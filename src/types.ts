@@ -1,5 +1,12 @@
 export type Locale = 'uz' | 'ru' | 'en';
 
+export interface DoctorCredentials {
+  licenseId: string;
+  yearsActive: number;
+  certificatesCount: number;
+  researchCount: number;
+}
+
 export interface Translation {
   title: string;
   description: string;
@@ -33,6 +40,7 @@ export interface Doctor {
     en: string;
   };
   photo: string;
+  credentials?: DoctorCredentials;
 }
 
 export interface PriceItem {
@@ -43,6 +51,7 @@ export interface PriceItem {
     en: string;
   };
   price: string;
+  priceValue?: number;
   category: string;
   ru_price_placeholder?: string;
   en_price_placeholder?: string;

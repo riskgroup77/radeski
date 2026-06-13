@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Sparkles, Building, Play, Users, Eye, ArrowUpRight, Award, GraduationCap } from 'lucide-react';
 import { Locale, Doctor } from '../types';
-import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS, DOCTORS } from '../data';
+import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from '../data';
 import CredentialsGrid from './CredentialsGrid';
 
 interface AboutProps {
@@ -14,9 +14,20 @@ interface AboutProps {
 
 export default function About({ locale, onOpenAppointment, doctors, dictionary }: AboutProps) {
   const d = dictionary || DICTIONARY[locale];
-  const dynamicDoctors = doctors || DOCTORS;
+  const dynamicDoctors = doctors ?? [];
   const [activeGalleryIdx, setActiveGalleryIdx] = useState<number | null>(null);
-  const [activeCredsDocId, setActiveCredsDocId] = useState<string>(dynamicDoctors[0]?.id || "ashurov-dilshod");
+  const [activeCredsDocId, setActiveCredsDocId] = useState<string>('');
+
+  useEffect(() => {
+    if (dynamicDoctors.length === 0) {
+      setActiveCredsDocId('');
+      return;
+    }
+    const isCurrentValid = dynamicDoctors.some((doc) => doc.id === activeCredsDocId);
+    if (!isCurrentValid) {
+      setActiveCredsDocId(dynamicDoctors[0].id);
+    }
+  }, [dynamicDoctors, activeCredsDocId]);
 
   // Dynamic Unsplash links corresponding each gallery item
   const galleryImageUrls = [
@@ -216,7 +227,18 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
             {/* Selected Credentials Card */}
             <div className="lg:col-span-7">
               {(() => {
-                const doc = dynamicDoctors.find(d => d.id === activeCredsDocId) || dynamicDoctors[0];
+                const doc = dynamicDoctors.find(d => d.id === activeCredsDocId) ?? dynamicDoctors[0];
+                if (!doc) {
+                  return (
+                    <div className="p-5 bg-brand-offwhite/50 rounded-2xl border border-brand-sectiongray/80 text-sm text-brand-text-muted font-light">
+                      {locale === 'uz'
+                        ? "Shifokorlar ma'lumoti hozircha mavjud emas."
+                        : locale === 'ru'
+                          ? 'Информация о врачах пока недоступна.'
+                          : 'Physician information is not available yet.'}
+                    </div>
+                  );
+                }
                 return (
                   <motion.div
                     key={doc.id}
@@ -245,7 +267,7 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
                     </p>
 
                     {/* Dynamic Credentials Grid */}
-                    <CredentialsGrid doctorId={doc.id} locale={locale} />
+                    <CredentialsGrid doctorId={doc.id} locale={locale} credentials={doc.credentials} />
                   </motion.div>
                 );
               })()}

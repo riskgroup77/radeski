@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Locale } from './types';
-import { DICTIONARY, SERVICE_CATEGORIES, DOCTORS, ARTICLES, CLINIC_RATINGS, GALLERY_IMAGS, PRICES } from './data';
+import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -15,10 +15,12 @@ import Prices from './components/Prices';
 import Articles from './components/Articles';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
-import { Doctor, ServiceCategory, PriceItem, Article } from './types';
 import AppointmentModal from './components/AppointmentModal';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShieldCheck, Phone, Mail, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle } from 'lucide-react';
+import { useClinicData } from './hooks/useClinicData';
+import { createAppointment } from './api/publicApi';
+import { ApiError } from './api/client';
 
 export default function App() {
   const [locale, setLocale] = useState<Locale>('uz');
@@ -26,26 +28,15 @@ export default function App() {
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
   const [preselectedServiceId, setPreselectedServiceId] = useState<string>('');
 
-  // Dynamic datasets with localStorage persistence
-  const [dynamicDoctors, setDynamicDoctors] = useState<Doctor[]>(() => {
-    const saved = localStorage.getItem('radeski_doctors_v1');
-    return saved ? JSON.parse(saved) : DOCTORS;
-  });
-
-  const [dynamicServiceCategories, setDynamicServiceCategories] = useState<ServiceCategory[]>(() => {
-    const saved = localStorage.getItem('radeski_service_categories_v1');
-    return saved ? JSON.parse(saved) : SERVICE_CATEGORIES;
-  });
-
-  const [dynamicPrices, setDynamicPrices] = useState<PriceItem[]>(() => {
-    const saved = localStorage.getItem('radeski_prices_v1');
-    return saved ? JSON.parse(saved) : PRICES;
-  });
-
-  const [dynamicArticles, setDynamicArticles] = useState<Article[]>(() => {
-    const saved = localStorage.getItem('radeski_articles_v1');
-    return saved ? JSON.parse(saved) : ARTICLES;
-  });
+  const {
+    doctors: dynamicDoctors,
+    serviceCategories: dynamicServiceCategories,
+    prices: dynamicPrices,
+    articles: dynamicArticles,
+    loading: dataLoading,
+    error: dataError,
+    refetch: refetchClinicData,
+  } = useClinicData();
 
   const [dynamicDictionary, setDynamicDictionary] = useState(() => {
     const saved = localStorage.getItem('radeski_dictionary_v1');
@@ -64,44 +55,19 @@ export default function App() {
   const [inlineSubmitted, setInlineSubmitted] = useState(false);
   const [inlineLoading, setInlineLoading] = useState(false);
 
-  const handleSaveData = (type: string, data: any) => {
-    if (type === 'doctors') {
-      localStorage.setItem('radeski_doctors_v1', JSON.stringify(data));
-      setDynamicDoctors(data);
-    } else if (type === 'services') {
-      localStorage.setItem('radeski_service_categories_v1', JSON.stringify(data));
-      setDynamicServiceCategories(data);
-    } else if (type === 'prices') {
-      localStorage.setItem('radeski_prices_v1', JSON.stringify(data));
-      setDynamicPrices(data);
-    } else if (type === 'articles') {
-      localStorage.setItem('radeski_articles_v1', JSON.stringify(data));
-      setDynamicArticles(data);
-    } else if (type === 'dictionary') {
+  const handleSaveLocalData = (type: string, data: unknown) => {
+    if (type === 'dictionary') {
       localStorage.setItem('radeski_dictionary_v1', JSON.stringify(data));
-      setDynamicDictionary(data);
+      setDynamicDictionary(data as typeof DICTIONARY);
     } else if (type === 'clinicRatings') {
       localStorage.setItem('radeski_clinic_ratings_v1', JSON.stringify(data));
-      setDynamicClinicRatings(data);
+      setDynamicClinicRatings(data as typeof CLINIC_RATINGS);
     }
   };
 
-  const handleResetAll = () => {
-    localStorage.removeItem('radeski_doctors_v1');
-    localStorage.removeItem('radeski_service_categories_v1');
-    localStorage.removeItem('radeski_prices_v1');
-    localStorage.removeItem('radeski_articles_v1');
+  const handleResetLocalData = () => {
     localStorage.removeItem('radeski_dictionary_v1');
     localStorage.removeItem('radeski_clinic_ratings_v1');
-
-    dynamicDoctors.forEach(doc => {
-      localStorage.removeItem(`doctor_creds_${doc.id}`);
-    });
-
-    setDynamicDoctors(DOCTORS);
-    setDynamicServiceCategories(SERVICE_CATEGORIES);
-    setDynamicPrices(PRICES);
-    setDynamicArticles(ARTICLES);
     setDynamicDictionary(DICTIONARY);
     setDynamicClinicRatings(CLINIC_RATINGS);
   };
@@ -360,21 +326,59 @@ export default function App() {
     setIsAppointmentOpen(true);
   };
 
-  const handleInlineSubmit = (e: React.FormEvent) => {
+  const handleInlineSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inlinePhone.trim()) return;
 
     setInlineLoading(true);
-    setTimeout(() => {
-      setInlineLoading(false);
+    try {
+      await createAppointment({ phone_number: inlinePhone.trim() });
       setInlineSubmitted(true);
       setInlinePhone('');
-    }, 1000);
+    } catch (err) {
+      const message =
+        err instanceof ApiError
+          ? err.message
+          : locale === 'uz'
+            ? 'Arizani yuborishda xatolik yuz berdi'
+            : locale === 'ru'
+              ? 'Ошибка при отправке заявки'
+              : 'Failed to submit request';
+      alert(message);
+    } finally {
+      setInlineLoading(false);
+    }
   };
 
   return (
     <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[88px] sm:pt-[120px]">
-      
+
+      {dataError && currentTab !== 'admin' && (
+        <div className="bg-amber-50 border-b border-amber-200 px-4 py-3">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex items-start gap-2 text-sm text-amber-900">
+              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+              <span>{dataError}</span>
+            </div>
+            <button
+              onClick={() => refetchClinicData()}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold rounded-lg cursor-pointer"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              {locale === 'uz' ? 'Qayta yuklash' : locale === 'ru' ? 'Повторить' : 'Retry'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {dataLoading && currentTab !== 'admin' && (
+        <div className="fixed inset-0 z-30 bg-white/60 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
+          <div className="px-4 py-2 bg-white border border-brand-sectiongray rounded-xl shadow-sm text-sm text-brand-text-muted">
+            {locale === 'uz' ? 'Ma\'lumotlar yuklanmoqda...' : locale === 'ru' ? 'Загрузка данных...' : 'Loading data...'}
+          </div>
+        </div>
+      )}
+
       {/* 1. Header Navigation */}
       <Header
         currentTab={currentTab}
@@ -622,7 +626,7 @@ export default function App() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {ARTICLES.slice(0, 3).map(art => (
+                    {dynamicArticles.slice(0, 3).map(art => (
                       <div
                         key={art.id}
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group cursor-pointer"
@@ -732,8 +736,9 @@ export default function App() {
               prices={dynamicPrices}
               articles={dynamicArticles}
               clinicRatings={dynamicClinicRatings}
-              onSaveData={handleSaveData}
-              onResetAll={handleResetAll}
+              onSaveLocalData={handleSaveLocalData}
+              onResetLocalData={handleResetLocalData}
+              onRefresh={refetchClinicData}
               onClose={() => setCurrentTab('home')}
             />
           )}
@@ -838,6 +843,7 @@ export default function App() {
         onClose={() => setIsAppointmentOpen(false)}
         locale={locale}
         preselectedServiceId={preselectedServiceId}
+        serviceCategories={dynamicServiceCategories}
       />
     </div>
   );

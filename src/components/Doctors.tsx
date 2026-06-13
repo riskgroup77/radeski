@@ -206,7 +206,7 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
                     </div>
 
                     {/* Credentials Grid (License, Active Practice, Certificates, Published Papers) */}
-                    <CredentialsGrid doctorId={activeDoctor.id} locale={locale} />
+                    <CredentialsGrid doctorId={activeDoctor.id} locale={locale} credentials={activeDoctor.credentials} />
 
                     {/* Highly Professional E-E-A-T Trust Indicators */}
                     <TrustIndicators doctorId={activeDoctor.id} locale={locale} />

@@ -248,11 +248,11 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
 
                 <div className="flex gap-3 mt-8">
                   <button
-                    onClick={() => {
-                      const id = activeDetailSubService.id;
-                      setActiveDetailId(null);
-                      onOpenAppointment(id);
-                    }}
+                      onClick={() => {
+                        const id = activeDetailSubService.id;
+                        setActiveDetailId(null);
+                        onOpenAppointment(id);
+                      }}
                     className="flex-1 py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl active:scale-98 transition-all cursor-pointer shadow-md text-center"
                   >
                     {d.appointmentBtn}

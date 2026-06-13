@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
 import { Search, Info, CalendarClock, ListFilter, HelpCircle } from 'lucide-react';
 import { Locale } from '../types';
-import { DICTIONARY, PRICES, SERVICE_CATEGORIES } from '../data';
+import { DICTIONARY } from '../data';
 
 import { PriceItem, ServiceCategory } from '../types';
 
@@ -16,8 +16,8 @@ interface PricesProps {
 
 export default function Prices({ locale, onOpenAppointment, prices, serviceCategories, dictionary }: PricesProps) {
   const d = dictionary || DICTIONARY[locale];
-  const dynamicPrices = prices || PRICES;
-  const dynamicCategories = serviceCategories || SERVICE_CATEGORIES;
+  const dynamicPrices = prices || [];
+  const dynamicCategories = serviceCategories || [];
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -99,7 +99,7 @@ export default function Prices({ locale, onOpenAppointment, prices, serviceCateg
                 {/* Mobile / Name */}
                 <div className="col-span-1 md:col-span-7">
                   <span className="text-[9px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden mb-1 leading-none">
-                    {SERVICE_CATEGORIES.find(c => c.id === item.category)?.title[locale]}
+                    {dynamicCategories.find(c => c.id === item.category)?.title[locale]}
                   </span>
                   <h4 className="text-brand-text-primary font-semibold text-sm sm:text-base leading-snug">
                     {item.name[locale]}

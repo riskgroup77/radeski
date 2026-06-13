@@ -1,21 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { Locale, Doctor, ServiceCategory, PriceItem, Article } from '../types';
-import { 
-  Lock, LayoutDashboard, Building, Users, Activity, CreditCard, FileText, 
-  Save, RefreshCw, Plus, Edit2, Trash2, Check, ArrowLeft, LogOut, Info, AlertTriangle, Eye, Globe
+import {
+  Lock, LayoutDashboard, Building, Users, Activity, CreditCard, FileText,
+  Save, RefreshCw, Plus, Edit2, Trash2, Check, ArrowLeft, LogOut, Info, AlertTriangle, PhoneCall
 } from 'lucide-react';
+import {
+  adminLogin,
+  createDoctor,
+  updateDoctor,
+  deleteDoctor,
+  createServiceCategory,
+  updateServiceCategory,
+  deleteServiceCategory,
+  createPrice,
+  updatePrice,
+  deletePrice,
+  createArticle,
+  updateArticle,
+  deleteArticle,
+  getAppointments,
+  updateAppointmentStatus,
+} from '../api/adminApi';
+import {
+  mapDoctorToCreatePayload,
+  mapServiceCategoryToPayload,
+  mapSubServiceToPayload,
+  mapPriceToCreatePayload,
+  mapArticleToCreatePayload,
+  parsePriceValue,
+} from '../api/mappers';
+import { ApiError, clearAuthToken, getAuthToken, setAuthToken } from '../api/client';
+import { ApiAppointment, AppointmentStatus } from '../api/types';
 
 interface AdminPanelProps {
   locale: Locale;
-  dictionary: any;
+  dictionary: Record<string, string>;
   doctors: Doctor[];
   serviceCategories: ServiceCategory[];
   prices: PriceItem[];
   articles: Article[];
-  clinicRatings: any[];
-  onSaveData: (type: string, data: any) => void;
-  onResetAll: () => void;
+  clinicRatings: Array<{ platform: string; rating: string; count: number; logo: string }>;
+  onSaveLocalData: (type: string, data: unknown) => void;
+  onResetLocalData: () => void;
+  onRefresh: () => Promise<void>;
   onClose: () => void;
 }
 
@@ -27,20 +55,18 @@ export default function AdminPanel({
   prices,
   articles,
   clinicRatings,
-  onSaveData,
-  onResetAll,
+  onSaveLocalData,
+  onResetLocalData,
+  onRefresh,
   onClose
 }: AdminPanelProps) {
-  // Authorization State
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem('radeski_admin_auth') === 'true';
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => !!getAuthToken());
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
 
   // Admin Section state
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'clinic' | 'doctors' | 'services' | 'prices' | 'articles'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'clinic' | 'doctors' | 'services' | 'prices' | 'articles' | 'appointments'>('dashboard');
   
   // Notification States
   const [saveSuccess, setSaveSuccess] = useState<string | null>(null);
@@ -90,6 +116,9 @@ export default function AdminPanel({
   const [isAddingArticle, setIsAddingArticle] = useState(false);
   const [articleForm, setArticleForm] = useState<Partial<Article>>({});
 
+  const [appointments, setAppointments] = useState<ApiAppointment[]>([]);
+  const [appointmentsLoading, setAppointmentsLoading] = useState(false);
+
   // Synchronize internal states if props change (e.g. after resetting)
   useEffect(() => {
     setEditedRatings(JSON.parse(JSON.stringify(clinicRatings)));
@@ -100,43 +129,48 @@ export default function AdminPanel({
     setEditedArticles(JSON.parse(JSON.stringify(articles)));
   }, [doctors, serviceCategories, prices, articles, clinicRatings, dictionary]);
 
-  // Load Dr Credentials when Doctor is selected for editing
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'appointments') return;
+
+    setAppointmentsLoading(true);
+    getAppointments()
+      .then(setAppointments)
+      .catch(() => setAppointments([]))
+      .finally(() => setAppointmentsLoading(false));
+  }, [isAuthenticated, activeTab, saveSuccess]);
+
   useEffect(() => {
     if (selectedDoctorId) {
-      const savedCreds = localStorage.getItem(`doctor_creds_${selectedDoctorId}`);
-      if (savedCreds) {
-        setDoctorFormCreds(JSON.parse(savedCreds));
+      const selectedDoctor = editedDoctors.find((doc) => doc.id === selectedDoctorId);
+      if (selectedDoctor?.credentials) {
+        setDoctorFormCreds({
+          licenseId: selectedDoctor.credentials.licenseId,
+          yearsActive: selectedDoctor.credentials.yearsActive,
+          certificatesCount: selectedDoctor.credentials.certificatesCount,
+          researchCount: selectedDoctor.credentials.researchCount,
+        });
       } else {
-        // Fallback default templates corresponding to CredentialsGrid.tsx
-        const physicianCredentials: Record<string, typeof doctorFormCreds> = {
-          "ashurov-dilshod": { licenseId: "LN-2008-01774", yearsActive: 18, certificatesCount: 12, researchCount: 24 },
-          "kodirova-dilafruzxon": { licenseId: "LN-2014-04981", yearsActive: 12, certificatesCount: 8, researchCount: 9 },
-          "yoqubov-farrux": { licenseId: "LN-2016-09224", yearsActive: 10, certificatesCount: 15, researchCount: 14 },
-          "mangasaryan-lorena": { licenseId: "LN-2017-08011", yearsActive: 9, certificatesCount: 11, researchCount: 7 },
-          "kamolova-barno": { licenseId: "LN-2019-11048", yearsActive: 7, certificatesCount: 6, researchCount: 4 },
-          "abdvaliyev-begali": { licenseId: "LN-2018-10992", yearsActive: 8, certificatesCount: 5, researchCount: 6 }
-        };
-        setDoctorFormCreds(physicianCredentials[selectedDoctorId] || {
+        setDoctorFormCreds({
           licenseId: `LN-${new Date().getFullYear()}-${Math.floor(Math.random() * 90000) + 10000}`,
-          yearsActive: 8,
-          certificatesCount: 4,
-          researchCount: 3
+          yearsActive: 5,
+          certificatesCount: 3,
+          researchCount: 2,
         });
       }
     }
-  }, [selectedDoctorId]);
+  }, [selectedDoctorId, editedDoctors]);
 
-  // Handle Login Authentication
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim() === 'admin' && password === 'radeski2026') {
+    try {
+      const { access_token } = await adminLogin({ username: username.trim(), password });
+      setAuthToken(access_token);
       setIsAuthenticated(true);
       setAuthError('');
-      localStorage.setItem('radeski_admin_auth', 'true');
-    } else {
+    } catch {
       setAuthError(
-        locale === 'uz' ? "Noto'g'ri foydalanuvchi nomi yoki parol!" : 
-        locale === 'ru' ? "Неверное имя пользователя или пароль!" : 
+        locale === 'uz' ? "Noto'g'ri foydalanuvchi nomi yoki parol!" :
+        locale === 'ru' ? "Неверное имя пользователя или пароль!" :
                           "Incorrect username or password!"
       );
     }
@@ -144,7 +178,7 @@ export default function AdminPanel({
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('radeski_admin_auth');
+    clearAuthToken();
   };
 
   // Helper trigger save notification
@@ -155,8 +189,8 @@ export default function AdminPanel({
 
   // 1. SAVE CLINIC DETAILS
   const handleSaveClinic = () => {
-    onSaveData('clinicRatings', editedRatings);
-    onSaveData('dictionary', editedDict);
+    onSaveLocalData('clinicRatings', editedRatings);
+    onSaveLocalData('dictionary', editedDict);
     triggerSaveNotification(
       locale === 'uz' ? "Klinika ma'lumotlari muvaffaqiyatli saqlandi!" :
       locale === 'ru' ? "Информация о клинике успешно сохранена!" :
@@ -191,75 +225,49 @@ export default function AdminPanel({
     setIsAddingDoctor(true);
   };
 
-  const handleSaveDoctor = () => {
+  const handleSaveDoctor = async () => {
     if (!doctorForm.name?.uz || !doctorForm.role?.uz) {
       alert("Please fill at least the Uzbek name and role of the doctor.");
       return;
     }
 
-    const docId = doctorForm.id ?? `doc-${Date.now()}`;
-    const formattedDoctor: Doctor = {
-      id: docId,
-      name: {
-        uz: doctorForm.name?.uz || '',
-        ru: doctorForm.name?.ru || doctorForm.name?.uz || '',
-        en: doctorForm.name?.en || doctorForm.name?.uz || ''
-      },
-      role: {
-        uz: doctorForm.role?.uz || '',
-        ru: doctorForm.role?.ru || doctorForm.role?.uz || '',
-        en: doctorForm.role?.en || doctorForm.role?.uz || ''
-      },
-      bio: {
-        uz: doctorForm.bio?.uz || '',
-        ru: doctorForm.bio?.ru || doctorForm.bio?.uz || '',
-        en: doctorForm.bio?.en || doctorForm.bio?.uz || ''
-      },
-      experience: {
-        uz: doctorForm.experience?.uz || doctorFormCreds.yearsActive.toString(),
-        ru: doctorForm.experience?.ru || doctorFormCreds.yearsActive.toString(),
-        en: doctorForm.experience?.en || doctorFormCreds.yearsActive.toString()
-      },
-      education: {
-        uz: doctorForm.education?.uz || '',
-        ru: doctorForm.education?.ru || doctorForm.education?.uz || '',
-        en: doctorForm.education?.en || doctorForm.education?.uz || ''
-      },
-      photo: doctorForm.photo || 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600'
-    };
+    try {
+      const payload = mapDoctorToCreatePayload(doctorForm, {
+        licenseId: doctorFormCreds.licenseId,
+        yearsActive: doctorFormCreds.yearsActive,
+        certificatesCount: doctorFormCreds.certificatesCount,
+        researchCount: doctorFormCreds.researchCount,
+      });
 
-    let updatedDocsList: Doctor[];
-    if (isAddingDoctor) {
-      updatedDocsList = [...editedDoctors, formattedDoctor];
-    } else {
-      updatedDocsList = editedDoctors.map(d => d.id === docId ? formattedDoctor : d);
+      if (isAddingDoctor) {
+        await createDoctor(payload);
+      } else if (doctorForm.id) {
+        await updateDoctor(doctorForm.id, payload);
+      }
+
+      await onRefresh();
+      setSelectedDoctorId(null);
+      setIsAddingDoctor(false);
+      triggerSaveNotification(
+        locale === 'uz' ? "Shifokor ma'lumotlari muvaffaqiyatli saqlandi!" :
+        locale === 'ru' ? "Резюме врача успешно сохранено!" :
+                          "Physician profile saved successfully!"
+      );
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Save failed');
     }
-
-    // Save doctor list
-    setEditedDoctors(updatedDocsList);
-    onSaveData('doctors', updatedDocsList);
-
-    // Save individual doctor credentials to localStorage
-    localStorage.setItem(`doctor_creds_${docId}`, JSON.stringify(doctorFormCreds));
-
-    // Cleanup state
-    setSelectedDoctorId(null);
-    setIsAddingDoctor(false);
-    triggerSaveNotification(
-      locale === 'uz' ? "Shifokor ma'lumotlari muvaffaqiyatli saqlandi!" :
-      locale === 'ru' ? "Резюме врача успешно сохранено!" :
-                        "Physician profile saved successfully!"
-    );
   };
 
-  const handleDeleteDoctor = (docId: string) => {
-    if (confirm(locale === 'uz' ? "Ushbu shifokor reestrini o'chirmoqchimisiz?" : "Удалить профиль данного врача?")) {
-      const list = editedDoctors.filter(d => d.id !== docId);
-      setEditedDoctors(list);
-      onSaveData('doctors', list);
-      localStorage.removeItem(`doctor_creds_${docId}`);
+  const handleDeleteDoctor = async (docId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu shifokor reestrini o'chirmoqchimisiz?" : "Удалить профиль данного врача?")) return;
+
+    try {
+      await deleteDoctor(docId);
+      await onRefresh();
       if (selectedDoctorId === docId) setSelectedDoctorId(null);
       triggerSaveNotification(locale === 'uz' ? "Muvaffaqiyatli o'chirildi!" : "Профиль удален!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Delete failed');
     }
   };
 
@@ -286,47 +294,51 @@ export default function AdminPanel({
     setIsAddingSubService(false);
   };
 
-  const handleSaveCategory = () => {
+  const handleSaveCategory = async () => {
     if (!categoryForm.title?.uz || !categoryForm.id) return;
 
-    const catId = categoryForm.id;
-    const formattedCategory: ServiceCategory = {
-      id: catId,
-      title: {
-        uz: categoryForm.title?.uz || '',
-        ru: categoryForm.title?.ru || categoryForm.title?.uz || '',
-        en: categoryForm.title?.en || categoryForm.title?.uz || ''
-      },
-      description: {
-        uz: categoryForm.description?.uz || '',
-        ru: categoryForm.description?.ru || categoryForm.description?.uz || '',
-        en: categoryForm.description?.en || categoryForm.description?.uz || ''
-      },
-      icon: categoryForm.icon || 'Activity',
-      subServices: categoryForm.subServices || []
-    };
+    try {
+      const payload = mapServiceCategoryToPayload({
+        id: categoryForm.id,
+        title: {
+          uz: categoryForm.title?.uz || '',
+          ru: categoryForm.title?.ru || categoryForm.title?.uz || '',
+          en: categoryForm.title?.en || categoryForm.title?.uz || '',
+        },
+        description: {
+          uz: categoryForm.description?.uz || '',
+          ru: categoryForm.description?.ru || categoryForm.description?.uz || '',
+          en: categoryForm.description?.en || categoryForm.description?.uz || '',
+        },
+        icon: categoryForm.icon || 'Activity',
+        subServices: categoryForm.subServices || [],
+      });
 
-    let updatedCats: ServiceCategory[];
-    if (isAddingCategory) {
-      updatedCats = [...editedCategories, formattedCategory];
-    } else {
-      updatedCats = editedCategories.map(c => c.id === catId ? formattedCategory : c);
+      if (isAddingCategory) {
+        await createServiceCategory(payload);
+      } else {
+        await updateServiceCategory(categoryForm.id, payload);
+      }
+
+      await onRefresh();
+      setSelectedCategoryId(null);
+      setIsAddingCategory(false);
+      triggerSaveNotification(locale === 'uz' ? "Kategoriya saqlandi!" : "Категория сохранена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Save failed');
     }
-
-    setEditedCategories(updatedCats);
-    onSaveData('serviceCategories', updatedCats);
-    setSelectedCategoryId(null);
-    setIsAddingCategory(false);
-    triggerSaveNotification(locale === 'uz' ? "Kategoriya saqlandi!" : "Категория сохранена!");
   };
 
-  const handleDeleteCategory = (catId: string) => {
-    if (confirm(locale === 'uz' ? "Ushbu kategoriyani barcha ichki xizmatlari bilan o'chirmoqchimisiz?" : "Удалить категорию со всеми услугами?")) {
-      const list = editedCategories.filter(c => c.id !== catId);
-      setEditedCategories(list);
-      onSaveData('serviceCategories', list);
+  const handleDeleteCategory = async (catId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu kategoriyani barcha ichki xizmatlari bilan o'chirmoqchimisiz?" : "Удалить категорию со всеми услугами?")) return;
+
+    try {
+      await deleteServiceCategory(catId);
+      await onRefresh();
       if (selectedCategoryId === catId) setSelectedCategoryId(null);
       triggerSaveNotification(locale === 'uz' ? "Kategoriya o'chirildi!" : "Категория удалена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Delete failed');
     }
   };
 
@@ -347,59 +359,76 @@ export default function AdminPanel({
     setIsAddingSubService(true);
   };
 
-  const handleSaveSubService = () => {
+  const handleSaveSubService = async () => {
     if (!selectedCategoryId || !subServiceForm.id || !subServiceForm.name.uz) return;
 
     const targetCat = editedCategories.find(c => c.id === selectedCategoryId);
     if (!targetCat) return;
 
     let updatedSubs = [...targetCat.subServices];
+    const mappedSub = {
+      id: subServiceForm.id,
+      name: subServiceForm.name,
+      description: subServiceForm.description,
+    };
+
     if (isAddingSubService) {
-      updatedSubs.push(subServiceForm);
+      updatedSubs.push(mappedSub);
     } else {
-      updatedSubs = updatedSubs.map(s => s.id === subServiceForm.id ? subServiceForm : s);
+      updatedSubs = updatedSubs.map(s => s.id === subServiceForm.id ? mappedSub : s);
     }
 
     const updatedCatObj = { ...targetCat, subServices: updatedSubs };
-    const updatedAllCats = editedCategories.map(c => c.id === selectedCategoryId ? updatedCatObj : c);
 
-    setEditedCategories(updatedAllCats);
-    onSaveData('serviceCategories', updatedAllCats);
-    
-    // update current category form
-    setCategoryForm(updatedCatObj);
-
-    setIsAddingSubService(false);
-    setSelectedSubServiceId(null);
-    triggerSaveNotification(locale === 'uz' ? "Xizmat saqlandi!" : "Услуга сохранена!");
+    try {
+      await updateServiceCategory(selectedCategoryId, {
+        sub_services: updatedCatObj.subServices.map(mapSubServiceToPayload),
+      });
+      await onRefresh();
+      setCategoryForm(updatedCatObj);
+      setIsAddingSubService(false);
+      setSelectedSubServiceId(null);
+      triggerSaveNotification(locale === 'uz' ? "Xizmat saqlandi!" : "Услуга сохранена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Save failed');
+    }
   };
 
-  const handleDeleteSubService = (subId: string) => {
+  const handleDeleteSubService = async (subId: string) => {
     if (!selectedCategoryId) return;
-    if (confirm(locale === 'uz' ? "Ushbu xizmatni o'chirib tashlamoqchimisiz?" : "Удалить эту услугу?")) {
-      const targetCat = editedCategories.find(c => c.id === selectedCategoryId);
-      if (!targetCat) return;
+    if (!confirm(locale === 'uz' ? "Ushbu xizmatni o'chirib tashlamoqchimisiz?" : "Удалить эту услугу?")) return;
 
-      const updatedSubs = targetCat.subServices.filter(s => s.id !== subId);
-      const updatedCatObj = { ...targetCat, subServices: updatedSubs };
-      
-      const updatedAllCats = editedCategories.map(c => c.id === selectedCategoryId ? updatedCatObj : c);
-      setEditedCategories(updatedAllCats);
-      onSaveData('serviceCategories', updatedAllCats);
+    const targetCat = editedCategories.find(c => c.id === selectedCategoryId);
+    if (!targetCat) return;
+
+    const updatedCatObj = {
+      ...targetCat,
+      subServices: targetCat.subServices.filter(s => s.id !== subId),
+    };
+
+    try {
+      await updateServiceCategory(selectedCategoryId, {
+        sub_services: updatedCatObj.subServices.map(mapSubServiceToPayload),
+      });
+      await onRefresh();
       setCategoryForm(updatedCatObj);
-      
       if (selectedSubServiceId === subId) {
         setSelectedSubServiceId(null);
         setIsAddingSubService(false);
       }
       triggerSaveNotification(locale === 'uz' ? "Xizmat o'chirildi!" : "Услуга удалена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Delete failed');
     }
   };
 
   // 4. PRICE ITEM CRUD
   const handleEditPrice = (pr: PriceItem) => {
     setSelectedPriceId(pr.id);
-    setPriceForm(pr);
+    setPriceForm({
+      ...pr,
+      priceValue: pr.priceValue ?? parsePriceValue(pr.price),
+    });
     setIsAddingPrice(false);
   };
 
@@ -409,46 +438,46 @@ export default function AdminPanel({
       id: `pr-${Date.now()}`,
       name: { uz: '', ru: '', en: '' },
       price: '100,000 UZS',
+      priceValue: 100000,
       category: serviceCategories[0]?.id || 'dermatologiya'
     });
     setIsAddingPrice(true);
   };
 
-  const handleSavePriceItem = () => {
+  const handleSavePriceItem = async () => {
     if (!priceForm.name?.uz || !priceForm.price || !priceForm.id) return;
 
-    const item: PriceItem = {
-      id: priceForm.id,
-      name: {
-        uz: priceForm.name.uz,
-        ru: priceForm.name.ru || priceForm.name.uz,
-        en: priceForm.name.en || priceForm.name.uz
-      },
-      price: priceForm.price,
-      category: priceForm.category || 'dermatologiya'
-    };
+    try {
+      const payload = mapPriceToCreatePayload({
+        ...priceForm,
+        priceValue: priceForm.priceValue ?? parsePriceValue(priceForm.price || '0'),
+      });
 
-    let list: PriceItem[];
-    if (isAddingPrice) {
-      list = [...editedPrices, item];
-    } else {
-      list = editedPrices.map(p => p.id === item.id ? item : p);
+      if (isAddingPrice) {
+        await createPrice(payload);
+      } else {
+        await updatePrice(priceForm.id, payload);
+      }
+
+      await onRefresh();
+      setSelectedPriceId(null);
+      setIsAddingPrice(false);
+      triggerSaveNotification(locale === 'uz' ? "Narx saqlandi!" : "Цена сохранена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Save failed');
     }
-
-    setEditedPrices(list);
-    onSaveData('prices', list);
-    setSelectedPriceId(null);
-    setIsAddingPrice(false);
-    triggerSaveNotification(locale === 'uz' ? "Narx saqlandi!" : "Цена сохранена!");
   };
 
-  const handleDeletePrice = (prId: string) => {
-    if (confirm(locale === 'uz' ? "Ushbu narx bandini o'chirmoqchimisiz?" : "Удалить эту позицию в ценах?")) {
-      const list = editedPrices.filter(p => p.id !== prId);
-      setEditedPrices(list);
-      onSaveData('prices', list);
+  const handleDeletePrice = async (prId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu narx bandini o'chirmoqchimisiz?" : "Удалить эту позицию в ценах?")) return;
+
+    try {
+      await deletePrice(prId);
+      await onRefresh();
       if (selectedPriceId === prId) setSelectedPriceId(null);
       triggerSaveNotification(locale === 'uz' ? "Narx o'chirildi!" : "Позиция удалена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Delete failed');
     }
   };
 
@@ -479,58 +508,48 @@ export default function AdminPanel({
     setIsAddingArticle(true);
   };
 
-  const handleSaveArticle = () => {
+  const handleSaveArticle = async () => {
     if (!articleForm.title?.uz || !articleForm.id) return;
 
-    const finalArt: Article = {
-      id: articleForm.id,
-      slug: articleForm.slug || `slug-${articleForm.id}`,
-      title: {
-        uz: articleForm.title.uz,
-        ru: articleForm.title.ru || articleForm.title.uz,
-        en: articleForm.title.en || articleForm.title.uz
-      },
-      summary: {
-        uz: articleForm.summary?.uz || '',
-        ru: articleForm.summary?.ru || articleForm.summary?.uz || '',
-        en: articleForm.summary?.en || articleForm.summary?.uz || ''
-      },
-      content: {
-        uz: articleForm.content?.uz || '',
-        ru: articleForm.content?.ru || articleForm.content?.uz || '',
-        en: articleForm.content?.en || articleForm.content?.uz || ''
-      },
-      author: {
-        uz: articleForm.author?.uz || 'Ashurov D.D.',
-        ru: articleForm.author?.ru || 'Ашуров Д.Д.',
-        en: articleForm.author?.en || 'Dr. Ashurov'
-      },
-      date: articleForm.date || new Date().toLocaleDateString('en-GB'),
-      image: articleForm.image || 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
-      views: articleForm.views || 25
-    };
+    try {
+      const payload = mapArticleToCreatePayload(articleForm);
 
-    let list: Article[];
-    if (isAddingArticle) {
-      list = [...editedArticles, finalArt];
-    } else {
-      list = editedArticles.map(a => a.id === finalArt.id ? finalArt : a);
+      if (isAddingArticle) {
+        await createArticle(payload);
+      } else {
+        await updateArticle(articleForm.id, payload);
+      }
+
+      await onRefresh();
+      setSelectedArticleId(null);
+      setIsAddingArticle(false);
+      triggerSaveNotification(locale === 'uz' ? "Maqola saqlandi!" : "Статья сохранена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Save failed');
     }
-
-    setEditedArticles(list);
-    onSaveData('articles', list);
-    setSelectedArticleId(null);
-    setIsAddingArticle(false);
-    triggerSaveNotification(locale === 'uz' ? "Maqola saqlandi!" : "Статья сохранена!");
   };
 
-  const handleDeleteArticle = (artId: string) => {
-    if (confirm(locale === 'uz' ? "Ushbu maqolani o'chirmoqchimisiz?" : "Удалить эту статью?")) {
-      const list = editedArticles.filter(a => a.id !== artId);
-      setEditedArticles(list);
-      onSaveData('articles', list);
+  const handleDeleteArticle = async (artId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu maqolani o'chirmoqchimisiz?" : "Удалить эту статью?")) return;
+
+    try {
+      await deleteArticle(artId);
+      await onRefresh();
       if (selectedArticleId === artId) setSelectedArticleId(null);
       triggerSaveNotification(locale === 'uz' ? "Maqola o'chirildi!" : "Статья удалена!");
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Delete failed');
+    }
+  };
+
+  const handleAppointmentStatusChange = async (appointmentId: string, status: AppointmentStatus) => {
+    try {
+      await updateAppointmentStatus(appointmentId, status);
+      const updated = await getAppointments();
+      setAppointments(updated);
+      triggerSaveNotification(locale === 'uz' ? 'Status yangilandi!' : 'Статус обновлен!');
+    } catch (err) {
+      alert(err instanceof ApiError ? err.message : 'Update failed');
     }
   };
 
@@ -634,9 +653,9 @@ export default function AdminPanel({
 
         <div className="flex gap-3">
           <button
-            onClick={onResetAll}
+            onClick={() => { onResetLocalData(); onRefresh(); }}
             className="px-3.5 py-2 hover:bg-red-50 border border-brand-sectiongray text-red-600 hover:border-red-200 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
-            title="Reset storage and reload baseline clinically authentic data"
+            title="Reset local clinic settings and reload API data"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>{locale === 'uz' ? "Arxivni tozalash (Asliga qaytarish)" : "Сбросить на исходные"}</span>
@@ -727,6 +746,18 @@ export default function AdminPanel({
           >
             <FileText className="w-4 h-4 shrink-0" />
             <span>{locale === 'uz' ? "Maqolalar / Blog" : "Статьи / Новости"}</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('appointments')}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-3 transition-colors cursor-pointer ${
+              activeTab === 'appointments'
+                ? 'bg-brand-dark-navy text-[#A6843F] shadow-sm'
+                : 'text-brand-text-muted hover:bg-brand-offwhite hover:text-brand-text-primary'
+            }`}
+          >
+            <PhoneCall className="w-4 h-4 shrink-0" />
+            <span>{locale === 'uz' ? "Onlayn arizalar" : "Заявки CRM"}</span>
           </button>
         </div>
 
@@ -1447,11 +1478,16 @@ export default function AdminPanel({
                     </div>
 
                     <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Tarif narxi (masalan: 120,000 UZS):</label>
+                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Tarif narxi (UZS, masalan: 150000):</label>
                       <input
-                        type="text"
-                        value={priceForm.price || ''}
-                        onChange={(e) => setPriceForm(prev => ({ ...prev, price: e.target.value }))}
+                        type="number"
+                        min={0}
+                        value={priceForm.priceValue ?? parsePriceValue(priceForm.price || '0')}
+                        onChange={(e) => setPriceForm(prev => ({
+                          ...prev,
+                          priceValue: Number(e.target.value),
+                          price: `${Number(e.target.value).toLocaleString('uz-UZ')} UZS`,
+                        }))}
                         className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
                       />
                     </div>
@@ -1561,6 +1597,16 @@ export default function AdminPanel({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
+                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Slug (SEO URL):</label>
+                      <input
+                        type="text"
+                        value={articleForm.slug || ''}
+                        onChange={(e) => setArticleForm(prev => ({ ...prev, slug: e.target.value }))}
+                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                      />
+                    </div>
+
+                    <div>
                       <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Maqola sarlavhasi (UZ):</label>
                       <input
                         type="text"
@@ -1626,6 +1672,61 @@ export default function AdminPanel({
                       <span>{locale === 'uz' ? "Tahrirni maqolaga kiritish" : "Опубликовать статью"}</span>
                     </button>
                   </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 7: APPOINTMENTS CRM */}
+          {activeTab === 'appointments' && (
+            <div className="space-y-6">
+              <div className="flex justify-between items-center pb-3 border-b border-brand-sectiongray">
+                <h3 className="text-base font-bold text-brand-text-primary">
+                  {locale === 'uz' ? 'Onlayn arizalar va qo\'ng\'iroq buyurtmalari' : 'Онлайн заявки и обратные звонки'}
+                </h3>
+              </div>
+
+              {appointmentsLoading ? (
+                <p className="text-sm text-brand-text-muted">{locale === 'uz' ? 'Yuklanmoqda...' : 'Загрузка...'}</p>
+              ) : appointments.length === 0 ? (
+                <p className="text-sm text-brand-text-muted italic">{locale === 'uz' ? 'Hozircha arizalar yo\'q.' : 'Заявок пока нет.'}</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr className="bg-brand-offwhite text-brand-text-muted uppercase text-[10px] border-b border-brand-sectiongray">
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Telefon' : 'Телефон'}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Xizmat' : 'Услуга'}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Sana' : 'Дата'}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Status' : 'Статус'}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {appointments.map((item) => (
+                        <tr key={item.id} className="border-b border-brand-sectiongray hover:bg-brand-offwhite/50">
+                          <td className="p-3 font-mono font-semibold text-brand-text-primary">{item.phone_number}</td>
+                          <td className="p-3 text-brand-text-secondary">
+                            {(locale === 'uz' ? item.service_name_uz : locale === 'ru' ? item.service_name_ru : item.service_name_en) ||
+                              item.service_name_uz ||
+                              (locale === 'uz' ? 'Umumiy konsultatsiya' : locale === 'ru' ? 'Общая консультация' : 'General consultation')}
+                          </td>
+                          <td className="p-3 text-brand-text-muted font-mono">{new Date(item.created_at).toLocaleString()}</td>
+                          <td className="p-3">
+                            <select
+                              value={item.status}
+                              onChange={(e) => handleAppointmentStatusChange(item.id, e.target.value as AppointmentStatus)}
+                              className="px-2 py-1 bg-brand-white border border-brand-sectiongray rounded-lg text-xs cursor-pointer"
+                            >
+                              <option value="new">{locale === 'uz' ? 'Yangi' : 'Новая'}</option>
+                              <option value="contacted">{locale === 'uz' ? 'Bog\'lanildi' : 'Связались'}</option>
+                              <option value="completed">{locale === 'uz' ? 'Yakunlandi' : 'Завершена'}</option>
+                              <option value="canceled">{locale === 'uz' ? 'Bekor' : 'Отменена'}</option>
+                            </select>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
             </div>

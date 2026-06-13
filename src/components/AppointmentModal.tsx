@@ -1,72 +1,95 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, CheckCircle, Phone, Calendar, User, ShieldCheck } from 'lucide-react';
-import { Locale } from '../types';
-import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
+import { X, CheckCircle, Phone, ShieldCheck } from 'lucide-react';
+import { Locale, ServiceCategory } from '../types';
+import { DICTIONARY } from '../data';
+import { createAppointment } from '../api/publicApi';
+import { ApiError } from '../api/client';
 
 interface AppointmentModalProps {
   isOpen: boolean;
   onClose: () => void;
   locale: Locale;
   preselectedServiceId?: string;
+  serviceCategories: ServiceCategory[];
 }
 
-export default function AppointmentModal({ isOpen, onClose, locale, preselectedServiceId }: AppointmentModalProps) {
+export default function AppointmentModal({
+  isOpen,
+  onClose,
+  locale,
+  preselectedServiceId,
+  serviceCategories,
+}: AppointmentModalProps) {
   const d = DICTIONARY[locale];
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    date: new Date().toISOString().split('T')[0],
-    serviceId: preselectedServiceId || '',
-    agree: true
-  });
+  const [phone, setPhone] = useState('');
+  const [serviceId, setServiceId] = useState(preselectedServiceId || '');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name.trim() || !formData.phone.trim()) {
-      setError(locale === 'uz' ? "Iltimos, barcha majburiy maydonlarni to'ldiring" : 
-               locale === 'ru' ? "Пожалуйста, заполните все обязательные поля" : 
-                                 "Please fill in all required fields");
-      return;
+  useEffect(() => {
+    if (isOpen) {
+      setServiceId(preselectedServiceId || '');
+      setError('');
+      setIsSubmitted(false);
     }
-    if (!formData.agree) {
-      setError(locale === 'uz' ? "Shaxsiy ma'lumotlarni qayta ishlashga rozilik berishingiz kerak" : 
-               locale === 'ru' ? "Необходимо согласие на обработку данных" : 
-                                 "You must agree to data processing");
+  }, [isOpen, preselectedServiceId]);
+
+  const resolveServiceId = (value: string): string | null => {
+    if (!value) return null;
+    for (const category of serviceCategories) {
+      if (category.subServices.some((sub) => sub.id === value)) {
+        return value;
+      }
+    }
+    return null;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone.trim()) {
+      setError(
+        locale === 'uz'
+          ? "Iltimos, telefon raqamingizni kiriting"
+          : locale === 'ru'
+            ? 'Пожалуйста, введите номер телефона'
+            : 'Please enter your phone number'
+      );
       return;
     }
 
     setIsSubmitting(true);
     setError('');
 
-    // Imitate server network request
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      // Clean form
-      setFormData({
-        name: '',
-        phone: '',
-        date: new Date().toISOString().split('T')[0],
-        serviceId: '',
-        agree: true
+    try {
+      const resolvedServiceId = resolveServiceId(serviceId);
+      await createAppointment({
+        phone_number: phone.trim(),
+        service_id: resolvedServiceId,
       });
-    }, 1200);
-  };
-
-  const selectedCategoryTitle = (catId: string) => {
-    const cat = SERVICE_CATEGORIES.find(c => c.id === catId);
-    return cat ? cat.title[locale] : '';
+      setIsSubmitted(true);
+      setPhone('');
+      setServiceId('');
+    } catch (err) {
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : locale === 'uz'
+            ? 'Arizani yuborishda xatolik yuz berdi'
+            : locale === 'ru'
+              ? 'Ошибка при отправке заявки'
+              : 'Failed to submit request'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Overlay */}
           <motion.div
             id="modal-overlay"
             initial={{ opacity: 0 }}
@@ -76,7 +99,6 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
             className="fixed inset-0 bg-[#0c1424]/70 backdrop-blur-sm"
           />
 
-          {/* Modal Container */}
           <motion.div
             id="appointment-modal-card"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -85,7 +107,6 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
             transition={{ type: 'spring', duration: 0.5 }}
             className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden z-10 border border-slate-150"
           >
-            {/* Top design accent bar */}
             <div className="h-2 bg-brand-gold" />
 
             <button
@@ -104,9 +125,11 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
                       {d.appointmentBtn}
                     </h3>
                     <p className="text-slate-500 text-sm mt-1">
-                      {locale === 'uz' ? "Sog'lom va go'zal teringiz uchun qulay vaqtni tanlang" : 
-                       locale === 'ru' ? "Выберите удобное время для вашей здоровой и красивой кожи" : 
-                                         "Select a convenient time slot for your healthy skin wellness"}
+                      {locale === 'uz'
+                        ? "Telefon raqamingizni qoldiring, operatorlarimiz tez orada bog'lanadi"
+                        : locale === 'ru'
+                          ? 'Оставьте номер телефона, наши операторы скоро свяжутся с вами'
+                          : 'Leave your phone number and our team will contact you shortly'}
                     </p>
                   </div>
 
@@ -117,26 +140,6 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
                   )}
 
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Name */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
-                        {d.formName} <span className="text-rose-500">*</span>
-                      </label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-3 w-4.5 h-4.5 text-slate-400" />
-                        <input
-                          id="name-input"
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold transition-all text-slate-800 placeholder-slate-400 text-sm"
-                          placeholder={locale === 'uz' ? "Masalan: Islom Karimov" : locale === 'ru' ? "Например: Иван Иванов" : "e.g., John Doe"}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Phone */}
                     <div>
                       <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
                         {d.formPhone} <span className="text-rose-500">*</span>
@@ -147,46 +150,28 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
                           id="phone-input"
                           type="tel"
                           required
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
                           className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold transition-all text-slate-800 placeholder-slate-400 text-sm"
                           placeholder="+998 (__) ___-__-__"
                         />
                       </div>
                     </div>
 
-                    {/* Date */}
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
-                        {d.formDate} <span className="text-rose-500">*</span>
-                      </label>
-                      <div className="relative">
-                        <Calendar className="absolute left-3 top-3 w-4.5 h-4.5 text-slate-400" />
-                        <input
-                          id="date-input"
-                          type="date"
-                          required
-                          min={new Date().toISOString().split('T')[0]}
-                          value={formData.date}
-                          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                          className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold transition-all text-slate-800 text-sm"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Service Selection */}
                     <div>
                       <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
                         {d.formService}
                       </label>
                       <select
                         id="service-select"
-                        value={formData.serviceId}
-                        onChange={(e) => setFormData({ ...formData, serviceId: e.target.value })}
+                        value={serviceId}
+                        onChange={(e) => setServiceId(e.target.value)}
                         className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold transition-all text-slate-800 text-sm cursor-pointer"
                       >
-                        <option value="">{locale === 'uz' ? "-- Tanlang --" : locale === 'ru' ? "-- Выберите --" : "-- Select --"}</option>
-                        {SERVICE_CATEGORIES.map((cat) => (
+                        <option value="">
+                          {locale === 'uz' ? '-- Umumiy konsultatsiya --' : locale === 'ru' ? '-- Общая консультация --' : '-- General consultation --'}
+                        </option>
+                        {serviceCategories.map((cat) => (
                           <optgroup key={cat.id} label={cat.title[locale]}>
                             {cat.subServices.map((sub) => (
                               <option key={sub.id} value={sub.id}>
@@ -198,23 +183,6 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
                       </select>
                     </div>
 
-                    {/* Privacy Agreement */}
-                    <div className="flex items-start gap-2 pt-2">
-                      <input
-                        id="agree-checkbox"
-                        type="checkbox"
-                        checked={formData.agree}
-                        onChange={(e) => setFormData({ ...formData, agree: e.target.checked })}
-                        className="mt-1 rounded border-slate-300 text-brand-gold focus:ring-brand-gold cursor-pointer w-4 h-4"
-                      />
-                      <span className="text-xs text-slate-500 leading-tight">
-                        {locale === 'uz' ? "Men shaxsiy ma'lumotlarimning 'Radeski Skin & Aesthetic Clinic' tomonidan qayta ishlanishiga rozilik beraman." : 
-                         locale === 'ru' ? "Я согласен на обработку персональных данных клиникой Radeski." : 
-                                           "I consent to the processing of my personal data by Radeski Clinic."}
-                      </span>
-                    </div>
-
-                    {/* Submit button */}
                     <button
                       id="submit-form-btn"
                       type="submit"
@@ -223,11 +191,11 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
                     >
                       {isSubmitting ? (
                         <>
-                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                          <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                           </svg>
-                          <span>{locale === 'uz' ? "Yuborilmoqda..." : locale === 'ru' ? "Отправка..." : "Submitting..."}</span>
+                          <span>{locale === 'uz' ? 'Yuborilmoqda...' : locale === 'ru' ? 'Отправка...' : 'Submitting...'}</span>
                         </>
                       ) : (
                         <>
@@ -249,7 +217,7 @@ export default function AppointmentModal({ isOpen, onClose, locale, preselectedS
                     <CheckCircle className="w-10 h-10" />
                   </motion.div>
                   <h3 className="text-xl font-bold text-slate-800">
-                    {locale === 'uz' ? "Darg'ol qabul qilindi!" : locale === 'ru' ? "Заявка принята!" : "Request Received!"}
+                    {locale === 'uz' ? "Arizangiz qabul qilindi!" : locale === 'ru' ? 'Заявка принята!' : 'Request Received!'}
                   </h3>
                   <p className="text-slate-500 text-sm mt-3 max-w-sm">
                     {d.formSuccess}
