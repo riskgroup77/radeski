@@ -85,7 +85,17 @@ export default function CredentialsGrid({ doctorId, locale }: CredentialsGridPro
     }
   };
 
-  const creds = physicianCredentials[doctorId] || physicianCredentials["ashurov-dilshod"];
+  const creds = (() => {
+    const saved = localStorage.getItem(`doctor_creds_${doctorId}`);
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // Fallback
+      }
+    }
+    return physicianCredentials[doctorId] || physicianCredentials["ashurov-dilshod"];
+  })();
 
   return (
     <div className="mt-4 p-4.5 bg-brand-offwhite rounded-2xl border border-brand-gold-light/20 shadow-xs" id={`credentials-grid-${doctorId}`}>

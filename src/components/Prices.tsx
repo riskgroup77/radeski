@@ -4,28 +4,35 @@ import { Search, Info, CalendarClock, ListFilter, HelpCircle } from 'lucide-reac
 import { Locale } from '../types';
 import { DICTIONARY, PRICES, SERVICE_CATEGORIES } from '../data';
 
+import { PriceItem, ServiceCategory } from '../types';
+
 interface PricesProps {
   locale: Locale;
   onOpenAppointment: (serviceId?: string) => void;
+  prices?: PriceItem[];
+  serviceCategories?: ServiceCategory[];
+  dictionary?: any;
 }
 
-export default function Prices({ locale, onOpenAppointment }: PricesProps) {
-  const d = DICTIONARY[locale];
+export default function Prices({ locale, onOpenAppointment, prices, serviceCategories, dictionary }: PricesProps) {
+  const d = dictionary || DICTIONARY[locale];
+  const dynamicPrices = prices || PRICES;
+  const dynamicCategories = serviceCategories || SERVICE_CATEGORIES;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const filteredPrices = useMemo(() => {
-    return PRICES.filter(item => {
+    return dynamicPrices.filter(item => {
       const matchesSearch = item.name[locale].toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory, locale]);
+  }, [searchQuery, selectedCategory, locale, dynamicPrices]);
 
   const categories = useMemo(() => {
-    const list = SERVICE_CATEGORIES.map(c => ({ id: c.id, title: c.title[locale] }));
+    const list = dynamicCategories.map(c => ({ id: c.id, title: c.title[locale] }));
     return [{ id: 'all', title: d.allServices }, ...list];
-  }, [locale, d]);
+  }, [locale, d, dynamicCategories]);
 
   return (
     <section id="prices-page" className="py-16 bg-brand-offwhite min-h-screen">

@@ -1,16 +1,19 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import * as Icons from 'lucide-react';
-import { Locale } from '../types';
+import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 
 interface ServicesProps {
   locale: Locale;
   onOpenAppointment: (serviceId?: string) => void;
+  serviceCategories?: ServiceCategory[];
+  dictionary?: any;
 }
 
-export default function Services({ locale, onOpenAppointment }: ServicesProps) {
-  const d = DICTIONARY[locale];
+export default function Services({ locale, onOpenAppointment, serviceCategories, dictionary }: ServicesProps) {
+  const d = dictionary || DICTIONARY[locale];
+  const dynamicCategories = serviceCategories || SERVICE_CATEGORIES;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [activeDetailId, setActiveDetailId] = useState<string | null>(null);
@@ -23,7 +26,7 @@ export default function Services({ locale, onOpenAppointment }: ServicesProps) {
   };
 
   const filteredCategories = useMemo(() => {
-    return SERVICE_CATEGORIES.map(category => {
+    return dynamicCategories.map(category => {
       // Filter sub-services based on search query
       const filteredSubs = category.subServices.filter(sub => {
         const query = searchQuery.toLowerCase();
@@ -46,17 +49,17 @@ export default function Services({ locale, onOpenAppointment }: ServicesProps) {
       }
       return null;
     }).filter(Boolean) as typeof SERVICE_CATEGORIES;
-  }, [searchQuery, locale]);
+  }, [searchQuery, locale, dynamicCategories]);
 
   // Find active sub-service for detailed modal info
   const activeDetailSubService = useMemo(() => {
     if (!activeDetailId) return null;
-    for (const cat of SERVICE_CATEGORIES) {
+    for (const cat of dynamicCategories) {
       const found = cat.subServices.find(s => s.id === activeDetailId);
       if (found) return found;
     }
     return null;
-  }, [activeDetailId]);
+  }, [activeDetailId, dynamicCategories]);
 
   return (
     <section id="services-page" className="py-16 bg-brand-offwhite min-h-screen">
@@ -103,7 +106,7 @@ export default function Services({ locale, onOpenAppointment }: ServicesProps) {
             >
               {d.allServices}
             </button>
-            {SERVICE_CATEGORIES.map(cat => (
+            {dynamicCategories.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}

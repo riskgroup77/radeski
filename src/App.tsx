@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Locale } from './types';
-import { DICTIONARY, SERVICE_CATEGORIES, DOCTORS, ARTICLES, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
+import { DICTIONARY, SERVICE_CATEGORIES, DOCTORS, ARTICLES, CLINIC_RATINGS, GALLERY_IMAGS, PRICES } from './data';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,6 +14,8 @@ import Doctors from './components/Doctors';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
 import Footer from './components/Footer';
+import AdminPanel from './components/AdminPanel';
+import { Doctor, ServiceCategory, PriceItem, Article } from './types';
 import AppointmentModal from './components/AppointmentModal';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Phone, Mail, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2 } from 'lucide-react';
@@ -24,12 +26,85 @@ export default function App() {
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
   const [preselectedServiceId, setPreselectedServiceId] = useState<string>('');
 
-  const d = DICTIONARY[locale];
+  // Dynamic datasets with localStorage persistence
+  const [dynamicDoctors, setDynamicDoctors] = useState<Doctor[]>(() => {
+    const saved = localStorage.getItem('radeski_doctors_v1');
+    return saved ? JSON.parse(saved) : DOCTORS;
+  });
+
+  const [dynamicServiceCategories, setDynamicServiceCategories] = useState<ServiceCategory[]>(() => {
+    const saved = localStorage.getItem('radeski_service_categories_v1');
+    return saved ? JSON.parse(saved) : SERVICE_CATEGORIES;
+  });
+
+  const [dynamicPrices, setDynamicPrices] = useState<PriceItem[]>(() => {
+    const saved = localStorage.getItem('radeski_prices_v1');
+    return saved ? JSON.parse(saved) : PRICES;
+  });
+
+  const [dynamicArticles, setDynamicArticles] = useState<Article[]>(() => {
+    const saved = localStorage.getItem('radeski_articles_v1');
+    return saved ? JSON.parse(saved) : ARTICLES;
+  });
+
+  const [dynamicDictionary, setDynamicDictionary] = useState(() => {
+    const saved = localStorage.getItem('radeski_dictionary_v1');
+    return saved ? JSON.parse(saved) : DICTIONARY;
+  });
+
+  const [dynamicClinicRatings, setDynamicClinicRatings] = useState(() => {
+    const saved = localStorage.getItem('radeski_clinic_ratings_v1');
+    return saved ? JSON.parse(saved) : CLINIC_RATINGS;
+  });
+
+  const d = dynamicDictionary[locale] || DICTIONARY[locale];
 
   // Inline Consultation / Be Beautiful form states
   const [inlinePhone, setInlinePhone] = useState('');
   const [inlineSubmitted, setInlineSubmitted] = useState(false);
   const [inlineLoading, setInlineLoading] = useState(false);
+
+  const handleSaveData = (type: string, data: any) => {
+    if (type === 'doctors') {
+      localStorage.setItem('radeski_doctors_v1', JSON.stringify(data));
+      setDynamicDoctors(data);
+    } else if (type === 'services') {
+      localStorage.setItem('radeski_service_categories_v1', JSON.stringify(data));
+      setDynamicServiceCategories(data);
+    } else if (type === 'prices') {
+      localStorage.setItem('radeski_prices_v1', JSON.stringify(data));
+      setDynamicPrices(data);
+    } else if (type === 'articles') {
+      localStorage.setItem('radeski_articles_v1', JSON.stringify(data));
+      setDynamicArticles(data);
+    } else if (type === 'dictionary') {
+      localStorage.setItem('radeski_dictionary_v1', JSON.stringify(data));
+      setDynamicDictionary(data);
+    } else if (type === 'clinicRatings') {
+      localStorage.setItem('radeski_clinic_ratings_v1', JSON.stringify(data));
+      setDynamicClinicRatings(data);
+    }
+  };
+
+  const handleResetAll = () => {
+    localStorage.removeItem('radeski_doctors_v1');
+    localStorage.removeItem('radeski_service_categories_v1');
+    localStorage.removeItem('radeski_prices_v1');
+    localStorage.removeItem('radeski_articles_v1');
+    localStorage.removeItem('radeski_dictionary_v1');
+    localStorage.removeItem('radeski_clinic_ratings_v1');
+
+    dynamicDoctors.forEach(doc => {
+      localStorage.removeItem(`doctor_creds_${doc.id}`);
+    });
+
+    setDynamicDoctors(DOCTORS);
+    setDynamicServiceCategories(SERVICE_CATEGORIES);
+    setDynamicPrices(PRICES);
+    setDynamicArticles(ARTICLES);
+    setDynamicDictionary(DICTIONARY);
+    setDynamicClinicRatings(CLINIC_RATINGS);
+  };
 
   // Automatically inject schema.org metadata and SEO tags dynamically on load / locale / tab change
   useEffect(() => {
@@ -74,7 +149,7 @@ export default function App() {
     };
 
     // 3. Dynamically generate an array of 'FAQPage' schema structures based on Service Categories and current locale
-    const faqPageSchemas = SERVICE_CATEGORIES.map(category => {
+    const faqPageSchemas = dynamicServiceCategories.map(category => {
       const categoryTitle = category.title[locale] || category.title['uz'];
       const categoryDesc = category.description[locale] || category.description['uz'];
       const subServicesList = category.subServices.map(sub => sub.name[locale] || sub.name['uz']).join(', ');
@@ -273,7 +348,7 @@ export default function App() {
     updateOg('og:url', `https://radeski.uz/#${currentTab}`);
     updateOg('og:locale', locale === 'uz' ? 'uz_UZ' : locale === 'ru' ? 'ru_RU' : 'en_US');
 
-  }, [locale, currentTab]);
+  }, [locale, currentTab, dynamicServiceCategories]);
 
   // Open modal with preselected service category
   const handleOpenAppointmentWithService = (catId?: string) => {
@@ -393,7 +468,7 @@ export default function App() {
 
                   {/* Horizontal visual Grid of 6 basic categories */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {SERVICE_CATEGORIES.slice(0, 6).map(category => (
+                    {dynamicServiceCategories.slice(0, 6).map(category => (
                       <div
                         key={category.id}
                         className="p-6 bg-brand-white border border-brand-sectiongray rounded-2xl shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
@@ -436,7 +511,7 @@ export default function App() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {DOCTORS.slice(0, 3).map(doc => (
+                    {dynamicDoctors.slice(0, 3).map(doc => (
                       <div
                         key={doc.id}
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between"
@@ -604,23 +679,63 @@ export default function App() {
           )}
 
           {currentTab === 'about' && (
-            <About locale={locale} onOpenAppointment={() => handleOpenAppointmentWithService()} />
+            <About 
+              locale={locale} 
+              onOpenAppointment={() => handleOpenAppointmentWithService()} 
+              doctors={dynamicDoctors}
+              dictionary={d}
+            />
           )}
 
           {currentTab === 'services' && (
-            <Services locale={locale} onOpenAppointment={handleOpenAppointmentWithService} />
+            <Services 
+              locale={locale} 
+              onOpenAppointment={handleOpenAppointmentWithService} 
+              serviceCategories={dynamicServiceCategories}
+              dictionary={d}
+            />
           )}
 
           {currentTab === 'doctors' && (
-            <Doctors locale={locale} onOpenAppointment={() => handleOpenAppointmentWithService()} />
+            <Doctors 
+              locale={locale} 
+              onOpenAppointment={() => handleOpenAppointmentWithService()} 
+              doctors={dynamicDoctors}
+              dictionary={d}
+            />
           )}
 
           {currentTab === 'prices' && (
-            <Prices locale={locale} onOpenAppointment={handleOpenAppointmentWithService} />
+            <Prices 
+              locale={locale} 
+              onOpenAppointment={handleOpenAppointmentWithService} 
+              prices={dynamicPrices}
+              serviceCategories={dynamicServiceCategories}
+              dictionary={d}
+            />
           )}
 
           {currentTab === 'articles' && (
-            <Articles locale={locale} />
+            <Articles 
+              locale={locale} 
+              articles={dynamicArticles}
+              dictionary={d}
+            />
+          )}
+
+          {currentTab === 'admin' && (
+            <AdminPanel
+              locale={locale}
+              dictionary={d}
+              doctors={dynamicDoctors}
+              serviceCategories={dynamicServiceCategories}
+              prices={dynamicPrices}
+              articles={dynamicArticles}
+              clinicRatings={dynamicClinicRatings}
+              onSaveData={handleSaveData}
+              onResetAll={handleResetAll}
+              onClose={() => setCurrentTab('home')}
+            />
           )}
 
           {currentTab === 'contacts' && (
@@ -714,6 +829,7 @@ export default function App() {
         locale={locale}
         onSelectTab={setCurrentTab}
         onOpenAppointment={() => handleOpenAppointmentWithService()}
+        currentTab={currentTab}
       />
 
       {/* 4. Overlay Appointment Booking dynamic Dialog */}

@@ -6,9 +6,10 @@ interface FooterProps {
   locale: Locale;
   onSelectTab: (tab: string) => void;
   onOpenAppointment: () => void;
+  currentTab?: string;
 }
 
-export default function Footer({ locale, onSelectTab, onOpenAppointment }: FooterProps) {
+export default function Footer({ locale, onSelectTab, onOpenAppointment, currentTab }: FooterProps) {
   const d = DICTIONARY[locale];
 
   return (
@@ -174,9 +175,16 @@ export default function Footer({ locale, onSelectTab, onOpenAppointment }: Foote
             <span className="hover:text-brand-gold-light transition-colors cursor-pointer font-light">
               Privacy Policy
             </span>
-            <span className="hover:text-brand-gold-light transition-colors cursor-pointer font-light">
-              Sitemap (1A)
-            </span>
+            <button 
+              onClick={() => onSelectTab(currentTab === 'admin' ? 'home' : 'admin')} 
+              className="hover:text-brand-gold-light transition-colors cursor-pointer font-light bg-transparent border-0 p-0 text-left"
+              title={currentTab === 'admin' ? "Chiqish" : "Admin Panel Login"}
+            >
+              {currentTab === 'admin' 
+                ? (locale === 'uz' ? "Chiqish" : locale === 'ru' ? "Выйти" : "Logout")
+                : (locale === 'uz' ? "Admin panel" : locale === 'ru' ? "Админ панель" : "Admin Panel")
+              }
+            </button>
           </div>
         </div>
       </div>

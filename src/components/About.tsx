@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Sparkles, Building, Play, Users, Eye, ArrowUpRight, Award, GraduationCap } from 'lucide-react';
-import { Locale } from '../types';
+import { Locale, Doctor } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS, DOCTORS } from '../data';
 import CredentialsGrid from './CredentialsGrid';
 
 interface AboutProps {
   locale: Locale;
   onOpenAppointment: () => void;
+  doctors?: Doctor[];
+  dictionary?: any;
 }
 
-export default function About({ locale, onOpenAppointment }: AboutProps) {
-  const d = DICTIONARY[locale];
+export default function About({ locale, onOpenAppointment, doctors, dictionary }: AboutProps) {
+  const d = dictionary || DICTIONARY[locale];
+  const dynamicDoctors = doctors || DOCTORS;
   const [activeGalleryIdx, setActiveGalleryIdx] = useState<number | null>(null);
-  const [activeCredsDocId, setActiveCredsDocId] = useState<string>("ashurov-dilshod");
+  const [activeCredsDocId, setActiveCredsDocId] = useState<string>(dynamicDoctors[0]?.id || "ashurov-dilshod");
 
   // Dynamic Unsplash links corresponding each gallery item
   const galleryImageUrls = [
@@ -181,7 +184,7 @@ export default function About({ locale, onOpenAppointment }: AboutProps) {
               </h4>
 
               <div className="space-y-2.5 max-h-[380px] overflow-y-auto pr-1">
-                {DOCTORS.map((doc) => {
+                {dynamicDoctors.map((doc) => {
                   const isActive = activeCredsDocId === doc.id;
                   return (
                     <button
@@ -213,7 +216,7 @@ export default function About({ locale, onOpenAppointment }: AboutProps) {
             {/* Selected Credentials Card */}
             <div className="lg:col-span-7">
               {(() => {
-                const doc = DOCTORS.find(d => d.id === activeCredsDocId) || DOCTORS[0];
+                const doc = dynamicDoctors.find(d => d.id === activeCredsDocId) || dynamicDoctors[0];
                 return (
                   <motion.div
                     key={doc.id}

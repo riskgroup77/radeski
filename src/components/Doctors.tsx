@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Award, GraduationCap, Clock, Calendar, Check, X, Shield } from 'lucide-react';
-import { Locale } from '../types';
+import { Locale, Doctor } from '../types';
 import { DICTIONARY, DOCTORS } from '../data';
 import TrustIndicators from './TrustIndicators';
 import CredentialsGrid from './CredentialsGrid';
@@ -9,13 +9,16 @@ import CredentialsGrid from './CredentialsGrid';
 interface DoctorsProps {
   locale: Locale;
   onOpenAppointment: () => void;
+  doctors?: Doctor[];
+  dictionary?: any;
 }
 
-export default function Doctors({ locale, onOpenAppointment }: DoctorsProps) {
-  const d = DICTIONARY[locale];
+export default function Doctors({ locale, onOpenAppointment, doctors, dictionary }: DoctorsProps) {
+  const d = dictionary || DICTIONARY[locale];
+  const dynamicDoctors = doctors || DOCTORS;
   const [selectedDoctorId, setSelectedDoctorId] = useState<string | null>(null);
 
-  const activeDoctor = DOCTORS.find(doc => doc.id === selectedDoctorId);
+  const activeDoctor = dynamicDoctors.find(doc => doc.id === selectedDoctorId);
 
   return (
     <section id="doctors-page" className="py-16 bg-brand-white min-h-screen">
@@ -35,7 +38,7 @@ export default function Doctors({ locale, onOpenAppointment }: DoctorsProps) {
 
         {/* Doctors list Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {DOCTORS.map((doc) => (
+          {dynamicDoctors.map((doc) => (
             <motion.div
               key={doc.id}
               id={`doctor-card-${doc.id}`}

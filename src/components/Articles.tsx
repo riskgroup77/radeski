@@ -4,28 +4,33 @@ import { HelpCircle, Clock, Eye, Calendar, User, CornerUpLeft, BookOpen, Chevron
 import { Locale } from '../types';
 import { DICTIONARY, ARTICLES } from '../data';
 
+import { Article } from '../types';
+
 interface ArticlesProps {
   locale: Locale;
+  articles?: Article[];
+  dictionary?: any;
 }
 
-export default function Articles({ locale }: ArticlesProps) {
-  const d = DICTIONARY[locale];
+export default function Articles({ locale, articles, dictionary }: ArticlesProps) {
+  const d = dictionary || DICTIONARY[locale];
+  const dynamicArticles = articles || ARTICLES;
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredArticles = useMemo(() => {
-    return ARTICLES.filter(item => {
+    return dynamicArticles.filter(item => {
       return (
         item.title[locale].toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.summary[locale].toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.content[locale].toLowerCase().includes(searchQuery.toLowerCase())
       );
     });
-  }, [searchQuery, locale]);
+  }, [searchQuery, locale, dynamicArticles]);
 
   const activeArticle = useMemo(() => {
-    return ARTICLES.find(a => a.id === selectedArticleId);
-  }, [selectedArticleId]);
+    return dynamicArticles.find(a => a.id === selectedArticleId);
+  }, [selectedArticleId, dynamicArticles]);
 
   return (
     <section id="articles-page" className="py-16 bg-brand-white min-h-screen">
