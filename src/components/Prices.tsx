@@ -29,6 +29,44 @@ export default function Prices({ locale, onOpenAppointment, prices, serviceCateg
     });
   }, [searchQuery, selectedCategory, locale, dynamicPrices]);
 
+  const pricesByCategory = useMemo(() => {
+    const grouped = new Map<string, PriceItem[]>();
+    filteredPrices.forEach((item) => {
+      const catId = item.category || 'other';
+      if (!grouped.has(catId)) grouped.set(catId, []);
+      grouped.get(catId)!.push(item);
+    });
+
+    const sections: { categoryId: string; title: string; items: PriceItem[] }[] = [];
+
+    const orderedCategoryIds =
+      selectedCategory === 'all'
+        ? dynamicCategories.map((c) => c.id)
+        : [selectedCategory];
+
+    orderedCategoryIds.forEach((catId) => {
+      const items = grouped.get(catId);
+      if (!items?.length) return;
+      const cat = dynamicCategories.find((c) => c.id === catId);
+      sections.push({
+        categoryId: catId,
+        title: cat?.title[locale] || catId,
+        items,
+      });
+      grouped.delete(catId);
+    });
+
+    grouped.forEach((items, catId) => {
+      sections.push({
+        categoryId: catId,
+        title: catId,
+        items,
+      });
+    });
+
+    return sections;
+  }, [filteredPrices, selectedCategory, dynamicCategories, locale]);
+
   const categories = useMemo(() => {
     const list = dynamicCategories.map(c => ({ id: c.id, title: c.title[locale] }));
     return [{ id: 'all', title: d.allServices }, ...list];
@@ -81,69 +119,89 @@ export default function Prices({ locale, onOpenAppointment, prices, serviceCateg
           </div>
         </div>
 
-        {/* Pricing Grid / List Table */}
-        <div className="bg-brand-white rounded-2xl border border-brand-sectiongray shadow-sm overflow-hidden mb-12">
-          <div className="hidden md:grid grid-cols-12 gap-4 bg-brand-offwhite px-6 py-4 border-b border-brand-sectiongray text-xs font-bold text-brand-text-muted uppercase tracking-wider">
-            <div className="col-span-7">{locale === 'uz' ? "Xizmat nomi" : locale === 'ru' ? "Наименование услуги" : "Service Description"}</div>
-            <div className="col-span-2 text-right">{locale === 'uz' ? "Narxi" : locale === 'ru' ? "Стоимость" : "Standard Price"}</div>
-            <div className="col-span-3 text-right">{locale === 'uz' ? "Amal" : locale === 'ru' ? "Действие" : "Booking Options"}</div>
-          </div>
-
-          <div className="divide-y divide-brand-sectiongray">
-            {filteredPrices.map((item) => (
-              <div
-                key={item.id}
-                id={`price-item-${item.id}`}
-                className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-brand-offwhite/50 transition-colors"
-              >
-                {/* Mobile / Name */}
-                <div className="col-span-1 md:col-span-7">
-                  <span className="text-[9px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden mb-1 leading-none">
-                    {dynamicCategories.find(c => c.id === item.category)?.title[locale]}
+        {/* Pricing by category */}
+        <div className="space-y-8 mb-12">
+          {pricesByCategory.map((section, sectionIndex) => (
+            <motion.div
+              key={section.categoryId}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: sectionIndex * 0.05 }}
+              className="bg-brand-white rounded-2xl border border-brand-sectiongray shadow-sm overflow-hidden"
+            >
+              <div className="px-6 py-4 bg-brand-offwhite border-b border-brand-sectiongray flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest">
+                    {locale === 'uz' ? 'Kategoriya' : locale === 'ru' ? 'Категория' : 'Category'}
                   </span>
-                  <h4 className="text-brand-text-primary font-semibold text-sm sm:text-base leading-snug">
-                    {item.name[locale]}
-                  </h4>
+                  <h3 className="text-lg sm:text-xl font-extrabold text-brand-text-primary tracking-tight mt-0.5">
+                    {section.title}
+                  </h3>
                 </div>
+                <span className="text-xs font-mono text-brand-text-muted bg-brand-white px-3 py-1 rounded-full border border-brand-sectiongray">
+                  {section.items.length}{' '}
+                  {locale === 'uz' ? 'ta xizmat' : locale === 'ru' ? 'услуг' : 'services'}
+                </span>
+              </div>
 
-                {/* Mobile Price and Action layout */}
-                <div className="col-span-1 md:col-span-2 md:text-right mt-2 md:mt-0 flex items-center justify-between md:block">
-                  <span className="text-[10px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden">
-                    {locale === 'uz' ? "Narxi:" : locale === 'ru' ? "Цена:" : "Price:"}
-                  </span>
-                  <span className="text-brand-gold-dark font-extrabold text-sm sm:text-base">
-                    {item.price === "Kelishilgan holda" && locale === 'en' ? "On agreement" : 
-                     item.price === "Kelishilgan holda" && locale === 'ru' ? "По договору" : 
-                     item.price}
-                  </span>
-                </div>
+              <div className="hidden md:grid grid-cols-12 gap-4 bg-brand-white px-6 py-3 border-b border-brand-offwhite text-xs font-bold text-brand-text-muted uppercase tracking-wider">
+                <div className="col-span-7">{locale === 'uz' ? "Xizmat nomi" : locale === 'ru' ? "Наименование услуги" : "Service Description"}</div>
+                <div className="col-span-2 text-right">{locale === 'uz' ? "Narxi" : locale === 'ru' ? "Стоимость" : "Standard Price"}</div>
+                <div className="col-span-3 text-right">{locale === 'uz' ? "Amal" : locale === 'ru' ? "Действие" : "Booking Options"}</div>
+              </div>
 
-                <div className="col-span-1 md:col-span-3 md:text-right flex items-center justify-between md:justify-end gap-2 mt-4 md:mt-0">
-                  <span className="text-[10px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden">
-                    {locale === 'uz' ? "Har qabul:" : locale === 'ru' ? "Назначить:" : "Book:"}
-                  </span>
-                  <button
-                    onClick={() => onOpenAppointment(item.category)}
-                    className="py-2.5 px-4 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl transition-all cursor-pointer shadow-md shadow-brand-gold/5 hover:shadow-brand-gold/15 flex items-center gap-1.5"
+              <div className="divide-y divide-brand-sectiongray">
+                {section.items.map((item) => (
+                  <div
+                    key={item.id}
+                    id={`price-item-${item.id}`}
+                    className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-6 py-5 hover:bg-brand-offwhite/50 transition-colors"
                   >
-                    <CalendarClock className="w-3.5 h-3.5" />
-                    <span>{d.appointmentBtn}</span>
-                  </button>
-                </div>
-              </div>
-            ))}
+                    <div className="col-span-1 md:col-span-7">
+                      <h4 className="text-brand-text-primary font-semibold text-sm sm:text-base leading-snug">
+                        {item.name[locale]}
+                      </h4>
+                    </div>
 
-            {filteredPrices.length === 0 && (
-              <div className="text-center py-16">
-                <HelpCircle className="w-12 h-12 text-brand-text-muted mx-auto mb-4" />
-                <p className="text-brand-text-muted text-sm">
-                  {locale === 'uz' ? "Ushbu filtr va kalit so'z bo'yicha hech qanday narx topilmadi." : 
-                   locale === 'ru' ? "По данному запросу цены не найдены." : 
-                                     "No pricing items matched your filter or search."}
-                </p>
+                    <div className="col-span-1 md:col-span-2 md:text-right mt-2 md:mt-0 flex items-center justify-between md:block">
+                      <span className="text-[10px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden">
+                        {locale === 'uz' ? "Narxi:" : locale === 'ru' ? "Цена:" : "Price:"}
+                      </span>
+                      <span className="text-brand-gold-dark font-extrabold text-sm sm:text-base">
+                        {item.price === "Kelishilgan holda" && locale === 'en' ? "On agreement" :
+                         item.price === "Kelishilgan holda" && locale === 'ru' ? "По договору" :
+                         item.price}
+                      </span>
+                    </div>
+
+                    <div className="col-span-1 md:col-span-3 md:text-right flex items-center justify-between md:justify-end gap-2 mt-4 md:mt-0">
+                      <span className="text-[10px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden">
+                        {locale === 'uz' ? "Har qabul:" : locale === 'ru' ? "Назначить:" : "Book:"}
+                      </span>
+                      <button
+                        onClick={() => onOpenAppointment(item.category)}
+                        className="py-2.5 px-4 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl transition-all cursor-pointer shadow-md shadow-brand-gold/5 hover:shadow-brand-gold/15 flex items-center gap-1.5"
+                      >
+                        <CalendarClock className="w-3.5 h-3.5" />
+                        <span>{d.appointmentBtn}</span>
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
+            </motion.div>
+          ))}
+
+          {pricesByCategory.length === 0 && (
+            <div className="bg-brand-white rounded-2xl border border-brand-sectiongray shadow-sm text-center py-16">
+              <HelpCircle className="w-12 h-12 text-brand-text-muted mx-auto mb-4" />
+              <p className="text-brand-text-muted text-sm">
+                {locale === 'uz' ? "Ushbu filtr va kalit so'z bo'yicha hech qanday narx topilmadi." :
+                 locale === 'ru' ? "По данному запросу цены не найдены." :
+                                   "No pricing items matched your filter or search."}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Pricing disclaimer / FAQ info */}

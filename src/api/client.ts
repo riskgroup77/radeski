@@ -112,6 +112,16 @@ export function getApiUrl(): string {
   return API_URL;
 }
 
+/** Relative upload paths from API → full URL for <img src> */
+export function resolveMediaUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  const base = API_URL.replace(/\/$/, '');
+  if (url.startsWith('/')) return `${base}${url}`;
+  if (url.startsWith('uploads/')) return `${base}/${url}`;
+  return url;
+}
+
 export const AUTH_TOKEN_KEY = 'admin_token';
 
 export function getAuthToken(): string | null {

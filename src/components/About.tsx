@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShieldCheck, Sparkles, Building, Play, Users, Eye, ArrowUpRight, Award, GraduationCap } from 'lucide-react';
+import { ShieldCheck, Sparkles, Building, Users, X, ChevronLeft, ChevronRight, Award, GraduationCap } from 'lucide-react';
 import { Locale, Doctor } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from '../data';
 import CredentialsGrid from './CredentialsGrid';
@@ -29,15 +29,40 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
     }
   }, [dynamicDoctors, activeCredsDocId]);
 
-  // Dynamic Unsplash links corresponding each gallery item
-  const galleryImageUrls = [
-    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800", // reception
-    "https://images.unsplash.com/photo-1512678080530-7760dfb14aba?auto=format&fit=crop&q=80&w=800", // consulting
-    "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&q=80&w=800", // photofinder
-    "https://images.unsplash.com/photo-1622902098748-028726098130?auto=format&fit=crop&q=80&w=800", // laser
-    "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&q=80&w=800", // treatment
-    "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=800"  // sterilization
-  ];
+  useEffect(() => {
+    if (activeGalleryIdx === null) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActiveGalleryIdx(null);
+      } else if (event.key === 'ArrowLeft') {
+        setActiveGalleryIdx((prev) =>
+          prev !== null ? (prev - 1 + GALLERY_IMAGS.length) % GALLERY_IMAGS.length : null
+        );
+      } else if (event.key === 'ArrowRight') {
+        setActiveGalleryIdx((prev) =>
+          prev !== null ? (prev + 1) % GALLERY_IMAGS.length : null
+        );
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeGalleryIdx]);
+
+  const showPrevGalleryImage = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setActiveGalleryIdx((prev) =>
+      prev !== null ? (prev - 1 + GALLERY_IMAGS.length) % GALLERY_IMAGS.length : null
+    );
+  };
+
+  const showNextGalleryImage = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setActiveGalleryIdx((prev) =>
+      prev !== null ? (prev + 1) % GALLERY_IMAGS.length : null
+    );
+  };
 
   return (
     <section id="about-page" className="py-16 bg-brand-white">
@@ -74,25 +99,20 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
             </div>
           </motion.div>
 
-          {/* Right illustration / clinic visual */}
+          {/* Clinic video */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative rounded-2xl overflow-hidden h-[320px] sm:h-[400px] border border-slate-150 shadow-lg group"
+            className="relative rounded-2xl overflow-hidden h-[320px] sm:h-[400px] border border-slate-150 shadow-lg bg-black"
           >
-            <img
-              src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200"
-              alt="Radeski Skin Clinic Inside"
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+            <iframe
+              src="https://www.youtube.com/embed/Hb8W-e1HZ_g"
+              title={locale === 'uz' ? 'Radeski klinikasi haqida video' : locale === 'ru' ? 'Видео о клинике Radeski' : 'About Radeski Clinic video'}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
             />
-            {/* Play overlay button style simulation for prestige */}
-            <div className="absolute inset-0 bg-slate-950/20 flex items-center justify-center">
-              <div className="w-14 h-14 bg-[#FFFFFF]/95 text-brand-gold rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all">
-                <Play className="w-5 h-5 ml-1 animate-pulse" />
-              </div>
-            </div>
           </motion.div>
         </div>
 
@@ -271,7 +291,12 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
                     </p>
 
                     {/* Dynamic Credentials Grid */}
-                    <CredentialsGrid doctorId={doc.id} locale={locale} credentials={doc.credentials} />
+                    <CredentialsGrid
+                      doctorId={doc.id}
+                      locale={locale}
+                      credentials={doc.credentials}
+                      specialty={doc.role[locale]}
+                    />
                   </motion.div>
                 );
               })()}
@@ -292,26 +317,18 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {GALLERY_IMAGS.map((img, idx) => (
-              <div
+              <button
                 key={img.name}
+                type="button"
                 onClick={() => setActiveGalleryIdx(idx)}
                 className="group relative h-48 rounded-2xl overflow-hidden shadow-xs hover:shadow-md cursor-pointer border border-brand-sectiongray active:scale-99 transition-all"
               >
                 <img
-                  src={galleryImageUrls[idx]}
-                  alt={img.label}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                  src={img.src}
+                  alt={`Radeski clinic ${idx + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-slate-950/35 group-hover:bg-slate-950/20 transition-colors" />
-
-                {/* Info panel */}
-                <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-[#FFFFFF]/90 backdrop-blur-xs px-2.5 py-1 rounded-lg text-[10px] sm:text-xs font-bold text-brand-text-primary shadow">
-                  <span>{img.icon}</span>
-                  <span>{img.label}</span>
-                  <ArrowUpRight className="w-3 h-3 text-slate-400 group-hover:text-brand-gold transition-colors" />
-                </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -336,39 +353,64 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
       {/* Lightbox Modal */}
       <AnimatePresence>
         {activeGalleryIdx !== null && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0a121e]/90 backdrop-blur-xs">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveGalleryIdx(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0a121e]/92 backdrop-blur-sm"
+          >
             <button
-              onClick={() => setActiveGalleryIdx(null)}
-              className="absolute top-4 right-4 text-white hover:text-slate-300 p-2 hover:bg-white/10 rounded-full transition-all"
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setActiveGalleryIdx(null);
+              }}
+              className="absolute top-4 right-4 text-white hover:text-slate-300 p-2.5 hover:bg-white/10 rounded-full transition-all z-10"
+              aria-label={locale === 'uz' ? 'Yopish' : locale === 'ru' ? 'Закрыть' : 'Close'}
             >
-              <Eye className="w-5 h-5" /> {locale === 'uz' ? "Yopish" : locale === 'ru' ? "Закрыть" : "Close"}
+              <X className="w-6 h-6" />
             </button>
 
-            <div className="relative max-w-4xl w-full max-h-[80vh] flex items-center justify-center">
-              <motion.img
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                src={galleryImageUrls[activeGalleryIdx]}
-                alt={GALLERY_IMAGS[activeGalleryIdx].label}
-                className="max-w-full max-h-[75vh] object-contain rounded-xl shadow-2xl border border-white/10"
-              />
+            <span className="absolute top-5 left-1/2 -translate-x-1/2 text-white/80 text-xs font-mono tracking-wider">
+              {activeGalleryIdx + 1} / {GALLERY_IMAGS.length}
+            </span>
 
-              {/* Prev / Next hooks */}
+            <div
+              onClick={(event) => event.stopPropagation()}
+              className="relative w-full max-w-5xl max-h-[85vh] flex items-center justify-center"
+            >
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={GALLERY_IMAGS[activeGalleryIdx].src}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.2 }}
+                  src={GALLERY_IMAGS[activeGalleryIdx].src}
+                  alt={`Radeski clinic ${activeGalleryIdx + 1}`}
+                  className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl border border-white/10"
+                />
+              </AnimatePresence>
+
               <button
-                onClick={() => setActiveGalleryIdx((prev) => prev !== null ? (prev - 1 + galleryImageUrls.length) % galleryImageUrls.length : null)}
-                className="absolute left-2 sm:left-4 font-bold text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all text-sm"
+                type="button"
+                onClick={showPrevGalleryImage}
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all"
+                aria-label={locale === 'uz' ? 'Oldingi rasm' : locale === 'ru' ? 'Предыдущее' : 'Previous'}
               >
-                ◀
+                <ChevronLeft className="w-6 h-6" />
               </button>
               <button
-                onClick={() => setActiveGalleryIdx((prev) => prev !== null ? (prev + 1) % galleryImageUrls.length : null)}
-                className="absolute right-2 sm:right-4 font-bold text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all text-sm"
+                type="button"
+                onClick={showNextGalleryImage}
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all"
+                aria-label={locale === 'uz' ? 'Keyingi rasm' : locale === 'ru' ? 'Следующее' : 'Next'}
               >
-                ▶
+                <ChevronRight className="w-6 h-6" />
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>

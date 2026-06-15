@@ -5,6 +5,7 @@ import { Locale, Doctor } from '../types';
 import { DICTIONARY, DOCTORS } from '../data';
 import TrustIndicators from './TrustIndicators';
 import CredentialsGrid from './CredentialsGrid';
+import MediaImage from './MediaImage';
 
 interface DoctorsProps {
   locale: Locale;
@@ -47,24 +48,23 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
               className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-md transition-all group flex flex-col justify-between"
             >
               <div>
-                {/* Image Wrap */}
-                <div className="relative h-72 w-full overflow-hidden bg-brand-offwhite">
+                {/* Image Wrap — portrait ratio, face centered */}
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-brand-offwhite">
                   {doc.photo ? (
-                    <img
+                    <MediaImage
                       src={doc.photo}
                       alt={doc.name[locale]}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-300"
+                      className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-sm">
+                    <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted text-sm">
                       {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет фото' : 'No photo'}
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent " />
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/75 to-transparent pointer-events-none" />
 
-                  {/* Absolute Badge */}
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                  {/* Experience badge */}
+                  <div className="absolute bottom-4 left-4 right-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-gold/90 backdrop-blur-xs text-white text-xs font-semibold shadow-md">
                       <Clock className="w-3.5 h-3.5" />
                       {doc.experience[locale]} {d.years} {locale === 'uz' ? "tajriba" : locale === 'ru' ? "лет практики" : "years"}
@@ -134,7 +134,7 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
       {/* Doctor profile detailed modal */}
       <AnimatePresence>
         {activeDoctor && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
             {/* Backdrop Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -149,7 +149,7 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl bg-brand-white rounded-2xl shadow-2xl z-10 overflow-hidden border border-brand-sectiongray my-8 max-h-[95vh] flex flex-col"
+              className="relative w-full max-w-6xl bg-brand-white rounded-2xl sm:rounded-3xl shadow-2xl z-10 overflow-hidden border border-brand-sectiongray my-4 sm:my-6 max-h-[92vh] flex flex-col"
             >
               {/* Close Button */}
               <button
@@ -161,29 +161,28 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
 
               <div className="flex flex-col md:flex-row h-full overflow-y-auto">
                 {/* Left Portrait Column */}
-                <div className="w-full md:w-2/5 h-64 md:h-auto md:min-h-[400px] relative bg-brand-offwhite shrink-0">
+                <div className="w-full md:w-[38%] relative bg-brand-offwhite shrink-0 min-h-[320px] md:min-h-[520px]">
                   {activeDoctor.photo ? (
-                    <img
+                    <MediaImage
                       src={activeDoctor.photo}
                       alt={activeDoctor.name[locale]}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-top"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-sm">
+                    <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted text-sm">
                       {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет фото' : 'No photo'}
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/30 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Right Portfolio Details Column */}
-                <div className="w-full md:w-3/5 p-6 sm:p-8 flex flex-col justify-between">
+                <div className="w-full md:w-[62%] p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
                   <div>
-                    <span className="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-mono leading-none block mb-1">
+                    <span className="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-mono leading-none block mb-1.5">
                       {activeDoctor.role[locale]}
                     </span>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-brand-text-primary leading-tight">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary leading-tight">
                       {activeDoctor.name[locale]}
                     </h3>
 
@@ -218,7 +217,12 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
                     </div>
 
                     {/* Credentials Grid (License, Active Practice, Certificates, Published Papers) */}
-                    <CredentialsGrid doctorId={activeDoctor.id} locale={locale} credentials={activeDoctor.credentials} />
+                    <CredentialsGrid
+                      doctorId={activeDoctor.id}
+                      locale={locale}
+                      credentials={activeDoctor.credentials}
+                      specialty={activeDoctor.role[locale]}
+                    />
 
                     {/* Highly Professional E-E-A-T Trust Indicators */}
                     <TrustIndicators doctorId={activeDoctor.id} locale={locale} />

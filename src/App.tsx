@@ -6,7 +6,30 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
 import { Locale } from './types';
+import ScrollToTop from './routing/ScrollToTop';
+import RootRedirect from './routing/RootRedirect';
+import LocaleAliasRedirect from './routing/LocaleAliasRedirect';
+import {
+  normalizeLocaleParam,
+  saveLocale,
+  getPreferredLocale,
+  localeToHreflang,
+  localeToOgLocale,
+  LOCALES,
+} from './routing/locale';
+import {
+  PageId,
+  getPageFromPathname,
+  getArticleSlugFromPathname,
+  pagePath,
+  absoluteUrl,
+  switchLocaleInPath,
+  pagePathForAllLocales,
+  articlePath,
+} from './routing/paths';
+import { useAppNavigation } from './routing/useAppNavigation';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -18,6 +41,7 @@ import Articles from './components/Articles';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
 import AppointmentModal from './components/AppointmentModal';
+import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
@@ -25,8 +49,35 @@ import { createAppointment } from './api/publicApi';
 import { ApiError } from './api/client';
 
 export default function App() {
-  const [locale, setLocale] = useState<Locale>('uz');
-  const [currentTab, setCurrentTab] = useState<string>('home');
+  return (
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<RootRedirect />} />
+        <Route path="/rus/*" element={<LocaleAliasRedirect locale="ru" />} />
+        <Route path="/eng/*" element={<LocaleAliasRedirect locale="en" />} />
+        <Route path="/admin" element={<ClinicShell forcePage="admin" />} />
+        <Route path="/:locale/*" element={<ClinicShell />} />
+        <Route path="*" element={<RootRedirect />} />
+      </Routes>
+    </>
+  );
+}
+
+interface ClinicShellProps {
+  forcePage?: 'admin';
+}
+
+function ClinicShell({ forcePage }: ClinicShellProps) {
+  const { locale: localeParam } = useParams();
+  const location = useLocation();
+  const parsedLocale = normalizeLocaleParam(localeParam);
+  const locale = parsedLocale ?? getPreferredLocale();
+  const currentPage: PageId = forcePage ?? getPageFromPathname(location.pathname);
+  const articleSlug = getArticleSlugFromPathname(location.pathname);
+  const { goToPage, goToArticle, changeLocale } = useAppNavigation(locale);
+  const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
+
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
   const [preselectedServiceId, setPreselectedServiceId] = useState<string>('');
 
@@ -87,7 +138,7 @@ export default function App() {
       "name": "Radeski Skin & Aesthetic Clinic",
       "alternateName": "Radeski Skin Clinic",
       "url": "https://radeski.uz",
-      "logo": "https://radeski.uz/logo.png",
+      "logo": `${window.location.origin}/gallery/logo.webp`,
       "image": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1920",
       "telephone": "+998732007373",
       "priceRange": "$$",
@@ -277,13 +328,16 @@ export default function App() {
       }
     };
 
-    const activeSEO = (TAB_SEO[locale] && TAB_SEO[locale][currentTab]) 
+    const activeSEO = (TAB_SEO[locale] && TAB_SEO[locale][currentPage])
       || (TAB_SEO['uz'] && TAB_SEO['uz']['home']);
 
     document.title = `${activeSEO.title}`;
 
     // Update document language
     document.documentElement.lang = locale;
+
+    const canonicalPath = forcePage === 'admin' ? '/admin' : location.pathname;
+    const canonicalUrl = absoluteUrl(canonicalPath);
 
     // Helper functions to safely update or append heads meta
     const updateMeta = (name: string, content: string) => {
@@ -313,10 +367,45 @@ export default function App() {
     // Update Social sharing graph protocols
     updateOg('og:title', activeSEO.title);
     updateOg('og:description', activeSEO.desc);
-    updateOg('og:url', `https://radeski.uz/#${currentTab}`);
-    updateOg('og:locale', locale === 'uz' ? 'uz_UZ' : locale === 'ru' ? 'ru_RU' : 'en_US');
+    updateOg('og:url', canonicalUrl);
+    updateOg('og:locale', localeToOgLocale(locale));
 
-  }, [locale, currentTab, dynamicServiceCategories]);
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
+
+    document.querySelectorAll('link[data-radeski-hreflang]').forEach((node) => node.remove());
+
+    if (forcePage !== 'admin') {
+      const pageForAlternates: PageId = currentPage === 'articles' && articleSlug ? 'articles' : currentPage;
+      LOCALES.forEach((altLocale) => {
+        const altPath = articleSlug
+          ? articlePath(altLocale, articleSlug)
+          : pagePathForAllLocales(pageForAlternates)[altLocale];
+        const link = document.createElement('link');
+        link.rel = 'alternate';
+        link.hreflang = localeToHreflang(altLocale);
+        link.href = absoluteUrl(altPath);
+        link.setAttribute('data-radeski-hreflang', 'true');
+        document.head.appendChild(link);
+      });
+
+      const defaultPath = articleSlug
+        ? articlePath('uz', articleSlug)
+        : pagePath('uz', pageForAlternates);
+      const defaultLink = document.createElement('link');
+      defaultLink.rel = 'alternate';
+      defaultLink.hreflang = 'x-default';
+      defaultLink.href = absoluteUrl(defaultPath);
+      defaultLink.setAttribute('data-radeski-hreflang', 'true');
+      document.head.appendChild(defaultLink);
+    }
+
+  }, [locale, currentPage, dynamicServiceCategories, location.pathname, articleSlug, forcePage]);
 
   // Open modal with preselected service category
   const handleOpenAppointmentWithService = (catId?: string) => {
@@ -352,10 +441,23 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    if (parsedLocale) saveLocale(parsedLocale);
+  }, [parsedLocale]);
+
+  if (invalidLocale) {
+    return (
+      <Navigate
+        to={switchLocaleInPath(location.pathname, getPreferredLocale())}
+        replace
+      />
+    );
+  }
+
   return (
     <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[88px] sm:pt-[120px]">
 
-      {dataError && currentTab !== 'admin' && (
+      {dataError && currentPage !== 'admin' && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-3">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-start gap-2 text-sm text-amber-900">
@@ -373,7 +475,7 @@ export default function App() {
         </div>
       )}
 
-      {dataLoading && currentTab !== 'admin' && (
+      {dataLoading && currentPage !== 'admin' && (
         <div className="fixed inset-0 z-30 bg-white/60 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
           <div className="px-4 py-2 bg-white border border-brand-sectiongray rounded-xl shadow-sm text-sm text-brand-text-muted">
             {locale === 'uz' ? 'Ma\'lumotlar yuklanmoqda...' : locale === 'ru' ? 'Загрузка данных...' : 'Loading data...'}
@@ -383,29 +485,29 @@ export default function App() {
 
       {/* 1. Header Navigation */}
       <Header
-        currentTab={currentTab}
-        setCurrentTab={setCurrentTab}
+        currentPage={currentPage}
         locale={locale}
-        setLocale={setLocale}
+        onNavigate={goToPage}
+        onChangeLocale={changeLocale}
         onOpenAppointment={() => handleOpenAppointmentWithService()}
       />
 
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={currentTab}
+          key={`${currentPage}-${articleSlug ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
         >
-          {currentTab === 'home' && (
+          {currentPage === 'home' && (
             <div id="home-dashboard">
               {/* Hero Slider banner */}
               <Hero
                 locale={locale}
                 onOpenAppointment={() => handleOpenAppointmentWithService()}
-                onSelectTab={setCurrentTab}
+                onNavigate={goToPage}
               />
 
               {/* Bento Grid Features / Advantages */}
@@ -464,7 +566,7 @@ export default function App() {
                       </h3>
                     </div>
                     <button
-                      onClick={() => setCurrentTab('services')}
+                      onClick={() => goToPage('services')}
                       className="text-xs font-bold text-brand-gold hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer"
                     >
                       <span>{locale === 'uz' ? "Barcha 12 ta xizmatni ko'rish" : locale === 'ru' ? "Посмотреть все 12 направлений" : "Explore all 12 services"}</span>
@@ -477,20 +579,39 @@ export default function App() {
                     {dynamicServiceCategories.slice(0, 6).map(category => (
                       <div
                         key={category.id}
-                        className="p-6 bg-brand-white border border-brand-sectiongray rounded-2xl shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                        className="bg-brand-white border border-brand-sectiongray rounded-2xl shadow-xs hover:shadow-md transition-all flex flex-col overflow-hidden"
                       >
-                        <div>
-                          <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest">{locale === 'uz' ? "Kategoriya" : locale === 'ru' ? "Направление" : "Specialty"}</span>
-                          <h4 className="font-extrabold text-brand-text-primary text-base sm:text-lg mt-1">{category.title[locale]}</h4>
-                          <p className="text-xs sm:text-sm text-brand-text-secondary mt-3 font-light leading-relaxed">{category.description[locale]}</p>
+                        {category.image ? (
+                          <div className="relative h-40 overflow-hidden bg-brand-offwhite">
+                            <MediaImage
+                              src={category.image}
+                              alt={category.title[locale]}
+                              loading="lazy"
+                              className="w-full h-full object-cover object-center"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/75 to-transparent" />
+                            <div className="absolute bottom-3 left-4 right-4">
+                              <span className="text-[10px] font-bold text-brand-gold-light uppercase tracking-widest">{locale === 'uz' ? "Kategoriya" : locale === 'ru' ? "Направление" : "Specialty"}</span>
+                              <h4 className="font-extrabold text-white text-base sm:text-lg mt-0.5 leading-tight">{category.title[locale]}</h4>
+                            </div>
+                          </div>
+                        ) : null}
+                        <div className="p-6 flex flex-col flex-1 justify-between">
+                          {!category.image && (
+                            <>
+                              <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest">{locale === 'uz' ? "Kategoriya" : locale === 'ru' ? "Направление" : "Specialty"}</span>
+                              <h4 className="font-extrabold text-brand-text-primary text-base sm:text-lg mt-1">{category.title[locale]}</h4>
+                            </>
+                          )}
+                          <p className={`text-xs sm:text-sm text-brand-text-secondary font-light leading-relaxed${category.image ? ' mt-0' : ' mt-3'}`}>{category.description[locale]}</p>
+                          <button
+                            onClick={() => goToPage('services')}
+                            className="mt-6 text-xs text-brand-gold hover:text-brand-gold-dark font-bold text-left inline-flex items-center gap-1 cursor-pointer"
+                          >
+                            <span>{d.viewDetails}</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </button>
                         </div>
-                        <button
-                          onClick={() => setCurrentTab('services')}
-                          className="mt-6 text-xs text-brand-gold hover:text-brand-gold-dark font-bold text-left inline-flex items-center gap-1 cursor-pointer"
-                        >
-                          <span>{d.viewDetails}</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </button>
                       </div>
                     ))}
                   </div>
@@ -508,7 +629,7 @@ export default function App() {
                       </h3>
                     </div>
                     <button
-                      onClick={() => setCurrentTab('doctors')}
+                      onClick={() => goToPage('doctors')}
                       className="text-xs font-bold text-brand-gold hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer"
                     >
                       <span>{locale === 'uz' ? "Barcha shifokorlar profili" : locale === 'ru' ? "Посмотреть анкеты всех врачей" : "Meet entire clinical team"}</span>
@@ -522,13 +643,17 @@ export default function App() {
                         key={doc.id}
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between"
                       >
-                        <div className="h-56 overflow-hidden bg-brand-offwhite relative">
+                        <div className="relative aspect-[3/4] overflow-hidden bg-brand-offwhite">
                           {doc.photo ? (
-                            <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" />
+                            <MediaImage
+                              src={doc.photo}
+                              alt={doc.name[locale]}
+                              className="absolute inset-0 w-full h-full object-cover object-center"
+                            />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">—</div>
+                            <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted text-xs">—</div>
                           )}
-                          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/40 to-transparent" />
+                          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-brand-dark-navy/50 to-transparent pointer-events-none" />
                           <span className="absolute bottom-3 left-3 bg-brand-gold text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">{doc.experience[locale]} {locale === 'uz' ? "yil tajriba" : locale === 'ru' ? "лет практики" : "years practice"}</span>
                         </div>
                         <div className="p-5">
@@ -536,7 +661,7 @@ export default function App() {
                           <h4 className="font-extrabold text-brand-text-primary text-md sm:text-base tracking-tight leading-snug mt-1">{doc.name[locale]}</h4>
                           <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">{doc.bio[locale]}</p>
                           <button
-                            onClick={() => setCurrentTab('doctors')}
+                            onClick={() => goToPage('doctors')}
                             className="mt-4 py-2.5 w-full text-center bg-brand-gold-light/10 hover:bg-brand-gold-light/20 text-brand-gold-dark font-bold text-xs rounded-lg transition-colors cursor-pointer"
                           >
                             {d.viewProfile}
@@ -623,7 +748,7 @@ export default function App() {
                       </h3>
                     </div>
                     <button
-                      onClick={() => setCurrentTab('articles')}
+                      onClick={() => goToPage('articles')}
                       className="text-xs font-bold text-brand-gold hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer"
                     >
                       <span>{locale === 'uz' ? "Barcha maqolalarni o'qish" : locale === 'ru' ? "Посмотреть все статьи" : "Read all articles"}</span>
@@ -636,14 +761,11 @@ export default function App() {
                       <div
                         key={art.id}
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group cursor-pointer"
-                        onClick={() => {
-                          setCurrentTab('articles');
-                          window.scrollTo({ top: 300, behavior: 'smooth' });
-                        }}
+                        onClick={() => goToArticle(art.slug)}
                       >
                         <div className="h-48 overflow-hidden bg-brand-offwhite relative">
                           {art.image ? (
-                            <img src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
+                            <MediaImage src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">—</div>
                           )}
@@ -692,7 +814,7 @@ export default function App() {
             </div>
           )}
 
-          {currentTab === 'about' && (
+          {currentPage === 'about' && (
             <About 
               locale={locale} 
               onOpenAppointment={() => handleOpenAppointmentWithService()} 
@@ -701,7 +823,7 @@ export default function App() {
             />
           )}
 
-          {currentTab === 'services' && (
+          {currentPage === 'services' && (
             <Services 
               locale={locale} 
               onOpenAppointment={handleOpenAppointmentWithService} 
@@ -710,7 +832,7 @@ export default function App() {
             />
           )}
 
-          {currentTab === 'doctors' && (
+          {currentPage === 'doctors' && (
             <Doctors 
               locale={locale} 
               onOpenAppointment={() => handleOpenAppointmentWithService()} 
@@ -719,7 +841,7 @@ export default function App() {
             />
           )}
 
-          {currentTab === 'prices' && (
+          {currentPage === 'prices' && (
             <Prices 
               locale={locale} 
               onOpenAppointment={handleOpenAppointmentWithService} 
@@ -729,15 +851,18 @@ export default function App() {
             />
           )}
 
-          {currentTab === 'articles' && (
+          {currentPage === 'articles' && (
             <Articles 
               locale={locale} 
               articles={dynamicArticles}
               dictionary={d}
+              articleSlug={articleSlug}
+              onOpenArticle={goToArticle}
+              onBackToList={() => goToPage('articles')}
             />
           )}
 
-          {currentTab === 'admin' && (
+          {currentPage === 'admin' && (
             <AdminPanel
               locale={locale}
               dictionary={d}
@@ -749,11 +874,11 @@ export default function App() {
               onSaveLocalData={handleSaveLocalData}
               onResetLocalData={handleResetLocalData}
               onRefresh={refetchClinicData}
-              onClose={() => setCurrentTab('home')}
+              onClose={() => goToPage('home')}
             />
           )}
 
-          {currentTab === 'contacts' && (
+          {currentPage === 'contacts' && (
             <div id="contacts-page" className="py-16 bg-brand-offwhite min-h-screen">
               <div className="max-w-7xl mx-auto px-4">
                 {/* Contact title header */}
@@ -842,9 +967,9 @@ export default function App() {
       {/* 3. Global Footer block */}
       <Footer
         locale={locale}
-        onSelectTab={setCurrentTab}
+        onNavigate={goToPage}
         onOpenAppointment={() => handleOpenAppointmentWithService()}
-        currentTab={currentTab}
+        currentPage={currentPage}
       />
 
       {/* 4. Overlay Appointment Booking dynamic Dialog */}

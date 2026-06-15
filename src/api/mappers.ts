@@ -11,6 +11,7 @@ import {
   PriceCreatePayload,
   ArticleCreatePayload,
 } from './types';
+import { resolveMediaUrl } from './client';
 
 export function preserveImagePath(url: string | null | undefined): string | null {
   if (!url) return null;
@@ -62,7 +63,7 @@ export function mapDoctorFromApi(api: ApiDoctor): Doctor {
       ru: api.education_ru || api.education_uz || '',
       en: api.education_en || api.education_uz || '',
     },
-    photo: api.photo,
+    photo: resolveMediaUrl(api.photo),
     credentials: mapCredentialsFromApi(api.credentials),
   };
 }
@@ -76,7 +77,7 @@ export function mapSubServiceFromApi(sub: ApiServiceCategory['sub_services'][num
       ru: sub.description_ru || sub.description_uz || '',
       en: sub.description_en || sub.description_uz || '',
     },
-    image: sub.image,
+    image: resolveMediaUrl(sub.image),
   };
 }
 
@@ -90,7 +91,7 @@ export function mapServiceCategoryFromApi(api: ApiServiceCategory): ServiceCateg
       en: api.description_en || api.description_uz || '',
     },
     icon: api.icon || 'Activity',
-    image: api.image,
+    image: resolveMediaUrl(api.image),
     subServices: api.sub_services.map(mapSubServiceFromApi),
   };
 }
@@ -136,7 +137,7 @@ export function mapArticleListItemFromApi(api: ApiArticleListItem): Article {
       en: api.author_en || api.author_uz || '',
     },
     date: formatArticleDate(api.date),
-    image: api.image,
+    image: resolveMediaUrl(api.image),
     views: api.views,
   };
 }

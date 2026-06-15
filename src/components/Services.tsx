@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import * as Icons from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
+import MediaImage from './MediaImage';
 
 interface ServicesProps {
   locale: Locale;
@@ -17,12 +18,13 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [activeDetailId, setActiveDetailId] = useState<string | null>(null);
+  const [expandedImage, setExpandedImage] = useState<{ src: string; alt: string } | null>(null);
 
   // Helper dynamic icon renderer
-  const renderIcon = (iconName: string) => {
+  const renderIcon = (iconName: string, className = 'w-6 h-6 text-brand-gold') => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const IconComponent = (Icons as any)[iconName] || Icons.Activity;
-    return <IconComponent className="w-6 h-6 text-brand-gold" />;
+    return <IconComponent className={className} />;
   };
 
   const filteredCategories = useMemo(() => {
@@ -60,6 +62,65 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
     }
     return null;
   }, [activeDetailId, dynamicCategories]);
+
+  const categoriesWithImages = useMemo(
+    () => filteredCategories.filter((cat) => cat.image),
+    [filteredCategories]
+  );
+
+  useEffect(() => {
+    if (expandedImage === null) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setExpandedImage(null);
+      } else if (event.key === 'ArrowLeft' && categoriesWithImages.length > 1) {
+        const currentIdx = categoriesWithImages.findIndex(
+          (cat) => cat.image === expandedImage.src
+        );
+        if (currentIdx >= 0) {
+          const prev = categoriesWithImages[
+            (currentIdx - 1 + categoriesWithImages.length) % categoriesWithImages.length
+          ];
+          setExpandedImage({ src: prev.image!, alt: prev.title[locale] });
+        }
+      } else if (event.key === 'ArrowRight' && categoriesWithImages.length > 1) {
+        const currentIdx = categoriesWithImages.findIndex(
+          (cat) => cat.image === expandedImage.src
+        );
+        if (currentIdx >= 0) {
+          const next = categoriesWithImages[(currentIdx + 1) % categoriesWithImages.length];
+          setExpandedImage({ src: next.image!, alt: next.title[locale] });
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [expandedImage, categoriesWithImages, locale]);
+
+  const openImageLightbox = (src: string, alt: string, event?: MouseEvent) => {
+    event?.stopPropagation();
+    setExpandedImage({ src, alt });
+  };
+
+  const navigateLightbox = (direction: 'prev' | 'next', event: MouseEvent) => {
+    event.stopPropagation();
+    if (!expandedImage || categoriesWithImages.length === 0) return;
+    const currentIdx = categoriesWithImages.findIndex((cat) => cat.image === expandedImage.src);
+    if (currentIdx < 0) return;
+    const nextIdx =
+      direction === 'prev'
+        ? (currentIdx - 1 + categoriesWithImages.length) % categoriesWithImages.length
+        : (currentIdx + 1) % categoriesWithImages.length;
+    const next = categoriesWithImages[nextIdx];
+    setExpandedImage({ src: next.image!, alt: next.title[locale] });
+  };
+
+  const lightboxIndex =
+    expandedImage && categoriesWithImages.length > 0
+      ? categoriesWithImages.findIndex((cat) => cat.image === expandedImage.src)
+      : -1;
 
   return (
     <section id="services-page" className="py-16 bg-brand-offwhite min-h-screen">
@@ -133,20 +194,33 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-brand-white rounded-2xl border border-brand-sectiongray p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+                className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col h-full group"
               >
-                <div>
-                  {category.image ? (
-                    <div className="relative h-36 w-full overflow-hidden rounded-xl mb-4 border border-brand-sectiongray">
-                      <img
-                        src={category.image}
-                        alt={category.title[locale]}
-                        className="w-full h-full object-cover"
-                      />
+                {category.image ? (
+                  <div className="relative h-48 sm:h-52 overflow-hidden bg-brand-offwhite shrink-0">
+                    <MediaImage
+                      src={category.image}
+                      alt={category.title[locale]}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/90 via-brand-dark-navy/30 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 flex items-end gap-3">
+                      <button
+                        type="button"
+                        onClick={(e) => openImageLightbox(category.image!, category.title[locale], e)}
+                        className="w-10 h-10 bg-white/15 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20 shrink-0 hover:bg-white/25 transition-all cursor-pointer"
+                        aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить изображение' : 'Expand image'}
+                      >
+                        <Icons.Maximize2 className="w-5 h-5 text-white" />
+                      </button>
+                      <h3 className="font-bold text-white text-lg leading-tight drop-shadow-sm">
+                        {category.title[locale]}
+                      </h3>
                     </div>
-                  ) : null}
-
-                  <div className="flex items-center gap-3 mb-4">
+                  </div>
+                ) : (
+                  <div className="p-5 pb-0 flex items-center gap-3">
                     <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center border border-brand-gold-light/20 shadow-xs">
                       {renderIcon(category.icon)}
                     </div>
@@ -154,37 +228,54 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                       {category.title[locale]}
                     </h3>
                   </div>
+                )}
 
-                  <p className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed mb-6 font-light">
+                <div className="p-5 flex flex-col flex-1">
+                  <p className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed mb-5 font-light">
                     {category.description[locale]}
                   </p>
 
-                  {/* Subservices list */}
-                  <div className="space-y-3 border-t border-brand-offwhite pt-5">
+                  <div className="space-y-2.5 border-t border-brand-offwhite pt-4 flex-1">
                     {category.subServices.map((sub) => (
-                      <div
+                      <button
                         key={sub.id}
+                        type="button"
                         onClick={() => setActiveDetailId(sub.id)}
-                        className="p-3 bg-brand-offwhite/50 hover:bg-brand-gold-light/5 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-center gap-3 cursor-pointer group transition-all"
+                        className="w-full p-2.5 sm:p-3 bg-brand-offwhite/60 hover:bg-brand-gold-light/10 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-center gap-3 cursor-pointer group/sub transition-all text-left"
                       >
                         {sub.image ? (
-                          <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-brand-sectiongray">
-                            <img src={sub.image} alt={sub.name[locale]} className="w-full h-full object-cover" />
+                          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-white shadow-xs group/thumb">
+                            <MediaImage
+                              src={sub.image}
+                              alt={sub.name[locale]}
+                              loading="lazy"
+                              className="w-full h-full object-cover object-center"
+                            />
+                            <button
+                              type="button"
+                              onClick={(e) => openImageLightbox(sub.image!, sub.name[locale], e)}
+                              className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-all cursor-pointer"
+                              aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить' : 'Expand'}
+                            >
+                              <Icons.Maximize2 className="w-4 h-4 text-white drop-shadow-md" />
+                            </button>
                           </div>
-                        ) : null}
-                        <span className="text-brand-text-secondary text-xs font-medium pr-2 group-hover:text-brand-gold leading-tight flex-1">
+                        ) : (
+                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl shrink-0 bg-brand-gold-light/10 border border-brand-gold-light/20 flex items-center justify-center">
+                            {renderIcon(category.icon, 'w-4 h-4 text-brand-gold')}
+                          </div>
+                        )}
+                        <span className="text-brand-text-secondary text-xs font-medium group-hover/sub:text-brand-gold leading-tight flex-1">
                           {sub.name[locale]}
                         </span>
-                        <Icons.ChevronRight className="w-4 h-4 text-brand-text-muted group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all shrink-0" />
-                      </div>
+                        <Icons.ChevronRight className="w-4 h-4 text-brand-text-muted group-hover/sub:text-brand-gold group-hover/sub:translate-x-0.5 transition-all shrink-0" />
+                      </button>
                     ))}
                   </div>
-                </div>
 
-                <div className="mt-6 pt-4">
                   <button
                     onClick={() => onOpenAppointment(category.id)}
-                    className="w-full py-2.5 bg-brand-gold-light/10 hover:bg-brand-gold-light/20 text-brand-gold font-bold text-xs rounded-xl active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-1"
+                    className="mt-5 w-full py-2.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm shadow-brand-gold/15"
                   >
                     <span>{d.appointmentBtn}</span>
                     <Icons.ArrowUpRight className="w-3.5 h-3.5" />
@@ -223,15 +314,43 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-lg bg-brand-white rounded-2xl shadow-xl z-10 overflow-hidden border border-brand-sectiongray"
             >
-              <div className="p-6 sm:p-8">
-                <button
-                  onClick={() => setActiveDetailId(null)}
-                  className="absolute top-4 right-4 text-brand-text-muted hover:text-brand-text-primary p-1.5 hover:bg-brand-offwhite rounded-full transition-all"
-                >
-                  <Icons.X className="w-5 h-5" />
-                </button>
+              {activeDetailSubService.image ? (
+                <div className="relative h-52 sm:h-56 overflow-hidden bg-brand-offwhite">
+                  <MediaImage
+                    src={activeDetailSubService.image}
+                    alt={activeDetailSubService.name[locale]}
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/80 via-transparent to-transparent" />
+                  <button
+                    type="button"
+                    onClick={(e) => openImageLightbox(activeDetailSubService.image!, activeDetailSubService.name[locale], e)}
+                    className="absolute top-4 left-4 p-2 bg-black/40 hover:bg-black/55 text-white rounded-lg backdrop-blur-sm transition-all"
+                    aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить' : 'Expand'}
+                  >
+                    <Icons.Maximize2 className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setActiveDetailId(null)}
+                    className="absolute top-4 right-4 text-white hover:text-slate-200 p-2 bg-black/30 hover:bg-black/45 rounded-full transition-all backdrop-blur-sm"
+                  >
+                    <Icons.X className="w-5 h-5" />
+                  </button>
+                </div>
+              ) : null}
+
+              <div className={`p-6 sm:p-8${!activeDetailSubService.image ? ' relative' : ''}`}>
+                {!activeDetailSubService.image && (
+                  <button
+                    onClick={() => setActiveDetailId(null)}
+                    className="absolute top-4 right-4 text-brand-text-muted hover:text-brand-text-primary p-1.5 hover:bg-brand-offwhite rounded-full transition-all"
+                  >
+                    <Icons.X className="w-5 h-5" />
+                  </button>
+                )}
 
                 <span className="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-mono py-1 px-2.5 bg-brand-gold-light/10 rounded-md">
                   {locale === 'uz' ? "Xizmat tafsiloti" : locale === 'ru' ? "Детали услуги" : "Therapeutic Details"}
@@ -240,16 +359,6 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                 <h3 className="text-xl sm:text-2xl font-extrabold text-brand-text-primary tracking-tight mt-3 leading-tight">
                   {activeDetailSubService.name[locale]}
                 </h3>
-
-                {activeDetailSubService.image ? (
-                  <div className="mt-4 h-44 w-full rounded-xl overflow-hidden border border-brand-sectiongray">
-                    <img
-                      src={activeDetailSubService.image}
-                      alt={activeDetailSubService.name[locale]}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ) : null}
 
                 <p className="text-brand-text-muted mt-4 leading-relaxed text-sm font-light">
                   {activeDetailSubService.description[locale]}
@@ -292,6 +401,84 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
               </div>
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      {/* Image lightbox */}
+      <AnimatePresence>
+        {expandedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setExpandedImage(null)}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#0a121e]/92 backdrop-blur-sm"
+          >
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpandedImage(null);
+              }}
+              className="absolute top-4 right-4 text-white hover:text-slate-300 p-2.5 hover:bg-white/10 rounded-full transition-all z-10"
+              aria-label={locale === 'uz' ? 'Yopish' : locale === 'ru' ? 'Закрыть' : 'Close'}
+            >
+              <Icons.X className="w-6 h-6" />
+            </button>
+
+            {lightboxIndex >= 0 && categoriesWithImages.length > 1 && (
+              <span className="absolute top-5 left-1/2 -translate-x-1/2 text-white/80 text-xs font-mono tracking-wider">
+                {lightboxIndex + 1} / {categoriesWithImages.length}
+              </span>
+            )}
+
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-5xl max-h-[85vh] flex items-center justify-center"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={expandedImage.src}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.2 }}
+                  className="max-w-full max-h-[80vh] flex items-center justify-center"
+                >
+                  <MediaImage
+                    src={expandedImage.src}
+                    alt={expandedImage.alt}
+                    className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-white/10"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {categoriesWithImages.length > 1 && lightboxIndex >= 0 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => navigateLightbox('prev', e)}
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all"
+                    aria-label={locale === 'uz' ? 'Oldingi rasm' : locale === 'ru' ? 'Предыдущее' : 'Previous'}
+                  >
+                    <Icons.ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => navigateLightbox('next', e)}
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all"
+                    aria-label={locale === 'uz' ? 'Keyingi rasm' : locale === 'ru' ? 'Следующее' : 'Next'}
+                  >
+                    <Icons.ChevronRight className="w-6 h-6" />
+                  </button>
+                </>
+              )}
+            </div>
+
+            <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/90 text-sm font-medium text-center px-4">
+              {expandedImage.alt}
+            </p>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>

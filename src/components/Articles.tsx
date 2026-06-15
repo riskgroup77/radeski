@@ -1,23 +1,34 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
-import { HelpCircle, Clock, Eye, Calendar, User, CornerUpLeft, BookOpen, ChevronRight, Share2, Loader2 } from 'lucide-react';
+import { HelpCircle, Eye, Calendar, User, CornerUpLeft, BookOpen, ChevronRight, Share2, Loader2 } from 'lucide-react';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
+import { articlesListPath } from '../routing/paths';
 
 interface ArticlesProps {
   locale: Locale;
   articles?: Article[];
   dictionary?: Record<string, string>;
+  articleSlug?: string | null;
+  onOpenArticle: (slug: string) => void;
+  onBackToList: () => void;
 }
 
-export default function Articles({ locale, articles, dictionary }: ArticlesProps) {
+export default function Articles({
+  locale,
+  articles,
+  dictionary,
+  articleSlug = null,
+  onOpenArticle,
+  onBackToList,
+}: ArticlesProps) {
   const d = dictionary || DICTIONARY[locale];
   const dynamicArticles = articles || [];
-  const [selectedArticleSlug, setSelectedArticleSlug] = useState<string | null>(null);
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
@@ -34,7 +45,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
   }, [searchQuery, locale, dynamicArticles]);
 
   useEffect(() => {
-    if (!selectedArticleSlug) {
+    if (!articleSlug) {
       setActiveArticle(null);
       setDetailError(null);
       return;
@@ -44,7 +55,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
     setDetailLoading(true);
     setDetailError(null);
 
-    getArticleBySlug(selectedArticleSlug)
+    getArticleBySlug(articleSlug)
       .then((data) => {
         if (!cancelled) {
           setActiveArticle(mapArticleFromApi(data));
@@ -63,13 +74,13 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
     return () => {
       cancelled = true;
     };
-  }, [selectedArticleSlug]);
+  }, [articleSlug]);
 
   return (
     <section id="articles-page" className="py-16 bg-brand-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4">
         <AnimatePresence mode="wait">
-          {!selectedArticleSlug ? (
+          {!articleSlug ? (
             <motion.div
               key="list"
               initial={{ opacity: 0 }}
@@ -150,7 +161,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                         By {art.author[locale]}
                       </span>
                       <button
-                        onClick={() => setSelectedArticleSlug(art.slug)}
+                        onClick={() => onOpenArticle(art.slug)}
                         className="text-xs text-brand-gold font-bold group-hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer"
                       >
                         <span>{d.readMore}</span>
@@ -178,13 +189,14 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
               exit={{ opacity: 0 }}
               className="max-w-3xl mx-auto"
             >
-              <button
-                onClick={() => setSelectedArticleSlug(null)}
+              <Link
+                to={articlesListPath(locale)}
+                onClick={() => onBackToList()}
                 className="inline-flex items-center gap-2 text-xs font-semibold text-brand-text-secondary hover:text-brand-text-primary bg-brand-offwhite hover:bg-brand-sectiongray px-3.5 py-2 rounded-xl transition-all cursor-pointer mb-8 border border-brand-sectiongray"
               >
                 <CornerUpLeft className="w-4 h-4" />
                 <span>{d.backToArticles}</span>
-              </button>
+              </Link>
 
               {detailLoading && (
                 <div className="flex items-center justify-center gap-2 py-20 text-brand-text-muted">

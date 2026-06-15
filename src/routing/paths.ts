@@ -1,0 +1,100 @@
+import { Locale } from '../types';
+
+export type PageId =
+  | 'home'
+  | 'about'
+  | 'services'
+  | 'doctors'
+  | 'prices'
+  | 'articles'
+  | 'contacts'
+  | 'admin';
+
+export const PUBLIC_PAGES: PageId[] = [
+  'home',
+  'about',
+  'services',
+  'doctors',
+  'prices',
+  'articles',
+  'contacts',
+];
+
+export const SITE_ORIGIN = 'https://radeski.uz';
+
+export function pagePath(locale: Locale, page: PageId): string {
+  if (page === 'admin') return '/admin';
+  if (page === 'home') return `/${locale}`;
+  return `/${locale}/${page}`;
+}
+
+export function articlePath(locale: Locale, slug: string): string {
+  return `/${locale}/articles/${encodeURIComponent(slug)}`;
+}
+
+export function articlesListPath(locale: Locale): string {
+  return `/${locale}/articles`;
+}
+
+export function getPageFromPathname(pathname: string): PageId {
+  const segments = pathname.split('/').filter(Boolean);
+
+  if (segments[0] === 'admin') return 'admin';
+
+  const pageSegment = segments[1];
+  if (!pageSegment) return 'home';
+
+  if (pageSegment === 'articles') return 'articles';
+
+  if (
+    pageSegment === 'about' ||
+    pageSegment === 'services' ||
+    pageSegment === 'doctors' ||
+    pageSegment === 'prices' ||
+    pageSegment === 'contacts'
+  ) {
+    return pageSegment;
+  }
+
+  return 'home';
+}
+
+export function getArticleSlugFromPathname(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length >= 3 && segments[1] === 'articles') {
+    try {
+      return decodeURIComponent(segments[2]);
+    } catch {
+      return segments[2];
+    }
+  }
+  return null;
+}
+
+export function switchLocaleInPath(pathname: string, nextLocale: Locale): string {
+  const segments = pathname.split('/').filter(Boolean);
+
+  if (segments[0] === 'admin') {
+    return pagePath(nextLocale, 'home');
+  }
+
+  if (segments.length === 0) {
+    return pagePath(nextLocale, 'home');
+  }
+
+  segments[0] = nextLocale;
+  return `/${segments.join('/')}`;
+}
+
+export function absoluteUrl(path: string): string {
+  if (path.startsWith('http')) return path;
+  return `${SITE_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
+export function pagePathForAllLocales(page: PageId): Record<Locale, string> {
+  return {
+    uz: pagePath('uz', page),
+    ru: pagePath('ru', page),
+    en: pagePath('en', page),
+  };
+}

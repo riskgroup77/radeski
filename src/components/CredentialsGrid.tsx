@@ -5,26 +5,27 @@ interface CredentialsGridProps {
   doctorId: string;
   locale: Locale;
   credentials?: DoctorCredentials;
+  specialty?: string;
 }
 
-export default function CredentialsGrid({ doctorId, locale, credentials }: CredentialsGridProps) {
+export default function CredentialsGrid({ doctorId, locale, credentials, specialty }: CredentialsGridProps) {
   const dict = {
     uz: {
-      licenseId: "Meyoriy Litsenziya ID",
+      specialty: "Mutaxassisligi",
       activePractice: "Aktiv amaliyot yillari",
       specialtyCerts: "Ixtisoslashuv sertifikatlari",
       publishedArticles: "Tibbiy ilmiy maqolalar",
       verifiedTrust: "O'zR Sog'liqni saqlash vazirligi tomonidan sertifikatlangan",
     },
     ru: {
-      licenseId: "Медицинская лицензия ID",
+      specialty: "Специализация",
       activePractice: "Лет активной практики",
       specialtyCerts: "Сертификаты специалиста",
       publishedArticles: "Научные публикации",
       verifiedTrust: "Верифицировано Министерством здравоохранения РУз",
     },
     en: {
-      licenseId: "Medical License ID",
+      specialty: "Specialization",
       activePractice: "Years of Active Practice",
       specialtyCerts: "Specialization Certificates",
       publishedArticles: "Published Research Articles",
@@ -54,11 +55,11 @@ export default function CredentialsGrid({ doctorId, locale, credentials }: Crede
           <div className="flex items-center gap-1.5 mb-1 text-brand-gold">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span className="text-[10px] font-bold text-brand-text-muted uppercase tracking-wider font-sans truncate">
-              {t.licenseId}
+              {t.specialty}
             </span>
           </div>
-          <div className="text-xs sm:text-sm font-extrabold text-brand-text-primary tracking-tight font-mono">
-            {creds.licenseId}
+          <div className="text-xs sm:text-sm font-extrabold text-brand-text-primary tracking-tight leading-snug">
+            {specialty || '—'}
           </div>
         </div>
 

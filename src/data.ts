@@ -192,13 +192,25 @@ export const CLINIC_RATINGS = [
   { platform: "2GIS", rating: "4.9", count: 96, logo: "🗺️" }
 ];
 
+export const SITE_LOGO = '/gallery/logo.webp';
+
+/** Bosh sahifa hero slayderi — gallery/top1–3.webp (public/gallery ga nusxalanadi) */
+export const HERO_SLIDE_IMAGES = [
+  { src: '/gallery/top1.webp', objectPosition: 'center center' },
+  { src: '/gallery/top2.webp', objectPosition: 'center center' },
+  { src: '/gallery/top3.webp', objectPosition: 'center center' },
+] as const;
+
 export const GALLERY_IMAGS = [
-  { name: "reception", label: "Reception", icon: "🏢" },
-  { name: "consulting_room", label: "Consulting Room", icon: "🛋️" },
-  { name: "photofinder_room", label: "PhotoFinder Lab", icon: "🖥️" },
-  { name: "bbl_laser", label: "BBL Laser Cabinet", icon: "⚡" },
-  { name: "treatment_room", label: "Treatment Room", icon: "💉" },
-  { name: "sterilization", label: "Sterilization Box", icon: "✨" }
+  { name: "gallery-1", src: "/gallery/1.webp" },
+  { name: "gallery-2", src: "/gallery/2.webp" },
+  { name: "gallery-3", src: "/gallery/3.webp" },
+  { name: "gallery-4", src: "/gallery/4.webp" },
+  { name: "gallery-5", src: "/gallery/5.webp" },
+  { name: "gallery-6", src: "/gallery/6.webp" },
+  { name: "gallery-7", src: "/gallery/7.webp" },
+  { name: "gallery-8", src: "/gallery/8.webp" },
+  { name: "gallery-9", src: "/gallery/9.webp" },
 ];
 
 export const DOCTORS: Doctor[] = [
