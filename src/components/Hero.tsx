@@ -37,19 +37,19 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
     },
     {
       title: {
-        uz: 'BBL Forever Young™ original foto-terapiyasi',
-        ru: 'Легендарное BBL Forever Young™ омоложение',
-        en: 'Original Sciton BBL Forever Young™',
+        uz: 'Gen darajasida innovatsion foto-yoshartirish',
+        ru: 'Инновационное фотоомоложение на генном уровне',
+        en: 'Innovative gene-level photo rejuvenation',
       },
       subtitle: {
-        uz: "O'zbekistonda yoshlik genlarini faollashtiruvchi yagona yechim",
-        ru: 'Инновационная американская система омоложения кожи на генном уровне в Фергане',
-        en: 'Exclusive gene-level skin renewal treatment on genuine Sciton system',
+        uz: "Og'riqsiz va juda tez apparatli foto-davolash (foto-yoshartirish) — bir necha seansda yuz va tanadagi dog'larni samarali olib tashlaydi, in'ektsiya va skalpel'siz!",
+        ru: 'Безболезненная и сверхбыстрая аппаратная процедура фотолечения (фотоомоложения), которая эффективно удаляет гиперпигментацию на лице и теле за несколько процедур, без уколов и скальпеля!',
+        en: 'A painless, ultra-fast hardware phototherapy procedure that effectively removes hyperpigmentation on the face and body in just a few sessions — without injections or a scalpel!',
       },
       badge: {
-        uz: "Eng so'nggi texnologiya",
-        ru: 'Передовые технологии США',
-        en: 'Certified USA Gold Standard',
+        uz: "Yoshni o'zgartirmaymiz — shunchaki sizni yoshroq qilamiz!",
+        ru: 'Мы не меняем возраст, мы просто делаем Вас моложе!',
+        en: "We don't change your age — we simply make you younger!",
       },
       badgeIcon: Sparkles,
       image: HERO_SLIDE_IMAGES[1],
