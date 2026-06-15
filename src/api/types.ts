@@ -41,6 +41,7 @@ export interface ApiSubService {
   description_uz: string | null;
   description_ru: string | null;
   description_en: string | null;
+  image: string | null;
 }
 
 export interface ApiServiceCategory {
@@ -52,6 +53,7 @@ export interface ApiServiceCategory {
   description_ru: string | null;
   description_en: string | null;
   icon: string | null;
+  image: string | null;
   sub_services: ApiSubService[];
 }
 
@@ -134,13 +136,13 @@ export interface DoctorCreatePayload {
   education_uz?: string | null;
   education_ru?: string | null;
   education_en?: string | null;
-  photo?: string | null;
   credentials?: {
     license_id?: string | null;
     years_active?: number | null;
     certificates_count?: number | null;
     research_count?: number | null;
   } | null;
+  photo?: string | null;
 }
 
 export interface SubServicePayload {
@@ -150,6 +152,7 @@ export interface SubServicePayload {
   description_uz?: string | null;
   description_ru?: string | null;
   description_en?: string | null;
+  image?: string | null;
 }
 
 export interface ServiceCategoryCreatePayload {
@@ -161,6 +164,7 @@ export interface ServiceCategoryCreatePayload {
   description_ru?: string | null;
   description_en?: string | null;
   icon?: string | null;
+  image?: string | null;
   sub_services?: SubServicePayload[];
 }
 
@@ -186,6 +190,6 @@ export interface ArticleCreatePayload {
   author_uz?: string | null;
   author_ru?: string | null;
   author_en?: string | null;
-  image?: string | null;
   date?: string | null;
+  image?: string | null;
 }

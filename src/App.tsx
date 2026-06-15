@@ -1,6 +1,8 @@
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
+ * dkbkdsbc
+ * hdkbscdbki
  */
 
 import React, { useState, useEffect } from 'react';
@@ -521,7 +523,11 @@ export default function App() {
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between"
                       >
                         <div className="h-56 overflow-hidden bg-brand-offwhite relative">
-                          <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" />
+                          {doc.photo ? (
+                            <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">—</div>
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/40 to-transparent" />
                           <span className="absolute bottom-3 left-3 bg-brand-gold text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">{doc.experience[locale]} {locale === 'uz' ? "yil tajriba" : locale === 'ru' ? "лет практики" : "years practice"}</span>
                         </div>
@@ -636,7 +642,11 @@ export default function App() {
                         }}
                       >
                         <div className="h-48 overflow-hidden bg-brand-offwhite relative">
-                          <img src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
+                          {art.image ? (
+                            <img src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">—</div>
+                          )}
                         </div>
                         <div className="p-5">
                           <span className="text-[10px] text-brand-text-muted font-light font-mono block mb-1">{art.date} | {art.views} reads</span>

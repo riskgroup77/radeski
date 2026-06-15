@@ -57,6 +57,57 @@ export async function apiRequest<T>(
   return response.json() as Promise<T>;
 }
 
+export async function apiFormRequest<T>(
+  path: string,
+  formData: FormData,
+  token?: string | null
+): Promise<T> {
+  const headers: Record<string, string> = {};
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method: 'POST',
+    headers,
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new ApiError(response.status, errorBody.detail ?? errorBody, response.statusText);
+  }
+
+  return response.json() as Promise<T>;
+}
+
+export async function apiFormRequestWithMethod<T>(
+  path: string,
+  method: 'POST' | 'PUT' | 'PATCH',
+  formData: FormData,
+  token?: string | null
+): Promise<T> {
+  const headers: Record<string, string> = {};
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${API_URL}${path}`, {
+    method,
+    headers,
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new ApiError(response.status, errorBody.detail ?? errorBody, response.statusText);
+  }
+
+  return response.json() as Promise<T>;
+}
+
 export function getApiUrl(): string {
   return API_URL;
 }

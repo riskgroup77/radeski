@@ -136,6 +136,16 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                 className="bg-brand-white rounded-2xl border border-brand-sectiongray p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
+                  {category.image ? (
+                    <div className="relative h-36 w-full overflow-hidden rounded-xl mb-4 border border-brand-sectiongray">
+                      <img
+                        src={category.image}
+                        alt={category.title[locale]}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : null}
+
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center border border-brand-gold-light/20 shadow-xs">
                       {renderIcon(category.icon)}
@@ -155,12 +165,17 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                       <div
                         key={sub.id}
                         onClick={() => setActiveDetailId(sub.id)}
-                        className="p-3 bg-brand-offwhite/50 hover:bg-brand-gold-light/5 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-center justify-between cursor-pointer group transition-all"
+                        className="p-3 bg-brand-offwhite/50 hover:bg-brand-gold-light/5 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-center gap-3 cursor-pointer group transition-all"
                       >
-                        <span className="text-brand-text-secondary text-xs font-medium pr-2 group-hover:text-brand-gold leading-tight">
+                        {sub.image ? (
+                          <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-brand-sectiongray">
+                            <img src={sub.image} alt={sub.name[locale]} className="w-full h-full object-cover" />
+                          </div>
+                        ) : null}
+                        <span className="text-brand-text-secondary text-xs font-medium pr-2 group-hover:text-brand-gold leading-tight flex-1">
                           {sub.name[locale]}
                         </span>
-                        <Icons.ChevronRight className="w-4 h-4 text-brand-text-muted group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all" />
+                        <Icons.ChevronRight className="w-4 h-4 text-brand-text-muted group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all shrink-0" />
                       </div>
                     ))}
                   </div>
@@ -225,6 +240,16 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                 <h3 className="text-xl sm:text-2xl font-extrabold text-brand-text-primary tracking-tight mt-3 leading-tight">
                   {activeDetailSubService.name[locale]}
                 </h3>
+
+                {activeDetailSubService.image ? (
+                  <div className="mt-4 h-44 w-full rounded-xl overflow-hidden border border-brand-sectiongray">
+                    <img
+                      src={activeDetailSubService.image}
+                      alt={activeDetailSubService.name[locale]}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ) : null}
 
                 <p className="text-brand-text-muted mt-4 leading-relaxed text-sm font-light">
                   {activeDetailSubService.description[locale]}

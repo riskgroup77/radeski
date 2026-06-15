@@ -208,7 +208,11 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
                       }`}
                     >
                       <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-offwhite">
-                        <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
+                        {doc.photo ? (
+                          <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-[8px] text-brand-text-muted">—</div>
+                        )}
                       </div>
                       <div className="min-w-0 flex-1">
                         <h5 className={`text-xs font-bold truncate leading-tight ${isActive ? 'text-brand-gold' : 'text-brand-text-primary'}`}>

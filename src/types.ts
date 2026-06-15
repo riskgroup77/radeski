@@ -39,7 +39,7 @@ export interface Doctor {
     ru: string;
     en: string;
   };
-  photo: string;
+  photo: string | null;
   credentials?: DoctorCredentials;
 }
 
@@ -69,6 +69,7 @@ export interface ServiceDetail {
     ru: string;
     en: string;
   };
+  image?: string | null;
   features?: {
     uz: string[];
     ru: string[];
@@ -89,6 +90,7 @@ export interface ServiceCategory {
     en: string;
   };
   icon: string;
+  image?: string | null;
   subServices: ServiceDetail[];
 }
 
@@ -116,6 +118,6 @@ export interface Article {
     en: string;
   };
   date: string;
-  image: string;
+  image: string | null;
   views: number;
 }

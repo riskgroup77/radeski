@@ -49,12 +49,18 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
               <div>
                 {/* Image Wrap */}
                 <div className="relative h-72 w-full overflow-hidden bg-brand-offwhite">
-                  <img
-                    src={doc.photo}
-                    alt={doc.name[locale]}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-300"
-                  />
+                  {doc.photo ? (
+                    <img
+                      src={doc.photo}
+                      alt={doc.name[locale]}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-top group-hover:scale-103 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-sm">
+                      {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет фото' : 'No photo'}
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent " />
 
                   {/* Absolute Badge */}
@@ -156,12 +162,18 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
               <div className="flex flex-col md:flex-row h-full overflow-y-auto">
                 {/* Left Portrait Column */}
                 <div className="w-full md:w-2/5 h-64 md:h-auto md:min-h-[400px] relative bg-brand-offwhite shrink-0">
-                  <img
-                    src={activeDoctor.photo}
-                    alt={activeDoctor.name[locale]}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-top"
-                  />
+                  {activeDoctor.photo ? (
+                    <img
+                      src={activeDoctor.photo}
+                      alt={activeDoctor.name[locale]}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-sm">
+                      {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет фото' : 'No photo'}
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/40 to-transparent" />
                 </div>
 

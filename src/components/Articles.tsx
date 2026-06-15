@@ -109,12 +109,18 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                   >
                     <div>
                       <div className="relative h-56 w-full overflow-hidden bg-brand-sectiongray">
-                        <img
-                          src={art.image}
-                          alt={art.title[locale]}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
-                        />
+                        {art.image ? (
+                          <img
+                            src={art.image}
+                            alt={art.title[locale]}
+                            referrerPolicy="no-referrer"
+                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">
+                            {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
+                          </div>
+                        )}
                       </div>
 
                       <div className="p-6">
@@ -220,12 +226,18 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                   </div>
 
                   <div className="h-[300px] sm:h-[400px] w-full rounded-2xl overflow-hidden bg-brand-sectiongray mb-8 border border-brand-offwhite">
-                    <img
-                      src={activeArticle.image}
-                      alt={activeArticle.title[locale]}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
+                    {activeArticle.image ? (
+                      <img
+                        src={activeArticle.image}
+                        alt={activeArticle.title[locale]}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-sm">
+                        {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
+                      </div>
+                    )}
                   </div>
 
                   <div className="prose prose-slate max-w-none text-brand-text-secondary leading-relaxed text-sm sm:text-base font-light space-y-6">

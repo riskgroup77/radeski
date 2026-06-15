@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
-import { Locale, Doctor, ServiceCategory, PriceItem, Article } from '../types';
+import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
 import {
   Lock, LayoutDashboard, Building, Users, Activity, CreditCard, FileText,
   Save, RefreshCw, Plus, Edit2, Trash2, Check, ArrowLeft, LogOut, Info, AlertTriangle, PhoneCall
@@ -32,6 +32,7 @@ import {
 } from '../api/mappers';
 import { ApiError, clearAuthToken, getAuthToken, setAuthToken } from '../api/client';
 import { ApiAppointment, AppointmentStatus } from '../api/types';
+import ImageUploadField from './ImageUploadField';
 
 interface AdminPanelProps {
   locale: Locale;
@@ -98,10 +99,15 @@ export default function AdminPanel({
   // Sub-services editing state
   const [selectedSubServiceId, setSelectedSubServiceId] = useState<string | null>(null);
   const [isAddingSubService, setIsAddingSubService] = useState(false);
-  const [subServiceForm, setSubServiceForm] = useState({
+  const [subServiceForm, setSubServiceForm] = useState<{
+    id: string;
+    name: { uz: string; ru: string; en: string };
+    description: { uz: string; ru: string; en: string };
+    image?: string | null;
+  }>({
     id: '',
     name: { uz: '', ru: '', en: '' },
-    description: { uz: '', ru: '', en: '' }
+    description: { uz: '', ru: '', en: '' },
   });
 
   // 4. Prices
@@ -115,6 +121,11 @@ export default function AdminPanel({
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
   const [isAddingArticle, setIsAddingArticle] = useState(false);
   const [articleForm, setArticleForm] = useState<Partial<Article>>({});
+
+  const [doctorPhotoFile, setDoctorPhotoFile] = useState<File | null>(null);
+  const [categoryImageFile, setCategoryImageFile] = useState<File | null>(null);
+  const [subServiceImageFile, setSubServiceImageFile] = useState<File | null>(null);
+  const [articleImageFile, setArticleImageFile] = useState<File | null>(null);
 
   const [appointments, setAppointments] = useState<ApiAppointment[]>([]);
   const [appointmentsLoading, setAppointmentsLoading] = useState(false);
@@ -202,6 +213,7 @@ export default function AdminPanel({
   const handleSelectDoctorForEdit = (doc: Doctor) => {
     setSelectedDoctorId(doc.id);
     setDoctorForm(doc);
+    setDoctorPhotoFile(null);
     setIsAddingDoctor(false);
   };
 
@@ -214,8 +226,9 @@ export default function AdminPanel({
       bio: { uz: '', ru: '', en: '' },
       experience: { uz: '5', ru: '5', en: '5' },
       education: { uz: '', ru: '', en: '' },
-      photo: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600'
+      photo: null,
     });
+    setDoctorPhotoFile(null);
     setDoctorFormCreds({
       licenseId: `LN-${new Date().getFullYear()}-${Math.floor(Math.random() * 900000) + 10000}`,
       yearsActive: 5,
@@ -232,22 +245,27 @@ export default function AdminPanel({
     }
 
     try {
-      const payload = mapDoctorToCreatePayload(doctorForm, {
+      const creds = {
         licenseId: doctorFormCreds.licenseId,
         yearsActive: doctorFormCreds.yearsActive,
         certificatesCount: doctorFormCreds.certificatesCount,
         researchCount: doctorFormCreds.researchCount,
-      });
+      };
 
       if (isAddingDoctor) {
-        await createDoctor(payload);
+        const payload = mapDoctorToCreatePayload(doctorForm, creds);
+        await createDoctor(payload, doctorPhotoFile);
       } else if (doctorForm.id) {
-        await updateDoctor(doctorForm.id, payload);
+        const payload = mapDoctorToCreatePayload(doctorForm, creds, {
+          preservePhoto: !doctorPhotoFile,
+        });
+        await updateDoctor(doctorForm.id, payload, doctorPhotoFile);
       }
 
       await onRefresh();
       setSelectedDoctorId(null);
       setIsAddingDoctor(false);
+      setDoctorPhotoFile(null);
       triggerSaveNotification(
         locale === 'uz' ? "Shifokor ma'lumotlari muvaffaqiyatli saqlandi!" :
         locale === 'ru' ? "Резюме врача успешно сохранено!" :
@@ -275,9 +293,11 @@ export default function AdminPanel({
   const handleSelectCategoryForEdit = (cat: ServiceCategory) => {
     setSelectedCategoryId(cat.id);
     setCategoryForm(cat);
+    setCategoryImageFile(null);
     setIsAddingCategory(false);
     setSelectedSubServiceId(null);
     setIsAddingSubService(false);
+    setSubServiceImageFile(null);
   };
 
   const handleCreateCategoryButton = () => {
@@ -287,18 +307,21 @@ export default function AdminPanel({
       title: { uz: '', ru: '', en: '' },
       description: { uz: '', ru: '', en: '' },
       icon: 'Activity',
+      image: null,
       subServices: []
     });
+    setCategoryImageFile(null);
     setIsAddingCategory(true);
     setSelectedSubServiceId(null);
     setIsAddingSubService(false);
+    setSubServiceImageFile(null);
   };
 
   const handleSaveCategory = async () => {
     if (!categoryForm.title?.uz || !categoryForm.id) return;
 
     try {
-      const payload = mapServiceCategoryToPayload({
+      const categoryData: ServiceCategory = {
         id: categoryForm.id,
         title: {
           uz: categoryForm.title?.uz || '',
@@ -311,18 +334,24 @@ export default function AdminPanel({
           en: categoryForm.description?.en || categoryForm.description?.uz || '',
         },
         icon: categoryForm.icon || 'Activity',
+        image: categoryForm.image ?? null,
         subServices: categoryForm.subServices || [],
+      };
+
+      const payload = mapServiceCategoryToPayload(categoryData, {
+        preserveImages: !categoryImageFile,
       });
 
       if (isAddingCategory) {
-        await createServiceCategory(payload);
+        await createServiceCategory(payload, categoryImageFile);
       } else {
-        await updateServiceCategory(categoryForm.id, payload);
+        await updateServiceCategory(categoryForm.id, payload, categoryImageFile);
       }
 
       await onRefresh();
       setSelectedCategoryId(null);
       setIsAddingCategory(false);
+      setCategoryImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Kategoriya saqlandi!" : "Категория сохранена!");
     } catch (err) {
       alert(err instanceof ApiError ? err.message : 'Save failed');
@@ -342,10 +371,10 @@ export default function AdminPanel({
     }
   };
 
-  // SUB SERVICES (nested inside categories)
-  const handleEditSubService = (sub: any) => {
+  const handleEditSubService = (sub: ServiceDetail) => {
     setSelectedSubServiceId(sub.id);
     setSubServiceForm(JSON.parse(JSON.stringify(sub)));
+    setSubServiceImageFile(null);
     setIsAddingSubService(false);
   };
 
@@ -354,8 +383,10 @@ export default function AdminPanel({
     setSubServiceForm({
       id: `sub-${Date.now()}`,
       name: { uz: '', ru: '', en: '' },
-      description: { uz: '', ru: '', en: '' }
+      description: { uz: '', ru: '', en: '' },
+      image: null,
     });
+    setSubServiceImageFile(null);
     setIsAddingSubService(true);
   };
 
@@ -366,10 +397,11 @@ export default function AdminPanel({
     if (!targetCat) return;
 
     let updatedSubs = [...targetCat.subServices];
-    const mappedSub = {
+    const mappedSub: ServiceDetail = {
       id: subServiceForm.id,
       name: subServiceForm.name,
       description: subServiceForm.description,
+      image: subServiceForm.image ?? null,
     };
 
     if (isAddingSubService) {
@@ -378,16 +410,30 @@ export default function AdminPanel({
       updatedSubs = updatedSubs.map(s => s.id === subServiceForm.id ? mappedSub : s);
     }
 
+    const editedIndex = updatedSubs.findIndex(s => s.id === subServiceForm.id);
+    const subImages = subServiceImageFile ? [subServiceImageFile] : [];
+
+    const subPayloads = updatedSubs.map((sub, index) => {
+      const isEdited = index === editedIndex;
+      return mapSubServiceToPayload(sub, {
+        preserveImages: !isEdited || !subServiceImageFile,
+      });
+    });
+
     const updatedCatObj = { ...targetCat, subServices: updatedSubs };
 
     try {
-      await updateServiceCategory(selectedCategoryId, {
-        sub_services: updatedCatObj.subServices.map(mapSubServiceToPayload),
-      });
+      await updateServiceCategory(
+        selectedCategoryId,
+        { sub_services: subPayloads },
+        null,
+        subImages
+      );
       await onRefresh();
       setCategoryForm(updatedCatObj);
       setIsAddingSubService(false);
       setSelectedSubServiceId(null);
+      setSubServiceImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Xizmat saqlandi!" : "Услуга сохранена!");
     } catch (err) {
       alert(err instanceof ApiError ? err.message : 'Save failed');
@@ -408,7 +454,9 @@ export default function AdminPanel({
 
     try {
       await updateServiceCategory(selectedCategoryId, {
-        sub_services: updatedCatObj.subServices.map(mapSubServiceToPayload),
+        sub_services: updatedCatObj.subServices.map((sub) =>
+          mapSubServiceToPayload(sub, { preserveImages: true })
+        ),
       });
       await onRefresh();
       setCategoryForm(updatedCatObj);
@@ -485,6 +533,7 @@ export default function AdminPanel({
   const handleEditArticle = (art: Article) => {
     setSelectedArticleId(art.id);
     setArticleForm(art);
+    setArticleImageFile(null);
     setIsAddingArticle(false);
   };
 
@@ -502,9 +551,10 @@ export default function AdminPanel({
         en: 'Dr. Ashurov'
       },
       date: new Date().toLocaleDateString('en-GB'),
-      image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800',
-      views: 12
+      image: null,
+      views: 0
     });
+    setArticleImageFile(null);
     setIsAddingArticle(true);
   };
 
@@ -512,17 +562,20 @@ export default function AdminPanel({
     if (!articleForm.title?.uz || !articleForm.id) return;
 
     try {
-      const payload = mapArticleToCreatePayload(articleForm);
-
       if (isAddingArticle) {
-        await createArticle(payload);
+        const payload = mapArticleToCreatePayload(articleForm);
+        await createArticle(payload, articleImageFile);
       } else {
-        await updateArticle(articleForm.id, payload);
+        const payload = mapArticleToCreatePayload(articleForm, {
+          preserveImage: !articleImageFile,
+        });
+        await updateArticle(articleForm.id, payload, articleImageFile);
       }
 
       await onRefresh();
       setSelectedArticleId(null);
       setIsAddingArticle(false);
+      setArticleImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Maqola saqlandi!" : "Статья сохранена!");
     } catch (err) {
       alert(err instanceof ApiError ? err.message : 'Save failed');
@@ -979,7 +1032,11 @@ export default function AdminPanel({
                     <div key={doc.id} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-4 justify-between items-start">
                       <div className="flex gap-3">
                         <div className="w-12 h-12 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-white shrink-0">
-                          <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
+                          {doc.photo ? (
+                            <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
+                          ) : (
+                            <div className="w-full h-full bg-brand-offwhite flex items-center justify-center text-[8px] text-brand-text-muted">—</div>
+                          )}
                         </div>
                         <div className="min-w-0">
                           <h4 className="font-bold text-xs sm:text-sm text-brand-text-primary truncate">{doc.name[locale]}</h4>
@@ -1073,14 +1130,14 @@ export default function AdminPanel({
                       />
                     </div>
 
-                    {/* Doctor portrait URL */}
+                    {/* Doctor portrait upload */}
                     <div className="md:col-span-2">
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Shifokor surati URL manzili:</label>
-                      <input
-                        type="text"
-                        value={doctorForm.photo || ''}
-                        onChange={(e) => setDoctorForm(prev => ({ ...prev, photo: e.target.value }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                      <ImageUploadField
+                        label={locale === 'uz' ? "Shifokor surati (qurilmadan yuklash)" : "Фото врача (загрузка с устройства)"}
+                        currentImageUrl={doctorForm.photo}
+                        file={doctorPhotoFile}
+                        onFileChange={setDoctorPhotoFile}
+                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
                       />
                     </div>
 
@@ -1267,6 +1324,16 @@ export default function AdminPanel({
                         className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
                       />
                     </div>
+
+                    <div className="md:col-span-2">
+                      <ImageUploadField
+                        label={locale === 'uz' ? "Kategoriya rasmi (qurilmadan yuklash)" : "Изображение категории (загрузка)"}
+                        currentImageUrl={categoryForm.image}
+                        file={categoryImageFile}
+                        onFileChange={setCategoryImageFile}
+                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
+                      />
+                    </div>
                   </div>
 
                   <div className="flex justify-end gap-3 pt-3 border-t border-brand-sectiongray">
@@ -1358,6 +1425,14 @@ export default function AdminPanel({
                                 className="w-full px-2.5 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg text-xs"
                               />
                             </div>
+
+                            <ImageUploadField
+                              label={locale === 'uz' ? "Xizmat rasmi (qurilmadan yuklash)" : "Изображение услуги (загрузка)"}
+                              currentImageUrl={subServiceForm.image}
+                              file={subServiceImageFile}
+                              onFileChange={setSubServiceImageFile}
+                              helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
+                            />
                           </div>
 
                           <div className="flex justify-end gap-2 text-xs">
@@ -1553,7 +1628,11 @@ export default function AdminPanel({
                     <div key={art.id} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-4 justify-between items-start">
                       <div className="flex gap-3 min-w-0">
                         <div className="w-16 h-16 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-white shrink-0">
-                          <img src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
+                          {art.image ? (
+                            <img src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full bg-brand-offwhite flex items-center justify-center text-[8px] text-brand-text-muted">—</div>
+                          )}
                         </div>
                         <div className="min-w-0">
                           <h4 className="font-extrabold text-xs sm:text-sm text-brand-text-primary truncate">{art.title[locale] || art.title['uz']}</h4>
@@ -1637,12 +1716,12 @@ export default function AdminPanel({
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Rasm muallifi / Unsplash rasm manzili (URL):</label>
-                      <input
-                        type="text"
-                        value={articleForm.image || ''}
-                        onChange={(e) => setArticleForm(prev => ({ ...prev, image: e.target.value }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                      <ImageUploadField
+                        label={locale === 'uz' ? "Maqola muqova rasmi (qurilmadan yuklash)" : "Обложка статьи (загрузка с устройства)"}
+                        currentImageUrl={articleForm.image}
+                        file={articleImageFile}
+                        onFileChange={setArticleImageFile}
+                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
                       />
                     </div>
 

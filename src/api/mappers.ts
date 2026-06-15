@@ -12,6 +12,15 @@ import {
   ArticleCreatePayload,
 } from './types';
 
+export function preserveImagePath(url: string | null | undefined): string | null {
+  if (!url) return null;
+  try {
+    return new URL(url).pathname;
+  } catch {
+    return url.startsWith('/') ? url : null;
+  }
+}
+
 export function getLocalizedField(
   item: Record<string, unknown>,
   field: string,
@@ -53,7 +62,7 @@ export function mapDoctorFromApi(api: ApiDoctor): Doctor {
       ru: api.education_ru || api.education_uz || '',
       en: api.education_en || api.education_uz || '',
     },
-    photo: api.photo || '',
+    photo: api.photo,
     credentials: mapCredentialsFromApi(api.credentials),
   };
 }
@@ -67,6 +76,7 @@ export function mapSubServiceFromApi(sub: ApiServiceCategory['sub_services'][num
       ru: sub.description_ru || sub.description_uz || '',
       en: sub.description_en || sub.description_uz || '',
     },
+    image: sub.image,
   };
 }
 
@@ -80,6 +90,7 @@ export function mapServiceCategoryFromApi(api: ApiServiceCategory): ServiceCateg
       en: api.description_en || api.description_uz || '',
     },
     icon: api.icon || 'Activity',
+    image: api.image,
     subServices: api.sub_services.map(mapSubServiceFromApi),
   };
 }
@@ -125,7 +136,7 @@ export function mapArticleListItemFromApi(api: ApiArticleListItem): Article {
       en: api.author_en || api.author_uz || '',
     },
     date: formatArticleDate(api.date),
-    image: api.image || '',
+    image: api.image,
     views: api.views,
   };
 }
@@ -143,9 +154,10 @@ export function mapArticleFromApi(api: ApiArticle): Article {
 
 export function mapDoctorToCreatePayload(
   doctor: Partial<Doctor>,
-  credentials?: DoctorCredentials
+  credentials?: DoctorCredentials,
+  options?: { preservePhoto?: boolean }
 ): DoctorCreatePayload {
-  return {
+  const payload: DoctorCreatePayload = {
     name_uz: doctor.name?.uz || '',
     name_ru: doctor.name?.ru || doctor.name?.uz || '',
     name_en: doctor.name?.en || doctor.name?.uz || '',
@@ -161,7 +173,6 @@ export function mapDoctorToCreatePayload(
     education_uz: doctor.education?.uz || null,
     education_ru: doctor.education?.ru || null,
     education_en: doctor.education?.en || null,
-    photo: doctor.photo || null,
     credentials: credentials
       ? {
           license_id: credentials.licenseId || null,
@@ -171,10 +182,19 @@ export function mapDoctorToCreatePayload(
         }
       : null,
   };
+
+  if (options?.preservePhoto && doctor.photo) {
+    payload.photo = preserveImagePath(doctor.photo);
+  }
+
+  return payload;
 }
 
-export function mapSubServiceToPayload(sub: ServiceDetail): SubServicePayload {
-  return {
+export function mapSubServiceToPayload(
+  sub: ServiceDetail,
+  options?: { preserveImages?: boolean }
+): SubServicePayload {
+  const payload: SubServicePayload = {
     name_uz: sub.name.uz,
     name_ru: sub.name.ru || sub.name.uz,
     name_en: sub.name.en || sub.name.uz,
@@ -182,10 +202,19 @@ export function mapSubServiceToPayload(sub: ServiceDetail): SubServicePayload {
     description_ru: sub.description.ru || null,
     description_en: sub.description.en || null,
   };
+
+  if (options?.preserveImages && sub.image) {
+    payload.image = preserveImagePath(sub.image);
+  }
+
+  return payload;
 }
 
-export function mapServiceCategoryToPayload(category: ServiceCategory): ServiceCategoryCreatePayload {
-  return {
+export function mapServiceCategoryToPayload(
+  category: ServiceCategory,
+  options?: { preserveImages?: boolean }
+): ServiceCategoryCreatePayload {
+  const payload: ServiceCategoryCreatePayload = {
     id: category.id,
     title_uz: category.title.uz,
     title_ru: category.title.ru || category.title.uz,
@@ -194,8 +223,16 @@ export function mapServiceCategoryToPayload(category: ServiceCategory): ServiceC
     description_ru: category.description.ru || null,
     description_en: category.description.en || null,
     icon: category.icon || null,
-    sub_services: category.subServices.map(mapSubServiceToPayload),
+    sub_services: category.subServices.map((sub) =>
+      mapSubServiceToPayload(sub, options)
+    ),
   };
+
+  if (options?.preserveImages && category.image) {
+    payload.image = preserveImagePath(category.image);
+  }
+
+  return payload;
 }
 
 export function mapPriceToCreatePayload(price: Partial<PriceItem>): PriceCreatePayload {
@@ -208,8 +245,11 @@ export function mapPriceToCreatePayload(price: Partial<PriceItem>): PriceCreateP
   };
 }
 
-export function mapArticleToCreatePayload(article: Partial<Article>): ArticleCreatePayload {
-  return {
+export function mapArticleToCreatePayload(
+  article: Partial<Article>,
+  options?: { preserveImage?: boolean }
+): ArticleCreatePayload {
+  const payload: ArticleCreatePayload = {
     slug: article.slug || `article-${Date.now()}`,
     title_uz: article.title?.uz || '',
     title_ru: article.title?.ru || article.title?.uz || '',
@@ -223,7 +263,12 @@ export function mapArticleToCreatePayload(article: Partial<Article>): ArticleCre
     author_uz: article.author?.uz || null,
     author_ru: article.author?.ru || null,
     author_en: article.author?.en || null,
-    image: article.image || null,
     date: article.date ? `${article.date}T08:00:00Z` : null,
   };
+
+  if (options?.preserveImage && article.image) {
+    payload.image = preserveImagePath(article.image);
+  }
+
+  return payload;
 }
