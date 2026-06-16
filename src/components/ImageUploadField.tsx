@@ -32,9 +32,11 @@ export default function ImageUploadField({
 
   return (
     <div className="space-y-2">
-      <label className="block text-[10px] font-bold text-brand-text-muted uppercase tracking-wider">
-        {label}
-      </label>
+      {label ? (
+        <label className="block text-[10px] font-bold text-brand-text-muted uppercase tracking-wider">
+          {label}
+        </label>
+      ) : null}
 
       {displaySrc ? (
         <div className="relative w-36 h-36 rounded-xl overflow-hidden border border-brand-sectiongray bg-brand-offwhite">

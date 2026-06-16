@@ -33,10 +33,13 @@ import {
 import { ApiError, clearAuthToken, getAuthToken, setAuthToken } from '../api/client';
 import { ApiAppointment, AppointmentStatus } from '../api/types';
 import ImageUploadField from './ImageUploadField';
+import LocalizedFieldGroup, { isLocalizedFilled } from './LocalizedFieldGroup';
+import { DICTIONARY } from '../data';
 
 interface AdminPanelProps {
   locale: Locale;
   dictionary: Record<string, string>;
+  fullDictionary?: typeof DICTIONARY;
   doctors: Doctor[];
   serviceCategories: ServiceCategory[];
   prices: PriceItem[];
@@ -51,6 +54,7 @@ interface AdminPanelProps {
 export default function AdminPanel({
   locale,
   dictionary,
+  fullDictionary = DICTIONARY,
   doctors,
   serviceCategories,
   prices,
@@ -75,20 +79,15 @@ export default function AdminPanel({
   // Editing Sub-states
   // 1. Clinic ratings & basic details
   const [editedRatings, setEditedRatings] = useState<any[]>(() => JSON.parse(JSON.stringify(clinicRatings)));
-  const [editedDict, setEditedDict] = useState<any>(() => JSON.parse(JSON.stringify(dictionary)));
+  const [editedFullDict, setEditedFullDict] = useState<typeof DICTIONARY>(() =>
+    JSON.parse(JSON.stringify(fullDictionary))
+  );
 
   // 2. Doctors
   const [editedDoctors, setEditedDoctors] = useState<Doctor[]>(() => JSON.parse(JSON.stringify(doctors)));
   const [selectedDoctorId, setSelectedDoctorId] = useState<string | null>(null);
   const [isAddingDoctor, setIsAddingDoctor] = useState(false);
   const [doctorForm, setDoctorForm] = useState<Partial<Doctor>>({});
-  // Dr credentials subform
-  const [doctorFormCreds, setDoctorFormCreds] = useState({
-    licenseId: '',
-    yearsActive: 5,
-    certificatesCount: 3,
-    researchCount: 2
-  });
 
   // 3. Services
   const [editedCategories, setEditedCategories] = useState<ServiceCategory[]>(() => JSON.parse(JSON.stringify(serviceCategories)));
@@ -133,12 +132,12 @@ export default function AdminPanel({
   // Synchronize internal states if props change (e.g. after resetting)
   useEffect(() => {
     setEditedRatings(JSON.parse(JSON.stringify(clinicRatings)));
-    setEditedDict(JSON.parse(JSON.stringify(dictionary)));
+    setEditedFullDict(JSON.parse(JSON.stringify(fullDictionary)));
     setEditedDoctors(JSON.parse(JSON.stringify(doctors)));
     setEditedCategories(JSON.parse(JSON.stringify(serviceCategories)));
     setEditedPrices(JSON.parse(JSON.stringify(prices)));
     setEditedArticles(JSON.parse(JSON.stringify(articles)));
-  }, [doctors, serviceCategories, prices, articles, clinicRatings, dictionary]);
+  }, [doctors, serviceCategories, prices, articles, clinicRatings, fullDictionary]);
 
   useEffect(() => {
     if (!isAuthenticated || activeTab !== 'appointments') return;
@@ -149,27 +148,6 @@ export default function AdminPanel({
       .catch(() => setAppointments([]))
       .finally(() => setAppointmentsLoading(false));
   }, [isAuthenticated, activeTab, saveSuccess]);
-
-  useEffect(() => {
-    if (selectedDoctorId) {
-      const selectedDoctor = editedDoctors.find((doc) => doc.id === selectedDoctorId);
-      if (selectedDoctor?.credentials) {
-        setDoctorFormCreds({
-          licenseId: selectedDoctor.credentials.licenseId,
-          yearsActive: selectedDoctor.credentials.yearsActive,
-          certificatesCount: selectedDoctor.credentials.certificatesCount,
-          researchCount: selectedDoctor.credentials.researchCount,
-        });
-      } else {
-        setDoctorFormCreds({
-          licenseId: `LN-${new Date().getFullYear()}-${Math.floor(Math.random() * 90000) + 10000}`,
-          yearsActive: 5,
-          certificatesCount: 3,
-          researchCount: 2,
-        });
-      }
-    }
-  }, [selectedDoctorId, editedDoctors]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -201,7 +179,7 @@ export default function AdminPanel({
   // 1. SAVE CLINIC DETAILS
   const handleSaveClinic = () => {
     onSaveLocalData('clinicRatings', editedRatings);
-    onSaveLocalData('dictionary', editedDict);
+    onSaveLocalData('dictionary', editedFullDict);
     triggerSaveNotification(
       locale === 'uz' ? "Klinika ma'lumotlari muvaffaqiyatli saqlandi!" :
       locale === 'ru' ? "Информация о клинике успешно сохранена!" :
@@ -229,34 +207,27 @@ export default function AdminPanel({
       photo: null,
     });
     setDoctorPhotoFile(null);
-    setDoctorFormCreds({
-      licenseId: `LN-${new Date().getFullYear()}-${Math.floor(Math.random() * 900000) + 10000}`,
-      yearsActive: 5,
-      certificatesCount: 3,
-      researchCount: 1
-    });
     setIsAddingDoctor(true);
   };
 
   const handleSaveDoctor = async () => {
-    if (!doctorForm.name?.uz || !doctorForm.role?.uz) {
-      alert("Please fill at least the Uzbek name and role of the doctor.");
+    if (!isLocalizedFilled(doctorForm.name, 'uz') || !isLocalizedFilled(doctorForm.role, 'uz')) {
+      alert(
+        locale === 'uz'
+          ? "Kamida o'zbek tilida ism va mutaxassislik to'ldirilishi shart."
+          : locale === 'ru'
+            ? 'Обязательно заполните имя и специализацию хотя бы на узбекском.'
+            : 'Name and role in Uzbek are required at minimum.'
+      );
       return;
     }
 
     try {
-      const creds = {
-        licenseId: doctorFormCreds.licenseId,
-        yearsActive: doctorFormCreds.yearsActive,
-        certificatesCount: doctorFormCreds.certificatesCount,
-        researchCount: doctorFormCreds.researchCount,
-      };
-
       if (isAddingDoctor) {
-        const payload = mapDoctorToCreatePayload(doctorForm, creds);
+        const payload = mapDoctorToCreatePayload(doctorForm);
         await createDoctor(payload, doctorPhotoFile);
       } else if (doctorForm.id) {
-        const payload = mapDoctorToCreatePayload(doctorForm, creds, {
+        const payload = mapDoctorToCreatePayload(doctorForm, {
           preservePhoto: !doctorPhotoFile,
         });
         await updateDoctor(doctorForm.id, payload, doctorPhotoFile);
@@ -318,20 +289,20 @@ export default function AdminPanel({
   };
 
   const handleSaveCategory = async () => {
-    if (!categoryForm.title?.uz || !categoryForm.id) return;
+    if (!isLocalizedFilled(categoryForm.title, 'uz') || !categoryForm.id) return;
 
     try {
       const categoryData: ServiceCategory = {
         id: categoryForm.id,
         title: {
-          uz: categoryForm.title?.uz || '',
-          ru: categoryForm.title?.ru || categoryForm.title?.uz || '',
-          en: categoryForm.title?.en || categoryForm.title?.uz || '',
+          uz: categoryForm.title?.uz?.trim() || '',
+          ru: categoryForm.title?.ru?.trim() || '',
+          en: categoryForm.title?.en?.trim() || '',
         },
         description: {
-          uz: categoryForm.description?.uz || '',
-          ru: categoryForm.description?.ru || categoryForm.description?.uz || '',
-          en: categoryForm.description?.en || categoryForm.description?.uz || '',
+          uz: categoryForm.description?.uz?.trim() || '',
+          ru: categoryForm.description?.ru?.trim() || '',
+          en: categoryForm.description?.en?.trim() || '',
         },
         icon: categoryForm.icon || 'Activity',
         image: categoryForm.image ?? null,
@@ -391,7 +362,7 @@ export default function AdminPanel({
   };
 
   const handleSaveSubService = async () => {
-    if (!selectedCategoryId || !subServiceForm.id || !subServiceForm.name.uz) return;
+    if (!selectedCategoryId || !subServiceForm.id || !isLocalizedFilled(subServiceForm.name, 'uz')) return;
 
     const targetCat = editedCategories.find(c => c.id === selectedCategoryId);
     if (!targetCat) return;
@@ -493,7 +464,7 @@ export default function AdminPanel({
   };
 
   const handleSavePriceItem = async () => {
-    if (!priceForm.name?.uz || !priceForm.price || !priceForm.id) return;
+    if (!isLocalizedFilled(priceForm.name, 'uz') || !priceForm.price || !priceForm.id) return;
 
     try {
       const payload = mapPriceToCreatePayload({
@@ -559,7 +530,7 @@ export default function AdminPanel({
   };
 
   const handleSaveArticle = async () => {
-    if (!articleForm.title?.uz || !articleForm.id) return;
+    if (!isLocalizedFilled(articleForm.title, 'uz') || !articleForm.id) return;
 
     try {
       if (isAddingArticle) {
@@ -816,7 +787,7 @@ export default function AdminPanel({
 
 
         {/* Right workspace interactive module */}
-        <div className="lg:col-span-9 bg-brand-white p-6 sm:p-8 rounded-2xl border border-brand-sectiongray min-h-[500px]">
+        <div className="lg:col-span-9 min-w-0 bg-brand-white p-6 sm:p-8 rounded-2xl border border-brand-sectiongray min-h-[500px]">
           
           {/* TAB 1: OVERVIEW/DASHBOARD */}
           {activeTab === 'dashboard' && (
@@ -899,55 +870,49 @@ export default function AdminPanel({
                   </label>
                   <input
                     type="text"
-                    value={editedDict.phoneTitleValue || '+998 (73) 200-73-73'}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setEditedDict((prev: any) => ({ ...prev, phoneTitleValue: val }));
-                    }}
-                    placeholder="+998 (73) 200-73-73"
-                    className="w-full px-4.5 py-2.5 bg-brand-offwhite border border-brand-sectiongray rounded-xl text-xs font-mono focus:bg-brand-white"
+                    value="+998 (73) 200-73-73"
+                    readOnly
+                    className="w-full px-4.5 py-2.5 bg-brand-offwhite/60 border border-brand-sectiongray rounded-xl text-xs font-mono opacity-70"
                   />
-                </div>
-                
-                <div>
-                  <label className="block text-[11px] font-bold text-brand-text-muted uppercase tracking-wider mb-1">
-                    {locale === 'uz' ? "Ish vaqti:" : "Часы работы:"}
-                  </label>
-                  <input
-                    type="text"
-                    value={editedDict.workingHoursValue}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setEditedDict((prev: any) => {
-                        const next = { ...prev };
-                        next.workingHoursValue = val;
-                        return next;
-                      });
-                    }}
-                    placeholder="Dushanba - Shanba: 08:00 - 18:00"
-                    className="w-full px-4.5 py-2.5 bg-brand-offwhite border border-brand-sectiongray rounded-xl text-xs focus:bg-brand-white"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="block text-[11px] font-bold text-brand-text-muted uppercase tracking-wider mb-1">
-                    {locale === 'uz' ? "Manzil (beposhta ko'rinishi) - UZ:" : "Адрес (выводится на сайте на узбекском):"}
-                  </label>
-                  <input
-                    type="text"
-                    value={editedDict.addressValue}
-                    onChange={(e) => {
-                      const val = e.target.value;
-                      setEditedDict((prev: any) => {
-                        const next = { ...prev };
-                        next.addressValue = val;
-                        return next;
-                      });
-                    }}
-                    className="w-full px-4.5 py-2.5 bg-brand-offwhite border border-brand-sectiongray rounded-xl text-xs focus:bg-brand-white"
-                  />
+                  <p className="text-[10px] text-brand-text-muted mt-1">
+                    {locale === 'uz' ? 'Telefon raqami barcha tillarda bir xil.' : 'Номер телефона одинаков для всех языков.'}
+                  </p>
                 </div>
               </div>
+
+              <LocalizedFieldGroup
+                label={locale === 'uz' ? 'Ish vaqti' : locale === 'ru' ? 'Часы работы' : 'Working hours'}
+                values={{
+                  uz: editedFullDict.uz.workingHoursValue,
+                  ru: editedFullDict.ru.workingHoursValue,
+                  en: editedFullDict.en.workingHoursValue,
+                }}
+                onChange={(values) =>
+                  setEditedFullDict((prev) => ({
+                    ...prev,
+                    uz: { ...prev.uz, workingHoursValue: values.uz },
+                    ru: { ...prev.ru, workingHoursValue: values.ru },
+                    en: { ...prev.en, workingHoursValue: values.en },
+                  }))
+                }
+              />
+
+              <LocalizedFieldGroup
+                label={locale === 'uz' ? 'Klinika manzili' : locale === 'ru' ? 'Адрес клиники' : 'Clinic address'}
+                values={{
+                  uz: editedFullDict.uz.addressValue,
+                  ru: editedFullDict.ru.addressValue,
+                  en: editedFullDict.en.addressValue,
+                }}
+                onChange={(values) =>
+                  setEditedFullDict((prev) => ({
+                    ...prev,
+                    uz: { ...prev.uz, addressValue: values.uz },
+                    ru: { ...prev.ru, addressValue: values.ru },
+                    en: { ...prev.en, addressValue: values.en },
+                  }))
+                }
+              />
 
               {/* Platform ratings edit */}
               <div className="space-y-4 pt-4 border-t border-brand-sectiongray">
@@ -1065,145 +1030,103 @@ export default function AdminPanel({
               ) : (
                 // EDIT / ADD SINGLE PHYSICIAN PROFILE FORM
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between pb-3 border-b border-brand-sectiongray">
-                    <span className="text-xs font-bold text-brand-gold uppercase tracking-widest font-mono">
-                      {isAddingDoctor ? "New Specialist Portfolio" : "Modifying Specialist Portfolio"}
-                    </span>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-brand-sectiongray">
+                    <div>
+                      <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest font-mono">
+                        {isAddingDoctor ? 'New Specialist Portfolio' : 'Modifying Specialist Portfolio'}
+                      </span>
+                      <h4 className="text-sm font-bold text-brand-text-primary mt-1">
+                        {locale === 'uz'
+                          ? isAddingDoctor
+                            ? "Yangi shifokor profilini yaratish"
+                            : "Shifokor profilini tahrirlash"
+                          : isAddingDoctor
+                            ? 'Создание профиля врача'
+                            : 'Редактирование профиля врача'}
+                      </h4>
+                    </div>
                     <button
                       onClick={() => { setSelectedDoctorId(null); setIsAddingDoctor(false); }}
-                      className="text-xs text-brand-text-muted hover:text-brand-text-primary flex items-center gap-1 font-bold cursor-pointer"
+                      className="self-start sm:self-auto px-3 py-2 text-xs text-brand-text-muted hover:text-brand-text-primary hover:bg-brand-offwhite flex items-center gap-1.5 font-bold rounded-lg transition-colors cursor-pointer"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>{locale === 'uz' ? "Orqaga reestrga" : "Назад к списку"}</span>
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {/* Multilingual names */}
-                    <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">F.I.SH. (O'zbekcha):</label>
-                      <input
-                        type="text"
-                        value={doctorForm.name?.uz || ''}
-                        onChange={(e) => setDoctorForm(prev => ({ ...prev, name: { ...prev.name!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
+                  <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_260px] gap-6 items-start">
+                    <div className="space-y-4 min-w-0">
+                      <LocalizedFieldGroup
+                        label={locale === 'uz' ? 'F.I.SH.' : locale === 'ru' ? 'Ф.И.О.' : 'Full name'}
+                        hint={locale === 'uz' ? "Shifokorning to'liq ism familiyasi" : undefined}
+                        values={{
+                          uz: doctorForm.name?.uz || '',
+                          ru: doctorForm.name?.ru || '',
+                          en: doctorForm.name?.en || '',
+                        }}
+                        onChange={(values) => setDoctorForm((prev) => ({ ...prev, name: values }))}
                       />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Ф.И.О. (Русский):</label>
-                      <input
-                        type="text"
-                        value={doctorForm.name?.ru || ''}
-                        onChange={(e) => setDoctorForm(prev => ({ ...prev, name: { ...prev.name!, ru: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
-                      />
-                    </div>
-                    
-                    {/* Multilingual Roles */}
-                    <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Mutaxassisligi (O'zbekcha):</label>
-                      <input
-                        type="text"
-                        value={doctorForm.role?.uz || ''}
-                        onChange={(e) => setDoctorForm(prev => ({ ...prev, role: { ...prev.role!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Специализация (Русский):</label>
-                      <input
-                        type="text"
-                        value={doctorForm.role?.ru || ''}
-                        onChange={(e) => setDoctorForm(prev => ({ ...prev, role: { ...prev.role!, ru: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
-                      />
-                    </div>
 
-                    {/* Educational institution */}
-                    <div className="md:col-span-2">
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">O'qish / Taxsil Maskani (UZ):</label>
-                      <textarea
+                      <LocalizedFieldGroup
+                        label={locale === 'uz' ? 'Mutaxassisligi' : locale === 'ru' ? 'Специализация' : 'Specialty / role'}
+                        values={{
+                          uz: doctorForm.role?.uz || '',
+                          ru: doctorForm.role?.ru || '',
+                          en: doctorForm.role?.en || '',
+                        }}
+                        onChange={(values) => setDoctorForm((prev) => ({ ...prev, role: values }))}
+                      />
+
+                      <LocalizedFieldGroup
+                        label={locale === 'uz' ? "Ta'lim / o'qish joyi" : locale === 'ru' ? 'Образование' : 'Education'}
+                        values={{
+                          uz: doctorForm.education?.uz || '',
+                          ru: doctorForm.education?.ru || '',
+                          en: doctorForm.education?.en || '',
+                        }}
+                        onChange={(values) => setDoctorForm((prev) => ({ ...prev, education: values }))}
+                        multiline
                         rows={2}
-                        value={doctorForm.education?.uz || ''}
-                        onChange={(e) => setDoctorForm(prev => ({ ...prev, education: { ...prev.education!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
+                      />
+
+                      <LocalizedFieldGroup
+                        label={locale === 'uz' ? 'Tajriba' : locale === 'ru' ? 'Стаж' : 'Experience'}
+                        hint={locale === 'uz' ? "Masalan: 10+ yil" : locale === 'ru' ? 'Например: 10+ лет' : 'e.g. 10+ years'}
+                        values={{
+                          uz: doctorForm.experience?.uz || '',
+                          ru: doctorForm.experience?.ru || '',
+                          en: doctorForm.experience?.en || '',
+                        }}
+                        onChange={(values) => setDoctorForm((prev) => ({ ...prev, experience: values }))}
                       />
                     </div>
 
-                    {/* Doctor portrait upload */}
-                    <div className="md:col-span-2">
+                    <div className="xl:sticky xl:top-4 rounded-xl border border-brand-sectiongray bg-brand-offwhite/40 p-4 space-y-3">
+                      <p className="text-xs font-bold text-brand-text-primary">
+                        {locale === 'uz' ? "Shifokor surati" : locale === 'ru' ? 'Фото врача' : "Doctor's photo"}
+                      </p>
                       <ImageUploadField
-                        label={locale === 'uz' ? "Shifokor surati (qurilmadan yuklash)" : "Фото врача (загрузка с устройства)"}
+                        label=""
                         currentImageUrl={doctorForm.photo}
                         file={doctorPhotoFile}
                         onFileChange={setDoctorPhotoFile}
                         helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
                       />
                     </div>
-
-                    {/* Brief bio in Uzbek */}
-                    <div className="md:col-span-2">
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Biografiya / Professional rezyume (UZ):</label>
-                      <textarea
-                        rows={3}
-                        value={doctorForm.bio?.uz || ''}
-                        onChange={(e) => setDoctorForm(prev => ({ ...prev, bio: { ...prev.bio!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs leading-relaxed"
-                      />
-                    </div>
                   </div>
 
-                  {/* CREDENTIALS GRID SUB-FORM */}
-                  <div className="p-5 bg-brand-offwhite/50 border border-brand-sectiongray rounded-2xl mt-6 space-y-4">
-                    <div className="flex items-center gap-2">
-                      <Lock className="w-4 h-4 text-brand-gold shrink-0" />
-                      <h4 className="text-xs font-bold text-brand-text-primary uppercase tracking-wider">
-                        {locale === 'uz' ? "Kafolatlangan Davlat litsenziyasi & Nashrlar" : "Лицензирование и Аккредитация"}
-                      </h4>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                      <div>
-                        <label className="block text-[9px] font-bold text-brand-text-muted uppercase mb-1">License ID:</label>
-                        <input
-                          type="text"
-                          value={doctorFormCreds.licenseId}
-                          onChange={(e) => setDoctorFormCreds(prev => ({ ...prev, licenseId: e.target.value }))}
-                          className="w-full px-3 py-2 bg-brand-white border border-brand-sectiongray rounded-lg text-xs font-mono font-extrabold text-brand-text-primary"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[9px] font-bold text-brand-text-muted uppercase mb-1">Tajriba yillari:</label>
-                        <input
-                          type="number"
-                          value={doctorFormCreds.yearsActive}
-                          onChange={(e) => setDoctorFormCreds(prev => ({ ...prev, yearsActive: parseInt(e.target.value) || 0 }))}
-                          className="w-full px-3 py-2 bg-brand-white border border-brand-sectiongray rounded-lg text-xs font-mono font-extrabold text-brand-text-primary"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[9px] font-bold text-brand-text-muted uppercase mb-1">Sertifikatlar soni:</label>
-                        <input
-                          type="number"
-                          value={doctorFormCreds.certificatesCount}
-                          onChange={(e) => setDoctorFormCreds(prev => ({ ...prev, certificatesCount: parseInt(e.target.value) || 0 }))}
-                          className="w-full px-3 py-2 bg-brand-white border border-brand-sectiongray rounded-lg text-xs font-mono font-extrabold text-brand-text-primary"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-[9px] font-bold text-brand-text-muted uppercase mb-1">PubMed loyihalari:</label>
-                        <input
-                          type="number"
-                          value={doctorFormCreds.researchCount}
-                          onChange={(e) => setDoctorFormCreds(prev => ({ ...prev, researchCount: parseInt(e.target.value) || 0 }))}
-                          className="w-full px-3 py-2 bg-brand-white border border-brand-sectiongray rounded-lg text-xs font-mono font-extrabold text-brand-text-primary"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Biografiya / professional rezyume' : locale === 'ru' ? 'Биография / резюме' : 'Biography / professional summary'}
+                    hint={locale === 'uz' ? "Shifokor haqida batafsil ma'lumot" : undefined}
+                    values={{
+                      uz: doctorForm.bio?.uz || '',
+                      ru: doctorForm.bio?.ru || '',
+                      en: doctorForm.bio?.en || '',
+                    }}
+                    onChange={(values) => setDoctorForm((prev) => ({ ...prev, bio: values }))}
+                    multiline
+                    rows={5}
+                  />
 
                   <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
                     <button
@@ -1305,23 +1228,29 @@ export default function AdminPanel({
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Kategoriya nomi (UZ):</label>
-                      <input
-                        type="text"
-                        value={categoryForm.title?.uz || ''}
-                        onChange={(e) => setCategoryForm(prev => ({ ...prev, title: { ...prev.title!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
+                    <div className="md:col-span-2">
+                      <LocalizedFieldGroup
+                        label={locale === 'uz' ? 'Kategoriya nomi' : locale === 'ru' ? 'Название категории' : 'Category title'}
+                        values={{
+                          uz: categoryForm.title?.uz || '',
+                          ru: categoryForm.title?.ru || '',
+                          en: categoryForm.title?.en || '',
+                        }}
+                        onChange={(values) => setCategoryForm((prev) => ({ ...prev, title: values }))}
                       />
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Asosiy Tavsifi (UZ):</label>
-                      <textarea
+                      <LocalizedFieldGroup
+                        label={locale === 'uz' ? 'Asosiy tavsif' : locale === 'ru' ? 'Описание категории' : 'Category description'}
+                        values={{
+                          uz: categoryForm.description?.uz || '',
+                          ru: categoryForm.description?.ru || '',
+                          en: categoryForm.description?.en || '',
+                        }}
+                        onChange={(values) => setCategoryForm((prev) => ({ ...prev, description: values }))}
+                        multiline
                         rows={2}
-                        value={categoryForm.description?.uz || ''}
-                        onChange={(e) => setCategoryForm(prev => ({ ...prev, description: { ...prev.description!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
                       />
                     </div>
 
@@ -1406,25 +1335,27 @@ export default function AdminPanel({
                           </h5>
 
                           <div className="grid grid-cols-1 gap-3.5">
-                            <div>
-                              <label className="block text-[9px] font-bold text-brand-text-muted uppercase">Nomi / Sarlavha (UZ):</label>
-                              <input
-                                type="text"
-                                value={subServiceForm.name.uz}
-                                onChange={(e) => setSubServiceForm(prev => ({ ...prev, name: { ...prev.name, uz: e.target.value } }))}
-                                className="w-full px-2.5 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg text-xs"
-                              />
-                            </div>
-                            
-                            <div>
-                              <label className="block text-[9px] font-bold text-brand-text-muted uppercase">Tavsif (Batafsil tushuntirish) - UZ:</label>
-                              <textarea
-                                rows={2}
-                                value={subServiceForm.description.uz}
-                                onChange={(e) => setSubServiceForm(prev => ({ ...prev, description: { ...prev.description, uz: e.target.value } }))}
-                                className="w-full px-2.5 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg text-xs"
-                              />
-                            </div>
+                            <LocalizedFieldGroup
+                              label={locale === 'uz' ? 'Xizmat nomi' : locale === 'ru' ? 'Название услуги' : 'Service name'}
+                              values={{
+                                uz: subServiceForm.name.uz,
+                                ru: subServiceForm.name.ru,
+                                en: subServiceForm.name.en,
+                              }}
+                              onChange={(values) => setSubServiceForm((prev) => ({ ...prev, name: values }))}
+                            />
+
+                            <LocalizedFieldGroup
+                              label={locale === 'uz' ? 'Tavsif' : locale === 'ru' ? 'Описание' : 'Description'}
+                              values={{
+                                uz: subServiceForm.description.uz,
+                                ru: subServiceForm.description.ru,
+                                en: subServiceForm.description.en,
+                              }}
+                              onChange={(values) => setSubServiceForm((prev) => ({ ...prev, description: values }))}
+                              multiline
+                              rows={2}
+                            />
 
                             <ImageUploadField
                               label={locale === 'uz' ? "Xizmat rasmi (qurilmadan yuklash)" : "Изображение услуги (загрузка)"}
@@ -1541,17 +1472,18 @@ export default function AdminPanel({
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Xizmat nomi (UZ):</label>
-                      <input
-                        type="text"
-                        value={priceForm.name?.uz || ''}
-                        onChange={(e) => setPriceForm(prev => ({ ...prev, name: { ...prev.name!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
-                      />
-                    </div>
+                  <div className="grid grid-cols-1 gap-4">
+                    <LocalizedFieldGroup
+                      label={locale === 'uz' ? 'Xizmat nomi' : locale === 'ru' ? 'Название услуги' : 'Service name'}
+                      values={{
+                        uz: priceForm.name?.uz || '',
+                        ru: priceForm.name?.ru || '',
+                        en: priceForm.name?.en || '',
+                      }}
+                      onChange={(values) => setPriceForm((prev) => ({ ...prev, name: values }))}
+                    />
 
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Tarif narxi (UZS, masalan: 150000):</label>
                       <input
@@ -1578,6 +1510,7 @@ export default function AdminPanel({
                           <option key={cat.id} value={cat.id}>{cat.title[locale] || cat.title['uz']}</option>
                         ))}
                       </select>
+                    </div>
                     </div>
                   </div>
 
@@ -1674,7 +1607,7 @@ export default function AdminPanel({
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     <div>
                       <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Slug (SEO URL):</label>
                       <input
@@ -1685,37 +1618,37 @@ export default function AdminPanel({
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Maqola sarlavhasi (UZ):</label>
-                      <input
-                        type="text"
-                        value={articleForm.title?.uz || ''}
-                        onChange={(e) => setArticleForm(prev => ({ ...prev, title: { ...prev.title!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
-                      />
-                    </div>
+                    <LocalizedFieldGroup
+                      label={locale === 'uz' ? 'Maqola sarlavhasi' : locale === 'ru' ? 'Заголовок статьи' : 'Article title'}
+                      values={{
+                        uz: articleForm.title?.uz || '',
+                        ru: articleForm.title?.ru || '',
+                        en: articleForm.title?.en || '',
+                      }}
+                      onChange={(values) => setArticleForm((prev) => ({ ...prev, title: values }))}
+                    />
+
+                    <LocalizedFieldGroup
+                      label={locale === 'uz' ? 'Muallif' : locale === 'ru' ? 'Автор' : 'Author'}
+                      values={{
+                        uz: articleForm.author?.uz || '',
+                        ru: articleForm.author?.ru || '',
+                        en: articleForm.author?.en || '',
+                      }}
+                      onChange={(values) => setArticleForm((prev) => ({ ...prev, author: values }))}
+                    />
+
+                    <LocalizedFieldGroup
+                      label={locale === 'uz' ? 'Qisqa tavsif (summary)' : locale === 'ru' ? 'Краткое описание' : 'Summary'}
+                      values={{
+                        uz: articleForm.summary?.uz || '',
+                        ru: articleForm.summary?.ru || '',
+                        en: articleForm.summary?.en || '',
+                      }}
+                      onChange={(values) => setArticleForm((prev) => ({ ...prev, summary: values }))}
+                    />
 
                     <div>
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Muallif (Masalan: Ashurov D.D.):</label>
-                      <input
-                        type="text"
-                        value={articleForm.author?.uz || ''}
-                        onChange={(e) => setArticleForm(prev => ({ ...prev, author: { ...prev.author!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
-                      />
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Mualliflik sarlavhasi / Muallifning qisqa tavsifi (UZ):</label>
-                      <input
-                        type="text"
-                        value={articleForm.summary?.uz || ''}
-                        onChange={(e) => setArticleForm(prev => ({ ...prev, summary: { ...prev.summary!, uz: e.target.value } }))}
-                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
-                      />
-                    </div>
-
-                    <div className="md:col-span-2">
                       <ImageUploadField
                         label={locale === 'uz' ? "Maqola muqova rasmi (qurilmadan yuklash)" : "Обложка статьи (загрузка с устройства)"}
                         currentImageUrl={articleForm.image}
@@ -1725,15 +1658,17 @@ export default function AdminPanel({
                       />
                     </div>
 
-                    <div className="md:col-span-2">
-                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Maqola to'liq matni (Tahrirlash UZ):</label>
-                      <textarea
-                        rows={10}
-                        value={articleForm.content?.uz || ''}
-                        onChange={(e) => setArticleForm(prev => ({ ...prev, content: { ...prev.content!, uz: e.target.value } }))}
-                        className="w-full px-3.5 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs leading-relaxed"
-                      />
-                    </div>
+                    <LocalizedFieldGroup
+                      label={locale === 'uz' ? "Maqola to'liq matni" : locale === 'ru' ? 'Полный текст статьи' : 'Full article content'}
+                      values={{
+                        uz: articleForm.content?.uz || '',
+                        ru: articleForm.content?.ru || '',
+                        en: articleForm.content?.en || '',
+                      }}
+                      onChange={(values) => setArticleForm((prev) => ({ ...prev, content: values }))}
+                      multiline
+                      rows={10}
+                    />
                   </div>
 
                   <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">

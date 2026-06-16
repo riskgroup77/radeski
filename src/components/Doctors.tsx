@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Award, GraduationCap, Clock, Calendar, Check, X, Shield } from 'lucide-react';
 import { Locale, Doctor } from '../types';
 import { DICTIONARY, DOCTORS } from '../data';
-import TrustIndicators from './TrustIndicators';
-import CredentialsGrid from './CredentialsGrid';
 import MediaImage from './MediaImage';
 
 interface DoctorsProps {
@@ -215,17 +213,6 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
                         </p>
                       </div>
                     </div>
-
-                    {/* Credentials Grid (License, Active Practice, Certificates, Published Papers) */}
-                    <CredentialsGrid
-                      doctorId={activeDoctor.id}
-                      locale={locale}
-                      credentials={activeDoctor.credentials}
-                      specialty={activeDoctor.role[locale]}
-                    />
-
-                    {/* Highly Professional E-E-A-T Trust Indicators */}
-                    <TrustIndicators doctorId={activeDoctor.id} locale={locale} />
                   </div>
 
                   <div className="mt-8 pt-4 border-t border-brand-offwhite flex gap-3">

@@ -1,33 +1,18 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShieldCheck, Sparkles, Building, Users, X, ChevronLeft, ChevronRight, Award, GraduationCap } from 'lucide-react';
-import { Locale, Doctor } from '../types';
+import { ShieldCheck, Sparkles, Building, Users, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Locale } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from '../data';
-import CredentialsGrid from './CredentialsGrid';
 
 interface AboutProps {
   locale: Locale;
   onOpenAppointment: () => void;
-  doctors?: Doctor[];
   dictionary?: any;
 }
 
-export default function About({ locale, onOpenAppointment, doctors, dictionary }: AboutProps) {
+export default function About({ locale, onOpenAppointment, dictionary }: AboutProps) {
   const d = dictionary || DICTIONARY[locale];
-  const dynamicDoctors = doctors ?? [];
   const [activeGalleryIdx, setActiveGalleryIdx] = useState<number | null>(null);
-  const [activeCredsDocId, setActiveCredsDocId] = useState<string>('');
-
-  useEffect(() => {
-    if (dynamicDoctors.length === 0) {
-      setActiveCredsDocId('');
-      return;
-    }
-    const isCurrentValid = dynamicDoctors.some((doc) => doc.id === activeCredsDocId);
-    if (!isCurrentValid) {
-      setActiveCredsDocId(dynamicDoctors[0].id);
-    }
-  }, [dynamicDoctors, activeCredsDocId]);
 
   useEffect(() => {
     if (activeGalleryIdx === null) return;
@@ -185,122 +170,6 @@ export default function About({ locale, onOpenAppointment, doctors, dictionary }
             >
               {locale === 'uz' ? "Sterillik kafolati bilan yozilish" : locale === 'ru' ? "Запись со стандартом стерильности" : "Book safe clinical consult"}
             </button>
-          </div>
-        </div>
-
-        {/* Credentials Grid section */}
-        <div className="mb-20" id="about-credentials-section">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full font-mono">
-              {locale === 'uz' ? "Kafolatlangan Akkreditatsiya" : locale === 'ru' ? "Официальная аккредитация" : "Clinical Licensing & Trust State"}
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-brand-text-primary tracking-tight mt-3">
-              {locale === 'uz' ? "Shifokorlarimizning litsenziya va ilmiy ko'rsatkichlari" : 
-               locale === 'ru' ? "Лицензии и научные показатели наших врачей" : 
-                                 "Official Medical Licenses & Academic Indicators"}
-            </h3>
-            <p className="text-brand-text-muted text-xs sm:text-sm mt-3 font-light leading-relaxed">
-              {locale === 'uz' ? "Tibbiyot markazimizning har bir mutaxassisi rasmiy tibbiy faoliyat ruxsatnomasiga, xalqaro attestatsiyadan o'tgan sertifikatlarga va faol ilmiy-klinik nashrlarga ega." : 
-               locale === 'ru' ? "Каждый специалист нашей клиники обладает официальной медицинской лицензией, международными сертификатами обучения и научными статьями." : 
-                                 "Every clinician on our medical registry holds a supreme governmental healthcare license, dynamic global qualifications, and peer-reviewed journals."}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start bg-brand-white p-4 sm:p-8 rounded-3xl border border-brand-sectiongray shadow-2xs">
-            {/* Physicians picker block */}
-            <div className="lg:col-span-5 space-y-3">
-              <h4 className="text-xs font-bold text-brand-text-muted uppercase tracking-widest mb-4 font-sans flex items-center gap-1.5">
-                <GraduationCap className="w-4 h-4 text-brand-gold" />
-                {locale === 'uz' ? "Shifokorlar reestri" : locale === 'ru' ? "Реестр специалистов" : "Registered Physicians"}
-              </h4>
-
-              <div className="space-y-2.5 max-h-[380px] overflow-y-auto pr-1">
-                {dynamicDoctors.map((doc) => {
-                  const isActive = activeCredsDocId === doc.id;
-                  return (
-                    <button
-                      key={doc.id}
-                      onClick={() => setActiveCredsDocId(doc.id)}
-                      className={`w-full text-left p-3.5 rounded-xl border flex items-center gap-3 transition-all cursor-pointer ${
-                        isActive
-                          ? 'bg-brand-gold-light/5 border-brand-gold shadow-xs'
-                          : 'bg-brand-white border-brand-sectiongray hover:bg-brand-offwhite'
-                      }`}
-                    >
-                      <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-offwhite">
-                        {doc.photo ? (
-                          <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-[8px] text-brand-text-muted">—</div>
-                        )}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h5 className={`text-xs font-bold truncate leading-tight ${isActive ? 'text-brand-gold' : 'text-brand-text-primary'}`}>
-                          {doc.name[locale]}
-                        </h5>
-                        <p className="text-[10px] text-brand-text-muted truncate leading-normal mt-0.5 font-light">
-                          {doc.role[locale]}
-                        </p>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Selected Credentials Card */}
-            <div className="lg:col-span-7">
-              {(() => {
-                const doc = dynamicDoctors.find(d => d.id === activeCredsDocId) ?? dynamicDoctors[0];
-                if (!doc) {
-                  return (
-                    <div className="p-5 bg-brand-offwhite/50 rounded-2xl border border-brand-sectiongray/80 text-sm text-brand-text-muted font-light">
-                      {locale === 'uz'
-                        ? "Shifokorlar ma'lumoti hozircha mavjud emas."
-                        : locale === 'ru'
-                          ? 'Информация о врачах пока недоступна.'
-                          : 'Physician information is not available yet.'}
-                    </div>
-                  );
-                }
-                return (
-                  <motion.div
-                    key={doc.id}
-                    initial={{ opacity: 0, x: 15 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-5 bg-brand-offwhite/50 rounded-2xl border border-brand-sectiongray/80"
-                  >
-                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-brand-sectiongray">
-                      <div>
-                        <span className="text-[9px] font-bold text-brand-gold uppercase tracking-widest font-mono">
-                          {locale === 'uz' ? "Tanlangan shifokor ma'lumotlari" : locale === 'ru' ? "Выбранный врач" : "Physician Under Review"}
-                        </span>
-                        <h4 className="text-base font-bold text-brand-text-primary leading-tight mt-0.5">
-                          {doc.name[locale]}
-                        </h4>
-                      </div>
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-gold/10 text-brand-gold text-[10px] font-semibold rounded-full border border-brand-gold/20 shrink-0">
-                        <Award className="w-3.5 h-3.5" />
-                        <span>{doc.experience[locale]} {locale === 'uz' ? "yil tajriba" : locale === 'ru' ? "лет" : "yrs"}</span>
-                      </div>
-                    </div>
-
-                    <p className="text-brand-text-secondary text-xs font-light leading-relaxed mb-4">
-                      <strong>{locale === 'uz' ? "Tavsif:" : locale === 'ru' ? "Реноме:" : "Focus:"}</strong> {doc.bio[locale]}
-                    </p>
-
-                    {/* Dynamic Credentials Grid */}
-                    <CredentialsGrid
-                      doctorId={doc.id}
-                      locale={locale}
-                      credentials={doc.credentials}
-                      specialty={doc.role[locale]}
-                    />
-                  </motion.div>
-                );
-              })()}
-            </div>
           </div>
         </div>
 

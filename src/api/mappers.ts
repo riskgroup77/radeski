@@ -1,4 +1,4 @@
-import { Locale, Doctor, DoctorCredentials, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
+import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
 import {
   ApiDoctor,
   ApiServiceCategory,
@@ -33,16 +33,6 @@ export function getLocalizedField(
   return typeof fallback === 'string' ? fallback : '';
 }
 
-export function mapCredentialsFromApi(credentials: ApiDoctor['credentials']): DoctorCredentials | undefined {
-  if (!credentials) return undefined;
-  return {
-    licenseId: credentials.license_id || '',
-    yearsActive: credentials.years_active ?? 0,
-    certificatesCount: credentials.certificates_count ?? 0,
-    researchCount: credentials.research_count ?? 0,
-  };
-}
-
 export function mapDoctorFromApi(api: ApiDoctor): Doctor {
   return {
     id: api.id,
@@ -64,7 +54,6 @@ export function mapDoctorFromApi(api: ApiDoctor): Doctor {
       en: api.education_en || api.education_uz || '',
     },
     photo: resolveMediaUrl(api.photo),
-    credentials: mapCredentialsFromApi(api.credentials),
   };
 }
 
@@ -155,7 +144,6 @@ export function mapArticleFromApi(api: ApiArticle): Article {
 
 export function mapDoctorToCreatePayload(
   doctor: Partial<Doctor>,
-  credentials?: DoctorCredentials,
   options?: { preservePhoto?: boolean }
 ): DoctorCreatePayload {
   const payload: DoctorCreatePayload = {
@@ -174,14 +162,7 @@ export function mapDoctorToCreatePayload(
     education_uz: doctor.education?.uz || null,
     education_ru: doctor.education?.ru || null,
     education_en: doctor.education?.en || null,
-    credentials: credentials
-      ? {
-          license_id: credentials.licenseId || null,
-          years_active: credentials.yearsActive ?? null,
-          certificates_count: credentials.certificatesCount ?? null,
-          research_count: credentials.researchCount ?? null,
-        }
-      : null,
+    credentials: null,
   };
 
   if (options?.preservePhoto && doctor.photo) {

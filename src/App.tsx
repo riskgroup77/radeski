@@ -849,7 +849,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <About 
               locale={locale} 
               onOpenAppointment={() => handleOpenAppointmentWithService()} 
-              doctors={dynamicDoctors}
               dictionary={d}
             />
           )}
@@ -897,6 +896,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <AdminPanel
               locale={locale}
               dictionary={d}
+              fullDictionary={dynamicDictionary}
               doctors={dynamicDoctors}
               serviceCategories={dynamicServiceCategories}
               prices={dynamicPrices}
