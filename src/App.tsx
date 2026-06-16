@@ -218,7 +218,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     const TAB_SEO: Record<string, Record<string, { title: string; desc: string; keywords: string }>> = {
       uz: {
         home: {
-          title: "Bosh sahifa - Sog'lom va go'zal teri kaliti | Radeski Skin & Aesthetic Clinic",
+          title: "Radeski Skin & Aesthetic Clinic",
           desc: "Radeski dermatologiya va estetika klinikasi Farg'onada PhotoFinder, BBL va Mohs mikrografik jarrohligi kabi zamonaviy usullar va malakali tibbiyot xodimlari bilan xizmat ko'rsatadi.",
           keywords: "Radeski, dermatologiya, kosmetologiya Farg'ona, PhotoFinder, botoks, BroadBand Light, BBL, lazer epilyatsiyasi, Mohs operatsiyasi, psoriaz, o'sma"
         },
