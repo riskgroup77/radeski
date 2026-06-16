@@ -156,9 +156,19 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
               &copy; {new Date().getFullYear()} Radeski Skin & Aesthetic Clinic. All rights reserved.
             </p>
           </div>
-          <div className="flex gap-4">
-            <span className="hover:text-brand-gold-light transition-colors cursor-pointer font-light">Terms of Use</span>
-            <span className="hover:text-brand-gold-light transition-colors cursor-pointer font-light">Privacy Policy</span>
+          <div className="flex flex-wrap gap-4 justify-center sm:justify-end">
+            <Link
+              to={pagePath(locale, 'terms')}
+              className="hover:text-brand-gold-light transition-colors font-light"
+            >
+              {d.navTerms}
+            </Link>
+            <Link
+              to={pagePath(locale, 'privacy')}
+              className="hover:text-brand-gold-light transition-colors font-light"
+            >
+              {d.navPrivacy}
+            </Link>
             <Link
               to={isAdmin ? pagePath(locale, 'home') : '/admin'}
               onClick={() => onNavigate(isAdmin ? 'home' : 'admin')}

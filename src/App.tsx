@@ -40,6 +40,7 @@ import Prices from './components/Prices';
 import Articles from './components/Articles';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
+import LegalPage from './components/LegalPage';
 import AppointmentModal from './components/AppointmentModal';
 import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
@@ -250,6 +251,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Rasmiy Manzil, Google Xarita & Aloqa Telefoni | Radeski Clinic",
           desc: "Farg'ona shahri, O'zbekiston Ovozi ko'chasi 1A. Telefon: +998 (73) 200-73-73. Klinikaga qulay yo'nalish xaritasi va ish vaqti.",
           keywords: "Radeski kontakti, Farg'ona dermatologiya telefoni, klinika manzili, ish vaqti, elektron pochta, Google xarita"
+        },
+        terms: {
+          title: "Foydalanish shartlari | Radeski Skin & Aesthetic Clinic",
+          desc: "Radeski klinikasi veb-saytidan foydalanish qoidalari, foydalanuvchi huquqlari va majburiyatlari, onlayn qabul va intellektual mulk bo'yicha shartlar.",
+          keywords: "Foydalanish shartlari, Radeski, veb-sayt qoidalari, foydalanuvchi shartnomasi"
+        },
+        privacy: {
+          title: "Maxfiylik siyosati | Radeski Skin & Aesthetic Clinic",
+          desc: "Shaxsiy ma'lumotlaringizni qanday to'plash, saqlash va himoya qilishimiz haqida Radeski klinikasi maxfiylik siyosati.",
+          keywords: "Maxfiylik siyosati, shaxsiy ma'lumotlar, Radeski, ma'lumotlarni himoya qilish"
         }
       },
       ru: {
@@ -287,6 +298,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Адрес, Контакты & Онлайн Карта Проезда | Radeski Clinic",
           desc: "Адрес клиники: г. Фергана, ул. Узбекистон Овози, 1А. Телефон регистратуры: +998 (73) 200-73-73. Схема проезда на интерактивной карте, часы работы.",
           keywords: "Контакты Радески, телефон клиники Фергана, адрес дерматологии, режим работы регистратуры, обратный звонок"
+        },
+        terms: {
+          title: "Пользовательское соглашение | Radeski Skin & Aesthetic Clinic",
+          desc: "Правила использования официального сайта Radeski: права и обязанности пользователей, онлайн-запись и интеллектуальная собственность.",
+          keywords: "Пользовательское соглашение, Радески, правила сайта, условия использования"
+        },
+        privacy: {
+          title: "Политика конфиденциальности | Radeski Skin & Aesthetic Clinic",
+          desc: "Как клиника Radeski собирает, хранит и защищает ваши персональные данные при использовании сайта radeski.uz.",
+          keywords: "Политика конфиденциальности, персональные данные, Радески, защита информации"
         }
       },
       en: {
@@ -324,6 +345,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Office Location, Support Hotline & Contact Address | Radeski",
           desc: "Located at 1A Uzbekiston Ovozi Street, Fergana. Dedicated helpline: +998 (73) 200-73-73. Dynamic route map and convenient clinic working hours.",
           keywords: "Radeski phone, dermatology contact, clinic location Fergana, map routing, request callback, email support"
+        },
+        terms: {
+          title: "Terms of Use | Radeski Skin & Aesthetic Clinic",
+          desc: "Rules for using the Radeski clinic website, including user obligations, online appointments, and intellectual property terms.",
+          keywords: "Terms of use, Radeski, website rules, user agreement"
+        },
+        privacy: {
+          title: "Privacy Policy | Radeski Skin & Aesthetic Clinic",
+          desc: "How Radeski Skin & Aesthetic Clinic collects, stores, and protects your personal data when you use radeski.uz.",
+          keywords: "Privacy policy, personal data, Radeski, data protection"
         }
       }
     };
@@ -876,6 +907,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               onRefresh={refetchClinicData}
               onClose={() => goToPage('home')}
             />
+          )}
+
+          {currentPage === 'terms' && (
+            <LegalPage locale={locale} type="terms" />
+          )}
+
+          {currentPage === 'privacy' && (
+            <LegalPage locale={locale} type="privacy" />
           )}
 
           {currentPage === 'contacts' && (

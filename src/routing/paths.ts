@@ -8,6 +8,8 @@ export type PageId =
   | 'prices'
   | 'articles'
   | 'contacts'
+  | 'terms'
+  | 'privacy'
   | 'admin';
 
 export const PUBLIC_PAGES: PageId[] = [
@@ -51,7 +53,9 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'services' ||
     pageSegment === 'doctors' ||
     pageSegment === 'prices' ||
-    pageSegment === 'contacts'
+    pageSegment === 'contacts' ||
+    pageSegment === 'terms' ||
+    pageSegment === 'privacy'
   ) {
     return pageSegment;
   }
