@@ -47,6 +47,9 @@ export async function apiRequest<T>(
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}));
+    if (response.status === 401) {
+      handleUnauthorizedResponse(token);
+    }
     throw new ApiError(response.status, errorBody.detail ?? errorBody, response.statusText);
   }
 
@@ -76,6 +79,9 @@ export async function apiFormRequest<T>(
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}));
+    if (response.status === 401) {
+      handleUnauthorizedResponse(token);
+    }
     throw new ApiError(response.status, errorBody.detail ?? errorBody, response.statusText);
   }
 
@@ -102,6 +108,9 @@ export async function apiFormRequestWithMethod<T>(
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}));
+    if (response.status === 401) {
+      handleUnauthorizedResponse(token);
+    }
     throw new ApiError(response.status, errorBody.detail ?? errorBody, response.statusText);
   }
 
@@ -123,6 +132,7 @@ export function resolveMediaUrl(url: string | null | undefined): string | null {
 }
 
 export const AUTH_TOKEN_KEY = 'admin_token';
+export const ADMIN_SESSION_EXPIRED_EVENT = 'radeski-admin-session-expired';
 
 export function getAuthToken(): string | null {
   return localStorage.getItem(AUTH_TOKEN_KEY);
@@ -134,4 +144,39 @@ export function setAuthToken(token: string): void {
 
 export function clearAuthToken(): void {
   localStorage.removeItem(AUTH_TOKEN_KEY);
+}
+
+export function dispatchSessionExpired(): void {
+  clearAuthToken();
+  window.dispatchEvent(new CustomEvent(ADMIN_SESSION_EXPIRED_EVENT));
+}
+
+export function isUnauthorizedError(error: unknown): boolean {
+  return error instanceof ApiError && error.status === 401;
+}
+
+function getTokenExpiryMs(token: string): number | null {
+  try {
+    const parts = token.split('.');
+    if (parts.length < 2) return null;
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+    if (typeof payload.exp !== 'number') return null;
+    return payload.exp * 1000;
+  } catch {
+    return null;
+  }
+}
+
+export function isAuthTokenExpired(token?: string | null, leewayMs = 30_000): boolean {
+  const value = token ?? getAuthToken();
+  if (!value) return true;
+  const expiresAt = getTokenExpiryMs(value);
+  if (!expiresAt) return false;
+  return Date.now() >= expiresAt - leewayMs;
+}
+
+function handleUnauthorizedResponse(token?: string | null): void {
+  if (token) {
+    dispatchSessionExpired();
+  }
 }

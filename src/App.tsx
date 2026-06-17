@@ -73,11 +73,21 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const { locale: localeParam } = useParams();
   const location = useLocation();
   const parsedLocale = normalizeLocaleParam(localeParam);
-  const locale = parsedLocale ?? getPreferredLocale();
+  const [adminLocale, setAdminLocale] = useState<Locale>(() => getPreferredLocale());
+  const locale = parsedLocale ?? (forcePage === 'admin' ? adminLocale : getPreferredLocale());
   const currentPage: PageId = forcePage ?? getPageFromPathname(location.pathname);
   const articleSlug = getArticleSlugFromPathname(location.pathname);
-  const { goToPage, goToArticle, changeLocale } = useAppNavigation(locale);
+  const { goToPage, goToArticle, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
+
+  const changeLocale = (nextLocale: Locale) => {
+    saveLocale(nextLocale);
+    if (forcePage === 'admin') {
+      setAdminLocale(nextLocale);
+      return;
+    }
+    navigateLocale(nextLocale);
+  };
 
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
   const [preselectedServiceId, setPreselectedServiceId] = useState<string>('');

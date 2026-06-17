@@ -79,7 +79,7 @@ export function switchLocaleInPath(pathname: string, nextLocale: Locale): string
   const segments = pathname.split('/').filter(Boolean);
 
   if (segments[0] === 'admin') {
-    return pagePath(nextLocale, 'home');
+    return '/admin';
   }
 
   if (segments.length === 0) {

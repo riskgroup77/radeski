@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
 import {
@@ -30,7 +30,7 @@ import {
   mapArticleToCreatePayload,
   parsePriceValue,
 } from '../api/mappers';
-import { ApiError, clearAuthToken, getAuthToken, setAuthToken } from '../api/client';
+import { ApiError, clearAuthToken, getAuthToken, setAuthToken, isUnauthorizedError, isAuthTokenExpired, ADMIN_SESSION_EXPIRED_EVENT } from '../api/client';
 import { ApiAppointment, AppointmentStatus } from '../api/types';
 import ImageUploadField from './ImageUploadField';
 import LocalizedFieldGroup, { isLocalizedFilled } from './LocalizedFieldGroup';
@@ -65,7 +65,10 @@ export default function AdminPanel({
   onRefresh,
   onClose
 }: AdminPanelProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => !!getAuthToken());
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    const token = getAuthToken();
+    return Boolean(token && !isAuthTokenExpired(token));
+  });
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
@@ -129,6 +132,24 @@ export default function AdminPanel({
   const [appointments, setAppointments] = useState<ApiAppointment[]>([]);
   const [appointmentsLoading, setAppointmentsLoading] = useState(false);
 
+  const sessionExpiredMessage =
+    locale === 'uz'
+      ? "Sessiya muddati tugadi. Ma'lumotlarni saqlash uchun qayta kiring."
+      : locale === 'ru'
+        ? 'Сессия истекла. Войдите снова, чтобы продолжить работу.'
+        : 'Your session has expired. Please sign in again to continue.';
+
+  const handleSessionExpired = useCallback(() => {
+    clearAuthToken();
+    setIsAuthenticated(false);
+    setAuthError(sessionExpiredMessage);
+  }, [sessionExpiredMessage]);
+
+  const reportAdminError = useCallback((err: unknown, fallback: string) => {
+    if (isUnauthorizedError(err)) return;
+    alert(err instanceof ApiError ? err.message : fallback);
+  }, []);
+
   // Synchronize internal states if props change (e.g. after resetting)
   useEffect(() => {
     setEditedRatings(JSON.parse(JSON.stringify(clinicRatings)));
@@ -140,12 +161,50 @@ export default function AdminPanel({
   }, [doctors, serviceCategories, prices, articles, clinicRatings, fullDictionary]);
 
   useEffect(() => {
+    const onSessionExpired = () => handleSessionExpired();
+    window.addEventListener(ADMIN_SESSION_EXPIRED_EVENT, onSessionExpired);
+    return () => window.removeEventListener(ADMIN_SESSION_EXPIRED_EVENT, onSessionExpired);
+  }, [handleSessionExpired]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const checkSession = () => {
+      if (isAuthTokenExpired()) {
+        handleSessionExpired();
+      }
+    };
+
+    checkSession();
+    const intervalId = window.setInterval(checkSession, 60_000);
+    const onFocus = () => checkSession();
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        checkSession();
+      }
+    };
+
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
+  }, [isAuthenticated, handleSessionExpired]);
+
+  useEffect(() => {
     if (!isAuthenticated || activeTab !== 'appointments') return;
 
     setAppointmentsLoading(true);
     getAppointments()
       .then(setAppointments)
-      .catch(() => setAppointments([]))
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) {
+          setAppointments([]);
+        }
+      })
       .finally(() => setAppointmentsLoading(false));
   }, [isAuthenticated, activeTab, saveSuccess]);
 
@@ -168,6 +227,7 @@ export default function AdminPanel({
   const handleLogout = () => {
     setIsAuthenticated(false);
     clearAuthToken();
+    setAuthError('');
   };
 
   // Helper trigger save notification
@@ -243,7 +303,7 @@ export default function AdminPanel({
                           "Physician profile saved successfully!"
       );
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Save failed');
+      reportAdminError(err, 'Save failed');
     }
   };
 
@@ -256,7 +316,7 @@ export default function AdminPanel({
       if (selectedDoctorId === docId) setSelectedDoctorId(null);
       triggerSaveNotification(locale === 'uz' ? "Muvaffaqiyatli o'chirildi!" : "Профиль удален!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Delete failed');
+      reportAdminError(err, 'Delete failed');
     }
   };
 
@@ -325,7 +385,7 @@ export default function AdminPanel({
       setCategoryImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Kategoriya saqlandi!" : "Категория сохранена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Save failed');
+      reportAdminError(err, 'Save failed');
     }
   };
 
@@ -338,7 +398,7 @@ export default function AdminPanel({
       if (selectedCategoryId === catId) setSelectedCategoryId(null);
       triggerSaveNotification(locale === 'uz' ? "Kategoriya o'chirildi!" : "Категория удалена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Delete failed');
+      reportAdminError(err, 'Delete failed');
     }
   };
 
@@ -407,7 +467,7 @@ export default function AdminPanel({
       setSubServiceImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Xizmat saqlandi!" : "Услуга сохранена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Save failed');
+      reportAdminError(err, 'Save failed');
     }
   };
 
@@ -437,7 +497,7 @@ export default function AdminPanel({
       }
       triggerSaveNotification(locale === 'uz' ? "Xizmat o'chirildi!" : "Услуга удалена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Delete failed');
+      reportAdminError(err, 'Delete failed');
     }
   };
 
@@ -483,7 +543,7 @@ export default function AdminPanel({
       setIsAddingPrice(false);
       triggerSaveNotification(locale === 'uz' ? "Narx saqlandi!" : "Цена сохранена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Save failed');
+      reportAdminError(err, 'Save failed');
     }
   };
 
@@ -496,7 +556,7 @@ export default function AdminPanel({
       if (selectedPriceId === prId) setSelectedPriceId(null);
       triggerSaveNotification(locale === 'uz' ? "Narx o'chirildi!" : "Позиция удалена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Delete failed');
+      reportAdminError(err, 'Delete failed');
     }
   };
 
@@ -549,7 +609,7 @@ export default function AdminPanel({
       setArticleImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Maqola saqlandi!" : "Статья сохранена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Save failed');
+      reportAdminError(err, 'Save failed');
     }
   };
 
@@ -562,7 +622,7 @@ export default function AdminPanel({
       if (selectedArticleId === artId) setSelectedArticleId(null);
       triggerSaveNotification(locale === 'uz' ? "Maqola o'chirildi!" : "Статья удалена!");
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Delete failed');
+      reportAdminError(err, 'Delete failed');
     }
   };
 
@@ -573,7 +633,7 @@ export default function AdminPanel({
       setAppointments(updated);
       triggerSaveNotification(locale === 'uz' ? 'Status yangilandi!' : 'Статус обновлен!');
     } catch (err) {
-      alert(err instanceof ApiError ? err.message : 'Update failed');
+      reportAdminError(err, 'Update failed');
     }
   };
 
