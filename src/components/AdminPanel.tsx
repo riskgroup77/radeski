@@ -21,6 +21,8 @@ import {
   deleteArticle,
   getAppointments,
   updateAppointmentStatus,
+  importPrices,
+  hasLocalizedImageFiles,
 } from '../api/adminApi';
 import {
   mapDoctorToCreatePayload,
@@ -33,6 +35,10 @@ import {
 import { ApiError, clearAuthToken, getAuthToken, setAuthToken, isUnauthorizedError, isAuthTokenExpired, ADMIN_SESSION_EXPIRED_EVENT } from '../api/client';
 import { ApiAppointment, AppointmentStatus } from '../api/types';
 import ImageUploadField from './ImageUploadField';
+import LocalizedImageUploadGroup from './LocalizedImageUploadGroup';
+import { EMPTY_LOCALIZED_IMAGE_FILES, getLocalizedImage } from '../utils/localizedImage';
+import { normalizeArticleViews } from '../utils/articleViews';
+import { getCatalogPrices } from '../utils/enrichPrices';
 import LocalizedFieldGroup, { isLocalizedFilled } from './LocalizedFieldGroup';
 import { DICTIONARY } from '../data';
 
@@ -106,6 +112,7 @@ export default function AdminPanel({
     name: { uz: string; ru: string; en: string };
     description: { uz: string; ru: string; en: string };
     image?: string | null;
+    images?: ServiceDetail['images'];
   }>({
     id: '',
     name: { uz: '', ru: '', en: '' },
@@ -125,12 +132,14 @@ export default function AdminPanel({
   const [articleForm, setArticleForm] = useState<Partial<Article>>({});
 
   const [doctorPhotoFile, setDoctorPhotoFile] = useState<File | null>(null);
-  const [categoryImageFile, setCategoryImageFile] = useState<File | null>(null);
-  const [subServiceImageFile, setSubServiceImageFile] = useState<File | null>(null);
-  const [articleImageFile, setArticleImageFile] = useState<File | null>(null);
+  const [categoryImageFiles, setCategoryImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
+  const [subServiceImageFiles, setSubServiceImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
+  const [articleImageFiles, setArticleImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
 
   const [appointments, setAppointments] = useState<ApiAppointment[]>([]);
   const [appointmentsLoading, setAppointmentsLoading] = useState(false);
+  const [appointmentStatusFilter, setAppointmentStatusFilter] = useState<AppointmentStatus | ''>('');
+  const [priceImportLoading, setPriceImportLoading] = useState(false);
 
   const sessionExpiredMessage =
     locale === 'uz'
@@ -198,7 +207,7 @@ export default function AdminPanel({
     if (!isAuthenticated || activeTab !== 'appointments') return;
 
     setAppointmentsLoading(true);
-    getAppointments()
+    getAppointments(appointmentStatusFilter ? { status: appointmentStatusFilter } : undefined)
       .then(setAppointments)
       .catch((err) => {
         if (!isUnauthorizedError(err)) {
@@ -206,7 +215,7 @@ export default function AdminPanel({
         }
       })
       .finally(() => setAppointmentsLoading(false));
-  }, [isAuthenticated, activeTab, saveSuccess]);
+  }, [isAuthenticated, activeTab, saveSuccess, appointmentStatusFilter]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -324,11 +333,11 @@ export default function AdminPanel({
   const handleSelectCategoryForEdit = (cat: ServiceCategory) => {
     setSelectedCategoryId(cat.id);
     setCategoryForm(cat);
-    setCategoryImageFile(null);
+    setCategoryImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
     setIsAddingCategory(false);
     setSelectedSubServiceId(null);
     setIsAddingSubService(false);
-    setSubServiceImageFile(null);
+    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
   };
 
   const handleCreateCategoryButton = () => {
@@ -341,11 +350,11 @@ export default function AdminPanel({
       image: null,
       subServices: []
     });
-    setCategoryImageFile(null);
+    setCategoryImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
     setIsAddingCategory(true);
     setSelectedSubServiceId(null);
     setIsAddingSubService(false);
-    setSubServiceImageFile(null);
+    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
   };
 
   const handleSaveCategory = async () => {
@@ -366,23 +375,24 @@ export default function AdminPanel({
         },
         icon: categoryForm.icon || 'Activity',
         image: categoryForm.image ?? null,
+        images: categoryForm.images,
         subServices: categoryForm.subServices || [],
       };
 
       const payload = mapServiceCategoryToPayload(categoryData, {
-        preserveImages: !categoryImageFile,
+        preserveImages: !hasLocalizedImageFiles(categoryImageFiles),
       });
 
       if (isAddingCategory) {
-        await createServiceCategory(payload, categoryImageFile);
+        await createServiceCategory(payload, categoryImageFiles);
       } else {
-        await updateServiceCategory(categoryForm.id, payload, categoryImageFile);
+        await updateServiceCategory(categoryForm.id, payload, categoryImageFiles);
       }
 
       await onRefresh();
       setSelectedCategoryId(null);
       setIsAddingCategory(false);
-      setCategoryImageFile(null);
+      setCategoryImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
       triggerSaveNotification(locale === 'uz' ? "Kategoriya saqlandi!" : "Категория сохранена!");
     } catch (err) {
       reportAdminError(err, 'Save failed');
@@ -405,7 +415,7 @@ export default function AdminPanel({
   const handleEditSubService = (sub: ServiceDetail) => {
     setSelectedSubServiceId(sub.id);
     setSubServiceForm(JSON.parse(JSON.stringify(sub)));
-    setSubServiceImageFile(null);
+    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
     setIsAddingSubService(false);
   };
 
@@ -417,7 +427,7 @@ export default function AdminPanel({
       description: { uz: '', ru: '', en: '' },
       image: null,
     });
-    setSubServiceImageFile(null);
+    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
     setIsAddingSubService(true);
   };
 
@@ -433,6 +443,7 @@ export default function AdminPanel({
       name: subServiceForm.name,
       description: subServiceForm.description,
       image: subServiceForm.image ?? null,
+      images: subServiceForm.images,
     };
 
     if (isAddingSubService) {
@@ -442,12 +453,19 @@ export default function AdminPanel({
     }
 
     const editedIndex = updatedSubs.findIndex(s => s.id === subServiceForm.id);
-    const subImages = subServiceImageFile ? [subServiceImageFile] : [];
+    const subLocalizedImageArrays = hasLocalizedImageFiles(subServiceImageFiles)
+      ? {
+          uz: subServiceImageFiles.uz ? [subServiceImageFiles.uz] : [],
+          ru: subServiceImageFiles.ru ? [subServiceImageFiles.ru] : [],
+          en: subServiceImageFiles.en ? [subServiceImageFiles.en] : [],
+        }
+      : undefined;
+    const subImages = subServiceImageFiles.uz && !subLocalizedImageArrays ? [subServiceImageFiles.uz] : [];
 
     const subPayloads = updatedSubs.map((sub, index) => {
       const isEdited = index === editedIndex;
       return mapSubServiceToPayload(sub, {
-        preserveImages: !isEdited || !subServiceImageFile,
+        preserveImages: !isEdited || !hasLocalizedImageFiles(subServiceImageFiles),
       });
     });
 
@@ -458,13 +476,14 @@ export default function AdminPanel({
         selectedCategoryId,
         { sub_services: subPayloads },
         null,
-        subImages
+        subImages,
+        subLocalizedImageArrays,
       );
       await onRefresh();
       setCategoryForm(updatedCatObj);
       setIsAddingSubService(false);
       setSelectedSubServiceId(null);
-      setSubServiceImageFile(null);
+      setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
       triggerSaveNotification(locale === 'uz' ? "Xizmat saqlandi!" : "Услуга сохранена!");
     } catch (err) {
       reportAdminError(err, 'Save failed');
@@ -564,7 +583,7 @@ export default function AdminPanel({
   const handleEditArticle = (art: Article) => {
     setSelectedArticleId(art.id);
     setArticleForm(art);
-    setArticleImageFile(null);
+    setArticleImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
     setIsAddingArticle(false);
   };
 
@@ -585,7 +604,7 @@ export default function AdminPanel({
       image: null,
       views: 0
     });
-    setArticleImageFile(null);
+    setArticleImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
     setIsAddingArticle(true);
   };
 
@@ -595,18 +614,18 @@ export default function AdminPanel({
     try {
       if (isAddingArticle) {
         const payload = mapArticleToCreatePayload(articleForm);
-        await createArticle(payload, articleImageFile);
+        await createArticle(payload, articleImageFiles);
       } else {
         const payload = mapArticleToCreatePayload(articleForm, {
-          preserveImage: !articleImageFile,
+          preserveImage: !hasLocalizedImageFiles(articleImageFiles),
         });
-        await updateArticle(articleForm.id, payload, articleImageFile);
+        await updateArticle(articleForm.id, payload, articleImageFiles);
       }
 
       await onRefresh();
       setSelectedArticleId(null);
       setIsAddingArticle(false);
-      setArticleImageFile(null);
+      setArticleImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
       triggerSaveNotification(locale === 'uz' ? "Maqola saqlandi!" : "Статья сохранена!");
     } catch (err) {
       reportAdminError(err, 'Save failed');
@@ -629,11 +648,44 @@ export default function AdminPanel({
   const handleAppointmentStatusChange = async (appointmentId: string, status: AppointmentStatus) => {
     try {
       await updateAppointmentStatus(appointmentId, status);
-      const updated = await getAppointments();
+      const updated = await getAppointments(
+        appointmentStatusFilter ? { status: appointmentStatusFilter } : undefined,
+      );
       setAppointments(updated);
       triggerSaveNotification(locale === 'uz' ? 'Status yangilandi!' : 'Статус обновлен!');
     } catch (err) {
       reportAdminError(err, 'Update failed');
+    }
+  };
+
+  const handleImportCatalogPrices = async () => {
+    const catalogItems = getCatalogPrices();
+    if (!catalogItems.length) return;
+
+    const confirmed = confirm(
+      locale === 'uz'
+        ? `${catalogItems.length} ta narxni API ga yuklashni tasdiqlaysizmi?`
+        : locale === 'ru'
+          ? `Загрузить ${catalogItems.length} цен в API?`
+          : `Import ${catalogItems.length} prices to the API?`,
+    );
+    if (!confirmed) return;
+
+    setPriceImportLoading(true);
+    try {
+      const result = await importPrices({
+        items: catalogItems.map((item) => mapPriceToCreatePayload(item)),
+      });
+      await onRefresh();
+      triggerSaveNotification(
+        locale === 'uz'
+          ? `Narxlar yuklandi: ${result.imported}`
+          : `Импортировано: ${result.imported}`,
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? 'Narx importida xatolik' : 'Price import failed');
+    } finally {
+      setPriceImportLoading(false);
     }
   };
 
@@ -1315,12 +1367,12 @@ export default function AdminPanel({
                     </div>
 
                     <div className="md:col-span-2">
-                      <ImageUploadField
-                        label={locale === 'uz' ? "Kategoriya rasmi (qurilmadan yuklash)" : "Изображение категории (загрузка)"}
-                        currentImageUrl={categoryForm.image}
-                        file={categoryImageFile}
-                        onFileChange={setCategoryImageFile}
-                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
+                      <LocalizedImageUploadGroup
+                        title={locale === 'uz' ? "Kategoriya rasmlari (har til uchun alohida)" : locale === 'ru' ? 'Изображения категории (по языкам)' : 'Category images (per language)'}
+                        images={categoryForm.images}
+                        files={categoryImageFiles}
+                        onFilesChange={setCategoryImageFiles}
+                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB. Saytda tanlangan tilga mos rasm chiqadi." : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
                       />
                     </div>
                   </div>
@@ -1417,11 +1469,11 @@ export default function AdminPanel({
                               rows={2}
                             />
 
-                            <ImageUploadField
-                              label={locale === 'uz' ? "Xizmat rasmi (qurilmadan yuklash)" : "Изображение услуги (загрузка)"}
-                              currentImageUrl={subServiceForm.image}
-                              file={subServiceImageFile}
-                              onFileChange={setSubServiceImageFile}
+                            <LocalizedImageUploadGroup
+                              title={locale === 'uz' ? "Xizmat rasmlari (har til uchun)" : locale === 'ru' ? 'Изображения услуги (по языкам)' : 'Service images (per language)'}
+                              images={subServiceForm.images}
+                              files={subServiceImageFiles}
+                              onFilesChange={setSubServiceImageFiles}
                               helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
                             />
                           </div>
@@ -1455,20 +1507,32 @@ export default function AdminPanel({
           {/* TAB 5: PRICES PREYSKURANT */}
           {activeTab === 'prices' && (
             <div className="space-y-6">
-              <div className="flex justify-between items-center pb-3 border-b border-brand-sectiongray">
+              <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-brand-sectiongray">
                 <h3 className="text-base font-bold text-brand-text-primary">
                   {locale === 'uz' ? "Klinika xizmatlari narxnomasi" : "Прейскурант цен на все медицинские услуги"}
                 </h3>
-                
-                {!isAddingPrice && selectedPriceId === null && (
-                  <button
-                    onClick={handleCreatePriceBtn}
-                    className="px-3 py-1.5 bg-brand-gold text-white font-bold text-xs rounded-lg flex items-center gap-1 hover:bg-brand-gold-dark cursor-pointer shadow-xs"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>{locale === 'uz' ? "Yangi narx qo'shish" : "Добавить цену"}</span>
-                  </button>
-                )}
+
+                <div className="flex flex-wrap items-center gap-2">
+                  {!isAddingPrice && selectedPriceId === null && (
+                    <>
+                      <button
+                        onClick={handleImportCatalogPrices}
+                        disabled={priceImportLoading}
+                        className="px-3 py-1.5 bg-brand-dark-navy text-white font-bold text-xs rounded-lg flex items-center gap-1 hover:bg-brand-dark-navy/90 cursor-pointer shadow-xs disabled:opacity-60"
+                      >
+                        <RefreshCw className={`w-3.5 h-3.5 ${priceImportLoading ? 'animate-spin' : ''}`} />
+                        <span>{locale === 'uz' ? 'Katalog import' : 'Импорт каталога'}</span>
+                      </button>
+                      <button
+                        onClick={handleCreatePriceBtn}
+                        className="px-3 py-1.5 bg-brand-gold text-white font-bold text-xs rounded-lg flex items-center gap-1 hover:bg-brand-gold-dark cursor-pointer shadow-xs"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>{locale === 'uz' ? "Yangi narx qo'shish" : "Добавить цену"}</span>
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
 
               {selectedPriceId === null && !isAddingPrice ? (
@@ -1621,16 +1685,22 @@ export default function AdminPanel({
                     <div key={art.id} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-4 justify-between items-start">
                       <div className="flex gap-3 min-w-0">
                         <div className="w-16 h-16 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-white shrink-0">
-                          {art.image ? (
-                            <img src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
+                          {(() => {
+                            const thumb = getLocalizedImage(art.images, locale) ?? art.image;
+                            return thumb ? (
+                            <img src={thumb} alt={art.title[locale]} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full bg-brand-offwhite flex items-center justify-center text-[8px] text-brand-text-muted">—</div>
-                          )}
+                          );
+                          })()}
                         </div>
                         <div className="min-w-0">
                           <h4 className="font-extrabold text-xs sm:text-sm text-brand-text-primary truncate">{art.title[locale] || art.title['uz']}</h4>
                           <p className="text-[10px] text-brand-text-muted mt-1 leading-relaxed line-clamp-2">{art.summary[locale] || art.summary['uz']}</p>
-                          <span className="text-[9px] text-[#A6843F] block mt-1.5 font-mono">{art.date} | {art.views} reads</span>
+                          <span className="text-[9px] text-[#A6843F] block mt-1.5 font-mono">
+                            {art.date} | {normalizeArticleViews(art.views).toLocaleString('uz-UZ')}{' '}
+                            {locale === 'uz' ? "ko'rish" : locale === 'ru' ? 'просм.' : 'views'}
+                          </span>
                         </div>
                       </div>
 
@@ -1709,12 +1779,12 @@ export default function AdminPanel({
                     />
 
                     <div>
-                      <ImageUploadField
-                        label={locale === 'uz' ? "Maqola muqova rasmi (qurilmadan yuklash)" : "Обложка статьи (загрузка с устройства)"}
-                        currentImageUrl={articleForm.image}
-                        file={articleImageFile}
-                        onFileChange={setArticleImageFile}
-                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
+                      <LocalizedImageUploadGroup
+                        title={locale === 'uz' ? "Maqola rasmlari (har til uchun)" : locale === 'ru' ? 'Изображения статьи (по языкам)' : 'Article images (per language)'}
+                        images={articleForm.images}
+                        files={articleImageFiles}
+                        onFilesChange={setArticleImageFiles}
+                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB. O'zbek, rus va ingliz tillari uchun alohida rasm." : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
                       />
                     </div>
 
@@ -1754,10 +1824,21 @@ export default function AdminPanel({
           {/* TAB 7: APPOINTMENTS CRM */}
           {activeTab === 'appointments' && (
             <div className="space-y-6">
-              <div className="flex justify-between items-center pb-3 border-b border-brand-sectiongray">
+              <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-brand-sectiongray">
                 <h3 className="text-base font-bold text-brand-text-primary">
                   {locale === 'uz' ? 'Onlayn arizalar va qo\'ng\'iroq buyurtmalari' : 'Онлайн заявки и обратные звонки'}
                 </h3>
+                <select
+                  value={appointmentStatusFilter}
+                  onChange={(e) => setAppointmentStatusFilter(e.target.value as AppointmentStatus | '')}
+                  className="px-3 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg text-xs cursor-pointer"
+                >
+                  <option value="">{locale === 'uz' ? 'Barcha statuslar' : 'Все статусы'}</option>
+                  <option value="new">{locale === 'uz' ? 'Yangi' : 'Новая'}</option>
+                  <option value="contacted">{locale === 'uz' ? 'Bog\'lanildi' : 'Связались'}</option>
+                  <option value="completed">{locale === 'uz' ? 'Yakunlandi' : 'Завершена'}</option>
+                  <option value="canceled">{locale === 'uz' ? 'Bekor' : 'Отменена'}</option>
+                </select>
               </div>
 
               {appointmentsLoading ? (
@@ -1770,8 +1851,11 @@ export default function AdminPanel({
                     <thead>
                       <tr className="bg-brand-offwhite text-brand-text-muted uppercase text-[10px] border-b border-brand-sectiongray">
                         <th className="p-3 font-bold">{locale === 'uz' ? 'Telefon' : 'Телефон'}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Mijoz' : 'Клиент'}</th>
                         <th className="p-3 font-bold">{locale === 'uz' ? 'Xizmat' : 'Услуга'}</th>
-                        <th className="p-3 font-bold">{locale === 'uz' ? 'Sana' : 'Дата'}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Qulay sana' : 'Удобная дата'}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Izoh' : 'Комментарий'}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Yuborilgan' : 'Отправлено'}</th>
                         <th className="p-3 font-bold">{locale === 'uz' ? 'Status' : 'Статус'}</th>
                       </tr>
                     </thead>
@@ -1779,10 +1863,17 @@ export default function AdminPanel({
                       {appointments.map((item) => (
                         <tr key={item.id} className="border-b border-brand-sectiongray hover:bg-brand-offwhite/50">
                           <td className="p-3 font-mono font-semibold text-brand-text-primary">{item.phone_number}</td>
+                          <td className="p-3 text-brand-text-secondary">{item.client_name || '—'}</td>
                           <td className="p-3 text-brand-text-secondary">
                             {(locale === 'uz' ? item.service_name_uz : locale === 'ru' ? item.service_name_ru : item.service_name_en) ||
                               item.service_name_uz ||
                               (locale === 'uz' ? 'Umumiy konsultatsiya' : locale === 'ru' ? 'Общая консультация' : 'General consultation')}
+                          </td>
+                          <td className="p-3 text-brand-text-muted font-mono">
+                            {item.preferred_date ? item.preferred_date.slice(0, 10) : '—'}
+                          </td>
+                          <td className="p-3 text-brand-text-muted max-w-[200px] truncate" title={item.comment || ''}>
+                            {item.comment || '—'}
                           </td>
                           <td className="p-3 text-brand-text-muted font-mono">{new Date(item.created_at).toLocaleString()}</td>
                           <td className="p-3">

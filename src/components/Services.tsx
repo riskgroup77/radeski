@@ -4,22 +4,23 @@ import * as Icons from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import MediaImage from './MediaImage';
-import { getServiceLucideIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
+import { getLocalizedImage } from '../utils/localizedImage';
+import { getServiceLucideIcon, resolveCategoryIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
 
 interface ServicesProps {
   locale: Locale;
   onOpenAppointment: (serviceId?: string) => void;
   onOpenCategory?: (categoryId: string) => void;
+  onOpenSubService?: (categoryId: string, subId: string) => void;
   serviceCategories?: ServiceCategory[];
   dictionary?: any;
 }
 
-export default function Services({ locale, onOpenAppointment, onOpenCategory, serviceCategories, dictionary }: ServicesProps) {
+export default function Services({ locale, onOpenAppointment, onOpenCategory, onOpenSubService, serviceCategories, dictionary }: ServicesProps) {
   const d = dictionary || DICTIONARY[locale];
   const dynamicCategories = serviceCategories || SERVICE_CATEGORIES;
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [activeDetailId, setActiveDetailId] = useState<string | null>(null);
   const [expandedImage, setExpandedImage] = useState<{ src: string; alt: string } | null>(null);
 
   const renderIcon = (iconName: string, className = 'w-6 h-6 text-brand-gold') => {
@@ -53,19 +54,15 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
     }).filter(Boolean) as typeof SERVICE_CATEGORIES;
   }, [searchQuery, locale, dynamicCategories]);
 
-  // Find active sub-service for detailed modal info
-  const activeDetailSubService = useMemo(() => {
-    if (!activeDetailId) return null;
-    for (const cat of dynamicCategories) {
-      const found = cat.subServices.find(s => s.id === activeDetailId);
-      if (found) return found;
-    }
-    return null;
-  }, [activeDetailId, dynamicCategories]);
+  const getCategoryImage = (category: ServiceCategory) =>
+    getLocalizedImage(category.images, locale) ?? category.image ?? null;
+
+  const getSubImage = (sub: ServiceCategory['subServices'][number]) =>
+    getLocalizedImage(sub.images, locale) ?? sub.image ?? null;
 
   const categoriesWithImages = useMemo(
-    () => filteredCategories.filter((cat) => cat.image),
-    [filteredCategories]
+    () => filteredCategories.filter((cat) => getCategoryImage(cat)),
+    [filteredCategories, locale],
   );
 
   useEffect(() => {
@@ -76,21 +73,21 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
         setExpandedImage(null);
       } else if (event.key === 'ArrowLeft' && categoriesWithImages.length > 1) {
         const currentIdx = categoriesWithImages.findIndex(
-          (cat) => cat.image === expandedImage.src
+          (cat) => getCategoryImage(cat) === expandedImage.src
         );
         if (currentIdx >= 0) {
           const prev = categoriesWithImages[
             (currentIdx - 1 + categoriesWithImages.length) % categoriesWithImages.length
           ];
-          setExpandedImage({ src: prev.image!, alt: prev.title[locale] });
+          setExpandedImage({ src: getCategoryImage(prev)!, alt: prev.title[locale] });
         }
       } else if (event.key === 'ArrowRight' && categoriesWithImages.length > 1) {
         const currentIdx = categoriesWithImages.findIndex(
-          (cat) => cat.image === expandedImage.src
+          (cat) => getCategoryImage(cat) === expandedImage.src
         );
         if (currentIdx >= 0) {
           const next = categoriesWithImages[(currentIdx + 1) % categoriesWithImages.length];
-          setExpandedImage({ src: next.image!, alt: next.title[locale] });
+          setExpandedImage({ src: getCategoryImage(next)!, alt: next.title[locale] });
         }
       }
     };
@@ -107,19 +104,19 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
   const navigateLightbox = (direction: 'prev' | 'next', event: MouseEvent) => {
     event.stopPropagation();
     if (!expandedImage || categoriesWithImages.length === 0) return;
-    const currentIdx = categoriesWithImages.findIndex((cat) => cat.image === expandedImage.src);
+    const currentIdx = categoriesWithImages.findIndex((cat) => getCategoryImage(cat) === expandedImage.src);
     if (currentIdx < 0) return;
     const nextIdx =
       direction === 'prev'
         ? (currentIdx - 1 + categoriesWithImages.length) % categoriesWithImages.length
         : (currentIdx + 1) % categoriesWithImages.length;
     const next = categoriesWithImages[nextIdx];
-    setExpandedImage({ src: next.image!, alt: next.title[locale] });
+    setExpandedImage({ src: getCategoryImage(next)!, alt: next.title[locale] });
   };
 
   const lightboxIndex =
     expandedImage && categoriesWithImages.length > 0
-      ? categoriesWithImages.findIndex((cat) => cat.image === expandedImage.src)
+      ? categoriesWithImages.findIndex((cat) => getCategoryImage(cat) === expandedImage.src)
       : -1;
 
   return (
@@ -196,17 +193,17 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col h-full group"
               >
-                {category.image ? (
+                {getCategoryImage(category) ? (
                   <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[200px] overflow-hidden bg-brand-offwhite shrink-0">
                     <MediaImage
-                      src={category.image}
+                      src={getCategoryImage(category)!}
                       alt={category.title[locale]}
                       loading="lazy"
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
                     <button
                       type="button"
-                      onClick={(e) => openImageLightbox(category.image!, category.title[locale], e)}
+                      onClick={(e) => openImageLightbox(getCategoryImage(category)!, category.title[locale], e)}
                       className="absolute top-3 right-3 p-2 bg-black/35 hover:bg-black/50 text-white rounded-lg backdrop-blur-sm transition-all cursor-pointer"
                       aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить изображение' : 'Expand image'}
                     >
@@ -216,7 +213,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
                 ) : (
                   <div className="p-5 pb-0 flex items-center gap-3">
                     <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center border border-brand-gold-light/20 shadow-xs">
-                      {renderIcon(category.icon)}
+                      {renderIcon(resolveCategoryIcon(category))}
                     </div>
                   </div>
                 )}
@@ -249,20 +246,20 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
                       <button
                         key={sub.id}
                         type="button"
-                        onClick={() => setActiveDetailId(sub.id)}
-                        className="w-full p-2.5 sm:p-3 bg-brand-offwhite/60 hover:bg-brand-gold-light/10 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-center gap-3 cursor-pointer group/sub transition-all text-left"
+                        onClick={() => onOpenSubService?.(category.id, sub.id)}
+                        className="w-full p-2.5 sm:p-3 bg-brand-offwhite/60 hover:bg-brand-gold-light/10 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-start gap-3 cursor-pointer group/sub transition-all text-left"
                       >
-                        {sub.image ? (
-                          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-white shadow-xs group/thumb">
+                        {getSubImage(sub) ? (
+                          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-white shadow-xs group/thumb mt-0.5">
                             <MediaImage
-                              src={sub.image}
+                              src={getSubImage(sub)!}
                               alt={sub.name[locale]}
                               loading="lazy"
                               className="w-full h-full object-cover object-center"
                             />
                             <button
                               type="button"
-                              onClick={(e) => openImageLightbox(sub.image!, sub.name[locale], e)}
+                              onClick={(e) => openImageLightbox(getSubImage(sub)!, sub.name[locale], e)}
                               className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-all cursor-pointer"
                               aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить' : 'Expand'}
                             >
@@ -270,14 +267,19 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
                             </button>
                           </div>
                         ) : (
-                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl shrink-0 bg-brand-gold-light/10 border border-brand-gold-light/20 flex items-center justify-center">
-                            {renderIcon(resolveSubServiceIcon(sub, category.icon), 'w-4 h-4 text-brand-gold')}
+                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl shrink-0 bg-brand-gold-light/10 border border-brand-gold-light/25 flex items-center justify-center shadow-xs mt-0.5">
+                            {renderIcon(resolveSubServiceIcon(sub, category), 'w-5 h-5 text-brand-gold')}
                           </div>
                         )}
-                        <span className="text-brand-text-secondary text-xs font-medium group-hover/sub:text-brand-gold leading-tight flex-1">
-                          {sub.name[locale]}
-                        </span>
-                        <Icons.ChevronRight className="w-4 h-4 text-brand-text-muted group-hover/sub:text-brand-gold group-hover/sub:translate-x-0.5 transition-all shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <span className="text-brand-text-primary text-xs sm:text-sm font-semibold group-hover/sub:text-brand-gold leading-tight block">
+                            {sub.name[locale]}
+                          </span>
+                          <span className="text-brand-text-muted text-[11px] sm:text-xs font-light leading-snug mt-1 line-clamp-2 block">
+                            {sub.description[locale]}
+                          </span>
+                        </div>
+                        <Icons.ChevronRight className="w-4 h-4 text-brand-text-muted group-hover/sub:text-brand-gold group-hover/sub:translate-x-0.5 transition-all shrink-0 mt-1" />
                       </button>
                     ))}
                   </div>
@@ -306,112 +308,6 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, se
           </div>
         )}
       </div>
-
-      {/* Subservice detailed information dialog */}
-      <AnimatePresence>
-        {activeDetailSubService && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setActiveDetailId(null)}
-              className="fixed inset-0 bg-[#0c1424]/65 backdrop-blur-xs"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-lg bg-brand-white rounded-2xl shadow-xl z-10 overflow-hidden border border-brand-sectiongray"
-            >
-              {activeDetailSubService.image ? (
-                <div className="relative h-52 sm:h-56 overflow-hidden bg-brand-offwhite">
-                  <MediaImage
-                    src={activeDetailSubService.image}
-                    alt={activeDetailSubService.name[locale]}
-                    className="w-full h-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/80 via-transparent to-transparent" />
-                  <button
-                    type="button"
-                    onClick={(e) => openImageLightbox(activeDetailSubService.image!, activeDetailSubService.name[locale], e)}
-                    className="absolute top-4 left-4 p-2 bg-black/40 hover:bg-black/55 text-white rounded-lg backdrop-blur-sm transition-all"
-                    aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить' : 'Expand'}
-                  >
-                    <Icons.Maximize2 className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => setActiveDetailId(null)}
-                    className="absolute top-4 right-4 text-white hover:text-slate-200 p-2 bg-black/30 hover:bg-black/45 rounded-full transition-all backdrop-blur-sm"
-                  >
-                    <Icons.X className="w-5 h-5" />
-                  </button>
-                </div>
-              ) : null}
-
-              <div className={`p-6 sm:p-8${!activeDetailSubService.image ? ' relative' : ''}`}>
-                {!activeDetailSubService.image && (
-                  <button
-                    onClick={() => setActiveDetailId(null)}
-                    className="absolute top-4 right-4 text-brand-text-muted hover:text-brand-text-primary p-1.5 hover:bg-brand-offwhite rounded-full transition-all"
-                  >
-                    <Icons.X className="w-5 h-5" />
-                  </button>
-                )}
-
-                <span className="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-mono py-1 px-2.5 bg-brand-gold-light/10 rounded-md">
-                  {locale === 'uz' ? "Xizmat tafsiloti" : locale === 'ru' ? "Детали услуги" : "Therapeutic Details"}
-                </span>
-
-                <h3 className="text-xl sm:text-2xl font-extrabold text-brand-text-primary tracking-tight mt-3 leading-tight">
-                  {activeDetailSubService.name[locale]}
-                </h3>
-
-                <p className="text-brand-text-muted mt-4 leading-relaxed text-sm font-light">
-                  {activeDetailSubService.description[locale]}
-                </p>
-
-                {/* Simulated list of medical benefits inside modal for premium looks */}
-                <div className="mt-6 space-y-2">
-                  <div className="flex items-center gap-2 text-xs text-brand-text-secondary font-light">
-                    <Icons.CheckCircle2 className="w-4 h-4 text-brand-gold shrink-0" />
-                    <span>{locale === 'uz' ? "Sertifikatlangan tibbiy uskunalar" : locale === 'ru' ? "Сертифицированное медоборудование" : "100% US & EU Clinical-Grade Devices"}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-brand-text-secondary font-light">
-                    <Icons.CheckCircle2 className="w-4 h-4 text-brand-gold shrink-0" />
-                    <span>{locale === 'uz' ? "Steril sharoit va ishonchlilik" : locale === 'ru' ? "Стерильные условия и безопасность" : "Sterile Clinical Environments"}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-brand-text-secondary font-light">
-                    <Icons.CheckCircle2 className="w-4 h-4 text-brand-gold shrink-0" />
-                    <span>{locale === 'uz' ? "Tajribali dermatolog konsultasiyasi" : locale === 'ru' ? "Консультация опытного специалиста" : "Individual Dermatological Oversight"}</span>
-                  </div>
-                </div>
-
-                <div className="flex gap-3 mt-8">
-                  <button
-                      onClick={() => {
-                        const id = activeDetailSubService.id;
-                        setActiveDetailId(null);
-                        onOpenAppointment(id);
-                      }}
-                    className="flex-1 py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl active:scale-98 transition-all cursor-pointer shadow-md text-center"
-                  >
-                    {d.appointmentBtn}
-                  </button>
-                  <button
-                    onClick={() => setActiveDetailId(null)}
-                    className="px-5 py-3 bg-brand-offwhite hover:bg-brand-sectiongray text-brand-text-secondary font-semibold text-xs rounded-xl active:scale-98 transition-all cursor-pointer text-center"
-                  >
-                    {d.closeBtn}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
 
       {/* Image lightbox */}
       <AnimatePresence>

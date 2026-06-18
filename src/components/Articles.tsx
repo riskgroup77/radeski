@@ -1,11 +1,18 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { HelpCircle, Eye, Calendar, BookOpen, ChevronRight } from 'lucide-react';
+import { HelpCircle, Calendar, BookOpen, ChevronRight, Clock } from 'lucide-react';
+import ArticleViewsBadge from './ArticleViewsBadge';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
 import MediaImage from './MediaImage';
+import { getLocalizedImage } from '../utils/localizedImage';
+import {
+  resolveArticleReadingMinutes,
+  resolveArticleSummary,
+  resolveArticleTags,
+} from '../utils/articleContent';
 
 interface ArticlesProps {
   locale: Locale;
@@ -23,7 +30,8 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
       const query = searchQuery.toLowerCase();
       return (
         item.title[locale].toLowerCase().includes(query) ||
-        item.summary[locale].toLowerCase().includes(query)
+        resolveArticleSummary(item, locale).toLowerCase().includes(query) ||
+        resolveArticleTags(item, locale).some((tag) => tag.toLowerCase().includes(query))
       );
     });
   }, [searchQuery, locale, dynamicArticles]);
@@ -68,9 +76,9 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                   className="flex flex-col flex-1 cursor-pointer"
                 >
                   <div className="relative h-56 w-full overflow-hidden bg-brand-sectiongray">
-                    {art.image ? (
+                    {getLocalizedImage(art.images, locale) ?? art.image ? (
                       <MediaImage
-                        src={art.image}
+                        src={(getLocalizedImage(art.images, locale) ?? art.image)!}
                         alt={art.title[locale]}
                         loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
@@ -83,15 +91,31 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                   </div>
 
                   <div className="p-6 flex-1">
-                    <div className="flex gap-4 items-center text-[10px] sm:text-xs text-brand-text-muted font-mono mb-3">
+                    <div className="flex gap-4 items-center text-[10px] sm:text-xs text-brand-text-muted font-mono mb-3 flex-wrap">
                       <span className="flex items-center gap-1.5 font-light">
                         <Calendar className="w-3.5 h-3.5" />
                         {art.date}
                       </span>
                       <span className="flex items-center gap-1.5 font-light">
-                        <Eye className="w-3.5 h-3.5" />
-                        {art.views} {locale === 'uz' ? "marta ko'rildi" : locale === 'ru' ? 'просмотров' : 'reads'}
+                        <Clock className="w-3.5 h-3.5" />
+                        {resolveArticleReadingMinutes(art, locale)} {locale === 'uz' ? 'daq' : locale === 'ru' ? 'мин' : 'min'}
                       </span>
+                      <ArticleViewsBadge
+                        views={art.views}
+                        locale={locale}
+                        className="text-[10px] sm:text-xs text-brand-text-muted font-mono"
+                      />
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {resolveArticleTags(art, locale).slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[9px] font-bold uppercase tracking-wide text-brand-gold bg-brand-gold-light/10 px-2 py-0.5 rounded-full"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
 
                     <h3 className="font-extrabold text-brand-text-primary text-base leading-snug group-hover:text-brand-gold transition-colors">
@@ -99,7 +123,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                     </h3>
 
                     <p className="text-brand-text-secondary text-xs sm:text-sm mt-3 line-clamp-3 leading-relaxed font-light">
-                      {art.summary[locale]}
+                      {resolveArticleSummary(art, locale)}
                     </p>
                   </div>
                 </Link>

@@ -4,6 +4,12 @@ import { ShieldCheck, Sparkles, Building, Users, X, ChevronLeft, ChevronRight } 
 import { Locale } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from '../data';
 
+const SAMPLE_VIDEOS = [
+  { id: 1, src: '/video-namuna/1.mp4' },
+  { id: 2, src: '/video-namuna/2.mp4' },
+  { id: 3, src: '/video-namuna/3.mp4' },
+] as const;
+
 interface AboutProps {
   locale: Locale;
   onOpenAppointment: () => void;
@@ -198,6 +204,46 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Video samples */}
+        <div className="mt-20">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <h3 className="text-2xl sm:text-3xl font-bold text-brand-text-primary tracking-tight">
+              {locale === 'uz' ? 'Video namuna' : locale === 'ru' ? 'Видео примеры' : 'Video samples'}
+            </h3>
+            <p className="text-brand-text-muted text-xs sm:text-sm mt-2">
+              {locale === 'uz'
+                ? 'Klinikamizdagi protseduralar va xizmatlar haqida qisqa videolar'
+                : locale === 'ru'
+                  ? 'Короткие видео о процедурах и услугах нашей клиники'
+                  : 'Short videos about our clinic procedures and services'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            {SAMPLE_VIDEOS.map((video) => (
+              <div
+                key={video.id}
+                className="rounded-2xl overflow-hidden border border-brand-sectiongray shadow-xs bg-black flex items-center justify-center min-h-[280px] sm:min-h-[320px]"
+              >
+                <video
+                  src={video.src}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full max-h-[520px] object-contain"
+                  title={
+                    locale === 'uz'
+                      ? `Video namuna ${video.id}`
+                      : locale === 'ru'
+                        ? `Видео пример ${video.id}`
+                        : `Video sample ${video.id}`
+                  }
+                />
+              </div>
             ))}
           </div>
         </div>

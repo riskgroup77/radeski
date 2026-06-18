@@ -1,5 +1,11 @@
 export type Locale = 'uz' | 'ru' | 'en';
 
+export interface LocalizedImages {
+  uz: string | null;
+  ru: string | null;
+  en: string | null;
+}
+
 export interface DoctorCredentials {
   licenseId: string;
   yearsActive: number;
@@ -57,6 +63,21 @@ export interface PriceItem {
   en_price_placeholder?: string;
 }
 
+export interface ServiceConditionTopic {
+  title: string;
+  description: string;
+}
+
+export interface ServiceRichContent {
+  overview: string;
+  /** Kasalliklar va muammolar haqida batafsil ma'lumot */
+  conditions: ServiceConditionTopic[];
+  indications: string[];
+  solutions: string[];
+  benefits: string[];
+  process: string[];
+}
+
 export interface ServiceDetail {
   id: string;
   name: {
@@ -70,12 +91,16 @@ export interface ServiceDetail {
     en: string;
   };
   image?: string | null;
+  /** Til bo'yicha rasmlar (uz, ru, en) */
+  images?: LocalizedImages;
   icon?: string;
   features?: {
     uz: string[];
     ru: string[];
     en: string[];
   };
+  /** To'liq xizmat ma'lumotlari — backenddan keladi */
+  richContent?: Partial<Record<Locale, ServiceRichContent>>;
 }
 
 export interface ServiceCategory {
@@ -92,7 +117,12 @@ export interface ServiceCategory {
   };
   icon: string;
   image?: string | null;
+  images?: LocalizedImages;
   subServices: ServiceDetail[];
+  /** Kategoriya bo'yicha to'liq ma'lumot — backenddan keladi */
+  richContent?: Partial<Record<Locale, ServiceRichContent>>;
+  sortOrder?: number;
+  isPriceSection?: boolean;
 }
 
 export interface Article {
@@ -120,5 +150,20 @@ export interface Article {
   };
   date: string;
   image: string | null;
+  images?: LocalizedImages;
   views: number;
+  /** To'liq maqola qo'shimcha ma'lumotlari — frontend katalogi yoki backend */
+  richContent?: Partial<Record<Locale, ArticleRichContent>>;
+}
+
+export interface ArticleFaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface ArticleRichContent {
+  keyTakeaways: string[];
+  faq: ArticleFaqItem[];
+  tags: string[];
+  whenToSeeDoctor: string[];
 }

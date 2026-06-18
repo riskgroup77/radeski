@@ -1,4 +1,5 @@
-import { ServiceCategory, Doctor, PriceItem, Article } from './types';
+import { ServiceCategory, Doctor, Article } from './types';
+export { PRICES } from './data/prices.ts';
 
 export const DICTIONARY = {
   uz: {
@@ -409,7 +410,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Диагностика и клиническое лечение всех видов заболеваний кожи (псориаз, витилиго, экзема, акне).",
       en: "Medical diagnostics and targeted clinical therapeutics for all skin diseases including psoriasis and eczema."
     },
-    icon: "ShieldAlert",
+    icon: "ScanFace",
     subServices: [
       {
         id: "det-derm",
@@ -452,7 +453,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Омоложение и чистка кожи лица с помощью новейших лазерных ультразвуковых и фотосистем.",
       en: "Non-invasive skin rejuvenation, texturing, and cell recovery using advanced medical laser devices."
     },
-    icon: "Cpu",
+    icon: "WandSparkles",
     subServices: [
       {
         id: "bbl-foto",
@@ -529,7 +530,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Безопасное и безболезненное удаление нежелательных волос на любом типе кожи диодным и александритовым лазером.",
       en: "Safe laser-targeted destruction of unwanted hair roots using specialized cooling clinical lasers."
     },
-    icon: "Sparkles",
+    icon: "Zap",
     subServices: [
       {
         id: "alex-lazer",
@@ -554,7 +555,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Комплексная диагностика заболеваний кожи головы, трихоскопия, лечение выпадения волос (алопеции).",
       en: "Expert trichological scanning, computerized hair shaft check, and active therapy for alopecias."
     },
-    icon: "Flame",
+    icon: "ScanSearch",
     subServices: [
       {
         id: "trixoskop",
@@ -579,7 +580,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Ранняя диагностика родинок, папиллом и злокачественных новообразований кожи (меланома). Скрининг.",
       en: "Pre-empty scanning of skin spots, dysplatic nevi, and early melanomas using modern dermoscopy markers."
     },
-    icon: "Activity",
+    icon: "ScanEye",
     subServices: [
       {
         id: "photofinder-scan",
@@ -613,7 +614,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Микрохирургическое удаление доброкачественных опухолей кожи, фибром, липом с наложением косметических швов.",
       en: "Advanced surgical removal of skin lesions, lipomas, and moles using micro-cosmetic stitching."
     },
-    icon: "Scissors",
+    icon: "ScalpelLine",
     subServices: [
       {
         id: "moh-surgery",
@@ -638,7 +639,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Обучение пациентов правильному уходу, подбору диеты и контролю обострений при хроническом псориазе.",
       en: "Clinical educational courses for psoriasis warriors guiding diet, flares, and psychological wellness."
     },
-    icon: "BookOpen",
+    icon: "BookHeart",
     subServices: [
       {
         id: "consult-group",
@@ -688,7 +689,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Лечение грибка ногтей, вросшего ногтя, трещин пятки и стержневых мозолей медицинскими методами.",
       en: "Clinical treatment of onychomycosis (nail fungus), ingrown toenails, and hyperkeratosis of heels."
     },
-    icon: "Scissors",
+    icon: "Footprints",
     subServices: [
       {
         id: "podolog-dermatolog",
@@ -738,7 +739,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       ru: "Революционная восстановительная технология BBL Forever Young, поворачивающая клеточный возраст вспять.",
       en: "Revolutionary medical-grade Sciton BBL Forever Young protocols directly resetting aging genes."
     },
-    icon: "HeartHandshake",
+    icon: "Dna",
     subServices: [
       {
         id: "fy-protocols",
@@ -750,131 +751,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         }
       }
     ]
-  }
-];
-
-export const PRICES: PriceItem[] = [
-  {
-    id: "pr-1",
-    name: {
-      uz: "Dermatolog Ashurov D.D. konsultatsiyasi",
-      ru: "Консультация дерматолога Ашурова Д.Д.",
-      en: "Consultation by Chief Dermatologist Dr. Ashurov"
-    },
-    price: "150,000 UZS",
-    category: "dermatologiya"
-  },
-  {
-    id: "pr-2",
-    name: {
-      uz: "Boshqa dermatologlar konsultatsiyasi",
-      ru: "Консультация других дерматологов клиники",
-      en: "Consultation by other clinic dermatologists"
-    },
-    price: "100,000 UZS",
-    category: "dermatologiya"
-  },
-  {
-    id: "pr-3",
-    name: {
-      uz: "BBL Forever Young to'liq yuz terapiyasi",
-      ru: "BBL Forever Young - терапия всего лица",
-      en: "BBL Forever Young full-face pulse therapy"
-    },
-    price: "1,500,000 UZS",
-    category: "apparatnaya-kosmetologiya"
-  },
-  {
-    id: "pr-4",
-    name: {
-      uz: "Yuzni ultratovushli tozalash (Chistka)",
-      ru: "Ультразвуковая чистка лица",
-      en: "Ultrasonic facial clinical cleansing"
-    },
-    price: "350,000 UZS",
-    category: "apparatnaya-kosmetologiya"
-  },
-  {
-    id: "pr-5",
-    name: {
-      uz: "Gialuron kislotali lab kattalashtirish (1 ml)",
-      ru: "Контурная пластика губ гиалуроновой кислотой (1 мл)",
-      en: "Hyaluronic acid lip sculpting filler (1ml)"
-    },
-    price: "1,800,000 UZS",
-    category: "in-ekcionnaya-kosmetologiya"
-  },
-  {
-    id: "pr-6",
-    name: {
-      uz: "Yuz biorevitalizatsiyasi (premium preparat)",
-      ru: "Биоревитализация лица (премиум препарат)",
-      en: "Facial biorevitalization (premium mesotherapy)"
-    },
-    price: "1,200,000 UZS",
-    category: "in-ekcionnaya-kosmetologiya"
-  },
-  {
-    id: "pr-7",
-    name: {
-      uz: "Lazer epilyatsiyasi - To'liq yuz",
-      ru: "Лазерная эпиляция - Полное лицо",
-      en: "Laser hair removal - Full Face"
-    },
-    price: "200,000 UZS",
-    category: "lazernaya-epilyaciya"
-  },
-  {
-    id: "pr-8",
-    name: {
-      uz: "Lazer epilyatsiyasi - Oyoqlar (To'liq)",
-      ru: "Лазерная эпиляция - Ноги полностью",
-      en: "Laser hair removal - Full Legs"
-    },
-    price: "600,000 UZS",
-    category: "lazernaya-epilyaciya"
-  },
-  {
-    id: "pr-9",
-    name: {
-      uz: "Soch uchun plazmoterapiya (1 seans)",
-      ru: "Плазмотерапия кожи головы (1 сеанс)",
-      en: "Scalp plasma rejuvenation (PRP - 1 session)"
-    },
-    price: "400,000 UZS",
-    category: "trihologiya-centr-lechenie-volos"
-  },
-  {
-    id: "pr-10",
-    name: {
-      uz: "PhotoFinder orqali butun tana xollari skaneri",
-      ru: "Картирование всего тела на PhotoFinder",
-      en: "Full-body mole scanning map with PhotoFinder"
-    },
-    price: "800,000 UZS",
-    category: "dermatoonkologiya"
-  },
-  {
-    id: "pr-11",
-    name: {
-      uz: "Xol va papillomalarni lazer yordamida olib tashlash (1 dona)",
-      ru: "Лазерное удаление невуса/папилломы (1 шт)",
-      en: "Laser removal of mole/papilloma (per lesion)"
-    },
-    price: "50,000 UZS",
-    category: "dermatoonkologiya"
-  },
-  {
-    id: "pr-12",
-    name: {
-      uz: "Mohs uslubi bo'yicha mikroxirurgik operatsiya",
-      ru: "Микрографическая операция по методу Mohs",
-      en: "Mohs micrographic clinical cancer surgery"
-    },
-    price: "Kelishilgan holda",
-    ru_price_placeholder: "По договору",
-    en_price_placeholder: "On agreement",
-    category: "hirurgicheskaya-dermatologiya"
   }
 ];
 

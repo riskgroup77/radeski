@@ -4,6 +4,7 @@ import { Menu, X, Globe, Phone, MapPin } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import SiteLogo from './SiteLogo';
+import AppointmentBookingLink from './AppointmentBookingLink';
 import { PageId, pagePath } from '../routing/paths';
 
 interface HeaderProps {
@@ -14,12 +15,17 @@ interface HeaderProps {
   onOpenAppointment: () => void;
 }
 
+function getCompactAppointmentLabel(locale: Locale): string {
+  if (locale === 'uz') return 'Qabul';
+  if (locale === 'ru') return 'Запись';
+  return 'Book';
+}
+
 export default function Header({
   currentPage,
   locale,
   onNavigate,
   onChangeLocale,
-  onOpenAppointment,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -81,12 +87,18 @@ export default function Header({
           <div className="flex items-center gap-5 lg:gap-8 xl:gap-10 flex-wrap min-w-0">
             <span className="flex items-center gap-2 font-medium">
               <MapPin className="w-4 h-4 text-brand-gold shrink-0" />
-              Farg'ona, O'zbekiston Ovozi 1A
+              Farg&apos;ona, O&apos;zbekiston Ovozi 1A
             </span>
             <a
               href="tel:+998732007373"
               className="phone-call-link shrink-0 cursor-pointer"
-              aria-label={locale === 'uz' ? "Telefon qilish: +998 (73) 200-73-73" : locale === 'ru' ? 'Позвонить: +998 (73) 200-73-73' : 'Call: +998 (73) 200-73-73'}
+              aria-label={
+                locale === 'uz'
+                  ? 'Telefon qilish: +998 (73) 200-73-73'
+                  : locale === 'ru'
+                    ? 'Позвонить: +998 (73) 200-73-73'
+                    : 'Call: +998 (73) 200-73-73'
+              }
             >
               <span className="phone-call-link__wrap">
                 <Phone className="w-4 h-4 shrink-0" />
@@ -101,13 +113,19 @@ export default function Header({
       </div>
 
       <div className="site-container flex justify-between items-center min-h-[56px] sm:min-h-[64px] gap-3 lg:gap-6">
-        <Link
-          to={pagePath(locale, 'home')}
-          onClick={() => onNavigate('home')}
-          className="flex items-center cursor-pointer group shrink-0"
-        >
-          <SiteLogo variant="header" className="group-hover:opacity-90 transition-opacity" />
-        </Link>
+        <div className="flex items-center gap-2 shrink-0 min-w-0">
+          <Link
+            to={pagePath(locale, 'home')}
+            onClick={() => onNavigate('home')}
+            className="flex items-center cursor-pointer group shrink-0"
+          >
+            <SiteLogo variant="header" className="group-hover:opacity-90 transition-opacity" />
+          </Link>
+
+          <AppointmentBookingLink className="sm:hidden header-appointment-btn header-appointment-btn--compact bg-brand-gold hover:bg-brand-gold-dark text-white rounded-lg active:scale-[0.98] transition-colors cursor-pointer no-underline shrink-0">
+            {getCompactAppointmentLabel(locale)}
+          </AppointmentBookingLink>
+        </div>
 
         <nav className="hidden lg:flex items-center justify-center gap-1.5 xl:gap-2 flex-1 min-w-0 px-2 xl:px-6">
           {navItems.map((item) => (
@@ -159,16 +177,14 @@ export default function Header({
             )}
           </div>
 
-          <button
-            onClick={onOpenAppointment}
-            className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl active:scale-[0.98] transition-colors cursor-pointer"
-          >
+          <AppointmentBookingLink className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl active:scale-[0.98] transition-colors cursor-pointer no-underline">
             {d.appointmentBtn}
-          </button>
+          </AppointmentBookingLink>
         </div>
 
-        <div className="flex sm:hidden items-center gap-2">
+        <div className="flex sm:hidden items-center gap-2 shrink-0">
           <button
+            type="button"
             onClick={() => {
               const list: Locale[] = ['uz', 'ru', 'en'];
               const nextIndex = (list.indexOf(locale) + 1) % list.length;
@@ -180,6 +196,7 @@ export default function Header({
           </button>
 
           <button
+            type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
           >
@@ -212,15 +229,12 @@ export default function Header({
                 <span className="phone-call-link__number text-sm">+998 (73) 200-73-73</span>
               </span>
             </a>
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenAppointment();
-              }}
-              className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--mobile w-full bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl text-center transition-colors"
+            <AppointmentBookingLink
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--mobile w-full bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl text-center transition-colors no-underline"
             >
               {d.appointmentBtn}
-            </button>
+            </AppointmentBookingLink>
           </div>
         </div>
       )}

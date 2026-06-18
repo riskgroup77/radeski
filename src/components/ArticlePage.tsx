@@ -1,24 +1,28 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import ReactMarkdown from 'react-markdown';
 import {
-  Eye,
   Calendar,
   User,
   CornerUpLeft,
   Share2,
   Loader2,
   ArrowUpRight,
+  Clock,
 } from 'lucide-react';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
+import { getLocalizedImage } from '../utils/localizedImage';
+import { enrichArticle } from '../utils/enrichArticles';
+import { resolveArticleReadingMinutes, resolveArticleSummary } from '../utils/articleContent';
 import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
 import { articlePath, articlesListPath, absoluteUrl } from '../routing/paths';
 import { findArticleByRouteParam, resolveArticleApiSlug } from '../utils/articles';
 import MediaImage from './MediaImage';
+import ArticleDetailContent from './ArticleDetailContent';
+import ArticleViewsBadge from './ArticleViewsBadge';
 
 interface ArticlePageProps {
   locale: Locale;
@@ -27,6 +31,7 @@ interface ArticlePageProps {
   dictionary?: Record<string, string>;
   onBackToList: () => void;
   onOpenArticle: (articleId: string) => void;
+  onViewsUpdate?: (match: { id: string; slug: string }, views: number) => void;
 }
 
 export default function ArticlePage({
@@ -36,6 +41,7 @@ export default function ArticlePage({
   dictionary,
   onBackToList,
   onOpenArticle,
+  onViewsUpdate,
 }: ArticlePageProps) {
   const d = dictionary || DICTIONARY[locale];
   const previewArticle = findArticleByRouteParam(articleId, articles);
@@ -50,7 +56,7 @@ export default function ArticlePage({
 
     const preview = findArticleByRouteParam(articleId, articles);
     if (preview) {
-      setActiveArticle(preview);
+      setActiveArticle(enrichArticle(preview));
     }
 
     const apiSlug = resolveArticleApiSlug(articleId, articles);
@@ -58,7 +64,9 @@ export default function ArticlePage({
     getArticleBySlug(apiSlug)
       .then((data) => {
         if (!cancelled) {
-          setActiveArticle(mapArticleFromApi(data));
+          const mapped = enrichArticle(mapArticleFromApi(data));
+          setActiveArticle(mapped);
+          onViewsUpdate?.({ id: mapped.id, slug: mapped.slug }, mapped.views);
         }
       })
       .catch((err) => {
@@ -76,7 +84,7 @@ export default function ArticlePage({
     return () => {
       cancelled = true;
     };
-  }, [articleId, articles]);
+  }, [articleId, articles, onViewsUpdate]);
 
   const relatedArticles = articles
     .filter((art) => art.id !== activeArticle?.id)
@@ -85,6 +93,10 @@ export default function ArticlePage({
   const shareUrl = activeArticle
     ? absoluteUrl(articlePath(locale, activeArticle.id))
     : absoluteUrl(articlePath(locale, articleId));
+
+  const articleImage = activeArticle
+    ? getLocalizedImage(activeArticle.images, locale) ?? activeArticle.image
+    : null;
 
   const handleCopyLink = async () => {
     try {
@@ -154,18 +166,24 @@ export default function ArticlePage({
                   <Calendar className="w-4 h-4 text-brand-text-muted" />
                   {activeArticle.date}
                 </span>
+                <ArticleViewsBadge
+                  views={activeArticle.views}
+                  locale={locale}
+                  variant="full"
+                  className="text-xs text-brand-text-secondary shrink-0"
+                />
                 <span className="flex items-center gap-1.5 shrink-0">
-                  <Eye className="w-4 h-4 text-brand-text-muted" />
-                  {activeArticle.views}{' '}
-                  {locale === 'uz' ? "ko'rildi" : locale === 'ru' ? 'просмотров' : 'reads'}
+                  <Clock className="w-4 h-4 text-brand-text-muted" />
+                  {resolveArticleReadingMinutes(activeArticle, locale)}{' '}
+                  {locale === 'uz' ? 'daq' : locale === 'ru' ? 'мин' : 'min'}
                 </span>
               </div>
             </div>
 
             <div className="h-[280px] sm:h-[380px] lg:h-[420px] w-full rounded-2xl overflow-hidden bg-brand-sectiongray mb-8 border border-brand-offwhite">
-              {activeArticle.image ? (
+              {articleImage ? (
                 <MediaImage
-                  src={activeArticle.image}
+                  src={articleImage}
                   alt={activeArticle.title[locale]}
                   className="w-full h-full object-cover"
                 />
@@ -176,24 +194,7 @@ export default function ArticlePage({
               )}
             </div>
 
-            <div className="prose prose-slate max-w-none text-brand-text-secondary leading-relaxed text-sm sm:text-base font-light space-y-6">
-              <p className="font-medium text-brand-text-primary bg-brand-gold-light/5 p-4 sm:p-5 rounded-xl border-l-4 border-brand-gold leading-normal">
-                {activeArticle.summary[locale]}
-              </p>
-              {activeArticle.content[locale] ? (
-                <div className="pt-2 font-light text-brand-text-secondary prose-headings:font-display prose-headings:text-brand-text-primary prose-a:text-brand-gold">
-                  <ReactMarkdown>{activeArticle.content[locale]}</ReactMarkdown>
-                </div>
-              ) : (
-                <p className="text-brand-text-muted italic">
-                  {locale === 'uz'
-                    ? "To'liq matn tez orada qo'shiladi."
-                    : locale === 'ru'
-                      ? 'Полный текст скоро будет добавлен.'
-                      : 'Full article content will be available soon.'}
-                </p>
-              )}
-            </div>
+            <ArticleDetailContent article={activeArticle} locale={locale} />
 
             <div className="border-t border-brand-offwhite pt-8 mt-12 flex flex-col sm:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-2 text-xs text-brand-text-muted leading-tight">
@@ -243,23 +244,40 @@ export default function ArticlePage({
                       : 'More helpful articles'}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {relatedArticles.map((art) => (
+                  {relatedArticles.map((art) => {
+                    const relatedImage = getLocalizedImage(art.images, locale) ?? art.image;
+                    return (
                     <Link
                       key={art.id}
                       to={articlePath(locale, art.id)}
                       onClick={() => onOpenArticle(art.id)}
-                      className="group bg-brand-offwhite hover:bg-brand-white border border-brand-sectiongray rounded-xl p-4 transition-all cursor-pointer"
+                      className="group bg-brand-offwhite hover:bg-brand-white border border-brand-sectiongray rounded-xl overflow-hidden transition-all cursor-pointer"
                     >
+                      {relatedImage && (
+                        <div className="h-28 overflow-hidden bg-brand-sectiongray">
+                          <MediaImage
+                            src={relatedImage}
+                            alt={art.title[locale]}
+                            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform"
+                          />
+                        </div>
+                      )}
+                      <div className="p-4">
                       <span className="text-[10px] text-brand-text-muted font-mono">{art.date}</span>
                       <h3 className="mt-2 text-sm font-bold text-brand-text-primary leading-snug group-hover:text-brand-gold transition-colors line-clamp-2">
                         {art.title[locale]}
                       </h3>
+                      <p className="mt-2 text-xs text-brand-text-muted line-clamp-2 font-light">
+                        {resolveArticleSummary(art, locale)}
+                      </p>
                       <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-brand-gold">
                         {d.readMore}
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </span>
+                      </div>
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}

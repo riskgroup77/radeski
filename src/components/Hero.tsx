@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowRight, Sparkles, ShieldAlert, Award } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY, HERO_SLIDE_IMAGES } from '../data';
+import AppointmentBookingLink from './AppointmentBookingLink';
 import { PageId } from '../routing/paths';
 
 interface HeroProps {
@@ -150,13 +151,10 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
           transition={{ delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 mt-8"
         >
-          <button
-            onClick={onOpenAppointment}
-            className="px-8 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white font-bold tracking-wide shadow-lg shadow-brand-gold/15 hover:shadow-brand-gold/25 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
-          >
+          <AppointmentBookingLink className="px-8 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white font-bold tracking-wide shadow-lg shadow-brand-gold/15 hover:shadow-brand-gold/25 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm no-underline">
             {d.appointmentBtn}
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </AppointmentBookingLink>
           <button
             onClick={() => onNavigate('services')}
             className="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold tracking-wide border border-white/20 backdrop-blur-sm active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"

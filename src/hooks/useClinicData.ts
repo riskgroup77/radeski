@@ -1,13 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
-import { publicApi } from '../api';
+import { useCallback, useEffect, useState } from 'react';import { publicApi } from '../api';
 import {
   mapArticleListItemFromApi,
   mapDoctorFromApi,
   mapPriceFromApi,
   mapServiceCategoryFromApi,
 } from '../api/mappers';
+import { enrichServiceCategories } from '../utils/enrichServices';
+import { enrichArticles } from '../utils/enrichArticles';
+import { enrichPrices } from '../utils/enrichPrices';
 import { ApiError } from '../api/client';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
+import { ARTICLES } from '../data';
+import { normalizeArticleViews } from '../utils/articleViews';
 
 interface ClinicDataState {
   doctors: Doctor[];
@@ -17,6 +21,7 @@ interface ClinicDataState {
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
+  updateArticleViews: (match: { id?: string; slug?: string }, views: number) => void;
 }
 
 export function useClinicData(): ClinicDataState {
@@ -40,9 +45,13 @@ export function useClinicData(): ClinicDataState {
       ]);
 
       setDoctors(doctorsRes.map(mapDoctorFromApi));
-      setServiceCategories(servicesRes.map(mapServiceCategoryFromApi));
-      setPrices(pricesRes.map(mapPriceFromApi));
-      setArticles(articlesRes.map(mapArticleListItemFromApi));
+      const mappedServices = servicesRes
+        .map(mapServiceCategoryFromApi)
+        .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+      setServiceCategories(enrichServiceCategories(mappedServices));
+      setPrices(enrichPrices(pricesRes.map(mapPriceFromApi)));
+      const mappedArticles = articlesRes.map(mapArticleListItemFromApi);
+      setArticles(enrichArticles(mappedArticles.length > 0 ? mappedArticles : ARTICLES));
     } catch (err) {
       const message =
         err instanceof ApiError
@@ -51,9 +60,23 @@ export function useClinicData(): ClinicDataState {
             ? err.message
             : 'Ma\'lumotlarni yuklashda xatolik yuz berdi';
       setError(message);
+      setPrices(enrichPrices([]));
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  const updateArticleViews = useCallback((match: { id?: string; slug?: string }, views: number) => {
+    const normalizedViews = normalizeArticleViews(views);
+    setArticles((prev) =>
+      prev.map((article) => {
+        const isMatch =
+          (match.id && article.id === match.id) ||
+          (match.slug && (article.slug === match.slug || article.id === match.slug));
+        if (!isMatch) return article;
+        return { ...article, views: normalizedViews };
+      }),
+    );
   }, []);
 
   useEffect(() => {
@@ -68,5 +91,6 @@ export function useClinicData(): ClinicDataState {
     loading,
     error,
     refetch,
+    updateArticleViews,
   };
 }

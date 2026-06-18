@@ -12,6 +12,17 @@ import {
   ArticleCreatePayload,
 } from './types';
 import { resolveMediaUrl } from './client';
+import { mapRichContentFromApi, mapRichContentToApiFields } from '../utils/parseRichContent';
+import {
+  mapArticleRichContentFromApi,
+  mapArticleRichContentToApiFields,
+} from '../utils/parseArticleRichContent';
+import {
+  getLocalizedImage,
+  localizedImagesToApiPaths,
+  mapLocalizedImagesFromApi,
+} from '../utils/localizedImage';
+import { normalizeArticleViews } from '../utils/articleViews';
 
 export function preserveImagePath(url: string | null | undefined): string | null {
   if (!url) return null;
@@ -54,34 +65,56 @@ export function mapDoctorFromApi(api: ApiDoctor): Doctor {
       en: api.education_en || api.education_uz || '',
     },
     photo: resolveMediaUrl(api.photo),
+    credentials: api.credentials
+      ? {
+          licenseId: api.credentials.license_id || '',
+          yearsActive: api.credentials.years_active ?? 0,
+          certificatesCount: api.credentials.certificates_count ?? 0,
+          researchCount: api.credentials.research_count ?? 0,
+        }
+      : undefined,
   };
 }
 
 export function mapSubServiceFromApi(sub: ApiServiceCategory['sub_services'][number]): ServiceDetail {
+  const description = {
+    uz: sub.description_uz || '',
+    ru: sub.description_ru || sub.description_uz || '',
+    en: sub.description_en || sub.description_uz || '',
+  };
+
+  const images = mapLocalizedImagesFromApi(sub);
+
   return {
     id: sub.id,
     name: { uz: sub.name_uz, ru: sub.name_ru, en: sub.name_en },
-    description: {
-      uz: sub.description_uz || '',
-      ru: sub.description_ru || sub.description_uz || '',
-      en: sub.description_en || sub.description_uz || '',
-    },
-    image: resolveMediaUrl(sub.image),
+    description,
+    images,
+    image: getLocalizedImage(images, 'uz'),
+    richContent: mapRichContentFromApi(sub, description),
   };
 }
 
 export function mapServiceCategoryFromApi(api: ApiServiceCategory): ServiceCategory {
+  const description = {
+    uz: api.description_uz || '',
+    ru: api.description_ru || api.description_uz || '',
+    en: api.description_en || api.description_uz || '',
+  };
+
+  const images = mapLocalizedImagesFromApi(api);
+
   return {
     id: api.id,
     title: { uz: api.title_uz, ru: api.title_ru, en: api.title_en },
-    description: {
-      uz: api.description_uz || '',
-      ru: api.description_ru || api.description_uz || '',
-      en: api.description_en || api.description_uz || '',
-    },
-    icon: api.icon || 'Activity',
-    image: resolveMediaUrl(api.image),
+    description,
+    icon: api.icon || 'ScanFace',
+    images,
+    image: getLocalizedImage(images, 'uz'),
+    richContent: mapRichContentFromApi(api, description),
     subServices: api.sub_services.map(mapSubServiceFromApi),
+    sortOrder: api.sort_order ?? undefined,
+    isPriceSection: api.is_price_section ?? undefined,
   };
 }
 
@@ -110,6 +143,8 @@ function formatArticleDate(date: string): string {
 }
 
 export function mapArticleListItemFromApi(api: ApiArticleListItem): Article {
+  const images = mapLocalizedImagesFromApi(api);
+
   return {
     id: api.id,
     slug: api.slug,
@@ -126,8 +161,9 @@ export function mapArticleListItemFromApi(api: ApiArticleListItem): Article {
       en: api.author_en || api.author_uz || '',
     },
     date: formatArticleDate(api.date),
-    image: resolveMediaUrl(api.image),
-    views: api.views,
+    images,
+    image: getLocalizedImage(images, 'uz'),
+    views: normalizeArticleViews(api.views),
   };
 }
 
@@ -139,6 +175,7 @@ export function mapArticleFromApi(api: ApiArticle): Article {
       ru: api.content_ru || api.content_uz || '',
       en: api.content_en || api.content_uz || '',
     },
+    richContent: mapArticleRichContentFromApi(api),
   };
 }
 
@@ -162,7 +199,14 @@ export function mapDoctorToCreatePayload(
     education_uz: doctor.education?.uz || null,
     education_ru: doctor.education?.ru || null,
     education_en: doctor.education?.en || null,
-    credentials: null,
+    credentials: doctor.credentials
+      ? {
+          license_id: doctor.credentials.licenseId || null,
+          years_active: doctor.credentials.yearsActive ?? null,
+          certificates_count: doctor.credentials.certificatesCount ?? null,
+          research_count: doctor.credentials.researchCount ?? null,
+        }
+      : null,
   };
 
   if (options?.preservePhoto && doctor.photo) {
@@ -183,10 +227,12 @@ export function mapSubServiceToPayload(
     description_uz: sub.description.uz || null,
     description_ru: sub.description.ru || null,
     description_en: sub.description.en || null,
+    ...mapRichContentToApiFields(sub.richContent),
+    ...localizedImagesToApiPaths(sub.images),
   };
 
-  if (options?.preserveImages && sub.image) {
-    payload.image = preserveImagePath(sub.image);
+  if (options?.preserveImages && !sub.images) {
+    if (sub.image) payload.image = preserveImagePath(sub.image);
   }
 
   return payload;
@@ -205,13 +251,17 @@ export function mapServiceCategoryToPayload(
     description_ru: category.description.ru || null,
     description_en: category.description.en || null,
     icon: category.icon || null,
+    ...mapRichContentToApiFields(category.richContent),
     sub_services: category.subServices.map((sub) =>
       mapSubServiceToPayload(sub, options)
     ),
+    ...localizedImagesToApiPaths(category.images),
+    sort_order: category.sortOrder ?? null,
+    is_price_section: category.isPriceSection ?? null,
   };
 
-  if (options?.preserveImages && category.image) {
-    payload.image = preserveImagePath(category.image);
+  if (options?.preserveImages && !category.images) {
+    if (category.image) payload.image = preserveImagePath(category.image);
   }
 
   return payload;
@@ -246,10 +296,12 @@ export function mapArticleToCreatePayload(
     author_ru: article.author?.ru || null,
     author_en: article.author?.en || null,
     date: article.date ? `${article.date}T08:00:00Z` : null,
+    ...localizedImagesToApiPaths(article.images),
+    ...mapArticleRichContentToApiFields(article.richContent),
   };
 
-  if (options?.preserveImage && article.image) {
-    payload.image = preserveImagePath(article.image);
+  if (options?.preserveImage && !article.images) {
+    if (article.image) payload.image = preserveImagePath(article.image);
   }
 
   return payload;

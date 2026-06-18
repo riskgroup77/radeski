@@ -23,6 +23,9 @@ export default function AppointmentModal({
 }: AppointmentModalProps) {
   const d = DICTIONARY[locale];
   const [phone, setPhone] = useState('');
+  const [clientName, setClientName] = useState('');
+  const [comment, setComment] = useState('');
+  const [preferredDate, setPreferredDate] = useState('');
   const [serviceId, setServiceId] = useState(preselectedServiceId || '');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,6 +34,9 @@ export default function AppointmentModal({
   useEffect(() => {
     if (isOpen) {
       setServiceId(preselectedServiceId || '');
+      setClientName('');
+      setComment('');
+      setPreferredDate('');
       setError('');
       setIsSubmitted(false);
     }
@@ -67,9 +73,15 @@ export default function AppointmentModal({
       await createAppointment({
         phone_number: phone.trim(),
         service_id: resolvedServiceId,
+        client_name: clientName.trim() || null,
+        comment: comment.trim() || null,
+        preferred_date: preferredDate || null,
       });
       setIsSubmitted(true);
       setPhone('');
+      setClientName('');
+      setComment('');
+      setPreferredDate('');
       setServiceId('');
     } catch (err) {
       setError(
@@ -160,6 +172,33 @@ export default function AppointmentModal({
 
                     <div>
                       <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+                        {locale === 'uz' ? 'Ismingiz' : locale === 'ru' ? 'Ваше имя' : 'Your name'}
+                      </label>
+                      <input
+                        id="client-name-input"
+                        type="text"
+                        value={clientName}
+                        onChange={(e) => setClientName(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold transition-all text-slate-800 placeholder-slate-400 text-sm"
+                        placeholder={locale === 'uz' ? 'Masalan: Dilnoza' : locale === 'ru' ? 'Например: Анна' : 'e.g. Anna'}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+                        {locale === 'uz' ? 'Qulay sana' : locale === 'ru' ? 'Удобная дата' : 'Preferred date'}
+                      </label>
+                      <input
+                        id="preferred-date-input"
+                        type="date"
+                        value={preferredDate}
+                        onChange={(e) => setPreferredDate(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold transition-all text-slate-800 text-sm"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
                         {d.formService}
                       </label>
                       <select
@@ -181,6 +220,20 @@ export default function AppointmentModal({
                           </optgroup>
                         ))}
                       </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+                        {locale === 'uz' ? 'Izoh' : locale === 'ru' ? 'Комментарий' : 'Comment'}
+                      </label>
+                      <textarea
+                        id="comment-input"
+                        rows={3}
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold transition-all text-slate-800 placeholder-slate-400 text-sm resize-none"
+                        placeholder={locale === 'uz' ? 'Qisqa izoh qoldiring...' : locale === 'ru' ? 'Краткий комментарий...' : 'Short note...'}
+                      />
                     </div>
 
                     <button

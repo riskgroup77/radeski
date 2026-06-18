@@ -42,6 +42,27 @@ export interface ApiSubService {
   description_ru: string | null;
   description_en: string | null;
   image: string | null;
+  image_uz?: string | null;
+  image_ru?: string | null;
+  image_en?: string | null;
+  overview_uz?: string | null;
+  overview_ru?: string | null;
+  overview_en?: string | null;
+  indications_uz?: string | null;
+  indications_ru?: string | null;
+  indications_en?: string | null;
+  solutions_uz?: string | null;
+  solutions_ru?: string | null;
+  solutions_en?: string | null;
+  benefits_uz?: string | null;
+  benefits_ru?: string | null;
+  benefits_en?: string | null;
+  process_uz?: string | null;
+  process_ru?: string | null;
+  process_en?: string | null;
+  conditions_uz?: string | null;
+  conditions_ru?: string | null;
+  conditions_en?: string | null;
 }
 
 export interface ApiServiceCategory {
@@ -54,7 +75,30 @@ export interface ApiServiceCategory {
   description_en: string | null;
   icon: string | null;
   image: string | null;
+  image_uz?: string | null;
+  image_ru?: string | null;
+  image_en?: string | null;
+  overview_uz?: string | null;
+  overview_ru?: string | null;
+  overview_en?: string | null;
+  indications_uz?: string | null;
+  indications_ru?: string | null;
+  indications_en?: string | null;
+  solutions_uz?: string | null;
+  solutions_ru?: string | null;
+  solutions_en?: string | null;
+  benefits_uz?: string | null;
+  benefits_ru?: string | null;
+  benefits_en?: string | null;
+  process_uz?: string | null;
+  process_ru?: string | null;
+  process_en?: string | null;
+  conditions_uz?: string | null;
+  conditions_ru?: string | null;
+  conditions_en?: string | null;
   sub_services: ApiSubService[];
+  sort_order?: number | null;
+  is_price_section?: boolean | null;
 }
 
 export interface ApiPrice {
@@ -79,6 +123,9 @@ export interface ApiArticleListItem {
   author_ru: string | null;
   author_en: string | null;
   image: string | null;
+  image_uz?: string | null;
+  image_ru?: string | null;
+  image_en?: string | null;
   views: number;
   date: string;
 }
@@ -87,11 +134,26 @@ export interface ApiArticle extends ApiArticleListItem {
   content_uz: string | null;
   content_ru: string | null;
   content_en: string | null;
+  key_takeaways_uz?: string | null;
+  key_takeaways_ru?: string | null;
+  key_takeaways_en?: string | null;
+  faq_uz?: string | null;
+  faq_ru?: string | null;
+  faq_en?: string | null;
+  tags_uz?: string | null;
+  tags_ru?: string | null;
+  tags_en?: string | null;
+  when_to_see_doctor_uz?: string | null;
+  when_to_see_doctor_ru?: string | null;
+  when_to_see_doctor_en?: string | null;
 }
 
 export interface AppointmentCreate {
   phone_number: string;
   service_id?: string | null;
+  client_name?: string | null;
+  comment?: string | null;
+  preferred_date?: string | null;
 }
 
 export interface ApiAppointment {
@@ -103,6 +165,9 @@ export interface ApiAppointment {
   service_name_uz: string | null;
   service_name_ru: string | null;
   service_name_en: string | null;
+  client_name?: string | null;
+  comment?: string | null;
+  preferred_date?: string | null;
 }
 
 export interface ApiResponse {
@@ -153,6 +218,27 @@ export interface SubServicePayload {
   description_ru?: string | null;
   description_en?: string | null;
   image?: string | null;
+  image_uz?: string | null;
+  image_ru?: string | null;
+  image_en?: string | null;
+  overview_uz?: string | null;
+  overview_ru?: string | null;
+  overview_en?: string | null;
+  indications_uz?: string | null;
+  indications_ru?: string | null;
+  indications_en?: string | null;
+  solutions_uz?: string | null;
+  solutions_ru?: string | null;
+  solutions_en?: string | null;
+  benefits_uz?: string | null;
+  benefits_ru?: string | null;
+  benefits_en?: string | null;
+  process_uz?: string | null;
+  process_ru?: string | null;
+  process_en?: string | null;
+  conditions_uz?: string | null;
+  conditions_ru?: string | null;
+  conditions_en?: string | null;
 }
 
 export interface ServiceCategoryCreatePayload {
@@ -165,7 +251,30 @@ export interface ServiceCategoryCreatePayload {
   description_en?: string | null;
   icon?: string | null;
   image?: string | null;
+  image_uz?: string | null;
+  image_ru?: string | null;
+  image_en?: string | null;
+  overview_uz?: string | null;
+  overview_ru?: string | null;
+  overview_en?: string | null;
+  indications_uz?: string | null;
+  indications_ru?: string | null;
+  indications_en?: string | null;
+  solutions_uz?: string | null;
+  solutions_ru?: string | null;
+  solutions_en?: string | null;
+  benefits_uz?: string | null;
+  benefits_ru?: string | null;
+  benefits_en?: string | null;
+  process_uz?: string | null;
+  process_ru?: string | null;
+  process_en?: string | null;
+  conditions_uz?: string | null;
+  conditions_ru?: string | null;
+  conditions_en?: string | null;
   sub_services?: SubServicePayload[];
+  sort_order?: number | null;
+  is_price_section?: boolean | null;
 }
 
 export interface PriceCreatePayload {
@@ -192,4 +301,29 @@ export interface ArticleCreatePayload {
   author_en?: string | null;
   date?: string | null;
   image?: string | null;
+  image_uz?: string | null;
+  image_ru?: string | null;
+  image_en?: string | null;
+  key_takeaways_uz?: string | null;
+  key_takeaways_ru?: string | null;
+  key_takeaways_en?: string | null;
+  faq_uz?: string | null;
+  faq_ru?: string | null;
+  faq_en?: string | null;
+  tags_uz?: string | null;
+  tags_ru?: string | null;
+  tags_en?: string | null;
+  when_to_see_doctor_uz?: string | null;
+  when_to_see_doctor_ru?: string | null;
+  when_to_see_doctor_en?: string | null;
+}
+
+export interface PriceBulkImportPayload {
+  items: PriceCreatePayload[];
+}
+
+export interface PriceBulkImportResult {
+  imported: number;
+  skipped?: number;
+  message?: string | null;
 }

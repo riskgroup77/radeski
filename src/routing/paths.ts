@@ -86,6 +86,10 @@ export function servicesListPath(locale: Locale): string {
   return pagePath(locale, 'services');
 }
 
+export function serviceSubPath(locale: Locale, categoryId: string, subId: string): string {
+  return `/${locale}/services/${encodeURIComponent(categoryId)}/${encodeURIComponent(subId)}`;
+}
+
 export function getServiceCategoryIdFromPathname(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
   if (segments.length >= 3 && segments[1] === 'services') {
@@ -93,6 +97,18 @@ export function getServiceCategoryIdFromPathname(pathname: string): string | nul
       return decodeURIComponent(segments[2]);
     } catch {
       return segments[2];
+    }
+  }
+  return null;
+}
+
+export function getServiceSubIdFromPathname(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length >= 4 && segments[1] === 'services') {
+    try {
+      return decodeURIComponent(segments[3]);
+    } catch {
+      return segments[3];
     }
   }
   return null;

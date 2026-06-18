@@ -5,7 +5,7 @@
  * hdkbscdbki
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
 import { Locale } from './types';
 import ScrollToTop from './routing/ScrollToTop';
@@ -24,12 +24,14 @@ import {
   getPageFromPathname,
   getArticleIdFromPathname,
   getServiceCategoryIdFromPathname,
+  getServiceSubIdFromPathname,
   pagePath,
   absoluteUrl,
   switchLocaleInPath,
   pagePathForAllLocales,
   articlePath,
   serviceCategoryPath,
+  serviceSubPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
@@ -38,6 +40,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import ServiceCategoryPage from './components/ServiceCategoryPage';
+import ServiceSubPage from './components/ServiceSubPage';
 import Doctors from './components/Doctors';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
@@ -45,7 +48,6 @@ import ArticlePage from './components/ArticlePage';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
 import LegalPage from './components/LegalPage';
-import AppointmentModal from './components/AppointmentModal';
 import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle } from 'lucide-react';
@@ -53,6 +55,11 @@ import { useClinicData } from './hooks/useClinicData';
 import { createAppointment } from './api/publicApi';
 import { ApiError } from './api/client';
 import { findArticleByRouteParam } from './utils/articles';
+import { openAppointmentBooking } from './config/links';
+import { getLocalizedImage } from './utils/localizedImage';
+import ArticleViewsBadge from './components/ArticleViewsBadge';
+import ClinicAiChat from './components/ClinicAiChat';
+import { buildClinicAiContext } from './utils/clinicAiContext';
 
 export default function App() {
   return (
@@ -83,7 +90,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const currentPage: PageId = forcePage ?? getPageFromPathname(location.pathname);
   const articleId = getArticleIdFromPathname(location.pathname);
   const serviceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
-  const { goToPage, goToArticle, goToServiceCategory, changeLocale: navigateLocale } = useAppNavigation(locale);
+  const serviceSubId = getServiceSubIdFromPathname(location.pathname);
+  const { goToPage, goToArticle, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
 
   const changeLocale = (nextLocale: Locale) => {
@@ -95,9 +103,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     navigateLocale(nextLocale);
   };
 
-  const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
-  const [preselectedServiceId, setPreselectedServiceId] = useState<string>('');
-
   const {
     doctors: dynamicDoctors,
     serviceCategories: dynamicServiceCategories,
@@ -106,11 +111,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     loading: dataLoading,
     error: dataError,
     refetch: refetchClinicData,
+    updateArticleViews,
   } = useClinicData();
 
   const activeServiceCategory = serviceCategoryId
     ? dynamicServiceCategories.find((category) => category.id === serviceCategoryId) ?? null
     : null;
+
+  const activeServiceSub =
+    activeServiceCategory && serviceSubId
+      ? activeServiceCategory.subServices.find((sub) => sub.id === serviceSubId) ?? null
+      : null;
 
   const activeArticlePreview = articleId
     ? findArticleByRouteParam(articleId, dynamicArticles) ?? null
@@ -388,14 +399,18 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
     const seoTitle = activeArticlePreview
       ? `${activeArticlePreview.title[locale]} | Radeski Clinic`
-      : activeServiceCategory
-        ? `${activeServiceCategory.title[locale]} | Radeski Clinic`
-        : activeSEO.title;
+      : activeServiceSub
+        ? `${activeServiceSub.name[locale]} | Radeski Clinic`
+        : activeServiceCategory
+          ? `${activeServiceCategory.title[locale]} | Radeski Clinic`
+          : activeSEO.title;
     const seoDesc = activeArticlePreview
       ? activeArticlePreview.summary[locale]
-      : activeServiceCategory
-        ? activeServiceCategory.description[locale]
-        : activeSEO.desc;
+      : activeServiceSub
+        ? activeServiceSub.description[locale]
+        : activeServiceCategory
+          ? activeServiceCategory.description[locale]
+          : activeSEO.desc;
 
     document.title = seoTitle;
 
@@ -451,9 +466,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       LOCALES.forEach((altLocale) => {
         const altPath = articleId
           ? articlePath(altLocale, activeArticlePreview?.id ?? articleId)
-          : serviceCategoryId
-            ? serviceCategoryPath(altLocale, serviceCategoryId)
-            : pagePathForAllLocales(pageForAlternates)[altLocale];
+          : serviceSubId && serviceCategoryId
+            ? serviceSubPath(altLocale, serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
+            : serviceCategoryId
+              ? serviceCategoryPath(altLocale, serviceCategoryId)
+              : pagePathForAllLocales(pageForAlternates)[altLocale];
         const link = document.createElement('link');
         link.rel = 'alternate';
         link.hreflang = localeToHreflang(altLocale);
@@ -464,9 +481,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
       const defaultPath = articleId
         ? articlePath('uz', activeArticlePreview?.id ?? articleId)
-        : serviceCategoryId
-          ? serviceCategoryPath('uz', serviceCategoryId)
-          : pagePath('uz', pageForAlternates);
+        : serviceSubId && serviceCategoryId
+          ? serviceSubPath('uz', serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
+          : serviceCategoryId
+            ? serviceCategoryPath('uz', serviceCategoryId)
+            : pagePath('uz', pageForAlternates);
       const defaultLink = document.createElement('link');
       defaultLink.rel = 'alternate';
       defaultLink.hreflang = 'x-default';
@@ -475,16 +494,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       document.head.appendChild(defaultLink);
     }
 
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, location.pathname, articleId, activeArticlePreview, serviceCategoryId, activeServiceCategory, forcePage]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, location.pathname, articleId, activeArticlePreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage]);
 
-  // Open modal with preselected service category
-  const handleOpenAppointmentWithService = (catId?: string) => {
-    if (catId) {
-      setPreselectedServiceId(catId);
-    } else {
-      setPreselectedServiceId('');
-    }
-    setIsAppointmentOpen(true);
+  // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
+  const handleOpenAppointmentWithService = (_catId?: string) => {
+    openAppointmentBooking();
   };
 
   const handleInlineSubmit = async (e: React.FormEvent) => {
@@ -514,6 +528,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   useEffect(() => {
     if (parsedLocale) saveLocale(parsedLocale);
   }, [parsedLocale]);
+
+  const clinicAiContext = useMemo(
+    () =>
+      buildClinicAiContext(locale, {
+        serviceCategories: dynamicServiceCategories,
+        doctors: dynamicDoctors,
+        articles: dynamicArticles,
+      }),
+    [locale, dynamicServiceCategories, dynamicDoctors, dynamicArticles],
+  );
 
   if (invalidLocale) {
     return (
@@ -565,7 +589,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={`${currentPage}-${articleId ?? ''}-${serviceCategoryId ?? ''}`}
+          key={`${currentPage}-${articleId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -650,16 +674,19 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                         key={category.id}
                         className="bg-brand-white border border-brand-sectiongray rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-lg transition-all flex flex-col overflow-hidden h-full group"
                       >
-                        {category.image ? (
+                        {(() => {
+                          const catImage = getLocalizedImage(category.images, locale) ?? category.image;
+                          return catImage ? (
                           <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[220px] sm:min-h-[260px] lg:min-h-[300px] overflow-hidden bg-brand-offwhite">
                             <MediaImage
-                              src={category.image}
+                              src={catImage}
                               alt={category.title[locale]}
                               loading="lazy"
                               className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                             />
                           </div>
-                        ) : null}
+                        ) : null;
+                        })()}
                         <div className="p-5 sm:p-6 lg:p-7 flex flex-col flex-1 justify-between">
                           <div>
                             <button
@@ -834,14 +861,20 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group cursor-pointer"
                       >
                         <div className="h-48 overflow-hidden bg-brand-offwhite relative">
-                          {art.image ? (
-                            <MediaImage src={art.image} alt={art.title[locale]} className="w-full h-full object-cover" />
+                          {(() => {
+                            const artImage = getLocalizedImage(art.images, locale) ?? art.image;
+                            return artImage ? (
+                            <MediaImage src={artImage} alt={art.title[locale]} className="w-full h-full object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">—</div>
-                          )}
+                          );
+                          })()}
                         </div>
                         <div className="p-5">
-                          <span className="text-[10px] text-brand-text-muted font-light font-mono block mb-1">{art.date} | {art.views} reads</span>
+                          <span className="text-[10px] text-brand-text-muted font-light font-mono block mb-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                            <span>{art.date}</span>
+                            <ArticleViewsBadge views={art.views} locale={locale} className="text-[10px]" />
+                          </span>
                           <h4 className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-snug group-hover:text-brand-gold transition-colors leading-tight line-clamp-2">{art.title[locale]}</h4>
                           <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">{art.summary[locale]}</p>
                           <span className="mt-4 inline-block text-xs font-bold text-brand-gold flex items-center gap-0.5">
@@ -892,14 +925,44 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {currentPage === 'services' && activeServiceCategory && (
+          {currentPage === 'services' && activeServiceCategory && activeServiceSub && (
+            <ServiceSubPage
+              locale={locale}
+              category={activeServiceCategory}
+              sub={activeServiceSub}
+              dictionary={d}
+              onBackToCategory={() => goToServiceCategory(activeServiceCategory.id)}
+              onBackToList={() => goToPage('services')}
+            />
+          )}
+
+          {currentPage === 'services' && activeServiceCategory && !activeServiceSub && !serviceSubId && (
             <ServiceCategoryPage
               locale={locale}
               category={activeServiceCategory}
               dictionary={d}
               onOpenAppointment={handleOpenAppointmentWithService}
+              onOpenSub={(subId) => goToServiceSub(activeServiceCategory.id, subId)}
               onBackToList={() => goToPage('services')}
             />
+          )}
+
+          {currentPage === 'services' && serviceSubId && activeServiceCategory && !activeServiceSub && !dataLoading && (
+            <div className="py-20 px-4 text-center min-h-[50vh]">
+              <p className="text-brand-text-muted mb-6">
+                {locale === 'uz'
+                  ? 'Muolaja topilmadi yoki o\'chirilgan.'
+                  : locale === 'ru'
+                    ? 'Процедура не найдена или была удалена.'
+                    : 'Procedure not found or has been removed.'}
+              </p>
+              <button
+                onClick={() => goToServiceCategory(activeServiceCategory.id)}
+                className="px-5 py-2.5 bg-brand-gold text-white font-bold text-xs rounded-xl cursor-pointer mr-2"
+              >
+                {locale === 'uz' ? 'Kategoriyaga qaytish' : locale === 'ru' ? 'К категории' : 'Back to category'}
+              </button>
+            </div>
           )}
 
           {currentPage === 'services' && serviceCategoryId && !activeServiceCategory && !dataLoading && (
@@ -925,6 +988,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale} 
               onOpenAppointment={handleOpenAppointmentWithService} 
               onOpenCategory={goToServiceCategory}
+              onOpenSubService={goToServiceSub}
               serviceCategories={dynamicServiceCategories}
               dictionary={d}
             />
@@ -944,7 +1008,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale} 
               onOpenAppointment={handleOpenAppointmentWithService} 
               prices={dynamicPrices}
-              serviceCategories={dynamicServiceCategories}
               dictionary={d}
             />
           )}
@@ -957,6 +1020,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               dictionary={d}
               onBackToList={() => goToPage('articles')}
               onOpenArticle={goToArticle}
+              onViewsUpdate={updateArticleViews}
             />
           )}
 
@@ -1087,14 +1151,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         currentPage={currentPage}
       />
 
-      {/* 4. Overlay Appointment Booking dynamic Dialog */}
-      <AppointmentModal
-        isOpen={isAppointmentOpen}
-        onClose={() => setIsAppointmentOpen(false)}
-        locale={locale}
-        preselectedServiceId={preselectedServiceId}
-        serviceCategories={dynamicServiceCategories}
-      />
+      {currentPage !== 'admin' && (
+        <ClinicAiChat locale={locale} context={clinicAiContext} />
+      )}
+
     </div>
   );
 }
