@@ -1,7 +1,10 @@
 import dotenv from 'dotenv';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+
+const require = createRequire(import.meta.url);
 
 export const DEEPSEEK_PLACEHOLDER_KEY = 'MY_DEEPSEEK_API_KEY';
 
@@ -45,6 +48,22 @@ function parseEnvFile(filePath: string): Record<string, string> {
   }
 }
 
+function readDeepSeekKeyFromLocalSecrets(): string | undefined {
+  try {
+    const mod = require('./secrets.local.ts') as { DEEPSEEK_API_KEY?: string };
+    const raw = mod.DEEPSEEK_API_KEY;
+    if (!raw) return undefined;
+    const key = normalizeEnvValue(raw);
+    if (key && key !== DEEPSEEK_PLACEHOLDER_KEY) {
+      process.env.DEEPSEEK_API_KEY = key;
+      return key;
+    }
+  } catch {
+    // secrets.local.ts mavjud emas — o'tkazib yuboriladi
+  }
+  return undefined;
+}
+
 function readDeepSeekKeyFromFiles(roots: string[]): string | undefined {
   for (const root of roots) {
     for (const filename of ['.env.local', '.env']) {
@@ -80,13 +99,14 @@ export function loadProjectEnv(
     const localPath = path.join(root, '.env.local');
 
     if (fs.existsSync(envPath)) {
-      dotenv.config({ path: envPath, override: true });
+      dotenv.config({ path: envPath, override: false });
     }
     if (fs.existsSync(localPath)) {
-      dotenv.config({ path: localPath, override: true });
+      dotenv.config({ path: localPath, override: false });
     }
   }
 
+  readDeepSeekKeyFromLocalSecrets();
   readDeepSeekKeyFromFiles(getProjectRoots(preferredRoot));
 }
 
@@ -109,6 +129,9 @@ export function getDeepSeekApiKey(preferredRoot?: string): string | undefined {
     const key = normalizeEnvValue(raw);
     if (key && key !== DEEPSEEK_PLACEHOLDER_KEY) return key;
   }
+
+  const fromLocal = readDeepSeekKeyFromLocalSecrets();
+  if (fromLocal) return fromLocal;
 
   return readDeepSeekKeyFromFiles(getProjectRoots(preferredRoot));
 }
