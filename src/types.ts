@@ -70,6 +70,7 @@ export interface ServiceDetail {
     en: string;
   };
   image?: string | null;
+  icon?: string;
   features?: {
     uz: string[];
     ru: string[];

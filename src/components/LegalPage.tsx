@@ -20,7 +20,7 @@ export default function LegalPage({ locale, type }: LegalPageProps) {
 
   return (
     <section id={`${type}-page`} className="py-16 bg-brand-offwhite min-h-screen">
-      <div className="max-w-4xl mx-auto px-4">
+      <div className="site-container">
         <Link
           to={pagePath(locale, 'home')}
           className="inline-flex items-center gap-2 text-xs font-semibold text-brand-text-secondary hover:text-brand-gold-dark bg-brand-white border border-brand-sectiongray px-3.5 py-2 rounded-xl transition-colors mb-8"

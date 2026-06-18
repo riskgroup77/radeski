@@ -30,13 +30,28 @@ export function pagePath(locale: Locale, page: PageId): string {
   return `/${locale}/${page}`;
 }
 
-export function articlePath(locale: Locale, slug: string): string {
-  return `/${locale}/articles/${encodeURIComponent(slug)}`;
+export function articlePath(locale: Locale, articleId: string): string {
+  return `/${locale}/articles/${encodeURIComponent(articleId)}`;
 }
 
 export function articlesListPath(locale: Locale): string {
   return `/${locale}/articles`;
 }
+
+export function getArticleIdFromPathname(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length >= 3 && segments[1] === 'articles') {
+    try {
+      return decodeURIComponent(segments[2]);
+    } catch {
+      return segments[2];
+    }
+  }
+  return null;
+}
+
+/** @deprecated Use getArticleIdFromPathname */
+export const getArticleSlugFromPathname = getArticleIdFromPathname;
 
 export function getPageFromPathname(pathname: string): PageId {
   const segments = pathname.split('/').filter(Boolean);
@@ -63,9 +78,17 @@ export function getPageFromPathname(pathname: string): PageId {
   return 'home';
 }
 
-export function getArticleSlugFromPathname(pathname: string): string | null {
+export function serviceCategoryPath(locale: Locale, categoryId: string): string {
+  return `/${locale}/services/${encodeURIComponent(categoryId)}`;
+}
+
+export function servicesListPath(locale: Locale): string {
+  return pagePath(locale, 'services');
+}
+
+export function getServiceCategoryIdFromPathname(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
-  if (segments.length >= 3 && segments[1] === 'articles') {
+  if (segments.length >= 3 && segments[1] === 'services') {
     try {
       return decodeURIComponent(segments[2]);
     } catch {

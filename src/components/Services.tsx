@@ -4,15 +4,17 @@ import * as Icons from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import MediaImage from './MediaImage';
+import { getServiceLucideIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
 
 interface ServicesProps {
   locale: Locale;
   onOpenAppointment: (serviceId?: string) => void;
+  onOpenCategory?: (categoryId: string) => void;
   serviceCategories?: ServiceCategory[];
   dictionary?: any;
 }
 
-export default function Services({ locale, onOpenAppointment, serviceCategories, dictionary }: ServicesProps) {
+export default function Services({ locale, onOpenAppointment, onOpenCategory, serviceCategories, dictionary }: ServicesProps) {
   const d = dictionary || DICTIONARY[locale];
   const dynamicCategories = serviceCategories || SERVICE_CATEGORIES;
   const [searchQuery, setSearchQuery] = useState('');
@@ -20,10 +22,8 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
   const [activeDetailId, setActiveDetailId] = useState<string | null>(null);
   const [expandedImage, setExpandedImage] = useState<{ src: string; alt: string } | null>(null);
 
-  // Helper dynamic icon renderer
   const renderIcon = (iconName: string, className = 'w-6 h-6 text-brand-gold') => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const IconComponent = (Icons as any)[iconName] || Icons.Activity;
+    const IconComponent = getServiceLucideIcon(iconName);
     return <IconComponent className={className} />;
   };
 
@@ -124,7 +124,7 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
 
   return (
     <section id="services-page" className="py-16 bg-brand-offwhite min-h-screen">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="site-container">
         {/* Title Block */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
@@ -197,43 +197,52 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                 className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col h-full group"
               >
                 {category.image ? (
-                  <div className="relative h-48 sm:h-52 overflow-hidden bg-brand-offwhite shrink-0">
+                  <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[200px] overflow-hidden bg-brand-offwhite shrink-0">
                     <MediaImage
                       src={category.image}
                       alt={category.title[locale]}
                       loading="lazy"
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/90 via-brand-dark-navy/30 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 flex items-end gap-3">
-                      <button
-                        type="button"
-                        onClick={(e) => openImageLightbox(category.image!, category.title[locale], e)}
-                        className="w-10 h-10 bg-white/15 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/20 shrink-0 hover:bg-white/25 transition-all cursor-pointer"
-                        aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить изображение' : 'Expand image'}
-                      >
-                        <Icons.Maximize2 className="w-5 h-5 text-white" />
-                      </button>
-                      <h3 className="font-bold text-white text-lg leading-tight drop-shadow-sm">
-                        {category.title[locale]}
-                      </h3>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={(e) => openImageLightbox(category.image!, category.title[locale], e)}
+                      className="absolute top-3 right-3 p-2 bg-black/35 hover:bg-black/50 text-white rounded-lg backdrop-blur-sm transition-all cursor-pointer"
+                      aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить изображение' : 'Expand image'}
+                    >
+                      <Icons.Maximize2 className="w-4 h-4" />
+                    </button>
                   </div>
                 ) : (
                   <div className="p-5 pb-0 flex items-center gap-3">
                     <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center border border-brand-gold-light/20 shadow-xs">
                       {renderIcon(category.icon)}
                     </div>
-                    <h3 className="font-bold text-brand-text-primary text-lg leading-tight">
-                      {category.title[locale]}
-                    </h3>
                   </div>
                 )}
 
                 <div className="p-5 flex flex-col flex-1">
-                  <p className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed mb-5 font-light">
+                  <button
+                    type="button"
+                    onClick={() => onOpenCategory?.(category.id)}
+                    className="text-left font-bold text-brand-text-primary text-lg leading-tight hover:text-brand-gold transition-colors cursor-pointer"
+                  >
+                    {category.title[locale]}
+                  </button>
+                  <p className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed mb-4 mt-3 font-light">
                     {category.description[locale]}
                   </p>
+
+                  {onOpenCategory && (
+                    <button
+                      type="button"
+                      onClick={() => onOpenCategory(category.id)}
+                      className="mb-4 text-xs text-brand-gold hover:text-brand-gold-dark font-bold inline-flex items-center gap-1 cursor-pointer"
+                    >
+                      <span>{d.viewDetails}</span>
+                      <Icons.ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
 
                   <div className="space-y-2.5 border-t border-brand-offwhite pt-4 flex-1">
                     {category.subServices.map((sub) => (
@@ -262,7 +271,7 @@ export default function Services({ locale, onOpenAppointment, serviceCategories,
                           </div>
                         ) : (
                           <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl shrink-0 bg-brand-gold-light/10 border border-brand-gold-light/20 flex items-center justify-center">
-                            {renderIcon(category.icon, 'w-4 h-4 text-brand-gold')}
+                            {renderIcon(resolveSubServiceIcon(sub, category.icon), 'w-4 h-4 text-brand-gold')}
                           </div>
                         )}
                         <span className="text-brand-text-secondary text-xs font-medium group-hover/sub:text-brand-gold leading-tight flex-1">

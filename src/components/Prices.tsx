@@ -74,7 +74,7 @@ export default function Prices({ locale, onOpenAppointment, prices, serviceCateg
 
   return (
     <section id="prices-page" className="py-16 bg-brand-offwhite min-h-screen">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="site-container">
         {/* Title Block */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">

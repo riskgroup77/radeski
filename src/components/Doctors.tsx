@@ -21,7 +21,7 @@ export default function Doctors({ locale, onOpenAppointment, doctors, dictionary
 
   return (
     <section id="doctors-page" className="py-16 bg-brand-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="site-container">
         {/* Title & Desc */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">

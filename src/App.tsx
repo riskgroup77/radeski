@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
 import { Locale } from './types';
 import ScrollToTop from './routing/ScrollToTop';
 import RootRedirect from './routing/RootRedirect';
@@ -22,12 +22,14 @@ import {
 import {
   PageId,
   getPageFromPathname,
-  getArticleSlugFromPathname,
+  getArticleIdFromPathname,
+  getServiceCategoryIdFromPathname,
   pagePath,
   absoluteUrl,
   switchLocaleInPath,
   pagePathForAllLocales,
   articlePath,
+  serviceCategoryPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
@@ -35,9 +37,11 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
+import ServiceCategoryPage from './components/ServiceCategoryPage';
 import Doctors from './components/Doctors';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
+import ArticlePage from './components/ArticlePage';
 import Footer from './components/Footer';
 import AdminPanel from './components/AdminPanel';
 import LegalPage from './components/LegalPage';
@@ -48,6 +52,7 @@ import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, Ch
 import { useClinicData } from './hooks/useClinicData';
 import { createAppointment } from './api/publicApi';
 import { ApiError } from './api/client';
+import { findArticleByRouteParam } from './utils/articles';
 
 export default function App() {
   return (
@@ -76,8 +81,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const [adminLocale, setAdminLocale] = useState<Locale>(() => getPreferredLocale());
   const locale = parsedLocale ?? (forcePage === 'admin' ? adminLocale : getPreferredLocale());
   const currentPage: PageId = forcePage ?? getPageFromPathname(location.pathname);
-  const articleSlug = getArticleSlugFromPathname(location.pathname);
-  const { goToPage, goToArticle, changeLocale: navigateLocale } = useAppNavigation(locale);
+  const articleId = getArticleIdFromPathname(location.pathname);
+  const serviceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
+  const { goToPage, goToArticle, goToServiceCategory, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
 
   const changeLocale = (nextLocale: Locale) => {
@@ -101,6 +107,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     error: dataError,
     refetch: refetchClinicData,
   } = useClinicData();
+
+  const activeServiceCategory = serviceCategoryId
+    ? dynamicServiceCategories.find((category) => category.id === serviceCategoryId) ?? null
+    : null;
+
+  const activeArticlePreview = articleId
+    ? findArticleByRouteParam(articleId, dynamicArticles) ?? null
+    : null;
 
   const [dynamicDictionary, setDynamicDictionary] = useState(() => {
     const saved = localStorage.getItem('radeski_dictionary_v1');
@@ -372,7 +386,18 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     const activeSEO = (TAB_SEO[locale] && TAB_SEO[locale][currentPage])
       || (TAB_SEO['uz'] && TAB_SEO['uz']['home']);
 
-    document.title = `${activeSEO.title}`;
+    const seoTitle = activeArticlePreview
+      ? `${activeArticlePreview.title[locale]} | Radeski Clinic`
+      : activeServiceCategory
+        ? `${activeServiceCategory.title[locale]} | Radeski Clinic`
+        : activeSEO.title;
+    const seoDesc = activeArticlePreview
+      ? activeArticlePreview.summary[locale]
+      : activeServiceCategory
+        ? activeServiceCategory.description[locale]
+        : activeSEO.desc;
+
+    document.title = seoTitle;
 
     // Update document language
     document.documentElement.lang = locale;
@@ -402,12 +427,12 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     };
 
     // Update main Search Engine optimization tags
-    updateMeta('description', activeSEO.desc);
+    updateMeta('description', seoDesc);
     updateMeta('keywords', activeSEO.keywords);
 
     // Update Social sharing graph protocols
-    updateOg('og:title', activeSEO.title);
-    updateOg('og:description', activeSEO.desc);
+    updateOg('og:title', seoTitle);
+    updateOg('og:description', seoDesc);
     updateOg('og:url', canonicalUrl);
     updateOg('og:locale', localeToOgLocale(locale));
 
@@ -422,11 +447,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     document.querySelectorAll('link[data-radeski-hreflang]').forEach((node) => node.remove());
 
     if (forcePage !== 'admin') {
-      const pageForAlternates: PageId = currentPage === 'articles' && articleSlug ? 'articles' : currentPage;
+      const pageForAlternates: PageId = currentPage === 'articles' && articleId ? 'articles' : currentPage;
       LOCALES.forEach((altLocale) => {
-        const altPath = articleSlug
-          ? articlePath(altLocale, articleSlug)
-          : pagePathForAllLocales(pageForAlternates)[altLocale];
+        const altPath = articleId
+          ? articlePath(altLocale, activeArticlePreview?.id ?? articleId)
+          : serviceCategoryId
+            ? serviceCategoryPath(altLocale, serviceCategoryId)
+            : pagePathForAllLocales(pageForAlternates)[altLocale];
         const link = document.createElement('link');
         link.rel = 'alternate';
         link.hreflang = localeToHreflang(altLocale);
@@ -435,9 +462,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         document.head.appendChild(link);
       });
 
-      const defaultPath = articleSlug
-        ? articlePath('uz', articleSlug)
-        : pagePath('uz', pageForAlternates);
+      const defaultPath = articleId
+        ? articlePath('uz', activeArticlePreview?.id ?? articleId)
+        : serviceCategoryId
+          ? serviceCategoryPath('uz', serviceCategoryId)
+          : pagePath('uz', pageForAlternates);
       const defaultLink = document.createElement('link');
       defaultLink.rel = 'alternate';
       defaultLink.hreflang = 'x-default';
@@ -446,7 +475,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       document.head.appendChild(defaultLink);
     }
 
-  }, [locale, currentPage, dynamicServiceCategories, location.pathname, articleSlug, forcePage]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, location.pathname, articleId, activeArticlePreview, serviceCategoryId, activeServiceCategory, forcePage]);
 
   // Open modal with preselected service category
   const handleOpenAppointmentWithService = (catId?: string) => {
@@ -496,11 +525,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   }
 
   return (
-    <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[88px] sm:pt-[120px]">
+    <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[96px] sm:pt-[136px]">
 
       {dataError && currentPage !== 'admin' && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-3">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="site-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-start gap-2 text-sm text-amber-900">
               <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
               <span>{dataError}</span>
@@ -536,7 +565,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={`${currentPage}-${articleSlug ?? ''}`}
+          key={`${currentPage}-${articleId ?? ''}-${serviceCategoryId ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -553,7 +582,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* Bento Grid Features / Advantages */}
               <section id="advantages-section" className="py-16 bg-brand-white border-b border-brand-offwhite">
-                <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="site-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                   <div className="flex gap-4 items-start p-5 bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
                     <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
                       <Star className="w-5 h-5 fill-current" />
@@ -598,8 +627,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* 12 Departments - Services Carousel teaser */}
               <section id="services-teaser" className="py-16 bg-brand-offwhite">
-                <div className="max-w-7xl mx-auto px-4">
-                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
+                <div className="site-container">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 lg:mb-10">
                     <div>
                       <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">{d.navServices}</span>
                       <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary mt-1 tracking-tight">
@@ -608,46 +637,46 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </div>
                     <button
                       onClick={() => goToPage('services')}
-                      className="text-xs font-bold text-brand-gold hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer"
+                      className="text-xs font-bold text-brand-gold hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer shrink-0"
                     >
                       <span>{locale === 'uz' ? "Barcha 12 ta xizmatni ko'rish" : locale === 'ru' ? "Посмотреть все 12 направлений" : "Explore all 12 services"}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
 
-                  {/* Horizontal visual Grid of 6 basic categories */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-5 xl:gap-6">
                     {dynamicServiceCategories.slice(0, 6).map(category => (
                       <div
                         key={category.id}
-                        className="bg-brand-white border border-brand-sectiongray rounded-2xl shadow-xs hover:shadow-md transition-all flex flex-col overflow-hidden"
+                        className="bg-brand-white border border-brand-sectiongray rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-lg transition-all flex flex-col overflow-hidden h-full group"
                       >
                         {category.image ? (
-                          <div className="relative h-40 overflow-hidden bg-brand-offwhite">
+                          <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[220px] sm:min-h-[260px] lg:min-h-[300px] overflow-hidden bg-brand-offwhite">
                             <MediaImage
                               src={category.image}
                               alt={category.title[locale]}
                               loading="lazy"
-                              className="w-full h-full object-cover object-center"
+                              className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/75 to-transparent" />
-                            <div className="absolute bottom-3 left-4 right-4">
-                              <span className="text-[10px] font-bold text-brand-gold-light uppercase tracking-widest">{locale === 'uz' ? "Kategoriya" : locale === 'ru' ? "Направление" : "Specialty"}</span>
-                              <h4 className="font-extrabold text-white text-base sm:text-lg mt-0.5 leading-tight">{category.title[locale]}</h4>
-                            </div>
                           </div>
                         ) : null}
-                        <div className="p-6 flex flex-col flex-1 justify-between">
-                          {!category.image && (
-                            <>
-                              <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest">{locale === 'uz' ? "Kategoriya" : locale === 'ru' ? "Направление" : "Specialty"}</span>
-                              <h4 className="font-extrabold text-brand-text-primary text-base sm:text-lg mt-1">{category.title[locale]}</h4>
-                            </>
-                          )}
-                          <p className={`text-xs sm:text-sm text-brand-text-secondary font-light leading-relaxed${category.image ? ' mt-0' : ' mt-3'}`}>{category.description[locale]}</p>
+                        <div className="p-5 sm:p-6 lg:p-7 flex flex-col flex-1 justify-between">
+                          <div>
+                            <button
+                              type="button"
+                              onClick={() => goToServiceCategory(category.id)}
+                              className="text-left w-full font-extrabold text-brand-text-primary text-lg sm:text-xl leading-snug hover:text-brand-gold transition-colors cursor-pointer"
+                            >
+                              {category.title[locale]}
+                            </button>
+                            <p className="mt-3 text-sm sm:text-base text-brand-text-secondary font-light leading-relaxed line-clamp-4">
+                              {category.description[locale]}
+                            </p>
+                          </div>
                           <button
-                            onClick={() => goToPage('services')}
-                            className="mt-6 text-xs text-brand-gold hover:text-brand-gold-dark font-bold text-left inline-flex items-center gap-1 cursor-pointer"
+                            type="button"
+                            onClick={() => goToServiceCategory(category.id)}
+                            className="mt-6 text-xs sm:text-sm text-brand-gold hover:text-brand-gold-dark font-bold text-left inline-flex items-center gap-1 cursor-pointer"
                           >
                             <span>{d.viewDetails}</span>
                             <ArrowRight className="w-3.5 h-3.5" />
@@ -661,7 +690,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* Professional Clincal Doctors Carousel teaser */}
               <section id="doctors-teaser" className="py-16 bg-brand-white border-y border-brand-sectiongray">
-                <div className="max-w-7xl mx-auto px-4">
+                <div className="site-container">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
                     <div>
                       <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">{d.navDoctors}</span>
@@ -717,7 +746,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               {/* Be Beautiful - Inline CTA consultation form */}
               <section id="be-beautiful-cta" className="py-20 bg-gradient-to-tr from-brand-dark-navy via-brand-dark-navy to-brand-deep-blue relative overflow-hidden">
                 <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-brand-gold/15 rounded-full blur-3xl" />
-                <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+                <div className="site-container text-center relative z-10">
                   <h3 className="text-3xl sm:text-4xl font-extrabold text-brand-white tracking-tight">
                     {d.beBeautiful}
                   </h3>
@@ -757,7 +786,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* Trust Ratings & Gallery and Clinical Quality Indicators */}
               <section id="trust-reviews" className="py-16 bg-brand-sectiongray">
-                <div className="max-w-7xl mx-auto px-4 text-center">
+                <div className="site-container text-center">
                   <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">{locale === 'uz' ? "Ko'rsatkichlar & Fikrlar" : locale === 'ru' ? "Рейтинги и Отзывы" : "Endorsements"}</span>
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary tracking-tight mt-1 mb-8">
                     {locale === 'uz' ? "Insonlar nega aynan bizni tanlashadi?" : locale === 'ru' ? "Почему пациенты доверяют именно нам?" : "What supports our clinical trust?"}
@@ -780,7 +809,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* Latest News / Blog preview teaser */}
               <section id="articles-teaser" className="py-16 bg-brand-white border-t border-brand-sectiongray">
-                <div className="max-w-7xl mx-auto px-4">
+                <div className="site-container">
                   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
                     <div>
                       <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">{d.navArticles}</span>
@@ -799,10 +828,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {dynamicArticles.slice(0, 3).map(art => (
-                      <div
+                      <Link
                         key={art.id}
+                        to={articlePath(locale, art.id)}
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group cursor-pointer"
-                        onClick={() => goToArticle(art.slug)}
                       >
                         <div className="h-48 overflow-hidden bg-brand-offwhite relative">
                           {art.image ? (
@@ -819,7 +848,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                             {d.readMore} <ArrowRight className="w-3.5 h-3.5" />
                           </span>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -827,7 +856,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* 10. Robust SEO block with coordinates and MAP integration */}
               <section id="seo-rich-block" className="py-20 bg-brand-offwhite border-t border-brand-sectiongray">
-                <div className="max-w-4xl mx-auto px-4 text-center">
+                <div className="site-container text-center">
                   <h3 className="text-xl sm:text-2xl font-bold text-brand-text-primary tracking-tight">
                     {d.seoTitle}
                   </h3>
@@ -863,10 +892,39 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {currentPage === 'services' && (
+          {currentPage === 'services' && activeServiceCategory && (
+            <ServiceCategoryPage
+              locale={locale}
+              category={activeServiceCategory}
+              dictionary={d}
+              onOpenAppointment={handleOpenAppointmentWithService}
+              onBackToList={() => goToPage('services')}
+            />
+          )}
+
+          {currentPage === 'services' && serviceCategoryId && !activeServiceCategory && !dataLoading && (
+            <div className="py-20 px-4 text-center min-h-[50vh]">
+              <p className="text-brand-text-muted mb-6">
+                {locale === 'uz'
+                  ? 'Xizmat topilmadi yoki o\'chirilgan.'
+                  : locale === 'ru'
+                    ? 'Услуга не найдена или была удалена.'
+                    : 'Service not found or has been removed.'}
+              </p>
+              <button
+                onClick={() => goToPage('services')}
+                className="px-5 py-2.5 bg-brand-gold text-white font-bold text-xs rounded-xl cursor-pointer"
+              >
+                {locale === 'uz' ? 'Xizmatlar ro\'yxatiga qaytish' : locale === 'ru' ? 'К списку услуг' : 'Back to services'}
+              </button>
+            </div>
+          )}
+
+          {currentPage === 'services' && !serviceCategoryId && (
             <Services 
               locale={locale} 
               onOpenAppointment={handleOpenAppointmentWithService} 
+              onOpenCategory={goToServiceCategory}
               serviceCategories={dynamicServiceCategories}
               dictionary={d}
             />
@@ -891,14 +949,22 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {currentPage === 'articles' && (
-            <Articles 
-              locale={locale} 
+          {currentPage === 'articles' && articleId && (
+            <ArticlePage
+              locale={locale}
+              articleId={articleId}
               articles={dynamicArticles}
               dictionary={d}
-              articleSlug={articleSlug}
-              onOpenArticle={goToArticle}
               onBackToList={() => goToPage('articles')}
+              onOpenArticle={goToArticle}
+            />
+          )}
+
+          {currentPage === 'articles' && !articleId && (
+            <Articles
+              locale={locale}
+              articles={dynamicArticles}
+              dictionary={d}
             />
           )}
 
@@ -929,7 +995,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
           {currentPage === 'contacts' && (
             <div id="contacts-page" className="py-16 bg-brand-offwhite min-h-screen">
-              <div className="max-w-7xl mx-auto px-4">
+              <div className="site-container">
                 {/* Contact title header */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
                   <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">

@@ -35,3 +35,191 @@ html {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
+
+@keyframes cta-soft-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes cta-ring-spread {
+  0% {
+    box-shadow: 0 0 0 0 rgba(192, 153, 73, 0.42);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(192, 153, 73, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(192, 153, 73, 0);
+  }
+}
+
+@keyframes cta-soft-pulse-button {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes cta-ring-spread-button {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(255, 255, 255, 0.65),
+      0 6px 20px rgba(192, 153, 73, 0.35);
+  }
+  70% {
+    box-shadow:
+      0 0 0 14px rgba(255, 255, 255, 0),
+      0 6px 20px rgba(192, 153, 73, 0.35);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(255, 255, 255, 0),
+      0 6px 20px rgba(192, 153, 73, 0.35);
+  }
+}
+
+.cta-pulse-ring {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  animation:
+    cta-soft-pulse 2.2s ease-in-out infinite,
+    cta-ring-spread 2.2s ease-out infinite;
+}
+
+.cta-pulse-ring:hover {
+  animation-play-state: paused;
+  transform: scale(1.03);
+}
+
+.cta-pulse-ring--button {
+  border-radius: 0.875rem;
+  animation:
+    cta-soft-pulse-button 2s ease-in-out infinite,
+    cta-ring-spread-button 2s ease-out infinite;
+}
+
+.cta-pulse-ring--button:hover {
+  animation-play-state: paused;
+  transform: scale(1.04);
+}
+
+.header-appointment-btn {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  padding: 0.8125rem 1.75rem;
+  min-height: 3.125rem;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(192, 153, 73, 0.35);
+}
+
+@media (min-width: 1024px) {
+  .header-appointment-btn {
+    font-size: 1.0625rem;
+    padding: 0.9375rem 2rem;
+    min-height: 3.375rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header-appointment-btn {
+    font-size: 1.125rem;
+    padding: 1rem 2.375rem;
+    min-height: 3.5rem;
+  }
+}
+
+.header-appointment-btn--mobile {
+  font-size: 1.0625rem;
+  padding: 1rem 1.5rem;
+  min-height: 3.5rem;
+}
+
+.phone-call-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: #a6843f;
+  transition: opacity 0.2s ease;
+}
+
+.phone-call-link:hover {
+  opacity: 0.9;
+}
+
+.phone-call-link__wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.15rem 0.35rem;
+  isolation: isolate;
+}
+
+.phone-call-link__wrap::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  z-index: -1;
+  pointer-events: none;
+  animation: cta-ring-spread 2.2s ease-out infinite;
+}
+
+.phone-call-link__number {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
+  color: #a6843f;
+}
+
+.phone-call-link__number--topbar {
+  font-size: 0.9375rem;
+  letter-spacing: 0.025em;
+}
+
+.site-container {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .site-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .site-container {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+}

@@ -61,7 +61,7 @@ export default function Header({
   };
 
   const navLinkClass = (page: PageId) =>
-    `px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+    `px-4 py-2 rounded-lg text-[15px] lg:text-base font-medium transition-all cursor-pointer ${
       currentPage === page
         ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
         : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-offwhite'
@@ -72,29 +72,35 @@ export default function Header({
       id="main-app-header"
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
-          : 'bg-white py-4 border-b border-slate-100'
+          ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 sm:py-3'
+          : 'bg-white py-3 sm:py-4 border-b border-slate-100'
       }`}
     >
-      <div className="hidden sm:block border-b border-slate-50 pb-2 mb-2 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-brand-gold" />
+      <div className="hidden sm:block w-full border-b border-slate-50 pb-2.5 mb-2.5 text-sm sm:text-[15px] leading-snug text-slate-600">
+        <div className="site-container flex justify-between items-center gap-6">
+          <div className="flex items-center gap-5 lg:gap-8 xl:gap-10 flex-wrap min-w-0">
+            <span className="flex items-center gap-2 font-medium">
+              <MapPin className="w-4 h-4 text-brand-gold shrink-0" />
               Farg'ona, O'zbekiston Ovozi 1A
             </span>
-            <span className="flex items-center gap-1.5">
-              <Phone className="w-3.5 h-3.5 text-brand-gold" />
-              +998 (73) 200-73-73
-            </span>
+            <a
+              href="tel:+998732007373"
+              className="phone-call-link shrink-0 cursor-pointer"
+              aria-label={locale === 'uz' ? "Telefon qilish: +998 (73) 200-73-73" : locale === 'ru' ? 'Позвонить: +998 (73) 200-73-73' : 'Call: +998 (73) 200-73-73'}
+            >
+              <span className="phone-call-link__wrap">
+                <Phone className="w-4 h-4 shrink-0" />
+                <span className="phone-call-link__number phone-call-link__number--topbar">+998 (73) 200-73-73</span>
+              </span>
+            </a>
           </div>
-          <div>
-            <span className="text-brand-gold font-medium font-mono">{d.workingHoursValue}</span>
+          <div className="shrink-0 text-right">
+            <span className="text-brand-gold font-semibold font-mono">{d.workingHoursValue}</span>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+      <div className="site-container flex justify-between items-center min-h-[56px] sm:min-h-[64px] gap-3 lg:gap-6">
         <Link
           to={pagePath(locale, 'home')}
           onClick={() => onNavigate('home')}
@@ -103,7 +109,7 @@ export default function Header({
           <SiteLogo variant="header" className="group-hover:opacity-90 transition-opacity" />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1.5">
+        <nav className="hidden lg:flex items-center justify-center gap-1.5 xl:gap-2 flex-1 min-w-0 px-2 xl:px-6">
           {navItems.map((item) => (
             <Link
               key={item.id}
@@ -115,13 +121,13 @@ export default function Header({
           ))}
         </nav>
 
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="hidden sm:flex items-center gap-3 lg:gap-4 shrink-0">
           <div className="relative">
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-sm font-semibold text-slate-700 transition-all cursor-pointer"
             >
-              <Globe className="w-4 h-4 text-slate-500" />
+              <Globe className="w-[18px] h-[18px] text-slate-500" />
               <span>{locale.toUpperCase()}</span>
             </button>
 
@@ -155,7 +161,7 @@ export default function Header({
 
           <button
             onClick={onOpenAppointment}
-            className="bg-brand-gold hover:bg-brand-gold-dark text-white text-xs font-semibold px-4.5 py-2.5 rounded-xl shadow-lg shadow-brand-gold/15 hover:shadow-brand-gold/25 active:scale-98 transition-all cursor-pointer"
+            className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl active:scale-[0.98] transition-colors cursor-pointer"
           >
             {d.appointmentBtn}
           </button>
@@ -168,7 +174,7 @@ export default function Header({
               const nextIndex = (list.indexOf(locale) + 1) % list.length;
               onChangeLocale(list[nextIndex]);
             }}
-            className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700"
+            className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 text-sm font-bold text-slate-700"
           >
             {locale.toUpperCase()}
           </button>
@@ -177,7 +183,7 @@ export default function Header({
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
       </div>
@@ -189,7 +195,7 @@ export default function Header({
               <Link
                 key={item.id}
                 to={pagePath(locale, item.id)}
-                className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${navLinkClass(item.id)}`}
+                className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${navLinkClass(item.id)}`}
               >
                 {item.label}
               </Link>
@@ -199,17 +205,19 @@ export default function Header({
           <div className="border-t border-brand-sectiongray pt-4 flex flex-col gap-3">
             <a
               href="tel:+998732007373"
-              className="flex items-center justify-center gap-2 py-2.5 text-sm font-semibold text-brand-text-secondary border border-brand-sectiongray rounded-xl bg-brand-offwhite hover:bg-brand-sectiongray"
+              className="phone-call-link w-full justify-center py-3 text-sm border border-brand-gold/25 rounded-xl bg-brand-gold-light/5 hover:bg-brand-gold-light/10 cursor-pointer"
             >
-              <Phone className="w-4 h-4 text-brand-gold" />
-              +998 (73) 200-73-73
+              <span className="phone-call-link__wrap">
+                <Phone className="w-4 h-4 shrink-0" />
+                <span className="phone-call-link__number text-sm">+998 (73) 200-73-73</span>
+              </span>
             </a>
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 onOpenAppointment();
               }}
-              className="w-full bg-brand-gold hover:bg-brand-gold-dark text-white text-sm font-semibold py-3 rounded-xl shadow-md text-center"
+              className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--mobile w-full bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl text-center transition-colors"
             >
               {d.appointmentBtn}
             </button>

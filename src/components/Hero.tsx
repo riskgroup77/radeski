@@ -112,7 +112,7 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/50 via-transparent to-transparent" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center">
+      <div className="relative site-container h-full flex flex-col justify-center">
         <motion.div
           key={`badge-${activeSlide}`}
           initial={{ opacity: 0, y: -20 }}

@@ -51,7 +51,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
 
   return (
     <section id="about-page" className="py-16 bg-brand-white">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="site-container">
         {/* Core content row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <motion.div
