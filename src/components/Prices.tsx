@@ -4,10 +4,11 @@ import { Search, Info, CalendarClock, ListFilter, HelpCircle } from 'lucide-reac
 import { Locale, PriceItem } from '../types';
 import { DICTIONARY } from '../data';
 import {
-  getPriceCategoryLabel,
   PRICE_CATEGORY_ORDER,
 } from '../data/priceCategoryLabels';
 import { getCatalogCategoryNameRu } from '../utils/priceCatalog';
+import { resolvePriceName } from '../utils/priceDisplay';
+import { resolvePriceCategoryLabel } from '../utils/priceCategoryDisplay';
 
 interface PricesProps {
   locale: Locale;
@@ -25,15 +26,17 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
   const filteredPrices = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     return dynamicPrices.filter((item) => {
+      const displayName = resolvePriceName(item, locale).toLowerCase();
       const matchesSearch =
         !query ||
+        displayName.includes(query) ||
         item.name.uz.toLowerCase().includes(query) ||
         item.name.ru.toLowerCase().includes(query) ||
         item.name.en.toLowerCase().includes(query);
       const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory, dynamicPrices]);
+  }, [searchQuery, selectedCategory, dynamicPrices, locale]);
 
   const pricesByCategory = useMemo(() => {
     const grouped = new Map<string, PriceItem[]>();
@@ -55,7 +58,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
       if (!items?.length) return;
       sections.push({
         categoryId: catId,
-        title: getPriceCategoryLabel(catId, locale, getCatalogCategoryNameRu(catId)),
+        title: resolvePriceCategoryLabel(catId, locale, getCatalogCategoryNameRu(catId)),
         items: [...items].sort((a, b) => (a.priceValue ?? 0) - (b.priceValue ?? 0)),
       });
       grouped.delete(catId);
@@ -64,7 +67,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
     grouped.forEach((items, catId) => {
       sections.push({
         categoryId: catId,
-        title: getPriceCategoryLabel(catId, locale, getCatalogCategoryNameRu(catId)),
+        title: resolvePriceCategoryLabel(catId, locale, getCatalogCategoryNameRu(catId)),
         items: [...items].sort((a, b) => (a.priceValue ?? 0) - (b.priceValue ?? 0)),
       });
     });
@@ -76,7 +79,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
     const usedIds = new Set(dynamicPrices.map((p) => p.category));
     const list = PRICE_CATEGORY_ORDER.filter((id) => usedIds.has(id)).map((id) => ({
       id,
-      title: getPriceCategoryLabel(id, locale, getCatalogCategoryNameRu(id)),
+      title: resolvePriceCategoryLabel(id, locale, getCatalogCategoryNameRu(id)),
     }));
     return [{ id: 'all', title: d.allServices }, ...list];
   }, [locale, d, dynamicPrices]);
@@ -99,11 +102,9 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
           </p>
           {totalItems > 0 && (
             <p className="text-xs text-brand-text-muted mt-3 font-mono">
-              {totalCategories}{' '}
-              {locale === 'uz' ? 'ta bo\'lim' : locale === 'ru' ? 'разделов' : 'sections'}
+              {totalCategories} {d.priceMetaSections}
               {' · '}
-              {totalItems}{' '}
-              {locale === 'uz' ? 'ta xizmat va pozitsiya' : locale === 'ru' ? 'позиций' : 'price items'}
+              {totalItems} {d.priceMetaItems}
             </p>
           )}
         </div>
@@ -150,28 +151,21 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
               <div className="px-6 py-4 bg-brand-offwhite border-b border-brand-sectiongray flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest">
-                    {locale === 'uz' ? 'Bo\'lim' : locale === 'ru' ? 'Раздел' : 'Section'}
+                    {d.priceSectionLabel}
                   </span>
                   <h3 className="text-lg sm:text-xl font-extrabold text-brand-text-primary tracking-tight mt-0.5">
                     {section.title}
                   </h3>
                 </div>
                 <span className="text-xs font-mono text-brand-text-muted bg-brand-white px-3 py-1 rounded-full border border-brand-sectiongray">
-                  {section.items.length}{' '}
-                  {locale === 'uz' ? 'ta' : locale === 'ru' ? 'поз.' : 'items'}
+                  {section.items.length} {d.priceItemsShort}
                 </span>
               </div>
 
               <div className="hidden md:grid grid-cols-12 gap-4 bg-brand-white px-6 py-3 border-b border-brand-offwhite text-xs font-bold text-brand-text-muted uppercase tracking-wider">
-                <div className="col-span-7">
-                  {locale === 'uz' ? 'Xizmat nomi' : locale === 'ru' ? 'Наименование' : 'Service'}
-                </div>
-                <div className="col-span-2 text-right">
-                  {locale === 'uz' ? 'Narxi (UZS)' : locale === 'ru' ? 'Цена (UZS)' : 'Price (UZS)'}
-                </div>
-                <div className="col-span-3 text-right">
-                  {locale === 'uz' ? 'Yozilish' : locale === 'ru' ? 'Запись' : 'Booking'}
-                </div>
+                <div className="col-span-7">{d.priceColService}</div>
+                <div className="col-span-2 text-right">{d.priceColPrice}</div>
+                <div className="col-span-3 text-right">{d.priceColBooking}</div>
               </div>
 
               <div className="divide-y divide-brand-sectiongray">
@@ -183,22 +177,16 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
                   >
                     <div className="col-span-1 md:col-span-7">
                       <h4 className="text-brand-text-primary font-semibold text-sm sm:text-base leading-snug">
-                        {item.name[locale]}
+                        {resolvePriceName(item, locale)}
                       </h4>
                     </div>
 
                     <div className="col-span-1 md:col-span-2 md:text-right mt-2 md:mt-0 flex items-center justify-between md:block">
                       <span className="text-[10px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden">
-                        {locale === 'uz' ? 'Narxi:' : locale === 'ru' ? 'Цена:' : 'Price:'}
+                        {d.priceMobilePrice}
                       </span>
                       <span className="text-brand-gold-dark font-extrabold text-sm sm:text-base whitespace-nowrap">
-                        {item.priceValue === 0
-                          ? locale === 'uz'
-                            ? 'Bepul'
-                            : locale === 'ru'
-                              ? 'Бесплатно'
-                              : 'Free'
-                          : item.price}
+                        {item.priceValue === 0 ? d.priceFree : item.price}
                       </span>
                     </div>
 
@@ -221,13 +209,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
           {pricesByCategory.length === 0 && (
             <div className="bg-brand-white rounded-2xl border border-brand-sectiongray shadow-sm text-center py-16">
               <HelpCircle className="w-12 h-12 text-brand-text-muted mx-auto mb-4" />
-              <p className="text-brand-text-muted text-sm">
-                {locale === 'uz'
-                  ? "Ushbu filtr bo'yicha narx topilmadi."
-                  : locale === 'ru'
-                    ? 'По данному запросу цены не найдены.'
-                    : 'No pricing items matched your filter or search.'}
-              </p>
+              <p className="text-brand-text-muted text-sm">{d.priceEmpty}</p>
             </div>
           )}
         </div>
@@ -235,16 +217,8 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
         <div className="p-6 bg-brand-gold-light/5 rounded-2xl border border-brand-gold-light/20 flex gap-4 text-xs sm:text-sm text-brand-text-secondary leading-relaxed">
           <Info className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
           <div>
-            <span className="font-bold text-brand-text-primary">
-              {locale === 'uz' ? 'Muhim eslatma!' : locale === 'ru' ? 'Важная информация!' : 'Important notice!'}
-            </span>
-            <p className="mt-1 font-light">
-              {locale === 'uz'
-                ? "Preyskurantdagi narxlar rasmiy klinika ro'yxati bo'lib, tanishuv maqsadida beriladi. Yakuniy narx shifokor ko'rigidagi tashxis va davolash hajmiga qarab belgilanadi."
-                : locale === 'ru'
-                  ? 'Прейскурант носит информационный характер. Окончательная стоимость определяется врачом на приёме с учётом объёма лечения и индивидуальных показаний.'
-                  : 'This price list is for reference. Final cost is determined at consultation based on treatment scope and clinical indications.'}
-            </p>
+            <span className="font-bold text-brand-text-primary">{d.priceNoticeTitle}</span>
+            <p className="mt-1 font-light">{d.priceNoticeBody}</p>
           </div>
         </div>
       </div>

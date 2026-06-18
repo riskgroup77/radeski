@@ -4,6 +4,7 @@ import {
   SUB_SERVICE_RICH_CATALOG,
   findSubServiceCatalogKey,
 } from '../data/serviceRichCatalog';
+import { filterExcludedServiceCategories } from './excludedServices';
 
 const LOCALES: Locale[] = ['uz', 'ru', 'en'];
 
@@ -69,7 +70,7 @@ function enrichSubService(sub: ServiceDetail, category: ServiceCategory): Servic
 }
 
 export function enrichServiceCategories(categories: ServiceCategory[]): ServiceCategory[] {
-  return categories.map((category) => {
+  const enriched = categories.map((category) => {
     const catalogCategory = CATEGORY_RICH_CATALOG[category.id];
     const enrichedCategory: ServiceCategory = {
       ...category,
@@ -82,4 +83,6 @@ export function enrichServiceCategories(categories: ServiceCategory[]): ServiceC
     };
     return enrichedCategory;
   });
+
+  return filterExcludedServiceCategories(enriched);
 }

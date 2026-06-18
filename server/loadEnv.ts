@@ -1,31 +1,118 @@
 import dotenv from 'dotenv';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const DEEPSEEK_PLACEHOLDER_KEY = 'MY_DEEPSEEK_API_KEY';
 
-dotenv.config({ path: path.join(rootDir, '.env') });
-dotenv.config({ path: path.join(rootDir, '.env.local'), override: true });
+export const DEFAULT_DEEPSEEK_MODEL = 'deepseek-chat';
 
-export const GEMINI_PLACEHOLDER_KEY = 'MY_GEMINI_API_KEY';
+export const DEFAULT_DEEPSEEK_API_BASE = 'https://api.deepseek.com';
 
-/** Default model — gemini-2.0-flash was shut down June 2026 */
-export const DEFAULT_GEMINI_MODEL = 'gemini-2.5-flash';
-
-export function getGeminiModel(): string {
-  const configured = process.env.GEMINI_MODEL?.trim().replace(/^["']|["']$/g, '');
-  return configured || DEFAULT_GEMINI_MODEL;
+function stripQuotes(value: string): string {
+  return value.replace(/^["']|["']$/g, '');
 }
 
-export function getGeminiApiKey(): string | undefined {
-  const raw = process.env.GEMINI_API_KEY?.trim();
-  if (!raw) return undefined;
-
-  const key = raw.replace(/^["']|["']$/g, '');
-  if (!key || key === GEMINI_PLACEHOLDER_KEY) return undefined;
-  return key;
+function normalizeEnvValue(value: string): string {
+  return stripQuotes(value.trim()).replace(/\r$/, '');
 }
 
-export function isGeminiConfigured(): boolean {
-  return Boolean(getGeminiApiKey());
+function getProjectRoots(preferredRoot?: string): string[] {
+  const roots = new Set<string>();
+
+  if (preferredRoot) {
+    roots.add(path.resolve(preferredRoot));
+  }
+
+  try {
+    const fromModule = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+    roots.add(fromModule);
+  } catch {
+    // ignore
+  }
+
+  roots.add(process.cwd());
+
+  return [...roots];
+}
+
+function parseEnvFile(filePath: string): Record<string, string> {
+  if (!fs.existsSync(filePath)) return {};
+  try {
+    return dotenv.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+function readDeepSeekKeyFromFiles(roots: string[]): string | undefined {
+  for (const root of roots) {
+    for (const filename of ['.env.local', '.env']) {
+      const parsed = parseEnvFile(path.join(root, filename));
+      const raw = parsed.DEEPSEEK_API_KEY;
+      if (!raw) continue;
+
+      const key = normalizeEnvValue(raw);
+      if (key && key !== DEEPSEEK_PLACEHOLDER_KEY) {
+        process.env.DEEPSEEK_API_KEY = key;
+        return key;
+      }
+    }
+  }
+  return undefined;
+}
+
+/** Load `.env` / `.env.local` from project root (safe to call multiple times). */
+export function loadProjectEnv(
+  extra?: Record<string, string | undefined>,
+  preferredRoot?: string,
+): void {
+  if (extra) {
+    for (const [key, value] of Object.entries(extra)) {
+      if (value !== undefined && value !== '') {
+        process.env[key] = value;
+      }
+    }
+  }
+
+  for (const root of getProjectRoots(preferredRoot)) {
+    const envPath = path.join(root, '.env');
+    const localPath = path.join(root, '.env.local');
+
+    if (fs.existsSync(envPath)) {
+      dotenv.config({ path: envPath, override: true });
+    }
+    if (fs.existsSync(localPath)) {
+      dotenv.config({ path: localPath, override: true });
+    }
+  }
+
+  readDeepSeekKeyFromFiles(getProjectRoots(preferredRoot));
+}
+
+loadProjectEnv();
+
+export function getDeepSeekModel(): string {
+  const configured = process.env.DEEPSEEK_MODEL?.trim();
+  return configured ? normalizeEnvValue(configured) : DEFAULT_DEEPSEEK_MODEL;
+}
+
+export function getDeepSeekApiBase(): string {
+  const configured = process.env.DEEPSEEK_API_BASE?.trim();
+  const base = configured ? normalizeEnvValue(configured) : DEFAULT_DEEPSEEK_API_BASE;
+  return base.replace(/\/$/, '');
+}
+
+export function getDeepSeekApiKey(preferredRoot?: string): string | undefined {
+  const raw = process.env.DEEPSEEK_API_KEY?.trim();
+  if (raw) {
+    const key = normalizeEnvValue(raw);
+    if (key && key !== DEEPSEEK_PLACEHOLDER_KEY) return key;
+  }
+
+  return readDeepSeekKeyFromFiles(getProjectRoots(preferredRoot));
+}
+
+export function isDeepSeekConfigured(preferredRoot?: string): boolean {
+  return Boolean(getDeepSeekApiKey(preferredRoot));
 }

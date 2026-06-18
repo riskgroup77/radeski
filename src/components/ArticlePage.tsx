@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
@@ -34,57 +34,82 @@ interface ArticlePageProps {
   onViewsUpdate?: (match: { id: string; slug: string }, views: number) => void;
 }
 
+function buildPreviewArticle(articleId: string, articles: Article[]): Article | null {
+  const preview = findArticleByRouteParam(articleId, articles);
+  return preview ? enrichArticle(preview) : null;
+}
+
 export default function ArticlePage({
   locale,
   articleId,
   articles,
   dictionary,
   onBackToList,
-  onOpenArticle,
+  onOpenArticle: _onOpenArticle,
   onViewsUpdate,
 }: ArticlePageProps) {
   const d = dictionary || DICTIONARY[locale];
-  const previewArticle = findArticleByRouteParam(articleId, articles);
-  const [activeArticle, setActiveArticle] = useState<Article | null>(previewArticle ?? null);
-  const [detailLoading, setDetailLoading] = useState(true);
+  const articlesRef = useRef(articles);
+  articlesRef.current = articles;
+  const onViewsUpdateRef = useRef(onViewsUpdate);
+  onViewsUpdateRef.current = onViewsUpdate;
+
+  const [activeArticle, setActiveArticle] = useState<Article | null>(() =>
+    buildPreviewArticle(articleId, articles),
+  );
+  const [detailLoading, setDetailLoading] = useState(
+    () => !buildPreviewArticle(articleId, articles),
+  );
+  const [detailRefreshing, setDetailRefreshing] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
 
   useEffect(() => {
-    let cancelled = false;
-    setDetailLoading(true);
+    const preview = buildPreviewArticle(articleId, articlesRef.current);
     setDetailError(null);
-
-    const preview = findArticleByRouteParam(articleId, articles);
     if (preview) {
-      setActiveArticle(enrichArticle(preview));
+      setActiveArticle(preview);
+      setDetailLoading(false);
+    } else {
+      setActiveArticle(null);
+      setDetailLoading(true);
     }
+  }, [articleId]);
 
-    const apiSlug = resolveArticleApiSlug(articleId, articles);
+  useEffect(() => {
+    let cancelled = false;
+    const preview = buildPreviewArticle(articleId, articlesRef.current);
+    const apiSlug = resolveArticleApiSlug(articleId, articlesRef.current);
+
+    if (preview) {
+      setDetailRefreshing(true);
+    }
 
     getArticleBySlug(apiSlug)
       .then((data) => {
-        if (!cancelled) {
-          const mapped = enrichArticle(mapArticleFromApi(data));
-          setActiveArticle(mapped);
-          onViewsUpdate?.({ id: mapped.id, slug: mapped.slug }, mapped.views);
+        if (cancelled) return;
+        const mapped = enrichArticle(mapArticleFromApi(data));
+        setActiveArticle(mapped);
+        if (mapped.views !== preview?.views) {
+          onViewsUpdateRef.current?.({ id: mapped.id, slug: mapped.slug }, mapped.views);
         }
       })
       .catch((err) => {
-        if (!cancelled) {
-          setDetailError(err instanceof ApiError ? err.message : 'Failed to load article');
-          if (!preview) {
-            setActiveArticle(null);
-          }
+        if (cancelled) return;
+        setDetailError(err instanceof ApiError ? err.message : 'Failed to load article');
+        if (!preview) {
+          setActiveArticle(null);
         }
       })
       .finally(() => {
-        if (!cancelled) setDetailLoading(false);
+        if (cancelled) return;
+        setDetailLoading(false);
+        setDetailRefreshing(false);
       });
 
     return () => {
       cancelled = true;
     };
-  }, [articleId, articles, onViewsUpdate]);
+  }, [articleId]);
 
   const relatedArticles = articles
     .filter((art) => art.id !== activeArticle?.id)
@@ -121,7 +146,7 @@ export default function ArticlePage({
           <span>{d.backToArticles}</span>
         </Link>
 
-        {detailLoading && (
+        {detailLoading && !activeArticle && (
           <div className="flex items-center justify-center gap-2 py-20 text-brand-text-muted">
             <Loader2 className="w-5 h-5 animate-spin" />
             <span>
@@ -142,13 +167,26 @@ export default function ArticlePage({
           </div>
         )}
 
-        {activeArticle && !detailLoading && (
+        {activeArticle && (
           <motion.article
             id={`article-page-${activeArticle.id}`}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             className="max-w-4xl mx-auto"
           >
+            {detailRefreshing && (
+              <div className="mb-4 flex items-center gap-2 text-[11px] text-brand-text-muted">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>
+                  {locale === 'uz'
+                    ? "To'liq maqola yangilanmoqda..."
+                    : locale === 'ru'
+                      ? 'Обновление полной версии статьи...'
+                      : 'Refreshing full article...'}
+                </span>
+              </div>
+            )}
+
             <div className="mb-6">
               <span className="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-mono py-1 px-2.5 bg-brand-gold-light/10 rounded-md">
                 {locale === 'uz' ? 'Dorivor darslik' : locale === 'ru' ? 'Клиническая статья' : 'Verified Clinical Post'}
@@ -250,7 +288,6 @@ export default function ArticlePage({
                     <Link
                       key={art.id}
                       to={articlePath(locale, art.id)}
-                      onClick={() => onOpenArticle(art.id)}
                       className="group bg-brand-offwhite hover:bg-brand-white border border-brand-sectiongray rounded-xl overflow-hidden transition-all cursor-pointer"
                     >
                       {relatedImage && (

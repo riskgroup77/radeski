@@ -70,88 +70,6 @@
       ]
     },
     {
-      "id": "eptaderm",
-      "nameRu": "Eptaderm",
-      "items": [
-        {
-          "nameRu": "Тропонин I",
-          "priceValue": 84000
-        },
-        {
-          "nameRu": "Epta PSO 10 Rich Emulsion 200ml",
-          "priceValue": 410000
-        },
-        {
-          "nameRu": "Epta Pso 50 Plus crem",
-          "priceValue": 280000
-        },
-        {
-          "nameRu": "Epta pso nails 12ml",
-          "priceValue": 220000
-        },
-        {
-          "nameRu": "Epta spot Cleansing 150ml",
-          "priceValue": 290000
-        },
-        {
-          "nameRu": "Epta spot night serum 30",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "epta spot 50 spf 50ml",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "Epta VTLG Emulsion 50ml",
-          "priceValue": 450000
-        },
-        {
-          "nameRu": "Epta PSO 30 Cream 100ml",
-          "priceValue": 340000
-        },
-        {
-          "nameRu": "EPTA AC SCRUB clensing",
-          "priceValue": 310000
-        },
-        {
-          "nameRu": "EPTA AC Fluid Cleansing",
-          "priceValue": 310000
-        },
-        {
-          "nameRu": "EPTA AC Sebo- normalizing",
-          "priceValue": 315000
-        },
-        {
-          "nameRu": "EPTA DS Spray",
-          "priceValue": 315000
-        },
-        {
-          "nameRu": "Epta DS Shampoo",
-          "priceValue": 365000
-        },
-        {
-          "nameRu": "Epta DS Cleansing",
-          "priceValue": 320000
-        },
-        {
-          "nameRu": "Epta PSO Shampoo",
-          "priceValue": 345000
-        },
-        {
-          "nameRu": "Epta CREME",
-          "priceValue": 290000
-        },
-        {
-          "nameRu": "EPTA CREME",
-          "priceValue": 355000
-        },
-        {
-          "nameRu": "EPTA SPOT Intensive serum",
-          "priceValue": 330000
-        }
-      ]
-    },
-    {
       "id": "healinte",
       "nameRu": "Healinte",
       "items": [
@@ -390,84 +308,6 @@
       ]
     },
     {
-      "id": "vrach-uzi",
-      "nameRu": "Врач УЗИ",
-      "items": [
-        {
-          "nameRu": "Трансабдоминальное (ТА) исследование матки и яичников",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "Трансабдоминальное (ТА) исследование матки и яичников с допплерографией",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Трансвагинальное (ТВ) исследование матки и яичников",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Трансвагинальное (ТВ) исследование матки и яичников с допплерографией",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "УЗИ молочной железы",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "УЗИ молочной железы с допплерографией",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "УЗИ мочевого пузыря и мочеточников",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "УЗИ органов малого таза при беременности",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "УЗИ органов малого таза, матки и яичника",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "УЗИ печени и желчного пузыря",
-          "priceValue": 65000
-        },
-        {
-          "nameRu": "УЗИ печени и желчного пузыря с определением функций желчного пузыря (натощак и после еды)",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "УЗИ печени, желчного пузыря, селезенки, поджелудочная железа",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "УЗИ почек",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "УЗИ почек, мочевого пузыря и предстательной железы",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "УЗИ предстательной железы и мочевого пузыря",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "УЗИ щитовидной железы",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "Фолликулометрия. Трансвагинальное (ТВ) исследование",
-          "priceValue": 40000
-        },
-        {
-          "nameRu": "Электрокардиография",
-          "priceValue": 25000
-        }
-      ]
-    },
-    {
       "id": "davlin-dermapal",
       "nameRu": "Давлин Dermapal",
       "items": [
@@ -496,42 +336,6 @@
         {
           "nameRu": "Операция (Базалиома)",
           "priceValue": 4000000
-        },
-        {
-          "nameRu": "Удаление родинок",
-          "priceValue": 2100000
-        },
-        {
-          "nameRu": "Удаление родинок",
-          "priceValue": 800000
-        },
-        {
-          "nameRu": "Удаление новооброзование",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Удаление новооброзование",
-          "priceValue": 800000
-        },
-        {
-          "nameRu": "Удаление родинок",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Удаление новооброзование",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Удаление новооброзование",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Удаление новооброзование",
-          "priceValue": 650000
-        },
-        {
-          "nameRu": "Удаление новооброзование",
-          "priceValue": 1000000
         },
         {
           "nameRu": "Обработка новооброзование",
@@ -3730,40 +3534,6 @@
       ]
     },
     {
-      "id": "fotoomolozhenie-forever-young",
-      "nameRu": "Фотоомоложение forever young",
-      "items": [
-        {
-          "nameRu": "Декольте",
-          "priceValue": 3500000
-        },
-        {
-          "nameRu": "Кисти рук",
-          "priceValue": 2100000
-        },
-        {
-          "nameRu": "Лицо",
-          "priceValue": 3500000
-        },
-        {
-          "nameRu": "Лицо + Шея",
-          "priceValue": 5500000
-        },
-        {
-          "nameRu": "Лицо + Шея + Декольте",
-          "priceValue": 6500000
-        },
-        {
-          "nameRu": "Предплечья",
-          "priceValue": 2500000
-        },
-        {
-          "nameRu": "Шея",
-          "priceValue": 3100000
-        }
-      ]
-    },
-    {
       "id": "fotoomolozhenie-ipl-lumecca",
       "nameRu": "Фотоомоложение IPL (Lumecca)",
       "items": [
@@ -3806,48 +3576,6 @@
         {
           "nameRu": "подмышки",
           "priceValue": 600000
-        }
-      ]
-    },
-    {
-      "id": "fotoomolozhenie-bbl-bbl-omolozhenie",
-      "nameRu": "Фотоомоложение ББЛ (BBL омоложение)",
-      "items": [
-        {
-          "nameRu": "Кисти рук",
-          "priceValue": 1500000
-        },
-        {
-          "nameRu": "Лицо + Шея IPL",
-          "priceValue": 1200000
-        },
-        {
-          "nameRu": "Лицо + Шея +Декольте",
-          "priceValue": 4000000
-        },
-        {
-          "nameRu": "Лицо полностью IPL",
-          "priceValue": 900000
-        },
-        {
-          "nameRu": "Одна вспышка",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Предплечья",
-          "priceValue": 2000000
-        },
-        {
-          "nameRu": "Спина полностью",
-          "priceValue": 3000000
-        },
-        {
-          "nameRu": "Шея",
-          "priceValue": 1300000
-        },
-        {
-          "nameRu": "Щеки",
-          "priceValue": 1500000
         }
       ]
     },
@@ -4286,16 +4014,6 @@
         {
           "nameRu": "Эксимер от 10",
           "priceValue": 200000
-        }
-      ]
-    },
-    {
-      "id": "endosfera",
-      "nameRu": "Эндосфера",
-      "items": [
-        {
-          "nameRu": "Эндосфера 75 мин",
-          "priceValue": 850000
         }
       ]
     },

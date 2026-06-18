@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';import { publicApi } from '../api';
+import { useCallback, useEffect, useState } from 'react';
+import { publicApi } from '../api';
 import {
   mapArticleListItemFromApi,
   mapDoctorFromApi,
@@ -68,15 +69,19 @@ export function useClinicData(): ClinicDataState {
 
   const updateArticleViews = useCallback((match: { id?: string; slug?: string }, views: number) => {
     const normalizedViews = normalizeArticleViews(views);
-    setArticles((prev) =>
-      prev.map((article) => {
+    setArticles((prev) => {
+      let changed = false;
+      const next = prev.map((article) => {
         const isMatch =
           (match.id && article.id === match.id) ||
           (match.slug && (article.slug === match.slug || article.id === match.slug));
         if (!isMatch) return article;
+        if (article.views === normalizedViews) return article;
+        changed = true;
         return { ...article, views: normalizedViews };
-      }),
-    );
+      });
+      return changed ? next : prev;
+    });
   }, []);
 
   useEffect(() => {

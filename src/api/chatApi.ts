@@ -41,13 +41,13 @@ export async function sendClinicChatMessage(payload: {
   return data.reply;
 }
 
-export async function checkChatHealth(): Promise<{ geminiConfigured: boolean }> {
+export async function checkChatHealth(): Promise<{ aiConfigured: boolean }> {
   try {
     const res = await fetch('/api/chat/health');
-    if (!res.ok) return { geminiConfigured: false };
-    const data = (await res.json()) as { geminiConfigured?: boolean };
-    return { geminiConfigured: Boolean(data.geminiConfigured) };
+    if (!res.ok) return { aiConfigured: false };
+    const data = (await res.json()) as { aiConfigured?: boolean };
+    return { aiConfigured: Boolean(data.aiConfigured) };
   } catch {
-    return { geminiConfigured: false };
+    return { aiConfigured: false };
   }
 }

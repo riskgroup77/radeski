@@ -34,8 +34,18 @@ export async function getArticles(search?: string): Promise<ApiArticleListItem[]
   return apiRequest<ApiArticleListItem[]>(`/api/articles${query}`);
 }
 
+const inflightArticleBySlug = new Map<string, Promise<ApiArticle>>();
+
 export async function getArticleBySlug(slug: string): Promise<ApiArticle> {
-  return apiRequest<ApiArticle>(`/api/articles/${encodeURIComponent(slug)}`);
+  const key = slug.trim();
+  const pending = inflightArticleBySlug.get(key);
+  if (pending) return pending;
+
+  const promise = apiRequest<ApiArticle>(`/api/articles/${encodeURIComponent(key)}`).finally(() => {
+    inflightArticleBySlug.delete(key);
+  });
+  inflightArticleBySlug.set(key, promise);
+  return promise;
 }
 
 export async function createAppointment(payload: AppointmentCreate): Promise<ApiResponse> {

@@ -1,13 +1,14 @@
 import type { PriceItem } from '../types';
 import { buildCatalogPriceItems, normalizeKey, priceMatchKey } from './priceCatalog';
 import { localizePriceName } from './localizePriceName';
+import { filterExcludedPrices } from './excludedServices';
+import { normalizePriceItems } from './priceDisplay';
 
 const API_CATEGORY_ALIASES: Record<string, string[]> = {
   dermatologiya: ['konsultatsii'],
   dermatoonkologiya: ['dermatoonkolog', 'tsifrovaya-dematologiya-dermatoskopiya', 'pasport-kozhi'],
   trikhologiya: ['trihologiya'],
   'apparatnaya-kosmetologiya': [
-    'fotoomolozhenie-bbl-bbl-omolozhenie',
     'fotoomolozhenie-ipl-lumecca',
     'esteticheskaya-kosmetologiya',
     'hooywood-spectra',
@@ -55,20 +56,22 @@ function findCatalogMatch(apiItem: PriceItem, catalog: PriceItem[]): PriceItem |
 
 function mergeApiOntoCatalog(catalogItem: PriceItem, apiItem: PriceItem): PriceItem {
   const hasGoodRu = apiItem.name.ru && !apiItem.name.ru.includes('???');
-  const hasGoodUz = apiItem.name.uz && !apiItem.name.uz.includes('???');
+  const ruBase = hasGoodRu ? apiItem.name.ru : catalogItem.name.ru;
 
-  return {
+  const merged: PriceItem = {
     ...catalogItem,
     id: apiItem.id,
     name: {
-      ru: hasGoodRu ? apiItem.name.ru : catalogItem.name.ru,
-      uz: hasGoodUz ? apiItem.name.uz : catalogItem.name.uz,
-      en: apiItem.name.en?.trim() ? apiItem.name.en : catalogItem.name.en,
+      ru: ruBase,
+      uz: catalogItem.name.uz,
+      en: catalogItem.name.en,
     },
     price: apiItem.price || catalogItem.price,
     priceValue: apiItem.priceValue ?? catalogItem.priceValue,
     category: catalogItem.category,
   };
+
+  return normalizePriceItems([merged])[0];
 }
 
 const API_PRICE_FULL_THRESHOLD = 100;
@@ -86,7 +89,7 @@ function localizeApiPriceNames(apiPrices: PriceItem[]): PriceItem[] {
 
 export function enrichPrices(apiPrices: PriceItem[]): PriceItem[] {
   if (apiPrices.length >= API_PRICE_FULL_THRESHOLD) {
-    return localizeApiPriceNames(apiPrices);
+    return filterExcludedPrices(normalizePriceItems(localizeApiPriceNames(apiPrices)));
   }
 
   const catalog = buildCatalogPriceItems();
@@ -107,20 +110,22 @@ export function enrichPrices(apiPrices: PriceItem[]): PriceItem[] {
     return catalogItem;
   });
 
-  const apiOnly = apiPrices
-    .filter((api) => !usedApiIds.has(api.id))
-    .map((api) => ({
-      ...api,
-      name: {
-        ru: api.name.ru?.includes('???') ? localizePriceName(api.name.uz, 'ru') : api.name.ru,
-        uz: api.name.uz,
-        en: api.name.en,
-      },
-    }));
+  const apiOnly = normalizePriceItems(
+    apiPrices
+      .filter((api) => !usedApiIds.has(api.id))
+      .map((api) => ({
+        ...api,
+        name: {
+          ru: api.name.ru?.includes('???') ? localizePriceName(api.name.uz, 'ru') : api.name.ru,
+          uz: api.name.uz,
+          en: api.name.en,
+        },
+      })),
+  );
 
-  return [...mergedCatalog, ...apiOnly];
+  return filterExcludedPrices([...mergedCatalog, ...apiOnly]);
 }
 
 export function getCatalogPrices(): PriceItem[] {
-  return buildCatalogPriceItems();
+  return filterExcludedPrices(buildCatalogPriceItems());
 }

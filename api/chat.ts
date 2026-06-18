@@ -1,16 +1,16 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { ChatApiError, handleGeminiChat } from '../server/geminiChatHandler';
-import { isGeminiConfigured, getGeminiModel } from '../server/loadEnv';
+import { ChatApiError, handleDeepSeekChat } from '../server/deepseekChatHandler';
+import { getDeepSeekModel, isDeepSeekConfigured, loadProjectEnv } from '../server/loadEnv';
 
-import '../server/loadEnv';
+loadProjectEnv();
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
-    const configured = isGeminiConfigured();
+    const configured = isDeepSeekConfigured();
     return res.status(200).json({
       ok: true,
-      geminiConfigured: configured,
-      model: getGeminiModel(),
+      aiConfigured: configured,
+      model: getDeepSeekModel(),
     });
   }
 
@@ -19,7 +19,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const reply = await handleGeminiChat(req.body);
+    const reply = await handleDeepSeekChat(req.body);
     return res.status(200).json({ reply });
   } catch (error) {
     if (error instanceof ChatApiError) {

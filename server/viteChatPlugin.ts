@@ -1,17 +1,33 @@
-import type { Plugin } from 'vite';
-import { ChatApiError, handleGeminiChat } from './geminiChatHandler';
+import { loadEnv, type Plugin } from 'vite';
+import { ChatApiError, handleDeepSeekChat } from './deepseekChatHandler';
 import { readJsonBody } from './readJsonBody';
-import { isGeminiConfigured, getGeminiModel } from './loadEnv';
+import {
+  getDeepSeekModel,
+  isDeepSeekConfigured,
+  loadProjectEnv,
+} from './loadEnv';
 
 function requestPath(url: string | undefined): string {
   if (!url) return '';
   return url.split('?')[0] ?? '';
 }
 
-export function geminiChatPlugin(): Plugin {
+export function clinicChatPlugin(): Plugin {
+  let projectRoot = process.cwd();
+
+  function syncEnv(mode: string, root: string): void {
+    projectRoot = root;
+    loadProjectEnv(loadEnv(mode, root, ''), root);
+  }
+
   return {
-    name: 'radeski-gemini-chat-api',
+    name: 'radeski-clinic-chat-api',
+    configResolved(config) {
+      syncEnv(config.mode, config.root);
+    },
     configureServer(server) {
+      syncEnv(server.config.mode, server.config.root);
+
       server.middlewares.use(async (req, res, next) => {
         const path = requestPath(req.url);
 
@@ -20,14 +36,16 @@ export function geminiChatPlugin(): Plugin {
           return;
         }
 
+        syncEnv(server.config.mode, server.config.root);
+
         if (req.method === 'GET' && path === '/api/chat/health') {
-          const configured = isGeminiConfigured();
+          const configured = isDeepSeekConfigured(projectRoot);
           res.setHeader('Content-Type', 'application/json');
           res.end(
             JSON.stringify({
               ok: true,
-              geminiConfigured: configured,
-              model: getGeminiModel(),
+              aiConfigured: configured,
+              model: getDeepSeekModel(),
             }),
           );
           return;
@@ -40,7 +58,10 @@ export function geminiChatPlugin(): Plugin {
 
         try {
           const body = await readJsonBody(req);
-          const reply = await handleGeminiChat(body as Parameters<typeof handleGeminiChat>[0]);
+          const reply = await handleDeepSeekChat(
+            body as Parameters<typeof handleDeepSeekChat>[0],
+            projectRoot,
+          );
           res.setHeader('Content-Type', 'application/json');
           res.end(JSON.stringify({ reply }));
         } catch (error) {

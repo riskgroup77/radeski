@@ -2,5 +2,5 @@
   "name": "Radeski Skin Clinic",
   "description": "Radeski Skin & Aesthetic Clinic - Ko'p tilli tibbiy klinika veb-portali (UZ, RU, EN)",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_DEEPSEEK_API"]
 }

@@ -1,7 +1,6 @@
 import type { Locale } from '../types';
 
-/** Preyskurant bo'limlari — rasmiy tartib */
-export const PRICE_CATEGORY_ORDER: string[] = [
+/** Preyskurant bo'limlari — rasmiy tartib */export const PRICE_CATEGORY_ORDER: string[] = [
   'bazovyy',
   '1-serniya-davlin',
   'derma-v',
@@ -16,8 +15,6 @@ export const PRICE_CATEGORY_ORDER: string[] = [
   'lazernaya-ablyatsionnaya-shlifovka-kozhi-srednyaya',
   'lazernaya-ablyatsionnaya-shlifovka-kozhi-poverhnostnaya',
   'lazernaya-epilyatsiya',
-  'fotoomolozhenie-bbl-bbl-omolozhenie',
-  'fotoomolozhenie-forever-young',
   'fotoomolozhenie-ipl-lumecca',
   'fotoomolozhenie-lechenie-sosudistyh-patologiy-rozatsea',
   'fotolechenie-acne-forever-clear',
@@ -38,15 +35,12 @@ export const PRICE_CATEGORY_ORDER: string[] = [
   'davlin-dermapal',
   'dnevnoy-statsionar',
   'statsionar',
-  'vrach-uzi',
   'laboratoriya',
   'allergo-proba-10-punktov',
   'arenda-apparatov',
-  'endosfera',
   'healinte',
   'neo-lyuks',
   'm-seriya',
-  'eptaderm',
   'teosyal',
   'vichi-dercos',
   'vichi-uhodovaya',
@@ -72,6 +66,9 @@ const CATEGORY_LABELS: Record<string, Record<Locale, string>> = {
   'vrach-uzi': { uz: 'UZI shifokori', ru: 'Врач УЗИ', en: 'Ultrasound diagnostics' },
   'davlin-dermapal': { uz: 'Davlin Dermapal', ru: 'Davlin Dermapal', en: 'Davlin Dermapal' },
   dermatoonkolog: { uz: 'Dermatoonkologiya', ru: 'Дерматоонколог', en: 'Dermato-oncology' },
+  dermatologiya: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+  'apparatnaya-kosmetologiya': { uz: 'Apparat kosmetologiya', ru: 'Аппаратная косметология', en: 'Device-based cosmetology' },
+  'injektsionnaya-kosmetologiya': { uz: 'Inyeksion kosmetologiya', ru: 'Инъекционная косметология', en: 'Injection cosmetology' },
   'dnevnoy-statsionar': { uz: 'Kunduzgi statsionar', ru: 'Дневной стационар', en: 'Day hospital' },
   'inektsionnaya-kosmetologiya': { uz: 'Inyeksion kosmetologiya', ru: 'Инъекционная косметология', en: 'Injection cosmetology' },
   konsultatsii: { uz: 'Konsultatsiyalar', ru: 'Консультации', en: 'Consultations' },
@@ -133,16 +130,24 @@ const CATEGORY_LABELS: Record<string, Record<Locale, string>> = {
   'esteticheskaya-kosmetologiya': { uz: 'Estetik kosmetologiya', ru: 'Эстетическая косметология', en: 'Aesthetic cosmetology' },
 };
 
-export function getPriceCategoryLabel(categoryId: string, locale: Locale, fallbackRu?: string): string {
-  const labels = CATEGORY_LABELS[categoryId];
-  if (labels) return labels[locale];
-  if (fallbackRu) {
-    if (locale === 'ru') return fallbackRu;
-    return fallbackRu;
-  }
-  return categoryId;
+const CATEGORY_ALIASES: Record<string, string> = {
+  rezhuran: 'rejuran',
+  'injektsionnaya-kosmetologiya': 'inektsionnaya-kosmetologiya',
+  trikhologiya: 'trihologiya',
+  dermatoonkologiya: 'dermatoonkolog',
+  'lazernaya-epilyaciya': 'lazernaya-epilyatsiya',
+};
+
+function resolveCategoryKey(categoryId: string): string {
+  return CATEGORY_ALIASES[categoryId] ?? categoryId;
 }
 
+export function getPriceCategoryLabel(categoryId: string, locale: Locale): string {
+  const key = resolveCategoryKey(categoryId);
+  const labels = CATEGORY_LABELS[key];
+  if (labels?.[locale]) return labels[locale];
+  return categoryId;
+}
 export function getPriceCategoryOptions(locale: Locale): { id: string; title: string }[] {
   return PRICE_CATEGORY_ORDER.map((id) => ({
     id,

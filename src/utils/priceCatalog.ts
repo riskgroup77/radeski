@@ -2,6 +2,7 @@ import type { PriceItem } from '../types';
 import catalogData from '../data/priceCatalog.json';
 import { formatPriceValue } from '../api/mappers';
 import { localizePriceName } from './localizePriceName';
+import { normalizePriceItems } from './priceDisplay';
 
 interface CatalogCategory {
   id: string;
@@ -38,7 +39,7 @@ export function buildCatalogPriceItems(): PriceItem[] {
     });
   });
 
-  return items;
+  return normalizePriceItems(items);
 }
 
 export function getCatalogCategoryNameRu(categoryId: string): string | undefined {

@@ -1,10 +1,10 @@
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ChatApiError, handleGeminiChat } from './geminiChatHandler';
-import { isGeminiConfigured, getGeminiModel } from './loadEnv';
+import { ChatApiError, handleDeepSeekChat } from './deepseekChatHandler';
+import { getDeepSeekModel, isDeepSeekConfigured, loadProjectEnv } from './loadEnv';
 
-import './loadEnv';
+loadProjectEnv();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.json({ limit: '48kb' }));
 
 app.post('/api/chat', async (req, res) => {
   try {
-    const reply = await handleGeminiChat(req.body);
+    const reply = await handleDeepSeekChat(req.body);
     res.json({ reply });
   } catch (error) {
     if (error instanceof ChatApiError) {
@@ -26,8 +26,8 @@ app.post('/api/chat', async (req, res) => {
 });
 
 app.get('/api/chat/health', (_req, res) => {
-  const configured = isGeminiConfigured();
-  res.json({ ok: true, geminiConfigured: configured, model: getGeminiModel() });
+  const configured = isDeepSeekConfigured();
+  res.json({ ok: true, aiConfigured: configured, model: getDeepSeekModel() });
 });
 
 const distPath = path.resolve(__dirname, '../dist');
