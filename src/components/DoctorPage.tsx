@@ -73,20 +73,21 @@ export default function DoctorPage({
           animate={{ opacity: 1, y: 0 }}
           className="bg-brand-white rounded-2xl sm:rounded-3xl border border-brand-sectiongray shadow-sm overflow-hidden"
         >
-          <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-[38%] relative bg-brand-offwhite shrink-0 min-h-[320px] md:min-h-[520px]">
-              {doctor.photo ? (
-                <MediaImage
-                  src={doctor.photo}
-                  alt={doctor.name[locale]}
-                  className="absolute inset-0 w-full h-full object-cover object-center"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted text-sm">
-                  {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет фото' : 'No photo'}
-                </div>
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/30 to-transparent pointer-events-none" />
+          <div className="flex flex-col md:flex-row md:items-stretch">
+            <div className="w-full md:w-[38%] bg-brand-offwhite shrink-0 border-b md:border-b-0 md:border-r border-brand-sectiongray">
+              <div className="flex items-start justify-center p-4 sm:p-6 md:p-8 md:min-h-full">
+                {doctor.photo ? (
+                  <MediaImage
+                    src={doctor.photo}
+                    alt={doctor.name[locale]}
+                    className="w-full h-auto max-h-[min(78vh,720px)] md:max-h-none object-contain object-top"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center w-full min-h-[280px] text-brand-text-muted text-sm">
+                    {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет фото' : 'No photo'}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="w-full md:w-[62%] p-6 sm:p-8 lg:p-10 flex flex-col justify-between">

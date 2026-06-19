@@ -10,6 +10,9 @@ export const DICTIONARY = {
     navPrices: "Narxlar",
     navArticles: "Maqolalar",
     navContacts: "Kontaktlar",
+    navVideos: "Videolar",
+    navBranches: "Filiallar",
+    navResults: "Natijalar",
     navTerms: "Foydalanish shartlari",
     navPrivacy: "Maxfiylik siyosati",
     appointmentBtn: "Qabulga yozilish",
@@ -47,6 +50,12 @@ export const DICTIONARY = {
     priceNoticeBody: "Preyskurantdagi narxlar rasmiy klinika ro'yxati bo'lib, tanishuv maqsadida beriladi. Yakuniy narx shifokor ko'rigidagi tashxis va davolash hajmiga qarab belgilanadi.",
     articlesTitle: "Tibbiy maqolalar & Yangiliklar",
     articlesDesc: "Teri parvarishi, kasalliklar va ularni davolash bo'yicha shifokorlarimiz tavsiyalari",
+    videosTitle: "Klinika videolari",
+    videosDesc: "Radeski klinikasidagi zamonaviy uskunalar, xizmatlar va bemor parvarishi haqida qisqa videolar",
+    branchesTitle: "Bizning filiallar",
+    branchesDesc: "Farg'ona vodiysi bo'ylab Radeski klinikasi filiallari va qabul punktlari",
+    resultsTitle: "Davolash natijalari",
+    resultsDesc: "Bemorlarimizdagi real o'zgarishlar — oldin va keyin. Har bir holat individual yondashuv asosida",
     searchPlaceholder: "Xizmatlar yoki maqolalarni qidirish...",
     experience: "Tajriba",
     education: "Ish joyi",
@@ -58,14 +67,14 @@ export const DICTIONARY = {
     yearsActive: "yillik tajriba",
     reviewsCount: "ko'rib chiqilgan fikrlar",
     seoTitle: "Radeski Skin & Aesthetic Clinic - Sog'lom va go'zal teri kaliti",
-    seoText: "Radeski dermatologiya va estetika klinikasi Farg'ona shahrida zamonaviy jihozlar va malakali tibbiyot xodimlari bilan xizmat ko'rsatmoqda. Biz teri kasalliklarini diagnostika qilish, davolash, jarrohlik amaliyotlari va ilg'or kosmetologiya yo'nalishlarida ilg'or texnologiyalarni qo'llaymiz. BBL, PhotoFinder va Moos mikrografik jarrohligi kabi zamonaviy usullar klinikamizning asosiy ustunligidir.",
+    seoText: "Radeski dermatologiya va estetika klinikasi Farg'ona shahrida zamonaviy jihozlar va malakali tibbiyot xodimlari bilan xizmat ko'rsatmoqda. Biz teri kasalliklarini diagnostika qilish, davolash, jarrohlik amaliyotlari va ilg'or kosmetologiya yo'nalishlarida ilg'or texnologiyalarni qo'llaymiz. IPL, PhotoFinder va Moos mikrografik jarrohligi kabi zamonaviy usullar klinikamizning asosiy ustunligidir.",
     aboutHeader: "Sizning go'zalligingiz va sog'lig'ingiz - bizning kasbiy burchimiz",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic dermatologiya, kosmetologiya va dermato-onkologiya sohalarida Farg'ona va butun vodiyda yuqori sifat standartlariga ega tibbiy xizmatlarni taqdim etadi.",
     aboutParagraph2: "Klinikamiz Germaniya, Italiya va AQShning yetakchi kompaniyalari ishlab chiqargan eng so'nggi va xavfsiz apparat va texnologiyalardan foydalanadi. Ashurov Dilshod Davlatovich boshchiligidagi shifokorlar guruhi muntazam ravishda Yevropa va MDH mamlakatlarida xalqaro sertifikatlardan o'tishadi.",
     features01: "Professional shifokorlar",
     features01Desc: "Xalqaro darajadagi dermatologlar va kosmetologlar jamoasi.",
     features02: "Zamonaviy innovatsiyalar",
-    features02Desc: "O'zbekistonda noyob bo'lgan PhotoFinder va BBL uskunalaridan foydalanish.",
+    features02Desc: "O'zbekistonda noyob bo'lgan PhotoFinder va IPL uskunalaridan foydalanish.",
     features03: "Yuqori darajadagi sterilizatsiya",
     features03Desc: "Yevropa tibbiyot standartlariga to'la mos keladigan steril xonalar.",
     features04: "Shaxsiy yondashuv",
@@ -85,6 +94,9 @@ export const DICTIONARY = {
     navPrices: "Цены",
     navArticles: "Статьи",
     navContacts: "Контакты",
+    navVideos: "Видео",
+    navBranches: "Филиалы",
+    navResults: "Результаты",
     navTerms: "Пользовательское соглашение",
     navPrivacy: "Политика конфиденциальности",
     appointmentBtn: "Записаться на прием",
@@ -122,6 +134,12 @@ export const DICTIONARY = {
     priceNoticeBody: "Прейскурант носит информационный характер. Окончательная стоимость определяется врачом на приёме с учётом объёма лечения и индивидуальных показаний.",
     articlesTitle: "Медицинские статьи и Новости",
     articlesDesc: "Рекомендации наших врачей по уходу за кожей, заболеваниям и их лечению",
+    videosTitle: "Видео о клинике",
+    videosDesc: "Короткие ролики об оборудовании, услугах и заботе о пациентах в клинике Radeski",
+    branchesTitle: "Наши филиалы",
+    branchesDesc: "Филиалы и пункты приёма Radeski по Ферганской долине",
+    resultsTitle: "Результаты лечения",
+    resultsDesc: "Реальные изменения у наших пациентов — до и после. Каждый случай индивидуален",
     searchPlaceholder: "Поиск услуг или статей...",
     experience: "Опыт работы",
     education: "Место работы",
@@ -133,14 +151,14 @@ export const DICTIONARY = {
     yearsActive: "лет практики",
     reviewsCount: "проверенных отзывов",
     seoTitle: "Radeski Skin & Aesthetic Clinic - Ключ к здоровой и красивой коже",
-    seoText: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное оборудование и квалифицированный медицинский персонал. Мы применяем новейшие технологии в диагностике, лечении кожных заболеваний, хирургических процедурах и эстетической косметологии. Передовые методы, такие как BBL, PhotoFinder и микрографическая хирургия по методу Mohs, являются ключевыми преимуществами нашей клиники.",
+    seoText: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное оборудование и квалифицированный медицинский персонал. Мы применяем новейшие технологии в диагностике, лечении кожных заболеваний, хирургических процедурах и эстетической косметологии. Передовые методы, такие как IPL, PhotoFinder и микрографическая хирургия по методу Mohs, являются ключевыми преимуществами нашей клиники.",
     aboutHeader: "Ваша красота и здоровье — наш профессиональный долг",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic предлагает медицинские услуги высочайших стандартов в области дерматологии, косметологии и дерматоонкологии в Фергане и по всей Ферганской долине.",
     aboutParagraph2: "Наша клиника оснащена самым современным и безопасным оборудованием от ведущих производителей Германии, Италии и США. Команда врачей под руководством Ашурова Дильшода Давлатовича регулярно проходит стажировки и сертификации в Европе и странах СНГ.",
     features01: "Профессиональные врачи",
     features01Desc: "Команда дерматологов и косметологов международного уровня.",
     features02: "Современные инновации",
-    features02Desc: "Применение уникального оборудования PhotoFinder и систем BBL в Узбекистане.",
+    features02Desc: "Применение уникального оборудования PhotoFinder и систем IPL в Узбекистане.",
     features03: "Высочайшая стерильность",
     features03Desc: "Стерилизационные боксы, полностью соответствующие европейским медицинским регламентам.",
     features04: "Индивидуальный подход",
@@ -160,6 +178,9 @@ export const DICTIONARY = {
     navPrices: "Prices",
     navArticles: "Articles",
     navContacts: "Contacts",
+    navVideos: "Videos",
+    navBranches: "Branches",
+    navResults: "Results",
     navTerms: "Terms of Use",
     navPrivacy: "Privacy Policy",
     appointmentBtn: "Book Appointment",
@@ -197,6 +218,12 @@ export const DICTIONARY = {
     priceNoticeBody: "This price list is for reference. Final cost is determined at consultation based on treatment scope and clinical indications.",
     articlesTitle: "Medical Articles & News",
     articlesDesc: "Skin care recommendations, conditions, and treatments directly from our clinical team",
+    videosTitle: "Clinic videos",
+    videosDesc: "Short videos about Radeski equipment, services, and patient care standards",
+    branchesTitle: "Our branches",
+    branchesDesc: "Radeski clinic branches and consultation points across the Fergana Valley",
+    resultsTitle: "Treatment results",
+    resultsDesc: "Real patient improvements — before and after. Every case follows an individual plan",
     searchPlaceholder: "Search services or articles...",
     experience: "Experience",
     education: "Workplace",
@@ -208,14 +235,14 @@ export const DICTIONARY = {
     yearsActive: "years of experience",
     reviewsCount: "verified testimonials",
     seoTitle: "Radeski Skin & Aesthetic Clinic - The Key to Healthy and Beautiful Skin",
-    seoText: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic and cosmetic facilities. We employ gold-standard technology in diagnosing and treating dermatological conditions, surgical procedures, and genetic-level skin rejuvenation. Advanced procedures like BBL, PhotoFinder computerized mole mapping, and Mohs micrographic surgery form the core of our specialized solutions.",
+    seoText: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic and cosmetic facilities. We employ gold-standard technology in diagnosing and treating dermatological conditions, surgical procedures, and genetic-level skin rejuvenation. Advanced procedures like IPL, PhotoFinder computerized mole mapping, and Mohs micrographic surgery form the core of our specialized solutions.",
     aboutHeader: "Your beauty and health is our professional dedication",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic provides premier medical services in clinical dermatology, aesthetic cosmetology, and dermato-oncology across regional Fergana.",
     aboutParagraph2: "Our facility is equipped with state-of-the-art clinical devices from world leaders in Germany, Italy, and the USA. Led by Dr. Dilshod Davlatovich Ashurov, our specialized medical group regularly is trained in European and international institutes.",
     features01: "Professional Physicians",
     features01Desc: "International-class dermatologists and aesthetic cosmetologists.",
     features02: "Modern Breakthroughs",
-    features02Desc: "Exclusive clinical application of PhotoFinder and Sciton BBL systems in Uzbekistan.",
+    features02Desc: "Exclusive clinical application of PhotoFinder and Sciton IPL systems in Uzbekistan.",
     features03: "High-grade Disinfection",
     features03Desc: "Clean sterilization facilities matching global healthcare parameters.",
     features04: "Bespoke Care",
@@ -230,9 +257,27 @@ export const DICTIONARY = {
 };
 
 export const CLINIC_RATINGS = [
-  { platform: "Yandex", rating: "4.9", count: 124, logo: "⭐" },
-  { platform: "Google Maps", rating: "4.8", count: 85, logo: "📍" },
-  { platform: "2GIS", rating: "4.9", count: 96, logo: "🗺️" }
+  {
+    platform: 'Yandex',
+    rating: '4.9',
+    count: 124,
+    logo: '⭐',
+    url: 'https://yandex.uz/profile/138616043960',
+  },
+  {
+    platform: 'Google Maps',
+    rating: '4.8',
+    count: 85,
+    logo: '📍',
+    url: 'https://www.google.com/maps/place/Radeski+Skin+%26+Aesthetic+Clinic/@40.3833622,71.7936632,17z/data=!3m1!4b1!4m6!3m5!1s0x38bb830bba97cb09:0xd99d7f456cd820e8!8m2!3d40.3833622!4d71.7962381!16s%2Fg%2F11y2mv11w6?hl=ru&entry=ttu',
+  },
+  {
+    platform: '2GIS',
+    rating: '4.9',
+    count: 96,
+    logo: '🗺️',
+    url: 'https://2gis.kg/bishkek?m=72.367424%2C41.175575%2F7.43',
+  },
 ];
 
 export const SITE_LOGO = '/gallery/logo.webp';
@@ -299,9 +344,9 @@ export const DOCTORS: Doctor[] = [
       en: "Dermatologist, Aesthetic Cosmetologist"
     },
     bio: {
-      uz: "Inyeksion va apparat kosmetologiyasi mutaxassisi. BBL fotoomolajeniyani gen darajasida qo'llash va yoshartirish protokollarini amalga oshiradi.",
-      ru: "Специалист по инъекционной и аппаратной косметологии. Владеет методиками фотоомоложения BBL на генном уровне и лифтинга кожи.",
-      en: "Expert in injection therapy and medical hardware cosmetology. Implements high-end genetic-level BBL photo-rejuvenation systems."
+      uz: "Inyeksion va apparat kosmetologiyasi mutaxassisi. IPL fotoomolajeniyani gen darajasida qo'llash va yoshartirish protokollarini amalga oshiradi.",
+      ru: "Специалист по инъекционной и аппаратной косметологии. Владеет методиками фотоомоложения IPL на генном уровне и лифтинга кожи.",
+      en: "Expert in injection therapy and medical hardware cosmetology. Implements high-end genetic-level IPL photo-rejuvenation systems."
     },
     experience: {
       uz: "12",
@@ -485,7 +530,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       en: "Hardware Cosmetology"
     },
     description: {
-      uz: "Eng so'nggi lazer va foto-texnologiyalar (BBL, mikrotoklar) orqali terini chuqur yoshartirish.",
+      uz: "Eng so'nggi lazer va foto-texnologiyalar (IPL, mikrotoklar) orqali terini chuqur yoshartirish.",
       ru: "Омоложение и чистка кожи лица с помощью новейших лазерных ультразвуковых и фотосистем.",
       en: "Non-invasive skin rejuvenation, texturing, and cell recovery using advanced medical laser devices."
     },
@@ -493,7 +538,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     subServices: [
       {
         id: "bbl-foto",
-        name: { uz: "BBL fotoomolajeniyani", ru: "BBL-фотоомоложение", en: "BroadBand Light (BBL) Rejuvenation" },
+        name: { uz: "IPL fotoomolajeniyani", ru: "IPL-фотоомоложение", en: "Intense Pulsed Light (IPL) Rejuvenation" },
         description: {
           uz: "Gen darajasida hujayra qarishini to'xtatuvchi, pigmentatsiya va qon-tomir tarmoqlarini yo'qotuvchi original Amerika texnologiyasi.",
           ru: "Легендарная американская методика омоложения кожи на генном уровне, удаления пигментации и сосудистых звездочек.",
@@ -771,15 +816,15 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       en: "Gene-Level Photo-Rejuvenation"
     },
     description: {
-      uz: "Qarish genlarini faolligini o'zgartiruvchi original BBL Forever Young ilg'or texnologiyasi.",
-      ru: "Революционная восстановительная технология BBL Forever Young, поворачивающая клеточный возраст вспять.",
-      en: "Revolutionary medical-grade Sciton BBL Forever Young protocols directly resetting aging genes."
+      uz: "Qarish genlarini faolligini o'zgartiruvchi original IPL Forever Young ilg'or texnologiyasi.",
+      ru: "Революционная восстановительная технология IPL Forever Young, поворачивающая клеточный возраст вспять.",
+      en: "Revolutionary medical-grade Sciton IPL Forever Young protocols directly resetting aging genes."
     },
     icon: "Dna",
     subServices: [
       {
         id: "fy-protocols",
-        name: { uz: "Forever Young BBL protokollari", ru: "Протоколы Forever Young BBL", en: "Forever Young BBL Protocols" },
+        name: { uz: "Forever Young IPL protokollari", ru: "Протоколы Forever Young IPL", en: "Forever Young IPL Protocols" },
         description: {
           uz: "Ajinsiz va chandiqsiz, butunlay yangi yosh, elastik va sog'lom teri qatlamini shakllantiruvchi amaliyot.",
           ru: "Воздействие световыми импульсами высокой интенсивности для активации генов, отвечающих за коллаген.",
@@ -827,14 +872,14 @@ export const ARTICLES: Article[] = [
       en: "How are hemangiomas treated without surgery?"
     },
     summary: {
-      uz: "Qizil tomirli xollar va bolalardagi tug'ma gemangiomalarning BBL foto-terapiyasi bilan xavfsiz davolash usullari.",
+      uz: "Qizil tomirli xollar va bolalardagi tug'ma gemangiomalarning IPL foto-terapiyasi bilan xavfsiz davolash usullari.",
       ru: "Современное неинвазивное лечение сосудистых опухолей и красных родинок с помощью технологии избирательного света.",
       en: "Discover modern, non-invasive treatment methods for vascular red spots and hemangiomas with pulsed light."
     },
     content: {
-      uz: "Gemangiomalar - qon tomirlarining haddan tashqari kengayishi yoki ko'payishidan hosil bo'ladigan xavfsiz tugunchalardir. Ilgari ularni faqat jarrohlik yoki kuchli kislotalar yordamida olib tashlashar edi. Bugungi kunda klinikada yangi BBL Sciton tizimi yordamida qon tomirlarga yo'naltirilgan nur yuborilib, sog'lom teri qatlamiga deyarli tegmasdan gemangiomalar yo'q qilinadi. Bemor hech qanday og'riq sezmaydi va chandiqlar qolmaydi.",
-      ru: "Гемангиомы представляют собой доброкачественные разрастания сосудов. Ранее для их удаления требовалось иссечение или жидкий азот, оставляющий ожоги. В нашей клинике применяется лазерная коагуляция и прогрессивные световые системы Sciton BBL. Световые волны селективно нагревают и склеивают пораженные сосуды, после чего гемангиома постепенно рассасывается без повреждения окружающих тканей.",
-      en: "Hemangiomas represent rapid benign vascular clustering. Traditional treatment relied heavily on liquid nitrogen or surgery, leaving noticeable scars. Today, our highly selective BBL light wavelength directly heats the feeding vessels, causing safe collapse and eventual natural absorption of the red spot, preserving neighboring skin."
+      uz: "Gemangiomalar - qon tomirlarining haddan tashqari kengayishi yoki ko'payishidan hosil bo'ladigan xavfsiz tugunchalardir. Ilgari ularni faqat jarrohlik yoki kuchli kislotalar yordamida olib tashlashar edi. Bugungi kunda klinikada yangi IPL Sciton tizimi yordamida qon tomirlarga yo'naltirilgan nur yuborilib, sog'lom teri qatlamiga deyarli tegmasdan gemangiomalar yo'q qilinadi. Bemor hech qanday og'riq sezmaydi va chandiqlar qolmaydi.",
+      ru: "Гемангиомы представляют собой доброкачественные разрастания сосудов. Ранее для их удаления требовалось иссечение или жидкий азот, оставляющий ожоги. В нашей клинике применяется лазерная коагуляция и прогрессивные световые системы Sciton IPL. Световые волны селективно нагревают и склеивают пораженные сосуды, после чего гемангиома постепенно рассасывается без повреждения окружающих тканей.",
+      en: "Hemangiomas represent rapid benign vascular clustering. Traditional treatment relied heavily on liquid nitrogen or surgery, leaving noticeable scars. Today, our highly selective IPL light wavelength directly heats the feeding vessels, causing safe collapse and eventual natural absorption of the red spot, preserving neighboring skin."
     },
     author: {
       uz: "Yo'qubov Farrux Farhodjonovich",

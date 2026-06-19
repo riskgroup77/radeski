@@ -45,6 +45,9 @@ import ServiceCategoryPage from './components/ServiceCategoryPage';
 import ServiceSubPage from './components/ServiceSubPage';
 import Doctors from './components/Doctors';
 import DoctorPage from './components/DoctorPage';
+import VideosPage from './components/VideosPage';
+import BranchesPage from './components/BranchesPage';
+import ResultsPage from './components/ResultsPage';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
 import ArticlePage from './components/ArticlePage';
@@ -53,16 +56,17 @@ import AdminPanel from './components/AdminPanel';
 import LegalPage from './components/LegalPage';
 import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle } from 'lucide-react';
+import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
 import { createAppointment } from './api/publicApi';
 import { ApiError } from './api/client';
 import { findArticleByRouteParam } from './utils/articles';
-import { openAppointmentBooking } from './config/links';
+import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
+import { getFeaturedDoctors } from './utils/doctors';
 
 export default function App() {
   return (
@@ -145,7 +149,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     return saved ? JSON.parse(saved) : CLINIC_RATINGS;
   });
 
-  const d = dynamicDictionary[locale] || DICTIONARY[locale];
+  const d = { ...DICTIONARY[locale], ...(dynamicDictionary[locale] || {}) };
 
   // Inline Consultation / Be Beautiful form states
   const [inlinePhone, setInlinePhone] = useState('');
@@ -262,8 +266,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       uz: {
         home: {
           title: "Radeski Skin & Aesthetic Clinic",
-          desc: "Radeski dermatologiya va estetika klinikasi Farg'onada PhotoFinder, BBL va Mohs mikrografik jarrohligi kabi zamonaviy usullar va malakali tibbiyot xodimlari bilan xizmat ko'rsatadi.",
-          keywords: "Radeski, dermatologiya, kosmetologiya Farg'ona, PhotoFinder, botoks, BroadBand Light, BBL, lazer epilyatsiyasi, Mohs operatsiyasi, psoriaz, o'sma"
+          desc: "Radeski dermatologiya va estetika klinikasi Farg'onada PhotoFinder, IPL va Mohs mikrografik jarrohligi kabi zamonaviy usullar va malakali tibbiyot xodimlari bilan xizmat ko'rsatadi.",
+          keywords: "Radeski, dermatologiya, kosmetologiya Farg'ona, PhotoFinder, botoks, BroadBand Light, IPL, lazer epilyatsiyasi, Mohs operatsiyasi, psoriaz, o'sma"
         },
         about: {
           title: "Muntazam Litsenziyalangan Shifokorlar & Akkreditatsiya | Radeski Clinic",
@@ -282,8 +286,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         },
         prices: {
           title: "Shaffof Xizmatlar Narxlari (Preyskurant) | Radeski Clinic",
-          desc: "Radeski klinikasidagi dermatologik konsultatsiyalar, BBL Forever Young, biopsiya va barcha dermatologik muolajalarning shaffof va qulay narxlari.",
-          keywords: "Dermatolog narxi, kosmetologiya narxlari, BBL narxi Farg'ona, botoks narxlari, xizmat preyskuranti, maslahat narxi"
+          desc: "Radeski klinikasidagi dermatologik konsultatsiyalar, IPL Forever Young, biopsiya va barcha dermatologik muolajalarning shaffof va qulay narxlari.",
+          keywords: "Dermatolog narxi, kosmetologiya narxlari, IPL narxi Farg'ona, botoks narxlari, xizmat preyskuranti, maslahat narxi"
         },
         articles: {
           title: "Teri Sog'lig'i Tavsiyalari, Psoriaz & Tibbiy Maqolalar | Radeski Clinic",
@@ -294,6 +298,21 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Rasmiy Manzil, Google Xarita & Aloqa Telefoni | Radeski Clinic",
           desc: "Farg'ona shahri, O'zbekiston Ovozi ko'chasi 1A. Telefon: +998 (73) 200-73-73. Klinikaga qulay yo'nalish xaritasi va ish vaqti.",
           keywords: "Radeski kontakti, Farg'ona dermatologiya telefoni, klinika manzili, ish vaqti, elektron pochta, Google xarita"
+        },
+        videos: {
+          title: "Klinika Videolari & Tibbiy Xizmatlar | Radeski Clinic",
+          desc: "Radeski klinikasidagi PhotoFinder, IPL terapiya va zamonaviy dermatologiya xizmatlari haqida video materiallar.",
+          keywords: "Radeski video, dermatologiya videosi, IPL terapiya, PhotoFinder, klinika tanishuv"
+        },
+        branches: {
+          title: "Filiallar va Qabul Punktlari | Radeski Clinic",
+          desc: "Farg'ona, Marg'ilon va Qo'qondagi Radeski klinikasi filiallari manzili, telefon va ish vaqti.",
+          keywords: "Radeski filiallar, Farg'ona klinika, Marg'ilon dermatolog, Qo'qon laboratoriya"
+        },
+        results: {
+          title: "Davolash Natijalari — Oldin va Keyin | Radeski Clinic",
+          desc: "Akne, pigmentatsiya, kuperoz va trixologiya bo'yicha Radeski klinikasi davolash natijalari galereyasi.",
+          keywords: "davolash natijalari, oldin keyin, akne natija, IPL natija, teri davolash"
         },
         terms: {
           title: "Foydalanish shartlari | Radeski Skin & Aesthetic Clinic",
@@ -309,7 +328,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       ru: {
         home: {
           title: "Главная - Ключ к здоровой и красивой коже | Radeski Skin & Aesthetic Clinic",
-          desc: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное немецкое оборудование PhotoFinder, BBL системы и Mohs хирургию.",
+          desc: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное немецкое оборудование PhotoFinder, IPL системы и Mohs хирургию.",
           keywords: "Радески, дерматолог Фергана, косметология, лазерная эпиляция, ботокс Фергана, PhotoFinder диагностика, витилиго, операции Моса"
         },
         about: {
@@ -320,7 +339,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         services: {
           title: "12 Медицинских Направлений & Лечение Кожи | Radeski Clinic",
           desc: "Всесторонние услуги в сфере клинической дерматовенерологии, эстетической косметологии, трихологии, дерматоонкологии и хирургии кожи по методике Mohs в Фергане.",
-          keywords: "Услуги косметолога, дерматология цены, удаление родинок, трихоскопия волос, фотоомоложение кожи лица, BBL"
+          keywords: "Услуги косметолога, дерматология цены, удаление родинок, трихоскопия волос, фотоомоложение кожи лица, IPL"
         },
         doctors: {
           title: "Наши Врачи, Научные Степни & Биографии | Radeski Clinic",
@@ -330,7 +349,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         prices: {
           title: "Цены на Услуги и Процедуры (Прейскурант) | Radeski Clinic",
           desc: "Прозрачный прейскурант медицинских и косметологических процедур в нашей клинике. Стоимость консультаций специалистов, инъекций и аппаратной терапии.",
-          keywords: "Сделать BBL цена, сколько стоит ботокс в Фергане, прейскурант клиники, консультация дерматолога цена"
+          keywords: "Сделать IPL цена, сколько стоит ботокс в Фергане, прейскурант клиники, консультация дерматолога цена"
         },
         articles: {
           title: "Медицинский Блог, Советы по Уходу & Статьи | Radeski Clinic",
@@ -341,6 +360,21 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Адрес, Контакты & Онлайн Карта Проезда | Radeski Clinic",
           desc: "Адрес клиники: г. Фергана, ул. Узбекистон Овози, 1А. Телефон регистратуры: +998 (73) 200-73-73. Схема проезда на интерактивной карте, часы работы.",
           keywords: "Контакты Радески, телефон клиники Фергана, адрес дерматологии, режим работы регистратуры, обратный звонок"
+        },
+        videos: {
+          title: "Видео о клинике и процедурах | Radeski Clinic",
+          desc: "Видеоматериалы о PhotoFinder, IPL-терапии и современных дерматологических услугах клиники Radeski.",
+          keywords: "видео Radeski, дерматология видео, IPL терапия, PhotoFinder, о клинике"
+        },
+        branches: {
+          title: "Филиалы и пункты приёма | Radeski Clinic",
+          desc: "Филиалы Radeski в Фергане, Маргилане и Коканде — адрес, телефон и график работы.",
+          keywords: "филиалы Radeski, клиника Фергана, дерматолог Маргилан, лаборатория Коканд"
+        },
+        results: {
+          title: "Результаты лечения — до и после | Radeski Clinic",
+          desc: "Галерея результатов лечения акне, пигментации, купероза и трихологии в клинике Radeski.",
+          keywords: "результаты лечения, до и после, акне результат, IPL результат"
         },
         terms: {
           title: "Пользовательское соглашение | Radeski Skin & Aesthetic Clinic",
@@ -356,8 +390,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       en: {
         home: {
           title: "Home - The Key to Healthy and Beautiful Skin | Radeski Skin & Aesthetic Clinic",
-          desc: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic BBL and German PhotoFinder mole mapping.",
-          keywords: "Radeski clinic, dermatologist Fergana, aesthetic skincare, laser hair removal, Botox, Sciton BBL, Mohs surgery, mole check"
+          desc: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic IPL and German PhotoFinder mole mapping.",
+          keywords: "Radeski clinic, dermatologist Fergana, aesthetic skincare, laser hair removal, Botox, Sciton IPL, Mohs surgery, mole check"
         },
         about: {
           title: "About Us, Clinical Credentials & Degrees | Radeski Clinic",
@@ -367,7 +401,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         services: {
           title: "Our 12 Clinical Services & Therapy Segments | Radeski Clinic",
           desc: "Explore our 12 specialized clinical departments covering clinical dermatology, non-invasive hardware cosmetology, injectables, hair treatment, and biopsies.",
-          keywords: "Dermatological services, acne removal, injectable solutions, BBL laser, clinical trichology, skin pathology"
+          keywords: "Dermatological services, acne removal, injectable solutions, IPL laser, clinical trichology, skin pathology"
         },
         doctors: {
           title: "Our Specialists, Physicians & Surgeons Registry | Radeski",
@@ -376,8 +410,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         },
         prices: {
           title: "Service Fee Guide & Cost Estimator (Pricelist) | Radeski Clinic",
-          desc: "Transparent price schedule for dermatological checkups, Sciton BBL sessions, Mohs surgeries, trichoscopy, and specialized aesthetic procedures.",
-          keywords: "Dermatologist fee, facial BBL price, Botox cost in Fergana, biopsy pricing, clinic rates, service fees"
+          desc: "Transparent price schedule for dermatological checkups, Sciton IPL sessions, Mohs surgeries, trichoscopy, and specialized aesthetic procedures.",
+          keywords: "Dermatologist fee, facial IPL price, Botox cost in Fergana, biopsy pricing, clinic rates, service fees"
         },
         articles: {
           title: "Skin Advice, Pathology Blogs & Board Articles | Radeski Clinic",
@@ -388,6 +422,21 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Office Location, Support Hotline & Contact Address | Radeski",
           desc: "Located at 1A Uzbekiston Ovozi Street, Fergana. Dedicated helpline: +998 (73) 200-73-73. Dynamic route map and convenient clinic working hours.",
           keywords: "Radeski phone, dermatology contact, clinic location Fergana, map routing, request callback, email support"
+        },
+        videos: {
+          title: "Clinic Videos & Procedures | Radeski Clinic",
+          desc: "Video tours of PhotoFinder, IPL therapy, and modern dermatology services at Radeski Clinic.",
+          keywords: "Radeski videos, dermatology video, IPL therapy, PhotoFinder, clinic tour"
+        },
+        branches: {
+          title: "Branches & Consultation Points | Radeski Clinic",
+          desc: "Radeski branches in Fergana, Margilan, and Kokand — address, phone, and opening hours.",
+          keywords: "Radeski branches, Fergana clinic, Margilan dermatology, Kokand lab"
+        },
+        results: {
+          title: "Treatment Results — Before & After | Radeski Clinic",
+          desc: "Gallery of acne, pigmentation, rosacea, and trichology treatment outcomes at Radeski Clinic.",
+          keywords: "treatment results, before after, acne results, IPL outcomes"
         },
         terms: {
           title: "Terms of Use | Radeski Skin & Aesthetic Clinic",
@@ -544,6 +593,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   useEffect(() => {
     if (parsedLocale) saveLocale(parsedLocale);
   }, [parsedLocale]);
+
+  const featuredHomeDoctors = useMemo(
+    () => getFeaturedDoctors(dynamicDoctors),
+    [dynamicDoctors],
+  );
 
   const clinicAiContext = useMemo(
     () =>
@@ -751,7 +805,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {dynamicDoctors.slice(0, 3).map(doc => (
+                    {featuredHomeDoctors.map(doc => (
                       <div
                         key={doc.id}
                         className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between"
@@ -853,16 +907,60 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {CLINIC_RATINGS.map(plat => (
-                      <div key={plat.platform} className="bg-brand-white rounded-2xl p-6 border border-brand-sectiongray text-left flex items-start gap-4 shadow-xs">
-                        <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-xl shadow-xs shrink-0">{plat.logo}</div>
-                        <div>
-                          <h4 className="font-extrabold text-brand-text-primary text-lg leading-none">{plat.platform}</h4>
-                          <span className="text-xl font-black text-brand-gold block mt-2">{plat.rating} / 5.0</span>
-                          <p className="text-xs text-brand-text-muted mt-1">{plat.count}+ {d.reviewsCount}</p>
+                    {dynamicClinicRatings.map((plat) => {
+                      const reviewUrl = resolveClinicRatingUrl(plat.platform, plat.url);
+                      const cardClassName =
+                        'bg-brand-white rounded-2xl p-6 border border-brand-sectiongray text-left flex items-start gap-4 shadow-xs transition-all';
+                      const cardContent = (
+                        <>
+                          <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-xl shadow-xs shrink-0">
+                            {plat.logo}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
+                              <h4 className="font-extrabold text-brand-text-primary text-lg leading-none">{plat.platform}</h4>
+                              {reviewUrl ? (
+                                <ExternalLink className="w-4 h-4 text-brand-gold shrink-0 opacity-70" aria-hidden="true" />
+                              ) : null}
+                            </div>
+                            <span className="text-xl font-black text-brand-gold block mt-2">{plat.rating} / 5.0</span>
+                            <p className="text-xs text-brand-text-muted mt-1">{plat.count}+ {d.reviewsCount}</p>
+                            {reviewUrl ? (
+                              <p className="text-[11px] font-semibold text-brand-gold mt-2">
+                                {locale === 'uz'
+                                  ? "Sharhlarni ko'rish"
+                                  : locale === 'ru'
+                                    ? 'Читать отзывы'
+                                    : 'View reviews'}
+                              </p>
+                            ) : null}
+                          </div>
+                        </>
+                      );
+
+                      return reviewUrl ? (
+                        <a
+                          key={plat.platform}
+                          href={reviewUrl}
+                          target={APPOINTMENT_LINK_TARGET}
+                          rel={APPOINTMENT_LINK_REL}
+                          className={`${cardClassName} hover:border-brand-gold/35 hover:shadow-md hover:-translate-y-0.5 cursor-pointer group`}
+                          aria-label={`${plat.platform} — ${
+                            locale === 'uz'
+                              ? "sharhlarni ko'rish"
+                              : locale === 'ru'
+                                ? 'читать отзывы'
+                                : 'view reviews'
+                          }`}
+                        >
+                          {cardContent}
+                        </a>
+                      ) : (
+                        <div key={plat.platform} className={cardClassName}>
+                          {cardContent}
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </section>
@@ -1100,6 +1198,26 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
           {currentPage === 'privacy' && (
             <LegalPage locale={locale} type="privacy" />
+          )}
+
+          {currentPage === 'videos' && (
+            <VideosPage locale={locale} dictionary={d} />
+          )}
+
+          {currentPage === 'branches' && (
+            <BranchesPage
+              locale={locale}
+              dictionary={d}
+              onOpenAppointment={() => handleOpenAppointmentWithService()}
+            />
+          )}
+
+          {currentPage === 'results' && (
+            <ResultsPage
+              locale={locale}
+              dictionary={d}
+              onOpenAppointment={() => handleOpenAppointmentWithService()}
+            />
           )}
 
           {currentPage === 'contacts' && (

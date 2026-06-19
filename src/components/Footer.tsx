@@ -102,6 +102,26 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
                   {d.navArticles}
                 </Link>
               </li>
+              <li>
+                <Link to={pagePath(locale, 'videos')} className="hover:text-brand-gold-light font-light transition-colors">
+                  {d.navVideos}
+                </Link>
+              </li>
+              <li>
+                <Link to={pagePath(locale, 'branches')} className="hover:text-brand-gold-light font-light transition-colors">
+                  {d.navBranches}
+                </Link>
+              </li>
+              <li>
+                <Link to={pagePath(locale, 'results')} className="hover:text-brand-gold-light font-light transition-colors">
+                  {d.navResults}
+                </Link>
+              </li>
+              <li>
+                <Link to={pagePath(locale, 'contacts')} className="hover:text-brand-gold-light font-light transition-colors">
+                  {d.navContacts}
+                </Link>
+              </li>
             </ul>
           </div>
 

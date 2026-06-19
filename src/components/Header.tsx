@@ -53,6 +53,9 @@ export default function Header({
     { id: 'prices', label: d.navPrices },
     { id: 'articles', label: d.navArticles },
     { id: 'contacts', label: d.navContacts },
+    { id: 'videos', label: d.navVideos },
+    { id: 'branches', label: d.navBranches },
+    { id: 'results', label: d.navResults },
   ];
 
   const getLanguageLabel = (l: Locale) => {
@@ -67,7 +70,7 @@ export default function Header({
   };
 
   const navLinkClass = (page: PageId) =>
-    `px-4 py-2 rounded-lg text-[15px] lg:text-base font-medium transition-all cursor-pointer ${
+    `px-2.5 xl:px-3 py-2 rounded-lg text-[13px] xl:text-[14px] font-medium transition-all cursor-pointer whitespace-nowrap ${
       currentPage === page
         ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
         : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-offwhite'
@@ -127,7 +130,7 @@ export default function Header({
           </AppointmentBookingLink>
         </div>
 
-        <nav className="hidden lg:flex items-center justify-center gap-1.5 xl:gap-2 flex-1 min-w-0 px-2 xl:px-6">
+        <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 flex-1 min-w-0 px-1 xl:px-3 overflow-x-auto scrollbar-none">
           {navItems.map((item) => (
             <Link
               key={item.id}

@@ -8,6 +8,9 @@ export type PageId =
   | 'prices'
   | 'articles'
   | 'contacts'
+  | 'videos'
+  | 'branches'
+  | 'results'
   | 'terms'
   | 'privacy'
   | 'admin';
@@ -20,6 +23,9 @@ export const PUBLIC_PAGES: PageId[] = [
   'prices',
   'articles',
   'contacts',
+  'videos',
+  'branches',
+  'results',
 ];
 
 export const SITE_ORIGIN = 'https://radeski.uz';
@@ -89,6 +95,9 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'doctors' ||
     pageSegment === 'prices' ||
     pageSegment === 'contacts' ||
+    pageSegment === 'videos' ||
+    pageSegment === 'branches' ||
+    pageSegment === 'results' ||
     pageSegment === 'terms' ||
     pageSegment === 'privacy'
   ) {

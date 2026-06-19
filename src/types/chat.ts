@@ -45,23 +45,26 @@ export function getQuickPrompts(locale: Locale): string[] {
     return [
       'Qanday xizmatlar bor?',
       'Qabulga qanday yozilaman?',
-      'BBL terapiya nima?',
+      'IPL terapiya nima?',
       'Klinika manzili va telefon',
+      'Narxlar qancha?',
     ];
   }
   if (locale === 'ru') {
     return [
       'Какие услуги есть?',
       'Как записаться на приём?',
-      'Что такое BBL-терапия?',
+      'Что такое IPL-терапия?',
       'Адрес и телефон клиники',
+      'Сколько стоят услуги?',
     ];
   }
   return [
     'What services do you offer?',
     'How do I book an appointment?',
-    'What is BBL therapy?',
+    'What is IPL therapy?',
     'Clinic address and phone',
+    'What are your prices?',
   ];
 }
 

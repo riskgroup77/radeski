@@ -8,12 +8,12 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Giperpigmentatsiya (teri rangining ortishi)',
         description:
-          'Giperpigmentatsiya — teri ma\'lum qismlarining atrofdagi teriga qaraganda to\'qroq rangga kirishidir. Quyosh nurlari, gormonal o\'zgarishlar (homiladorlik, kontratseptivlar), akne keyingi dog\'lar yoki jarohatlar sabab bo\'lishi mumkin. Melasma ko\'pincha yuzda simmetrik dog\'lar shaklida paydo bo\'ladi. Apparat kosmetologiyasida Sciton BBL va gen darajasida foto-yangilash pigment hujayralarini bosqichma-bosqich yo\'q qiladi, teri rangini tekislaydi va qayta paydo bo\'lishining oldini olish uchun profilaktik reja tuziladi.',
+          'Giperpigmentatsiya — teri ma\'lum qismlarining atrofdagi teriga qaraganda to\'qroq rangga kirishidir. Quyosh nurlari, gormonal o\'zgarishlar (homiladorlik, kontratseptivlar), akne keyingi dog\'lar yoki jarohatlar sabab bo\'lishi mumkin. Melasma ko\'pincha yuzda simmetrik dog\'lar shaklida paydo bo\'ladi. Apparat kosmetologiyasida Sciton IPL va gen darajasida foto-yangilash pigment hujayralarini bosqichma-bosqich yo\'q qiladi, teri rangini tekislaydi va qayta paydo bo\'lishining oldini olish uchun profilaktik reja tuziladi.',
       },
       {
         title: 'Rozaseya va qon tomir tarmoqlari',
         description:
-          'Rozaseya — yuzda doimiy yoki vaqti-vaqti bilan qizarish, kichik qon tomir tarmoqlari (kuperoz) va ba\'zan toshma bilan kechadigan surunkali holat. Issiq, stress, alkogol va quyosh nurlari kuchaytirishi mumkin. BBL apparat muolajasi qon tomirlarni ko\'ngil qizdiruvchi yorug\'lik bilan yopadi, qizarishni kamaytiradi va teri to\'qimasini mustahkamlaydi. Og\'riqsiz usul bo\'lib, bir necha seansdan keyin sezilarli yaxshilanish kuzatiladi.',
+          'Rozaseya — yuzda doimiy yoki vaqti-vaqti bilan qizarish, kichik qon tomir tarmoqlari (kuperoz) va ba\'zan toshma bilan kechadigan surunkali holat. Issiq, stress, alkogol va quyosh nurlari kuchaytirishi mumkin. IPL apparat muolajasi qon tomirlarni ko\'ngil qizdiruvchi yorug\'lik bilan yopadi, qizarishni kamaytiradi va teri to\'qimasini mustahkamlaydi. Og\'riqsiz usul bo\'lib, bir necha seansdan keyin sezilarli yaxshilanish kuzatiladi.',
       },
       {
         title: 'Yoshga bog\'liq teri eskirishi va ajinlar',
@@ -28,7 +28,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Teri quruqligi va suvsizlanishi',
         description:
-          'Teri epidermisida namlik yetishmovchiligi quruqlik, tig\'izlik, xiralik va noqulaylik hissini keltirib chiqaradi. Yoshi, iqlim, noto\'g\'ri parvarish yoki tibbiy holatlar sabab bo\'lishi mumkin. Lazer biorevitalizatsiya va BBL terining namlik balansini tiklaydi, gialuron kislotasi va tiklanish jarayonlarini faollashtiradi. Teri yumshoq, silliq va sog\'lom ko\'rinishga ega bo\'ladi.',
+          'Teri epidermisida namlik yetishmovchiligi quruqlik, tig\'izlik, xiralik va noqulaylik hissini keltirib chiqaradi. Yoshi, iqlim, noto\'g\'ri parvarish yoki tibbiy holatlar sabab bo\'lishi mumkin. Lazer biorevitalizatsiya va IPL terining namlik balansini tiklaydi, gialuron kislotasi va tiklanish jarayonlarini faollashtiradi. Teri yumshoq, silliq va sog\'lom ko\'rinishga ega bo\'ladi.',
       },
       {
         title: 'Yuz konturining pasayishi va mushak tonusi',
@@ -40,12 +40,12 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Гиперпигментация',
         description:
-          'Гиперпигментация — потемнение участков кожи из-за солнца, гормонов, постакне или травм. Мелазма проявляется симметричными пятнами на лице. Аппаратная косметология с Sciton BBL постепенно устраняет пигмент и выравнивает тон кожи.',
+          'Гиперпигментация — потемнение участков кожи из-за солнца, гормонов, постакне или травм. Мелазма проявляется симметричными пятнами на лице. Аппаратная косметология с Sciton IPL постепенно устраняет пигмент и выравнивает тон кожи.',
       },
       {
         title: 'Розацеа и сосудистые звездочки',
         description:
-          'Розацеа — хроническое покраснение лица, сосудистая сетка и чувствительность кожи. BBL-терапия коагулирует мелкие сосуды и уменьшает воспаление без боли и длительной реабилитации.',
+          'Розацеа — хроническое покраснение лица, сосудистая сетка и чувствительность кожи. IPL-терапия коагулирует мелкие сосуды и уменьшает воспаление без боли и длительной реабилитации.',
       },
       {
         title: 'Возрастное старение и морщины',
@@ -60,7 +60,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Сухость и обезвоженность кожи',
         description:
-          'Недостаток влаги вызывает стянутость, тусклость и шелушение. Лазерная биоревитализация и BBL восстанавливают гидробаланс и сияние кожи.',
+          'Недостаток влаги вызывает стянутость, тусклость и шелушение. Лазерная биоревитализация и IPL восстанавливают гидробаланс и сияние кожи.',
       },
       {
         title: 'Потеря контуров лица',
@@ -72,12 +72,12 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Hyperpigmentation',
         description:
-          'Hyperpigmentation is darkening of skin areas caused by sun, hormones, post-acne marks or injury. Melasma often appears as symmetric facial patches. Sciton BBL gradually removes pigment and evens skin tone.',
+          'Hyperpigmentation is darkening of skin areas caused by sun, hormones, post-acne marks or injury. Melasma often appears as symmetric facial patches. Sciton IPL gradually removes pigment and evens skin tone.',
       },
       {
         title: 'Rosacea and vascular lesions',
         description:
-          'Rosacea causes chronic facial redness, visible vessels and sensitivity. BBL therapy coagulates small vessels and reduces inflammation painlessly with minimal downtime.',
+          'Rosacea causes chronic facial redness, visible vessels and sensitivity. IPL therapy coagulates small vessels and reduces inflammation painlessly with minimal downtime.',
       },
       {
         title: 'Age-related aging and wrinkles',
@@ -92,7 +92,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Dryness and dehydration',
         description:
-          'Lack of moisture causes tightness, dullness and flaking. Laser biorevitalization and BBL restore hydration balance and natural glow.',
+          'Lack of moisture causes tightness, dullness and flaking. Laser biorevitalization and IPL restore hydration balance and natural glow.',
       },
       {
         title: 'Facial contour loss',
@@ -247,7 +247,7 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       {
         title: 'Melasma (gormonal pigmentatsiya)',
         description:
-          'Melasma — yuzda, ayniqsa yonoq, lab ustida va peshonada simmetrik jigarrang dog\'lar. Homiladorlik, kontratseptivlar yoki quyosh ta\'siri kuchaytiradi. BBL Forever Young pigment hujayralarini tanlab yo\'q qiladi, teri rangini bir tekis qiladi. Bir necha seansdan keyin dog\'lar sezilarli ochiladi.',
+          'Melasma — yuzda, ayniqsa yonoq, lab ustida va peshonada simmetrik jigarrang dog\'lar. Homiladorlik, kontratseptivlar yoki quyosh ta\'siri kuchaytiradi. IPL Forever Young pigment hujayralarini tanlab yo\'q qiladi, teri rangini bir tekis qiladi. Bir necha seansdan keyin dog\'lar sezilarli ochiladi.',
       },
       {
         title: 'Lentigo va quyosh dog\'lari',
@@ -257,7 +257,7 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       {
         title: 'Kuperoz (qon tomir tarmoqlari)',
         description:
-          'Yuzda, ayniqsa burun va yonoqlarda kichik qizil yoki binafsha tomirlar ko\'rinadi. Rozaseyaning bir shakli bo\'lishi mumkin. BBL maxsus filtri tomirlarni yopadi, qizarishni kamaytiradi. Og\'riqsiz, tez va samarali usul.',
+          'Yuzda, ayniqsa burun va yonoqlarda kichik qizil yoki binafsha tomirlar ko\'rinadi. Rozaseyaning bir shakli bo\'lishi mumkin. IPL maxsus filtri tomirlarni yopadi, qizarishni kamaytiradi. Og\'riqsiz, tez va samarali usul.',
       },
       {
         title: 'Fotoeskirish (photoaging)',
@@ -267,22 +267,22 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       {
         title: 'Teri rangining notekisligi',
         description:
-          'Turli sabablarga ko\'ra teri ba\'zi joylari to\'qroq yoki ochroq bo\'ladi. Bu estetik va psixologik noqulaylik tug\'dirishi mumkin. Individual BBL protokoli rangni tekislaydi, teri yorqinligi va teksturasini yaxshilaydi.',
+          'Turli sabablarga ko\'ra teri ba\'zi joylari to\'qroq yoki ochroq bo\'ladi. Bu estetik va psixologik noqulaylik tug\'dirishi mumkin. Individual IPL protokoli rangni tekislaydi, teri yorqinligi va teksturasini yaxshilaydi.',
       },
     ],
     ru: [
-      { title: 'Мелазма', description: 'Гормональная пигментация на лице. BBL Forever Young селективно устраняет пигмент и выравнивает тон за несколько сеансов.' },
+      { title: 'Мелазма', description: 'Гормональная пигментация на лице. IPL Forever Young селективно устраняет пигмент и выравнивает тон за несколько сеансов.' },
       { title: 'Лентиго и солнечные пятна', description: 'Пигментные пятна от солнца. Фотоомоложение постепенно осветляет их и обучает защите SPF.' },
-      { title: 'Купероз', description: 'Сосудистые звездочки на лице. BBL закрывает сосуды и уменьшает покраснение безболезненно.' },
+      { title: 'Купероз', description: 'Сосудистые звездочки на лице. IPL закрывает сосуды и уменьшает покраснение безболезненно.' },
       { title: 'Фотостарение', description: 'Преждевременное старение от UV. Генное фотоомоложение стимулирует коллаген и возвращает молодость кожи.' },
-      { title: 'Неровный тон кожи', description: 'Различия в цвете кожи. Индивидуальный протокол BBL выравнивает тон и улучшает текстуру.' },
+      { title: 'Неровный тон кожи', description: 'Различия в цвете кожи. Индивидуальный протокол IPL выравнивает тон и улучшает текстуру.' },
     ],
     en: [
-      { title: 'Melasma', description: 'Hormonal facial pigmentation. BBL Forever Young selectively removes pigment and evens tone within several sessions.' },
+      { title: 'Melasma', description: 'Hormonal facial pigmentation. IPL Forever Young selectively removes pigment and evens tone within several sessions.' },
       { title: 'Lentigo and sun spots', description: 'Sun-induced brown spots. Photo-rejuvenation gradually lightens them with SPF prevention guidance.' },
-      { title: 'Couperose', description: 'Facial vascular spider veins. BBL closes vessels and reduces redness painlessly.' },
+      { title: 'Couperose', description: 'Facial vascular spider veins. IPL closes vessels and reduces redness painlessly.' },
       { title: 'Photoaging', description: 'Premature aging from UV damage. Gene-level rejuvenation stimulates collagen renewal.' },
-      { title: 'Uneven skin tone', description: 'Color irregularities on skin. Individual BBL protocol evens tone and improves texture.' },
+      { title: 'Uneven skin tone', description: 'Color irregularities on skin. Individual IPL protocol evens tone and improves texture.' },
     ],
   },
   'bbl-foto': {
@@ -290,21 +290,21 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       {
         title: 'Pigment dog\'lar',
         description:
-          'Teri yuzasida melanin to\'planishi natijasida jigarrang yoki sariq dog\'lar paydo bo\'ladi. BBL yorug\'lik energiyasi pigmentni parchalaydi, tananing tabiiy jarayoni orqali dog\' asta-sekin yo\'qoladi.',
+          'Teri yuzasida melanin to\'planishi natijasida jigarrang yoki sariq dog\'lar paydo bo\'ladi. IPL yorug\'lik energiyasi pigmentni parchalaydi, tananing tabiiy jarayoni orqali dog\' asta-sekin yo\'qoladi.',
       },
       {
         title: 'Sosudistiy yulduzchalar',
         description:
-          'Yuzda mayda qon tomirlari kengayib, qizil chiziqlar ko\'rinadi. BBL issiqlik energiyasi bilan tomirlarni yopadi, teri rangi bir xil bo\'ladi.',
+          'Yuzda mayda qon tomirlari kengayib, qizil chiziqlar ko\'rinadi. IPL issiqlik energiyasi bilan tomirlarni yopadi, teri rangi bir xil bo\'ladi.',
       },
     ],
     ru: [
-      { title: 'Пигментные пятна', description: 'Скопление меланина на коже. BBL разрушает пигмент, и пятна постепенно исчезают.' },
-      { title: 'Сосудистые звездочки', description: 'Расширенные капилляры на лице. BBL коагулирует сосуды и выравнивает цвет.' },
+      { title: 'Пигментные пятна', description: 'Скопление меланина на коже. IPL разрушает пигмент, и пятна постепенно исчезают.' },
+      { title: 'Сосудистые звездочки', description: 'Расширенные капилляры на лице. IPL коагулирует сосуды и выравнивает цвет.' },
     ],
     en: [
-      { title: 'Pigment spots', description: 'Melanin accumulation on skin. BBL breaks down pigment and spots fade gradually.' },
-      { title: 'Vascular spider veins', description: 'Dilated capillaries on face. BBL coagulates vessels and evens skin color.' },
+      { title: 'Pigment spots', description: 'Melanin accumulation on skin. IPL breaks down pigment and spots fade gradually.' },
+      { title: 'Vascular spider veins', description: 'Dilated capillaries on face. IPL coagulates vessels and evens skin color.' },
     ],
   },
   mikrotoki: {

@@ -50,7 +50,7 @@ interface AdminPanelProps {
   serviceCategories: ServiceCategory[];
   prices: PriceItem[];
   articles: Article[];
-  clinicRatings: Array<{ platform: string; rating: string; count: number; logo: string }>;
+  clinicRatings: Array<{ platform: string; rating: string; count: number; logo: string; url?: string }>;
   onSaveLocalData: (type: string, data: unknown) => void;
   onResetLocalData: () => void;
   onRefresh: () => Promise<void>;

@@ -173,9 +173,9 @@ Gemangioma — qon tomirlarining tug'ma yoki keyinchalik paydo bo'ladigan xavfsi
 
 Agar dog' tez kattalashsa, qon ketishga moyil bo'lsa, og'riq bersa yoki ko'rinish jiddiy bezovta qilsa, mutaxassis bahosi kerak. Eski usul — jarrohlik bilan kesib tashlash — hozir ko'pincha zamonaviy apparat usullar bilan almashtirilgan.
 
-## BBL va lazer davolash
+## IPL va lazer davolash
 
-Radeski klinikasida **Sciton BBL** va selektiv lazer texnologiyalari qon tomirlarini aniq nishonga oladi. Nur energiyasi tomir devorlarini qizdiradi va ularni yopadi, gemangioma esa asta-sekin rangini yo'qotadi va kichrayadi. Sog'lom teri qatlami deyarli zarar ko'rmaydi.
+Radeski klinikasida **Sciton IPL** va selektiv lazer texnologiyalari qon tomirlarini aniq nishonga oladi. Nur energiyasi tomir devorlarini qizdiradi va ularni yopadi, gemangioma esa asta-sekin rangini yo'qotadi va kichrayadi. Sog'lom teri qatlami deyarli zarar ko'rmaydi.
 
 ## Muolaja jarayoni
 
@@ -208,9 +208,9 @@ function ruBodyHemangioma(): string {
 
 Показано лечение при быстром росте, склонности к кровоточивости, боли или выраженном косметическом дефекте. Хирургическое иссечение уступает место щадящим аппаратным методам.
 
-## Лечение BBL и лазером
+## Лечение IPL и лазером
 
-В клинике Radeski применяются **Sciton BBL** и селективные лазерные системы. Световая энергия нагревает сосудистые стенки, «склеивает» их, и гемангиома постепенно бледнеет. Окружающие ткани повреждаются минимально.
+В клинике Radeski применяются **Sciton IPL** и селективные лазерные системы. Световая энергия нагревает сосудистые стенки, «склеивает» их, и гемангиома постепенно бледнеет. Окружающие ткани повреждаются минимально.
 
 ## Этапы процедуры
 
@@ -243,9 +243,9 @@ A hemangioma is a benign vascular skin lesion. In children it often appears as a
 
 Treatment is indicated for rapid growth, bleeding tendency, pain, or significant cosmetic concern. Modern device-based therapy has largely replaced surgical excision for many cases.
 
-## BBL and laser therapy
+## IPL and laser therapy
 
-At Radeski clinic, **Sciton BBL** and selective laser wavelengths target blood vessels precisely. Light energy heats vessel walls, causing gradual fading of the lesion with minimal damage to surrounding skin.
+At Radeski clinic, **Sciton IPL** and selective laser wavelengths target blood vessels precisely. Light energy heats vessel walls, causing gradual fading of the lesion with minimal damage to surrounding skin.
 
 ## Treatment steps
 
@@ -527,19 +527,19 @@ const TAKEAWAYS = {
   hemangioma: {
     uz: [
       'Gemangioma — qon tomir o\'smasi, ko\'pincha apparat usuli bilan davolanadi',
-      'BBL va lazer sog\'lom terini saqlab, dog\'ni asta-sekin ochadi',
+      'IPL va lazer sog\'lom terini saqlab, dog\'ni asta-sekin ochadi',
       'Tez o\'sish yoki qon ketishda shifokorga murojaat qiling',
       'Muolajadan keyin quyoshdan himoya majburiy',
     ],
     ru: [
       'Гемангиома — сосудистое образование, чаще лечится аппаратными методами',
-      'BBL и лазер постепенно осветляют пятно, сохраняя здоровую кожу',
+      'IPL и лазер постепенно осветляют пятно, сохраняя здоровую кожу',
       'При быстром росте или кровоточивости обратитесь к врачу',
       'После процедуры обязательна защита от солнца',
     ],
     en: [
       'Hemangiomas are vascular lesions, often treated with devices',
-      'BBL and laser fade spots while sparing healthy skin',
+      'IPL and laser fade spots while sparing healthy skin',
       'Seek care for rapid growth or bleeding',
       'Sun protection is mandatory after treatment',
     ],
@@ -682,10 +682,10 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   hemangioma: {
     uz: {
       summary:
-        "Qizil tomirli dog'lar va gemangiomalarni BBL foto-terapiya va lazer bilan xavfsiz davolash — qanday ishlaydi va nima kutish mumkin.",
+        "Qizil tomirli dog'lar va gemangiomalarni IPL foto-terapiya va lazer bilan xavfsiz davolash — qanday ishlaydi va nima kutish mumkin.",
       body: uzBodyHemangioma(),
       keyTakeaways: TAKEAWAYS.hemangioma.uz,
-      tags: ['Gemangioma', 'BBL', 'Lazer', 'Qizil xol'],
+      tags: ['Gemangioma', 'IPL', 'Lazer', 'Qizil xol'],
       whenToSeeDoctor: [
         "Dog' tez kattalashsa",
         'Qon ketishi yoki og\'riq bo\'lsa',
@@ -707,10 +707,10 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
     },
     ru: {
       summary:
-        'Безопасное лечение красных сосудистых пятен и гемангиом с помощью BBL и лазера — как это работает и чего ожидать.',
+        'Безопасное лечение красных сосудистых пятен и гемангиом с помощью IPL и лазера — как это работает и чего ожидать.',
       body: ruBodyHemangioma(),
       keyTakeaways: TAKEAWAYS.hemangioma.ru,
-      tags: ['Гемангиома', 'BBL', 'Лазер', 'Сосуды'],
+      tags: ['Гемангиома', 'IPL', 'Лазер', 'Сосуды'],
       whenToSeeDoctor: [
         'Быстрый рост пятна',
         'Кровоточивость или боль',
@@ -732,10 +732,10 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
     },
     en: {
       summary:
-        'Safe treatment of red vascular spots and hemangiomas with BBL and laser — how it works and what to expect.',
+        'Safe treatment of red vascular spots and hemangiomas with IPL and laser — how it works and what to expect.',
       body: enBodyHemangioma(),
       keyTakeaways: TAKEAWAYS.hemangioma.en,
-      tags: ['Hemangioma', 'BBL', 'Laser', 'Vascular'],
+      tags: ['Hemangioma', 'IPL', 'Laser', 'Vascular'],
       whenToSeeDoctor: [
         'Rapid spot growth',
         'Bleeding or pain',

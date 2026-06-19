@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Sparkles, Building, Users, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from '../data';
+import { APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from '../config/links';
 
 const SAMPLE_VIDEOS = [
   { id: 1, src: '/video-namuna/1.mp4' },
@@ -252,15 +253,39 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
         <div className="mt-20 border-t border-brand-sectiongray pt-10 text-center">
           <p className="text-xs font-bold text-brand-text-muted uppercase tracking-widest">{d.ratingsTitle}</p>
           <div className="flex justify-center gap-6 sm:gap-14 flex-wrap mt-6">
-            {CLINIC_RATINGS.map((plat) => (
-              <div key={plat.platform} className="flex items-center gap-3">
-                <span className="text-xl">{plat.logo}</span>
-                <div className="text-left leading-none">
-                  <span className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-none block">{plat.rating} / 5.0</span>
-                  <span className="text-[10px] text-brand-text-muted uppercase tracking-wider font-light leading-none">{plat.platform} ({plat.count}+ {d.reviewsCount})</span>
+            {CLINIC_RATINGS.map((plat) => {
+              const reviewUrl = resolveClinicRatingUrl(plat.platform, plat.url);
+              const inner = (
+                <>
+                  <span className="text-xl">{plat.logo}</span>
+                  <div className="text-left leading-none">
+                    <span className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-none block">
+                      {plat.rating} / 5.0
+                    </span>
+                    <span className="text-[10px] text-brand-text-muted uppercase tracking-wider font-light leading-none">
+                      {plat.platform} ({plat.count}+ {d.reviewsCount})
+                    </span>
+                  </div>
+                </>
+              );
+
+              return reviewUrl ? (
+                <a
+                  key={plat.platform}
+                  href={reviewUrl}
+                  target={APPOINTMENT_LINK_TARGET}
+                  rel={APPOINTMENT_LINK_REL}
+                  className="flex items-center gap-3 hover:text-brand-gold transition-colors cursor-pointer"
+                  aria-label={plat.platform}
+                >
+                  {inner}
+                </a>
+              ) : (
+                <div key={plat.platform} className="flex items-center gap-3">
+                  {inner}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

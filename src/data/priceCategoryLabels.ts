@@ -1,10 +1,11 @@
 import type { Locale } from '../types';
 
-/** Preyskurant bo'limlari — rasmiy tartib */export const PRICE_CATEGORY_ORDER: string[] = [
+/** Preyskurant bo'limlari — rasmiy tartib */
+export const PRICE_CATEGORY_ORDER: string[] = [
+  'konsultatsii',
   'bazovyy',
   '1-serniya-davlin',
   'derma-v',
-  'konsultatsii',
   'dermatoonkolog',
   'hirurgicheskaya-dermatologiya',
   'hirurgicheskaya-dematologiya',
@@ -114,7 +115,7 @@ const CATEGORY_LABELS: Record<string, Record<Locale, string>> = {
   'fotolechenie-acne-forever-clear': { uz: 'Forever Clear akne fotodavolash', ru: 'Forever Clear — лечение акне', en: 'Forever Clear acne phototherapy' },
   'fotoomolozhenie-forever-young': { uz: 'Forever Young foto-yoshartirish', ru: 'Фотоомоложение Forever Young', en: 'Forever Young photorejuvenation' },
   'fotoomolozhenie-ipl-lumecca': { uz: 'IPL Lumecca foto-yoshartirish', ru: 'Фотоомоложение IPL (Lumecca)', en: 'IPL Lumecca photorejuvenation' },
-  'fotoomolozhenie-bbl-bbl-omolozhenie': { uz: 'BBL foto-yoshartirish', ru: 'Фотоомоложение BBL', en: 'BBL photorejuvenation' },
+  'fotoomolozhenie-bbl-bbl-omolozhenie': { uz: 'IPL foto-yoshartirish', ru: 'Фотоомоложение IPL', en: 'IPL photorejuvenation' },
   'fotoomolozhenie-lechenie-sosudistyh-patologiy-rozatsea': {
     uz: 'Qon tomir va rozatsea fotodavolash',
     ru: 'Лечение сосудов и розацеа',

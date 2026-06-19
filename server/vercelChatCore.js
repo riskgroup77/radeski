@@ -9,7 +9,7 @@ const CLINIC_FACTS = {
   hours: 'Dushanba–Shanba 08:00–18:00',
   booking: 'https://hipolink.net/radeskiskinclinicuz',
   specialties:
-    'Dermatologiya, dermatoonkologiya, trixologiya, apparat kosmetologiya, lazer, BBL, PhotoFinder, inyeksion kosmetologiya, podologiya, laboratoriya',
+    'Dermatologiya, dermatoonkologiya, trixologiya, apparat kosmetologiya, lazer, IPL, PhotoFinder, inyeksion kosmetologiya, podologiya, laboratoriya',
 };
 
 export class ChatApiError extends Error {

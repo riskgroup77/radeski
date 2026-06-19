@@ -9,6 +9,7 @@ import {
 import { getCatalogCategoryNameRu } from '../utils/priceCatalog';
 import { resolvePriceName } from '../utils/priceDisplay';
 import { resolvePriceCategoryLabel } from '../utils/priceCategoryDisplay';
+import { sortPriceItemsInCategory } from '../utils/sortPriceItems';
 
 interface PricesProps {
   locale: Locale;
@@ -59,7 +60,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
       sections.push({
         categoryId: catId,
         title: resolvePriceCategoryLabel(catId, locale, getCatalogCategoryNameRu(catId)),
-        items: [...items].sort((a, b) => (a.priceValue ?? 0) - (b.priceValue ?? 0)),
+        items: sortPriceItemsInCategory(items, catId),
       });
       grouped.delete(catId);
     });
@@ -68,7 +69,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
       sections.push({
         categoryId: catId,
         title: resolvePriceCategoryLabel(catId, locale, getCatalogCategoryNameRu(catId)),
-        items: [...items].sort((a, b) => (a.priceValue ?? 0) - (b.priceValue ?? 0)),
+        items: sortPriceItemsInCategory(items, catId),
       });
     });
 

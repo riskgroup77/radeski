@@ -55,7 +55,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
   'apparatnaya-kosmetologiya': {
     uz: {
       overview:
-        'Apparat kosmetologiyasi — bu jarrohliksiz, zamonaviy tibbiy uskunalar yordamida terini yoshartirish, tozalash va estetik muammolarni bartaraf etish yo\'nalishi. Radeski klinikasida Sciton BBL, gen darajasida foto-yangilash, mikrotoklar va lazer biorevitalizatsiya kabi ilg\'or texnologiyalar qo\'llaniladi. Muolajalar og\'riqsiz o\'tadi, tiklanish vaqti qisqa bo\'ladi va har bir bemorga teri turi hamda muammosiga qarab individual protokol tuziladi.',
+        'Apparat kosmetologiyasi — bu jarrohliksiz, zamonaviy tibbiy uskunalar yordamida terini yoshartirish, tozalash va estetik muammolarni bartaraf etish yo\'nalishi. Radeski klinikasida Sciton IPL, gen darajasida foto-yangilash, mikrotoklar va lazer biorevitalizatsiya kabi ilg\'or texnologiyalar qo\'llaniladi. Muolajalar og\'riqsiz o\'tadi, tiklanish vaqti qisqa bo\'ladi va har bir bemorga teri turi hamda muammosiga qarab individual protokol tuziladi.',
       indications: [
         'Teri rangidagi notekislik, dog\'lar va giperpigmentatsiya',
         'Yoshga bog\'liq teri eskirishi, ajinlar va elastiklikning pasayishi',
@@ -65,11 +65,11 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Akne va post-akne dog\'lari, kengaytirilgan toshma teshiklari',
       ],
       solutions: [
-        'Gen darajasida innovatsion foto-yangilash (Sciton BBL Forever Young)',
-        'BBL foto-yangilash — pigmentatsiya va qon tomirlarni yo\'qotish',
+        'Gen darajasida innovatsion foto-yangilash (Sciton IPL Forever Young)',
+        'IPL foto-yangilash — pigmentatsiya va qon tomirlarni yo\'qotish',
         'Lazer biorevitalizatsiya — chuqur namlantirish va tiklanish',
         'Mikrotok terapiyasi — limfodrenaj va yuz liftingi',
-        'Kombinatsiyalangan apparat protokollari (masalan, BBL + mikrotok)',
+        'Kombinatsiyalangan apparat protokollari (masalan, IPL + mikrotok)',
         'Profilaktik yoshartirish kurslari va mavsumiy teri tiklash rejalari',
       ],
       benefits: CLINIC_BENEFITS.uz,
@@ -77,7 +77,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
     },
     ru: {
       overview:
-        'Аппаратная косметология — это направление безоперационного омоложения, очищения и коррекции эстетических проблем кожи с помощью современного медицинского оборудования. В клинике Radeski применяются передовые технологии Sciton BBL, фотоомоложение на генном уровне, микротоки и лазерная биоревитализация. Процедуры безболезненны, требуют минимального восстановления, а протокол подбирается индивидуально.',
+        'Аппаратная косметология — это направление безоперационного омоложения, очищения и коррекции эстетических проблем кожи с помощью современного медицинского оборудования. В клинике Radeski применяются передовые технологии Sciton IPL, фотоомоложение на генном уровне, микротоки и лазерная биоревитализация. Процедуры безболезненны, требуют минимального восстановления, а протокол подбирается индивидуально.',
       indications: [
         'Неровный тон кожи, пигментные пятна и гиперпигментация',
         'Возрастное старение, морщины и снижение эластичности',
@@ -87,8 +87,8 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Акне, постакне и расширенные поры',
       ],
       solutions: [
-        'Инновационное фотоомоложение на генном уровне (Sciton BBL Forever Young)',
-        'BBL фотоомоложение — устранение пигментации и сосудов',
+        'Инновационное фотоомоложение на генном уровне (Sciton IPL Forever Young)',
+        'IPL фотоомоложение — устранение пигментации и сосудов',
         'Лазерная биоревитализация — глубокое увлажнение и восстановление',
         'Микротоковая терапия — лимфодренаж и лифтинг',
         'Комбинированные аппаратные протоколы',
@@ -99,7 +99,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
     },
     en: {
       overview:
-        'Hardware cosmetology is a non-surgical field focused on skin rejuvenation, cleansing, and aesthetic correction using advanced medical devices. At Radeski Clinic we use Sciton BBL, gene-level photo-rejuvenation, microcurrent therapy, and laser biorevitalization. Procedures are painless, require minimal downtime, and every patient receives a personalized protocol.',
+        'Hardware cosmetology is a non-surgical field focused on skin rejuvenation, cleansing, and aesthetic correction using advanced medical devices. At Radeski Clinic we use Sciton IPL, gene-level photo-rejuvenation, microcurrent therapy, and laser biorevitalization. Procedures are painless, require minimal downtime, and every patient receives a personalized protocol.',
       indications: [
         'Uneven skin tone, spots and hyperpigmentation',
         'Age-related aging, wrinkles and reduced elasticity',
@@ -109,8 +109,8 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Acne, post-acne marks and enlarged pores',
       ],
       solutions: [
-        'Gene-level innovative photo-rejuvenation (Sciton BBL Forever Young)',
-        'BBL photo-rejuvenation for pigmentation and vessels',
+        'Gene-level innovative photo-rejuvenation (Sciton IPL Forever Young)',
+        'IPL photo-rejuvenation for pigmentation and vessels',
         'Laser biorevitalization for deep hydration',
         'Microcurrent therapy for lymphatic drainage and lifting',
         'Combined device protocols',
@@ -164,7 +164,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
   'gene-photo-rejuvenation': {
     uz: {
       overview:
-        'Gen darajasida innovatsion foto-yangilash — Sciton BBL Forever Young texnologiyasiga asoslangan ilg\'or apparat muolajasi. U teri hujayralaridagi qarish bilan bog\'liq genlarning faolligini o\'zgartiradi, kollegen va elastin ishlab chiqarishni rag\'batlantiradi. Muolaja og\'riqsiz, jarrohliksiz o\'tadi va bir necha seans ichida giperpigmentatsiya, dog\'lar hamda teri rangidagi notekisliklarni sezilarli darajada yengillashtiradi.',
+        'Gen darajasida innovatsion foto-yangilash — Sciton IPL Forever Young texnologiyasiga asoslangan ilg\'or apparat muolajasi. U teri hujayralaridagi qarish bilan bog\'liq genlarning faolligini o\'zgartiradi, kollegen va elastin ishlab chiqarishni rag\'batlantiradi. Muolaja og\'riqsiz, jarrohliksiz o\'tadi va bir necha seans ichida giperpigmentatsiya, dog\'lar hamda teri rangidagi notekisliklarni sezilarli darajada yengillashtiradi.',
       indications: [
         'Yuz va tana terisidagi giperpigmentatsiya (qora dog\'lar, melasma)',
         'Quyosh dog\'lari va yoshga bog\'liq pigmentatsiya',
@@ -174,7 +174,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Teri elastikligi va turgorining pasayishi',
       ],
       solutions: [
-        'Sciton BBL Forever Young protokoli — gen darajasida hujayra yangilanishi',
+        'Sciton IPL Forever Young protokoli — gen darajasida hujayra yangilanishi',
         'Tor spektrli yuqori intensivlikli yorug\'lik impulslari',
         'Pigmentatsiyani bosqichma-bosqich yo\'q qilish (odatda 3–5 seans)',
         'Qon tomir va qizarishni kamaytirish uchun maxsus filtrlar',
@@ -184,7 +184,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       benefits: [
         'Og\'riqsiz va tezkor apparat muolajasi — reabilitatsiya deyarli talab qilmaydi',
         'Giperpigmentatsiyani bir necha seansda sezilarli darajada yo\'qotish',
-        'AQShda ishlab chiqarilgan original Sciton BBL uskunalari',
+        'AQShda ishlab chiqarilgan original Sciton IPL uskunalari',
         'Dermatolog va kosmetolog mutaxassislari doimiy nazorati ostida',
         'Yuz, bo\'yin, dekoldé va qo\'llar uchun xavfsiz qo\'llash',
         'Uzoq muddatli yoshartirish va profilaktik effekt',
@@ -192,14 +192,14 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       process: [
         'Dermatolog konsultatsiyasi: teri turi, shikoyatlar va kutilyotgan natija aniqlanadi',
         'Teri holati baholanadi, foto hujjatlashtirish va muolajaga tayyorgarlik',
-        'Teri tozalanganidan keyin maxsus ko\'zoynak bilan BBL seansi o\'tkaziladi (15–45 daqiqa)',
+        'Teri tozalanganidan keyin maxsus ko\'zoynak bilan IPL seansi o\'tkaziladi (15–45 daqiqa)',
         'Muolajadan so\'ng tinchlantiruvchi va UV-himoya kremlari qo\'llaniladi',
         '2–4 hafta oralig\'ida takroriy seanslar va natijani kuzatish, parvarish tavsiyalari',
       ],
     },
     ru: {
       overview:
-        'Инновационное фотоомоложение на генном уровне — передовая аппаратная процедура на базе Sciton BBL Forever Young. Она изменяет активность генов, связанных со старением клеток кожи, стимулируя выработку коллагена и эластина. Процедура безболезненна, неинвазивна и заметно уменьшает гиперпигментацию и неровный тон уже за несколько сеансов.',
+        'Инновационное фотоомоложение на генном уровне — передовая аппаратная процедура на базе Sciton IPL Forever Young. Она изменяет активность генов, связанных со старением клеток кожи, стимулируя выработку коллагена и эластина. Процедура безболезненна, неинвазивна и заметно уменьшает гиперпигментацию и неровный тон уже за несколько сеансов.',
       indications: [
         'Гиперпигментация на лице и теле (пятна, мелазма)',
         'Солнечные пятна и возрастная пигментация',
@@ -209,7 +209,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Снижение эластичности и тургора кожи',
       ],
       solutions: [
-        'Протокол Sciton BBL Forever Young — обновление на генном уровне',
+        'Протокол Sciton IPL Forever Young — обновление на генном уровне',
         'Импульсы высокоинтенсивного света узкого спектра',
         'Поэтапное устранение пигментации (обычно 3–5 сеансов)',
         'Специальные фильтры для сосудов и покраснений',
@@ -219,7 +219,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       benefits: [
         'Безболезненная быстрая процедура с минимальным восстановлением',
         'Заметное уменьшение гиперпигментации за несколько сеансов',
-        'Оригинальное оборудование Sciton BBL из США',
+        'Оригинальное оборудование Sciton IPL из США',
         'Постоянный контроль дерматологов и косметологов',
         'Безопасно для лица, шеи, декольте и рук',
         'Долговременный омолаживающий и профилактический эффект',
@@ -227,14 +227,14 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       process: [
         'Консультация дерматолога: тип кожи, жалобы и ожидаемый результат',
         'Оценка состояния кожи, фотодокументирование и подготовка',
-        'Сеанс BBL в защитных очках после очищения кожи (15–45 минут)',
+        'Сеанс IPL в защитных очках после очищения кожи (15–45 минут)',
         'Нанесение успокаивающих и SPF-средств после процедуры',
         'Повторные сеансы через 2–4 недели и контроль результата',
       ],
     },
     en: {
       overview:
-        'Gene-level innovative photo-rejuvenation is an advanced device-based procedure using Sciton BBL Forever Young technology. It modulates aging-related gene activity and stimulates collagen and elastin production. The treatment is painless, non-invasive, and significantly reduces hyperpigmentation and uneven tone within a few sessions.',
+        'Gene-level innovative photo-rejuvenation is an advanced device-based procedure using Sciton IPL Forever Young technology. It modulates aging-related gene activity and stimulates collagen and elastin production. The treatment is painless, non-invasive, and significantly reduces hyperpigmentation and uneven tone within a few sessions.',
       indications: [
         'Facial and body hyperpigmentation (spots, melasma)',
         'Sun spots and age-related pigmentation',
@@ -244,7 +244,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Reduced skin elasticity and turgor',
       ],
       solutions: [
-        'Sciton BBL Forever Young protocol — gene-level renewal',
+        'Sciton IPL Forever Young protocol — gene-level renewal',
         'Narrow-spectrum high-intensity light pulses',
         'Stepwise pigmentation removal (typically 3–5 sessions)',
         'Special filters for vessels and redness',
@@ -254,7 +254,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       benefits: [
         'Painless fast procedure with minimal downtime',
         'Significant hyperpigmentation reduction in few sessions',
-        'Original US-made Sciton BBL equipment',
+        'Original US-made Sciton IPL equipment',
         'Continuous dermatologist and cosmetologist supervision',
         'Safe for face, neck, décolleté and hands',
         'Long-term rejuvenation and preventive effect',
@@ -262,7 +262,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       process: [
         'Dermatologist consultation: skin type, concerns and expected outcome',
         'Skin assessment, photo documentation and preparation',
-        'BBL session with protective eyewear after cleansing (15–45 min)',
+        'IPL session with protective eyewear after cleansing (15–45 min)',
         'Soothing and SPF products applied after treatment',
         'Repeat sessions every 2–4 weeks with result monitoring',
       ],
@@ -271,23 +271,23 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
   'bbl-foto': {
     uz: {
       overview:
-        'BBL foto-yangilash — Sciton kompaniyasining original Amerika texnologiyasi bo\'yicha terini yoshartirish va tiklash usuli. Keng spektrli yorug\'lik impulslari pigmentatsiya, qon tomir tarmoqlari va yoshga bog\'liq o\'zgarishlarni bir vaqtning o\'zida bartaraf etadi. Muolaja og\'riqsiz, qisqa vaqt ichida natija beradi.',
+        'IPL foto-yangilash — Sciton kompaniyasining original Amerika texnologiyasi bo\'yicha terini yoshartirish va tiklash usuli. Keng spektrli yorug\'lik impulslari pigmentatsiya, qon tomir tarmoqlari va yoshga bog\'liq o\'zgarishlarni bir vaqtning o\'zida bartaraf etadi. Muolaja og\'riqsiz, qisqa vaqt ichida natija beradi.',
       indications: ['Pigment dog\'lar va melasma', 'Qon tomir tarmoqlari va qizarish', 'Teri rangining notekisligi', 'Yoshga bog\'liq teri eskirishi', 'Quyosh ta\'siridan paydo bo\'lgan dog\'lar'],
-      solutions: ['Sciton BBL apparati bilan fotoomolajeniyani', 'Pigmentatsiyani bosqichma-bosqich yo\'qotish', 'Qon tomirlarni ko\'tarilgan temperatura bilan yopish', 'Teri teksturasini yaxshilash', 'Profilaktik yoshartirish kurslari'],
-      benefits: ['Original Sciton BBL uskunalari', 'Chandiqsiz va tez tiklanish', 'Yuz va tana uchun mos', 'Dermatolog nazorati', 'Aniq va bashorat qilinadigan natija'],
+      solutions: ['Sciton IPL apparati bilan fotoomolajeniyani', 'Pigmentatsiyani bosqichma-bosqich yo\'qotish', 'Qon tomirlarni ko\'tarilgan temperatura bilan yopish', 'Teri teksturasini yaxshilash', 'Profilaktik yoshartirish kurslari'],
+      benefits: ['Original Sciton IPL uskunalari', 'Chandiqsiz va tez tiklanish', 'Yuz va tana uchun mos', 'Dermatolog nazorati', 'Aniq va bashorat qilinadigan natija'],
       process: STANDARD_PROCESS.uz,
     },
     ru: {
-      overview: 'BBL фотоомоложение — метод омоложения на оригинальной американской технологии Sciton. Импульсы широкополосного света устраняют пигментацию, сосуды и возрастные изменения. Процедура безболезненна и дает быстрый результат.',
+      overview: 'IPL фотоомоложение — метод омоложения на оригинальной американской технологии Sciton. Импульсы широкополосного света устраняют пигментацию, сосуды и возрастные изменения. Процедура безболезненна и дает быстрый результат.',
       indications: ['Пигментные пятна и мелазма', 'Сосудистые звездочки', 'Неровный тон кожи', 'Возрастные изменения', 'Солнечные пятна'],
-      solutions: ['Фотоомоложение на Sciton BBL', 'Поэтапное устранение пигментации', 'Коагуляция сосудов', 'Улучшение текстуры кожи', 'Профилактические курсы'],
+      solutions: ['Фотоомоложение на Sciton IPL', 'Поэтапное устранение пигментации', 'Коагуляция сосудов', 'Улучшение текстуры кожи', 'Профилактические курсы'],
       benefits: ['Оригинальное оборудование Sciton', 'Без рубцов и быстрое восстановление', 'Для лица и тела', 'Контроль дерматолога', 'Прогнозируемый результат'],
       process: STANDARD_PROCESS.ru,
     },
     en: {
-      overview: 'BBL photo-rejuvenation uses original Sciton US technology. Broad-band light pulses address pigmentation, vascular lesions and age-related changes. The procedure is painless and delivers fast visible results.',
+      overview: 'IPL photo-rejuvenation uses original Sciton US technology. Broad-band light pulses address pigmentation, vascular lesions and age-related changes. The procedure is painless and delivers fast visible results.',
       indications: ['Pigment spots and melasma', 'Vascular lesions and redness', 'Uneven skin tone', 'Age-related skin changes', 'Sun-induced spots'],
-      solutions: ['Sciton BBL photo-rejuvenation', 'Stepwise pigmentation removal', 'Vessel coagulation', 'Skin texture improvement', 'Preventive rejuvenation courses'],
+      solutions: ['Sciton IPL photo-rejuvenation', 'Stepwise pigmentation removal', 'Vessel coagulation', 'Skin texture improvement', 'Preventive rejuvenation courses'],
       benefits: ['Original Sciton equipment', 'No scarring and quick recovery', 'Suitable for face and body', 'Dermatologist supervision', 'Predictable results'],
       process: STANDARD_PROCESS.en,
     },
@@ -344,7 +344,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
 
 const KEYWORD_RULES: { key: string; patterns: string[] }[] = [
   { key: 'gene-photo-rejuvenation', patterns: ['gen darajasida', 'innovatsion foto', 'forever young', 'генном уровне', 'gene-level'] },
-  { key: 'bbl-foto', patterns: ['bbl foto', 'bbl-foto', 'bbl '] },
+  { key: 'bbl-foto', patterns: ['IPL foto', 'bbl-foto', 'bbl ', 'IPL '] },
   { key: 'lazer-biorev', patterns: ['lazer biorevital', 'lazer biorev', 'лазерная биоревит', 'laser biorev'] },
   { key: 'mikrotoki', patterns: ['mikrotok', 'микроток', 'microcurrent'] },
   { key: 'det-derm', patterns: ['bolalar dermat', 'детская дермат', 'pediatric dermat'] },

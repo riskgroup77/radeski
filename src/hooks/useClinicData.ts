@@ -13,6 +13,7 @@ import { ApiError } from '../api/client';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
 import { ARTICLES } from '../data';
 import { normalizeArticleViews } from '../utils/articleViews';
+import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 
 interface ClinicDataState {
   doctors: Doctor[];
@@ -45,7 +46,7 @@ export function useClinicData(): ClinicDataState {
         publicApi.getArticles(),
       ]);
 
-      setDoctors(doctorsRes.map(mapDoctorFromApi));
+      setDoctors(sortDoctorsFeaturedFirst(doctorsRes.map(mapDoctorFromApi)));
       const mappedServices = servicesRes
         .map(mapServiceCategoryFromApi)
         .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));

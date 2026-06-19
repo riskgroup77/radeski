@@ -53,11 +53,13 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
   const [draft, setDraft] = useState('');
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [usedQuickPrompts, setUsedQuickPrompts] = useState<string[]>([]);
   const labels = getChatUiLabels(locale);
   const quickPrompts = getQuickPrompts(locale);
   const { messages, isLoading, error, sendMessage, resetChat } = useClinicAiChat(locale, context);
 
-  const showQuickPrompts = messages.length <= 2 && !isLoading;
+  const visibleQuickPrompts = quickPrompts.filter((prompt) => !usedQuickPrompts.includes(prompt));
+  const showQuickPrompts = visibleQuickPrompts.length > 0 && !isLoading;
 
   useEffect(() => {
     if (!open) return;
@@ -78,6 +80,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
 
   useEffect(() => {
     setShowWelcomePreview(true);
+    setUsedQuickPrompts([]);
   }, [locale]);
 
   const bookingLabel = useMemo(() => {
@@ -94,7 +97,13 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
   };
 
   const handleQuickPrompt = async (prompt: string) => {
+    setUsedQuickPrompts((prev) => (prev.includes(prompt) ? prev : [...prev, prompt]));
     await sendMessage(prompt);
+  };
+
+  const handleResetChat = () => {
+    resetChat();
+    setUsedQuickPrompts([]);
   };
 
   return (
@@ -126,7 +135,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
               <div className="flex items-center gap-1 shrink-0">
                 <button
                   type="button"
-                  onClick={resetChat}
+                  onClick={handleResetChat}
                   className="p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
                   title={locale === 'uz' ? 'Yangi suhbat' : locale === 'ru' ? 'Новый чат' : 'New chat'}
                   aria-label={locale === 'uz' ? 'Yangi suhbat' : locale === 'ru' ? 'Новый чат' : 'New chat'}
@@ -197,7 +206,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
 
             {showQuickPrompts && (
               <div className="px-3 pb-2 flex flex-wrap gap-1.5 bg-brand-offwhite shrink-0">
-                {quickPrompts.map((prompt) => (
+                {visibleQuickPrompts.map((prompt) => (
                   <button
                     key={prompt}
                     type="button"

@@ -62,6 +62,29 @@ function matchesLesionRemovalPrice(text: string): boolean {
   );
 }
 
+/** Rus tilidagi hujjatlar chiqarish xizmati — preyskurantdan olib tashlangan */
+function matchesRussianDocumentExtractPrice(text: string): boolean {
+  const value = normalizeText(text);
+  if (!value) return false;
+
+  const isDocumentExtract =
+    (value.includes('выписок') || value.includes('vipisok') || value.includes('extract')) &&
+    (value.includes('документ') || value.includes('dokument') || value.includes('document'));
+
+  const isRussianLanguage =
+    value.includes('русском') ||
+    value.includes('russkom') ||
+    value.includes('rus tilida') ||
+    value.includes('russian language');
+
+  return isDocumentExtract && isRussianLanguage;
+}
+
+export function isExcludedRussianDocumentExtractPrice(item: PriceItem): boolean {
+  const fields = [item.name.uz, item.name.ru, item.name.en];
+  return fields.some((field) => matchesRussianDocumentExtractPrice(field));
+}
+
 export function isExcludedDermatoOncologySubService(
   sub: ServiceDetail,
   categoryId: string,
@@ -125,6 +148,9 @@ export function isExcludedDermatoOncologyPrice(item: PriceItem): boolean {
 
 export function filterExcludedPrices(prices: PriceItem[]): PriceItem[] {
   return prices.filter(
-    (item) => !isExcludedPriceCategory(item.category) && !isExcludedDermatoOncologyPrice(item),
+    (item) =>
+      !isExcludedPriceCategory(item.category) &&
+      !isExcludedDermatoOncologyPrice(item) &&
+      !isExcludedRussianDocumentExtractPrice(item),
   );
 }

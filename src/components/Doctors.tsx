@@ -1,8 +1,10 @@
+import { useMemo } from 'react';
 import { motion } from 'motion/react';
 import { Clock, Calendar, Shield } from 'lucide-react';
 import { Locale, Doctor } from '../types';
 import { DICTIONARY, DOCTORS } from '../data';
 import MediaImage from './MediaImage';
+import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 
 interface DoctorsProps {
   locale: Locale;
@@ -39,7 +41,10 @@ export default function Doctors({
   dictionary,
 }: DoctorsProps) {
   const d = dictionary || DICTIONARY[locale];
-  const dynamicDoctors = doctors || DOCTORS;
+  const dynamicDoctors = useMemo(
+    () => sortDoctorsFeaturedFirst(doctors || DOCTORS),
+    [doctors],
+  );
 
   return (
     <section id="doctors-page" className="py-16 bg-brand-white min-h-screen">
