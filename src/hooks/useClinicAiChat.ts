@@ -3,28 +3,10 @@ import type { Locale } from '../types';
 import {
   createChatMessage,
   createWelcomeMessage,
-  type ChatApiMessagePayload,
   type ChatMessage,
   type ClinicAiContext,
 } from '../types/chat';
 import { sendClinicChatMessage } from '../api/chatApi';
-
-function toApiMessages(messages: ChatMessage[]): ChatApiMessagePayload[] {
-  const filtered = messages.filter((m) => m.role === 'user' || m.role === 'assistant');
-  const lastIndex = filtered.length - 1;
-
-  return filtered.map((m, index) => {
-    const isLast = index === lastIndex;
-    const payload: ChatApiMessagePayload = {
-      role: m.role,
-      content: m.content,
-    };
-    if (m.imageDataUrl && m.role === 'user' && isLast) {
-      payload.image = m.imageDataUrl;
-    }
-    return payload;
-  });
-}
 
 export function useClinicAiChat(locale: Locale, context?: ClinicAiContext) {
   const [messages, setMessages] = useState<ChatMessage[]>(() => [createWelcomeMessage(locale)]);
@@ -40,11 +22,11 @@ export function useClinicAiChat(locale: Locale, context?: ClinicAiContext) {
   }, [locale]);
 
   const sendMessage = useCallback(
-    async (text: string, imageDataUrl?: string) => {
+    async (text: string) => {
       const trimmed = text.trim();
-      if ((!trimmed && !imageDataUrl) || isLoading) return;
+      if (!trimmed || isLoading) return;
 
-      const userMessage = createChatMessage('user', trimmed, { imageDataUrl });
+      const userMessage = createChatMessage('user', trimmed);
       const nextMessages = [...messages, userMessage];
       setMessages(nextMessages);
       setIsLoading(true);
@@ -53,7 +35,7 @@ export function useClinicAiChat(locale: Locale, context?: ClinicAiContext) {
       try {
         const reply = await sendClinicChatMessage({
           locale,
-          messages: toApiMessages(nextMessages),
+          messages: nextMessages.map((m) => ({ role: m.role, content: m.content })),
           context,
         });
         setMessages((prev) => [...prev, createChatMessage('assistant', reply)]);

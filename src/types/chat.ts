@@ -76,7 +76,6 @@ export function getChatUiLabels(locale: Locale) {
       error: 'Javob olishda xatolik. Qayta urinib ko\'ring.',
       close: 'Yopish',
       open: 'AI chat',
-      powered: 'DeepSeek AI',
     };
   }
   if (locale === 'ru') {
@@ -89,7 +88,6 @@ export function getChatUiLabels(locale: Locale) {
       error: 'Ошибка при получении ответа. Попробуйте снова.',
       close: 'Закрыть',
       open: 'AI чат',
-      powered: 'DeepSeek AI',
     };
   }
   return {
@@ -101,6 +99,5 @@ export function getChatUiLabels(locale: Locale) {
     error: 'Could not get a reply. Please try again.',
     close: 'Close',
     open: 'AI chat',
-    powered: 'DeepSeek AI',
   };
 }

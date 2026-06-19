@@ -1,13 +1,6 @@
 /** Vercel + local dev uchun chat yadro moduli (api/ papkasida emas). */
 
-import {
-  buildImageContextText,
-  describeSkinImage,
-  isVisionConfigured,
-} from './visionDescribe.js';
-
 const PLACEHOLDER = 'MY_DEEPSEEK_API_KEY';
-const MAX_IMAGE_DATA_URL = 1_200_000;
 
 const CLINIC_FACTS = {
   name: 'Radeski Skin & Aesthetic Clinic',
@@ -79,35 +72,6 @@ Online booking: ${CLINIC_FACTS.booking}
 Services: ${CLINIC_FACTS.specialties}`;
 }
 
-function imageAnalysisRules(locale) {
-  if (locale === 'uz') {
-    return `
-RASM TAHLILI QOIDALARI:
-- Agar xabarda "[Teri rasmi — dastlabki tahlil]" bo'lsa, undagi tavsif asosida javob bering.
-- Mumkin bo'lgan dermatologik yo'nalishlarni taxminiy ayting — bu TASHXIS EMAS.
-- Aniq tashxis faqat shifokor ko'rigida qo'yiladi deb eslatib o'ting.
-- Radeski klinikasida qaysi mutaxassis/xizmat mos kelishini tavsiya qiling.
-- Har doim telefon (${CLINIC_FACTS.phone}) va Hipolink (${CLINIC_FACTS.booking}) ni ko'rsating.
-- Javob bo'limlari: Ko'rinish | Ehtimoliy sabablar | Klinikaga murojaat.`;
-  }
-  if (locale === 'ru') {
-    return `
-ПРАВИЛА АНАЛИЗА ФОТО:
-- Если в сообщении есть "[Фото кожи — предварительный анализ]", отвечайте на основе описания.
-- Укажите возможные направления — это НЕ диагноз.
-- Точный диагноз ставит только врач на приёме.
-- Рекомендуйте услуги Radeski, телефон (${CLINIC_FACTS.phone}) и Hipolink (${CLINIC_FACTS.booking}).
-- Структура: Что видно | Возможные причины | Обращение в клинику.`;
-  }
-  return `
-IMAGE ANALYSIS RULES:
-- If the message contains "[Skin photo — preliminary analysis]", answer from that description.
-- Suggest possible directions — NOT a diagnosis.
-- Only an in-person visit confirms diagnosis.
-- Recommend Radeski services, phone (${CLINIC_FACTS.phone}) and Hipolink (${CLINIC_FACTS.booking}).
-- Structure: What is visible | Possible causes | Visit the clinic.`;
-}
-
 function buildClinicSystemInstruction(locale, context) {
   const langRule =
     locale === 'uz'
@@ -118,10 +82,32 @@ function buildClinicSystemInstruction(locale, context) {
 
   const role =
     locale === 'uz'
-      ? `Siz "${CLINIC_FACTS.name}" klinikasining rasmiy AI yordamchisisiz.`
+      ? `Siz "${CLINIC_FACTS.name}" klinikasining rasmiy AI yordamchisisiz. Bemorlarga teri salomatligi, xizmatlar, qabul va klinika haqida aniq, iliq va professional javob berasiz.`
       : locale === 'ru'
-        ? `Вы официальный AI-ассистент клиники "${CLINIC_FACTS.name}".`
-        : `You are the official AI assistant of ${CLINIC_FACTS.name}.`;
+        ? `Вы официальный AI-ассистент клиники "${CLINIC_FACTS.name}". Помогаете пациентам с вопросами о коже, услугах, записи и клинике — точно, дружелюбно и профессионально.`
+        : `You are the official AI assistant of ${CLINIC_FACTS.name}. Help visitors with skin health, services, appointments, and clinic information — warmly and professionally.`;
+
+  const rules =
+    locale === 'uz'
+      ? `
+QOIDALAR:
+- Aniq va qisqa javob bering (kerak bo'lsa ro'yxat va bosqichlar bilan).
+- Tashxis qo'ymang va dori buyurmang — shifokor ko'rigi tavsiya qiling.
+- Narxlar taxminiy bo'lishi mumkin; aniq narx uchun qabulga yo'naltiring.
+- Qabul uchun Hipolink havolasini yoki telefonni eslatib o'ting.`
+      : locale === 'ru'
+        ? `
+ПРАВИЛА:
+- Отвечайте чётко и по делу (списки и шаги при необходимости).
+- Не ставьте диагноз и не назначайте лекарства — направляйте на приём.
+- Цены могут быть ориентировочными; точную стоимость уточняет врач.
+- Для записи предлагайте Hipolink или телефон клиники.`
+        : `
+RULES:
+- Be clear and concise (use lists/steps when helpful).
+- Do not diagnose or prescribe medication — recommend a doctor visit.
+- Prices may be indicative; exact quotes come from consultation.
+- For booking, mention Hipolink or the clinic phone.`;
 
   const extra = [
     context?.serviceSummary ? `Xizmatlar: ${context.serviceSummary}` : '',
@@ -131,64 +117,7 @@ function buildClinicSystemInstruction(locale, context) {
     .filter(Boolean)
     .join('\n');
 
-  return `${role}\n${langRule}\n${factsBlock(locale)}\n${imageAnalysisRules(locale)}${extra ? `\n\nKONTEKST:\n${extra}` : ''}`;
-}
-
-function validateImageDataUrl(image) {
-  if (!image || typeof image !== 'string') return undefined;
-  const trimmed = image.trim();
-  if (!trimmed.startsWith('data:image/')) {
-    throw new ChatApiError('Invalid image format', 400);
-  }
-  if (trimmed.length > MAX_IMAGE_DATA_URL) {
-    throw new ChatApiError('Image is too large', 400);
-  }
-  return trimmed;
-}
-
-function visionNotConfiguredMessage(locale) {
-  if (locale === 'ru') {
-    return 'Анализ фото не настроен. Добавьте GEMINI_API_KEY или VISION_API_KEY в переменные окружения.';
-  }
-  if (locale === 'en') {
-    return 'Photo analysis is not configured. Add GEMINI_API_KEY or VISION_API_KEY to environment variables.';
-  }
-  return 'Rasm tahlili sozlanmagan. GEMINI_API_KEY yoki VISION_API_KEY ni muhit o\'zgaruvchilariga qo\'shing.';
-}
-
-async function buildTextUserContent(message, locale, isLatestUserMessage) {
-  const text = message.content?.trim() || '';
-  const image = validateImageDataUrl(message.image);
-
-  if (!image) {
-    return text || null;
-  }
-
-  if (!isLatestUserMessage) {
-    if (locale === 'ru') return text || '[Ранее отправлено фото кожи]';
-    if (locale === 'en') return text || '[Skin photo was sent earlier]';
-    return text || '[Avval teri rasmi yuborilgan]';
-  }
-
-  if (!isVisionConfigured()) {
-    throw new ChatApiError(visionNotConfiguredMessage(locale), 503);
-  }
-
-  try {
-    const description = await describeSkinImage(image, locale, text);
-    return buildImageContextText(locale, text, description);
-  } catch (error) {
-    if (error instanceof ChatApiError) throw error;
-    const detail = error instanceof Error ? error.message : 'Vision failed';
-    throw new ChatApiError(
-      locale === 'uz'
-        ? `Rasmni tahlil qilib bo'lmadi: ${detail}`
-        : locale === 'ru'
-          ? `Не удалось проанализировать фото: ${detail}`
-          : `Could not analyze photo: ${detail}`,
-      502,
-    );
-  }
+  return `${role}\n${langRule}\n${factsBlock(locale)}\n${rules}${extra ? `\n\nKONTEKST:\n${extra}` : ''}`;
 }
 
 export function parseChatBody(raw) {
@@ -222,36 +151,22 @@ export async function handleDeepSeekChat(body) {
     throw new ChatApiError('Messages are required', 400);
   }
 
-  const lastIndex = messages.length - 1;
-  const last = messages[lastIndex];
-  if (last.role !== 'user') {
+  const last = messages[messages.length - 1];
+  if (last.role !== 'user' || !last.content?.trim()) {
     throw new ChatApiError('Last message must be from user', 400);
   }
 
-  const lastHasContent = Boolean(last.content?.trim() || last.image);
-  if (!lastHasContent) {
-    throw new ChatApiError('Last message must include text or image', 400);
-  }
-
-  if ((last.content?.length ?? 0) > 2500) {
+  if (last.content.length > 2500) {
     throw new ChatApiError('Message is too long', 400);
   }
 
-  const apiMessages = [{ role: 'system', content: buildClinicSystemInstruction(locale, body.context) }];
-
-  for (let i = 0; i < messages.length; i += 1) {
-    const message = messages[i];
-
-    if (message.role === 'assistant') {
-      apiMessages.push({ role: 'assistant', content: message.content?.trim() || '' });
-      continue;
-    }
-
-    const isLatestUser = i === lastIndex;
-    const content = await buildTextUserContent(message, locale, isLatestUser);
-    if (!content) continue;
-    apiMessages.push({ role: 'user', content });
-  }
+  const apiMessages = [
+    { role: 'system', content: buildClinicSystemInstruction(locale, body.context) },
+    ...messages.map((message) => ({
+      role: message.role,
+      content: message.content.trim(),
+    })),
+  ];
 
   const response = await fetch(`${getDeepSeekApiBase()}/chat/completions`, {
     method: 'POST',
@@ -263,7 +178,7 @@ export async function handleDeepSeekChat(body) {
       model: getDeepSeekModel(),
       messages: apiMessages,
       temperature: 0.65,
-      max_tokens: 1400,
+      max_tokens: 1200,
     }),
   });
 
@@ -288,7 +203,6 @@ export function getChatHealthPayload() {
   return {
     ok: true,
     aiConfigured: isDeepSeekConfigured(),
-    visionConfigured: isVisionConfigured(),
     model: getDeepSeekModel(),
   };
 }

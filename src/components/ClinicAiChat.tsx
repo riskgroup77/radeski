@@ -248,15 +248,6 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
                   <SendHorizontal className="w-4 h-4" />
                 </button>
               </form>
-
-              <p className="mt-2 text-[10px] text-center text-brand-text-muted">
-                {labels.powered} ·{' '}
-                {locale === 'uz'
-                  ? 'Tibbiy maslahat emas — shifokor ko\'rigini tavsiya qilamiz'
-                  : locale === 'ru'
-                    ? 'Не заменяет консультацию врача'
-                    : 'Not a substitute for medical advice'}
-              </p>
             </footer>
           </motion.section>
         )}

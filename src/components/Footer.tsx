@@ -153,7 +153,7 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
           <div>
             <p className="font-light">
-              &copy; {new Date().getFullYear()} Radeski Skin & Aesthetic Clinic. All rights reserved.
+              &copy; {new Date().getFullYear()} Radeski Skin & Aesthetic Clinic
             </p>
           </div>
           <div className="flex flex-wrap gap-4 justify-center sm:justify-end">
