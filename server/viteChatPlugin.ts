@@ -1,11 +1,7 @@
 import { loadEnv, type Plugin } from 'vite';
 import { ChatApiError, handleDeepSeekChat } from './deepseekChatHandler';
 import { readJsonBody } from './readJsonBody';
-import {
-  getDeepSeekModel,
-  isDeepSeekConfigured,
-  loadProjectEnv,
-} from './loadEnv';
+import { loadProjectEnv } from './loadEnv';
 
 function requestPath(url: string | undefined): string {
   if (!url) return '';
@@ -42,15 +38,9 @@ export function clinicChatPlugin(): Plugin {
           req.method === 'GET' &&
           (path === '/api/chat/health' || path === '/api/chat-health')
         ) {
-          const configured = isDeepSeekConfigured(projectRoot);
+          const { getChatHealthPayload } = await import('./vercelChatCore.js');
           res.setHeader('Content-Type', 'application/json');
-          res.end(
-            JSON.stringify({
-              ok: true,
-              aiConfigured: configured,
-              model: getDeepSeekModel(),
-            }),
-          );
+          res.end(JSON.stringify(getChatHealthPayload()));
           return;
         }
 

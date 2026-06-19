@@ -1,5 +1,5 @@
 import type { Locale } from '../types';
-import type { ChatMessage, ClinicAiContext } from '../types/chat';
+import type { ChatApiMessagePayload, ChatMessage, ClinicAiContext } from '../types/chat';
 import { ApiError } from './client';
 
 export interface ChatApiResponse {
@@ -28,7 +28,7 @@ async function parseChatResponse(res: Response): Promise<ChatApiResponse> {
 
 export async function sendClinicChatMessage(payload: {
   locale: Locale;
-  messages: Pick<ChatMessage, 'role' | 'content'>[];
+  messages: ChatApiMessagePayload[];
   context?: ClinicAiContext;
 }): Promise<string> {
   const res = await fetch('/api/chat', {
@@ -41,13 +41,16 @@ export async function sendClinicChatMessage(payload: {
   return data.reply;
 }
 
-export async function checkChatHealth(): Promise<{ aiConfigured: boolean }> {
+export async function checkChatHealth(): Promise<{ aiConfigured: boolean; visionConfigured?: boolean }> {
   try {
     const res = await fetch('/api/chat-health');
-    if (!res.ok) return { aiConfigured: false };
-    const data = (await res.json()) as { aiConfigured?: boolean };
-    return { aiConfigured: Boolean(data.aiConfigured) };
+    if (!res.ok) return { aiConfigured: false, visionConfigured: false };
+    const data = (await res.json()) as { aiConfigured?: boolean; visionConfigured?: boolean };
+    return {
+      aiConfigured: Boolean(data.aiConfigured),
+      visionConfigured: Boolean(data.visionConfigured),
+    };
   } catch {
-    return { aiConfigured: false };
+    return { aiConfigured: false, visionConfigured: false };
   }
 }
