@@ -4,5 +4,13 @@
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/chat/index.ts": {
+      "maxDuration": 60
+    },
+    "api/chat/health.ts": {
+      "maxDuration": 10
+    }
+  }
 }
