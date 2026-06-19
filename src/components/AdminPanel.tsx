@@ -1106,8 +1106,11 @@ export default function AdminPanel({
                 // DOCTOR DIRECTORY ROSTER
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {editedDoctors.map((doc) => (
-                    <div key={doc.id} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-4 justify-between items-start">
-                      <div className="flex gap-3">
+                    <div
+                      key={doc.id}
+                      className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-3 items-start overflow-hidden"
+                    >
+                      <div className="flex gap-3 flex-1 min-w-0">
                         <div className="w-12 h-12 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-white shrink-0">
                           {doc.photo ? (
                             <img src={doc.photo} alt={doc.name[locale]} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
@@ -1115,14 +1118,26 @@ export default function AdminPanel({
                             <div className="w-full h-full bg-brand-offwhite flex items-center justify-center text-[8px] text-brand-text-muted">—</div>
                           )}
                         </div>
-                        <div className="min-w-0">
-                          <h4 className="font-bold text-xs sm:text-sm text-brand-text-primary truncate">{doc.name[locale]}</h4>
-                          <p className="text-[10px] text-brand-gold font-medium leading-normal block mt-0.5 truncate">{doc.role[locale]}</p>
-                          <span className="text-[9px] text-brand-text-muted font-mono">{doc.experience[locale]} {locale === 'uz' ? 'yil amaliyot' : 'лет стажа'}</span>
+                        <div className="min-w-0 flex-1 overflow-hidden">
+                          <h4
+                            className="font-bold text-xs sm:text-sm text-brand-text-primary truncate"
+                            title={doc.name[locale]}
+                          >
+                            {doc.name[locale]}
+                          </h4>
+                          <p
+                            className="text-[10px] text-brand-gold font-medium leading-normal block mt-0.5 truncate"
+                            title={doc.role[locale]}
+                          >
+                            {doc.role[locale]}
+                          </p>
+                          <span className="text-[9px] text-brand-text-muted font-mono block truncate">
+                            {doc.experience[locale]} {locale === 'uz' ? 'yil amaliyot' : 'лет стажа'}
+                          </span>
                         </div>
                       </div>
 
-                      <div className="flex gap-1">
+                      <div className="flex gap-1 shrink-0">
                         <button
                           onClick={() => handleSelectDoctorForEdit(doc)}
                           className="p-1.5 bg-brand-white hover:bg-brand-gold-light/20 text-brand-gold-dark border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
