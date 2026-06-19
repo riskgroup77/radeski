@@ -1,16 +1,14 @@
-import dotenv from 'dotenv';
 import fs from 'node:fs';
 import path from 'node:path';
-import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-
-const require = createRequire(import.meta.url);
 
 export const DEEPSEEK_PLACEHOLDER_KEY = 'MY_DEEPSEEK_API_KEY';
 
 export const DEFAULT_DEEPSEEK_MODEL = 'deepseek-chat';
 
 export const DEFAULT_DEEPSEEK_API_BASE = 'https://api.deepseek.com';
+
+let envLoaded = false;
 
 function stripQuotes(value: string): string {
   return value.replace(/^["']|["']$/g, '');
@@ -39,28 +37,73 @@ function getProjectRoots(preferredRoot?: string): string[] {
   return [...roots];
 }
 
+/** Minimal .env parser — dotenv is avoided (breaks Vercel esbuild bundle). */
+function parseEnvFileContent(content: string): Record<string, string> {
+  const result: Record<string, string> = {};
+
+  for (const line of content.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+
+    const eq = trimmed.indexOf('=');
+    if (eq <= 0) continue;
+
+    const key = trimmed.slice(0, eq).trim();
+    let value = trimmed.slice(eq + 1).trim();
+
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+
+    if (key) result[key] = value;
+  }
+
+  return result;
+}
+
 function parseEnvFile(filePath: string): Record<string, string> {
   if (!fs.existsSync(filePath)) return {};
   try {
-    return dotenv.parse(fs.readFileSync(filePath, 'utf8'));
+    return parseEnvFileContent(fs.readFileSync(filePath, 'utf8'));
   } catch {
     return {};
   }
 }
 
-function readDeepSeekKeyFromLocalSecrets(): string | undefined {
-  try {
-    const mod = require('./secrets.local.ts') as { DEEPSEEK_API_KEY?: string };
-    const raw = mod.DEEPSEEK_API_KEY;
-    if (!raw) return undefined;
-    const key = normalizeEnvValue(raw);
-    if (key && key !== DEEPSEEK_PLACEHOLDER_KEY) {
-      process.env.DEEPSEEK_API_KEY = key;
-      return key;
+function applyEnvRecord(record: Record<string, string>, override: boolean): void {
+  for (const [key, value] of Object.entries(record)) {
+    if (value === undefined || value === '') continue;
+    if (override || process.env[key] === undefined || process.env[key] === '') {
+      process.env[key] = value;
     }
-  } catch {
-    // secrets.local.ts mavjud emas — o'tkazib yuboriladi
   }
+}
+
+function readDeepSeekKeyFromLocalSecrets(roots: string[]): string | undefined {
+  for (const root of roots) {
+    const secretsPath = path.join(root, 'server', 'secrets.local.ts');
+    if (!fs.existsSync(secretsPath)) continue;
+
+    try {
+      const content = fs.readFileSync(secretsPath, 'utf8');
+      const match = content.match(
+        /DEEPSEEK_API_KEY\s*=\s*(['"`])([\s\S]*?)\1/,
+      );
+      if (!match?.[2]) continue;
+
+      const key = normalizeEnvValue(match[2]);
+      if (key && key !== DEEPSEEK_PLACEHOLDER_KEY) {
+        process.env.DEEPSEEK_API_KEY = key;
+        return key;
+      }
+    } catch {
+      // ignore
+    }
+  }
+
   return undefined;
 }
 
@@ -78,6 +121,7 @@ function readDeepSeekKeyFromFiles(roots: string[]): string | undefined {
       }
     }
   }
+
   return undefined;
 }
 
@@ -87,53 +131,58 @@ export function loadProjectEnv(
   preferredRoot?: string,
 ): void {
   if (extra) {
-    for (const [key, value] of Object.entries(extra)) {
-      if (value !== undefined && value !== '') {
-        process.env[key] = value;
+    applyEnvRecord(
+      Object.fromEntries(
+        Object.entries(extra).filter(([, value]) => value !== undefined && value !== ''),
+      ) as Record<string, string>,
+      true,
+    );
+  }
+
+  if (envLoaded && !extra) return;
+
+  const roots = getProjectRoots(preferredRoot);
+
+  for (const root of roots) {
+    for (const filename of ['.env', '.env.local']) {
+      const filePath = path.join(root, filename);
+      const parsed = parseEnvFile(filePath);
+      if (Object.keys(parsed).length > 0) {
+        applyEnvRecord(parsed, false);
       }
     }
   }
 
-  for (const root of getProjectRoots(preferredRoot)) {
-    const envPath = path.join(root, '.env');
-    const localPath = path.join(root, '.env.local');
+  readDeepSeekKeyFromLocalSecrets(roots);
+  readDeepSeekKeyFromFiles(roots);
 
-    if (fs.existsSync(envPath)) {
-      dotenv.config({ path: envPath, override: false });
-    }
-    if (fs.existsSync(localPath)) {
-      dotenv.config({ path: localPath, override: false });
-    }
-  }
-
-  readDeepSeekKeyFromLocalSecrets();
-  readDeepSeekKeyFromFiles(getProjectRoots(preferredRoot));
+  envLoaded = true;
 }
 
-loadProjectEnv();
-
 export function getDeepSeekModel(): string {
+  loadProjectEnv();
   const configured = process.env.DEEPSEEK_MODEL?.trim();
   return configured ? normalizeEnvValue(configured) : DEFAULT_DEEPSEEK_MODEL;
 }
 
 export function getDeepSeekApiBase(): string {
+  loadProjectEnv();
   const configured = process.env.DEEPSEEK_API_BASE?.trim();
   const base = configured ? normalizeEnvValue(configured) : DEFAULT_DEEPSEEK_API_BASE;
   return base.replace(/\/$/, '');
 }
 
 export function getDeepSeekApiKey(preferredRoot?: string): string | undefined {
+  loadProjectEnv(undefined, preferredRoot);
+
   const raw = process.env.DEEPSEEK_API_KEY?.trim();
   if (raw) {
     const key = normalizeEnvValue(raw);
     if (key && key !== DEEPSEEK_PLACEHOLDER_KEY) return key;
   }
 
-  const fromLocal = readDeepSeekKeyFromLocalSecrets();
-  if (fromLocal) return fromLocal;
-
-  return readDeepSeekKeyFromFiles(getProjectRoots(preferredRoot));
+  const roots = getProjectRoots(preferredRoot);
+  return readDeepSeekKeyFromLocalSecrets(roots) ?? readDeepSeekKeyFromFiles(roots);
 }
 
 export function isDeepSeekConfigured(preferredRoot?: string): boolean {
