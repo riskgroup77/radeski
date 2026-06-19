@@ -1,15 +1,19 @@
 {
   "rewrites": [
     {
+      "source": "/api/chat/health",
+      "destination": "/api/chat-health"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ],
   "functions": {
-    "api/chat/index.ts": {
+    "api/chat.js": {
       "maxDuration": 60
     },
-    "api/chat/health.ts": {
+    "api/chat-health.js": {
       "maxDuration": 10
     }
   }

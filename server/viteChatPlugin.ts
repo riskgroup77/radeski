@@ -38,7 +38,10 @@ export function clinicChatPlugin(): Plugin {
 
         syncEnv(server.config.mode, server.config.root);
 
-        if (req.method === 'GET' && path === '/api/chat/health') {
+        if (
+          req.method === 'GET' &&
+          (path === '/api/chat/health' || path === '/api/chat-health')
+        ) {
           const configured = isDeepSeekConfigured(projectRoot);
           res.setHeader('Content-Type', 'application/json');
           res.end(

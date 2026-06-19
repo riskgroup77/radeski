@@ -43,7 +43,7 @@ export async function sendClinicChatMessage(payload: {
 
 export async function checkChatHealth(): Promise<{ aiConfigured: boolean }> {
   try {
-    const res = await fetch('/api/chat/health');
+    const res = await fetch('/api/chat-health');
     if (!res.ok) return { aiConfigured: false };
     const data = (await res.json()) as { aiConfigured?: boolean };
     return { aiConfigured: Boolean(data.aiConfigured) };

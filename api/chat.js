@@ -1,15 +1,14 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { ChatApiError, handleDeepSeekChat, parseChatBody } from '../_lib/handler';
-import { getDeepSeekModel, isDeepSeekConfigured } from '../_lib/env';
+import {
+  ChatApiError,
+  handleDeepSeekChat,
+  parseChatBody,
+  getChatHealthPayload,
+} from '../server/vercelChatCore.js';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   try {
     if (req.method === 'GET') {
-      return res.status(200).json({
-        ok: true,
-        aiConfigured: isDeepSeekConfigured(),
-        model: getDeepSeekModel(),
-      });
+      return res.status(200).json(getChatHealthPayload());
     }
 
     if (req.method !== 'POST') {
