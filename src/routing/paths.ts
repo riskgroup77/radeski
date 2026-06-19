@@ -38,6 +38,26 @@ export function articlesListPath(locale: Locale): string {
   return `/${locale}/articles`;
 }
 
+export function doctorPath(locale: Locale, doctorId: string): string {
+  return `/${locale}/doctors/${encodeURIComponent(doctorId)}`;
+}
+
+export function doctorsListPath(locale: Locale): string {
+  return pagePath(locale, 'doctors');
+}
+
+export function getDoctorIdFromPathname(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length >= 3 && segments[1] === 'doctors') {
+    try {
+      return decodeURIComponent(segments[2]);
+    } catch {
+      return segments[2];
+    }
+  }
+  return null;
+}
+
 export function getArticleIdFromPathname(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
   if (segments.length >= 3 && segments[1] === 'articles') {

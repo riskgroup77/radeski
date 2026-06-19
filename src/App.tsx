@@ -23,6 +23,7 @@ import {
   PageId,
   getPageFromPathname,
   getArticleIdFromPathname,
+  getDoctorIdFromPathname,
   getServiceCategoryIdFromPathname,
   getServiceSubIdFromPathname,
   pagePath,
@@ -30,6 +31,7 @@ import {
   switchLocaleInPath,
   pagePathForAllLocales,
   articlePath,
+  doctorPath,
   serviceCategoryPath,
   serviceSubPath,
 } from './routing/paths';
@@ -42,6 +44,7 @@ import Services from './components/Services';
 import ServiceCategoryPage from './components/ServiceCategoryPage';
 import ServiceSubPage from './components/ServiceSubPage';
 import Doctors from './components/Doctors';
+import DoctorPage from './components/DoctorPage';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
 import ArticlePage from './components/ArticlePage';
@@ -89,9 +92,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const locale = parsedLocale ?? (forcePage === 'admin' ? adminLocale : getPreferredLocale());
   const currentPage: PageId = forcePage ?? getPageFromPathname(location.pathname);
   const articleId = getArticleIdFromPathname(location.pathname);
+  const doctorId = getDoctorIdFromPathname(location.pathname);
   const serviceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
   const serviceSubId = getServiceSubIdFromPathname(location.pathname);
-  const { goToPage, goToArticle, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
+  const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
 
   const changeLocale = (nextLocale: Locale) => {
@@ -125,6 +129,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
   const activeArticlePreview = articleId
     ? findArticleByRouteParam(articleId, dynamicArticles) ?? null
+    : null;
+
+  const activeDoctorPreview = doctorId
+    ? dynamicDoctors.find((doc) => doc.id === doctorId) ?? null
     : null;
 
   const [dynamicDictionary, setDynamicDictionary] = useState(() => {
@@ -399,18 +407,22 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
     const seoTitle = activeArticlePreview
       ? `${activeArticlePreview.title[locale]} | Radeski Clinic`
-      : activeServiceSub
-        ? `${activeServiceSub.name[locale]} | Radeski Clinic`
-        : activeServiceCategory
-          ? `${activeServiceCategory.title[locale]} | Radeski Clinic`
-          : activeSEO.title;
+      : activeDoctorPreview
+        ? `${activeDoctorPreview.name[locale]} | Radeski Clinic`
+        : activeServiceSub
+          ? `${activeServiceSub.name[locale]} | Radeski Clinic`
+          : activeServiceCategory
+            ? `${activeServiceCategory.title[locale]} | Radeski Clinic`
+            : activeSEO.title;
     const seoDesc = activeArticlePreview
       ? activeArticlePreview.summary[locale]
-      : activeServiceSub
-        ? activeServiceSub.description[locale]
-        : activeServiceCategory
-          ? activeServiceCategory.description[locale]
-          : activeSEO.desc;
+      : activeDoctorPreview
+        ? activeDoctorPreview.bio[locale]
+        : activeServiceSub
+          ? activeServiceSub.description[locale]
+          : activeServiceCategory
+            ? activeServiceCategory.description[locale]
+            : activeSEO.desc;
 
     document.title = seoTitle;
 
@@ -466,11 +478,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       LOCALES.forEach((altLocale) => {
         const altPath = articleId
           ? articlePath(altLocale, activeArticlePreview?.id ?? articleId)
-          : serviceSubId && serviceCategoryId
-            ? serviceSubPath(altLocale, serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
-            : serviceCategoryId
-              ? serviceCategoryPath(altLocale, serviceCategoryId)
-              : pagePathForAllLocales(pageForAlternates)[altLocale];
+          : doctorId
+            ? doctorPath(altLocale, activeDoctorPreview?.id ?? doctorId)
+            : serviceSubId && serviceCategoryId
+              ? serviceSubPath(altLocale, serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
+              : serviceCategoryId
+                ? serviceCategoryPath(altLocale, serviceCategoryId)
+                : pagePathForAllLocales(pageForAlternates)[altLocale];
         const link = document.createElement('link');
         link.rel = 'alternate';
         link.hreflang = localeToHreflang(altLocale);
@@ -481,11 +495,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
       const defaultPath = articleId
         ? articlePath('uz', activeArticlePreview?.id ?? articleId)
-        : serviceSubId && serviceCategoryId
-          ? serviceSubPath('uz', serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
-          : serviceCategoryId
-            ? serviceCategoryPath('uz', serviceCategoryId)
-            : pagePath('uz', pageForAlternates);
+        : doctorId
+          ? doctorPath('uz', activeDoctorPreview?.id ?? doctorId)
+          : serviceSubId && serviceCategoryId
+            ? serviceSubPath('uz', serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
+            : serviceCategoryId
+              ? serviceCategoryPath('uz', serviceCategoryId)
+              : pagePath('uz', pageForAlternates);
       const defaultLink = document.createElement('link');
       defaultLink.rel = 'alternate';
       defaultLink.hreflang = 'x-default';
@@ -494,7 +510,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       document.head.appendChild(defaultLink);
     }
 
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, location.pathname, articleId, activeArticlePreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {
@@ -589,7 +605,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={`${currentPage}-${articleId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}`}
+          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -755,10 +771,27 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                         </div>
                         <div className="p-5">
                           <span className="text-[10px] font-bold text-brand-gold tracking-wide uppercase font-mono">{doc.role[locale]}</span>
-                          <h4 className="font-extrabold text-brand-text-primary text-md sm:text-base tracking-tight leading-snug mt-1">{doc.name[locale]}</h4>
+                          <button
+                            type="button"
+                            onClick={() => goToDoctor(doc.id)}
+                            className="text-left w-full font-extrabold text-brand-text-primary text-md sm:text-base tracking-tight leading-snug mt-1 hover:text-brand-gold transition-colors cursor-pointer"
+                          >
+                            {doc.name[locale]}
+                          </button>
+                          {doc.education[locale] && (
+                            <div className="mt-2">
+                              <span className="text-xs font-extrabold text-brand-text-primary uppercase tracking-wide">
+                                {d.education}
+                              </span>
+                              <p className="text-sm mt-1 font-semibold text-brand-text-primary line-clamp-2 leading-relaxed">
+                                {doc.education[locale]}
+                              </p>
+                            </div>
+                          )}
                           <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">{doc.bio[locale]}</p>
                           <button
-                            onClick={() => goToPage('doctors')}
+                            type="button"
+                            onClick={() => goToDoctor(doc.id)}
                             className="mt-4 py-2.5 w-full text-center bg-brand-gold-light/10 hover:bg-brand-gold-light/20 text-brand-gold-dark font-bold text-xs rounded-lg transition-colors cursor-pointer"
                           >
                             {d.viewProfile}
@@ -994,10 +1027,22 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {currentPage === 'doctors' && (
-            <Doctors 
-              locale={locale} 
-              onOpenAppointment={() => handleOpenAppointmentWithService()} 
+          {currentPage === 'doctors' && doctorId && (
+            <DoctorPage
+              locale={locale}
+              doctorId={doctorId}
+              doctors={dynamicDoctors}
+              dictionary={d}
+              onBackToList={() => goToPage('doctors')}
+              onOpenAppointment={() => handleOpenAppointmentWithService()}
+            />
+          )}
+
+          {currentPage === 'doctors' && !doctorId && (
+            <Doctors
+              locale={locale}
+              onOpenAppointment={() => handleOpenAppointmentWithService()}
+              onOpenDoctor={goToDoctor}
               doctors={dynamicDoctors}
               dictionary={d}
             />

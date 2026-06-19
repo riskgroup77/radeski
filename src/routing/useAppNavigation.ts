@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Locale } from '../types';
 import { saveLocale } from '../routing/locale';
-import { PageId, pagePath, switchLocaleInPath, articlePath, serviceCategoryPath, serviceSubPath } from '../routing/paths';
+import { PageId, pagePath, switchLocaleInPath, articlePath, serviceCategoryPath, serviceSubPath, doctorPath } from '../routing/paths';
 
 export function useAppNavigation(locale: Locale) {
   const navigate = useNavigate();
@@ -36,6 +36,13 @@ export function useAppNavigation(locale: Locale) {
     [navigate, locale],
   );
 
+  const goToDoctor = useCallback(
+    (doctorId: string) => {
+      navigate(doctorPath(locale, doctorId));
+    },
+    [navigate, locale],
+  );
+
   const changeLocale = useCallback(
     (nextLocale: Locale) => {
       saveLocale(nextLocale);
@@ -44,5 +51,5 @@ export function useAppNavigation(locale: Locale) {
     [navigate, location.pathname],
   );
 
-  return { goToPage, goToArticle, goToServiceCategory, goToServiceSub, changeLocale, navigate };
+  return { goToPage, goToArticle, goToServiceCategory, goToServiceSub, goToDoctor, changeLocale, navigate };
 }

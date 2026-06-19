@@ -1190,7 +1190,7 @@ export default function AdminPanel({
                       />
 
                       <LocalizedFieldGroup
-                        label={locale === 'uz' ? "Ta'lim / o'qish joyi" : locale === 'ru' ? 'Образование' : 'Education'}
+                        label={locale === 'uz' ? 'Ish joyi' : locale === 'ru' ? 'Место работы' : 'Workplace'}
                         values={{
                           uz: doctorForm.education?.uz || '',
                           ru: doctorForm.education?.ru || '',
