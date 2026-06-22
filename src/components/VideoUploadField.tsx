@@ -1,24 +1,25 @@
 import { useEffect, useState } from 'react';
-import { ImagePlus, X } from 'lucide-react';
+import { Film, X } from 'lucide-react';
 import { useMediaUrl } from '../hooks/useMediaUrl';
 
-interface ImageUploadFieldProps {
+interface VideoUploadFieldProps {
   label: string;
-  currentImageUrl?: string | null;
+  currentVideoUrl?: string | null;
   file: File | null;
   onFileChange: (file: File | null) => void;
   helperText?: string;
 }
 
-export default function ImageUploadField({
+export default function VideoUploadField({
   label,
-  currentImageUrl,
+  currentVideoUrl,
   file,
   onFileChange,
   helperText,
-}: ImageUploadFieldProps) {
+}: VideoUploadFieldProps) {
   const [preview, setPreview] = useState<string | null>(null);
-  const resolvedCurrentUrl = useMediaUrl(currentImageUrl);
+  const resolvedCurrentUrl = useMediaUrl(currentVideoUrl);
+  const displaySrc = preview || resolvedCurrentUrl || null;
 
   useEffect(() => {
     if (!file) {
@@ -30,8 +31,6 @@ export default function ImageUploadField({
     return () => URL.revokeObjectURL(url);
   }, [file]);
 
-  const displaySrc = preview || resolvedCurrentUrl || null;
-
   return (
     <div className="space-y-2">
       {label ? (
@@ -41,8 +40,8 @@ export default function ImageUploadField({
       ) : null}
 
       {displaySrc ? (
-        <div className="relative w-36 h-36 rounded-xl overflow-hidden border border-brand-sectiongray bg-brand-offwhite">
-          <img src={displaySrc} alt="Preview" className="w-full h-full object-cover" />
+        <div className="relative w-full max-w-md aspect-video rounded-xl overflow-hidden border border-brand-sectiongray bg-brand-dark-navy">
+          <video src={displaySrc} className="w-full h-full object-cover" muted playsInline controls preload="metadata" />
           {file && (
             <button
               type="button"
@@ -55,14 +54,14 @@ export default function ImageUploadField({
           )}
         </div>
       ) : (
-        <div className="w-36 h-36 rounded-xl border border-dashed border-brand-sectiongray bg-brand-offwhite flex items-center justify-center text-brand-text-muted">
-          <ImagePlus className="w-8 h-8 opacity-40" />
+        <div className="w-full max-w-md aspect-video rounded-xl border border-dashed border-brand-sectiongray bg-brand-offwhite flex items-center justify-center text-brand-text-muted">
+          <Film className="w-10 h-10 opacity-40" />
         </div>
       )}
 
       <input
         type="file"
-        accept="image/jpeg,image/png,image/webp,image/gif"
+        accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov"
         onChange={(e) => onFileChange(e.target.files?.[0] ?? null)}
         className="block w-full text-xs text-brand-text-secondary file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-gold-light/15 file:text-brand-gold-dark hover:file:bg-brand-gold-light/25 cursor-pointer"
       />

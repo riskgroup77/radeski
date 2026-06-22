@@ -3,17 +3,19 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Play, Clock, Film, X } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
-import { CLINIC_VIDEOS } from '../data/sitePagesContent';
+import type { ClinicVideo } from '../data/sitePagesContent';
+import ResolvedVideo from './ResolvedVideo';
 
 interface VideosPageProps {
   locale: Locale;
   dictionary?: Record<string, string>;
+  videos: ClinicVideo[];
 }
 
-export default function VideosPage({ locale, dictionary }: VideosPageProps) {
+export default function VideosPage({ locale, dictionary, videos }: VideosPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
-  const activeVideo = CLINIC_VIDEOS.find((video) => video.id === activeVideoId) ?? null;
+  const activeVideo = videos.find((video) => video.id === activeVideoId) ?? null;
 
   return (
     <section id="videos-page" className="py-16 bg-brand-white min-h-screen">
@@ -31,7 +33,7 @@ export default function VideosPage({ locale, dictionary }: VideosPageProps) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
-          {CLINIC_VIDEOS.map((video, index) => (
+          {videos.map((video, index) => (
             <motion.article
               key={video.id}
               initial={{ opacity: 0, y: 16 }}
@@ -44,7 +46,7 @@ export default function VideosPage({ locale, dictionary }: VideosPageProps) {
                 onClick={() => setActiveVideoId(video.id)}
                 className="relative aspect-video w-full bg-brand-dark-navy overflow-hidden cursor-pointer"
               >
-                <video
+                <ResolvedVideo
                   src={video.src}
                   className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-[1.02] transition-transform duration-500"
                   muted
@@ -114,7 +116,7 @@ export default function VideosPage({ locale, dictionary }: VideosPageProps) {
               >
                 <X className="w-5 h-5" />
               </button>
-              <video
+              <ResolvedVideo
                 src={activeVideo.src}
                 controls
                 autoPlay

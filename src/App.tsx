@@ -37,6 +37,12 @@ import {
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
+import {
+  loadClinicVideos,
+  loadTreatmentResults,
+  SITE_PAGES_STORAGE_KEYS,
+} from './utils/sitePagesStorage';
+import { clearAllLocalMedia } from './utils/localMediaStorage';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -149,6 +155,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     return saved ? JSON.parse(saved) : CLINIC_RATINGS;
   });
 
+  const [dynamicClinicVideos, setDynamicClinicVideos] = useState(() => loadClinicVideos());
+  const [dynamicTreatmentResults, setDynamicTreatmentResults] = useState(() => loadTreatmentResults());
+
   const d = { ...DICTIONARY[locale], ...(dynamicDictionary[locale] || {}) };
 
   // Inline Consultation / Be Beautiful form states
@@ -163,14 +172,25 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     } else if (type === 'clinicRatings') {
       localStorage.setItem('radeski_clinic_ratings_v1', JSON.stringify(data));
       setDynamicClinicRatings(data as typeof CLINIC_RATINGS);
+    } else if (type === 'clinicVideos') {
+      localStorage.setItem(SITE_PAGES_STORAGE_KEYS.videos, JSON.stringify(data));
+      setDynamicClinicVideos(data as ReturnType<typeof loadClinicVideos>);
+    } else if (type === 'treatmentResults') {
+      localStorage.setItem(SITE_PAGES_STORAGE_KEYS.results, JSON.stringify(data));
+      setDynamicTreatmentResults(data as ReturnType<typeof loadTreatmentResults>);
     }
   };
 
   const handleResetLocalData = () => {
     localStorage.removeItem('radeski_dictionary_v1');
     localStorage.removeItem('radeski_clinic_ratings_v1');
+    localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.videos);
+    localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.results);
+    void clearAllLocalMedia();
     setDynamicDictionary(DICTIONARY);
     setDynamicClinicRatings(CLINIC_RATINGS);
+    setDynamicClinicVideos(loadClinicVideos());
+    setDynamicTreatmentResults(loadTreatmentResults());
   };
 
   // Automatically inject schema.org metadata and SEO tags dynamically on load / locale / tab change
@@ -1185,6 +1205,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               prices={dynamicPrices}
               articles={dynamicArticles}
               clinicRatings={dynamicClinicRatings}
+              clinicVideos={dynamicClinicVideos}
+              treatmentResults={dynamicTreatmentResults}
               onSaveLocalData={handleSaveLocalData}
               onResetLocalData={handleResetLocalData}
               onRefresh={refetchClinicData}
@@ -1201,7 +1223,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           )}
 
           {currentPage === 'videos' && (
-            <VideosPage locale={locale} dictionary={d} />
+            <VideosPage locale={locale} dictionary={d} videos={dynamicClinicVideos} />
           )}
 
           {currentPage === 'branches' && (
@@ -1216,6 +1238,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <ResultsPage
               locale={locale}
               dictionary={d}
+              results={dynamicTreatmentResults}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
             />
           )}

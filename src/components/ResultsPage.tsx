@@ -3,22 +3,23 @@ import { motion } from 'motion/react';
 import { Sparkles, ArrowLeftRight, CalendarClock } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
-import { TREATMENT_RESULTS } from '../data/sitePagesContent';
+import type { TreatmentResult } from '../data/sitePagesContent';
 import MediaImage from './MediaImage';
 
 interface ResultsPageProps {
   locale: Locale;
   dictionary?: Record<string, string>;
+  results: TreatmentResult[];
   onOpenAppointment?: () => void;
 }
 
-export default function ResultsPage({ locale, dictionary, onOpenAppointment }: ResultsPageProps) {
+export default function ResultsPage({ locale, dictionary, results, onOpenAppointment }: ResultsPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
   const serviceFilters = [
     { id: 'all', label: locale === 'uz' ? 'Barchasi' : locale === 'ru' ? 'Все' : 'All' },
-    ...Array.from(new Set(TREATMENT_RESULTS.map((item) => item.service[locale]))).map((label) => ({
+    ...Array.from(new Set(results.map((item) => item.service[locale]))).map((label) => ({
       id: label,
       label,
     })),
@@ -26,8 +27,8 @@ export default function ResultsPage({ locale, dictionary, onOpenAppointment }: R
 
   const filteredResults =
     activeFilter === 'all'
-      ? TREATMENT_RESULTS
-      : TREATMENT_RESULTS.filter((item) => item.service[locale] === activeFilter);
+      ? results
+      : results.filter((item) => item.service[locale] === activeFilter);
 
   return (
     <section id="results-page" className="py-16 bg-brand-white min-h-screen">

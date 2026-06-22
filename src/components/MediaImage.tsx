@@ -1,4 +1,5 @@
 import { useEffect, useState, type ImgHTMLAttributes, type ReactNode } from 'react';
+import { isLocalMediaRef, resolveMediaUrl, isBlobUrl } from '../utils/localMediaStorage';
 
 function mimeFromUrl(url: string): string {
   const lower = url.split('?')[0].toLowerCase();
@@ -35,7 +36,7 @@ export default function MediaImage({
       return;
     }
 
-    if (!needsBlobFix(src)) {
+    if (!needsBlobFix(src) && !isLocalMediaRef(src)) {
       setDisplaySrc(src);
       setFailed(false);
       return;
@@ -47,18 +48,28 @@ export default function MediaImage({
     setDisplaySrc(null);
     setFailed(false);
 
-    fetch(src)
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.blob();
-      })
-      .then((blob) => {
-        if (cancelled) return;
-        const typedBlob = blob.type.startsWith('image/')
-          ? blob
-          : new Blob([blob], { type: mimeFromUrl(src) });
-        objectUrl = URL.createObjectURL(typedBlob);
-        setDisplaySrc(objectUrl);
+    const loadPromise = isLocalMediaRef(src)
+      ? resolveMediaUrl(src)
+      : fetch(src)
+          .then((response) => {
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return response.blob();
+          })
+          .then((blob) => {
+            const typedBlob = blob.type.startsWith('image/')
+              ? blob
+              : new Blob([blob], { type: mimeFromUrl(src) });
+            return URL.createObjectURL(typedBlob);
+          });
+
+    loadPromise
+      .then((resolved) => {
+        if (cancelled) {
+          if (isBlobUrl(resolved)) URL.revokeObjectURL(resolved!);
+          return;
+        }
+        objectUrl = resolved;
+        setDisplaySrc(resolved);
       })
       .catch(() => {
         if (!cancelled) setFailed(true);
@@ -66,7 +77,7 @@ export default function MediaImage({
 
     return () => {
       cancelled = true;
-      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      if (isBlobUrl(objectUrl)) URL.revokeObjectURL(objectUrl!);
     };
   }, [src]);
 

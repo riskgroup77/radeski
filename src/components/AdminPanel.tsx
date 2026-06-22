@@ -3,7 +3,8 @@ import { AnimatePresence } from 'motion/react';
 import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
 import {
   Lock, LayoutDashboard, Building, Users, Activity, CreditCard, FileText,
-  Save, RefreshCw, Plus, Edit2, Trash2, Check, ArrowLeft, LogOut, Info, AlertTriangle, PhoneCall
+  Save, RefreshCw, Plus, Edit2, Trash2, Check, ArrowLeft, LogOut, Info, AlertTriangle, PhoneCall,
+  Film, Sparkles
 } from 'lucide-react';
 import {
   adminLogin,
@@ -35,12 +36,17 @@ import {
 import { ApiError, clearAuthToken, getAuthToken, setAuthToken, isUnauthorizedError, isAuthTokenExpired, ADMIN_SESSION_EXPIRED_EVENT } from '../api/client';
 import { ApiAppointment, AppointmentStatus } from '../api/types';
 import ImageUploadField from './ImageUploadField';
+import VideoUploadField from './VideoUploadField';
+import ResolvedVideo from './ResolvedVideo';
+import MediaImage from './MediaImage';
+import { deleteLocalMedia, isLocalMediaRef, saveLocalMedia } from '../utils/localMediaStorage';
 import LocalizedImageUploadGroup from './LocalizedImageUploadGroup';
 import { EMPTY_LOCALIZED_IMAGE_FILES, getLocalizedImage } from '../utils/localizedImage';
 import { normalizeArticleViews } from '../utils/articleViews';
 import { getCatalogPrices } from '../utils/enrichPrices';
-import LocalizedFieldGroup, { isLocalizedFilled } from './LocalizedFieldGroup';
+import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
 import { DICTIONARY } from '../data';
+import type { ClinicVideo, TreatmentResult } from '../data/sitePagesContent';
 
 interface AdminPanelProps {
   locale: Locale;
@@ -51,6 +57,8 @@ interface AdminPanelProps {
   prices: PriceItem[];
   articles: Article[];
   clinicRatings: Array<{ platform: string; rating: string; count: number; logo: string; url?: string }>;
+  clinicVideos: ClinicVideo[];
+  treatmentResults: TreatmentResult[];
   onSaveLocalData: (type: string, data: unknown) => void;
   onResetLocalData: () => void;
   onRefresh: () => Promise<void>;
@@ -66,6 +74,8 @@ export default function AdminPanel({
   prices,
   articles,
   clinicRatings,
+  clinicVideos,
+  treatmentResults,
   onSaveLocalData,
   onResetLocalData,
   onRefresh,
@@ -80,7 +90,9 @@ export default function AdminPanel({
   const [authError, setAuthError] = useState('');
 
   // Admin Section state
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'clinic' | 'doctors' | 'services' | 'prices' | 'articles' | 'appointments'>('dashboard');
+  const [activeTab, setActiveTab] = useState<
+    'dashboard' | 'clinic' | 'doctors' | 'services' | 'prices' | 'articles' | 'videos' | 'results' | 'appointments'
+  >('dashboard');
   
   // Notification States
   const [saveSuccess, setSaveSuccess] = useState<string | null>(null);
@@ -131,6 +143,22 @@ export default function AdminPanel({
   const [isAddingArticle, setIsAddingArticle] = useState(false);
   const [articleForm, setArticleForm] = useState<Partial<Article>>({});
 
+  const [editedVideos, setEditedVideos] = useState<ClinicVideo[]>(() => JSON.parse(JSON.stringify(clinicVideos)));
+  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
+  const [isAddingVideo, setIsAddingVideo] = useState(false);
+  const [videoForm, setVideoForm] = useState<Partial<ClinicVideo>>({});
+
+  const [editedResults, setEditedResults] = useState<TreatmentResult[]>(() =>
+    JSON.parse(JSON.stringify(treatmentResults)),
+  );
+  const [selectedResultId, setSelectedResultId] = useState<string | null>(null);
+  const [isAddingResult, setIsAddingResult] = useState(false);
+  const [resultForm, setResultForm] = useState<Partial<TreatmentResult>>({});
+
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [beforeImageFile, setBeforeImageFile] = useState<File | null>(null);
+  const [afterImageFile, setAfterImageFile] = useState<File | null>(null);
+
   const [doctorPhotoFile, setDoctorPhotoFile] = useState<File | null>(null);
   const [categoryImageFiles, setCategoryImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
   const [subServiceImageFiles, setSubServiceImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
@@ -167,7 +195,9 @@ export default function AdminPanel({
     setEditedCategories(JSON.parse(JSON.stringify(serviceCategories)));
     setEditedPrices(JSON.parse(JSON.stringify(prices)));
     setEditedArticles(JSON.parse(JSON.stringify(articles)));
-  }, [doctors, serviceCategories, prices, articles, clinicRatings, fullDictionary]);
+    setEditedVideos(JSON.parse(JSON.stringify(clinicVideos)));
+    setEditedResults(JSON.parse(JSON.stringify(treatmentResults)));
+  }, [doctors, serviceCategories, prices, articles, clinicRatings, fullDictionary, clinicVideos, treatmentResults]);
 
   useEffect(() => {
     const onSessionExpired = () => handleSessionExpired();
@@ -645,6 +675,203 @@ export default function AdminPanel({
     }
   };
 
+  const handleCreateVideoBtn = () => {
+    setSelectedVideoId(null);
+    setVideoForm({
+      id: `video-${Date.now()}`,
+      title: emptyLocalized(),
+      description: emptyLocalized(),
+      category: emptyLocalized(),
+      src: '',
+      duration: '0:00',
+    });
+    setVideoFile(null);
+    setIsAddingVideo(true);
+  };
+
+  const handleEditVideo = (video: ClinicVideo) => {
+    setSelectedVideoId(video.id);
+    setVideoForm(JSON.parse(JSON.stringify(video)));
+    setVideoFile(null);
+    setIsAddingVideo(false);
+  };
+
+  const handleSaveVideo = async () => {
+    if (!isLocalizedFilled(videoForm.title, 'uz')) {
+      alert(
+        locale === 'uz'
+          ? "Kamida o'zbek tilida sarlavha to'ldirilishi shart."
+          : locale === 'ru'
+            ? 'Обязательно заполните заголовок на узбекском.'
+            : 'Uzbek title is required.',
+      );
+      return;
+    }
+
+    try {
+      let src = videoForm.src || '';
+      if (videoFile) {
+        if (isLocalMediaRef(src)) {
+          await deleteLocalMedia(src);
+        }
+        src = await saveLocalMedia(`${videoForm.id}-src`, videoFile);
+      } else if (!src.trim()) {
+        alert(
+          locale === 'uz'
+            ? 'Video faylini yuklang.'
+            : locale === 'ru'
+              ? 'Загрузите видеофайл.'
+              : 'Please upload a video file.',
+        );
+        return;
+      }
+
+      const video: ClinicVideo = {
+        ...(videoForm as ClinicVideo),
+        src,
+      };
+      const next = isAddingVideo
+        ? [...editedVideos, video]
+        : editedVideos.map((item) => (item.id === video.id ? video : item));
+
+      setEditedVideos(next);
+      onSaveLocalData('clinicVideos', next);
+      setSelectedVideoId(null);
+      setIsAddingVideo(false);
+      setVideoFile(null);
+      triggerSaveNotification(
+        locale === 'uz' ? 'Video saqlandi!' : locale === 'ru' ? 'Видео сохранено!' : 'Video saved!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? 'Videoni saqlashda xatolik' : 'Failed to save video');
+    }
+  };
+
+  const handleDeleteVideo = async (videoId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu videoni o'chirmoqchimisiz?" : 'Удалить это видео?')) return;
+
+    const target = editedVideos.find((item) => item.id === videoId);
+    if (target?.src && isLocalMediaRef(target.src)) {
+      await deleteLocalMedia(target.src);
+    }
+
+    const next = editedVideos.filter((item) => item.id !== videoId);
+    setEditedVideos(next);
+    onSaveLocalData('clinicVideos', next);
+    if (selectedVideoId === videoId) setSelectedVideoId(null);
+    triggerSaveNotification(
+      locale === 'uz' ? "Video o'chirildi!" : locale === 'ru' ? 'Видео удалено!' : 'Video deleted!',
+    );
+  };
+
+  const handleCreateResultBtn = () => {
+    setSelectedResultId(null);
+    setResultForm({
+      id: `result-${Date.now()}`,
+      title: emptyLocalized(),
+      description: emptyLocalized(),
+      service: emptyLocalized(),
+      sessions: emptyLocalized(),
+      beforeImage: '',
+      afterImage: '',
+    });
+    setBeforeImageFile(null);
+    setAfterImageFile(null);
+    setIsAddingResult(true);
+  };
+
+  const handleEditResult = (result: TreatmentResult) => {
+    setSelectedResultId(result.id);
+    setResultForm(JSON.parse(JSON.stringify(result)));
+    setBeforeImageFile(null);
+    setAfterImageFile(null);
+    setIsAddingResult(false);
+  };
+
+  const handleSaveResult = async () => {
+    if (!isLocalizedFilled(resultForm.title, 'uz')) {
+      alert(
+        locale === 'uz'
+          ? "Kamida o'zbek tilida sarlavha to'ldirilishi shart."
+          : locale === 'ru'
+            ? 'Обязательно заполните заголовок на узбекском.'
+            : 'Uzbek title is required.',
+      );
+      return;
+    }
+
+    try {
+      let beforeImage = resultForm.beforeImage || '';
+      let afterImage = resultForm.afterImage || '';
+
+      if (beforeImageFile) {
+        if (isLocalMediaRef(beforeImage)) {
+          await deleteLocalMedia(beforeImage);
+        }
+        beforeImage = await saveLocalMedia(`${resultForm.id}-before`, beforeImageFile);
+      }
+
+      if (afterImageFile) {
+        if (isLocalMediaRef(afterImage)) {
+          await deleteLocalMedia(afterImage);
+        }
+        afterImage = await saveLocalMedia(`${resultForm.id}-after`, afterImageFile);
+      }
+
+      if (!beforeImage.trim() || !afterImage.trim()) {
+        alert(
+          locale === 'uz'
+            ? 'Oldin va keyin rasmlarini yuklang.'
+            : locale === 'ru'
+              ? 'Загрузите фото «до» и «после».'
+              : 'Please upload before and after images.',
+        );
+        return;
+      }
+
+      const result: TreatmentResult = {
+        ...(resultForm as TreatmentResult),
+        beforeImage,
+        afterImage,
+      };
+      const next = isAddingResult
+        ? [...editedResults, result]
+        : editedResults.map((item) => (item.id === result.id ? result : item));
+
+      setEditedResults(next);
+      onSaveLocalData('treatmentResults', next);
+      setSelectedResultId(null);
+      setIsAddingResult(false);
+      setBeforeImageFile(null);
+      setAfterImageFile(null);
+      triggerSaveNotification(
+        locale === 'uz' ? 'Natija saqlandi!' : locale === 'ru' ? 'Результат сохранен!' : 'Result saved!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? 'Natijani saqlashda xatolik' : 'Failed to save result');
+    }
+  };
+
+  const handleDeleteResult = async (resultId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu natijani o'chirmoqchimisiz?" : 'Удалить этот результат?')) return;
+
+    const target = editedResults.find((item) => item.id === resultId);
+    if (target?.beforeImage && isLocalMediaRef(target.beforeImage)) {
+      await deleteLocalMedia(target.beforeImage);
+    }
+    if (target?.afterImage && isLocalMediaRef(target.afterImage)) {
+      await deleteLocalMedia(target.afterImage);
+    }
+
+    const next = editedResults.filter((item) => item.id !== resultId);
+    setEditedResults(next);
+    onSaveLocalData('treatmentResults', next);
+    if (selectedResultId === resultId) setSelectedResultId(null);
+    triggerSaveNotification(
+      locale === 'uz' ? "Natija o'chirildi!" : locale === 'ru' ? 'Результат удален!' : 'Result deleted!',
+    );
+  };
+
   const handleAppointmentStatusChange = async (appointmentId: string, status: AppointmentStatus) => {
     try {
       await updateAppointmentStatus(appointmentId, status);
@@ -885,6 +1112,30 @@ export default function AdminPanel({
           </button>
 
           <button
+            onClick={() => setActiveTab('videos')}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-3 transition-colors cursor-pointer ${
+              activeTab === 'videos'
+                ? 'bg-brand-dark-navy text-[#A6843F] shadow-sm'
+                : 'text-brand-text-muted hover:bg-brand-offwhite hover:text-brand-text-primary'
+            }`}
+          >
+            <Film className="w-4 h-4 shrink-0" />
+            <span>{locale === 'uz' ? "Klinika videolari" : "Видео клиники"}</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('results')}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-3 transition-colors cursor-pointer ${
+              activeTab === 'results'
+                ? 'bg-brand-dark-navy text-[#A6843F] shadow-sm'
+                : 'text-brand-text-muted hover:bg-brand-offwhite hover:text-brand-text-primary'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 shrink-0" />
+            <span>{locale === 'uz' ? "Davolash natijalari" : "Результаты лечения"}</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('appointments')}
             className={`w-full text-left px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-3 transition-colors cursor-pointer ${
               activeTab === 'appointments'
@@ -908,7 +1159,7 @@ export default function AdminPanel({
                 {locale === 'uz' ? "Klinik ma'lumotlar tahlili" : "Общая аналитика клиники"}
               </h3>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
                 <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
                   <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Shifokorlar" : "Врачи"}</span>
                   <span className="text-3xl font-black text-brand-gold mt-1 block">{editedDoctors.length}</span>
@@ -924,6 +1175,14 @@ export default function AdminPanel({
                 <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
                   <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Maqolalar" : "Статей блога"}</span>
                   <span className="text-3xl font-black text-brand-gold mt-1 block">{editedArticles.length}</span>
+                </div>
+                <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
+                  <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Videolar" : "Видео"}</span>
+                  <span className="text-3xl font-black text-brand-gold mt-1 block">{editedVideos.length}</span>
+                </div>
+                <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
+                  <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Natijalar" : "Результаты"}</span>
+                  <span className="text-3xl font-black text-brand-gold mt-1 block">{editedResults.length}</span>
                 </div>
               </div>
 
@@ -1829,6 +2088,329 @@ export default function AdminPanel({
                     >
                       <Save className="w-4 h-4" />
                       <span>{locale === 'uz' ? "Tahrirni maqolaga kiritish" : "Опубликовать статью"}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB: CLINIC VIDEOS */}
+          {activeTab === 'videos' && (
+            <div className="space-y-6">
+              <div className="flex justify-between items-center pb-3 border-b border-brand-sectiongray">
+                <h3 className="text-base font-bold text-brand-text-primary">
+                  {locale === 'uz' ? 'Klinika videolari boshqaruvi' : locale === 'ru' ? 'Управление видео клиники' : 'Clinic videos management'}
+                </h3>
+
+                {!isAddingVideo && selectedVideoId === null && (
+                  <button
+                    onClick={handleCreateVideoBtn}
+                    className="px-3 py-1.5 bg-brand-gold text-white font-bold text-xs rounded-lg flex items-center gap-1 hover:bg-brand-gold-dark cursor-pointer shadow-xs"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>{locale === 'uz' ? 'Yangi video' : locale === 'ru' ? 'Добавить видео' : 'Add video'}</span>
+                  </button>
+                )}
+              </div>
+
+              {selectedVideoId === null && !isAddingVideo ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {editedVideos.map((video) => (
+                    <div key={video.id} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-4 justify-between items-start">
+                      <div className="flex gap-3 min-w-0">
+                        <div className="w-24 h-16 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-dark-navy shrink-0">
+                          {video.src ? (
+                            <ResolvedVideo src={video.src} className="w-full h-full object-cover" muted playsInline preload="metadata" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-[8px] text-brand-text-muted">—</div>
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="font-extrabold text-xs sm:text-sm text-brand-text-primary truncate">
+                            {video.title[locale] || video.title.uz}
+                          </h4>
+                          <p className="text-[10px] text-brand-text-muted mt-1 leading-relaxed line-clamp-2">
+                            {video.description[locale] || video.description.uz}
+                          </p>
+                          <span className="text-[9px] text-[#A6843F] block mt-1.5 font-mono">
+                            {video.duration} | {video.category[locale] || video.category.uz}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-1 ml-3 shrink-0">
+                        <button
+                          onClick={() => handleEditVideo(video)}
+                          className="p-1.5 bg-brand-white hover:bg-brand-gold-light/20 text-brand-gold-dark border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteVideo(video.id)}
+                          className="p-1.5 bg-brand-white hover:bg-red-50 text-red-600 border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between pb-3 border-b border-brand-sectiongray">
+                    <span className="text-xs font-bold text-brand-gold uppercase tracking-widest font-mono">
+                      Video Studio
+                    </span>
+                    <button
+                      onClick={() => { setSelectedVideoId(null); setIsAddingVideo(false); setVideoFile(null); }}
+                      className="text-xs text-brand-text-muted hover:text-brand-text-primary flex items-center gap-1 font-bold cursor-pointer"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Videolar ro\'yxati' : locale === 'ru' ? 'К списку видео' : 'Back to list'}</span>
+                    </button>
+                  </div>
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Video sarlavhasi' : locale === 'ru' ? 'Заголовок видео' : 'Video title'}
+                    values={{
+                      uz: videoForm.title?.uz || '',
+                      ru: videoForm.title?.ru || '',
+                      en: videoForm.title?.en || '',
+                    }}
+                    onChange={(values) => setVideoForm((prev) => ({ ...prev, title: values }))}
+                  />
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Video tavsifi' : locale === 'ru' ? 'Описание видео' : 'Video description'}
+                    values={{
+                      uz: videoForm.description?.uz || '',
+                      ru: videoForm.description?.ru || '',
+                      en: videoForm.description?.en || '',
+                    }}
+                    onChange={(values) => setVideoForm((prev) => ({ ...prev, description: values }))}
+                    multiline
+                    rows={4}
+                  />
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Kategoriya' : locale === 'ru' ? 'Категория' : 'Category'}
+                    values={{
+                      uz: videoForm.category?.uz || '',
+                      ru: videoForm.category?.ru || '',
+                      en: videoForm.category?.en || '',
+                    }}
+                    onChange={(values) => setVideoForm((prev) => ({ ...prev, category: values }))}
+                  />
+
+                  <VideoUploadField
+                    label={locale === 'uz' ? 'Video fayli' : locale === 'ru' ? 'Видеофайл' : 'Video file'}
+                    currentVideoUrl={videoForm.src}
+                    file={videoFile}
+                    onFileChange={setVideoFile}
+                    helperText={
+                      locale === 'uz'
+                        ? 'MP4, WebM yoki MOV formatida video yuklang.'
+                        : locale === 'ru'
+                          ? 'Загрузите видео в формате MP4, WebM или MOV.'
+                          : 'Upload video in MP4, WebM, or MOV format.'
+                    }
+                  />
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">
+                      {locale === 'uz' ? 'Davomiyligi' : locale === 'ru' ? 'Длительность' : 'Duration'}
+                    </label>
+                    <input
+                      type="text"
+                      value={videoForm.duration || ''}
+                      onChange={(e) => setVideoForm((prev) => ({ ...prev, duration: e.target.value }))}
+                      placeholder="2:15"
+                      className="w-full max-w-xs px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                    />
+                  </div>
+
+                  <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
+                    <button
+                      onClick={() => { setSelectedVideoId(null); setIsAddingVideo(false); setVideoFile(null); }}
+                      className="px-4 py-2 hover:bg-brand-offwhite text-brand-text-muted text-xs font-bold rounded-lg cursor-pointer"
+                    >
+                      {locale === 'uz' ? 'Bekor qilish' : locale === 'ru' ? 'Отмена' : 'Cancel'}
+                    </button>
+                    <button
+                      onClick={handleSaveVideo}
+                      className="px-5 py-2 bg-brand-dark-navy text-[#A6843F] hover:bg-brand-gold hover:text-white font-bold text-xs rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Videoni saqlash' : locale === 'ru' ? 'Сохранить видео' : 'Save video'}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB: TREATMENT RESULTS */}
+          {activeTab === 'results' && (
+            <div className="space-y-6">
+              <div className="flex justify-between items-center pb-3 border-b border-brand-sectiongray">
+                <h3 className="text-base font-bold text-brand-text-primary">
+                  {locale === 'uz' ? 'Davolash natijalari boshqaruvi' : locale === 'ru' ? 'Управление результатами лечения' : 'Treatment results management'}
+                </h3>
+
+                {!isAddingResult && selectedResultId === null && (
+                  <button
+                    onClick={handleCreateResultBtn}
+                    className="px-3 py-1.5 bg-brand-gold text-white font-bold text-xs rounded-lg flex items-center gap-1 hover:bg-brand-gold-dark cursor-pointer shadow-xs"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>{locale === 'uz' ? 'Yangi natija' : locale === 'ru' ? 'Добавить результат' : 'Add result'}</span>
+                  </button>
+                )}
+              </div>
+
+              {selectedResultId === null && !isAddingResult ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {editedResults.map((result) => (
+                    <div key={result.id} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-4 justify-between items-start">
+                      <div className="flex gap-3 min-w-0">
+                        <div className="flex gap-1 shrink-0">
+                          <div className="w-14 h-16 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-white">
+                            <MediaImage src={result.beforeImage} alt="" className="w-full h-full object-cover" />
+                          </div>
+                          <div className="w-14 h-16 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-white">
+                            <MediaImage src={result.afterImage} alt="" className="w-full h-full object-cover" />
+                          </div>
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="font-extrabold text-xs sm:text-sm text-brand-text-primary truncate">
+                            {result.title[locale] || result.title.uz}
+                          </h4>
+                          <p className="text-[10px] text-brand-text-muted mt-1 leading-relaxed line-clamp-2">
+                            {result.description[locale] || result.description.uz}
+                          </p>
+                          <span className="text-[9px] text-[#A6843F] block mt-1.5 font-mono">
+                            {result.service[locale] || result.service.uz} | {result.sessions[locale] || result.sessions.uz}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-1 ml-3 shrink-0">
+                        <button
+                          onClick={() => handleEditResult(result)}
+                          className="p-1.5 bg-brand-white hover:bg-brand-gold-light/20 text-brand-gold-dark border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteResult(result.id)}
+                          className="p-1.5 bg-brand-white hover:bg-red-50 text-red-600 border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between pb-3 border-b border-brand-sectiongray">
+                    <span className="text-xs font-bold text-brand-gold uppercase tracking-widest font-mono">
+                      Results Studio
+                    </span>
+                    <button
+                      onClick={() => { setSelectedResultId(null); setIsAddingResult(false); setBeforeImageFile(null); setAfterImageFile(null); }}
+                      className="text-xs text-brand-text-muted hover:text-brand-text-primary flex items-center gap-1 font-bold cursor-pointer"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Natijalar ro\'yxati' : locale === 'ru' ? 'К списку результатов' : 'Back to list'}</span>
+                    </button>
+                  </div>
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Natija sarlavhasi' : locale === 'ru' ? 'Заголовок результата' : 'Result title'}
+                    values={{
+                      uz: resultForm.title?.uz || '',
+                      ru: resultForm.title?.ru || '',
+                      en: resultForm.title?.en || '',
+                    }}
+                    onChange={(values) => setResultForm((prev) => ({ ...prev, title: values }))}
+                  />
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Tavsif' : locale === 'ru' ? 'Описание' : 'Description'}
+                    values={{
+                      uz: resultForm.description?.uz || '',
+                      ru: resultForm.description?.ru || '',
+                      en: resultForm.description?.en || '',
+                    }}
+                    onChange={(values) => setResultForm((prev) => ({ ...prev, description: values }))}
+                    multiline
+                    rows={4}
+                  />
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Xizmat turi' : locale === 'ru' ? 'Тип услуги' : 'Service type'}
+                    values={{
+                      uz: resultForm.service?.uz || '',
+                      ru: resultForm.service?.ru || '',
+                      en: resultForm.service?.en || '',
+                    }}
+                    onChange={(values) => setResultForm((prev) => ({ ...prev, service: values }))}
+                  />
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Seanslar soni' : locale === 'ru' ? 'Количество сеансов' : 'Session count'}
+                    values={{
+                      uz: resultForm.sessions?.uz || '',
+                      ru: resultForm.sessions?.ru || '',
+                      en: resultForm.sessions?.en || '',
+                    }}
+                    onChange={(values) => setResultForm((prev) => ({ ...prev, sessions: values }))}
+                  />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <ImageUploadField
+                      label={locale === 'uz' ? 'Oldin rasm' : locale === 'ru' ? 'Фото «до»' : 'Before image'}
+                      currentImageUrl={resultForm.beforeImage}
+                      file={beforeImageFile}
+                      onFileChange={setBeforeImageFile}
+                      helperText={
+                        locale === 'uz'
+                          ? 'JPG, PNG yoki WebP formatida rasm yuklang.'
+                          : locale === 'ru'
+                            ? 'Загрузите изображение JPG, PNG или WebP.'
+                            : 'Upload JPG, PNG, or WebP image.'
+                      }
+                    />
+                    <ImageUploadField
+                      label={locale === 'uz' ? 'Keyin rasm' : locale === 'ru' ? 'Фото «после»' : 'After image'}
+                      currentImageUrl={resultForm.afterImage}
+                      file={afterImageFile}
+                      onFileChange={setAfterImageFile}
+                      helperText={
+                        locale === 'uz'
+                          ? 'JPG, PNG yoki WebP formatida rasm yuklang.'
+                          : locale === 'ru'
+                            ? 'Загрузите изображение JPG, PNG или WebP.'
+                            : 'Upload JPG, PNG, or WebP image.'
+                      }
+                    />
+                  </div>
+
+                  <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
+                    <button
+                      onClick={() => { setSelectedResultId(null); setIsAddingResult(false); setBeforeImageFile(null); setAfterImageFile(null); }}
+                      className="px-4 py-2 hover:bg-brand-offwhite text-brand-text-muted text-xs font-bold rounded-lg cursor-pointer"
+                    >
+                      {locale === 'uz' ? 'Bekor qilish' : locale === 'ru' ? 'Отмена' : 'Cancel'}
+                    </button>
+                    <button
+                      onClick={handleSaveResult}
+                      className="px-5 py-2 bg-brand-dark-navy text-[#A6843F] hover:bg-brand-gold hover:text-white font-bold text-xs rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Natijani saqlash' : locale === 'ru' ? 'Сохранить результат' : 'Save result'}</span>
                     </button>
                   </div>
                 </div>
