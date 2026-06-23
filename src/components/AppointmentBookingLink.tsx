@@ -4,6 +4,7 @@ import {
   APPOINTMENT_LINK_REL,
   APPOINTMENT_LINK_TARGET,
 } from '../config/links';
+import { incrementClientCount } from '../utils/clientCount';
 
 type AppointmentBookingLinkProps = Omit<
   AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -15,6 +16,7 @@ type AppointmentBookingLinkProps = Omit<
 export default function AppointmentBookingLink({
   children,
   className,
+  onClick,
   ...props
 }: AppointmentBookingLinkProps) {
   return (
@@ -23,6 +25,10 @@ export default function AppointmentBookingLink({
       target={APPOINTMENT_LINK_TARGET}
       rel={APPOINTMENT_LINK_REL}
       className={className}
+      onClick={(event) => {
+        incrementClientCount();
+        onClick?.(event);
+      }}
       {...props}
     >
       {children}

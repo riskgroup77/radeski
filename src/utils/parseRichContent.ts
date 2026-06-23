@@ -1,7 +1,29 @@
 import type { Locale, ServiceConditionTopic, ServiceRichContent } from '../types';
 
-export function parseJsonConditionTopics(value: string | null | undefined): ServiceConditionTopic[] {
-  if (!value || !value.trim()) return [];
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function asString(value: unknown): string {
+  return typeof value === 'string' ? value : '';
+}
+
+export function parseJsonConditionTopics(value: unknown): ServiceConditionTopic[] {
+  if (value == null) return [];
+
+  if (Array.isArray(value)) {
+    return value.filter(
+      (item): item is ServiceConditionTopic =>
+        Boolean(item) &&
+        typeof item === 'object' &&
+        typeof (item as ServiceConditionTopic).title === 'string' &&
+        typeof (item as ServiceConditionTopic).description === 'string' &&
+        (item as ServiceConditionTopic).title.trim().length > 0 &&
+        (item as ServiceConditionTopic).description.trim().length > 0,
+    );
+  }
+
+  if (typeof value !== 'string' || !value.trim()) return [];
   try {
     const parsed = JSON.parse(value);
     if (Array.isArray(parsed)) {
@@ -26,12 +48,18 @@ export function stringifyJsonConditionTopics(items: ServiceConditionTopic[] | un
   return JSON.stringify(items);
 }
 
-export function parseJsonStringArray(value: string | null | undefined): string[] {
-  if (!value || !value.trim()) return [];
+export function parseJsonStringArray(value: unknown): string[] {
+  if (value == null) return [];
+
+  if (Array.isArray(value)) {
+    return value.filter((item): item is string => isNonEmptyString(item));
+  }
+
+  if (typeof value !== 'string' || !value.trim()) return [];
   try {
     const parsed = JSON.parse(value);
     if (Array.isArray(parsed)) {
-      return parsed.filter((item): item is string => typeof item === 'string' && item.trim().length > 0);
+      return parsed.filter((item): item is string => isNonEmptyString(item));
     }
   } catch {
     // fallback: newline or semicolon separated
@@ -77,14 +105,12 @@ export function mapRichContentFromApi(
   let hasAny = false;
 
   for (const locale of locales) {
-    const overview =
-      (api[`overview_${locale}` as keyof ApiRichFields] as string | null | undefined) ||
-      '';
-    const indications = parseJsonStringArray(api[`indications_${locale}` as keyof ApiRichFields] as string | null);
-    const solutions = parseJsonStringArray(api[`solutions_${locale}` as keyof ApiRichFields] as string | null);
-    const benefits = parseJsonStringArray(api[`benefits_${locale}` as keyof ApiRichFields] as string | null);
-    const process = parseJsonStringArray(api[`process_${locale}` as keyof ApiRichFields] as string | null);
-    const conditions = parseJsonConditionTopics(api[`conditions_${locale}` as keyof ApiRichFields] as string | null);
+    const overview = asString(api[`overview_${locale}` as keyof ApiRichFields]);
+    const indications = parseJsonStringArray(api[`indications_${locale}` as keyof ApiRichFields]);
+    const solutions = parseJsonStringArray(api[`solutions_${locale}` as keyof ApiRichFields]);
+    const benefits = parseJsonStringArray(api[`benefits_${locale}` as keyof ApiRichFields]);
+    const process = parseJsonStringArray(api[`process_${locale}` as keyof ApiRichFields]);
+    const conditions = parseJsonConditionTopics(api[`conditions_${locale}` as keyof ApiRichFields]);
 
     const hasStructured =
       Boolean(overview.trim()) ||

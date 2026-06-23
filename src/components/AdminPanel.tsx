@@ -4,7 +4,7 @@ import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } fr
 import {
   Lock, LayoutDashboard, Building, Users, Activity, CreditCard, FileText,
   Save, RefreshCw, Plus, Edit2, Trash2, Check, ArrowLeft, LogOut, Info, AlertTriangle, PhoneCall,
-  Film, Sparkles
+  Film, Sparkles, Handshake, MessageSquareQuote
 } from 'lucide-react';
 import {
   adminLogin,
@@ -46,7 +46,7 @@ import { normalizeArticleViews } from '../utils/articleViews';
 import { getCatalogPrices } from '../utils/enrichPrices';
 import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
 import { DICTIONARY } from '../data';
-import type { ClinicVideo, TreatmentResult } from '../data/sitePagesContent';
+import type { ClinicVideo, TreatmentResult, ClinicPartner, CustomerReview } from '../data/sitePagesContent';
 
 interface AdminPanelProps {
   locale: Locale;
@@ -59,6 +59,8 @@ interface AdminPanelProps {
   clinicRatings: Array<{ platform: string; rating: string; count: number; logo: string; url?: string }>;
   clinicVideos: ClinicVideo[];
   treatmentResults: TreatmentResult[];
+  clinicPartners: ClinicPartner[];
+  customerReviews: CustomerReview[];
   onSaveLocalData: (type: string, data: unknown) => void;
   onResetLocalData: () => void;
   onRefresh: () => Promise<void>;
@@ -76,6 +78,8 @@ export default function AdminPanel({
   clinicRatings,
   clinicVideos,
   treatmentResults,
+  clinicPartners,
+  customerReviews,
   onSaveLocalData,
   onResetLocalData,
   onRefresh,
@@ -91,7 +95,7 @@ export default function AdminPanel({
 
   // Admin Section state
   const [activeTab, setActiveTab] = useState<
-    'dashboard' | 'clinic' | 'doctors' | 'services' | 'prices' | 'articles' | 'videos' | 'results' | 'appointments'
+    'dashboard' | 'clinic' | 'doctors' | 'services' | 'prices' | 'articles' | 'videos' | 'results' | 'partners' | 'testimonials' | 'appointments'
   >('dashboard');
   
   // Notification States
@@ -155,6 +159,21 @@ export default function AdminPanel({
   const [isAddingResult, setIsAddingResult] = useState(false);
   const [resultForm, setResultForm] = useState<Partial<TreatmentResult>>({});
 
+  const [editedPartners, setEditedPartners] = useState<ClinicPartner[]>(() =>
+    JSON.parse(JSON.stringify(clinicPartners)),
+  );
+  const [selectedPartnerId, setSelectedPartnerId] = useState<string | null>(null);
+  const [isAddingPartner, setIsAddingPartner] = useState(false);
+  const [partnerForm, setPartnerForm] = useState<Partial<ClinicPartner>>({});
+  const [partnerLogoFile, setPartnerLogoFile] = useState<File | null>(null);
+
+  const [editedCustomerReviews, setEditedCustomerReviews] = useState<CustomerReview[]>(() =>
+    JSON.parse(JSON.stringify(customerReviews)),
+  );
+  const [selectedCustomerReviewId, setSelectedCustomerReviewId] = useState<string | null>(null);
+  const [isAddingCustomerReview, setIsAddingCustomerReview] = useState(false);
+  const [customerReviewForm, setCustomerReviewForm] = useState<Partial<CustomerReview>>({});
+
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [beforeImageFile, setBeforeImageFile] = useState<File | null>(null);
   const [afterImageFile, setAfterImageFile] = useState<File | null>(null);
@@ -197,7 +216,9 @@ export default function AdminPanel({
     setEditedArticles(JSON.parse(JSON.stringify(articles)));
     setEditedVideos(JSON.parse(JSON.stringify(clinicVideos)));
     setEditedResults(JSON.parse(JSON.stringify(treatmentResults)));
-  }, [doctors, serviceCategories, prices, articles, clinicRatings, fullDictionary, clinicVideos, treatmentResults]);
+    setEditedPartners(JSON.parse(JSON.stringify(clinicPartners)));
+    setEditedCustomerReviews(JSON.parse(JSON.stringify(customerReviews)));
+  }, [doctors, serviceCategories, prices, articles, clinicRatings, fullDictionary, clinicVideos, treatmentResults, clinicPartners, customerReviews]);
 
   useEffect(() => {
     const onSessionExpired = () => handleSessionExpired();
@@ -872,6 +893,174 @@ export default function AdminPanel({
     );
   };
 
+  const handleCreatePartnerBtn = () => {
+    setSelectedPartnerId(null);
+    setPartnerForm({
+      id: `partner-${Date.now()}`,
+      name: emptyLocalized(),
+      logo: '',
+    });
+    setPartnerLogoFile(null);
+    setIsAddingPartner(true);
+  };
+
+  const handleEditPartner = (partner: ClinicPartner) => {
+    setSelectedPartnerId(partner.id);
+    setPartnerForm(JSON.parse(JSON.stringify(partner)));
+    setPartnerLogoFile(null);
+    setIsAddingPartner(false);
+  };
+
+  const handleSavePartner = async () => {
+    if (!isLocalizedFilled(partnerForm.name, 'uz')) {
+      alert(
+        locale === 'uz'
+          ? "Kamida o'zbek tilida hamkor nomi to'ldirilishi shart."
+          : locale === 'ru'
+            ? 'Обязательно заполните название партнера на узбекском.'
+            : 'Partner name in Uzbek is required.',
+      );
+      return;
+    }
+
+    try {
+      let logo = partnerForm.logo || '';
+      if (partnerLogoFile) {
+        if (isLocalMediaRef(logo)) {
+          await deleteLocalMedia(logo);
+        }
+        logo = await saveLocalMedia(`${partnerForm.id}-logo`, partnerLogoFile);
+      } else if (!logo.trim()) {
+        alert(
+          locale === 'uz'
+            ? 'Hamkor logosini yuklang.'
+            : locale === 'ru'
+              ? 'Загрузите логотип партнера.'
+              : 'Please upload a partner logo.',
+        );
+        return;
+      }
+
+      const partner: ClinicPartner = {
+        ...(partnerForm as ClinicPartner),
+        logo,
+      };
+      const next = isAddingPartner
+        ? [...editedPartners, partner]
+        : editedPartners.map((item) => (item.id === partner.id ? partner : item));
+
+      setEditedPartners(next);
+      onSaveLocalData('clinicPartners', next);
+      setSelectedPartnerId(null);
+      setIsAddingPartner(false);
+      setPartnerLogoFile(null);
+      triggerSaveNotification(
+        locale === 'uz' ? 'Hamkor saqlandi!' : locale === 'ru' ? 'Партнер сохранен!' : 'Partner saved!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? 'Hamkorni saqlashda xatolik' : 'Failed to save partner');
+    }
+  };
+
+  const handleDeletePartner = async (partnerId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu hamkorni o'chirmoqchimisiz?" : 'Удалить этого партнера?')) return;
+
+    const target = editedPartners.find((item) => item.id === partnerId);
+    if (target?.logo && isLocalMediaRef(target.logo)) {
+      await deleteLocalMedia(target.logo);
+    }
+
+    const next = editedPartners.filter((item) => item.id !== partnerId);
+    setEditedPartners(next);
+    onSaveLocalData('clinicPartners', next);
+    if (selectedPartnerId === partnerId) setSelectedPartnerId(null);
+    triggerSaveNotification(
+      locale === 'uz' ? "Hamkor o'chirildi!" : locale === 'ru' ? 'Партнер удален!' : 'Partner deleted!',
+    );
+  };
+
+  const handleCreateCustomerReviewBtn = () => {
+    setSelectedCustomerReviewId(null);
+    setCustomerReviewForm({
+      id: `review-${Date.now()}`,
+      authorName: '',
+      rating: 5,
+      comment: emptyLocalized(),
+      service: emptyLocalized(),
+      date: new Date().toISOString().slice(0, 10),
+      published: true,
+    });
+    setIsAddingCustomerReview(true);
+  };
+
+  const handleEditCustomerReview = (review: CustomerReview) => {
+    setSelectedCustomerReviewId(review.id);
+    setCustomerReviewForm(JSON.parse(JSON.stringify(review)));
+    setIsAddingCustomerReview(false);
+  };
+
+  const handleSaveCustomerReview = () => {
+    if (!customerReviewForm.authorName?.trim() || !isLocalizedFilled(customerReviewForm.comment, 'uz')) {
+      alert(
+        locale === 'uz'
+          ? "Ism va kamida o'zbek tilida fikr matni to'ldirilishi shart."
+          : locale === 'ru'
+            ? 'Укажите имя и текст отзыва хотя бы на узбекском.'
+            : 'Name and review text in Uzbek are required.',
+      );
+      return;
+    }
+
+    const review: CustomerReview = {
+      id: customerReviewForm.id || `review-${Date.now()}`,
+      authorName: customerReviewForm.authorName.trim(),
+      rating: Math.min(5, Math.max(1, customerReviewForm.rating ?? 5)),
+      comment: customerReviewForm.comment as CustomerReview['comment'],
+      service: isLocalizedFilled(customerReviewForm.service, 'uz') ||
+        isLocalizedFilled(customerReviewForm.service, 'ru') ||
+        isLocalizedFilled(customerReviewForm.service, 'en')
+        ? (customerReviewForm.service as CustomerReview['service'])
+        : undefined,
+      date: customerReviewForm.date || new Date().toISOString().slice(0, 10),
+      published: Boolean(customerReviewForm.published),
+    };
+
+    const next = isAddingCustomerReview
+      ? [...editedCustomerReviews, review]
+      : editedCustomerReviews.map((item) => (item.id === review.id ? review : item));
+
+    setEditedCustomerReviews(next);
+    onSaveLocalData('customerReviews', next);
+    setSelectedCustomerReviewId(null);
+    setIsAddingCustomerReview(false);
+    triggerSaveNotification(
+      locale === 'uz' ? 'Fikr saqlandi!' : locale === 'ru' ? 'Отзыв сохранен!' : 'Review saved!',
+    );
+  };
+
+  const handleDeleteCustomerReview = (reviewId: string) => {
+    if (!confirm(locale === 'uz' ? "Ushbu fikrni o'chirmoqchimisiz?" : 'Удалить этот отзыв?')) return;
+
+    const next = editedCustomerReviews.filter((item) => item.id !== reviewId);
+    setEditedCustomerReviews(next);
+    onSaveLocalData('customerReviews', next);
+    if (selectedCustomerReviewId === reviewId) setSelectedCustomerReviewId(null);
+    triggerSaveNotification(
+      locale === 'uz' ? "Fikr o'chirildi!" : locale === 'ru' ? 'Отзыв удален!' : 'Review deleted!',
+    );
+  };
+
+  const handleToggleCustomerReviewPublished = (reviewId: string) => {
+    const next = editedCustomerReviews.map((item) =>
+      item.id === reviewId ? { ...item, published: !item.published } : item,
+    );
+    setEditedCustomerReviews(next);
+    onSaveLocalData('customerReviews', next);
+    triggerSaveNotification(
+      locale === 'uz' ? 'Holat yangilandi!' : locale === 'ru' ? 'Статус обновлен!' : 'Status updated!',
+    );
+  };
+
   const handleAppointmentStatusChange = async (appointmentId: string, status: AppointmentStatus) => {
     try {
       await updateAppointmentStatus(appointmentId, status);
@@ -1136,6 +1325,30 @@ export default function AdminPanel({
           </button>
 
           <button
+            onClick={() => setActiveTab('partners')}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-3 transition-colors cursor-pointer ${
+              activeTab === 'partners'
+                ? 'bg-brand-dark-navy text-[#A6843F] shadow-sm'
+                : 'text-brand-text-muted hover:bg-brand-offwhite hover:text-brand-text-primary'
+            }`}
+          >
+            <Handshake className="w-4 h-4 shrink-0" />
+            <span>{locale === 'uz' ? 'Hamkorlar' : locale === 'ru' ? 'Партнеры' : 'Partners'}</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('testimonials')}
+            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-3 transition-colors cursor-pointer ${
+              activeTab === 'testimonials'
+                ? 'bg-brand-dark-navy text-[#A6843F] shadow-sm'
+                : 'text-brand-text-muted hover:bg-brand-offwhite hover:text-brand-text-primary'
+            }`}
+          >
+            <MessageSquareQuote className="w-4 h-4 shrink-0" />
+            <span>{locale === 'uz' ? 'Mijozlar fikri' : locale === 'ru' ? 'Отзывы клиентов' : 'Client reviews'}</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('appointments')}
             className={`w-full text-left px-4 py-3 rounded-xl text-xs font-extrabold flex items-center gap-3 transition-colors cursor-pointer ${
               activeTab === 'appointments'
@@ -1159,7 +1372,7 @@ export default function AdminPanel({
                 {locale === 'uz' ? "Klinik ma'lumotlar tahlili" : "Общая аналитика клиники"}
               </h3>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-8 gap-4">
                 <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
                   <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Shifokorlar" : "Врачи"}</span>
                   <span className="text-3xl font-black text-brand-gold mt-1 block">{editedDoctors.length}</span>
@@ -1183,6 +1396,14 @@ export default function AdminPanel({
                 <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
                   <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Natijalar" : "Результаты"}</span>
                   <span className="text-3xl font-black text-brand-gold mt-1 block">{editedResults.length}</span>
+                </div>
+                <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
+                  <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Hamkorlar" : "Партнеры"}</span>
+                  <span className="text-3xl font-black text-brand-gold mt-1 block">{editedPartners.length}</span>
+                </div>
+                <div className="p-5 bg-brand-offwhite rounded-xl border border-brand-sectiongray">
+                  <span className="text-[10px] uppercase text-brand-text-muted font-bold block">{locale === 'uz' ? "Mijoz fikrlari" : "Отзывы"}</span>
+                  <span className="text-3xl font-black text-brand-gold mt-1 block">{editedCustomerReviews.length}</span>
                 </div>
               </div>
 
@@ -2411,6 +2632,335 @@ export default function AdminPanel({
                     >
                       <Save className="w-4 h-4" />
                       <span>{locale === 'uz' ? 'Natijani saqlash' : locale === 'ru' ? 'Сохранить результат' : 'Save result'}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB: PARTNERS */}
+          {activeTab === 'partners' && (
+            <div className="space-y-6">
+              <div className="flex justify-between items-center pb-3 border-b border-brand-sectiongray">
+                <h3 className="text-base font-bold text-brand-text-primary">
+                  {locale === 'uz' ? 'Hamkorlar boshqaruvi' : locale === 'ru' ? 'Управление партнерами' : 'Partners management'}
+                </h3>
+
+                {!isAddingPartner && selectedPartnerId === null && (
+                  <button
+                    onClick={handleCreatePartnerBtn}
+                    className="px-3 py-1.5 bg-brand-gold text-white font-bold text-xs rounded-lg flex items-center gap-1 hover:bg-brand-gold-dark cursor-pointer shadow-xs"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>{locale === 'uz' ? 'Yangi hamkor' : locale === 'ru' ? 'Добавить партнера' : 'Add partner'}</span>
+                  </button>
+                )}
+              </div>
+
+              {selectedPartnerId === null && !isAddingPartner ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {editedPartners.map((partner) => (
+                    <div
+                      key={partner.id}
+                      className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray flex gap-4 justify-between items-center"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-16 h-12 rounded-lg overflow-hidden border border-brand-sectiongray bg-brand-white shrink-0 flex items-center justify-center p-1">
+                          {partner.logo ? (
+                            <MediaImage src={partner.logo} alt="" className="max-w-full max-h-full object-contain" />
+                          ) : (
+                            <span className="text-[8px] text-brand-text-muted">—</span>
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="font-extrabold text-xs sm:text-sm text-brand-text-primary truncate">
+                            {partner.name[locale] || partner.name.uz}
+                          </h4>
+                        </div>
+                      </div>
+
+                      <div className="flex gap-1 ml-3 shrink-0">
+                        <button
+                          onClick={() => handleEditPartner(partner)}
+                          className="p-1.5 bg-brand-white hover:bg-brand-gold-light/20 text-brand-gold-dark border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeletePartner(partner.id)}
+                          className="p-1.5 bg-brand-white hover:bg-red-50 text-red-600 border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between pb-3 border-b border-brand-sectiongray">
+                    <span className="text-xs font-bold text-brand-gold uppercase tracking-widest font-mono">
+                      Partner Studio
+                    </span>
+                    <button
+                      onClick={() => {
+                        setSelectedPartnerId(null);
+                        setIsAddingPartner(false);
+                        setPartnerLogoFile(null);
+                      }}
+                      className="text-xs text-brand-text-muted hover:text-brand-text-primary flex items-center gap-1 font-bold cursor-pointer"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Hamkorlar ro\'yxati' : locale === 'ru' ? 'К списку партнеров' : 'Back to list'}</span>
+                    </button>
+                  </div>
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Hamkor nomi' : locale === 'ru' ? 'Название партнера' : 'Partner name'}
+                    values={{
+                      uz: partnerForm.name?.uz || '',
+                      ru: partnerForm.name?.ru || '',
+                      en: partnerForm.name?.en || '',
+                    }}
+                    onChange={(values) => setPartnerForm((prev) => ({ ...prev, name: values }))}
+                  />
+
+                  <ImageUploadField
+                    label={locale === 'uz' ? 'Hamkor logotipi' : locale === 'ru' ? 'Логотип партнера' : 'Partner logo'}
+                    currentImageUrl={partnerForm.logo}
+                    file={partnerLogoFile}
+                    onFileChange={setPartnerLogoFile}
+                    helperText={
+                      locale === 'uz'
+                        ? 'JPG, PNG yoki WebP formatida logo yuklang.'
+                        : locale === 'ru'
+                          ? 'Загрузите логотип в формате JPG, PNG или WebP.'
+                          : 'Upload logo in JPG, PNG, or WebP format.'
+                    }
+                  />
+
+                  <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
+                    <button
+                      onClick={() => {
+                        setSelectedPartnerId(null);
+                        setIsAddingPartner(false);
+                        setPartnerLogoFile(null);
+                      }}
+                      className="px-4 py-2 hover:bg-brand-offwhite text-brand-text-muted text-xs font-bold rounded-lg cursor-pointer"
+                    >
+                      {locale === 'uz' ? 'Bekor qilish' : locale === 'ru' ? 'Отмена' : 'Cancel'}
+                    </button>
+                    <button
+                      onClick={handleSavePartner}
+                      className="px-5 py-2 bg-brand-dark-navy text-[#A6843F] hover:bg-brand-gold hover:text-white font-bold text-xs rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Hamkorni saqlash' : locale === 'ru' ? 'Сохранить партнера' : 'Save partner'}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB: CUSTOMER TESTIMONIALS */}
+          {activeTab === 'testimonials' && (
+            <div className="space-y-6">
+              <div className="flex justify-between items-center pb-3 border-b border-brand-sectiongray">
+                <div>
+                  <h3 className="text-base font-bold text-brand-text-primary">
+                    {locale === 'uz' ? 'Mijozlar fikrlari boshqaruvi' : locale === 'ru' ? 'Управление отзывами' : 'Customer reviews management'}
+                  </h3>
+                  <p className="text-[10px] text-brand-text-muted mt-1">
+                    {locale === 'uz'
+                      ? `${editedCustomerReviews.filter((r) => !r.published).length} ta yangi fikr moderatsiyada`
+                      : `${editedCustomerReviews.filter((r) => !r.published).length} pending reviews`}
+                  </p>
+                </div>
+
+                {!isAddingCustomerReview && selectedCustomerReviewId === null && (
+                  <button
+                    onClick={handleCreateCustomerReviewBtn}
+                    className="px-3 py-1.5 bg-brand-gold text-white font-bold text-xs rounded-lg flex items-center gap-1 hover:bg-brand-gold-dark cursor-pointer shadow-xs"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>{locale === 'uz' ? 'Yangi fikr' : locale === 'ru' ? 'Добавить отзыв' : 'Add review'}</span>
+                  </button>
+                )}
+              </div>
+
+              {selectedCustomerReviewId === null && !isAddingCustomerReview ? (
+                <div className="space-y-3">
+                  {editedCustomerReviews.map((review) => (
+                    <div
+                      key={review.id}
+                      className={`p-4 rounded-xl border flex flex-col sm:flex-row gap-4 justify-between items-start ${
+                        review.published
+                          ? 'bg-brand-offwhite border-brand-sectiongray'
+                          : 'bg-amber-50/80 border-amber-200'
+                      }`}
+                    >
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                          <span className="font-extrabold text-sm text-brand-text-primary">{review.authorName}</span>
+                          <span className="text-[10px] font-mono text-brand-gold">{review.rating}/5</span>
+                          <span className="text-[10px] text-brand-text-muted font-mono">{review.date}</span>
+                          {!review.published && (
+                            <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-amber-200 text-amber-900">
+                              {locale === 'uz' ? 'Kutilmoqda' : locale === 'ru' ? 'Ожидает' : 'Pending'}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-brand-text-secondary leading-relaxed line-clamp-3 italic">
+                          "{review.comment[locale] || review.comment.uz || review.comment.ru || review.comment.en}"
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-1 shrink-0">
+                        <button
+                          onClick={() => handleToggleCustomerReviewPublished(review.id)}
+                          className={`px-2.5 py-1.5 text-[10px] font-bold rounded-lg border cursor-pointer ${
+                            review.published
+                              ? 'bg-brand-white border-brand-sectiongray text-brand-text-muted'
+                              : 'bg-brand-gold text-white border-brand-gold'
+                          }`}
+                        >
+                          {review.published
+                            ? (locale === 'uz' ? 'Yashirish' : locale === 'ru' ? 'Скрыть' : 'Unpublish')
+                            : (locale === 'uz' ? 'Chop etish' : locale === 'ru' ? 'Опубликовать' : 'Publish')}
+                        </button>
+                        <button
+                          onClick={() => handleEditCustomerReview(review)}
+                          className="p-1.5 bg-brand-white hover:bg-brand-gold-light/20 text-brand-gold-dark border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteCustomerReview(review.id)}
+                          className="p-1.5 bg-brand-white hover:bg-red-50 text-red-600 border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between pb-3 border-b border-brand-sectiongray">
+                    <span className="text-xs font-bold text-brand-gold uppercase tracking-widest font-mono">
+                      Review Studio
+                    </span>
+                    <button
+                      onClick={() => {
+                        setSelectedCustomerReviewId(null);
+                        setIsAddingCustomerReview(false);
+                      }}
+                      className="text-xs text-brand-text-muted hover:text-brand-text-primary flex items-center gap-1 font-bold cursor-pointer"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Fikrlar ro\'yxati' : locale === 'ru' ? 'К списку отзывов' : 'Back to list'}</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">
+                        {locale === 'uz' ? 'Ism' : locale === 'ru' ? 'Имя' : 'Name'}
+                      </label>
+                      <input
+                        type="text"
+                        value={customerReviewForm.authorName || ''}
+                        onChange={(e) => setCustomerReviewForm((prev) => ({ ...prev, authorName: e.target.value }))}
+                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">
+                        {locale === 'uz' ? 'Baholash (1-5)' : locale === 'ru' ? 'Оценка (1-5)' : 'Rating (1-5)'}
+                      </label>
+                      <input
+                        type="number"
+                        min={1}
+                        max={5}
+                        value={customerReviewForm.rating ?? 5}
+                        onChange={(e) =>
+                          setCustomerReviewForm((prev) => ({
+                            ...prev,
+                            rating: Math.min(5, Math.max(1, Number(e.target.value) || 5)),
+                          }))
+                        }
+                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Fikr matni' : locale === 'ru' ? 'Текст отзыва' : 'Review text'}
+                    values={{
+                      uz: customerReviewForm.comment?.uz || '',
+                      ru: customerReviewForm.comment?.ru || '',
+                      en: customerReviewForm.comment?.en || '',
+                    }}
+                    onChange={(values) => setCustomerReviewForm((prev) => ({ ...prev, comment: values }))}
+                    multiline
+                    rows={4}
+                  />
+
+                  <LocalizedFieldGroup
+                    label={locale === 'uz' ? 'Xizmat turi (ixtiyoriy)' : locale === 'ru' ? 'Услуга (необязательно)' : 'Service (optional)'}
+                    values={{
+                      uz: customerReviewForm.service?.uz || '',
+                      ru: customerReviewForm.service?.ru || '',
+                      en: customerReviewForm.service?.en || '',
+                    }}
+                    onChange={(values) => setCustomerReviewForm((prev) => ({ ...prev, service: values }))}
+                  />
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">
+                        {locale === 'uz' ? 'Sana' : locale === 'ru' ? 'Дата' : 'Date'}
+                      </label>
+                      <input
+                        type="date"
+                        value={customerReviewForm.date || ''}
+                        onChange={(e) => setCustomerReviewForm((prev) => ({ ...prev, date: e.target.value }))}
+                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                      />
+                    </div>
+                    <label className="flex items-center gap-2 pt-6 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(customerReviewForm.published)}
+                        onChange={(e) =>
+                          setCustomerReviewForm((prev) => ({ ...prev, published: e.target.checked }))
+                        }
+                        className="rounded border-brand-sectiongray text-brand-gold focus:ring-brand-gold/30"
+                      />
+                      <span className="text-xs font-semibold text-brand-text-primary">
+                        {locale === 'uz' ? 'Saytda ko\'rsatish' : locale === 'ru' ? 'Показывать на сайте' : 'Show on website'}
+                      </span>
+                    </label>
+                  </div>
+
+                  <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
+                    <button
+                      onClick={() => {
+                        setSelectedCustomerReviewId(null);
+                        setIsAddingCustomerReview(false);
+                      }}
+                      className="px-4 py-2 hover:bg-brand-offwhite text-brand-text-muted text-xs font-bold rounded-lg cursor-pointer"
+                    >
+                      {locale === 'uz' ? 'Bekor qilish' : locale === 'ru' ? 'Отмена' : 'Cancel'}
+                    </button>
+                    <button
+                      onClick={handleSaveCustomerReview}
+                      className="px-5 py-2 bg-brand-dark-navy text-[#A6843F] hover:bg-brand-gold hover:text-white font-bold text-xs rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>{locale === 'uz' ? 'Fikrni saqlash' : locale === 'ru' ? 'Сохранить отзыв' : 'Save review'}</span>
                     </button>
                   </div>
                 </div>

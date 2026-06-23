@@ -104,13 +104,15 @@ export default function LocalizedFieldGroup({
 }
 
 export function mergeLocalized(values?: Partial<LocalizedText>): LocalizedText {
+  const trimField = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
   return {
-    uz: values?.uz?.trim() || '',
-    ru: values?.ru?.trim() || '',
-    en: values?.en?.trim() || '',
+    uz: trimField(values?.uz) || '',
+    ru: trimField(values?.ru) || '',
+    en: trimField(values?.en) || '',
   };
 }
 
 export function isLocalizedFilled(values?: Partial<LocalizedText>, lang: Locale = 'uz'): boolean {
-  return Boolean(values?.[lang]?.trim());
+  const value = values?.[lang];
+  return typeof value === 'string' && value.trim().length > 0;
 }

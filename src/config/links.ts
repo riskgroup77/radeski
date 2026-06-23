@@ -1,3 +1,5 @@
+import { incrementClientCount } from '../utils/clientCount';
+
 /** Onlayn qabul — Hipolink sahifasi */
 export const APPOINTMENT_BOOKING_URL =
   'https://hipolink.net/radeskiskinclinicuz?utm_source=website&utm_medium=web&utm_content=appointment_cta';
@@ -25,5 +27,6 @@ export function resolveClinicRatingUrl(platform: string, url?: string): string |
 
 /** Tugma bosilganda yangi tabda ochish (popup bloklamaydi) */
 export function openAppointmentBooking(): void {
+  incrementClientCount();
   window.open(APPOINTMENT_BOOKING_URL, APPOINTMENT_LINK_TARGET, APPOINTMENT_LINK_REL);
 }

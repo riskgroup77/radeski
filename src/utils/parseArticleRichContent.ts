@@ -16,8 +16,21 @@ export interface ApiArticleRichFields {
   when_to_see_doctor_en?: string | null;
 }
 
-function parseFaqItems(value: string | null | undefined): ArticleFaqItem[] {
-  if (!value?.trim()) return [];
+function parseFaqItems(value: unknown): ArticleFaqItem[] {
+  if (value == null) return [];
+
+  if (Array.isArray(value)) {
+    return value.filter(
+      (item): item is ArticleFaqItem =>
+        Boolean(item) &&
+        typeof item === 'object' &&
+        typeof (item as ArticleFaqItem).question === 'string' &&
+        typeof (item as ArticleFaqItem).answer === 'string' &&
+        (item as ArticleFaqItem).question.trim().length > 0,
+    );
+  }
+
+  if (typeof value !== 'string' || !value.trim()) return [];
   try {
     const parsed = JSON.parse(value);
     if (!Array.isArray(parsed)) return [];

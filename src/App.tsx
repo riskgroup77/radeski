@@ -40,8 +40,10 @@ import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
 import {
   loadClinicVideos,
   loadTreatmentResults,
+  loadClinicPartners,
   SITE_PAGES_STORAGE_KEYS,
 } from './utils/sitePagesStorage';
+import { loadCustomerReviews, CUSTOMER_REVIEWS_STORAGE_KEY } from './utils/customerReviewsStorage';
 import { clearAllLocalMedia } from './utils/localMediaStorage';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -70,9 +72,13 @@ import { findArticleByRouteParam } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
+import HomeCarousel from './components/HomeCarousel';
+import CustomerReviewsSection from './components/CustomerReviewsSection';
+import ClientCountBar from './components/ClientCountBar';
+import type { CustomerReview } from './data/sitePagesContent';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
-import { getFeaturedDoctors } from './utils/doctors';
+import { sortDoctorsFeaturedFirst } from './utils/doctors';
 
 export default function App() {
   return (
@@ -157,6 +163,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
   const [dynamicClinicVideos, setDynamicClinicVideos] = useState(() => loadClinicVideos());
   const [dynamicTreatmentResults, setDynamicTreatmentResults] = useState(() => loadTreatmentResults());
+  const [dynamicClinicPartners, setDynamicClinicPartners] = useState(() => loadClinicPartners());
+  const [dynamicCustomerReviews, setDynamicCustomerReviews] = useState(() => loadCustomerReviews());
 
   const d = { ...DICTIONARY[locale], ...(dynamicDictionary[locale] || {}) };
 
@@ -178,6 +186,12 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     } else if (type === 'treatmentResults') {
       localStorage.setItem(SITE_PAGES_STORAGE_KEYS.results, JSON.stringify(data));
       setDynamicTreatmentResults(data as ReturnType<typeof loadTreatmentResults>);
+    } else if (type === 'clinicPartners') {
+      localStorage.setItem(SITE_PAGES_STORAGE_KEYS.partners, JSON.stringify(data));
+      setDynamicClinicPartners(data as ReturnType<typeof loadClinicPartners>);
+    } else if (type === 'customerReviews') {
+      localStorage.setItem(CUSTOMER_REVIEWS_STORAGE_KEY, JSON.stringify(data));
+      setDynamicCustomerReviews(data as CustomerReview[]);
     }
   };
 
@@ -186,11 +200,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     localStorage.removeItem('radeski_clinic_ratings_v1');
     localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.videos);
     localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.results);
+    localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.partners);
+    localStorage.removeItem(CUSTOMER_REVIEWS_STORAGE_KEY);
     void clearAllLocalMedia();
     setDynamicDictionary(DICTIONARY);
     setDynamicClinicRatings(CLINIC_RATINGS);
     setDynamicClinicVideos(loadClinicVideos());
     setDynamicTreatmentResults(loadTreatmentResults());
+    setDynamicClinicPartners(loadClinicPartners());
+    setDynamicCustomerReviews(loadCustomerReviews());
   };
 
   // Automatically inject schema.org metadata and SEO tags dynamically on load / locale / tab change
@@ -614,8 +632,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     if (parsedLocale) saveLocale(parsedLocale);
   }, [parsedLocale]);
 
-  const featuredHomeDoctors = useMemo(
-    () => getFeaturedDoctors(dynamicDoctors),
+  const homeDoctorsCarousel = useMemo(
+    () => sortDoctorsFeaturedFirst(dynamicDoctors),
     [dynamicDoctors],
   );
 
@@ -675,6 +693,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         onChangeLocale={changeLocale}
         onOpenAppointment={() => handleOpenAppointmentWithService()}
       />
+
+      {currentPage === 'home' && <ClientCountBar locale={locale} />}
 
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
@@ -824,55 +844,73 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {featuredHomeDoctors.map(doc => (
-                      <div
-                        key={doc.id}
-                        className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between"
-                      >
-                        <div className="relative aspect-[3/4] overflow-hidden bg-brand-offwhite">
-                          {doc.photo ? (
-                            <MediaImage
-                              src={doc.photo}
-                              alt={doc.name[locale]}
-                              className="absolute inset-0 w-full h-full object-cover object-center"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted text-xs">—</div>
-                          )}
-                          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-brand-dark-navy/50 to-transparent pointer-events-none" />
-                          <span className="absolute bottom-3 left-3 bg-brand-gold text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">{doc.experience[locale]} {locale === 'uz' ? "yil tajriba" : locale === 'ru' ? "лет практики" : "years practice"}</span>
+                  <div className="px-2 sm:px-10">
+                    <HomeCarousel
+                      items={homeDoctorsCarousel}
+                      visibleCount={3}
+                      autoPlayMs={0}
+                      getKey={(doc) => doc.id}
+                      gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                      ariaLabel={
+                        locale === 'uz'
+                          ? 'Shifokorlar karuseli'
+                          : locale === 'ru'
+                            ? 'Карусель врачей'
+                            : 'Doctors carousel'
+                      }
+                      renderItem={(doc) => (
+                        <div className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between">
+                          <div className="relative aspect-[3/4] overflow-hidden bg-brand-offwhite">
+                            {doc.photo ? (
+                              <MediaImage
+                                src={doc.photo}
+                                alt={doc.name[locale]}
+                                className="absolute inset-0 w-full h-full object-cover object-center"
+                              />
+                            ) : (
+                              <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted text-xs">—</div>
+                            )}
+                            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-brand-dark-navy/50 to-transparent pointer-events-none" />
+                            <span className="absolute bottom-3 left-3 bg-brand-gold text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                              {doc.experience[locale]}{' '}
+                              {locale === 'uz' ? 'yil tajriba' : locale === 'ru' ? 'лет практики' : 'years practice'}
+                            </span>
+                          </div>
+                          <div className="p-5">
+                            <span className="text-[10px] font-bold text-brand-gold tracking-wide uppercase font-mono">
+                              {doc.role[locale]}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => goToDoctor(doc.id)}
+                              className="text-left w-full font-extrabold text-brand-text-primary text-md sm:text-base tracking-tight leading-snug mt-1 hover:text-brand-gold transition-colors cursor-pointer"
+                            >
+                              {doc.name[locale]}
+                            </button>
+                            {doc.education[locale] && (
+                              <div className="mt-2">
+                                <span className="text-xs font-extrabold text-brand-text-primary uppercase tracking-wide">
+                                  {d.education}
+                                </span>
+                                <p className="text-sm mt-1 font-semibold text-brand-text-primary line-clamp-2 leading-relaxed">
+                                  {doc.education[locale]}
+                                </p>
+                              </div>
+                            )}
+                            <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">
+                              {doc.bio[locale]}
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() => goToDoctor(doc.id)}
+                              className="mt-4 py-2.5 w-full text-center bg-brand-gold-light/10 hover:bg-brand-gold-light/20 text-brand-gold-dark font-bold text-xs rounded-lg transition-colors cursor-pointer"
+                            >
+                              {d.viewProfile}
+                            </button>
+                          </div>
                         </div>
-                        <div className="p-5">
-                          <span className="text-[10px] font-bold text-brand-gold tracking-wide uppercase font-mono">{doc.role[locale]}</span>
-                          <button
-                            type="button"
-                            onClick={() => goToDoctor(doc.id)}
-                            className="text-left w-full font-extrabold text-brand-text-primary text-md sm:text-base tracking-tight leading-snug mt-1 hover:text-brand-gold transition-colors cursor-pointer"
-                          >
-                            {doc.name[locale]}
-                          </button>
-                          {doc.education[locale] && (
-                            <div className="mt-2">
-                              <span className="text-xs font-extrabold text-brand-text-primary uppercase tracking-wide">
-                                {d.education}
-                              </span>
-                              <p className="text-sm mt-1 font-semibold text-brand-text-primary line-clamp-2 leading-relaxed">
-                                {doc.education[locale]}
-                              </p>
-                            </div>
-                          )}
-                          <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">{doc.bio[locale]}</p>
-                          <button
-                            type="button"
-                            onClick={() => goToDoctor(doc.id)}
-                            className="mt-4 py-2.5 w-full text-center bg-brand-gold-light/10 hover:bg-brand-gold-light/20 text-brand-gold-dark font-bold text-xs rounded-lg transition-colors cursor-pointer"
-                          >
-                            {d.viewProfile}
-                          </button>
-                        </div>
-                      </div>
-                    ))}
+                      )}
+                    />
                   </div>
                 </div>
               </section>
@@ -1004,39 +1042,128 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {dynamicArticles.slice(0, 3).map(art => (
-                      <Link
-                        key={art.id}
-                        to={articlePath(locale, art.id)}
-                        className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group cursor-pointer"
-                      >
-                        <div className="h-48 overflow-hidden bg-brand-offwhite relative">
-                          {(() => {
-                            const artImage = getLocalizedImage(art.images, locale) ?? art.image;
-                            return artImage ? (
-                            <MediaImage src={artImage} alt={art.title[locale]} className="w-full h-full object-cover" />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">—</div>
-                          );
-                          })()}
-                        </div>
-                        <div className="p-5">
-                          <span className="text-[10px] text-brand-text-muted font-light font-mono block mb-1 flex flex-wrap items-center gap-x-2 gap-y-1">
-                            <span>{art.date}</span>
-                            <ArticleViewsBadge views={art.views} locale={locale} className="text-[10px]" />
-                          </span>
-                          <h4 className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-snug group-hover:text-brand-gold transition-colors leading-tight line-clamp-2">{art.title[locale]}</h4>
-                          <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">{art.summary[locale]}</p>
-                          <span className="mt-4 inline-block text-xs font-bold text-brand-gold flex items-center gap-0.5">
-                            {d.readMore} <ArrowRight className="w-3.5 h-3.5" />
-                          </span>
-                        </div>
-                      </Link>
-                    ))}
+                  <div className="px-2 sm:px-10">
+                    <HomeCarousel
+                      items={dynamicArticles}
+                      visibleCount={3}
+                      autoPlayMs={5000}
+                      getKey={(art) => art.id}
+                      gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                      ariaLabel={
+                        locale === 'uz'
+                          ? 'Maqolalar karuseli'
+                          : locale === 'ru'
+                            ? 'Карусель статей'
+                            : 'Articles carousel'
+                      }
+                      renderItem={(art) => (
+                        <Link
+                          to={articlePath(locale, art.id)}
+                          className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group cursor-pointer h-full"
+                        >
+                          <div className="h-48 overflow-hidden bg-brand-offwhite relative">
+                            {(() => {
+                              const artImage = getLocalizedImage(art.images, locale) ?? art.image;
+                              return artImage ? (
+                                <MediaImage src={artImage} alt={art.title[locale]} className="w-full h-full object-cover" />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">—</div>
+                              );
+                            })()}
+                          </div>
+                          <div className="p-5">
+                            <span className="text-[10px] text-brand-text-muted font-light font-mono block mb-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                              <span>{art.date}</span>
+                              <ArticleViewsBadge views={art.views} locale={locale} className="text-[10px]" />
+                            </span>
+                            <h4 className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-snug group-hover:text-brand-gold transition-colors leading-tight line-clamp-2">
+                              {art.title[locale]}
+                            </h4>
+                            <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">
+                              {art.summary[locale]}
+                            </p>
+                            <span className="mt-4 inline-block text-xs font-bold text-brand-gold flex items-center gap-0.5">
+                              {d.readMore} <ArrowRight className="w-3.5 h-3.5" />
+                            </span>
+                          </div>
+                        </Link>
+                      )}
+                    />
                   </div>
                 </div>
               </section>
+
+              {/* Partners teaser */}
+              {dynamicClinicPartners.length > 0 && (
+                <section id="partners-teaser" className="py-16 bg-brand-offwhite border-t border-brand-sectiongray">
+                  <div className="site-container">
+                    <div className="text-center max-w-3xl mx-auto mb-10">
+                      <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">
+                        {locale === 'uz' ? 'Hamkorlar' : locale === 'ru' ? 'Партнеры' : 'Partners'}
+                      </span>
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary mt-1 tracking-tight">
+                        {locale === 'uz'
+                          ? 'Bizning ishonchli hamkorlarimiz'
+                          : locale === 'ru'
+                            ? 'Наши надежные партнеры'
+                            : 'Our trusted partners'}
+                      </h3>
+                      <p className="text-brand-text-muted mt-4 text-sm sm:text-base leading-relaxed">
+                        {locale === 'uz'
+                          ? 'Radeski klinikasi dunyoning yetakchi tibbiy va kosmetologik brendlari bilan hamkorlik qiladi.'
+                          : locale === 'ru'
+                            ? 'Клиника Radeski сотрудничает с ведущими мировыми медицинскими и косметологическими брендами.'
+                            : 'Radeski Clinic partners with leading global medical and aesthetic brands.'}
+                      </p>
+                    </div>
+
+                    <div className="px-2 sm:px-10">
+                      <HomeCarousel
+                        items={dynamicClinicPartners}
+                        visibleCount={3}
+                        autoPlayMs={5000}
+                        getKey={(partner) => partner.id}
+                        gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                        ariaLabel={
+                          locale === 'uz'
+                            ? 'Hamkorlar karuseli'
+                            : locale === 'ru'
+                              ? 'Карусель партнеров'
+                              : 'Partners carousel'
+                        }
+                        renderItem={(partner) => (
+                          <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-5 py-2 px-3">
+                            <div className="h-24 sm:h-28 md:h-32 w-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] mx-auto flex items-center justify-center">
+                              {partner.logo ? (
+                                <MediaImage
+                                  src={partner.logo}
+                                  alt={partner.name[locale]}
+                                  className="max-h-full max-w-full w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
+                                />
+                              ) : (
+                                <span className="text-brand-text-muted/40 text-xs">—</span>
+                              )}
+                            </div>
+                            <p className="text-xs sm:text-sm font-semibold text-brand-text-secondary tracking-wide leading-snug max-w-[220px]">
+                              {partner.name[locale] || partner.name.uz}
+                            </p>
+                          </div>
+                        )}
+                      />
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              <CustomerReviewsSection
+                locale={locale}
+                reviews={dynamicCustomerReviews}
+                serviceCategories={dynamicServiceCategories}
+                onSubmitReview={(review) => {
+                  const next = [...dynamicCustomerReviews, review];
+                  handleSaveLocalData('customerReviews', next);
+                }}
+              />
 
               {/* 10. Robust SEO block with coordinates and MAP integration */}
               <section id="seo-rich-block" className="py-20 bg-brand-offwhite border-t border-brand-sectiongray">
@@ -1207,6 +1334,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               clinicRatings={dynamicClinicRatings}
               clinicVideos={dynamicClinicVideos}
               treatmentResults={dynamicTreatmentResults}
+              clinicPartners={dynamicClinicPartners}
+              customerReviews={dynamicCustomerReviews}
               onSaveLocalData={handleSaveLocalData}
               onResetLocalData={handleResetLocalData}
               onRefresh={refetchClinicData}

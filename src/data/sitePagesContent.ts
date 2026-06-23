@@ -34,6 +34,122 @@ export interface TreatmentResult {
   sessions: LocalizedText;
 }
 
+export interface ClinicPartner {
+  id: string;
+  name: LocalizedText;
+  logo: string;
+}
+
+export interface CustomerReview {
+  id: string;
+  authorName: string;
+  rating: number;
+  comment: LocalizedText;
+  service?: LocalizedText;
+  date: string;
+  published: boolean;
+}
+
+export const CUSTOMER_REVIEWS: CustomerReview[] = [
+  {
+    id: 'review-1',
+    authorName: 'Nilufar A.',
+    rating: 5,
+    comment: {
+      uz: "IPL seanslaridan keyin terim ancha yorqin va tekis bo'ldi. Shifokor har bir bosqichni tushuntirib berdi — juda professional yondashuv.",
+      ru: 'После курса IPL кожа стала заметно свежее и ровнее. Врач подробно объяснял каждый этап — очень профессиональный подход.',
+      en: 'After IPL sessions my skin became noticeably brighter and smoother. The doctor explained every step — truly professional care.',
+    },
+    service: { uz: 'IPL terapiya', ru: 'IPL-терапия', en: 'IPL therapy' },
+    date: '2025-11-12',
+    published: true,
+  },
+  {
+    id: 'review-2',
+    authorName: 'Jamshid R.',
+    rating: 5,
+    comment: {
+      uz: "PhotoFinder tekshiruvi juda qulay va tez o'tkazildi. Natijalar aniq, shifokor barcha savollarga batafsil javob berdi.",
+      ru: 'Обследование PhotoFinder прошло быстро и комфортно. Результаты понятны, врач подробно ответил на все вопросы.',
+      en: 'The PhotoFinder screening was quick and comfortable. Results were clear and the doctor answered all my questions in detail.',
+    },
+    service: { uz: 'PhotoFinder diagnostika', ru: 'Диагностика PhotoFinder', en: 'PhotoFinder diagnostics' },
+    date: '2025-10-28',
+    published: true,
+  },
+  {
+    id: 'review-3',
+    authorName: 'Dilnoza K.',
+    rating: 5,
+    comment: {
+      uz: "Akne davolash kursidan keyin yuzim sezilarli darajada tozalandi. Klinika sharoiti va xodimlarning muomilasi a'lo darajada.",
+      ru: 'После курса лечения акне лицо заметно очистилось. Условия клиники и отношение персонала на высшем уровне.',
+      en: 'After acne treatment my face cleared up significantly. Clinic conditions and staff attitude are excellent.',
+    },
+    service: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+    date: '2025-09-15',
+    published: true,
+  },
+  {
+    id: 'review-4',
+    authorName: 'Aziza M.',
+    rating: 5,
+    comment: {
+      uz: "Kosmetologik muolajalar natijasidan juda mamnunman. Natija tabiiy va uzoq muddatli saqlanmoqda.",
+      ru: 'Очень довольна результатом косметологических процедур. Эффект естественный и сохраняется долго.',
+      en: 'Very happy with the cosmetic treatment results. The effect looks natural and lasts a long time.',
+    },
+    service: { uz: 'Kosmetologiya', ru: 'Косметология', en: 'Cosmetology' },
+    date: '2025-08-03',
+    published: true,
+  },
+  {
+    id: 'review-5',
+    authorName: 'Rustam T.',
+    rating: 4,
+    comment: {
+      uz: "Qabulga yozilish oson, navbat tez. Shifokor vaqtida qabul qildi va davolash rejasini aniq tuzdi.",
+      ru: 'Записаться легко, очереди почти нет. Врач принял вовремя и составил понятный план лечения.',
+      en: 'Booking was easy and wait times are short. The doctor saw me on time and created a clear treatment plan.',
+    },
+    date: '2025-07-20',
+    published: true,
+  },
+];
+
+export const CLINIC_PARTNERS: ClinicPartner[] = [
+  {
+    id: 'sciton',
+    name: { uz: 'Sciton (AQSh)', ru: 'Sciton (США)', en: 'Sciton (USA)' },
+    logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=200&h=200',
+  },
+  {
+    id: 'fotofinder',
+    name: { uz: 'FotoFinder', ru: 'FotoFinder', en: 'FotoFinder' },
+    logo: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=200&h=200',
+  },
+  {
+    id: 'lumenis',
+    name: { uz: 'Lumenis', ru: 'Lumenis', en: 'Lumenis' },
+    logo: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=200&h=200',
+  },
+  {
+    id: 'mesoestetic',
+    name: { uz: 'Mesoestetic', ru: 'Mesoestetic', en: 'Mesoestetic' },
+    logo: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=200&h=200',
+  },
+  {
+    id: 'cynosure',
+    name: { uz: 'Cynosure', ru: 'Cynosure', en: 'Cynosure' },
+    logo: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=200&h=200',
+  },
+  {
+    id: 'dermalogica',
+    name: { uz: 'Dermalogica', ru: 'Dermalogica', en: 'Dermalogica' },
+    logo: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=200&h=200',
+  },
+];
+
 export const CLINIC_VIDEOS: ClinicVideo[] = [
   {
     id: 'clinic-tour',
