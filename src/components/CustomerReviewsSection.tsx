@@ -30,9 +30,11 @@ function StarRatingDisplay({ rating }: { rating: number }) {
 function StarRatingInput({
   value,
   onChange,
+  compact = false,
 }: {
   value: number;
   onChange: (rating: number) => void;
+  compact?: boolean;
 }) {
   const [hover, setHover] = useState(0);
 
@@ -62,7 +64,7 @@ function StarRatingInput({
             aria-pressed={value === starValue}
           >
             <Star
-              className={`w-7 h-7 transition-colors ${
+              className={`${compact ? 'w-5 h-5' : 'w-7 h-7'} transition-colors ${
                 active ? 'text-brand-gold fill-brand-gold' : 'text-brand-sectiongray fill-transparent'
               }`}
             />
@@ -201,7 +203,7 @@ export default function CustomerReviewsSection({
   return (
     <section id="customer-reviews" className="py-16 bg-brand-white border-t border-brand-sectiongray">
       <div className="site-container">
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
           <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">{labels.badge}</span>
           <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary mt-1 tracking-tight">
             {labels.title}
@@ -209,126 +211,148 @@ export default function CustomerReviewsSection({
           <p className="text-brand-text-muted mt-4 text-sm sm:text-base leading-relaxed">{labels.desc}</p>
         </div>
 
-        {publishedReviews.length > 0 && (
-          <div className="px-2 sm:px-10 mb-12">
-            <HomeCarousel
-              items={publishedReviews}
-              visibleCount={3}
-              autoPlayMs={5000}
-              getKey={(review) => review.id}
-              gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-              ariaLabel={
-                locale === 'uz'
-                  ? 'Mijozlar fikrlari karuseli'
-                  : locale === 'ru'
-                    ? 'Карусель отзывов'
-                    : 'Reviews carousel'
-              }
-              renderItem={(review) => (
-                <div className="relative px-3 sm:px-4 py-5 sm:py-6 text-center h-full flex flex-col items-center">
-                  <Quote className="w-8 h-8 text-brand-gold/25 mx-auto mb-3" aria-hidden="true" />
-                  <StarRatingDisplay rating={review.rating} />
-                  <p className="mt-4 text-sm sm:text-base text-brand-text-primary leading-relaxed font-light italic line-clamp-4 flex-1">
-                    "{review.comment[locale] || review.comment.uz || review.comment.ru || review.comment.en}"
-                  </p>
-                  <div className="mt-5 flex flex-col items-center gap-1.5">
-                    <div className="w-10 h-10 rounded-full bg-brand-gold/15 text-brand-gold font-bold text-xs flex items-center justify-center">
-                      {getInitials(review.authorName)}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.95fr)] gap-5 lg:gap-6 xl:gap-7 items-start">
+          <div className="min-w-0">
+            {publishedReviews.length > 0 ? (
+              <div className="relative">
+                <HomeCarousel
+                  items={publishedReviews}
+                  visibleCount={4}
+                  autoPlayMs={5000}
+                  arrowsInside
+                  dotsClassName="mt-4"
+                  getKey={(review) => review.id}
+                  gridClassName="grid-cols-2"
+                  gridGapClassName="gap-3 sm:gap-3.5"
+                  ariaLabel={
+                    locale === 'uz'
+                      ? 'Mijozlar fikrlari karuseli'
+                      : locale === 'ru'
+                        ? 'Карусель отзывов'
+                        : 'Reviews carousel'
+                  }
+                  renderItem={(review) => (
+                    <div className="relative h-full min-h-[168px] sm:min-h-[176px] rounded-xl border border-brand-sectiongray bg-brand-offwhite/50 px-3 py-3.5 sm:py-4 text-center flex flex-col items-center">
+                      <Quote className="w-5 h-5 text-brand-gold/30 mb-1.5" aria-hidden="true" />
+                      <StarRatingDisplay rating={review.rating} />
+                      <p className="mt-2 text-[11px] sm:text-xs text-brand-text-primary leading-relaxed font-light italic line-clamp-3 flex-1">
+                        &ldquo;{review.comment[locale] || review.comment.uz || review.comment.ru || review.comment.en}&rdquo;
+                      </p>
+                      <div className="mt-3 flex flex-col items-center gap-0.5">
+                        <div className="w-8 h-8 rounded-full bg-brand-gold/15 text-brand-gold font-bold text-[9px] flex items-center justify-center">
+                          {getInitials(review.authorName)}
+                        </div>
+                        <p className="font-extrabold text-brand-text-primary text-[11px] sm:text-xs">{review.authorName}</p>
+                        {review.service?.[locale] || review.service?.uz ? (
+                          <span className="text-[8px] font-bold uppercase tracking-wide text-brand-gold line-clamp-1">
+                            {review.service?.[locale] || review.service?.uz}
+                          </span>
+                        ) : null}
+                        <span className="text-[8px] text-brand-text-muted font-mono">{review.date}</span>
+                      </div>
                     </div>
-                    <p className="font-extrabold text-brand-text-primary text-sm">{review.authorName}</p>
-                    {review.service?.[locale] || review.service?.uz ? (
-                      <span className="text-[9px] font-bold uppercase tracking-wide text-brand-gold line-clamp-1">
-                        {review.service?.[locale] || review.service?.uz}
-                      </span>
-                    ) : null}
-                    <span className="text-[10px] text-brand-text-muted font-mono">{review.date}</span>
-                  </div>
-                </div>
-              )}
-            />
-          </div>
-        )}
-
-        <div className="max-w-2xl mx-auto">
-          <div className="rounded-2xl border border-brand-sectiongray bg-brand-offwhite/60 p-6 sm:p-8">
-            <h4 className="text-lg font-extrabold text-brand-text-primary text-center">{labels.formTitle}</h4>
-            <p className="text-xs text-brand-text-muted text-center mt-2 mb-6">{labels.formDesc}</p>
-
-            {submitted ? (
-              <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm">
-                <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
-                <p>{labels.success}</p>
+                  )}
+                />
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
-                    {labels.name}
-                  </label>
-                  <input
-                    type="text"
-                    value={authorName}
-                    onChange={(e) => setAuthorName(e.target.value)}
-                    className="w-full px-4 py-3 bg-brand-white border border-brand-sectiongray rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold/40"
-                    placeholder={locale === 'uz' ? 'Masalan: Nilufar A.' : 'e.g. Nilufar A.'}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
-                    {labels.rating}
-                  </label>
-                  <StarRatingInput value={rating} onChange={setRating} />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
-                    {labels.service}
-                  </label>
-                  <select
-                    value={serviceId}
-                    onChange={(e) => setServiceId(e.target.value)}
-                    className="w-full px-4 py-3 bg-brand-white border border-brand-sectiongray rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold/40 cursor-pointer"
-                  >
-                    <option value="">{serviceSelectPlaceholder}</option>
-                    {serviceCategories.map((category) => (
-                      <option key={category.id} value={category.id}>
-                        {category.title[locale] || category.title.uz}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
-                    {labels.comment}
-                  </label>
-                  <textarea
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    rows={4}
-                    className="w-full px-4 py-3 bg-brand-white border border-brand-sectiongray rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold/40 resize-y min-h-[100px]"
-                    placeholder={
-                      locale === 'uz'
-                        ? 'Klinikadagi tajribangiz haqida yozing...'
-                        : locale === 'ru'
-                          ? 'Расскажите о вашем опыте...'
-                          : 'Tell us about your experience...'
-                    }
-                  />
-                </div>
-
-                {error ? <p className="text-xs text-red-600">{error}</p> : null}
-
-                <button
-                  type="submit"
-                  className="w-full sm:w-auto px-6 py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-sm rounded-xl transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
-                >
-                  <Send className="w-4 h-4" />
-                  {labels.submit}
-                </button>
-              </form>
+              <div className="min-h-[220px] rounded-xl border border-dashed border-brand-sectiongray bg-brand-offwhite/30 px-5 py-8 flex flex-col items-center justify-center text-center">
+                <Quote className="w-10 h-10 text-brand-gold/25 mb-4" aria-hidden="true" />
+                <p className="text-brand-text-muted text-sm sm:text-base max-w-sm leading-relaxed">
+                  {locale === 'uz'
+                    ? 'Hozircha chop etilgan fikrlar yo\'q. Birinchi bo\'lib o\'z tajribangizni qoldiring.'
+                    : locale === 'ru'
+                      ? 'Пока нет опубликованных отзывов. Оставьте свой первым.'
+                      : 'No published reviews yet. Be the first to share your experience.'}
+                </p>
+              </div>
             )}
+          </div>
+
+          <div className="min-w-0 w-full">
+            <div className="rounded-xl border border-brand-sectiongray bg-brand-offwhite/60 p-5 sm:p-6 shadow-[0_8px_30px_-18px_rgba(7,27,46,0.12)]">
+              <h4 className="text-base sm:text-lg font-extrabold text-brand-text-primary text-center lg:text-left">
+                {labels.formTitle}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-brand-text-muted text-center lg:text-left mt-1.5 mb-5 leading-snug">
+                {labels.formDesc}
+              </p>
+
+              {submitted ? (
+                <div className="flex items-start gap-2.5 p-3.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
+                  <p>{labels.success}</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-3.5">
+                  <div>
+                    <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
+                      {labels.name}
+                    </label>
+                    <input
+                      type="text"
+                      value={authorName}
+                      onChange={(e) => setAuthorName(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-brand-white border border-brand-sectiongray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold/40"
+                      placeholder={locale === 'uz' ? 'Masalan: Nilufar A.' : 'e.g. Nilufar A.'}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
+                      {labels.rating}
+                    </label>
+                    <StarRatingInput value={rating} onChange={setRating} />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
+                      {labels.service}
+                    </label>
+                    <select
+                      value={serviceId}
+                      onChange={(e) => setServiceId(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-brand-white border border-brand-sectiongray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold/40 cursor-pointer"
+                    >
+                      <option value="">{serviceSelectPlaceholder}</option>
+                      {serviceCategories.map((category) => (
+                        <option key={category.id} value={category.id}>
+                          {category.title[locale] || category.title.uz}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
+                      {labels.comment}
+                    </label>
+                    <textarea
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      rows={4}
+                      className="w-full min-h-[88px] px-3.5 py-2.5 bg-brand-white border border-brand-sectiongray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold/40 resize-y"
+                      placeholder={
+                        locale === 'uz'
+                          ? 'Klinikadagi tajribangiz haqida yozing...'
+                          : locale === 'ru'
+                            ? 'Расскажите о вашем опыте...'
+                            : 'Tell us about your experience...'
+                      }
+                    />
+                  </div>
+
+                  {error ? <p className="text-[11px] text-red-600">{error}</p> : null}
+
+                  <button
+                    type="submit"
+                    className="w-full px-5 py-2.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-sm rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
+                  >
+                    <Send className="w-4 h-4" />
+                    {labels.submit}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -74,7 +74,6 @@ import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
 import HomeCarousel from './components/HomeCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
-import ClientCountBar from './components/ClientCountBar';
 import type { CustomerReview } from './data/sitePagesContent';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
@@ -695,8 +694,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         serviceCategories={dynamicServiceCategories}
         onOpenServiceCategory={goToServiceCategory}
       />
-
-      {currentPage === 'home' && <ClientCountBar locale={locale} />}
 
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">

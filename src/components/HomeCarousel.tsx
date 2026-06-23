@@ -9,7 +9,11 @@ interface HomeCarouselProps<T> {
   getKey: (item: T) => string;
   renderItem: (item: T) => ReactNode;
   gridClassName?: string;
+  gridGapClassName?: string;
   ariaLabel?: string;
+  arrowsInside?: boolean;
+  className?: string;
+  dotsClassName?: string;
 }
 
 function getVisibleItems<T>(items: T[], start: number, count: number): T[] {
@@ -25,7 +29,11 @@ export default function HomeCarousel<T>({
   getKey,
   renderItem,
   gridClassName = 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  gridGapClassName = 'gap-6',
   ariaLabel = 'Carousel',
+  arrowsInside = false,
+  className = '',
+  dotsClassName = 'mt-8',
 }: HomeCarouselProps<T>) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -53,20 +61,30 @@ export default function HomeCarousel<T>({
 
   const visibleItems = getVisibleItems(items, index, visibleCount);
 
+  const arrowBase =
+    'absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-brand-white border border-brand-sectiongray shadow-md text-brand-gold hover:bg-brand-gold hover:text-white transition-colors cursor-pointer flex items-center justify-center';
+  const prevArrowClass = arrowsInside
+    ? `${arrowBase} left-3 sm:left-4`
+    : `${arrowBase} left-0 -translate-x-1/2 sm:-translate-x-full hidden sm:flex`;
+  const nextArrowClass = arrowsInside
+    ? `${arrowBase} right-3 sm:right-4`
+    : `${arrowBase} right-0 translate-x-1/2 sm:translate-x-full hidden sm:flex`;
+
   return (
     <div
-      className="relative"
+      className={`relative ${className}`}
       aria-label={ariaLabel}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      <div className={`grid gap-6 ${gridClassName}`}>
+      <div className={`grid flex-1 auto-rows-fr ${gridGapClassName} ${gridClassName}`}>
         <AnimatePresence mode="popLayout" initial={false}>
           {visibleItems.map((item, itemIndex) => (
             <motion.div
               key={`${getKey(item)}-${index}-${itemIndex}`}
+              className="h-full"
               initial={{ opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -24 }}
@@ -83,7 +101,7 @@ export default function HomeCarousel<T>({
           <button
             type="button"
             onClick={goPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 sm:-translate-x-full z-10 w-10 h-10 rounded-full bg-brand-white border border-brand-sectiongray shadow-md text-brand-gold hover:bg-brand-gold hover:text-white transition-colors cursor-pointer hidden sm:flex items-center justify-center"
+            className={prevArrowClass}
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -91,13 +109,13 @@ export default function HomeCarousel<T>({
           <button
             type="button"
             onClick={goNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 sm:translate-x-full z-10 w-10 h-10 rounded-full bg-brand-white border border-brand-sectiongray shadow-md text-brand-gold hover:bg-brand-gold hover:text-white transition-colors cursor-pointer hidden sm:flex items-center justify-center"
+            className={nextArrowClass}
             aria-label="Next slide"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          <div className="flex justify-center gap-2 mt-8">
+          <div className={`flex justify-center gap-2 shrink-0 ${dotsClassName}`}>
             {items.map((item, dotIndex) => (
               <button
                 key={getKey(item)}

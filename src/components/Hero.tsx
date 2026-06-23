@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, ShieldAlert, Award } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY, HERO_SLIDE_IMAGES } from '../data';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import ClientCountCard from './ClientCountCard';
 import { PageId } from '../routing/paths';
 
 interface HeroProps {
@@ -113,57 +114,65 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/50 via-transparent to-transparent" />
       </div>
 
-      <div className="relative site-container h-full flex flex-col justify-center">
-        <motion.div
-          key={`badge-${activeSlide}`}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold-light/30 text-brand-gold-light text-xs font-semibold w-fit mb-6"
-        >
-          <Icon className="w-4 h-4" />
-          <span>{slide.badge[locale]}</span>
-        </motion.div>
+      <div className="relative site-container h-full flex flex-col justify-center pb-20 sm:pb-16 lg:pb-12">
+        <div className="lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] lg:items-center lg:gap-8 xl:gap-12 2xl:gap-16">
+          <div className="min-w-0">
+            <motion.div
+              key={`badge-${activeSlide}`}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-gold/15 border border-brand-gold-light/30 text-brand-gold-light text-xs font-semibold w-fit mb-6"
+            >
+              <Icon className="w-4 h-4" />
+              <span>{slide.badge[locale]}</span>
+            </motion.div>
 
-        <motion.h2
-          key={`title-${activeSlide}`}
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ type: 'spring', stiffness: 100, delay: 0.3 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-white tracking-tight max-w-3xl leading-tight drop-shadow-sm"
-        >
-          {slide.title[locale]}
-        </motion.h2>
+            <motion.h2
+              key={`title-${activeSlide}`}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ type: 'spring', stiffness: 100, delay: 0.3 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-white tracking-tight max-w-3xl leading-tight drop-shadow-sm"
+            >
+              {slide.title[locale]}
+            </motion.h2>
 
-        <motion.p
-          key={`sub-${activeSlide}`}
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ type: 'spring', stiffness: 100, delay: 0.4 }}
-          className="text-slate-200 text-base sm:text-lg md:text-xl mt-4 max-w-2xl leading-relaxed font-light drop-shadow-sm"
-        >
-          {slide.subtitle[locale]}
-        </motion.p>
+            <motion.p
+              key={`sub-${activeSlide}`}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ type: 'spring', stiffness: 100, delay: 0.4 }}
+              className="text-slate-200 text-base sm:text-lg md:text-xl mt-4 max-w-2xl leading-relaxed font-light drop-shadow-sm"
+            >
+              {slide.subtitle[locale]}
+            </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 mt-8"
-        >
-          <AppointmentBookingLink className="px-8 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white font-bold tracking-wide shadow-lg shadow-brand-gold/15 hover:shadow-brand-gold/25 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm no-underline">
-            {d.appointmentBtn}
-            <ArrowRight className="w-4 h-4" />
-          </AppointmentBookingLink>
-          <button
-            onClick={() => onNavigate('services')}
-            className="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold tracking-wide border border-white/20 backdrop-blur-sm active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
-          >
-            {locale === 'uz' ? 'Xizmatlarimiz' : locale === 'ru' ? 'Наши услуги' : 'Explore Services'}
-          </button>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-8 flex flex-col sm:flex-row gap-4 max-w-2xl"
+            >
+              <AppointmentBookingLink className="px-8 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white font-bold tracking-wide shadow-lg shadow-brand-gold/15 hover:shadow-brand-gold/25 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm no-underline">
+                {d.appointmentBtn}
+                <ArrowRight className="w-4 h-4" />
+              </AppointmentBookingLink>
+              <button
+                onClick={() => onNavigate('services')}
+                className="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold tracking-wide border border-white/20 backdrop-blur-sm active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
+              >
+                {locale === 'uz' ? 'Xizmatlarimiz' : locale === 'ru' ? 'Наши услуги' : 'Explore Services'}
+              </button>
+            </motion.div>
+          </div>
 
-        <div className="absolute bottom-8 left-4 flex gap-2">
+          <div className="mt-10 sm:mt-12 lg:mt-0 flex items-center justify-center lg:justify-end lg:self-center overflow-visible">
+            <ClientCountCard locale={locale} variant="hero" />
+          </div>
+        </div>
+
+        <div className="absolute bottom-8 left-4 flex gap-2 z-10">
           {slides.map((_, idx) => (
             <button
               key={idx}
