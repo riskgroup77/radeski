@@ -692,6 +692,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         onNavigate={goToPage}
         onChangeLocale={changeLocale}
         onOpenAppointment={() => handleOpenAppointmentWithService()}
+        serviceCategories={dynamicServiceCategories}
+        onOpenServiceCategory={goToServiceCategory}
       />
 
       {currentPage === 'home' && <ClientCountBar locale={locale} />}

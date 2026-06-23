@@ -11,7 +11,7 @@ import { enrichArticles } from '../utils/enrichArticles';
 import { enrichPrices } from '../utils/enrichPrices';
 import { ApiError } from '../api/client';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
-import { ARTICLES } from '../data';
+import { ARTICLES, SERVICE_CATEGORIES } from '../data';
 import { normalizeArticleViews } from '../utils/articleViews';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 
@@ -62,6 +62,7 @@ export function useClinicData(): ClinicDataState {
             ? err.message
             : 'Ma\'lumotlarni yuklashda xatolik yuz berdi';
       setError(message);
+      setServiceCategories(enrichServiceCategories(SERVICE_CATEGORIES));
       setPrices(enrichPrices([]));
     } finally {
       setLoading(false);

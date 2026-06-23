@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Phone, MapPin } from 'lucide-react';
-import { Locale } from '../types';
-import { DICTIONARY } from '../data';
+import { Menu, X, Globe, Phone, MapPin, ChevronDown } from 'lucide-react';
+import { Locale, ServiceCategory } from '../types';
+import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import SiteLogo from './SiteLogo';
 import AppointmentBookingLink from './AppointmentBookingLink';
-import { PageId, pagePath } from '../routing/paths';
+import {
+  PageId,
+  pagePath,
+  serviceCategoryPath,
+  servicesListPath,
+  getServiceCategoryIdFromPathname,
+} from '../routing/paths';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -13,6 +19,8 @@ interface HeaderProps {
   onNavigate: (page: PageId) => void;
   onChangeLocale: (locale: Locale) => void;
   onOpenAppointment: () => void;
+  serviceCategories?: ServiceCategory[];
+  onOpenServiceCategory?: (categoryId: string) => void;
 }
 
 function getCompactAppointmentLabel(locale: Locale): string {
@@ -26,12 +34,28 @@ export default function Header({
   locale,
   onNavigate,
   onChangeLocale,
+  serviceCategories = [],
+  onOpenServiceCategory,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const location = useLocation();
   const d = DICTIONARY[locale];
+  const activeServiceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
+
+  const navServiceCategories = useMemo(
+    () => (serviceCategories.length > 0 ? serviceCategories : SERVICE_CATEGORIES),
+    [serviceCategories],
+  );
+
+  const servicesDropdownTitle =
+    locale === 'uz' ? 'Asosiy sohalar' : locale === 'ru' ? 'Основные направления' : 'Main areas';
+
+  const allServicesLabel =
+    locale === 'uz' ? "Barcha xizmatlar ro'yxati" : locale === 'ru' ? 'Все услуги' : 'All services';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +67,8 @@ export default function Header({
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsMobileServicesOpen(false);
+    setIsServicesDropdownOpen(false);
   }, [location.pathname]);
 
   const navItems: { id: PageId; label: string }[] = [
@@ -75,6 +101,148 @@ export default function Header({
         ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
         : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-offwhite'
     }`;
+
+  const servicesNavClass = navLinkClass('services');
+
+  const serviceDropdownItemClass = (categoryId: string) =>
+    `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite ${
+      activeServiceCategoryId === categoryId
+        ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
+        : 'text-brand-text-secondary hover:text-brand-text-primary'
+    }`;
+
+  const renderDesktopNavItem = (item: { id: PageId; label: string }) => {
+    if (item.id !== 'services') {
+      return (
+        <Link key={item.id} to={pagePath(locale, item.id)} className={navLinkClass(item.id)}>
+          {item.label}
+        </Link>
+      );
+    }
+
+    return (
+      <div
+        key={item.id}
+        className="relative shrink-0"
+        onMouseEnter={() => setIsServicesDropdownOpen(true)}
+        onMouseLeave={() => setIsServicesDropdownOpen(false)}
+      >
+        <button
+          type="button"
+          onClick={() => onNavigate('services')}
+          className={`${servicesNavClass} inline-flex items-center gap-1`}
+          aria-haspopup="menu"
+          aria-expanded={isServicesDropdownOpen}
+        >
+          {item.label}
+          <ChevronDown
+            className={`w-3.5 h-3.5 transition-transform duration-200 ${
+              isServicesDropdownOpen ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+
+        {isServicesDropdownOpen && (
+          <div className="absolute top-full left-0 pt-2 z-[100]">
+            <div
+              className="min-w-[280px] max-w-[340px] max-h-[min(70vh,460px)] overflow-y-auto bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
+              role="menu"
+            >
+              <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
+                {servicesDropdownTitle}
+              </p>
+              {navServiceCategories.map((category) => (
+                <Link
+                  key={category.id}
+                  to={serviceCategoryPath(locale, category.id)}
+                  role="menuitem"
+                  onClick={() => {
+                    onOpenServiceCategory?.(category.id);
+                    setIsServicesDropdownOpen(false);
+                  }}
+                  className={serviceDropdownItemClass(category.id)}
+                >
+                  {category.title[locale] || category.title.uz}
+                </Link>
+              ))}
+              <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
+                <Link
+                  to={servicesListPath(locale)}
+                  onClick={() => setIsServicesDropdownOpen(false)}
+                  className="block px-4 py-2.5 text-[12px] font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+                >
+                  {allServicesLabel}
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderMobileNavItem = (item: { id: PageId; label: string }) => {
+    if (item.id !== 'services') {
+      return (
+        <Link
+          key={item.id}
+          to={pagePath(locale, item.id)}
+          className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${navLinkClass(item.id)}`}
+        >
+          {item.label}
+        </Link>
+      );
+    }
+
+    return (
+      <div key={item.id} className="rounded-lg overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setIsMobileServicesOpen((open) => !open)}
+          className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors inline-flex items-center justify-between ${servicesNavClass}`}
+        >
+          <span>{item.label}</span>
+          <ChevronDown
+            className={`w-4 h-4 transition-transform duration-200 ${
+              isMobileServicesOpen ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+
+        {isMobileServicesOpen && (
+          <div className="mt-1 ml-2 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 max-h-[50vh] overflow-y-auto">
+            <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-gold">
+              {servicesDropdownTitle}
+            </p>
+            {navServiceCategories.map((category) => (
+              <Link
+                key={category.id}
+                to={serviceCategoryPath(locale, category.id)}
+                onClick={() => {
+                  onOpenServiceCategory?.(category.id);
+                  setIsMobileServicesOpen(false);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`px-3 py-2.5 rounded-lg text-sm transition-colors ${serviceDropdownItemClass(category.id)}`}
+              >
+                {category.title[locale] || category.title.uz}
+              </Link>
+            ))}
+            <Link
+              to={servicesListPath(locale)}
+              onClick={() => {
+                setIsMobileServicesOpen(false);
+                setIsMobileMenuOpen(false);
+              }}
+              className="px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+            >
+              {allServicesLabel}
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <header
@@ -130,16 +298,8 @@ export default function Header({
           </AppointmentBookingLink>
         </div>
 
-        <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 flex-1 min-w-0 px-1 xl:px-3 overflow-x-auto scrollbar-none">
-          {navItems.map((item) => (
-            <Link
-              key={item.id}
-              to={pagePath(locale, item.id)}
-              className={navLinkClass(item.id)}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1 flex-1 min-w-0 px-1 xl:px-3 overflow-visible">
+          {navItems.map((item) => renderDesktopNavItem(item))}
         </nav>
 
         <div className="hidden sm:flex items-center gap-3 lg:gap-4 shrink-0">
@@ -211,15 +371,7 @@ export default function Header({
       {isMobileMenuOpen && (
         <div className="sm:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-150 shadow-xl py-4 px-4 animate-in fade-in slide-in-from-top-3 duration-200">
           <nav className="flex flex-col gap-1 mb-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.id}
-                to={pagePath(locale, item.id)}
-                className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${navLinkClass(item.id)}`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => renderMobileNavItem(item))}
           </nav>
 
           <div className="border-t border-brand-sectiongray pt-4 flex flex-col gap-3">
