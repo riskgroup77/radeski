@@ -46,6 +46,15 @@ function getKonsultatsiiSpecialtyRank(text: string): number {
 }
 
 function comparePriceItems(a: PriceItem, b: PriceItem, categoryId: string): number {
+  const orderA = a.sortOrder;
+  const orderB = b.sortOrder;
+  const hasOrderA = typeof orderA === 'number' && Number.isFinite(orderA);
+  const hasOrderB = typeof orderB === 'number' && Number.isFinite(orderB);
+
+  if (hasOrderA && hasOrderB && orderA !== orderB) return orderA - orderB;
+  if (hasOrderA && !hasOrderB) return -1;
+  if (!hasOrderA && hasOrderB) return 1;
+
   const textA = itemSearchText(a);
   const textB = itemSearchText(b);
   const tierA = getConsultationTier(textA);

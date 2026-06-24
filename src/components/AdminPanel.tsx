@@ -44,9 +44,25 @@ import LocalizedImageUploadGroup from './LocalizedImageUploadGroup';
 import { EMPTY_LOCALIZED_IMAGE_FILES, getLocalizedImage } from '../utils/localizedImage';
 import { normalizeArticleViews } from '../utils/articleViews';
 import { getCatalogPrices } from '../utils/enrichPrices';
+import {
+  applyStoredPriceSortOrders,
+  getNextSortOrderInCategory,
+  writePriceSortOrder,
+} from '../utils/priceSortOrderStorage';
 import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo, TreatmentResult, ClinicPartner, CustomerReview } from '../data/sitePagesContent';
+
+function compareAdminPriceRows(a: PriceItem, b: PriceItem): number {
+  const categoryCompare = a.category.localeCompare(b.category);
+  if (categoryCompare !== 0) return categoryCompare;
+
+  const orderA = a.sortOrder ?? Number.MAX_SAFE_INTEGER;
+  const orderB = b.sortOrder ?? Number.MAX_SAFE_INTEGER;
+  if (orderA !== orderB) return orderA - orderB;
+
+  return (a.name.uz || a.name.ru || '').localeCompare(b.name.uz || b.name.ru || '', 'uz');
+}
 
 interface AdminPanelProps {
   locale: Locale;
@@ -136,7 +152,9 @@ export default function AdminPanel({
   });
 
   // 4. Prices
-  const [editedPrices, setEditedPrices] = useState<PriceItem[]>(() => JSON.parse(JSON.stringify(prices)));
+  const [editedPrices, setEditedPrices] = useState<PriceItem[]>(() =>
+    JSON.parse(JSON.stringify(applyStoredPriceSortOrders(prices))),
+  );
   const [selectedPriceId, setSelectedPriceId] = useState<string | null>(null);
   const [isAddingPrice, setIsAddingPrice] = useState(false);
   const [priceForm, setPriceForm] = useState<Partial<PriceItem>>({});
@@ -212,7 +230,7 @@ export default function AdminPanel({
     setEditedFullDict(JSON.parse(JSON.stringify(fullDictionary)));
     setEditedDoctors(JSON.parse(JSON.stringify(doctors)));
     setEditedCategories(JSON.parse(JSON.stringify(serviceCategories)));
-    setEditedPrices(JSON.parse(JSON.stringify(prices)));
+    setEditedPrices(JSON.parse(JSON.stringify(applyStoredPriceSortOrders(prices))));
     setEditedArticles(JSON.parse(JSON.stringify(articles)));
     setEditedVideos(JSON.parse(JSON.stringify(clinicVideos)));
     setEditedResults(JSON.parse(JSON.stringify(treatmentResults)));
@@ -582,13 +600,15 @@ export default function AdminPanel({
   };
 
   const handleCreatePriceBtn = () => {
+    const category = serviceCategories[0]?.id || 'dermatologiya';
     setSelectedPriceId(null);
     setPriceForm({
       id: `pr-${Date.now()}`,
       name: { uz: '', ru: '', en: '' },
       price: '100,000 UZS',
       priceValue: 100000,
-      category: serviceCategories[0]?.id || 'dermatologiya'
+      category,
+      sortOrder: getNextSortOrderInCategory(category, editedPrices),
     });
     setIsAddingPrice(true);
   };
@@ -596,10 +616,26 @@ export default function AdminPanel({
   const handleSavePriceItem = async () => {
     if (!isLocalizedFilled(priceForm.name, 'uz') || !priceForm.price || !priceForm.id) return;
 
+    if (
+      priceForm.sortOrder === undefined ||
+      !Number.isFinite(priceForm.sortOrder) ||
+      priceForm.sortOrder < 1
+    ) {
+      alert(
+        locale === 'uz'
+          ? "Tartib raqamini kiriting (1 dan boshlab, masalan: 5)."
+          : locale === 'ru'
+            ? 'Укажите порядковый номер (от 1, например: 5).'
+            : 'Enter a sort order number (from 1, e.g. 5).',
+      );
+      return;
+    }
+
     try {
       const payload = mapPriceToCreatePayload({
         ...priceForm,
         priceValue: priceForm.priceValue ?? parsePriceValue(priceForm.price || '0'),
+        sortOrder: Math.round(priceForm.sortOrder),
       });
 
       if (isAddingPrice) {
@@ -607,6 +643,8 @@ export default function AdminPanel({
       } else {
         await updatePrice(priceForm.id, payload);
       }
+
+      writePriceSortOrder(priceForm.id, Math.round(priceForm.sortOrder));
 
       await onRefresh();
       setSelectedPriceId(null);
@@ -622,6 +660,7 @@ export default function AdminPanel({
 
     try {
       await deletePrice(prId);
+      writePriceSortOrder(prId, undefined);
       await onRefresh();
       if (selectedPriceId === prId) setSelectedPriceId(null);
       triggerSaveNotification(locale === 'uz' ? "Narx o'chirildi!" : "Позиция удалена!");
@@ -2038,18 +2077,22 @@ export default function AdminPanel({
                       <tr className="bg-brand-offwhite text-brand-text-muted uppercase text-[10px] border-b border-brand-sectiongray">
                         <th className="p-3 font-bold">{locale === 'uz' ? "Xizmat Nomi" : "Процедура"}</th>
                         <th className="p-3 font-bold">{locale === 'uz' ? "Kategoriya" : "Раздел"}</th>
+                        <th className="p-3 font-bold">{locale === 'uz' ? 'Tartib' : 'Порядок'}</th>
                         <th className="p-3 font-bold">{locale === 'uz' ? "Narxi" : "Цена"}</th>
                         <th className="p-3 text-right font-bold">Amallar</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {editedPrices.map((pr) => (
+                      {[...editedPrices].sort(compareAdminPriceRows).map((pr) => (
                         <tr key={pr.id} className="border-b border-brand-sectiongray hover:bg-brand-offwhite/50 transition-colors">
                           <td className="p-3 font-semibold text-brand-text-primary">
                             {pr.name[locale] || pr.name['uz']}
                           </td>
                           <td className="p-3 text-brand-gold font-mono uppercase text-[9px] font-bold">
                             {pr.category}
+                          </td>
+                          <td className="p-3 font-mono text-brand-text-secondary text-[11px]">
+                            {pr.sortOrder ?? '—'}
                           </td>
                           <td className="p-3 font-extrabold text-brand-text-primary font-sans">
                             {pr.price}
@@ -2102,7 +2145,7 @@ export default function AdminPanel({
                       onChange={(values) => setPriceForm((prev) => ({ ...prev, name: values }))}
                     />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Tarif narxi (UZS, masalan: 150000):</label>
                       <input
@@ -2122,13 +2165,56 @@ export default function AdminPanel({
                       <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Kategoriya burchagi (Id kod):</label>
                       <select
                         value={priceForm.category || 'dermatologiya'}
-                        onChange={(e) => setPriceForm(prev => ({ ...prev, category: e.target.value }))}
+                        onChange={(e) => {
+                          const category = e.target.value;
+                          setPriceForm((prev) => ({
+                            ...prev,
+                            category,
+                            ...(isAddingPrice
+                              ? { sortOrder: getNextSortOrderInCategory(category, editedPrices) }
+                              : {}),
+                          }));
+                        }}
                         className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs cursor-pointer"
                       >
                         {serviceCategories.map(cat => (
                           <option key={cat.id} value={cat.id}>{cat.title[locale] || cat.title['uz']}</option>
                         ))}
                       </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">
+                        {locale === 'uz'
+                          ? "Tartib raqami (bo'lim ichida):"
+                          : locale === 'ru'
+                            ? 'Порядковый номер (в разделе):'
+                            : 'Sort order (within section):'}
+                      </label>
+                      <input
+                        type="number"
+                        min={1}
+                        step={1}
+                        value={priceForm.sortOrder ?? ''}
+                        onChange={(e) =>
+                          setPriceForm((prev) => ({
+                            ...prev,
+                            sortOrder:
+                              e.target.value === ''
+                                ? undefined
+                                : Math.max(1, Math.round(Number(e.target.value))),
+                          }))
+                        }
+                        placeholder={locale === 'uz' ? 'Masalan: 3' : 'e.g. 3'}
+                        className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs"
+                      />
+                      <p className="mt-1 text-[10px] text-brand-text-muted leading-relaxed">
+                        {locale === 'uz'
+                          ? "Kichik raqam yuqorida turadi. Har bir bo'limda alohida tartib."
+                          : locale === 'ru'
+                            ? 'Меньший номер выше в списке. Порядок задаётся отдельно для каждого раздела.'
+                            : 'Lower numbers appear first within each section.'}
+                      </p>
                     </div>
                     </div>
                   </div>

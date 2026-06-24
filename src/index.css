@@ -268,3 +268,31 @@ h1, h2, h3, h4, h5, h6 {
 .clinic-ai-chat-fab:hover {
   animation-play-state: paused;
 }
+
+.partners-marquee-track {
+  animation: partners-marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.partners-marquee:hover .partners-marquee-track,
+.partners-marquee:focus-within .partners-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes partners-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -38,6 +38,7 @@ export interface ClinicPartner {
   id: string;
   name: LocalizedText;
   logo: string;
+  logoVariant?: 'dark' | 'light';
 }
 
 export interface CustomerReview {
@@ -119,34 +120,22 @@ export const CUSTOMER_REVIEWS: CustomerReview[] = [
 
 export const CLINIC_PARTNERS: ClinicPartner[] = [
   {
-    id: 'sciton',
-    name: { uz: 'Sciton (AQSh)', ru: 'Sciton (США)', en: 'Sciton (USA)' },
-    logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=200&h=200',
+    id: 'deka',
+    name: { uz: 'DEKA', ru: 'DEKA', en: 'DEKA' },
+    logo: '/partners/hamkor1.png',
+    logoVariant: 'dark',
   },
   {
-    id: 'fotofinder',
-    name: { uz: 'FotoFinder', ru: 'FotoFinder', en: 'FotoFinder' },
-    logo: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=200&h=200',
+    id: 'bella-systech',
+    name: { uz: 'Bella-Systech Uzbekistan', ru: 'Bella-Systech Uzbekistan', en: 'Bella-Systech Uzbekistan' },
+    logo: '/partners/hamkor2.png',
+    logoVariant: 'dark',
   },
   {
-    id: 'lumenis',
-    name: { uz: 'Lumenis', ru: 'Lumenis', en: 'Lumenis' },
-    logo: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=200&h=200',
-  },
-  {
-    id: 'mesoestetic',
-    name: { uz: 'Mesoestetic', ru: 'Mesoestetic', en: 'Mesoestetic' },
-    logo: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=200&h=200',
-  },
-  {
-    id: 'cynosure',
-    name: { uz: 'Cynosure', ru: 'Cynosure', en: 'Cynosure' },
-    logo: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=200&h=200',
-  },
-  {
-    id: 'dermalogica',
-    name: { uz: 'Dermalogica', ru: 'Dermalogica', en: 'Dermalogica' },
-    logo: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=200&h=200',
+    id: 'cynosure-lutronic',
+    name: { uz: 'Cynosure & Lutronic', ru: 'Cynosure & Lutronic', en: 'Cynosure & Lutronic' },
+    logo: '/partners/hamkor3.jpg',
+    logoVariant: 'light',
   },
 ];
 
@@ -245,60 +234,6 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
       'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.0022026857106!2d71.7864115!3d40.3864115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb83461413146b%3A0xe5aef1cb446faab4!2zNSwgTyd6YmVraXN0b24gT3Zvemkga28nY2hhc2ksIEZhcmdvbmEsIE96YmVraXN0YW4!5e0!3m2!1sen!2s!4v1718300000000!5m2!1sen!2s',
     isMain: true,
     image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    id: 'margilon-consult',
-    name: {
-      uz: 'Radeski — Marg‘ilon konsultatsiya markazi',
-      ru: 'Radeski — Консультационный центр (Маргилан)',
-      en: 'Radeski — Margilan Consultation Center',
-    },
-    address: {
-      uz: "Marg'ilon sh., B. Marg'iloniy ko'chasi, 24-uy",
-      ru: 'г. Маргилан, ул. Б. Маргилоний, дом 24',
-      en: '24 B. Margiloniy St., Margilan',
-    },
-    phone: '+998 (73) 200-73-73',
-    hours: {
-      uz: 'Seshanba, Payshanba, Shanba: 09:00 – 17:00',
-      ru: 'Вторник, Четверг, Суббота: 09:00 – 17:00',
-      en: 'Tuesday, Thursday, Saturday: 09:00 – 17:00',
-    },
-    services: {
-      uz: 'Dermatolog konsultatsiyasi, trixologiya, kichik kosmetologik muolajalar',
-      ru: 'Консультация дерматолога, трихология, малые косметологические процедуры',
-      en: 'Dermatology consults, trichology, minor cosmetic procedures',
-    },
-    mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.5!2d71.72!3d40.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m2!1s0x0%3A0x0!5e0!3m2!1sen!2s!4v1718300000001!5m2!1sen!2s',
-    image: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    id: 'kokand-lab',
-    name: {
-      uz: 'Radeski — Qo‘qon laboratoriya punkti',
-      ru: 'Radeski — Лабораторный пункт (Коканд)',
-      en: 'Radeski — Kokand Lab Point',
-    },
-    address: {
-      uz: "Qo'qon sh., I. Karimov ko'chasi, 15-uy",
-      ru: 'г. Коканд, ул. И. Каримов, дом 15',
-      en: '15 I. Karimov St., Kokand',
-    },
-    phone: '+998 (73) 200-73-73',
-    hours: {
-      uz: 'Dushanba – Juma: 08:30 – 16:30',
-      ru: 'Понедельник – Пятница: 08:30 – 16:30',
-      en: 'Monday – Friday: 08:30 – 16:30',
-    },
-    services: {
-      uz: 'Teri analizlari, allergik testlar, onkologik markerlar',
-      ru: 'Анализы кожи, аллергические тесты, онкомаркеры',
-      en: 'Skin panels, allergy tests, oncology markers',
-    },
-    mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.5!2d70.94!3d40.53!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m2!1s0x0%3A0x0!5e0!3m2!1sen!2s!4v1718300000002!5m2!1sen!2s',
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=800',
   },
 ];
 

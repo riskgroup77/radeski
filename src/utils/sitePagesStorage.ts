@@ -10,7 +10,7 @@ import {
 export const SITE_PAGES_STORAGE_KEYS = {
   videos: 'radeski_clinic_videos_v1',
   results: 'radeski_treatment_results_v1',
-  partners: 'radeski_clinic_partners_v1',
+  partners: 'radeski_clinic_partners_v3',
 } as const;
 
 function parseStoredArray<T>(raw: string | null): T[] | null {

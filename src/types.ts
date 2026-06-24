@@ -59,6 +59,8 @@ export interface PriceItem {
   price: string;
   priceValue?: number;
   category: string;
+  /** Bo'lim ichidagi tartib raqami — kichik raqam yuqorida */
+  sortOrder?: number;
   ru_price_placeholder?: string;
   en_price_placeholder?: string;
 }

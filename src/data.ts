@@ -53,7 +53,7 @@ export const DICTIONARY = {
     videosTitle: "Klinika videolari",
     videosDesc: "Radeski klinikasidagi zamonaviy uskunalar, xizmatlar va bemor parvarishi haqida qisqa videolar",
     branchesTitle: "Bizning filiallar",
-    branchesDesc: "Farg'ona vodiysi bo'ylab Radeski klinikasi filiallari va qabul punktlari",
+    branchesDesc: "Radeski bosh klinikasi — Farg'ona shahridagi manzil, telefon va ish vaqti",
     resultsTitle: "Davolash natijalari",
     resultsDesc: "Bemorlarimizdagi real o'zgarishlar — oldin va keyin. Har bir holat individual yondashuv asosida",
     searchPlaceholder: "Xizmatlar yoki maqolalarni qidirish...",
@@ -61,6 +61,8 @@ export const DICTIONARY = {
     education: "Ish joyi",
     specialization: "Mutaxassisligi",
     ratingsTitle: "Platforma reytinglarimiz",
+    trustSectionDesc: "Google Maps, Yandex va 2GIS kabi mustaqil platformalardagi reytinglar bemorlarimizning haqiqiy tajribasini yoritadi. Quyida har bir manbadagi ball, sharhlar va qisqa xulosa keltirilgan.",
+    trustCardSummaryLabel: "Xulosa",
     safetyTitle: "100% Steril va Xavfsiz Sharoit",
     safetyDesc: "Klinikamizda barcha asbob-uskunalar Yevropa standartlariga muvofiq ko'p bosqichli sterilizatsiyadan o'tkaziladi. Sizning xavfsizligingiz - bizning oliy maqsadimizdir.",
     years: "yil",
@@ -137,7 +139,7 @@ export const DICTIONARY = {
     videosTitle: "Видео о клинике",
     videosDesc: "Короткие ролики об оборудовании, услугах и заботе о пациентах в клинике Radeski",
     branchesTitle: "Наши филиалы",
-    branchesDesc: "Филиалы и пункты приёма Radeski по Ферганской долине",
+    branchesDesc: "Главная клиника Radeski в Фергане — адрес, телефон и график работы",
     resultsTitle: "Результаты лечения",
     resultsDesc: "Реальные изменения у наших пациентов — до и после. Каждый случай индивидуален",
     searchPlaceholder: "Поиск услуг или статей...",
@@ -145,6 +147,8 @@ export const DICTIONARY = {
     education: "Место работы",
     specialization: "Специализация",
     ratingsTitle: "Рейтинги клиники",
+    trustSectionDesc: "Рейтинги на независимых платформах — Google Maps, Yandex и 2GIS — отражают реальный опыт наших пациентов. Ниже — оценка, число отзывов и краткий вывод по каждому источнику.",
+    trustCardSummaryLabel: "Вывод",
     safetyTitle: "100% Стерильность и Безопасность",
     safetyDesc: "В нашей клинике все инструменты проходят многоступенчатую стерилизацию в соответствии с европейскими стандартами. Ваша безопасность - наш главный приоритет.",
     years: "лет",
@@ -221,7 +225,7 @@ export const DICTIONARY = {
     videosTitle: "Clinic videos",
     videosDesc: "Short videos about Radeski equipment, services, and patient care standards",
     branchesTitle: "Our branches",
-    branchesDesc: "Radeski clinic branches and consultation points across the Fergana Valley",
+    branchesDesc: "Radeski main clinic in Fergana — address, phone, and opening hours",
     resultsTitle: "Treatment results",
     resultsDesc: "Real patient improvements — before and after. Every case follows an individual plan",
     searchPlaceholder: "Search services or articles...",
@@ -229,6 +233,8 @@ export const DICTIONARY = {
     education: "Workplace",
     specialization: "Specialization",
     ratingsTitle: "Our Ratings",
+    trustSectionDesc: "Ratings on independent platforms — Google Maps, Yandex, and 2GIS — reflect our patients' real experiences. Below are the score, review count, and a brief conclusion for each source.",
+    trustCardSummaryLabel: "Summary",
     safetyTitle: "100% Sterile & Safe Environment",
     safetyDesc: "All instruments in our facility undergo multi-stage disinfection matching rigorous European clinical directives. Your health safety is our absolute focus.",
     years: "years",
@@ -279,6 +285,24 @@ export const CLINIC_RATINGS = [
     url: 'https://2gis.kg/bishkek?m=72.367424%2C41.175575%2F7.43',
   },
 ];
+
+export const CLINIC_RATING_SUMMARIES: Record<string, { uz: string; ru: string; en: string }> = {
+  Yandex: {
+    uz: "Yandex'dagi 4.9 ball va 120 dan ortiq sharh bemorlar qabuldan keyin xizmat sifatini yuqori baholaganini ko'rsatadi. Ko'p fikrlarda shifokorlar bilimi, e'tibor va davolash natijasi alohida qayd etilgan.",
+    ru: "Оценка 4,9 и более 120 отзывов на Yandex показывает, что пациенты высоко ценят качество приёма. В отзывах часто отмечают профессионализм врачей, внимание и результат лечения.",
+    en: "A 4.9 score and 120+ Yandex reviews show patients consistently rate our care highly. Reviews often highlight physician expertise, attentive service, and treatment outcomes.",
+  },
+  'Google Maps': {
+    uz: "Google Maps'dagi 4.8 reyting va 85+ sharh klinika manzili, ish vaqti va xizmatlar ro'yxatining aniq ekanini tasdiqlaydi. Xalqaro mehmonlar ham xizmat sifati va shaffoflik haqida ijobiy fikr qoldirgan.",
+    ru: "Рейтинг 4,8 и 85+ отзывов на Google Maps подтверждают точность адреса, графика и перечня услуг. Многие отзывы, в том числе от иностранных пациентов, отмечают качество и прозрачность сервиса.",
+    en: "A 4.8 rating and 85+ Google Maps reviews confirm accurate location, hours, and service listings. Many reviewers, including international visitors, praise our care quality and transparency.",
+  },
+  '2GIS': {
+    uz: "2GIS'dagi 4.9 ball va 96+ sharh mahalliy bemorlar klinikamizni oson topishlari va xizmatlar haqida to'liq ma'lumot olishlarini ko'rsatadi. Sharhlarda tez yozilish va do'stona qabul ko'p tilga olinadi.",
+    ru: "Оценка 4,9 и 96+ отзывов в 2GIS показывают, что местные пациенты легко находят клинику и видят полный список услуг. В отзывах часто хвалят быструю запись и доброжелательный приём.",
+    en: "A 4.9 score and 96+ 2GIS reviews show local patients find us easily and see complete service information. Reviews frequently mention quick booking and a welcoming reception.",
+  },
+};
 
 export const SITE_LOGO = '/gallery/logo.webp';
 

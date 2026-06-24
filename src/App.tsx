@@ -36,7 +36,7 @@ import {
   serviceSubPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
-import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from './data';
+import { DICTIONARY, CLINIC_RATINGS, CLINIC_RATING_SUMMARIES, GALLERY_IMAGS } from './data';
 import {
   loadClinicVideos,
   loadTreatmentResults,
@@ -73,6 +73,7 @@ import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, 
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
 import HomeCarousel from './components/HomeCarousel';
+import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
 import type { CustomerReview } from './data/sitePagesContent';
 import ClinicAiChat from './components/ClinicAiChat';
@@ -342,9 +343,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           keywords: "Radeski video, dermatologiya videosi, IPL terapiya, PhotoFinder, klinika tanishuv"
         },
         branches: {
-          title: "Filiallar va Qabul Punktlari | Radeski Clinic",
-          desc: "Farg'ona, Marg'ilon va Qo'qondagi Radeski klinikasi filiallari manzili, telefon va ish vaqti.",
-          keywords: "Radeski filiallar, Farg'ona klinika, Marg'ilon dermatolog, Qo'qon laboratoriya"
+          title: "Filiallar | Radeski Clinic",
+          desc: "Radeski bosh klinikasi — Farg'ona shahri manzili, telefon va ish vaqti.",
+          keywords: "Radeski filial, Farg'ona klinika, dermatolog Farg'ona, klinika manzili"
         },
         results: {
           title: "Davolash Natijalari — Oldin va Keyin | Radeski Clinic",
@@ -404,9 +405,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           keywords: "видео Radeski, дерматология видео, IPL терапия, PhotoFinder, о клинике"
         },
         branches: {
-          title: "Филиалы и пункты приёма | Radeski Clinic",
-          desc: "Филиалы Radeski в Фергане, Маргилане и Коканде — адрес, телефон и график работы.",
-          keywords: "филиалы Radeski, клиника Фергана, дерматолог Маргилан, лаборатория Коканд"
+          title: "Филиал | Radeski Clinic",
+          desc: "Главная клиника Radeski в Фергане — адрес, телефон и график работы.",
+          keywords: "филиал Radeski, клиника Фергана, дерматолог Фергана, адрес клиники"
         },
         results: {
           title: "Результаты лечения — до и после | Radeski Clinic",
@@ -466,9 +467,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           keywords: "Radeski videos, dermatology video, IPL therapy, PhotoFinder, clinic tour"
         },
         branches: {
-          title: "Branches & Consultation Points | Radeski Clinic",
-          desc: "Radeski branches in Fergana, Margilan, and Kokand — address, phone, and opening hours.",
-          keywords: "Radeski branches, Fergana clinic, Margilan dermatology, Kokand lab"
+          title: "Branch | Radeski Clinic",
+          desc: "Radeski main clinic in Fergana — address, phone, and opening hours.",
+          keywords: "Radeski branch, Fergana clinic, Fergana dermatology, clinic address"
         },
         results: {
           title: "Treatment Results — Before & After | Radeski Clinic",
@@ -959,39 +960,60 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               <section id="trust-reviews" className="py-16 bg-brand-sectiongray">
                 <div className="site-container text-center">
                   <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">{locale === 'uz' ? "Ko'rsatkichlar & Fikrlar" : locale === 'ru' ? "Рейтинги и Отзывы" : "Endorsements"}</span>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary tracking-tight mt-1 mb-8">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary tracking-tight mt-1 mb-4">
                     {locale === 'uz' ? "Insonlar nega aynan bizni tanlashadi?" : locale === 'ru' ? "Почему пациенты доверяют именно нам?" : "What supports our clinical trust?"}
                   </h3>
+                  <p className="text-sm sm:text-base text-brand-text-muted max-w-2xl mx-auto leading-relaxed mb-10">
+                    {d.trustSectionDesc}
+                  </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {dynamicClinicRatings.map((plat) => {
                       const reviewUrl = resolveClinicRatingUrl(plat.platform, plat.url);
+                      const platformSummary =
+                        CLINIC_RATING_SUMMARIES[plat.platform]?.[locale] ??
+                        CLINIC_RATING_SUMMARIES[plat.platform]?.uz ??
+                        '';
                       const cardClassName =
-                        'bg-brand-white rounded-2xl p-6 border border-brand-sectiongray text-left flex items-start gap-4 shadow-xs transition-all';
+                        'bg-brand-white rounded-2xl p-6 border border-brand-sectiongray text-left flex flex-col shadow-xs transition-all h-full';
                       const cardContent = (
                         <>
-                          <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-xl shadow-xs shrink-0">
-                            {plat.logo}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between gap-2">
-                              <h4 className="font-extrabold text-brand-text-primary text-lg leading-none">{plat.platform}</h4>
-                              {reviewUrl ? (
-                                <ExternalLink className="w-4 h-4 text-brand-gold shrink-0 opacity-70" aria-hidden="true" />
-                              ) : null}
+                          <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-xl shadow-xs shrink-0">
+                              {plat.logo}
                             </div>
-                            <span className="text-xl font-black text-brand-gold block mt-2">{plat.rating} / 5.0</span>
-                            <p className="text-xs text-brand-text-muted mt-1">{plat.count}+ {d.reviewsCount}</p>
-                            {reviewUrl ? (
-                              <p className="text-[11px] font-semibold text-brand-gold mt-2">
-                                {locale === 'uz'
-                                  ? "Sharhlarni ko'rish"
-                                  : locale === 'ru'
-                                    ? 'Читать отзывы'
-                                    : 'View reviews'}
-                              </p>
-                            ) : null}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-2">
+                                <h4 className="font-extrabold text-brand-text-primary text-lg leading-none">{plat.platform}</h4>
+                                {reviewUrl ? (
+                                  <ExternalLink className="w-4 h-4 text-brand-gold shrink-0 opacity-70" aria-hidden="true" />
+                                ) : null}
+                              </div>
+                              <span className="text-xl font-black text-brand-gold block mt-2">{plat.rating} / 5.0</span>
+                              <p className="text-xs text-brand-text-muted mt-1">{plat.count}+ {d.reviewsCount}</p>
+                            </div>
                           </div>
+
+                          {platformSummary ? (
+                            <div className="mt-5 pt-4 border-t border-brand-sectiongray flex-1">
+                              <p className="text-[11px] font-bold text-brand-gold uppercase tracking-wide">
+                                {d.trustCardSummaryLabel}
+                              </p>
+                              <p className="text-xs sm:text-sm text-brand-text-muted mt-2 leading-relaxed">
+                                {platformSummary}
+                              </p>
+                            </div>
+                          ) : null}
+
+                          {reviewUrl ? (
+                            <p className="text-[11px] font-semibold text-brand-gold mt-4">
+                              {locale === 'uz'
+                                ? "Sharhlarni ko'rish"
+                                : locale === 'ru'
+                                  ? 'Читать отзывы'
+                                  : 'View reviews'}
+                            </p>
+                          ) : null}
                         </>
                       );
 
@@ -1094,9 +1116,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* Partners teaser */}
               {dynamicClinicPartners.length > 0 && (
-                <section id="partners-teaser" className="py-16 bg-brand-offwhite border-t border-brand-sectiongray">
-                  <div className="site-container">
-                    <div className="text-center max-w-3xl mx-auto mb-10">
+                <section id="partners-teaser" className="py-20 bg-gradient-to-b from-brand-offwhite via-brand-white to-brand-offwhite border-t border-brand-sectiongray relative overflow-hidden">
+                  <div className="pointer-events-none absolute inset-0 opacity-[0.35]" aria-hidden="true">
+                    <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-gold/10 blur-3xl" />
+                    <div className="absolute bottom-0 right-0 h-48 w-48 rounded-full bg-brand-gold/5 blur-3xl" />
+                  </div>
+
+                  <div className="site-container relative">
+                    <div className="text-center max-w-3xl mx-auto mb-12">
                       <span className="text-xs font-bold text-brand-gold tracking-wider uppercase">
                         {locale === 'uz' ? 'Hamkorlar' : locale === 'ru' ? 'Партнеры' : 'Partners'}
                       </span>
@@ -1116,40 +1143,24 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                       </p>
                     </div>
 
-                    <div className="px-2 sm:px-10">
-                      <HomeCarousel
-                        items={dynamicClinicPartners}
-                        visibleCount={3}
-                        autoPlayMs={5000}
-                        getKey={(partner) => partner.id}
-                        gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                        ariaLabel={
-                          locale === 'uz'
-                            ? 'Hamkorlar karuseli'
-                            : locale === 'ru'
-                              ? 'Карусель партнеров'
-                              : 'Partners carousel'
-                        }
-                        renderItem={(partner) => (
-                          <div className="flex flex-col items-center justify-center text-center gap-4 sm:gap-5 py-2 px-3">
-                            <div className="h-24 sm:h-28 md:h-32 w-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] mx-auto flex items-center justify-center">
-                              {partner.logo ? (
-                                <MediaImage
-                                  src={partner.logo}
-                                  alt={partner.name[locale]}
-                                  className="max-h-full max-w-full w-auto object-contain opacity-90 hover:opacity-100 transition-opacity duration-300"
-                                />
-                              ) : (
-                                <span className="text-brand-text-muted/40 text-xs">—</span>
-                              )}
-                            </div>
-                            <p className="text-xs sm:text-sm font-semibold text-brand-text-secondary tracking-wide leading-snug max-w-[220px]">
-                              {partner.name[locale] || partner.name.uz}
-                            </p>
-                          </div>
-                        )}
-                      />
-                    </div>
+                    <PartnersCarousel
+                      partners={dynamicClinicPartners}
+                      locale={locale}
+                      ariaLabel={
+                        locale === 'uz'
+                          ? 'Hamkorlar karuseli'
+                          : locale === 'ru'
+                            ? 'Карусель партнеров'
+                            : 'Partners carousel'
+                      }
+                      badgeLabel={
+                        locale === 'uz'
+                          ? 'Rasmiy hamkor'
+                          : locale === 'ru'
+                            ? 'Официальный партнер'
+                            : 'Official partner'
+                      }
+                    />
                   </div>
                 </section>
               )}

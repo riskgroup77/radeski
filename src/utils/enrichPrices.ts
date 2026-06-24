@@ -69,6 +69,7 @@ function mergeApiOntoCatalog(catalogItem: PriceItem, apiItem: PriceItem): PriceI
     price: apiItem.price || catalogItem.price,
     priceValue: apiItem.priceValue ?? catalogItem.priceValue,
     category: catalogItem.category,
+    sortOrder: apiItem.sortOrder ?? catalogItem.sortOrder,
   };
 
   return normalizePriceItems([merged])[0];

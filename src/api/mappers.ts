@@ -134,6 +134,7 @@ export function mapPriceFromApi(api: ApiPrice): PriceItem {
     price: formatPriceValue(api.price_value),
     priceValue: api.price_value,
     category: api.category_id,
+    sortOrder: api.sort_order ?? undefined,
   };
 }
 
@@ -274,6 +275,7 @@ export function mapPriceToCreatePayload(price: Partial<PriceItem>): PriceCreateP
     name_ru: price.name?.ru || price.name?.uz || '',
     name_en: price.name?.en || price.name?.uz || '',
     price_value: price.priceValue ?? parsePriceValue(price.price || '0'),
+    sort_order: price.sortOrder ?? null,
   };
 }
 

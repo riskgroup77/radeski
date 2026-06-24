@@ -9,6 +9,7 @@ import {
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
 import { enrichPrices } from '../utils/enrichPrices';
+import { applyStoredPriceSortOrders } from '../utils/priceSortOrderStorage';
 import { ApiError } from '../api/client';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
 import { ARTICLES, SERVICE_CATEGORIES } from '../data';
@@ -51,7 +52,7 @@ export function useClinicData(): ClinicDataState {
         .map(mapServiceCategoryFromApi)
         .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
       setServiceCategories(enrichServiceCategories(mappedServices));
-      setPrices(enrichPrices(pricesRes.map(mapPriceFromApi)));
+      setPrices(applyStoredPriceSortOrders(enrichPrices(pricesRes.map(mapPriceFromApi))));
       const mappedArticles = articlesRes.map(mapArticleListItemFromApi);
       setArticles(enrichArticles(mappedArticles.length > 0 ? mappedArticles : ARTICLES));
     } catch (err) {

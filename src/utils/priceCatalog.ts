@@ -35,6 +35,7 @@ export function buildCatalogPriceItems(): PriceItem[] {
         },
         price: formatPriceValue(item.priceValue),
         priceValue: item.priceValue,
+        sortOrder: index + 1,
       });
     });
   });

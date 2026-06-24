@@ -108,6 +108,7 @@ export interface ApiPrice {
   name_ru: string;
   name_en: string;
   price_value: number;
+  sort_order?: number | null;
 }
 
 export interface ApiArticleListItem {
@@ -283,6 +284,7 @@ export interface PriceCreatePayload {
   name_ru: string;
   name_en: string;
   price_value: number;
+  sort_order?: number | null;
 }
 
 export interface ArticleCreatePayload {
