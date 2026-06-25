@@ -1,3 +1,4 @@
+import { resolvePriceCategoryForApi } from '../data/priceCategoryLabels';
 import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
 import {
   ApiDoctor,
@@ -73,6 +74,8 @@ export function mapDoctorFromApi(api: ApiDoctor): Doctor {
           researchCount: api.credentials.research_count ?? 0,
         }
       : undefined,
+    sortOrder: api.sort_order ?? undefined,
+    isFeatured: api.is_featured ?? undefined,
   };
 }
 
@@ -208,6 +211,8 @@ export function mapDoctorToCreatePayload(
           research_count: doctor.credentials.researchCount ?? null,
         }
       : null,
+    sort_order: doctor.sortOrder ?? null,
+    is_featured: doctor.isFeatured ?? null,
   };
 
   if (options?.preservePhoto && doctor.photo) {
@@ -268,9 +273,12 @@ export function mapServiceCategoryToPayload(
   return payload;
 }
 
-export function mapPriceToCreatePayload(price: Partial<PriceItem>): PriceCreatePayload {
+export function mapPriceToCreatePayload(
+  price: Partial<PriceItem>,
+  serviceCategoryIds: string[] = [],
+): PriceCreatePayload {
   return {
-    category_id: price.category || 'dermatologiya',
+    category_id: resolvePriceCategoryForApi(price.category || 'dermatologiya', serviceCategoryIds),
     name_uz: price.name?.uz || '',
     name_ru: price.name?.ru || price.name?.uz || '',
     name_en: price.name?.en || price.name?.uz || '',

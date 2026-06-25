@@ -2,16 +2,23 @@ import { motion } from 'motion/react';
 import { Building2, MapPin, Phone, Clock, Star, Navigation } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
+import type { ClinicBranch } from '../data/sitePagesContent';
 import { CLINIC_BRANCHES } from '../data/sitePagesContent';
 import MediaImage from './MediaImage';
 
 interface BranchesPageProps {
   locale: Locale;
   dictionary?: Record<string, string>;
+  branches?: ClinicBranch[];
   onOpenAppointment?: () => void;
 }
 
-export default function BranchesPage({ locale, dictionary, onOpenAppointment }: BranchesPageProps) {
+export default function BranchesPage({
+  locale,
+  dictionary,
+  branches = CLINIC_BRANCHES,
+  onOpenAppointment,
+}: BranchesPageProps) {
   const d = dictionary || DICTIONARY[locale];
 
   return (
@@ -30,7 +37,7 @@ export default function BranchesPage({ locale, dictionary, onOpenAppointment }: 
         </div>
 
         <div className="space-y-8">
-          {CLINIC_BRANCHES.map((branch, index) => (
+          {branches.map((branch, index) => (
             <motion.article
               key={branch.id}
               initial={{ opacity: 0, y: 20 }}

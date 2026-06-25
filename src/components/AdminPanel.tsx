@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
+import { getPriceCategoryOptions, toPriceSectionCategory } from '../data/priceCategoryLabels';
 import {
   Lock, LayoutDashboard, Building, Users, Activity, CreditCard, FileText,
   Save, RefreshCw, Plus, Edit2, Trash2, Check, ArrowLeft, LogOut, Info, AlertTriangle, PhoneCall,
@@ -24,6 +25,20 @@ import {
   updateAppointmentStatus,
   importPrices,
   hasLocalizedImageFiles,
+  createPartner,
+  updatePartner,
+  deletePartner,
+  patchReview,
+  deleteReview,
+  getAdminReviews,
+  createTreatmentResult,
+  updateTreatmentResult,
+  deleteTreatmentResult,
+  createVideo,
+  updateVideo,
+  deleteVideo,
+  createClinicRating,
+  updateClinicRating,
 } from '../api/adminApi';
 import {
   mapDoctorToCreatePayload,
@@ -33,10 +48,19 @@ import {
   mapArticleToCreatePayload,
   parsePriceValue,
 } from '../api/mappers';
+import {
+  mapPartnerToCreatePayload,
+  mapTreatmentResultToCreatePayload,
+  mapClinicVideoToCreatePayload,
+  mapClinicRatingToCreatePayload,
+  mapReviewFromApi,
+  mapReviewToCreatePayload,
+  type ClinicRatingDisplay,
+} from '../api/cmsMappers';
+import { createReview as submitPublicReview } from '../api/publicApi';
 import { ApiError, clearAuthToken, getAuthToken, setAuthToken, isUnauthorizedError, isAuthTokenExpired, ADMIN_SESSION_EXPIRED_EVENT } from '../api/client';
 import { ApiAppointment, AppointmentStatus } from '../api/types';
 import ImageUploadField from './ImageUploadField';
-import VideoUploadField from './VideoUploadField';
 import ResolvedVideo from './ResolvedVideo';
 import MediaImage from './MediaImage';
 import { deleteLocalMedia, isLocalMediaRef, saveLocalMedia } from '../utils/localMediaStorage';
@@ -44,11 +68,8 @@ import LocalizedImageUploadGroup from './LocalizedImageUploadGroup';
 import { EMPTY_LOCALIZED_IMAGE_FILES, getLocalizedImage } from '../utils/localizedImage';
 import { normalizeArticleViews } from '../utils/articleViews';
 import { getCatalogPrices } from '../utils/enrichPrices';
-import {
-  applyStoredPriceSortOrders,
-  getNextSortOrderInCategory,
-  writePriceSortOrder,
-} from '../utils/priceSortOrderStorage';
+import { getNextSortOrderInCategory } from '../utils/priceSortOrderStorage';
+import { getPlatformLogo } from '../utils/platformLogo';
 import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo, TreatmentResult, ClinicPartner, CustomerReview } from '../data/sitePagesContent';
@@ -72,7 +93,7 @@ interface AdminPanelProps {
   serviceCategories: ServiceCategory[];
   prices: PriceItem[];
   articles: Article[];
-  clinicRatings: Array<{ platform: string; rating: string; count: number; logo: string; url?: string }>;
+  clinicRatings: ClinicRatingDisplay[];
   clinicVideos: ClinicVideo[];
   treatmentResults: TreatmentResult[];
   clinicPartners: ClinicPartner[];
@@ -80,6 +101,7 @@ interface AdminPanelProps {
   onSaveLocalData: (type: string, data: unknown) => void;
   onResetLocalData: () => void;
   onRefresh: () => Promise<void>;
+  onRefreshCms: () => Promise<void>;
   onClose: () => void;
 }
 
@@ -99,6 +121,7 @@ export default function AdminPanel({
   onSaveLocalData,
   onResetLocalData,
   onRefresh,
+  onRefreshCms,
   onClose
 }: AdminPanelProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
@@ -119,7 +142,9 @@ export default function AdminPanel({
 
   // Editing Sub-states
   // 1. Clinic ratings & basic details
-  const [editedRatings, setEditedRatings] = useState<any[]>(() => JSON.parse(JSON.stringify(clinicRatings)));
+  const [editedRatings, setEditedRatings] = useState<ClinicRatingDisplay[]>(() =>
+    JSON.parse(JSON.stringify(clinicRatings)),
+  );
   const [editedFullDict, setEditedFullDict] = useState<typeof DICTIONARY>(() =>
     JSON.parse(JSON.stringify(fullDictionary))
   );
@@ -153,7 +178,7 @@ export default function AdminPanel({
 
   // 4. Prices
   const [editedPrices, setEditedPrices] = useState<PriceItem[]>(() =>
-    JSON.parse(JSON.stringify(applyStoredPriceSortOrders(prices))),
+    JSON.parse(JSON.stringify(prices)),
   );
   const [selectedPriceId, setSelectedPriceId] = useState<string | null>(null);
   const [isAddingPrice, setIsAddingPrice] = useState(false);
@@ -230,13 +255,22 @@ export default function AdminPanel({
     setEditedFullDict(JSON.parse(JSON.stringify(fullDictionary)));
     setEditedDoctors(JSON.parse(JSON.stringify(doctors)));
     setEditedCategories(JSON.parse(JSON.stringify(serviceCategories)));
-    setEditedPrices(JSON.parse(JSON.stringify(applyStoredPriceSortOrders(prices))));
+    setEditedPrices(JSON.parse(JSON.stringify(prices)));
     setEditedArticles(JSON.parse(JSON.stringify(articles)));
     setEditedVideos(JSON.parse(JSON.stringify(clinicVideos)));
     setEditedResults(JSON.parse(JSON.stringify(treatmentResults)));
     setEditedPartners(JSON.parse(JSON.stringify(clinicPartners)));
     setEditedCustomerReviews(JSON.parse(JSON.stringify(customerReviews)));
   }, [doctors, serviceCategories, prices, articles, clinicRatings, fullDictionary, clinicVideos, treatmentResults, clinicPartners, customerReviews]);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'testimonials') return;
+    getAdminReviews()
+      .then((items) => setEditedCustomerReviews(items.map(mapReviewFromApi)))
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) setEditedCustomerReviews([]);
+      });
+  }, [isAuthenticated, activeTab, saveSuccess]);
 
   useEffect(() => {
     const onSessionExpired = () => handleSessionExpired();
@@ -315,14 +349,28 @@ export default function AdminPanel({
   };
 
   // 1. SAVE CLINIC DETAILS
-  const handleSaveClinic = () => {
-    onSaveLocalData('clinicRatings', editedRatings);
+  const handleSaveClinic = async () => {
     onSaveLocalData('dictionary', editedFullDict);
-    triggerSaveNotification(
-      locale === 'uz' ? "Klinika ma'lumotlari muvaffaqiyatli saqlandi!" :
-      locale === 'ru' ? "Информация о клинике успешно сохранена!" :
-                        "Clinic information saved successfully!"
-    );
+
+    try {
+      for (const rating of editedRatings) {
+        const payload = mapClinicRatingToCreatePayload(rating);
+        const isApiRecord = /^[0-9a-f-]{36}$/i.test(rating.id);
+        if (isApiRecord) {
+          await updateClinicRating(rating.id, payload);
+        } else {
+          await createClinicRating(payload);
+        }
+      }
+      await onRefreshCms();
+      triggerSaveNotification(
+        locale === 'uz' ? "Klinika ma'lumotlari muvaffaqiyatli saqlandi!" :
+        locale === 'ru' ? "Информация о клинике успешно сохранена!" :
+                          "Clinic information saved successfully!"
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? 'Saqlashda xatolik' : 'Save failed');
+    }
   };
 
   // 2. SAVE/UPDATE DOCTORS
@@ -594,13 +642,14 @@ export default function AdminPanel({
     setSelectedPriceId(pr.id);
     setPriceForm({
       ...pr,
+      category: toPriceSectionCategory(pr.category),
       priceValue: pr.priceValue ?? parsePriceValue(pr.price),
     });
     setIsAddingPrice(false);
   };
 
   const handleCreatePriceBtn = () => {
-    const category = serviceCategories[0]?.id || 'dermatologiya';
+    const category = getPriceCategoryOptions(locale)[0]?.id || 'dermatologiya';
     setSelectedPriceId(null);
     setPriceForm({
       id: `pr-${Date.now()}`,
@@ -632,19 +681,21 @@ export default function AdminPanel({
     }
 
     try {
-      const payload = mapPriceToCreatePayload({
-        ...priceForm,
-        priceValue: priceForm.priceValue ?? parsePriceValue(priceForm.price || '0'),
-        sortOrder: Math.round(priceForm.sortOrder),
-      });
+      const serviceCategoryIds = serviceCategories.map((cat) => cat.id);
+      const payload = mapPriceToCreatePayload(
+        {
+          ...priceForm,
+          priceValue: priceForm.priceValue ?? parsePriceValue(priceForm.price || '0'),
+          sortOrder: Math.round(priceForm.sortOrder),
+        },
+        serviceCategoryIds,
+      );
 
       if (isAddingPrice) {
         await createPrice(payload);
       } else {
         await updatePrice(priceForm.id, payload);
       }
-
-      writePriceSortOrder(priceForm.id, Math.round(priceForm.sortOrder));
 
       await onRefresh();
       setSelectedPriceId(null);
@@ -660,7 +711,6 @@ export default function AdminPanel({
 
     try {
       await deletePrice(prId);
-      writePriceSortOrder(prId, undefined);
       await onRefresh();
       if (selectedPriceId === prId) setSelectedPriceId(null);
       triggerSaveNotification(locale === 'uz' ? "Narx o'chirildi!" : "Позиция удалена!");
@@ -768,34 +818,31 @@ export default function AdminPanel({
       return;
     }
 
-    try {
-      let src = videoForm.src || '';
-      if (videoFile) {
-        if (isLocalMediaRef(src)) {
-          await deleteLocalMedia(src);
-        }
-        src = await saveLocalMedia(`${videoForm.id}-src`, videoFile);
-      } else if (!src.trim()) {
-        alert(
-          locale === 'uz'
-            ? 'Video faylini yuklang.'
-            : locale === 'ru'
-              ? 'Загрузите видеофайл.'
-              : 'Please upload a video file.',
-        );
-        return;
-      }
+    const src = videoForm.src?.trim();
+    if (!src) {
+      alert(
+        locale === 'uz'
+          ? 'Video manzilini kiriting (YouTube embed yoki MP4 URL).'
+          : locale === 'ru'
+            ? 'Укажите URL видео (YouTube embed или MP4).'
+            : 'Enter a video URL (YouTube embed or MP4 link).',
+      );
+      return;
+    }
 
-      const video: ClinicVideo = {
+    try {
+      const payload = mapClinicVideoToCreatePayload({
         ...(videoForm as ClinicVideo),
         src,
-      };
-      const next = isAddingVideo
-        ? [...editedVideos, video]
-        : editedVideos.map((item) => (item.id === video.id ? video : item));
+      });
 
-      setEditedVideos(next);
-      onSaveLocalData('clinicVideos', next);
+      if (isAddingVideo) {
+        await createVideo(payload, videoFile);
+      } else if (videoForm.id) {
+        await updateVideo(videoForm.id, payload, videoFile);
+      }
+
+      await onRefreshCms();
       setSelectedVideoId(null);
       setIsAddingVideo(false);
       setVideoFile(null);
@@ -810,18 +857,16 @@ export default function AdminPanel({
   const handleDeleteVideo = async (videoId: string) => {
     if (!confirm(locale === 'uz' ? "Ushbu videoni o'chirmoqchimisiz?" : 'Удалить это видео?')) return;
 
-    const target = editedVideos.find((item) => item.id === videoId);
-    if (target?.src && isLocalMediaRef(target.src)) {
-      await deleteLocalMedia(target.src);
+    try {
+      await deleteVideo(videoId);
+      await onRefreshCms();
+      if (selectedVideoId === videoId) setSelectedVideoId(null);
+      triggerSaveNotification(
+        locale === 'uz' ? "Video o'chirildi!" : locale === 'ru' ? 'Видео удалено!' : 'Video deleted!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? "Videoni o'chirishda xatolik" : 'Delete failed');
     }
-
-    const next = editedVideos.filter((item) => item.id !== videoId);
-    setEditedVideos(next);
-    onSaveLocalData('clinicVideos', next);
-    if (selectedVideoId === videoId) setSelectedVideoId(null);
-    triggerSaveNotification(
-      locale === 'uz' ? "Video o'chirildi!" : locale === 'ru' ? 'Видео удалено!' : 'Video deleted!',
-    );
   };
 
   const handleCreateResultBtn = () => {
@@ -861,24 +906,7 @@ export default function AdminPanel({
     }
 
     try {
-      let beforeImage = resultForm.beforeImage || '';
-      let afterImage = resultForm.afterImage || '';
-
-      if (beforeImageFile) {
-        if (isLocalMediaRef(beforeImage)) {
-          await deleteLocalMedia(beforeImage);
-        }
-        beforeImage = await saveLocalMedia(`${resultForm.id}-before`, beforeImageFile);
-      }
-
-      if (afterImageFile) {
-        if (isLocalMediaRef(afterImage)) {
-          await deleteLocalMedia(afterImage);
-        }
-        afterImage = await saveLocalMedia(`${resultForm.id}-after`, afterImageFile);
-      }
-
-      if (!beforeImage.trim() || !afterImage.trim()) {
+      if (isAddingResult && (!beforeImageFile && !resultForm.beforeImage?.trim())) {
         alert(
           locale === 'uz'
             ? 'Oldin va keyin rasmlarini yuklang.'
@@ -889,17 +917,19 @@ export default function AdminPanel({
         return;
       }
 
-      const result: TreatmentResult = {
-        ...(resultForm as TreatmentResult),
-        beforeImage,
-        afterImage,
+      const payload = mapTreatmentResultToCreatePayload(resultForm as TreatmentResult);
+      const files = {
+        before_image: beforeImageFile,
+        after_image: afterImageFile,
       };
-      const next = isAddingResult
-        ? [...editedResults, result]
-        : editedResults.map((item) => (item.id === result.id ? result : item));
 
-      setEditedResults(next);
-      onSaveLocalData('treatmentResults', next);
+      if (isAddingResult) {
+        await createTreatmentResult(payload, files);
+      } else if (resultForm.id) {
+        await updateTreatmentResult(resultForm.id, payload, files);
+      }
+
+      await onRefreshCms();
       setSelectedResultId(null);
       setIsAddingResult(false);
       setBeforeImageFile(null);
@@ -915,21 +945,16 @@ export default function AdminPanel({
   const handleDeleteResult = async (resultId: string) => {
     if (!confirm(locale === 'uz' ? "Ushbu natijani o'chirmoqchimisiz?" : 'Удалить этот результат?')) return;
 
-    const target = editedResults.find((item) => item.id === resultId);
-    if (target?.beforeImage && isLocalMediaRef(target.beforeImage)) {
-      await deleteLocalMedia(target.beforeImage);
+    try {
+      await deleteTreatmentResult(resultId);
+      await onRefreshCms();
+      if (selectedResultId === resultId) setSelectedResultId(null);
+      triggerSaveNotification(
+        locale === 'uz' ? "Natija o'chirildi!" : locale === 'ru' ? 'Результат удален!' : 'Result deleted!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? "Natijani o'chirishda xatolik" : 'Delete failed');
     }
-    if (target?.afterImage && isLocalMediaRef(target.afterImage)) {
-      await deleteLocalMedia(target.afterImage);
-    }
-
-    const next = editedResults.filter((item) => item.id !== resultId);
-    setEditedResults(next);
-    onSaveLocalData('treatmentResults', next);
-    if (selectedResultId === resultId) setSelectedResultId(null);
-    triggerSaveNotification(
-      locale === 'uz' ? "Natija o'chirildi!" : locale === 'ru' ? 'Результат удален!' : 'Result deleted!',
-    );
   };
 
   const handleCreatePartnerBtn = () => {
@@ -963,13 +988,7 @@ export default function AdminPanel({
     }
 
     try {
-      let logo = partnerForm.logo || '';
-      if (partnerLogoFile) {
-        if (isLocalMediaRef(logo)) {
-          await deleteLocalMedia(logo);
-        }
-        logo = await saveLocalMedia(`${partnerForm.id}-logo`, partnerLogoFile);
-      } else if (!logo.trim()) {
+      if (isAddingPartner && !partnerLogoFile && !partnerForm.logo?.trim()) {
         alert(
           locale === 'uz'
             ? 'Hamkor logosini yuklang.'
@@ -980,16 +999,15 @@ export default function AdminPanel({
         return;
       }
 
-      const partner: ClinicPartner = {
-        ...(partnerForm as ClinicPartner),
-        logo,
-      };
-      const next = isAddingPartner
-        ? [...editedPartners, partner]
-        : editedPartners.map((item) => (item.id === partner.id ? partner : item));
+      const payload = mapPartnerToCreatePayload(partnerForm as ClinicPartner);
 
-      setEditedPartners(next);
-      onSaveLocalData('clinicPartners', next);
+      if (isAddingPartner) {
+        await createPartner(payload, partnerLogoFile);
+      } else if (partnerForm.id) {
+        await updatePartner(partnerForm.id, payload, partnerLogoFile);
+      }
+
+      await onRefreshCms();
       setSelectedPartnerId(null);
       setIsAddingPartner(false);
       setPartnerLogoFile(null);
@@ -1004,18 +1022,16 @@ export default function AdminPanel({
   const handleDeletePartner = async (partnerId: string) => {
     if (!confirm(locale === 'uz' ? "Ushbu hamkorni o'chirmoqchimisiz?" : 'Удалить этого партнера?')) return;
 
-    const target = editedPartners.find((item) => item.id === partnerId);
-    if (target?.logo && isLocalMediaRef(target.logo)) {
-      await deleteLocalMedia(target.logo);
+    try {
+      await deletePartner(partnerId);
+      await onRefreshCms();
+      if (selectedPartnerId === partnerId) setSelectedPartnerId(null);
+      triggerSaveNotification(
+        locale === 'uz' ? "Hamkor o'chirildi!" : locale === 'ru' ? 'Партнер удален!' : 'Partner deleted!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? "Hamkorni o'chirishda xatolik" : 'Delete failed');
     }
-
-    const next = editedPartners.filter((item) => item.id !== partnerId);
-    setEditedPartners(next);
-    onSaveLocalData('clinicPartners', next);
-    if (selectedPartnerId === partnerId) setSelectedPartnerId(null);
-    triggerSaveNotification(
-      locale === 'uz' ? "Hamkor o'chirildi!" : locale === 'ru' ? 'Партнер удален!' : 'Partner deleted!',
-    );
   };
 
   const handleCreateCustomerReviewBtn = () => {
@@ -1038,7 +1054,7 @@ export default function AdminPanel({
     setIsAddingCustomerReview(false);
   };
 
-  const handleSaveCustomerReview = () => {
+  const handleSaveCustomerReview = async () => {
     if (!customerReviewForm.authorName?.trim() || !isLocalizedFilled(customerReviewForm.comment, 'uz')) {
       alert(
         locale === 'uz'
@@ -1064,40 +1080,58 @@ export default function AdminPanel({
       published: Boolean(customerReviewForm.published),
     };
 
-    const next = isAddingCustomerReview
-      ? [...editedCustomerReviews, review]
-      : editedCustomerReviews.map((item) => (item.id === review.id ? review : item));
+    try {
+      if (isAddingCustomerReview) {
+        const created = await submitPublicReview(mapReviewToCreatePayload(review));
+        if (review.published) {
+          await patchReview(created.id, { published: true });
+        }
+      } else if (review.id) {
+        await patchReview(review.id, { published: review.published });
+      }
 
-    setEditedCustomerReviews(next);
-    onSaveLocalData('customerReviews', next);
-    setSelectedCustomerReviewId(null);
-    setIsAddingCustomerReview(false);
-    triggerSaveNotification(
-      locale === 'uz' ? 'Fikr saqlandi!' : locale === 'ru' ? 'Отзыв сохранен!' : 'Review saved!',
-    );
+      const updated = await getAdminReviews();
+      setEditedCustomerReviews(updated.map(mapReviewFromApi));
+      setSelectedCustomerReviewId(null);
+      setIsAddingCustomerReview(false);
+      triggerSaveNotification(
+        locale === 'uz' ? 'Fikr saqlandi!' : locale === 'ru' ? 'Отзыв сохранен!' : 'Review saved!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? 'Fikrni saqlashda xatolik' : 'Save failed');
+    }
   };
 
-  const handleDeleteCustomerReview = (reviewId: string) => {
+  const handleDeleteCustomerReview = async (reviewId: string) => {
     if (!confirm(locale === 'uz' ? "Ushbu fikrni o'chirmoqchimisiz?" : 'Удалить этот отзыв?')) return;
 
-    const next = editedCustomerReviews.filter((item) => item.id !== reviewId);
-    setEditedCustomerReviews(next);
-    onSaveLocalData('customerReviews', next);
-    if (selectedCustomerReviewId === reviewId) setSelectedCustomerReviewId(null);
-    triggerSaveNotification(
-      locale === 'uz' ? "Fikr o'chirildi!" : locale === 'ru' ? 'Отзыв удален!' : 'Review deleted!',
-    );
+    try {
+      await deleteReview(reviewId);
+      const updated = await getAdminReviews();
+      setEditedCustomerReviews(updated.map(mapReviewFromApi));
+      if (selectedCustomerReviewId === reviewId) setSelectedCustomerReviewId(null);
+      triggerSaveNotification(
+        locale === 'uz' ? "Fikr o'chirildi!" : locale === 'ru' ? 'Отзыв удален!' : 'Review deleted!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? "Fikrni o'chirishda xatolik" : 'Delete failed');
+    }
   };
 
-  const handleToggleCustomerReviewPublished = (reviewId: string) => {
-    const next = editedCustomerReviews.map((item) =>
-      item.id === reviewId ? { ...item, published: !item.published } : item,
-    );
-    setEditedCustomerReviews(next);
-    onSaveLocalData('customerReviews', next);
-    triggerSaveNotification(
-      locale === 'uz' ? 'Holat yangilandi!' : locale === 'ru' ? 'Статус обновлен!' : 'Status updated!',
-    );
+  const handleToggleCustomerReviewPublished = async (reviewId: string) => {
+    const target = editedCustomerReviews.find((item) => item.id === reviewId);
+    if (!target) return;
+
+    try {
+      await patchReview(reviewId, { published: !target.published });
+      const updated = await getAdminReviews();
+      setEditedCustomerReviews(updated.map(mapReviewFromApi));
+      triggerSaveNotification(
+        locale === 'uz' ? 'Holat yangilandi!' : locale === 'ru' ? 'Статус обновлен!' : 'Status updated!',
+      );
+    } catch (err) {
+      reportAdminError(err, locale === 'uz' ? 'Holatni yangilashda xatolik' : 'Update failed');
+    }
   };
 
   const handleAppointmentStatusChange = async (appointmentId: string, status: AppointmentStatus) => {
@@ -1129,7 +1163,9 @@ export default function AdminPanel({
     setPriceImportLoading(true);
     try {
       const result = await importPrices({
-        items: catalogItems.map((item) => mapPriceToCreatePayload(item)),
+        items: catalogItems.map((item) =>
+          mapPriceToCreatePayload(item, serviceCategories.map((cat) => cat.id)),
+        ),
       });
       await onRefresh();
       triggerSaveNotification(
@@ -1244,7 +1280,7 @@ export default function AdminPanel({
 
         <div className="flex gap-3">
           <button
-            onClick={() => { onResetLocalData(); onRefresh(); }}
+            onClick={() => { onResetLocalData(); void onRefresh(); void onRefreshCms(); }}
             className="px-3.5 py-2 hover:bg-red-50 border border-brand-sectiongray text-red-600 hover:border-red-200 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors cursor-pointer"
             title="Reset local clinic settings and reload API data"
           >
@@ -1553,10 +1589,10 @@ export default function AdminPanel({
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                   {editedRatings.map((rating, idx) => (
-                    <div key={rating.platform} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray space-y-3">
+                    <div key={rating.id} className="p-4 bg-brand-offwhite rounded-xl border border-brand-sectiongray space-y-3">
                       <div className="flex justify-between items-center">
                         <span className="text-xs font-bold text-brand-text-primary">{rating.platform}</span>
-                        <span>{rating.logo}</span>
+                        <span>{getPlatformLogo(rating.platform)}</span>
                       </div>
                       
                       <div className="grid grid-cols-2 gap-2">
@@ -1773,6 +1809,37 @@ export default function AdminPanel({
                     multiline
                     rows={5}
                   />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1.5">
+                        {locale === 'uz' ? 'Tartib raqami' : locale === 'ru' ? 'Порядок' : 'Sort order'}
+                      </label>
+                      <input
+                        type="number"
+                        min={0}
+                        value={doctorForm.sortOrder ?? 0}
+                        onChange={(e) =>
+                          setDoctorForm((prev) => ({
+                            ...prev,
+                            sortOrder: Number.parseInt(e.target.value, 10) || 0,
+                          }))
+                        }
+                        className="w-full max-w-xs px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                      />
+                    </div>
+                    <label className="flex items-center gap-2 text-xs font-bold text-brand-text-primary pt-5 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(doctorForm.isFeatured)}
+                        onChange={(e) =>
+                          setDoctorForm((prev) => ({ ...prev, isFeatured: e.target.checked }))
+                        }
+                        className="rounded border-brand-sectiongray text-brand-gold focus:ring-brand-gold/30"
+                      />
+                      {locale === 'uz' ? 'Tavsiya etilgan (bosh sahifa)' : locale === 'ru' ? 'Рекомендуемый (главная)' : 'Featured (homepage)'}
+                    </label>
+                  </div>
 
                   <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
                     <button
@@ -2164,7 +2231,7 @@ export default function AdminPanel({
                     <div>
                       <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">Kategoriya burchagi (Id kod):</label>
                       <select
-                        value={priceForm.category || 'dermatologiya'}
+                        value={toPriceSectionCategory(priceForm.category || 'dermatologiya')}
                         onChange={(e) => {
                           const category = e.target.value;
                           setPriceForm((prev) => ({
@@ -2177,8 +2244,8 @@ export default function AdminPanel({
                         }}
                         className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs cursor-pointer"
                       >
-                        {serviceCategories.map(cat => (
-                          <option key={cat.id} value={cat.id}>{cat.title[locale] || cat.title['uz']}</option>
+                        {getPriceCategoryOptions(locale).map((cat) => (
+                          <option key={cat.id} value={cat.id}>{cat.title}</option>
                         ))}
                       </select>
                     </div>
@@ -2510,17 +2577,28 @@ export default function AdminPanel({
                     onChange={(values) => setVideoForm((prev) => ({ ...prev, category: values }))}
                   />
 
-                  <VideoUploadField
-                    label={locale === 'uz' ? 'Video fayli' : locale === 'ru' ? 'Видеофайл' : 'Video file'}
-                    currentVideoUrl={videoForm.src}
+                  <div>
+                    <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">
+                      {locale === 'uz' ? 'Video manzili (URL)' : locale === 'ru' ? 'URL видео' : 'Video URL'}
+                    </label>
+                    <input
+                      type="url"
+                      value={videoForm.src || ''}
+                      onChange={(e) => setVideoForm((prev) => ({ ...prev, src: e.target.value }))}
+                      placeholder="https://www.youtube.com/embed/..."
+                      className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
+                    />
+                  </div>
+
+                  <ImageUploadField
+                    label={locale === 'uz' ? 'Miniatura (ixtiyoriy)' : locale === 'ru' ? 'Миниатюра (необяз.)' : 'Thumbnail (optional)'}
+                    currentImageUrl={videoForm.thumbnail}
                     file={videoFile}
                     onFileChange={setVideoFile}
                     helperText={
                       locale === 'uz'
-                        ? 'MP4, WebM yoki MOV formatida video yuklang.'
-                        : locale === 'ru'
-                          ? 'Загрузите видео в формате MP4, WebM или MOV.'
-                          : 'Upload video in MP4, WebM, or MOV format.'
+                        ? 'JPG, PNG yoki WebP — video uchun rasm.'
+                        : 'JPG, PNG or WebP thumbnail image.'
                     }
                   />
 

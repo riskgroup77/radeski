@@ -139,6 +139,98 @@ const CATEGORY_ALIASES: Record<string, string> = {
   'lazernaya-epilyaciya': 'lazernaya-epilyatsiya',
 };
 
+/**
+ * Preyskurant bo'limlari → backend service category_id.
+ * API faqat xizmat kategoriyalari ID sini qabul qiladi (masalan dermatoonkologiya).
+ */
+const API_PARENT_FOR_PRICE_CATEGORIES: Record<string, string[]> = {
+  dermatologiya: ['konsultatsii'],
+  dermatoonkologiya: ['dermatoonkolog', 'tsifrovaya-dematologiya-dermatoskopiya', 'pasport-kozhi'],
+  trikhologiya: ['trihologiya'],
+  'apparatnaya-kosmetologiya': [
+    'fotoomolozhenie-ipl-lumecca',
+    'esteticheskaya-kosmetologiya',
+    'hooywood-spectra',
+    'rf-morfeus-8',
+  ],
+  'injektsionnaya-kosmetologiya': ['inektsionnaya-kosmetologiya'],
+  'lazernaya-epilyaciya': ['lazernaya-epilyatsiya'],
+  'hirurgicheskaya-dermatologiya': ['hirurgicheskaya-dermatologiya', 'hirurgicheskaya-dematologiya'],
+};
+
+const PRICE_TO_API_CATEGORY: Record<string, string> = (() => {
+  const map: Record<string, string> = {};
+
+  for (const [apiId, priceId] of Object.entries(CATEGORY_ALIASES)) {
+    map[priceId] = apiId;
+  }
+
+  for (const [apiId, priceIds] of Object.entries(API_PARENT_FOR_PRICE_CATEGORIES)) {
+    for (const priceId of priceIds) {
+      map[priceId] = apiId;
+    }
+  }
+
+  return map;
+})();
+
+/** API yoki preyskurant category_id ni preyskurant bo'limi ID siga aylantiradi (admin forma uchun) */
+export function toPriceSectionCategory(categoryId: string): string {
+  const id = categoryId.trim();
+  if (!id) return 'dermatologiya';
+  if (PRICE_CATEGORY_ORDER.includes(id)) return id;
+
+  const alias = CATEGORY_ALIASES[id];
+  if (alias && PRICE_CATEGORY_ORDER.includes(alias)) return alias;
+
+  for (const [apiId, priceIds] of Object.entries(API_PARENT_FOR_PRICE_CATEGORIES)) {
+    if (apiId === id) {
+      const match = priceIds.find((priceId) => PRICE_CATEGORY_ORDER.includes(priceId));
+      if (match) return match;
+    }
+  }
+
+  return id;
+}
+
+/**
+ * Admin/API ga yuborish uchun haqiqiy service category_id ni aniqlaydi.
+ * Preyskurant bo'limi (masalan dermatoonkolog) → API ID (masalan dermatoonkologiya).
+ */
+export function resolvePriceCategoryForApi(
+  categoryId: string,
+  serviceCategoryIds: string[] = [],
+): string {
+  const normalized = categoryId.trim();
+  if (!normalized) return 'dermatologiya';
+
+  const mapped = priceCategoryToApiId(normalized);
+
+  if (serviceCategoryIds.length === 0) {
+    return mapped;
+  }
+
+  if (serviceCategoryIds.includes(mapped)) return mapped;
+  if (serviceCategoryIds.includes(normalized)) return normalized;
+
+  for (const serviceId of serviceCategoryIds) {
+    if (priceCategoryToApiId(serviceId) === mapped) return serviceId;
+  }
+
+  return mapped;
+}
+
+/** Preyskurant/katalog category_id ni API ga yuborish uchun service category_id ga aylantiradi */
+export function priceCategoryToApiId(categoryId: string): string {
+  if (!categoryId) return 'dermatologiya';
+  return PRICE_TO_API_CATEGORY[categoryId] ?? categoryId;
+}
+
+/** API category_id ni preyskurant ko'rinishi uchun (agar alias bo'lsa) */
+export function apiCategoryToPriceCategory(categoryId: string): string {
+  return CATEGORY_ALIASES[categoryId] ?? categoryId;
+}
+
 function resolveCategoryKey(categoryId: string): string {
   return CATEGORY_ALIASES[categoryId] ?? categoryId;
 }

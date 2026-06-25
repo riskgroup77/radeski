@@ -9,7 +9,7 @@ interface CustomerReviewsSectionProps {
   locale: Locale;
   reviews: CustomerReview[];
   serviceCategories?: ServiceCategory[];
-  onSubmitReview: (review: CustomerReview) => void;
+  onSubmitReview: (review: CustomerReview) => void | Promise<void>;
 }
 
 function StarRatingDisplay({ rating }: { rating: number }) {
@@ -100,6 +100,7 @@ export default function CustomerReviewsSection({
   const [comment, setComment] = useState('');
   const [serviceId, setServiceId] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
   const serviceSelectPlaceholder =
@@ -150,7 +151,7 @@ export default function CustomerReviewsSection({
           : 'Thank you! Your review was received and will be reviewed shortly.',
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setError('');
 
@@ -177,21 +178,34 @@ export default function CustomerReviewsSection({
 
     const selectedService = serviceCategories.find((category) => category.id === serviceId);
 
-    onSubmitReview({
-      id: `review-${Date.now()}`,
-      authorName: authorName.trim(),
-      rating,
-      comment: localizedComment,
-      service: selectedService?.title,
-      date: new Date().toISOString().slice(0, 10),
-      published: false,
-    });
+    setSubmitting(true);
+    try {
+      await onSubmitReview({
+        id: `review-${Date.now()}`,
+        authorName: authorName.trim(),
+        rating,
+        comment: localizedComment,
+        service: selectedService?.title,
+        date: new Date().toISOString().slice(0, 10),
+        published: false,
+      });
 
-    setAuthorName('');
-    setComment('');
-    setServiceId('');
-    setRating(5);
-    setSubmitted(true);
+      setAuthorName('');
+      setComment('');
+      setServiceId('');
+      setRating(5);
+      setSubmitted(true);
+    } catch {
+      setError(
+        locale === 'uz'
+          ? 'Fikr yuborishda xatolik yuz berdi. Qayta urinib ko\'ring.'
+          : locale === 'ru'
+            ? 'Ошибка при отправке отзыва. Попробуйте снова.'
+            : 'Failed to submit review. Please try again.',
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -345,10 +359,17 @@ export default function CustomerReviewsSection({
 
                   <button
                     type="submit"
-                    className="w-full px-5 py-2.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-sm rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
+                    disabled={submitting}
+                    className="w-full px-5 py-2.5 bg-brand-gold hover:bg-brand-gold-dark disabled:opacity-60 text-white font-bold text-sm rounded-lg transition-colors cursor-pointer inline-flex items-center justify-center gap-2"
                   >
                     <Send className="w-4 h-4" />
-                    {labels.submit}
+                    {submitting
+                      ? locale === 'uz'
+                        ? 'Yuborilmoqda...'
+                        : locale === 'ru'
+                          ? 'Отправка...'
+                          : 'Sending...'
+                      : labels.submit}
                   </button>
                 </form>
               )}

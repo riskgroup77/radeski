@@ -68,6 +68,21 @@ export function getFeaturedDoctors(doctors: Doctor[]): Doctor[] {
 }
 
 export function sortDoctorsFeaturedFirst(doctors: Doctor[]): Doctor[] {
+  const hasApiOrdering = doctors.some(
+    (doctor) => doctor.isFeatured || (doctor.sortOrder !== undefined && doctor.sortOrder > 0),
+  );
+
+  if (hasApiOrdering) {
+    return [...doctors].sort((a, b) => {
+      const featuredDiff = Number(Boolean(b.isFeatured)) - Number(Boolean(a.isFeatured));
+      if (featuredDiff !== 0) return featuredDiff;
+      const orderA = a.sortOrder ?? 999;
+      const orderB = b.sortOrder ?? 999;
+      if (orderA !== orderB) return orderA - orderB;
+      return 0;
+    });
+  }
+
   const featured = getFeaturedDoctors(doctors);
   const featuredIds = new Set(featured.map((doctor) => doctor.id));
   const rest = doctors.filter((doctor) => !featuredIds.has(doctor.id));

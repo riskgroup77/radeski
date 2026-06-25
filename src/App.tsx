@@ -36,14 +36,7 @@ import {
   serviceSubPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
-import { DICTIONARY, CLINIC_RATINGS, CLINIC_RATING_SUMMARIES, GALLERY_IMAGS } from './data';
-import {
-  loadClinicVideos,
-  loadTreatmentResults,
-  loadClinicPartners,
-  SITE_PAGES_STORAGE_KEYS,
-} from './utils/sitePagesStorage';
-import { loadCustomerReviews, CUSTOMER_REVIEWS_STORAGE_KEY } from './utils/customerReviewsStorage';
+import { DICTIONARY, GALLERY_IMAGS } from './data';
 import { clearAllLocalMedia } from './utils/localMediaStorage';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -66,7 +59,11 @@ import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
-import { createAppointment } from './api/publicApi';
+import { useCmsData } from './hooks/useCmsData';
+import { createAppointment, createReview } from './api/publicApi';
+import { mapReviewToCreatePayload } from './api/cmsMappers';
+import { fetchClientCountFromApi } from './utils/clientCount';
+import { getPlatformLogo } from './utils/platformLogo';
 import { ApiError } from './api/client';
 import { findArticleByRouteParam } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
@@ -75,7 +72,6 @@ import ArticleViewsBadge from './components/ArticleViewsBadge';
 import HomeCarousel from './components/HomeCarousel';
 import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
-import type { CustomerReview } from './data/sitePagesContent';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
@@ -134,6 +130,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     updateArticleViews,
   } = useClinicData();
 
+  const {
+    partners: cmsPartners,
+    reviews: cmsReviews,
+    branches: cmsBranches,
+    treatmentResults: cmsTreatmentResults,
+    videos: cmsVideos,
+    clinicRatings: cmsClinicRatings,
+    refetch: refetchCms,
+  } = useCmsData();
+
   const activeServiceCategory = serviceCategoryId
     ? dynamicServiceCategories.find((category) => category.id === serviceCategoryId) ?? null
     : null;
@@ -156,16 +162,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     return saved ? JSON.parse(saved) : DICTIONARY;
   });
 
-  const [dynamicClinicRatings, setDynamicClinicRatings] = useState(() => {
-    const saved = localStorage.getItem('radeski_clinic_ratings_v1');
-    return saved ? JSON.parse(saved) : CLINIC_RATINGS;
-  });
-
-  const [dynamicClinicVideos, setDynamicClinicVideos] = useState(() => loadClinicVideos());
-  const [dynamicTreatmentResults, setDynamicTreatmentResults] = useState(() => loadTreatmentResults());
-  const [dynamicClinicPartners, setDynamicClinicPartners] = useState(() => loadClinicPartners());
-  const [dynamicCustomerReviews, setDynamicCustomerReviews] = useState(() => loadCustomerReviews());
-
   const d = { ...DICTIONARY[locale], ...(dynamicDictionary[locale] || {}) };
 
   // Inline Consultation / Be Beautiful form states
@@ -177,38 +173,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     if (type === 'dictionary') {
       localStorage.setItem('radeski_dictionary_v1', JSON.stringify(data));
       setDynamicDictionary(data as typeof DICTIONARY);
-    } else if (type === 'clinicRatings') {
-      localStorage.setItem('radeski_clinic_ratings_v1', JSON.stringify(data));
-      setDynamicClinicRatings(data as typeof CLINIC_RATINGS);
-    } else if (type === 'clinicVideos') {
-      localStorage.setItem(SITE_PAGES_STORAGE_KEYS.videos, JSON.stringify(data));
-      setDynamicClinicVideos(data as ReturnType<typeof loadClinicVideos>);
-    } else if (type === 'treatmentResults') {
-      localStorage.setItem(SITE_PAGES_STORAGE_KEYS.results, JSON.stringify(data));
-      setDynamicTreatmentResults(data as ReturnType<typeof loadTreatmentResults>);
-    } else if (type === 'clinicPartners') {
-      localStorage.setItem(SITE_PAGES_STORAGE_KEYS.partners, JSON.stringify(data));
-      setDynamicClinicPartners(data as ReturnType<typeof loadClinicPartners>);
-    } else if (type === 'customerReviews') {
-      localStorage.setItem(CUSTOMER_REVIEWS_STORAGE_KEY, JSON.stringify(data));
-      setDynamicCustomerReviews(data as CustomerReview[]);
     }
   };
 
   const handleResetLocalData = () => {
     localStorage.removeItem('radeski_dictionary_v1');
-    localStorage.removeItem('radeski_clinic_ratings_v1');
-    localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.videos);
-    localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.results);
-    localStorage.removeItem(SITE_PAGES_STORAGE_KEYS.partners);
-    localStorage.removeItem(CUSTOMER_REVIEWS_STORAGE_KEY);
     void clearAllLocalMedia();
     setDynamicDictionary(DICTIONARY);
-    setDynamicClinicRatings(CLINIC_RATINGS);
-    setDynamicClinicVideos(loadClinicVideos());
-    setDynamicTreatmentResults(loadTreatmentResults());
-    setDynamicClinicPartners(loadClinicPartners());
-    setDynamicCustomerReviews(loadCustomerReviews());
+    void refetchCms();
   };
 
   // Automatically inject schema.org metadata and SEO tags dynamically on load / locale / tab change
@@ -613,6 +585,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       await createAppointment({ phone_number: inlinePhone.trim() });
       setInlineSubmitted(true);
       setInlinePhone('');
+      void fetchClientCountFromApi();
     } catch (err) {
       const message =
         err instanceof ApiError
@@ -968,11 +941,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {dynamicClinicRatings.map((plat) => {
+                    {cmsClinicRatings.map((plat) => {
                       const reviewUrl = resolveClinicRatingUrl(plat.platform, plat.url);
                       const platformSummary =
-                        CLINIC_RATING_SUMMARIES[plat.platform]?.[locale] ??
-                        CLINIC_RATING_SUMMARIES[plat.platform]?.uz ??
+                        plat.summary[locale] ||
+                        plat.summary.uz ||
                         '';
                       const cardClassName =
                         'bg-brand-white rounded-2xl p-6 border border-brand-sectiongray text-left flex flex-col shadow-xs transition-all h-full';
@@ -980,7 +953,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                         <>
                           <div className="flex items-start gap-4">
                             <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-xl shadow-xs shrink-0">
-                              {plat.logo}
+                              {getPlatformLogo(plat.platform)}
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between gap-2">
@@ -1019,7 +992,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
                       return reviewUrl ? (
                         <a
-                          key={plat.platform}
+                          key={plat.id}
                           href={reviewUrl}
                           target={APPOINTMENT_LINK_TARGET}
                           rel={APPOINTMENT_LINK_REL}
@@ -1035,7 +1008,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                           {cardContent}
                         </a>
                       ) : (
-                        <div key={plat.platform} className={cardClassName}>
+                        <div key={plat.id} className={cardClassName}>
                           {cardContent}
                         </div>
                       );
@@ -1115,7 +1088,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               </section>
 
               {/* Partners teaser */}
-              {dynamicClinicPartners.length > 0 && (
+              {cmsPartners.length > 0 && (
                 <section id="partners-teaser" className="py-20 bg-gradient-to-b from-brand-offwhite via-brand-white to-brand-offwhite border-t border-brand-sectiongray relative overflow-hidden">
                   <div className="pointer-events-none absolute inset-0 opacity-[0.35]" aria-hidden="true">
                     <div className="absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-gold/10 blur-3xl" />
@@ -1144,7 +1117,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </div>
 
                     <PartnersCarousel
-                      partners={dynamicClinicPartners}
+                      partners={cmsPartners}
                       locale={locale}
                       ariaLabel={
                         locale === 'uz'
@@ -1167,11 +1140,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               <CustomerReviewsSection
                 locale={locale}
-                reviews={dynamicCustomerReviews}
+                reviews={cmsReviews}
                 serviceCategories={dynamicServiceCategories}
-                onSubmitReview={(review) => {
-                  const next = [...dynamicCustomerReviews, review];
-                  handleSaveLocalData('customerReviews', next);
+                onSubmitReview={async (review) => {
+                  await createReview(mapReviewToCreatePayload(review));
                 }}
               />
 
@@ -1341,14 +1313,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               serviceCategories={dynamicServiceCategories}
               prices={dynamicPrices}
               articles={dynamicArticles}
-              clinicRatings={dynamicClinicRatings}
-              clinicVideos={dynamicClinicVideos}
-              treatmentResults={dynamicTreatmentResults}
-              clinicPartners={dynamicClinicPartners}
-              customerReviews={dynamicCustomerReviews}
+              clinicRatings={cmsClinicRatings}
+              clinicVideos={cmsVideos}
+              treatmentResults={cmsTreatmentResults}
+              clinicPartners={cmsPartners}
+              customerReviews={cmsReviews}
               onSaveLocalData={handleSaveLocalData}
               onResetLocalData={handleResetLocalData}
               onRefresh={refetchClinicData}
+              onRefreshCms={refetchCms}
               onClose={() => goToPage('home')}
             />
           )}
@@ -1362,13 +1335,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           )}
 
           {currentPage === 'videos' && (
-            <VideosPage locale={locale} dictionary={d} videos={dynamicClinicVideos} />
+            <VideosPage locale={locale} dictionary={d} videos={cmsVideos} />
           )}
 
           {currentPage === 'branches' && (
             <BranchesPage
               locale={locale}
               dictionary={d}
+              branches={cmsBranches}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
             />
           )}
@@ -1377,7 +1351,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <ResultsPage
               locale={locale}
               dictionary={d}
-              results={dynamicTreatmentResults}
+              results={cmsTreatmentResults}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
             />
           )}

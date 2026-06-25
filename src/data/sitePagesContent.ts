@@ -10,6 +10,8 @@ export interface ClinicVideo {
   duration: string;
   category: LocalizedText;
   thumbnail?: string;
+  sortOrder?: number;
+  isActive?: boolean;
 }
 
 export interface ClinicBranch {
@@ -22,6 +24,8 @@ export interface ClinicBranch {
   mapEmbed: string;
   isMain?: boolean;
   image: string;
+  sortOrder?: number;
+  isActive?: boolean;
 }
 
 export interface TreatmentResult {
@@ -32,6 +36,8 @@ export interface TreatmentResult {
   beforeImage: string;
   afterImage: string;
   sessions: LocalizedText;
+  sortOrder?: number;
+  published?: boolean;
 }
 
 export interface ClinicPartner {
@@ -39,6 +45,8 @@ export interface ClinicPartner {
   name: LocalizedText;
   logo: string;
   logoVariant?: 'dark' | 'light';
+  sortOrder?: number;
+  isActive?: boolean;
 }
 
 export interface CustomerReview {
@@ -137,6 +145,20 @@ export const CLINIC_PARTNERS: ClinicPartner[] = [
     logo: '/partners/hamkor3.jpg',
     logoVariant: 'light',
   },
+  {
+    id: 'davlin',
+    name: { uz: 'Daavlin', ru: 'Davlin', en: 'Davlin' },
+    logo: '/partners/hamkor4.jfif',
+    logoVariant: 'dark',
+    sortOrder: 4,
+  },
+  {
+    id: 'inmode',
+    name: { uz: 'InMode', ru: 'InMode', en: 'InMode' },
+    logo: '/partners/hamkor5.png',
+    logoVariant: 'dark',
+    sortOrder: 5,
+  },
 ];
 
 export const CLINIC_VIDEOS: ClinicVideo[] = [
@@ -159,12 +181,12 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   {
     id: 'IPL-therapy',
     title: {
-      uz: 'IPL Forever Young terapiyasi qanday ishlaydi?',
+      uz: 'Vitiligo — teriga rang beruvchi melanotsit hujayralarining yo‘qolishi yoki faoliyatining buzilishi natijasida terida oq dog‘lar paydo bo‘ladigan kasallik.',
       ru: 'Как работает терапия IPL Forever Young?',
       en: 'How IPL Forever Young therapy works',
     },
     description: {
-      uz: 'Gen darajasida teri yangilanishi va pigmentatsiyani yengillashtirish protokoli.',
+      uz: 'Ko‘plab tadqiqotlarda NB-UVB fototerapiya vitiligo uchun eng samarali va xavfsiz usullardan biri deb hisoblanadi. Ayniqsa kasallik faol bo‘lmasa va davolash muntazam olib borilsa, yaxshi natijalar kuzatiladi.',
       ru: 'Протокол обновления кожи на генном уровне и коррекции пигментации.',
       en: 'Gen-level skin renewal and pigmentation correction protocol.',
     },
@@ -175,12 +197,12 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   {
     id: 'photofinder',
     title: {
-      uz: 'PhotoFinder — teri o‘smalarini erta aniqlash',
+      uz: 'Psoriaz — surunkali (uzoq davom etuvchi) teri kasalligi bo‘lib, immun tizimining noto‘g‘ri ishlashi natijasida teri hujayralari juda tez ko‘payib ketadi. Natijada terida qizargan, qalinlashgan va usti oq-kumush rang tangachalar bilan qoplangan dog‘lar paydo bo‘ladi.',
       ru: 'PhotoFinder — ранняя диагностика новообразований',
       en: 'PhotoFinder — early mole mapping',
     },
     description: {
-      uz: 'Kompyuterli dermatoskopiya va xavfli o‘smalarni kuzatish tizimi.',
+      uz: 'Kompyuterli dermatoskopiya va psoryazni apparati texnologiyalar yordamida davolaymiz',
       ru: 'Компьютерная дерматоскопия и система наблюдения за новообразованиями.',
       en: 'Computerized dermoscopy and mole monitoring workflow.',
     },

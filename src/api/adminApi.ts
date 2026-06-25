@@ -16,6 +16,23 @@ import {
   PriceBulkImportPayload,
   PriceBulkImportResult,
 } from './types';
+import type {
+  ApiBranchOut,
+  ApiClinicRatingOut,
+  ApiClinicVideoOut,
+  ApiPartnerOut,
+  ApiReviewOut,
+  ApiSiteTextOut,
+  ApiTreatmentResultOut,
+  BranchCreatePayload,
+  ClinicRatingCreatePayload,
+  ClinicVideoCreatePayload,
+  PartnerCreatePayload,
+  ReviewPatchPayload,
+  SiteTextBulkPayload,
+  SiteTextUpdatePayload,
+  TreatmentResultCreatePayload,
+} from './cmsTypes';
 import type { Locale } from '../types';
 import type { LocalizedImageFiles } from '../utils/localizedImage';
 import { hasLocalizedImageFiles } from '../utils/localizedImage';
@@ -267,6 +284,234 @@ export async function updateAppointmentStatus(
   return apiRequest<ApiAppointment>(`/api/admin/appointments/${appointmentId}`, {
     method: 'PATCH',
     body: JSON.stringify({ status }),
+  }, withToken(token));
+}
+
+function buildCmsMultipartForm(data: unknown, files?: Record<string, File | null | undefined>): FormData {
+  const form = new FormData();
+  form.append('data', JSON.stringify(data));
+  if (files) {
+    Object.entries(files).forEach(([key, file]) => {
+      if (file) form.append(key, file);
+    });
+  }
+  return form;
+}
+
+// --- CMS: Partners ---
+export async function getAdminPartners(token?: string | null) {
+  return apiRequest<ApiPartnerOut[]>('/api/admin/partners', {}, withToken(token));
+}
+
+export async function createPartner(
+  payload: PartnerCreatePayload,
+  logoFile?: File | null,
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, { logo: logoFile });
+  return apiFormRequestWithMethod<ApiPartnerOut>('/api/admin/partners', 'POST', form, withToken(token));
+}
+
+export async function updatePartner(
+  partnerId: string,
+  payload: Partial<PartnerCreatePayload>,
+  logoFile?: File | null,
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, { logo: logoFile });
+  return apiFormRequestWithMethod<ApiPartnerOut>(
+    `/api/admin/partners/${partnerId}`,
+    'PUT',
+    form,
+    withToken(token),
+  );
+}
+
+export async function deletePartner(partnerId: string, token?: string | null) {
+  return apiRequest<ApiResponse>(`/api/admin/partners/${partnerId}`, { method: 'DELETE' }, withToken(token));
+}
+
+// --- CMS: Reviews ---
+export async function getAdminReviews(token?: string | null) {
+  return apiRequest<ApiReviewOut[]>('/api/admin/reviews', {}, withToken(token));
+}
+
+export async function patchReview(
+  reviewId: string,
+  payload: ReviewPatchPayload,
+  token?: string | null,
+) {
+  return apiRequest<ApiReviewOut>(`/api/admin/reviews/${reviewId}`, {
+    method: 'PATCH',
+    body: JSON.stringify(payload),
+  }, withToken(token));
+}
+
+export async function deleteReview(reviewId: string, token?: string | null) {
+  return apiRequest<ApiResponse>(`/api/admin/reviews/${reviewId}`, { method: 'DELETE' }, withToken(token));
+}
+
+// --- CMS: Branches ---
+export async function getAdminBranches(token?: string | null) {
+  return apiRequest<ApiBranchOut[]>('/api/admin/branches', {}, withToken(token));
+}
+
+export async function createBranch(
+  payload: BranchCreatePayload,
+  imageFile?: File | null,
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, { image: imageFile });
+  return apiFormRequestWithMethod<ApiBranchOut>('/api/admin/branches', 'POST', form, withToken(token));
+}
+
+export async function updateBranch(
+  branchId: string,
+  payload: Partial<BranchCreatePayload>,
+  imageFile?: File | null,
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, { image: imageFile });
+  return apiFormRequestWithMethod<ApiBranchOut>(
+    `/api/admin/branches/${branchId}`,
+    'PUT',
+    form,
+    withToken(token),
+  );
+}
+
+export async function deleteBranch(branchId: string, token?: string | null) {
+  return apiRequest<ApiResponse>(`/api/admin/branches/${branchId}`, { method: 'DELETE' }, withToken(token));
+}
+
+// --- CMS: Treatment results ---
+export async function getAdminTreatmentResults(token?: string | null) {
+  return apiRequest<ApiTreatmentResultOut[]>('/api/admin/treatment-results', {}, withToken(token));
+}
+
+export async function createTreatmentResult(
+  payload: TreatmentResultCreatePayload,
+  files?: { before_image?: File | null; after_image?: File | null },
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, files);
+  return apiFormRequestWithMethod<ApiTreatmentResultOut>(
+    '/api/admin/treatment-results',
+    'POST',
+    form,
+    withToken(token),
+  );
+}
+
+export async function updateTreatmentResult(
+  resultId: string,
+  payload: Partial<TreatmentResultCreatePayload>,
+  files?: { before_image?: File | null; after_image?: File | null },
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, files);
+  return apiFormRequestWithMethod<ApiTreatmentResultOut>(
+    `/api/admin/treatment-results/${resultId}`,
+    'PUT',
+    form,
+    withToken(token),
+  );
+}
+
+export async function deleteTreatmentResult(resultId: string, token?: string | null) {
+  return apiRequest<ApiResponse>(`/api/admin/treatment-results/${resultId}`, {
+    method: 'DELETE',
+  }, withToken(token));
+}
+
+// --- CMS: Videos ---
+export async function getAdminVideos(token?: string | null) {
+  return apiRequest<ApiClinicVideoOut[]>('/api/admin/videos', {}, withToken(token));
+}
+
+export async function createVideo(
+  payload: ClinicVideoCreatePayload,
+  thumbnailFile?: File | null,
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, { thumbnail: thumbnailFile });
+  return apiFormRequestWithMethod<ApiClinicVideoOut>('/api/admin/videos', 'POST', form, withToken(token));
+}
+
+export async function updateVideo(
+  videoId: string,
+  payload: Partial<ClinicVideoCreatePayload>,
+  thumbnailFile?: File | null,
+  token?: string | null,
+) {
+  const form = buildCmsMultipartForm(payload, { thumbnail: thumbnailFile });
+  return apiFormRequestWithMethod<ApiClinicVideoOut>(
+    `/api/admin/videos/${videoId}`,
+    'PUT',
+    form,
+    withToken(token),
+  );
+}
+
+export async function deleteVideo(videoId: string, token?: string | null) {
+  return apiRequest<ApiResponse>(`/api/admin/videos/${videoId}`, { method: 'DELETE' }, withToken(token));
+}
+
+// --- CMS: Clinic ratings ---
+export async function getAdminClinicRatings(token?: string | null) {
+  return apiRequest<ApiClinicRatingOut[]>('/api/admin/clinic-ratings', {}, withToken(token));
+}
+
+export async function createClinicRating(payload: ClinicRatingCreatePayload, token?: string | null) {
+  return apiRequest<ApiClinicRatingOut>('/api/admin/clinic-ratings', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }, withToken(token));
+}
+
+export async function updateClinicRating(
+  ratingId: string,
+  payload: Partial<ClinicRatingCreatePayload>,
+  token?: string | null,
+) {
+  return apiRequest<ApiClinicRatingOut>(`/api/admin/clinic-ratings/${ratingId}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+  }, withToken(token));
+}
+
+export async function deleteClinicRating(ratingId: string, token?: string | null) {
+  return apiRequest<ApiResponse>(`/api/admin/clinic-ratings/${ratingId}`, {
+    method: 'DELETE',
+  }, withToken(token));
+}
+
+// --- CMS: Site texts ---
+export async function getAdminSiteTexts(token?: string | null) {
+  return apiRequest<ApiSiteTextOut[]>('/api/admin/site-texts', {}, withToken(token));
+}
+
+export async function updateSiteText(
+  key: string,
+  payload: SiteTextUpdatePayload,
+  token?: string | null,
+) {
+  return apiRequest<ApiSiteTextOut>(`/api/admin/site-texts/${encodeURIComponent(key)}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+  }, withToken(token));
+}
+
+export async function bulkUpdateSiteTexts(payload: SiteTextBulkPayload, token?: string | null) {
+  return apiRequest<ApiSiteTextOut[]>('/api/admin/site-texts', {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+  }, withToken(token));
+}
+
+export async function deleteSiteText(key: string, token?: string | null) {
+  return apiRequest<ApiResponse>(`/api/admin/site-texts/${encodeURIComponent(key)}`, {
+    method: 'DELETE',
   }, withToken(token));
 }
 

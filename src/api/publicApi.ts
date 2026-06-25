@@ -8,6 +8,17 @@ import {
   AppointmentCreate,
   ApiResponse,
 } from './types';
+import type {
+  ApiBranchOut,
+  ApiClinicRatingOut,
+  ApiClinicVideoOut,
+  ApiClientCountOut,
+  ApiPartnerOut,
+  ApiReviewOut,
+  ApiSiteTextOut,
+  ApiTreatmentResultOut,
+  ReviewCreatePayload,
+} from './cmsTypes';
 
 export async function getHealth() {
   return apiRequest<{ status: string; service: string }>('/health');
@@ -53,4 +64,44 @@ export async function createAppointment(payload: AppointmentCreate): Promise<Api
     method: 'POST',
     body: JSON.stringify(payload),
   });
+}
+
+export async function getPartners(): Promise<ApiPartnerOut[]> {
+  return apiRequest<ApiPartnerOut[]>('/api/partners');
+}
+
+export async function getReviews(published = true): Promise<ApiReviewOut[]> {
+  const query = published ? '?published=true' : '?published=false';
+  return apiRequest<ApiReviewOut[]>(`/api/reviews${query}`);
+}
+
+export async function createReview(payload: ReviewCreatePayload): Promise<ApiReviewOut> {
+  return apiRequest<ApiReviewOut>('/api/reviews', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+}
+
+export async function getBranches(): Promise<ApiBranchOut[]> {
+  return apiRequest<ApiBranchOut[]>('/api/branches');
+}
+
+export async function getTreatmentResults(): Promise<ApiTreatmentResultOut[]> {
+  return apiRequest<ApiTreatmentResultOut[]>('/api/treatment-results');
+}
+
+export async function getVideos(): Promise<ApiClinicVideoOut[]> {
+  return apiRequest<ApiClinicVideoOut[]>('/api/videos');
+}
+
+export async function getClinicRatings(): Promise<ApiClinicRatingOut[]> {
+  return apiRequest<ApiClinicRatingOut[]>('/api/clinic-ratings');
+}
+
+export async function getClientCount(): Promise<ApiClientCountOut> {
+  return apiRequest<ApiClientCountOut>('/api/stats/client-count');
+}
+
+export async function getSiteTexts(): Promise<ApiSiteTextOut[]> {
+  return apiRequest<ApiSiteTextOut[]>('/api/site-texts');
 }

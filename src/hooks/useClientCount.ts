@@ -1,26 +1,34 @@
 import { useEffect, useState } from 'react';
 import {
   CLIENT_COUNT_UPDATED_EVENT,
-  getClientCount,
+  fetchClientCountFromApi,
+  getCachedClientCount,
 } from '../utils/clientCount';
 
-export function useClientCount(): number {
-  const [count, setCount] = useState(() => getClientCount());
+export function useClientCount(initialCount?: number): number {
+  const [count, setCount] = useState(() => initialCount ?? getCachedClientCount());
 
   useEffect(() => {
-    const sync = () => setCount(getClientCount());
+    if (initialCount !== undefined) {
+      setCount(initialCount);
+    }
+  }, [initialCount]);
+
+  useEffect(() => {
     const onUpdated = (event: Event) => {
       const detail = (event as CustomEvent<number>).detail;
-      setCount(typeof detail === 'number' ? detail : getClientCount());
+      if (typeof detail === 'number') setCount(detail);
     };
-
     window.addEventListener(CLIENT_COUNT_UPDATED_EVENT, onUpdated);
-    window.addEventListener('storage', sync);
-    return () => {
-      window.removeEventListener(CLIENT_COUNT_UPDATED_EVENT, onUpdated);
-      window.removeEventListener('storage', sync);
-    };
+    return () => window.removeEventListener(CLIENT_COUNT_UPDATED_EVENT, onUpdated);
   }, []);
+
+  useEffect(() => {
+    if (initialCount !== undefined) return;
+    void fetchClientCountFromApi()
+      .then(setCount)
+      .catch(() => setCount(getCachedClientCount()));
+  }, [initialCount]);
 
   return count;
 }

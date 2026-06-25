@@ -1,3 +1,5 @@
+export * from './cmsTypes';
+export * from './cmsMappers';
 export * from './types';
 export * from './client';
 export * from './mappers';

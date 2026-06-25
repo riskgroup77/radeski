@@ -47,6 +47,8 @@ export interface Doctor {
   };
   photo: string | null;
   credentials?: DoctorCredentials;
+  sortOrder?: number;
+  isFeatured?: boolean;
 }
 
 export interface PriceItem {

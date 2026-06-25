@@ -25,7 +25,7 @@ export function resolveClinicRatingUrl(platform: string, url?: string): string |
   return undefined;
 }
 
-/** Tugma bosilganda yangi tabda ochish (popup bloklamaydi) */
+/** Tugma bosilganda yangi tabda ochish va mijozlar sonini +1 oshirish */
 export function openAppointmentBooking(): void {
   incrementClientCount();
   window.open(APPOINTMENT_BOOKING_URL, APPOINTMENT_LINK_TARGET, APPOINTMENT_LINK_REL);

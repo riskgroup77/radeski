@@ -30,6 +30,8 @@ export interface ApiDoctor {
   photo: string | null;
   created_at: string;
   credentials: DoctorCredential | null;
+  sort_order?: number | null;
+  is_featured?: boolean | null;
 }
 
 export interface ApiSubService {
@@ -209,6 +211,8 @@ export interface DoctorCreatePayload {
     research_count?: number | null;
   } | null;
   photo?: string | null;
+  sort_order?: number | null;
+  is_featured?: boolean | null;
 }
 
 export interface SubServicePayload {
