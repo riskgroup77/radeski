@@ -153,7 +153,7 @@ export interface ClinicVideoCreatePayload {
   description_uz?: string | null;
   description_ru?: string | null;
   description_en?: string | null;
-  src: string;
+  src?: string;
   duration?: string | null;
   category_uz?: string | null;
   category_ru?: string | null;

@@ -36,7 +36,7 @@ import {
   serviceSubPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
-import { DICTIONARY, GALLERY_IMAGS } from './data';
+import { DICTIONARY, GALLERY_IMAGS, getClinicRatingSummary } from './data';
 import { clearAllLocalMedia } from './utils/localMediaStorage';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -943,10 +943,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {cmsClinicRatings.map((plat) => {
                       const reviewUrl = resolveClinicRatingUrl(plat.platform, plat.url);
-                      const platformSummary =
-                        plat.summary[locale] ||
-                        plat.summary.uz ||
-                        '';
+                      const platformSummary = getClinicRatingSummary(
+                        plat.platform,
+                        locale,
+                        plat.summary,
+                      );
                       const cardClassName =
                         'bg-brand-white rounded-2xl p-6 border border-brand-sectiongray text-left flex flex-col shadow-xs transition-all h-full';
                       const cardContent = (
@@ -972,7 +973,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                               <p className="text-[11px] font-bold text-brand-gold uppercase tracking-wide">
                                 {d.trustCardSummaryLabel}
                               </p>
-                              <p className="text-xs sm:text-sm text-brand-text-muted mt-2 leading-relaxed">
+                              <p className="text-xs sm:text-sm text-brand-text-primary font-medium mt-2 leading-relaxed">
                                 {platformSummary}
                               </p>
                             </div>

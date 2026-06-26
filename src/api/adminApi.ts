@@ -229,12 +229,11 @@ export async function importPrices(
 
 export async function createArticle(
   payload: ArticleCreatePayload,
-  coverFiles?: LocalizedImageFiles,
+  coverFile?: File | null,
   token?: string | null
 ) {
   const form = buildMultipartForm(payload, {
-    localizedImages: coverFiles,
-    image: coverFiles?.uz ?? null,
+    image: coverFile ?? null,
   });
   return apiFormRequestWithMethod<ApiArticle>(
     '/api/admin/articles',
@@ -247,12 +246,11 @@ export async function createArticle(
 export async function updateArticle(
   articleId: string,
   payload: Partial<ArticleCreatePayload>,
-  coverFiles?: LocalizedImageFiles,
+  coverFile?: File | null,
   token?: string | null
 ) {
   const form = buildMultipartForm(payload, {
-    localizedImages: coverFiles,
-    image: coverFiles?.uz ?? null,
+    image: coverFile ?? null,
   });
   return apiFormRequestWithMethod<ApiArticle>(
     `/api/admin/articles/${articleId}`,
@@ -431,20 +429,26 @@ export async function getAdminVideos(token?: string | null) {
 
 export async function createVideo(
   payload: ClinicVideoCreatePayload,
-  thumbnailFile?: File | null,
+  files?: { video?: File | null; thumbnail?: File | null },
   token?: string | null,
 ) {
-  const form = buildCmsMultipartForm(payload, { thumbnail: thumbnailFile });
+  const form = buildCmsMultipartForm(payload, {
+    video: files?.video,
+    thumbnail: files?.thumbnail,
+  });
   return apiFormRequestWithMethod<ApiClinicVideoOut>('/api/admin/videos', 'POST', form, withToken(token));
 }
 
 export async function updateVideo(
   videoId: string,
   payload: Partial<ClinicVideoCreatePayload>,
-  thumbnailFile?: File | null,
+  files?: { video?: File | null; thumbnail?: File | null },
   token?: string | null,
 ) {
-  const form = buildCmsMultipartForm(payload, { thumbnail: thumbnailFile });
+  const form = buildCmsMultipartForm(payload, {
+    video: files?.video,
+    thumbnail: files?.thumbnail,
+  });
   return apiFormRequestWithMethod<ApiClinicVideoOut>(
     `/api/admin/videos/${videoId}`,
     'PUT',

@@ -24,7 +24,7 @@ import {
   CUSTOMER_REVIEWS,
   TREATMENT_RESULTS,
 } from '../data/sitePagesContent';
-import { CLINIC_RATINGS } from '../data';
+import { CLINIC_RATINGS, CLINIC_RATING_SUMMARIES } from '../data';
 import { setCachedClientCount } from '../utils/clientCount';
 
 function withFallback<T>(apiItems: T[], fallback: T[]): T[] {
@@ -38,7 +38,7 @@ function mapLegacyRatings(): ClinicRatingDisplay[] {
     rating: item.rating,
     count: item.count,
     url: item.url,
-    summary: { uz: '', ru: '', en: '' },
+    summary: CLINIC_RATING_SUMMARIES[item.platform] ?? { uz: '', ru: '', en: '' },
   }));
 }
 

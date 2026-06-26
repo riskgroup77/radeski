@@ -37,6 +37,7 @@ import {
   createVideo,
   updateVideo,
   deleteVideo,
+  getAdminVideos,
   createClinicRating,
   updateClinicRating,
 } from '../api/adminApi';
@@ -55,6 +56,7 @@ import {
   mapClinicRatingToCreatePayload,
   mapReviewFromApi,
   mapReviewToCreatePayload,
+  mapClinicVideoFromApi,
   type ClinicRatingDisplay,
 } from '../api/cmsMappers';
 import { createReview as submitPublicReview } from '../api/publicApi';
@@ -62,6 +64,7 @@ import { ApiError, clearAuthToken, getAuthToken, setAuthToken, isUnauthorizedErr
 import { ApiAppointment, AppointmentStatus } from '../api/types';
 import ImageUploadField from './ImageUploadField';
 import ResolvedVideo from './ResolvedVideo';
+import VideoUploadField from './VideoUploadField';
 import MediaImage from './MediaImage';
 import { deleteLocalMedia, isLocalMediaRef, saveLocalMedia } from '../utils/localMediaStorage';
 import LocalizedImageUploadGroup from './LocalizedImageUploadGroup';
@@ -218,13 +221,14 @@ export default function AdminPanel({
   const [customerReviewForm, setCustomerReviewForm] = useState<Partial<CustomerReview>>({});
 
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [videoThumbnailFile, setVideoThumbnailFile] = useState<File | null>(null);
   const [beforeImageFile, setBeforeImageFile] = useState<File | null>(null);
   const [afterImageFile, setAfterImageFile] = useState<File | null>(null);
 
   const [doctorPhotoFile, setDoctorPhotoFile] = useState<File | null>(null);
   const [categoryImageFiles, setCategoryImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
-  const [subServiceImageFiles, setSubServiceImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
-  const [articleImageFiles, setArticleImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
+  const [subServiceImageFile, setSubServiceImageFile] = useState<File | null>(null);
+  const [articleImageFile, setArticleImageFile] = useState<File | null>(null);
 
   const [appointments, setAppointments] = useState<ApiAppointment[]>([]);
   const [appointmentsLoading, setAppointmentsLoading] = useState(false);
@@ -269,6 +273,15 @@ export default function AdminPanel({
       .then((items) => setEditedCustomerReviews(items.map(mapReviewFromApi)))
       .catch((err) => {
         if (!isUnauthorizedError(err)) setEditedCustomerReviews([]);
+      });
+  }, [isAuthenticated, activeTab, saveSuccess]);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'videos') return;
+    getAdminVideos()
+      .then((items) => setEditedVideos(items.map(mapClinicVideoFromApi)))
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) setEditedVideos([]);
       });
   }, [isAuthenticated, activeTab, saveSuccess]);
 
@@ -532,7 +545,7 @@ export default function AdminPanel({
   const handleEditSubService = (sub: ServiceDetail) => {
     setSelectedSubServiceId(sub.id);
     setSubServiceForm(JSON.parse(JSON.stringify(sub)));
-    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setSubServiceImageFile(null);
     setIsAddingSubService(false);
   };
 
@@ -544,7 +557,7 @@ export default function AdminPanel({
       description: { uz: '', ru: '', en: '' },
       image: null,
     });
-    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setSubServiceImageFile(null);
     setIsAddingSubService(true);
   };
 
@@ -570,19 +583,12 @@ export default function AdminPanel({
     }
 
     const editedIndex = updatedSubs.findIndex(s => s.id === subServiceForm.id);
-    const subLocalizedImageArrays = hasLocalizedImageFiles(subServiceImageFiles)
-      ? {
-          uz: subServiceImageFiles.uz ? [subServiceImageFiles.uz] : [],
-          ru: subServiceImageFiles.ru ? [subServiceImageFiles.ru] : [],
-          en: subServiceImageFiles.en ? [subServiceImageFiles.en] : [],
-        }
-      : undefined;
-    const subImages = subServiceImageFiles.uz && !subLocalizedImageArrays ? [subServiceImageFiles.uz] : [];
+    const subImages = subServiceImageFile ? [subServiceImageFile] : [];
 
     const subPayloads = updatedSubs.map((sub, index) => {
       const isEdited = index === editedIndex;
       return mapSubServiceToPayload(sub, {
-        preserveImages: !isEdited || !hasLocalizedImageFiles(subServiceImageFiles),
+        preserveImages: !isEdited || !subServiceImageFile,
       });
     });
 
@@ -594,7 +600,6 @@ export default function AdminPanel({
         { sub_services: subPayloads },
         null,
         subImages,
-        subLocalizedImageArrays,
       );
       await onRefresh();
       setCategoryForm(updatedCatObj);
@@ -723,7 +728,7 @@ export default function AdminPanel({
   const handleEditArticle = (art: Article) => {
     setSelectedArticleId(art.id);
     setArticleForm(art);
-    setArticleImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setArticleImageFile(null);
     setIsAddingArticle(false);
   };
 
@@ -744,7 +749,7 @@ export default function AdminPanel({
       image: null,
       views: 0
     });
-    setArticleImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setArticleImageFile(null);
     setIsAddingArticle(true);
   };
 
@@ -754,18 +759,18 @@ export default function AdminPanel({
     try {
       if (isAddingArticle) {
         const payload = mapArticleToCreatePayload(articleForm);
-        await createArticle(payload, articleImageFiles);
+        await createArticle(payload, articleImageFile);
       } else {
         const payload = mapArticleToCreatePayload(articleForm, {
-          preserveImage: !hasLocalizedImageFiles(articleImageFiles),
+          preserveImage: !articleImageFile,
         });
-        await updateArticle(articleForm.id, payload, articleImageFiles);
+        await updateArticle(articleForm.id, payload, articleImageFile);
       }
 
       await onRefresh();
       setSelectedArticleId(null);
       setIsAddingArticle(false);
-      setArticleImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+      setArticleImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Maqola saqlandi!" : "Статья сохранена!");
     } catch (err) {
       reportAdminError(err, 'Save failed');
@@ -796,6 +801,7 @@ export default function AdminPanel({
       duration: '0:00',
     });
     setVideoFile(null);
+    setVideoThumbnailFile(null);
     setIsAddingVideo(true);
   };
 
@@ -803,6 +809,7 @@ export default function AdminPanel({
     setSelectedVideoId(video.id);
     setVideoForm(JSON.parse(JSON.stringify(video)));
     setVideoFile(null);
+    setVideoThumbnailFile(null);
     setIsAddingVideo(false);
   };
 
@@ -818,14 +825,25 @@ export default function AdminPanel({
       return;
     }
 
-    const src = videoForm.src?.trim();
-    if (!src) {
+    const hasExistingSrc = Boolean(videoForm.src?.trim());
+    if (isAddingVideo && !videoFile) {
       alert(
         locale === 'uz'
-          ? 'Video manzilini kiriting (YouTube embed yoki MP4 URL).'
+          ? 'Video faylini qurilmadan yuklang (MP4, WebM yoki MOV).'
           : locale === 'ru'
-            ? 'Укажите URL видео (YouTube embed или MP4).'
-            : 'Enter a video URL (YouTube embed or MP4 link).',
+            ? 'Загрузите видеофайл с устройства (MP4, WebM или MOV).'
+            : 'Upload a video file from your device (MP4, WebM, or MOV).',
+      );
+      return;
+    }
+
+    if (!isAddingVideo && !videoFile && !hasExistingSrc) {
+      alert(
+        locale === 'uz'
+          ? 'Video faylini yuklang yoki mavjud video saqlangan bo\'lishi kerak.'
+          : locale === 'ru'
+            ? 'Загрузите видеофайл или сохраните существующее видео.'
+            : 'Upload a video file or keep the existing uploaded video.',
       );
       return;
     }
@@ -833,19 +851,22 @@ export default function AdminPanel({
     try {
       const payload = mapClinicVideoToCreatePayload({
         ...(videoForm as ClinicVideo),
-        src,
+        src: videoForm.src?.trim() || '',
       });
 
+      const files = { video: videoFile, thumbnail: videoThumbnailFile };
+
       if (isAddingVideo) {
-        await createVideo(payload, videoFile);
+        await createVideo(payload, files);
       } else if (videoForm.id) {
-        await updateVideo(videoForm.id, payload, videoFile);
+        await updateVideo(videoForm.id, payload, files);
       }
 
       await onRefreshCms();
       setSelectedVideoId(null);
       setIsAddingVideo(false);
       setVideoFile(null);
+      setVideoThumbnailFile(null);
       triggerSaveNotification(
         locale === 'uz' ? 'Video saqlandi!' : locale === 'ru' ? 'Видео сохранено!' : 'Video saved!',
       );
@@ -2070,12 +2091,12 @@ export default function AdminPanel({
                               rows={2}
                             />
 
-                            <LocalizedImageUploadGroup
-                              title={locale === 'uz' ? "Xizmat rasmlari (har til uchun)" : locale === 'ru' ? 'Изображения услуги (по языкам)' : 'Service images (per language)'}
-                              images={subServiceForm.images}
-                              files={subServiceImageFiles}
-                              onFilesChange={setSubServiceImageFiles}
-                              helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
+                            <ImageUploadField
+                              label={locale === 'uz' ? 'Xizmat rasmi' : locale === 'ru' ? 'Изображение услуги' : 'Service image'}
+                              currentImageUrl={getLocalizedImage(subServiceForm.images, locale) ?? subServiceForm.image}
+                              file={subServiceImageFile}
+                              onFileChange={setSubServiceImageFile}
+                              helperText={locale === 'uz' ? 'JPG, PNG, WebP yoki GIF — maks. 5 MB' : 'JPG, PNG, WebP or GIF — max 5 MB'}
                             />
                           </div>
 
@@ -2427,12 +2448,12 @@ export default function AdminPanel({
                     />
 
                     <div>
-                      <LocalizedImageUploadGroup
-                        title={locale === 'uz' ? "Maqola rasmlari (har til uchun)" : locale === 'ru' ? 'Изображения статьи (по языкам)' : 'Article images (per language)'}
-                        images={articleForm.images}
-                        files={articleImageFiles}
-                        onFilesChange={setArticleImageFiles}
-                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB. O'zbek, rus va ingliz tillari uchun alohida rasm." : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
+                      <ImageUploadField
+                        label={locale === 'uz' ? 'Maqola rasmi' : locale === 'ru' ? 'Изображение статьи' : 'Article cover image'}
+                        currentImageUrl={getLocalizedImage(articleForm.images, locale) ?? articleForm.image}
+                        file={articleImageFile}
+                        onFileChange={setArticleImageFile}
+                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB" : 'JPG, PNG, WebP or GIF — max 5 MB'}
                       />
                     </div>
 
@@ -2537,7 +2558,7 @@ export default function AdminPanel({
                       Video Studio
                     </span>
                     <button
-                      onClick={() => { setSelectedVideoId(null); setIsAddingVideo(false); setVideoFile(null); }}
+                      onClick={() => { setSelectedVideoId(null); setIsAddingVideo(false); setVideoFile(null); setVideoThumbnailFile(null); }}
                       className="text-xs text-brand-text-muted hover:text-brand-text-primary flex items-center gap-1 font-bold cursor-pointer"
                     >
                       <ArrowLeft className="w-4 h-4" />
@@ -2577,28 +2598,29 @@ export default function AdminPanel({
                     onChange={(values) => setVideoForm((prev) => ({ ...prev, category: values }))}
                   />
 
-                  <div>
-                    <label className="block text-[10px] font-bold text-brand-text-muted uppercase mb-1">
-                      {locale === 'uz' ? 'Video manzili (URL)' : locale === 'ru' ? 'URL видео' : 'Video URL'}
-                    </label>
-                    <input
-                      type="url"
-                      value={videoForm.src || ''}
-                      onChange={(e) => setVideoForm((prev) => ({ ...prev, src: e.target.value }))}
-                      placeholder="https://www.youtube.com/embed/..."
-                      className="w-full px-3 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-lg text-xs font-mono"
-                    />
-                  </div>
-
-                  <ImageUploadField
-                    label={locale === 'uz' ? 'Miniatura (ixtiyoriy)' : locale === 'ru' ? 'Миниатюра (необяз.)' : 'Thumbnail (optional)'}
-                    currentImageUrl={videoForm.thumbnail}
+                  <VideoUploadField
+                    label={locale === 'uz' ? 'Video fayli' : locale === 'ru' ? 'Видеофайл' : 'Video file'}
+                    currentVideoUrl={videoForm.src}
                     file={videoFile}
                     onFileChange={setVideoFile}
                     helperText={
                       locale === 'uz'
-                        ? 'JPG, PNG yoki WebP — video uchun rasm.'
-                        : 'JPG, PNG or WebP thumbnail image.'
+                        ? 'MP4, WebM yoki MOV formatida video yuklang. URL kiritish shart emas.'
+                        : locale === 'ru'
+                          ? 'Загрузите видео MP4, WebM или MOV. URL не требуется.'
+                          : 'Upload MP4, WebM, or MOV. No URL required.'
+                    }
+                  />
+
+                  <ImageUploadField
+                    label={locale === 'uz' ? 'Miniatura (ixtiyoriy)' : locale === 'ru' ? 'Миниатюра (необяз.)' : 'Thumbnail (optional)'}
+                    currentImageUrl={videoForm.thumbnail}
+                    file={videoThumbnailFile}
+                    onFileChange={setVideoThumbnailFile}
+                    helperText={
+                      locale === 'uz'
+                        ? 'Video kartochkasi uchun rasm (ixtiyoriy).'
+                        : 'Optional preview image for the video card.'
                     }
                   />
 
@@ -2617,7 +2639,7 @@ export default function AdminPanel({
 
                   <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
                     <button
-                      onClick={() => { setSelectedVideoId(null); setIsAddingVideo(false); setVideoFile(null); }}
+                      onClick={() => { setSelectedVideoId(null); setIsAddingVideo(false); setVideoFile(null); setVideoThumbnailFile(null); }}
                       className="px-4 py-2 hover:bg-brand-offwhite text-brand-text-muted text-xs font-bold rounded-lg cursor-pointer"
                     >
                       {locale === 'uz' ? 'Bekor qilish' : locale === 'ru' ? 'Отмена' : 'Cancel'}

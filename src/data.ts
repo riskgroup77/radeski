@@ -304,6 +304,31 @@ export const CLINIC_RATING_SUMMARIES: Record<string, { uz: string; ru: string; e
   },
 };
 
+export function getClinicRatingSummary(
+  platform: string,
+  locale: 'uz' | 'ru' | 'en',
+  apiSummary?: { uz: string; ru: string; en: string },
+): string {
+  const fromApi = apiSummary?.[locale]?.trim() || apiSummary?.uz?.trim();
+  if (fromApi) return fromApi;
+
+  const direct = CLINIC_RATING_SUMMARIES[platform];
+  if (direct) return direct[locale] || direct.uz;
+
+  const matchedKey = Object.keys(CLINIC_RATING_SUMMARIES).find((key) => {
+    const a = key.toLowerCase();
+    const b = platform.toLowerCase();
+    return a === b || a.includes(b) || b.includes(a);
+  });
+
+  if (matchedKey) {
+    const summary = CLINIC_RATING_SUMMARIES[matchedKey];
+    return summary[locale] || summary.uz;
+  }
+
+  return '';
+}
+
 export const SITE_LOGO = '/gallery/logo.webp';
 
 /** Bosh sahifa hero slayderi — gallery/top1–3.webp (public/gallery ga nusxalanadi) */
