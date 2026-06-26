@@ -28,6 +28,7 @@ import type {
   ClinicRatingCreatePayload,
   ClinicVideoCreatePayload,
   PartnerCreatePayload,
+  AdminReviewCreatePayload,
   ReviewPatchPayload,
   SiteTextBulkPayload,
   SiteTextUpdatePayload,
@@ -133,12 +134,12 @@ export async function deleteDoctor(doctorId: string, token?: string | null) {
 
 export async function createServiceCategory(
   payload: ServiceCategoryCreatePayload,
-  categoryImages?: LocalizedImageFiles,
+  categoryImageFile?: File | null,
   subImages: (File | null)[] = [],
   token?: string | null
 ) {
   const form = buildMultipartForm(payload, {
-    localizedImages: categoryImages,
+    image: categoryImageFile ?? null,
     subImages,
   });
   return apiFormRequestWithMethod<ApiServiceCategory>(
@@ -152,15 +153,13 @@ export async function createServiceCategory(
 export async function updateServiceCategory(
   categoryId: string,
   payload: Partial<ServiceCategoryCreatePayload>,
-  categoryImages?: LocalizedImageFiles,
+  categoryImageFile?: File | null,
   subImages: (File | null)[] = [],
-  subLocalizedImageArrays?: SubLocalizedImageArrays,
   token?: string | null
 ) {
   const form = buildMultipartForm(payload, {
-    localizedImages: categoryImages,
+    image: categoryImageFile ?? null,
     subImages,
-    subLocalizedImageArrays,
   });
   return apiFormRequestWithMethod<ApiServiceCategory>(
     `/api/admin/services/${encodeURIComponent(categoryId)}`,
@@ -332,6 +331,16 @@ export async function deletePartner(partnerId: string, token?: string | null) {
 // --- CMS: Reviews ---
 export async function getAdminReviews(token?: string | null) {
   return apiRequest<ApiReviewOut[]>('/api/admin/reviews', {}, withToken(token));
+}
+
+export async function createAdminReview(
+  payload: AdminReviewCreatePayload,
+  token?: string | null,
+) {
+  return apiRequest<ApiReviewOut>('/api/admin/reviews', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }, withToken(token));
 }
 
 export async function patchReview(

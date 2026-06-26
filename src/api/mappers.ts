@@ -34,6 +34,18 @@ export function preserveImagePath(url: string | null | undefined): string | null
   }
 }
 
+function applyPreservedImageField(
+  payload: { image?: string | null },
+  options: { preserveImage?: boolean; preserveImages?: boolean } | undefined,
+  image: string | null | undefined,
+  images?: { uz?: string | null; ru?: string | null; en?: string | null } | null,
+) {
+  const preserve = options?.preserveImage ?? options?.preserveImages;
+  if (!preserve) return;
+  const path = image ?? images?.uz ?? images?.ru ?? images?.en;
+  if (path) payload.image = preserveImagePath(path);
+}
+
 export function getLocalizedField(
   item: Record<string, unknown>,
   field: string,
@@ -224,7 +236,7 @@ export function mapDoctorToCreatePayload(
 
 export function mapSubServiceToPayload(
   sub: ServiceDetail,
-  options?: { preserveImages?: boolean }
+  options?: { preserveImages?: boolean; preserveImage?: boolean }
 ): SubServicePayload {
   const payload: SubServicePayload = {
     name_uz: sub.name.uz,
@@ -237,16 +249,14 @@ export function mapSubServiceToPayload(
     ...localizedImagesToApiPaths(sub.images),
   };
 
-  if (options?.preserveImages && !sub.images) {
-    if (sub.image) payload.image = preserveImagePath(sub.image);
-  }
+  applyPreservedImageField(payload, options, sub.image, sub.images);
 
   return payload;
 }
 
 export function mapServiceCategoryToPayload(
   category: ServiceCategory,
-  options?: { preserveImages?: boolean }
+  options?: { preserveImages?: boolean; preserveImage?: boolean }
 ): ServiceCategoryCreatePayload {
   const payload: ServiceCategoryCreatePayload = {
     id: category.id,
@@ -266,9 +276,7 @@ export function mapServiceCategoryToPayload(
     is_price_section: category.isPriceSection ?? null,
   };
 
-  if (options?.preserveImages && !category.images) {
-    if (category.image) payload.image = preserveImagePath(category.image);
-  }
+  applyPreservedImageField(payload, options, category.image, category.images);
 
   return payload;
 }
@@ -310,9 +318,7 @@ export function mapArticleToCreatePayload(
     ...mapArticleRichContentToApiFields(article.richContent),
   };
 
-  if (options?.preserveImage && !article.images) {
-    if (article.image) payload.image = preserveImagePath(article.image);
-  }
+  applyPreservedImageField(payload, options, article.image ?? null, article.images);
 
   return payload;
 }

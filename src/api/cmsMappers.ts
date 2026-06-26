@@ -16,6 +16,7 @@ import type {
   ClinicRatingCreatePayload,
   ClinicVideoCreatePayload,
   PartnerCreatePayload,
+  AdminReviewCreatePayload,
   ReviewCreatePayload,
   TreatmentResultCreatePayload,
 } from './cmsTypes';
@@ -211,5 +212,12 @@ export function mapReviewToCreatePayload(review: CustomerReview): ReviewCreatePa
     service_uz: review.service?.uz || undefined,
     service_ru: review.service?.ru || undefined,
     service_en: review.service?.en || undefined,
+  };
+}
+
+export function mapReviewToAdminCreatePayload(review: CustomerReview): AdminReviewCreatePayload {
+  return {
+    ...mapReviewToCreatePayload(review),
+    published: review.published,
   };
 }

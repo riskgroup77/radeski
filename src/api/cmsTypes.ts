@@ -46,6 +46,10 @@ export interface ReviewCreatePayload {
   service_en?: string;
 }
 
+export interface AdminReviewCreatePayload extends ReviewCreatePayload {
+  published?: boolean;
+}
+
 export interface ReviewPatchPayload {
   published?: boolean;
 }

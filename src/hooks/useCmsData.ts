@@ -20,9 +20,7 @@ import type {
 import {
   CLINIC_BRANCHES,
   CLINIC_PARTNERS,
-  CLINIC_VIDEOS,
   CUSTOMER_REVIEWS,
-  TREATMENT_RESULTS,
 } from '../data/sitePagesContent';
 import { CLINIC_RATINGS, CLINIC_RATING_SUMMARIES } from '../data';
 import { setCachedClientCount } from '../utils/clientCount';
@@ -59,8 +57,8 @@ export function useCmsData(): CmsDataState {
   const [partners, setPartners] = useState<ClinicPartner[]>(CLINIC_PARTNERS);
   const [reviews, setReviews] = useState<CustomerReview[]>(CUSTOMER_REVIEWS);
   const [branches, setBranches] = useState<ClinicBranch[]>(CLINIC_BRANCHES);
-  const [treatmentResults, setTreatmentResults] = useState<TreatmentResult[]>(TREATMENT_RESULTS);
-  const [videos, setVideos] = useState<ClinicVideo[]>(CLINIC_VIDEOS);
+  const [treatmentResults, setTreatmentResults] = useState<TreatmentResult[]>([]);
+  const [videos, setVideos] = useState<ClinicVideo[]>([]);
   const [clinicRatings, setClinicRatings] = useState<ClinicRatingDisplay[]>(mapLegacyRatings());
   const [clientCount, setClientCount] = useState(998);
   const [loading, setLoading] = useState(true);
@@ -92,8 +90,18 @@ export function useCmsData(): CmsDataState {
       setPartners(withFallback(partnersRes.map(mapPartnerFromApi), CLINIC_PARTNERS));
       setReviews(withFallback(reviewsRes.map(mapReviewFromApi), CUSTOMER_REVIEWS.filter((r) => r.published)));
       setBranches(withFallback(branchesRes.map(mapBranchFromApi), CLINIC_BRANCHES));
-      setTreatmentResults(withFallback(resultsRes.map(mapTreatmentResultFromApi), TREATMENT_RESULTS));
-      setVideos(withFallback(videosRes.map(mapClinicVideoFromApi), CLINIC_VIDEOS));
+      setTreatmentResults(
+        resultsRes
+          .map(mapTreatmentResultFromApi)
+          .filter((result) => result.published !== false)
+          .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999)),
+      );
+      setVideos(
+        videosRes
+          .map(mapClinicVideoFromApi)
+          .filter((video) => video.isActive !== false)
+          .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999)),
+      );
       setClinicRatings(
         ratingsRes.length > 0 ? ratingsRes.map(mapClinicRatingFromApi) : mapLegacyRatings(),
       );

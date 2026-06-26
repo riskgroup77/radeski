@@ -24,13 +24,17 @@ import {
   getAppointments,
   updateAppointmentStatus,
   importPrices,
-  hasLocalizedImageFiles,
+  getAdminDoctors,
+  getAdminServices,
+  getAdminPrices,
+  getAdminArticles,
   createPartner,
   updatePartner,
   deletePartner,
   patchReview,
   deleteReview,
   getAdminReviews,
+  createAdminReview,
   createTreatmentResult,
   updateTreatmentResult,
   deleteTreatmentResult,
@@ -43,10 +47,14 @@ import {
 } from '../api/adminApi';
 import {
   mapDoctorToCreatePayload,
+  mapDoctorFromApi,
   mapServiceCategoryToPayload,
+  mapServiceCategoryFromApi,
   mapSubServiceToPayload,
   mapPriceToCreatePayload,
+  mapPriceFromApi,
   mapArticleToCreatePayload,
+  mapArticleFromApi,
   parsePriceValue,
 } from '../api/mappers';
 import {
@@ -55,11 +63,10 @@ import {
   mapClinicVideoToCreatePayload,
   mapClinicRatingToCreatePayload,
   mapReviewFromApi,
-  mapReviewToCreatePayload,
+  mapReviewToAdminCreatePayload,
   mapClinicVideoFromApi,
   type ClinicRatingDisplay,
 } from '../api/cmsMappers';
-import { createReview as submitPublicReview } from '../api/publicApi';
 import { ApiError, clearAuthToken, getAuthToken, setAuthToken, isUnauthorizedError, isAuthTokenExpired, ADMIN_SESSION_EXPIRED_EVENT } from '../api/client';
 import { ApiAppointment, AppointmentStatus } from '../api/types';
 import ImageUploadField from './ImageUploadField';
@@ -67,10 +74,12 @@ import ResolvedVideo from './ResolvedVideo';
 import VideoUploadField from './VideoUploadField';
 import MediaImage from './MediaImage';
 import { deleteLocalMedia, isLocalMediaRef, saveLocalMedia } from '../utils/localMediaStorage';
-import LocalizedImageUploadGroup from './LocalizedImageUploadGroup';
-import { EMPTY_LOCALIZED_IMAGE_FILES, getLocalizedImage } from '../utils/localizedImage';
+import { getLocalizedImage } from '../utils/localizedImage';
 import { normalizeArticleViews } from '../utils/articleViews';
-import { getCatalogPrices } from '../utils/enrichPrices';
+import { getCatalogPrices, enrichPrices } from '../utils/enrichPrices';
+import { enrichServiceCategories } from '../utils/enrichServices';
+import { enrichArticles } from '../utils/enrichArticles';
+import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 import { getNextSortOrderInCategory } from '../utils/priceSortOrderStorage';
 import { getPlatformLogo } from '../utils/platformLogo';
 import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
@@ -226,7 +235,7 @@ export default function AdminPanel({
   const [afterImageFile, setAfterImageFile] = useState<File | null>(null);
 
   const [doctorPhotoFile, setDoctorPhotoFile] = useState<File | null>(null);
-  const [categoryImageFiles, setCategoryImageFiles] = useState(EMPTY_LOCALIZED_IMAGE_FILES);
+  const [categoryImageFile, setCategoryImageFile] = useState<File | null>(null);
   const [subServiceImageFile, setSubServiceImageFile] = useState<File | null>(null);
   const [articleImageFile, setArticleImageFile] = useState<File | null>(null);
 
@@ -284,6 +293,47 @@ export default function AdminPanel({
         if (!isUnauthorizedError(err)) setEditedVideos([]);
       });
   }, [isAuthenticated, activeTab, saveSuccess]);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'doctors') return;
+    getAdminDoctors()
+      .then((items) => setEditedDoctors(sortDoctorsFeaturedFirst(items.map(mapDoctorFromApi))))
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) reportAdminError(err, 'Load failed');
+      });
+  }, [isAuthenticated, activeTab, saveSuccess, reportAdminError]);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'services') return;
+    getAdminServices()
+      .then((items) => {
+        const mapped = items
+          .map(mapServiceCategoryFromApi)
+          .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+        setEditedCategories(enrichServiceCategories(mapped));
+      })
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) reportAdminError(err, 'Load failed');
+      });
+  }, [isAuthenticated, activeTab, saveSuccess, reportAdminError]);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'prices') return;
+    getAdminPrices()
+      .then((items) => setEditedPrices(enrichPrices(items.map(mapPriceFromApi))))
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) reportAdminError(err, 'Load failed');
+      });
+  }, [isAuthenticated, activeTab, saveSuccess, reportAdminError]);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'articles') return;
+    getAdminArticles()
+      .then((items) => setEditedArticles(enrichArticles(items.map(mapArticleFromApi))))
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) reportAdminError(err, 'Load failed');
+      });
+  }, [isAuthenticated, activeTab, saveSuccess, reportAdminError]);
 
   useEffect(() => {
     const onSessionExpired = () => handleSessionExpired();
@@ -463,11 +513,11 @@ export default function AdminPanel({
   const handleSelectCategoryForEdit = (cat: ServiceCategory) => {
     setSelectedCategoryId(cat.id);
     setCategoryForm(cat);
-    setCategoryImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setCategoryImageFile(null);
     setIsAddingCategory(false);
     setSelectedSubServiceId(null);
     setIsAddingSubService(false);
-    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setSubServiceImageFile(null);
   };
 
   const handleCreateCategoryButton = () => {
@@ -480,11 +530,11 @@ export default function AdminPanel({
       image: null,
       subServices: []
     });
-    setCategoryImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setCategoryImageFile(null);
     setIsAddingCategory(true);
     setSelectedSubServiceId(null);
     setIsAddingSubService(false);
-    setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+    setSubServiceImageFile(null);
   };
 
   const handleSaveCategory = async () => {
@@ -510,19 +560,19 @@ export default function AdminPanel({
       };
 
       const payload = mapServiceCategoryToPayload(categoryData, {
-        preserveImages: !hasLocalizedImageFiles(categoryImageFiles),
+        preserveImage: !categoryImageFile,
       });
 
       if (isAddingCategory) {
-        await createServiceCategory(payload, categoryImageFiles);
+        await createServiceCategory(payload, categoryImageFile);
       } else {
-        await updateServiceCategory(categoryForm.id, payload, categoryImageFiles);
+        await updateServiceCategory(categoryForm.id, payload, categoryImageFile);
       }
 
       await onRefresh();
       setSelectedCategoryId(null);
       setIsAddingCategory(false);
-      setCategoryImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+      setCategoryImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Kategoriya saqlandi!" : "Категория сохранена!");
     } catch (err) {
       reportAdminError(err, 'Save failed');
@@ -588,7 +638,7 @@ export default function AdminPanel({
     const subPayloads = updatedSubs.map((sub, index) => {
       const isEdited = index === editedIndex;
       return mapSubServiceToPayload(sub, {
-        preserveImages: !isEdited || !subServiceImageFile,
+        preserveImage: !isEdited || !subServiceImageFile,
       });
     });
 
@@ -605,7 +655,7 @@ export default function AdminPanel({
       setCategoryForm(updatedCatObj);
       setIsAddingSubService(false);
       setSelectedSubServiceId(null);
-      setSubServiceImageFiles(EMPTY_LOCALIZED_IMAGE_FILES);
+      setSubServiceImageFile(null);
       triggerSaveNotification(locale === 'uz' ? "Xizmat saqlandi!" : "Услуга сохранена!");
     } catch (err) {
       reportAdminError(err, 'Save failed');
@@ -1103,10 +1153,7 @@ export default function AdminPanel({
 
     try {
       if (isAddingCustomerReview) {
-        const created = await submitPublicReview(mapReviewToCreatePayload(review));
-        if (review.published) {
-          await patchReview(created.id, { published: true });
-        }
+        await createAdminReview(mapReviewToAdminCreatePayload(review));
       } else if (review.id) {
         await patchReview(review.id, { published: review.published });
       }
@@ -1989,12 +2036,12 @@ export default function AdminPanel({
                     </div>
 
                     <div className="md:col-span-2">
-                      <LocalizedImageUploadGroup
-                        title={locale === 'uz' ? "Kategoriya rasmlari (har til uchun alohida)" : locale === 'ru' ? 'Изображения категории (по языкам)' : 'Category images (per language)'}
-                        images={categoryForm.images}
-                        files={categoryImageFiles}
-                        onFilesChange={setCategoryImageFiles}
-                        helperText={locale === 'uz' ? "JPG, PNG, WebP yoki GIF — maks. 5 MB. Saytda tanlangan tilga mos rasm chiqadi." : "JPG, PNG, WebP или GIF — макс. 5 МБ"}
+                      <ImageUploadField
+                        label={locale === 'uz' ? 'Kategoriya rasmi' : locale === 'ru' ? 'Изображение категории' : 'Category image'}
+                        currentImageUrl={getLocalizedImage(categoryForm.images, locale) ?? categoryForm.image}
+                        file={categoryImageFile}
+                        onFileChange={setCategoryImageFile}
+                        helperText={locale === 'uz' ? 'JPG, PNG, WebP yoki GIF — maks. 5 MB. Barcha tillar uchun bir xil rasm.' : 'JPG, PNG, WebP or GIF — max 5 MB. Same image for all languages.'}
                       />
                     </div>
                   </div>

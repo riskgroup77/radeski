@@ -57,7 +57,7 @@ import AdminPanel from './components/AdminPanel';
 import LegalPage from './components/LegalPage';
 import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShieldCheck, Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
+import { Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
 import { useCmsData } from './hooks/useCmsData';
 import { createAppointment, createReview } from './api/publicApi';
@@ -137,6 +137,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     treatmentResults: cmsTreatmentResults,
     videos: cmsVideos,
     clinicRatings: cmsClinicRatings,
+    loading: cmsLoading,
     refetch: refetchCms,
   } = useCmsData();
 
@@ -689,8 +690,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
               {/* Bento Grid Features / Advantages */}
               <section id="advantages-section" className="py-16 bg-brand-white border-b border-brand-offwhite">
-                <div className="site-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                  <div className="flex gap-4 items-start p-5 bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
+                <div className="site-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 w-full items-stretch">
+                  <div className="flex gap-4 items-start p-6 lg:p-8 h-full w-full bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
                     <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
                       <Star className="w-5 h-5 fill-current" />
                     </div>
@@ -700,7 +701,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start p-5 bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
+                  <div className="flex gap-4 items-start p-6 lg:p-8 h-full w-full bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
                     <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
                       <HeartHandshake className="w-5 h-5" />
                     </div>
@@ -710,17 +711,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 items-start p-5 bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
-                    <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
-                      <ShieldCheck className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-brand-text-primary text-sm sm:text-base">{d.features03}</h4>
-                      <p className="text-xs text-brand-text-muted mt-1 leading-normal font-light">{d.features03Desc}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 items-start p-5 bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
+                  <div className="flex gap-4 items-start p-6 lg:p-8 h-full w-full bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
                     <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
                       <CheckCircle2 className="w-5 h-5" />
                     </div>
@@ -1336,7 +1327,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           )}
 
           {currentPage === 'videos' && (
-            <VideosPage locale={locale} dictionary={d} videos={cmsVideos} />
+            <VideosPage locale={locale} dictionary={d} videos={cmsVideos} loading={cmsLoading} />
           )}
 
           {currentPage === 'branches' && (
@@ -1353,6 +1344,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale}
               dictionary={d}
               results={cmsTreatmentResults}
+              loading={cmsLoading}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
             />
           )}

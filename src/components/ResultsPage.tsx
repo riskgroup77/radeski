@@ -10,10 +10,11 @@ interface ResultsPageProps {
   locale: Locale;
   dictionary?: Record<string, string>;
   results: TreatmentResult[];
+  loading?: boolean;
   onOpenAppointment?: () => void;
 }
 
-export default function ResultsPage({ locale, dictionary, results, onOpenAppointment }: ResultsPageProps) {
+export default function ResultsPage({ locale, dictionary, results, loading = false, onOpenAppointment }: ResultsPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
@@ -45,6 +46,7 @@ export default function ResultsPage({ locale, dictionary, results, onOpenAppoint
           </p>
         </div>
 
+        {!loading && results.length > 0 && (
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {serviceFilters.map((filter) => (
             <button
@@ -61,9 +63,23 @@ export default function ResultsPage({ locale, dictionary, results, onOpenAppoint
             </button>
           ))}
         </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
-          {filteredResults.map((result, index) => (
+          {loading ? (
+            <div className="col-span-full py-16 text-center text-brand-text-muted text-sm">
+              {locale === 'uz' ? 'Natijalar yuklanmoqda...' : locale === 'ru' ? 'Загрузка результатов...' : 'Loading results...'}
+            </div>
+          ) : filteredResults.length === 0 ? (
+            <div className="col-span-full py-16 text-center text-brand-text-muted text-sm leading-relaxed">
+              {locale === 'uz'
+                ? 'Hozircha davolash natijalari joylashtirilmagan.'
+                : locale === 'ru'
+                  ? 'Результаты лечения пока не добавлены.'
+                  : 'Treatment results have not been added yet.'}
+            </div>
+          ) : (
+          filteredResults.map((result, index) => (
             <motion.article
               key={result.id}
               initial={{ opacity: 0, y: 16 }}
@@ -113,7 +129,8 @@ export default function ResultsPage({ locale, dictionary, results, onOpenAppoint
                 </p>
               </div>
             </motion.article>
-          ))}
+          ))
+          )}
         </div>
 
         <div className="mt-14 bg-gradient-to-r from-brand-dark-navy to-brand-deep-blue rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden">

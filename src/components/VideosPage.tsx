@@ -10,9 +10,10 @@ interface VideosPageProps {
   locale: Locale;
   dictionary?: Record<string, string>;
   videos: ClinicVideo[];
+  loading?: boolean;
 }
 
-export default function VideosPage({ locale, dictionary, videos }: VideosPageProps) {
+export default function VideosPage({ locale, dictionary, videos, loading = false }: VideosPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const activeVideo = videos.find((video) => video.id === activeVideoId) ?? null;
@@ -33,7 +34,20 @@ export default function VideosPage({ locale, dictionary, videos }: VideosPagePro
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
-          {videos.map((video, index) => (
+          {loading ? (
+            <div className="col-span-full py-16 text-center text-brand-text-muted text-sm">
+              {locale === 'uz' ? 'Videolar yuklanmoqda...' : locale === 'ru' ? 'Загрузка видео...' : 'Loading videos...'}
+            </div>
+          ) : videos.length === 0 ? (
+            <div className="col-span-full py-16 text-center text-brand-text-muted text-sm leading-relaxed">
+              {locale === 'uz'
+                ? 'Hozircha klinika videolari joylashtirilmagan.'
+                : locale === 'ru'
+                  ? 'Видео клиники пока не добавлены.'
+                  : 'Clinic videos have not been added yet.'}
+            </div>
+          ) : (
+          videos.map((video, index) => (
             <motion.article
               key={video.id}
               initial={{ opacity: 0, y: 16 }}
@@ -80,9 +94,11 @@ export default function VideosPage({ locale, dictionary, videos }: VideosPagePro
                 </p>
               </div>
             </motion.article>
-          ))}
+          ))
+          )}
         </div>
 
+        {!loading && videos.length > 0 && (
         <p className="mt-10 text-center text-xs text-brand-text-muted max-w-2xl mx-auto leading-relaxed">
           {locale === 'uz'
             ? 'Videolar tanishuv maqsadida joylashtirilgan. Aniq davolash rejasi shifokor ko‘rigida belgilanadi.'
@@ -90,6 +106,7 @@ export default function VideosPage({ locale, dictionary, videos }: VideosPagePro
               ? 'Видео размещены в ознакомительных целях. Точный план лечения определяется на приёме.'
               : 'Videos are for reference. Exact treatment plans are set at consultation.'}
         </p>
+        )}
       </div>
 
       <AnimatePresence>
