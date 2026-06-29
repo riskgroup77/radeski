@@ -23,7 +23,7 @@ import {
   CUSTOMER_REVIEWS,
 } from '../data/sitePagesContent';
 import { CLINIC_RATINGS, CLINIC_RATING_SUMMARIES } from '../data';
-import { setCachedClientCount } from '../utils/clientCount';
+import { getCachedClientCount, resolveClientCount, setCachedClientCount } from '../utils/clientCount';
 
 function withFallback<T>(apiItems: T[], fallback: T[]): T[] {
   return apiItems.length > 0 ? apiItems : fallback;
@@ -60,7 +60,7 @@ export function useCmsData(): CmsDataState {
   const [treatmentResults, setTreatmentResults] = useState<TreatmentResult[]>([]);
   const [videos, setVideos] = useState<ClinicVideo[]>([]);
   const [clinicRatings, setClinicRatings] = useState<ClinicRatingDisplay[]>(mapLegacyRatings());
-  const [clientCount, setClientCount] = useState(998);
+  const [clientCount, setClientCount] = useState(() => getCachedClientCount());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -105,7 +105,7 @@ export function useCmsData(): CmsDataState {
       setClinicRatings(
         ratingsRes.length > 0 ? ratingsRes.map(mapClinicRatingFromApi) : mapLegacyRatings(),
       );
-      const count = countRes.client_count > 0 ? countRes.client_count : 998;
+      const count = resolveClientCount(countRes.client_count);
       setClientCount(count);
       setCachedClientCount(count);
     } catch (err) {

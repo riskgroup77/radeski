@@ -3,15 +3,18 @@ import {
   CLIENT_COUNT_UPDATED_EVENT,
   fetchClientCountFromApi,
   getCachedClientCount,
+  resolveClientCount,
+  setCachedClientCount,
 } from '../utils/clientCount';
 
 export function useClientCount(initialCount?: number): number {
-  const [count, setCount] = useState(() => initialCount ?? getCachedClientCount());
+  const [count, setCount] = useState(() => getCachedClientCount());
 
   useEffect(() => {
-    if (initialCount !== undefined) {
-      setCount(initialCount);
-    }
+    if (initialCount === undefined) return;
+    const resolved = resolveClientCount(initialCount);
+    setCachedClientCount(resolved);
+    setCount(resolved);
   }, [initialCount]);
 
   useEffect(() => {
