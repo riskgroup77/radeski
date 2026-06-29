@@ -64,10 +64,10 @@ export default function HomeCarousel<T>({
   const arrowBase =
     'absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-brand-white border border-brand-sectiongray shadow-md text-brand-gold hover:bg-brand-gold hover:text-white transition-colors cursor-pointer flex items-center justify-center';
   const prevArrowClass = arrowsInside
-    ? `${arrowBase} left-3 sm:left-4`
+    ? `${arrowBase} left-2 sm:left-3 md:left-4`
     : `${arrowBase} left-0 -translate-x-1/2 sm:-translate-x-full hidden sm:flex`;
   const nextArrowClass = arrowsInside
-    ? `${arrowBase} right-3 sm:right-4`
+    ? `${arrowBase} right-2 sm:right-3 md:right-4`
     : `${arrowBase} right-0 translate-x-1/2 sm:translate-x-full hidden sm:flex`;
 
   return (

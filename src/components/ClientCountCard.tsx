@@ -8,6 +8,7 @@ interface ClientCountCardProps {
   locale: Locale;
   compact?: boolean;
   variant?: 'default' | 'hero';
+  apiCount?: number;
 }
 
 type CountTheme = 'light' | 'hero';
@@ -238,8 +239,9 @@ export default function ClientCountCard({
   locale,
   compact = false,
   variant = 'default',
+  apiCount,
 }: ClientCountCardProps) {
-  const count = useAnimatedClientCount();
+  const count = useAnimatedClientCount(apiCount);
   const copy = getCopy(locale);
   const size: 'compact' | 'default' | 'hero' = compact ? 'compact' : variant === 'hero' ? 'hero' : 'default';
   const isHero = variant === 'hero';
@@ -250,23 +252,36 @@ export default function ClientCountCard({
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.55 }}
-        className="w-full lg:w-auto lg:min-w-[min(100%,480px)] xl:min-w-[min(100%,560px)] flex flex-col items-center lg:items-end gap-3 sm:gap-4"
+        className="w-full lg:w-auto lg:min-w-[min(100%,480px)] xl:min-w-[min(100%,560px)]"
         aria-live="polite"
       >
-        <p className="font-bold uppercase tracking-[0.16em] sm:tracking-[0.18em] text-white/70 text-[11px] sm:text-xs md:text-sm shrink-0 relative z-10">
-          {copy.label}
-        </p>
-
-        <div className="text-[8rem] leading-none py-[1em] w-full flex justify-center lg:justify-end overflow-visible">
-          <AnimatedClientCount count={count} size="hero" theme="hero" align="end" />
-        </div>
-
-        {!compact && (
-          <p className="text-white/55 font-medium flex items-center justify-center lg:justify-end gap-1.5 text-[11px] sm:text-xs md:text-sm shrink-0 relative z-10">
-            <TrendingUp className="text-brand-gold shrink-0 w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
-            <span>{copy.hint}</span>
+        <div className="flex flex-col items-center lg:items-end gap-2.5 sm:gap-3 lg:gap-4 w-full rounded-2xl border border-white/20 bg-black/25 backdrop-blur-md px-4 py-4 sm:px-5 sm:py-5 lg:rounded-none lg:border-0 lg:bg-transparent lg:backdrop-blur-none lg:px-0 lg:py-0">
+          <p className="font-bold uppercase tracking-[0.14em] sm:tracking-[0.16em] text-white/85 text-[11px] sm:text-xs md:text-sm shrink-0 text-center lg:text-right w-full">
+            {copy.label}
           </p>
-        )}
+
+          {/* Mobile / tablet: static count — fits narrow screens without clipping */}
+          <div className="lg:hidden w-full flex justify-center">
+            <p
+              className="font-black text-white leading-none tabular-nums drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] text-[clamp(2.75rem,16vw,4.75rem)]"
+              aria-label={formatCount(count)}
+            >
+              {formatCount(count)}
+            </p>
+          </div>
+
+          {/* Desktop: reel animation */}
+          <div className="hidden lg:flex text-[clamp(5rem,7vw,8rem)] leading-none py-[0.35em] w-full justify-end overflow-visible">
+            <AnimatedClientCount count={count} size="hero" theme="hero" align="end" />
+          </div>
+
+          {!compact && (
+            <p className="text-white/70 font-medium flex items-center justify-center lg:justify-end gap-1.5 text-[11px] sm:text-xs md:text-sm shrink-0 text-center lg:text-right w-full">
+              <TrendingUp className="text-brand-gold shrink-0 w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
+              <span>{copy.hint}</span>
+            </p>
+          )}
+        </div>
       </motion.div>
     );
   }

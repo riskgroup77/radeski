@@ -202,6 +202,19 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.025em;
 }
 
+.phone-call-link--subheader {
+  display: flex;
+}
+
+.phone-call-link--subheader .phone-call-link__wrap::before {
+  animation: none;
+  display: none;
+}
+
+#main-app-header .header-mobile-contact-hours {
+  word-break: break-word;
+}
+
 .site-container {
   width: 100%;
   padding-left: 1rem;
@@ -236,7 +249,27 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.clinic-ai-chat-welcome,
+@media (max-width: 639px) {
+  #hero-section {
+    padding-bottom: max(4rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  #advantages-section .site-container > div {
+    min-height: 0;
+  }
+
+  #inline-phone-input,
+  #inline-submit-btn,
+  .header-appointment-btn--mobile {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 1023px) {
+  #hero-section .site-container {
+    min-height: 0;
+  }
+}
 .clinic-ai-chat-welcome-preview {
   background-color: #ffffff;
 }

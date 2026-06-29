@@ -11,9 +11,10 @@ interface HeroProps {
   locale: Locale;
   onOpenAppointment: () => void;
   onNavigate: (page: PageId) => void;
+  clientCount?: number;
 }
 
-export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProps) {
+export default function Hero({ locale, onOpenAppointment, onNavigate, clientCount }: HeroProps) {
   const d = DICTIONARY[locale];
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -90,7 +91,7 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
   return (
     <div
       id="hero-section"
-      className="relative w-full h-[min(72vh,580px)] sm:h-[min(78vh,650px)] min-h-[480px] bg-brand-dark-navy overflow-hidden pt-12"
+      className="relative w-full bg-brand-dark-navy overflow-x-hidden pt-12 pb-16 sm:pb-14 lg:overflow-hidden lg:h-[min(78vh,650px)] lg:min-h-[580px]"
     >
       {/* Background slideshow — hero konteyneriga to‘liq mos object-cover */}
       <div className="absolute inset-0" aria-hidden="true">
@@ -114,7 +115,7 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/50 via-transparent to-transparent" />
       </div>
 
-      <div className="relative site-container h-full flex flex-col justify-center pb-20 sm:pb-16 lg:pb-12">
+      <div className="relative site-container flex flex-col justify-center py-6 sm:py-8 lg:h-full lg:py-0 lg:pb-12">
         <div className="lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.95fr)] lg:items-center lg:gap-8 xl:gap-12 2xl:gap-16">
           <div className="min-w-0">
             <motion.div
@@ -133,7 +134,7 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ type: 'spring', stiffness: 100, delay: 0.3 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-white tracking-tight max-w-3xl leading-tight drop-shadow-sm"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold text-white tracking-tight max-w-3xl leading-tight drop-shadow-sm"
             >
               {slide.title[locale]}
             </motion.h2>
@@ -143,7 +144,7 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ type: 'spring', stiffness: 100, delay: 0.4 }}
-              className="text-slate-200 text-base sm:text-lg md:text-xl mt-4 max-w-2xl leading-relaxed font-light drop-shadow-sm"
+              className="text-slate-200 text-sm sm:text-base md:text-lg lg:text-xl mt-3 sm:mt-4 max-w-2xl leading-relaxed font-light drop-shadow-sm line-clamp-5 sm:line-clamp-none"
             >
               {slide.subtitle[locale]}
             </motion.p>
@@ -152,27 +153,27 @@ export default function Hero({ locale, onOpenAppointment, onNavigate }: HeroProp
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="mt-8 flex flex-col sm:flex-row gap-4 max-w-2xl"
+              className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-2xl"
             >
-              <AppointmentBookingLink className="px-8 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white font-bold tracking-wide shadow-lg shadow-brand-gold/15 hover:shadow-brand-gold/25 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm no-underline">
+              <AppointmentBookingLink className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white font-bold tracking-wide shadow-lg shadow-brand-gold/15 hover:shadow-brand-gold/25 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm no-underline">
                 {d.appointmentBtn}
                 <ArrowRight className="w-4 h-4" />
               </AppointmentBookingLink>
               <button
                 onClick={() => onNavigate('services')}
-                className="px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold tracking-wide border border-white/20 backdrop-blur-sm active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
+                className="w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold tracking-wide border border-white/20 backdrop-blur-sm active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer text-sm"
               >
                 {locale === 'uz' ? 'Xizmatlarimiz' : locale === 'ru' ? 'Наши услуги' : 'Explore Services'}
               </button>
             </motion.div>
           </div>
 
-          <div className="mt-10 sm:mt-12 lg:mt-0 flex items-center justify-center lg:justify-end lg:self-center overflow-visible">
-            <ClientCountCard locale={locale} variant="hero" />
+          <div className="hidden lg:flex mt-0 items-stretch justify-end self-center overflow-visible">
+            <ClientCountCard locale={locale} variant="hero" apiCount={clientCount} />
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-4 flex gap-2 z-10">
+        <div className="mt-8 sm:mt-0 sm:absolute sm:bottom-8 left-4 flex gap-2 z-10">
           {slides.map((_, idx) => (
             <button
               key={idx}

@@ -138,6 +138,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     videos: cmsVideos,
     clinicRatings: cmsClinicRatings,
     loading: cmsLoading,
+    clientCount: cmsClientCount,
     refetch: refetchCms,
   } = useCmsData();
 
@@ -631,7 +632,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   }
 
   return (
-    <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[96px] sm:pt-[136px]">
+    <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[158px] sm:pt-[136px]">
 
       {dataError && currentPage !== 'admin' && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-3">
@@ -686,6 +687,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                 locale={locale}
                 onOpenAppointment={() => handleOpenAppointmentWithService()}
                 onNavigate={goToPage}
+                clientCount={cmsClientCount}
               />
 
               {/* Bento Grid Features / Advantages */}
@@ -751,7 +753,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                         {(() => {
                           const catImage = getLocalizedImage(category.images, locale) ?? category.image;
                           return catImage ? (
-                          <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[220px] sm:min-h-[260px] lg:min-h-[300px] overflow-hidden bg-brand-offwhite">
+                          <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[180px] sm:min-h-[260px] lg:min-h-[300px] overflow-hidden bg-brand-offwhite">
                             <MediaImage
                               src={catImage}
                               alt={category.title[locale]}
@@ -808,11 +810,12 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </button>
                   </div>
 
-                  <div className="px-2 sm:px-10">
+                  <div className="px-1 sm:px-10">
                     <HomeCarousel
                       items={homeDoctorsCarousel}
                       visibleCount={3}
                       autoPlayMs={0}
+                      arrowsInside
                       getKey={(doc) => doc.id}
                       gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                       ariaLabel={
@@ -891,21 +894,23 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   </p>
 
                   {!inlineSubmitted ? (
-                    <form onSubmit={handleInlineSubmit} className="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                    <form onSubmit={handleInlineSubmit} className="mt-8 max-w-md mx-auto w-full px-1 flex flex-col sm:flex-row gap-3">
                       <input
                         id="inline-phone-input"
                         type="tel"
+                        inputMode="tel"
+                        autoComplete="tel"
                         required
                         value={inlinePhone}
                         onChange={(e) => setInlinePhone(e.target.value)}
                         placeholder="+998 (__) ___-__-__"
-                        className="flex-1 px-4 py-3 bg-white/10 hover:bg-white/15 border border-white/20 focus:bg-white font-medium focus:border-white rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 text-white focus:text-brand-text-primary transition-all text-sm placeholder-slate-400"
+                        className="w-full flex-1 px-4 py-3.5 bg-white/10 hover:bg-white/15 border border-white/20 focus:bg-white font-medium focus:border-white rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold/25 text-white focus:text-brand-text-primary transition-all text-base sm:text-sm placeholder-slate-400 min-h-[48px]"
                       />
                       <button
                         id="inline-submit-btn"
                         type="submit"
                         disabled={inlineLoading}
-                        className="px-6 py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-extrabold text-sm rounded-xl transition-all cursor-pointer shadow-lg shadow-brand-gold/10"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-extrabold text-sm rounded-xl transition-all cursor-pointer shadow-lg shadow-brand-gold/10 min-h-[48px]"
                       >
                         {inlineLoading ? (locale === 'uz' ? "Yuborilmoqda..." : "Отправка...") : d.submitBtn}
                       </button>
@@ -1028,11 +1033,12 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </button>
                   </div>
 
-                  <div className="px-2 sm:px-10">
+                  <div className="px-1 sm:px-10">
                     <HomeCarousel
                       items={dynamicArticles}
                       visibleCount={3}
                       autoPlayMs={5000}
+                      arrowsInside
                       getKey={(art) => art.id}
                       gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                       ariaLabel={

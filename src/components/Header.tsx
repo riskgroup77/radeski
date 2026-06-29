@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Phone, MapPin, ChevronDown } from 'lucide-react';
+import { Menu, X, Globe, Phone, MapPin, ChevronDown, Clock } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import SiteLogo from './SiteLogo';
@@ -393,6 +393,40 @@ export default function Header({
           </div>
         </div>
       )}
+
+      <div className="sm:hidden border-t border-slate-100 bg-slate-50/95">
+        <div className="site-container py-2.5 flex flex-col gap-2">
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.addressShort ?? d.addressValue)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-start justify-center gap-1.5 text-[11px] text-slate-700 text-center leading-snug px-1 hover:text-brand-gold transition-colors"
+          >
+            <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
+            <span>{d.addressShort ?? d.addressValue}</span>
+          </a>
+          <a
+            href="tel:+998732007373"
+            className="phone-call-link phone-call-link--subheader w-full justify-center"
+            aria-label={
+              locale === 'uz'
+                ? 'Telefon qilish: +998 (73) 200-73-73'
+                : locale === 'ru'
+                  ? 'Позвонить: +998 (73) 200-73-73'
+                  : 'Call: +998 (73) 200-73-73'
+            }
+          >
+            <span className="phone-call-link__wrap">
+              <Phone className="w-4 h-4 shrink-0" />
+              <span className="phone-call-link__number text-sm whitespace-nowrap">+998 (73) 200-73-73</span>
+            </span>
+          </a>
+          <p className="flex items-start justify-center gap-1.5 text-[11px] sm:text-xs text-slate-600 text-center leading-snug px-1">
+            <Clock className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
+            <span>{d.workingHoursShort ?? d.workingHoursValue}</span>
+          </p>
+        </div>
+      </div>
     </header>
   );
 }
