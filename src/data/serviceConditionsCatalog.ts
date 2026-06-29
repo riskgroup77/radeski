@@ -13,7 +13,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Rozaseya va qon tomir tarmoqlari',
         description:
-          'Rozaseya — yuzda doimiy yoki vaqti-vaqti bilan qizarish, kichik qon tomir tarmoqlari (kuperoz) va ba\'zan toshma bilan kechadigan surunkali holat. Issiq, stress, alkogol va quyosh nurlari kuchaytirishi mumkin. IPL apparat muolajasi qon tomirlarni ko\'ngil qizdiruvchi yorug\'lik bilan yopadi, qizarishni kamaytiradi va teri to\'qimasini mustahkamlaydi. Og\'riqsiz usul bo\'lib, bir necha seansdan keyin sezilarli yaxshilanish kuzatiladi.',
+          'Rozaseya — yuzda doimiy yoki vaqti-vaqti bilan qizarish, kichik qon tomir tarmoqlari (kuperoz) va ba\'zan toshma bilan kechadigan surunkali holat. Issiq, stress, alkogol va quyosh nurlari kuchaytirishi mumkin. IPL apparat muolajasi qon tomirlarni issiq yorug\'lik bilan yopadi, qizarishni kamaytiradi va teri to\'qimasini mustahkamlaydi. Og\'riqsiz usul bo\'lib, bir necha seansdan keyin sezilarli yaxshilanish kuzatiladi.',
       },
       {
         title: 'Yoshga bog\'liq teri eskirishi va ajinlar',
@@ -106,7 +106,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Psoriaz',
         description:
-          'Psoriaz — autoimmun xarakterli surunkali teri kasalligi bo\'lib, qizil dog\'lar va oq qoplama (leykoderma) bilan namoyon bo\'ladi. Tizza, tirsak, bosh terisi va tana qismlarida uchraydi. Radeski klinikasida fototerapiya (UVB 311 nm), mahalliy terapiya va og\'ir holatlarda immunobiologik preparatlar qo\'llaniladi. Maqsad — asoratlarni kamaytirish va remissiya muddatini uzaytirish.',
+          'Psoriaz — autoimmun xarakterli surunkali teri kasalligi bo\'lib, qizil dog\'lar va qalqonsimon oq-qizil qoplama bilan namoyon bo\'ladi. Tizza, tirsak, bosh terisi va tana qismlarida uchraydi. Radeski klinikasida fototerapiya (UVB 311 nm), mahalliy terapiya va og\'ir holatlarda immunobiologik preparatlar qo\'llaniladi. Maqsad — asoratlarni kamaytirish va remissiya muddatini uzaytirish.',
       },
       {
         title: 'Vitiligo',
@@ -126,7 +126,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Seborreya va teri zamburug\'i',
         description:
-          'Seborreya — yog\'li teri, qichish va qalqonsimon qoplama bilan kechadi, ko\'pincha bosh terisida. Zamburug\'i (mikoz) tirnoq va teri qatlamlarini zararlaydi. Antifungal va protivovospalitel davolash, shuningdek parvarish tavsiyalari beriladi.',
+          'Seborreya — yog\'li teri, qichish va qalqonsimon qoplama bilan kechadi, ko\'pincha bosh terisida. Zamburug\'i (mikoz) tirnoq va teri qatlamlarini zararlaydi. Antifungal va yallig\'lanishga qarshi davolash, shuningdek parvarish tavsiyalari beriladi.',
       },
     ],
     ru: [
@@ -239,6 +239,78 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       { title: 'Papillomas and warts', description: 'Viral lesions are diagnosed dermoscopically and by biopsy when needed.' },
     ],
   },
+  'hirurgicheskaya-dermatologiya': {
+    uz: [
+      { title: 'Teri o\'smalari', description: 'Borma, papilloma va fibromalarni xirurgik olib tashlash kosmetik tikish bilan amalga oshiriladi.' },
+      { title: 'Teri saratonlari', description: 'Mohs jarrohligi yuz qismidagi saratonlarni yuqori aniqlik bilan davolaydi.' },
+    ],
+    ru: [
+      { title: 'Новообразования кожи', description: 'Хирургическое удаление бородавок, папиллом и фибром с косметическими швами.' },
+      { title: 'Рак кожи', description: 'Хирургия Mohs эффективно лечит рак кожи на лице.' },
+    ],
+    en: [
+      { title: 'Skin lesions', description: 'Surgical removal of warts, papillomas and fibromas with cosmetic suturing.' },
+      { title: 'Skin cancer', description: 'Mohs surgery effectively treats skin cancer on the face.' },
+    ],
+  },
+  'shkola-psoriaza': {
+    uz: [
+      { title: 'Surunkali psoriaz', description: 'Maktab bemorlarga kasallikni boshqarish va remissiyani uzaytirishni o\'rgatadi.' },
+    ],
+    ru: [
+      { title: 'Хронический псориаз', description: 'Школа обучает пациентов контролю заболевания и продлению ремиссии.' },
+    ],
+    en: [
+      { title: 'Chronic psoriasis', description: 'The school teaches patients disease control and remission extension.' },
+    ],
+  },
+  'shkola-dermatoskopii': {
+    uz: [
+      { title: 'Dermatoskopiya', description: 'Shifokorlar uchun teri o\'smalarini optik diagnostika qilish bo\'yicha o\'quv dasturi.' },
+    ],
+    ru: [
+      { title: 'Дерматоскопия', description: 'Обучающая программа для врачей по оптической диагностике новообразований.' },
+    ],
+    en: [
+      { title: 'Dermatoscopy', description: 'Training program for physicians in optical diagnosis of skin lesions.' },
+    ],
+  },
+  'clinika-patologii-nogtej': {
+    uz: [
+      { title: 'Tirnoq zamburug\'i', description: 'Onikomikoz tirnoq qalinlashishi va rang o\'zgarishi bilan kechadi. Tibbiy davolash talab qilinadi.' },
+      { title: 'O\'sib ketgan tirnoq', description: 'Og\'riq va yallig\'lanish keltiradi. Podologik tuzatish samarali yechim beradi.' },
+    ],
+    ru: [
+      { title: 'Грибок ногтей', description: 'Онихомикоз проявляется утолщением и изменением цвета ногтя.' },
+      { title: 'Вросший ноготь', description: 'Вызывает боль и воспаление. Подологическая коррекция эффективна.' },
+    ],
+    en: [
+      { title: 'Nail fungus', description: 'Onychomycosis causes thickened discolored nails. Medical treatment is required.' },
+      { title: 'Ingrown toenail', description: 'Causes pain and inflammation. Podologic correction is effective.' },
+    ],
+  },
+  dermatopatologiya: {
+    uz: [
+      { title: 'Gistologik tahlil', description: 'Biopsiya namunalarining mikroskopik tekshiruvi aniq tashxis uchun asos hisoblanadi.' },
+    ],
+    ru: [
+      { title: 'Гистологический анализ', description: 'Микроскопическое исследование биоптатов — основа точного диагноза.' },
+    ],
+    en: [
+      { title: 'Histologic analysis', description: 'Microscopic examination of biopsies is the basis for accurate diagnosis.' },
+    ],
+  },
+  'gen-revo': {
+    uz: [
+      { title: 'Gen darajasida yoshartirish', description: 'Forever Young IPL qarish genlarining faolligini o\'zgartiradi, kollegen yangilanishini rag\'batlantiradi.' },
+    ],
+    ru: [
+      { title: 'Омоложение на генном уровне', description: 'Forever Young IPL модулирует гены старения и стимулирует обновление коллагена.' },
+    ],
+    en: [
+      { title: 'Gene-level rejuvenation', description: 'Forever Young IPL modulates aging genes and stimulates collagen renewal.' },
+    ],
+  },
 };
 
 export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
@@ -349,6 +421,242 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
     en: [
       { title: 'Skin dehydration', description: 'Lack of moisture causes dryness. Laser biorevitalization delivers hyaluronic acid to deep layers.' },
       { title: 'Loss of elasticity', description: 'Collagen decline. Laser energy stimulates recovery processes and skin firmness.' },
+    ],
+  },
+  'ultratovush-yuz': {
+    uz: [
+      {
+        title: 'Kengaytirilgan toshma teshiklari',
+        description:
+          'Yog\' va kir to\'planishi poralarni kengaytiradi, teri noaniq va muammoli ko\'rinadi. Ultratovush tozalash poralarni yumshatadi, ichki qatlamdan tozalaydi va keyingi parvarish uchun tayyorlaydi.',
+      },
+      {
+        title: 'Qora nuqtalar va komedonlar',
+        description:
+          'Tor poralarda yog\' va qoldiqlar to\'planib qora nuqtalar hosil bo\'ladi. Professional ultratovush spatula bu qatlamlarni ehtiyotkorlik bilan olib tashlaydi, yangi toshma paydo bo\'lishini kamaytiradi.',
+      },
+      {
+        title: 'Yog\'li teri va matlik',
+        description:
+          'Seboreya yoki noto\'g\'ri parvarish terini yog\'li va xira qiladi. Ultratovush tozalash ortiqcha yog\'ni kamaytiradi, teri nafas olishini yaxshilaydi va yorqinroq ko\'rinish beradi.',
+      },
+      {
+        title: 'Teri teksturasining notekisligi',
+        description:
+          'Qattiq qoplama va mayda qirqindilar teri sirtini tekislamaydi. Chuqur tozalashdan keyin teri silliqroq, yumshoqroq va kosmetik mahsulotlarni yaxshiroq qabul qiladi.',
+      },
+    ],
+    ru: [
+      { title: 'Расширенные поры', description: 'Скопление себума расширяет поры. Ультразвуковая чистка мягко очищает кожу в глубоких слоях и подготавливает к дальнейшему уходу.' },
+      { title: 'Черные точки и комедоны', description: 'Закупорка пор вызывает черные точки. Профессиональная ультразвуковая шпатель-чистка аккуратно удаляет содержимое пор.' },
+      { title: 'Жирная кожа и тусклость', description: 'Избыток себума делает кожу жирной и тусклой. Ультразвуковая чистка нормализует работу сальных желез и улучшает цвет лица.' },
+      { title: 'Неровная текстура кожи', description: 'Омертвевшие клетки и загрязнения ухудшают рельеф. После глубокой чистки кожа становится более гладкой и восприимчивой к уходу.' },
+    ],
+    en: [
+      { title: 'Enlarged pores', description: 'Sebum buildup widens pores. Ultrasonic cleansing gently cleanses deep layers and prepares skin for further care.' },
+      { title: 'Blackheads and comedones', description: 'Clogged pores form blackheads. Professional ultrasonic spatula cleansing carefully removes debris from pores.' },
+      { title: 'Oily skin and dullness', description: 'Excess sebum makes skin oily and dull. Ultrasonic cleansing normalizes oil balance and improves complexion.' },
+      { title: 'Uneven skin texture', description: 'Dead cells and impurities roughen skin surface. After deep cleansing, skin becomes smoother and more receptive to skincare.' },
+    ],
+  },
+  'det-derm': {
+    uz: [
+      { title: 'Atopik dermatit', description: 'Bolalarda qichish, qizarish va quruq teri bilan kechadi. Yumshoq terapiya va ota-ona yo\'riqnomasi bilan boshqariladi.' },
+      { title: 'Allergik toshma', description: 'Allergenlar bilan bog\'liq teri reaksiyalari. Triggerlarni aniqlash va xavfsiz davolash rejalashtiriladi.' },
+    ],
+    ru: [
+      { title: 'Атопический дерматит', description: 'Зуд, покраснение и сухость кожи у детей. Лечение мягкими методами под контролем дерматолога.' },
+      { title: 'Аллергические высыпания', description: 'Кожные реакции на аллергены. Выявление триггеров и безопасная терапия.' },
+    ],
+    en: [
+      { title: 'Atopic dermatitis', description: 'Itching, redness and dry skin in children. Managed with gentle therapy and parent guidance.' },
+      { title: 'Allergic rashes', description: 'Skin reactions to allergens. Trigger identification and safe treatment planning.' },
+    ],
+  },
+  fototerapiya: {
+    uz: [
+      { title: 'Psoriaz', description: 'Qizil plakalar va qalqonsimon qoplama. UVB 311 nm fototerapiya plakalarni kamaytiradi va remissiya muddatini uzaytiradi.' },
+      { title: 'Vitiligo', description: 'Pigment yo\'qolishi bilan oq dog\'lar. Tor to\'lqinli UVB repigmentatsiyani rag\'batlantiradi.' },
+    ],
+    ru: [
+      { title: 'Псориаз', description: 'Красные бляшки со шелушением. UVB 311 нм уменьшает высыпания и продлевает ремиссию.' },
+      { title: 'Витилиго', description: 'Белые пятна при потере пигмента. Узкополосный UVB стимулирует репигментацию.' },
+    ],
+    en: [
+      { title: 'Psoriasis', description: 'Red scaly plaques. UVB 311 nm phototherapy reduces lesions and extends remission.' },
+      { title: 'Vitiligo', description: 'White patches from pigment loss. Narrow-band UVB stimulates repigmentation.' },
+    ],
+  },
+  immunobiologicheskaya: {
+    uz: [
+      { title: 'Og\'ir surunkali psoriaz', description: 'Keng tarqalgan plakalar va an\'anaviy terapiyaga javob bermagan holatlar. Biologik preparatlar target yondashuv beradi.' },
+    ],
+    ru: [
+      { title: 'Тяжелый псориаз', description: 'Распространенные бляшки при неэффективности стандартной терапии. Биологические препараты дают таргетный эффект.' },
+    ],
+    en: [
+      { title: 'Severe chronic psoriasis', description: 'Widespread plaques unresponsive to standard therapy. Biologics provide targeted treatment.' },
+    ],
+  },
+  konturnaya: {
+    uz: [
+      { title: 'Yuz hajmi kamayishi', description: 'Yosh bilan yonoq va lab hajmi kamayadi. Gialuron kislotali fillerlar konturni tiklaydi.' },
+      { title: 'Nazolabial chiziqlar', description: 'Burun va lab atrofidagi chuqurlashgan chiziqlar. Filler bilan to\'ldiriladi.' },
+    ],
+    ru: [
+      { title: 'Потеря объема лица', description: 'С возрастом уменьшается объем скул и губ. Филлеры восстанавливают контуры.' },
+      { title: 'Носогубные складки', description: 'Глубокие складки от носа к губам. Корректируются филлерами.' },
+    ],
+    en: [
+      { title: 'Facial volume loss', description: 'Cheeks and lips lose volume with age. Hyaluronic fillers restore contours.' },
+      { title: 'Nasolabial folds', description: 'Deep lines from nose to mouth. Corrected with fillers.' },
+    ],
+  },
+  botulino: {
+    uz: [
+      { title: 'Mimik ajinlar', description: 'Peshona, ko\'z atrofi va lab ustidagi ajinlar. Botulinoterapiya mushaklarni yumshatadi, terini tekislaydi.' },
+    ],
+    ru: [
+      { title: 'Мимические морщины', description: 'Морщины лба, вокруг глаз и над губой. Ботулинотерапия расслабляет мышцы и разглаживает кожу.' },
+    ],
+    en: [
+      { title: 'Expression wrinkles', description: 'Forehead, eye area and upper lip wrinkles. Botulinum therapy relaxes muscles and smooths skin.' },
+    ],
+  },
+  biorev: {
+    uz: [
+      { title: 'Teri suvsizlanishi', description: 'Gialuron kislotasi mikroinyeksiyalari terini chuqur namlantiradi va yorqinlikni qaytaradi.' },
+    ],
+    ru: [
+      { title: 'Обезвоженность кожи', description: 'Микроинъекции гиалуроновой кислоты глубоко увлажняют кожу и возвращают сияние.' },
+    ],
+    en: [
+      { title: 'Skin dehydration', description: 'Hyaluronic acid microinjections deeply hydrate skin and restore glow.' },
+    ],
+  },
+  'alex-lazer': {
+    uz: [
+      { title: 'Gipertrixoz', description: 'Aleksandrit lazer soch folikulasini yo\'q qiladi, teri uzoq muddat silliq bo\'ladi.' },
+      { title: 'O\'sib ketgan sochlar', description: 'Lazer folikulni butunlay yo\'q qilib, yallig\'lanishni oldini oladi.' },
+    ],
+    ru: [
+      { title: 'Гипертрихоз', description: 'Александритовый лазер разрушает фолликул и обеспечивает длительную гладкость.' },
+      { title: 'Вросшие волосы', description: 'Лазер устраняет фолликул и предотвращает воспаление.' },
+    ],
+    en: [
+      { title: 'Hypertrichosis', description: 'Alexandrite laser destroys follicles for long-lasting smooth skin.' },
+      { title: 'Ingrown hairs', description: 'Laser eliminates follicles and prevents inflammation.' },
+    ],
+  },
+  trixoskop: {
+    uz: [
+      { title: 'Alopeciya', description: 'Trixoskopiya soch to\'kilishi sababini aniqlaydi, keyin individual davolash rejalashtiriladi.' },
+      { title: 'Bosh terisi seboreyasi', description: 'Qichish va qalqonsimon qoplama. Kompleks terapiya va parvarish tavsiya etiladi.' },
+    ],
+    ru: [
+      { title: 'Алопеция', description: 'Трихоскопия определяет причину выпадения, затем составляется план лечения.' },
+      { title: 'Себорея кожи головы', description: 'Зуд и перхоть. Назначается комплексная терапия.' },
+    ],
+    en: [
+      { title: 'Alopecia', description: 'Trichoscopy identifies hair loss cause, then an individual treatment plan is made.' },
+      { title: 'Scalp seborrhea', description: 'Itching and flaking. Combined therapy and care are recommended.' },
+    ],
+  },
+  'photofinder-scan': {
+    uz: [
+      { title: 'Melanoma xavfi', description: 'PhotoFinder AI xavfli xol o\'zgarishlarini erta aniqlashga yordam beradi.' },
+      { title: 'Ko\'p sonli xollar', description: 'Butun tana raqamli xaritalash yangi va o\'zgargan xollarni kuzatish imkonini beradi.' },
+    ],
+    ru: [
+      { title: 'Риск меланомы', description: 'PhotoFinder с ИИ выявляет опасные изменения родинок на ранней стадии.' },
+      { title: 'Множественные родинки', description: 'Цифровое картирование всего тела позволяет отслеживать новые и изменившиеся образования.' },
+    ],
+    en: [
+      { title: 'Melanoma risk', description: 'PhotoFinder AI helps detect dangerous mole changes early.' },
+      { title: 'Multiple moles', description: 'Full-body digital mapping tracks new and changing lesions.' },
+    ],
+  },
+  biopsiya: {
+    uz: [
+      { title: 'Shubhali o\'sma', description: 'Biopsiya aniq tashxis uchun zarur. Gistologik tahlil yaxshi yoki yomon sifatli jarayonni aniqlaydi.' },
+    ],
+    ru: [
+      { title: 'Подозрительное образование', description: 'Биопсия необходима для точного диагноза. Гистология определяет доброкачественность или злокачественность.' },
+    ],
+    en: [
+      { title: 'Suspicious lesion', description: 'Biopsy is needed for accurate diagnosis. Histology determines benign vs malignant process.' },
+    ],
+  },
+  'moh-surgery': {
+    uz: [
+      { title: 'Yuzdagi teri saratonlari', description: 'Mohs jarrohligi basalioma va spinotsellyular karsinomani sog\'lom to\'qimalarni saqlab olib tashlaydi.' },
+    ],
+    ru: [
+      { title: 'Рак кожи на лице', description: 'Хирургия Mohs удаляет базалиому и плоскоклеточный рак с сохранением здоровых тканей.' },
+    ],
+    en: [
+      { title: 'Facial skin cancer', description: 'Mohs surgery removes basal cell and squamous carcinoma while preserving healthy tissue.' },
+    ],
+  },
+  'consult-group': {
+    uz: [
+      { title: 'Psoriaz nazorati', description: 'Guruhli maslahatlar parvarish, diet va kuchayishlarning oldini olish bo\'yicha amaliy bilim beradi.' },
+    ],
+    ru: [
+      { title: 'Контроль псориаза', description: 'Групповые консультации дают практические знания по уходу и предотвращению обострений.' },
+    ],
+    en: [
+      { title: 'Psoriasis control', description: 'Group counseling provides practical knowledge on care and preventing flares.' },
+    ],
+  },
+  'dermatosc-lessons': {
+    uz: [
+      { title: 'Xavfli xollar diagnostikasi', description: 'Amaliy darslarda dermatoskopik belgilar bo\'yicha tajriba oshiriladi.' },
+    ],
+    ru: [
+      { title: 'Диагностика опасных родинок', description: 'На практических курсах отрабатываются дерматоскопические признаки.' },
+    ],
+    en: [
+      { title: 'Risky mole diagnosis', description: 'Practical workshops build skills in dermoscopic signs of dangerous lesions.' },
+    ],
+  },
+  'podolog-dermatolog': {
+    uz: [
+      { title: 'O\'sib ketgan tirnoq', description: 'Podologik tuzatish og\'riqni kamaytiradi va tirnoq o\'sishini to\'g\'rilaydi.' },
+      { title: 'Tirnoq zamburug\'i', description: 'Antifungal terapiya va tibbiy pedikyur bilan davolash samarali natija beradi.' },
+    ],
+    ru: [
+      { title: 'Вросший ноготь', description: 'Подологическая коррекция уменьшает боль и исправляет рост ногтя.' },
+      { title: 'Грибок ногтей', description: 'Противогрибковая терапия и медицинский педикюр дают эффективный результат.' },
+    ],
+    en: [
+      { title: 'Ingrown toenail', description: 'Podologic correction reduces pain and corrects nail growth.' },
+      { title: 'Nail fungus', description: 'Antifungal therapy and medical pedicure deliver effective results.' },
+    ],
+  },
+  gistolog: {
+    uz: [
+      { title: 'Gistologik tashxis', description: 'Mikroskopik tahlil biopsiya namunasidagi patologik o\'zgarishlarni aniqlaydi.' },
+    ],
+    ru: [
+      { title: 'Гистологический диагноз', description: 'Микроскопический анализ выявляет патологические изменения в биоптате.' },
+    ],
+    en: [
+      { title: 'Histologic diagnosis', description: 'Microscopic analysis identifies pathological changes in biopsy samples.' },
+    ],
+  },
+  'fy-protocols': {
+    uz: [
+      { title: 'Fotoeskirish', description: 'UV zarari terini erta qaritadi. Forever Young IPL kollegen yangilanishini rag\'batlantiradi.' },
+      { title: 'Giperpigmentatsiya', description: 'Dog\'lar va rang notekisligi IPL protokollari bilan bosqichma-bosqich yengillashtiriladi.' },
+    ],
+    ru: [
+      { title: 'Фотостарение', description: 'UV-повреждение ускоряет старение. Forever Young IPL стимулирует обновление коллагена.' },
+      { title: 'Гиперпигментация', description: 'Пятна и неровный тон постепенно осветляются протоколами IPL.' },
+    ],
+    en: [
+      { title: 'Photoaging', description: 'UV damage accelerates aging. Forever Young IPL stimulates collagen renewal.' },
+      { title: 'Hyperpigmentation', description: 'Spots and uneven tone are gradually lightened with IPL protocols.' },
     ],
   },
 };

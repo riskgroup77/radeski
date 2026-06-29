@@ -81,10 +81,10 @@ export const DICTIONARY = {
     features02Desc: "O'zbekistonda noyob bo'lgan PhotoFinder va IPL uskunalaridan foydalanish.",
     features03: "Yuqori darajadagi sterilizatsiya",
     features03Desc: "Yevropa tibbiyot standartlariga to'la mos keladigan steril xonalar.",
-    features04: "Shaxsiy yondashuv",
-    features04Desc: "Har bir bemor terisining xususiyatlarini inobatga olgan holda maxsus terapiya.",
+    features04: "Turli xil apparatlar",
+    features04Desc: "Teri diagnostikasi, davolash va kosmetologiya uchun keng ko'lamli apparatlar assortimenti.",
     beBeautiful: "Chiroyli va sog'lom bo'ling",
-    beBeautifulDesc: "Teri sog'lig'i bo'yicha maslahat olish uchun ma'lumotlaringizni qoldiring va biz szga tez orada aloqaga chiqamiz.",
+    beBeautifulDesc: "Teri sog'lig'i bo'yicha maslahat olish uchun ma'lumotlaringizni qoldiring va biz sizga tez orada aloqaga chiqamiz.",
     viewProfile: "Profilni ko'rish",
     readMore: "Batafsil o'qish",
     backToArticles: "Barcha maqolalarga qaytish",
@@ -169,8 +169,8 @@ export const DICTIONARY = {
     features02Desc: "Применение уникального оборудования PhotoFinder и систем IPL в Узбекистане.",
     features03: "Высочайшая стерильность",
     features03Desc: "Стерилизационные боксы, полностью соответствующие европейским медицинским регламентам.",
-    features04: "Индивидуальный подход",
-    features04Desc: "Подбор протоколов терапии с учетом индивидуальных особенностей кожи каждого пациента.",
+    features04: "Разнообразные аппараты",
+    features04Desc: "Широкий выбор оборудования для диагностики, лечения и аппаратной косметологии.",
     beBeautiful: "Будьте красивыми и здоровыми",
     beBeautifulDesc: "Оставьте свои данные, чтобы получить консультацию по здоровью кожи, и мы свяжемся с вами в ближайшее время.",
     viewProfile: "Профиль врача",
@@ -257,8 +257,8 @@ export const DICTIONARY = {
     features02Desc: "Exclusive clinical application of PhotoFinder and Sciton IPL systems in Uzbekistan.",
     features03: "High-grade Disinfection",
     features03Desc: "Clean sterilization facilities matching global healthcare parameters.",
-    features04: "Bespoke Care",
-    features04Desc: "Custom clinical programs matching the biological features of your skin.",
+    features04: "Diverse Clinical Devices",
+    features04Desc: "A wide range of equipment for diagnostics, treatment, and hardware cosmetology.",
     beBeautiful: "Be Beautiful and Healthy",
     beBeautifulDesc: "Leave your contact details for an expert skin health consultation, and we will get back to you shortly.",
     viewProfile: "View profile",
@@ -399,7 +399,7 @@ export const DOCTORS: Doctor[] = [
       en: "Dermatologist, Aesthetic Cosmetologist"
     },
     bio: {
-      uz: "Inyeksion va apparat kosmetologiyasi mutaxassisi. IPL fotoomolajeniyani gen darajasida qo'llash va yoshartirish protokollarini amalga oshiradi.",
+      uz: "Inyeksion va apparat kosmetologiyasi mutaxassisi. IPL foto-yangilashni gen darajasida qo'llash va yoshartirish protokollarini amalga oshiradi.",
       ru: "Специалист по инъекционной и аппаратной косметологии. Владеет методиками фотоомоложения IPL на генном уровне и лифтинга кожи.",
       en: "Expert in injection therapy and medical hardware cosmetology. Implements high-end genetic-level IPL photo-rejuvenation systems."
     },
@@ -486,7 +486,7 @@ export const DOCTORS: Doctor[] = [
       en: "Aesthetic Cosmetologist, Laser Therapist"
     },
     bio: {
-      uz: "Uskuna kosmetologiyasi bo'yicha sertifikatlangan mutaxassis. Lazer epilyatsiyasi va fotoomolajeniyani yuqori darajada olib boradi.",
+      uz: "Uskuna kosmetologiyasi bo'yicha sertifikatlangan mutaxassis. Lazer epilyatsiyasi va foto-yangilashni yuqori darajada olib boradi.",
       ru: "Сертифицированный специалист по аппаратной косметологии, лазерной эпиляции и неинвазивным уходовым процедурам.",
       en: "Certified advanced hardware cosmetology professional. Specialized in laser hair reduction and non-invasive glow treatments."
     },
@@ -570,7 +570,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         id: "immunobiologicheskaya",
         name: { uz: "Immunobiologik terapiya", ru: "Иммунобиологическая терапия", en: "Immunobiological Therapy" },
         description: {
-          uz: "Og'ir va surunkali teri shikastlanishlarini ilg'or gen-inzheneriya biologik preparatlari bilan bartaraf yetish.",
+          uz: "Og'ir va surunkali teri kasalliklarini ilg'or biologik preparatlar bilan davolash.",
           ru: "Лечение тяжелых системных аутоиммунных патологий кожи с использованием современных таргетных биопрепаратов.",
           en: "High-level advanced biologic agent targeting of chronic auto-immune dermatological diseases."
         }
@@ -593,7 +593,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     subServices: [
       {
         id: "bbl-foto",
-        name: { uz: "IPL fotoomolajeniyani", ru: "IPL-фотоомоложение", en: "Intense Pulsed Light (IPL) Rejuvenation" },
+        name: { uz: "IPL foto-yangilash", ru: "IPL-фотоомоложение", en: "Intense Pulsed Light (IPL) Rejuvenation" },
         description: {
           uz: "Gen darajasida hujayra qarishini to'xtatuvchi, pigmentatsiya va qon-tomir tarmoqlarini yo'qotuvchi original Amerika texnologiyasi.",
           ru: "Легендарная американская методика омоложения кожи на генном уровне, удаления пигментации и сосудистых звездочек.",
@@ -857,7 +857,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         name: { uz: "Gistologik mikroskopik tahlil", ru: "Гистологическое исследование", en: "Histopathology Biomarker Exam" },
         description: {
           uz: "Laboratoriyada to'qimalarning hujayra darajasida patalogik o'zgarishlarini barcha turlarini aniq tashxisi.",
-          ru: "Микроскопический послойный анализ структуры клеток для верификации доброкачественность орагнических очагов.",
+          ru: "Микроскопический послойный анализ структуры клеток для верификации доброкачественности или злокачественности очагов.",
           en: "Stained tissue slide examination to rule out malignancies and confirm cellular health indicators."
         }
       }
@@ -866,7 +866,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "gen-revo",
     title: {
-      uz: "Gen-darajasida fotoomolajeniya",
+      uz: "Gen darajasida foto-yangilash",
       ru: "Фотоомоложение на генном уровне",
       en: "Gene-Level Photo-Rejuvenation"
     },
@@ -881,7 +881,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         id: "fy-protocols",
         name: { uz: "Forever Young IPL protokollari", ru: "Протоколы Forever Young IPL", en: "Forever Young IPL Protocols" },
         description: {
-          uz: "Ajinsiz va chandiqsiz, butunlay yangi yosh, elastik va sog'lom teri qatlamini shakllantiruvchi amaliyot.",
+          uz: "Ajinsiz va iz qoldirmasdan, terini elastik va sog'lom holatga keltiruvchi Forever Young IPL protokoli.",
           ru: "Воздействие световыми импульсами высокой интенсивности для активации генов, отвечающих за коллаген.",
           en: "Focused intense pulsed light cycles inducing rapid renewal of elastin and natural collagen builders."
         }

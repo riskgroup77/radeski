@@ -92,14 +92,13 @@ function attachConditions(
 ): ServiceRichContent {
   let conditions = content.conditions ?? [];
   if (conditions.length === 0) {
-    conditions = isSub && catalogKey
-      ? getSubConditions(catalogKey, locale)
-      : getCategoryConditions(categoryId, locale);
-  }
-  if (conditions.length === 0 && isSub && catalogKey) {
-    const subFallback = getSubConditions(catalogKey, 'uz');
-    if (locale !== 'uz' && subFallback.length > 0) {
-      conditions = subFallback;
+    if (isSub && catalogKey) {
+      conditions = getSubConditions(catalogKey, locale);
+      if (conditions.length === 0 && locale !== 'uz') {
+        conditions = getSubConditions(catalogKey, 'uz');
+      }
+    } else if (!isSub) {
+      conditions = getCategoryConditions(categoryId, locale);
     }
   }
   if (conditions.length === 0 && content.indications.length > 0) {
@@ -114,6 +113,46 @@ function attachConditions(
     benefits: content.benefits,
     process: content.process,
   };
+}
+
+function isCategoryConditionDump(
+  conditions: ServiceConditionTopic[],
+  categoryId: string,
+  locale: Locale,
+): boolean {
+  const catCond = getCategoryConditions(categoryId, locale);
+  if (catCond.length === 0 || conditions.length < 3) return false;
+  const catTitles = new Set(catCond.map((c) => c.title));
+  const overlap = conditions.filter((c) => catTitles.has(c.title)).length;
+  return overlap >= Math.min(3, catCond.length);
+}
+
+function finalizeSubRichContent(
+  content: ServiceRichContent,
+  sub: ServiceDetail,
+  category: ServiceCategory,
+  locale: Locale,
+  catalogKey: string | null,
+): ServiceRichContent {
+  if (catalogKey) {
+    let subCond = getSubConditions(catalogKey, locale);
+    if (subCond.length === 0 && locale !== 'uz') {
+      subCond = getSubConditions(catalogKey, 'uz');
+    }
+    if (subCond.length > 0) {
+      return { ...content, conditions: subCond };
+    }
+  }
+
+  if (isCategoryConditionDump(content.conditions, category.id, locale)) {
+    const rebuilt =
+      content.indications.length > 0
+        ? buildConditionsFromIndications(content.indications, sub.name[locale], locale)
+        : [];
+    return { ...content, conditions: rebuilt };
+  }
+
+  return content;
 }
 
 function fromEntityRich(
@@ -209,11 +248,14 @@ export function resolveServiceRichContent(
   const catalogKey = findSubServiceCatalogKey(sub, category);
 
   const fromApi = fromEntityRich(sub.richContent, locale, fallbackOverview);
-  if (fromApi && isCompleteRich(fromApi)) return fromApi;
 
-  const fromCatalog = catalogKey ? SUB_SERVICE_RICH_CATALOG[catalogKey]?.[locale] : undefined;
-  if (fromCatalog) {
-    return attachConditions(
+  let result: ServiceRichContent;
+
+  if (fromApi && isCompleteRich(fromApi)) {
+    result = fromApi;
+  } else if (catalogKey && SUB_SERVICE_RICH_CATALOG[catalogKey]?.[locale]) {
+    const fromCatalog = SUB_SERVICE_RICH_CATALOG[catalogKey][locale];
+    result = attachConditions(
       {
         overview: fromCatalog.overview || fallbackOverview,
         indications: fromCatalog.indications,
@@ -228,20 +270,20 @@ export function resolveServiceRichContent(
       catalogKey,
       true,
     );
+  } else if (fromApi) {
+    result = attachConditions(fromApi, locale, sub.name[locale], category.id, catalogKey, true);
+  } else {
+    result = attachConditions(
+      buildSubFallback(sub, category, locale),
+      locale,
+      sub.name[locale],
+      category.id,
+      catalogKey,
+      true,
+    );
   }
 
-  if (fromApi) {
-    return attachConditions(fromApi, locale, sub.name[locale], category.id, catalogKey, true);
-  }
-
-  return attachConditions(
-    buildSubFallback(sub, category, locale),
-    locale,
-    sub.name[locale],
-    category.id,
-    catalogKey,
-    true,
-  );
+  return finalizeSubRichContent(result, sub, category, locale, catalogKey);
 }
 
 export function resolveCategoryRichContent(
