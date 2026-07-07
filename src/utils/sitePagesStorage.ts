@@ -6,6 +6,7 @@ import {
   type TreatmentResult,
   type ClinicPartner,
 } from '../data/sitePagesContent';
+import { resolvePublicTreatmentResults } from './treatmentResults';
 
 export const SITE_PAGES_STORAGE_KEYS = {
   videos: 'radeski_clinic_videos_v1',
@@ -34,7 +35,7 @@ export function loadTreatmentResults(): TreatmentResult[] {
   const stored = parseStoredArray<TreatmentResult>(
     localStorage.getItem(SITE_PAGES_STORAGE_KEYS.results),
   );
-  return stored ?? TREATMENT_RESULTS;
+  return resolvePublicTreatmentResults(stored ?? []);
 }
 
 export function loadClinicPartners(): ClinicPartner[] {

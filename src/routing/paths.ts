@@ -11,6 +11,8 @@ export type PageId =
   | 'videos'
   | 'branches'
   | 'results'
+  | 'technologies'
+  | 'clinic-equipment'
   | 'terms'
   | 'privacy'
   | 'admin';
@@ -98,6 +100,8 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'videos' ||
     pageSegment === 'branches' ||
     pageSegment === 'results' ||
+    pageSegment === 'technologies' ||
+    pageSegment === 'clinic-equipment' ||
     pageSegment === 'terms' ||
     pageSegment === 'privacy'
   ) {
@@ -113,6 +117,22 @@ export function serviceCategoryPath(locale: Locale, categoryId: string): string 
 
 export function servicesListPath(locale: Locale): string {
   return pagePath(locale, 'services');
+}
+
+export function promoServicePath(locale: Locale, promoSlug: string): string {
+  return `/${locale}/promo/${encodeURIComponent(promoSlug)}`;
+}
+
+export function getPromoSlugFromPathname(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length >= 3 && segments[1] === 'promo') {
+    try {
+      return decodeURIComponent(segments[2]);
+    } catch {
+      return segments[2];
+    }
+  }
+  return null;
 }
 
 export function serviceSubPath(locale: Locale, categoryId: string, subId: string): string {

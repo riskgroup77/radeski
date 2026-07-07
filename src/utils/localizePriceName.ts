@@ -1,8 +1,12 @@
 import type { Locale } from '../types';
+import { translatePriceRuToUz } from './translatePriceRuToUz';
+import { translatePriceRuToEn } from './translatePriceRuToEn';
+import { normalizePriceRu } from './normalizePriceRu';
 
 const TYPO_FIXES: [string, string][] = [
   ['гемагингиом', 'гемангиом'],
   ['новооброзование', 'новообразование'],
+  ['новооброзований', 'новообразований'],
   ['осморт', 'осмотр'],
   ['ботулакс', 'ботулотоксин'],
   ['Hooywood', 'Hollywood'],
@@ -20,7 +24,22 @@ const PHRASES_UZ: [string, string][] = [
   ['Радиоволновая хирургия 1 образования (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы) с анестезией', '1 ta epidermal o\'smani radioto\'lqin xirurgiyasi, anesteziya bilan'],
   ['Первичная консультация и осмотр', 'Birinchi konsultatsiya va ko\'rik'],
   ['Повторная консультация и осмотр', 'Takroriy konsultatsiya va ko\'rik'],
-  ['Первичный осмотр врача', 'Shifokorning birinchi ko\'rigi'],
+  ['Первичный осмотр врача дерматовениролога', 'Dermatovenerolog shifokorining birinchi ko\'rigi'],
+  ['Повторный осмотр врача дерматовениролога', 'Dermatovenerolog shifokorining takroriy ko\'rigi'],
+  ['Первичный осморт врача трихолога + трихоскопия', 'Trixolog shifokorining birinchi ko\'rigi + trixoskopiya'],
+  ['Повторный осмотр врача трихолога', 'Trixolog shifokorining takroriy ko\'rigi'],
+  ['Первичный осмотр врача дерматоонколога + дерматоскопия', 'Dermatoonkolog shifokorining birinchi ko\'rigi + dermatoskopiya'],
+  ['Повторная консультация к врачу дерматоонколога', 'Dermatoonkolog shifokoriga takroriy konsultatsiya'],
+  ['Первичный осмотр врача дерматокосметолога + сканирование лица на аппарате JANUS PRO', 'Dermatokosmetolog birinchi ko\'rigi + JANUS PRO yuz skaneri'],
+  ['Повторный осморт врача дерматокосметолога', 'Dermatokosmetolog takroriy ko\'rigi'],
+  ['Первичная консультация подолога', 'Podologning birinchi konsultatsiyasi'],
+  ['Повторный осмотр подолога', 'Podologning takroriy ko\'rigi'],
+  ['Нео люкс', 'Neo Lux'],
+  ['Косметические средства', 'Kosmetik vositalar'],
+  ['Лазерное удаление доброкачественных новообразований НА DEKA SMARXIDE PUNTO СО2 ЛАЗЕРЕ', 'DEKA SmartXide Punto CO2 lazer bilan xavfsiz o\'smalarni olib tashlash'],
+  ['ДНЕВНОЙ СТАЦИОНАР', 'Kunduzgi statsionar'],
+  ['Инъекционная косметология', 'Inyeksion kosmetologiya'],
+  ['Аллерго проба 10 пунктов', 'Allergo-test (10 punkt)'],
   ['Повторный осмотр врача', 'Shifokorning takroriy ko\'rigi'],
   ['Трансвагинальное (ТВ) исследование матки и яичников с допплерографией', 'Bachadon va tuxumdonlarni transvaginal (TV) tekshiruv, doppler bilan'],
   ['Трансвагинальное (ТВ) исследование матки и яичников', 'Bachadon va tuxumdonlarni transvaginal (TV) tekshiruv'],
@@ -158,115 +177,11 @@ const PHRASES_UZ: [string, string][] = [
   ['Бесплатно', 'Bepul'],
 ];
 
-const PHRASES_EN: [string, string][] = [
-  ['Микрографическое хирургическое удаление злокачественных новообразований кожи по методу "Mohs"', 'Mohs micrographic surgery for malignant skin lesions'],
-  ['Лазерное удаление доброкачественных эпидермальных новообразований кожи', 'Laser removal of benign epidermal skin lesions'],
-  ['Лазерное удаление доброкачественных новообразований кожи', 'Laser removal of benign skin lesions'],
-  ['Первичная консультация и осмотр', 'Primary consultation and examination'],
-  ['Повторная консультация и осмотр', 'Follow-up consultation and examination'],
-  ['Первичный осмотр врача', 'Primary physician examination'],
-  ['Повторный осмотр врача', 'Follow-up physician examination'],
-  ['Трансвагинальное (ТВ) исследование матки и яичников с допплерографией', 'Transvaginal ultrasound of uterus and ovaries with Doppler'],
-  ['Трансвагинальное (ТВ) исследование матки и яичников', 'Transvaginal ultrasound of uterus and ovaries'],
-  ['Трансабдоминальное (ТА) исследование матки и яичников с допплерографией', 'Transabdominal ultrasound of uterus and ovaries with Doppler'],
-  ['Трансабдоминальное (ТА) исследование матки и яичников', 'Transabdominal ultrasound of uterus and ovaries'],
-  ['Лазерная абляционная шлифовка кожи', 'Laser ablative skin resurfacing'],
-  ['Лазерное удаление вен на нижних конечностях', 'Laser removal of leg veins'],
-  ['Лазерное удаление сосудистых звездочек на лице', 'Laser removal of facial spider veins'],
-  ['Лазерное удаление телеангиэтазий на крыльях носа', 'Laser treatment of nose telangiectasias'],
-  ['Лазерное удаление телеангиэтазий на всём теле', 'Laser treatment of body telangiectasias'],
-  ['Лазерное лечение гемангиом', 'Laser treatment of hemangiomas'],
-  ['удаление пигментации все лицо', 'Full-face pigmentation removal'],
-  ['Лечение пигментации лицо', 'Facial pigmentation treatment'],
-  ['Лечение пигментации щеки', 'Cheek pigmentation treatment'],
-  ['Осветление зоны бикини', 'Bikini area lightening'],
-  ['Удаление татуажа бровей', 'Eyebrow permanent makeup removal'],
-  ['Face art лечение розацеа акне', 'Face Art rosacea and acne treatment'],
-  ['Лечение акне, красноты, пост акне (gold toning)', 'Acne, redness and post-acne treatment (gold toning)'],
-  ['карбоновый пилинг+ gold toning', 'Carbon peel + gold toning'],
-  ['Процедура 1 серия', 'Session 1 procedure'],
-  ['Лечение онихомикоза ногтей', 'Onychomycosis nail treatment'],
-  ['Механическая чистка лица', 'Manual facial cleansing'],
-  ['Ультразвуковая чистка лица', 'Ultrasonic facial cleansing'],
-  ['Уход за кожей лица', 'Facial skin care'],
-  ['Гистологическое исследование', 'Histology examination'],
-  ['Фотоомоложение кожи', 'Skin photorejuvenation'],
-  ['Фотоомоложение', 'Photorejuvenation'],
-  ['Лазерная эпиляция', 'Laser hair removal'],
-  ['Лазерное удаление', 'Laser removal'],
-  ['Лазерное лечение', 'Laser treatment'],
-  ['Контурная пластика губ', 'Lip contouring'],
-  ['Контурная пластика', 'Contour plastic'],
-  ['Инъекции Ботулотоксина', 'Botulinum toxin injections'],
-  ['Удаление родинок', 'Mole removal'],
-  ['Удаление новообразований', 'Lesion removal'],
-  ['Удаление татуажа', 'Permanent makeup removal'],
-  ['Удаление татуировки', 'Tattoo removal'],
-  ['Лечение пигментации', 'Pigmentation treatment'],
-  ['Лечение акне', 'Acne treatment'],
-  ['Лечение рубцов', 'Scar treatment'],
-  ['Лечение купероза и розации', 'Couperose and rosacea treatment'],
-  ['Коррекция рубца', 'Scar correction'],
-  ['Панч биопсия', 'Punch biopsy'],
-  ['Чистка лица', 'Facial cleansing'],
-  ['Повторный осмотр', 'Follow-up visit'],
-  ['Первичный осмотр', 'Primary examination'],
-  ['Криодеструкция', 'Cryodestruction'],
-  ['Криохирургия', 'Cryosurgery'],
-  ['Биоревитализация', 'Biorevitalization'],
-  ['Мезотерапия', 'Mesotherapy'],
-  ['Плазмотерапия', 'Plasma therapy (PRP)'],
-  ['Фототерапия', 'Phototherapy'],
-  ['Консультация', 'Consultation'],
-  ['Инъекции', 'Injections'],
-  ['Инъекция', 'Injection'],
-  ['Удаление', 'Removal'],
-  ['Лечение', 'Treatment'],
-  ['Осмотр', 'Examination'],
-  ['Процедура', 'Procedure'],
-  ['Операция', 'Surgery'],
-  ['Обработка', 'Treatment'],
-  ['на всём теле', 'full body'],
-  ['на нижних конечностях', 'lower limbs'],
-  ['на лице', 'on face'],
-  ['на крыльях носа', 'on nose wings'],
-  ['всё лицо', 'full face'],
-  ['всего лица', 'full face'],
-  ['с анестезией', 'with anesthesia'],
-  ['с допплерографией', 'with Doppler'],
-  ['1 ноготь', '1 nail'],
-  ['за 1 элемент', 'per lesion'],
-  ['за сеанс', 'per session'],
-  ['от ', 'from '],
-  ['до ', 'up to '],
-  ['процедур', 'sessions'],
-  ['процедура', 'procedure'],
-  ['сеанс', 'session'],
-  ['лицо', 'face'],
-  ['шея', 'neck'],
-  ['декольте', 'décolleté'],
-  ['руки', 'hands'],
-  ['ноги', 'legs'],
-  ['волосы', 'hair'],
-  ['ногтей', 'nails'],
-  ['кожи', 'skin'],
-  ['кожа', 'skin'],
-  ['зона', 'zone'],
-  ['Волосы', 'Hair'],
-  ['Лицо', 'Face'],
-  ['Забор крови', 'Blood draw'],
-  ['Электрокардиография', 'Electrocardiography (ECG)'],
-  ['Фолликулометрия', 'Folliculometry'],
-  ['Базалиома', 'Basal cell carcinoma'],
-  ['Бесплатно', 'Free'],
-];
-
 function sortPhrases(phrases: [string, string][]): [string, string][] {
   return [...phrases].sort((a, b) => b[0].length - a[0].length);
 }
 
 const SORTED_PHRASES_UZ = sortPhrases(PHRASES_UZ);
-const SORTED_PHRASES_EN = sortPhrases(PHRASES_EN);
 
 function applyTypos(text: string): string {
   let result = text;
@@ -279,7 +194,11 @@ function applyTypos(text: string): string {
 function applyPhrases(text: string, phrases: [string, string][]): string {
   let result = text;
   for (const [from, to] of phrases) {
-    result = result.replace(new RegExp(escapeRegExp(from), 'gi'), to);
+    const pattern = new RegExp(
+      `(?<![\\p{L}\\p{N}])${escapeRegExp(from)}(?![\\p{L}\\p{N}])`,
+      'giu',
+    );
+    result = result.replace(pattern, to);
   }
   return result.replace(/\s+/g, ' ').trim();
 }
@@ -312,14 +231,7 @@ export function localizePriceName(nameRu: string, locale: Locale): string {
   const normalized = applyTypos(nameRu.trim());
   if (!normalized) return '';
 
-  if (locale === 'ru') return normalized;
-
-  const phrases = locale === 'uz' ? SORTED_PHRASES_UZ : SORTED_PHRASES_EN;
-  let result = applyPhrases(normalized, phrases);
-
-  if (locale === 'uz' && /[а-яА-ЯёЁ]/.test(result)) {
-    result = transliterateRuToLatin(result);
-  }
-
-  return result.replace(/\s+/g, ' ').trim();
+  if (locale === 'ru') return normalizePriceRu(normalized);
+  if (locale === 'uz') return translatePriceRuToUz(normalized);
+  return translatePriceRuToEn(normalized);
 }

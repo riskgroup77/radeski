@@ -21,9 +21,11 @@ import {
   CLINIC_BRANCHES,
   CLINIC_PARTNERS,
   CUSTOMER_REVIEWS,
+  TREATMENT_RESULTS,
 } from '../data/sitePagesContent';
 import { CLINIC_RATINGS, CLINIC_RATING_SUMMARIES } from '../data';
 import { getCachedClientCount, resolveClientCount, setCachedClientCount } from '../utils/clientCount';
+import { resolvePublicTreatmentResults } from '../utils/treatmentResults';
 
 function withFallback<T>(apiItems: T[], fallback: T[]): T[] {
   return apiItems.length > 0 ? apiItems : fallback;
@@ -57,7 +59,7 @@ export function useCmsData(): CmsDataState {
   const [partners, setPartners] = useState<ClinicPartner[]>(CLINIC_PARTNERS);
   const [reviews, setReviews] = useState<CustomerReview[]>(CUSTOMER_REVIEWS);
   const [branches, setBranches] = useState<ClinicBranch[]>(CLINIC_BRANCHES);
-  const [treatmentResults, setTreatmentResults] = useState<TreatmentResult[]>([]);
+  const [treatmentResults, setTreatmentResults] = useState<TreatmentResult[]>(TREATMENT_RESULTS);
   const [videos, setVideos] = useState<ClinicVideo[]>([]);
   const [clinicRatings, setClinicRatings] = useState<ClinicRatingDisplay[]>(mapLegacyRatings());
   const [clientCount, setClientCount] = useState(() => getCachedClientCount());
@@ -91,10 +93,7 @@ export function useCmsData(): CmsDataState {
       setReviews(withFallback(reviewsRes.map(mapReviewFromApi), CUSTOMER_REVIEWS.filter((r) => r.published)));
       setBranches(withFallback(branchesRes.map(mapBranchFromApi), CLINIC_BRANCHES));
       setTreatmentResults(
-        resultsRes
-          .map(mapTreatmentResultFromApi)
-          .filter((result) => result.published !== false)
-          .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999)),
+        resolvePublicTreatmentResults(resultsRes.map(mapTreatmentResultFromApi)),
       );
       setVideos(
         videosRes
@@ -116,6 +115,7 @@ export function useCmsData(): CmsDataState {
             ? err.message
             : 'CMS ma\'lumotlarini yuklashda xatolik';
       setError(message);
+      setTreatmentResults(TREATMENT_RESULTS);
     } finally {
       setLoading(false);
     }

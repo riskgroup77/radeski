@@ -16,18 +16,20 @@ export function isLocalizedPriceName(name: string | undefined, locale: Locale): 
 
 export function resolvePriceName(item: PriceItem, locale: Locale): string {
   const ru = item.name.ru?.trim() || '';
-  const stored = item.name[locale]?.trim();
 
   if (locale === 'ru') {
-    return ru || stored || '';
+    if (ru) return localizePriceName(ru, 'ru');
+    return item.name.ru?.trim() || '';
   }
 
-  if (stored && isLocalizedPriceName(stored, locale)) {
-    return stored;
-  }
-
+  // O'zbekcha/inglizcha: har doim ruscha manbadan — API dagi aralash tarjimalarni e'tiborsiz qoldirish
   if (ru) {
     return localizePriceName(ru, locale);
+  }
+
+  const stored = item.name[locale]?.trim();
+  if (stored && isLocalizedPriceName(stored, locale)) {
+    return stored;
   }
 
   return stored || '';

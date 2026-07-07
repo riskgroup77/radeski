@@ -1,6 +1,7 @@
 import type { Locale } from '../types';
 import { getPriceCategoryLabel } from '../data/priceCategoryLabels';
 import { localizePriceName } from './localizePriceName';
+import { normalizePriceCategoryRu } from './normalizePriceRu';
 
 /** Bo'lim sarlavhasi — statik label yoki RU nomdan tarjima. */
 export function resolvePriceCategoryLabel(
@@ -12,7 +13,7 @@ export function resolvePriceCategoryLabel(
   const staticLabel = getPriceCategoryLabel(key, locale);
   if (staticLabel !== categoryId) return staticLabel;
   if (fallbackRu?.trim()) {
-    return localizePriceName(fallbackRu, locale);
+    return normalizePriceCategoryRu(fallbackRu);
   }
   return categoryId;
 }

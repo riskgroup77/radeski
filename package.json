@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
-    "build:prices": "node scripts/buildPriceCatalog.mjs",
+    "build:prices": "node scripts/buildPriceCatalogFromExcel.mjs && node scripts/generatePriceCategoryOrder.mjs && node scripts/normalizePriceCatalogRu.mjs && node scripts/buildPriceTranslationsUz.mjs && npx tsx scripts/buildPriceTranslationsEn.mjs",
+    "sync:prices": "tsx scripts/syncPricesToApi.ts",
+    "seed:catalog": "tsx scripts/seedCatalogToApi.ts",
     "preview": "vite preview",
     "server": "tsx server/expressServer.ts",
     "start": "tsx server/expressServer.ts",

@@ -71,14 +71,14 @@ export const DICTIONARY = {
     yearsActive: "yillik tajriba",
     reviewsCount: "ko'rib chiqilgan fikrlar",
     seoTitle: "Radeski Skin & Aesthetic Clinic - Sog'lom va go'zal teri kaliti",
-    seoText: "Radeski dermatologiya va estetika klinikasi Farg'ona shahrida zamonaviy jihozlar va malakali tibbiyot xodimlari bilan xizmat ko'rsatmoqda. Biz teri kasalliklarini diagnostika qilish, davolash, jarrohlik amaliyotlari va ilg'or kosmetologiya yo'nalishlarida ilg'or texnologiyalarni qo'llaymiz. IPL, PhotoFinder va Moos mikrografik jarrohligi kabi zamonaviy usullar klinikamizning asosiy ustunligidir.",
+    seoText: "Radeski dermatologiya va estetika klinikasi Farg'ona shahrida zamonaviy jihozlar va malakali tibbiyot xodimlari bilan xizmat ko'rsatmoqda. Biz teri kasalliklarini diagnostika qilish, davolash, jarrohlik amaliyotlari va ilg'or kosmetologiya yo'nalishlarida ilg'or texnologiyalarni qo'llaymiz. IPL, dermatoskopiya va Mohs mikrografik jarrohligi kabi zamonaviy usullar klinikamizning asosiy ustunligidir.",
     aboutHeader: "Sizning go'zalligingiz va sog'lig'ingiz - bizning kasbiy burchimiz",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic dermatologiya, kosmetologiya va dermato-onkologiya sohalarida Farg'ona va butun vodiyda yuqori sifat standartlariga ega tibbiy xizmatlarni taqdim etadi.",
     aboutParagraph2: "Klinikamiz Germaniya, Italiya va AQShning yetakchi kompaniyalari ishlab chiqargan eng so'nggi va xavfsiz apparat va texnologiyalardan foydalanadi. Ashurov Dilshod Davlatovich boshchiligidagi shifokorlar guruhi muntazam ravishda Yevropa va MDH mamlakatlarida xalqaro sertifikatlardan o'tishadi.",
     features01: "Professional shifokorlar",
     features01Desc: "Xalqaro darajadagi dermatologlar va kosmetologlar jamoasi.",
     features02: "Zamonaviy texnologiyalar",
-    features02Desc: "O'zbekistonda noyob bo'lgan PhotoFinder va IPL uskunalaridan foydalanish.",
+    features02Desc: "O'zbekistonda Sciton IPL va ilg'or lazer uskunalaridan foydalanish.",
     features03: "Yuqori darajadagi sterilizatsiya",
     features03Desc: "Yevropa tibbiyot standartlariga to'la mos keladigan steril xonalar.",
     features04: "Turli xil apparatlar",
@@ -159,14 +159,14 @@ export const DICTIONARY = {
     yearsActive: "лет практики",
     reviewsCount: "проверенных отзывов",
     seoTitle: "Radeski Skin & Aesthetic Clinic - Ключ к здоровой и красивой коже",
-    seoText: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное оборудование и квалифицированный медицинский персонал. Мы применяем новейшие технологии в диагностике, лечении кожных заболеваний, хирургических процедурах и эстетической косметологии. Передовые методы, такие как IPL, PhotoFinder и микрографическая хирургия по методу Mohs, являются ключевыми преимуществами нашей клиники.",
+    seoText: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное оборудование и квалифицированный медицинский персонал. Мы применяем новейшие технологии в диагностике, лечении кожных заболеваний, хирургических процедурах и эстетической косметологии. Передовые методы, такие как IPL, дерматоскопия и микрографическая хирургия по методу Mohs, являются ключевыми преимуществами нашей клиники.",
     aboutHeader: "Ваша красота и здоровье — наш профессиональный долг",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic предлагает медицинские услуги высочайших стандартов в области дерматологии, косметологии и дерматоонкологии в Фергане и по всей Ферганской долине.",
     aboutParagraph2: "Наша клиника оснащена самым современным и безопасным оборудованием от ведущих производителей Германии, Италии и США. Команда врачей под руководством Ашурова Дильшода Давлатовича регулярно проходит стажировки и сертификации в Европе и странах СНГ.",
     features01: "Профессиональные врачи",
     features01Desc: "Команда дерматологов и косметологов международного уровня.",
     features02: "Современные технологии",
-    features02Desc: "Применение уникального оборудования PhotoFinder и систем IPL в Узбекистане.",
+    features02Desc: "Применение систем IPL Sciton и передового лазерного оборудования в Узбекистане.",
     features03: "Высочайшая стерильность",
     features03Desc: "Стерилизационные боксы, полностью соответствующие европейским медицинским регламентам.",
     features04: "Разнообразные аппараты",
@@ -247,14 +247,14 @@ export const DICTIONARY = {
     yearsActive: "years of experience",
     reviewsCount: "verified testimonials",
     seoTitle: "Radeski Skin & Aesthetic Clinic - The Key to Healthy and Beautiful Skin",
-    seoText: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic and cosmetic facilities. We employ gold-standard technology in diagnosing and treating dermatological conditions, surgical procedures, and genetic-level skin rejuvenation. Advanced procedures like IPL, PhotoFinder computerized mole mapping, and Mohs micrographic surgery form the core of our specialized solutions.",
+    seoText: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic and cosmetic facilities. We employ gold-standard technology in diagnosing and treating dermatological conditions, surgical procedures, and genetic-level skin rejuvenation. Advanced procedures like IPL, clinical dermatoscopy, and Mohs micrographic surgery form the core of our specialized solutions.",
     aboutHeader: "Your beauty and health is our professional dedication",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic provides premier medical services in clinical dermatology, aesthetic cosmetology, and dermato-oncology across regional Fergana.",
     aboutParagraph2: "Our facility is equipped with state-of-the-art clinical devices from world leaders in Germany, Italy, and the USA. Led by Dr. Dilshod Davlatovich Ashurov, our specialized medical group regularly is trained in European and international institutes.",
     features01: "Professional Physicians",
     features01Desc: "International-class dermatologists and aesthetic cosmetologists.",
     features02: "Modern Technologies",
-    features02Desc: "Exclusive clinical application of PhotoFinder and Sciton IPL systems in Uzbekistan.",
+    features02Desc: "Exclusive clinical application of Sciton IPL and advanced laser systems in Uzbekistan.",
     features03: "High-grade Disinfection",
     features03Desc: "Clean sterilization facilities matching global healthcare parameters.",
     features04: "Diverse Clinical Devices",
@@ -370,9 +370,9 @@ export const DOCTORS: Doctor[] = [
       en: "Chief Medical Officer, Dermatovenerologist, Dermato-oncologist"
     },
     bio: {
-      uz: "Rossiya va Germaniyada malaka oshirgan, ko'p yillik professional tajribaga ega dermatoonkolog. Teri xavfli o'smalarining erta diagnostikasi (PhotoFinder) va davolash bo'yicha mutaxassis.",
-      ru: "Прошел повышение квалификации в России и Германии. Специалист международного уровня по ранней диагностике новообразований кожи с помощью PhotoFinder и дерматохирургии.",
-      en: "Specialized in advanced dermato-oncology and computerized mole mapping (PhotoFinder) trained in Germany and Russia. Active member of European Academy of Dermatology."
+      uz: "Rossiya va Germaniyada malaka oshirgan, ko'p yillik professional tajribaga ega dermatoonkolog. Teri xavfli o'smalarining erta diagnostikasi (dermatoskopiya) va davolash bo'yicha mutaxassis.",
+      ru: "Прошел повышение квалификации в России и Германии. Специалист международного уровня по ранней диагностике новообразований кожи с помощью дерматоскопии и дерматохирургии.",
+      en: "Specialized in advanced dermato-oncology and clinical dermatoscopy trained in Germany and Russia. Active member of European Academy of Dermatology."
     },
     experience: {
       uz: "18",
@@ -399,7 +399,7 @@ export const DOCTORS: Doctor[] = [
       en: "Dermatologist, Aesthetic Cosmetologist"
     },
     bio: {
-      uz: "Inyeksion va apparat kosmetologiyasi mutaxassisi. IPL foto-yangilashni gen darajasida qo'llash va yoshartirish protokollarini amalga oshiradi.",
+      uz: "Inyeksion va apparatli kosmetologiya mutaxassisi. IPL foto-yangilashni gen darajasida qo'llash va yoshartirish protokollarini amalga oshiradi.",
       ru: "Специалист по инъекционной и аппаратной косметологии. Владеет методиками фотоомоложения IPL на генном уровне и лифтинга кожи.",
       en: "Expert in injection therapy and medical hardware cosmetology. Implements high-end genetic-level IPL photo-rejuvenation systems."
     },
@@ -580,33 +580,51 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "apparatnaya-kosmetologiya",
     title: {
-      uz: "Apparat kosmetologiyasi",
+      uz: "Apparatli kosmetologiyasi",
       ru: "Аппаратная косметология",
-      en: "Hardware Cosmetology"
+      en: "Device-based cosmetology"
     },
     description: {
-      uz: "Eng so'nggi lazer va foto-texnologiyalar (IPL, mikrotoklar) orqali terini chuqur yoshartirish.",
-      ru: "Омоложение и чистка кожи лица с помощью новейших лазерных ультразвуковых и фотосистем.",
-      en: "Non-invasive skin rejuvenation, texturing, and cell recovery using advanced medical laser devices."
+      uz: "Radeski klinikasidagi zamonaviy apparatlar: IPL foto-yangilash (InMode), lazer biorevitalizatsiya va ultratovush tozalash.",
+      ru: "Современное оборудование клиники Radeski: фотоомоложение IPL (InMode), лазерная биоревитализация и ультразвуковая чистка.",
+      en: "Modern Radeski Clinic devices: IPL photo-rejuvenation (InMode), laser biorevitalization, and ultrasonic cleansing."
     },
     icon: "WandSparkles",
     subServices: [
       {
-        id: "bbl-foto",
-        name: { uz: "IPL foto-yangilash", ru: "IPL-фотоомоложение", en: "Intense Pulsed Light (IPL) Rejuvenation" },
+        id: "ipl-inmode",
+        name: { uz: "IPL foto-yangilash (InMode)", ru: "Фотоомоложение IPL (InMode)", en: "IPL photo-rejuvenation (InMode)" },
         description: {
-          uz: "Gen darajasida hujayra qarishini to'xtatuvchi, pigmentatsiya va qon-tomir tarmoqlarini yo'qotuvchi original Amerika texnologiyasi.",
-          ru: "Легендарная американская методика омоложения кожи на генном уровне, удаления пигментации и сосудистых звездочек.",
-          en: "Original Sciton BroadBand Light genetic-level rejuvenation targeted at solar lentigines and vascular redness."
+          uz: "InMode IPL — pigmentatsiya, qon tomirlari va teri tonini jarrohliksiz yaxshilash.",
+          ru: "InMode IPL — безоперационное улучшение пигментации, сосудов и тона кожи.",
+          en: "InMode IPL — non-surgical improvement of pigmentation, vessels and skin tone."
         }
       },
       {
-        id: "mikrotoki",
-        name: { uz: "Mikrotok terapiyasi", ru: "Микротоковая терапия", en: "Microcurrent Therapy" },
+        id: "hollywood-spectra",
+        name: { uz: "Hollywood Spectra (Lutronic)", ru: "Hollywood Spectra (Lutronic)", en: "Hollywood Spectra (Lutronic)" },
         description: {
-          uz: "Past chastotali o'zgaruvchan mikrotoklar orqali yuz mushaklari tonusini tiklash va shishlarni bartaraf etish.",
-          ru: "Стимуляция клеток микротоками низкой частоты для лимфодренажа, устранения отеков и нехирургического лифтинга.",
-          en: "Gentle low-frequency microelectrical impulse simulation for tissue lymphatic drainage and skin tightening."
+          uz: "Q-switch lazer — pigmentatsiya, post-akne va teri yangilanishi protokollari.",
+          ru: "Q-switch лазер — протоколы лечения пигментации, постакне и обновления кожи.",
+          en: "Q-switch laser — pigmentation, post-acne and skin renewal protocols."
+        }
+      },
+      {
+        id: "lazer-biorev",
+        name: { uz: "Lazer biorevitalizatsiya", ru: "Лазерная биоревитализация", en: "Laser biorevitalization" },
+        description: {
+          uz: "Lazer energiyasi bilan chuqur namlantirish va teri tiklanishi — elastiklik va yorqinlikni qaytarish.",
+          ru: "Глубокое увлажнение и восстановление кожи лазерной энергией — возвращение эластичности и сияния.",
+          en: "Deep hydration and skin renewal with laser energy — restoring elasticity and radiance."
+        }
+      },
+      {
+        id: "ultratovush-yuz",
+        name: { uz: "Ultratovush yuz tozalash", ru: "Ультразвуковая чистка лица", en: "Ultrasonic facial cleansing" },
+        description: {
+          uz: "Professional ultratovush apparati bilan chuqur yuz tozalash: poralar, qora nuqtalar va teri matligini bartaraf etish.",
+          ru: "Профессиональная ультразвуковая чистка лица: поры, чёрные точки и тусклость кожи.",
+          en: "Professional ultrasonic deep facial cleansing for pores, blackheads, and dull skin."
         }
       }
     ]
@@ -719,15 +737,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     icon: "ScanEye",
     subServices: [
       {
-        id: "photofinder-scan",
-        name: { uz: "PhotoFinder dermatologik skanerlash", ru: "Скрининг на PhotoFinder", en: "PhotoFinder Mole Mapping" },
-        description: {
-          uz: "Butun tana va teridagi xollarni sun'iy intellekt orqali to'liq raqamli xaritalash, melanoma xavfini baholash.",
-          ru: "Цифровое картирование всего тела на немецком аппарате PhotoFinder. ИИ находит новые и опасные родинки.",
-          en: "German PhotoFinder high-resolution automated body imaging. AI detects evolving risk moles early."
-        }
-      },
-      {
         id: "biopsiya",
         name: { uz: "Teri biopsiyasi va gistologiya", ru: "Биопсия кожи и гистология", en: "Skin Biopsy & Histopathology" },
         description: {
@@ -806,7 +815,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         id: "dermatosc-lessons",
         name: { uz: "Praktik o'quv darslari", ru: "Практические курсы", en: "Practical Training Workshops" },
         description: {
-          uz: "Haqiqiy klinik holatlarda PhotoFinder skanerlari yordamida tashxis qo'yish amaliyotini o'rganish.",
+          uz: "Haqiqiy klinik holatlarda dermatoskopiya yordamida tashxis qo'yish amaliyotini o'rganish.",
           ru: "Разбор сотен цифровых атласов кожных повреждений под руководством ведущих дерматоонкологов.",
           en: "Hands-on analysis of mole digital repositories with expert evaluation by leading dermato-oncologists."
         }
@@ -862,31 +871,6 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         }
       }
     ]
-  },
-  {
-    id: "gen-revo",
-    title: {
-      uz: "Gen darajasida foto-yangilash",
-      ru: "Фотоомоложение на генном уровне",
-      en: "Gene-Level Photo-Rejuvenation"
-    },
-    description: {
-      uz: "Qarish genlarini faolligini o'zgartiruvchi original IPL Forever Young ilg'or texnologiyasi.",
-      ru: "Революционная восстановительная технология IPL Forever Young, поворачивающая клеточный возраст вспять.",
-      en: "Revolutionary medical-grade Sciton IPL Forever Young protocols directly resetting aging genes."
-    },
-    icon: "Dna",
-    subServices: [
-      {
-        id: "fy-protocols",
-        name: { uz: "Forever Young IPL protokollari", ru: "Протоколы Forever Young IPL", en: "Forever Young IPL Protocols" },
-        description: {
-          uz: "Ajinsiz va iz qoldirmasdan, terini elastik va sog'lom holatga keltiruvchi Forever Young IPL protokoli.",
-          ru: "Воздействие световыми импульсами высокой интенсивности для активации генов, отвечающих за коллаген.",
-          en: "Focused intense pulsed light cycles inducing rapid renewal of elastin and natural collagen builders."
-        }
-      }
-    ]
   }
 ];
 
@@ -905,7 +889,7 @@ export const ARTICLES: Article[] = [
       en: "Skin growths are more than a simple aesthetic issue. Find out about their infectious nature and potential risks."
     },
     content: {
-      uz: "Papillomalar va so'gallar inson papillomasi virusi (HPV) sababli yuzaga keladi. Ushbu o'smalar jarohatlanganda, kiyimga ishqalanganda yoki immunitet tushib ketganda tez ko'payishi va ayrim hollarda xavfli tus olishi mumkin. Shuning uchun dermatolog nazoratida PhotoFinder yoki optik dermatoskop bilan tekshirilib, xavfsiz lazer, kriyodestruksiya yoki radioto'lqinlar bilan olib tashlanishi zarur. O'zboshimchalik bilan xalqona uslubda yo'qotish og'ir asoratlarga olib kelishi mumkin.",
+      uz: "Papillomalar va so'gallar inson papillomasi virusi (HPV) sababli yuzaga keladi. Ushbu o'smalar jarohatlanganda, kiyimga ishqalanganda yoki immunitet tushib ketganda tez ko'payishi va ayrim hollarda xavfli tus olishi mumkin. Shuning uchun dermatolog nazoratida optik dermatoskop bilan tekshirilib, xavfsiz lazer, kriyodestruksiya yoki radioto'lqinlar bilan olib tashlanishi zarur. O'zboshimchalik bilan xalqona uslubda yo'qotish og'ir asoratlarga olib kelishi mumkin.",
       ru: "Папилломы и бородавки вызываются вирусом папилломы человека (ВПЧ). При трении об одежду, случайных травмах или ослаблении иммунитета они способны быстро разрастаться и в редких случаях малигнизироваться. Именно поэтому крайне важна своевременная диагностика дерматоонкологом. Удаление жидким азотом, лазером или радиоволной в условиях клиники гарантирует безопасность и отсутствие рубцов. Категорически не рекомендуется заниматься самолечением дома.",
       en: "Papillomas and clinical warts are directly induced by HPV strains. Chronic irritation by collared clothing or accidental surface scratching might spark local spread, cell atypia, and very rarely transition into risk zones. We recommend a computerized evaluation under certified dermatologists and removal via laser, cold nitrogen, or radiofrequency tools to prevent any permanent scarring."
     },

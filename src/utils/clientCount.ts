@@ -2,7 +2,8 @@ import { getClientCount } from '../api/publicApi';
 
 export const CLIENT_COUNT_UPDATED_EVENT = 'radeski-client-count-updated';
 export const CLIENT_COUNT_STORAGE_KEY = 'radeski-client-count';
-export const DEFAULT_CLIENT_COUNT = 998;
+export const DEFAULT_CLIENT_COUNT = 50000;
+export const MIN_CLIENT_COUNT = 50000;
 
 function normalizeClientCount(value: unknown): number | null {
   const parsed =
@@ -37,6 +38,10 @@ function persistClientCount(count: number): void {
 }
 
 let cachedClientCount = readStoredClientCount() ?? DEFAULT_CLIENT_COUNT;
+if (cachedClientCount < MIN_CLIENT_COUNT) {
+  cachedClientCount = DEFAULT_CLIENT_COUNT;
+  persistClientCount(cachedClientCount);
+}
 
 export function getCachedClientCount(): number {
   return cachedClientCount;
@@ -47,7 +52,7 @@ export function resolveClientCount(apiCount?: number | null): number {
   const api = normalizeClientCount(apiCount);
   const apiBase = api && api > 0 ? api : DEFAULT_CLIENT_COUNT;
   const stored = readStoredClientCount() ?? DEFAULT_CLIENT_COUNT;
-  return Math.max(apiBase, stored, cachedClientCount);
+  return Math.max(apiBase, stored, cachedClientCount, MIN_CLIENT_COUNT);
 }
 
 export function setCachedClientCount(count: number): void {

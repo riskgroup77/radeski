@@ -50,7 +50,7 @@ HPV teri yoki shilliq qavatiga mikrojarohatlar orqali kiradi. Nam joylar (qo'l, 
 
 ## Diagnostika: nima qilinadi?
 
-Radeski klinikasida dermatolog o'smani ko'zdan kechiradi va kerak bo'lsa **dermatoskop** yoki **PhotoFinder** tizimi bilan chuqurroq baholaydi. Maqsad — o'smaning xavfsiz ekanini tasdiqlash va agressiv davolash usulini tanlash. Ba'zan bir nechta o'sma bir vaqtda tekshiriladi, chunki HPV ba'zan tanada bir vaqtning o'zida bir nechta fokusda namoyon bo'ladi.
+Radeski klinikasida dermatolog o'smani ko'zdan kechiradi va kerak bo'lsa **dermatoskop** bilan chuqurroq baholaydi. Maqsad — o'smaning xavfsiz ekanini tasdiqlash va agressiv davolash usulini tanlash. Ba'zan bir nechta o'sma bir vaqtda tekshiriladi, chunki HPV ba'zan tanada bir vaqtning o'zida bir nechta fokusda namoyon bo'ladi.
 
 ## Zamonaviy davolash usullari
 
@@ -92,7 +92,7 @@ function ruBodyPapilloma(): string {
 
 ## Диагностика в клинике
 
-Врач-дерматолог оценивает образование визуально и при необходимости использует **дерматоскоп** или систему **PhotoFinder** для дифференциальной диагностики. Это позволяет отличить безопасную бородавку от других новообразований и выбрать оптимальный метод удаления.
+Врач-дерматолог оценивает образование визуально и при необходимости использует **дерматоскоп** для дифференциальной диагностики. Это позволяет отличить безопасную бородавку от других новообразований и выбрать оптимальный метод удаления.
 
 ## Современные методы лечения
 
@@ -134,7 +134,7 @@ HPV enters through micro-injuries in skin or mucosa. Common sites include hands,
 
 ## Diagnosis at the clinic
 
-Our dermatologist performs a clinical exam and may use **dermatoscopy** or **PhotoFinder** imaging to confirm the lesion type and rule out other conditions before removal.
+Our dermatologist performs a clinical exam and may use **dermatoscopy** to confirm the lesion type and rule out other conditions before removal.
 
 ## Modern treatment options
 

@@ -1,328 +1,81 @@
 {
   "categories": [
     {
-      "id": "bazovyy",
-      "nameRu": "Базовый",
-      "items": []
-    },
-    {
-      "id": "1-serniya-davlin",
-      "nameRu": "1 серния давлин",
+      "id": "dermatologiya",
+      "nameRu": "Дерматология",
       "items": [
         {
-          "nameRu": "Процедура 1 серия",
-          "priceValue": 70000
-        }
-      ]
-    },
-    {
-      "id": "derma-v",
-      "nameRu": "Derma v",
-      "items": [
-        {
-          "nameRu": "Лечение купероза и розации",
-          "priceValue": 800000
-        },
-        {
-          "nameRu": "Лазерное удаление вен на нижних конечностях",
+          "nameRu": "Первичный осмотр врача дерматовениролога",
           "priceValue": 150000
         },
         {
-          "nameRu": "Лазерное лечение гемагингиом, ангиом,сосудистых новообразований от",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "удаление пигментации все лицо",
-          "priceValue": 800000
-        },
-        {
-          "nameRu": "Лазерное удаление сосудистых звездочек на лице от",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Лазерное удаление телеангиэтазий на всём теле от",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Лазерное удаление телеангиэтазий на крыльях носа от",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Лечение онихомикоза ногтей 1 ноготь",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Лечение онихомикоза ногтей от",
-          "priceValue": 1300000
-        },
-        {
-          "nameRu": "Коррекция рубца",
-          "priceValue": 1500000
-        },
-        {
-          "nameRu": "Face art лечение розацеа акне",
-          "priceValue": 2000000
-        },
-        {
-          "nameRu": "Лазерное лечение гемангиом",
-          "priceValue": 1400000
+          "nameRu": "Повторный осмотр врача дерматовениролога",
+          "priceValue": 100000
         }
       ]
     },
     {
-      "id": "healinte",
-      "nameRu": "Healinte",
+      "id": "trihologiya",
+      "nameRu": "Трихология",
       "items": [
         {
-          "nameRu": "Волосы",
-          "priceValue": 110000
-        },
-        {
-          "nameRu": "Лицо",
-          "priceValue": 130000
-        }
-      ]
-    },
-    {
-      "id": "hooywood-spectra",
-      "nameRu": "Hooywood Spectra",
-      "items": [
-        {
-          "nameRu": "Лечение акне, красноты, пост акне (gold toning)",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Лечение пигментации лицо",
-          "priceValue": 1200000
-        },
-        {
-          "nameRu": "Лечение пигментации до 5 см2",
-          "priceValue": 350000
-        },
-        {
-          "nameRu": "Лечение пигментации щеки",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Осветление зоны бикини",
-          "priceValue": 900000
-        },
-        {
-          "nameRu": "карбоновый пилинг",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "карбоновый пилинг+ gold toning",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Удаление татуажа бровей",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Удаление татуировки 6 см",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Лечение рубцов 5см2",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Лечение пигментации до 10 см 2",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Лечения пигментации",
-          "priceValue": 700000
-        }
-      ]
-    },
-    {
-      "id": "teosyal",
-      "nameRu": "TEOSYAL",
-      "items": [
-        {
-          "nameRu": "TEOSYAL PureSense Ultra Deep",
-          "priceValue": 2500000
-        },
-        {
-          "nameRu": "TEOSYAL Pure Sense Kiss",
-          "priceValue": 3000000
-        },
-        {
-          "nameRu": "TEOSYAL Pure Sense Redensity 1 3ml",
-          "priceValue": 2900000
-        },
-        {
-          "nameRu": "TEOSYAL Pure Sense Redensity 1 1ml",
-          "priceValue": 1600000
-        },
-        {
-          "nameRu": "TEOSYAL Pure Sense Redensity 2 1ml",
-          "priceValue": 2300000
-        },
-        {
-          "nameRu": "TEOSYAL RHA 1",
-          "priceValue": 2000000
-        },
-        {
-          "nameRu": "TEOSYAL RHA 2",
-          "priceValue": 2400000
-        },
-        {
-          "nameRu": "TEOSYAL RHA 3",
-          "priceValue": 2200000
-        },
-        {
-          "nameRu": "TEOSYAL RHA 4 1.2ml",
-          "priceValue": 2600000
-        },
-        {
-          "nameRu": "TEOSYAL KISS 0.7",
-          "priceValue": 2400000
-        }
-      ]
-    },
-    {
-      "id": "vichi-dercos",
-      "nameRu": "Vichi dercos",
-      "items": [
-        {
-          "nameRu": "dercos dandruff and scalp для нормальных и жирных 200мл",
-          "priceValue": 280000
-        },
-        {
-          "nameRu": "Vichi Dercos аминексил средство для волос для женщин 21 монодоза 6мл",
-          "priceValue": 770000
-        },
-        {
-          "nameRu": "Vichi Dercos аминексил средство для волос для мужчин 21 монодоза 6мл",
-          "priceValue": 770000
-        },
-        {
-          "nameRu": "Vichi Dercos энерджи шампунь против выпадения волос 400мл",
-          "priceValue": 380000
-        },
-        {
-          "nameRu": "Vichi Dercos энерджи шампунь против выпадения волос 200мл",
-          "priceValue": 280000
-        },
-        {
-          "nameRu": "Vichi Dercos тонизирующий кондиционер для волос 200мл",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Vichi Dercos шампунь пилинг против перхоти 250мл",
-          "priceValue": 260000
-        },
-        {
-          "nameRu": "Vichi Dercos псолюшн кераторегулирующий шампунь 200мл",
-          "priceValue": 270000
-        },
-        {
-          "nameRu": "Vichi Dercos против перхоти для чувствительной кожи головы 200мл",
-          "priceValue": 260000
-        },
-        {
-          "nameRu": "Vichi Dercos против перхоти для жирных волос 200мл",
-          "priceValue": 260000
-        },
-        {
-          "nameRu": "Vichi Dercos против перхоти для жирных волос 390мл",
-          "priceValue": 390000
-        },
-        {
-          "nameRu": "Vichi Dercos против перхоти для сухих волос 200мл",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "Vichi Dercos против перхоти для сухих волос 390мл",
-          "priceValue": 380000
-        },
-        {
-          "nameRu": "Vichi Dercos шампунь кондиционер против пехоти 2 в 1 200мл",
-          "priceValue": 290000
-        },
-        {
-          "nameRu": "Vichi Dercos шампунь кондиционер против пехоти 2 в 1 390мл",
-          "priceValue": 410000
-        },
-        {
-          "nameRu": "Vichi Dercos регулир шампунь для жирных волос 200мл",
-          "priceValue": 260000
-        },
-        {
-          "nameRu": "Vichi Dercos успокаивающий шампунь для нормальных и жирных волос 200мл",
-          "priceValue": 260000
-        },
-        {
-          "nameRu": "Vichi термальная вода 15мл",
+          "nameRu": "Первичный осмотр врача трихолога + трихоскопия",
           "priceValue": 150000
-        }
-      ]
-    },
-    {
-      "id": "vichi-uhodovaya",
-      "nameRu": "Vichi уходовая",
-      "items": [
-        {
-          "nameRu": "виши минерал 89 гель - сыворотка 50мл",
-          "priceValue": 450000
         },
         {
-          "nameRu": "виши минерал 89 увлажнаяющий крем 72ч 50мл",
-          "priceValue": 430000
+          "nameRu": "Повторный осмотр врача трихолога",
+          "priceValue": 100000
+        }
+      ]
+    },
+    {
+      "id": "dermatoonkologiya",
+      "nameRu": "Дерматоонкология",
+      "items": [
+        {
+          "nameRu": "Первичный осмотр врача дерматоонколога + дерматоскопия",
+          "priceValue": 150000
         },
         {
-          "nameRu": "виши минерал 89 увлажняющий крем 72ч для сухой кожи 50мл",
-          "priceValue": 430000
+          "nameRu": "Повторная консультация к врачу дерматоонколога",
+          "priceValue": 100000
+        }
+      ]
+    },
+    {
+      "id": "dermatokosmetolog",
+      "nameRu": "Дерматокосметолог",
+      "items": [
+        {
+          "nameRu": "Первичный осмотр врача дерматокосметолога + сканирование лица на аппарате JANUS PRO",
+          "priceValue": 150000
         },
         {
-          "nameRu": "виши минерал 79 матирующий гель для жирной кожи 50мл",
-          "priceValue": 430000
+          "nameRu": "Повторный осмотр врача дерматокосметолога",
+          "priceValue": 100000
         }
       ]
     },
     {
-      "id": "allergo-proba-10-punktov",
-      "nameRu": "Аллерго проба 10 пунктов",
+      "id": "podolog",
+      "nameRu": "Подолог",
       "items": [
         {
-          "nameRu": "Аллерго проба 10 пунктов",
-          "priceValue": 500000
-        }
-      ]
-    },
-    {
-      "id": "arenda-apparatov",
-      "nameRu": "Аренда аппаратов",
-      "items": [
-        {
-          "nameRu": "Дермапал",
-          "priceValue": 1000000
+          "nameRu": "Первичная консультация подолога",
+          "priceValue": 150000
         },
         {
-          "nameRu": "1 серия",
-          "priceValue": 1500000
+          "nameRu": "Повторный осмотр подолога",
+          "priceValue": 100000
         }
       ]
     },
     {
-      "id": "davlin-dermapal",
-      "nameRu": "Давлин Dermapal",
+      "id": "dermatoonkologiya-2",
+      "nameRu": "Дерматоонкология",
       "items": [
         {
-          "nameRu": "Процедура",
-          "priceValue": 35000
-        }
-      ]
-    },
-    {
-      "id": "dermatoonkolog",
-      "nameRu": "Дерматоонколог",
-      "items": [
-        {
-          "nameRu": "Панч биопсия",
+          "nameRu": "Панч-биопсия",
           "priceValue": 300000
         },
         {
@@ -338,18 +91,292 @@
           "priceValue": 4000000
         },
         {
-          "nameRu": "Обработка новооброзование",
+          "nameRu": "Удаление родинок (от)",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Удаление новообразований (от)",
+          "priceValue": 30000
+        }
+      ]
+    },
+    {
+      "id": "hirurgicheskaya-dematologiya",
+      "nameRu": "Хирургическая дерматология",
+      "items": [
+        {
+          "nameRu": "Shave (Шейв) - удаление новообразований кожи",
+          "priceValue": 150000
+        },
+        {
+          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" (базовый пакет с привлечением пластического хирурга)",
+          "priceValue": 9000000
+        },
+        {
+          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" (базовый пакет)",
+          "priceValue": 5000000
+        },
+        {
+          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" в периорбитальной области (реконструктивный этап выполняется офтальмохирургом, д.м.н.)",
+          "priceValue": 10000000
+        },
+        {
+          "nameRu": "Радиоволновая хирургия 1 образования (доброкачественные внутридермальные новообразования кожи - родинки/невусы) с анестезией",
+          "priceValue": 65000
+        },
+        {
+          "nameRu": "Радиоволновая хирургия 1 образования (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы) с анестезией",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Радиоволновая хирургия 1 образования в сложных анатомических зонах (веки, паховая область, слизистые) с анестезией",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Радиоволновое удаление контагиозного моллюска (за 1 элемент): до 10 образований",
+          "priceValue": 70000
+        },
+        {
+          "nameRu": "Хирургическое удаление доброкачественных новообразований кожи больших размеров и новообразований кожи, которые расположены в анатомически сложных участках І уровня сложности",
+          "priceValue": 2000000
+        }
+      ]
+    },
+    {
+      "id": "lazernoe-udalenie-dobrokachestvennyh-novoobrazovaniy-na-deka-smarxide-punto-so2-lazere",
+      "nameRu": "Лазерное удаление доброкачественных новообразований на аппарате DEKA SmartXide Punto CO₂",
+      "items": [
+        {
+          "nameRu": "Лазерное удаление (за 1 элемент)",
           "priceValue": 300000
         },
         {
-          "nameRu": "Обработка новооброзование",
+          "nameRu": "Удаление образований в интимной зоне (до 5 мм)",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Удаление образований в интимной зоне (от 5 мм)",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Удаление образований в области верхних и нижних век (от 1 до 3 мм)",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Удаление образований в области верхних и нижних век (от 5 мм)",
           "priceValue": 250000
+        },
+        {
+          "nameRu": "Родинка (до 5 мм)",
+          "priceValue": 250000
+        },
+        {
+          "nameRu": "Родинка (от 5 мм до 10 мм)",
+          "priceValue": 350000
+        },
+        {
+          "nameRu": "Родинка (от 10 мм)",
+          "priceValue": 450000
+        },
+        {
+          "nameRu": "Подногтевые бородавки (до 5 мм)",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Подногтевые бородавки (от 5 мм до 10 мм)",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Подногтевые бородавки (от 10 мм до 15 мм)",
+          "priceValue": 400000
+        }
+      ]
+    },
+    {
+      "id": "kriohirurgiya",
+      "nameRu": "Криохирургия",
+      "items": [
+        {
+          "nameRu": "Внутренне очаговая криодеструкция рубца",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Вторая степень сложности (от трех до семи элементов)",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "Иммунокриохирургия",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Криодеструкция доброкачественных глубоких новообразований кожи",
+          "priceValue": 20000
+        },
+        {
+          "nameRu": "Криодеструкция доброкачественных поверхностных новообразований кожи",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "Криодеструкция рубца аэрозольным методом",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "Криодеструкция рубца контактным методом",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "Криохирургия немеланомных злокачественных опухолей кожи (Базальноклеточный карцинома, плоскоклеточная карцинома)",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Криохирургия предраковых состояний кожи (лейкоплакия, актинический кератоз, актинический хейлит, болезнь Боуэна)",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Первая степень сложности (один-два элемента)",
+          "priceValue": 20000
+        },
+        {
+          "nameRu": "Третья степень сложности (от восьми до пятнадцати элементов)",
+          "priceValue": 40000
+        }
+      ]
+    },
+    {
+      "id": "derma-v-sosudistyy-lazer-lechenie-sosudistyh-zvezdochek-kuperoza-i-rozatsii",
+      "nameRu": "Derma V — сосудистый лазер (лечение сосудистых звёздочек, купероза и розации)",
+      "items": [
+        {
+          "nameRu": "Лечение купероза и розации",
+          "priceValue": 800000
+        },
+        {
+          "nameRu": "Лазерное удаление вен на нижних конечностях (от)",
+          "priceValue": 150000
+        },
+        {
+          "nameRu": "Лазерное лечение гемангиом, ангиом, сосудистых новообразований (от)",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Удаление пигментации всего лица",
+          "priceValue": 800000
+        },
+        {
+          "nameRu": "Лазерное удаление сосудистых звёздочек на лице (от)",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Лазерное удаление телеангиэтазий на всём теле (от)",
+          "priceValue": 1000000
+        },
+        {
+          "nameRu": "Лазерное удаление телеангиэтазий на крыльях носа (от)",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Лечение онихомикоза ногтей 1 ноготь",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Лечение онихомикоза ногтей (от)",
+          "priceValue": 130000
+        },
+        {
+          "nameRu": "Коррекция рубца",
+          "priceValue": 1000000
+        },
+        {
+          "nameRu": "Face art лечение розацеа акне",
+          "priceValue": 800000
+        },
+        {
+          "nameRu": "Лазерное лечение гемангиом (от)",
+          "priceValue": 300000
+        }
+      ]
+    },
+    {
+      "id": "healinte-fotodinamicheskoe-omolozhenie",
+      "nameRu": "Healite II (фотодинамическое омоложение)",
+      "items": [
+        {
+          "nameRu": "Волосы",
+          "priceValue": 110000
+        },
+        {
+          "nameRu": "Лицо",
+          "priceValue": 130000
+        }
+      ]
+    },
+    {
+      "id": "hooywood-spectra-lechenie-pigmentatsii-post-akne",
+      "nameRu": "Hollywood Spectra (лечение пигментации, пост-акне)",
+      "items": [
+        {
+          "nameRu": "Лечение акне, красноты, пост-акне (gold toning)",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Лечение пигментации лицо",
+          "priceValue": 1200000
+        },
+        {
+          "nameRu": "Лечение пигментации до 5 см²",
+          "priceValue": 350000
+        },
+        {
+          "nameRu": "Лечение пигментации щеки",
+          "priceValue": 700000
+        },
+        {
+          "nameRu": "Осветление зоны бикини",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Карбоновый пилинг",
+          "priceValue": 700000
+        },
+        {
+          "nameRu": "Карбоновый пилинг+ gold toning",
+          "priceValue": 1000000
+        },
+        {
+          "nameRu": "Удаление татуажа бровей",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Удаление татуировки 6 см",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Лечение рубцов 5 см²",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Лечение пигментации до 10 см²",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Лечение пигментации",
+          "priceValue": 700000
+        }
+      ]
+    },
+    {
+      "id": "allergo-proba-10-punktov",
+      "nameRu": "Аллергопроба (10 пунктов)",
+      "items": [
+        {
+          "nameRu": "Аллергопроба 10 пунктов",
+          "priceValue": 500000
         }
       ]
     },
     {
       "id": "dnevnoy-statsionar",
-      "nameRu": "ДНЕВНОЙ СТАЦИОНАР",
+      "nameRu": "Дневной стационар",
       "items": [
         {
           "nameRu": "Забор крови",
@@ -357,10 +384,10 @@
         },
         {
           "nameRu": "Инъекция с метотриксатом",
-          "priceValue": 150000
+          "priceValue": 160000
         },
         {
-          "nameRu": "Инъкция в/м без расходного материала",
+          "nameRu": "Инъекция в/м без расходного материала",
           "priceValue": 10000
         },
         {
@@ -368,7 +395,7 @@
           "priceValue": 20000
         },
         {
-          "nameRu": "капельница без расходных материалов",
+          "nameRu": "Капельница без расходных материалов",
           "priceValue": 30000
         },
         {
@@ -381,7 +408,7 @@
         },
         {
           "nameRu": "Инъекция с метотриксатом 0.75",
-          "priceValue": 100000
+          "priceValue": 110000
         },
         {
           "nameRu": "Обработка раны первичная",
@@ -396,12 +423,8 @@
           "priceValue": 50000
         },
         {
-          "nameRu": "Блокада с кеналогом 300",
+          "nameRu": "Блокада с кеналогом",
           "priceValue": 300000
-        },
-        {
-          "nameRu": "Модификационный PRP",
-          "priceValue": 500000
         }
       ]
     },
@@ -558,142 +581,708 @@
           "priceValue": 600000
         },
         {
-          "nameRu": "гиппергидроз+релатокс",
+          "nameRu": "Гиппергидроз препарат релатокс",
           "priceValue": 1800000
         },
         {
-          "nameRu": "Гипергидроз ботулакс",
+          "nameRu": "Гипергидроз ботулотоксин",
           "priceValue": 1300000
         }
       ]
     },
     {
-      "id": "konsultatsii",
-      "nameRu": "Консультации",
+      "id": "teosyal",
+      "nameRu": "TEOSYAL",
       "items": [
         {
-          "nameRu": "Консилиум (специалисты клиники)",
-          "priceValue": 500000
+          "nameRu": "TEOSYAL PureSense Ultra Deep",
+          "priceValue": 2500000
         },
         {
-          "nameRu": "Онкологичнеский консилиум (tumor board)",
+          "nameRu": "TEOSYAL Pure Sense Kiss",
+          "priceValue": 3000000
+        },
+        {
+          "nameRu": "TEOSYAL Pure Sense Redensity 1 3ml",
+          "priceValue": 2900000
+        },
+        {
+          "nameRu": "TEOSYAL Pure Sense Redensity 1 1ml",
+          "priceValue": 1600000
+        },
+        {
+          "nameRu": "TEOSYAL Pure Sense Redensity 2 1ml",
+          "priceValue": 2300000
+        },
+        {
+          "nameRu": "TEOSYAL RHA 1",
           "priceValue": 2000000
         },
         {
-          "nameRu": "Определение статуса эпидермального барьера",
-          "priceValue": 100000
+          "nameRu": "TEOSYAL RHA 2",
+          "priceValue": 2400000
         },
         {
-          "nameRu": "Оформление и подготовка выписок из документов на иностранном языке",
-          "priceValue": 300000
+          "nameRu": "TEOSYAL RHA 3",
+          "priceValue": 2200000
         },
         {
-          "nameRu": "Первичная консультация и осмотр кандидата медицинских наук",
-          "priceValue": 300000
+          "nameRu": "TEOSYAL RHA 4 1.2ml",
+          "priceValue": 2600000
         },
         {
-          "nameRu": "Первичная консультация профессора, доктора медицинских наук",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Прием (осмотр, консультация) индивидуально приглашенного специалиста (профессора, доктора медицинских наук, ведущего специалиста и др.)",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Первичный осмотр врача дерматовениролога",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Первичный осмотр врача дерматокосметолога",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Первичный осморт врача трихолога",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Первичный осморт врача дерматоонколога",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Повторная консультация к врачу дерматовенеролога",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Первичная консультация подолога",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Повторный осмотр врача трихолога",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Повторный осморт врача дерматоонколога",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Повторный осмотр подолога",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Повторный осморт врача дерматокосметолога",
-          "priceValue": 100000
+          "nameRu": "TEOSYAL KISS 0.7",
+          "priceValue": 2400000
         }
       ]
     },
     {
-      "id": "kriohirurgiya",
-      "nameRu": "Криохирургия",
+      "id": "rejuran",
+      "nameRu": "Rejuran",
       "items": [
         {
-          "nameRu": "Внутренне очаговая криодеструкция рубца",
-          "priceValue": 50000
+          "nameRu": "Режуран С от рубцов",
+          "priceValue": 2300000
         },
         {
-          "nameRu": "Вторая степень сложности (от трех до семи элементов)",
-          "priceValue": 30000
+          "nameRu": "Режуран",
+          "priceValue": 3200000
         },
         {
-          "nameRu": "Иммунокриохирургия",
+          "nameRu": "Режуран глаза",
+          "priceValue": 2600000
+        }
+      ]
+    },
+    {
+      "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-glubokaya",
+      "nameRu": "Лазерная абляционная шлифовка кожи (глубокая)",
+      "items": [
+        {
+          "nameRu": "Веки (верхние и нижние)",
+          "priceValue": 1300000
+        },
+        {
+          "nameRu": "Верхняя губа",
           "priceValue": 500000
         },
         {
-          "nameRu": "Криодеструкция доброкачественных глубоких новообразований кожи",
-          "priceValue": 20000
+          "nameRu": "Кисти рук",
+          "priceValue": 1400000
         },
         {
-          "nameRu": "Криодеструкция доброкачественных поверхностных новообразований кожи",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Криодеструкция рубца аэрозольным методом",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Криодеструкция рубца контактным методом",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Криохирургия немеланомных злокачественных опухолей кожи (Базальноклеточный карцинома, плоскоклеточная карцинома)",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Криохирургия предраковых состояний кожи (лейкоплакия, актинический кератоз, актинический хейлит, болезнь Боуэна)",
+          "nameRu": "Лазерное лечение бородавок с помощью аппарата PinPoint laser за 1 кв.см (1 сеанс)",
           "priceValue": 100000
         },
         {
-          "nameRu": "Первая степень сложности (один-два элемента)",
-          "priceValue": 20000
+          "nameRu": "Лицо",
+          "priceValue": 3000000
         },
         {
-          "nameRu": "Третья степень сложности (от восьми до пятнадцати элементов)",
-          "priceValue": 40000
+          "nameRu": "Лицо включая область века",
+          "priceValue": 3500000
+        },
+        {
+          "nameRu": "Лоб",
+          "priceValue": 700000
+        },
+        {
+          "nameRu": "Нос",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Рубец (10-20см)",
+          "priceValue": 1800000
+        },
+        {
+          "nameRu": "Рубец (1см)",
+          "priceValue": 250000
+        },
+        {
+          "nameRu": "Рубец (2см)",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Рубец (3-4см)",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Рубец (5-10см)",
+          "priceValue": 900000
+        },
+        {
+          "nameRu": "Стрии (10-10 см)",
+          "priceValue": 900000
+        },
+        {
+          "nameRu": "Стрии (10-20 см)",
+          "priceValue": 1800000
+        },
+        {
+          "nameRu": "Тело (10х10)",
+          "priceValue": 900000
+        },
+        {
+          "nameRu": "Тело (20х20)",
+          "priceValue": 1500000
+        },
+        {
+          "nameRu": "Щеки",
+          "priceValue": 2500000
+        },
+        {
+          "nameRu": "Рубец",
+          "priceValue": 700000
         }
       ]
     },
     {
-      "id": "la-rosh",
-      "nameRu": "Ла рош",
+      "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-poverhnostnaya",
+      "nameRu": "Лазерная абляционная шлифовка кожи (поверхностная)",
+      "items": [
+        {
+          "nameRu": "Веки (верхние/нижние)",
+          "priceValue": 700000
+        },
+        {
+          "nameRu": "Верхняя губа",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Декольте",
+          "priceValue": 1000000
+        },
+        {
+          "nameRu": "Кисти рук",
+          "priceValue": 1000000
+        },
+        {
+          "nameRu": "Лицо, включая область века",
+          "priceValue": 2500000
+        },
+        {
+          "nameRu": "Лоб",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Нос",
+          "priceValue": 350000
+        },
+        {
+          "nameRu": "Шея",
+          "priceValue": 1000000
+        },
+        {
+          "nameRu": "Щеки",
+          "priceValue": 2100000
+        },
+        {
+          "nameRu": "Щека",
+          "priceValue": 1250000
+        }
+      ]
+    },
+    {
+      "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-srednyaya",
+      "nameRu": "Лазерная абляционная шлифовка кожи (средняя)",
+      "items": [
+        {
+          "nameRu": "Веки (верхние/нижние)",
+          "priceValue": 990000
+        },
+        {
+          "nameRu": "Верхняя губа",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Декольте",
+          "priceValue": 1200000
+        },
+        {
+          "nameRu": "Кисти рук",
+          "priceValue": 1200000
+        },
+        {
+          "nameRu": "Лицо",
+          "priceValue": 2500000
+        },
+        {
+          "nameRu": "Лицо, включая область века",
+          "priceValue": 2900000
+        },
+        {
+          "nameRu": "Лоб",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Нос",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Шея",
+          "priceValue": 1200000
+        },
+        {
+          "nameRu": "Щеки",
+          "priceValue": 2300000
+        },
+        {
+          "nameRu": "Лицо",
+          "priceValue": 2000000
+        }
+      ]
+    },
+    {
+      "id": "lazernaya-epilyatsiya",
+      "nameRu": "Лазерная эпиляция",
+      "items": [
+        {
+          "nameRu": "Ареолы молочных желез",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Белая линия живота",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Женская спина",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Женские ноги от стопы до бедер (75%)",
+          "priceValue": 550000
+        },
+        {
+          "nameRu": "Женские ноги от стопы до колена (50%)",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Женские руки выше локтя",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Женские руки от кисти до локтя (50%, 2 зоны)",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Женские руки полностью",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Женские ягодицы",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Женский живот",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Женское декольте",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Женское классическое бикини",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Кисти рук и пальцы",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Подмышечные впадины",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Тыл стоп + пальцы",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Женские ноги полностью",
+          "priceValue": 550000
+        },
+        {
+          "nameRu": "Лицо полностью",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Верхняя губа",
+          "priceValue": 90000
+        },
+        {
+          "nameRu": "Бакенбарды",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Лоб",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Задняя часть шеи",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Шея полностью",
+          "priceValue": 250000
+        },
+        {
+          "nameRu": "Щеки",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Межбровье",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Мочки ушей",
+          "priceValue": 50000
+        }
+      ]
+    },
+    {
+      "id": "daavlin-neolux",
+      "nameRu": "Daavlin Neolux",
+      "items": [
+        {
+          "nameRu": "Neo Lux",
+          "priceValue": 70000
+        }
+      ]
+    },
+    {
+      "id": "m-series",
+      "nameRu": "M series",
+      "items": [
+        {
+          "nameRu": "Руки",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Ноги",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Руки+Ноги",
+          "priceValue": 90000
+        }
+      ]
+    },
+    {
+      "id": "eksimer",
+      "nameRu": "Эксимер",
+      "items": [
+        {
+          "nameRu": "Эксимер от 1 до 5 точек",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Эксимер от 5 до 10 точек",
+          "priceValue": 150000
+        },
+        {
+          "nameRu": "Эксимер от 10",
+          "priceValue": 200000
+        }
+      ]
+    },
+    {
+      "id": "1-series",
+      "nameRu": "1 series",
+      "items": [
+        {
+          "nameRu": "Процедура 1 серия",
+          "priceValue": 70000
+        }
+      ]
+    },
+    {
+      "id": "arenda-apparatov",
+      "nameRu": "Аренда аппаратов",
+      "items": [
+        {
+          "nameRu": "Дермапал",
+          "priceValue": 1000000
+        },
+        {
+          "nameRu": "1 серия",
+          "priceValue": 1500000
+        }
+      ]
+    },
+    {
+      "id": "daavlin-dermapal",
+      "nameRu": "Daavlin Dermapal",
+      "items": [
+        {
+          "nameRu": "Процедура",
+          "priceValue": 35000
+        }
+      ]
+    },
+    {
+      "id": "pasport-kozhi",
+      "nameRu": "Паспорт кожи",
+      "items": [
+        {
+          "nameRu": "Дерматоскопия тела + база данных",
+          "priceValue": 2000000
+        }
+      ]
+    },
+    {
+      "id": "pigmentatsiya",
+      "nameRu": "Пигментация",
+      "items": [
+        {
+          "nameRu": "Трихопигментация (голова) 50%",
+          "priceValue": 1200000
+        },
+        {
+          "nameRu": "Трихопигментация (голова)100%",
+          "priceValue": 2400000
+        },
+        {
+          "nameRu": "Пигментация кожи 10 см кв",
+          "priceValue": 600000
+        }
+      ]
+    },
+    {
+      "id": "podologiya",
+      "nameRu": "Подология",
+      "items": [
+        {
+          "nameRu": "Аппаратная чистка стопы",
+          "priceValue": 250000
+        },
+        {
+          "nameRu": "Обработка мозоли без стерженя",
+          "priceValue": 60000
+        },
+        {
+          "nameRu": "Обработка мозоли со стерженем",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Стрижка ногтей(за ед)",
+          "priceValue": 20000
+        },
+        {
+          "nameRu": "Удаление вросшего ногтя",
+          "priceValue": 250000
+        },
+        {
+          "nameRu": "Тейп",
+          "priceValue": 10000
+        },
+        {
+          "nameRu": "Титановая нить",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Аппаратная чистка ногтей",
+          "priceValue": 230000
+        }
+      ]
+    },
+    {
+      "id": "morpheus-8-mikroigolchatyy-rf-lifting",
+      "nameRu": "Morpheus 8 микроигольчатый RF лифтинг",
+      "items": [
+        {
+          "nameRu": "Омоложение кожи лица (без глаз)",
+          "priceValue": 3167000
+        },
+        {
+          "nameRu": "Омоложение зоны вокруг глаз",
+          "priceValue": 2907000
+        },
+        {
+          "nameRu": "Омоложение лица и шеи",
+          "priceValue": 3415000
+        },
+        {
+          "nameRu": "Омоложение лица и зоны вокруг глаз",
+          "priceValue": 5257000
+        },
+        {
+          "nameRu": "Омоложение кожи лица, шеи и декольте",
+          "priceValue": 4552000
+        },
+        {
+          "nameRu": "Омоложение лица, шеи, зоны декольте, вокруг глаз",
+          "priceValue": 5541000
+        },
+        {
+          "nameRu": "Омоложение зоны тела до 400 см²",
+          "priceValue": 3986000
+        },
+        {
+          "nameRu": "Омоложение зоны тела 800",
+          "priceValue": 6590000
+        }
+      ]
+    },
+    {
+      "id": "transplantatsiya-melanotsitov",
+      "nameRu": "Трансплантация меланоцитов",
+      "items": [
+        {
+          "nameRu": "Пересадка меланоцитов 1 до 10 см²",
+          "priceValue": 5000000
+        },
+        {
+          "nameRu": "Пересадка меланоцитов 10 до 20 см²",
+          "priceValue": 10000000
+        },
+        {
+          "nameRu": "Пересадка меланоцитов 30 до 40 см²",
+          "priceValue": 20000000
+        },
+        {
+          "nameRu": "Пересадка меланоцитов 1см",
+          "priceValue": 4000000
+        }
+      ]
+    },
+    {
+      "id": "trihologiya-2",
+      "nameRu": "Трихология",
+      "items": [
+        {
+          "nameRu": "PRP терапия",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Кеналогок блокада(Волосы)",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Дерма Хел-PRP",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Трансплантация волос (от)",
+          "priceValue": 7000000
+        },
+        {
+          "nameRu": "PRP терапия 0.5",
+          "priceValue": 250000
+        },
+        {
+          "nameRu": "Hair Vital (испания) жен",
+          "priceValue": 480000
+        },
+        {
+          "nameRu": "Hair Loss Control муж",
+          "priceValue": 480000
+        }
+      ]
+    },
+    {
+      "id": "fizioterapiya",
+      "nameRu": "Физиотерапия",
+      "items": [
+        {
+          "nameRu": "ВЛОК аппарат (внутривенное лазерное облучение)",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Дарсонваль",
+          "priceValue": 35000
+        },
+        {
+          "nameRu": "Плазмафорез",
+          "priceValue": 1500000
+        }
+      ]
+    },
+    {
+      "id": "fotoomolozhenie-ipl-lumecca",
+      "nameRu": "Фотоомоложение IPL (Lumecca)",
+      "items": [
+        {
+          "nameRu": "Лицо-Шея/ декольте",
+          "priceValue": 1200000
+        },
+        {
+          "nameRu": "Лицо+шея+декольте",
+          "priceValue": 1900000
+        },
+        {
+          "nameRu": "Кисти рук",
+          "priceValue": 1100000
+        },
+        {
+          "nameRu": "Лицо",
+          "priceValue": 900000
+        },
+        {
+          "nameRu": "Нос",
+          "priceValue": 200000
+        },
+        {
+          "nameRu": "Щека",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Декольте",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Шея",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Одна зона размером с ладонь",
+          "priceValue": 400000
+        },
+        {
+          "nameRu": "Подмышки",
+          "priceValue": 600000
+        }
+      ]
+    },
+    {
+      "id": "esteticheskaya-kosmetologiya",
+      "nameRu": "Эстетическая косметология",
+      "items": [
+        {
+          "nameRu": "Уход за кожей лица: Интенсивное увлажнение (Innoaestetic)",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Уход за кожей лица: Уход для чувствительной кожи (Innoaestetic)",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Чистка лица: Механическая чистка лица на косметике Innoaestetic",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Чистка лица: Ультразвуковая чистка лица на косметике Innoaestetic",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Чистка лица: Пилинги PRX-T33",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Пилинг MCA-35 Innoaesthetics",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Пилинг T.C. Age Innoaesthetics",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Me Line пилинг против пигментации",
+          "priceValue": 700000
+        }
+      ]
+    },
+    {
+      "id": "kosmeticheskie-sredstva",
+      "nameRu": "Косметические средства",
       "items": [
         {
           "nameRu": "ЛРП толеран розалиак ар сыворотка корректирующая 40мл",
@@ -802,6 +1391,268 @@
         {
           "nameRu": "ЛРп гиалу B5 сыворотка для вокруг глаз 15мл",
           "priceValue": 630000
+        }
+      ]
+    },
+    {
+      "id": "lrp-antigelios-spf",
+      "nameRu": "La Roche-Posay Anthelios (SPF)",
+      "items": [
+        {
+          "nameRu": "ЛРП Антигелиос UVMUNE 400 флюид СПФ50 +50мл",
+          "priceValue": 430000
+        },
+        {
+          "nameRu": "ЛРП Антигелиос UVMUNE 400 увлажняющий крем СПФ50+ 50мл",
+          "priceValue": 430000
+        },
+        {
+          "nameRu": "ЛРП Антигелиос UVMUNE 400 матирующий гель крем СПФ50 +50мл",
+          "priceValue": 430000
+        },
+        {
+          "nameRu": "ЛРП Антигелиос UVMUNE 400 антивозрастной крем СПФ50 +50мл",
+          "priceValue": 530000
+        },
+        {
+          "nameRu": "Увлажняющий спрей вуаль виши спф 50",
+          "priceValue": 430000
+        },
+        {
+          "nameRu": "Легкий срей флюид виши спф 50",
+          "priceValue": 430000
+        },
+        {
+          "nameRu": "ЛРП спрей для лица и тела спф50 200мл",
+          "priceValue": 445000
+        },
+        {
+          "nameRu": "Увлажняющее молочко для тела и лица спф50 250мл",
+          "priceValue": 480000
+        },
+        {
+          "nameRu": "ЛРП дермопедиатрикс 400 для лица и тела 250мл",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Дермопедиатрикс ветскин для детей спф50 200мл",
+          "priceValue": 500000
+        },
+        {
+          "nameRu": "Лрп увлажняющий молочко для лица итела 150мл",
+          "priceValue": 550000
+        },
+        {
+          "nameRu": "ЛРП флюид против пигментации спф +50 50мл",
+          "priceValue": 440000
+        },
+        {
+          "nameRu": "ЛРП тонирующий флюид спф +50",
+          "priceValue": 445000
+        }
+      ]
+    },
+    {
+      "id": "lrp-tsikoplast-lipikar",
+      "nameRu": "La Roche-Posay Cicaplast, Lipikar",
+      "items": [
+        {
+          "nameRu": "ЛРП цикопласт бальзам В5+15мл",
+          "priceValue": 125000
+        },
+        {
+          "nameRu": "ЛРП цикопласт бальзам В5+40мл",
+          "priceValue": 205000
+        },
+        {
+          "nameRu": "ЛРП цикопласт бальзам В5+100мл",
+          "priceValue": 325000
+        },
+        {
+          "nameRu": "ЛРП цикопласт бальзам В5+спф50 40мл",
+          "priceValue": 285000
+        },
+        {
+          "nameRu": "ЛРП цикопласт очищающий гельВ5 200мл",
+          "priceValue": 260000
+        },
+        {
+          "nameRu": "ЛПР липикар ап+масло для купания 750мл",
+          "priceValue": 480000
+        },
+        {
+          "nameRu": "ЛПР липикар ап+масло для купания 400мл",
+          "priceValue": 370000
+        },
+        {
+          "nameRu": "ЛРП Липикар АП+М бальзам для тела 75мл",
+          "priceValue": 140000
+        },
+        {
+          "nameRu": "ЛРП Липикар АП+М бальзам для тела 200мл",
+          "priceValue": 365000
+        },
+        {
+          "nameRu": "ЛРП Липикар АП+М бальзам для тела 400мл",
+          "priceValue": 485000
+        },
+        {
+          "nameRu": "ЛРП Липикар синдет АП+ очищающий крем-гель 200мл",
+          "priceValue": 230000
+        },
+        {
+          "nameRu": "ЛРП Липикар синдет АП+ очищающий крем-гель 400мл",
+          "priceValue": 335000
+        },
+        {
+          "nameRu": "ЛРП Липикар молочко для тела 400мл",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "ЛРП Липикар молочко для тела с10% мочевиной 400мл",
+          "priceValue": 545000
+        },
+        {
+          "nameRu": "Липикар уреа 30%",
+          "priceValue": 270000
+        },
+        {
+          "nameRu": "ЛРП цикопласт бальзам для губ",
+          "priceValue": 165000
+        }
+      ]
+    },
+    {
+      "id": "cerave",
+      "nameRu": "CeraVe",
+      "items": [
+        {
+          "nameRu": "Очищающий гель для норм и жирной кожи 236мл",
+          "priceValue": 180000
+        },
+        {
+          "nameRu": "Крем пенка для очищения 236мл",
+          "priceValue": 220000
+        },
+        {
+          "nameRu": "Увлажняющий крем для очень сухой кожи 340мл",
+          "priceValue": 315000
+        },
+        {
+          "nameRu": "Увлажняющий лосьон для очень сухой кожи 236мл",
+          "priceValue": 245000
+        },
+        {
+          "nameRu": "Очищающий гель против несовершенств 236мл",
+          "priceValue": 230000
+        },
+        {
+          "nameRu": "Цераве гель против несовершенств с ана и вна кислотами",
+          "priceValue": 270000
+        },
+        {
+          "nameRu": "Очищающий крем-гель для нормальной и сухой кожи 236мл",
+          "priceValue": 190000
+        }
+      ]
+    },
+    {
+      "id": "vichi-dercos",
+      "nameRu": "Vichy Dercos",
+      "items": [
+        {
+          "nameRu": "dercos dandruff and scalp для нормальных и жирных 200мл",
+          "priceValue": 280000
+        },
+        {
+          "nameRu": "Vichi Dercos аминексил средство для волос для женщин 21 монодоза 6мл",
+          "priceValue": 770000
+        },
+        {
+          "nameRu": "Vichi Dercos аминексил средство для волос для мужчин 21 монодоза 6мл",
+          "priceValue": 770000
+        },
+        {
+          "nameRu": "Vichi Dercos энерджи шампунь против выпадения волос 400мл",
+          "priceValue": 380000
+        },
+        {
+          "nameRu": "Vichi Dercos энерджи шампунь против выпадения волос 200мл",
+          "priceValue": 280000
+        },
+        {
+          "nameRu": "Vichi Dercos тонизирующий кондиционер для волос 200мл",
+          "priceValue": 300000
+        },
+        {
+          "nameRu": "Vichi Dercos шампунь пилинг против перхоти 250мл",
+          "priceValue": 260000
+        },
+        {
+          "nameRu": "Vichi Dercos псолюшн кераторегулирующий шампунь 200мл",
+          "priceValue": 270000
+        },
+        {
+          "nameRu": "Vichi Dercos против перхоти для чувствительной кожи головы 200мл",
+          "priceValue": 260000
+        },
+        {
+          "nameRu": "Vichi Dercos против перхоти для жирных волос 200мл",
+          "priceValue": 260000
+        },
+        {
+          "nameRu": "Vichi Dercos против перхоти для жирных волос 390мл",
+          "priceValue": 390000
+        },
+        {
+          "nameRu": "Vichi Dercos против перхоти для сухих волос 200мл",
+          "priceValue": 250000
+        },
+        {
+          "nameRu": "Vichi Dercos против перхоти для сухих волос 390мл",
+          "priceValue": 380000
+        },
+        {
+          "nameRu": "Vichi Dercos шампунь кондиционер против пехоти 2 в 1 200мл",
+          "priceValue": 290000
+        },
+        {
+          "nameRu": "Vichi Dercos шампунь кондиционер против пехоти 2 в 1 390мл",
+          "priceValue": 410000
+        },
+        {
+          "nameRu": "Vichi Dercos регулир шампунь для жирных волос 200мл",
+          "priceValue": 260000
+        },
+        {
+          "nameRu": "Vichi Dercos успокаивающий шампунь для нормальных и жирных волос 200мл",
+          "priceValue": 260000
+        },
+        {
+          "nameRu": "Vichi термальная вода 15мл",
+          "priceValue": 150000
+        }
+      ]
+    },
+    {
+      "id": "vichi-uhodovaya-kosmetika",
+      "nameRu": "Vichy — уходовая косметика",
+      "items": [
+        {
+          "nameRu": "Виши минерал 89 гель - сыворотка 50мл",
+          "priceValue": 450000
+        },
+        {
+          "nameRu": "Виши минерал 89 увлажнаяющий крем 72ч 50мл",
+          "priceValue": 430000
+        },
+        {
+          "nameRu": "Виши минерал 89 увлажняющий крем 72ч для сухой кожи 50мл",
+          "priceValue": 430000
+        },
+        {
+          "nameRu": "Виши минерал 79 матирующий гель для жирной кожи 50мл",
+          "priceValue": 430000
         }
       ]
     },
@@ -1010,7 +1861,7 @@
           "priceValue": 600000
         },
         {
-          "nameRu": "лактатдегидрогеназа (ЛДГ)",
+          "nameRu": "Лактатдегидрогеназа (ЛДГ)",
           "priceValue": 26000
         },
         {
@@ -1062,7 +1913,7 @@
           "priceValue": 220000
         },
         {
-          "nameRu": "гистологическое исследование",
+          "nameRu": "Гистологическое исследование",
           "priceValue": 210000
         },
         {
@@ -1198,7 +2049,7 @@
           "priceValue": 50000
         },
         {
-          "nameRu": "волосистой части головы)",
+          "nameRu": "Волосистой части головы)",
           "priceValue": 35000
         },
         {
@@ -1334,7 +2185,7 @@
           "priceValue": 85000
         },
         {
-          "nameRu": "СПИД (ВИЧ) Экспресс ( иностранцам )",
+          "nameRu": "СПИД (ВИЧ) Экспресс (иностранцам)",
           "priceValue": 211000
         },
         {
@@ -1502,7 +2353,7 @@
           "priceValue": 140000
         },
         {
-          "nameRu": "Глюкоматдекарбоксилаза ( Анти-GAD)",
+          "nameRu": "Глюкоматдекарбоксилаза (Анти-GAD)",
           "priceValue": 200000
         },
         {
@@ -1762,7 +2613,7 @@
           "priceValue": 330000
         },
         {
-          "nameRu": "фактор роста (IGFBP-3)",
+          "nameRu": "Фактор роста (IGFBP-3)",
           "priceValue": 330000
         },
         {
@@ -1814,7 +2665,7 @@
           "priceValue": 104000
         },
         {
-          "nameRu": "с беременностью)",
+          "nameRu": "С беременностью)",
           "priceValue": 90000
         },
         {
@@ -1834,7 +2685,7 @@
           "priceValue": 90000
         },
         {
-          "nameRu": "железа + ЖКТ)",
+          "nameRu": "Железа + ЖКТ)",
           "priceValue": 78000
         },
         {
@@ -1922,7 +2773,7 @@
           "priceValue": 325000
         },
         {
-          "nameRu": "Вирус простого герпеса Herpes Simplex Virus ? качество",
+          "nameRu": "Вирус простого герпеса Herpes Simplex Virus? качество",
           "priceValue": 165000
         },
         {
@@ -2006,7 +2857,7 @@
           "priceValue": 630000
         },
         {
-          "nameRu": "(AMA M2,SP100,gp210,LKM1,LC1,CENP-B,GBM,PR3,MPO,SLA/LP) NEW",
+          "nameRu": "(AMA M2, SP100, gp210, LKM1, LC1, CENP-B, GBM, PR3, MPO, SLA/LP) NEW",
           "priceValue": 570000
         },
         {
@@ -2018,7 +2869,7 @@
           "priceValue": 375000
         },
         {
-          "nameRu": "антитела (ANCA)",
+          "nameRu": "Антитела (ANCA)",
           "priceValue": 375000
         },
         {
@@ -2070,7 +2921,7 @@
           "priceValue": 70000
         },
         {
-          "nameRu": "эхинококкоз)",
+          "nameRu": "Эхинококкоз)",
           "priceValue": 70000
         },
         {
@@ -2346,19 +3197,19 @@
           "priceValue": 130000
         },
         {
-          "nameRu": "Авидность к токсоплазме",
+          "nameRu": "Антитела к токсоплазме",
           "priceValue": 108000
         },
         {
-          "nameRu": "Авидность к ЦМВ",
+          "nameRu": "Антитела к ЦМВ",
           "priceValue": 108000
         },
         {
-          "nameRu": "Авидность к ВПГ",
+          "nameRu": "Антитела к ВПГ",
           "priceValue": 108000
         },
         {
-          "nameRu": "Авидность к Краснухе",
+          "nameRu": "Антитела к Краснухе",
           "priceValue": 108000
         },
         {
@@ -2446,7 +3297,7 @@
           "priceValue": 50000
         },
         {
-          "nameRu": "антитела к рецепторам ТТГ (анти-рТТГ)",
+          "nameRu": "Антитела к рецепторам ТТГ (анти-рТТГ)",
           "priceValue": 295000
         },
         {
@@ -2474,7 +3325,7 @@
           "priceValue": 465000
         },
         {
-          "nameRu": "железы, рака яичника, рака толстого кишечника)",
+          "nameRu": "Железы, рака яичника, рака толстого кишечника)",
           "priceValue": 420000
         },
         {
@@ -2522,7 +3373,7 @@
           "priceValue": 1829000
         },
         {
-          "nameRu": "Неинвазивное определение пола плода. Определние риска развития аномалий хромосомного набора плода. Экспертный тест . (точность 99.9 %)",
+          "nameRu": "Неинвазивное определение пола плода. Определние риска развития аномалий хромосомного набора плода. Экспертный тест. (точность 99.9 %)",
           "priceValue": 6854000
         },
         {
@@ -2534,11 +3385,11 @@
           "priceValue": 575000
         },
         {
-          "nameRu": "НИПТ Panorama ( Natera , США), « Базовая панель 22 q»",
+          "nameRu": "НИПТ Panorama (Natera, США), « Базовая панель 22 q»",
           "priceValue": 5504000
         },
         {
-          "nameRu": "НИПТ Panorama ( Natera , США), « Расширенная панель »",
+          "nameRu": "НИПТ Panorama (Natera, США), « Расширенная панель »",
           "priceValue": 7935000
         },
         {
@@ -2558,11 +3409,11 @@
           "priceValue": 300000
         },
         {
-          "nameRu": "TORCH Ig M ИХЛА (токсоплазма,ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
+          "nameRu": "TORCH Ig M ИХЛА (токсоплазма, ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
           "priceValue": 481000
         },
         {
-          "nameRu": "TORCH Ig G ИХЛА (токсоплазма,ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
+          "nameRu": "TORCH Ig G ИХЛА (токсоплазма, ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
           "priceValue": 481000
         },
         {
@@ -2610,23 +3461,23 @@
           "priceValue": 135000
         },
         {
-          "nameRu": "ВПЧ 6,11",
+          "nameRu": "ВПЧ 6, 11",
           "priceValue": 195000
         },
         {
-          "nameRu": "ВПЧ 16,31,33,35,52,6,11,18,39,45,59,58,51,56,68 ( HPV квант -15",
+          "nameRu": "ВПЧ 16, 31, 33, 35, 52, 6, 11, 18, 39, 45, 59, 58, 51, 56, 68 (HPV квант -15",
           "priceValue": 399000
         },
         {
-          "nameRu": "ВПЧ 31,35,16,53,33,68,45,82,51,6,44,11,18,39,58,66,26,53,59,56,73 (HPV квант-21)",
+          "nameRu": "ВПЧ 31, 35, 16, 53, 33, 68, 45, 82, 51, 6, 44, 11, 18, 39, 58, 66, 26, 53, 59, 56, 73 (HPV квант-21)",
           "priceValue": 552000
         },
         {
-          "nameRu": "Комплекс: (Cand.albicans,Cand.glabrata,Cand.krusei) (мазок, моча, ротоглотка)",
+          "nameRu": "Комплекс: (Cand.albicans, Cand.glabrata, Cand.krusei) (мазок, моча, ротоглотка)",
           "priceValue": 435000
         },
         {
-          "nameRu": "Скрин Микоз РТ-ПЦР( выявление и типированиевозбудителей грибковых инфекций)",
+          "nameRu": "Скрин Микоз РТ-ПЦР(выявление и типированиевозбудителей грибковых инфекций)",
           "priceValue": 495000
         },
         {
@@ -2672,1394 +3523,6 @@
         {
           "nameRu": "Ренин",
           "priceValue": 253000
-        }
-      ]
-    },
-    {
-      "id": "lazer-pinpoint",
-      "nameRu": "Лазер pinpoint",
-      "items": [
-        {
-          "nameRu": "Лазерное лечение бородавок с помощью аппарата PinPoint laser за 1 кв.см (2 сеанс)",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Лазерное лечение бородавок с помощью аппарата PinPoint laser за 3 кв.см (3 сеанс)",
-          "priceValue": 70000
-        }
-      ]
-    },
-    {
-      "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-glubokaya",
-      "nameRu": "Лазерная абляционная шлифовка кожи (глубокая)",
-      "items": [
-        {
-          "nameRu": "Веки (верхние и нижние)",
-          "priceValue": 1300000
-        },
-        {
-          "nameRu": "Верхняя губа",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Кисти рук",
-          "priceValue": 1400000
-        },
-        {
-          "nameRu": "Лазерное лечение бородавок с помощью аппарата PinPoint laser за 1 кв.см (1 сеанс)",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Лицо",
-          "priceValue": 3000000
-        },
-        {
-          "nameRu": "Лицо включая область века",
-          "priceValue": 3500000
-        },
-        {
-          "nameRu": "Лоб",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Нос",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Рубец (10-20см)",
-          "priceValue": 1800000
-        },
-        {
-          "nameRu": "Рубец (1см)",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "Рубец (2см)",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Рубец (3-4см)",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Рубец (5-10см)",
-          "priceValue": 900000
-        },
-        {
-          "nameRu": "Стрии (10-10 см)",
-          "priceValue": 900000
-        },
-        {
-          "nameRu": "Стрии (10-20 см)",
-          "priceValue": 1800000
-        },
-        {
-          "nameRu": "Тело (10х10)",
-          "priceValue": 900000
-        },
-        {
-          "nameRu": "Тело (20х20)",
-          "priceValue": 1500000
-        },
-        {
-          "nameRu": "Щеки",
-          "priceValue": 2500000
-        },
-        {
-          "nameRu": "Рубец",
-          "priceValue": 700000
-        }
-      ]
-    },
-    {
-      "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-poverhnostnaya",
-      "nameRu": "Лазерная абляционная шлифовка кожи (поверхностная)",
-      "items": [
-        {
-          "nameRu": "Веки (верхние/нижние)",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Верхняя губа",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Декольте",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Кисти рук",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Лицо, включая область века",
-          "priceValue": 2500000
-        },
-        {
-          "nameRu": "Лоб",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Нос",
-          "priceValue": 350000
-        },
-        {
-          "nameRu": "Шея",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Щеки",
-          "priceValue": 2100000
-        },
-        {
-          "nameRu": "Щека",
-          "priceValue": 1250000
-        }
-      ]
-    },
-    {
-      "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-srednyaya",
-      "nameRu": "Лазерная абляционная шлифовка кожи (средняя)",
-      "items": [
-        {
-          "nameRu": "Веки (верхние/нижние)",
-          "priceValue": 990000
-        },
-        {
-          "nameRu": "Верхняя губа",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Декольте",
-          "priceValue": 1200000
-        },
-        {
-          "nameRu": "Кисти рук",
-          "priceValue": 1200000
-        },
-        {
-          "nameRu": "Лицо",
-          "priceValue": 2500000
-        },
-        {
-          "nameRu": "Лицо, включая область века",
-          "priceValue": 2900000
-        },
-        {
-          "nameRu": "Лоб",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Нос",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Шея",
-          "priceValue": 1200000
-        },
-        {
-          "nameRu": "Щеки",
-          "priceValue": 2300000
-        },
-        {
-          "nameRu": "Лицо",
-          "priceValue": 2000000
-        }
-      ]
-    },
-    {
-      "id": "lazernaya-epilyatsiya",
-      "nameRu": "Лазерная эпиляция",
-      "items": [
-        {
-          "nameRu": "Ареолы молочных желез",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Белая линия живота",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Женская спина",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Женские ноги от стопы до бедер (75%)",
-          "priceValue": 550000
-        },
-        {
-          "nameRu": "Женские ноги от стопы до колена (50%)",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Женские руки выше локтя",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Женские руки от кисти до локтя (50%, 2 зоны)",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Женские руки полностью",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Женские ягодицы",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Женский живот",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Женское декольте",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Женское классическое бикини",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Кисти рук и пальцы",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Подмышечные впадины",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Тыл стоп + пальцы",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Женские ноги полностью",
-          "priceValue": 550000
-        },
-        {
-          "nameRu": "Лицо полностью",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "верхняя губа",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Бакенбарды",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Лоб",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "задняя часть шеи",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "шея полностью",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "щеки",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "межбровье",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "мочки ушей",
-          "priceValue": 50000
-        }
-      ]
-    },
-    {
-      "id": "lazernoe-udalenie-dobrokachestvennyh-novoobrazovaniy-na-deka-smarxide-punto-so2-lazere",
-      "nameRu": "Лазерное удаление доброкачественных новообразований НА DEKA SMARXIDE PUNTO СО2 ЛАЗЕРЕ",
-      "items": [
-        {
-          "nameRu": "Лазерное удаление 10 новообразований",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Лазерное удаление ксантелазм (за 1 элемент)",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Лазерное удаление образования до 0,5 см в диаметре (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы, папилломы, контагиозный моллюск, милиумы, плоские бородавки) с анестезией (за 1 элемент)",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Лазерное удаление образования до 0,5 см в диаметре (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы, папилломы, контагиозный моллюск, милиумы, плоские бородавки) с анестезией более 10 элементов (за 1 элемент)",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Лазерное удаление образования от 0,5 см в диаметре (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы, папилломы, контагиозный моллюск, милиумы, плоские бородавки) с анестезией (за 1 элемент)",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Лазерное удаление образования от 0,5 см в диаметре (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы, папилломы, контагиозный моллюск, милиумы, плоские бородавки) с анестезией более 10 элементов (за 1 элемент)",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Удаление образований в интимной зоне (до 5мм)",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Удаление образований в интимной зоне (от 5мм)",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Удаление образований в области верних и нижних век (от 1до 3мм)",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Удаление образований в области верхних и нижних век (от 5 мм)",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "Удаление подошвенных бородавок (до 5мм)",
-          "priceValue": 350000
-        },
-        {
-          "nameRu": "Удаление подошвенных бородавок (от 5мм)",
-          "priceValue": 450000
-        },
-        {
-          "nameRu": "Родинка (до 5мм)",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "Родинка (от 5мм до 10 мм)",
-          "priceValue": 350000
-        },
-        {
-          "nameRu": "Родинка (от 10 мм)",
-          "priceValue": 450000
-        },
-        {
-          "nameRu": "Подногтевые бородавки (до 5мм)",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Подногтевые бородавки (от 5 мм до 10 мм)",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Подногтевые бородавки (от 10 мм до 15 мм)",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Удаление кератомы от 5мм до 10мм",
-          "priceValue": 240000
-        },
-        {
-          "nameRu": "Удаление кератомы от 10 мм до 20 мм",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "Лазерное удаление ксантелазмы",
-          "priceValue": 250000
-        }
-      ]
-    },
-    {
-      "id": "lrp-antigelios-spf",
-      "nameRu": "ЛРП Антигелиос(СПФ)",
-      "items": [
-        {
-          "nameRu": "ЛРП Антигелиос UVMUNE 400 флюид СПФ50 +50мл",
-          "priceValue": 430000
-        },
-        {
-          "nameRu": "ЛРП Антигелиос UVMUNE 400 увлажняющий крем СПФ50+ 50мл",
-          "priceValue": 430000
-        },
-        {
-          "nameRu": "ЛРП Антигелиос UVMUNE 400 матирующий гель крем СПФ50 +50мл",
-          "priceValue": 430000
-        },
-        {
-          "nameRu": "ЛРП Антигелиос UVMUNE 400 антивозрастной крем СПФ50 +50мл",
-          "priceValue": 530000
-        },
-        {
-          "nameRu": "Увлажняющий спрей вуаль виши спф 50",
-          "priceValue": 430000
-        },
-        {
-          "nameRu": "Легкий срей флюид виши спф 50",
-          "priceValue": 430000
-        },
-        {
-          "nameRu": "ЛРП спрей для лица и тела спф50 200мл",
-          "priceValue": 445000
-        },
-        {
-          "nameRu": "Увлажняющее молочко для тела и лица спф50 250мл",
-          "priceValue": 480000
-        },
-        {
-          "nameRu": "ЛРП дермопедиатрикс 400 для лица и тела 250мл",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Дермопедиатрикс ветскин для детей спф50 200мл",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "лрп увлажняющий молочко для лица итела 150мл",
-          "priceValue": 550000
-        },
-        {
-          "nameRu": "ЛРП флюид против пигментации спф +50 50мл",
-          "priceValue": 440000
-        },
-        {
-          "nameRu": "ЛРП тонирующий флюид спф +50",
-          "priceValue": 445000
-        }
-      ]
-    },
-    {
-      "id": "lrp-tsikoplast-lipikar",
-      "nameRu": "ЛРП цикопласт, липикар",
-      "items": [
-        {
-          "nameRu": "ЛРП цикопласт бальзам В5+15мл",
-          "priceValue": 125000
-        },
-        {
-          "nameRu": "ЛРП цикопласт бальзам В5+40мл",
-          "priceValue": 205000
-        },
-        {
-          "nameRu": "ЛРП цикопласт бальзам В5+100мл",
-          "priceValue": 325000
-        },
-        {
-          "nameRu": "ЛРП цикопласт бальзам В5+спф50 40мл",
-          "priceValue": 285000
-        },
-        {
-          "nameRu": "ЛРП цикопласт очищающий гельВ5 200мл",
-          "priceValue": 260000
-        },
-        {
-          "nameRu": "ЛПР липикар ап+масло для купания 750мл",
-          "priceValue": 480000
-        },
-        {
-          "nameRu": "ЛПР липикар ап+масло для купания 400мл",
-          "priceValue": 370000
-        },
-        {
-          "nameRu": "ЛРП Липикар АП+М бальзам для тела 75мл",
-          "priceValue": 140000
-        },
-        {
-          "nameRu": "ЛРП Липикар АП+М бальзам для тела 200мл",
-          "priceValue": 365000
-        },
-        {
-          "nameRu": "ЛРП Липикар АП+М бальзам для тела 400мл",
-          "priceValue": 485000
-        },
-        {
-          "nameRu": "ЛРП Липикар синдет АП+ очищающий крем-гель 200мл",
-          "priceValue": 230000
-        },
-        {
-          "nameRu": "ЛРП Липикар синдет АП+ очищающий крем-гель 400мл",
-          "priceValue": 335000
-        },
-        {
-          "nameRu": "ЛРП Липикар молочко для тела 400мл",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "ЛРП Липикар молочко для тела с10% мочевиной 400мл",
-          "priceValue": 545000
-        },
-        {
-          "nameRu": "Липикар уреа 30%",
-          "priceValue": 270000
-        },
-        {
-          "nameRu": "ЛРП цикопласт бальзам для губ",
-          "priceValue": 165000
-        }
-      ]
-    },
-    {
-      "id": "m-seriya",
-      "nameRu": "М серия",
-      "items": [
-        {
-          "nameRu": "Руки",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Ноги",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Руки+Ноги",
-          "priceValue": 90000
-        }
-      ]
-    },
-    {
-      "id": "neo-lyuks",
-      "nameRu": "НЕО люкс",
-      "items": [
-        {
-          "nameRu": "Нео люкс",
-          "priceValue": 70000
-        }
-      ]
-    },
-    {
-      "id": "pasport-kozhi",
-      "nameRu": "Паспорт кожи",
-      "items": [
-        {
-          "nameRu": "Дерматоскопия тела + база данных",
-          "priceValue": 2000000
-        }
-      ]
-    },
-    {
-      "id": "pigmentatsiya",
-      "nameRu": "Пигментация",
-      "items": [
-        {
-          "nameRu": "трихопигментация (голова) 50%",
-          "priceValue": 1200000
-        },
-        {
-          "nameRu": "трихопигментация (голова)100%",
-          "priceValue": 2400000
-        },
-        {
-          "nameRu": "пигментация кожи 10 см кв",
-          "priceValue": 600000
-        }
-      ]
-    },
-    {
-      "id": "podologiya",
-      "nameRu": "Подология",
-      "items": [
-        {
-          "nameRu": "Аппаратная чистка стопы",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "обработка мозоли без стерженя",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "обработка мозоли со стерженем",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "стрижка ногтей( за ед)",
-          "priceValue": 20000
-        },
-        {
-          "nameRu": "удаление вросшего ногтя",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "иньекция кеналог",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "тейп",
-          "priceValue": 10000
-        },
-        {
-          "nameRu": "титановый нить",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "аппаратная чистка ногтей",
-          "priceValue": 230000
-        }
-      ]
-    },
-    {
-      "id": "provizor",
-      "nameRu": "Провизор",
-      "items": [
-        {
-          "nameRu": "Расходные материалы",
-          "priceValue": 0
-        }
-      ]
-    },
-    {
-      "id": "rezhuran",
-      "nameRu": "Режуран",
-      "items": [
-        {
-          "nameRu": "режуран С от рубцов",
-          "priceValue": 2300000
-        },
-        {
-          "nameRu": "режуран",
-          "priceValue": 3200000
-        },
-        {
-          "nameRu": "режуран глаза",
-          "priceValue": 2600000
-        }
-      ]
-    },
-    {
-      "id": "rf-morfeus-8",
-      "nameRu": "РФ Морфеус 8",
-      "items": [
-        {
-          "nameRu": "омоложение кожи лица (без глаз)",
-          "priceValue": 3167000
-        },
-        {
-          "nameRu": "Омоложение зоны вокруг глаз",
-          "priceValue": 2907000
-        },
-        {
-          "nameRu": "Омоложение лица и шеи",
-          "priceValue": 3415000
-        },
-        {
-          "nameRu": "Омоложение лица и зоны вокруг глаз",
-          "priceValue": 5257000
-        },
-        {
-          "nameRu": "Омоложение кожи лица, шеи и декольте",
-          "priceValue": 4552000
-        },
-        {
-          "nameRu": "Омоложение лица,шеи,зоны декольте,вокруг глаз",
-          "priceValue": 5541000
-        },
-        {
-          "nameRu": "омоложение зоны тела до 400см2",
-          "priceValue": 3986000
-        },
-        {
-          "nameRu": "омоложение зоны тела 800",
-          "priceValue": 6590000
-        }
-      ]
-    },
-    {
-      "id": "statsionar",
-      "nameRu": "Стационар",
-      "items": [
-        {
-          "nameRu": "1 койка в стационаре класса VIP без включения лекарственных препаратов и питание",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "1 койка в стационаре класса VIP с лекарственными препаратами и питанием",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Питание",
-          "priceValue": 50000
-        }
-      ]
-    },
-    {
-      "id": "transplantatsiya-melanotsitov",
-      "nameRu": "Трансплантация меланоцитов",
-      "items": [
-        {
-          "nameRu": "Пересадка меланоцитов 1 до 10 см2",
-          "priceValue": 5000000
-        },
-        {
-          "nameRu": "Пересадка меланоцитов 10 до 20 см2",
-          "priceValue": 10000000
-        },
-        {
-          "nameRu": "Пересадка меланоцитов 30 до 40 см2",
-          "priceValue": 20000000
-        },
-        {
-          "nameRu": "Пересадка меланоцитов 1см",
-          "priceValue": 4000000
-        }
-      ]
-    },
-    {
-      "id": "trihologiya",
-      "nameRu": "Трихология",
-      "items": [
-        {
-          "nameRu": "Check-up лист для женщин (24 тип)",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Check-up лист для мужчин (24 тип)",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "PRP терапия",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "PRP терапия с биотином",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Кеналогок блокада(Волосы)",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Инъекции для профилактики выпадения волос",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Дерма Хел-PRP",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Мезотерапия",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Первичная консультация и осмотр врача кандидата медицинских наук",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "Первичная консультация и осмотр врача трихолога",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Первичная консультация и осмотр профессора с применением искусственного интеллекта",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Пересадка по методу FUE (1-графт)",
-          "priceValue": 5000
-        },
-        {
-          "nameRu": "Трихограмма с применением искусственного интеллекта",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Трихоспопия",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Трансплантация волос",
-          "priceValue": 11000000
-        },
-        {
-          "nameRu": "PRP терапия 0.5",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "Hair Vital (испания) жен",
-          "priceValue": 480000
-        },
-        {
-          "nameRu": "Hair Loss Control муж",
-          "priceValue": 480000
-        },
-        {
-          "nameRu": "PRP 0/75",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Prp c ледокаином",
-          "priceValue": 100000
-        }
-      ]
-    },
-    {
-      "id": "fizioterapiya",
-      "nameRu": "Физиотерапия",
-      "items": [
-        {
-          "nameRu": "Хилайт(лицо)",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "ВЛОК аппарат (внутривенное лазерное облучение)",
-          "priceValue": 45000
-        },
-        {
-          "nameRu": "Дарсонваль",
-          "priceValue": 35000
-        },
-        {
-          "nameRu": "Кварц УФО",
-          "priceValue": 20000
-        },
-        {
-          "nameRu": "Криомассаж ограниченный",
-          "priceValue": 15000
-        },
-        {
-          "nameRu": "Криомассаж распространенный",
-          "priceValue": 35000
-        },
-        {
-          "nameRu": "Плазмафорез",
-          "priceValue": 1300000
-        },
-        {
-          "nameRu": "Хилайт(Волосы)",
-          "priceValue": 110000
-        }
-      ]
-    },
-    {
-      "id": "fotolechenie-acne-forever-clear",
-      "nameRu": "Фотолечение acne forever clear",
-      "items": [
-        {
-          "nameRu": "Зона 10 см*10 см",
-          "priceValue": 1100000
-        }
-      ]
-    },
-    {
-      "id": "fotoomolozhenie-ipl-lumecca",
-      "nameRu": "Фотоомоложение IPL (Lumecca)",
-      "items": [
-        {
-          "nameRu": "Лицо-Шея/ декольте",
-          "priceValue": 1200000
-        },
-        {
-          "nameRu": "лицо+шея+декольте",
-          "priceValue": 1900000
-        },
-        {
-          "nameRu": "кисти рук",
-          "priceValue": 1100000
-        },
-        {
-          "nameRu": "лицо",
-          "priceValue": 900000
-        },
-        {
-          "nameRu": "Нос",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "щека",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "декольте",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "шея",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "одна зона размером с ладонь",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "подмышки",
-          "priceValue": 600000
-        }
-      ]
-    },
-    {
-      "id": "fotoomolozhenie-lechenie-sosudistyh-patologiy-rozatsea",
-      "nameRu": "Фотоомоложение. Лечение сосудистых патологий. Розацеа",
-      "items": [
-        {
-          "nameRu": "Фотоомоложение кожи/Лоб",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Фотоомоложение кожи/Щеки",
-          "priceValue": 1100000
-        },
-        {
-          "nameRu": "Фотоомоложение кожи/Нос",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Фотоомоложение кожи/Подбородок",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Фотоомоложение кожи/Лицо",
-          "priceValue": 1900000
-        },
-        {
-          "nameRu": "Фотоомоложение кожи 1 категория/ 1зона",
-          "priceValue": 1700000
-        }
-      ]
-    },
-    {
-      "id": "fototerapiya",
-      "nameRu": "Фототерапия",
-      "items": [
-        {
-          "nameRu": "Exсimer 1 вспышка",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Exсimer 2 вспышки",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Exсimer 3 вспышки",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Exсimer 5 вспышек",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Needle (Вторая степень сложности)",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Needle (Первая степень сложности)",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Needle (Третья степень сложности)",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "UVB (280 нм -320 нм)",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Повторная консультация и осмотр",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "UVB (280нм-320нм) за 8 процедур",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "фототерапия UVB (280-320 нм) за 6 процедур",
-          "priceValue": 300000
-        }
-      ]
-    },
-    {
-      "id": "hirurgicheskaya-dematologiya",
-      "nameRu": "Хирургическая дематология",
-      "items": [
-        {
-          "nameRu": "Shave (Шейв) - удаление новообразований кожи",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Инцизионная биопсия",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" (базовый пакет с привлечением пластического хирурга)",
-          "priceValue": 9000000
-        },
-        {
-          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" (базовый пакет)",
-          "priceValue": 5000000
-        },
-        {
-          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" в периорбитальной области (реконструктивный этап выполняется офтальмохирургом, д.м.н.)",
-          "priceValue": 10000000
-        },
-        {
-          "nameRu": "Панч - биопсия",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Радиоволновая хирургия 1 образования (доброкачественные внутридермальные новообразования кожи - родинки/невусы) с анестезией",
-          "priceValue": 65000
-        },
-        {
-          "nameRu": "Радиоволновая хирургия 1 образования (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы) с анестезией",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Радиоволновая хирургия 1 образования в сложных анатомических зонах (веки, паховая область, слизистые) с анестезией",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Радиоволновое удаление контагиозного моллюска (за 1 элемент): до 10 образований",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "Радиоволновое удаление контагиозного моллюска (за 1 элемент): от 10 образований",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "Радиоволновое удаление ксантелазм на веках (1 веко)",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Радиоволновое удаление мягкой фибромы (за 1 элемент)",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Радиоволновое удаление остроконечной кондиломы (за 1 элемент)",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Радиоволновое удаление папилломы (неосложненной)",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Радиоволновое удаление папилломы (осложненной)",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "Радиоволновое удаление пиогенной гранулемы (ботриомикомы)",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "размеров и новообразований кожи, которые расположены в анатомически сложных участках ІІІ уровня сложности",
-          "priceValue": 2300000
-        },
-        {
-          "nameRu": "Фотодинамическая терапия (без стоимости фотосенсибилизатора) за сеанс",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Хирургическое удаление доброкачественных новообразований кожи больших размеров и новообразований кожи, которые расположены в анатомически сложных участках І уровня сложности",
-          "priceValue": 2000000
-        },
-        {
-          "nameRu": "Хирургическое удаление доброкачественных новообразований кожи больших размеров и новообразований кожи, которые расположены в анатомически сложных участках ІІ уровня сложности",
-          "priceValue": 2200000
-        },
-        {
-          "nameRu": "Хирургическое удаление злокачественных новообразований кожи І уровня сложности",
-          "priceValue": 2000000
-        },
-        {
-          "nameRu": "Хирургическое удаление злокачественных новообразований кожи ІIІ уровня сложности",
-          "priceValue": 2300000
-        },
-        {
-          "nameRu": "Хирургическое удаление злокачественных новообразований кожи ІІ уровня сложности",
-          "priceValue": 2200000
-        },
-        {
-          "nameRu": "Хирургическое удаление новообразований кожи (классическое эллиптическое иссечение) І уровень сложности",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Хирургическое удаление новообразований кожи (классическое эллиптическое иссечение) ІІ уровень сложности",
-          "priceValue": 1300000
-        },
-        {
-          "nameRu": "Хирургическое удаление новообразований кожи (классическое эллиптическое иссечение) ІІІ уровень сложности",
-          "priceValue": 1500000
-        },
-        {
-          "nameRu": "Эксцизионная биопсия (более 0,5 см в области лица, половых органов, волосистой части головы, труднодостпных анатомических областях)",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Хирургический удаление новооброзование",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Радиоволновое удаление контагиозного моллюска за 8 образований",
-          "priceValue": 560000
-        },
-        {
-          "nameRu": "Хирургический удаление атеромы",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Хирургические удаление атеромо",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Хирургический удаление рубца",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Удаление атеромы",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Удаление атеромы",
-          "priceValue": 300000
-        }
-      ]
-    },
-    {
-      "id": "hirurgicheskaya-dermatologiya",
-      "nameRu": "Хирургическая дерматология",
-      "items": [
-        {
-          "nameRu": "Shave (Шейв) - удаление новообразований кожи",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Инцизионная биопсия",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" (базовый пакет с привлечением пластического хирурга)",
-          "priceValue": 9000000
-        },
-        {
-          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" (базовый пакет)",
-          "priceValue": 5000000
-        },
-        {
-          "nameRu": "Микрографическое хирургическое удаление злокачественных новообразований кожи по методу \"Mohs\" в периорбитальной области (реконструктивный этап выполняется офтальмохирургом, д.м.н.)",
-          "priceValue": 10000000
-        },
-        {
-          "nameRu": "Панч - биопсия",
-          "priceValue": 300000
-        },
-        {
-          "nameRu": "Радиоволновая хирургия 1 образования (доброкачественные внутридермальные новообразования кожи - родинки/невусы) с анестезией",
-          "priceValue": 65000
-        },
-        {
-          "nameRu": "Радиоволновая хирургия 1 образования (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы) с анестезией",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Радиоволновая хирургия 1 образования в сложных анатомических зонах (веки, паховая область, слизистые) с анестезией",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Радиоволновое удаление контагиозного моллюска (за 1 элемент): до 10 образований",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "Радиоволновое удаление контагиозного моллюска (за 1 элемент): от 10 образований",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "Радиоволновое удаление ксантелазм на веках (1 веко)",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Радиоволновое удаление мягкой фибромы (за 1 элемент)",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Радиоволновое удаление остроконечной кондиломы (за 1 элемент)",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Радиоволновое удаление папилломы (неосложненной)",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Радиоволновое удаление папилломы (осложненной)",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "Радиоволновое удаление пиогенной гранулемы (ботриомикомы)",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "размеров и новообразований кожи, которые расположены в анатомически сложных участках ІІІ уровня сложности",
-          "priceValue": 2300000
-        },
-        {
-          "nameRu": "Фотодинамическая терапия (без стоимости фотосенсибилизатора) за сеанс",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Хирургическое удаление доброкачественных новообразований кожи больших размеров и новообразований кожи, которые расположены в анатомически сложных участках І уровня сложности",
-          "priceValue": 2000000
-        },
-        {
-          "nameRu": "Хирургическое удаление доброкачественных новообразований кожи больших размеров и новообразований кожи, которые расположены в анатомически сложных участках ІІ уровня сложности",
-          "priceValue": 2200000
-        },
-        {
-          "nameRu": "Хирургическое удаление злокачественных новообразований кожи І уровня сложности",
-          "priceValue": 2000000
-        },
-        {
-          "nameRu": "Хирургическое удаление злокачественных новообразований кожи ІIІ уровня сложности",
-          "priceValue": 2300000
-        },
-        {
-          "nameRu": "Хирургическое удаление злокачественных новообразований кожи ІІ уровня сложности",
-          "priceValue": 2200000
-        },
-        {
-          "nameRu": "Хирургическое удаление новообразований кожи (классическое эллиптическое иссечение) І уровень сложности",
-          "priceValue": 1000000
-        },
-        {
-          "nameRu": "Хирургическое удаление новообразований кожи (классическое эллиптическое иссечение) ІІ уровень сложности",
-          "priceValue": 1300000
-        },
-        {
-          "nameRu": "Хирургическое удаление новообразований кожи (классическое эллиптическое иссечение) ІІІ уровень сложности",
-          "priceValue": 1500000
-        },
-        {
-          "nameRu": "Эксцизионная биопсия (более 0,5 см в области лица, половых органов, волосистой части головы, труднодостпных анатомических областях)",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Хирургический удаление новооброзование",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Радиоволновое удаление контагиозного моллюска за 8 образований",
-          "priceValue": 560000
-        },
-        {
-          "nameRu": "Хирургический удаление атеромы",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Хирургические удаление атеромо",
-          "priceValue": 400000
-        },
-        {
-          "nameRu": "Хирургический удаление рубца",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Удаление атеромы",
-          "priceValue": 700000
-        }
-      ]
-    },
-    {
-      "id": "tserave",
-      "nameRu": "Цераве",
-      "items": [
-        {
-          "nameRu": "очищающий гель для норм и жирной кожи 236мл",
-          "priceValue": 180000
-        },
-        {
-          "nameRu": "крем пенка для очищения 236мл",
-          "priceValue": 220000
-        },
-        {
-          "nameRu": "увлажняющий крем для очень сухой кожи 340мл",
-          "priceValue": 315000
-        },
-        {
-          "nameRu": "увлажняющий лосьон для очень сухой кожи 236мл",
-          "priceValue": 245000
-        },
-        {
-          "nameRu": "очищающий гель против несовершенств 236мл",
-          "priceValue": 230000
-        },
-        {
-          "nameRu": "Цераве гель против несовершенств с ана и вна кислотами",
-          "priceValue": 270000
-        },
-        {
-          "nameRu": "очищающий крем-гель для нормальной и сухой кожи 236мл",
-          "priceValue": 190000
-        }
-      ]
-    },
-    {
-      "id": "tsifrovaya-dematologiya-dermatoskopiya",
-      "nameRu": "Цифровая дематология (ДЕРМАТОСКОПИЯ)",
-      "items": [
-        {
-          "nameRu": "Цифровая дерматоскопия на аппарате FotoFinder с консультацией врача до 5 элиментов",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Цифровая дерматоскопия на аппарате FotoFinder с консультацией врача от 5 элиментов",
-          "priceValue": 200000
-        },
-        {
-          "nameRu": "Цифровая дерматоскопия на аппарате FotoFinder с консультацией профессора",
-          "priceValue": 1000000
-        }
-      ]
-    },
-    {
-      "id": "eksimer",
-      "nameRu": "Эксимер",
-      "items": [
-        {
-          "nameRu": "Эксимер от 1до 5 точек",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Эксимер от 5 до 10 точек",
-          "priceValue": 150000
-        },
-        {
-          "nameRu": "Эксимер от 10",
-          "priceValue": 200000
-        }
-      ]
-    },
-    {
-      "id": "esteticheskaya-kosmetologiya",
-      "nameRu": "Эстетическая косметология",
-      "items": [
-        {
-          "nameRu": "Уход за кожей лица: Интенсивное увлажнение (Innoaestetic)",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Уход за кожей лица: Уход для чувствительной кожи (Innoaestetic)",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Уход за кожей лица: Очищающий уход (Innoaestetic)",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Уход за кожей лица: Омолаживающий уход (Innoaestetic)",
-          "priceValue": 700000
-        },
-        {
-          "nameRu": "Чистка лица: Механическая чистка лица на косметике Innoaestetic",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Чистка лица: Ультразвуковая чистка лица на косметике Innoaestetic",
-          "priceValue": 500000
-        },
-        {
-          "nameRu": "Чистка лица: Пилинги PRX-T33",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Чистка на аппарате aquapire",
-          "priceValue": 800000
-        },
-        {
-          "nameRu": "Пилинг MCA-35 Innoaesthetics",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Пилинг T.C. Age Innoaesthetics",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Me Line пилинг против пигментации",
-          "priceValue": 700000
         }
       ]
     }

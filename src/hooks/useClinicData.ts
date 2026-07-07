@@ -8,10 +8,12 @@ import {
 } from '../api/mappers';
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
+import { enrichDoctors } from '../utils/enrichDoctors';
 import { enrichPrices } from '../utils/enrichPrices';
 import { ApiError } from '../api/client';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
-import { ARTICLES, SERVICE_CATEGORIES } from '../data';
+import { ARTICLES, DOCTORS, SERVICE_CATEGORIES } from '../data';
+import { hydrateServiceAboutFromSiteTexts } from '../data/serviceAboutCatalog';
 import { normalizeArticleViews } from '../utils/articleViews';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 
@@ -39,17 +41,28 @@ export function useClinicData(): ClinicDataState {
     setError(null);
 
     try {
-      const [doctorsRes, servicesRes, pricesRes, articlesRes] = await Promise.all([
+      const [doctorsRes, servicesRes, pricesRes, articlesRes, siteTextsRes] = await Promise.all([
         publicApi.getDoctors(),
         publicApi.getServices(),
         publicApi.getPrices(),
         publicApi.getArticles(),
+        publicApi.getSiteTexts().catch(() => []),
       ]);
 
-      setDoctors(sortDoctorsFeaturedFirst(doctorsRes.map(mapDoctorFromApi)));
-      const mappedServices = servicesRes
-        .map(mapServiceCategoryFromApi)
-        .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+      hydrateServiceAboutFromSiteTexts(siteTextsRes);
+
+      setDoctors(
+        sortDoctorsFeaturedFirst(
+          doctorsRes.length > 0
+            ? enrichDoctors(doctorsRes.map(mapDoctorFromApi))
+            : DOCTORS,
+        ),
+      );
+      const mappedServices = (
+        servicesRes.length > 0
+          ? servicesRes.map(mapServiceCategoryFromApi)
+          : SERVICE_CATEGORIES
+      ).sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
       setServiceCategories(enrichServiceCategories(mappedServices));
       setPrices(enrichPrices(pricesRes.map(mapPriceFromApi)));
       const mappedArticles = articlesRes.map(mapArticleListItemFromApi);

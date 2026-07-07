@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowUpRight, CornerUpLeft } from 'lucide-react';
-import { Locale, ServiceCategory } from '../types';
+import { Locale, PriceItem, ServiceCategory } from '../types';
 import { DICTIONARY } from '../data';
 import { serviceSubPath, servicesListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
@@ -15,6 +15,7 @@ interface ServiceCategoryPageProps {
   locale: Locale;
   category: ServiceCategory;
   dictionary?: Record<string, string>;
+  prices?: PriceItem[];
   onOpenAppointment: (serviceId?: string) => void;
   onOpenSub: (subId: string) => void;
   onBackToList: () => void;
@@ -24,6 +25,7 @@ export default function ServiceCategoryPage({
   locale,
   category,
   dictionary,
+  prices,
   onOpenAppointment,
   onOpenSub,
   onBackToList,
@@ -80,7 +82,7 @@ export default function ServiceCategoryPage({
             </h1>
 
             <div className="mt-6 sm:mt-8">
-              <ServiceDetailContent locale={locale} category={category} dictionary={d} compact />
+              <ServiceDetailContent locale={locale} category={category} dictionary={d} compact prices={prices} />
             </div>
 
             <div className="mt-8 pt-6 border-t border-brand-offwhite flex flex-wrap gap-3">
@@ -149,6 +151,7 @@ export default function ServiceCategoryPage({
                     sub={sub}
                     dictionary={d}
                     compact
+                    prices={prices}
                   />
 
                   <div className="mt-6 pt-4 border-t border-brand-offwhite flex flex-wrap gap-4">

@@ -246,6 +246,27 @@ export default function ClientCountCard({
   const size: 'compact' | 'default' | 'hero' = compact ? 'compact' : variant === 'hero' ? 'hero' : 'default';
   const isHero = variant === 'hero';
 
+  if (compact) {
+    return (
+      <div
+        className="relative overflow-hidden rounded-2xl border border-brand-sectiongray bg-brand-offwhite p-4 sm:p-5 min-w-[200px] sm:min-w-[240px]"
+        aria-live="polite"
+      >
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-gold via-brand-gold-light to-brand-gold" />
+        <p className="font-bold uppercase tracking-[0.14em] text-brand-text-muted text-[10px] sm:text-[11px]">
+          {copy.label}
+        </p>
+        <p className="font-black text-brand-dark-navy leading-none tabular-nums text-2xl sm:text-3xl mt-1">
+          {formatCount(count)}
+        </p>
+        <p className="mt-1.5 text-brand-text-muted font-medium flex items-center gap-1 text-[10px] sm:text-[11px]">
+          <TrendingUp className="text-brand-gold shrink-0 w-3 h-3" aria-hidden="true" />
+          <span className="line-clamp-1">{copy.hint}</span>
+        </p>
+      </div>
+    );
+  }
+
   if (isHero) {
     return (
       <motion.div

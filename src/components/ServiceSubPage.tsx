@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { CornerUpLeft } from 'lucide-react';
-import { Locale, ServiceCategory, ServiceDetail } from '../types';
+import { Locale, PriceItem, ServiceCategory, ServiceDetail } from '../types';
 import { DICTIONARY } from '../data';
 import { serviceCategoryPath, servicesListPath } from '../routing/paths';
 import ServiceDetailContent from './ServiceDetailContent';
@@ -11,6 +11,7 @@ interface ServiceSubPageProps {
   category: ServiceCategory;
   sub: ServiceDetail;
   dictionary?: Record<string, string>;
+  prices?: PriceItem[];
   onBackToCategory: () => void;
   onBackToList: () => void;
 }
@@ -20,6 +21,7 @@ export default function ServiceSubPage({
   category,
   sub,
   dictionary,
+  prices,
   onBackToCategory,
   onBackToList,
 }: ServiceSubPageProps) {
@@ -51,7 +53,7 @@ export default function ServiceSubPage({
           animate={{ opacity: 1, y: 0 }}
           className="bg-brand-white border border-brand-sectiongray rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm"
         >
-          <ServiceDetailContent locale={locale} category={category} sub={sub} dictionary={d} />
+          <ServiceDetailContent locale={locale} category={category} sub={sub} dictionary={d} prices={prices} />
         </motion.div>
       </div>
     </section>

@@ -68,14 +68,29 @@ export interface PriceItem {
 }
 
 export interface ServiceConditionTopic {
+  /** Barqaror identifikator (kengaytirilgan ma'lumot uchun) */
+  id?: string;
   title: string;
   description: string;
+  /** API / katalogdan — «Nima uchun Radeski» bloki */
+  aboutTitle?: string;
+  aboutOverview?: string;
+  aboutSections?: { title: string; description: string }[];
+  aboutFooter?: string;
 }
 
 export interface ServiceRichContent {
   overview: string;
+  /** «Xizmat haqida» sarlavhasi (ixtiyoriy) */
+  aboutTitle?: string;
+  /** «Xizmat haqida» ichidagi bo'limlar */
+  aboutSections?: ServiceConditionTopic[];
+  /** «Xizmat haqida» yakuniy paragrafi */
+  aboutFooter?: string;
   /** Kasalliklar va muammolar haqida batafsil ma'lumot */
   conditions: ServiceConditionTopic[];
+  /** Klinikadagi apparatlar (asosan apparatli kosmetologiya uchun) */
+  equipment?: ServiceConditionTopic[];
   indications: string[];
   solutions: string[];
   benefits: string[];

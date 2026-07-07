@@ -8,7 +8,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Giperpigmentatsiya (teri rangining ortishi)',
         description:
-          'Giperpigmentatsiya — teri ma\'lum qismlarining atrofdagi teriga qaraganda to\'qroq rangga kirishidir. Quyosh nurlari, gormonal o\'zgarishlar (homiladorlik, kontratseptivlar), akne keyingi dog\'lar yoki jarohatlar sabab bo\'lishi mumkin. Melasma ko\'pincha yuzda simmetrik dog\'lar shaklida paydo bo\'ladi. Apparat kosmetologiyasida Sciton IPL va gen darajasida foto-yangilash pigment hujayralarini bosqichma-bosqich yo\'q qiladi, teri rangini tekislaydi va qayta paydo bo\'lishining oldini olish uchun profilaktik reja tuziladi.',
+          'Giperpigmentatsiya — teri ma\'lum qismlarining atrofdagi teriga qaraganda to\'qroq rangga kirishidir. Quyosh nurlari, gormonal o\'zgarishlar (homiladorlik, kontratseptivlar), akne keyingi dog\'lar yoki jarohatlar sabab bo\'lishi mumkin. Melasma ko\'pincha yuzda simmetrik dog\'lar shaklida paydo bo\'ladi. Apparatli kosmetologiyada Sciton IPL va gen darajasida foto-yangilash pigment hujayralarini bosqichma-bosqich yo\'q qiladi, teri rangini tekislaydi va qayta paydo bo\'lishining oldini olish uchun profilaktik reja tuziladi.',
       },
       {
         title: 'Rozaseya va qon tomir tarmoqlari',
@@ -23,7 +23,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Akne va post-akne dog\'lari',
         description:
-          'Akne — yog\' bezlarining faoliyati buzilishi natijasida toshma, qizil to\'plamlar va ba\'zan chuqur izlar paydo bo\'lishi. Davolangandan keyin ham dog\'lar va tekstura o\'zgarishi qolishi mumkin (post-akne). Apparat kosmetologiyasi pigment dog\'larni yengillashtiradi, teri teksturasini tekislaydi va kengaytirilgan toshma teshiklarini kamaytirishga yordam beradi. Dermatolog nazoratida xavfsiz protokol tanlanadi.',
+          'Akne — yog\' bezlarining faoliyati buzilishi natijasida toshma, qizil to\'plamlar va ba\'zan chuqur izlar paydo bo\'lishi. Davolangandan keyin ham dog\'lar va tekstura o\'zgarishi qolishi mumkin (post-akne). Apparatli kosmetologiya pigment dog\'larni yengillashtiradi, teri teksturasini tekislaydi va kengaytirilgan toshma teshiklarini kamaytirishga yordam beradi. Dermatolog nazoratida xavfsiz protokol tanlanadi.',
       },
       {
         title: 'Teri quruqligi va suvsizlanishi',
@@ -222,7 +222,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Melanoma xavfi (xavfli xollar)',
         description:
-          'Teridagi xollar o\'zgarishi melanoma belgisi bo\'lishi mumkin. PhotoFinder AI yordamida xavfli o\'zgarishlarni erta aniqlash mumkin.',
+          'Teridagi xollar o\'zgarishi melanoma belgisi bo\'lishi mumkin. Dermatoskopiya yordamida xavfli o\'zgarishlarni erta aniqlash mumkin.',
       },
       {
         title: 'Papilloma va borma',
@@ -231,11 +231,11 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       },
     ],
     ru: [
-      { title: 'Риск меланомы', description: 'PhotoFinder с ИИ выявляет опасные изменения родинок на ранней стадии.' },
+      { title: 'Риск меланомы', description: 'Дерматоскопия выявляет опасные изменения родинок на ранней стадии.' },
       { title: 'Папилломы и бородавки', description: 'Вирусные образования диагностируются дерматоскопически и при необходимости биопсией.' },
     ],
     en: [
-      { title: 'Melanoma risk', description: 'PhotoFinder AI detects dangerous mole changes at an early stage.' },
+      { title: 'Melanoma risk', description: 'Clinical dermatoscopy detects dangerous mole changes at an early stage.' },
       { title: 'Papillomas and warts', description: 'Viral lesions are diagnosed dermoscopically and by biopsy when needed.' },
     ],
   },
@@ -314,6 +314,35 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
 };
 
 export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
+  'ipl-inmode': {
+    uz: [
+      {
+        title: 'Melasma (gormonal pigmentatsiya)',
+        description:
+          'Melasma — yuzda simmetrik jigarrang dog\'lar. InMode IPL pigment hujayralarini tanlab yo\'q qiladi, teri rangini bir tekis qiladi. Bir necha seansdan keyin dog\'lar sezilarli ochiladi.',
+      },
+      {
+        title: 'Kuperoz (qon tomir tarmoqlari)',
+        description:
+          'Yuzda kichik qizil yoki binafsha tomirlar ko\'rinadi. InMode IPL tomirlarni yopadi, qizarishni kamaytiradi. Og\'riqsiz va samarali usul.',
+      },
+      {
+        title: 'Teri rangining notekisligi',
+        description:
+          'Turli sabablarga ko\'ra teri ba\'zi joylari to\'qroq yoki ochroq bo\'ladi. Individual IPL protokoli rangni tekislaydi, teri yorqinligi va teksturasini yaxshilaydi.',
+      },
+    ],
+    ru: [
+      { title: 'Мелазма', description: 'Гормональная пигментация на лице. InMode IPL селективно устраняет пигмент и выравнивает тон за несколько сеансов.' },
+      { title: 'Купероз', description: 'Сосудистые звездочки на лице. IPL InMode закрывает сосуды и уменьшает покраснение безболезненно.' },
+      { title: 'Неровный тон кожи', description: 'Различия в цвете кожи. Индивидуальный протокол IPL выравнивает тон и улучшает текстуру.' },
+    ],
+    en: [
+      { title: 'Melasma', description: 'Hormonal facial pigmentation. InMode IPL selectively removes pigment and evens tone within several sessions.' },
+      { title: 'Couperose', description: 'Facial vascular spider veins. InMode IPL closes vessels and reduces redness painlessly.' },
+      { title: 'Uneven skin tone', description: 'Color irregularities on skin. Individual IPL protocol evens tone and improves texture.' },
+    ],
+  },
   'gene-photo-rejuvenation': {
     uz: [
       {
@@ -355,28 +384,6 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       { title: 'Couperose', description: 'Facial vascular spider veins. IPL closes vessels and reduces redness painlessly.' },
       { title: 'Photoaging', description: 'Premature aging from UV damage. Gene-level rejuvenation stimulates collagen renewal.' },
       { title: 'Uneven skin tone', description: 'Color irregularities on skin. Individual IPL protocol evens tone and improves texture.' },
-    ],
-  },
-  'bbl-foto': {
-    uz: [
-      {
-        title: 'Pigment dog\'lar',
-        description:
-          'Teri yuzasida melanin to\'planishi natijasida jigarrang yoki sariq dog\'lar paydo bo\'ladi. IPL yorug\'lik energiyasi pigmentni parchalaydi, tananing tabiiy jarayoni orqali dog\' asta-sekin yo\'qoladi.',
-      },
-      {
-        title: 'Sosudistiy yulduzchalar',
-        description:
-          'Yuzda mayda qon tomirlari kengayib, qizil chiziqlar ko\'rinadi. IPL issiqlik energiyasi bilan tomirlarni yopadi, teri rangi bir xil bo\'ladi.',
-      },
-    ],
-    ru: [
-      { title: 'Пигментные пятна', description: 'Скопление меланина на коже. IPL разрушает пигмент, и пятна постепенно исчезают.' },
-      { title: 'Сосудистые звездочки', description: 'Расширенные капилляры на лице. IPL коагулирует сосуды и выравнивает цвет.' },
-    ],
-    en: [
-      { title: 'Pigment spots', description: 'Melanin accumulation on skin. IPL breaks down pigment and spots fade gradually.' },
-      { title: 'Vascular spider veins', description: 'Dilated capillaries on face. IPL coagulates vessels and evens skin color.' },
     ],
   },
   mikrotoki: {
@@ -562,20 +569,6 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       { title: 'Scalp seborrhea', description: 'Itching and flaking. Combined therapy and care are recommended.' },
     ],
   },
-  'photofinder-scan': {
-    uz: [
-      { title: 'Melanoma xavfi', description: 'PhotoFinder AI xavfli xol o\'zgarishlarini erta aniqlashga yordam beradi.' },
-      { title: 'Ko\'p sonli xollar', description: 'Butun tana raqamli xaritalash yangi va o\'zgargan xollarni kuzatish imkonini beradi.' },
-    ],
-    ru: [
-      { title: 'Риск меланомы', description: 'PhotoFinder с ИИ выявляет опасные изменения родинок на ранней стадии.' },
-      { title: 'Множественные родинки', description: 'Цифровое картирование всего тела позволяет отслеживать новые и изменившиеся образования.' },
-    ],
-    en: [
-      { title: 'Melanoma risk', description: 'PhotoFinder AI helps detect dangerous mole changes early.' },
-      { title: 'Multiple moles', description: 'Full-body digital mapping tracks new and changing lesions.' },
-    ],
-  },
   biopsiya: {
     uz: [
       { title: 'Shubhali o\'sma', description: 'Biopsiya aniq tashxis uchun zarur. Gistologik tahlil yaxshi yoki yomon sifatli jarayonni aniqlaydi.' },
@@ -661,10 +654,37 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
   },
 };
 
+function slugifyConditionTitle(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[''`ʻʼ]/g, '')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48) || 'item';
+}
+
+function withStableConditionIds(
+  items: ServiceConditionTopic[],
+  uzItems: ServiceConditionTopic[],
+  scope: string,
+): ServiceConditionTopic[] {
+  return items.map((item, index) => {
+    const uzTitle = uzItems[index]?.title ?? item.title;
+    return {
+      ...item,
+      id: uzItems[index]?.id ?? item.id ?? `${scope}-${slugifyConditionTitle(uzTitle)}`,
+    };
+  });
+}
+
 export function getCategoryConditions(categoryId: string, locale: Locale): ServiceConditionTopic[] {
-  return CATEGORY_CONDITIONS_CATALOG[categoryId]?.[locale] ?? CATEGORY_CONDITIONS_CATALOG[categoryId]?.uz ?? [];
+  const uzList = CATEGORY_CONDITIONS_CATALOG[categoryId]?.uz ?? [];
+  const items = CATEGORY_CONDITIONS_CATALOG[categoryId]?.[locale] ?? uzList;
+  return withStableConditionIds(items, uzList, `cat-${categoryId}`);
 }
 
 export function getSubConditions(catalogKey: string, locale: Locale): ServiceConditionTopic[] {
-  return SUB_CONDITIONS_CATALOG[catalogKey]?.[locale] ?? SUB_CONDITIONS_CATALOG[catalogKey]?.uz ?? [];
+  const uzList = SUB_CONDITIONS_CATALOG[catalogKey]?.uz ?? [];
+  const items = SUB_CONDITIONS_CATALOG[catalogKey]?.[locale] ?? uzList;
+  return withStableConditionIds(items, uzList, `sub-${catalogKey}`);
 }

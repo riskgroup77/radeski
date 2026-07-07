@@ -1,0 +1,217 @@
+[
+  {
+    "id": "dermatologiya",
+    "nameRu": "Дерматология",
+    "itemCount": 2
+  },
+  {
+    "id": "trihologiya",
+    "nameRu": "Трихология",
+    "itemCount": 2
+  },
+  {
+    "id": "dermatoonkologiya",
+    "nameRu": "Дерматоонкология",
+    "itemCount": 2
+  },
+  {
+    "id": "dermatokosmetolog",
+    "nameRu": "Дерматокосметолог",
+    "itemCount": 2
+  },
+  {
+    "id": "podolog",
+    "nameRu": "Подолог",
+    "itemCount": 2
+  },
+  {
+    "id": "dermatoonkologiya-2",
+    "nameRu": "Дерматоонкология",
+    "itemCount": 6
+  },
+  {
+    "id": "hirurgicheskaya-dematologiya",
+    "nameRu": "Хирургическая дематология",
+    "itemCount": 9
+  },
+  {
+    "id": "lazernoe-udalenie-dobrokachestvennyh-novoobrazovaniy-na-deka-smarxide-punto-so2-lazere",
+    "nameRu": "Лазерное удаление доброкачественных новообразований НА DEKA SMARXIDE PUNTO СО2 ЛАЗЕРЕ",
+    "itemCount": 11
+  },
+  {
+    "id": "kriohirurgiya",
+    "nameRu": "Криохирургия",
+    "itemCount": 11
+  },
+  {
+    "id": "derma-v-sosudistyy-lazer-lechenie-sosudistyh-zvezdochek-kuperoza-i-rozatsii",
+    "nameRu": "Derma v сосудистый лазер (лечение сосудистых звездочек, купероза и розации)",
+    "itemCount": 12
+  },
+  {
+    "id": "healinte-fotodinamicheskoe-omolozhenie",
+    "nameRu": "Healinte (фотодинамическое омоложение)",
+    "itemCount": 2
+  },
+  {
+    "id": "hooywood-spectra-lechenie-pigmentatsii-post-akne",
+    "nameRu": "Hooywood Spectra (лечение пигментации, пост акне)",
+    "itemCount": 12
+  },
+  {
+    "id": "allergo-proba-10-punktov",
+    "nameRu": "Аллерго проба 10 пунктов",
+    "itemCount": 1
+  },
+  {
+    "id": "dnevnoy-statsionar",
+    "nameRu": "ДНЕВНОЙ СТАЦИОНАР",
+    "itemCount": 12
+  },
+  {
+    "id": "inektsionnaya-kosmetologiya",
+    "nameRu": "Инъекционная косметология",
+    "itemCount": 39
+  },
+  {
+    "id": "teosyal",
+    "nameRu": "TEOSYAL",
+    "itemCount": 10
+  },
+  {
+    "id": "rejuran",
+    "nameRu": "Rejuran",
+    "itemCount": 3
+  },
+  {
+    "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-glubokaya",
+    "nameRu": "Лазерная абляционная шлифовка кожи (глубокая)",
+    "itemCount": 19
+  },
+  {
+    "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-poverhnostnaya",
+    "nameRu": "Лазерная абляционная шлифовка кожи (поверхностная)",
+    "itemCount": 10
+  },
+  {
+    "id": "lazernaya-ablyatsionnaya-shlifovka-kozhi-srednyaya",
+    "nameRu": "Лазерная абляционная шлифовка кожи (средняя)",
+    "itemCount": 11
+  },
+  {
+    "id": "lazernaya-epilyatsiya",
+    "nameRu": "Лазерная эпиляция",
+    "itemCount": 25
+  },
+  {
+    "id": "daavlin-neolux",
+    "nameRu": "Daavlin Neolux",
+    "itemCount": 1
+  },
+  {
+    "id": "m-series",
+    "nameRu": "M series",
+    "itemCount": 3
+  },
+  {
+    "id": "eksimer",
+    "nameRu": "Эксимер",
+    "itemCount": 3
+  },
+  {
+    "id": "1-series",
+    "nameRu": "1 series",
+    "itemCount": 1
+  },
+  {
+    "id": "arenda-apparatov",
+    "nameRu": "Аренда аппаратов",
+    "itemCount": 2
+  },
+  {
+    "id": "daavlin-dermapal",
+    "nameRu": "Daavlin Dermapal",
+    "itemCount": 1
+  },
+  {
+    "id": "pasport-kozhi",
+    "nameRu": "Паспорт кожи",
+    "itemCount": 1
+  },
+  {
+    "id": "pigmentatsiya",
+    "nameRu": "Пигментация",
+    "itemCount": 3
+  },
+  {
+    "id": "podologiya",
+    "nameRu": "Подология",
+    "itemCount": 8
+  },
+  {
+    "id": "morpheus-8-mikroigolchatyy-rf-lifting",
+    "nameRu": "Morpheus 8 микроигольчатый RF лифтинг",
+    "itemCount": 8
+  },
+  {
+    "id": "transplantatsiya-melanotsitov",
+    "nameRu": "Трансплантация меланоцитов",
+    "itemCount": 4
+  },
+  {
+    "id": "trihologiya-2",
+    "nameRu": "Трихология",
+    "itemCount": 7
+  },
+  {
+    "id": "fizioterapiya",
+    "nameRu": "Физиотерапия",
+    "itemCount": 3
+  },
+  {
+    "id": "fotoomolozhenie-ipl-lumecca",
+    "nameRu": "Фотоомоложение IPL (Lumecca)",
+    "itemCount": 10
+  },
+  {
+    "id": "esteticheskaya-kosmetologiya",
+    "nameRu": "Эстетическая косметология",
+    "itemCount": 8
+  },
+  {
+    "id": "kosmeticheskie-sredstva",
+    "nameRu": "Косметические средства",
+    "itemCount": 27
+  },
+  {
+    "id": "lrp-antigelios-spf",
+    "nameRu": "ЛРП Антигелиос(СПФ)",
+    "itemCount": 13
+  },
+  {
+    "id": "lrp-tsikoplast-lipikar",
+    "nameRu": "ЛРП цикопласт, липикар",
+    "itemCount": 16
+  },
+  {
+    "id": "cerave",
+    "nameRu": "CeraVe",
+    "itemCount": 7
+  },
+  {
+    "id": "vichi-dercos",
+    "nameRu": "Vichi dercos",
+    "itemCount": 18
+  },
+  {
+    "id": "vichi-uhodovaya-kosmetika",
+    "nameRu": "Vichi уходовая косметика",
+    "itemCount": 4
+  },
+  {
+    "id": "laboratoriya",
+    "nameRu": "Лаборатория",
+    "itemCount": 466
+  }
+]

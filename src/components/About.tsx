@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Building, Users, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS } from '../data';
 import { APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from '../config/links';
+import ClinicAdvantagesCards from './ClinicAdvantagesCards';
 
 const SAMPLE_VIDEOS = [
   { id: 1, src: '/video-namuna/1.mp4' },
@@ -110,43 +111,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
 
         {/* Benefits cards bento grid */}
         <div className="mb-20">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-brand-text-primary tracking-tight">
-              {locale === 'uz' ? "Bizning asosiy afzalliklarimiz" : locale === 'ru' ? "Наши ключевые преимущества" : "Why Choose Our Clinic?"}
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 w-full items-stretch">
-            <div className="p-6 lg:p-8 h-full w-full bg-brand-offwhite/50 hover:bg-[#FFFFFF] rounded-2xl border border-brand-sectiongray hover:border-brand-gold-light/40 transition-all shadow-xs flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold mb-4 border border-brand-gold-light/20">
-                  <Users className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-brand-text-primary text-base">{d.features01}</h4>
-                <p className="text-xs text-brand-text-muted mt-2 leading-relaxed font-light">{d.features01Desc}</p>
-              </div>
-            </div>
-
-            <div className="p-6 lg:p-8 h-full w-full bg-brand-offwhite/50 hover:bg-[#FFFFFF] rounded-2xl border border-brand-sectiongray hover:border-brand-gold-light/40 transition-all shadow-xs flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold mb-4 border border-brand-gold-light/20">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-brand-text-primary text-base">{d.features02}</h4>
-                <p className="text-xs text-brand-text-muted mt-2 leading-relaxed font-light">{d.features02Desc}</p>
-              </div>
-            </div>
-
-            <div className="p-6 lg:p-8 h-full w-full bg-brand-offwhite/50 hover:bg-[#FFFFFF] rounded-2xl border border-brand-sectiongray hover:border-brand-gold-light/40 transition-all shadow-xs flex flex-col justify-between">
-              <div>
-                <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold mb-4 border border-brand-gold-light/20">
-                  <Building className="w-5 h-5" />
-                </div>
-                <h4 className="font-bold text-brand-text-primary text-base">{d.features04}</h4>
-                <p className="text-xs text-brand-text-muted mt-2 leading-relaxed font-light">{d.features04Desc}</p>
-              </div>
-            </div>
-          </div>
+          <ClinicAdvantagesCards locale={locale} dictionary={d} variant="wide" showHeading />
         </div>
 
         {/* Sterility & Safety module */}

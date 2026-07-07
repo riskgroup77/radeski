@@ -36,6 +36,40 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }
 
+@keyframes promo-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.promo-slide-active {
+  animation: promo-slide-in 0.32s ease-out;
+}
+
+@keyframes hero-cards-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-service-cards-enter {
+  animation: hero-cards-enter 0.4s ease-out;
+}
+
+.hero-copy-panel {
+  text-shadow: 0 1px 8px rgba(255, 255, 255, 0.5);
+}
+
 @keyframes cta-soft-pulse {
   0%,
   100% {

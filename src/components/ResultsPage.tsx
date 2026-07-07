@@ -87,7 +87,20 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
               transition={{ delay: index * 0.05 }}
               className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-md transition-all"
             >
-              <div className="grid grid-cols-2 gap-0.5 bg-brand-sectiongray">
+              <div className={result.comparisonImage ? '' : 'grid grid-cols-2 gap-0.5 bg-brand-sectiongray'}>
+                {result.comparisonImage ? (
+                  <div className="relative aspect-[4/3] bg-brand-offwhite">
+                    <MediaImage
+                      src={result.comparisonImage}
+                      alt={`${result.title[locale]} — ${locale === 'uz' ? 'Oldin / Keyin' : locale === 'ru' ? 'До / После' : 'Before / After'}`}
+                      className="absolute inset-0 w-full h-full object-contain object-center"
+                    />
+                    <span className="absolute top-2 left-1/2 -translate-x-1/2 text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-black/55 text-white whitespace-nowrap">
+                      {locale === 'uz' ? 'Oldin · Keyin' : locale === 'ru' ? 'До · После' : 'Before · After'}
+                    </span>
+                  </div>
+                ) : (
+                <>
                 <div className="relative aspect-[4/5] bg-brand-offwhite">
                   <MediaImage
                     src={result.beforeImage}
@@ -108,6 +121,8 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                     {locale === 'uz' ? 'Keyin' : locale === 'ru' ? 'После' : 'After'}
                   </span>
                 </div>
+                </>
+                )}
               </div>
 
               <div className="p-5">

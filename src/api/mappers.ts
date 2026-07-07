@@ -223,8 +223,8 @@ export function mapDoctorToCreatePayload(
           research_count: doctor.credentials.researchCount ?? null,
         }
       : null,
-    sort_order: doctor.sortOrder ?? null,
-    is_featured: doctor.isFeatured ?? null,
+    ...(doctor.sortOrder != null ? { sort_order: doctor.sortOrder } : {}),
+    ...(doctor.isFeatured != null ? { is_featured: doctor.isFeatured } : {}),
   };
 
   if (options?.preservePhoto && doctor.photo) {
@@ -272,8 +272,8 @@ export function mapServiceCategoryToPayload(
       mapSubServiceToPayload(sub, options)
     ),
     ...localizedImagesToApiPaths(category.images),
-    sort_order: category.sortOrder ?? null,
-    is_price_section: category.isPriceSection ?? null,
+    ...(category.sortOrder != null ? { sort_order: category.sortOrder } : {}),
+    ...(category.isPriceSection != null ? { is_price_section: category.isPriceSection } : {}),
   };
 
   applyPreservedImageField(payload, options, category.image, category.images);
@@ -291,7 +291,7 @@ export function mapPriceToCreatePayload(
     name_ru: price.name?.ru || price.name?.uz || '',
     name_en: price.name?.en || price.name?.uz || '',
     price_value: price.priceValue ?? parsePriceValue(price.price || '0'),
-    sort_order: price.sortOrder ?? null,
+    ...(price.sortOrder != null ? { sort_order: price.sortOrder } : {}),
   };
 }
 

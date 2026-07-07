@@ -5,18 +5,42 @@ import { filterExcludedPrices } from './excludedServices';
 import { normalizePriceItems } from './priceDisplay';
 
 const API_CATEGORY_ALIASES: Record<string, string[]> = {
-  dermatologiya: ['konsultatsii'],
-  dermatoonkologiya: ['dermatoonkolog', 'tsifrovaya-dematologiya-dermatoskopiya', 'pasport-kozhi'],
-  trikhologiya: ['trihologiya'],
+  dermatologiya: ['dermatologiya', 'dermatokosmetolog', 'podolog'],
+  dermatoonkologiya: [
+    'dermatoonkologiya',
+    'dermatoonkologiya-2',
+    'pasport-kozhi',
+    'pigmentatsiya',
+    'transplantatsiya-melanotsitov',
+  ],
+  'trihologiya-centr-lechenie-volos': ['trihologiya', 'trihologiya-2'],
   'apparatnaya-kosmetologiya': [
     'fotoomolozhenie-ipl-lumecca',
     'esteticheskaya-kosmetologiya',
-    'hooywood-spectra',
-    'rf-morfeus-8',
+    'hooywood-spectra-lechenie-pigmentatsii-post-akne',
+    'morpheus-8-mikroigolchatyy-rf-lifting',
+    'derma-v-sosudistyy-lazer-lechenie-sosudistyh-zvezdochek-kuperoza-i-rozatsii',
+    'healinte-fotodinamicheskoe-omolozhenie',
+    'daavlin-neolux',
+    'm-series',
+    'eksimer',
+    '1-series',
+    'daavlin-dermapal',
+    'fizioterapiya',
   ],
-  'injektsionnaya-kosmetologiya': ['inektsionnaya-kosmetologiya'],
+  'injektsionnaya-kosmetologiya': ['inektsionnaya-kosmetologiya', 'teosyal', 'rejuran'],
   'lazernaya-epilyaciya': ['lazernaya-epilyatsiya'],
-  'hirurgicheskaya-dermatologiya': ['hirurgicheskaya-dermatologiya', 'hirurgicheskaya-dematologiya'],
+  'hirurgicheskaya-dermatologiya': [
+    'hirurgicheskaya-dermatologiya',
+    'hirurgicheskaya-dematologiya',
+    'kriohirurgiya',
+    'lazernoe-udalenie-dobrokachestvennyh-novoobrazovaniy-na-deka-smarxide-punto-so2-lazere',
+    'lazernaya-ablyatsionnaya-shlifovka-kozhi-glubokaya',
+    'lazernaya-ablyatsionnaya-shlifovka-kozhi-poverhnostnaya',
+    'lazernaya-ablyatsionnaya-shlifovka-kozhi-srednyaya',
+  ],
+  podologiya: ['podologiya'],
+  laboratoriya: ['laboratoriya', 'dnevnoy-statsionar', 'allergo-proba-10-punktov'],
 };
 
 function findCatalogMatch(apiItem: PriceItem, catalog: PriceItem[]): PriceItem | undefined {
@@ -63,8 +87,8 @@ function mergeApiOntoCatalog(catalogItem: PriceItem, apiItem: PriceItem): PriceI
     id: apiItem.id,
     name: {
       ru: ruBase,
-      uz: catalogItem.name.uz,
-      en: catalogItem.name.en,
+      uz: localizePriceName(ruBase, 'uz'),
+      en: localizePriceName(ruBase, 'en'),
     },
     price: apiItem.price || catalogItem.price,
     priceValue: apiItem.priceValue ?? catalogItem.priceValue,
@@ -78,14 +102,21 @@ function mergeApiOntoCatalog(catalogItem: PriceItem, apiItem: PriceItem): PriceI
 const API_PRICE_FULL_THRESHOLD = 100;
 
 function localizeApiPriceNames(apiPrices: PriceItem[]): PriceItem[] {
-  return apiPrices.map((api) => ({
-    ...api,
-    name: {
-      ru: api.name.ru?.includes('???') ? localizePriceName(api.name.uz, 'ru') : api.name.ru,
-      uz: api.name.uz,
-      en: api.name.en,
-    },
-  }));
+  return apiPrices.map((api) => {
+    const ru = api.name.ru?.includes('???')
+      ? localizePriceName(api.name.uz, 'ru')
+      : (api.name.ru?.trim() || api.name.uz?.trim() || '');
+    const normalizedRu = ru ? localizePriceName(ru, 'ru') : '';
+
+    return {
+      ...api,
+      name: {
+        ru: normalizedRu,
+        uz: normalizedRu ? localizePriceName(normalizedRu, 'uz') : api.name.uz,
+        en: normalizedRu ? localizePriceName(normalizedRu, 'en') : api.name.en,
+      },
+    };
+  });
 }
 
 export function enrichPrices(apiPrices: PriceItem[]): PriceItem[] {

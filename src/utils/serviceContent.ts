@@ -4,6 +4,7 @@ import {
   SUB_SERVICE_RICH_CATALOG,
   findSubServiceCatalogKey,
 } from '../data/serviceRichCatalog';
+import { getServiceAboutContent } from '../data/serviceAboutCatalog';
 import { getCategoryConditions, getSubConditions } from '../data/serviceConditionsCatalog';
 
 export type { ServiceRichContent };
@@ -107,12 +108,36 @@ function attachConditions(
 
   return {
     overview: content.overview,
+    aboutTitle: content.aboutTitle,
+    aboutSections: content.aboutSections,
+    aboutFooter: content.aboutFooter,
     conditions,
+    equipment: content.equipment,
     indications: content.indications,
     solutions: content.solutions,
     benefits: content.benefits,
     process: content.process,
   };
+}
+
+function mergeServiceAboutContent(
+  content: ServiceRichContent,
+  aboutKey: string,
+  locale: Locale,
+): ServiceRichContent {
+  const about = getServiceAboutContent(aboutKey, locale);
+  if (!about) return content;
+  return {
+    ...content,
+    overview: about.overview,
+    aboutTitle: about.aboutTitle,
+    aboutSections: about.aboutSections,
+    aboutFooter: about.aboutFooter,
+  };
+}
+
+function resolveAboutKey(categoryId: string, catalogKey: string | null): string {
+  return catalogKey ?? categoryId;
 }
 
 function isCategoryConditionDump(
@@ -165,6 +190,9 @@ function fromEntityRich(
 
   const merged: ServiceRichContent = {
     overview: localized.overview?.trim() || fallbackOverview,
+    aboutTitle: localized.aboutTitle,
+    aboutSections: localized.aboutSections,
+    aboutFooter: localized.aboutFooter,
     conditions: localized.conditions ?? [],
     indications: localized.indications ?? [],
     solutions: localized.solutions ?? [],
@@ -258,6 +286,9 @@ export function resolveServiceRichContent(
     result = attachConditions(
       {
         overview: fromCatalog.overview || fallbackOverview,
+        aboutTitle: fromCatalog.aboutTitle,
+        aboutSections: fromCatalog.aboutSections,
+        aboutFooter: fromCatalog.aboutFooter,
         indications: fromCatalog.indications,
         solutions: fromCatalog.solutions,
         benefits: fromCatalog.benefits,
@@ -283,7 +314,13 @@ export function resolveServiceRichContent(
     );
   }
 
-  return finalizeSubRichContent(result, sub, category, locale, catalogKey);
+  return finalizeSubRichContent(
+    mergeServiceAboutContent(result, resolveAboutKey(category.id, catalogKey), locale),
+    sub,
+    category,
+    locale,
+    catalogKey,
+  );
 }
 
 export function resolveCategoryRichContent(
@@ -293,38 +330,74 @@ export function resolveCategoryRichContent(
   const fallbackOverview = category.description[locale] || category.description.uz;
 
   const fromApi = fromEntityRich(category.richContent, locale, fallbackOverview);
-  if (fromApi && isCompleteRich(fromApi)) return fromApi;
-
   const fromCatalog = CATEGORY_RICH_CATALOG[category.id]?.[locale];
+
+  if (fromApi && isCompleteRich(fromApi)) {
+    return mergeServiceAboutContent(
+      attachConditions(
+        {
+          ...fromApi,
+          overview: fromCatalog?.overview || fromApi.overview,
+          aboutTitle: fromCatalog?.aboutTitle,
+          aboutSections: fromCatalog?.aboutSections,
+          aboutFooter: fromCatalog?.aboutFooter,
+        },
+        locale,
+        category.title[locale],
+        category.id,
+        null,
+        false,
+      ),
+      category.id,
+      locale,
+    );
+  }
+
   if (fromCatalog) {
-    return attachConditions(
-      {
-        overview: fromCatalog.overview || fallbackOverview,
-        indications: fromCatalog.indications,
-        solutions: fromCatalog.solutions,
-        benefits: fromCatalog.benefits,
-        process: fromCatalog.process,
-        conditions: fromCatalog.conditions,
-      },
+    return mergeServiceAboutContent(
+      attachConditions(
+        {
+          overview: fromCatalog.overview || fallbackOverview,
+          aboutTitle: fromCatalog.aboutTitle,
+          aboutSections: fromCatalog.aboutSections,
+          aboutFooter: fromCatalog.aboutFooter,
+          indications: fromCatalog.indications,
+          solutions: fromCatalog.solutions,
+          benefits: fromCatalog.benefits,
+          process: fromCatalog.process,
+          conditions: fromCatalog.conditions,
+          equipment: fromCatalog.equipment,
+        },
+        locale,
+        category.title[locale],
+        category.id,
+        null,
+        false,
+      ),
+      category.id,
+      locale,
+    );
+  }
+
+  if (fromApi) {
+    return mergeServiceAboutContent(
+      attachConditions(fromApi, locale, category.title[locale], category.id, null, false),
+      category.id,
+      locale,
+    );
+  }
+
+  return mergeServiceAboutContent(
+    attachConditions(
+      buildCategoryFallback(category, locale),
       locale,
       category.title[locale],
       category.id,
       null,
       false,
-    );
-  }
-
-  if (fromApi) {
-    return attachConditions(fromApi, locale, category.title[locale], category.id, null, false);
-  }
-
-  return attachConditions(
-    buildCategoryFallback(category, locale),
-    locale,
-    category.title[locale],
+    ),
     category.id,
-    null,
-    false,
+    locale,
   );
 }
 
@@ -332,6 +405,7 @@ export function getServiceSectionLabels(locale: Locale) {
   return locale === 'uz'
     ? {
         about: 'Xizmat haqida',
+        equipment: 'Klinikadagi apparatlar',
         conditions: 'Davolanadigan kasalliklar va muammolar haqida',
         indications: 'Qachon shifokorga murojaat qilish kerak',
         solutions: 'Mavjud yechimlar va muolajalar',
@@ -341,7 +415,8 @@ export function getServiceSectionLabels(locale: Locale) {
       }
     : locale === 'ru'
       ? {
-          about: 'О процедуре',
+          about: 'Об услуге',
+          equipment: 'Оборудование клиники',
           conditions: 'О заболеваниях и проблемах, которые мы лечим',
           indications: 'Когда обращаться к врачу',
           solutions: 'Доступные решения и процедуры',
@@ -351,6 +426,7 @@ export function getServiceSectionLabels(locale: Locale) {
         }
       : {
           about: 'About this service',
+          equipment: 'Clinic equipment',
           conditions: 'Diseases and conditions we treat',
           indications: 'When to see a doctor',
           solutions: 'Available solutions and procedures',

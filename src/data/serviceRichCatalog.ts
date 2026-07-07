@@ -1,6 +1,9 @@
 import type { Locale, ServiceCategory, ServiceDetail, ServiceRichContent, ServiceConditionTopic } from '../types';
 
-type CatalogRich = Omit<ServiceRichContent, 'conditions'> & { conditions?: ServiceConditionTopic[] };
+type CatalogRich = Omit<ServiceRichContent, 'conditions'> & {
+  conditions?: ServiceConditionTopic[];
+  equipment?: ServiceConditionTopic[];
+};
 type LocalizedRich = Record<Locale, CatalogRich>;
 
 const CLINIC_BENEFITS: Record<Locale, string[]> = {
@@ -55,7 +58,34 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
   'apparatnaya-kosmetologiya': {
     uz: {
       overview:
-        'Apparat kosmetologiyasi — bu jarrohliksiz, zamonaviy tibbiy uskunalar yordamida terini yoshartirish, tozalash va estetik muammolarni bartaraf etish yo\'nalishi. Radeski klinikasida Sciton IPL, gen darajasida foto-yangilash, mikrotoklar va lazer biorevitalizatsiya kabi ilg\'or texnologiyalar qo\'llaniladi. Muolajalar og\'riqsiz o\'tadi, tiklanish vaqti qisqa bo\'ladi va har bir bemorga teri turi hamda muammosiga qarab individual protokol tuziladi.',
+        'Apparatli kosmetologiya — Radeski klinikasidagi zamonaviy tibbiy apparatlar yordamida terini yoshartirish, chuqur tozalash va estetik muammolarni jarrohliksiz hal qilish yo\'nalishi. IPL foto-yangilash (InMode), lazer biorevitalizatsiya va ultratovush tozalash kabi xizmatlar dermatolog va kosmetolog nazoratida, individual protokol asosida qo\'llaniladi.',
+      equipment: [
+        {
+          title: 'IPL InMode',
+          description:
+            'Yuqori intensivlikli impulsli yorug\'lik tizimi. Pigmentatsiya, qon tomirlari va teri tonidagi notekisliklarni jarrohliksiz yaxshilash.',
+        },
+        {
+          title: 'Derma V (Lutronic)',
+          description:
+            'Sosudist va pigmentatsiyaga qaratilgan lazer tizimi. Kuperoza, rozaseya va qon tomir yulduzchalarini davolash.',
+        },
+        {
+          title: 'Hollywood Spectra (Lutronic)',
+          description:
+            'Q-switch lazer asosidagi yuz tozalash va teri yangilanishi. Karbon piling, gold toning va pigmentatsiya protokollari.',
+        },
+        {
+          title: 'Lazer biorevitalizatsiya',
+          description:
+            'Lazer energiyasi bilan chuqur namlantirish va teri tiklanishi. Teri quruqligi, elastiklik pasayishi va tabiiy yorqinlik yo\'qolishida qo\'llaniladi.',
+        },
+        {
+          title: 'Ultratovush yuz tozalash',
+          description:
+            'Professional chuqur tozalash apparati. Kengaytirilgan poralar, qora nuqtalar, yog\'li teri va matlikni bartaraf etish.',
+        },
+      ],
       indications: [
         'Teri rangidagi notekislik, dog\'lar va giperpigmentatsiya',
         'Yoshga bog\'liq teri eskirishi, ajinlar va elastiklikning pasayishi',
@@ -65,12 +95,11 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Akne va post-akne dog\'lari, kengaytirilgan toshma teshiklari',
       ],
       solutions: [
-        'Gen darajasida innovatsion foto-yangilash (Sciton IPL Forever Young)',
-        'IPL foto-yangilash — pigmentatsiya va qon tomirlarni yo\'qotish',
+        'IPL foto-yangilash (InMode) — pigmentatsiya va qon tomirlarni yo\'qotish',
         'Lazer biorevitalizatsiya — chuqur namlantirish va tiklanish',
-        'Mikrotok terapiyasi — limfodrenaj va yuz liftingi',
         'Professional ultratovush yuz tozalash',
-        'Kombinatsiyalangan apparat protokollari (masalan, IPL + mikrotok)',
+        'Hollywood Spectra va Derma V lazer protokollari',
+        'Kombinatsiyalangan apparat protokollari',
         'Profilaktik yoshartirish kurslari va mavsumiy teri tiklash rejalari',
       ],
       benefits: CLINIC_BENEFITS.uz,
@@ -78,7 +107,34 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
     },
     ru: {
       overview:
-        'Аппаратная косметология — это направление безоперационного омоложения, очищения и коррекции эстетических проблем кожи с помощью современного медицинского оборудования. В клинике Radeski применяются передовые технологии Sciton IPL, фотоомоложение на генном уровне, микротоки и лазерная биоревитализация. Процедуры безболезненны, требуют минимального восстановления, а протокол подбирается индивидуально.',
+        'Аппаратная косметология — направление безоперационного омоложения, очищения и коррекции эстетических проблем кожи с помощью современного медицинского оборудования клиники Radeski. Фотоомоложение IPL (InMode), лазерная биоревитализация и ультразвуковая чистка применяются под контролем дерматолога и косметолога по индивидуальному протоколу.',
+      equipment: [
+        {
+          title: 'IPL InMode',
+          description:
+            'Система импульсного света высокой интенсивности. Безоперационное улучшение пигментации, сосудов и тона кожи.',
+        },
+        {
+          title: 'Derma V (Lutronic)',
+          description:
+            'Лазерная система для сосудистых и пигментных изменений. Лечение купероза, розацеа и сосудистых звёздочек.',
+        },
+        {
+          title: 'Hollywood Spectra (Lutronic)',
+          description:
+            'Лазерное очищение и обновление кожи на базе Q-switch. Карбоновый пилинг, gold toning и протоколы при пигментации.',
+        },
+        {
+          title: 'Лазерная биоревитализация',
+          description:
+            'Глубокое увлажнение и восстановление кожи лазерной энергией. При сухости, снижении эластичности и потере естественного сияния.',
+        },
+        {
+          title: 'Ультразвуковая чистка лица',
+          description:
+            'Профессиональное глубокое очищение. Расширенные поры, чёрные точки, жирная кожа и тусклость.',
+        },
+      ],
       indications: [
         'Неровный тон кожи, пигментные пятна и гиперпигментация',
         'Возрастное старение, морщины и снижение эластичности',
@@ -88,11 +144,10 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Акне, постакне и расширенные поры',
       ],
       solutions: [
-        'Инновационное фотоомоложение на генном уровне (Sciton IPL Forever Young)',
-        'IPL фотоомоложение — устранение пигментации и сосудов',
+        'Фотоомоложение IPL (InMode) — устранение пигментации и сосудов',
         'Лазерная биоревитализация — глубокое увлажнение и восстановление',
-        'Микротоковая терапия — лимфодренаж и лифтинг',
         'Профессиональная ультразвуковая чистка лица',
+        'Протоколы Hollywood Spectra и Derma V',
         'Комбинированные аппаратные протоколы',
         'Профилактические курсы омоложения',
       ],
@@ -101,7 +156,34 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
     },
     en: {
       overview:
-        'Hardware cosmetology is a non-surgical field focused on skin rejuvenation, cleansing, and aesthetic correction using advanced medical devices. At Radeski Clinic we use Sciton IPL, gene-level photo-rejuvenation, microcurrent therapy, and laser biorevitalization. Procedures are painless, require minimal downtime, and every patient receives a personalized protocol.',
+        'Device-based cosmetology at Radeski Clinic uses modern medical equipment for non-surgical skin rejuvenation, deep cleansing, and aesthetic correction. IPL photo-rejuvenation (InMode), laser biorevitalization, and ultrasonic cleansing are performed under dermatologist and cosmetologist supervision with individualized protocols.',
+      equipment: [
+        {
+          title: 'IPL InMode',
+          description:
+            'High-intensity pulsed-light system for non-surgical improvement of pigmentation, vessels and skin tone.',
+        },
+        {
+          title: 'Derma V (Lutronic)',
+          description:
+            'Laser system for vascular and pigment concerns. Treats couperose, rosacea and spider veins.',
+        },
+        {
+          title: 'Hollywood Spectra (Lutronic)',
+          description:
+            'Q-switch laser facial cleansing and skin renewal. Carbon peel, gold toning and pigmentation protocols.',
+        },
+        {
+          title: 'Laser biorevitalization',
+          description:
+            'Deep hydration and skin renewal with laser energy. Used for dryness, reduced elasticity, and loss of natural radiance.',
+        },
+        {
+          title: 'Ultrasonic facial cleansing',
+          description:
+            'Professional deep cleansing device. Addresses enlarged pores, blackheads, oily skin, and dullness.',
+        },
+      ],
       indications: [
         'Uneven skin tone, spots and hyperpigmentation',
         'Age-related aging, wrinkles and reduced elasticity',
@@ -111,11 +193,10 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Acne, post-acne marks and enlarged pores',
       ],
       solutions: [
-        'Gene-level innovative photo-rejuvenation (Sciton IPL Forever Young)',
-        'IPL photo-rejuvenation for pigmentation and vessels',
+        'IPL photo-rejuvenation (InMode) for pigmentation and vessels',
         'Laser biorevitalization for deep hydration',
-        'Microcurrent therapy for lymphatic drainage and lifting',
         'Professional ultrasonic facial cleansing',
+        'Hollywood Spectra and Derma V laser protocols',
         'Combined device protocols',
         'Preventive rejuvenation courses',
       ],
@@ -125,8 +206,39 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
   },
   dermatologiya: {
     uz: {
+      aboutTitle:
+        "Nima uchun dermatolog ko'rigi va dermatoskopiyadan aynan Radeski Skin Clinic'da o'tish kerak?",
       overview:
-        'Dermatologiya yo\'nalishi teri kasalliklarini aniq diagnostika qilish, davolash va uzoq muddatli nazorat qilishga qaratilgan. Radeski klinikasida vitiligo, psoriaz, ekzema, allergik toshma va boshqa surunkali kasalliklar zamonaviy protokollar asosida davolanadi. Har bir bemor uchun individual terapiya rejasi tuziladi va natija muntazam kuzatiladi.',
+        "Radeski Skin Clinic'da dermatolog shifokor konsultatsiyasi — bu oddiy ko'rik emas, balki zamonaviy diagnostika usullari yordamida teri holatini kompleks baholashdir.",
+      aboutSections: [
+        {
+          title: 'Aniq diagnostika',
+          description:
+            "Shifokorlarimiz terini sinchkovlik bilan ko'rib chiqadi va kerak bo'lganda raqamli dermatoskopiya o'tkazadi — yangi hosilalar va boshqa o'zgarishlarni ko'p baravar kattalashtirilgan holda ko'rish imkonini beruvchi zamonaviy, og'riqsiz va xavfsiz usul. Bu ko'plab kasalliklarni erta bosqichda aniqlash va optimal davolash taktikasini belgilashga yordam beradi.",
+        },
+        {
+          title: 'Tajribali mutaxassislar',
+          description:
+            "Qabulni malakali dermatolog shifokorlar olib boradi. Ular muntazam malaka oshiradi, xalqaro konferensiyalarda qatnashadi va zamonaviy klinik tavsiyalarni kundalik amaliyotda qo'llaydi.",
+        },
+        {
+          title: 'Zamonaviy uskunalar',
+          description:
+            "Oddiy ko'rikda ko'rinmaydigan o'zgarishlarni aniqlashga va maksimal aniq tashxis qo'yishga yordam beradigan professional diagnostika uskunalaridan foydalanamiz.",
+        },
+        {
+          title: 'Individual yondashuv',
+          description:
+            "Har bir bemor shaxsiy tavsiyalar oladi. Biz keraksiz protseduralarni tayinlamaymiz — faqat sizning holatingizda haqiqatan zarur bo'lgan tekshiruv va davolash usullarini tanlaymiz.",
+        },
+        {
+          title: "To'liq yordam bir joyda",
+          description:
+            "Konsultatsiyadan so'ng kerak bo'lsa, qo'shimcha tekshiruvlardan o'tishingiz, xavfsiz yangi hosilalarni olib tashlashingiz, teri kasalliklarini davolashni boshlashingiz yoki estetik muammolarni hal qilish uchun samarali apparatli protseduralarni tanlashingiz mumkin.",
+        },
+      ],
+      aboutFooter:
+        "Radeski Skin Clinic'da biz o'z vaqtida diagnostika qilish — teri salomatligini saqlashning eng yaxshi usuli, deb hisoblaymiz. Zamonaviy uskunalar, tajribali mutaxassislar va har bir bemorga g'amxo'rlik bilan yondashish yuqori professional darajada tekshiruv o'tkazish va kuzatuv yoki davolashni talab qiladigan o'zgarishlarni o'z vaqtida aniqlash imkonini beradi.",
       indications: [
         'Psoriaz, vitiligo, ekzema va surunkali dermatit',
         'Allergik toshma va atopik dermatit',
@@ -145,16 +257,78 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
       process: STANDARD_PROCESS.uz,
     },
     ru: {
+      aboutTitle:
+        'Почему осмотр дерматолога и дерматоскопию нужно пройти именно в Radeski Skin Clinic?',
       overview:
-        'Дерматология направлена на точную диагностику, лечение и долгосрочный контроль заболеваний кожи. В клинике Radeski лечат витилиго, псориаз, экзему, аллергические высыпания и другие хронические состояния по современным протоколам.',
+        'В Radeski Skin Clinic консультация врача-дерматолога — это не просто осмотр, а комплексная оценка состояния кожи с использованием современных методов диагностики.',
+      aboutSections: [
+        {
+          title: 'Точная диагностика',
+          description:
+            'Наши врачи проводят тщательный осмотр кожи и при необходимости выполняют цифровую дерматоскопию — современный, безболезненный и безопасный метод исследования новообразований и других изменений кожи под многократным увеличением. Это позволяет выявлять многие заболевания на ранних стадиях и определить оптимальную тактику лечения.',
+        },
+        {
+          title: 'Опытные специалисты',
+          description:
+            'Прием ведут квалифицированные врачи-дерматологи, которые регулярно повышают свою квалификацию, участвуют в международных конференциях и применяют современные клинические рекомендации в ежедневной практике.',
+        },
+        {
+          title: 'Современное оборудование',
+          description:
+            'Мы используем профессиональное диагностическое оборудование, которое помогает обнаружить изменения, незаметные при обычном осмотре, и поставить максимально точный диагноз.',
+        },
+        {
+          title: 'Индивидуальный подход',
+          description:
+            'Каждый пациент получает персональные рекомендации. Мы не назначаем лишних процедур — только те обследования и методы лечения, которые действительно необходимы именно в вашем случае.',
+        },
+        {
+          title: 'Полный спектр помощи в одном месте',
+          description:
+            'После консультации при необходимости вы можете сразу пройти дополнительные обследования, удалить доброкачественные новообразования, начать лечение кожных заболеваний или подобрать эффективные аппаратные процедуры для решения эстетических проблем.',
+        },
+      ],
+      aboutFooter:
+        'В Radeski Skin Clinic мы убеждены, что своевременная диагностика — лучший способ сохранить здоровье кожи. Современное оборудование, опытные специалисты и внимательное отношение к каждому пациенту позволяют нам проводить обследование на высоком профессиональном уровне и своевременно выявлять изменения, требующие наблюдения или лечения.',
       indications: ['Псориаз, витилиго, экзема', 'Аллергический дерматит', 'Акне и себорея', 'Детские дерматозы', 'Тяжелые аутоиммунные заболевания кожи'],
       solutions: ['Дерматологическая диагностика', 'Фототерапия UVB 311 нм', 'Иммунобиологическая терапия', 'Детская дерматология', 'Комплексное лечение'],
       benefits: CLINIC_BENEFITS.ru,
       process: STANDARD_PROCESS.ru,
     },
     en: {
+      aboutTitle:
+        'Why should a dermatologist examination and dermatoscopy be done at Radeski Skin Clinic?',
       overview:
-        'Dermatology focuses on accurate diagnosis, treatment, and long-term monitoring of skin diseases. At Radeski Clinic we treat vitiligo, psoriasis, eczema, allergic rashes, and chronic conditions using modern clinical protocols.',
+        'At Radeski Skin Clinic, a dermatologist consultation is not just a routine exam — it is a comprehensive skin assessment using modern diagnostic methods.',
+      aboutSections: [
+        {
+          title: 'Accurate diagnosis',
+          description:
+            'Our physicians perform a thorough skin examination and, when needed, digital dermatoscopy — a modern, painless and safe method to evaluate lesions and other skin changes under high magnification. This helps detect many conditions at early stages and define the optimal treatment plan.',
+        },
+        {
+          title: 'Experienced specialists',
+          description:
+            'Consultations are provided by qualified dermatologists who regularly advance their training, attend international conferences, and apply up-to-date clinical guidelines in daily practice.',
+        },
+        {
+          title: 'Modern equipment',
+          description:
+            'We use professional diagnostic equipment that helps reveal changes invisible during a standard exam and establish the most accurate diagnosis.',
+        },
+        {
+          title: 'Individual approach',
+          description:
+            'Every patient receives personal recommendations. We do not prescribe unnecessary procedures — only the examinations and treatments that are truly needed in your case.',
+        },
+        {
+          title: 'Full range of care in one place',
+          description:
+            'After consultation, you can, if needed, undergo additional tests, remove benign lesions, start treatment for skin diseases, or choose effective device-based procedures for aesthetic concerns.',
+        },
+      ],
+      aboutFooter:
+        'At Radeski Skin Clinic we believe timely diagnosis is the best way to protect skin health. Modern equipment, experienced specialists, and attentive care allow us to examine patients at a high professional level and detect changes that require monitoring or treatment in time.',
       indications: ['Psoriasis, vitiligo, eczema', 'Allergic dermatitis', 'Acne and seborrhea', 'Pediatric skin conditions', 'Severe autoimmune skin diseases'],
       solutions: ['Comprehensive dermatologic diagnostics', 'UVB 311 nm phototherapy', 'Immunobiological therapy', 'Pediatric dermatology', 'Combined treatment plans'],
       benefits: CLINIC_BENEFITS.en,
@@ -278,7 +452,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
   dermatoonkologiya: {
     uz: {
       overview:
-        'Dermato-onkologiya — teridagi xollar, papillomalar va shubhali o\'smalarni erta aniqlash, diagnostika qilish va monitoring qilish yo\'nalishi. PhotoFinder AI skanerlash va biopsiya bilan melanoma xavfini vaqtida baholash mumkin.',
+        'Dermato-onkologiya — teridagi xollar, papillomalar va shubhali o\'smalarni erta aniqlash, diagnostika qilish va monitoring qilish yo\'nalishi. Dermatoskopiya va biopsiya bilan melanoma xavfini vaqtida baholash mumkin.',
       indications: [
         'Yangi paydo bo\'lgan yoki o\'zgarayotgan teri xollari',
         'Ko\'p sonli papilloma va bormalar',
@@ -287,7 +461,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Oilaviy melanoma anamnezi',
       ],
       solutions: [
-        'PhotoFinder AI bilan butun tana skanerlash',
+        'Dermatoskopik ko\'rik va raqamli monitoring',
         'Dermatoskopik ko\'rik va raqamli xaritalash',
         'Teri biopsiyasi va gistologik tahlil',
         'Xavfli o\'smalarni monitoring qilish rejasi',
@@ -298,17 +472,17 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
     },
     ru: {
       overview:
-        'Дерматоонкология — ранняя диагностика родинок, папиллом и подозрительных новообразований. PhotoFinder с ИИ и биопсия позволяют вовремя оценить риск меланомы.',
+        'Дерматоонкология — ранняя диагностика родинок, папиллом и подозрительных новообразований. Дерматоскопия и биопсия позволяют вовремя оценить риск меланомы.',
       indications: ['Новые или изменяющиеся родинки', 'Множественные папилломы', 'Солнечные ожоги в анамнезе', 'Изменение цвета или формы родинки', 'Семейный анамнез меланомы'],
-      solutions: ['Скрининг PhotoFinder', 'Дерматоскопия и картирование', 'Биопсия и гистология', 'План наблюдения', 'Направление на лечение при необходимости'],
+      solutions: ['Дерматоскопический осмотр', 'Дерматоскопия и картирование', 'Биопсия и гистология', 'План наблюдения', 'Направление на лечение при необходимости'],
       benefits: CLINIC_BENEFITS.ru,
       process: STANDARD_PROCESS.ru,
     },
     en: {
       overview:
-        'Dermato-oncology focuses on early detection, diagnosis, and monitoring of moles, papillomas, and suspicious skin lesions. PhotoFinder AI screening and biopsy help assess melanoma risk in time.',
+        'Dermato-oncology focuses on early detection, diagnosis, and monitoring of moles, papillomas, and suspicious skin lesions. Clinical dermatoscopy and biopsy help assess melanoma risk in time.',
       indications: ['New or changing moles', 'Multiple papillomas', 'History of sunburns', 'Changes in mole color or shape', 'Family history of melanoma'],
-      solutions: ['PhotoFinder AI full-body screening', 'Dermoscopy and digital mapping', 'Skin biopsy and histology', 'Surveillance plan', 'Treatment referral when needed'],
+      solutions: ['Clinical dermatoscopy examination', 'Dermoscopy and digital mapping', 'Skin biopsy and histology', 'Surveillance plan', 'Treatment referral when needed'],
       benefits: CLINIC_BENEFITS.en,
       process: STANDARD_PROCESS.en,
     },
@@ -392,7 +566,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
   'shkola-dermatoskopii': {
     uz: {
       overview:
-        'Dermatoskopiya maktabi — dermatolog va dermatoonkolog mutaxassislari uchun teri o\'smalarini dermatoskopik diagnostika qilish bo\'yicha amaliy o\'quv dasturi. Haqiqiy klinik holatlar va PhotoFinder atlaslari asosida bilim oshiriladi.',
+        'Dermatoskopiya maktabi — dermatolog va dermatoonkolog mutaxassislari uchun teri o\'smalarini dermatoskopik diagnostika qilish bo\'yicha amaliy o\'quv dasturi. Haqiqiy klinik holatlar va dermatoskopiya atlaslari asosida bilim oshiriladi.',
       indications: [
         'Dermatoskopiya bo\'yicha amaliy ko\'nikmalarni oshirish kerakligi',
         'Xavfli va xavfsiz xollarni farqlashda qiyinchilik',
@@ -402,7 +576,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
       ],
       solutions: [
         'Praktik o\'quv darslari va seminarlar',
-        'PhotoFinder va dermatoskop bilan ishlash',
+        'Dermatoskop va raqamli vositalar bilan ishlash',
         'Klinik holatlar atlasini tahlil qilish',
         'Yetakchi mutaxassislar bilan amaliy mashg\'ulotlar',
         'Sertifikatlashtirish va bilimni mustahkamlash',
@@ -414,15 +588,15 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
       overview:
         'Школа дерматоскопии — практическая программа для врачей по оптической и цифровой диагностике новообразований кожи на реальных клинических случаях.',
       indications: ['Нужны практические навыки', 'Сложности в дифференциации родинок', 'Освоение цифровой диагностики', 'Расширение клинического опыта', 'Повышение квалификации'],
-      solutions: ['Практические курсы', 'Работа с PhotoFinder', 'Разбор клинических атласов', 'Занятия с экспертами', 'Закрепление знаний'],
+      solutions: ['Практические курсы', 'Работа с дерматоскопом', 'Разбор клинических атласов', 'Занятия с экспертами', 'Закрепление знаний'],
       benefits: CLINIC_BENEFITS.ru,
       process: STANDARD_PROCESS.ru,
     },
     en: {
       overview:
-        'Dermatoscopy School offers practical training for physicians in optical and digital diagnosis of skin lesions using real clinical cases and PhotoFinder atlases.',
+        'Dermatoscopy School offers practical training for physicians in optical and digital diagnosis of skin lesions using real clinical cases and dermatoscopy atlases.',
       indications: ['Need practical dermoscopy skills', 'Difficulty distinguishing risky moles', 'Digital diagnostics training', 'Expanding clinical experience', 'Professional development'],
-      solutions: ['Practical workshops', 'PhotoFinder hands-on training', 'Clinical atlas review', 'Expert-led sessions', 'Knowledge consolidation'],
+      solutions: ['Practical workshops', 'Dermatoscope hands-on training', 'Clinical atlas review', 'Expert-led sessions', 'Knowledge consolidation'],
       benefits: CLINIC_BENEFITS.en,
       process: STANDARD_PROCESS.en,
     },
@@ -544,6 +718,104 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
 };
 
 export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
+  'ipl-inmode': {
+    uz: {
+      overview:
+        'IPL foto-yangilash (InMode) — yuqori intensivlikli impulsli yorug\'lik bilan pigmentatsiya, qon tomirlari va teri tonidagi notekisliklarni jarrohliksiz bartaraf etish. Muolaja og\'riqsiz, qisqa tiklanish va dermatolog nazoratida o\'tkaziladi.',
+      indications: [
+        'Yuz va tana terisidagi giperpigmentatsiya (qora dog\'lar, melasma)',
+        'Quyosh dog\'lari va yoshga bog\'liq pigmentatsiya',
+        'Teri rangining notekisligi, xiraligi va matligi',
+        'Qon tomir tarmoqlari, qizarish va rozaseya belgilari',
+        'Teri elastikligi va turgorining pasayishi',
+      ],
+      solutions: [
+        'InMode IPL protokoli — pigmentatsiya va qon tomirlarni yo\'qotish',
+        'Yuqori intensivlikli impulsli yorug\'lik seanslari',
+        'Pigmentatsiyani bosqichma-bosqich yo\'q qilish (odatda 3–5 seans)',
+        'Qon tomir va qizarishni kamaytirish uchun maxsus filtrlar',
+        'Individual teri turiga moslashtirilgan energiya parametrlari',
+      ],
+      benefits: [
+        'Og\'riqsiz va tezkor apparat muolajasi — reabilitatsiya deyarli talab qilmaydi',
+        'Giperpigmentatsiyani bir necha seansda sezilarli darajada yo\'qotish',
+        'InMode IPL professional uskunalari',
+        'Dermatolog va kosmetolog mutaxassislari doimiy nazorati ostida',
+        'Yuz, bo\'yin, ko\'krak oldi va qo\'llar uchun xavfsiz qo\'llash',
+      ],
+      process: [
+        'Dermatolog konsultatsiyasi: teri turi, shikoyatlar va kutilyotgan natija aniqlanadi',
+        'Teri holati baholanadi va muolajaga tayyorgarlik',
+        'Maxsus ko\'zoynak bilan IPL seansi o\'tkaziladi (15–45 daqiqa)',
+        'Muolajadan so\'ng tinchlantiruvchi va UV-himoya kremlari qo\'llaniladi',
+        '2–4 hafta oralig\'ida takroriy seanslar va natijani kuzatish',
+      ],
+    },
+    ru: {
+      overview:
+        'Фотоомоложение IPL (InMode) — безоперационное устранение пигментации, сосудов и неровного тона кожи с помощью импульсного света высокой интенсивности. Процедура безболезненна, с коротким восстановлением и под контролем дерматолога.',
+      indications: [
+        'Гиперпигментация на лице и теле (пятна, мелазма)',
+        'Солнечные пятна и возрастная пигментация',
+        'Неровный тон, тусклость и матовость кожи',
+        'Сосудистые звездочки, покраснения и розацеа',
+        'Снижение эластичности и тургора кожи',
+      ],
+      solutions: [
+        'Протокол InMode IPL — устранение пигментации и сосудов',
+        'Сеансы импульсного света высокой интенсивности',
+        'Поэтапное устранение пигментации (обычно 3–5 сеансов)',
+        'Специальные фильтры для сосудов и покраснений',
+        'Индивидуальные параметры энергии под тип кожи',
+      ],
+      benefits: [
+        'Безболезненная быстрая процедура с минимальным восстановлением',
+        'Заметное уменьшение гиперпигментации за несколько сеансов',
+        'Профессиональное оборудование InMode IPL',
+        'Постоянный контроль дерматологов и косметологов',
+        'Безопасно для лица, шеи, декольте и рук',
+      ],
+      process: [
+        'Консультация дерматолога: тип кожи, жалобы и ожидаемый результат',
+        'Оценка состояния кожи и подготовка',
+        'Сеанс IPL в защитных очках (15–45 минут)',
+        'Нанесение успокаивающих и SPF-средств после процедуры',
+        'Повторные сеансы через 2–4 недели и контроль результата',
+      ],
+    },
+    en: {
+      overview:
+        'IPL photo-rejuvenation (InMode) uses high-intensity pulsed light to non-surgically treat pigmentation, vessels and uneven skin tone. The procedure is painless, has short downtime and is performed under dermatologist supervision.',
+      indications: [
+        'Facial and body hyperpigmentation (spots, melasma)',
+        'Sun spots and age-related pigmentation',
+        'Uneven tone, dullness and matte skin',
+        'Vascular lesions, redness and rosacea',
+        'Reduced skin elasticity and turgor',
+      ],
+      solutions: [
+        'InMode IPL protocol for pigmentation and vessels',
+        'High-intensity pulsed-light sessions',
+        'Stepwise pigmentation removal (typically 3–5 sessions)',
+        'Special filters for vessels and redness',
+        'Energy parameters tailored to skin type',
+      ],
+      benefits: [
+        'Painless fast procedure with minimal downtime',
+        'Significant hyperpigmentation reduction in few sessions',
+        'Professional InMode IPL equipment',
+        'Continuous dermatologist and cosmetologist supervision',
+        'Safe for face, neck, décolleté and hands',
+      ],
+      process: [
+        'Dermatologist consultation: skin type, concerns and expected outcome',
+        'Skin assessment and preparation',
+        'IPL session with protective eyewear (15–45 minutes)',
+        'Soothing and SPF aftercare',
+        'Follow-up sessions every 2–4 weeks and result monitoring',
+      ],
+    },
+  },
   'gene-photo-rejuvenation': {
     uz: {
       overview:
@@ -651,48 +923,6 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       ],
     },
   },
-  'bbl-foto': {
-    uz: {
-      overview:
-        'IPL foto-yangilash — Sciton kompaniyasining original Amerika texnologiyasi bo\'yicha terini yoshartirish va tiklash usuli. Keng spektrli yorug\'lik impulslari pigmentatsiya, qon tomir tarmoqlari va yoshga bog\'liq o\'zgarishlarni bir vaqtning o\'zida bartaraf etadi. Muolaja og\'riqsiz, qisqa vaqt ichida natija beradi.',
-      indications: ['Pigment dog\'lar va melasma', 'Qon tomir tarmoqlari va qizarish', 'Teri rangining notekisligi', 'Yoshga bog\'liq teri eskirishi', 'Quyosh ta\'siridan paydo bo\'lgan dog\'lar'],
-      solutions: ['Sciton IPL apparati bilan foto-yangilash', 'Pigmentatsiyani bosqichma-bosqich yo\'qotish', 'Qon tomirlarni issiq yorug\'lik bilan yopish', 'Teri teksturasini yaxshilash', 'Profilaktik yoshartirish kurslari'],
-      benefits: ['Original Sciton IPL uskunalari', 'Iz qoldirmaydi, tiklanish tez', 'Yuz va tana uchun mos', 'Dermatolog nazorati', 'Aniq va bashorat qilinadigan natija'],
-      process: [
-        'Dermatolog konsultatsiyasi va teri holatini baholash',
-        'Teri tozalash va IPL uchun tayyorgarlik',
-        'Sciton IPL seansi maxsus ko\'zoynak bilan o\'tkaziladi (15–30 daqiqa)',
-        'Tinchlantiruvchi va UV-himoya vositalari qo\'llaniladi',
-        '2–4 hafta oralig\'ida takroriy seanslar va natijani kuzatish',
-      ],
-    },
-    ru: {
-      overview: 'IPL фотоомоложение — метод омоложения на оригинальной американской технологии Sciton. Импульсы широкополосного света устраняют пигментацию, сосуды и возрастные изменения. Процедура безболезненна и дает быстрый результат.',
-      indications: ['Пигментные пятна и мелазма', 'Сосудистые звездочки', 'Неровный тон кожи', 'Возрастные изменения', 'Солнечные пятна'],
-      solutions: ['Фотоомоложение на Sciton IPL', 'Поэтапное устранение пигментации', 'Коагуляция сосудов', 'Улучшение текстуры кожи', 'Профилактические курсы'],
-      benefits: ['Оригинальное оборудование Sciton', 'Без рубцов и быстрое восстановление', 'Для лица и тела', 'Контроль дерматолога', 'Прогнозируемый результат'],
-      process: [
-        'Консультация дерматолога и оценка состояния кожи',
-        'Очищение кожи и подготовка к IPL',
-        'Сеанс Sciton IPL в защитных очках (15–30 минут)',
-        'Нанесение успокаивающих и SPF-средств',
-        'Повторные сеансы через 2–4 недели и контроль результата',
-      ],
-    },
-    en: {
-      overview: 'IPL photo-rejuvenation uses original Sciton US technology. Broad-band light pulses address pigmentation, vascular lesions and age-related changes. The procedure is painless and delivers fast visible results.',
-      indications: ['Pigment spots and melasma', 'Vascular lesions and redness', 'Uneven skin tone', 'Age-related skin changes', 'Sun-induced spots'],
-      solutions: ['Sciton IPL photo-rejuvenation', 'Stepwise pigmentation removal', 'Vessel coagulation with light energy', 'Skin texture improvement', 'Preventive rejuvenation courses'],
-      benefits: ['Original Sciton equipment', 'No scarring and quick recovery', 'Suitable for face and body', 'Dermatologist supervision', 'Predictable results'],
-      process: [
-        'Dermatologist consultation and skin assessment',
-        'Skin cleansing and IPL preparation',
-        'Sciton IPL session with protective eyewear (15–30 minutes)',
-        'Soothing and SPF products applied after treatment',
-        'Repeat sessions every 2–4 weeks with result monitoring',
-      ],
-    },
-  },
   'lazer-biorev': {
     uz: {
       overview:
@@ -744,7 +974,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
   'ultratovush-yuz': {
     uz: {
       overview:
-        'Professional ultratovush yuz tozalash — yuz terisini chuqur, lekin ehtiyotkorlik bilan tozalash usuli. Ultratovush to\'lqinlari yog\' va mayda kir qoldiqlarini yumshatadi, poralarni ochadi va keyingi parvarish uchun terini tayyorlaydi. Jarrohliksiz, og\'riqsiz muolaja bo\'lib, apparat kosmetologiyasidagi muhim tayyorlovchi bosqich hisoblanadi.',
+        'Professional ultratovush yuz tozalash — yuz terisini chuqur, lekin ehtiyotkorlik bilan tozalash usuli. Ultratovush to\'lqinlari yog\' va mayda kir qoldiqlarini yumshatadi, poralarni ochadi va keyingi parvarish uchun terini tayyorlaydi. Jarrohliksiz, og\'riqsiz muolaja bo\'lib, apparatli kosmetologiyadagi muhim tayyorlovchi bosqich hisoblanadi.',
       indications: [
         'Kengaytirilgan toshma teshiklari va qora nuqtalar',
         'Yog\'li teri, komedonlar va matlik',
@@ -1023,29 +1253,6 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       process: ['Trichologist consultation', 'Scalp preparation', 'Trichoscopy scan', 'Results explanation', 'Treatment planning'],
     },
   },
-  'photofinder-scan': {
-    uz: {
-      overview: 'PhotoFinder dermatologik skanerlash — butun tana terisidagi xollarni sun\'iy intellekt yordamida raqamli xaritalash va melanoma xavfini baholash usuli. O\'zgarishlarni vaqtida aniqlash imkonini beradi.',
-      indications: ['Ko\'p sonli yoki yangi xollar', 'Xol o\'zgarishi shubhasi', 'Melanoma xavfi omillari', 'Muntazam skrining kerakligi', 'Oldingi xaritalash bilan solishtirish'],
-      solutions: ['PhotoFinder AI butun tana skaneri', 'Raqamli xaritalash va arxivlash', 'Xavfli xollarni belgilash', 'Dermatolog tahlili', 'Monitoring rejasi tuzish'],
-      benefits: ['Erta aniqlash', 'Yuqori aniqlik', 'Raqamli arxiv', 'Tez va qulay', 'Mutaxassis nazorati'],
-      process: ['Konsultatsiya va anamnez', 'Butun tana skanerlash', 'AI tahlil va dermatolog ko\'rigi', 'Xulosalar va tavsiyalar', 'Kerak bo\'lsa biopsiya yoki kuzatuv rejasi'],
-    },
-    ru: {
-      overview: 'Скрининг PhotoFinder — цифровое картирование родинок всего тела с ИИ для оценки риска меланомы.',
-      indications: ['Множественные родинки', 'Изменение родинки', 'Факторы риска меланомы', 'Регулярный скрининг', 'Сравнение с предыдущими снимками'],
-      solutions: ['Сканер PhotoFinder AI', 'Цифровое картирование', 'Выявление опасных образований', 'Анализ дерматолога', 'План наблюдения'],
-      benefits: ['Ранняя диагностика', 'Высокая точность', 'Цифровой архив', 'Быстро и комфортно', 'Контроль специалиста'],
-      process: ['Консультация', 'Сканирование тела', 'Анализ ИИ и осмотр', 'Заключение', 'Биопсия или наблюдение'],
-    },
-    en: {
-      overview: 'PhotoFinder mole mapping uses AI to digitally map body moles and assess melanoma risk for early detection.',
-      indications: ['Multiple or new moles', 'Suspicious mole changes', 'Melanoma risk factors', 'Regular screening need', 'Comparison with prior maps'],
-      solutions: ['PhotoFinder AI full-body scan', 'Digital mapping and archiving', 'High-risk lesion flagging', 'Dermatologist review', 'Surveillance plan'],
-      benefits: ['Early detection', 'High accuracy', 'Digital archive', 'Fast and comfortable', 'Specialist oversight'],
-      process: ['Consultation and history', 'Full-body scanning', 'AI analysis and exam', 'Report and recommendations', 'Biopsy or follow-up plan'],
-    },
-  },
   biopsiya: {
     uz: {
       overview: 'Teri biopsiyasi — shubhali o\'smalardan kichik to\'qima namunasi olish va gistologik tahlil orqali aniq tashxis qo\'yish usuli. Dermatoonkologiya va dermatopatologiya hamkorligida amalga oshiriladi.',
@@ -1117,23 +1324,23 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
   },
   'dermatosc-lessons': {
     uz: {
-      overview: 'Praktik o\'quv darslari — dermatologlar uchun dermatoskopik diagnostika va PhotoFinder bilan ishlash bo\'yicha amaliy mashg\'ulotlar.',
+      overview: 'Praktik o\'quv darslari — dermatologlar uchun dermatoskopik diagnostika bo\'yicha amaliy mashg\'ulotlar.',
       indications: ['Dermatoskopiya ko\'nikmalarini oshirish', 'Xavfli xollarni farqlash', 'Raqamli diagnostika o\'rganish', 'Klinik holatlar tajribasi', 'Malaka oshirish'],
-      solutions: ['Amaliy seminarlar', 'PhotoFinder bilan ishlash', 'Klinik atlas tahlili', 'Ekspert bilan mashg\'ulot', 'Sertifikatlashtirish'],
+      solutions: ['Amaliy seminarlar', 'Dermatoskop bilan ishlash', 'Klinik atlas tahlili', 'Ekspert bilan mashg\'ulot', 'Sertifikatlashtirish'],
       benefits: ['Amaliy tajriba', 'Zamonaviy uskunalar', 'Ekspert yo\'riqnomasi', 'Klinik holatlar bazasi', 'Malaka sertifikati'],
       process: ['Dasturga yozilish', 'Nazariy qism', 'Amaliy mashg\'ulot', 'Holatlarni tahlil qilish', 'Sertifikat va tavsiyalar'],
     },
     ru: {
-      overview: 'Практические курсы — обучение дерматологов дерматоскопии и работе с PhotoFinder на реальных клинических случаях.',
+      overview: 'Практические курсы — обучение дерматологов дерматоскопии на реальных клинических случаях.',
       indications: ['Повышение навыков', 'Дифференциация родинок', 'Цифровая диагностика', 'Клинический опыт', 'Повышение квалификации'],
-      solutions: ['Практические семинары', 'Работа с PhotoFinder', 'Разбор атласов', 'Занятия с экспертом', 'Сертификация'],
+      solutions: ['Практические семинары', 'Работа с дерматоскопом', 'Разбор атласов', 'Занятия с экспертом', 'Сертификация'],
       benefits: ['Практический опыт', 'Современное оборудование', 'Руководство эксперта', 'База клинических случаев', 'Сертификат'],
       process: ['Запись на курс', 'Теория', 'Практика', 'Разбор случаев', 'Сертификат'],
     },
     en: {
-      overview: 'Practical training workshops teach dermatologists dermoscopy and PhotoFinder use through hands-on clinical case analysis.',
+      overview: 'Practical training workshops teach dermatologists dermoscopy through hands-on clinical case analysis.',
       indications: ['Skill improvement', 'Risky mole differentiation', 'Digital diagnostics training', 'Clinical case experience', 'Professional development'],
-      solutions: ['Practical seminars', 'PhotoFinder training', 'Clinical atlas review', 'Expert-led practice', 'Certification'],
+      solutions: ['Practical seminars', 'Dermatoscope training', 'Clinical atlas review', 'Expert-led practice', 'Certification'],
       benefits: ['Hands-on experience', 'Modern equipment', 'Expert guidance', 'Clinical case library', 'Certificate'],
       process: ['Course enrollment', 'Theory session', 'Practical workshop', 'Case analysis', 'Certificate and recommendations'],
     },
@@ -1212,8 +1419,9 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
 const KEYWORD_RULES: { key: string; patterns: string[] }[] = [
   { key: 'ultratovush-yuz', patterns: ['ultratovush', 'ultrazvuk', 'ultrasonic', 'ультразвуков', 'ultrasound facial', 'ultrasound cleansing'] },
   { key: 'fy-protocols', patterns: ['fy-protocol', 'forever young ipl', 'gen-revo'] },
+  { key: 'ipl-inmode', patterns: ['ipl inmode', 'inmode ipl', 'ipl foto', 'фотоомоложение ipl', 'ipl photo', 'bbl'] },
+  { key: 'hollywood-spectra', patterns: ['hollywood spectra', 'hollywood', 'холливуд', 'gold toning', 'karbon piling'] },
   { key: 'gene-photo-rejuvenation', patterns: ['gen darajasida', 'innovatsion foto', 'forever young', 'генном уровне', 'gene-level'] },
-  { key: 'bbl-foto', patterns: ['IPL foto', 'bbl-foto', 'bbl ', 'IPL '] },
   { key: 'lazer-biorev', patterns: ['lazer biorevital', 'lazer biorev', 'лазерная биоревит', 'laser biorev'] },
   { key: 'mikrotoki', patterns: ['mikrotok', 'микроток', 'microcurrent'] },
   { key: 'det-derm', patterns: ['bolalar dermat', 'детская дермат', 'pediatric dermat'] },
@@ -1224,7 +1432,6 @@ const KEYWORD_RULES: { key: string; patterns: string[] }[] = [
   { key: 'biorev', patterns: ['biorevital', 'биоревит'] },
   { key: 'alex-lazer', patterns: ['aleksandrit', 'александрит', 'alexandrite'] },
   { key: 'trixoskop', patterns: ['trixoskop', 'трихоскоп', 'trichoscop'] },
-  { key: 'photofinder-scan', patterns: ['photofinder', 'photo finder'] },
   { key: 'biopsiya', patterns: ['biopsi', 'биопси', 'skin biopsy', 'биопсия кожи'] },
   { key: 'gistolog', patterns: ['gistolog', 'гистолог', 'histopath', 'gistologik'] },
   { key: 'moh-surgery', patterns: ['mohs', 'moh ', 'моха', 'микрограф'] },

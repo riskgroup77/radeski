@@ -1,5 +1,5 @@
-import { CheckCircle2, HeartPulse, ListOrdered, Sparkles, Stethoscope, Target } from 'lucide-react';
-import type { Locale, ServiceCategory, ServiceDetail, ServiceConditionTopic } from '../types';
+import { CheckCircle2, ListOrdered, Sparkles, Stethoscope, Target } from 'lucide-react';
+import type { Locale, PriceItem, ServiceCategory, ServiceDetail } from '../types';
 import {
   getServiceSectionLabels,
   resolveCategoryRichContent,
@@ -9,6 +9,8 @@ import { getServiceLucideIcon, resolveCategoryIcon, resolveSubServiceIcon } from
 import { getLocalizedImage } from '../utils/localizedImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import MediaImage from './MediaImage';
+import ClinicEquipmentSection from './ClinicEquipmentSection';
+import ServiceConditionsSection from './ServiceConditionsSection';
 
 interface ServiceDetailContentProps {
   locale: Locale;
@@ -16,40 +18,7 @@ interface ServiceDetailContentProps {
   sub?: ServiceDetail;
   dictionary?: Record<string, string>;
   compact?: boolean;
-}
-
-function ConditionsSection({
-  title,
-  items,
-}: {
-  title: string;
-  items: ServiceConditionTopic[];
-}) {
-  if (items.length === 0) return null;
-
-  return (
-    <section className="mt-6">
-      <h4 className="flex items-center gap-2 text-sm font-bold text-brand-text-primary mb-3">
-        <HeartPulse className="w-4 h-4 text-brand-gold shrink-0" />
-        {title}
-      </h4>
-      <div className="space-y-4">
-        {items.map((item, index) => (
-          <article
-            key={`${item.title}-${index}`}
-            className="bg-brand-offwhite/70 border border-brand-sectiongray rounded-xl p-4 sm:p-5"
-          >
-            <h5 className="text-sm sm:text-base font-bold text-brand-text-primary leading-snug mb-2">
-              {item.title}
-            </h5>
-            <p className="text-sm text-brand-text-secondary font-light leading-relaxed">
-              {item.description}
-            </p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
+  prices?: PriceItem[];
 }
 
 function BulletSection({
@@ -98,6 +67,7 @@ export default function ServiceDetailContent({
   sub,
   dictionary,
   compact = false,
+  prices,
 }: ServiceDetailContentProps) {
   const labels = getServiceSectionLabels(locale);
   const d = dictionary;
@@ -139,12 +109,40 @@ export default function ServiceDetailContent({
           <Stethoscope className="w-4 h-4 text-brand-gold" />
           {labels.about}
         </h4>
-        <p className="text-sm sm:text-base text-brand-text-secondary font-light leading-relaxed bg-brand-gold-light/5 border-l-4 border-brand-gold rounded-r-xl p-4 sm:p-5">
-          {rich.overview}
-        </p>
+        <div className="bg-brand-gold-light/5 border-l-4 border-brand-gold rounded-r-xl p-4 sm:p-5 space-y-4">
+          {rich.aboutTitle && (
+            <h5 className="text-base sm:text-lg font-extrabold text-brand-text-primary leading-snug">
+              {rich.aboutTitle}
+            </h5>
+          )}
+          <p className="text-sm sm:text-base text-brand-text-secondary font-light leading-relaxed">
+            {rich.overview}
+          </p>
+          {rich.aboutSections?.map((section, index) => (
+            <div key={`${section.title}-${index}`}>
+              <h6 className="text-sm font-bold text-brand-text-primary mb-1.5">{section.title}</h6>
+              <p className="text-sm text-brand-text-secondary font-light leading-relaxed">{section.description}</p>
+            </div>
+          ))}
+          {rich.aboutFooter && (
+            <p className="text-sm sm:text-base text-brand-text-secondary font-light leading-relaxed pt-1 border-t border-brand-gold/15">
+              {rich.aboutFooter}
+            </p>
+          )}
+        </div>
       </section>
 
-      <ConditionsSection title={labels.conditions} items={rich.conditions} />
+      {!sub && category.id === 'apparatnaya-kosmetologiya' && (
+        <ClinicEquipmentSection locale={locale} category={category} prices={prices} />
+      )}
+
+      <ServiceConditionsSection
+        locale={locale}
+        category={category}
+        sub={sub}
+        items={rich.conditions}
+        title={labels.conditions}
+      />
       <BulletSection title={labels.indications} icon={Target} items={rich.indications} />
       <BulletSection title={labels.solutions} icon={Sparkles} items={rich.solutions} />
       <BulletSection title={labels.benefits} icon={CheckCircle2} items={rich.benefits} />

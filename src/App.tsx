@@ -26,6 +26,7 @@ import {
   getDoctorIdFromPathname,
   getServiceCategoryIdFromPathname,
   getServiceSubIdFromPathname,
+  getPromoSlugFromPathname,
   pagePath,
   absoluteUrl,
   switchLocaleInPath,
@@ -40,6 +41,8 @@ import { DICTIONARY, GALLERY_IMAGS, getClinicRatingSummary } from './data';
 import { clearAllLocalMedia } from './utils/localMediaStorage';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import PromoServicePage from './components/PromoServicePage';
+import { findPromoSlideBySlug } from './data/homePromoCarousel';
 import About from './components/About';
 import Services from './components/Services';
 import ServiceCategoryPage from './components/ServiceCategoryPage';
@@ -48,6 +51,9 @@ import Doctors from './components/Doctors';
 import DoctorPage from './components/DoctorPage';
 import VideosPage from './components/VideosPage';
 import BranchesPage from './components/BranchesPage';
+import TechnologiesPage from './components/TechnologiesPage';
+import ClinicEquipmentParkPage from './components/ClinicEquipmentParkPage';
+import ClinicAdvantagesCards from './components/ClinicAdvantagesCards';
 import ResultsPage from './components/ResultsPage';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
@@ -57,7 +63,7 @@ import AdminPanel from './components/AdminPanel';
 import LegalPage from './components/LegalPage';
 import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, MapPin, Clock, ArrowRight, Star, HeartHandshake, CheckCircle2, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
+import { Phone, MapPin, Clock, ArrowRight, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
 import { useCmsData } from './hooks/useCmsData';
 import { createAppointment, createReview } from './api/publicApi';
@@ -107,6 +113,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const doctorId = getDoctorIdFromPathname(location.pathname);
   const serviceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
   const serviceSubId = getServiceSubIdFromPathname(location.pathname);
+  const promoSlug = getPromoSlugFromPathname(location.pathname);
+  const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
   const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
 
@@ -278,8 +286,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       uz: {
         home: {
           title: "Radeski Skin & Aesthetic Clinic",
-          desc: "Radeski dermatologiya va estetika klinikasi Farg'onada PhotoFinder, IPL va Mohs mikrografik jarrohligi kabi zamonaviy usullar va malakali tibbiyot xodimlari bilan xizmat ko'rsatadi.",
-          keywords: "Radeski, dermatologiya, kosmetologiya Farg'ona, PhotoFinder, botoks, BroadBand Light, IPL, lazer epilyatsiyasi, Mohs operatsiyasi, psoriaz, o'sma"
+          desc: "Radeski dermatologiya va estetika klinikasi Farg'onada IPL, dermatoskopiya va Mohs mikrografik jarrohligi kabi zamonaviy usullar va malakali tibbiyot xodimlari bilan xizmat ko'rsatadi.",
+          keywords: "Radeski, dermatologiya, kosmetologiya Farg'ona, dermatoskopiya, botoks, IPL, lazer epilyatsiyasi, Mohs operatsiyasi, psoriaz, o'sma"
         },
         about: {
           title: "Muntazam Litsenziyalangan Shifokorlar & Akkreditatsiya | Radeski Clinic",
@@ -289,7 +297,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         services: {
           title: "12 ta Tibbiy Xizmatlar & Dermato-Onkologiya | Radeski Clinic",
           desc: "Klinikamizda 12 ta ixtisoslashgan dermatologiya, kosmetologiya, dermato-onkologiya, trixologiya va mikrografik jarrohlik yo'nalishlarida samarali xizmatlar taqdim etiladi.",
-          keywords: "Dermatologiya xizmatlari, kosmetologik muolajalar, botoks inyeksiyalari, plazmoterapiya, akne davolash, PhotoFinder xaritasi"
+          keywords: "Dermatologiya xizmatlari, kosmetologik muolajalar, botoks inyeksiyalari, plazmoterapiya, akne davolash, dermatoskopiya"
         },
         doctors: {
           title: "Malakali Mutaxassislar & Shifokorlar Reestri | Radeski Clinic",
@@ -313,8 +321,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         },
         videos: {
           title: "Klinika Videolari & Tibbiy Xizmatlar | Radeski Clinic",
-          desc: "Radeski klinikasidagi PhotoFinder, IPL terapiya va zamonaviy dermatologiya xizmatlari haqida video materiallar.",
-          keywords: "Radeski video, dermatologiya videosi, IPL terapiya, PhotoFinder, klinika tanishuv"
+          desc: "Radeski klinikasidagi IPL terapiya va zamonaviy dermatologiya xizmatlari haqida video materiallar.",
+          keywords: "Radeski video, dermatologiya videosi, IPL terapiya, dermatoskopiya, klinika tanishuv"
         },
         branches: {
           title: "Filiallar | Radeski Clinic",
@@ -325,6 +333,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Davolash Natijalari — Oldin va Keyin | Radeski Clinic",
           desc: "Akne, pigmentatsiya, kuperoz va trixologiya bo'yicha Radeski klinikasi davolash natijalari galereyasi.",
           keywords: "davolash natijalari, oldin keyin, akne natija, IPL natija, teri davolash"
+        },
+        technologies: {
+          title: "Zamonaviy Texnologiyalar — Sciton IPL, Mohs, Excimer | Radeski",
+          desc: "Radeski klinikasidagi Sciton IPL Forever Young, Mohs jarrohligi, Excimer va UVB fototerapiya haqida batafsil.",
+          keywords: "Sciton IPL, Mohs, Excimer, UVB fototerapiya, zamonaviy dermatologiya Farg'ona"
+        },
+        'clinic-equipment': {
+          title: "Klinika Apparatlari — Daavlin, InMode, Lutronic | Radeski",
+          desc: "Radeski klinikasi apparatlari: plazmoforez, Daavlin NeoLux, M series, Aquex, IPL InMode, Derma V va Hollywood Spectra.",
+          keywords: "klinika apparatlari, Daavlin NeoLux, IPL InMode, Derma V, Hollywood Spectra, plazmoforez, fototerapiya Farg'ona"
         },
         terms: {
           title: "Foydalanish shartlari | Radeski Skin & Aesthetic Clinic",
@@ -340,8 +358,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       ru: {
         home: {
           title: "Главная - Ключ к здоровой и красивой коже | Radeski Skin & Aesthetic Clinic",
-          desc: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное немецкое оборудование PhotoFinder, IPL системы и Mohs хирургию.",
-          keywords: "Радески, дерматолог Фергана, косметология, лазерная эпиляция, ботокс Фергана, PhotoFinder диагностика, витилиго, операции Моса"
+          desc: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное оборудование IPL, дерматоскопию и хирургию Mohs.",
+          keywords: "Радески, дерматолог Фергана, косметология, лазерная эпиляция, ботокс Фергана, дерматоскопия, витилиго, операции Моса"
         },
         about: {
           title: "О клинике, Аккредитация & Лицензии Врачей | Radeski Clinic",
@@ -375,8 +393,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         },
         videos: {
           title: "Видео о клинике и процедурах | Radeski Clinic",
-          desc: "Видеоматериалы о PhotoFinder, IPL-терапии и современных дерматологических услугах клиники Radeski.",
-          keywords: "видео Radeski, дерматология видео, IPL терапия, PhotoFinder, о клинике"
+          desc: "Видеоматериалы об IPL-терапии и современных дерматологических услугах клиники Radeski.",
+          keywords: "видео Radeski, дерматология видео, IPL терапия, дерматоскопия, о клинике"
         },
         branches: {
           title: "Филиал | Radeski Clinic",
@@ -387,6 +405,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Результаты лечения — до и после | Radeski Clinic",
           desc: "Галерея результатов лечения акне, пигментации, купероза и трихологии в клинике Radeski.",
           keywords: "результаты лечения, до и после, акне результат, IPL результат"
+        },
+        technologies: {
+          title: "Современные технологии — Sciton IPL, Mohs, Excimer | Radeski",
+          desc: "Sciton IPL Forever Young, хирургия Mohs, эксимерный лазер и UVB-фототерапия в клинике Radeski.",
+          keywords: "Sciton IPL, Mohs, эксимер, UVB фототерапия, современная дерматология Фергана"
+        },
+        'clinic-equipment': {
+          title: "Аппараты клиники — Daavlin, InMode, Lutronic | Radeski",
+          desc: "Аппараты клиники Radeski: плазмофорез, Daavlin NeoLux, M series, Aquex, IPL InMode, Derma V и Hollywood Spectra.",
+          keywords: "аппараты клиники, Daavlin NeoLux, IPL InMode, Derma V, Hollywood Spectra, плазмофорез, фототерапия Фергана"
         },
         terms: {
           title: "Пользовательское соглашение | Radeski Skin & Aesthetic Clinic",
@@ -402,7 +430,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       en: {
         home: {
           title: "Home - The Key to Healthy and Beautiful Skin | Radeski Skin & Aesthetic Clinic",
-          desc: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic IPL and German PhotoFinder mole mapping.",
+          desc: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic IPL and clinical dermatoscopy.",
           keywords: "Radeski clinic, dermatologist Fergana, aesthetic skincare, laser hair removal, Botox, Sciton IPL, Mohs surgery, mole check"
         },
         about: {
@@ -437,8 +465,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         },
         videos: {
           title: "Clinic Videos & Procedures | Radeski Clinic",
-          desc: "Video tours of PhotoFinder, IPL therapy, and modern dermatology services at Radeski Clinic.",
-          keywords: "Radeski videos, dermatology video, IPL therapy, PhotoFinder, clinic tour"
+          desc: "Video tours of IPL therapy and modern dermatology services at Radeski Clinic.",
+          keywords: "Radeski videos, dermatology video, IPL therapy, dermatoscopy, clinic tour"
         },
         branches: {
           title: "Branch | Radeski Clinic",
@@ -449,6 +477,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Treatment Results — Before & After | Radeski Clinic",
           desc: "Gallery of acne, pigmentation, rosacea, and trichology treatment outcomes at Radeski Clinic.",
           keywords: "treatment results, before after, acne results, IPL outcomes"
+        },
+        technologies: {
+          title: "Modern Technologies — Sciton IPL, Mohs, Excimer | Radeski",
+          desc: "Sciton IPL Forever Young, Mohs surgery, Excimer laser and UVB phototherapy at Radeski Clinic.",
+          keywords: "Sciton IPL, Mohs, Excimer, UVB phototherapy, modern dermatology Fergana"
+        },
+        'clinic-equipment': {
+          title: "Clinic Equipment — Daavlin, InMode, Lutronic | Radeski",
+          desc: "Radeski Clinic devices: plasmapheresis, Daavlin NeoLux, M series, Aquex, IPL InMode, Derma V and Hollywood Spectra.",
+          keywords: "clinic equipment, Daavlin NeoLux, IPL InMode, Derma V, Hollywood Spectra, plasmapheresis, phototherapy Fergana"
         },
         terms: {
           title: "Terms of Use | Radeski Skin & Aesthetic Clinic",
@@ -674,13 +712,32 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}`}
+          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
         >
-          {currentPage === 'home' && (
+          {promoSlug && activePromoSlide && (
+            <PromoServicePage
+              locale={locale}
+              slide={activePromoSlide}
+              appointmentLabel={d.appointmentBtn}
+            />
+          )}
+
+          {promoSlug && !activePromoSlide && (
+            <section className="py-20 text-center min-h-[50vh]">
+              <p className="text-brand-text-muted">
+                {locale === 'uz' ? 'Sahifa topilmadi' : locale === 'ru' ? 'Страница не найдена' : 'Page not found'}
+              </p>
+              <button type="button" onClick={() => goToPage('home')} className="mt-4 text-brand-gold font-semibold cursor-pointer">
+                {locale === 'uz' ? 'Bosh sahifa' : locale === 'ru' ? 'Главная' : 'Home'}
+              </button>
+            </section>
+          )}
+
+          {!promoSlug && currentPage === 'home' && (
             <div id="home-dashboard">
               {/* Hero Slider banner */}
               <Hero
@@ -688,40 +745,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                 onOpenAppointment={() => handleOpenAppointmentWithService()}
                 onNavigate={goToPage}
                 clientCount={cmsClientCount}
+                doctorsCount={dynamicDoctors.length || 18}
               />
 
               {/* Bento Grid Features / Advantages */}
               <section id="advantages-section" className="py-16 bg-brand-white border-b border-brand-offwhite">
-                <div className="site-container grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 w-full items-stretch">
-                  <div className="flex gap-4 items-start p-6 lg:p-8 h-full w-full bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
-                    <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
-                      <Star className="w-5 h-5 fill-current" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-brand-text-primary text-sm sm:text-base">{d.features01}</h4>
-                      <p className="text-xs text-brand-text-muted mt-1 leading-normal font-light">{d.features01Desc}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 items-start p-6 lg:p-8 h-full w-full bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
-                    <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
-                      <HeartHandshake className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-brand-text-primary text-sm sm:text-base">{d.features02}</h4>
-                      <p className="text-xs text-brand-text-muted mt-1 leading-normal font-light">{d.features02Desc}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 items-start p-6 lg:p-8 h-full w-full bg-brand-offwhite rounded-2xl border border-brand-sectiongray shadow-xs">
-                    <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0">
-                      <CheckCircle2 className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-brand-text-primary text-sm sm:text-base">{d.features04}</h4>
-                      <p className="text-xs text-brand-text-muted mt-1 leading-normal font-light">{d.features04Desc}</p>
-                    </div>
-                  </div>
+                <div className="site-container">
+                  <ClinicAdvantagesCards locale={locale} dictionary={d} variant="compact" />
                 </div>
               </section>
 
@@ -1189,6 +1219,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               category={activeServiceCategory}
               sub={activeServiceSub}
               dictionary={d}
+              prices={dynamicPrices}
               onBackToCategory={() => goToServiceCategory(activeServiceCategory.id)}
               onBackToList={() => goToPage('services')}
             />
@@ -1199,6 +1230,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale}
               category={activeServiceCategory}
               dictionary={d}
+              prices={dynamicPrices}
               onOpenAppointment={handleOpenAppointmentWithService}
               onOpenSub={(subId) => goToServiceSub(activeServiceCategory.id, subId)}
               onBackToList={() => goToPage('services')}
@@ -1342,6 +1374,18 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               dictionary={d}
               branches={cmsBranches}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
+            />
+          )}
+
+          {currentPage === 'technologies' && (
+            <TechnologiesPage locale={locale} />
+          )}
+
+          {currentPage === 'clinic-equipment' && (
+            <ClinicEquipmentParkPage
+              locale={locale}
+              prices={dynamicPrices}
+              serviceCategories={dynamicServiceCategories}
             />
           )}
 

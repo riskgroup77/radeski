@@ -104,21 +104,113 @@ export function isExcludedDermatoOncologySubService(
   return fields.some((field) => matchesMoleRemovalTopic(field));
 }
 
-export function filterExcludedSubServices(category: ServiceCategory): ServiceCategory {
-  if (!DERMATO_ONCOLOGY_CATEGORY_IDS.has(category.id)) return category;
+/** Butunlay yashiriladigan xizmat kategoriyalari */
+export const EXCLUDED_CATEGORY_IDS = new Set(['gen-revo']);
 
-  return {
-    ...category,
-    subServices: category.subServices.filter(
-      (sub) => !isExcludedDermatoOncologySubService(sub, category.id),
-    ),
-  };
+/** Xizmatlar ro'yxatidan yashiriladigan sub-xizmatlar (mavjud emas) */
+export const EXCLUDED_SUB_SERVICE_IDS = new Set([
+  'photofinder-scan',
+  'gene-photo-rejuvenation',
+  'mikrotoki',
+  'fy-protocols',
+]);
+
+const APPARATUS_IPL_SUB_SERVICE: ServiceDetail = {
+  id: 'ipl-inmode',
+  name: {
+    uz: 'IPL foto-yangilash (InMode)',
+    ru: 'Фотоомоложение IPL (InMode)',
+    en: 'IPL photo-rejuvenation (InMode)',
+  },
+  description: {
+    uz: 'InMode IPL — pigmentatsiya, qon tomirlari va teri tonini jarrohliksiz yaxshilash.',
+    ru: 'InMode IPL — безоперационное улучшение пигментации, сосудов и тона кожи.',
+    en: 'InMode IPL — non-surgical improvement of pigmentation, vessels and skin tone.',
+  },
+};
+
+function isExcludedCategory(category: ServiceCategory): boolean {
+  if (EXCLUDED_CATEGORY_IDS.has(category.id)) return true;
+  const fields = [category.title.uz, category.title.ru, category.title.en, category.description.uz, category.description.ru, category.description.en];
+  const haystack = normalizeText(fields.join(' '));
+  return (
+    haystack.includes('gen darajasida') ||
+    haystack.includes('генном уровне') ||
+    haystack.includes('gene-level photo') ||
+    haystack.includes('forever young ipl')
+  );
+}
+
+function isRemovedApparatusSubService(sub: ServiceDetail): boolean {
+  if (EXCLUDED_SUB_SERVICE_IDS.has(sub.id)) return true;
+  const fields = [
+    sub.name.uz,
+    sub.name.ru,
+    sub.name.en,
+    sub.description.uz,
+    sub.description.ru,
+    sub.description.en,
+  ];
+  const haystack = normalizeText(fields.join(' '));
+  return (
+    haystack.includes('mikrotok') ||
+    haystack.includes('микроток') ||
+    haystack.includes('microcurrent') ||
+    haystack.includes('gen darajasida') ||
+    haystack.includes('генном уровне') ||
+    haystack.includes('gene-level') ||
+    haystack.includes('forever young') ||
+    haystack.includes('innovatsion foto') ||
+    haystack.includes('инновационное фотоомоложение')
+  );
+}
+
+function isBblSubService(sub: ServiceDetail): boolean {
+  if (sub.id === 'bbl-foto' || sub.id === 'bbl') return true;
+  const fields = [sub.name.uz, sub.name.ru, sub.name.en];
+  return fields.some((field) => /\bbbl\b/i.test(field));
+}
+
+function normalizeApparatusSubServices(category: ServiceCategory): ServiceCategory {
+  const normalized: ServiceDetail[] = [];
+  let hasIplInmode = false;
+
+  for (const sub of category.subServices) {
+    if (isExcludedDermatoOncologySubService(sub, category.id)) continue;
+    if (category.id === 'apparatnaya-kosmetologiya' && isRemovedApparatusSubService(sub)) continue;
+    if (category.id !== 'apparatnaya-kosmetologiya' && EXCLUDED_SUB_SERVICE_IDS.has(sub.id)) continue;
+
+    if (category.id === 'apparatnaya-kosmetologiya' && isBblSubService(sub)) {
+      if (!hasIplInmode) {
+        normalized.push(APPARATUS_IPL_SUB_SERVICE);
+        hasIplInmode = true;
+      }
+      continue;
+    }
+
+    if (sub.id === 'ipl-inmode') {
+      if (hasIplInmode) continue;
+      hasIplInmode = true;
+    }
+
+    normalized.push(sub);
+  }
+
+  if (category.id === 'apparatnaya-kosmetologiya' && !hasIplInmode) {
+    normalized.unshift(APPARATUS_IPL_SUB_SERVICE);
+  }
+
+  return { ...category, subServices: normalized };
+}
+
+export function filterExcludedSubServices(category: ServiceCategory): ServiceCategory {
+  return normalizeApparatusSubServices(category);
 }
 
 export function filterExcludedServiceCategories(
   categories: ServiceCategory[],
 ): ServiceCategory[] {
-  return categories.map(filterExcludedSubServices);
+  return categories.filter((category) => !isExcludedCategory(category)).map(filterExcludedSubServices);
 }
 
 export function isExcludedPriceCategory(categoryId: string): boolean {

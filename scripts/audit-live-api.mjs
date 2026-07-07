@@ -1,4 +1,4 @@
-const BASE = 'https://radeski.arxivfjsti.uz';
+const BASE = 'https://radeskiapi.arxivfjsti.uz';
 
 async function fetchJson(path, options = {}) {
   const res = await fetch(`${BASE}${path}`, options);

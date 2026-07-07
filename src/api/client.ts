@@ -1,4 +1,7 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL =
+  (import.meta.env && import.meta.env.VITE_API_URL) ||
+  (typeof process !== 'undefined' ? process.env.VITE_API_URL : undefined) ||
+  'https://radeskiapi.arxivfjsti.uz';
 
 export class ApiError extends Error {
   status: number;
@@ -124,6 +127,13 @@ export function getApiUrl(): string {
 /** Relative upload paths from API → full URL for <img src> */
 export function resolveMediaUrl(url: string | null | undefined): string | null {
   if (!url) return null;
+
+  const uploadsPath = url.match(/\/uploads\/[^\s?#]+/)?.[0];
+  if (uploadsPath) {
+    const base = API_URL.replace(/\/$/, '');
+    return `${base}${uploadsPath}`;
+  }
+
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
   const base = API_URL.replace(/\/$/, '');
   if (url.startsWith('/')) return `${base}${url}`;

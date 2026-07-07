@@ -11,6 +11,7 @@ function mimeFromUrl(url: string): string {
 }
 
 function needsBlobFix(src: string): boolean {
+  if (src.startsWith('http://') || src.startsWith('https://')) return false;
   return src.includes('/uploads/');
 }
 
