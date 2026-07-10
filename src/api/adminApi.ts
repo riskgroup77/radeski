@@ -501,7 +501,7 @@ export async function deleteClinicRating(ratingId: string, token?: string | null
 
 // --- CMS: Site texts ---
 export async function getAdminSiteTexts(token?: string | null) {
-  return apiRequest<ApiSiteTextOut[]>('/api/admin/site-texts', {}, withToken(token));
+  return apiRequest<ApiSiteTextOut[]>('/api/site-texts', {}, withToken(token));
 }
 
 export async function updateSiteText(

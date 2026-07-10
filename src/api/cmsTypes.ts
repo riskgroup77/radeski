@@ -129,6 +129,8 @@ export interface TreatmentResultCreatePayload {
   sessions?: string | null;
   sort_order?: number;
   published?: boolean;
+  clear_before_image?: boolean;
+  clear_after_image?: boolean;
 }
 
 export interface ApiClinicVideoOut {

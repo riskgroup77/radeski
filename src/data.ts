@@ -1,6 +1,9 @@
 import { ServiceCategory, Doctor, Article } from './types';
 export { PRICES } from './data/prices.ts';
 
+/** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
+export const CLINIC_EXPERIENCE_YEARS = 2;
+
 export const DICTIONARY = {
   uz: {
     navHome: "Bosh sahifa",
@@ -9,7 +12,6 @@ export const DICTIONARY = {
     navDoctors: "Shifokorlar",
     navPrices: "Narxlar",
     navArticles: "Maqolalar",
-    navContacts: "Kontaktlar",
     navVideos: "Videolar",
     navBranches: "Filiallar",
     navResults: "Natijalar",
@@ -55,7 +57,7 @@ export const DICTIONARY = {
     videosTitle: "Klinika videolari",
     videosDesc: "Radeski klinikasidagi zamonaviy uskunalar, xizmatlar va bemor parvarishi haqida qisqa videolar",
     branchesTitle: "Bizning filiallar",
-    branchesDesc: "Radeski bosh klinikasi — Farg'ona shahridagi manzil, telefon va ish vaqti",
+    branchesDesc: "Radeski klinikasi filiallari — Farg'ona va Qo'qon shahlaridagi manzil, telefon va ish vaqti",
     resultsTitle: "Davolash natijalari",
     resultsDesc: "Bemorlarimizdagi real o'zgarishlar — oldin va keyin. Har bir holat individual yondashuv asosida",
     searchPlaceholder: "Xizmatlar yoki maqolalarni qidirish...",
@@ -97,7 +99,6 @@ export const DICTIONARY = {
     navDoctors: "Врачи",
     navPrices: "Цены",
     navArticles: "Статьи",
-    navContacts: "Контакты",
     navVideos: "Видео",
     navBranches: "Филиалы",
     navResults: "Результаты",
@@ -143,7 +144,7 @@ export const DICTIONARY = {
     videosTitle: "Видео о клинике",
     videosDesc: "Короткие ролики об оборудовании, услугах и заботе о пациентах в клинике Radeski",
     branchesTitle: "Наши филиалы",
-    branchesDesc: "Главная клиника Radeski в Фергане — адрес, телефон и график работы",
+    branchesDesc: 'Филиалы Radeski — адреса, телефон и график работы в Фергане и Коканде',
     resultsTitle: "Результаты лечения",
     resultsDesc: "Реальные изменения у наших пациентов — до и после. Каждый случай индивидуален",
     searchPlaceholder: "Поиск услуг или статей...",
@@ -185,7 +186,6 @@ export const DICTIONARY = {
     navDoctors: "Doctors",
     navPrices: "Prices",
     navArticles: "Articles",
-    navContacts: "Contacts",
     navVideos: "Videos",
     navBranches: "Branches",
     navResults: "Results",
@@ -231,7 +231,7 @@ export const DICTIONARY = {
     videosTitle: "Clinic videos",
     videosDesc: "Short videos about Radeski equipment, services, and patient care standards",
     branchesTitle: "Our branches",
-    branchesDesc: "Radeski main clinic in Fergana — address, phone, and opening hours",
+    branchesDesc: 'Radeski branches — address, phone, and hours in Fergana and Kokand',
     resultsTitle: "Treatment results",
     resultsDesc: "Real patient improvements — before and after. Every case follows an individual plan",
     searchPlaceholder: "Search services or articles...",
@@ -250,7 +250,7 @@ export const DICTIONARY = {
     seoText: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic and cosmetic facilities. We employ gold-standard technology in diagnosing and treating dermatological conditions, surgical procedures, and genetic-level skin rejuvenation. Advanced procedures like IPL, clinical dermatoscopy, and Mohs micrographic surgery form the core of our specialized solutions.",
     aboutHeader: "Your beauty and health is our professional dedication",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic provides premier medical services in clinical dermatology, aesthetic cosmetology, and dermato-oncology across regional Fergana.",
-    aboutParagraph2: "Our facility is equipped with state-of-the-art clinical devices from world leaders in Germany, Italy, and the USA. Led by Dr. Dilshod Davlatovich Ashurov, our specialized medical group regularly is trained in European and international institutes.",
+    aboutParagraph2: "Our facility is equipped with state-of-the-art clinical devices from world leaders in Germany, Italy, and the USA. Led by Dr. Dilshod Davlatovich Ashurov, our specialized medical team is regularly trained and certified at European and international institutes.",
     features01: "Professional Physicians",
     features01Desc: "International-class dermatologists and aesthetic cosmetologists.",
     features02: "Modern Technologies",
@@ -899,7 +899,12 @@ export const ARTICLES: Article[] = [
       en: "Dr. Dilshod Davlatovich Ashurov"
     },
     date: "2026-05-15",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600",
+    image: "/karusel/co2-lazer-osmalar.jpg",
+    images: {
+      uz: "/karusel/co2-lazer-osmalar.jpg",
+      ru: "/karusel/co2-lazer-osmalar.jpg",
+      en: "/karusel/co2-lazer-osmalar.jpg",
+    },
     views: 342
   },
   {
@@ -926,7 +931,12 @@ export const ARTICLES: Article[] = [
       en: "Dr. Farrukh Farhodjonovich Yoqubov"
     },
     date: "2026-05-28",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600",
+    image: "/karusel/ipl.webp",
+    images: {
+      uz: "/karusel/ipl.webp",
+      ru: "/karusel/ipl.webp",
+      en: "/karusel/ipl.webp",
+    },
     views: 290
   },
   {
@@ -953,7 +963,12 @@ export const ARTICLES: Article[] = [
       en: "Dr. Dilshod Davlatovich Ashurov"
     },
     date: "2026-06-02",
-    image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600",
+    image: "/karusel/fototerapiya.webp",
+    images: {
+      uz: "/karusel/fototerapiya.webp",
+      ru: "/karusel/fototerapiya.webp",
+      en: "/karusel/fototerapiya.webp",
+    },
     views: 412
   }
 ];

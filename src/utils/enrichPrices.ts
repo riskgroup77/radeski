@@ -1,5 +1,5 @@
 import type { PriceItem } from '../types';
-import { buildCatalogPriceItems, normalizeKey, priceMatchKey } from './priceCatalog';
+import { buildCatalogPriceItems, normalizeKey } from './priceCatalog';
 import { localizePriceName } from './localizePriceName';
 import { filterExcludedPrices } from './excludedServices';
 import { normalizePriceItems } from './priceDisplay';
@@ -79,27 +79,18 @@ function findCatalogMatch(apiItem: PriceItem, catalog: PriceItem[]): PriceItem |
 }
 
 function mergeApiOntoCatalog(catalogItem: PriceItem, apiItem: PriceItem): PriceItem {
-  const hasGoodRu = apiItem.name.ru && !apiItem.name.ru.includes('???');
-  const ruBase = hasGoodRu ? apiItem.name.ru : catalogItem.name.ru;
-
   const merged: PriceItem = {
     ...catalogItem,
     id: apiItem.id,
-    name: {
-      ru: ruBase,
-      uz: localizePriceName(ruBase, 'uz'),
-      en: localizePriceName(ruBase, 'en'),
-    },
+    name: catalogItem.name,
     price: apiItem.price || catalogItem.price,
     priceValue: apiItem.priceValue ?? catalogItem.priceValue,
     category: catalogItem.category,
-    sortOrder: apiItem.sortOrder ?? catalogItem.sortOrder,
+    sortOrder: catalogItem.sortOrder ?? apiItem.sortOrder,
   };
 
   return normalizePriceItems([merged])[0];
 }
-
-const API_PRICE_FULL_THRESHOLD = 100;
 
 function localizeApiPriceNames(apiPrices: PriceItem[]): PriceItem[] {
   return apiPrices.map((api) => {
@@ -120,19 +111,22 @@ function localizeApiPriceNames(apiPrices: PriceItem[]): PriceItem[] {
 }
 
 export function enrichPrices(apiPrices: PriceItem[]): PriceItem[] {
-  if (apiPrices.length >= API_PRICE_FULL_THRESHOLD) {
+  const catalog = buildCatalogPriceItems();
+  if (catalog.length === 0) {
     return filterExcludedPrices(normalizePriceItems(localizeApiPriceNames(apiPrices)));
   }
 
-  const catalog = buildCatalogPriceItems();
-  if (catalog.length === 0) return apiPrices;
-
   const usedApiIds = new Set<string>();
   const mergedCatalog = catalog.map((catalogItem) => {
+    const catalogNameKey = normalizeKey(catalogItem.name.ru);
+
     const apiMatch = apiPrices.find((api) => {
       if (usedApiIds.has(api.id)) return false;
-      const found = findCatalogMatch(api, [catalogItem]);
-      return Boolean(found);
+      const apiNameKey = normalizeKey(api.name.ru || api.name.uz || api.name.en);
+      const samePrice = Math.abs((api.priceValue ?? 0) - (catalogItem.priceValue ?? 0)) < 1;
+      if (!samePrice) return false;
+      if (apiNameKey === catalogNameKey) return true;
+      return Boolean(findCatalogMatch(api, [catalogItem]));
     });
 
     if (apiMatch) {

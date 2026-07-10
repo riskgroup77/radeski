@@ -6,6 +6,8 @@ import type {
   CustomerReview,
   TreatmentResult,
 } from '../data/sitePagesContent';
+import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl } from '../config/links';
+import { resolveMediaUrl } from './client';
 import type {
   ApiBranchOut,
   ApiClinicRatingOut,
@@ -46,7 +48,7 @@ export function mapPartnerFromApi(api: ApiPartnerOut): ClinicPartner {
   return {
     id: api.id,
     name: localized(api.name_uz, api.name_ru, api.name_en),
-    logo: api.logo_url || '',
+    logo: resolveMediaUrl(api.logo_url) || '',
     logoVariant: api.logo_variant === 'light' || api.logo_variant === 'dark' ? api.logo_variant : undefined,
     sortOrder: api.sort_order,
     isActive: api.is_active,
@@ -75,23 +77,30 @@ export function mapBranchFromApi(api: ApiBranchOut): ClinicBranch {
     phone: api.phone || '',
     hours: localized(api.hours_uz || '', api.hours_ru, api.hours_en),
     services: localized(api.services_uz || '', api.services_ru, api.services_en),
-    mapEmbed: api.map_embed || '',
+    mapEmbed: api.map_embed?.trim() && !api.map_embed.includes('0x38bb83461413146b')
+      ? api.map_embed
+      : CLINIC_MAP_EMBED_URL,
+    mapUrl: getClinicMapOpenUrl(),
     isMain: api.is_main,
-    image: api.image || '',
+    image: resolveMediaUrl(api.image) || api.image || '',
     sortOrder: api.sort_order,
     isActive: api.is_active,
   };
 }
 
 export function mapTreatmentResultFromApi(api: ApiTreatmentResultOut): TreatmentResult {
+  const beforeImage = resolveMediaUrl(api.before_image) || '';
+  const afterImage = resolveMediaUrl(api.after_image) || '';
   return {
     id: api.id,
     title: localized(api.title_uz, api.title_ru, api.title_en),
     description: localized(api.description_uz || '', api.description_ru, api.description_en),
     service: localized(api.service_uz || '', api.service_ru, api.service_en),
     sessions: localized(api.sessions || '', api.sessions, api.sessions),
-    beforeImage: api.before_image || '',
-    afterImage: api.after_image || '',
+    beforeImage,
+    afterImage,
+    comparisonImage:
+      beforeImage && afterImage && beforeImage === afterImage ? beforeImage : undefined,
     sortOrder: api.sort_order,
     published: api.published,
   };
@@ -102,8 +111,8 @@ export function mapClinicVideoFromApi(api: ApiClinicVideoOut): ClinicVideo {
     id: api.id,
     title: localized(api.title_uz, api.title_ru, api.title_en),
     description: localized(api.description_uz || '', api.description_ru, api.description_en),
-    src: api.src,
-    thumbnail: api.thumbnail || undefined,
+    src: resolveMediaUrl(api.src) || api.src,
+    thumbnail: resolveMediaUrl(api.thumbnail) || api.thumbnail || undefined,
     duration: api.duration || '',
     category: localized(api.category_uz || '', api.category_ru, api.category_en),
     sortOrder: api.sort_order,

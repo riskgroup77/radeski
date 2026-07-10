@@ -25,6 +25,7 @@ import {
 } from '../data/sitePagesContent';
 import { CLINIC_RATINGS, CLINIC_RATING_SUMMARIES } from '../data';
 import { getCachedClientCount, resolveClientCount, setCachedClientCount } from '../utils/clientCount';
+import { mapApiClinicVideos } from '../utils/clinicVideos';
 import { resolvePublicTreatmentResults } from '../utils/treatmentResults';
 
 function withFallback<T>(apiItems: T[], fallback: T[]): T[] {
@@ -95,12 +96,7 @@ export function useCmsData(): CmsDataState {
       setTreatmentResults(
         resolvePublicTreatmentResults(resultsRes.map(mapTreatmentResultFromApi)),
       );
-      setVideos(
-        videosRes
-          .map(mapClinicVideoFromApi)
-          .filter((video) => video.isActive !== false)
-          .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999)),
-      );
+      setVideos(mapApiClinicVideos(videosRes.map(mapClinicVideoFromApi)));
       setClinicRatings(
         ratingsRes.length > 0 ? ratingsRes.map(mapClinicRatingFromApi) : mapLegacyRatings(),
       );

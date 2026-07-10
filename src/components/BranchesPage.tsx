@@ -4,7 +4,18 @@ import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { ClinicBranch } from '../data/sitePagesContent';
 import { CLINIC_BRANCHES } from '../data/sitePagesContent';
+import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl } from '../config/links';
 import MediaImage from './MediaImage';
+
+function resolveBranchMapEmbed(branch: ClinicBranch): string {
+  const embed = branch.mapEmbed?.trim();
+  if (!embed || embed.includes('0x38bb83461413146b')) return CLINIC_MAP_EMBED_URL;
+  return embed;
+}
+
+function resolveBranchMapOpenUrl(branch: ClinicBranch): string {
+  return branch.mapUrl?.trim() || getClinicMapOpenUrl();
+}
 
 interface BranchesPageProps {
   locale: Locale;
@@ -22,117 +33,120 @@ export default function BranchesPage({
   const d = dictionary || DICTIONARY[locale];
 
   return (
-    <section id="branches-page" className="py-16 bg-brand-offwhite min-h-screen">
+    <section id="branches-page" className="py-12 bg-brand-offwhite">
       <div className="site-container">
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-8">
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
             {d.navBranches}
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary mt-3 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary mt-3 tracking-tight">
             {d.branchesTitle}
           </h1>
-          <p className="text-brand-text-muted mt-4 text-sm sm:text-base leading-relaxed">
+          <p className="text-brand-text-muted mt-3 text-sm leading-relaxed">
             {d.branchesDesc}
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
           {branches.map((branch, index) => (
             <motion.article
               key={branch.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08 }}
-              className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm"
+              transition={{ delay: index * 0.06 }}
+              className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-sm flex flex-col"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-[minmax(200px,240px)_minmax(0,1fr)_minmax(280px,360px)] lg:items-stretch">
-                <div className="relative h-44 sm:h-52 lg:h-auto lg:min-h-[300px] bg-brand-offwhite">
-                  <MediaImage
-                    src={branch.image}
-                    alt={branch.name[locale]}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 to-transparent pointer-events-none lg:bg-gradient-to-r" />
-                  {branch.isMain && (
-                    <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-gold text-white text-[9px] font-bold uppercase tracking-wide shadow-md">
-                      <Star className="w-3 h-3" fill="currentColor" />
-                      {locale === 'uz' ? 'Bosh filial' : locale === 'ru' ? 'Главный филиал' : 'Main branch'}
-                    </span>
-                  )}
+              <div className="relative aspect-[16/10] sm:aspect-[5/3] bg-brand-offwhite shrink-0 overflow-hidden">
+                <MediaImage
+                  src={branch.image}
+                  alt={branch.name[locale]}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  style={
+                    branch.id === 'fergana-main'
+                      ? { objectPosition: 'center 42%' }
+                      : { objectPosition: 'center center' }
+                  }
+                />
+                {branch.isMain && (
+                  <span className="absolute top-2.5 left-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-gold text-white text-[8px] font-bold uppercase tracking-wide shadow-md">
+                    <Star className="w-2.5 h-2.5" fill="currentColor" />
+                    {locale === 'uz' ? 'Bosh filial' : locale === 'ru' ? 'Главный филиал' : 'Main branch'}
+                  </span>
+                )}
+              </div>
+
+              <div className="p-4 flex flex-col flex-1">
+                <div className="flex items-start gap-2 mb-2.5">
+                  <Building2 className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
+                  <h2 className="text-base sm:text-lg font-extrabold text-brand-text-primary leading-tight">
+                    {branch.name[locale]}
+                  </h2>
                 </div>
 
-                <div className="p-5 sm:p-6 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-brand-sectiongray">
-                  <div>
-                    <div className="flex items-start gap-2 mb-3">
-                      <Building2 className="w-5 h-5 text-brand-gold shrink-0 mt-0.5" />
-                      <h2 className="text-lg sm:text-xl font-extrabold text-brand-text-primary leading-tight">
-                        {branch.name[locale]}
-                      </h2>
-                    </div>
-
-                    <ul className="space-y-3 text-sm">
-                      <li className="flex gap-2.5">
-                        <MapPin className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-                        <span className="text-brand-text-secondary leading-relaxed">{branch.address[locale]}</span>
-                      </li>
-                      <li className="flex gap-2.5">
-                        <Phone className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-                        <a
-                          href="tel:+998732007373"
-                          className="text-brand-text-primary font-semibold font-mono hover:text-brand-gold transition-colors"
-                        >
-                          {branch.phone}
-                        </a>
-                      </li>
-                      <li className="flex gap-2.5">
-                        <Clock className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-                        <span className="text-brand-text-secondary">{branch.hours[locale]}</span>
-                      </li>
-                    </ul>
-
-                    <p className="mt-4 text-xs sm:text-sm text-brand-text-muted leading-relaxed border-t border-brand-sectiongray pt-3">
-                      <span className="font-bold text-brand-text-primary block mb-1">
-                        {locale === 'uz' ? 'Xizmatlar:' : locale === 'ru' ? 'Услуги:' : 'Services:'}
-                      </span>
-                      {branch.services[locale]}
-                    </p>
-                  </div>
-
-                  <div className="mt-5 flex flex-col sm:flex-row gap-2.5">
-                    {onOpenAppointment && (
-                      <button
-                        type="button"
-                        onClick={onOpenAppointment}
-                        className="flex-1 py-2.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl transition-colors cursor-pointer"
-                      >
-                        {d.appointmentBtn}
-                      </button>
-                    )}
+                <ul className="space-y-2 text-xs sm:text-sm">
+                  <li className="flex gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
+                    <span className="text-brand-text-secondary leading-relaxed">{branch.address[locale]}</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <Phone className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
                     <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.address[locale])}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 py-2.5 bg-brand-offwhite hover:bg-brand-sectiongray text-brand-text-secondary font-semibold text-xs rounded-xl transition-colors text-center inline-flex items-center justify-center gap-2"
+                      href="tel:+998732007373"
+                      className="text-brand-text-primary font-semibold font-mono hover:text-brand-gold transition-colors"
                     >
-                      <Navigation className="w-4 h-4" />
-                      {locale === 'uz' ? 'Xaritada ochish' : locale === 'ru' ? 'Открыть на карте' : 'Open in maps'}
+                      {branch.phone}
                     </a>
-                  </div>
-                </div>
+                  </li>
+                  <li className="flex gap-2">
+                    <Clock className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
+                    <span className="text-brand-text-secondary">{branch.hours[locale]}</span>
+                  </li>
+                </ul>
 
-                <div className="h-56 sm:h-64 lg:h-auto lg:min-h-[300px] border-t lg:border-t-0 lg:border-l border-brand-sectiongray bg-brand-sectiongray/30">
-                  <iframe
-                    src={branch.mapEmbed}
-                    width="100%"
-                    height="100%"
-                    className="block w-full h-full min-h-[220px] lg:min-h-[300px]"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title={branch.name[locale]}
-                  />
+                <p className="mt-3 text-[11px] sm:text-xs text-brand-text-muted leading-relaxed border-t border-brand-sectiongray pt-2.5 line-clamp-2">
+                  <span className="font-bold text-brand-text-primary">
+                    {locale === 'uz' ? 'Xizmatlar: ' : locale === 'ru' ? 'Услуги: ' : 'Services: '}
+                  </span>
+                  {branch.services[locale]}
+                </p>
+
+                <div className="mt-3 flex gap-2">
+                  {onOpenAppointment && (
+                    <button
+                      type="button"
+                      onClick={onOpenAppointment}
+                      className="flex-1 py-2 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-[11px] rounded-lg transition-colors cursor-pointer"
+                    >
+                      {d.appointmentBtn}
+                    </button>
+                  )}
+                  <a
+                    href={resolveBranchMapOpenUrl(branch)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 py-2 bg-brand-offwhite hover:bg-brand-sectiongray text-brand-text-secondary font-semibold text-[11px] rounded-lg transition-colors text-center inline-flex items-center justify-center gap-1.5"
+                  >
+                    <Navigation className="w-3.5 h-3.5" />
+                    {locale === 'uz' ? 'Xaritada ochish' : locale === 'ru' ? 'На карте' : 'Open map'}
+                  </a>
                 </div>
+              </div>
+
+              <div className="h-40 sm:h-44 border-t border-brand-sectiongray bg-brand-sectiongray/30 shrink-0">
+                <iframe
+                  src={resolveBranchMapEmbed(branch)}
+                  width="100%"
+                  height="100%"
+                  className="block w-full h-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={branch.name[locale]}
+                />
               </div>
             </motion.article>
           ))}

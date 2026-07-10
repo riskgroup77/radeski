@@ -1,4 +1,5 @@
 import type { Locale } from '../types';
+import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl, KOKAND_BRANCH_MAP_EMBED_URL, KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
 
 type LocalizedText = Record<Locale, string>;
 
@@ -22,6 +23,8 @@ export interface ClinicBranch {
   hours: LocalizedText;
   services: LocalizedText;
   mapEmbed: string;
+  /** Google Maps'da ochish uchun to'g'ri havola (ixtiyoriy) */
+  mapUrl?: string;
   isMain?: boolean;
   image: string;
   sortOrder?: number;
@@ -165,7 +168,8 @@ export const CLINIC_PARTNERS: ClinicPartner[] = [
 
 export const CLINIC_VIDEOS: ClinicVideo[] = [
   {
-    id: 'clinic-tour',
+    id: 'clinic-video-1',
+    sortOrder: 1,
     title: {
       uz: 'Radeski klinikasi — zamonaviy tibbiy markaz',
       ru: 'Клиника Radeski — современный медицинский центр',
@@ -176,57 +180,162 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
       ru: 'Познакомьтесь со стерильными кабинетами, дерматоскопией и аппаратной косметологией.',
       en: 'Tour sterile rooms, dermatoscopy, and hardware cosmetology departments.',
     },
-    src: '/video-namuna/1.mp4',
-    duration: '2:15',
-    category: { uz: 'Klinika haqida', ru: 'О клинике', en: 'About clinic' },
+    src: '/videos/1.mp4',
+    duration: '0:49',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
   },
   {
-    id: 'IPL-therapy',
+    id: 'clinic-video-2',
+    sortOrder: 2,
     title: {
-      uz: 'Vitiligo — teriga rang beruvchi melanotsit hujayralarining yo‘qolishi yoki faoliyatining buzilishi natijasida terida oq dog‘lar paydo bo‘ladigan kasallik.',
-      ru: 'Как работает терапия IPL Forever Young?',
-      en: 'How IPL Forever Young therapy works',
+      uz: 'Vitiligo va fototerapiya',
+      ru: 'Витилиго и фототерапия',
+      en: 'Vitiligo and phototherapy',
     },
     description: {
-      uz: 'Ko‘plab tadqiqotlarda NB-UVB fototerapiya vitiligo uchun eng samarali va xavfsiz usullardan biri deb hisoblanadi. Ayniqsa kasallik faol bo‘lmasa va davolash muntazam olib borilsa, yaxshi natijalar kuzatiladi.',
-      ru: 'Протокол обновления кожи на генном уровне и коррекции пигментации.',
-      en: 'Gen-level skin renewal and pigmentation correction protocol.',
+      uz: 'NB-UVB fototerapiya vitiligo uchun samarali va xavfsiz usul hisoblanadi.',
+      ru: 'Фототерапия NB-UVB — эффективный и безопасный метод лечения витилиго.',
+      en: 'NB-UVB phototherapy is an effective and safe vitiligo treatment.',
     },
-    src: '/video-namuna/2.mp4',
-    duration: '1:48',
-    category: { uz: 'Kosmetologiya', ru: 'Косметология', en: 'Cosmetology' },
+    src: '/videos/2.mp4',
+    duration: '0:52',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
   },
   {
-    id: 'psoriasis-care',
+    id: 'clinic-video-3',
+    sortOrder: 3,
     title: {
-      uz: 'Psoriaz — surunkali teri kasalligini kompleks davolash',
-      ru: 'Псориаз — комплексное лечение хронического заболевания кожи',
-      en: 'Psoriasis — comprehensive chronic skin care',
+      uz: 'Psoriaz — kompleks davolash',
+      ru: 'Псориаз — комплексное лечение',
+      en: 'Psoriasis — comprehensive treatment',
     },
     description: {
-      uz: 'Dermatoskopiya va apparatli texnologiyalar yordamida psoriazni nazorat qilish va davolash.',
+      uz: 'Dermatoskopiya va apparatli texnologiyalar yordamida psoriazni nazorat qilish.',
       ru: 'Контроль и лечение псориаза с помощью дерматоскопии и аппаратных технологий.',
-      en: 'Psoriasis monitoring and treatment with dermatoscopy and device-based therapies.',
+      en: 'Psoriasis monitoring and treatment with dermatoscopy and device therapies.',
     },
-    src: '/video-namuna/3.mp4',
-    duration: '2:40',
-    category: { uz: 'Diagnostika', ru: 'Диагностика', en: 'Diagnostics' },
+    src: '/videos/3.mp4',
+    duration: '1:02',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
   },
   {
-    id: 'patient-care',
+    id: 'clinic-video-4',
+    sortOrder: 4,
     title: {
-      uz: 'Bemorga shaxsiy yondashuv va parvarish',
-      ru: 'Индивидуальный подход и уход за пациентом',
-      en: 'Personalized patient care journey',
+      uz: 'Bemorga shaxsiy yondashuv',
+      ru: 'Индивидуальный подход к пациенту',
+      en: 'Personalized patient care',
     },
     description: {
       uz: 'Konsultatsiyadan davolashgacha — har bir bosqichda professional qo‘llab-quvvatlash.',
       ru: 'От консультации до лечения — профессиональное сопровождение на каждом этапе.',
       en: 'From consultation to treatment — professional support at every step.',
     },
-    src: '/video-namuna/1.mp4',
-    duration: '1:30',
-    category: { uz: 'Xizmatlar', ru: 'Услуги', en: 'Services' },
+    src: '/videos/4.mp4',
+    duration: '0:17',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
+  },
+  {
+    id: 'clinic-video-5',
+    sortOrder: 5,
+    title: {
+      uz: 'Apparatli kosmetologiya',
+      ru: 'Аппаратная косметология',
+      en: 'Hardware cosmetology',
+    },
+    description: {
+      uz: 'Zamonaviy apparatlar yordamida terini yangilash va muammolarni bartaraf etish.',
+      ru: 'Омоложение кожи и решение эстетических задач с помощью современного оборудования.',
+      en: 'Skin renewal and aesthetic care with modern clinical devices.',
+    },
+    src: '/videos/5.mp4',
+    duration: '1:01',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
+  },
+  {
+    id: 'clinic-video-6',
+    sortOrder: 6,
+    title: {
+      uz: 'Dermatoskopiya va diagnostika',
+      ru: 'Дерматоскопия и диагностика',
+      en: 'Dermatoscopy and diagnostics',
+    },
+    description: {
+      uz: 'Teridagi o‘zgarishlarni aniq aniqlash va to‘g‘ri davolash rejasini tuzish.',
+      ru: 'Точная диагностика изменений кожи и составление плана лечения.',
+      en: 'Accurate skin assessment and personalized treatment planning.',
+    },
+    src: '/videos/6.mp4',
+    duration: '1:15',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
+  },
+  {
+    id: 'clinic-video-7',
+    sortOrder: 7,
+    title: {
+      uz: 'IPL terapiya',
+      ru: 'IPL-терапия',
+      en: 'IPL therapy',
+    },
+    description: {
+      uz: 'Pigmentatsiya, qizarish va teri rangini tekislash uchun IPL protokollari.',
+      ru: 'IPL-протоколы для коррекции пигментации, покраснений и тона кожи.',
+      en: 'IPL protocols for pigmentation, redness and skin tone correction.',
+    },
+    src: '/videos/7.mp4',
+    duration: '1:02',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
+  },
+  {
+    id: 'clinic-video-8',
+    sortOrder: 8,
+    title: {
+      uz: 'Laser epilyatsiya',
+      ru: 'Лазерная эпиляция',
+      en: 'Laser hair removal',
+    },
+    description: {
+      uz: 'Laser texnologiyasi yordamida uzoq muddatli va xavfsiz tuklarni olib tashlash.',
+      ru: 'Долговременное и безопасное удаление волос лазерными технологиями.',
+      en: 'Long-lasting, safe hair removal with laser technology.',
+    },
+    src: '/videos/8.mp4',
+    duration: '1:14',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
+  },
+  {
+    id: 'clinic-video-9',
+    sortOrder: 9,
+    title: {
+      uz: 'Podologiya xizmatlari',
+      ru: 'Подологические услуги',
+      en: 'Podiatry services',
+    },
+    description: {
+      uz: 'Tirnoq va oyoq terisi muammolarini professional podologik yondashuv bilan davolash.',
+      ru: 'Лечение проблем ногтей и кожи стоп с профессиональным подологическим подходом.',
+      en: 'Professional podology care for nail and foot skin concerns.',
+    },
+    src: '/videos/9.mp4',
+    duration: '1:19',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
+  },
+  {
+    id: 'clinic-video-10',
+    sortOrder: 10,
+    title: {
+      uz: 'Klinika hayoti',
+      ru: 'Жизнь клиники',
+      en: 'Clinic life',
+    },
+    description: {
+      uz: 'Radeski jamoasi, bemorlar va kundalik klinika jarayonlari haqida qisqa lavha.',
+      ru: 'Короткий ролик о команде Radeski, пациентах и буднях клиники.',
+      en: 'A short look at the Radeski team, patients, and daily clinic workflow.',
+    },
+    src: '/videos/10.mp4',
+    duration: '0:39',
+    category: { uz: 'Instagram', ru: 'Instagram', en: 'Instagram' },
   },
 ];
 
@@ -254,10 +363,40 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
       ru: 'Полный спектр: дерматология, косметология, лазер, лаборатория, дерматоскопия',
       en: 'Full spectrum: dermatology, cosmetology, laser, lab, dermatoscopy',
     },
-    mapEmbed:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.0022026857106!2d71.7864115!3d40.3864115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb83461413146b%3A0xe5aef1cb446faab4!2zNSwgTyd6YmVraXN0b24gT3Zvemkga28nY2hhc2ksIEZhcmdvbmEsIE96YmVraXN0YW4!5e0!3m2!1sen!2s!4v1718300000000!5m2!1sen!2s',
+    mapEmbed: CLINIC_MAP_EMBED_URL,
+    mapUrl: getClinicMapOpenUrl(),
     isMain: true,
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800',
+    image: '/gallery/rasmfilial1.jpg',
+    sortOrder: 1,
+  },
+  {
+    id: 'kokand-branch',
+    name: {
+      uz: 'Radeski — Filial (Qo‘qon)',
+      ru: 'Radeski — Филиал (Коканд)',
+      en: 'Radeski — Branch (Kokand)',
+    },
+    address: {
+      uz: "Qo'qon sh., 47-MFI, Huqandiy mavzesi, 144A",
+      ru: 'г. Коканд, 47-МФЙ, массив Хукандий, 144А',
+      en: '144A Huqandiy Block, 47-MFI, Kokand City',
+    },
+    phone: '+998 (73) 200-73-73',
+    hours: {
+      uz: 'Dushanba – Shanba: 08:00 – 18:00',
+      ru: 'Понедельник – Суббота: 08:00 – 18:00',
+      en: 'Monday – Saturday: 08:00 – 18:00',
+    },
+    services: {
+      uz: 'To‘liq spektr: dermatologiya, kosmetologiya, lazer, laboratoriya, dermatoskopiya',
+      ru: 'Полный спектр: дерматология, косметология, лазер, лаборатория, дерматоскопия',
+      en: 'Full spectrum: dermatology, cosmetology, laser, lab, dermatoscopy',
+    },
+    mapEmbed: KOKAND_BRANCH_MAP_EMBED_URL,
+    mapUrl: KOKAND_BRANCH_MAP_OPEN_URL,
+    isMain: false,
+    image: '/gallery/rasmfilial2.jpg',
+    sortOrder: 2,
   },
 ];
 
@@ -276,9 +415,8 @@ export const TREATMENT_RESULTS: TreatmentResult[] = [
       en: 'Active acne, redness and inflammation on the cheek and jaw were cleared with combined device therapy. Skin texture smoothed and marks lightened.',
     },
     service: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
-    comparisonImage: '/promo/do1.jpg',
-    beforeImage: '/promo/do1.jpg',
-    afterImage: '/promo/do1.jpg',
+    beforeImage: '/promo/do1do.jpg',
+    afterImage: '/promo/do1posle.jpg',
     sessions: { uz: '6–8 seans', ru: '6–8 сеансов', en: '6–8 sessions' },
   },
   {
@@ -295,9 +433,8 @@ export const TREATMENT_RESULTS: TreatmentResult[] = [
       en: 'Thickened, yellowed and crumbling nails regained natural color and strength after clinical podology treatment.',
     },
     service: { uz: 'Podologiya', ru: 'Подология', en: 'Podiatry' },
-    comparisonImage: '/promo/do2.jpg',
-    beforeImage: '/promo/do2.jpg',
-    afterImage: '/promo/do2.jpg',
+    beforeImage: '/promo/do2do.jpg',
+    afterImage: '/promo/do2posle.jpg',
     sessions: { uz: '4–6 oy kurs', ru: '4–6 месяцев', en: '4–6 month course' },
   },
   {
@@ -314,9 +451,8 @@ export const TREATMENT_RESULTS: TreatmentResult[] = [
       en: 'Crown and vertex hair loss (androgenetic alopecia). FUE transplant restored dense, natural-looking hair coverage.',
     },
     service: { uz: 'Trixologiya', ru: 'Трихология', en: 'Trichology' },
-    comparisonImage: '/promo/do3.jpg',
-    beforeImage: '/promo/do3.jpg',
-    afterImage: '/promo/do3.jpg',
+    beforeImage: '/promo/do3do.jpg',
+    afterImage: '/promo/do3posle.jpg',
     sessions: { uz: '1 operatsiya + nazorat', ru: '1 операция + контроль', en: '1 procedure + follow-up' },
   },
 ];

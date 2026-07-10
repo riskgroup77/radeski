@@ -136,9 +136,16 @@ export function resolveMediaUrl(url: string | null | undefined): string | null {
 
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
   const base = API_URL.replace(/\/$/, '');
-  if (url.startsWith('/')) return `${base}${url}`;
+  if (url.startsWith('/uploads/')) return `${base}${url}`;
   if (url.startsWith('uploads/')) return `${base}/${url}`;
+  if (url.startsWith('/')) return url;
   return url;
+}
+
+/** API upload URL ekanligini tekshiradi (localhost yoki /uploads/) */
+export function isApiUploadMediaUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  return /\/uploads\//.test(url) || /localhost|127\.0\.0\.1/.test(url);
 }
 
 export const AUTH_TOKEN_KEY = 'admin_token';

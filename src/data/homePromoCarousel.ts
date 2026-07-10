@@ -123,7 +123,7 @@ export const HOME_PROMO_SLIDES: HomePromoSlide[] = [
       en: 'CO₂ laser removal of moles and lesions',
     },
     description: {
-      uz: 'DEKA SmartXide CO₂ lazer yordamida papilloma, hol va boshqa yaxshi xavfli o‘smalarni minimal travma bilan olib tashlash.',
+      uz: 'DEKA SmartXide CO₂ lazer yordamida papilloma, hol va boshqa xavfsiz o‘smalarni minimal travma bilan olib tashlash.',
       ru: 'Удаление папиллом, родинок и других доброкачественных образований лазером DEKA SmartXide с минимальной травмой.',
       en: 'DEKA SmartXide CO₂ laser removes papillomas, moles and other benign lesions with minimal trauma.',
     },

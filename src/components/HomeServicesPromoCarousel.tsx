@@ -17,6 +17,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import type { Locale } from '../types';
+import { CLINIC_EXPERIENCE_YEARS } from '../data';
 import { formatPriceValue } from '../api/mappers';
 import {
   buildHomePromoSlides,
@@ -321,7 +322,7 @@ export default function HomeServicesPromoCarousel({
   locale,
   appointmentLabel,
   clientCount = 12000,
-  doctorsCount = 18,
+  doctorsCount = 20,
   onNavigate,
 }: HomeServicesPromoCarouselProps) {
   const labels = useMemo(() => getPromoCarouselLabels(locale), [locale]);
@@ -407,7 +408,7 @@ export default function HomeServicesPromoCarousel({
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-extrabold text-brand-text-primary tabular-nums leading-none">
-                      {doctorsCount}
+                      {formatStatCount(doctorsCount)}
                     </p>
                     <p className="mt-1 text-xs sm:text-sm text-brand-text-muted font-medium">{copy.statDoctors}</p>
                   </div>
@@ -418,7 +419,7 @@ export default function HomeServicesPromoCarousel({
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-extrabold text-brand-text-primary tabular-nums leading-none">
-                      7+ {copy.yearsSuffix}
+                      {CLINIC_EXPERIENCE_YEARS}+ {copy.yearsSuffix}
                     </p>
                     <p className="mt-1 text-xs sm:text-sm text-brand-text-muted font-medium">{copy.statExperience}</p>
                   </div>

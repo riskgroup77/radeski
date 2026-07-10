@@ -4,6 +4,7 @@ import { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import SiteLogo from './SiteLogo';
 import { PageId, pagePath } from '../routing/paths';
+import { CLINIC_MAP_EMBED_URL } from '../config/links';
 
 interface FooterProps {
   locale: Locale;
@@ -117,16 +118,11 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
                   {d.navResults}
                 </Link>
               </li>
-              <li>
-                <Link to={pagePath(locale, 'contacts')} className="hover:text-brand-gold-light font-light transition-colors">
-                  {d.navContacts}
-                </Link>
-              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-bold text-sm tracking-wider uppercase mb-5">{d.navContacts}</h4>
+            <h4 className="text-white font-bold text-sm tracking-wider uppercase mb-5">{d.addressTitle}</h4>
             <ul className="space-y-4 text-xs sm:text-sm">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4.5 h-4.5 text-brand-gold shrink-0 mt-0.5" />
@@ -157,7 +153,7 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
             </h4>
             <div className="w-full h-36 bg-slate-800 rounded-xl overflow-hidden border border-slate-700">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.0022026857106!2d71.7864115!3d40.3864115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb83461413146b%3A0xe5aef1cb446faab4!2zNSwgTyd6YmVraXN0b24gT3Zvemkga28nY2hhc2ksIEZhcmdvbmEsIE96YmVraXN0YW4!5e0!3m2!1sen!2s!4v1718300000000!5m2!1sen!2s"
+                src={CLINIC_MAP_EMBED_URL}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

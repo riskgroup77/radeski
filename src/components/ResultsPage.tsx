@@ -32,22 +32,22 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
       : results.filter((item) => item.service[locale] === activeFilter);
 
   return (
-    <section id="results-page" className="py-16 bg-brand-white min-h-screen">
+    <section id="results-page" className="py-10 sm:py-12 bg-brand-white min-h-screen">
       <div className="site-container">
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
             {d.navResults}
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary mt-3 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-brand-text-primary mt-2.5 tracking-tight">
             {d.resultsTitle}
           </h1>
-          <p className="text-brand-text-muted mt-4 text-sm sm:text-base leading-relaxed">
+          <p className="text-brand-text-muted mt-3 text-sm leading-relaxed">
             {d.resultsDesc}
           </p>
         </div>
 
         {!loading && results.length > 0 && (
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8">
           {serviceFilters.map((filter) => (
             <button
               key={filter.id}
@@ -65,7 +65,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
         </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {loading ? (
             <div className="col-span-full py-16 text-center text-brand-text-muted text-sm">
               {locale === 'uz' ? 'Natijalar yuklanmoqda...' : locale === 'ru' ? 'Загрузка результатов...' : 'Loading results...'}
@@ -85,7 +85,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-md transition-all"
+              className="flex h-full flex-col bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-md transition-all"
             >
               <div className={result.comparisonImage ? '' : 'grid grid-cols-2 gap-0.5 bg-brand-sectiongray'}>
                 {result.comparisonImage ? (
@@ -93,53 +93,69 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                     <MediaImage
                       src={result.comparisonImage}
                       alt={`${result.title[locale]} — ${locale === 'uz' ? 'Oldin / Keyin' : locale === 'ru' ? 'До / После' : 'Before / After'}`}
-                      className="absolute inset-0 w-full h-full object-contain object-center"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
                     />
-                    <span className="absolute top-2 left-1/2 -translate-x-1/2 text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-black/55 text-white whitespace-nowrap">
+                    <span className="absolute top-1.5 left-1/2 -translate-x-1/2 text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-black/55 text-white whitespace-nowrap">
                       {locale === 'uz' ? 'Oldin · Keyin' : locale === 'ru' ? 'До · После' : 'Before · After'}
                     </span>
                   </div>
                 ) : (
                 <>
-                <div className="relative aspect-[4/5] bg-brand-offwhite">
-                  <MediaImage
-                    src={result.beforeImage}
-                    alt={`${result.title[locale]} — before`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <span className="absolute top-2 left-2 text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-black/55 text-white">
+                <div className="relative aspect-square bg-brand-offwhite">
+                  {result.beforeImage ? (
+                    <MediaImage
+                      src={result.beforeImage}
+                      alt={`${result.title[locale]} — before`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-[10px] text-brand-text-muted bg-brand-offwhite">
+                      {locale === 'uz' ? 'Oldin' : locale === 'ru' ? 'До' : 'Before'}
+                    </div>
+                  )}
+                  {result.beforeImage && (
+                  <span className="absolute top-1.5 left-1.5 text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-black/55 text-white">
                     {locale === 'uz' ? 'Oldin' : locale === 'ru' ? 'До' : 'Before'}
                   </span>
+                  )}
                 </div>
-                <div className="relative aspect-[4/5] bg-brand-offwhite">
-                  <MediaImage
-                    src={result.afterImage}
-                    alt={`${result.title[locale]} — after`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <span className="absolute top-2 left-2 text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-brand-gold/90 text-white">
+                <div className="relative aspect-square bg-brand-offwhite">
+                  {result.afterImage ? (
+                    <MediaImage
+                      src={result.afterImage}
+                      alt={`${result.title[locale]} — after`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-[10px] text-brand-text-muted bg-brand-offwhite">
+                      {locale === 'uz' ? 'Keyin' : locale === 'ru' ? 'После' : 'After'}
+                    </div>
+                  )}
+                  {result.afterImage && (
+                  <span className="absolute top-1.5 left-1.5 text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-brand-gold/90 text-white">
                     {locale === 'uz' ? 'Keyin' : locale === 'ru' ? 'После' : 'After'}
                   </span>
+                  )}
                 </div>
                 </>
                 )}
               </div>
 
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-bold text-brand-gold uppercase tracking-wide">
+              <div className="flex flex-1 flex-col p-3 sm:p-3.5">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <span className="text-[9px] font-bold text-brand-gold uppercase tracking-wide truncate">
                     {result.service[locale]}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] text-brand-text-muted font-mono">
-                    <CalendarClock className="w-3 h-3" />
+                  <span className="inline-flex shrink-0 items-center gap-1 text-[9px] text-brand-text-muted font-mono">
+                    <CalendarClock className="w-2.5 h-2.5" />
                     {result.sessions[locale]}
                   </span>
                 </div>
-                <h2 className="font-extrabold text-brand-text-primary text-base leading-snug flex items-start gap-2">
-                  <ArrowLeftRight className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
+                <h2 className="font-bold text-brand-text-primary text-sm leading-snug flex items-start gap-1.5 line-clamp-2">
+                  <ArrowLeftRight className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
                   {result.title[locale]}
                 </h2>
-                <p className="text-brand-text-muted text-sm mt-2 leading-relaxed font-light">
+                <p className="text-brand-text-muted text-xs mt-1.5 leading-relaxed font-light line-clamp-2">
                   {result.description[locale]}
                 </p>
               </div>
@@ -148,7 +164,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
           )}
         </div>
 
-        <div className="mt-14 bg-gradient-to-r from-brand-dark-navy to-brand-deep-blue rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden">
+        <div className="mt-10 sm:mt-12 bg-gradient-to-r from-brand-dark-navy to-brand-deep-blue rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden">
           <div className="absolute -top-8 -right-8 w-32 h-32 bg-brand-gold/15 rounded-full blur-2xl" />
           <div className="relative z-10 max-w-2xl mx-auto">
             <Sparkles className="w-8 h-8 text-brand-gold mx-auto mb-3" />

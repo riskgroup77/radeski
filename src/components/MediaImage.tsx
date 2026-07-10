@@ -1,4 +1,5 @@
 import { useEffect, useState, type ImgHTMLAttributes, type ReactNode } from 'react';
+import { isApiUploadMediaUrl, resolveMediaUrl as resolveApiMediaUrl } from '../api/client';
 import { isLocalMediaRef, resolveMediaUrl, isBlobUrl } from '../utils/localMediaStorage';
 
 function mimeFromUrl(url: string): string {
@@ -38,7 +39,8 @@ export default function MediaImage({
     }
 
     if (!needsBlobFix(src) && !isLocalMediaRef(src)) {
-      setDisplaySrc(src);
+      const normalized = isApiUploadMediaUrl(src) ? (resolveApiMediaUrl(src) ?? src) : src;
+      setDisplaySrc(normalized);
       setFailed(false);
       return;
     }

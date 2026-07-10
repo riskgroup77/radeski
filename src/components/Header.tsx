@@ -12,6 +12,7 @@ import {
   servicesListPath,
   getServiceCategoryIdFromPathname,
 } from '../routing/paths';
+import { getClinicMapOpenUrl } from '../config/links';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -78,7 +79,6 @@ export default function Header({
     { id: 'doctors', label: d.navDoctors },
     { id: 'prices', label: d.navPrices },
     { id: 'articles', label: d.navArticles },
-    { id: 'contacts', label: d.navContacts },
     { id: 'videos', label: d.navVideos },
     { id: 'branches', label: d.navBranches },
     { id: 'results', label: d.navResults },
@@ -397,7 +397,7 @@ export default function Header({
       <div className="sm:hidden border-t border-slate-100 bg-slate-50/95">
         <div className="site-container py-2.5 flex flex-col gap-2">
           <a
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(d.addressShort ?? d.addressValue)}`}
+            href={getClinicMapOpenUrl()}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-start justify-center gap-1.5 text-[11px] text-slate-700 text-center leading-snug px-1 hover:text-brand-gold transition-colors"

@@ -7,7 +7,6 @@ export type PageId =
   | 'doctors'
   | 'prices'
   | 'articles'
-  | 'contacts'
   | 'videos'
   | 'branches'
   | 'results'
@@ -24,7 +23,6 @@ export const PUBLIC_PAGES: PageId[] = [
   'doctors',
   'prices',
   'articles',
-  'contacts',
   'videos',
   'branches',
   'results',
@@ -96,7 +94,6 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'services' ||
     pageSegment === 'doctors' ||
     pageSegment === 'prices' ||
-    pageSegment === 'contacts' ||
     pageSegment === 'videos' ||
     pageSegment === 'branches' ||
     pageSegment === 'results' ||

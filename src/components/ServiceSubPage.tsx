@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
 import { CornerUpLeft } from 'lucide-react';
 import { Locale, PriceItem, ServiceCategory, ServiceDetail } from '../types';
 import { DICTIONARY } from '../data';
 import { serviceCategoryPath, servicesListPath } from '../routing/paths';
 import ServiceDetailContent from './ServiceDetailContent';
+import ServicePageHero from './ServicePageHero';
+import { resolveCategoryIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
+import { resolveServiceRichContent } from '../utils/serviceContent';
+import { getLocalizedImage } from '../utils/localizedImage';
 
 interface ServiceSubPageProps {
   locale: Locale;
@@ -14,6 +17,14 @@ interface ServiceSubPageProps {
   prices?: PriceItem[];
   onBackToCategory: () => void;
   onBackToList: () => void;
+}
+
+function heroDescription(text: string, maxLength = 300): string {
+  const trimmed = text.trim();
+  if (trimmed.length <= maxLength) return trimmed;
+  const cut = trimmed.slice(0, maxLength);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${cut.slice(0, lastSpace > 0 ? lastSpace : maxLength).trim()}…`;
 }
 
 export default function ServiceSubPage({
@@ -26,11 +37,14 @@ export default function ServiceSubPage({
   onBackToList,
 }: ServiceSubPageProps) {
   const d = dictionary || DICTIONARY[locale];
+  const rich = resolveServiceRichContent(sub, category, locale);
+  const subImage = getLocalizedImage(sub.images, locale) ?? sub.image ?? getLocalizedImage(category.images, locale) ?? category.image;
+  const heroText = heroDescription(rich.overview || sub.description[locale]);
 
   return (
-    <section id={`service-sub-page-${sub.id}`} className="py-12 sm:py-16 bg-brand-offwhite min-h-screen">
+    <section id={`service-sub-page-${sub.id}`} className="py-8 sm:py-12 bg-brand-offwhite min-h-screen">
       <div className="site-container">
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-6">
           <Link
             to={servicesListPath(locale)}
             onClick={() => onBackToList()}
@@ -48,13 +62,24 @@ export default function ServiceSubPage({
           </Link>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-brand-white border border-brand-sectiongray rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm"
-        >
-          <ServiceDetailContent locale={locale} category={category} sub={sub} dictionary={d} prices={prices} />
-        </motion.div>
+        <ServicePageHero
+          badge={category.title[locale]}
+          title={sub.name[locale]}
+          description={heroText}
+          image={subImage}
+          iconName={resolveSubServiceIcon(sub, category) || resolveCategoryIcon(category)}
+          appointmentLabel={d.appointmentBtn}
+        />
+
+        <div className="mt-8">
+          <ServiceDetailContent
+            locale={locale}
+            category={category}
+            sub={sub}
+            variant="page"
+            prices={prices}
+          />
+        </div>
       </div>
     </section>
   );

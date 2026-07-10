@@ -455,7 +455,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Dermato-onkologiya — teridagi xollar, papillomalar va shubhali o\'smalarni erta aniqlash, diagnostika qilish va monitoring qilish yo\'nalishi. Dermatoskopiya va biopsiya bilan melanoma xavfini vaqtida baholash mumkin.',
       indications: [
         'Yangi paydo bo\'lgan yoki o\'zgarayotgan teri xollari',
-        'Ko\'p sonli papilloma va bormalar',
+        'Ko\'p sonli papilloma va so\'gallar',
         'Quyosh kuyishi tarixi va melanoma xavfi',
         'Xol rangi, shakli yoki hajmining o\'zgarishi',
         'Oilaviy melanoma anamnezi',

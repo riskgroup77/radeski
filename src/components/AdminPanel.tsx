@@ -42,6 +42,8 @@ import {
   updateVideo,
   deleteVideo,
   getAdminVideos,
+  getAdminPartners,
+  getAdminTreatmentResults,
   createClinicRating,
   updateClinicRating,
 } from '../api/adminApi';
@@ -59,7 +61,9 @@ import {
 } from '../api/mappers';
 import {
   mapPartnerToCreatePayload,
+  mapPartnerFromApi,
   mapTreatmentResultToCreatePayload,
+  mapTreatmentResultFromApi,
   mapClinicVideoToCreatePayload,
   mapClinicRatingToCreatePayload,
   mapReviewFromApi,
@@ -81,6 +85,9 @@ import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 import { getNextSortOrderInCategory } from '../utils/priceSortOrderStorage';
+import { isApiRecordId } from '../utils/apiRecord';
+import { getApiUrl } from '../api/client';
+import { getHealth } from '../api/publicApi';
 import { getPlatformLogo } from '../utils/platformLogo';
 import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
 import { DICTIONARY } from '../data';
@@ -233,6 +240,8 @@ export default function AdminPanel({
   const [videoThumbnailFile, setVideoThumbnailFile] = useState<File | null>(null);
   const [beforeImageFile, setBeforeImageFile] = useState<File | null>(null);
   const [afterImageFile, setAfterImageFile] = useState<File | null>(null);
+  const [beforeImageCleared, setBeforeImageCleared] = useState(false);
+  const [afterImageCleared, setAfterImageCleared] = useState(false);
 
   const [doctorPhotoFile, setDoctorPhotoFile] = useState<File | null>(null);
   const [categoryImageFile, setCategoryImageFile] = useState<File | null>(null);
@@ -243,6 +252,8 @@ export default function AdminPanel({
   const [appointmentsLoading, setAppointmentsLoading] = useState(false);
   const [appointmentStatusFilter, setAppointmentStatusFilter] = useState<AppointmentStatus | ''>('');
   const [priceImportLoading, setPriceImportLoading] = useState(false);
+  const [apiStatus, setApiStatus] = useState<'checking' | 'online' | 'offline'>('checking');
+  const [apiStatusDetail, setApiStatusDetail] = useState('');
 
   const sessionExpiredMessage =
     locale === 'uz'
@@ -336,6 +347,44 @@ export default function AdminPanel({
   }, [isAuthenticated, activeTab, saveSuccess, reportAdminError]);
 
   useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'partners') return;
+    getAdminPartners()
+      .then((items) => {
+        const mapped = items.map(mapPartnerFromApi).sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+        setEditedPartners(mapped.length > 0 ? mapped : JSON.parse(JSON.stringify(clinicPartners)));
+      })
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) reportAdminError(err, 'Load failed');
+      });
+  }, [isAuthenticated, activeTab, saveSuccess, reportAdminError, clinicPartners]);
+
+  useEffect(() => {
+    if (!isAuthenticated || activeTab !== 'results') return;
+    getAdminTreatmentResults()
+      .then((items) => {
+        const mapped = items.map(mapTreatmentResultFromApi);
+        setEditedResults(mapped.length > 0 ? mapped : JSON.parse(JSON.stringify(treatmentResults)));
+      })
+      .catch((err) => {
+        if (!isUnauthorizedError(err)) reportAdminError(err, 'Load failed');
+      });
+  }, [isAuthenticated, activeTab, saveSuccess, reportAdminError, treatmentResults]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    setApiStatus('checking');
+    getHealth()
+      .then(() => {
+        setApiStatus('online');
+        setApiStatusDetail(getApiUrl());
+      })
+      .catch(() => {
+        setApiStatus('offline');
+        setApiStatusDetail(getApiUrl());
+      });
+  }, [isAuthenticated, saveSuccess]);
+
+  useEffect(() => {
     const onSessionExpired = () => handleSessionExpired();
     window.addEventListener(ADMIN_SESSION_EXPIRED_EVENT, onSessionExpired);
     return () => window.removeEventListener(ADMIN_SESSION_EXPIRED_EVENT, onSessionExpired);
@@ -418,7 +467,7 @@ export default function AdminPanel({
     try {
       for (const rating of editedRatings) {
         const payload = mapClinicRatingToCreatePayload(rating);
-        const isApiRecord = /^[0-9a-f-]{36}$/i.test(rating.id);
+        const isApiRecord = isApiRecordId(rating.id);
         if (isApiRecord) {
           await updateClinicRating(rating.id, payload);
         } else {
@@ -906,7 +955,7 @@ export default function AdminPanel({
 
       const files = { video: videoFile, thumbnail: videoThumbnailFile };
 
-      if (isAddingVideo) {
+      if (isAddingVideo || !isApiRecordId(videoForm.id)) {
         await createVideo(payload, files);
       } else if (videoForm.id) {
         await updateVideo(videoForm.id, payload, files);
@@ -953,6 +1002,8 @@ export default function AdminPanel({
     });
     setBeforeImageFile(null);
     setAfterImageFile(null);
+    setBeforeImageCleared(false);
+    setAfterImageCleared(false);
     setIsAddingResult(true);
   };
 
@@ -961,8 +1012,18 @@ export default function AdminPanel({
     setResultForm(JSON.parse(JSON.stringify(result)));
     setBeforeImageFile(null);
     setAfterImageFile(null);
+    setBeforeImageCleared(false);
+    setAfterImageCleared(false);
     setIsAddingResult(false);
   };
+
+  const hasResultBefore = () =>
+    Boolean(beforeImageFile || (!beforeImageCleared && resultForm.beforeImage?.trim()));
+
+  const hasResultAfter = () =>
+    Boolean(afterImageFile || (!afterImageCleared && resultForm.afterImage?.trim()));
+
+  const hasResultImages = () => hasResultBefore() || hasResultAfter();
 
   const handleSaveResult = async () => {
     if (!isLocalizedFilled(resultForm.title, 'uz')) {
@@ -977,24 +1038,39 @@ export default function AdminPanel({
     }
 
     try {
-      if (isAddingResult && (!beforeImageFile && !resultForm.beforeImage?.trim())) {
+      if (isAddingResult && !hasResultImages()) {
         alert(
           locale === 'uz'
-            ? 'Oldin va keyin rasmlarini yuklang.'
+            ? 'Kamida bitta rasm yuklang (oldin yoki keyin).'
             : locale === 'ru'
-              ? 'Загрузите фото «до» и «после».'
-              : 'Please upload before and after images.',
+              ? 'Загрузите хотя бы одно фото (до или после).'
+              : 'Upload at least one image (before or after).',
         );
         return;
       }
 
-      const payload = mapTreatmentResultToCreatePayload(resultForm as TreatmentResult);
+      if (!isAddingResult && isApiRecordId(resultForm.id) && !hasResultImages()) {
+        alert(
+          locale === 'uz'
+            ? 'Kamida bitta rasm qolishi kerak.'
+            : locale === 'ru'
+              ? 'Должно остаться хотя бы одно фото.'
+              : 'At least one image is required.',
+        );
+        return;
+      }
+
+      const payload = {
+        ...mapTreatmentResultToCreatePayload(resultForm as TreatmentResult),
+        ...(beforeImageCleared ? { clear_before_image: true } : {}),
+        ...(afterImageCleared ? { clear_after_image: true } : {}),
+      };
       const files = {
         before_image: beforeImageFile,
         after_image: afterImageFile,
       };
 
-      if (isAddingResult) {
+      if (isAddingResult || !isApiRecordId(resultForm.id)) {
         await createTreatmentResult(payload, files);
       } else if (resultForm.id) {
         await updateTreatmentResult(resultForm.id, payload, files);
@@ -1005,6 +1081,8 @@ export default function AdminPanel({
       setIsAddingResult(false);
       setBeforeImageFile(null);
       setAfterImageFile(null);
+      setBeforeImageCleared(false);
+      setAfterImageCleared(false);
       triggerSaveNotification(
         locale === 'uz' ? 'Natija saqlandi!' : locale === 'ru' ? 'Результат сохранен!' : 'Result saved!',
       );
@@ -1072,7 +1150,7 @@ export default function AdminPanel({
 
       const payload = mapPartnerToCreatePayload(partnerForm as ClinicPartner);
 
-      if (isAddingPartner) {
+      if (isAddingPartner || !isApiRecordId(partnerForm.id)) {
         await createPartner(payload, partnerLogoFile);
       } else if (partnerForm.id) {
         await updatePartner(partnerForm.id, payload, partnerLogoFile);
@@ -1091,6 +1169,16 @@ export default function AdminPanel({
   };
 
   const handleDeletePartner = async (partnerId: string) => {
+    if (!isApiRecordId(partnerId)) {
+      alert(
+        locale === 'uz'
+          ? "Bu mahalliy statik yozuv. API ga saqlash uchun tahrirlab «Saqlash» bosing yoki «Yangi qo'shish» orqali yarating."
+          : locale === 'ru'
+            ? 'Это локальная запись. Отредактируйте и сохраните, чтобы создать в API.'
+            : 'This is a local static entry. Edit and save to create it in the API.',
+      );
+      return;
+    }
     if (!confirm(locale === 'uz' ? "Ushbu hamkorni o'chirmoqchimisiz?" : 'Удалить этого партнера?')) return;
 
     try {
@@ -1152,9 +1240,9 @@ export default function AdminPanel({
     };
 
     try {
-      if (isAddingCustomerReview) {
+      if (isAddingCustomerReview || !isApiRecordId(review.id)) {
         await createAdminReview(mapReviewToAdminCreatePayload(review));
-      } else if (review.id) {
+      } else {
         await patchReview(review.id, { published: review.published });
       }
 
@@ -1171,6 +1259,16 @@ export default function AdminPanel({
   };
 
   const handleDeleteCustomerReview = async (reviewId: string) => {
+    if (!isApiRecordId(reviewId)) {
+      alert(
+        locale === 'uz'
+          ? "Bu mahalliy statik fikr — API da yo'q. Yangi fikr qo'shish orqali API ga yuklang."
+          : locale === 'ru'
+            ? 'Это локальный отзыв — его нет в API. Добавьте новый отзыв для сохранения в API.'
+            : 'This is a local static review — add a new review to save to the API.',
+      );
+      return;
+    }
     if (!confirm(locale === 'uz' ? "Ushbu fikrni o'chirmoqchimisiz?" : 'Удалить этот отзыв?')) return;
 
     try {
@@ -1557,8 +1655,35 @@ export default function AdminPanel({
                     {locale === 'uz' ? "Tizim qanday ishlaydi?" : "Как работает система?"}
                   </p>
                   <p>
-                    {locale === 'uz' ? "Ushbu ma'muriy pult yordamida o'zgartirilgan barcha ma'lumotlar drayverga daxldor bo'lib, darhol foydalanuvchi interfeysida (bosh sahifa, shifokorlar sahifasi, akkreditatsiya gridi, narxlar jadvali va xizmatlar) real vaqtda aks ettiriladi. Ma'lumotlarni bemalol o'zgartiring va saqlab oling." : 
-                                       "Все данные, сохраненные через эту панель, мгновенно заменяют статический контент на живом сайте. Изменения сохраняются и не теряются при следующих сессиях."}
+                    {locale === 'uz' ? "Shifokorlar, xizmatlar, narxlar va maqolalar API orqali saqlanadi. Hamkorlar, videolar va natijalar birinchi marta saqlanganda API ga yangi yozuv yaratiladi. Klinika matnlari (manzil, ish vaqti) hozircha brauzer xotirasida saqlanadi. Filiallar bo'limi admin panelda hali yo'q — filiallar kod orqali ko'rsatiladi." : 
+                                       "Врачи, услуги, цены и статьи сохраняются через API. Партнёры, видео и результаты при первом сохранении создаются в API. Тексты клиники пока в localStorage. Филиалы в админке пока не управляются."}
+                  </p>
+                </div>
+              </div>
+
+              <div className={`p-4 rounded-xl border flex items-start gap-3 ${
+                apiStatus === 'online'
+                  ? 'bg-emerald-50 border-emerald-200'
+                  : apiStatus === 'offline'
+                    ? 'bg-red-50 border-red-200'
+                    : 'bg-brand-offwhite border-brand-sectiongray'
+              }`}>
+                <AlertTriangle className={`w-5 h-5 shrink-0 mt-0.5 ${
+                  apiStatus === 'online' ? 'text-emerald-600' : apiStatus === 'offline' ? 'text-red-600' : 'text-brand-text-muted'
+                }`} />
+                <div className="text-xs leading-relaxed">
+                  <p className="font-bold text-brand-text-primary mb-1">
+                    {locale === 'uz' ? 'API ulanishi' : locale === 'ru' ? 'Подключение к API' : 'API connection'}
+                  </p>
+                  <p className="text-brand-text-secondary font-mono break-all">{apiStatusDetail || getApiUrl()}</p>
+                  <p className={`mt-1 font-semibold ${
+                    apiStatus === 'online' ? 'text-emerald-700' : apiStatus === 'offline' ? 'text-red-700' : 'text-brand-text-muted'
+                  }`}>
+                    {apiStatus === 'checking'
+                      ? (locale === 'uz' ? 'Tekshirilmoqda...' : 'Проверка...')
+                      : apiStatus === 'online'
+                        ? (locale === 'uz' ? 'Ulangan — API ishlayapti' : 'Подключено — API работает')
+                        : (locale === 'uz' ? 'Ulanmadi — internet yoki serverni tekshiring' : 'Нет связи — проверьте интернет или сервер')}
                   </p>
                 </div>
               </div>
@@ -2773,7 +2898,14 @@ export default function AdminPanel({
                       Results Studio
                     </span>
                     <button
-                      onClick={() => { setSelectedResultId(null); setIsAddingResult(false); setBeforeImageFile(null); setAfterImageFile(null); }}
+                      onClick={() => {
+                        setSelectedResultId(null);
+                        setIsAddingResult(false);
+                        setBeforeImageFile(null);
+                        setAfterImageFile(null);
+                        setBeforeImageCleared(false);
+                        setAfterImageCleared(false);
+                      }}
                       className="text-xs text-brand-text-muted hover:text-brand-text-primary flex items-center gap-1 font-bold cursor-pointer"
                     >
                       <ArrowLeft className="w-4 h-4" />
@@ -2826,35 +2958,58 @@ export default function AdminPanel({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <ImageUploadField
                       label={locale === 'uz' ? 'Oldin rasm' : locale === 'ru' ? 'Фото «до»' : 'Before image'}
-                      currentImageUrl={resultForm.beforeImage}
+                      currentImageUrl={beforeImageCleared ? undefined : resultForm.beforeImage}
                       file={beforeImageFile}
-                      onFileChange={setBeforeImageFile}
+                      onFileChange={(file) => {
+                        setBeforeImageFile(file);
+                        if (file) setBeforeImageCleared(false);
+                      }}
+                      onClearCurrent={() => {
+                        setResultForm((prev) => ({ ...prev, beforeImage: '', comparisonImage: undefined }));
+                        setBeforeImageCleared(true);
+                        setBeforeImageFile(null);
+                      }}
                       helperText={
                         locale === 'uz'
-                          ? 'JPG, PNG yoki WebP formatida rasm yuklang.'
+                          ? 'Ixtiyoriy. O\'chirsangiz bo\'sh qoladi — faqat keyin rasm bilan ham saqlash mumkin.'
                           : locale === 'ru'
-                            ? 'Загрузите изображение JPG, PNG или WebP.'
-                            : 'Upload JPG, PNG, or WebP image.'
+                            ? 'Необязательно. Можно оставить пустым и сохранить только «после».'
+                            : 'Optional. You may clear this and save with only the after image.'
                       }
                     />
                     <ImageUploadField
                       label={locale === 'uz' ? 'Keyin rasm' : locale === 'ru' ? 'Фото «после»' : 'After image'}
-                      currentImageUrl={resultForm.afterImage}
+                      currentImageUrl={afterImageCleared ? undefined : resultForm.afterImage}
                       file={afterImageFile}
-                      onFileChange={setAfterImageFile}
+                      onFileChange={(file) => {
+                        setAfterImageFile(file);
+                        if (file) setAfterImageCleared(false);
+                      }}
+                      onClearCurrent={() => {
+                        setResultForm((prev) => ({ ...prev, afterImage: '', comparisonImage: undefined }));
+                        setAfterImageCleared(true);
+                        setAfterImageFile(null);
+                      }}
                       helperText={
                         locale === 'uz'
-                          ? 'JPG, PNG yoki WebP formatida rasm yuklang.'
+                          ? 'Ixtiyoriy. O\'chirsangiz bo\'sh qoladi — faqat oldin rasm bilan ham saqlash mumkin.'
                           : locale === 'ru'
-                            ? 'Загрузите изображение JPG, PNG или WebP.'
-                            : 'Upload JPG, PNG, or WebP image.'
+                            ? 'Необязательно. Можно оставить пустым и сохранить только «до».'
+                            : 'Optional. You may clear this and save with only the before image.'
                       }
                     />
                   </div>
 
                   <div className="flex gap-3 justify-end pt-4 border-t border-brand-sectiongray">
                     <button
-                      onClick={() => { setSelectedResultId(null); setIsAddingResult(false); setBeforeImageFile(null); setAfterImageFile(null); }}
+                      onClick={() => {
+                        setSelectedResultId(null);
+                        setIsAddingResult(false);
+                        setBeforeImageFile(null);
+                        setAfterImageFile(null);
+                        setBeforeImageCleared(false);
+                        setAfterImageCleared(false);
+                      }}
                       className="px-4 py-2 hover:bg-brand-offwhite text-brand-text-muted text-xs font-bold rounded-lg cursor-pointer"
                     >
                       {locale === 'uz' ? 'Bekor qilish' : locale === 'ru' ? 'Отмена' : 'Cancel'}

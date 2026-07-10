@@ -16,6 +16,35 @@ export const CLINIC_REVIEW_LINKS = {
   twoGis: 'https://2gis.kg/bishkek?m=72.367424%2C41.175575%2F7.43',
 } as const;
 
+/** Radeski bosh klinika — aniq koordinatalar (Google Maps) */
+export const CLINIC_GEO = {
+  lat: 40.3833622,
+  lng: 71.7962381,
+} as const;
+
+/**
+ * Google Maps embed — Radeski Skin & Aesthetic Clinic (1A, O'zbekiston Ovozi).
+ * Eski noto'g'ri embed 5-uy manziliga ishora qilardi.
+ */
+export const CLINIC_MAP_EMBED_URL =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.6474567890123!2d71.7936631!3d40.3833622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb830bba97cb09%3A0xd99d7f456cd820e8!2sRadeski%20Skin%20%26%20Aesthetic%20Clinic!5e0!3m2!1suz!2suz!4v1749465600000!5m2!1suz!2suz';
+
+/** Brauzerda Google Maps'da aniq joylashuvni ochish */
+export function getClinicMapOpenUrl(): string {
+  return CLINIC_REVIEW_LINKS.googleMaps;
+}
+
+/** Qo'qon filiali — Abu Tayib Huqandiy dahasi, 144A (Yandex: 40.548944, 70.928711) */
+export const KOKAND_BRANCH_GEO = {
+  lat: 40.548944,
+  lng: 70.928711,
+} as const;
+
+export const KOKAND_BRANCH_MAP_OPEN_URL =
+  'https://www.google.com/maps/search/?api=1&query=40.548944,70.928711';
+
+export const KOKAND_BRANCH_MAP_EMBED_URL = `https://maps.google.com/maps?q=${KOKAND_BRANCH_GEO.lat},${KOKAND_BRANCH_GEO.lng}&hl=uz&z=17&output=embed`;
+
 export function resolveClinicRatingUrl(platform: string, url?: string): string | undefined {
   if (url) return url;
   const key = platform.toLowerCase();

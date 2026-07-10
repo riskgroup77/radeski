@@ -1,0 +1,117 @@
+/**
+ * Maqolalarni to'liq matn, FAQ va rasmlar bilan API ga yangilaydi.
+ * Usage: npm run seed:articles
+ */
+import 'dotenv/config';
+import { readFileSync, existsSync } from 'node:fs';
+import path from 'node:path';
+import { adminLogin, getAdminArticles, updateArticle } from '../src/api/adminApi';
+import { mapArticleToCreatePayload } from '../src/api/mappers';
+import { ARTICLES } from '../src/data';
+import { enrichArticle } from '../src/utils/enrichArticles';
+import {
+  resolveArticleBody,
+  resolveArticleSummary,
+  buildArticleRichContentMap,
+} from '../src/utils/articleContent';
+
+const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 800);
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+async function withRetry<T>(label: string, fn: () => Promise<T>): Promise<T> {
+  let attempt = 0;
+  while (true) {
+    try {
+      return await fn();
+    } catch (error) {
+      attempt++;
+      const msg = error instanceof Error ? error.message : String(error);
+      if (!/too many requests|429/i.test(msg) || attempt > 6) throw error;
+      const wait = REQUEST_DELAY_MS * 2 ** attempt;
+      console.warn(`Rate limited "${label}", retry ${attempt}/6 in ${wait}ms`);
+      await sleep(wait);
+    }
+  }
+}
+
+function loadPublicImage(relativePath: string): File | null {
+  const normalized = relativePath.replace(/^\//, '');
+  const filePath = path.join(process.cwd(), 'public', normalized);
+  if (!existsSync(filePath)) {
+    console.warn(`  image not found: ${filePath}`);
+    return null;
+  }
+  const buffer = readFileSync(filePath);
+  const ext = path.extname(filePath).toLowerCase();
+  const mime =
+    ext === '.webp' ? 'image/webp' : ext === '.png' ? 'image/png' : 'image/jpeg';
+  return new File([buffer], path.basename(filePath), { type: mime });
+}
+
+function normalizeKey(value: string): string {
+  return value.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function buildSeedArticle(staticArticle: (typeof ARTICLES)[number]) {
+  const withResolvedText = {
+    ...staticArticle,
+    summary: {
+      uz: resolveArticleSummary(staticArticle, 'uz'),
+      ru: resolveArticleSummary(staticArticle, 'ru'),
+      en: resolveArticleSummary(staticArticle, 'en'),
+    },
+    content: {
+      uz: resolveArticleBody(staticArticle, 'uz'),
+      ru: resolveArticleBody(staticArticle, 'ru'),
+      en: resolveArticleBody(staticArticle, 'en'),
+    },
+    richContent: buildArticleRichContentMap(staticArticle),
+  };
+  return enrichArticle(withResolvedText);
+}
+
+async function main() {
+  const username = process.env.ADMIN_USERNAME?.trim() || 'admin';
+  const password = process.env.ADMIN_PASSWORD?.trim() || 'radeski2026';
+
+  console.log('Logging in...');
+  const token = (await withRetry('login', () => adminLogin({ username, password }))).access_token;
+
+  const existing = await withRetry('get articles', () => getAdminArticles(token));
+  const bySlug = new Map(existing.map((item) => [normalizeKey(item.slug), item]));
+  const byTitle = new Map(existing.map((item) => [normalizeKey(item.title_uz), item]));
+
+  let updated = 0;
+  let skipped = 0;
+
+  for (const staticArticle of ARTICLES) {
+    const article = buildSeedArticle(staticArticle);
+    const match =
+      bySlug.get(normalizeKey(staticArticle.slug)) ??
+      byTitle.get(normalizeKey(staticArticle.title.uz));
+
+    if (!match) {
+      console.warn(`  skip (not on API): ${staticArticle.title.uz}`);
+      skipped++;
+      continue;
+    }
+
+    const payload = mapArticleToCreatePayload(article);
+    const imagePath = staticArticle.image || staticArticle.images?.uz;
+    const coverFile = imagePath ? loadPublicImage(imagePath) : null;
+
+    await withRetry(staticArticle.title.uz, () =>
+      updateArticle(match.id, payload, coverFile, token),
+    );
+    updated++;
+    console.log(`  updated: ${staticArticle.title.uz}`);
+    await sleep(REQUEST_DELAY_MS);
+  }
+
+  console.log(`Done — updated: ${updated}, skipped: ${skipped}`);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

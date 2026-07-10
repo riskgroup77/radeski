@@ -121,16 +121,24 @@ export function resolveArticleRichContent(
   };
 }
 
-export function resolveArticleBody(article: Article, locale: Locale): string {
-  const apiContent = article.content[locale]?.trim() || '';
-  if (isSubstantialText(apiContent)) {
-    return apiContent;
-  }
+function isStructuredArticleMarkdown(text: string): boolean {
+  return /^##\s+/m.test(text);
+}
 
+export function resolveArticleBody(article: Article, locale: Locale): string {
   const catalogKey = findArticleCatalogKey(article);
   const catalog = ARTICLE_RICH_CATALOG[catalogKey] ?? ARTICLE_RICH_CATALOG['general-dermatology'];
   const catalogBody = catalog[locale]?.body?.trim() || '';
+  const apiContent = article.content[locale]?.trim() || '';
 
+  const preferCatalog =
+    catalogBody.length > 0 &&
+    (!apiContent ||
+      !isStructuredArticleMarkdown(apiContent) ||
+      catalogBody.length > apiContent.length + 150);
+
+  if (preferCatalog) return catalogBody;
+  if (isSubstantialText(apiContent)) return apiContent;
   if (catalogBody) return catalogBody;
 
   const uzFallback = article.content.uz?.trim() || '';
@@ -140,15 +148,15 @@ export function resolveArticleBody(article: Article, locale: Locale): string {
 }
 
 export function resolveArticleSummary(article: Article, locale: Locale): string {
-  const apiSummary = article.summary[locale]?.trim() || '';
-  if (apiSummary.length >= 80) {
-    return apiSummary;
-  }
-
   const catalogKey = findArticleCatalogKey(article);
   const catalog = ARTICLE_RICH_CATALOG[catalogKey] ?? ARTICLE_RICH_CATALOG['general-dermatology'];
   const catalogSummary = catalog[locale]?.summary?.trim() || '';
+  const apiSummary = article.summary[locale]?.trim() || '';
 
+  if (catalogSummary && (!apiSummary || catalogSummary.length >= apiSummary.length + 20)) {
+    return catalogSummary;
+  }
+  if (apiSummary.length >= 80) return apiSummary;
   if (catalogSummary) return catalogSummary;
 
   return apiSummary || article.summary.uz || '';

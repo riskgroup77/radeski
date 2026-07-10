@@ -245,7 +245,7 @@ export const SERVICE_ABOUT_CATALOG: Record<string, LocalizedServiceAbout> = {
         {
           title: "Hududda yagona dermatoonkolog shifokor",
           description:
-            "Radeski Skin Clinic — Farg'ona viloyatida dermatoonkolog shifokor qabul olib boradigan yagona klinika. U yaxshi va yomon xavfli teri yangi hosilalarini diagnostika qiladi va xavfli o'zgarishlarni eng erta bosqichlarda aniqlashga yordam beradi.",
+            "Radeski Skin Clinic — Farg'ona viloyatida dermatoonkolog shifokor qabul olib boradigan yagona klinika. U xavfsiz va xavfli teri o'smalarini diagnostika qiladi va xavfli o'zgarishlarni eng erta bosqichlarda aniqlashga yordam beradi.",
         },
         {
           title: 'Zamonaviy dermatoskopiya',
@@ -260,7 +260,7 @@ export const SERVICE_ABOUT_CATALOG: Record<string, LocalizedServiceAbout> = {
         {
           title: 'Barcha diagnostika bosqichlari bir klinikada',
           description:
-            "Radeski Skin Clinic'da bemor butun yo'lni bir joyda bosib o'tishi mumkin: dermatoonkolog konsultatsiyasi; dermatoskopik tekshiruv; ko'rsatmalar bo'yicha biopsiya; yaxshi xavfli hosilalarni zamonaviy usullar bilan olib tashlash; keyingi kuzatuv va davolash.",
+            "Radeski Skin Clinic'da bemor butun yo'lni bir joyda bosib o'tishi mumkin: dermatoonkolog konsultatsiyasi; dermatoskopik tekshiruv; ko'rsatmalar bo'yicha biopsiya; xavfsiz o'smalarni zamonaviy usullar bilan olib tashlash; keyingi kuzatuv va davolash.",
         },
         {
           title: 'Dermatoonkologga qachon murojaat qilish kerak?',

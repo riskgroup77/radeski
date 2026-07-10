@@ -99,6 +99,13 @@ const EXACT_PHRASES_UZ: [string, string][] = [
   ['Инъкция в/м без расходного материала', 'Intramuskulyar inyeksiya (sarf materialisiz)'],
   ['капельница без расходных материалов', 'Tomchi terapiya (sarf materiallarisiz)'],
   ['Нео люкс', 'Neo Lux'],
+  [
+    'Лечение акне, красноты, пост-акне (gold toning)',
+    'Akne, qizarish va post-akneni davolash (gold toning)',
+  ],
+  ['Карбоновый пилинг+ gold toning', 'Karbonli piling + gold toning'],
+  ['Лечение купероза и розации', 'Kuperoz va rozatseani davolash'],
+  ['Дермапал', 'Dermapal'],
 ];
 
 const WORDS_UZ: Record<string, string> = {
@@ -551,7 +558,7 @@ function cleanupUz(text: string): string {
     .replace(/\(\s+/g, '(')
     .replace(/\s+\)/g, ')')
     .replace(/\s*—\s*/g, ' — ')
-    .replace(/\s*-\s*/g, ' — ')
+    .replace(/(?<=[\p{L}\p{N}])\s*-\s*(?=[\p{L}\p{N}])/gu, '-')
     .replace(/\s{2,}/g, ' ')
     .replace(/\s+da\s+da/g, 'da')
     .replace(/\s+bilan\s+bilan/g, 'bilan')
@@ -563,6 +570,11 @@ export function translatePriceRuToUz(nameRu: string): string {
   if (!normalized) return '';
 
   const exactKey = normalizeKey(normalized);
+
+  for (const [from, to] of EXACT_PHRASES_UZ) {
+    if (normalizeKey(from) === exactKey) return to;
+  }
+
   const cached = EXACT_UZ_MAP[exactKey];
   if (cached && !/[а-яА-ЯёЁ]/.test(cached)) {
     return cached;

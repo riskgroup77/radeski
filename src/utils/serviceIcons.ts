@@ -78,7 +78,7 @@ const SUB_SERVICE_KEYWORD_RULES: { keywords: string[]; icon: string }[] = [
   { keywords: ['biopsiya', 'биопс', 'namuna olish'], icon: 'Microscope' },
   { keywords: ['mohs', 'mikrografik', 'mikrograf', 'микрохирург'], icon: 'ScalpelLine' },
   { keywords: ['jarroh', 'хирург', 'operats', 'surgery', 'olib tashlash', 'удален'], icon: 'ScalpelLine' },
-  { keywords: ['papilloma', 'papillom', 'папиллом', 'borma', 'борма', 'condylom'], icon: 'CircleDot' },
+  { keywords: ['papilloma', 'papillom', 'папиллом', 'so\'gal', 'sogal', 'borma', 'бородавк', 'condylom'], icon: 'CircleDot' },
   { keywords: ['gemangioma', 'gemang', 'гемангиом', 'angioma'], icon: 'HeartPulse' },
   { keywords: ['psoriaz', 'псориаз', 'psoriasis'], icon: 'Hand' },
   { keywords: ['akne', 'акне', 'acne', 'ugri', 'угр'], icon: 'ScanFace' },

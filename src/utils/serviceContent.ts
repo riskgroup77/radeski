@@ -401,36 +401,51 @@ export function resolveCategoryRichContent(
   );
 }
 
+export function streamlineServiceRichContent(content: ServiceRichContent): ServiceRichContent {
+  const dedupe = (items: string[]) => [...new Set(items.map((item) => item.trim()).filter(Boolean))];
+
+  return {
+    ...content,
+    overview: content.overview.trim(),
+    aboutSections: content.aboutSections?.slice(0, 1),
+    conditions: content.conditions.slice(0, 5),
+    indications: dedupe(content.indications).slice(0, 6),
+    solutions: dedupe(content.solutions).slice(0, 5),
+    benefits: dedupe(content.benefits).slice(0, 4),
+    process: content.process.slice(0, 4),
+  };
+}
+
 export function getServiceSectionLabels(locale: Locale) {
   return locale === 'uz'
     ? {
         about: 'Xizmat haqida',
         equipment: 'Klinikadagi apparatlar',
-        conditions: 'Davolanadigan kasalliklar va muammolar haqida',
-        indications: 'Qachon shifokorga murojaat qilish kerak',
-        solutions: 'Mavjud yechimlar va muolajalar',
-        benefits: 'Afzalliklari',
-        process: 'Qanday amalga oshiriladi',
+        conditions: 'Davolanadigan muammolar',
+        indications: 'Qachon murojaat qilish kerak',
+        solutions: 'Biz qanday yechim taklif qilamiz',
+        benefits: 'Nega aynan Radeski?',
+        process: 'Muolaja qanday o\'tadi',
         readMore: 'Batafsil ma\'lumot',
       }
     : locale === 'ru'
       ? {
           about: 'Об услуге',
           equipment: 'Оборудование клиники',
-          conditions: 'О заболеваниях и проблемах, которые мы лечим',
-          indications: 'Когда обращаться к врачу',
-          solutions: 'Доступные решения и процедуры',
-          benefits: 'Преимущества',
+          conditions: 'Какие проблемы лечим',
+          indications: 'Когда обращаться',
+          solutions: 'Какие решения мы предлагаем',
+          benefits: 'Почему именно Radeski?',
           process: 'Как проходит процедура',
           readMore: 'Подробнее',
         }
       : {
           about: 'About this service',
           equipment: 'Clinic equipment',
-          conditions: 'Diseases and conditions we treat',
-          indications: 'When to see a doctor',
-          solutions: 'Available solutions and procedures',
-          benefits: 'Benefits',
+          conditions: 'Conditions we treat',
+          indications: 'When to visit',
+          solutions: 'Solutions we offer',
+          benefits: 'Why Radeski?',
           process: 'How it works',
           readMore: 'Learn more',
         };

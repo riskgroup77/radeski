@@ -71,7 +71,19 @@ Muolajadan keyin shifokor uy parvarishi bo'yicha aniq ko'rsatmalar beradi: terin
 
 ## Profilaktika
 
-Qo'llarni yuvish, jamoat hammomlarida yalang'och oyoq bilan yurmaslik, shaxsiy asboblarni almashmaslik va immunitetni mustahkamlash (uyqu, to'g'ri ovqatlanish) virus xavfini kamaytiradi. Muntazam dermatolog ko'rigi esa yangi o'smalarni erta aniqlashga yordam beradi.`;
+Qo'llarni yuvish, jamoat hammomlarida yalang'och oyoq bilan yurmaslik, shaxsiy asboblarni almashmaslik va immunitetni mustahkamlash (uyqu, to'g'ri ovqatlanish) virus xavfini kamaytiradi. Muntazam dermatolog ko'rigi esa yangi o'smalarni erta aniqlashga yordam beradi.
+
+## Radeski Skin Clinic'da davolash jarayoni
+
+1. **Konsultatsiya** — o'smalarning joyi, soni, nechadan beri borligi va o'sish tezligi aniqlanadi.
+2. **Dermatoskopik ko'rik** — har bir element alohida baholanadi, xavfli o'zgarishlar istisno qilinadi.
+3. **Usul tanlash** — lazer, kriyodestruksiya yoki radioto'lqin protokoli individual tanlanadi.
+4. **Muolaja** — steril sharoitda, minimal noqulaylik bilan o'tkaziladi.
+5. **Nazorat** — 2–4 haftadan keyin qayta ko'rik, kerak bo'lsa qo'shimcha seans.
+
+## Davolashdan keyin nima kutish kerak?
+
+Kichik qizarish va qichish 1–3 kun davom etishi tabiiy. Shifokor tavsiya qilgan parvarish qoidalariga rioya qiling: yarani quruq saqlang, quyoshdan himoyalaning va kiyim ishqalashidan saqlaning.`;
 }
 
 function ruBodyPapilloma(): string {
@@ -113,7 +125,19 @@ function ruBodyPapilloma(): string {
 
 ## Профилактика
 
-Гигиена рук, личные предметы обихода, защита стоп в общественных местах и укрепление иммунитета снижают риск заражения. Регулярные осмотры у дерматолога помогают выявлять новые элементы на ранней стадии.`;
+Гигиена рук, личные предметы обихода, защита стоп в общественных местах и укрепление иммунитета снижают риск заражения. Регулярные осмотры у дерматолога помогают выявлять новые элементы на ранней стадии.
+
+## Лечение в клинике Radeski
+
+1. **Консультация** — локализация, количество и динамика роста.
+2. **Дерматоскопия** — оценка каждого элемента.
+3. **Выбор метода** — лазер, крио или радиоволна по показаниям.
+4. **Процедура** — в стерильных условиях.
+5. **Контроль** — повторный осмотр через 2–4 недели.
+
+## Что ожидать после удаления
+
+Лёгкое покраснение 1–3 дня — норма. Соблюдайте рекомендации врача: сухость, SPF, избегайте трения.`;
 }
 
 function enBodyPapilloma(): string {
@@ -155,7 +179,19 @@ Post-procedure care includes keeping the area dry, sun protection, and monitorin
 
 ## Prevention
 
-Hand hygiene, personal footwear in public showers, avoiding shared grooming tools, and immune support reduce risk. Regular skin checks help detect new lesions early.`;
+Hand hygiene, personal footwear in public showers, avoiding shared grooming tools, and immune support reduce risk. Regular skin checks help detect new lesions early.
+
+## Treatment at Radeski Skin Clinic
+
+1. **Consultation** — location, count, and growth history.
+2. **Dermatoscopy** — each lesion is assessed individually.
+3. **Method selection** — laser, cryotherapy, or radiofrequency as indicated.
+4. **Procedure** — performed under sterile conditions.
+5. **Follow-up** — review in 2–4 weeks.
+
+## What to expect after treatment
+
+Mild redness for 1–3 days is normal. Keep the area dry, use sun protection, and avoid friction on the site.`;
 }
 
 function uzBodyHemangioma(): string {
@@ -167,7 +203,7 @@ Gemangioma — qon tomirlarining tug'ma yoki keyinchalik paydo bo'ladigan xavfsi
 
 - **Bolalar gemangiomalari** — tug'ilganda yoki birinchi haftalarda paydo bo'ladi, tez o'sishi mumkin, keyin o'zi qisqarishi ham mumkin.
 - **Kapillyar gemangiomalar** — yuzda qizil dog', bosganda oqaradi.
-- **Kavernöz turlar** — chuqurroq joylashgan, ba'zan shish keltiradi.
+- **Kavernoz turlar** — chuqurroq joylashgan, ba'zan shish keltiradi.
 
 ## Nega shunchaki kuzatish yetarli emas?
 
@@ -190,7 +226,15 @@ Kichik kapillyar dog'lar bir necha seansdan keyin sezilarli ochiladi. Katta yoki
 
 ## Uy parvarishi
 
-Muolajadan keyin 48 soat quyosh, sauna va issiq dushdan saqlanish tavsiya etiladi. Terini namlantiruvchi krem va SPF himoya tiklanishni tezlashtiradi.`;
+Muolajadan keyin 48 soat quyosh, sauna va issiq dushdan saqlanish tavsiya etiladi. Terini namlantiruvchi krem va SPF himoya tiklanishni tezlashtiradi.
+
+## Radeski klinikasida qanday uskunalar ishlatiladi?
+
+- **Sciton IPL Forever Young** — yuz va tanadagi kapillyar dog'lar uchun
+- **Selektiv lazer** — chuqurroq yoki kattaroq gemangiomalar uchun
+- **Dermatoskop** — oldindan to'g'ri tashxis va kuzatuv uchun
+
+Har bir bemor uchun seanslar soni va interval individual belgilanadi. Og'ir holatlarda bir nechta mutaxassis maslahati tashkil etiladi.`;
 }
 
 function ruBodyHemangioma(): string {
@@ -225,7 +269,15 @@ function ruBodyHemangioma(): string {
 
 ## Уход после процедуры
 
-48 часов избегайте солнца, сауны и горячего душа. Увлажнение и SPF ускоряют восстановление кожи.`;
+48 часов избегайте солнца, сауны и горячего душа. Увлажнение и SPF ускоряют восстановление кожи.
+
+## Оборудование клиники Radeski
+
+- **Sciton IPL Forever Young** — для капиллярных пятен
+- **Селективный лазер** — для глубоких гемангиом
+- **Дерматоскоп** — для точной диагностики и контроля
+
+Количество сеансов подбирается индивидуально.`;
 }
 
 function enBodyHemangioma(): string {
@@ -260,7 +312,15 @@ Small capillary spots lighten after several sessions. Larger lesions may need a 
 
 ## Aftercare
 
-Avoid sun, sauna, and hot showers for 48 hours. Moisturizer and SPF support healing.`;
+Avoid sun, sauna, and hot showers for 48 hours. Moisturizer and SPF support healing.
+
+## Equipment at Radeski clinic
+
+- **Sciton IPL Forever Young** — for capillary spots
+- **Selective laser** — for deeper hemangiomas
+- **Dermatoscope** — for accurate diagnosis and follow-up
+
+Session count is tailored individually.`;
 }
 
 function uzBodyPsoriasis(): string {
@@ -305,7 +365,19 @@ Biz **individual protokol** tuzamiz: teri holati, maydon, yoshi va hamroh kasall
 
 ## Qachon shoshilinch yordam kerak?
 
-Butun tanani qamrab olgan qizarish, isitma va umumiy holsizlik — erythroderma belgilari bo'lishi mumkin. Bunday holatda darhol tibbiy yordam kerak.`;
+Butun tanani qamrab olgan qizarish, isitma va umumiy holsizlik — erythroderma belgilari bo'lishi mumkin. Bunday holatda darhol tibbiy yordam kerak.
+
+## Radeski klinikasidagi fototerapiya kabinasi
+
+Klinikamizda **Daavlin** va zamonaviy **narrow-band UVB 311 nm** apparatlari mavjud. Seanslar shifokor nazoratida, ko'z va teri himoyasi bilan o'tkaziladi. Bemor uchun dozaj, davomiylik va chastota individual hisoblanadi.
+
+## «Psoriaz maktabi» dasturi
+
+Remissiyani uzaytirish uchun bemorlarga amaliy darslar beriladi:
+- quruq teri uchun to'g'ri parvarish
+- triggerlarni aniqlash va kundalik daftarcha
+- stressni boshqarish va uyqu tartibi
+- qaysi mahsulotlardan voz kechish kerakligi`;
 }
 
 function ruBodyPsoriasis(): string {
@@ -350,7 +422,15 @@ function ruBodyPsoriasis(): string {
 
 ## Когда нужна срочная помощь?
 
-Генерализованное покраснение, лихорадка и слабость могут указывать на эритродермию — требуется немедленная медицинская помощь.`;
+Генерализованное покраснение, лихорадка и слабость могут указывать на эритродермию — требуется немедленная медицинская помощь.
+
+## Фототерапевтический кабинет Radeski
+
+В клинике используются аппараты **Daavlin** и узкополосное **УФБ 311 нм** под контролем врача с защитой кожи и глаз.
+
+## Программа «Школа псориаза»
+
+Практические занятия по уходу, выявлению триггеров, управлению стрессом и правильному питанию.`;
 }
 
 function enBodyPsoriasis(): string {
@@ -395,7 +475,15 @@ We build an **individual protocol** based on lesion area, age, and comorbidities
 
 ## When to seek urgent care
 
-Generalized redness with fever and malaise may signal erythroderma — seek immediate medical attention.`;
+Generalized redness with fever and malaise may signal erythroderma — seek immediate medical attention.
+
+## Phototherapy at Radeski clinic
+
+We use **Daavlin** narrow-band **UVB 311 nm** devices under physician supervision with proper skin and eye protection.
+
+## Psoriasis Patient School
+
+Practical guidance on skincare, trigger tracking, stress management, and nutrition to extend remission.`;
 }
 
 function uzBodyGeneral(): string {
@@ -410,7 +498,7 @@ Teri — organizmning eng katta organi va birinchi himoya qavati. Teri muammolar
 - Pigmentatsiya va melazma
 - Quruq teri va seborreya
 - Soch tokilishi va tirnoq o'zgarishlari
-- Teri o'smalari va nevüs kuzatuvi
+- Teri o'smalari va nevus kuzatuvi
 
 ## Nega o'z-o'zidan davolash xavfli?
 
@@ -616,6 +704,16 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
           answer:
             'To\'g\'ri usul va tajribali mutaxassis bilan ishlov berilganda chandiq ehtimoli minimal.',
         },
+        {
+          question: 'HPV yuqtirilganini qanday bilaman?',
+          answer:
+            'Ko\'p hollarda faqat o\'smalar paydo bo\'lishi bilan aniqlanadi. Aniq tashxis va tarqalish xavfini dermatolog baholaydi.',
+        },
+        {
+          question: 'Bitta o\'smadan boshqalari chiqadimi?',
+          answer:
+            'Ha, HPV bir nechta joyda bir vaqtda namoyon bo\'lishi mumkin. Shuning uchun kompleks ko\'rik muhim.',
+        },
       ],
     },
     ru: {
@@ -703,6 +801,16 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
           answer:
             'Odatda 2–5 seans, lekin dog\' hajmi va chuqurligiga bog\'liq.',
         },
+        {
+          question: 'Bolada gemangioma qachon davolash kerak?',
+          answer:
+            'Tez o\'sish, funksional joylashuv (ko\'z, burun, og\'iz) yoki qon ketish bo\'lsa — darhol shifokorga murojaat qiling.',
+        },
+        {
+          question: 'IPL og\'riqlimi?',
+          answer:
+            'Ko\'pincha yengil issiq his yoki qisqa noqulaylik; katta maydonlar uchun mahalliy behushlik qo\'llanishi mumkin.',
+        },
       ],
     },
     ru: {
@@ -779,6 +887,16 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
           question: 'UVB xavflimi?',
           answer:
             'Narrow-band UVB 311 nm klinik nazoratda xavfsiz hisoblanadi; seanslar shifokor rejasi bo\'yicha o\'tkaziladi.',
+        },
+        {
+          question: 'Psoriaz qaysi oziq-ovqatdan kuchayadi?',
+          answer:
+            'Har bir bemorda triggerlar farq qiladi. Odatda spirtli ichimlik, ortiqcha stress va ayrim dorilar kuchaytirishi mumkin — shifokor bilan aniqlang.',
+        },
+        {
+          question: 'Fototerapiya necha hafta davom etadi?',
+          answer:
+            'Odatda 8–12 hafta, haftasiga 2–3 seans. Aniq reja kasallik maydoni va javobga qarab tuziladi.',
         },
       ],
     },

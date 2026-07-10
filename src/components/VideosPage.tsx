@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Clock, Film, X } from 'lucide-react';
+import { Play, Clock, X } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo } from '../data/sitePagesContent';
@@ -21,7 +21,7 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
   return (
     <section id="videos-page" className="py-16 bg-brand-white min-h-screen">
       <div className="site-container">
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
             {d.navVideos}
           </span>
@@ -33,79 +33,72 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
-          {loading ? (
-            <div className="col-span-full py-16 text-center text-brand-text-muted text-sm">
-              {locale === 'uz' ? 'Videolar yuklanmoqda...' : locale === 'ru' ? 'Загрузка видео...' : 'Loading videos...'}
-            </div>
-          ) : videos.length === 0 ? (
-            <div className="col-span-full py-16 text-center text-brand-text-muted text-sm leading-relaxed">
-              {locale === 'uz'
-                ? 'Hozircha klinika videolari joylashtirilmagan.'
-                : locale === 'ru'
-                  ? 'Видео клиники пока не добавлены.'
-                  : 'Clinic videos have not been added yet.'}
-            </div>
-          ) : (
-          videos.map((video, index) => (
-            <motion.article
-              key={video.id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.06 }}
-              className="group bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-md transition-all"
-            >
-              <button
-                type="button"
-                onClick={() => setActiveVideoId(video.id)}
-                className="relative aspect-video w-full bg-brand-dark-navy overflow-hidden cursor-pointer"
+        {loading ? (
+          <div className="py-16 text-center text-brand-text-muted text-sm">
+            {locale === 'uz' ? 'Videolar yuklanmoqda...' : locale === 'ru' ? 'Загрузка видео...' : 'Loading videos...'}
+          </div>
+        ) : videos.length === 0 ? (
+          <div className="py-16 text-center text-brand-text-muted text-sm leading-relaxed">
+            {locale === 'uz'
+              ? 'Hozircha klinika videolari joylashtirilmagan.'
+              : locale === 'ru'
+                ? 'Видео клиники пока не добавлены.'
+                : 'Clinic videos have not been added yet.'}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
+            {videos.map((video, index) => (
+              <motion.article
+                key={video.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.04 }}
+                className="group"
               >
-                <ResolvedVideo
-                  src={video.src}
-                  className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-[1.02] transition-transform duration-500"
-                  muted
-                  playsInline
-                  preload="metadata"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
-                <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-brand-gold/90 text-white">
-                  {video.category[locale]}
-                </span>
-                <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 text-[10px] font-mono font-semibold text-white/90 bg-black/40 px-2 py-1 rounded-md">
-                  <Clock className="w-3 h-3" />
-                  {video.duration}
-                </span>
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="w-14 h-14 rounded-full bg-brand-gold/95 text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                    <Play className="w-6 h-6 ml-0.5" fill="currentColor" />
+                <button
+                  type="button"
+                  onClick={() => setActiveVideoId(video.id)}
+                  className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-brand-dark-navy shadow-md hover:shadow-xl transition-shadow cursor-pointer"
+                >
+                  <ResolvedVideo
+                    src={video.src}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    muted
+                    playsInline
+                    preload="metadata"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-slate-950/20" />
+                  <span className="absolute top-2 left-2 text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-brand-gold/90 text-white">
+                    {video.category[locale]}
                   </span>
-                </span>
-              </button>
-
-              <div className="p-5 sm:p-6">
-                <div className="flex items-start gap-2 mb-2">
-                  <Film className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-                  <h2 className="font-extrabold text-brand-text-primary text-base leading-snug">
-                    {video.title[locale]}
-                  </h2>
-                </div>
-                <p className="text-brand-text-muted text-sm leading-relaxed font-light">
-                  {video.description[locale]}
-                </p>
-              </div>
-            </motion.article>
-          ))
-          )}
-        </div>
+                  <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[9px] font-mono font-semibold text-white/90 bg-black/40 px-1.5 py-0.5 rounded-md">
+                    <Clock className="w-2.5 h-2.5" />
+                    {video.duration}
+                  </span>
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="w-10 h-10 rounded-full bg-brand-gold/95 text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                      <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
+                    </span>
+                  </span>
+                  <div className="absolute bottom-0 left-0 right-0 p-3 text-left">
+                    <h2 className="font-extrabold text-white text-xs leading-snug line-clamp-2">
+                      {video.title[locale]}
+                    </h2>
+                  </div>
+                </button>
+              </motion.article>
+            ))}
+          </div>
+        )}
 
         {!loading && videos.length > 0 && (
-        <p className="mt-10 text-center text-xs text-brand-text-muted max-w-2xl mx-auto leading-relaxed">
-          {locale === 'uz'
-            ? 'Videolar tanishuv maqsadida joylashtirilgan. Aniq davolash rejasi shifokor ko‘rigida belgilanadi.'
-            : locale === 'ru'
-              ? 'Видео размещены в ознакомительных целях. Точный план лечения определяется на приёме.'
-              : 'Videos are for reference. Exact treatment plans are set at consultation.'}
-        </p>
+          <p className="mt-8 text-center text-xs text-brand-text-muted max-w-2xl mx-auto leading-relaxed">
+            {locale === 'uz'
+              ? 'Videolar tanishuv maqsadida joylashtirilgan. Aniq davolash rejasi shifokor ko‘rigida belgilanadi.'
+              : locale === 'ru'
+                ? 'Видео размещены в ознакомительных целях. Точный план лечения определяется на приёме.'
+                : 'Videos are for reference. Exact treatment plans are set at consultation.'}
+          </p>
         )}
       </div>
 
@@ -123,7 +116,7 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
               initial={{ opacity: 0, scale: 0.96, y: 12 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 12 }}
-              className="relative w-full max-w-4xl bg-brand-white rounded-2xl overflow-hidden shadow-2xl border border-brand-sectiongray"
+              className="relative w-full max-w-sm bg-brand-white rounded-2xl overflow-hidden shadow-2xl border border-brand-sectiongray"
             >
               <button
                 type="button"
@@ -137,11 +130,11 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
                 src={activeVideo.src}
                 controls
                 autoPlay
-                className="w-full aspect-video bg-black"
+                className="w-full aspect-[9/16] bg-black object-cover"
                 playsInline
               />
-              <div className="p-5 sm:p-6">
-                <h3 className="text-lg font-extrabold text-brand-text-primary">{activeVideo.title[locale]}</h3>
+              <div className="p-5">
+                <h3 className="text-base font-extrabold text-brand-text-primary">{activeVideo.title[locale]}</h3>
                 <p className="text-sm text-brand-text-muted mt-2 leading-relaxed">{activeVideo.description[locale]}</p>
               </div>
             </motion.div>

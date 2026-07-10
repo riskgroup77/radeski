@@ -95,7 +95,7 @@ export const TECHNOLOGIES_PAGE: AdvantagePageContent = {
         en: 'DEKA SmartXide CO2 and laser therapy',
       },
       description: {
-        uz: 'DEKA SmartXide Punto CO2 lazeri teri o\'smalarini olib tashlash, shlifovka va tiklash muolajalarida qo\'llaniladi. PinPoint lazer borma va papillomalarni minimal travma bilan davolash imkonini beradi.',
+        uz: 'DEKA SmartXide Punto CO2 lazeri teri o\'smalarini olib tashlash, shlifovka va tiklash muolajalarida qo\'llaniladi. PinPoint lazer so\'gal va papillomalarni minimal travma bilan davolash imkonini beradi.',
         ru: 'Лазер DEKA SmartXide Punto CO2 используется для удаления новообразований, шлифовки и восстановительных процедур. Лазер PinPoint — лечение бородавок и папиллом с минимальной травмой.',
         en: 'DEKA SmartXide Punto CO2 laser removes lesions, resurfaces and supports restorative procedures. PinPoint laser treats warts and papillomas with minimal trauma.',
       },

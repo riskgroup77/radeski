@@ -30,6 +30,7 @@ interface ClinicEquipmentSectionProps {
   locale: Locale;
   category: ServiceCategory;
   prices?: PriceItem[];
+  embedded?: boolean;
 }
 
 function EquipmentDetailPanel({
@@ -226,6 +227,7 @@ export default function ClinicEquipmentSection({
   locale,
   category,
   prices,
+  embedded = false,
 }: ClinicEquipmentSectionProps) {
   const labels = getEquipmentSectionLabels(locale);
   const equipmentList = getCategoryEquipmentList(category.id);
@@ -233,15 +235,8 @@ export default function ClinicEquipmentSection({
 
   if (equipmentList.length === 0) return null;
 
-  return (
-    <section className="mt-6">
-      <h4 className="flex items-center gap-2 text-sm font-bold text-brand-text-primary mb-1">
-        <Cpu className="w-4 h-4 text-brand-gold shrink-0" />
-        {labels.sectionTitle}
-      </h4>
-      <p className="text-xs text-brand-text-muted font-light mb-3 max-w-3xl">{labels.hint}</p>
-
-      <div className="space-y-3">
+  const list = (
+    <div className="space-y-3">
         {equipmentList.map((entry) => {
           const isOpen = openId === entry.id;
           const title = getLocalizedEquipmentText(entry.title, locale);
@@ -298,7 +293,19 @@ export default function ClinicEquipmentSection({
             </article>
           );
         })}
-      </div>
+    </div>
+  );
+
+  if (embedded) return list;
+
+  return (
+    <section className="mt-6">
+      <h4 className="flex items-center gap-2 text-sm font-bold text-brand-text-primary mb-1">
+        <Cpu className="w-4 h-4 text-brand-gold shrink-0" />
+        {labels.sectionTitle}
+      </h4>
+      <p className="text-xs text-brand-text-muted font-light mb-3 max-w-3xl">{labels.hint}</p>
+      {list}
     </section>
   );
 }

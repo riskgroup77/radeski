@@ -225,7 +225,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
           'Teridagi xollar o\'zgarishi melanoma belgisi bo\'lishi mumkin. Dermatoskopiya yordamida xavfli o\'zgarishlarni erta aniqlash mumkin.',
       },
       {
-        title: 'Papilloma va borma',
+        title: 'Papilloma va so\'gal',
         description:
           'Virus (HPV) sababli o\'simalar paydo bo\'ladi. Dermatoskopik ko\'rik va kerak bo\'lsa biopsiya bilan aniq tashxis qo\'yiladi.',
       },

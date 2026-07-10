@@ -53,7 +53,6 @@ import VideosPage from './components/VideosPage';
 import BranchesPage from './components/BranchesPage';
 import TechnologiesPage from './components/TechnologiesPage';
 import ClinicEquipmentParkPage from './components/ClinicEquipmentParkPage';
-import ClinicAdvantagesCards from './components/ClinicAdvantagesCards';
 import ResultsPage from './components/ResultsPage';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
@@ -81,6 +80,7 @@ import CustomerReviewsSection from './components/CustomerReviewsSection';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
+import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
 
 export default function App() {
   return (
@@ -117,6 +117,12 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
   const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
+  const legacyContactsRedirect =
+    !forcePage && location.pathname.split('/').filter(Boolean)[1] === 'contacts';
+
+  if (legacyContactsRedirect && parsedLocale) {
+    return <Navigate to={pagePath(parsedLocale, 'branches')} replace />;
+  }
 
   const changeLocale = (nextLocale: Locale) => {
     saveLocale(nextLocale);
@@ -146,6 +152,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     videos: cmsVideos,
     clinicRatings: cmsClinicRatings,
     loading: cmsLoading,
+    error: cmsError,
     clientCount: cmsClientCount,
     refetch: refetchCms,
   } = useCmsData();
@@ -314,11 +321,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           desc: "Teri parvarishi, akne, psoriaz, o'smalarni erta aniqlash va teri sog'ligini saqlash bo'yicha shifokorlarimiz tomonidan yozilgan ilmiy va ommabop maqolalar.",
           keywords: "Tibbiy maqolalar, teri parvarishi, akne davolash maslahatlari, psoriazni nazorat qilish, trixologiya maqolalari"
         },
-        contacts: {
-          title: "Rasmiy Manzil, Google Xarita & Aloqa Telefoni | Radeski Clinic",
-          desc: "Farg'ona shahri, O'zbekiston Ovozi ko'chasi 1A. Telefon: +998 (73) 200-73-73. Klinikaga qulay yo'nalish xaritasi va ish vaqti.",
-          keywords: "Radeski kontakti, Farg'ona dermatologiya telefoni, klinika manzili, ish vaqti, elektron pochta, Google xarita"
-        },
         videos: {
           title: "Klinika Videolari & Tibbiy Xizmatlar | Radeski Clinic",
           desc: "Radeski klinikasidagi IPL terapiya va zamonaviy dermatologiya xizmatlari haqida video materiallar.",
@@ -386,11 +388,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           desc: "Научно-популярные статьи и практические рекомендации от наших практикующих врачей по дерматологии, уходу за проблемной кожей и трихологии.",
           keywords: "Полезные статьи о коже, как лечить акне, уход за сухой кожей, советы трихолога, профилактика меланомы"
         },
-        contacts: {
-          title: "Адрес, Контакты & Онлайн Карта Проезда | Radeski Clinic",
-          desc: "Адрес клиники: г. Фергана, ул. Узбекистон Овози, 1А. Телефон регистратуры: +998 (73) 200-73-73. Схема проезда на интерактивной карте, часы работы.",
-          keywords: "Контакты Радески, телефон клиники Фергана, адрес дерматологии, режим работы регистратуры, обратный звонок"
-        },
         videos: {
           title: "Видео о клинике и процедурах | Radeski Clinic",
           desc: "Видеоматериалы об IPL-терапии и современных дерматологических услугах клиники Radeski.",
@@ -457,11 +454,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           title: "Skin Advice, Pathology Blogs & Board Articles | Radeski Clinic",
           desc: "Professional health advises and skin care guidelines authored by our clinical team concerning acne, psoriasis, aging defense, and trichology.",
           keywords: "Medical articles, dermatology blog, psoriasis management, skin moisture tips, hair care guidelines"
-        },
-        contacts: {
-          title: "Office Location, Support Hotline & Contact Address | Radeski",
-          desc: "Located at 1A Uzbekiston Ovozi Street, Fergana. Dedicated helpline: +998 (73) 200-73-73. Dynamic route map and convenient clinic working hours.",
-          keywords: "Radeski phone, dermatology contact, clinic location Fergana, map routing, request callback, email support"
         },
         videos: {
           title: "Clinic Videos & Procedures | Radeski Clinic",
@@ -650,6 +642,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     [dynamicDoctors],
   );
 
+  const homeServiceTeaserCategories = useMemo(
+    () => getHomeServiceTeaserCategories(dynamicServiceCategories),
+    [dynamicServiceCategories],
+  );
+
   const clinicAiContext = useMemo(
     () =>
       buildClinicAiContext(locale, {
@@ -672,15 +669,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   return (
     <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[158px] sm:pt-[136px]">
 
-      {dataError && currentPage !== 'admin' && (
+      {(dataError || cmsError) && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-3">
           <div className="site-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div className="flex items-start gap-2 text-sm text-amber-900">
               <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-              <span>{dataError}</span>
+              <span>{dataError || cmsError}</span>
             </div>
             <button
-              onClick={() => refetchClinicData()}
+              onClick={() => { void refetchClinicData(); void refetchCms(); }}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold rounded-lg cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
@@ -745,15 +742,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                 onOpenAppointment={() => handleOpenAppointmentWithService()}
                 onNavigate={goToPage}
                 clientCount={cmsClientCount}
-                doctorsCount={dynamicDoctors.length || 18}
+                doctorsCount={20}
               />
-
-              {/* Bento Grid Features / Advantages */}
-              <section id="advantages-section" className="py-16 bg-brand-white border-b border-brand-offwhite">
-                <div className="site-container">
-                  <ClinicAdvantagesCards locale={locale} dictionary={d} variant="compact" />
-                </div>
-              </section>
 
               {/* 12 Departments - Services Carousel teaser */}
               <section id="services-teaser" className="py-16 bg-brand-offwhite">
@@ -775,7 +765,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-5 xl:gap-6">
-                    {dynamicServiceCategories.slice(0, 6).map(category => (
+                    {homeServiceTeaserCategories.map(category => (
                       <div
                         key={category.id}
                         className="bg-brand-white border border-brand-sectiongray rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-lg transition-all flex flex-col overflow-hidden h-full group"
@@ -1399,89 +1389,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {currentPage === 'contacts' && (
-            <div id="contacts-page" className="py-16 bg-brand-offwhite min-h-screen">
-              <div className="site-container">
-                {/* Contact title header */}
-                <div className="text-center max-w-3xl mx-auto mb-12">
-                  <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
-                    {d.navContacts}
-                  </span>
-                  <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary tracking-tight mt-3">
-                    {locale === 'uz' ? "Biz bilan bog'laning" : locale === 'ru' ? "Свяжитесь с нами" : "Get In Touch With Us"}
-                  </h2>
-                  <p className="text-brand-text-muted mt-4 text-sm sm:text-base pr-3 pl-3">
-                    {locale === 'uz' ? "Klinikamiz manzili, telefon raqamlari yoki mutaxassislar xizmatiga oid barcha savollar bo'yicha biz bilan bevosita bog'laning." : 
-                     locale === 'ru' ? "Не стесняйтесь обращаться к нам по поводу стоимости процедур, графика врачей или адреса нашего центра." : 
-                                       "Do not hesitate to reach out to our administration desk regarding medical procedures, fee schedules, or slots."}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                  {/* Left contact card index */}
-                  <div className="bg-brand-white rounded-2xl border border-brand-sectiongray p-6 sm:p-8 shadow-sm flex flex-col justify-between">
-                    <div className="space-y-6">
-                      <div className="flex gap-4 items-start pb-5 border-b border-brand-sectiongray">
-                        <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0 mt-0.5">
-                          <MapPin className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-brand-text-primary text-sm sm:text-base mb-1">{d.addressTitle}</h4>
-                          <p className="text-brand-text-secondary text-xs sm:text-sm font-light leading-normal">{d.addressValue}</p>
-                          <span className="text-[10px] font-bold text-brand-gold tracking-tight mt-1.5 block uppercase font-mono">{locale === 'uz' ? "Yagona manzil: O'zbekiston Ovozi 1A" : "Единый адрес: Узбекистон Овози 1А"}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-4 items-start pb-5 border-b border-brand-sectiongray">
-                        <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0 mt-0.5">
-                          <Phone className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-brand-text-primary text-sm sm:text-base mb-1">{d.phoneTitle}</h4>
-                          <a href="tel:+998732007373" className="text-brand-text-primary text-xs sm:text-sm font-semibold hover:text-brand-gold-dark transition-colors font-mono">
-                            +998 (73) 200-73-73
-                          </a>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-4 items-start">
-                        <div className="w-10 h-10 bg-brand-gold-light/10 rounded-xl flex items-center justify-center text-brand-gold border border-brand-gold-light/20 shrink-0 mt-0.5">
-                          <Clock className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-brand-text-primary text-sm sm:text-base mb-1">{d.workingHoursTitle}</h4>
-                          <p className="text-brand-text-secondary text-xs sm:text-sm font-light leading-normal">{d.workingHoursValue}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-8 pt-6 border-t border-brand-sectiongray">
-                      <button
-                        onClick={() => handleOpenAppointmentWithService()}
-                        className="w-full py-3 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl transition-all cursor-pointer shadow-md text-center"
-                      >
-                        {d.appointmentBtn}
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Right big xarita maps col */}
-                  <div className="bg-brand-white rounded-2xl border border-brand-sectiongray p-4 shadow-sm h-[320px] sm:h-auto overflow-hidden">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.0022026857106!2d71.7864115!3d40.3864115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb83461413146b%3A0xe5aef1cb446faab4!2zNSwgTyd6YmVraXN0b24gT3Zvemkga28nY2hhc2ksIEZhcmdvbmEsIE96YmVraXN0YW4!5e0!3m2!1sen!2s!4v1718300000000!5m2!1sen!2s" 
-                      width="100%" 
-                      height="100%" 
-                      style={{ border: 0, borderRadius: '0.75rem' }} 
-                      allowFullScreen={true} 
-                      loading="lazy" 
-                      referrerPolicy="no-referrer-when-downgrade"
-                      id="contacts-route-map"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </motion.main>
       </AnimatePresence>
 

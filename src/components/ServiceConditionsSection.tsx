@@ -28,6 +28,7 @@ interface ServiceConditionsSectionProps {
   sub?: ServiceDetail;
   items: ServiceConditionTopic[];
   title: string;
+  embedded?: boolean;
 }
 
 function ConditionDetailBody({
@@ -300,6 +301,7 @@ export default function ServiceConditionsSection({
   sub,
   items,
   title,
+  embedded = false,
 }: ServiceConditionsSectionProps) {
   const labels = getConditionSectionLabels(locale);
   const subCatalogKey = sub ? findSubServiceCatalogKey(sub, category) : null;
@@ -307,15 +309,8 @@ export default function ServiceConditionsSection({
 
   if (items.length === 0) return null;
 
-  return (
-    <section className="mt-6">
-      <h4 className="flex items-center gap-2 text-sm font-bold text-brand-text-primary mb-1">
-        <HeartPulse className="w-4 h-4 text-brand-gold shrink-0" />
-        {title}
-      </h4>
-      <p className="text-xs text-brand-text-muted font-light mb-3 max-w-3xl">{labels.hint}</p>
-
-      <div className="space-y-3">
+  const list = (
+    <div className="space-y-3">
         {items.map((item, index) => {
           const itemId = item.id ?? `${index}`;
 
@@ -345,7 +340,23 @@ export default function ServiceConditionsSection({
             </article>
           );
         })}
-      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {embedded ? (
+        list
+      ) : (
+        <section className="mt-6">
+          <h4 className="flex items-center gap-2 text-sm font-bold text-brand-text-primary mb-1">
+            <HeartPulse className="w-4 h-4 text-brand-gold shrink-0" />
+            {title}
+          </h4>
+          <p className="text-xs text-brand-text-muted font-light mb-3 max-w-3xl">{labels.hint}</p>
+          {list}
+        </section>
+      )}
 
       {selectedCondition && (
         <AnimatePresence>
@@ -360,6 +371,6 @@ export default function ServiceConditionsSection({
           />
         </AnimatePresence>
       )}
-    </section>
+    </>
   );
 }

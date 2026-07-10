@@ -76,29 +76,11 @@ async function loadRows() {
     }
   }
 
-  let openpyxl;
-  try {
-    const { execSync } = await import("child_process");
-    execSync("python -c \"import openpyxl\"", { stdio: "ignore" });
-  } catch {
-    throw new Error("openpyxl required: pip install openpyxl");
-  }
-
-  const pyScript = `
-import json, openpyxl
-wb = openpyxl.load_workbook(r'''${xlsxPath.replace(/\\/g, "\\\\")}''', data_only=True)
-ws = wb.active
-rows = []
-for row in ws.iter_rows(min_row=1, max_row=ws.max_row, values_only=True):
-    cells = [None if c is None else str(c).strip() for c in row]
-    if any(c for c in cells if c):
-        rows.append(cells)
-with open(r'''${parsedJsonPath.replace(/\\/g, "\\\\")}''', 'w', encoding='utf-8') as f:
-    json.dump(rows, f, ensure_ascii=False, indent=2)
-print(len(rows))
-`;
   const { execSync } = await import("child_process");
-  execSync(`python -c ${JSON.stringify(pyScript)}`, { stdio: "inherit", cwd: root });
+  execSync(`python "${path.join(__dirname, "parse_excel.py")}" "${xlsxPath}" "${parsedJsonPath}"`, {
+    stdio: "inherit",
+    cwd: root,
+  });
   return JSON.parse(fs.readFileSync(parsedJsonPath, "utf8"));
 }
 

@@ -55,58 +55,15 @@ function clinicAdvantagesSection(
   return {
     id: 'clinic-advantages',
     title: L(
-      'Nima uchun Radeski klinikasi?',
-      'Почему клиника Radeski?',
-      'Why Radeski Clinic?',
-    ),
-    intro: L(
-      'Radeski Skin & Aesthetic Clinic — Farg\'onada xalqaro standartdagi dermatologiya va kosmetologiya markazi. Har bir muolaja malakali shifokor nazoratida, steril sharoitda va sertifikatlangan uskunalar yordamida o\'tkaziladi.',
-      'Radeski Skin & Aesthetic Clinic — дерматологический и косметологический центр международного уровня в Фергане. Каждая процедура проводится под контролем квалифицированных врачей в стерильных условиях на сертифицированном оборудовании.',
-      'Radeski Skin & Aesthetic Clinic is an international-standard dermatology and aesthetic center in Fergana. Every procedure is performed under qualified physician supervision in sterile conditions with certified equipment.',
+      'Nima uchun Radeski?',
+      'Почему Radeski?',
+      'Why Radeski?',
     ),
     subsections: [
       {
         title: equipmentTitle,
-        paragraphs: equipmentParagraphs,
+        paragraphs: equipmentParagraphs.slice(0, 1),
         bullets: equipmentBullets,
-      },
-      {
-        title: L(
-          'Malakali shifokorlar va individual yondashuv',
-          'Квалифицированные врачи и индивидуальный подход',
-          'Qualified physicians and individualized care',
-        ),
-        paragraphs: [
-          L(
-            'Klinikamizda dermatologlar, kosmetologlar, trixologlar va podologlar ishlaydi. Har bir bemor uchun anamnez olinadi, teri yoki tirnoq holati baholanadi va xavfsizlik cheklovlari hisobga olinadi.',
-            'В клинике работают дерматологи, косметологи, трихологи и подологи. Для каждого пациента собирается анамнез, оценивается состояние кожи или ногтей с учётом противопоказаний.',
-            'Our team includes dermatologists, cosmetologists, trichologists and podiatrists. Each patient receives a full assessment with safety contraindications considered.',
-          ),
-        ],
-        bullets: [
-          L('Dermatolog va kosmetolog konsultatsiyasi', 'Консультация дерматолога и косметолога', 'Dermatologist and cosmetologist consultation'),
-          L('Individual protokol va kurs rejasi', 'Индивидуальный протокол и план курса', 'Individual protocol and course plan'),
-          L('Natijani kuzatish va tavsiyalar', 'Контроль результата и рекомендации', 'Outcome monitoring and follow-up advice'),
-        ],
-      },
-      {
-        title: L(
-          'Sterillik va xavfsizlik standartlari',
-          'Стерильность и стандарты безопасности',
-          'Sterility and safety standards',
-        ),
-        paragraphs: [
-          L(
-            'Muolajalar maxsus steril xonalarda o\'tkaziladi. Bir martalik sarf materiallar, dezinfeksiya va sanitariya protokollari qat\'iy rioya qilinadi. Beemor xavfsizligi — ustuvor tamoyil.',
-            'Процедуры проводятся в специально оборудованных стерильных кабинетах. Одноразовые материалы, дезинфекция и санитарные протоколы строго соблюдаются. Безопасность пациента — приоритет.',
-            'Procedures are performed in dedicated sterile treatment rooms. Single-use materials, disinfection and sanitation protocols are strictly followed. Patient safety is our priority.',
-          ),
-        ],
-        bullets: [
-          L('Bir martalik asbob va sarf materiallar', 'Одноразовые инструменты и расходники', 'Single-use instruments and supplies'),
-          L('Klinika sanitariya nazorati', 'Санитарный контроль клиники', 'Clinic sanitation monitoring'),
-          L('Muolajadan keyin parvarish ko\'rsatmalari', 'Рекомендации по уходу после процедуры', 'Post-procedure care instructions'),
-        ],
       },
     ],
   };
@@ -123,32 +80,13 @@ function recoverySection(
       'Восстановление и уход',
       'Recovery and aftercare',
     ),
-    intro: L(
-      'Muolajadan keyingi parvarish natijani mustahkamlash va asoratlarni oldini olish uchun muhim. Quyidagi tavsiyalarga rioya qiling.',
-      'Послепроцедурный уход важен для закрепления результата и предотвращения осложнений. Соблюдайте рекомендации врача.',
-      'Post-procedure care is essential to maintain results and prevent complications. Follow your physician\'s recommendations.',
-    ),
     subsections: [
       {
         title: L('Parvarish tavsiyalari', 'Рекомендации по уходу', 'Aftercare recommendations'),
-        paragraphs: [
-          L(
-            'Shifokor ko\'rsatmalariga qat\'iy amal qiling. Kerak bo\'lsa, nazorat ko\'rigiga keling.',
-            'Строго следуйте назначениям врача. При необходимости приходите на контрольный осмотр.',
-            'Strictly follow physician instructions. Attend follow-up visits when recommended.',
-          ),
-        ],
         bullets: aftercareBullets,
       },
       {
         title: L('Qarshi ko\'rsatmalar', 'Противопоказания', 'Contraindications'),
-        paragraphs: [
-          L(
-            'Quyidagi holatlarda muolaja qoldirilishi yoki kechiktirilishi mumkin. Konsultatsiyada shifokorga barcha kasalliklar va dori-darmonlaringiz haqida xabar bering.',
-            'При следующих состояниях процедура может быть отложена или противопоказана. На консультации сообщите врачу обо всех заболеваниях и принимаемых препаратах.',
-            'The procedure may be postponed or contraindicated in the following cases. Tell your physician about all conditions and medications at consultation.',
-          ),
-        ],
         bullets: contraindicationBullets,
       },
     ],
@@ -170,11 +108,6 @@ const PROMO_DERMATASKOPIYA: PromoPageContent = {
           'Bu tekshiruv og\'riqsiz, invaziv emas va melanoma hamda boshqa xavfli o\'zgarishlarni erta bosqichda aniqlashga yordam beradi. Dermatolog ko\'rigi bilan birgalikda aniq tashxis va keyingi harakatlar rejasi tuziladi.',
           'Обследование безболезненное, неинвазивное и помогает выявить меланому и другие опасные изменения на ранней стадии. Вместе с осмотром дерматолога формируется точный диагноз и план дальнейших действий.',
           'The exam is painless, non-invasive and helps detect melanoma and other dangerous changes early. Combined with a dermatologist visit, it leads to accurate diagnosis and next steps.',
-        ),
-        L(
-          'Farg\'onada Radeski klinikasi teri diagnostikasi bo\'yicha xalqaro standartlarga mos xizmat ko\'rsatadi. Kerak bo\'lsa, raqamli dermatoskopiya va teri pasporti xizmati ham mavjud.',
-          'В Фергане клиника Radeski предоставляет диагностику кожи по международным стандартам. При необходимости доступна цифровая дерматоскопия и услуга «паспорт кожи».',
-          'In Fergana, Radeski Clinic offers skin diagnostics to international standards. Digital dermatoscopy and skin passport services are available when needed.',
         ),
       ],
     },
@@ -213,22 +146,6 @@ const PROMO_DERMATASKOPIYA: PromoPageContent = {
             L('Rang bir xil emas (qora, jigarrang, qizil)', 'Неравномерный цвет (чёрный, коричневый, красный)', 'Uneven color (black, brown, red)'),
             L('Diametr 6 mm dan katta', 'Диаметр более 6 мм', 'Diameter greater than 6 mm'),
             L('Vaqt o\'tishi bilan o\'zgarish (Evolution)', 'Изменение со временем (Evolution)', 'Change over time (Evolution)'),
-          ],
-        },
-        {
-          title: L('Qachon shifokorga murojaat qilish kerak?', 'Когда обратиться к врачу?', 'When to visit a doctor?'),
-          paragraphs: [
-            L(
-              'Shubhali o\'zgarishni sezganingizda kechiktirmang. Erta diagnostika — eng samarali himoya.',
-              'Не откладывайте визит при подозрительных изменениях. Ранняя диагностика — лучшая защита.',
-              'Do not delay if you notice suspicious changes. Early diagnosis is the best protection.',
-            ),
-          ],
-          bullets: [
-            L('Hol qichishadi, qonaydi yoki og\'riyapti', 'Родинка чешется, кровоточит или болит', 'Mole itches, bleeds or hurts'),
-            L('Tez o\'sib bormoqda', 'Быстро увеличивается в размере', 'Rapidly growing in size'),
-            L('Rangi yoki shakli o\'zgardi', 'Изменился цвет или форма', 'Color or shape has changed'),
-            L('Yillik profilaktik ko\'rik vaqti keldi', 'Настало время ежегодного профилактического осмотра', 'Time for annual preventive check-up'),
           ],
         },
       ],
@@ -364,14 +281,6 @@ const PROMO_DERMATASKOPIYA: PromoPageContent = {
           ),
         },
         {
-          question: L('Dermatoskopiya nima?', 'Что такое дерматоскопия?', 'What is dermatoscopy?'),
-          answer: L(
-            'Bu teridagi hol va o\'smalarni kattalashtirilgan optik uskunada ko\'rib chiqish usuli. Shifokor tuzilma, rang va chegaralarni batafsil baholaydi.',
-            'Это метод осмотра родинок и новообразований с оптическим увеличением. Врач детально оценивает структуру, цвет и границы.',
-            'It is an examination of moles and lesions using optical magnification. The physician evaluates structure, color and borders in detail.',
-          ),
-        },
-        {
           question: L('Biopsiya har doim kerakmi?', 'Всегда ли нужна биопсия?', 'Is biopsy always needed?'),
           answer: L(
             'Yo\'q. Ko\'pchilik holatlar dermatoskop orqali xavfsiz deb baholanadi va kuzatish yetarli. Biopsiya faqat shubhali o\'zgarishlarda tavsiya etiladi.',
@@ -500,7 +409,7 @@ const PROMO_IPL: PromoPageContent = {
     ),
     {
       id: 'faq',
-      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'FAQ'),
+      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'),
       faq: [
         { question: L('IPL og\'riqlimi?', 'Болезненна ли IPL?', 'Is IPL painful?'), answer: L('Yengil igna sanchishi yoki issiqlik hissi bo\'lishi mumkin. Ko\'pchilik bemorlar yengil deb baholaydi.', 'Возможно лёгкое покалывание или тепло. Большинство пациентов переносят легко.', 'Mild pinching or warmth may occur. Most patients tolerate it well.') },
         { question: L('Natija qachon ko\'rinadi?', 'Когда виден результат?', 'When are results visible?'), answer: L('Pigment dog\'lari 1–2 haftada qorayib, keyin tushadi. To\'liq natija kurs oxirida.', 'Пигментные пятна темнеют за 1–2 недели, затем отшелушиваются. Полный результат — в конце курса.', 'Pigment spots darken in 1–2 weeks then flake off. Full result at course end.') },
@@ -554,7 +463,7 @@ const PROMO_PODOLOGIYA: PromoPageContent = {
     ),
     {
       id: 'faq',
-      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'FAQ'),
+      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'),
       faq: [
         { question: L('Muolaja og\'riqlimi?', 'Болезненна ли процедура?', 'Is the procedure painful?'), answer: L('Yo\'q, aparat bilan ishlov berish og\'riqsiz. Ba\'zan yengil noqulaylik bo\'lishi mumkin.', 'Нет, аппаратная обработка безболезненна. Иногда возможен лёгкий дискомфорт.', 'No, device treatment is painless. Mild discomfort may occur.') },
         { question: L('Bir seans yetadimi?', 'Достаточно ли одного сеанса?', 'Is one session enough?'), answer: L('Zamburug\' uchun bir necha seans kerak. Shifokor individual reja tuzadi.', 'При грибке нужно несколько сеансов. Врач составляет индивидуальный план.', 'Fungus requires multiple sessions. Physician creates individual plan.') },
@@ -608,7 +517,7 @@ const PROMO_KARBON_PEELING: PromoPageContent = {
     ),
     {
       id: 'faq',
-      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'FAQ'),
+      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'),
       faq: [
         { question: L('Og\'riqlimi?', 'Болезненно ли?', 'Is it painful?'), answer: L('Yengil igna sanchishi hissi bo\'lishi mumkin, lekin ko\'pchilik yengil deb baholaydi.', 'Возможно лёгкое покалывание, большинство переносят легко.', 'Mild pinching may occur; most tolerate it well.') },
         { question: L('Natija qachon ko\'rinadi?', 'Когда виден результат?', 'When is result visible?'), answer: L('Darhol teri yorqinlashadi. To\'liq effekt 3–5 kun ichida.', 'Сияние сразу после процедуры. Полный эффект за 3–5 дней.', 'Immediate glow. Full effect within 3–5 days.') },
@@ -626,7 +535,7 @@ const PROMO_CO2_LAZER: PromoPageContent = {
       id: 'overview',
       title: L('Xizmat haqida', 'Об услуге', 'About the service'),
       paragraphs: [
-        L('CO₂ lazer bilan olib tashlash — DEKA SmartXide Punto CO₂ lazer yordamida papilloma, hol, borma va boshqa yaxshi xavfli teri o\'smalarini minimal travma bilan olib tashlash usuli.', 'Удаление CO₂-лазером — метод удаления папиллом, родинок, бородавок и других доброкачественных новообразований лазером DEKA SmartXide Punto CO₂ с минимальной травмой.', 'CO₂ laser removal uses DEKA SmartXide Punto CO₂ laser to remove papillomas, moles, warts and other benign lesions with minimal trauma.'),
+        L('CO₂ lazer bilan olib tashlash — DEKA SmartXide Punto CO₂ lazer yordamida papilloma, hol, so\'gal va boshqa xavfsiz teri o\'smalarini minimal travma bilan olib tashlash usuli.', 'Удаление CO₂-лазером — метод удаления папиллом, родинок, бородавок и других доброкачественных новообразований лазером DEKA SmartXide Punto CO₂ с минимальной травмой.', 'CO₂ laser removal uses DEKA SmartXide Punto CO₂ laser to remove papillomas, moles, warts and other benign lesions with minimal trauma.'),
         L('Lazer nur to\'qimalarni bug\'latib, qon ketishsiz kesadi. Bu usul xirurgik skalpelga nisbatan aniqroq, kamroq qon ketadi va tezroq tiklanadi.', 'Лазерный луч испаряет ткани, разрезая без кровотечения. По сравнению со скальпелем — точнее, меньше крови, быстрее заживление.', 'The laser vaporizes tissue, cutting without bleeding. Compared to scalpel — more precise, less bleeding, faster healing.'),
         L('Radeski klinikasida xirurgik dermatolog nazoratida bajariladi. Har bir o\'sma oldindan dermatoskop bilan baholanadi.', 'Выполняется под контролем хирургического дерматолога в клинике Radeski. Каждое образование предварительно оценивается дерматоскопом.', 'Performed under surgical dermatologist supervision at Radeski. Each lesion is pre-assessed with dermoscopy.'),
       ],
@@ -635,7 +544,7 @@ const PROMO_CO2_LAZER: PromoPageContent = {
       id: 'indications',
       title: L('Ko\'rsatmalar', 'Показания', 'Indications'),
       subsections: [
-        { title: L('Kim uchun kerak?', 'Кому необходимо?', 'Who needs it?'), paragraphs: [L('Yaxshi xavfli teri o\'smalari bo\'lgan bemorlar.', 'Пациенты с доброкачественными новообразованиями кожи.', 'Patients with benign skin lesions.')], bullets: [L('Papillomalar (suyakil)', 'Папилломы (бородавки)', 'Papillomas (skin tags)'), L('Hol (nevüs)', 'Родинки (невусы)', 'Moles (nevi)'), L('Seborreik keratozlar', 'Себорейные кератомы', 'Seborrheic keratoses'), L('Ksantelazmalar', 'Ксантелазмы', 'Xanthelasmas')] },
+        { title: L('Kim uchun kerak?', 'Кому необходимо?', 'Who needs it?'), paragraphs: [L('Xavfsiz teri o\'smalari bo\'lgan bemorlar.', 'Пациенты с доброкачественными новообразованиями кожи.', 'Patients with benign skin lesions.')], bullets: [L('Papilloma va so\'gallar', 'Папилломы (бородавки)', 'Papillomas (skin tags)'), L('Hol (nevus)', 'Родинки (невусы)', 'Moles (nevi)'), L('Seborreik keratozlar', 'Себорейные кератомы', 'Seborrheic keratoses'), L('Ksantelazmalar', 'Ксантелазмы', 'Xanthelasmas')] },
         { title: L('Belgilar', 'Симптомы', 'Symptoms'), paragraphs: [L('Quyidagi holatlar CO₂ lazer olib tashlash uchun ko\'rsatma.', 'Следующие состояния — показание к удалению CO₂-лазером.', 'The following indicate CO₂ laser removal.')], bullets: [L('Kosmetik noqulaylik tug\'diradigan o\'smalar', 'Образования, вызывающие эстетический дискомфорт', 'Lesions causing cosmetic discomfort'), L('Siqilish yoki jarohatlanadigan joylashuv', 'Локализация с трением или травмированием', 'Location with friction or trauma'), L('O\'sib borayotgan o\'smalar', 'Растущие образования', 'Growing lesions')] },
         { title: L('Qachon murojaat qilish kerak?', 'Когда обратиться?', 'When to visit'), paragraphs: [L('Dermatolog ko\'rigidan keyin olib tashlash rejalashtiriladi.', 'Удаление планируется после осмотра дерматолога.', 'Removal is planned after dermatologist examination.')], bullets: [L('Dermatoskop tekshiruvi o\'tkazilgandan keyin', 'После дерматоскопического обследования', 'After dermoscopic examination'), L('Shubhali o\'zgarishlar bundan mustasno — biopsiya kerak', 'Исключая подозрительные изменения — нужна биопсия', 'Except suspicious changes — biopsy needed')] },
       ],
@@ -662,7 +571,7 @@ const PROMO_CO2_LAZER: PromoPageContent = {
     ),
     {
       id: 'faq',
-      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'FAQ'),
+      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'),
       faq: [
         { question: L('Iz qoladimi?', 'Останется ли шрам?', 'Will there be a scar?'), answer: L('DEKA SmartXide aniq ishlaydi, iz minimal. Katta o\'smalarda yengil iz bo\'lishi mumkin.', 'DEKA SmartXide работает точно, рубец минимален. При крупных образованиях возможен лёгкий след.', 'DEKA SmartXide is precise; scarring is minimal. Large lesions may leave a light mark.') },
         { question: L('Og\'riqlimi?', 'Болезненно ли?', 'Is it painful?'), answer: L('Mahalliy behushlik bilan og\'riq sezilmas. Keyin yengil noqulaylik bo\'lishi mumkin.', 'При местной анестезии боли нет. Затем возможен лёгкий дискомфорт.', 'No pain with local anesthesia. Mild discomfort afterward.') },
@@ -716,7 +625,7 @@ const PROMO_QOSH_TATU: PromoPageContent = {
     ),
     {
       id: 'faq',
-      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'FAQ'),
+      title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'),
       faq: [
         { question: L('Bir seansda to\'liq yo\'qoladimi?', 'Удалится ли полностью за один сеанс?', 'Will it be fully removed in one session?'), answer: L('Yo\'q. Pigment bosqichma-bosqich ochiladi. Odatda 3–6 seans kerak.', 'Нет. Пигмент осветляется поэтапно. Обычно нужно 3–6 сеансов.', 'No. Pigment lightens gradually. Usually 3–6 sessions needed.') },
         { question: L('Qosh tuklari zararlanadimi?', 'Пострадают ли волоски бровей?', 'Will brow hairs be damaged?'), answer: L('To\'g\'ri protokolda qosh tuklari saqlanadi. Ba\'zi tuklar vaqtincha tushishi mumkin.', 'При правильном протоколе волоски сохраняются. Некоторые могут временно выпасть.', 'With proper protocol, hairs are preserved. Some may temporarily shed.') },
@@ -761,19 +670,19 @@ const PROMO_LAZER_EPILYATSIYA: PromoPageContent = {
     clinicAdvantagesSection(L('Aleksandrit lazer', 'Александритовый лазер', 'Alexandrite laser'), [L('Radeski klinikasida aleksandrit lazer — yorug\' teri va nozik tuklar uchun samarali.', 'В Radeski александритовый лазер эффективен для светлой кожи и тонких волос.', 'At Radeski, alexandrite laser is effective for fair skin and fine hair.')], [L('Integratsiyalangan sovitish', 'Встроенное охлаждение', 'Integrated cooling'), L('Malakali operator nazorati', 'Контроль квалифицированного оператора', 'Qualified operator supervision')]),
     { id: 'pricing', title: L('Narxlar', 'Цены', 'Pricing'), tiers: [{ label: L('Ayollar oyoqlari (to\'liq)', 'Женские ноги полностью', 'Women\'s legs full'), value: L('550 000 so\'m', '550 000 сум', '550,000 UZS') }, { label: L('Oyoq to\'piqdan tizzagacha (50%)', 'Ноги от стопы до колена', 'Legs ankle to knee'), value: L('300 000 so\'m', '300 000 сум', '300,000 UZS') }] },
     recoverySection([L('48 soat issiq vannadan saqlaning', 'Избегайте горячей ванны 48 часов', 'No hot bath 48 hours'), L('SPF 30+', 'SPF 30+', 'SPF 30+'), L('Qizilishda sovuq kompress', 'Холодный компресс при покраснении', 'Cold compress if redness')], [L('Homiladorlik', 'Беременность', 'Pregnancy'), L('Faol herpes', 'Активный герпес', 'Active herpes'), L('Yaqinda quyosh kuyishi', 'Недавний загар', 'Recent tanning')]),
-    { id: 'faq', title: L('FAQ', 'FAQ', 'FAQ'), faq: [{ question: L('Nechta seans kerak?', 'Сколько сеансов?', 'How many sessions?'), answer: L('Odatda 6–8 seans, tuk turi va zonaga bog\'liq.', 'Обычно 6–8 сеансов, зависит от типа волос и зоны.', 'Usually 6–8 sessions depending on hair and zone.') }, { question: L('Og\'riqlimi?', 'Болезненно?', 'Painful?'), answer: L('Yengil qisqich hissi. Sovitish yordam beradi.', 'Лёгкое покалывание. Охлаждение помогает.', 'Mild pinching. Cooling helps.') }] },
+    { id: 'faq', title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'), faq: [{ question: L('Nechta seans kerak?', 'Сколько сеансов?', 'How many sessions?'), answer: L('Odatda 6–8 seans, tuk turi va zonaga bog\'liq.', 'Обычно 6–8 сеансов, зависит от типа волос и зоны.', 'Usually 6–8 sessions depending on hair and zone.') }, { question: L('Og\'riqlimi?', 'Болезненно?', 'Painful?'), answer: L('Yengil qisqich hissi. Sovitish yordam beradi.', 'Лёгкое покалывание. Охлаждение помогает.', 'Mild pinching. Cooling helps.') }] },
   ],
 };
 
 const PROMO_SOCH_MEZOTERAPIYA: PromoPageContent = {
   sections: [
     { id: 'overview', title: L('Xizmat haqida', 'Об услуге', 'About'), paragraphs: [L('Soch mezoterapiyasi — vitamin, aminokislota va peptid komplekslarini bosh terisiga mikroinjektsiya qilish. Folikulalar oziqlantiriladi, to\'kilish kamayadi.', 'Мезотерапия волос — микроинъекции витаминных и пептидных комплексов в кожу головы. Фолликулы питаются, выпадение снижается.', 'Hair mesotherapy delivers vitamin and peptide complexes into the scalp. Follicles are nourished, shedding decreases.'), L('Radeski trixologiya markazida individual kokteyl va trixoskopik nazorat bilan amalga oshiriladi.', 'В трихологическом центре Radeski с индивидуальным коктейлем и трихоскопическим контролем.', 'At Radeski trichology center with individual cocktail and trichoscopy monitoring.')] },
-    { id: 'indications', title: L('Ko\'rsatmalar', 'Показания', 'Indications'), subsections: [{ title: L('Belgilar', 'Симптомы', 'Symptoms'), paragraphs: [L('Soch sifati yomonlashganda.', 'При ухудшении качества волос.', 'When hair quality worsens.')], bullets: [L('Soch to\'kilishi', 'Выпадение волос', 'Hair loss'), L('Zariflash', 'Истончение', 'Thinning'), L('Quruq bosh terisi', 'Сухая кожа головы', 'Dry scalp')] }] },
+    { id: 'indications', title: L('Ko\'rsatmalar', 'Показания', 'Indications'), subsections: [{ title: L('Belgilar', 'Симптомы', 'Symptoms'), paragraphs: [L('Soch sifati yomonlashganda.', 'При ухудшении качества волос.', 'When hair quality worsens.')], bullets: [L('Soch to\'kilishi', 'Выпадение волос', 'Hair loss'), L('Soch siyraklashishi', 'Истончение', 'Thinning'), L('Quruq bosh terisi', 'Сухая кожа головы', 'Dry scalp')] }] },
     { id: 'protocol', title: L('Bosqichlar', 'Этапы', 'Steps'), steps: [{ title: L('1. Trixoskopiya', '1. Трихоскопия', '1. Trichoscopy'), description: L('Folikul holati baholanadi.', 'Оценка состояния фолликулов.', 'Follicle assessment.'), details: [] }, { title: L('2. Mezoterapiya', '2. Мезотерапия', '2. Mesotherapy'), description: L('Bosh terisiga mikroinjektsiyalar.', 'Микроинъекции в кожу головы.', 'Microinjections into scalp.'), details: [L('400 000 – 480 000 so\'m oralig\'i', '400 000 – 480 000 сум', '400,000 – 480,000 UZS')] }, { title: L('3. Kurs', '3. Курс', '3. Course'), description: L('Odatda 4–8 seans, 2 hafta oralig\'ida.', 'Обычно 4–8 сеансов с интервалом 2 недели.', 'Usually 4–8 sessions every 2 weeks.'), details: [] }] },
     clinicAdvantagesSection(L('Trixologiya markazi', 'Трихологический центр', 'Trichology center'), [L('Kompyuter trixoskopiyasi va AI tahlil imkoniyati.', 'Компьютерная трихоскопия и ИИ-анализ.', 'Computer trichoscopy and AI analysis.')], [L('Sertifikatlangan trixolog', 'Сертифицированный трихолог', 'Certified trichologist')]),
     { id: 'pricing', title: L('Narxlar', 'Цены', 'Pricing'), tiers: [{ label: L('Soch mezoterapiyasi (1 seans)', 'Мезотерапия волос (1 сеанс)', 'Hair mesotherapy (1 session)'), value: L('400 000 – 480 000 so\'m', '400 000 – 480 000 сум', '400,000 – 480,000 UZS'), note: L('Preparat turiga bog\'liq', 'Зависит от препарата', 'Depends on product') }] },
     recoverySection([L('24 soat bosh yuvmay turing', 'Не мойте голову 24 часа', 'No hair wash 24 hours'), L('Sauna va basseyn 3 kun', 'Сауна и бассейн 3 дня', 'No sauna/pool 3 days')], [L('Faol infeksiya', 'Активная инфекция', 'Active infection'), L('Qon ivish buzilishi', 'Нарушения свёртываемости', 'Coagulation disorders')]),
-    { id: 'faq', title: L('FAQ', 'FAQ', 'FAQ'), faq: [{ question: L('Qachon natija?', 'Когда результат?', 'When results?'), answer: L('2–3 seansdan keyin seziladi, to\'liq kursdan keyin mustahkamlanadi.', 'Заметно после 2–3 сеансов, закрепляется после курса.', 'Noticeable after 2–3 sessions, consolidated after full course.') }] },
+    { id: 'faq', title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'), faq: [{ question: L('Qachon natija?', 'Когда результат?', 'When results?'), answer: L('2–3 seansdan keyin seziladi, to\'liq kursdan keyin mustahkamlanadi.', 'Заметно после 2–3 сеансов, закрепляется после курса.', 'Noticeable after 2–3 sessions, consolidated after full course.') }] },
   ],
 };
 
@@ -785,7 +694,7 @@ const PROMO_FOTOTERAPIYA: PromoPageContent = {
     clinicAdvantagesSection(L('UVB 311 nm kabineti', 'Кабинет УФB 311 нм', 'UVB 311 nm cabinet'), [L('Tor spektrli UVB — minimal yon ta\'sir.', 'Узкополосное УФB — минимальные побочные эффекты.', 'Narrow-band UVB — minimal side effects.')], [L('Dermatolog nazorati', 'Контроль дерматолога', 'Dermatologist supervision')]),
     { id: 'pricing', title: L('Narxlar', 'Цены', 'Pricing'), tiers: [{ label: L('Fototerapiya (1 seans)', 'Фототерапия (1 сеанс)', 'Phototherapy (1 session)'), value: L('70 000 so\'m', '70 000 сум', '70,000 UZS') }, { label: L('6 seans paketi', 'Пакет 6 сеансов', '6-session package'), value: L('300 000 so\'m', '300 000 сум', '300,000 UZS') }] },
     recoverySection([L('Seansdan keyin namlantiruvchi krem', 'Увлажняющий крем после сеанса', 'Moisturizer after session'), L('Qo\'shimcha quyoshdan saqlaning', 'Дополнительная защита от солнца', 'Extra sun protection')], [L('Teri saratoni tarixi', 'История рака кожи', 'Skin cancer history'), L('Fotosensitiv dorilar', 'Фотосенсибилизирующие препараты', 'Photosensitizing drugs')]),
-    { id: 'faq', title: L('FAQ', 'FAQ', 'FAQ'), faq: [{ question: L('Xavflimi?', 'Опасно ли?', 'Is it safe?'), answer: L('Dermatolog nazoratida xavfsiz. Doza individual hisoblanadi.', 'Безопасно под контролем дерматолога. Доза индивидуальна.', 'Safe under dermatologist supervision. Dose is individualized.') }] },
+    { id: 'faq', title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'), faq: [{ question: L('Xavflimi?', 'Опасно ли?', 'Is it safe?'), answer: L('Dermatolog nazoratida xavfsiz. Doza individual hisoblanadi.', 'Безопасно под контролем дерматолога. Доза индивидуальна.', 'Safe under dermatologist supervision. Dose is individualized.') }] },
   ],
 };
 
@@ -797,7 +706,7 @@ const PROMO_SOCH_EKISH: PromoPageContent = {
     clinicAdvantagesSection(L('FUE transplantatsiya', 'FUE трансплантация', 'FUE transplant'), [L('Tajribali jarroh va trixolog jamoasi.', 'Опытная команда хирурга и трихолога.', 'Experienced surgeon and trichologist team.')], [L('Individual graft rejalashtirish', 'Индивидуальное планирование графтов', 'Individual graft planning')]),
     { id: 'pricing', title: L('Narxlar', 'Цены', 'Pricing'), tiers: [{ label: L('Soch ekish (FUE)', 'Пересадка волос (FUE)', 'Hair transplant (FUE)'), value: L('7 000 000 – 12 000 000 so\'m', '7 000 000 – 12 000 000 сум', '7,000,000 – 12,000,000 UZS'), note: L('Graft soni va zona hajmiga bog\'liq', 'Зависит от числа графтов и зоны', 'Depends on graft count and zone') }] },
     recoverySection([L('Birinchi 10 kun ehtiyotkor yuvish', 'Осторожное мытьё первые 10 дней', 'Gentle washing first 10 days'), L('Sport va og\'ir ish 2 hafta cheklash', 'Ограничение спорта 2 недели', 'Limit sports 2 weeks')], [L('Faol infeksiya', 'Активная инфекция', 'Active infection'), L('Qon ivish buzilishi', 'Нарушения свёртываемости', 'Coagulation disorders')]),
-    { id: 'faq', title: L('FAQ', 'FAQ', 'FAQ'), faq: [{ question: L('Natija qachon?', 'Когда результат?', 'When results?'), answer: L('3–6 oyda o\'sish, 12 oyda to\'liq natija.', 'Рост через 3–6 месяцев, полный результат за 12 месяцев.', 'Growth at 3–6 months, full result at 12 months.') }, { question: L('Og\'riqlimi?', 'Болезненно?', 'Painful?'), answer: L('Mahalliy behushlik bilan og\'riq minimal.', 'При местной анестезии боль минимальна.', 'Minimal pain with local anesthesia.') }] },
+    { id: 'faq', title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'), faq: [{ question: L('Natija qachon?', 'Когда результат?', 'When results?'), answer: L('3–6 oyda o\'sish, 12 oyda to\'liq natija.', 'Рост через 3–6 месяцев, полный результат за 12 месяцев.', 'Growth at 3–6 months, full result at 12 months.') }, { question: L('Og\'riqlimi?', 'Болезненно?', 'Painful?'), answer: L('Mahalliy behushlik bilan og\'riq minimal.', 'При местной анестезии боль минимальна.', 'Minimal pain with local anesthesia.') }] },
   ],
 };
 
@@ -814,8 +723,40 @@ export const PROMO_PAGE_CATALOG: Record<string, PromoPageContent> = {
   'promo-soch-ekish': PROMO_SOCH_EKISH,
 };
 
+/** Batafsil sahifada ko'rsatish uchun ortiqcha bo'limlarni qisqartiradi */
+export function streamlinePromoSections(sections: PromoSection[]): PromoSection[] {
+  return sections
+    .filter((section) => section.id !== 'pricing')
+    .map((section) => {
+      if (section.id === 'overview' && section.paragraphs && section.paragraphs.length > 2) {
+        return { ...section, paragraphs: section.paragraphs.slice(0, 2) };
+      }
+
+      if (section.id === 'indications' && section.subsections && section.subsections.length > 1) {
+        const mergedBullets = section.subsections.flatMap((sub) => sub.bullets ?? []);
+        return {
+          ...section,
+          subsections: [
+            {
+              title: section.subsections[0].title,
+              bullets: mergedBullets.slice(0, 8),
+            },
+          ],
+        };
+      }
+
+      if (section.id === 'faq' && section.faq && section.faq.length > 4) {
+        return { ...section, faq: section.faq.slice(0, 4) };
+      }
+
+      return section;
+    });
+}
+
 export function getPromoPageContent(promoId: string): PromoPageContent | null {
-  return PROMO_PAGE_CATALOG[promoId] ?? null;
+  const raw = PROMO_PAGE_CATALOG[promoId];
+  if (!raw) return null;
+  return { sections: streamlinePromoSections(raw.sections) };
 }
 
 export function getPromoLocalizedText(text: PromoLocalizedText, locale: 'uz' | 'ru' | 'en'): string {
