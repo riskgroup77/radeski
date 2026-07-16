@@ -1,4 +1,7 @@
 import { ServiceCategory, Doctor, Article } from './types';
+import { ACNE_ARTICLE } from './data/articles/acneArticle';
+import { POST_ACNE_ARTICLE } from './data/articles/postAcneArticle';
+import { ROSACEA_ARTICLE } from './data/articles/rosaceaArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -525,7 +528,7 @@ export const DOCTORS: Doctor[] = [
       en: "8"
     },
     education: {
-      uz: "Andijon Davlat Tibbiyot Instituti, Moskva Soch davolash trixologiya markazi maxsus diplomi.",
+      uz: "Andijon Davlat Tibbiyot Instituti, Moskva soch kasalliklarini davolash bo'yicha trixologiya markazi maxsus diplomi.",
       ru: "Андижанский Государственный Медицинский Институт, Профессиональная переподготовка по трихологии в Москве.",
       en: "Andijan State Medical Institute, Moscow Advanced Academy of Trichology Certification."
     },
@@ -700,7 +703,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "trihologiya-centr-lechenie-volos",
     title: {
-      uz: "Soch davolash - Trixologiya",
+      uz: "Soch kasalliklarini davolash - trixologiya",
       ru: "Лечение волос - Трихология",
       en: "Trichology - Hair & Scalp Treatment"
     },
@@ -730,7 +733,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       en: "Dermato-oncology"
     },
     description: {
-      uz: "Xollar, papilloma va xavfli o'smalarni (melanoma) erta aniqlash, diagnostika va monitoring.",
+      uz: "Xollar (nevus), papilloma va xavfli o'smalarni (melanoma) erta aniqlash, diagnostika va monitoring.",
       ru: "Ранняя диагностика родинок, папиллом и злокачественных новообразований кожи (меланома). Скрининг и наблюдение.",
       en: "Early screening of skin spots, dysplastic nevi, and melanomas using modern dermoscopy markers and follow-up monitoring."
     },
@@ -875,100 +878,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
 ];
 
 export const ARTICLES: Article[] = [
-  {
-    id: "art-1",
-    slug: "papillomy-borodavki",
-    title: {
-      uz: "Papillomalar va so'gallar nima uchun xavfli?",
-      ru: "Чем опасны папилломы и бородавки?",
-      en: "Why are papillomas and warts dangerous?"
-    },
-    summary: {
-      uz: "Teridagi o'smalar shunchaki estetik muammo emas. Ularning kelib chiqishi va erta davolash nima uchun muhimligini bilib oling.",
-      ru: "Новообразования на коже - это не просто эстетический дефект. Узнайте больше об их вирусной природе и рисках их перерождения.",
-      en: "Skin growths are more than a simple aesthetic issue. Find out about their infectious nature and potential risks."
-    },
-    content: {
-      uz: "Papillomalar va so'gallar inson papillomasi virusi (HPV) sababli yuzaga keladi. Ushbu o'smalar jarohatlanganda, kiyimga ishqalanganda yoki immunitet tushib ketganda tez ko'payishi va ayrim hollarda xavfli tus olishi mumkin. Shuning uchun dermatolog nazoratida optik dermatoskop bilan tekshirilib, xavfsiz lazer, kriyodestruksiya yoki radioto'lqinlar bilan olib tashlanishi zarur. O'zboshimchalik bilan xalqona uslubda yo'qotish og'ir asoratlarga olib kelishi mumkin.",
-      ru: "Папилломы и бородавки вызываются вирусом папилломы человека (ВПЧ). При трении об одежду, случайных травмах или ослаблении иммунитета они способны быстро разрастаться и в редких случаях малигнизироваться. Именно поэтому крайне важна своевременная диагностика дерматоонкологом. Удаление жидким азотом, лазером или радиоволной в условиях клиники гарантирует безопасность и отсутствие рубцов. Категорически не рекомендуется заниматься самолечением дома.",
-      en: "Papillomas and clinical warts are directly induced by HPV strains. Chronic irritation by collared clothing or accidental surface scratching might spark local spread, cell atypia, and very rarely transition into risk zones. We recommend a computerized evaluation under certified dermatologists and removal via laser, cold nitrogen, or radiofrequency tools to prevent any permanent scarring."
-    },
-    author: {
-      uz: "Ashurov Dilshod Davlatovich",
-      ru: "Ашуров Дильшод Давлатович",
-      en: "Dr. Dilshod Davlatovich Ashurov"
-    },
-    date: "2026-05-15",
-    image: "/karusel/co2-lazer-osmalar.jpg",
-    images: {
-      uz: "/karusel/co2-lazer-osmalar.jpg",
-      ru: "/karusel/co2-lazer-osmalar.jpg",
-      en: "/karusel/co2-lazer-osmalar.jpg",
-    },
-    views: 342
-  },
-  {
-    id: "art-2",
-    slug: "gemangioma",
-    title: {
-      uz: "Gemangioma dori-darmonsiz qanday davolanadi?",
-      ru: "Как лечить гемангиомы без операции?",
-      en: "How are hemangiomas treated without surgery?"
-    },
-    summary: {
-      uz: "Qizil tomirli xollar va bolalardagi tug'ma gemangiomalarning IPL foto-terapiyasi bilan xavfsiz davolash usullari.",
-      ru: "Современное неинвазивное лечение сосудистых опухолей и красных родинок с помощью технологии избирательного света.",
-      en: "Discover modern, non-invasive treatment methods for vascular red spots and hemangiomas with pulsed light."
-    },
-    content: {
-      uz: "Gemangiomalar - qon tomirlarining haddan tashqari kengayishi yoki ko'payishidan hosil bo'ladigan xavfsiz tugunchalardir. Ilgari ularni faqat jarrohlik yoki kuchli kislotalar yordamida olib tashlashar edi. Bugungi kunda klinikada yangi IPL Sciton tizimi yordamida qon tomirlarga yo'naltirilgan nur yuborilib, sog'lom teri qatlamiga deyarli tegmasdan gemangiomalar yo'q qilinadi. Bemor hech qanday og'riq sezmaydi va chandiqlar qolmaydi.",
-      ru: "Гемангиомы представляют собой доброкачественные разрастания сосудов. Ранее для их удаления требовалось иссечение или жидкий азот, оставляющий ожоги. В нашей клинике применяется лазерная коагуляция и прогрессивные световые системы Sciton IPL. Световые волны селективно нагревают и склеивают пораженные сосуды, после чего гемангиома постепенно рассасывается без повреждения окружающих тканей.",
-      en: "Hemangiomas represent rapid benign vascular clustering. Traditional treatment relied heavily on liquid nitrogen or surgery, leaving noticeable scars. Today, our highly selective IPL light wavelength directly heats the feeding vessels, causing safe collapse and eventual natural absorption of the red spot, preserving neighboring skin."
-    },
-    author: {
-      uz: "Yo'qubov Farrux Farhodjonovich",
-      ru: "Якубов Фаррух Фарходжонович",
-      en: "Dr. Farrukh Farhodjonovich Yoqubov"
-    },
-    date: "2026-05-28",
-    image: "/karusel/ipl.webp",
-    images: {
-      uz: "/karusel/ipl.webp",
-      ru: "/karusel/ipl.webp",
-      en: "/karusel/ipl.webp",
-    },
-    views: 290
-  },
-  {
-    id: "art-3",
-    slug: "psoriaz-psoriasis",
-    title: {
-      uz: "Psoriaz: Remissiya davrini qanday uzaytirish mumkin?",
-      ru: "Псориаз: Как продлить период ремиссии?",
-      en: "Psoriasis: Practical steps to prolong remission"
-    },
-    summary: {
-      uz: "Tizimli surunkali psoriaz kasalligini dori va fototerapiya (UVB 311) integratsiyasi orqali jilovlash choralari.",
-      ru: "Научно обоснованные методы контроля обострений чешуйчатого лишая с помощью диеты и селективной фототерапии.",
-      en: "Evidence-based methods to keep psoriasis flares under control using narrow-band UVB light and medical diets."
-    },
-    content: {
-      uz: "Psoriaz - butun dunyo bo'ylab millionlab odamlardan uchrashi mumkin bo'lgan autoimmun surunkali muammodir. Uni butunlay to'xtatib bo'lmasa-da, zamonaviy tibbiyot UVB 311nm fototerapiya va biologik dorilar yordamida teri toshmalarini butunlay tozalashi va remissiyani uzoq yillarga cho'za oladi. 'Psoriaz maktabi' dasturlarimiz orqali bemorlarga quruq teri parvarishi va to'g'ri oziqlanish sirlarini professional darajada yetkazamiz.",
-      ru: "Псориаз – это системное иммуноассоциированное заболевание. Хотя окончательно вылечить его невозможно, современные медицинские протоколы позволяют добиться очищения кожи на 95-100%. Мы комбинируем узковолновую фототерапию UVB 311 нм и таргетные биопрепараты нового поколения. В рамках нашей 'Школы псориаза' мы даем пациентам дорожную карту по диете, гидратации кожи и минимизации рисков обострений.",
-      en: "Psoriasis is a chronic systemic immune-linked condition. While a complete cure is clinically elusive, modern skin clearing of 95% is achievable through UVB 311nm phototherapy coupled with specific targeted biologics. In our clinical 'Psoriasis Patient School', we layout highly detailed diet patterns, lipid skin barriers, and stress management."
-    },
-    author: {
-      uz: "Ashurov Dilshod Davlatovich",
-      ru: "Ашуров Дильшод Давлатович",
-      en: "Dr. Dilshod Davlatovich Ashurov"
-    },
-    date: "2026-06-02",
-    image: "/karusel/fototerapiya.webp",
-    images: {
-      uz: "/karusel/fototerapiya.webp",
-      ru: "/karusel/fototerapiya.webp",
-      en: "/karusel/fototerapiya.webp",
-    },
-    views: 412
-  }
+  ACNE_ARTICLE,
+  POST_ACNE_ARTICLE,
+  ROSACEA_ARTICLE,
 ];

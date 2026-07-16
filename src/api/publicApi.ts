@@ -1,4 +1,4 @@
-import { apiRequest } from './client';
+import { apiRequest, getApiUrl } from './client';
 import {
   ApiDoctor,
   ApiServiceCategory,
@@ -21,6 +21,11 @@ import type {
 } from './cmsTypes';
 
 export async function getHealth() {
+  // On radeski.uz /health serves the SPA — probe a proxied API route instead
+  if (!getApiUrl()) {
+    await apiRequest<unknown>('/api/articles');
+    return { status: 'ok', service: 'Radeski Clinic API' };
+  }
   return apiRequest<{ status: string; service: string }>('/health');
 }
 

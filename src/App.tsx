@@ -77,6 +77,7 @@ import ArticleViewsBadge from './components/ArticleViewsBadge';
 import HomeCarousel from './components/HomeCarousel';
 import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
+import QrFeedbackPage from './components/QrFeedbackPage';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
@@ -90,6 +91,7 @@ export default function App() {
         <Route path="/" element={<RootRedirect />} />
         <Route path="/rus/*" element={<LocaleAliasRedirect locale="ru" />} />
         <Route path="/eng/*" element={<LocaleAliasRedirect locale="en" />} />
+        <Route path="/fikr" element={<Navigate to="/uz/fikr" replace />} />
         <Route path="/admin" element={<ClinicShell forcePage="admin" />} />
         <Route path="/:locale/*" element={<ClinicShell />} />
         <Route path="*" element={<RootRedirect />} />
@@ -657,6 +659,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     [locale, dynamicServiceCategories, dynamicDoctors, dynamicArticles],
   );
 
+  const isQrFeedbackPage = currentPage === 'fikr';
+
   if (invalidLocale) {
     return (
       <Navigate
@@ -667,7 +671,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   }
 
   return (
-    <div className="bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white pt-[158px] sm:pt-[136px]">
+    <div
+      className={`bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white ${
+        isQrFeedbackPage ? 'pt-0' : 'pt-[158px] sm:pt-[136px]'
+      }`}
+    >
 
       {(dataError || cmsError) && (
         <div className="bg-amber-50 border-b border-amber-200 px-4 py-3">
@@ -687,7 +695,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         </div>
       )}
 
-      {dataLoading && currentPage !== 'admin' && (
+      {dataLoading && currentPage !== 'admin' && !isQrFeedbackPage && (
         <div className="fixed inset-0 z-30 bg-white/60 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
           <div className="px-4 py-2 bg-white border border-brand-sectiongray rounded-xl shadow-sm text-sm text-brand-text-muted">
             {locale === 'uz' ? 'Ma\'lumotlar yuklanmoqda...' : locale === 'ru' ? 'Загрузка данных...' : 'Loading data...'}
@@ -696,15 +704,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       )}
 
       {/* 1. Header Navigation */}
-      <Header
-        currentPage={currentPage}
-        locale={locale}
-        onNavigate={goToPage}
-        onChangeLocale={changeLocale}
-        onOpenAppointment={() => handleOpenAppointmentWithService()}
-        serviceCategories={dynamicServiceCategories}
-        onOpenServiceCategory={goToServiceCategory}
-      />
+      {!isQrFeedbackPage && (
+        <Header
+          currentPage={currentPage}
+          locale={locale}
+          onNavigate={goToPage}
+          onChangeLocale={changeLocale}
+          onOpenAppointment={() => handleOpenAppointmentWithService()}
+          serviceCategories={dynamicServiceCategories}
+          onOpenServiceCategory={goToServiceCategory}
+        />
+      )}
 
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
@@ -834,7 +844,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     <HomeCarousel
                       items={homeDoctorsCarousel}
                       visibleCount={3}
-                      autoPlayMs={0}
+                      autoPlayMs={5000}
+                      variant="slide"
                       arrowsInside
                       getKey={(doc) => doc.id}
                       gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
@@ -1195,6 +1206,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             </div>
           )}
 
+          {currentPage === 'fikr' && (
+            <QrFeedbackPage
+              locale={locale}
+              serviceCategories={dynamicServiceCategories}
+              onSubmitReview={async (review) => {
+                await createReview(mapReviewToCreatePayload(review));
+              }}
+            />
+          )}
+
           {currentPage === 'about' && (
             <About 
               locale={locale} 
@@ -1393,14 +1414,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       </AnimatePresence>
 
       {/* 3. Global Footer block */}
-      <Footer
-        locale={locale}
-        onNavigate={goToPage}
-        onOpenAppointment={() => handleOpenAppointmentWithService()}
-        currentPage={currentPage}
-      />
+      {!isQrFeedbackPage && (
+        <Footer
+          locale={locale}
+          onNavigate={goToPage}
+          onOpenAppointment={() => handleOpenAppointmentWithService()}
+          currentPage={currentPage}
+        />
+      )}
 
-      {currentPage !== 'admin' && (
+      {currentPage !== 'admin' && !isQrFeedbackPage && (
         <ClinicAiChat locale={locale} context={clinicAiContext} />
       )}
 

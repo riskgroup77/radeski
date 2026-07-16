@@ -374,13 +374,16 @@ export default function AdminPanel({
     if (!isAuthenticated) return;
     setApiStatus('checking');
     getHealth()
-      .then(() => {
+      .then((health) => {
         setApiStatus('online');
-        setApiStatusDetail(getApiUrl());
+        const base = getApiUrl() || window.location.origin;
+        setApiStatusDetail(`${base} — ${health.service}`);
       })
-      .catch(() => {
+      .catch((err) => {
         setApiStatus('offline');
-        setApiStatusDetail(getApiUrl());
+        const base = getApiUrl() || window.location.origin;
+        const msg = err instanceof Error ? err.message : String(err);
+        setApiStatusDetail(`${base} — ${msg}`);
       });
   }, [isAuthenticated, saveSuccess]);
 
@@ -866,6 +869,8 @@ export default function AdminPanel({
         await updateArticle(articleForm.id, payload, articleImageFile);
       }
 
+      const items = await getAdminArticles();
+      setEditedArticles(enrichArticles(items.map(mapArticleFromApi)));
       await onRefresh();
       setSelectedArticleId(null);
       setIsAddingArticle(false);
@@ -1407,12 +1412,7 @@ export default function AdminPanel({
             </button>
           </form>
 
-          <p className="text-[10px] text-brand-text-muted font-light mt-6 leading-relaxed">
-            {locale === 'uz' ? "Birlamchi ma'lumotlar: login: admin, parol: radeski2026" : 
-                               "Стандартный вход: имя: admin, пароль: radeski2026"}
-          </p>
-
-          <button onClick={onClose} className="mt-4 text-[10px] text-brand-gold hover:underline flex items-center gap-1 justify-center mx-auto cursor-pointer">
+          <button onClick={onClose} className="mt-6 text-[10px] text-brand-gold hover:underline flex items-center gap-1 justify-center mx-auto cursor-pointer">
             <ArrowLeft className="w-3 h-3" />
             {locale === 'uz' ? "Saytga qaytish" : "Назад на сайт"}
           </button>

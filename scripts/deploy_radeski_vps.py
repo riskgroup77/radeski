@@ -103,8 +103,8 @@ def main() -> None:
             gzip_types text/plain text/css application/json application/javascript text/xml application/xml image/svg+xml;
             gzip_min_length 256;
 
-            location /api/chat {{
-                proxy_pass http://127.0.0.1:8787;
+            location = /api/chat {{
+                proxy_pass http://127.0.0.1:8787/api/chat;
                 proxy_http_version 1.1;
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
@@ -113,7 +113,7 @@ def main() -> None:
                 proxy_read_timeout 120s;
             }}
 
-            location /api/chat-health {{
+            location = /api/chat-health {{
                 proxy_pass http://127.0.0.1:8787/api/chat/health;
                 proxy_http_version 1.1;
                 proxy_set_header Host $host;

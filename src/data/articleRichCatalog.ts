@@ -1,4 +1,7 @@
 import type { Article, ArticleRichContent, Locale } from '../types';
+import { ACNE_ARTICLE_CATALOG } from './articles/acneArticle';
+import { POST_ACNE_ARTICLE_CATALOG } from './articles/postAcneArticle';
+import { ROSACEA_ARTICLE_CATALOG } from './articles/rosaceaArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -24,9 +27,10 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   'papilloma-warts': ['papillom', 'borodav', 'wart', 'hpv', "so'gal", 'бородав', 'папиллом', 'condylom'],
   hemangioma: ['gemangi', 'геманги', 'hemangi', 'vascular', 'qizil xol', 'angioma'],
   psoriasis: ['psoria', 'псориаз', 'psoriasis', 'lishay'],
-  acne: ['akne', 'акне', 'acne', 'post-akne', 'комедон'],
+  'post-acne': ['postakne', 'post-akne', 'постакне', 'post-acne', 'post acne', 'chandiq', 'рубц', 'scar after'],
+  acne: ['akne', 'акне', 'acne', 'комедон'],
   'atopic-dermatitis': ['ekzem', 'atop', 'экзем', 'dermatit', 'allergik'],
-  rosacea: ['rozase', 'розаце', 'rosacea', 'qizarish'],
+  rosacea: ['rozase', 'rozacea', 'розаце', 'rosacea', 'qizarish', 'derma v', 'ipl inmode'],
   vitiligo: ['vitili', 'витили', 'depigment'],
   fungal: ['zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
   'mole-screening': ['nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
@@ -675,6 +679,9 @@ const TAKEAWAYS = {
 };
 
 export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
+  acne: ACNE_ARTICLE_CATALOG,
+  'post-acne': POST_ACNE_ARTICLE_CATALOG,
+  rosacea: ROSACEA_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

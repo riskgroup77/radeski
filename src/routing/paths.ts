@@ -14,7 +14,8 @@ export type PageId =
   | 'clinic-equipment'
   | 'terms'
   | 'privacy'
-  | 'admin';
+  | 'admin'
+  | 'fikr';
 
 export const PUBLIC_PAGES: PageId[] = [
   'home',
@@ -100,7 +101,8 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'technologies' ||
     pageSegment === 'clinic-equipment' ||
     pageSegment === 'terms' ||
-    pageSegment === 'privacy'
+    pageSegment === 'privacy' ||
+    pageSegment === 'fikr'
   ) {
     return pageSegment;
   }
@@ -173,6 +175,10 @@ export function switchLocaleInPath(pathname: string, nextLocale: Locale): string
 
   segments[0] = nextLocale;
   return `/${segments.join('/')}`;
+}
+
+export function feedbackPath(locale: Locale): string {
+  return `/${locale}/fikr`;
 }
 
 export function absoluteUrl(path: string): string {

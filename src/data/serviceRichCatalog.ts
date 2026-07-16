@@ -452,12 +452,12 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
   dermatoonkologiya: {
     uz: {
       overview:
-        'Dermato-onkologiya — teridagi xollar, papillomalar va shubhali o\'smalarni erta aniqlash, diagnostika qilish va monitoring qilish yo\'nalishi. Dermatoskopiya va biopsiya bilan melanoma xavfini vaqtida baholash mumkin.',
+        'Dermato-onkologiya — teridagi xollar (nevus), papillomalar va shubhali o\'smalarni erta aniqlash, diagnostika qilish va monitoring qilish yo\'nalishi. Dermatoskopiya va biopsiya bilan melanoma xavfini vaqtida baholash mumkin.',
       indications: [
-        'Yangi paydo bo\'lgan yoki o\'zgarayotgan teri xollari',
+        'Yangi paydo bo\'lgan yoki o\'zgarayotgan teri xollari (nevus)',
         'Ko\'p sonli papilloma va so\'gallar',
         'Quyosh kuyishi tarixi va melanoma xavfi',
-        'Xol rangi, shakli yoki hajmining o\'zgarishi',
+        'Xol (nevus) rangi, shakli yoki hajmining o\'zgarishi',
         'Oilaviy melanoma anamnezi',
       ],
       solutions: [
@@ -569,7 +569,7 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
         'Dermatoskopiya maktabi — dermatolog va dermatoonkolog mutaxassislari uchun teri o\'smalarini dermatoskopik diagnostika qilish bo\'yicha amaliy o\'quv dasturi. Haqiqiy klinik holatlar va dermatoskopiya atlaslari asosida bilim oshiriladi.',
       indications: [
         'Dermatoskopiya bo\'yicha amaliy ko\'nikmalarni oshirish kerakligi',
-        'Xavfli va xavfsiz xollarni farqlashda qiyinchilik',
+        'Xavfli va xavfsiz xollarni (nevus) farqlashda qiyinchilik',
         'Raqamli diagnostika vositalaridan samarali foydalanish istagi',
         'Klinik holatlarni tahlil qilish tajribasini kengaytirish',
         'Dermatoonkologiya yo\'nalishida malaka oshirish',
@@ -1256,7 +1256,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
   biopsiya: {
     uz: {
       overview: 'Teri biopsiyasi — shubhali o\'smalardan kichik to\'qima namunasi olish va gistologik tahlil orqali aniq tashxis qo\'yish usuli. Dermatoonkologiya va dermatopatologiya hamkorligida amalga oshiriladi.',
-      indications: ['Shubhali teri o\'smasi', 'O\'zgarayotgan xol yoki dog\'', 'Xavfli dermatoskopik belgilar', 'Davomiy toshmalar noaniq tashxisda', 'Olib tashlashdan oldin tasdiqlash'],
+      indications: ['Shubhali teri o\'smasi', 'O\'zgarayotgan xol (nevus) yoki dog\'', 'Xavfli dermatoskopik belgilar', 'Davomiy toshmalar noaniq tashxisda', 'Olib tashlashdan oldin tasdiqlash'],
       solutions: ['Punch yoki insitsional biopsiya', 'Steril sharoitda namuna olish', 'Gistologik laboratoriya tahlili', 'Patolog xulosasi', 'Keyingi davolash strategiyasi'],
       benefits: ['Aniq tashxis', 'Minimal invaziv', 'Tez laboratoriya javobi', 'Xavfsiz usul', 'Mutaxassislar jamoasi'],
       process: ['Konsultatsiya va zona belgilash', 'Mahalliy behushlik', 'Biopsiya olish', 'Jarayon joyini parvarish', 'Gistologiya natijasi va keyingi qadamlar'],
@@ -1325,7 +1325,7 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
   'dermatosc-lessons': {
     uz: {
       overview: 'Praktik o\'quv darslari — dermatologlar uchun dermatoskopik diagnostika bo\'yicha amaliy mashg\'ulotlar.',
-      indications: ['Dermatoskopiya ko\'nikmalarini oshirish', 'Xavfli xollarni farqlash', 'Raqamli diagnostika o\'rganish', 'Klinik holatlar tajribasi', 'Malaka oshirish'],
+      indications: ['Dermatoskopiya ko\'nikmalarini oshirish', 'Xavfli xollarni (nevus) farqlash', 'Raqamli diagnostika o\'rganish', 'Klinik holatlar tajribasi', 'Malaka oshirish'],
       solutions: ['Amaliy seminarlar', 'Dermatoskop bilan ishlash', 'Klinik atlas tahlili', 'Ekspert bilan mashg\'ulot', 'Sertifikatlashtirish'],
       benefits: ['Amaliy tajriba', 'Zamonaviy uskunalar', 'Ekspert yo\'riqnomasi', 'Klinik holatlar bazasi', 'Malaka sertifikati'],
       process: ['Dasturga yozilish', 'Nazariy qism', 'Amaliy mashg\'ulot', 'Holatlarni tahlil qilish', 'Sertifikat va tavsiyalar'],

@@ -12,7 +12,9 @@ import {
   servicesListPath,
   getServiceCategoryIdFromPathname,
 } from '../routing/paths';
-import { getClinicMapOpenUrl } from '../config/links';
+import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY, getHeaderTopBarContacts } from '../config/clinicContacts';
+import { getClinicMapOpenUrl, KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
+import { handleHomeLogoClick } from '../utils/scrollToTop';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -45,6 +47,11 @@ export default function Header({
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const location = useLocation();
   const d = DICTIONARY[locale];
+  const topBar = getHeaderTopBarContacts(locale);
+  const ferganaMapUrl = topBar.ferganaMapUrl || getClinicMapOpenUrl();
+  const kokandMapUrl = topBar.kokandMapUrl || KOKAND_BRANCH_MAP_OPEN_URL;
+  const mapOpenLabel =
+    locale === 'ru' ? 'Открыть на карте' : locale === 'en' ? 'Open in map' : 'Xaritada ochish';
   const activeServiceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
 
   const navServiceCategories = useMemo(
@@ -253,32 +260,72 @@ export default function Header({
           : 'bg-white py-3 sm:py-4 border-b border-slate-100'
       }`}
     >
-      <div className="hidden sm:block w-full border-b border-slate-50 pb-2.5 mb-2.5 text-sm sm:text-[15px] leading-snug text-slate-600">
-        <div className="site-container flex justify-between items-center gap-6">
-          <div className="flex items-center gap-5 lg:gap-8 xl:gap-10 flex-wrap min-w-0">
-            <span className="flex items-center gap-2 font-medium">
-              <MapPin className="w-4 h-4 text-brand-gold shrink-0" />
-              Farg&apos;ona, O&apos;zbekiston Ovozi 1A
-            </span>
+      <div className="hidden sm:block w-full border-b border-slate-50 pb-2.5 mb-2.5">
+        <div className="site-container flex justify-between items-center gap-3 lg:gap-4 min-w-0">
+          <div className="header-topbar-row min-w-0 flex-1">
             <a
-              href="tel:+998732007373"
-              className="phone-call-link shrink-0 cursor-pointer"
-              aria-label={
-                locale === 'uz'
-                  ? 'Telefon qilish: +998 (73) 200-73-73'
-                  : locale === 'ru'
-                    ? 'Позвонить: +998 (73) 200-73-73'
-                    : 'Call: +998 (73) 200-73-73'
-              }
+              href={ferganaMapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={mapOpenLabel}
+              className="header-topbar-row__item header-address-link text-slate-600 font-medium"
+              aria-label={`${topBar.ferganaAddress} — ${mapOpenLabel}`}
+            >
+              <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" aria-hidden="true" />
+              <span>{topBar.ferganaAddress}</span>
+            </a>
+
+            <span className="header-topbar-row__divider" aria-hidden="true">
+              |
+            </span>
+
+            <a
+              href={`tel:${topBar.kokandPhone.tel}`}
+              className="header-topbar-row__item phone-call-link cursor-pointer"
+              aria-label={`${locale === 'ru' ? 'Позвонить' : locale === 'en' ? 'Call' : 'Telefon'}: ${topBar.kokandPhone.display}`}
             >
               <span className="phone-call-link__wrap">
-                <Phone className="w-4 h-4 shrink-0" />
-                <span className="phone-call-link__number phone-call-link__number--topbar">+998 (73) 200-73-73</span>
+                <Phone className="w-3.5 h-3.5 shrink-0" />
+                <span className="phone-call-link__number phone-call-link__number--topbar">
+                  {topBar.kokandPhone.display}
+                </span>
               </span>
             </a>
+
+            <a
+              href={`tel:${topBar.primaryPhone.tel}`}
+              className="header-topbar-row__item phone-call-link cursor-pointer"
+              aria-label={`${locale === 'ru' ? 'Позвонить' : locale === 'en' ? 'Call' : 'Telefon'}: ${topBar.primaryPhone.display}`}
+            >
+              <span className="phone-call-link__wrap">
+                <Phone className="w-3.5 h-3.5 shrink-0" />
+                <span className="phone-call-link__number phone-call-link__number--topbar">
+                  {topBar.primaryPhone.display}
+                </span>
+              </span>
+            </a>
+
+            <span className="header-topbar-row__divider" aria-hidden="true">
+              |
+            </span>
+
+            <a
+              href={kokandMapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={mapOpenLabel}
+              className="header-topbar-row__item header-address-link text-slate-600 font-medium"
+              aria-label={`${topBar.kokandAddress} — ${mapOpenLabel}`}
+            >
+              <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" aria-hidden="true" />
+              <span>{topBar.kokandAddress}</span>
+            </a>
           </div>
-          <div className="shrink-0 text-right">
-            <span className="text-brand-gold font-semibold font-mono">{d.workingHoursValue}</span>
+
+          <div className="shrink-0 text-right whitespace-nowrap">
+            <span className="text-brand-gold font-semibold font-mono text-[11px] lg:text-xs xl:text-sm">
+              {d.workingHoursValue}
+            </span>
           </div>
         </div>
       </div>
@@ -287,7 +334,13 @@ export default function Header({
         <div className="flex items-center gap-2 shrink-0 min-w-0">
           <Link
             to={pagePath(locale, 'home')}
-            onClick={() => onNavigate('home')}
+            onClick={(event) => {
+              if (currentPage === 'home') {
+                handleHomeLogoClick(event, true);
+              } else {
+                onNavigate('home');
+              }
+            }}
             className="flex items-center cursor-pointer group shrink-0"
           >
             <SiteLogo variant="header" className="group-hover:opacity-90 transition-opacity" />
@@ -375,15 +428,26 @@ export default function Header({
           </nav>
 
           <div className="border-t border-brand-sectiongray pt-4 flex flex-col gap-3">
-            <a
-              href="tel:+998732007373"
-              className="phone-call-link w-full justify-center py-3 text-sm border border-brand-gold/25 rounded-xl bg-brand-gold-light/5 hover:bg-brand-gold-light/10 cursor-pointer"
-            >
-              <span className="phone-call-link__wrap">
-                <Phone className="w-4 h-4 shrink-0" />
-                <span className="phone-call-link__number text-sm">+998 (73) 200-73-73</span>
-              </span>
-            </a>
+            <div className="grid grid-cols-1 gap-2">
+              <a
+                href={`tel:${CLINIC_PHONE_KOKAND.tel}`}
+                className="phone-call-link w-full justify-center py-3 text-sm border border-brand-gold/25 rounded-xl bg-brand-gold-light/5 hover:bg-brand-gold-light/10 cursor-pointer"
+              >
+                <span className="phone-call-link__wrap">
+                  <Phone className="w-4 h-4 shrink-0" />
+                  <span className="phone-call-link__number text-sm">{CLINIC_PHONE_KOKAND.display}</span>
+                </span>
+              </a>
+              <a
+                href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
+                className="phone-call-link w-full justify-center py-3 text-sm border border-brand-gold/25 rounded-xl bg-brand-gold-light/5 hover:bg-brand-gold-light/10 cursor-pointer"
+              >
+                <span className="phone-call-link__wrap">
+                  <Phone className="w-4 h-4 shrink-0" />
+                  <span className="phone-call-link__number text-sm">{CLINIC_PHONE_PRIMARY.display}</span>
+                </span>
+              </a>
+            </div>
             <AppointmentBookingLink
               onClick={() => setIsMobileMenuOpen(false)}
               className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--mobile w-full bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl text-center transition-colors no-underline"
@@ -397,29 +461,48 @@ export default function Header({
       <div className="sm:hidden border-t border-slate-100 bg-slate-50/95">
         <div className="site-container py-2.5 flex flex-col gap-2">
           <a
-            href={getClinicMapOpenUrl()}
+            href={ferganaMapUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-start justify-center gap-1.5 text-[11px] text-slate-700 text-center leading-snug px-1 hover:text-brand-gold transition-colors"
+            title={mapOpenLabel}
+            className="header-address-link flex items-start justify-center gap-1.5 text-[11px] text-slate-700 text-center leading-snug px-1"
+            aria-label={`${topBar.ferganaAddress} — ${mapOpenLabel}`}
           >
             <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
-            <span>{d.addressShort ?? d.addressValue}</span>
+            <span>{topBar.ferganaAddress}</span>
           </a>
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            <a
+              href={`tel:${CLINIC_PHONE_KOKAND.tel}`}
+              className="phone-call-link phone-call-link--subheader"
+              aria-label={`${CLINIC_PHONE_KOKAND.display}`}
+            >
+              <span className="phone-call-link__wrap">
+                <Phone className="w-4 h-4 shrink-0" />
+                <span className="phone-call-link__number text-sm whitespace-nowrap">{CLINIC_PHONE_KOKAND.display}</span>
+              </span>
+            </a>
+            <a
+              href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
+              className="phone-call-link phone-call-link--subheader"
+              aria-label={`${CLINIC_PHONE_PRIMARY.display}`}
+            >
+              <span className="phone-call-link__wrap">
+                <Phone className="w-4 h-4 shrink-0" />
+                <span className="phone-call-link__number text-sm whitespace-nowrap">{CLINIC_PHONE_PRIMARY.display}</span>
+              </span>
+            </a>
+          </div>
           <a
-            href="tel:+998732007373"
-            className="phone-call-link phone-call-link--subheader w-full justify-center"
-            aria-label={
-              locale === 'uz'
-                ? 'Telefon qilish: +998 (73) 200-73-73'
-                : locale === 'ru'
-                  ? 'Позвонить: +998 (73) 200-73-73'
-                  : 'Call: +998 (73) 200-73-73'
-            }
+            href={kokandMapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={mapOpenLabel}
+            className="header-address-link flex items-start justify-center gap-1.5 text-[11px] text-slate-700 text-center leading-snug px-1"
+            aria-label={`${topBar.kokandAddress} — ${mapOpenLabel}`}
           >
-            <span className="phone-call-link__wrap">
-              <Phone className="w-4 h-4 shrink-0" />
-              <span className="phone-call-link__number text-sm whitespace-nowrap">+998 (73) 200-73-73</span>
-            </span>
+            <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
+            <span>{topBar.kokandAddress}</span>
           </a>
           <p className="flex items-start justify-center gap-1.5 text-[11px] sm:text-xs text-slate-600 text-center leading-snug px-1">
             <Clock className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />

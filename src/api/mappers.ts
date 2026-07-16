@@ -314,11 +314,13 @@ export function mapArticleToCreatePayload(
     author_ru: article.author?.ru || null,
     author_en: article.author?.en || null,
     date: article.date ? `${article.date}T08:00:00Z` : null,
-    ...localizedImagesToApiPaths(article.images),
     ...mapArticleRichContentToApiFields(article.richContent),
   };
 
-  applyPreservedImageField(payload, options, article.image ?? null, article.images);
+  if (options?.preserveImage) {
+    Object.assign(payload, localizedImagesToApiPaths(article.images));
+    applyPreservedImageField(payload, options, article.image ?? null, article.images);
+  }
 
   return payload;
 }

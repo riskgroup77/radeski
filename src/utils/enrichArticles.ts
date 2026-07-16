@@ -28,6 +28,8 @@ export function enrichArticle(article: Article): Article {
     (item) => item.id === article.id || item.slug === article.slug,
   );
 
+  const fromApi = isApiArticleId(article.id);
+
   const base: Article = staticMatch
     ? {
         ...staticMatch,
@@ -35,11 +37,11 @@ export function enrichArticle(article: Article): Article {
         title: { ...staticMatch.title, ...article.title },
         author: { ...staticMatch.author, ...article.author },
         date: article.date || staticMatch.date,
-        views: isApiArticleId(article.id)
+        views: fromApi
           ? normalizeArticleViews(article.views)
           : normalizeArticleViews(article.views ?? staticMatch.views),
-        image: article.image ?? staticMatch.image,
-        images: article.images ?? staticMatch.images,
+        image: fromApi ? article.image : (article.image ?? staticMatch.image),
+        images: fromApi ? article.images : (article.images ?? staticMatch.images),
       }
     : article;
 

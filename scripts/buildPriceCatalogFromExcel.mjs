@@ -63,6 +63,91 @@ function formatPriceRaw(value) {
   return String(value).replace(".", ",");
 }
 
+const LAB_CATEGORY_DEFS = [
+  {
+    id: "laboratoriya-umumiy-klinik",
+    nameRu: "Лаборатория — общеклинические исследования",
+    match: (text) =>
+      /(общий анализ крови|общий анализ мочи|соэ|лейкоформул|тромбоцит|резус|группа крови|гемоглобин|нечипоренко|зимницкому|стаканная проба|моча по|хг в моче)/i.test(text),
+  },
+  {
+    id: "laboratoriya-siydik-va-najas",
+    nameRu: "Лаборатория — моча и кал",
+    match: (text) =>
+      /(копролог|копрограмм|кал |кала|скрытую кровь|моча|мочи|моче|осадка мочи|желчные пигменты|ацетон|микроальбумин|белок в моче|глюкоза в моче)/i.test(text),
+  },
+  {
+    id: "laboratoriya-koagulatsiya",
+    nameRu: "Лаборатория — коагулограмма и гемостаз",
+    match: (text) =>
+      /(коагул|свертываем|кровотеч|протромбин|тромбо динамика|коалиновое|ачтв|мно|пти|тромбиновое|д[ -]?димер|антитромбин|волчаноч)/i.test(text),
+  },
+  {
+    id: "laboratoriya-biokimyo",
+    nameRu: "Лаборатория — биохимия и микроэлементы",
+    match: (text) =>
+      /(алт|аст|альбумин|билирубин|глюкоз|инсулин|креатинин|мочевина|холестерин|триглицерид|аполипопротеин|железо|ферритин|трансферрин|эритропоэтин|амилаз|липаза|фосфатаза|лдг|ldg|ггт|ggt|холинэстераза|кфк|цистатин|эластаза|кальпротектин|мочевая кислота|калий|натрий|хлорид|магний|кальций|фосфор|цинк|медь|витамин|фолиевая|гомоцистеин|миоглобин|прокальцитонин|остеокальцин|кальцитонин|натрийуретический пептид|фруктозамин|индекс нома|глики|гликози|гликолизи|глюкоматдекарбоксилаза|реактивный белок|тропонин)/i.test(text),
+  },
+  {
+    id: "laboratoriya-gormonal",
+    nameRu: "Лаборатория — гормоны и репродуктивное здоровье",
+    match: (text) =>
+      /(прогестерон|dhea|дгэа|актг|кортизол|пролактин|тестостерон|ттг|тире|трийод|тироксин|т4|т3|хгч|фсг|лг|эстрадиол|эстриол|антимюллер|амг|ингибин|соматотроп|igf|igfbp|адренокортикотроп|ренин|альдостерон|паратгормон|shbg|глобулин, связывающий половые гормоны|свобод\. хорионич|гонадотропин)/i.test(text),
+  },
+  {
+    id: "laboratoriya-infektsiyalar",
+    nameRu: "Лаборатория — инфекции и серология",
+    match: (text) =>
+      /(cytomegalovirus|цмв|герпес|herpes|hiv|вич|спид|hbsag|hcv|hvc|гепатит|rw|сифилис|sars-cov|covid|rose bengal|бруцел|helicobacter|toxoplas|токсоплаз|эпштейн|ebv|igg|igm|igg\/igm|antigen|ифа|torch)/i.test(text),
+  },
+  {
+    id: "laboratoriya-immunologiya-allergiya",
+    nameRu: "Лаборатория — иммунология и аллергология",
+    match: (text) =>
+      /(антител|ана|антинуклеар|антинейтрофил|цитруллин|ревматоидный|антистрептолизин|асло|ige|iga|igm|igg$|общий ige|аллергопанел|аллерго|целиакия|аутоиммун|интерлейкин|ama m2|lkm1|lc1|cenp-b|gbm|pr3|mpo|sla\/lp|анти[- ]?тпо|анти[- ]?тг|rh-фактору)/i.test(text),
+  },
+  {
+    id: "laboratoriya-mikrobiologiya-pcr",
+    nameRu: "Лаборатория — ПЦР, бактериология и мазки",
+    match: (text) =>
+      /(пцр|рт-пцр|бак |бактериол|бакпосев|мазок|соскоб|уретр|цитолог|pap-тест|впч|секрет простаты|спермограмма|нативный мазок|лептотрихоз|мокрот|назальный секрет|совместимость|курцрока|шуварского|симса|гунера|антисперм|mar - тест|neisseria|trichomonas|gardnerella|candida|уреаплаз|микоплаз|хламид)/i.test(text),
+  },
+  {
+    id: "laboratoriya-parazitologiya-mikologiya",
+    nameRu: "Лаборатория — паразитология и микология",
+    match: (text) =>
+      /(аскарида|лямбли|простейш|гельминт|энтеробиоз|остриц|демодек|чесоточ|клещ|лейшманиоз|гриб|микоз)/i.test(text),
+  },
+  {
+    id: "laboratoriya-onkomarkerlar",
+    nameRu: "Лаборатория — онкомаркеры",
+    match: (text) =>
+      /(онкомаркер|раковый|cea|са-|\bca[- ]?\d+|cyfra|he-4|roma|scc|s 100|psa|альфа-фетопротеин|afp|эмбриональный антиген|нейрон специфическая енолаза|nse)/i.test(text),
+  },
+  {
+    id: "laboratoriya-patomorfologiya",
+    nameRu: "Лаборатория — гистология и биопсия",
+    match: (text) => /(биопсия|гистолог)/i.test(text),
+  },
+];
+
+function splitLaboratoryCategory(category) {
+  const grouped = new Map(
+    LAB_CATEGORY_DEFS.map((def) => [def.id, { id: def.id, nameRu: def.nameRu, items: [] }]),
+  );
+  const fallbackId = "laboratoriya-biokimyo";
+
+  for (const item of category.items) {
+    const match = LAB_CATEGORY_DEFS.find((def) => def.match(item.nameRu));
+    const targetId = match?.id ?? fallbackId;
+    grouped.get(targetId).items.push(item);
+  }
+
+  return LAB_CATEGORY_DEFS
+    .map((def) => grouped.get(def.id))
+    .filter((group) => group.items.length > 0);
+}
+
 async function loadRows() {
   if (fs.existsSync(parsedJsonPath)) {
     const statJson = fs.statSync(parsedJsonPath);
@@ -123,7 +208,15 @@ function parseRows(rows) {
     startCategory(name);
   }
 
-  return { categories: categories.filter((c) => c.items.length > 0), errors };
+  const normalized = categories
+    .filter((c) => c.items.length > 0)
+    .flatMap((category) =>
+      category.id === "laboratoriya" || /лаборатор/i.test(category.nameRu)
+        ? splitLaboratoryCategory(category)
+        : [category],
+    );
+
+  return { categories: normalized, errors };
 }
 
 function toRawText(categories) {

@@ -220,9 +220,9 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
   'dermatoonkologiya': {
     uz: [
       {
-        title: 'Melanoma xavfi (xavfli xollar)',
+        title: 'Melanoma xavfi (xavfli xollar — nevus)',
         description:
-          'Teridagi xollar o\'zgarishi melanoma belgisi bo\'lishi mumkin. Dermatoskopiya yordamida xavfli o\'zgarishlarni erta aniqlash mumkin.',
+          'Teridagi xollar (nevus) o\'zgarishi melanoma belgisi bo\'lishi mumkin. Dermatoskopiya yordamida xavfli o\'zgarishlarni erta aniqlash mumkin.',
       },
       {
         title: 'Papilloma va so\'gal',
@@ -604,7 +604,7 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
   },
   'dermatosc-lessons': {
     uz: [
-      { title: 'Xavfli xollar diagnostikasi', description: 'Amaliy darslarda dermatoskopik belgilar bo\'yicha tajriba oshiriladi.' },
+      { title: 'Xavfli xollar (nevus) diagnostikasi', description: 'Amaliy darslarda dermatoskopik belgilar bo\'yicha tajriba oshiriladi.' },
     ],
     ru: [
       { title: 'Диагностика опасных родинок', description: 'На практических курсах отрабатываются дерматоскопические признаки.' },

@@ -43,6 +43,7 @@ function matchesMoleRemovalTopic(text: string): boolean {
     value === 'mole removal' ||
     value === 'удаление родинок' ||
     value.startsWith('удаление родинок ') ||
+    value.includes('xol (nevus)larni olib tashlash') ||
     value.includes('xolarni olib tashlash') ||
     value.includes("nevuslarni olib tashlash") ||
     value.includes('безопасное удаление родинок') ||
@@ -171,6 +172,33 @@ function isBblSubService(sub: ServiceDetail): boolean {
   return fields.some((field) => /\bbbl\b/i.test(field));
 }
 
+/** API da bir xil IPL (InMode / Lumecca / BBL) bir necha marta kelishi mumkin — bittasini qoldiramiz */
+function isIplInmodeSubService(sub: ServiceDetail): boolean {
+  if (sub.id === 'ipl-inmode') return true;
+  if (isBblSubService(sub)) return true;
+
+  const fields = [
+    sub.name.uz,
+    sub.name.ru,
+    sub.name.en,
+    sub.description.uz,
+    sub.description.ru,
+    sub.description.en,
+  ];
+  const haystack = normalizeText(fields.join(' '));
+
+  return (
+    (haystack.includes('ipl') &&
+      (haystack.includes('inmode') ||
+        haystack.includes('foto-yangilash') ||
+        haystack.includes('fotoomolozhenie') ||
+        haystack.includes('фотоомоложение') ||
+        haystack.includes('photo-rejuvenation') ||
+        haystack.includes('lumecca'))) ||
+    haystack.includes('forever young ipl')
+  );
+}
+
 function normalizeApparatusSubServices(category: ServiceCategory): ServiceCategory {
   const normalized: ServiceDetail[] = [];
   let hasIplInmode = false;
@@ -180,17 +208,16 @@ function normalizeApparatusSubServices(category: ServiceCategory): ServiceCatego
     if (category.id === 'apparatnaya-kosmetologiya' && isRemovedApparatusSubService(sub)) continue;
     if (category.id !== 'apparatnaya-kosmetologiya' && EXCLUDED_SUB_SERVICE_IDS.has(sub.id)) continue;
 
-    if (category.id === 'apparatnaya-kosmetologiya' && isBblSubService(sub)) {
+    if (category.id === 'apparatnaya-kosmetologiya' && isIplInmodeSubService(sub)) {
       if (!hasIplInmode) {
-        normalized.push(APPARATUS_IPL_SUB_SERVICE);
+        normalized.push({
+          ...APPARATUS_IPL_SUB_SERVICE,
+          images: sub.images,
+          image: sub.image,
+        });
         hasIplInmode = true;
       }
       continue;
-    }
-
-    if (sub.id === 'ipl-inmode') {
-      if (hasIplInmode) continue;
-      hasIplInmode = true;
     }
 
     normalized.push(sub);

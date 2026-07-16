@@ -1657,132 +1657,12 @@
       ]
     },
     {
-      "id": "laboratoriya",
-      "nameRu": "Лаборатория",
+      "id": "laboratoriya-umumiy-klinik",
+      "nameRu": "Лаборатория — общеклинические исследования",
       "items": [
-        {
-          "nameRu": "17-ОН Прогестерон",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Cytomegalovirus (ЦМВ) IgG",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "DHEA-S",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "HBsAg (гепатит В)",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "HVC (гепатит С)",
-          "priceValue": 40000
-        },
-        {
-          "nameRu": "HIV (ВИЧ)",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "RW (сифилис)",
-          "priceValue": 45000
-        },
-        {
-          "nameRu": "АКТГ",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Аланинаминотрансфераза (АЛТ)",
-          "priceValue": 28000
-        },
-        {
-          "nameRu": "Альбумин",
-          "priceValue": 45000
-        },
-        {
-          "nameRu": "Антистрептолизин АСЛО",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "Аскарида",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Аспартатаминотрасфераза (АСТ)",
-          "priceValue": 25000
-        },
-        {
-          "nameRu": "АТ к ТПО",
-          "priceValue": 65000
-        },
-        {
-          "nameRu": "Общий Билирубин",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Витамин Д3",
-          "priceValue": 160000
-        },
-        {
-          "nameRu": "Герпес Herpes Simplex 1/2 IgG",
-          "priceValue": 70000
-        },
         {
           "nameRu": "Гликозированный гемоглобин",
           "priceValue": 70000
-        },
-        {
-          "nameRu": "Глюкоза",
-          "priceValue": 25000
-        },
-        {
-          "nameRu": "Железа (Кровь)",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Инсулин",
-          "priceValue": 114000
-        },
-        {
-          "nameRu": "Калий",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Кальций",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Коагулограмма",
-          "priceValue": 235000
-        },
-        {
-          "nameRu": "Копрология",
-          "priceValue": 35000
-        },
-        {
-          "nameRu": "Кортизол",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "Креатинин",
-          "priceValue": 40000
-        },
-        {
-          "nameRu": "ЛГ",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Магний",
-          "priceValue": 30000
-        },
-        {
-          "nameRu": "Мазок из уретры",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Мочевина",
-          "priceValue": 40000
         },
         {
           "nameRu": "Общий анализ крови (развернутый)",
@@ -1791,134 +1671,6 @@
         {
           "nameRu": "Общий анализ мочи",
           "priceValue": 45000
-        },
-        {
-          "nameRu": "Общий белок",
-          "priceValue": 45000
-        },
-        {
-          "nameRu": "Пролактин",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Ревматоидный фактор",
-          "priceValue": 54000
-        },
-        {
-          "nameRu": "С реактивный белок",
-          "priceValue": 40000
-        },
-        {
-          "nameRu": "Соскоб на грибы",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Соскоб на демодекоз",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Соскоб на чесотки",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "С-реактивный белок GPR",
-          "priceValue": 70000
-        },
-        {
-          "nameRu": "Тестостерон",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Тиреотропный гармон (TTG)",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Трийодтрионин свободный (FT3)",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Триоксин свободный (FT4)",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Ферритин",
-          "priceValue": 115000
-        },
-        {
-          "nameRu": "ФСГ",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "ХГЧ",
-          "priceValue": 80000
-        },
-        {
-          "nameRu": "Холестерин Общ.",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Биопсия",
-          "priceValue": 600000
-        },
-        {
-          "nameRu": "Лактатдегидрогеназа (ЛДГ)",
-          "priceValue": 26000
-        },
-        {
-          "nameRu": "ТТГ общий",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "Трийодтиронин Т3 общий",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "Тироксин общий Т4",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "Антитела к тиреоглобулину (АТ-ТГ)",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "Антитела к териопироксидазе (АТ-ТПО)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Бак иследование носа",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "Бак исследование со слизистой оболочки из зева",
-          "priceValue": 120000
-        },
-        {
-          "nameRu": "Трийодтиронин Т3 свободный",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "Тироксин свободный Т4",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "Кал на лямблии и другие простейшие",
-          "priceValue": 55000
-        },
-        {
-          "nameRu": "Антитела к растворимому антигену печенипеченочно-панкреатическому антигену (Anti SLA LP IgG)",
-          "priceValue": 195000
-        },
-        {
-          "nameRu": "Антинуклеарные антитела (АНА)",
-          "priceValue": 220000
-        },
-        {
-          "nameRu": "Гистологическое исследование",
-          "priceValue": 210000
-        },
-        {
-          "nameRu": "Анализ кала на простейшие, в т.ч. лямблии",
-          "priceValue": 70000
         },
         {
           "nameRu": "Общий анализ крови (24 показателей)",
@@ -1937,20 +1689,8 @@
           "priceValue": 30000
         },
         {
-          "nameRu": "Мазок на эозинофилы",
-          "priceValue": 45000
-        },
-        {
           "nameRu": "Концентрация гемоглобина",
           "priceValue": 42000
-        },
-        {
-          "nameRu": "LE-клетки",
-          "priceValue": 45000
-        },
-        {
-          "nameRu": "Антитела к Rh-фактору",
-          "priceValue": 65000
         },
         {
           "nameRu": "Группа крови – Резус фактор",
@@ -1973,6 +1713,40 @@
           "priceValue": 50000
         },
         {
+          "nameRu": "ХГ в моче",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "Гликолизированный гемоглобин",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "Концентрация гемоглобина",
+          "priceValue": 42000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-siydik-va-najas",
+      "nameRu": "Лаборатория — моча и кал",
+      "items": [
+        {
+          "nameRu": "Копрология",
+          "priceValue": 35000
+        },
+        {
+          "nameRu": "Мочевина",
+          "priceValue": 40000
+        },
+        {
+          "nameRu": "Кал на лямблии и другие простейшие",
+          "priceValue": 55000
+        },
+        {
+          "nameRu": "Анализ кала на простейшие, в т.ч. лямблии",
+          "priceValue": 70000
+        },
+        {
           "nameRu": "Моча на желчные пигменты",
           "priceValue": 45000
         },
@@ -1989,92 +1763,12 @@
           "priceValue": 45000
         },
         {
-          "nameRu": "ХГ в моче",
-          "priceValue": 30000
-        },
-        {
           "nameRu": "Глюкоза в моче",
           "priceValue": 35000
         },
         {
           "nameRu": "Цитология осадка мочи",
           "priceValue": 68000
-        },
-        {
-          "nameRu": "Общий мазок на флору",
-          "priceValue": 62995
-        },
-        {
-          "nameRu": "Цитология мазка (PAP-тест)",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Мазок на ВПЧ (HPV)",
-          "priceValue": 57000
-        },
-        {
-          "nameRu": "Цитологическое исслед. на атипические клетки",
-          "priceValue": 60000
-        },
-        {
-          "nameRu": "Спермограмма",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Сок простаты",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Нативный мазок на трихомониаз",
-          "priceValue": 40000
-        },
-        {
-          "nameRu": "Женский мазок на лептотрихоз",
-          "priceValue": 45000
-        },
-        {
-          "nameRu": "Общий анализ мокроты",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Назальный секрет (Эозинофилы)",
-          "priceValue": 45000
-        },
-        {
-          "nameRu": "Демодекоз",
-          "priceValue": 55000
-        },
-        {
-          "nameRu": "Анализ на грибок (с гладкой кожи и",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Волосистой части головы)",
-          "priceValue": 35000
-        },
-        {
-          "nameRu": "Чесоточный клещ",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Лейшманиоз",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Тест на совместимость (Курцрока-Миллера)",
-          "priceValue": 58000
-        },
-        {
-          "nameRu": "Проба Шуварского – Симса Гунера",
-          "priceValue": 58000
-        },
-        {
-          "nameRu": "Проба на антиспермальные антитела",
-          "priceValue": 58000
-        },
-        {
-          "nameRu": "MAR - тест",
-          "priceValue": 247000
         },
         {
           "nameRu": "Анализ кала на яйца гельминтов",
@@ -2089,8 +1783,50 @@
           "priceValue": 58000
         },
         {
-          "nameRu": "Соскоб на энтеробиоз (острицы)",
-          "priceValue": 50000
+          "nameRu": "Глюкоза мочи",
+          "priceValue": 40000
+        },
+        {
+          "nameRu": "Альфа-амилаза (диастаза) мочи",
+          "priceValue": 53000
+        },
+        {
+          "nameRu": "Мочевина",
+          "priceValue": 25000
+        },
+        {
+          "nameRu": "Мочевая кислота в крови",
+          "priceValue": 48000
+        },
+        {
+          "nameRu": "Мочевая кислота в суточной моче",
+          "priceValue": 48000
+        },
+        {
+          "nameRu": "Кальций в моче (Ca)",
+          "priceValue": 53000
+        },
+        {
+          "nameRu": "Мочи",
+          "priceValue": 108000
+        },
+        {
+          "nameRu": "Кал (дизбактериоз)",
+          "priceValue": 279000
+        },
+        {
+          "nameRu": "Комплекс: (Cand.albicans, Cand.glabrata, Cand.krusei) (мазок, моча, ротоглотка)",
+          "priceValue": 435000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-koagulatsiya",
+      "nameRu": "Лаборатория — коагулограмма и гемостаз",
+      "items": [
+        {
+          "nameRu": "Коагулограмма",
+          "priceValue": 235000
         },
         {
           "nameRu": "Время Свертываемости крови",
@@ -2107,10 +1843,6 @@
         {
           "nameRu": "Тромбо динамика",
           "priceValue": 300000
-        },
-        {
-          "nameRu": "Фибриноген",
-          "priceValue": 45000
         },
         {
           "nameRu": "Коалиновое время",
@@ -2133,10 +1865,6 @@
           "priceValue": 45000
         },
         {
-          "nameRu": "Д - димер (D - dimer)",
-          "priceValue": 187000
-        },
-        {
           "nameRu": "Антитромбин III",
           "priceValue": 225000
         },
@@ -2149,52 +1877,130 @@
           "priceValue": 225000
         },
         {
-          "nameRu": "HAV IgM (Гепатит А)",
+          "nameRu": "Мозговой натрийуретический пептид (NT pro BNP)",
+          "priceValue": 216000
+        },
+        {
+          "nameRu": "С-пептид",
+          "priceValue": 140000
+        },
+        {
+          "nameRu": "Неинвазивное определение пола плода. Определние риска развития аномалий хромосомного набора плода. Экспертный тест. (точность 99.9 %)",
+          "priceValue": 6854000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-biokimyo",
+      "nameRu": "Лаборатория — биохимия и микроэлементы",
+      "items": [
+        {
+          "nameRu": "Аланинаминотрансфераза (АЛТ)",
+          "priceValue": 28000
+        },
+        {
+          "nameRu": "Альбумин",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Аспартатаминотрасфераза (АСТ)",
+          "priceValue": 25000
+        },
+        {
+          "nameRu": "АТ к ТПО",
+          "priceValue": 65000
+        },
+        {
+          "nameRu": "Общий Билирубин",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "Витамин Д3",
+          "priceValue": 160000
+        },
+        {
+          "nameRu": "Глюкоза",
+          "priceValue": 25000
+        },
+        {
+          "nameRu": "Железа (Кровь)",
           "priceValue": 50000
         },
         {
-          "nameRu": "HBsAg (Гепатит В)",
-          "priceValue": 50000
+          "nameRu": "Инсулин",
+          "priceValue": 114000
         },
         {
-          "nameRu": "HCV (Гепатит С)",
-          "priceValue": 50000
+          "nameRu": "Калий",
+          "priceValue": 30000
         },
         {
-          "nameRu": "RW - (Экспрес PRP - тест)",
-          "priceValue": 59997
+          "nameRu": "Кальций",
+          "priceValue": 30000
         },
         {
-          "nameRu": "Helicobacter pylory (кровь, кал)",
-          "priceValue": 75000
+          "nameRu": "Креатинин",
+          "priceValue": 40000
         },
         {
-          "nameRu": "Дыхательно- уреазный тест на определение Helicobacter pylory",
-          "priceValue": 220000
+          "nameRu": "Магний",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "Общий белок",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "С реактивный белок",
+          "priceValue": 40000
+        },
+        {
+          "nameRu": "С-реактивный белок GPR",
+          "priceValue": 70000
+        },
+        {
+          "nameRu": "Триоксин свободный (FT4)",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Ферритин",
+          "priceValue": 115000
+        },
+        {
+          "nameRu": "Холестерин Общ.",
+          "priceValue": 130000
+        },
+        {
+          "nameRu": "Лактатдегидрогеназа (ЛДГ)",
+          "priceValue": 26000
+        },
+        {
+          "nameRu": "Антитела к растворимому антигену печенипеченочно-панкреатическому антигену (Anti SLA LP IgG)",
+          "priceValue": 195000
+        },
+        {
+          "nameRu": "LE-клетки",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Сок простаты",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Волосистой части головы)",
+          "priceValue": 35000
+        },
+        {
+          "nameRu": "Фибриноген",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Д - димер (D - dimer)",
+          "priceValue": 187000
         },
         {
           "nameRu": "Тропонин I",
           "priceValue": 80000
-        },
-        {
-          "nameRu": "Бруцеллёз (Rose Bengal)",
-          "priceValue": 65000
-        },
-        {
-          "nameRu": "СПИД (ВИЧ) Экспресс",
-          "priceValue": 85000
-        },
-        {
-          "nameRu": "СПИД (ВИЧ) Экспресс (иностранцам)",
-          "priceValue": 211000
-        },
-        {
-          "nameRu": "SARS-CoV-2 IgM/IgG",
-          "priceValue": 120000
-        },
-        {
-          "nameRu": "SARS-CoV-2- Antigen",
-          "priceValue": 120000
         },
         {
           "nameRu": "Глюкозо - толерантный тест",
@@ -2205,16 +2011,8 @@
           "priceValue": 1000
         },
         {
-          "nameRu": "Глюкоза мочи",
-          "priceValue": 40000
-        },
-        {
           "nameRu": "Глюкоза через 2 часа после еды",
           "priceValue": 40000
-        },
-        {
-          "nameRu": "Гликолизированный гемоглобин",
-          "priceValue": 85000
         },
         {
           "nameRu": "Инсулин",
@@ -2313,10 +2111,6 @@
           "priceValue": 53000
         },
         {
-          "nameRu": "Альфа-амилаза (диастаза) мочи",
-          "priceValue": 53000
-        },
-        {
           "nameRu": "Липаза (Lipase)",
           "priceValue": 75000
         },
@@ -2365,24 +2159,12 @@
           "priceValue": 254000
         },
         {
-          "nameRu": "Мочевина",
-          "priceValue": 25000
-        },
-        {
           "nameRu": "Креатинин",
           "priceValue": 24997
         },
         {
           "nameRu": "Проба Реберга",
           "priceValue": 60000
-        },
-        {
-          "nameRu": "Мочевая кислота в крови",
-          "priceValue": 48000
-        },
-        {
-          "nameRu": "Мочевая кислота в суточной моче",
-          "priceValue": 48000
         },
         {
           "nameRu": "Калий (K)",
@@ -2402,10 +2184,6 @@
         },
         {
           "nameRu": "Кальций в крови (Ca)",
-          "priceValue": 53000
-        },
-        {
-          "nameRu": "Кальций в моче (Ca)",
           "priceValue": 53000
         },
         {
@@ -2445,20 +2223,8 @@
           "priceValue": 466000
         },
         {
-          "nameRu": "Ревматоидный фактор",
-          "priceValue": 40000
-        },
-        {
           "nameRu": "С-Реактивный белок",
           "priceValue": 54000
-        },
-        {
-          "nameRu": "Антистрептолизин",
-          "priceValue": 54000
-        },
-        {
-          "nameRu": "Антитела к циклическому цитруллин",
-          "priceValue": 230000
         },
         {
           "nameRu": "Миоглобин",
@@ -2470,10 +2236,6 @@
         },
         {
           "nameRu": "С - реактивный белок",
-          "priceValue": 54000
-        },
-        {
-          "nameRu": "Антистрептолизин",
           "priceValue": 54000
         },
         {
@@ -2493,115 +2255,11 @@
           "priceValue": 80000
         },
         {
-          "nameRu": "Мозговой натрийуретический пептид (NT pro BNP)",
-          "priceValue": 216000
-        },
-        {
-          "nameRu": "IgA",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "IgM",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "IgG",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "ТТГ",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Т3",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Т3 свободный",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Т4",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Т4 свободный",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Антитела к ТГ",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Антитела к ТПО",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Тиреоглобулин",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Прогестерон (Progesterone)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Эстрадиол (Estradiol)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Эстриол (Free Estriol)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Пролактин (Prolactin)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Тестостерон (Testosterone)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Свободный тестостерон (Free Testosterone)",
-          "priceValue": 105000
-        },
-        {
           "nameRu": "Фоликулостимулирующий гормон (FSH)",
           "priceValue": 95000
         },
         {
           "nameRu": "Лютеинизирующий гормон (LH)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Дегидроэпиандростерон-сульфат (DHEAS)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "17- ОН прогестерон",
-          "priceValue": 105000
-        },
-        {
-          "nameRu": "Антимюллеров гормон (АМГ)",
-          "priceValue": 365000
-        },
-        {
-          "nameRu": "Глобулин, связывающий половые гормоны (SHBG)",
-          "priceValue": 135000
-        },
-        {
-          "nameRu": "Ингибин В",
-          "priceValue": 385000
-        },
-        {
-          "nameRu": "Кортизол (утро)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Кортизол (вечер)",
-          "priceValue": 95000
-        },
-        {
-          "nameRu": "Соматотропный гормон (СТГ)",
           "priceValue": 95000
         },
         {
@@ -2613,52 +2271,8 @@
           "priceValue": 330000
         },
         {
-          "nameRu": "Фактор роста (IGFBP-3)",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "Адренокортикотропный гормон (АКТГ)",
-          "priceValue": 180000
-        },
-        {
-          "nameRu": "Альдостерон",
-          "priceValue": 260000
-        },
-        {
-          "nameRu": "Ренин",
-          "priceValue": 253000
-        },
-        {
           "nameRu": "Адреналин/Норадреналин",
           "priceValue": 355000
-        },
-        {
-          "nameRu": "Паратгормон (PTH)",
-          "priceValue": 201000
-        },
-        {
-          "nameRu": "ХГЧ – ранняя диагностика беременности",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "ХГЧ – точное разведение",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "AFP - Алфа-фетопротеин",
-          "priceValue": 97000
-        },
-        {
-          "nameRu": "Эстриол свободный (Free estriol)",
-          "priceValue": 90000
-        },
-        {
-          "nameRu": "Свобод. Хорионич. гонадотропин (Free-B-HCG)",
-          "priceValue": 86000
-        },
-        {
-          "nameRu": "Свобод. Хорионич. гонадотропин (Free-B-HCG)",
-          "priceValue": 103000
         },
         {
           "nameRu": "PAPP - A (белок А плазмы ассоциированный",
@@ -2669,228 +2283,20 @@
           "priceValue": 90000
         },
         {
-          "nameRu": "АФП+ХГЧ+Эстриол",
-          "priceValue": 220000
-        },
-        {
-          "nameRu": "Раковый эмбриональный антиген (CEA)",
-          "priceValue": 81000
-        },
-        {
-          "nameRu": "Углеводный антиген СА-15-3 (молочная железа)",
-          "priceValue": 86000
-        },
-        {
-          "nameRu": "Углеводный антиген СА-19-9 (поджелудочная",
-          "priceValue": 90000
-        },
-        {
           "nameRu": "Железа + ЖКТ)",
           "priceValue": 78000
-        },
-        {
-          "nameRu": "Углеводный антиген СА-72-4 (желудок)",
-          "priceValue": 86000
-        },
-        {
-          "nameRu": "Углеводный антиген СА-125 (яичники)",
-          "priceValue": 86000
-        },
-        {
-          "nameRu": "CYFRA 21-1",
-          "priceValue": 127000
         },
         {
           "nameRu": "НЕ-4 (яичники)",
           "priceValue": 242000
         },
         {
-          "nameRu": "Нейрон специфическая енолаза (NSE - лёгкие)",
-          "priceValue": 109000
-        },
-        {
-          "nameRu": "Альфа-фетопротеин (AFP - печень)",
-          "priceValue": 81000
-        },
-        {
-          "nameRu": "Хорионический гонадотропин (ХГЧ - яички, пуз. занос)",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Простатспецифический антиген общий (PSA)",
-          "priceValue": 81000
-        },
-        {
           "nameRu": "Простатспецифический антиген свобод. (Free-PSА)",
           "priceValue": 81000
         },
         {
-          "nameRu": "Индекс ROMA (HE-4+CA125)",
-          "priceValue": 285000
-        },
-        {
-          "nameRu": "Антиген плоскоклеточной карциномы (SCC)",
-          "priceValue": 248500
-        },
-        {
-          "nameRu": "Тиреоглобулин (щитовидная железа)",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "S 100 (маркер потенциального повреждения",
-          "priceValue": 525000
-        },
-        {
-          "nameRu": "Микоплазма Mycoplasma genitalium",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Уреаплазма Ureaplasma urealiticum",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Уреаплазма Ureaplasma parvum",
-          "priceValue": 190000
-        },
-        {
-          "nameRu": "Гонококк Neisseria gonorrhoeae",
-          "priceValue": 178000
-        },
-        {
-          "nameRu": "Трихомонада Trichomonas vaginalis",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Гарднерелла Gardnerella vaginalis",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Цитомегаловирус Cytomegalovirus качество",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Цитомегаловирус Cytomegalovirus количество",
-          "priceValue": 325000
-        },
-        {
-          "nameRu": "Вирус простого герпеса Herpes Simplex Virus? качество",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Вирус простого герпеса Herpes Simplex Virus 8 количество",
-          "priceValue": 325000
-        },
-        {
           "nameRu": "Инсулин",
           "priceValue": 114000
-        },
-        {
-          "nameRu": "С-пептид",
-          "priceValue": 140000
-        },
-        {
-          "nameRu": "Общий IgE",
-          "priceValue": 100000
-        },
-        {
-          "nameRu": "Аллергопанели (смешанная)",
-          "priceValue": 2806000
-        },
-        {
-          "nameRu": "Аллергопанели (ингаляционна)",
-          "priceValue": 1996000
-        },
-        {
-          "nameRu": "Аллергопанели (пищевая)",
-          "priceValue": 2036000
-        },
-        {
-          "nameRu": "Антинуклеарные антитела (ANA)",
-          "priceValue": 270000
-        },
-        {
-          "nameRu": "Антиспермальные антитела (АСА)",
-          "priceValue": 380000
-        },
-        {
-          "nameRu": "Антитела к фосфолипидам (AFS) IgM IgG",
-          "priceValue": 185000
-        },
-        {
-          "nameRu": "Антитела к митохондриям (АМА)",
-          "priceValue": 375000
-        },
-        {
-          "nameRu": "Антитела к миелопероксидазе (Анти-МРО)",
-          "priceValue": 365000
-        },
-        {
-          "nameRu": "Антитела к модифицированному цитруллинированому виментину (A-MCV)",
-          "priceValue": 365000
-        },
-        {
-          "nameRu": "Целиакия (трансглутаминаза IgA) количественный",
-          "priceValue": 266000
-        },
-        {
-          "nameRu": "Целиакия (антитела к глиадину IgA) количественный",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "Целиакия (антитела к глиадину IgG) количественный",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "IgG к одноцепочечнойДНК, IgG к двухцепочечнойДНК",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "Anti - histone – Определение антител к гистонам",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "Anti - PR3 – Определение антител к протеиназе 3",
-          "priceValue": 360000
-        },
-        {
-          "nameRu": "Аутоиммунная панель-10 антигенов",
-          "priceValue": 630000
-        },
-        {
-          "nameRu": "(AMA M2, SP100, gp210, LKM1, LC1, CENP-B, GBM, PR3, MPO, SLA/LP) NEW",
-          "priceValue": 570000
-        },
-        {
-          "nameRu": "Антитела к Saccharomyces cerevisiae (ASCA) Ig G",
-          "priceValue": 330000
-        },
-        {
-          "nameRu": "Антинейтрофильные цитоплазматические",
-          "priceValue": 375000
-        },
-        {
-          "nameRu": "Антитела (ANCA)",
-          "priceValue": 375000
-        },
-        {
-          "nameRu": "Интерлейкин 2 (ИЛ 2)",
-          "priceValue": 207000
-        },
-        {
-          "nameRu": "Интерлейкин 6 (ИЛ 6)",
-          "priceValue": 207000
-        },
-        {
-          "nameRu": "Интерлейкин 10 (ИЛ 10)",
-          "priceValue": 207000
-        },
-        {
-          "nameRu": "Интерлейкин 4 (ИЛ 4)",
-          "priceValue": 207000
-        },
-        {
-          "nameRu": "Интерлейкин 8 (ИЛ 8)",
-          "priceValue": 207000
         },
         {
           "nameRu": "Компонент комплемента С3 (С3-Complement Factor)",
@@ -2901,60 +2307,8 @@
           "priceValue": 150000
         },
         {
-          "nameRu": "Антитела к лямблиям суммарные",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Антитела к лямблиям IgG",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Антитела к аскаридам IgG",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Антитела к эхинококку IgG",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Гельминты (токсокароз, описторхоз, трихенеллёз,",
-          "priceValue": 70000
-        },
-        {
           "nameRu": "Эхинококкоз)",
           "priceValue": 70000
-        },
-        {
-          "nameRu": "HAV (Гепатит A) IgM IgG по",
-          "priceValue": 64000
-        },
-        {
-          "nameRu": "Anti Hbs (Антитела к поверхностному антигену гепатита B)",
-          "priceValue": 64000
-        },
-        {
-          "nameRu": "Anti HBc (Антитела к ядерному антигену гепатита B) IgM, IgG",
-          "priceValue": 64000
-        },
-        {
-          "nameRu": "HBeAg (Антиген оболочки гепатита B)",
-          "priceValue": 64000
-        },
-        {
-          "nameRu": "Anti Hbe (Антитела к антигену оболочки гепатита B)",
-          "priceValue": 64000
-        },
-        {
-          "nameRu": "Anti HCV (Гепатит C)",
-          "priceValue": 64000
-        },
-        {
-          "nameRu": "Anti HDV (Гепатит D)",
-          "priceValue": 64000
-        },
-        {
-          "nameRu": "HEV IgM (Гепатит E)",
-          "priceValue": 64000
         },
         {
           "nameRu": "A.R.I. WELL D-ONE",
@@ -2993,14 +2347,6 @@
           "priceValue": 152000
         },
         {
-          "nameRu": "Мокроты",
-          "priceValue": 191000
-        },
-        {
-          "nameRu": "Мочи",
-          "priceValue": 108000
-        },
-        {
           "nameRu": "Urethra",
           "priceValue": 190000
         },
@@ -3037,10 +2383,6 @@
           "priceValue": 168000
         },
         {
-          "nameRu": "Кал (дизбактериоз)",
-          "priceValue": 279000
-        },
-        {
           "nameRu": "Кишечная группа (Дизентерия, сальмонелез)",
           "priceValue": 92000
         },
@@ -3049,160 +2391,12 @@
           "priceValue": 137000
         },
         {
-          "nameRu": "Антитела к токсоплазме IgM",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к токсоплазме IgG",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к ЦМВ IgM",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к ЦМВ IgG",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к вирусу герпеса I типа IgM",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к вирусу герпеса I типа IgG",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к вирусу герпеса II типа IgM",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к вирусу герпеса II типа IgG",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к вирусу краснухи IgM",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к вирусу краснухи IgG",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Антитела к хламидиям IgM",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к хламидиям IgG",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к микоплазме M.hominis Ig.A Ig.M Ig.G",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к уреаплазме U.urealiticum Ig.A Ig.M Ig.G",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к гарднерелле IgG",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к трихомонаде IgG",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к кандиде по IgM IgG",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к хламидиям пневм. по IgM IgG",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Антитела к микоплазме пнев. по IgM IgG",
-          "priceValue": 66000
-        },
-        {
-          "nameRu": "Helicobacter pylori суммарные",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Helicobacter pylori IgM IgG",
-          "priceValue": 69000
-        },
-        {
-          "nameRu": "Вирус Эпштейн-Барра VCA IgG",
-          "priceValue": 108000
-        },
-        {
-          "nameRu": "Вирус Эпштейн-Барра VCA IgM",
-          "priceValue": 108000
-        },
-        {
-          "nameRu": "Вирус Эпштейн-Барра IgG к раннему антигену ЕА",
-          "priceValue": 108000
-        },
-        {
-          "nameRu": "Вирус Эпштейн-Барра IgG к ядерному антигену NA",
-          "priceValue": 108000
-        },
-        {
-          "nameRu": "VZV (Вирус Зостер) IgM",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Бруцеллёз IgM",
-          "priceValue": 76000
-        },
-        {
           "nameRu": "Корь IgМ",
-          "priceValue": 158000
-        },
-        {
-          "nameRu": "Корь IgG",
           "priceValue": 158000
         },
         {
           "nameRu": "Коклюш IgМ",
           "priceValue": 182000
-        },
-        {
-          "nameRu": "Коклюш IgG",
-          "priceValue": 182000
-        },
-        {
-          "nameRu": "СПИД (ВИЧ) ИФА ОИТС (Иностранцам)",
-          "priceValue": 207000
-        },
-        {
-          "nameRu": "СПИД (ВИЧ) ИФА ОИТС",
-          "priceValue": 61000
-        },
-        {
-          "nameRu": "Анти-SARS-CoV-2 IgM",
-          "priceValue": 184000
-        },
-        {
-          "nameRu": "Анти-SARS-CoV-2 IgG",
-          "priceValue": 184000
-        },
-        {
-          "nameRu": "Anti – RBD антитела к коронавирусу SARS – CoV 2",
-          "priceValue": 213000
-        },
-        {
-          "nameRu": "Туберкулёз – Антитела",
-          "priceValue": 130000
-        },
-        {
-          "nameRu": "Антитела к токсоплазме",
-          "priceValue": 108000
-        },
-        {
-          "nameRu": "Антитела к ЦМВ",
-          "priceValue": 108000
         },
         {
           "nameRu": "Антитела к ВПГ",
@@ -3211,50 +2405,6 @@
         {
           "nameRu": "Антитела к Краснухе",
           "priceValue": 108000
-        },
-        {
-          "nameRu": "Гепатит В (качественный)",
-          "priceValue": 163000
-        },
-        {
-          "nameRu": "Гепатит В (количественный)",
-          "priceValue": 271000
-        },
-        {
-          "nameRu": "Гепатит С (качественный)",
-          "priceValue": 163000
-        },
-        {
-          "nameRu": "Гепатит С (количественный)",
-          "priceValue": 291000
-        },
-        {
-          "nameRu": "Гепатит С (Генотипирование)",
-          "priceValue": 298000
-        },
-        {
-          "nameRu": "Гепатит D (качественный)",
-          "priceValue": 217000
-        },
-        {
-          "nameRu": "Гепатит D (количественный)",
-          "priceValue": 345000
-        },
-        {
-          "nameRu": "Вирус Эпштейна-Барра (EBV) кровь качественный",
-          "priceValue": 195000
-        },
-        {
-          "nameRu": "Вирус Эпштейна-Барра (EBV) кровь количественный",
-          "priceValue": 345000
-        },
-        {
-          "nameRu": "Вирус Эпштейна-Барра (EBV) слюна качественный",
-          "priceValue": 195000
-        },
-        {
-          "nameRu": "Вирус Эпштейна-Барра (EBV) слюна количественный",
-          "priceValue": 345000
         },
         {
           "nameRu": "VZV (Вирус Зостер)",
@@ -3267,38 +2417,6 @@
         {
           "nameRu": "Сальмонеллёз",
           "priceValue": 195000
-        },
-        {
-          "nameRu": "Хламидия пневмония",
-          "priceValue": 187000
-        },
-        {
-          "nameRu": "Бруцеллез РТ-ПЦР",
-          "priceValue": 195000
-        },
-        {
-          "nameRu": "Helicobacter pylori слюна, Желудочный сок по",
-          "priceValue": 195000
-        },
-        {
-          "nameRu": "SARS-CoV-2 (Covid-19)",
-          "priceValue": 182000
-        },
-        {
-          "nameRu": "Хламидия Chlamidia trachomatis",
-          "priceValue": 165000
-        },
-        {
-          "nameRu": "Антитела к лямблиям IgM",
-          "priceValue": 75000
-        },
-        {
-          "nameRu": "Анализ на грибок (ногтей) руки",
-          "priceValue": 50000
-        },
-        {
-          "nameRu": "Антитела к рецепторам ТТГ (анти-рТТГ)",
-          "priceValue": 295000
         },
         {
           "nameRu": "Панель В27 HLA",
@@ -3365,16 +2483,8 @@
           "priceValue": 1725000
         },
         {
-          "nameRu": "Кариотип анализ экспертного уровня",
-          "priceValue": 915000
-        },
-        {
           "nameRu": "Неинвазивное определение пола плода. Стандартный тест (точность 99 %)",
           "priceValue": 1829000
-        },
-        {
-          "nameRu": "Неинвазивное определение пола плода. Определние риска развития аномалий хромосомного набора плода. Экспертный тест. (точность 99.9 %)",
-          "priceValue": 6854000
         },
         {
           "nameRu": "Иммуногенетика IL 28- B в прогнозе противовирусной терапии при ВГС",
@@ -3409,26 +2519,6 @@
           "priceValue": 300000
         },
         {
-          "nameRu": "TORCH Ig M ИХЛА (токсоплазма, ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
-          "priceValue": 481000
-        },
-        {
-          "nameRu": "TORCH Ig G ИХЛА (токсоплазма, ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
-          "priceValue": 481000
-        },
-        {
-          "nameRu": "TORCH ПЦР",
-          "priceValue": 737000
-        },
-        {
-          "nameRu": "Гистологическое иследование",
-          "priceValue": 250000
-        },
-        {
-          "nameRu": "СА-242 раковый антиген для диагностики рака поджелудочной железы толстог7о кишечника прямой кишки",
-          "priceValue": 259000
-        },
-        {
           "nameRu": "СА-50 маркер гастроинестинальных новообразования в первую очередь желудочной железы",
           "priceValue": 250000
         },
@@ -3445,12 +2535,908 @@
           "priceValue": 201000
         },
         {
+          "nameRu": "Фемофлор 16",
+          "priceValue": 690000
+        },
+        {
+          "nameRu": "Фемофлор скрин",
+          "priceValue": 470000
+        },
+        {
+          "nameRu": "Андрофлор",
+          "priceValue": 689000
+        },
+        {
+          "nameRu": "Скорость оседания эритроцитов",
+          "priceValue": 30000
+        },
+        {
+          "nameRu": "ПАП тест",
+          "priceValue": 90000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-gormonal",
+      "nameRu": "Лаборатория — гормоны и репродуктивное здоровье",
+      "items": [
+        {
+          "nameRu": "17-ОН Прогестерон",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "DHEA-S",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "АКТГ",
+          "priceValue": 165000
+        },
+        {
+          "nameRu": "Кортизол",
+          "priceValue": 70000
+        },
+        {
+          "nameRu": "ЛГ",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Пролактин",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Тестостерон",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Тиреотропный гармон (TTG)",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Трийодтрионин свободный (FT3)",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "ФСГ",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "ХГЧ",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "ТТГ общий",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "Трийодтиронин Т3 общий",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "Тироксин общий Т4",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "Антитела к тиреоглобулину (АТ-ТГ)",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "Трийодтиронин Т3 свободный",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "Тироксин свободный Т4",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "ТТГ",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Т3",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Т3 свободный",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Т4",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Т4 свободный",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Тиреоглобулин",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Прогестерон (Progesterone)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Эстрадиол (Estradiol)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Эстриол (Free Estriol)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Пролактин (Prolactin)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Тестостерон (Testosterone)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Свободный тестостерон (Free Testosterone)",
+          "priceValue": 105000
+        },
+        {
+          "nameRu": "Дегидроэпиандростерон-сульфат (DHEAS)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "17- ОН прогестерон",
+          "priceValue": 105000
+        },
+        {
+          "nameRu": "Антимюллеров гормон (АМГ)",
+          "priceValue": 365000
+        },
+        {
+          "nameRu": "Глобулин, связывающий половые гормоны (SHBG)",
+          "priceValue": 135000
+        },
+        {
+          "nameRu": "Ингибин В",
+          "priceValue": 385000
+        },
+        {
+          "nameRu": "Кортизол (утро)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Кортизол (вечер)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Соматотропный гормон (СТГ)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Фактор роста (IGFBP-3)",
+          "priceValue": 330000
+        },
+        {
+          "nameRu": "Адренокортикотропный гормон (АКТГ)",
+          "priceValue": 180000
+        },
+        {
+          "nameRu": "Альдостерон",
+          "priceValue": 260000
+        },
+        {
+          "nameRu": "Ренин",
+          "priceValue": 253000
+        },
+        {
+          "nameRu": "Паратгормон (PTH)",
+          "priceValue": 201000
+        },
+        {
+          "nameRu": "ХГЧ – ранняя диагностика беременности",
+          "priceValue": 90000
+        },
+        {
+          "nameRu": "ХГЧ – точное разведение",
+          "priceValue": 90000
+        },
+        {
+          "nameRu": "Эстриол свободный (Free estriol)",
+          "priceValue": 90000
+        },
+        {
+          "nameRu": "Свобод. Хорионич. гонадотропин (Free-B-HCG)",
+          "priceValue": 86000
+        },
+        {
+          "nameRu": "Свобод. Хорионич. гонадотропин (Free-B-HCG)",
+          "priceValue": 103000
+        },
+        {
+          "nameRu": "АФП+ХГЧ+Эстриол",
+          "priceValue": 220000
+        },
+        {
+          "nameRu": "Хорионический гонадотропин (ХГЧ - яички, пуз. занос)",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "Тиреоглобулин (щитовидная железа)",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "Антитела к рецепторам ТТГ (анти-рТТГ)",
+          "priceValue": 295000
+        },
+        {
+          "nameRu": "Ренин",
+          "priceValue": 253000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-infektsiyalar",
+      "nameRu": "Лаборатория — инфекции и серология",
+      "items": [
+        {
+          "nameRu": "Cytomegalovirus (ЦМВ) IgG",
+          "priceValue": 70000
+        },
+        {
+          "nameRu": "HBsAg (гепатит В)",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "HVC (гепатит С)",
+          "priceValue": 40000
+        },
+        {
+          "nameRu": "HIV (ВИЧ)",
+          "priceValue": 60000
+        },
+        {
+          "nameRu": "RW (сифилис)",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Герпес Herpes Simplex 1/2 IgG",
+          "priceValue": 70000
+        },
+        {
+          "nameRu": "HAV IgM (Гепатит А)",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "HBsAg (Гепатит В)",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "HCV (Гепатит С)",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "RW - (Экспрес PRP - тест)",
+          "priceValue": 59997
+        },
+        {
+          "nameRu": "Helicobacter pylory (кровь, кал)",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "Дыхательно- уреазный тест на определение Helicobacter pylory",
+          "priceValue": 220000
+        },
+        {
+          "nameRu": "Бруцеллёз (Rose Bengal)",
+          "priceValue": 65000
+        },
+        {
+          "nameRu": "СПИД (ВИЧ) Экспресс",
+          "priceValue": 85000
+        },
+        {
+          "nameRu": "СПИД (ВИЧ) Экспресс (иностранцам)",
+          "priceValue": 211000
+        },
+        {
+          "nameRu": "SARS-CoV-2 IgM/IgG",
+          "priceValue": 120000
+        },
+        {
+          "nameRu": "SARS-CoV-2- Antigen",
+          "priceValue": 120000
+        },
+        {
+          "nameRu": "IgM",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "IgG",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Цитомегаловирус Cytomegalovirus качество",
+          "priceValue": 165000
+        },
+        {
+          "nameRu": "Цитомегаловирус Cytomegalovirus количество",
+          "priceValue": 325000
+        },
+        {
+          "nameRu": "Вирус простого герпеса Herpes Simplex Virus? качество",
+          "priceValue": 165000
+        },
+        {
+          "nameRu": "Вирус простого герпеса Herpes Simplex Virus 8 количество",
+          "priceValue": 325000
+        },
+        {
+          "nameRu": "Антитела к фосфолипидам (AFS) IgM IgG",
+          "priceValue": 185000
+        },
+        {
+          "nameRu": "Целиакия (антитела к глиадину IgG) количественный",
+          "priceValue": 330000
+        },
+        {
+          "nameRu": "IgG к одноцепочечнойДНК, IgG к двухцепочечнойДНК",
+          "priceValue": 330000
+        },
+        {
+          "nameRu": "Антитела к лямблиям IgG",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "Антитела к аскаридам IgG",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "Антитела к эхинококку IgG",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "HAV (Гепатит A) IgM IgG по",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "Anti Hbs (Антитела к поверхностному антигену гепатита B)",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "Anti HBc (Антитела к ядерному антигену гепатита B) IgM, IgG",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "HBeAg (Антиген оболочки гепатита B)",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "Anti Hbe (Антитела к антигену оболочки гепатита B)",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "Anti HCV (Гепатит C)",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "Anti HDV (Гепатит D)",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "HEV IgM (Гепатит E)",
+          "priceValue": 64000
+        },
+        {
+          "nameRu": "Антитела к токсоплазме IgM",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к токсоплазме IgG",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к ЦМВ IgM",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к ЦМВ IgG",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к вирусу герпеса I типа IgM",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к вирусу герпеса I типа IgG",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к вирусу герпеса II типа IgM",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к вирусу герпеса II типа IgG",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к вирусу краснухи IgM",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к вирусу краснухи IgG",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Антитела к хламидиям IgM",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Антитела к хламидиям IgG",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Антитела к гарднерелле IgG",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Антитела к трихомонаде IgG",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Антитела к кандиде по IgM IgG",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Антитела к хламидиям пневм. по IgM IgG",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Антитела к микоплазме пнев. по IgM IgG",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Helicobacter pylori суммарные",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Helicobacter pylori IgM IgG",
+          "priceValue": 69000
+        },
+        {
+          "nameRu": "Вирус Эпштейн-Барра VCA IgG",
+          "priceValue": 108000
+        },
+        {
+          "nameRu": "Вирус Эпштейн-Барра VCA IgM",
+          "priceValue": 108000
+        },
+        {
+          "nameRu": "Вирус Эпштейн-Барра IgG к раннему антигену ЕА",
+          "priceValue": 108000
+        },
+        {
+          "nameRu": "Вирус Эпштейн-Барра IgG к ядерному антигену NA",
+          "priceValue": 108000
+        },
+        {
+          "nameRu": "VZV (Вирус Зостер) IgM",
+          "priceValue": 130000
+        },
+        {
+          "nameRu": "Бруцеллёз IgM",
+          "priceValue": 76000
+        },
+        {
+          "nameRu": "Корь IgG",
+          "priceValue": 158000
+        },
+        {
+          "nameRu": "Коклюш IgG",
+          "priceValue": 182000
+        },
+        {
+          "nameRu": "СПИД (ВИЧ) ИФА ОИТС (Иностранцам)",
+          "priceValue": 207000
+        },
+        {
+          "nameRu": "СПИД (ВИЧ) ИФА ОИТС",
+          "priceValue": 61000
+        },
+        {
+          "nameRu": "Анти-SARS-CoV-2 IgM",
+          "priceValue": 184000
+        },
+        {
+          "nameRu": "Анти-SARS-CoV-2 IgG",
+          "priceValue": 184000
+        },
+        {
+          "nameRu": "Антитела к токсоплазме",
+          "priceValue": 108000
+        },
+        {
+          "nameRu": "Антитела к ЦМВ",
+          "priceValue": 108000
+        },
+        {
+          "nameRu": "Гепатит В (качественный)",
+          "priceValue": 163000
+        },
+        {
+          "nameRu": "Гепатит В (количественный)",
+          "priceValue": 271000
+        },
+        {
+          "nameRu": "Гепатит С (качественный)",
+          "priceValue": 163000
+        },
+        {
+          "nameRu": "Гепатит С (количественный)",
+          "priceValue": 291000
+        },
+        {
+          "nameRu": "Гепатит С (Генотипирование)",
+          "priceValue": 298000
+        },
+        {
+          "nameRu": "Гепатит D (качественный)",
+          "priceValue": 217000
+        },
+        {
+          "nameRu": "Гепатит D (количественный)",
+          "priceValue": 345000
+        },
+        {
+          "nameRu": "Вирус Эпштейна-Барра (EBV) кровь качественный",
+          "priceValue": 195000
+        },
+        {
+          "nameRu": "Вирус Эпштейна-Барра (EBV) кровь количественный",
+          "priceValue": 345000
+        },
+        {
+          "nameRu": "Вирус Эпштейна-Барра (EBV) слюна качественный",
+          "priceValue": 195000
+        },
+        {
+          "nameRu": "Вирус Эпштейна-Барра (EBV) слюна количественный",
+          "priceValue": 345000
+        },
+        {
+          "nameRu": "Бруцеллез РТ-ПЦР",
+          "priceValue": 195000
+        },
+        {
+          "nameRu": "Helicobacter pylori слюна, Желудочный сок по",
+          "priceValue": 195000
+        },
+        {
+          "nameRu": "SARS-CoV-2 (Covid-19)",
+          "priceValue": 182000
+        },
+        {
+          "nameRu": "Антитела к лямблиям IgM",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "TORCH Ig M ИХЛА (токсоплазма, ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
+          "priceValue": 481000
+        },
+        {
+          "nameRu": "TORCH Ig G ИХЛА (токсоплазма, ЦМВ, хламадия, микоплазма, уреоплазма, рубелла., герпес I, ll тип)",
+          "priceValue": 481000
+        },
+        {
+          "nameRu": "TORCH ПЦР",
+          "priceValue": 737000
+        },
+        {
           "nameRu": "Вирус герпеса человека 6 тип, 8 тип качество по",
           "priceValue": 195000
         },
         {
           "nameRu": "Вирус герпеса человека 6 тип, 8 тип количество по",
           "priceValue": 345000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-immunologiya-allergiya",
+      "nameRu": "Лаборатория — иммунология и аллергология",
+      "items": [
+        {
+          "nameRu": "Антистрептолизин АСЛО",
+          "priceValue": 70000
+        },
+        {
+          "nameRu": "Ревматоидный фактор",
+          "priceValue": 54000
+        },
+        {
+          "nameRu": "Антитела к териопироксидазе (АТ-ТПО)",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Антинуклеарные антитела (АНА)",
+          "priceValue": 220000
+        },
+        {
+          "nameRu": "Антитела к Rh-фактору",
+          "priceValue": 65000
+        },
+        {
+          "nameRu": "Общий анализ мокроты",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Анализ на грибок (с гладкой кожи и",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Проба на антиспермальные антитела",
+          "priceValue": 58000
+        },
+        {
+          "nameRu": "Ревматоидный фактор",
+          "priceValue": 40000
+        },
+        {
+          "nameRu": "Антистрептолизин",
+          "priceValue": 54000
+        },
+        {
+          "nameRu": "Антитела к циклическому цитруллин",
+          "priceValue": 230000
+        },
+        {
+          "nameRu": "Антистрептолизин",
+          "priceValue": 54000
+        },
+        {
+          "nameRu": "IgA",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Антитела к ТГ",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Антитела к ТПО",
+          "priceValue": 95000
+        },
+        {
+          "nameRu": "Общий IgE",
+          "priceValue": 100000
+        },
+        {
+          "nameRu": "Аллергопанели (смешанная)",
+          "priceValue": 2806000
+        },
+        {
+          "nameRu": "Аллергопанели (ингаляционна)",
+          "priceValue": 1996000
+        },
+        {
+          "nameRu": "Аллергопанели (пищевая)",
+          "priceValue": 2036000
+        },
+        {
+          "nameRu": "Антинуклеарные антитела (ANA)",
+          "priceValue": 270000
+        },
+        {
+          "nameRu": "Антиспермальные антитела (АСА)",
+          "priceValue": 380000
+        },
+        {
+          "nameRu": "Антитела к митохондриям (АМА)",
+          "priceValue": 375000
+        },
+        {
+          "nameRu": "Антитела к миелопероксидазе (Анти-МРО)",
+          "priceValue": 365000
+        },
+        {
+          "nameRu": "Антитела к модифицированному цитруллинированому виментину (A-MCV)",
+          "priceValue": 365000
+        },
+        {
+          "nameRu": "Целиакия (трансглутаминаза IgA) количественный",
+          "priceValue": 266000
+        },
+        {
+          "nameRu": "Целиакия (антитела к глиадину IgA) количественный",
+          "priceValue": 330000
+        },
+        {
+          "nameRu": "Anti - histone – Определение антител к гистонам",
+          "priceValue": 330000
+        },
+        {
+          "nameRu": "Anti - PR3 – Определение антител к протеиназе 3",
+          "priceValue": 360000
+        },
+        {
+          "nameRu": "Аутоиммунная панель-10 антигенов",
+          "priceValue": 630000
+        },
+        {
+          "nameRu": "(AMA M2, SP100, gp210, LKM1, LC1, CENP-B, GBM, PR3, MPO, SLA/LP) NEW",
+          "priceValue": 570000
+        },
+        {
+          "nameRu": "Антитела к Saccharomyces cerevisiae (ASCA) Ig G",
+          "priceValue": 330000
+        },
+        {
+          "nameRu": "Антинейтрофильные цитоплазматические",
+          "priceValue": 375000
+        },
+        {
+          "nameRu": "Антитела (ANCA)",
+          "priceValue": 375000
+        },
+        {
+          "nameRu": "Интерлейкин 2 (ИЛ 2)",
+          "priceValue": 207000
+        },
+        {
+          "nameRu": "Интерлейкин 6 (ИЛ 6)",
+          "priceValue": 207000
+        },
+        {
+          "nameRu": "Интерлейкин 10 (ИЛ 10)",
+          "priceValue": 207000
+        },
+        {
+          "nameRu": "Интерлейкин 4 (ИЛ 4)",
+          "priceValue": 207000
+        },
+        {
+          "nameRu": "Интерлейкин 8 (ИЛ 8)",
+          "priceValue": 207000
+        },
+        {
+          "nameRu": "Антитела к лямблиям суммарные",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "Антитела к микоплазме M.hominis Ig.A Ig.M Ig.G",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Антитела к уреаплазме U.urealiticum Ig.A Ig.M Ig.G",
+          "priceValue": 66000
+        },
+        {
+          "nameRu": "Anti – RBD антитела к коронавирусу SARS – CoV 2",
+          "priceValue": 213000
+        },
+        {
+          "nameRu": "Туберкулёз – Антитела",
+          "priceValue": 130000
+        },
+        {
+          "nameRu": "Анализ на грибок (ногтей) руки",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Кариотип анализ экспертного уровня",
+          "priceValue": 915000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-mikrobiologiya-pcr",
+      "nameRu": "Лаборатория — ПЦР, бактериология и мазки",
+      "items": [
+        {
+          "nameRu": "Мазок из уретры",
+          "priceValue": 130000
+        },
+        {
+          "nameRu": "Соскоб на грибы",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Соскоб на демодекоз",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Соскоб на чесотки",
+          "priceValue": 80000
+        },
+        {
+          "nameRu": "Бак иследование носа",
+          "priceValue": 60000
+        },
+        {
+          "nameRu": "Бак исследование со слизистой оболочки из зева",
+          "priceValue": 120000
+        },
+        {
+          "nameRu": "Мазок на эозинофилы",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Общий мазок на флору",
+          "priceValue": 62995
+        },
+        {
+          "nameRu": "Цитология мазка (PAP-тест)",
+          "priceValue": 90000
+        },
+        {
+          "nameRu": "Мазок на ВПЧ (HPV)",
+          "priceValue": 57000
+        },
+        {
+          "nameRu": "Цитологическое исслед. на атипические клетки",
+          "priceValue": 60000
+        },
+        {
+          "nameRu": "Спермограмма",
+          "priceValue": 75000
+        },
+        {
+          "nameRu": "Нативный мазок на трихомониаз",
+          "priceValue": 40000
+        },
+        {
+          "nameRu": "Женский мазок на лептотрихоз",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Назальный секрет (Эозинофилы)",
+          "priceValue": 45000
+        },
+        {
+          "nameRu": "Тест на совместимость (Курцрока-Миллера)",
+          "priceValue": 58000
+        },
+        {
+          "nameRu": "Проба Шуварского – Симса Гунера",
+          "priceValue": 58000
+        },
+        {
+          "nameRu": "MAR - тест",
+          "priceValue": 247000
+        },
+        {
+          "nameRu": "Соскоб на энтеробиоз (острицы)",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Микоплазма Mycoplasma genitalium",
+          "priceValue": 165000
+        },
+        {
+          "nameRu": "Уреаплазма Ureaplasma urealiticum",
+          "priceValue": 165000
+        },
+        {
+          "nameRu": "Уреаплазма Ureaplasma parvum",
+          "priceValue": 190000
+        },
+        {
+          "nameRu": "Гонококк Neisseria gonorrhoeae",
+          "priceValue": 178000
+        },
+        {
+          "nameRu": "Трихомонада Trichomonas vaginalis",
+          "priceValue": 165000
+        },
+        {
+          "nameRu": "Гарднерелла Gardnerella vaginalis",
+          "priceValue": 165000
+        },
+        {
+          "nameRu": "Мокроты",
+          "priceValue": 191000
+        },
+        {
+          "nameRu": "Хламидия пневмония",
+          "priceValue": 187000
+        },
+        {
+          "nameRu": "Хламидия Chlamidia trachomatis",
+          "priceValue": 165000
         },
         {
           "nameRu": "ВПЧ 16 (Papilomavirus 16)",
@@ -3473,10 +3459,6 @@
           "priceValue": 552000
         },
         {
-          "nameRu": "Комплекс: (Cand.albicans, Cand.glabrata, Cand.krusei) (мазок, моча, ротоглотка)",
-          "priceValue": 435000
-        },
-        {
           "nameRu": "Скрин Микоз РТ-ПЦР(выявление и типированиевозбудителей грибковых инфекций)",
           "priceValue": 495000
         },
@@ -3489,40 +3471,118 @@
           "priceValue": 495000
         },
         {
-          "nameRu": "Фемофлор 16",
-          "priceValue": 690000
-        },
-        {
-          "nameRu": "Фемофлор скрин",
-          "priceValue": 470000
-        },
-        {
-          "nameRu": "Андрофлор",
-          "priceValue": 689000
-        },
-        {
           "nameRu": "Хламидия",
           "priceValue": 155000
         },
         {
-          "nameRu": "Концентрация гемоглобина",
-          "priceValue": 42000
-        },
-        {
-          "nameRu": "Скорость оседания эритроцитов",
-          "priceValue": 30000
-        },
-        {
           "nameRu": "Гистологическое исследования соскоба матки",
           "priceValue": 302000
-        },
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-parazitologiya-mikologiya",
+      "nameRu": "Лаборатория — паразитология и микология",
+      "items": [
         {
-          "nameRu": "ПАП тест",
+          "nameRu": "Аскарида",
           "priceValue": 90000
         },
         {
-          "nameRu": "Ренин",
-          "priceValue": 253000
+          "nameRu": "Демодекоз",
+          "priceValue": 55000
+        },
+        {
+          "nameRu": "Чесоточный клещ",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Лейшманиоз",
+          "priceValue": 50000
+        },
+        {
+          "nameRu": "Гельминты (токсокароз, описторхоз, трихенеллёз,",
+          "priceValue": 70000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-onkomarkerlar",
+      "nameRu": "Лаборатория — онкомаркеры",
+      "items": [
+        {
+          "nameRu": "AFP - Алфа-фетопротеин",
+          "priceValue": 97000
+        },
+        {
+          "nameRu": "Раковый эмбриональный антиген (CEA)",
+          "priceValue": 81000
+        },
+        {
+          "nameRu": "Углеводный антиген СА-15-3 (молочная железа)",
+          "priceValue": 86000
+        },
+        {
+          "nameRu": "Углеводный антиген СА-19-9 (поджелудочная",
+          "priceValue": 90000
+        },
+        {
+          "nameRu": "Углеводный антиген СА-72-4 (желудок)",
+          "priceValue": 86000
+        },
+        {
+          "nameRu": "Углеводный антиген СА-125 (яичники)",
+          "priceValue": 86000
+        },
+        {
+          "nameRu": "CYFRA 21-1",
+          "priceValue": 127000
+        },
+        {
+          "nameRu": "Нейрон специфическая енолаза (NSE - лёгкие)",
+          "priceValue": 109000
+        },
+        {
+          "nameRu": "Альфа-фетопротеин (AFP - печень)",
+          "priceValue": 81000
+        },
+        {
+          "nameRu": "Простатспецифический антиген общий (PSA)",
+          "priceValue": 81000
+        },
+        {
+          "nameRu": "Индекс ROMA (HE-4+CA125)",
+          "priceValue": 285000
+        },
+        {
+          "nameRu": "Антиген плоскоклеточной карциномы (SCC)",
+          "priceValue": 248500
+        },
+        {
+          "nameRu": "S 100 (маркер потенциального повреждения",
+          "priceValue": 525000
+        },
+        {
+          "nameRu": "СА-242 раковый антиген для диагностики рака поджелудочной железы толстог7о кишечника прямой кишки",
+          "priceValue": 259000
+        }
+      ]
+    },
+    {
+      "id": "laboratoriya-patomorfologiya",
+      "nameRu": "Лаборатория — гистология и биопсия",
+      "items": [
+        {
+          "nameRu": "Биопсия",
+          "priceValue": 600000
+        },
+        {
+          "nameRu": "Гистологическое исследование",
+          "priceValue": 210000
+        },
+        {
+          "nameRu": "Гистологическое иследование",
+          "priceValue": 250000
         }
       ]
     }

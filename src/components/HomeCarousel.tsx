@@ -6,12 +6,16 @@ interface HomeCarouselProps<T> {
   items: T[];
   visibleCount: number;
   autoPlayMs?: number;
+  /** fade — almashtirish; slide — chapga siljish, o‘ngdan yangi kartochka */
+  variant?: 'fade' | 'slide';
   getKey: (item: T) => string;
   renderItem: (item: T) => ReactNode;
   gridClassName?: string;
   gridGapClassName?: string;
   ariaLabel?: string;
   arrowsInside?: boolean;
+  /** sichqoncha/fokus ustida avtomatik aylanishni to'xtatish (default: false) */
+  pauseOnHover?: boolean;
   className?: string;
   dotsClassName?: string;
 }
@@ -26,12 +30,14 @@ export default function HomeCarousel<T>({
   items,
   visibleCount,
   autoPlayMs = 5000,
+  variant = 'fade',
   getKey,
   renderItem,
   gridClassName = 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   gridGapClassName = 'gap-6',
   ariaLabel = 'Carousel',
   arrowsInside = false,
+  pauseOnHover = false,
   className = '',
   dotsClassName = 'mt-8',
 }: HomeCarouselProps<T>) {
@@ -60,6 +66,21 @@ export default function HomeCarousel<T>({
   if (items.length === 0) return null;
 
   const visibleItems = getVisibleItems(items, index, visibleCount);
+  const isSlide = variant === 'slide';
+
+  const itemMotion = isSlide
+    ? {
+        initial: { opacity: 0, x: '100%' },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: '-100%' },
+        transition: { duration: 0.5, ease: 'easeInOut' as const },
+      }
+    : {
+        initial: { opacity: 0, x: 24 },
+        animate: { opacity: 1, x: 0 },
+        exit: { opacity: 0, x: -24 },
+        transition: { duration: 0.35, ease: 'easeOut' as const },
+      };
 
   const arrowBase =
     'absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-brand-white border border-brand-sectiongray shadow-md text-brand-gold hover:bg-brand-gold hover:text-white transition-colors cursor-pointer flex items-center justify-center';
@@ -74,21 +95,23 @@ export default function HomeCarousel<T>({
     <div
       className={`relative ${className}`}
       aria-label={ariaLabel}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
+      onMouseEnter={pauseOnHover ? () => setPaused(true) : undefined}
+      onMouseLeave={pauseOnHover ? () => setPaused(false) : undefined}
+      onFocusCapture={pauseOnHover ? () => setPaused(true) : undefined}
+      onBlurCapture={pauseOnHover ? () => setPaused(false) : undefined}
     >
-      <div className={`grid flex-1 auto-rows-fr ${gridGapClassName} ${gridClassName}`}>
+      <div
+        className={`grid flex-1 auto-rows-fr ${gridGapClassName} ${gridClassName} ${
+          isSlide ? 'overflow-hidden' : ''
+        }`}
+      >
         <AnimatePresence mode="popLayout" initial={false}>
-          {visibleItems.map((item, itemIndex) => (
+          {visibleItems.map((item) => (
             <motion.div
-              key={`${getKey(item)}-${index}-${itemIndex}`}
-              className="h-full"
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -24 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
+              key={getKey(item)}
+              layout={isSlide}
+              className="h-full min-w-0"
+              {...itemMotion}
             >
               {renderItem(item)}
             </motion.div>

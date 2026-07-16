@@ -9,6 +9,15 @@ export const APPOINTMENT_LINK_TARGET = '_blank';
 export const APPOINTMENT_LINK_REL = 'noopener noreferrer';
 
 /** Tashqi platformalardagi klinika profillari */
+export const CLINIC_SOCIAL_LINKS = {
+  telegram: 'https://t.me/radeskiuz',
+  instagram: {
+    fergana: 'https://www.instagram.com/radeski_skin_clinic/',
+    kokand: 'https://www.instagram.com/radeski.clinic.kokand/',
+  },
+  facebook: 'https://www.facebook.com/p/Radeski-Skin-Clinic-61556558737040/',
+} as const;
+
 export const CLINIC_REVIEW_LINKS = {
   yandex: 'https://yandex.uz/profile/138616043960',
   googleMaps:

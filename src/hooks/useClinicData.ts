@@ -10,9 +10,8 @@ import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
 import { enrichDoctors } from '../utils/enrichDoctors';
 import { enrichPrices } from '../utils/enrichPrices';
-import { ApiError } from '../api/client';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
-import { ARTICLES, DOCTORS, SERVICE_CATEGORIES } from '../data';
+import { ARTICLES, DOCTORS, PRICES, SERVICE_CATEGORIES } from '../data';
 import { hydrateServiceAboutFromSiteTexts } from '../data/serviceAboutCatalog';
 import { normalizeArticleViews } from '../utils/articleViews';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
@@ -28,6 +27,15 @@ interface ClinicDataState {
   updateArticleViews: (match: { id?: string; slug?: string }, views: number) => void;
 }
 
+async function safeApi<T>(label: string, fn: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    return await fn();
+  } catch (error) {
+    console.warn(`[clinic-data] ${label} failed, using fallback`, error);
+    return fallback;
+  }
+}
+
 export function useClinicData(): ClinicDataState {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
@@ -40,46 +48,54 @@ export function useClinicData(): ClinicDataState {
     setLoading(true);
     setError(null);
 
-    try {
-      const [doctorsRes, servicesRes, pricesRes, articlesRes, siteTextsRes] = await Promise.all([
-        publicApi.getDoctors(),
-        publicApi.getServices(),
-        publicApi.getPrices(),
-        publicApi.getArticles(),
-        publicApi.getSiteTexts().catch(() => []),
-      ]);
+    const [
+      doctorsRes,
+      servicesRes,
+      pricesRes,
+      articlesRes,
+      siteTextsRes,
+    ] = await Promise.all([
+      safeApi('doctors', () => publicApi.getDoctors(), []),
+      safeApi('services', () => publicApi.getServices(), []),
+      safeApi('prices', () => publicApi.getPrices(), []),
+      safeApi('articles', () => publicApi.getArticles(), []),
+      safeApi('site-texts', () => publicApi.getSiteTexts(), []),
+    ]);
 
-      hydrateServiceAboutFromSiteTexts(siteTextsRes);
+    const apiFailed =
+      doctorsRes.length === 0 &&
+      servicesRes.length === 0 &&
+      pricesRes.length === 0 &&
+      articlesRes.length === 0;
 
-      setDoctors(
-        sortDoctorsFeaturedFirst(
-          doctorsRes.length > 0
-            ? enrichDoctors(doctorsRes.map(mapDoctorFromApi))
-            : DOCTORS,
-        ),
-      );
-      const mappedServices = (
-        servicesRes.length > 0
-          ? servicesRes.map(mapServiceCategoryFromApi)
-          : SERVICE_CATEGORIES
-      ).sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
-      setServiceCategories(enrichServiceCategories(mappedServices));
-      setPrices(enrichPrices(pricesRes.map(mapPriceFromApi)));
-      const mappedArticles = articlesRes.map(mapArticleListItemFromApi);
-      setArticles(enrichArticles(mappedArticles.length > 0 ? mappedArticles : ARTICLES));
-    } catch (err) {
-      const message =
-        err instanceof ApiError
-          ? err.message
-          : err instanceof Error
-            ? err.message
-            : 'Ma\'lumotlarni yuklashda xatolik yuz berdi';
-      setError(message);
-      setServiceCategories(enrichServiceCategories(SERVICE_CATEGORIES));
-      setPrices(enrichPrices([]));
-    } finally {
-      setLoading(false);
+    if (apiFailed) {
+      setError('API vaqtincha ishlamayapti — mahalliy ma\'lumotlar ko\'rsatilmoqda');
     }
+
+    hydrateServiceAboutFromSiteTexts(siteTextsRes);
+
+    setDoctors(
+      sortDoctorsFeaturedFirst(
+        doctorsRes.length > 0
+          ? enrichDoctors(doctorsRes.map(mapDoctorFromApi))
+          : DOCTORS,
+      ),
+    );
+
+    const mappedServices = (
+      servicesRes.length > 0
+        ? servicesRes.map(mapServiceCategoryFromApi)
+        : SERVICE_CATEGORIES
+    ).sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+    setServiceCategories(enrichServiceCategories(mappedServices));
+
+    const mappedPrices = pricesRes.length > 0 ? pricesRes.map(mapPriceFromApi) : PRICES;
+    setPrices(enrichPrices(mappedPrices));
+
+    const mappedArticles = articlesRes.map(mapArticleListItemFromApi);
+    setArticles(enrichArticles(mappedArticles.length > 0 ? mappedArticles : ARTICLES));
+
+    setLoading(false);
   }, []);
 
   const updateArticleViews = useCallback((match: { id?: string; slug?: string }, views: number) => {
@@ -100,7 +116,7 @@ export function useClinicData(): ClinicDataState {
   }, []);
 
   useEffect(() => {
-    refetch();
+    void refetch();
   }, [refetch]);
 
   return {

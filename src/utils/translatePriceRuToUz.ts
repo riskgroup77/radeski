@@ -4,6 +4,20 @@
  */
 import type { Locale } from '../types';
 import exactUz from '../data/priceTranslationsUz.json';
+import { COSMETIC_EXACT_PHRASES_UZ } from '../data/priceCosmeticExactUz';
+import { SURGERY_EXACT_PHRASES_UZ } from '../data/priceSurgeryExactUz';
+import { LASER_THERAPY_EXACT_PHRASES_UZ } from '../data/priceLaserTherapyExactUz';
+import { INJECTION_EXACT_PHRASES_UZ } from '../data/priceInjectionExactUz';
+import { REJURAN_RESURFACING_EXACT_PHRASES_UZ } from '../data/priceRejuranResurfacingExactUz';
+import { EPILATION_MISC_EXACT_PHRASES_UZ } from '../data/priceEpilationMiscExactUz';
+import { SERVICES_EXACT_PHRASES_UZ } from '../data/priceServicesExactUz';
+import { ADVANCED_SERVICES_EXACT_PHRASES_UZ } from '../data/priceAdvancedServicesExactUz';
+import { LAB_EXACT_PHRASES_UZ } from '../data/priceLabExactUz';
+import {
+  postProcessPriceUz,
+  protectTerms,
+  tryStructuralTranslateRuToUz,
+} from './priceTranslationStructureUz';
 
 const TYPO_FIXES: [string, string][] = [
   ['гемагингиом', 'гемангиом'],
@@ -21,6 +35,11 @@ const TYPO_FIXES: [string, string][] = [
 
 /** To'liq moslik — eng ustuvor */
 const EXACT_PHRASES_UZ: [string, string][] = [
+  ...SURGERY_EXACT_PHRASES_UZ,
+  ...LASER_THERAPY_EXACT_PHRASES_UZ,
+  ...INJECTION_EXACT_PHRASES_UZ,
+  ...REJURAN_RESURFACING_EXACT_PHRASES_UZ,
+  ...EPILATION_MISC_EXACT_PHRASES_UZ,
   ['Первичный осмотр врача дерматовениролога', 'Dermatovenerolog shifokorining birinchi ko\'rigi'],
   ['Повторный осмотр врача дерматовениролога', 'Dermatovenerolog shifokorining takroriy ko\'rigi'],
   ['Первичный осмотр врача трихолога + трихоскопия', 'Trixolog shifokorining birinchi ko\'rigi + trixoskopiya'],
@@ -48,11 +67,11 @@ const EXACT_PHRASES_UZ: [string, string][] = [
   ],
   [
     'Радиоволновая хирургия 1 образования (доброкачественные внутридермальные новообразования кожи - родинки/невусы) с анестезией',
-    '1 ta xavfsiz ichki teri o\'smasini (xol/nevus) radioto\'lqin xirurgiyasi, anesteziya bilan',
+    '1 ta xavfsiz ichki teri o\'smasini (xol (nevus)) radioto\'lqin xirurgiyasi, anesteziya bilan',
   ],
   [
     'Радиоволновая хирургия 1 образования (доброкачественные эпидермальные новообразования кожи - кератомы, родинки/невусы) с анестезией',
-    '1 ta xavfsiz epidermal teri o\'smasini (keratoma, xol/nevus) radioto\'lqin xirurgiyasi, anesteziya bilan',
+    '1 ta xavfsiz epidermal teri o\'smasini (keratoma, xol (nevus)) radioto\'lqin xirurgiyasi, anesteziya bilan',
   ],
   [
     'Радиоволновая хирургия 1 образования в сложных анатомических зонах (веки, паховая область, слизистые) с анестезией',
@@ -60,16 +79,16 @@ const EXACT_PHRASES_UZ: [string, string][] = [
   ],
   [
     'Радиоволновое удаление контагиозного моллюска (за 1 элемент): до 10 образований',
-    'Yuqumli mol\'yuskni radioto\'lqin bilan olib tashlash (1 element): 10 tagacha o\'sma',
+    'Yuqumli mol\'yuskni radioto\'lqin bilan olib tashlash (1 ta element uchun, 10 tagacha o\'sma)',
   ],
   [
     'Хирургическое удаление доброкачественных новообразований кожи больших размеров и новообразований кожи, которые расположены в анатомически сложных участках І уровня сложности',
     'Katta hajmdagi va I darajali murakkab anatomik joylashuvdagi xavfsiz teri o\'smalarini xirurgik olib tashlash',
   ],
   ['Shave (Шейв) - удаление новообразований кожи', 'Shave (seyv) — teri o\'smalarini olib tashlash'],
-  ['Удаление родинок от', 'Xolarni olib tashlash — dan'],
-  ['Удаление новообразований от', 'O\'smalarni olib tashlash — dan'],
-  ['Удаление новообразований от', 'O\'smalarni olib tashlash — dan'],
+  ['Удаление родинок (от)', 'Xol (nevus)larni olib tashlash (dan)'],
+  ['Удаление новообразований (от)', 'O\'smalarni olib tashlash (dan)'],
+  ['Удаление новообразований (от)', 'O\'smalarni olib tashlash (dan)'],
   ['Операция (Базалиома)', 'Operatsiya (bazalioma)'],
   ['Гистологическое исследование', 'Gistologik tekshiruv'],
   ['Панч биопсия', 'Panch-biopsiya'],
@@ -105,7 +124,30 @@ const EXACT_PHRASES_UZ: [string, string][] = [
   ],
   ['Карбоновый пилинг+ gold toning', 'Karbonli piling + gold toning'],
   ['Лечение купероза и розации', 'Kuperoz va rozatseani davolash'],
-  ['Дермапал', 'Dermapal'],
+  [
+    'СА-242 раковый антиген для диагностики рака поджелудочной железы толстог7о кишечника прямой кишки',
+    'SA-242 — oshqozon osti bezi, qalin ichak va to\'g\'ri ichak saratonini aniqlash uchun onkogen antigen',
+  ],
+  [
+    'Комплекс: (Cand.albicans, Cand.glabrata, Cand.krusei) (мазок, моча, ротоглотка)',
+    'Kompleks: Candida albicans, C. glabrata, C. krusei (surtma, siydik, og\'iz-boqish)',
+  ],
+  [
+    'Скрин Микоз РТ-ПЦР(выявление и типированиевозбудителей грибковых инфекций)',
+    'Mikoz skriningi RT-PTSR (zamburug\' infeksiyalari qo\'zg\'atolchilarini aniqlash va tipizatsiya qilish)',
+  ],
+  [
+    '12-ОРЗ-панель РТ-ПЦР (острые респираторные заболевания)',
+    '12-ORZ panel RT-PTSR (o\'tkir respirator kasalliklar)',
+  ],
+  [
+    'АБ-ГенРезиста РТ-ПЦР (выявление генов резистентности к антибиотикам)',
+    'AB-GenRezista RT-PTSR (antibiotiklarga chidamlilik genlarini aniqlash)',
+  ],
+  ...COSMETIC_EXACT_PHRASES_UZ,
+  ...SERVICES_EXACT_PHRASES_UZ,
+  ...ADVANCED_SERVICES_EXACT_PHRASES_UZ,
+  ...LAB_EXACT_PHRASES_UZ,
 ];
 
 const WORDS_UZ: Record<string, string> = {
@@ -135,9 +177,9 @@ const WORDS_UZ: Record<string, string> = {
   кожи: 'teri',
   коже: 'terida',
   кожа: 'teri',
-  родинок: 'xollar',
-  родинки: 'xol',
-  родинка: 'xol',
+  родинок: 'xollar (nevus)',
+  родинки: 'xollar (nevus)',
+  родинка: 'xol (nevus)',
   невусы: 'nevuslar',
   невус: 'nevus',
   кератомы: 'keratomalar',
@@ -492,6 +534,9 @@ function translateToken(token: string): string {
   if (!/[а-яА-ЯёЁ]/.test(token)) return token;
 
   const lower = token.toLowerCase();
+  // "С" (Cyrillic es) as standalone abbreviation — not preposition "s/bilan"
+  if (token.length === 1 && lower === 'с') return 'C';
+
   const mapped = WORDS_UZ[lower];
   if (mapped !== undefined) {
     if (!mapped) return '';
@@ -517,6 +562,20 @@ function transliterateToken(token: string): string {
       const tr = map[lower];
       if (!tr) return char;
       return char === lower ? tr : tr.charAt(0).toUpperCase() + tr.slice(1);
+    })
+    .join('');
+}
+
+function translateFragment(text: string): string {
+  const protectedText = protectTerms(text);
+  const structural = tryStructuralTranslateRuToUz(protectedText, translateFragment);
+  if (structural) return structural;
+
+  const tokens = tokenizeRussian(protectedText);
+  return tokens
+    .map((token) => {
+      if (!/[а-яА-ЯёЁ]/.test(token)) return token;
+      return translateToken(token);
     })
     .join('');
 }
@@ -572,23 +631,23 @@ export function translatePriceRuToUz(nameRu: string): string {
   const exactKey = normalizeKey(normalized);
 
   for (const [from, to] of EXACT_PHRASES_UZ) {
-    if (normalizeKey(from) === exactKey) return to;
+    if (normalizeKey(from) === exactKey) return postProcessPriceUz(normalized, to);
+  }
+
+  const protectedText = protectTerms(normalized);
+  const structural = tryStructuralTranslateRuToUz(protectedText, translateFragment);
+  if (structural) {
+    return postProcessPriceUz(normalized, structural);
   }
 
   const cached = EXACT_UZ_MAP[exactKey];
   if (cached && !/[а-яА-ЯёЁ]/.test(cached)) {
-    return cached;
+    return postProcessPriceUz(normalized, cached);
   }
 
-  let text = applyBoundaryPhrases(normalized, SORTED_EXACT_PHRASES);
-
-  const tokens = tokenizeRussian(text);
-  const translated = tokens.map((token) => {
-    if (!/[а-яА-ЯёЁ]/.test(token)) return token;
-    return translateToken(token);
-  });
-
-  return cleanupUz(finalizeCyrillic(translated.join('')));
+  const text = applyBoundaryPhrases(protectedText, SORTED_EXACT_PHRASES);
+  const translated = translateFragment(text);
+  return postProcessPriceUz(normalized, cleanupUz(finalizeCyrillic(translated)));
 }
 
 /** Qolgan kirill qismlarini tozalash */

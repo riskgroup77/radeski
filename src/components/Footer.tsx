@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Clock, Mail, Send, MessageCircle, Facebook, Instagram } from 'lucide-react';
+import { MapPin, Phone, Clock, Mail, Send, Facebook } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import SiteLogo from './SiteLogo';
+import InstagramBranchPicker from './InstagramBranchPicker';
 import { PageId, pagePath } from '../routing/paths';
-import { CLINIC_MAP_EMBED_URL } from '../config/links';
+import { CLINIC_MAP_EMBED_URL, CLINIC_SOCIAL_LINKS } from '../config/links';
+import { handleHomeLogoClick } from '../utils/scrollToTop';
 
 interface FooterProps {
   locale: Locale;
@@ -24,7 +26,13 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
           <div>
             <Link
               to={pagePath(locale, 'home')}
-              onClick={() => onNavigate('home')}
+              onClick={(event) => {
+                if (currentPage === 'home') {
+                  handleHomeLogoClick(event, true);
+                } else {
+                  onNavigate('home');
+                }
+              }}
               className="inline-flex mb-5 cursor-pointer group"
             >
               <SiteLogo variant="footer" className="group-hover:opacity-90 transition-opacity" />
@@ -39,36 +47,23 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
 
             <div className="flex gap-3">
               <a
-                href="https://t.me/tradeski"
+                href={CLINIC_SOCIAL_LINKS.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-lg bg-slate-850 hover:bg-brand-gold hover:text-white flex items-center justify-center transition-all text-slate-300"
+                aria-label="Telegram"
               >
                 <Send className="w-4 h-4" />
               </a>
+              <InstagramBranchPicker locale={locale} />
               <a
-                href="https://instagram.com/radeski"
+                href={CLINIC_SOCIAL_LINKS.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-lg bg-slate-850 hover:bg-brand-gold hover:text-white flex items-center justify-center transition-all text-slate-300"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="https://facebook.com/radeski"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-850 hover:bg-brand-gold hover:text-white flex items-center justify-center transition-all text-slate-300"
+                aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="https://wa.me/998732007373"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-850 hover:bg-brand-gold hover:text-white flex items-center justify-center transition-all text-slate-300"
-              >
-                <MessageCircle className="w-4 h-4" />
               </a>
             </div>
           </div>

@@ -25,10 +25,13 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-app.get('/api/chat/health', (_req, res) => {
+const healthHandler: express.RequestHandler = (_req, res) => {
   const configured = isDeepSeekConfigured();
   res.json({ ok: true, aiConfigured: configured, model: getDeepSeekModel() });
-});
+};
+
+app.get('/api/chat/health', healthHandler);
+app.get('/api/chat-health', healthHandler);
 
 const distPath = path.resolve(__dirname, '../dist');
 app.use(express.static(distPath));

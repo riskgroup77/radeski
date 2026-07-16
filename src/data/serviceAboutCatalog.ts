@@ -250,7 +250,7 @@ export const SERVICE_ABOUT_CATALOG: Record<string, LocalizedServiceAbout> = {
         {
           title: 'Zamonaviy dermatoskopiya',
           description:
-            "Qabul vaqtida raqamli dermatoskopiya o'tkaziladi — terini ko'p baravar kattalashtirilgan holda og'riqsiz tekshirish. Usul xollar va boshqa hosilalarning tuzilishini batafsil baholash, ko'z bilan ko'rinmaydigan o'zgarishlarni aniqlash va keyingi kuzatuv yoki davolash zarurligini belgilash imkonini beradi.",
+            "Qabul vaqtida raqamli dermatoskopiya o'tkaziladi — terini ko'p baravar kattalashtirilgan holda og'riqsiz tekshirish. Usul xollar (nevus) va boshqa hosilalarning tuzilishini batafsil baholash, ko'z bilan ko'rinmaydigan o'zgarishlarni aniqlash va keyingi kuzatuv yoki davolash zarurligini belgilash imkonini beradi.",
         },
         {
           title: 'Biopsiya imkoniyati',
@@ -265,7 +265,7 @@ export const SERVICE_ABOUT_CATALOG: Record<string, LocalizedServiceAbout> = {
         {
           title: 'Dermatoonkologga qachon murojaat qilish kerak?',
           description:
-            "Konsultatsiya tavsiya etiladi, agar: yangi xol yoki hosila paydo bo'lsa; mavjud xolning shakli, o'lchami yoki rangi o'zgarsa; qichish, og'riq, qon ketish yoki yallig'lanish bo'lsa; terida uzoq davom etayotgan yara yoki yaracha bo'lsa; profilaktik ko'rikdan o'tib, xollaringiz xavfsizligiga ishonch hosil qilmoqchi bo'lsangiz.",
+            "Konsultatsiya tavsiya etiladi, agar: yangi xol (nevus) yoki hosila paydo bo'lsa; mavjud xol (nevus)ning shakli, o'lchami yoki rangi o'zgarsa; qichish, og'riq, qon ketish yoki yallig'lanish bo'lsa; terida uzoq davom etayotgan yara yoki yaracha bo'lsa; profilaktik ko'rikdan o'tib, xollar (nevus)ingiz xavfsizligiga ishonch hosil qilmoqchi bo'lsangiz.",
         },
       ],
       aboutFooter:

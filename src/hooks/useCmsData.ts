@@ -9,7 +9,6 @@ import {
   mapTreatmentResultFromApi,
   type ClinicRatingDisplay,
 } from '../api/cmsMappers';
-import { ApiError } from '../api/client';
 import type {
   ClinicBranch,
   ClinicPartner,
@@ -56,6 +55,15 @@ interface CmsDataState {
   refetch: () => Promise<void>;
 }
 
+async function safeApi<T>(label: string, fn: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    return await fn();
+  } catch (error) {
+    console.warn(`[cms-data] ${label} failed, using fallback`, error);
+    return fallback;
+  }
+}
+
 export function useCmsData(): CmsDataState {
   const [partners, setPartners] = useState<ClinicPartner[]>(CLINIC_PARTNERS);
   const [reviews, setReviews] = useState<CustomerReview[]>(CUSTOMER_REVIEWS);
@@ -71,50 +79,55 @@ export function useCmsData(): CmsDataState {
     setLoading(true);
     setError(null);
 
-    try {
-      const [
-        partnersRes,
-        reviewsRes,
-        branchesRes,
-        resultsRes,
-        videosRes,
-        ratingsRes,
-        countRes,
-      ] = await Promise.all([
-        publicApi.getPartners(),
-        publicApi.getReviews(true),
-        publicApi.getBranches(),
-        publicApi.getTreatmentResults(),
-        publicApi.getVideos(),
-        publicApi.getClinicRatings(),
-        publicApi.getClientCount(),
-      ]);
+    const [
+      partnersRes,
+      reviewsRes,
+      branchesRes,
+      resultsRes,
+      videosRes,
+      ratingsRes,
+      countRes,
+    ] = await Promise.all([
+      safeApi('partners', () => publicApi.getPartners(), []),
+      safeApi('reviews', () => publicApi.getReviews(true), []),
+      safeApi('branches', () => publicApi.getBranches(), []),
+      safeApi('treatment-results', () => publicApi.getTreatmentResults(), []),
+      safeApi('videos', () => publicApi.getVideos(), []),
+      safeApi('clinic-ratings', () => publicApi.getClinicRatings(), []),
+      safeApi('client-count', () => publicApi.getClientCount(), { client_count: getCachedClientCount() }),
+    ]);
 
-      setPartners(withFallback(partnersRes.map(mapPartnerFromApi), CLINIC_PARTNERS));
-      setReviews(withFallback(reviewsRes.map(mapReviewFromApi), CUSTOMER_REVIEWS.filter((r) => r.published)));
-      setBranches(withFallback(branchesRes.map(mapBranchFromApi), CLINIC_BRANCHES));
-      setTreatmentResults(
-        resolvePublicTreatmentResults(resultsRes.map(mapTreatmentResultFromApi)),
-      );
-      setVideos(mapApiClinicVideos(videosRes.map(mapClinicVideoFromApi)));
-      setClinicRatings(
-        ratingsRes.length > 0 ? ratingsRes.map(mapClinicRatingFromApi) : mapLegacyRatings(),
-      );
-      const count = resolveClientCount(countRes.client_count);
-      setClientCount(count);
-      setCachedClientCount(count);
-    } catch (err) {
-      const message =
-        err instanceof ApiError
-          ? err.message
-          : err instanceof Error
-            ? err.message
-            : 'CMS ma\'lumotlarini yuklashda xatolik';
-      setError(message);
-      setTreatmentResults(TREATMENT_RESULTS);
-    } finally {
-      setLoading(false);
+    const apiFailed =
+      partnersRes.length === 0 &&
+      reviewsRes.length === 0 &&
+      branchesRes.length === 0 &&
+      resultsRes.length === 0 &&
+      videosRes.length === 0 &&
+      ratingsRes.length === 0;
+
+    if (apiFailed) {
+      setError('CMS API vaqtincha ishlamayapti — mahalliy ma\'lumotlar ko\'rsatilmoqda');
     }
+
+    setPartners(withFallback(partnersRes.map(mapPartnerFromApi), CLINIC_PARTNERS));
+    setReviews(withFallback(reviewsRes.map(mapReviewFromApi), CUSTOMER_REVIEWS.filter((r) => r.published)));
+    setBranches(withFallback(branchesRes.map(mapBranchFromApi), CLINIC_BRANCHES));
+    setTreatmentResults(
+      resultsRes.length > 0
+        ? resolvePublicTreatmentResults(resultsRes.map(mapTreatmentResultFromApi))
+        : TREATMENT_RESULTS,
+    );
+    setVideos(
+      videosRes.length > 0 ? mapApiClinicVideos(videosRes.map(mapClinicVideoFromApi)) : [],
+    );
+    setClinicRatings(
+      ratingsRes.length > 0 ? ratingsRes.map(mapClinicRatingFromApi) : mapLegacyRatings(),
+    );
+    const count = resolveClientCount(countRes.client_count);
+    setClientCount(count);
+    setCachedClientCount(count);
+
+    setLoading(false);
   }, []);
 
   useEffect(() => {

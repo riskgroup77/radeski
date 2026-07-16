@@ -1,7 +1,33 @@
-const API_URL =
-  (import.meta.env && import.meta.env.VITE_API_URL) ||
-  (typeof process !== 'undefined' ? process.env.VITE_API_URL : undefined) ||
-  'https://radeskiapi.arxivfjsti.uz';
+const API_BACKEND = 'https://radeskiapi.arxivfjsti.uz';
+const PRODUCTION_HOSTS = new Set(['radeski.uz', 'www.radeski.uz']);
+
+function resolveApiBaseUrl(): string {
+  // Production: always same-origin /api proxy — ignores baked VITE_API_URL
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (PRODUCTION_HOSTS.has(host)) {
+      return '';
+    }
+  }
+
+  const envUrl =
+    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) ||
+    (typeof process !== 'undefined' ? process.env.VITE_API_URL : undefined);
+
+  if (typeof envUrl === 'string' && envUrl.trim()) {
+    return envUrl.trim().replace(/\/$/, '');
+  }
+
+  if (typeof window !== 'undefined') {
+    return '';
+  }
+
+  return API_BACKEND;
+}
+
+function getApiBaseUrl(): string {
+  return resolveApiBaseUrl();
+}
 
 export class ApiError extends Error {
   status: number;
@@ -43,7 +69,7 @@ export async function apiRequest<T>(
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiBaseUrl()}${path}`, {
     ...options,
     headers,
   });
@@ -74,7 +100,7 @@ export async function apiFormRequest<T>(
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiBaseUrl()}${path}`, {
     method: 'POST',
     headers,
     body: formData,
@@ -103,7 +129,7 @@ export async function apiFormRequestWithMethod<T>(
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${getApiBaseUrl()}${path}`, {
     method,
     headers,
     body: formData,
@@ -121,21 +147,21 @@ export async function apiFormRequestWithMethod<T>(
 }
 
 export function getApiUrl(): string {
-  return API_URL;
+  return getApiBaseUrl();
 }
 
 /** Relative upload paths from API → full URL for <img src> */
 export function resolveMediaUrl(url: string | null | undefined): string | null {
   if (!url) return null;
 
+  const base = (getApiBaseUrl() || API_BACKEND).replace(/\/$/, '');
+
   const uploadsPath = url.match(/\/uploads\/[^\s?#]+/)?.[0];
   if (uploadsPath) {
-    const base = API_URL.replace(/\/$/, '');
     return `${base}${uploadsPath}`;
   }
 
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  const base = API_URL.replace(/\/$/, '');
   if (url.startsWith('/uploads/')) return `${base}${url}`;
   if (url.startsWith('uploads/')) return `${base}/${url}`;
   if (url.startsWith('/')) return url;

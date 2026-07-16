@@ -5,7 +5,23 @@ import { filterExcludedPrices } from './excludedServices';
 import { normalizePriceItems } from './priceDisplay';
 
 const API_CATEGORY_ALIASES: Record<string, string[]> = {
-  dermatologiya: ['dermatologiya', 'dermatokosmetolog', 'podolog'],
+  dermatologiya: [
+    'dermatologiya',
+    'dermatokosmetolog',
+    'podolog',
+    'laboratoriya',
+    'laboratoriya-umumiy-klinik',
+    'laboratoriya-siydik-va-najas',
+    'laboratoriya-koagulatsiya',
+    'laboratoriya-biokimyo',
+    'laboratoriya-gormonal',
+    'laboratoriya-infektsiyalar',
+    'laboratoriya-immunologiya-allergiya',
+    'laboratoriya-mikrobiologiya-pcr',
+    'laboratoriya-parazitologiya-mikologiya',
+    'laboratoriya-onkomarkerlar',
+    'laboratoriya-patomorfologiya',
+  ],
   dermatoonkologiya: [
     'dermatoonkologiya',
     'dermatoonkologiya-2',
@@ -40,7 +56,22 @@ const API_CATEGORY_ALIASES: Record<string, string[]> = {
     'lazernaya-ablyatsionnaya-shlifovka-kozhi-srednyaya',
   ],
   podologiya: ['podologiya'],
-  laboratoriya: ['laboratoriya', 'dnevnoy-statsionar', 'allergo-proba-10-punktov'],
+  laboratoriya: [
+    'laboratoriya',
+    'laboratoriya-umumiy-klinik',
+    'laboratoriya-siydik-va-najas',
+    'laboratoriya-koagulatsiya',
+    'laboratoriya-biokimyo',
+    'laboratoriya-gormonal',
+    'laboratoriya-infektsiyalar',
+    'laboratoriya-immunologiya-allergiya',
+    'laboratoriya-mikrobiologiya-pcr',
+    'laboratoriya-parazitologiya-mikologiya',
+    'laboratoriya-onkomarkerlar',
+    'laboratoriya-patomorfologiya',
+    'dnevnoy-statsionar',
+    'allergo-proba-10-punktov',
+  ],
 };
 
 function findCatalogMatch(apiItem: PriceItem, catalog: PriceItem[]): PriceItem | undefined {

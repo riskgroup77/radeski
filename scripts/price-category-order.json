@@ -210,8 +210,58 @@
     "itemCount": 4
   },
   {
-    "id": "laboratoriya",
-    "nameRu": "Лаборатория",
-    "itemCount": 466
+    "id": "laboratoriya-umumiy-klinik",
+    "nameRu": "Лаборатория — общеклинические исследования",
+    "itemCount": 16
+  },
+  {
+    "id": "laboratoriya-siydik-va-najas",
+    "nameRu": "Лаборатория — моча и кал",
+    "itemCount": 22
+  },
+  {
+    "id": "laboratoriya-koagulatsiya",
+    "nameRu": "Лаборатория — коагулограмма и гемостаз",
+    "itemCount": 16
+  },
+  {
+    "id": "laboratoriya-biokimyo",
+    "nameRu": "Лаборатория — биохимия и микроэлементы",
+    "itemCount": 165
+  },
+  {
+    "id": "laboratoriya-gormonal",
+    "nameRu": "Лаборатория — гормоны и репродуктивное здоровье",
+    "itemCount": 52
+  },
+  {
+    "id": "laboratoriya-infektsiyalar",
+    "nameRu": "Лаборатория — инфекции и серология",
+    "itemCount": 90
+  },
+  {
+    "id": "laboratoriya-immunologiya-allergiya",
+    "nameRu": "Лаборатория — иммунология и аллергология",
+    "itemCount": 45
+  },
+  {
+    "id": "laboratoriya-mikrobiologiya-pcr",
+    "nameRu": "Лаборатория — ПЦР, бактериология и мазки",
+    "itemCount": 38
+  },
+  {
+    "id": "laboratoriya-parazitologiya-mikologiya",
+    "nameRu": "Лаборатория — паразитология и микология",
+    "itemCount": 5
+  },
+  {
+    "id": "laboratoriya-onkomarkerlar",
+    "nameRu": "Лаборатория — онкомаркеры",
+    "itemCount": 14
+  },
+  {
+    "id": "laboratoriya-patomorfologiya",
+    "nameRu": "Лаборатория — гистология и биопсия",
+    "itemCount": 3
   }
 ]

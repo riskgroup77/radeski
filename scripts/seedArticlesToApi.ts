@@ -1,12 +1,19 @@
 /**
- * Maqolalarni to'liq matn, FAQ va rasmlar bilan API ga yangilaydi.
+ * Maqolalarni API ga sinxronlashtiradi: eski maqolalarni o'chiradi, yangilarini yaratadi/yangilaydi.
  * Usage: npm run seed:articles
  */
 import 'dotenv/config';
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
-import { adminLogin, getAdminArticles, updateArticle } from '../src/api/adminApi';
+import {
+  adminLogin,
+  createArticle,
+  deleteArticle,
+  getAdminArticles,
+  updateArticle,
+} from '../src/api/adminApi';
 import { mapArticleToCreatePayload } from '../src/api/mappers';
+import { mapLocalizedImagesFromApi } from '../src/utils/localizedImage';
 import { ARTICLES } from '../src/data';
 import { enrichArticle } from '../src/utils/enrichArticles';
 import {
@@ -70,6 +77,19 @@ function buildSeedArticle(staticArticle: (typeof ARTICLES)[number]) {
   return enrichArticle(withResolvedText);
 }
 
+function findMatch(
+  staticArticle: (typeof ARTICLES)[number],
+  existing: Awaited<ReturnType<typeof getAdminArticles>>,
+) {
+  const bySlug = new Map(existing.map((item) => [normalizeKey(item.slug), item]));
+  const byTitle = new Map(existing.map((item) => [normalizeKey(item.title_uz), item]));
+  return (
+    bySlug.get(normalizeKey(staticArticle.slug)) ??
+    byTitle.get(normalizeKey(staticArticle.title.uz)) ??
+    null
+  );
+}
+
 async function main() {
   const username = process.env.ADMIN_USERNAME?.trim() || 'admin';
   const password = process.env.ADMIN_PASSWORD?.trim() || 'radeski2026';
@@ -77,38 +97,61 @@ async function main() {
   console.log('Logging in...');
   const token = (await withRetry('login', () => adminLogin({ username, password }))).access_token;
 
-  const existing = await withRetry('get articles', () => getAdminArticles(token));
-  const bySlug = new Map(existing.map((item) => [normalizeKey(item.slug), item]));
-  const byTitle = new Map(existing.map((item) => [normalizeKey(item.title_uz), item]));
-
-  let updated = 0;
-  let skipped = 0;
+  let existing = await withRetry('get articles', () => getAdminArticles(token));
+  const keepIds = new Set<string>();
 
   for (const staticArticle of ARTICLES) {
-    const article = buildSeedArticle(staticArticle);
-    const match =
-      bySlug.get(normalizeKey(staticArticle.slug)) ??
-      byTitle.get(normalizeKey(staticArticle.title.uz));
+    const match = findMatch(staticArticle, existing);
+    if (match) keepIds.add(match.id);
+  }
 
-    if (!match) {
-      console.warn(`  skip (not on API): ${staticArticle.title.uz}`);
-      skipped++;
-      continue;
-    }
-
-    const payload = mapArticleToCreatePayload(article);
-    const imagePath = staticArticle.image || staticArticle.images?.uz;
-    const coverFile = imagePath ? loadPublicImage(imagePath) : null;
-
-    await withRetry(staticArticle.title.uz, () =>
-      updateArticle(match.id, payload, coverFile, token),
-    );
-    updated++;
-    console.log(`  updated: ${staticArticle.title.uz}`);
+  let deleted = 0;
+  for (const item of existing) {
+    if (keepIds.has(item.id)) continue;
+    await withRetry(`delete ${item.title_uz}`, () => deleteArticle(item.id, token));
+    deleted++;
+    console.log(`  deleted: ${item.title_uz}`);
     await sleep(REQUEST_DELAY_MS);
   }
 
-  console.log(`Done — updated: ${updated}, skipped: ${skipped}`);
+  existing = await withRetry('refresh articles', () => getAdminArticles(token));
+
+  let created = 0;
+  let updated = 0;
+
+  for (const staticArticle of ARTICLES) {
+    const article = buildSeedArticle(staticArticle);
+    const match = findMatch(staticArticle, existing);
+
+    if (match) {
+      // Mavjud maqolada admin yuklagan rasmni saqlash — statik /karusel rasmini qayta yozmaymiz
+      const apiImages = mapLocalizedImagesFromApi(match);
+      const articleWithApiImages = {
+        ...article,
+        images: apiImages,
+        image: apiImages.uz ?? apiImages.ru ?? apiImages.en ?? article.image ?? null,
+      };
+      const payload = mapArticleToCreatePayload(articleWithApiImages, { preserveImage: true });
+      await withRetry(staticArticle.title.uz, () =>
+        updateArticle(match.id, payload, null, token),
+      );
+      updated++;
+      console.log(`  updated (text only, image kept): ${staticArticle.title.uz}`);
+    } else {
+      const payload = mapArticleToCreatePayload(article);
+      const imagePath = staticArticle.image || staticArticle.images?.uz;
+      const coverFile = imagePath ? loadPublicImage(imagePath) : null;
+      await withRetry(staticArticle.title.uz, () =>
+        createArticle(payload, coverFile, token),
+      );
+      created++;
+      console.log(`  created: ${staticArticle.title.uz}`);
+    }
+
+    await sleep(REQUEST_DELAY_MS);
+  }
+
+  console.log(`Done — deleted: ${deleted}, created: ${created}, updated: ${updated}`);
 }
 
 main().catch((error) => {
