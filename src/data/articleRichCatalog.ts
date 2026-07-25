@@ -2,6 +2,10 @@ import type { Article, ArticleRichContent, Locale } from '../types';
 import { ACNE_ARTICLE_CATALOG } from './articles/acneArticle';
 import { POST_ACNE_ARTICLE_CATALOG } from './articles/postAcneArticle';
 import { ROSACEA_ARTICLE_CATALOG } from './articles/rosaceaArticle';
+import { PRP_HAIR_ARTICLE_CATALOG } from './articles/prpHairArticle';
+import { PLASMAPHERESIS_ARTICLE_CATALOG } from './articles/plasmapheresisArticle';
+import { DEKA_CO2_ARTICLE_CATALOG } from './articles/dekaCo2LaserArticle';
+import { DEKA_MOVEO_ARTICLE_CATALOG } from './articles/dekaMoveoEpilationArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -24,6 +28,27 @@ const DISCLAIMER: Record<Locale, string> = {
 export { DISCLAIMER };
 
 export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
+  'deka-moveo': [
+    'deka-moveo',
+    'moveo',
+    'motus',
+    'aleksandrit',
+    'александрит',
+    'alexandrite',
+    'epilyatsiya-tayyorgarlik',
+    'лазерной эпиляции',
+    'laser hair removal',
+  ],
+  'deka-co2': [
+    'co2-lazer-deka',
+    'co2-lazer',
+    'co₂-lazer',
+    'co₂-лазер',
+    'co2 лазер',
+    'smartxide',
+    'фракцион',
+    'fraksion lazer',
+  ],
   'papilloma-warts': ['papillom', 'borodav', 'wart', 'hpv', "so'gal", 'бородав', 'папиллом', 'condylom'],
   hemangioma: ['gemangi', 'геманги', 'hemangi', 'vascular', 'qizil xol', 'angioma'],
   psoriasis: ['psoria', 'псориаз', 'psoriasis', 'lishay'],
@@ -34,6 +59,22 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   vitiligo: ['vitili', 'витили', 'depigment'],
   fungal: ['zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
   'mole-screening': ['nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
+  'prp-hair': [
+    'plazmotorapiya-soch',
+    'plazmotorapiya',
+    'плазмотерап',
+    'prp',
+    'platelet rich plasma',
+    'soch uchun plazmo',
+    'трихолог',
+    'trixolog',
+  ],
+  plasmapheresis: [
+    'plazmaferez',
+    'плазмаферез',
+    'plasmapheresis',
+    'plazmaferez-teri',
+  ],
 };
 
 function uzBodyPapilloma(): string {
@@ -682,6 +723,10 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   acne: ACNE_ARTICLE_CATALOG,
   'post-acne': POST_ACNE_ARTICLE_CATALOG,
   rosacea: ROSACEA_ARTICLE_CATALOG,
+  'prp-hair': PRP_HAIR_ARTICLE_CATALOG,
+  plasmapheresis: PLASMAPHERESIS_ARTICLE_CATALOG,
+  'deka-co2': DEKA_CO2_ARTICLE_CATALOG,
+  'deka-moveo': DEKA_MOVEO_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

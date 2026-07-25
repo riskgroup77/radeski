@@ -2,7 +2,7 @@
  * Full catalog seed: services, prices, site-texts, doctors, articles.
  *
  * Usage:
- *   set VITE_API_URL=https://radeskiapi.arxivfjsti.uz
+ *   set VITE_API_URL=https://api.radeski.uz
  *   set ADMIN_USERNAME=...
  *   set ADMIN_PASSWORD=...
  *   npm run seed:catalog
@@ -34,7 +34,7 @@ import { resolveCategoryRichContent, resolveServiceRichContent } from '../src/ut
 
 const API_URL = (
   process.env.VITE_API_URL ||
-  'https://radeskiapi.arxivfjsti.uz'
+  'https://api.radeski.uz'
 ).replace(/\/$/, '');
 
 const LOCALES: Locale[] = ['uz', 'ru', 'en'];

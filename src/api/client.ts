@@ -1,13 +1,14 @@
-const API_BACKEND = 'https://radeskiapi.arxivfjsti.uz';
+const API_BACKEND = 'https://api.radeski.uz';
 const PRODUCTION_HOSTS = new Set(['radeski.uz', 'www.radeski.uz']);
+
+function isProductionHost(): boolean {
+  return typeof window !== 'undefined' && PRODUCTION_HOSTS.has(window.location.hostname);
+}
 
 function resolveApiBaseUrl(): string {
   // Production: always same-origin /api proxy — ignores baked VITE_API_URL
-  if (typeof window !== 'undefined') {
-    const host = window.location.hostname;
-    if (PRODUCTION_HOSTS.has(host)) {
-      return '';
-    }
+  if (isProductionHost()) {
+    return '';
   }
 
   const envUrl =
@@ -154,7 +155,8 @@ export function getApiUrl(): string {
 export function resolveMediaUrl(url: string | null | undefined): string | null {
   if (!url) return null;
 
-  const base = (getApiBaseUrl() || API_BACKEND).replace(/\/$/, '');
+  // Production serves /uploads/ through the same nginx that proxies /api/
+  const base = isProductionHost() ? '' : (getApiBaseUrl() || API_BACKEND).replace(/\/$/, '');
 
   const uploadsPath = url.match(/\/uploads\/[^\s?#]+/)?.[0];
   if (uploadsPath) {

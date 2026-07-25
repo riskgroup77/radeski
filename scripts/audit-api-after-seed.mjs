@@ -1,7 +1,7 @@
 /**
  * Post-seed API audit — counts and samples.
  */
-const BASE = (process.env.VITE_API_URL || 'https://radeskiapi.arxivfjsti.uz').replace(/\/$/, '');
+const BASE = (process.env.VITE_API_URL || 'https://api.radeski.uz').replace(/\/$/, '');
 
 async function getJson(path) {
   const res = await fetch(`${BASE}${path}`);

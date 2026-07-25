@@ -14,7 +14,7 @@ USER = os.environ.get("RADESKI_DEPLOY_USER", "root")
 PASSWORD = os.environ.get("RADESKI_DEPLOY_PASSWORD", "")
 REPO = "https://github.com/riskgroup77/radeski.git"
 APP_DIR = "/var/www/radeski"
-API_URL = "https://radeskiapi.arxivfjsti.uz"
+API_URL = "https://api.radeski.uz"
 DOMAIN = "radeski.uz"
 
 

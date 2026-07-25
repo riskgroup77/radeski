@@ -2,6 +2,10 @@ import { ServiceCategory, Doctor, Article } from './types';
 import { ACNE_ARTICLE } from './data/articles/acneArticle';
 import { POST_ACNE_ARTICLE } from './data/articles/postAcneArticle';
 import { ROSACEA_ARTICLE } from './data/articles/rosaceaArticle';
+import { PRP_HAIR_ARTICLE } from './data/articles/prpHairArticle';
+import { PLASMAPHERESIS_ARTICLE } from './data/articles/plasmapheresisArticle';
+import { DEKA_CO2_ARTICLE } from './data/articles/dekaCo2LaserArticle';
+import { DEKA_MOVEO_ARTICLE } from './data/articles/dekaMoveoEpilationArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -881,4 +885,8 @@ export const ARTICLES: Article[] = [
   ACNE_ARTICLE,
   POST_ACNE_ARTICLE,
   ROSACEA_ARTICLE,
+  PRP_HAIR_ARTICLE,
+  PLASMAPHERESIS_ARTICLE,
+  DEKA_CO2_ARTICLE,
+  DEKA_MOVEO_ARTICLE,
 ];

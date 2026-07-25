@@ -15,7 +15,7 @@ import { PRICE_CATEGORY_ORDER } from '../src/data/priceCategoryLabels';
 import type { PriceItem } from '../src/types';
 import { buildCatalogPriceItems, normalizeKey } from '../src/utils/priceCatalog';
 
-const API_URL = (process.env.VITE_API_URL || 'https://radeskiapi.arxivfjsti.uz').replace(/\/$/, '');
+const API_URL = (process.env.VITE_API_URL || 'https://api.radeski.uz').replace(/\/$/, '');
 const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 150);
 const MAX_RETRIES = 5;
 
