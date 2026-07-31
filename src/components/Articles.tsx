@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { HelpCircle, Calendar, BookOpen, ChevronRight, Clock } from 'lucide-react';
 import ArticleViewsBadge from './ArticleViewsBadge';
+import ArticleHashtagList from './ArticleHashtagList';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
 import MediaImage from './MediaImage';
 import { getLocalizedImage } from '../utils/localizedImage';
 import {
+  formatArticleHashtags,
   resolveArticleReadingMinutes,
   resolveArticleSummary,
   resolveArticleTags,
@@ -27,11 +29,15 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
 
   const filteredArticles = useMemo(() => {
     return dynamicArticles.filter((item) => {
-      const query = searchQuery.toLowerCase();
+      const query = searchQuery.toLowerCase().replace(/^#/, '');
+      if (!query) return true;
+      const tags = resolveArticleTags(item, locale);
+      const hashtags = formatArticleHashtags(tags);
       return (
         item.title[locale].toLowerCase().includes(query) ||
         resolveArticleSummary(item, locale).toLowerCase().includes(query) ||
-        resolveArticleTags(item, locale).some((tag) => tag.toLowerCase().includes(query))
+        tags.some((tag) => tag.toLowerCase().includes(query)) ||
+        hashtags.some((hash) => hash.toLowerCase().includes(query))
       );
     });
   }, [searchQuery, locale, dynamicArticles]);
@@ -98,7 +104,8 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                       </span>
                       <span className="flex items-center gap-1.5 font-light">
                         <Clock className="w-3.5 h-3.5" />
-                        {resolveArticleReadingMinutes(art, locale)} {locale === 'uz' ? 'daq' : locale === 'ru' ? 'мин' : 'min'}
+                        {resolveArticleReadingMinutes(art, locale)}{' '}
+                        {locale === 'uz' ? 'daq' : locale === 'ru' ? 'мин' : 'min'}
                       </span>
                       <ArticleViewsBadge
                         views={art.views}
@@ -107,16 +114,12 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                       />
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {resolveArticleTags(art, locale).slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[9px] font-bold uppercase tracking-wide text-brand-gold bg-brand-gold-light/10 px-2 py-0.5 rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    <ArticleHashtagList
+                      article={art}
+                      locale={locale}
+                      limit={7}
+                      className="flex flex-wrap gap-x-2 gap-y-1 mb-3"
+                    />
 
                     <h3 className="font-extrabold text-brand-text-primary text-base leading-snug group-hover:text-brand-gold transition-colors">
                       {art.title[locale]}
@@ -148,7 +151,11 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
             <div className="text-center py-16">
               <HelpCircle className="w-12 h-12 text-brand-text-muted mx-auto mb-4" />
               <p className="text-brand-text-muted text-sm">
-                {locale === 'uz' ? 'Hech qanday maqola topilmadi.' : locale === 'ru' ? 'Статьи не найдены.' : 'No articles found matching search.'}
+                {locale === 'uz'
+                  ? 'Hech qanday maqola topilmadi.'
+                  : locale === 'ru'
+                    ? 'Статьи не найдены.'
+                    : 'No articles found matching search.'}
               </p>
             </div>
           )}

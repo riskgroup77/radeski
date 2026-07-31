@@ -348,7 +348,7 @@ Book a consultation at Radeski Skin Clinic — our specialists will build an ind
 export const DEKA_MOVEO_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   uz: {
     summary:
-      'DEKA Moveo aleksandrit lazerida epilyatsiyaga qanday tayyorlanish: 4 haftalik qoidalar, muolaja kuni, keyingi parvarish, necha seans kerak va Radeski Skin Clinic’da nima kutadi.',
+      'DEKA Moveo aleksandrit lazerida epilyatsiya Farg‘ona va Qo‘qonda: 4 haftalik tayyorgarlik, muolaja kuni, keyingi parvarish va Radeski Skin Clinic’da nima kutadi.',
     body: uzBody(),
     keyTakeaways: [
       'Aleksandrit 755 nm — melaninga yo‘naltirilgan «oltin standart»',
@@ -356,7 +356,7 @@ export const DEKA_MOVEO_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       '4 hafta ildizdan olib tashlash mumkin emas; 1–2 kun oldin ~1 mm qirqish',
       'Kurs odatda 6–8 seans; oraliqni shifokor belgilaydi',
     ],
-    tags: ['Lazer epilyatsiya', 'DEKA Moveo', 'Aleksandrit', 'Tayyorgarlik', 'Motus AX'],
+    tags: ['Lazer epilyatsiya', 'DEKA Moveo', 'Aleksandrit', 'Tayyorgarlik', 'Motus AX', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Birinchi marta lazer epilyatsiya rejalashtirilayotgan bo‘lsa',
       'Teri fototipi yoki gormonal holat noaniq bo‘lsa',
@@ -389,7 +389,7 @@ export const DEKA_MOVEO_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Как подготовиться к лазерной эпиляции на александритовом лазере DEKA Moveo: правила за 4 недели, день процедуры, уход после, сколько сеансов нужно и что предлагает Radeski Skin Clinic.',
+      'Подготовка к лазерной эпиляции DEKA Moveo в Фергане и Коканде: правила за 4 недели, день процедуры, уход после и что предлагает Radeski Skin Clinic.',
     body: ruBody(),
     keyTakeaways: [
       'Александрит 755 нм — «золотой стандарт» по меланину волоса',
@@ -397,7 +397,7 @@ export const DEKA_MOVEO_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'За 4 недели нельзя удалять волос с корнем; за 1–2 дня сбрить до ~1 мм',
       'Курс обычно 6–8 процедур; интервал определяет врач',
     ],
-    tags: ['Лазерная эпиляция', 'DEKA Moveo', 'Александрит', 'Подготовка', 'Motus AX'],
+    tags: ['Лазерная эпиляция', 'DEKA Moveo', 'Александрит', 'Подготовка', 'Motus AX', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Планируете первую лазерную эпиляцию',
       'Неясен фототип кожи или гормональный фон',
@@ -430,7 +430,7 @@ export const DEKA_MOVEO_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   en: {
     summary:
-      'How to prepare for alexandrite laser hair removal with DEKA Moveo: 4-week rules, treatment day, aftercare, how many sessions you need, and what to expect at Radeski Skin Clinic.',
+      'How to prepare for DEKA Moveo alexandrite laser hair removal in Fergana and Kokand: 4-week rules, treatment day, aftercare at Radeski Skin Clinic.',
     body: enBody(),
     keyTakeaways: [
       'Alexandrite 755 nm is a melanin-targeted “gold standard”',
@@ -438,7 +438,7 @@ export const DEKA_MOVEO_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'No root removal for 4 weeks; shave to ~1 mm 1–2 days before',
       'A typical course is 6–8 sessions; intervals are set by the doctor',
     ],
-    tags: ['Laser hair removal', 'DEKA Moveo', 'Alexandrite', 'Preparation', 'Motus AX'],
+    tags: ['Laser hair removal', 'DEKA Moveo', 'Alexandrite', 'Preparation', 'Motus AX', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Planning your first laser hair removal',
       'Skin phototype or hormones are unclear',

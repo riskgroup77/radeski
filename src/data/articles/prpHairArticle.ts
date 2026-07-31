@@ -231,7 +231,7 @@ We use modern PRP protocols, sterile technique, and individual planning for ever
 export const PRP_HAIR_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   uz: {
     summary:
-      'Soch uchun plazmotorapiya (PRP): kimlarga mos, qanday o‘tadi, qanday natija kutish mumkin va Radeski Skin Clinic’da trixolog qanday individual reja tuzadi.',
+      'Soch uchun plazmotorapiya (PRP) Farg‘ona va Qo‘qonda: kimlarga mos, qanday o‘tadi va Radeski Skin Clinic’da trixolog qanday individual reja tuzadi.',
     body: uzBody(),
     keyTakeaways: [
       'PRP — bemorning o‘z trombotsitlarga boy plazmasi bilan soch follikulalarini stimullash',
@@ -239,7 +239,7 @@ export const PRP_HAIR_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Kurs ko‘pincha 4–6 seans, oraliq 3–4 hafta',
       'Soch to‘kilishi belgi — kompleks diagnostika muhim',
     ],
-    tags: ['PRP', 'Plazmotorapiya', 'Soch to‘kilishi', 'Trixologiya'],
+    tags: ['PRP', 'Plazmotorapiya', 'Soch to‘kilishi', 'Trixologiya', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Har kuni ko‘p soch to‘kilsa',
       'Ajratma kengayib borsa yoki yupqalanish zonasi paydo bo‘lsa',
@@ -272,7 +272,7 @@ export const PRP_HAIR_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Плазмотерапия волос (PRP): кому подходит, как проходит процедура, каких результатов ждать и как в Radeski Skin Clinic составляют индивидуальный план у трихолога.',
+      'Плазмотерапия волос (PRP) в Фергане и Коканде: кому подходит, как проходит процедура и как в Radeski Skin Clinic составляют план у трихолога.',
     body: ruBody(),
     keyTakeaways: [
       'PRP использует собственную тромбоцитарную плазму пациента',
@@ -280,7 +280,7 @@ export const PRP_HAIR_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Чаще всего курс — 4–6 сеансов с интервалом 3–4 недели',
       'Выпадение волос — симптом; важна комплексная диагностика',
     ],
-    tags: ['PRP', 'Плазмотерапия', 'Выпадение волос', 'Трихология'],
+    tags: ['PRP', 'Плазмотерапия', 'Выпадение волос', 'Трихология', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Ежедневно теряется много волос',
       'Расширяется пробор или появляются зоны поредения',
@@ -313,7 +313,7 @@ export const PRP_HAIR_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   en: {
     summary:
-      'PRP hair therapy: who it may suit, how the procedure works, what results to expect, and how Radeski Skin Clinic builds an individual plan with a trichologist.',
+      'PRP hair therapy in Fergana and Kokand: who it may suit, how it works, and how Radeski Skin Clinic builds an individual plan with a trichologist.',
     body: enBody(),
     keyTakeaways: [
       'PRP uses the patient’s own platelet-rich plasma',
@@ -321,7 +321,7 @@ export const PRP_HAIR_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'A typical course is 4–6 sessions every 3–4 weeks',
       'Hair loss is a symptom — comprehensive diagnostics matter',
     ],
-    tags: ['PRP', 'Hair loss', 'Trichology', 'Scalp care'],
+    tags: ['PRP', 'Hair loss', 'Trichology', 'Scalp care', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Daily hair shedding is heavy',
       'The part widens or thinning patches appear',

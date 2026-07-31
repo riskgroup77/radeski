@@ -14,10 +14,12 @@ import {
   extractArticleHeadings,
   getArticleDisclaimer,
   getArticleSectionLabels,
+  formatArticleHashtags,
   resolveArticleBody,
   resolveArticleRichContent,
   resolveArticleReadingMinutes,
   resolveArticleSummary,
+  stripArticleHashtagSection,
 } from '../utils/articleContent';
 import AppointmentBookingLink from './AppointmentBookingLink';
 
@@ -37,10 +39,14 @@ function slugifyHeading(text: string): string {
 export default function ArticleDetailContent({ article, locale }: ArticleDetailContentProps) {
   const labels = getArticleSectionLabels(locale);
   const summary = resolveArticleSummary(article, locale);
-  const body = resolveArticleBody(article, locale);
+  const body = useMemo(
+    () => stripArticleHashtagSection(resolveArticleBody(article, locale)),
+    [article, locale],
+  );
   const rich = resolveArticleRichContent(article, locale);
   const readingMinutes = resolveArticleReadingMinutes(article, locale);
   const toc = useMemo(() => extractArticleHeadings(body), [body]);
+  const hashtags = useMemo(() => formatArticleHashtags(rich.tags), [rich.tags]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const markdownComponents = useMemo(
@@ -219,6 +225,21 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
                 );
               })}
             </div>
+          </section>
+        )}
+
+        {hashtags.length > 0 && (
+          <section className="mt-10 border-t border-brand-offwhite pt-6">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-brand-gold mb-3">
+              {labels.hashtags}
+            </h2>
+            <p className="flex flex-wrap gap-x-3 gap-y-2 text-sm text-brand-text-secondary font-medium leading-relaxed">
+              {hashtags.map((hash) => (
+                <span key={hash} className="text-brand-gold">
+                  {hash}
+                </span>
+              ))}
+            </p>
           </section>
         )}
 

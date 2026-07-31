@@ -6,6 +6,10 @@ import { PRP_HAIR_ARTICLE_CATALOG } from './articles/prpHairArticle';
 import { PLASMAPHERESIS_ARTICLE_CATALOG } from './articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE_CATALOG } from './articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE_CATALOG } from './articles/dekaMoveoEpilationArticle';
+import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE_CATALOG } from './articles/hairTransplantContraindicationsArticle';
+import { VITILIGO_DAAVLIN_ARTICLE_CATALOG } from './articles/vitiligoDaavlinArticle';
+import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG } from './articles/psoriasisDaavlinKokandArticle';
+import { IPL_THERAPY_ARTICLE_CATALOG } from './articles/iplTherapyArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -51,12 +55,48 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
   'papilloma-warts': ['papillom', 'borodav', 'wart', 'hpv', "so'gal", 'бородав', 'папиллом', 'condylom'],
   hemangioma: ['gemangi', 'геманги', 'hemangi', 'vascular', 'qizil xol', 'angioma'],
+  'psoriasis-daavlin-kokand': [
+    'psoriaz-davolash-daavlin-fototerapiya-qoqon',
+    'лечение псориаза фототерапией daavlin в коканде',
+    'daavlin phototherapy for psoriasis in kokand',
+    'psoriaz qoqon',
+    'псориаз коканд',
+    'psoriasis kokand',
+  ],
+  'ipl-therapy': [
+    'ipl-terapiya-nima-fargona',
+    'ipl-terapiya',
+    'ipl terapiya',
+    'ipl терапия',
+    'ipl fargona',
+    'ipl фергана',
+    'ipl fergana',
+    'ipl qoqon',
+    'ipl коканд',
+    'ipl kokand',
+    'intense pulsed light',
+    'impulsli yorug',
+    'fotoqarish',
+    'фотостарен',
+    'kuperoz',
+    'купероз',
+  ],
   psoriasis: ['psoria', 'псориаз', 'psoriasis', 'lishay'],
   'post-acne': ['postakne', 'post-akne', 'постакне', 'post-acne', 'post acne', 'chandiq', 'рубц', 'scar after'],
   acne: ['akne', 'акне', 'acne', 'комедон'],
   'atopic-dermatitis': ['ekzem', 'atop', 'экзем', 'dermatit', 'allergik'],
   rosacea: ['rozase', 'rozacea', 'розаце', 'rosacea', 'qizarish', 'derma v', 'ipl inmode'],
-  vitiligo: ['vitili', 'витили', 'depigment'],
+  vitiligo: [
+    'vitili',
+    'витили',
+    'depigment',
+    'vitiligo-davolash-daavlin',
+    'daavlin',
+    'uvb 311',
+    'фототерап',
+    'fototerapiya',
+    'repigment',
+  ],
   fungal: ['zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
   'mole-screening': ['nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
   'prp-hair': [
@@ -74,6 +114,17 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'плазмаферез',
     'plasmapheresis',
     'plazmaferez-teri',
+  ],
+  'hair-transplant-contraindications': [
+    'soch-ekish-mumkin-bolmagan-holatlar',
+    'peresadka-volos-protivopokazaniya',
+    'hair transplant contraindications',
+    'hair-transplant-contraindications',
+    'peresadka volos',
+    'soch ekish',
+    'soch kochirib ekish',
+    'alopecia areata',
+    'андрогенетической алопеции',
   ],
 };
 
@@ -727,13 +778,17 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   plasmapheresis: PLASMAPHERESIS_ARTICLE_CATALOG,
   'deka-co2': DEKA_CO2_ARTICLE_CATALOG,
   'deka-moveo': DEKA_MOVEO_ARTICLE_CATALOG,
+  'hair-transplant-contraindications': HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE_CATALOG,
+  vitiligo: VITILIGO_DAAVLIN_ARTICLE_CATALOG,
+  'psoriasis-daavlin-kokand': PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG,
+  'ipl-therapy': IPL_THERAPY_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:
         "Papillomalar va so'gallar — HPV bilan bog'liq o'smalar. Nega ularni e'tiborsiz qoldirmaslik, qanday tekshiriladi va zamonaviy usullar bilan qanday xavfsiz olib tashlanishi haqida to'liq qo'llanma.",
       body: uzBodyPapilloma(),
       keyTakeaways: TAKEAWAYS.papilloma.uz,
-      tags: ['HPV', 'Papilloma', "So'g'al", 'Dermatologiya'],
+      tags: ['HPV', 'Papilloma', "So'g'al", 'Dermatologiya', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         "O'sma tez kattalashsa yoki rangi o'zgarsa",
         'Qon ketishi yoki og\'riq paydo bo\'lsa',
@@ -773,7 +828,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Папилломы и бородавки связаны с ВПЧ. Полное руководство: почему важно не игнорировать, как проходит диагностика и безопасное удаление современными методами.',
       body: ruBodyPapilloma(),
       keyTakeaways: TAKEAWAYS.papilloma.ru,
-      tags: ['ВПЧ', 'Папилломы', 'Бородавки', 'Дерматология'],
+      tags: ['ВПЧ', 'Папилломы', 'Бородавки', 'Дерматология', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Быстрый рост или изменение цвета',
         'Кровоточивость или боль',
@@ -803,7 +858,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Papillomas and warts are HPV-related growths. A complete guide to risks, diagnosis, and safe modern removal.',
       body: enBodyPapilloma(),
       keyTakeaways: TAKEAWAYS.papilloma.en,
-      tags: ['HPV', 'Papilloma', 'Warts', 'Dermatology'],
+      tags: ['HPV', 'Papilloma', 'Warts', 'Dermatology', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Rapid growth or color change',
         'Bleeding or pain',
@@ -835,7 +890,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         "Qizil tomirli dog'lar va gemangiomalarni IPL foto-terapiya va lazer bilan xavfsiz davolash — qanday ishlaydi va nima kutish mumkin.",
       body: uzBodyHemangioma(),
       keyTakeaways: TAKEAWAYS.hemangioma.uz,
-      tags: ['Gemangioma', 'IPL', 'Lazer', 'Qizil xol'],
+      tags: ['Gemangioma', 'IPL', 'Lazer', 'Qizil xol', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         "Dog' tez kattalashsa",
         'Qon ketishi yoki og\'riq bo\'lsa',
@@ -870,7 +925,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Безопасное лечение красных сосудистых пятен и гемангиом с помощью IPL и лазера — как это работает и чего ожидать.',
       body: ruBodyHemangioma(),
       keyTakeaways: TAKEAWAYS.hemangioma.ru,
-      tags: ['Гемангиома', 'IPL', 'Лазер', 'Сосуды'],
+      tags: ['Гемангиома', 'IPL', 'Лазер', 'Сосуды', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Быстрый рост пятна',
         'Кровоточивость или боль',
@@ -895,7 +950,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Safe treatment of red vascular spots and hemangiomas with IPL and laser — how it works and what to expect.',
       body: enBodyHemangioma(),
       keyTakeaways: TAKEAWAYS.hemangioma.en,
-      tags: ['Hemangioma', 'IPL', 'Laser', 'Vascular'],
+      tags: ['Hemangioma', 'IPL', 'Laser', 'Vascular', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Rapid spot growth',
         'Bleeding or pain',
@@ -922,7 +977,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         "Psoriazni nazorat qilish, remissiyani uzaytirish va UVB 311 fototerapiyaning roli — ilmiy asoslangan qo'llanma.",
       body: uzBodyPsoriasis(),
       keyTakeaways: TAKEAWAYS.psoriasis.uz,
-      tags: ['Psoriaz', 'Fototerapiya', 'UVB', 'Remissiya'],
+      tags: ['Psoriaz', 'Fototerapiya', 'UVB', 'Remissiya', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Dog\'lar tez tarqalsa',
         'Bo\'g\'im og\'rig\'i qo\'shilsa',
@@ -957,7 +1012,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Контроль псориаза, продление ремиссии и роль фототерапии УФБ 311 — научно обоснованное руководство.',
       body: ruBodyPsoriasis(),
       keyTakeaways: TAKEAWAYS.psoriasis.ru,
-      tags: ['Псориаз', 'Фототерапия', 'УФБ', 'Ремиссия'],
+      tags: ['Псориаз', 'Фототерапия', 'УФБ', 'Ремиссия', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Быстрое распространение высыпаний',
         'Боль в суставах',
@@ -982,7 +1037,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Controlling psoriasis, extending remission, and the role of UVB 311 phototherapy — an evidence-based guide.',
       body: enBodyPsoriasis(),
       keyTakeaways: TAKEAWAYS.psoriasis.en,
-      tags: ['Psoriasis', 'Phototherapy', 'UVB', 'Remission'],
+      tags: ['Psoriasis', 'Phototherapy', 'UVB', 'Remission', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Rapid spread of plaques',
         'Joint pain develops',
@@ -1009,7 +1064,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         "Teri salomatligi, ko'p uchraydigan muammolar va dermatologga qachon murojaat qilish kerakligi haqida foydali ma'lumot.",
       body: uzBodyGeneral(),
       keyTakeaways: TAKEAWAYS.general.uz,
-      tags: ['Teri parvarishi', 'Dermatologiya', 'Profilaktika'],
+      tags: ['Teri parvarishi', 'Dermatologiya', 'Profilaktika', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Yangi yoki o\'zgarayotgan teri dog\'i',
         'Uzoq davom etayotgan qichishish',
@@ -1029,7 +1084,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Полезная информация о здоровье кожи, распространённых проблемах и когда обращаться к дерматологу.',
       body: ruBodyGeneral(),
       keyTakeaways: TAKEAWAYS.general.ru,
-      tags: ['Уход за кожей', 'Дерматология', 'Профилактика'],
+      tags: ['Уход за кожей', 'Дерматология', 'Профилактика', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'Новое или изменяющееся пятно',
         'Длительный зуд',
@@ -1049,7 +1104,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
         'Useful information on skin health, common concerns, and when to see a dermatologist.',
       body: enBodyGeneral(),
       keyTakeaways: TAKEAWAYS.general.en,
-      tags: ['Skincare', 'Dermatology', 'Prevention'],
+      tags: ['Skincare', 'Dermatology', 'Prevention', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
       whenToSeeDoctor: [
         'New or changing skin spot',
         'Persistent itching',
@@ -1070,8 +1125,15 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
 export function findArticleCatalogKey(article: Pick<Article, 'id' | 'slug' | 'title'>): string {
   const haystack = `${article.id} ${article.slug} ${article.title.uz} ${article.title.ru} ${article.title.en}`.toLowerCase();
 
-  for (const [key, keywords] of Object.entries(ARTICLE_CATALOG_KEYWORDS)) {
-    if (keywords.some((keyword) => haystack.includes(keyword.toLowerCase()))) {
+  // Prefer longer/more specific keywords first to avoid false matches (e.g. shared city names).
+  const ranked = Object.entries(ARTICLE_CATALOG_KEYWORDS)
+    .flatMap(([key, keywords]) =>
+      keywords.map((keyword) => ({ key, keyword: keyword.toLowerCase() })),
+    )
+    .sort((a, b) => b.keyword.length - a.keyword.length);
+
+  for (const { key, keyword } of ranked) {
+    if (keyword.length >= 4 && haystack.includes(keyword)) {
       return key;
     }
   }

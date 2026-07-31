@@ -10,7 +10,17 @@ import {
   updateArticle,
 } from '../src/api/adminApi';
 import { mapArticleToCreatePayload } from '../src/api/mappers';
+import { DEKA_CO2_ARTICLE } from '../src/data/articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE } from '../src/data/articles/dekaMoveoEpilationArticle';
+import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE } from '../src/data/articles/hairTransplantContraindicationsArticle';
+import { VITILIGO_DAAVLIN_ARTICLE } from '../src/data/articles/vitiligoDaavlinArticle';
+import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from '../src/data/articles/psoriasisDaavlinKokandArticle';
+import { IPL_THERAPY_ARTICLE } from '../src/data/articles/iplTherapyArticle';
+import { ACNE_ARTICLE } from '../src/data/articles/acneArticle';
+import { POST_ACNE_ARTICLE } from '../src/data/articles/postAcneArticle';
+import { ROSACEA_ARTICLE } from '../src/data/articles/rosaceaArticle';
+import { PRP_HAIR_ARTICLE } from '../src/data/articles/prpHairArticle';
+import { PLASMAPHERESIS_ARTICLE } from '../src/data/articles/plasmapheresisArticle';
 import { enrichArticle } from '../src/utils/enrichArticles';
 import {
   buildArticleRichContentMap,
@@ -21,7 +31,19 @@ import {
 const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 800);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-const TARGETS = [DEKA_MOVEO_ARTICLE];
+const TARGETS = [
+  ACNE_ARTICLE,
+  POST_ACNE_ARTICLE,
+  ROSACEA_ARTICLE,
+  PRP_HAIR_ARTICLE,
+  PLASMAPHERESIS_ARTICLE,
+  DEKA_CO2_ARTICLE,
+  DEKA_MOVEO_ARTICLE,
+  HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE,
+  VITILIGO_DAAVLIN_ARTICLE,
+  PSORIASIS_DAAVLIN_KOKAND_ARTICLE,
+  IPL_THERAPY_ARTICLE,
+];
 
 async function withRetry<T>(label: string, fn: () => Promise<T>): Promise<T> {
   let attempt = 0;

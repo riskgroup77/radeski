@@ -67,6 +67,7 @@ import { useClinicData } from './hooks/useClinicData';
 import { useCmsData } from './hooks/useCmsData';
 import { createAppointment, createReview } from './api/publicApi';
 import { mapReviewToCreatePayload } from './api/cmsMappers';
+import { resolveArticleRichContent } from './utils/articleContent';
 import { fetchClientCountFromApi } from './utils/clientCount';
 import { getPlatformLogo } from './utils/platformLogo';
 import { ApiError } from './api/client';
@@ -74,6 +75,8 @@ import { findArticleByRouteParam } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
+import ArticleHashtagList from './components/ArticleHashtagList';
+
 import HomeCarousel from './components/HomeCarousel';
 import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
@@ -546,9 +549,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       meta.setAttribute('content', content);
     };
 
+    const seoKeywords = activeArticlePreview
+      ? resolveArticleRichContent(activeArticlePreview, locale).tags.join(', ')
+      : activeSEO.keywords;
+
     // Update main Search Engine optimization tags
     updateMeta('description', seoDesc);
-    updateMeta('keywords', activeSEO.keywords);
+    updateMeta('keywords', seoKeywords);
 
     // Update Social sharing graph protocols
     updateOg('og:title', seoTitle);
@@ -1095,17 +1102,24 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                             })()}
                           </div>
                           <div className="p-5">
-                            <span className="text-[10px] text-brand-text-muted font-light font-mono block mb-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                            <span className="text-[10px] text-brand-text-muted font-light font-mono mb-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                               <span>{art.date}</span>
                               <ArticleViewsBadge views={art.views} locale={locale} className="text-[10px]" />
                             </span>
-                            <h4 className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-snug group-hover:text-brand-gold transition-colors leading-tight line-clamp-2">
+                            <ArticleHashtagList
+                              article={art}
+                              locale={locale}
+                              limit={5}
+                              className="flex flex-wrap gap-x-2 gap-y-1 mb-2"
+                              itemClassName="text-[10px] font-semibold text-brand-gold/90"
+                            />
+                            <h4 className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-snug group-hover:text-brand-gold transition-colors line-clamp-2">
                               {art.title[locale]}
                             </h4>
                             <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">
                               {art.summary[locale]}
                             </p>
-                            <span className="mt-4 inline-block text-xs font-bold text-brand-gold flex items-center gap-0.5">
+                            <span className="mt-4 inline-flex text-xs font-bold text-brand-gold items-center gap-0.5">
                               {d.readMore} <ArrowRight className="w-3.5 h-3.5" />
                             </span>
                           </div>

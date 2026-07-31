@@ -438,7 +438,7 @@ If pimples or post-acne marks concern you, do not delay a dermatology visit. The
 export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   uz: {
     summary:
-      "Akne nima uchun paydo bo'lishi, qanday belgilar bilan namoyon bo'lishi va zamonaviy dermatologiyada qanday davolanishini bilib oling. Radeski Skin Clinic mutaxassislari individual yondashuv haqida.",
+      "Akne nima uchun paydo bo'lishi, qanday belgilar bilan namoyon bo'lishi va Farg‘ona hamda Qo‘qonda Radeski Skin Clinic’da qanday davolanishini bilib oling.",
     body: uzBodyAcne(),
     keyTakeaways: [
       "Akne — surunkali kasallik; o'z-o'zidan davolash ko'pincha yallig'lanishni kuchaytiradi",
@@ -446,7 +446,7 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Og\'irlik darajasiga qarab mahalliy yoki tizimli terapiya tanlanadi',
       'Erta dermatolog murojaati chandiq va postakne xavfini kamaytiradi',
     ],
-    tags: ['Akne', 'Postakne', 'Dermatologiya', 'Teri parvarishi'],
+    tags: ['Akne', 'Postakne', 'Dermatologiya', 'Teri parvarishi', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Toshmalar 2–3 oydan ko\'proq saqlansa',
       'Toshmalar og\'riqli bo\'lib qolsa',
@@ -474,7 +474,7 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Узнайте, почему появляется акне, как распознать его симптомы и степень тяжести, и какие современные методы лечения применяются в дерматологии. Индивидуальный подход специалистов Radeski Skin Clinic.',
+      'Узнайте, почему появляется акне, как распознать симптомы и какие методы лечения доступны в Фергане и Коканде в Radeski Skin Clinic.',
     body: ruBodyAcne(),
     keyTakeaways: [
       'Акне — хроническое заболевание; самолечение часто усиливает воспаление',
@@ -482,7 +482,7 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Терапия подбирается по степени тяжести: наружная или системная',
       'Раннее обращение к дерматологу снижает риск рубцов и постакне',
     ],
-    tags: ['Акне', 'Постакне', 'Дерматология', 'Уход за кожей'],
+    tags: ['Акне', 'Постакне', 'Дерматология', 'Уход за кожей', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Прыщи сохраняются более 2–3 месяцев',
       'Высыпания становятся болезненными',
@@ -510,7 +510,7 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   en: {
     summary:
-      'Learn why acne develops, how to recognize symptoms and severity, and which modern dermatology treatments are available. Individual care from Radeski Skin Clinic specialists.',
+      'Learn why acne develops, how to recognize symptoms, and which dermatology treatments are available in Fergana and Kokand at Radeski Skin Clinic.',
     body: enBodyAcne(),
     keyTakeaways: [
       'Acne is chronic; self-treatment often worsens inflammation',
@@ -518,7 +518,7 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Therapy is tailored by severity: topical or systemic options',
       'Early dermatology care lowers scarring and post-acne risk',
     ],
-    tags: ['Acne', 'Post-acne', 'Dermatology', 'Skincare'],
+    tags: ['Acne', 'Post-acne', 'Dermatology', 'Skincare', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Breakouts last more than 2–3 months',
       'Lesions become painful',

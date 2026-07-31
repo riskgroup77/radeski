@@ -6,6 +6,10 @@ import { PRP_HAIR_ARTICLE } from './data/articles/prpHairArticle';
 import { PLASMAPHERESIS_ARTICLE } from './data/articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE } from './data/articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE } from './data/articles/dekaMoveoEpilationArticle';
+import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE } from './data/articles/hairTransplantContraindicationsArticle';
+import { VITILIGO_DAAVLIN_ARTICLE } from './data/articles/vitiligoDaavlinArticle';
+import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from './data/articles/psoriasisDaavlinKokandArticle';
+import { IPL_THERAPY_ARTICLE } from './data/articles/iplTherapyArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -889,4 +893,8 @@ export const ARTICLES: Article[] = [
   PLASMAPHERESIS_ARTICLE,
   DEKA_CO2_ARTICLE,
   DEKA_MOVEO_ARTICLE,
+  HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE,
+  VITILIGO_DAAVLIN_ARTICLE,
+  PSORIASIS_DAAVLIN_KOKAND_ARTICLE,
+  IPL_THERAPY_ARTICLE,
 ];

@@ -339,7 +339,7 @@ If persistent facial redness, visible vessels, or frequent rosacea flares concer
 export const ROSACEA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   uz: {
     summary:
-      "Rozatsea da IPL va Derma V Lutronic qanday ishlaydi: qizarish, tomir to'ri va kuchayishlarni kamaytirish, kurs davomiyligi va Radeski Skin Clinic'dagi kompleks davolash.",
+      "Rozatsea da IPL va Derma V Lutronic qanday ishlaydi: qizarish va tomir to'rini kamaytirish, kurs va Farg‘ona/Qo‘qonda Radeski Skin Clinic’dagi kompleks davolash.",
     body: uzBodyRosacea(),
     keyTakeaways: [
       'Rozatsea surunkali kasallik — nazorat va belgilarni kamaytirish mumkin',
@@ -347,7 +347,7 @@ export const ROSACEA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Derma V Lutronic tomir shaklidagi rozatsea uchun aniqroq yechim',
       'Eng yaxshi natija apparat + uy parvarishi + dori kombinatsiyasida',
     ],
-    tags: ['Rozatsea', 'IPL', 'Derma V', 'Tomir lazer', 'Dermatologiya'],
+    tags: ['Rozatsea', 'IPL', 'Derma V', 'Tomir lazer', 'Dermatologiya', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Yuz doimiy qizarib tursa',
       'Tomir to\'ri aniq ko\'rinib qolsa',
@@ -375,7 +375,7 @@ export const ROSACEA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Как IPL и Derma V Lutronic помогают при розацеа: уменьшение покраснения и сосудистой сетки, курс процедур и комплексное лечение в Radeski Skin Clinic.',
+      'Как IPL и Derma V Lutronic помогают при розацеа в Фергане и Коканде: уменьшение покраснения и сосудистой сетки, курс процедур в Radeski Skin Clinic.',
     body: ruBodyRosacea(),
     keyTakeaways: [
       'Розацеа хроническое — важен контроль и уменьшение симптомов',
@@ -383,7 +383,7 @@ export const ROSACEA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Derma V Lutronic — для выраженной сосудистой формы',
       'Лучший результат при комплексном подходе',
     ],
-    tags: ['Розацеа', 'IPL', 'Derma V', 'Сосудистый лазер', 'Дерматология'],
+    tags: ['Розацеа', 'IPL', 'Derma V', 'Сосудистый лазер', 'Дерматология', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Сохраняется постоянное покраснение лица',
       'Появилась выраженная сосудистая сетка',
@@ -411,7 +411,7 @@ export const ROSACEA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   en: {
     summary:
-      'How IPL and Derma V Lutronic help rosacea: reducing redness and vessels, treatment course, and comprehensive care at Radeski Skin Clinic.',
+      'How IPL and Derma V Lutronic help rosacea in Fergana and Kokand: reducing redness and vessels, treatment course at Radeski Skin Clinic.',
     body: enBodyRosacea(),
     keyTakeaways: [
       'Rosacea is chronic — focus on control and symptom reduction',
@@ -419,7 +419,7 @@ export const ROSACEA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Derma V Lutronic suits pronounced vascular rosacea',
       'Best results come from combined care',
     ],
-    tags: ['Rosacea', 'IPL', 'Derma V', 'Vascular laser', 'Dermatology'],
+    tags: ['Rosacea', 'IPL', 'Derma V', 'Vascular laser', 'Dermatology', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Persistent facial redness',
       'Visible vascular network',

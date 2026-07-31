@@ -393,7 +393,7 @@ If scars, spots, or other acne sequelae concern you, Radeski Skin Clinic special
 export const POST_ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   uz: {
     summary:
-      "Akne ketgach qoladigan chandiqlar, qizil va qorong'i dog'lar haqida: postakne nima, qanday davolanadi va Radeski Skin Clinic'da qaysi apparatlar qo'llaniladi.",
+      "Akne ketgach qoladigan chandiqlar va dog'lar: postakne nima, Farg‘ona va Qo‘qonda Radeski Skin Clinic’da qanday davolanadi.",
     body: uzBodyPostAcne(),
     keyTakeaways: [
       'Postakne — akne oqibati; erta davolash chandiq xavfini kamaytiradi',
@@ -401,7 +401,7 @@ export const POST_ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Hollywood Spectra, Derma V, IPL InMode va DEKA Tetra PRO — kompleks natija beradi',
       'Faol toshmalar nazoratga olgach postakne korrektsiyasini boshlash ma\'qul',
     ],
-    tags: ['Postakne', 'Chandiq', 'IPL', 'Lazer', 'Dermatologiya'],
+    tags: ['Postakne', 'Chandiq', 'IPL', 'Lazer', 'Dermatologiya', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Chuqur chandiqlar yoki keng poralar saqlansa',
       'Qizil dog\'lar 6 oydan ko\'p davom etsa',
@@ -429,7 +429,7 @@ export const POST_ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Рубцы, красные и тёмные пятна после акне: что такое постакне, как его лечить и какие технологии применяются в Radeski Skin Clinic.',
+      'Рубцы и пятна после акне: что такое постакне и как его лечат в Фергане и Коканде в Radeski Skin Clinic.',
     body: ruBodyPostAcne(),
     keyTakeaways: [
       'Постакне — последствия акне; раннее лечение снижает риск рубцов',
@@ -437,7 +437,7 @@ export const POST_ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Hollywood Spectra, Derma V, IPL InMode и DEKA Tetra PRO дают комплексный эффект',
       'Коррекцию лучше начинать после контроля активных высыпаний',
     ],
-    tags: ['Постакне', 'Рубцы', 'IPL', 'Лазер', 'Дерматология'],
+    tags: ['Постакне', 'Рубцы', 'IPL', 'Лазер', 'Дерматология', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Сохраняются глубокие рубцы или расширенные поры',
       'Красные пятна не проходят более 6 месяцев',
@@ -465,7 +465,7 @@ export const POST_ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   en: {
     summary:
-      'Scars and red or brown spots after acne: what post-acne is, how it is treated, and which technologies are used at Radeski Skin Clinic.',
+      'Scars and spots after acne: what post-acne is and how it is treated in Fergana and Kokand at Radeski Skin Clinic.',
     body: enBodyPostAcne(),
     keyTakeaways: [
       'Post-acne follows breakouts; early care lowers scarring risk',
@@ -473,7 +473,7 @@ export const POST_ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Hollywood Spectra, Derma V, IPL InMode, and DEKA Tetra PRO work best in combination',
       'Start correction after active breakouts are controlled',
     ],
-    tags: ['Post-acne', 'Scars', 'IPL', 'Laser', 'Dermatology'],
+    tags: ['Post-acne', 'Scars', 'IPL', 'Laser', 'Dermatology', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Deep scars or enlarged pores persist',
       'Red spots last more than 6 months',

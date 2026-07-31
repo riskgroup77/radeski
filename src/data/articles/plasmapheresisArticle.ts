@@ -258,7 +258,7 @@ Radeski specialists will diagnose the condition, decide whether plasmapheresis i
 export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   uz: {
     summary:
-      'Teri kasalliklarida plazmaferez: qachon ko‘rsatiladi, qanday o‘tadi, qanday foyda kutish mumkin va nima uchun Radeski Skin Clinic’da u faqat kompleks terapiya qismi sifatida qo‘llaniladi.',
+      'Teri kasalliklarida plazmaferez Farg‘ona va Qo‘qonda: qachon ko‘rsatiladi va nima uchun Radeski Skin Clinic’da u faqat kompleks terapiya qismi sifatida qo‘llaniladi.',
     body: uzBody(),
     keyTakeaways: [
       'Plazmaferez — qon plazmasini apparatda ajratish; sababni yo‘qotmaydi, lekin yallig‘lanish faolligini pasaytirishi mumkin',
@@ -266,7 +266,7 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Seans odatda 60–120 daqiqa; soni individual',
       'Asosiy terapiyani almashtirmaydi — kompleks yondashuv muhim',
     ],
-    tags: ['Plazmaferez', 'Psoriaz', 'Dermatologiya', 'Kompleks terapiya'],
+    tags: ['Plazmaferez', 'Psoriaz', 'Dermatologiya', 'Kompleks terapiya', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Surunkali teri kasalligi zo‘rayib borsa',
       'Mahalliy davolash yetarli bo‘lmasa',
@@ -299,7 +299,7 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Плазмаферез при кожных заболеваниях: когда может быть полезен, как проходит процедура, каких эффектов ждать и почему в Radeski Skin Clinic его применяют только как часть комплексной терапии.',
+      'Плазмаферез при кожных заболеваниях в Фергане и Коканде: когда может быть полезен и почему в Radeski Skin Clinic его применяют только как часть комплексной терапии.',
     body: ruBody(),
     keyTakeaways: [
       'Плазмаферез отделяет плазму аппаратно; причину болезни не устраняет, но может снизить активность воспаления',
@@ -307,7 +307,7 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Сеанс обычно длится 60–120 минут; число процедур индивидуально',
       'Не заменяет основную терапию — важен комплексный подход',
     ],
-    tags: ['Плазмаферез', 'Псориаз', 'Дерматология', 'Комплексная терапия'],
+    tags: ['Плазмаферез', 'Псориаз', 'Дерматология', 'Комплексная терапия', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Хроническое заболевание кожи обостряется',
       'Местного лечения недостаточно',
@@ -340,7 +340,7 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   en: {
     summary:
-      'Plasmapheresis for skin disease: when it may help, how the session works, what to expect, and why Radeski Skin Clinic uses it only as part of comprehensive care.',
+      'Plasmapheresis for skin disease in Fergana and Kokand: when it may help and why Radeski Skin Clinic uses it only as part of comprehensive care.',
     body: enBody(),
     keyTakeaways: [
       'Plasmapheresis separates plasma with a device; it does not cure the cause, but may lower inflammatory activity',
@@ -348,7 +348,7 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'A session usually lasts 60–120 minutes; session count is individual',
       'It does not replace primary therapy — combined care matters',
     ],
-    tags: ['Plasmapheresis', 'Psoriasis', 'Dermatology', 'Combined therapy'],
+    tags: ['Plasmapheresis', 'Psoriasis', 'Dermatology', 'Combined therapy', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'A chronic skin disease is flaring',
       'Topical care alone is not enough',

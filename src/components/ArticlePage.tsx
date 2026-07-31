@@ -15,6 +15,8 @@ import { DICTIONARY } from '../data';
 import { getLocalizedImage } from '../utils/localizedImage';
 import { enrichArticle } from '../utils/enrichArticles';
 import { resolveArticleReadingMinutes, resolveArticleSummary } from '../utils/articleContent';
+import ArticleHashtagList from './ArticleHashtagList';
+
 import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
@@ -301,6 +303,13 @@ export default function ArticlePage({
                       )}
                       <div className="p-4">
                       <span className="text-[10px] text-brand-text-muted font-mono">{art.date}</span>
+                      <ArticleHashtagList
+                        article={art}
+                        locale={locale}
+                        limit={4}
+                        className="flex flex-wrap gap-x-2 gap-y-1 mt-2"
+                        itemClassName="text-[10px] font-semibold text-brand-gold/90"
+                      />
                       <h3 className="mt-2 text-sm font-bold text-brand-text-primary leading-snug group-hover:text-brand-gold transition-colors line-clamp-2">
                         {art.title[locale]}
                       </h3>

@@ -17,6 +17,7 @@ const SECTION_LABELS: Record<
     readingTime: string;
     minRead: string;
     tableOfContents: string;
+    hashtags: string;
   }
 > = {
   uz: {
@@ -27,6 +28,7 @@ const SECTION_LABELS: Record<
     readingTime: "O'qish vaqti",
     minRead: 'daq',
     tableOfContents: 'Mundarija',
+    hashtags: 'Teglar',
   },
   ru: {
     keyTakeaways: 'Ключевые выводы',
@@ -36,6 +38,7 @@ const SECTION_LABELS: Record<
     readingTime: 'Время чтения',
     minRead: 'мин',
     tableOfContents: 'Содержание',
+    hashtags: 'Хештеги',
   },
   en: {
     keyTakeaways: 'Key takeaways',
@@ -45,6 +48,7 @@ const SECTION_LABELS: Record<
     readingTime: 'Reading time',
     minRead: 'min',
     tableOfContents: 'Table of contents',
+    hashtags: 'Hashtags',
   },
 };
 
@@ -125,6 +129,61 @@ function isStructuredArticleMarkdown(text: string): boolean {
   return /^##\s+/m.test(text);
 }
 
+const ARTICLE_HASHTAG_MARKER = '<!--article-hashtags-->';
+
+/** Convert a tag label into a crawlable #Hashtag (spaces/apostrophes removed). */
+export function toArticleHashtag(tag: string): string {
+  const cleaned = tag
+    .replace(/^#+/, '')
+    .replace(/[''`‘’ʻʼ]/g, '')
+    .replace(/[^\p{L}\p{N}]+/gu, '')
+    .trim();
+  return cleaned ? `#${cleaned}` : '';
+}
+
+export function formatArticleHashtags(tags: string[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const tag of tags) {
+    const hash = toArticleHashtag(tag);
+    if (!hash) continue;
+    const key = hash.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(hash);
+  }
+  return result;
+}
+
+function appendHashtagSection(body: string, tags: string[], locale: Locale): string {
+  const hashtags = formatArticleHashtags(tags);
+  if (!hashtags.length) return body;
+
+  const heading = SECTION_LABELS[locale].hashtags;
+  const block = `${ARTICLE_HASHTAG_MARKER}\n## ${heading}\n\n${hashtags.join(' ')}`;
+
+  if (body.includes(ARTICLE_HASHTAG_MARKER)) {
+    return body.replace(
+      new RegExp(`${ARTICLE_HASHTAG_MARKER}[\\s\\S]*$`),
+      block,
+    );
+  }
+
+  // Strip a trailing "## Teglar|Хештеги|Hashtags" block if present, then append fresh.
+  const stripped = body
+    .replace(/\n+##\s+(Teglar|Хештеги|Hashtags)\s*\n+[\s\S]*$/i, '')
+    .trimEnd();
+  return `${stripped}\n\n${block}\n`;
+}
+
+/** Remove auto-appended hashtag block for on-page rendering (UI shows tags separately). */
+export function stripArticleHashtagSection(body: string): string {
+  return body
+    .replace(new RegExp(`\\n*${ARTICLE_HASHTAG_MARKER}[\\s\\S]*$`), '')
+    .replace(/\n+##\s+(Teglar|Хештеги|Hashtags)\s*\n+[\s\S]*$/i, '')
+    .trimEnd();
+}
+
 export function resolveArticleBody(article: Article, locale: Locale): string {
   const catalogKey = findArticleCatalogKey(article);
   const catalog = ARTICLE_RICH_CATALOG[catalogKey] ?? ARTICLE_RICH_CATALOG['general-dermatology'];
@@ -137,14 +196,17 @@ export function resolveArticleBody(article: Article, locale: Locale): string {
       !isStructuredArticleMarkdown(apiContent) ||
       catalogBody.length > apiContent.length + 150);
 
-  if (preferCatalog) return catalogBody;
-  if (isSubstantialText(apiContent)) return apiContent;
-  if (catalogBody) return catalogBody;
+  let body = '';
+  if (preferCatalog) body = catalogBody;
+  else if (isSubstantialText(apiContent)) body = apiContent;
+  else if (catalogBody) body = catalogBody;
+  else {
+    const uzFallback = article.content.uz?.trim() || '';
+    body = uzFallback || ARTICLE_RICH_CATALOG['general-dermatology'][locale]?.body || '';
+  }
 
-  const uzFallback = article.content.uz?.trim() || '';
-  if (uzFallback) return uzFallback;
-
-  return ARTICLE_RICH_CATALOG['general-dermatology'][locale]?.body || '';
+  const tags = resolveArticleRichContent(article, locale).tags;
+  return appendHashtagSection(body, tags, locale);
 }
 
 export function resolveArticleSummary(article: Article, locale: Locale): string {

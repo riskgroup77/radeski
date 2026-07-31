@@ -570,7 +570,7 @@ At Radeski Skin Clinic, DEKA CO₂ laser procedures are performed by qualified d
 export const DEKA_CO2_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   uz: {
     summary:
-      'CO₂-lazer DEKA: jarrohsiz yoshartirish, chandiq, postakne, cho‘zilish izlari va teri sifatini yaxshilash. Muolaja qanday o‘tadi, tiklanish va Radeski Skin Clinic’da individual yondashuv.',
+      'CO₂-lazer DEKA Farg‘ona va Qo‘qonda: jarrohsiz yoshartirish, chandiq, postakne va teri sifatini yaxshilash — Radeski Skin Clinic’da individual yondashuv.',
     body: uzBody(),
     keyTakeaways: [
       'DEKA CO₂ — fraksion lazer; kollagen va elastinni rag‘batlantiradi',
@@ -578,7 +578,7 @@ export const DEKA_CO2_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Tiklanish odatda 5–10 kun; yakuniy natija 2–6 oyda shakllanadi',
       'Parametrlar va seanslar soni faqat shifokor tomonidan individual belgilanadi',
     ],
-    tags: ['CO₂-lazer', 'DEKA', 'Yoshartirish', 'Chandiq', 'Lazer kosmetologiya'],
+    tags: ['CO₂-lazer', 'DEKA', 'Yoshartirish', 'Chandiq', 'Lazer kosmetologiya', 'Fargona', 'Qoqon', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Ajinlar, bo‘shashish yoki xira yuz rangi bezovta qilsa',
       'Postakne yoki chandiqlar sezilarli bo‘lsa',
@@ -611,7 +611,7 @@ export const DEKA_CO2_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'CO₂-лазер DEKA: омоложение без хирургии, рубцы, постакне, растяжки и улучшение качества кожи. Как проходит процедура, восстановление и индивидуальный подход в Radeski Skin Clinic.',
+      'CO₂-лазер DEKA в Фергане и Коканде: омоложение без хирургии, рубцы, постакне и улучшение качества кожи в Radeski Skin Clinic.',
     body: ruBody(),
     keyTakeaways: [
       'DEKA CO₂ — фракционный лазер, стимулирующий коллаген и эластин',
@@ -619,7 +619,7 @@ export const DEKA_CO2_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Восстановление обычно 5–10 дней; итоговый результат формируется 2–6 месяцев',
       'Параметры и число сеансов подбирает только врач',
     ],
-    tags: ['CO₂-лазер', 'DEKA', 'Омоложение', 'Рубцы', 'Лазерная косметология'],
+    tags: ['CO₂-лазер', 'DEKA', 'Омоложение', 'Рубцы', 'Лазерная косметология', 'Фергана', 'Коканд', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Беспокоят морщины, дряблость или тусклый цвет лица',
       'Заметны постакне или рубцы',
@@ -652,7 +652,7 @@ export const DEKA_CO2_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   en: {
     summary:
-      'DEKA CO₂ laser: non-surgical rejuvenation, scars, post-acne, stretch marks, and better skin quality. How the procedure works, recovery, and individual care at Radeski Skin Clinic.',
+      'DEKA CO₂ laser in Fergana and Kokand: non-surgical rejuvenation, scars, post-acne, and better skin quality at Radeski Skin Clinic.',
     body: enBody(),
     keyTakeaways: [
       'DEKA CO₂ is a fractional laser that stimulates collagen and elastin',
@@ -660,7 +660,7 @@ export const DEKA_CO2_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Recovery is usually 5–10 days; final results build over 2–6 months',
       'Settings and session count are set only by the doctor',
     ],
-    tags: ['CO₂ laser', 'DEKA', 'Rejuvenation', 'Scars', 'Laser aesthetics'],
+    tags: ['CO₂ laser', 'DEKA', 'Rejuvenation', 'Scars', 'Laser aesthetics', 'Fergana', 'Kokand', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Wrinkles, laxity, or dull skin bother you',
       'Post-acne or scars are noticeable',
