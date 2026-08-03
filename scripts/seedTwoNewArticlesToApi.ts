@@ -16,6 +16,7 @@ import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE } from '../src/data/articles/
 import { VITILIGO_DAAVLIN_ARTICLE } from '../src/data/articles/vitiligoDaavlinArticle';
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from '../src/data/articles/psoriasisDaavlinKokandArticle';
 import { IPL_THERAPY_ARTICLE } from '../src/data/articles/iplTherapyArticle';
+import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from '../src/data/articles/pediatricWartsCo2DekaArticle';
 import { ACNE_ARTICLE } from '../src/data/articles/acneArticle';
 import { POST_ACNE_ARTICLE } from '../src/data/articles/postAcneArticle';
 import { ROSACEA_ARTICLE } from '../src/data/articles/rosaceaArticle';
@@ -43,6 +44,7 @@ const TARGETS = [
   VITILIGO_DAAVLIN_ARTICLE,
   PSORIASIS_DAAVLIN_KOKAND_ARTICLE,
   IPL_THERAPY_ARTICLE,
+  PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
 ];
 
 async function withRetry<T>(label: string, fn: () => Promise<T>): Promise<T> {

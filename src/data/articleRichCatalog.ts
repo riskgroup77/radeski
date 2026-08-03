@@ -10,6 +10,7 @@ import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE_CATALOG } from './articles/ha
 import { VITILIGO_DAAVLIN_ARTICLE_CATALOG } from './articles/vitiligoDaavlinArticle';
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG } from './articles/psoriasisDaavlinKokandArticle';
 import { IPL_THERAPY_ARTICLE_CATALOG } from './articles/iplTherapyArticle';
+import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG } from './articles/pediatricWartsCo2DekaArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -52,6 +53,16 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'smartxide',
     'фракцион',
     'fraksion lazer',
+  ],
+  'pediatric-warts-co2-deka': [
+    'bolalarda-sogal-olib-tashlash-co2-lazer-deka-fargona',
+    'bolalarda-sogal-olib-tashlash-co2-lazer-deka',
+    'бородавки у детей',
+    'warts in children',
+    'bolalarda sogal',
+    'детских бородавок',
+    'pediatric warts',
+    'sogal co2 deka',
   ],
   'papilloma-warts': ['papillom', 'borodav', 'wart', 'hpv', "so'gal", 'бородав', 'папиллом', 'condylom'],
   hemangioma: ['gemangi', 'геманги', 'hemangi', 'vascular', 'qizil xol', 'angioma'],
@@ -782,6 +793,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   vitiligo: VITILIGO_DAAVLIN_ARTICLE_CATALOG,
   'psoriasis-daavlin-kokand': PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG,
   'ipl-therapy': IPL_THERAPY_ARTICLE_CATALOG,
+  'pediatric-warts-co2-deka': PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:
