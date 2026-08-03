@@ -524,6 +524,125 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '1:22',
     category: { uz: 'Trixologiya', ru: 'Трихология', en: 'Trichology' },
   },
+  {
+    id: 'clinic-video-30',
+    sortOrder: 7,
+    title: {
+      uz: 'Endi siz shifokor-dermatologdan 7 ta asosiy insaytni bilasiz!',
+      ru: 'Теперь вы знаете 7 ключевых инсайтов от врача-дерматолога!',
+      en: 'Now you know 7 key insights from a dermatologist!',
+    },
+    description: {
+      uz: 'Maslahat yoki muolajalarga yozilish uchun istalgan filialimizga murojaat qilishingiz mumkin.',
+      ru: 'Для записи на консультацию или процедуры вы можете обратиться в любой наш филиал.',
+      en: 'To book a consultation or treatment, you can contact any of our branches.',
+    },
+    src: '/videos/30.mp4',
+    duration: '1:01',
+    category: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+  },
+  {
+    id: 'clinic-video-31',
+    sortOrder: 6,
+    title: {
+      uz: 'Kosmetologiya xizmatlari uchun super aksiya',
+      ru: 'Супер-акция на услуги косметологии',
+      en: 'Super promo on cosmetology services',
+    },
+    description: {
+      uz: 'PRP + yuz tozalash va mezoterapiya + yuz tozalash paketlari — chegirmali narxlar haqida qisqa video.',
+      ru: 'Пакеты PRP + чистка лица и мезотерапия + чистка лица — короткое видео о ценах со скидкой.',
+      en: 'PRP + facial cleansing and mesotherapy + facial cleansing packages — a short video about discounted prices.',
+    },
+    src: '/videos/31.mp4',
+    duration: '0:39',
+    category: { uz: 'Kosmetologiya', ru: 'Косметология', en: 'Cosmetology' },
+  },
+  {
+    id: 'clinic-video-34',
+    sortOrder: 5,
+    title: {
+      uz: 'Sochlar uchun plazmotorapiya 400 000 so‘m o‘rniga 250 000 so‘m!',
+      ru: 'Плазмотерапия для волос: 250 000 сум вместо 400 000 сум!',
+      en: 'Hair PRP therapy: 250,000 UZS instead of 400,000 UZS!',
+    },
+    description: {
+      uz: 'Qo‘qonda Radeski Skin Clinic ochilishi munosabati bilan super-aksiya. Soch to‘kilishi, siyraklashish yoki o‘sish to‘xtagan bo‘lsa — plazmotorapiya aynan shu holatlar uchun.',
+      ru: 'Супер-акция к открытию Radeski Skin Clinic в Коканде. Если беспокоит сильное выпадение, поредение или остановка роста волос — плазмотерапия как раз для вас.',
+      en: 'A special opening promo for Radeski Skin Clinic in Kokand. If heavy shedding, thinning, or stalled hair growth worries you — PRP therapy is designed for this.',
+    },
+    src: '/videos/34.mp4',
+    duration: '0:37',
+    category: { uz: 'Trixologiya', ru: 'Трихология', en: 'Trichology' },
+  },
+  {
+    id: 'clinic-video-35',
+    sortOrder: 4,
+    title: {
+      uz: 'Tibbiy pedikyur 230 000 so‘m o‘rniga 180 000 so‘m!',
+      ru: 'Медицинский педикюр: 180 000 сум вместо 230 000 сум!',
+      en: 'Medical pedicure: 180,000 UZS instead of 230,000 UZS!',
+    },
+    description: {
+      uz: 'Qo‘qon filiali ochilishi munosabati bilan aksiya. Og‘riqli tirnoq botishi, qalinlashish yoki deformatsiya bo‘lsa — oddiy pedikyur yetmaydi; biz murakkab hollarni ham steril, og‘riqsiz va xavfsiz qabul qilamiz.',
+      ru: 'Акция к открытию филиала в Коканде. При вросшем ногте, утолщении или деформации обычный педикюр не поможет — принимаем даже сложные случаи стерильно, без боли и с минимальным риском осложнений.',
+      en: 'Opening promo for our Kokand branch. For ingrown nails, thickening, or deformation, a regular pedicure is not enough — we treat even complex cases in sterile conditions, with comfort and low complication risk.',
+    },
+    src: '/videos/35.mp4',
+    duration: '0:37',
+    category: { uz: 'Podologiya', ru: 'Подология', en: 'Podiatry' },
+  },
+  {
+    id: 'clinic-video-36',
+    sortOrder: 3,
+    title: {
+      uz: 'Qo‘qonda dermatologdan bepul konsultatsiya!',
+      ru: 'Бесплатная консультация дерматолога в Коканде!',
+      en: 'Free dermatologist consultation in Kokand!',
+    },
+    description: {
+      uz: 'Radeski Skin Clinic Qo‘qon filiali ochilishi munosabati bilan vitiligoni davolash bo‘yicha dermatolog konsultatsiyasi bepul. Tajriba va zamonaviy uskunalar to‘g‘ri tashxis va eng samarali davoni tanlashga yordam beradi.',
+      ru: 'К открытию филиала Radeski Skin Clinic в Коканде — бесплатная консультация дерматолога по лечению витилиго. Опыт врачей и современное оборудование помогают поставить точный диагноз и выбрать эффективную терапию.',
+      en: 'For the opening of Radeski Skin Clinic in Kokand — a free dermatologist consultation on vitiligo care. Our specialists’ experience and modern equipment support accurate diagnosis and the most effective treatment plan.',
+    },
+    src: '/videos/36.mp4',
+    duration: '0:30',
+    category: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+  },
+  {
+    id: 'clinic-video-37',
+    sortOrder: 2,
+    title: {
+      uz: '1 daqiqada qabulga qanday yozilish mumkin?',
+      ru: 'Как записаться на приём за 1 минуту?',
+      en: 'How to book an appointment in 1 minute?',
+    },
+    description: {
+      uz: 'Qisqa video orqali qadamma-qadam yo‘riqnomani ko‘ring va muolajalarga o‘zingizga qulay vaqtda yoziling.',
+      ru: 'Посмотрите пошаговую инструкцию в коротком видео и запишитесь на процедуры в удобное для вас время.',
+      en: 'Watch this short step-by-step guide and book your treatment at a time that works for you.',
+    },
+    src: '/videos/37.mp4',
+    duration: '0:51',
+    category: { uz: 'Yo‘riqnoma', ru: 'Инструкция', en: 'How-to' },
+  },
+  {
+    id: 'clinic-video-38',
+    sortOrder: 1,
+    title: {
+      uz: 'DEKA Tetra Pro lazer: ajin, dog‘ va chandiqlarga zamonaviy yechim',
+      ru: 'Лазер Tetra Pro от DEKA: новый уровень ухода от морщин, пятен и рубцов',
+      en: 'DEKA Tetra Pro laser: a modern answer to wrinkles, spots, and scars',
+    },
+    description: {
+      uz: 'Jarrohsiz va tez tiklanish bilan: lazer silliqlash, ajinlarni kamaytirish, pigment dog‘larini ochish, chandiq va shramlarni yumshatish, yumshoq yoshartirish. Radeski Skin Clinic’da DEKA Tetra Pro — teri sifatini yaxshilash uchun aniq va qulay yondashuv.',
+      ru: 'Без операций и с быстрым восстановлением: лазерная шлифовка, уменьшение морщин, работа с пигментными пятнами, лечение рубцов и шрамов, деликатное омоложение. В Radeski Skin Clinic лазер Tetra Pro от DEKA помогает бережно улучшить качество кожи.',
+      en: 'No surgery and a shorter recovery: laser resurfacing, wrinkle refinement, pigment-spot care, scar improvement, and gentle rejuvenation. At Radeski Skin Clinic, DEKA Tetra Pro offers a precise, comfortable way to improve skin quality.',
+    },
+    src: '/videos/38.mp4',
+    duration: '0:53',
+    category: { uz: 'Lazer kosmetologiya', ru: 'Лазерная косметология', en: 'Laser aesthetics' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [
