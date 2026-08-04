@@ -1,5 +1,5 @@
 import type { Locale } from '../types';
-import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl, KOKAND_BRANCH_MAP_EMBED_URL, KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
+import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl, KOKAND_BRANCH_MAP_EMBED_URL, KOKAND_BRANCH_MAP_OPEN_URL, LIEGE_BRANCH_MAP_EMBED_URL, LIEGE_BRANCH_MAP_OPEN_URL, RADE_SKIN_CLINIC_EMAIL, RADE_SKIN_CLINIC_PHONE, RADE_SKIN_CLINIC_WEBSITE } from '../config/links';
 
 type LocalizedText = Record<Locale, string>;
 
@@ -20,11 +20,15 @@ export interface ClinicBranch {
   name: LocalizedText;
   address: LocalizedText;
   phone: string;
+  /** tel: havolasi uchun (ixtiyoriy; bo‘lmasa phone dan hosil qilinadi) */
+  phoneTel?: string;
   hours: LocalizedText;
   services: LocalizedText;
   mapEmbed: string;
   /** Google Maps'da ochish uchun to'g'ri havola (ixtiyoriy) */
   mapUrl?: string;
+  website?: string;
+  email?: string;
   isMain?: boolean;
   image: string;
   sortOrder?: number;
@@ -720,6 +724,38 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
     isMain: false,
     image: '/gallery/rasmfilial2.jpg',
     sortOrder: 2,
+  },
+  {
+    id: 'liege-rade-skin',
+    name: {
+      uz: 'Rade Skin Clinic — Filial (Liège, Belgiya)',
+      ru: 'Rade Skin Clinic — Филиал (Льеж, Бельгия)',
+      en: 'Rade Skin Clinic — Branch (Liège, Belgium)',
+    },
+    address: {
+      uz: 'Boulevard de la Sauvenière 67, 4000 Liège, Belgiya',
+      ru: 'Boulevard de la Sauvenière 67, 4000 Льеж, Бельгия',
+      en: 'Boulevard de la Sauvenière 67, 4000 Liège, Belgium',
+    },
+    phone: RADE_SKIN_CLINIC_PHONE.display,
+    phoneTel: RADE_SKIN_CLINIC_PHONE.tel,
+    hours: {
+      uz: 'Qabul: oldindan yozilish | Favqulodda aloqa: 24/7',
+      ru: 'Приём: по записи | Экстренная связь: 24/7',
+      en: 'Appointments by booking | Emergency contact: 24/7',
+    },
+    services: {
+      uz: 'Estetik tibbiyot, teri parvarishi, lazer epilyatsiya, soch to‘kilishi, yoshartirish',
+      ru: 'Эстетическая медицина, уход за кожей, лазерная эпиляция, выпадение волос, anti-age',
+      en: 'Aesthetic medicine, skin care, laser hair removal, hair loss care, anti-age',
+    },
+    mapEmbed: LIEGE_BRANCH_MAP_EMBED_URL,
+    mapUrl: LIEGE_BRANCH_MAP_OPEN_URL,
+    website: RADE_SKIN_CLINIC_WEBSITE,
+    email: RADE_SKIN_CLINIC_EMAIL,
+    isMain: false,
+    image: '/gallery/rade-skin-clinic-liege.png',
+    sortOrder: 3,
   },
 ];
 

@@ -31,6 +31,31 @@ function withFallback<T>(apiItems: T[], fallback: T[]): T[] {
   return apiItems.length > 0 ? apiItems : fallback;
 }
 
+function mergeBranches(apiItems: ClinicBranch[], fallback: ClinicBranch[]): ClinicBranch[] {
+  if (apiItems.length === 0) return fallback;
+
+  const haystack = apiItems
+    .map((b) => `${b.name.uz} ${b.name.ru} ${b.name.en} ${b.address.uz} ${b.phone}`.toLowerCase())
+    .join(' | ');
+
+  const extras = fallback.filter((branch) => {
+    if (branch.id === 'liege-rade-skin') {
+      return !/liège|liege|belgiya|belgium|rade skin|sauvenière|sauveniere/.test(haystack);
+    }
+    if (branch.id === 'kokand-branch') {
+      return !/qo[‘']?qon|коканд|kokand/.test(haystack);
+    }
+    if (branch.id === 'fergana-main') {
+      return !/farg[‘']?ona|фергана|fergana/.test(haystack);
+    }
+    return false;
+  });
+
+  return [...apiItems, ...extras].sort(
+    (a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999),
+  );
+}
+
 function mapLegacyRatings(): ClinicRatingDisplay[] {
   return CLINIC_RATINGS.map((item) => ({
     id: item.platform.toLowerCase().replace(/\s+/g, '-'),
@@ -111,7 +136,7 @@ export function useCmsData(): CmsDataState {
 
     setPartners(withFallback(partnersRes.map(mapPartnerFromApi), CLINIC_PARTNERS));
     setReviews(withFallback(reviewsRes.map(mapReviewFromApi), CUSTOMER_REVIEWS.filter((r) => r.published)));
-    setBranches(withFallback(branchesRes.map(mapBranchFromApi), CLINIC_BRANCHES));
+    setBranches(mergeBranches(branchesRes.map(mapBranchFromApi), CLINIC_BRANCHES));
     setTreatmentResults(
       resultsRes.length > 0
         ? resolvePublicTreatmentResults(resultsRes.map(mapTreatmentResultFromApi))

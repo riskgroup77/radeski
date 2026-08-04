@@ -6,7 +6,7 @@ import type {
   CustomerReview,
   TreatmentResult,
 } from '../data/sitePagesContent';
-import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl } from '../config/links';
+import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl, KOKAND_BRANCH_MAP_OPEN_URL, LIEGE_BRANCH_MAP_OPEN_URL, RADE_SKIN_CLINIC_EMAIL, RADE_SKIN_CLINIC_PHONE, RADE_SKIN_CLINIC_WEBSITE } from '../config/links';
 import { resolveMediaUrl } from './client';
 import type {
   ApiBranchOut,
@@ -15,6 +15,7 @@ import type {
   ApiPartnerOut,
   ApiReviewOut,
   ApiTreatmentResultOut,
+  BranchCreatePayload,
   ClinicRatingCreatePayload,
   ClinicVideoCreatePayload,
   PartnerCreatePayload,
@@ -70,21 +71,58 @@ export function mapReviewFromApi(api: ApiReviewOut): CustomerReview {
 }
 
 export function mapBranchFromApi(api: ApiBranchOut): ClinicBranch {
+  const name = localized(api.name_uz, api.name_ru, api.name_en);
+  const address = localized(api.address_uz, api.address_ru, api.address_en);
+  const blob = `${name.uz} ${name.ru} ${name.en} ${address.uz} ${address.en} ${api.phone || ''}`.toLowerCase();
+  const isLiege = /liège|liege|belgi|rade skin|sauvenière|sauveniere/.test(blob);
+  const isKokand = /qo[‘']?qon|коканд|kokand/.test(blob);
+
   return {
     id: api.id,
-    name: localized(api.name_uz, api.name_ru, api.name_en),
-    address: localized(api.address_uz, api.address_ru, api.address_en),
+    name,
+    address,
     phone: api.phone || '',
+    phoneTel: isLiege
+      ? RADE_SKIN_CLINIC_PHONE.tel
+      : undefined,
     hours: localized(api.hours_uz || '', api.hours_ru, api.hours_en),
     services: localized(api.services_uz || '', api.services_ru, api.services_en),
     mapEmbed: api.map_embed?.trim() && !api.map_embed.includes('0x38bb83461413146b')
       ? api.map_embed
       : CLINIC_MAP_EMBED_URL,
-    mapUrl: getClinicMapOpenUrl(),
+    mapUrl: isLiege
+      ? LIEGE_BRANCH_MAP_OPEN_URL
+      : isKokand
+        ? KOKAND_BRANCH_MAP_OPEN_URL
+        : getClinicMapOpenUrl(),
+    website: isLiege ? RADE_SKIN_CLINIC_WEBSITE : undefined,
+    email: isLiege ? RADE_SKIN_CLINIC_EMAIL : undefined,
     isMain: api.is_main,
     image: resolveMediaUrl(api.image) || api.image || '',
     sortOrder: api.sort_order,
     isActive: api.is_active,
+  };
+}
+
+export function mapClinicBranchToCreatePayload(branch: ClinicBranch): BranchCreatePayload {
+  return {
+    name_uz: branch.name.uz,
+    name_ru: branch.name.ru,
+    name_en: branch.name.en,
+    address_uz: branch.address.uz,
+    address_ru: branch.address.ru,
+    address_en: branch.address.en,
+    phone: branch.phone,
+    hours_uz: branch.hours.uz,
+    hours_ru: branch.hours.ru,
+    hours_en: branch.hours.en,
+    services_uz: branch.services.uz,
+    services_ru: branch.services.ru,
+    services_en: branch.services.en,
+    map_embed: branch.mapEmbed,
+    is_main: Boolean(branch.isMain),
+    sort_order: branch.sortOrder ?? 99,
+    is_active: branch.isActive !== false,
   };
 }
 

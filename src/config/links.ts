@@ -54,6 +54,24 @@ export const KOKAND_BRANCH_MAP_OPEN_URL =
 
 export const KOKAND_BRANCH_MAP_EMBED_URL = `https://maps.google.com/maps?q=${KOKAND_BRANCH_GEO.lat},${KOKAND_BRANCH_GEO.lng}&hl=uz&z=17&output=embed`;
 
+/** Belgiya — Rade Skin Clinic (Liège), Boulevard de la Sauvenière 67 */
+export const LIEGE_BRANCH_GEO = {
+  lat: 50.6428,
+  lng: 5.5715,
+} as const;
+
+export const LIEGE_BRANCH_MAP_OPEN_URL =
+  'https://www.google.com/maps/search/?api=1&query=Boulevard+de+la+Sauvenière+67,+4000+Liège,+Belgium';
+
+export const LIEGE_BRANCH_MAP_EMBED_URL = `https://maps.google.com/maps?q=${LIEGE_BRANCH_GEO.lat},${LIEGE_BRANCH_GEO.lng}&hl=en&z=17&output=embed`;
+
+export const RADE_SKIN_CLINIC_WEBSITE = 'https://rade-skin-clinic.com/';
+export const RADE_SKIN_CLINIC_EMAIL = 'contact@rade-skin-clinic.com';
+export const RADE_SKIN_CLINIC_PHONE = {
+  display: '+32 472 97 04 37',
+  tel: '+32472970437',
+} as const;
+
 export function resolveClinicRatingUrl(platform: string, url?: string): string | undefined {
   if (url) return url;
   const key = platform.toLowerCase();

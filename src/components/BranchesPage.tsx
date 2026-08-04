@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Building2, MapPin, Phone, Clock, Star, Navigation } from 'lucide-react';
+import { Building2, MapPin, Phone, Clock, Star, Navigation, Globe, Mail } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { ClinicBranch } from '../data/sitePagesContent';
@@ -14,7 +14,18 @@ function resolveBranchMapEmbed(branch: ClinicBranch): string {
 }
 
 function resolveBranchMapOpenUrl(branch: ClinicBranch): string {
-  return branch.mapUrl?.trim() || getClinicMapOpenUrl();
+  if (branch.mapUrl?.trim()) return branch.mapUrl.trim();
+  const address = branch.address.uz || branch.address.en || '';
+  if (address) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+  }
+  return getClinicMapOpenUrl();
+}
+
+function resolveBranchTelHref(branch: ClinicBranch): string {
+  if (branch.phoneTel?.trim()) return `tel:${branch.phoneTel.trim()}`;
+  const digits = branch.phone.replace(/[^\d+]/g, '');
+  return digits ? `tel:${digits}` : '#';
 }
 
 interface BranchesPageProps {
@@ -94,12 +105,36 @@ export default function BranchesPage({
                   <li className="flex gap-2">
                     <Phone className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
                     <a
-                      href="tel:+998732007373"
+                      href={resolveBranchTelHref(branch)}
                       className="text-brand-text-primary font-semibold font-mono hover:text-brand-gold transition-colors"
                     >
                       {branch.phone}
                     </a>
                   </li>
+                  {branch.email && (
+                    <li className="flex gap-2">
+                      <Mail className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
+                      <a
+                        href={`mailto:${branch.email}`}
+                        className="text-brand-text-secondary hover:text-brand-gold transition-colors break-all"
+                      >
+                        {branch.email}
+                      </a>
+                    </li>
+                  )}
+                  {branch.website && (
+                    <li className="flex gap-2">
+                      <Globe className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
+                      <a
+                        href={branch.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-brand-gold font-semibold hover:text-brand-gold-dark transition-colors break-all"
+                      >
+                        {branch.website.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+                      </a>
+                    </li>
+                  )}
                   <li className="flex gap-2">
                     <Clock className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" />
                     <span className="text-brand-text-secondary">{branch.hours[locale]}</span>
