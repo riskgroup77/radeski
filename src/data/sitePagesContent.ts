@@ -526,7 +526,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-30',
-    sortOrder: 7,
+    sortOrder: 8,
     title: {
       uz: 'Endi siz shifokor-dermatologdan 7 ta asosiy insaytni bilasiz!',
       ru: 'Теперь вы знаете 7 ключевых инсайтов от врача-дерматолога!',
@@ -543,7 +543,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-31',
-    sortOrder: 6,
+    sortOrder: 7,
     title: {
       uz: 'Kosmetologiya xizmatlari uchun super aksiya',
       ru: 'Супер-акция на услуги косметологии',
@@ -560,7 +560,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-34',
-    sortOrder: 5,
+    sortOrder: 6,
     title: {
       uz: 'Sochlar uchun plazmotorapiya 400 000 so‘m o‘rniga 250 000 so‘m!',
       ru: 'Плазмотерапия для волос: 250 000 сум вместо 400 000 сум!',
@@ -577,7 +577,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-35',
-    sortOrder: 4,
+    sortOrder: 5,
     title: {
       uz: 'Tibbiy pedikyur 230 000 so‘m o‘rniga 180 000 so‘m!',
       ru: 'Медицинский педикюр: 180 000 сум вместо 230 000 сум!',
@@ -594,7 +594,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-36',
-    sortOrder: 3,
+    sortOrder: 4,
     title: {
       uz: 'Qo‘qonda dermatologdan bepul konsultatsiya!',
       ru: 'Бесплатная консультация дерматолога в Коканде!',
@@ -611,7 +611,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-37',
-    sortOrder: 2,
+    sortOrder: 3,
     title: {
       uz: '1 daqiqada qabulga qanday yozilish mumkin?',
       ru: 'Как записаться на приём за 1 минуту?',
@@ -628,7 +628,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-38',
-    sortOrder: 1,
+    sortOrder: 2,
     title: {
       uz: 'DEKA Tetra Pro lazer: ajin, dog‘ va chandiqlarga zamonaviy yechim',
       ru: 'Лазер Tetra Pro от DEKA: новый уровень ухода от морщин, пятен и рубцов',
@@ -642,6 +642,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     src: '/videos/38.mp4',
     duration: '0:53',
     category: { uz: 'Lazer kosmetologiya', ru: 'Лазерная косметология', en: 'Laser aesthetics' },
+  },
+  {
+    id: 'clinic-video-39',
+    sortOrder: 1,
+    title: {
+      uz: 'Aquex Daavlin: kaft va tovon terlashiga og‘riqsiz yechim',
+      ru: 'Aquex Daavlin: безопасное решение против потливости ладоней и стоп',
+      en: 'Aquex Daavlin: a gentle solution for sweaty palms and soles',
+    },
+    description: {
+      uz: 'Nam kaftlar va tovonlar noqulaylik keltiradimi? Aquex Daavlin uskunasi bilan giperhidrozni (ortiqcha terlashni) og‘riqsiz, ukolsiz va uzoq tiklanishsiz kamaytirish mumkin — organizm uchun xavfsiz yondashuv. Radeski Skin Clinic’da qulaylik va ishonchli natija uchun individual reja tuziladi.',
+      ru: 'Устали от влажных ладоней и дискомфорта? Аппарат Aquex Daavlin помогает снизить избыточную потливость кистей и стоп без уколов, боли и долгой реабилитации — мягко и безопасно для организма. В Radeski Skin Clinic подбираем индивидуальный курс для заметного комфорта.',
+      en: 'Tired of damp palms and daily discomfort? Aquex Daavlin therapy can reduce excessive sweating of the hands and feet without injections, pain, or long downtime — a body-friendly approach. At Radeski Skin Clinic we build an individual plan for more comfortable, drier skin.',
+    },
+    src: '/videos/39.mp4',
+    duration: '0:48',
+    category: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
   },
 ];
 

@@ -9,8 +9,9 @@ import { adminLogin, getAdminVideos, updateVideo } from '../src/api/adminApi';
 const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 400);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-/** Eng yangi birinchi: 38, 37, 36, 35, 34, 31, 30 */
+/** Eng yangi birinchi: 39, 38, 37, 36, 35, 34, 31, 30 */
 const NEWEST_FIRST_MARKERS = [
+  /aquex|tersiz hayot|kaft va tovon terlash|потливости ладоней|sweaty palms/i,
   /tetra pro|deka tetra/i,
   /1 daqiqada qabul|qanday yozilish mumkin|как записаться на приём|how to book an appointment/i,
   /dermatologdan bepul konsultatsiya/i,
