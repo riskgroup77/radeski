@@ -11,6 +11,7 @@ import { VITILIGO_DAAVLIN_ARTICLE_CATALOG } from './articles/vitiligoDaavlinArti
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG } from './articles/psoriasisDaavlinKokandArticle';
 import { IPL_THERAPY_ARTICLE_CATALOG } from './articles/iplTherapyArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG } from './articles/pediatricWartsCo2DekaArticle';
+import { ADULT_ACNE_ARTICLE_CATALOG } from './articles/adultAcneArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -94,6 +95,17 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
   psoriasis: ['psoria', 'псориаз', 'psoriasis', 'lishay'],
   'post-acne': ['postakne', 'post-akne', 'постакне', 'post-acne', 'post acne', 'chandiq', 'рубц', 'scar after'],
+  'adult-acne': [
+    'pryshchi-u-vzroslykh',
+    'прыщи у взрослых',
+    'adult acne',
+    'kattalarda toshma',
+    'kattalarda akne',
+    'акне у взрослых',
+    'лечение акне в коканде',
+    'akne qoqon',
+    'pimples in adults',
+  ],
   acne: ['akne', 'акне', 'acne', 'комедон'],
   'atopic-dermatitis': ['ekzem', 'atop', 'экзем', 'dermatit', 'allergik'],
   rosacea: ['rozase', 'rozacea', 'розаце', 'rosacea', 'qizarish', 'derma v', 'ipl inmode'],
@@ -794,6 +806,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'psoriasis-daavlin-kokand': PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG,
   'ipl-therapy': IPL_THERAPY_ARTICLE_CATALOG,
   'pediatric-warts-co2-deka': PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG,
+  'adult-acne': ADULT_ACNE_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

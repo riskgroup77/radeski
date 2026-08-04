@@ -11,6 +11,7 @@ import { VITILIGO_DAAVLIN_ARTICLE } from './data/articles/vitiligoDaavlinArticle
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from './data/articles/psoriasisDaavlinKokandArticle';
 import { IPL_THERAPY_ARTICLE } from './data/articles/iplTherapyArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from './data/articles/pediatricWartsCo2DekaArticle';
+import { ADULT_ACNE_ARTICLE } from './data/articles/adultAcneArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -899,4 +900,5 @@ export const ARTICLES: Article[] = [
   PSORIASIS_DAAVLIN_KOKAND_ARTICLE,
   IPL_THERAPY_ARTICLE,
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
+  ADULT_ACNE_ARTICLE,
 ];
