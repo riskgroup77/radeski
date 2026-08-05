@@ -56,10 +56,10 @@ export function buildServiceH1(name: string, locale: Locale): string {
 export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   uz: {
     home: {
-      title: "Dermatologiya Farg'ona | Qo'qon | Radeski Skin Clinic — kosmetologiya, IPL, lazer",
-      desc: "Radeski — Farg'ona va Qo'qondagi dermatologiya va kosmetologiya klinikasi. IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks va Mohs. Tel: +998 73 200-73-73.",
+      title: "Radeski Skin Clinic — kosmetologiya, IPL, lazer",
+      desc: "Radeski Skin Clinic — teri, estetika va kosmetologiya: IPL, lazer epilyatsiya, fototerapiya, botoks, dermatoskopiya va Mohs. Tel: +998 73 200-73-73.",
       keywords:
-        "dermatologiya Farg'ona, dermatologiya Qo'qon, dermatolog Farg'ona, dermatolog Qo'qon, kosmetologiya Farg'ona, kosmetologiya Qo'qon, Radeski, IPL, lazer epilyatsiya, fototerapiya, botoks",
+        "Radeski Skin Clinic, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya, botoks, teri klinikasi, estetika",
     },
     about: {
       title: "Klinika haqida | Radeski Skin Clinic — dermatologiya Farg'ona | Qo'qon",
@@ -131,10 +131,10 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   },
   ru: {
     home: {
-      title: "Дерматология Фергана | Коканд | Radeski Skin Clinic — косметология, IPL, лазер",
-      desc: "Radeski — клиника дерматологии и косметологии в Фергане и Коканде. IPL, лазерная эпиляция, дерматоскопия, фототерапия, ботокс и Mohs. Тел: +998 73 200-73-73.",
+      title: "Radeski Skin Clinic — косметология, IPL, лазер",
+      desc: "Radeski Skin Clinic — кожа, эстетика и косметология: IPL, лазерная эпиляция, фототерапия, ботокс, дерматоскопия и Mohs. Тел: +998 73 200-73-73.",
       keywords:
-        "дерматолог Фергана, дерматолог Коканд, дерматология Фергана, дерматология Коканд, косметология Фергана, косметология Коканд, Radeski, IPL, лазерная эпиляция",
+        "Radeski Skin Clinic, косметология, IPL, лазерная эпиляция, фототерапия, ботокс, клиника кожи, эстетика",
     },
     about: {
       title: "О клинике | Radeski Skin Clinic — дерматология Фергана | Коканд",
@@ -206,10 +206,10 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   },
   en: {
     home: {
-      title: "Dermatology Fergana | Kokand | Radeski Skin Clinic — cosmetology, IPL, laser",
-      desc: "Radeski Skin Clinic in Fergana and Kokand: dermatology, IPL, laser hair removal, dermatoscopy, phototherapy, Botox and Mohs. Tel: +998 73 200-73-73.",
+      title: "Radeski Skin Clinic — cosmetology, IPL, laser",
+      desc: "Radeski Skin Clinic — skin, aesthetics and cosmetology: IPL, laser hair removal, phototherapy, Botox, dermatoscopy and Mohs. Tel: +998 73 200-73-73.",
       keywords:
-        "dermatologist Fergana, dermatologist Kokand, dermatology Fergana, dermatology Kokand, cosmetology Fergana, cosmetology Kokand, Radeski, IPL, laser hair removal",
+        "Radeski Skin Clinic, cosmetology, IPL, laser hair removal, phototherapy, Botox, skin clinic, aesthetics",
     },
     about: {
       title: "About the clinic | Radeski Skin Clinic — dermatology Fergana | Kokand",
