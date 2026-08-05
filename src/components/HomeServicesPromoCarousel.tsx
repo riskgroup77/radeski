@@ -56,11 +56,11 @@ const SLIDE_ICONS: Record<string, LucideIcon> = {
 function getHeroCopy(locale: Locale) {
   if (locale === 'uz') {
     return {
-      badge: "Dermatologiya klinikasi — Farg'ona",
-      titleLead: "Dermatologiya Farg'ona |",
+      badge: "Dermatologiya klinikasi — Farg'ona | Qo'qon",
+      titleLead: "Dermatologiya Farg'ona | Qo'qon |",
       titleAccent: 'Radeski Skin Clinic',
       description:
-        "IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks va Mohs — Farg'ona va vodiy uchun zamonaviy dermatologiya va kosmetologiya.",
+        "IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks va Mohs — Farg'ona | Qo'qon va vodiy uchun zamonaviy dermatologiya va kosmetologiya.",
       viewServices: "Xizmatlarni ko'rish",
       statPatients: 'Baxtli bemorlar',
       statDoctors: 'Mutaxassis shifokorlar',
@@ -70,11 +70,11 @@ function getHeroCopy(locale: Locale) {
   }
   if (locale === 'ru') {
     return {
-      badge: 'Дерматологическая клиника — Фергана',
-      titleLead: 'Дерматология Фергана |',
+      badge: 'Дерматологическая клиника — Фергана | Коканд',
+      titleLead: 'Дерматология Фергана | Коканд |',
       titleAccent: 'Radeski Skin Clinic',
       description:
-        'IPL, лазерная эпиляция, дерматоскопия, фототерапия, ботокс и Mohs — современная дерматология и косметология для Ферганы и долины.',
+        'IPL, лазерная эпиляция, дерматоскопия, фототерапия, ботокс и Mohs — современная дерматология и косметология для Ферганы | Коканда и долины.',
       viewServices: 'Посмотреть услуги',
       statPatients: 'Довольных пациентов',
       statDoctors: 'Специалистов',
@@ -83,11 +83,11 @@ function getHeroCopy(locale: Locale) {
     };
   }
   return {
-    badge: 'Dermatology clinic — Fergana',
-    titleLead: 'Dermatology Fergana |',
+    badge: 'Dermatology clinic — Fergana | Kokand',
+    titleLead: 'Dermatology Fergana | Kokand |',
     titleAccent: 'Radeski Skin Clinic',
     description:
-      'IPL, laser hair removal, dermatoscopy, phototherapy, Botox and Mohs — modern dermatology and cosmetology in Fergana Valley.',
+      'IPL, laser hair removal, dermatoscopy, phototherapy, Botox and Mohs — modern dermatology and cosmetology for Fergana | Kokand and the valley.',
     viewServices: 'View services',
     statPatients: 'Happy patients',
     statDoctors: 'Specialist doctors',
