@@ -9,6 +9,7 @@ export type PageId =
   | 'articles'
   | 'videos'
   | 'branches'
+  | 'qoqon'
   | 'results'
   | 'technologies'
   | 'clinic-equipment'
@@ -97,6 +98,7 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'prices' ||
     pageSegment === 'videos' ||
     pageSegment === 'branches' ||
+    pageSegment === 'qoqon' ||
     pageSegment === 'results' ||
     pageSegment === 'technologies' ||
     pageSegment === 'clinic-equipment' ||

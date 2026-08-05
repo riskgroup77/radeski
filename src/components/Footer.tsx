@@ -109,6 +109,11 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
                 </Link>
               </li>
               <li>
+                <Link to={pagePath(locale, 'qoqon')} className="hover:text-brand-gold-light font-light transition-colors">
+                  {locale === 'uz' ? 'Dermatolog Qo‘qon' : locale === 'ru' ? 'Дерматолог Коканд' : 'Dermatologist Kokand'}
+                </Link>
+              </li>
+              <li>
                 <Link to={pagePath(locale, 'results')} className="hover:text-brand-gold-light font-light transition-colors">
                   {d.navResults}
                 </Link>

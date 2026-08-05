@@ -81,6 +81,7 @@ import HomeCarousel from './components/HomeCarousel';
 import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
 import QrFeedbackPage from './components/QrFeedbackPage';
+import KokandLandingPage from './components/KokandLandingPage';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
@@ -1213,6 +1214,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               branches={cmsBranches}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
             />
+          )}
+
+          {currentPage === 'qoqon' && (
+            <KokandLandingPage locale={locale} appointmentLabel={d.appointmentBtn} />
           )}
 
           {currentPage === 'technologies' && (

@@ -5,7 +5,9 @@ import { DICTIONARY } from '../data';
 import type { ClinicBranch } from '../data/sitePagesContent';
 import { CLINIC_BRANCHES } from '../data/sitePagesContent';
 import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl } from '../config/links';
+import { pagePath } from '../routing/paths';
 import MediaImage from './MediaImage';
+import { Link } from 'react-router-dom';
 
 function resolveBranchMapEmbed(branch: ClinicBranch): string {
   const embed = branch.mapEmbed?.trim();
@@ -56,6 +58,16 @@ export default function BranchesPage({
           <p className="text-brand-text-muted mt-3 text-sm leading-relaxed">
             {d.branchesDesc}
           </p>
+          <Link
+            to={pagePath(locale, 'qoqon')}
+            className="inline-flex mt-4 text-sm font-bold text-brand-gold hover:text-brand-gold-dark"
+          >
+            {locale === 'uz'
+              ? 'Dermatolog Qo‘qon — alohida sahifa →'
+              : locale === 'ru'
+                ? 'Дерматолог Коканд — отдельная страница →'
+                : 'Dermatologist Kokand — dedicated page →'}
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
@@ -93,7 +105,13 @@ export default function BranchesPage({
                 <div className="flex items-start gap-2 mb-2.5">
                   <Building2 className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
                   <h2 className="text-base sm:text-lg font-extrabold text-brand-text-primary leading-tight">
-                    {branch.name[locale]}
+                    {branch.id === 'kokand-branch' ? (
+                      <Link to={pagePath(locale, 'qoqon')} className="hover:text-brand-gold no-underline text-inherit">
+                        {branch.name[locale]}
+                      </Link>
+                    ) : (
+                      branch.name[locale]
+                    )}
                   </h2>
                 </div>
 

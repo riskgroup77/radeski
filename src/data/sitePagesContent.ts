@@ -699,9 +699,9 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
   {
     id: 'kokand-branch',
     name: {
-      uz: 'Radeski — Filial (Qo‘qon)',
-      ru: 'Radeski — Филиал (Коканд)',
-      en: 'Radeski — Branch (Kokand)',
+      uz: 'Dermatolog Qo‘qon — Radeski Skin Clinic',
+      ru: 'Дерматолог Коканд — Radeski Skin Clinic',
+      en: 'Dermatologist Kokand — Radeski Skin Clinic',
     },
     address: {
       uz: "Qo'qon sh., 47-MFI, Huqandiy mavzesi, 144A",

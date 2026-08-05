@@ -80,9 +80,15 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Radeski video, dermatologiya video, IPL, klinika Farg'ona",
     },
     branches: {
-      title: "Filiallar — Farg'ona, Qo'qon, Belgiya | Radeski Skin Clinic",
-      desc: "Radeski filiallari: Farg'ona, Qo'qon va Rade Skin Clinic (Liège, Belgiya). Manzil, telefon va ish vaqti.",
-      keywords: "Radeski filial, dermatolog Farg'ona, dermatolog Qo'qon, klinika manzili, Rade Skin Clinic",
+      title: "Filiallar — Farg'ona, Qo‘qon, Belgiya | Radeski Skin Clinic",
+      desc: "Radeski filiallari: Farg'ona, Qo‘qon va Rade Skin Clinic (Liège). Manzil, telefon va ish vaqti. Qo‘qon: dermatolog, IPL, lazer.",
+      keywords: "Radeski filial, dermatolog Farg'ona, dermatolog Qo‘qon, klinika manzili, Rade Skin Clinic",
+    },
+    qoqon: {
+      title: "Dermatolog Qo‘qon | Radeski Skin Clinic — kosmetologiya, IPL, lazer",
+      desc: "Qo‘qonda Radeski Skin Clinic: dermatologiya, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya. Manzil: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.",
+      keywords:
+        "dermatolog Qo‘qon, dermatologiya Qo‘qon, kosmetologiya Qo‘qon, IPL Qo‘qon, lazer epilyatsiya Qo‘qon, Radeski Qo‘qon, akne Qo‘qon",
     },
     results: {
       title: "Natijalar — oldin va keyin | Radeski Farg'ona",
@@ -150,8 +156,14 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     branches: {
       title: "Филиалы — Фергана, Коканд, Бельгия | Radeski",
-      desc: "Филиалы Radeski в Фергане, Коканде и Rade Skin Clinic в Льеже (Бельгия).",
+      desc: "Филиалы Radeski в Фергане, Коканде и Rade Skin Clinic в Льеже (Бельгия). Дерматолог и косметология в Коканде.",
       keywords: "филиал Radeski, дерматолог Фергана, дерматолог Коканд, адрес клиники",
+    },
+    qoqon: {
+      title: "Дерматолог Коканд | Radeski Skin Clinic — косметология, IPL, лазер",
+      desc: "Клиника Radeski в Коканде: дерматология, косметология, IPL, лазерная эпиляция, фототерапия. Адрес: 47-МФЙ, Хукандий 144А. Тел: +998 95 210 73 73.",
+      keywords:
+        "дерматолог Коканд, дерматология Коканд, косметология Коканд, IPL Коканд, лазерная эпиляция Коканд, Radeski Коканд, акне Коканд",
     },
     results: {
       title: "Результаты — до и после | Radeski Фергана",
@@ -219,8 +231,14 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     branches: {
       title: "Branches — Fergana, Kokand, Belgium | Radeski",
-      desc: "Radeski branches in Fergana, Kokand and Rade Skin Clinic in Liège, Belgium.",
+      desc: "Radeski branches in Fergana, Kokand and Rade Skin Clinic in Liège, Belgium. Dermatologist and cosmetology in Kokand.",
       keywords: "Radeski branch, dermatologist Fergana, dermatologist Kokand, clinic address",
+    },
+    qoqon: {
+      title: "Dermatologist Kokand | Radeski Skin Clinic — cosmetology, IPL, laser",
+      desc: "Radeski Skin Clinic in Kokand: dermatology, cosmetology, IPL, laser hair removal, phototherapy. Address: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.",
+      keywords:
+        "dermatologist Kokand, dermatology Kokand, cosmetology Kokand, IPL Kokand, laser hair removal Kokand, Radeski Kokand, acne Kokand",
     },
     results: {
       title: "Results — before and after | Radeski Fergana",
