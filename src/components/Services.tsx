@@ -127,15 +127,19 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
             {d.navServices}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary tracking-tight mt-3">
-            {locale === 'uz' ? "Bizning ixtisoslashtirilgan yo'nalishlarimiz" : 
-             locale === 'ru' ? "Наши специализированные направления" : 
-                               "Our Specialized Medical Departments"}
-          </h2>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary tracking-tight mt-3">
+            {locale === 'uz'
+              ? "Dermatologiya va kosmetologiya xizmatlari — Farg'ona"
+              : locale === 'ru'
+                ? 'Услуги дерматологии и косметологии — Фергана'
+                : 'Dermatology & cosmetology services — Fergana'}
+          </h1>
           <p className="text-brand-text-muted mt-4 text-sm sm:text-base">
-            {locale === 'uz' ? "Klinikamizda teri muammolarini 100% xavfsiz davolovchi 12 ta asosiy strategik va zamonaviy darslik tibbiy yo'nalishlari faoliyat ko'rsatmoqda." : 
-             locale === 'ru' ? "Наша клиника работает по 12 ключевым дерматологическим направлениям, решая широчайший спектр медицинских задач." : 
-                               "Our center specializes in 12 separate clinical spheres to secure absolute safety and healthy skin results."}
+            {locale === 'uz'
+              ? "Radeski klinikada IPL, lazer epilyatsiya, fototerapiya, dermatoskopiya, trixologiya va inyeksion kosmetologiya — 12 ta ixtisoslashgan yo'nalish."
+              : locale === 'ru'
+                ? 'В клинике Radeski: IPL, лазерная эпиляция, фототерапия, дерматоскопия, трихология и инъекционная косметология — 12 направлений.'
+                : 'At Radeski Clinic: IPL, laser hair removal, phototherapy, dermatoscopy, trichology and injectables — 12 specialties.'}
           </p>
         </div>
 

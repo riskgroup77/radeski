@@ -65,8 +65,8 @@ export const DICTIONARY = {
     priceEmpty: "Ushbu filtr bo'yicha narx topilmadi.",
     priceNoticeTitle: "Muhim eslatma!",
     priceNoticeBody: "Preyskurantdagi narxlar rasmiy klinika ro'yxati bo'lib, tanishuv maqsadida beriladi. Yakuniy narx shifokor ko'rigidagi tashxis va davolash hajmiga qarab belgilanadi.",
-    articlesTitle: "Tibbiy maqolalar & Yangiliklar",
-    articlesDesc: "Teri parvarishi, kasalliklar va ularni davolash bo'yicha shifokorlarimiz tavsiyalari",
+    articlesTitle: "Dermatologiya maqolalari — Farg'ona",
+    articlesDesc: "Akne, psoriaz, vitiligo, IPL, lazer epilyatsiya va soch muammolari bo'yicha Radeski shifokorlari maslahatlari",
     videosTitle: "Klinika videolari",
     videosDesc: "Radeski klinikasidagi zamonaviy uskunalar, xizmatlar va bemor parvarishi haqida qisqa videolar",
     branchesTitle: "Bizning filiallar",
@@ -85,9 +85,9 @@ export const DICTIONARY = {
     years: "yil",
     yearsActive: "yillik tajriba",
     reviewsCount: "ko'rib chiqilgan fikrlar",
-    seoTitle: "Radeski Skin & Aesthetic Clinic - Sog'lom va go'zal teri kaliti",
-    seoText: "Radeski dermatologiya va estetika klinikasi Farg'ona shahrida zamonaviy jihozlar va malakali tibbiyot xodimlari bilan xizmat ko'rsatmoqda. Biz teri kasalliklarini diagnostika qilish, davolash, jarrohlik amaliyotlari va ilg'or kosmetologiya yo'nalishlarida ilg'or texnologiyalarni qo'llaymiz. IPL, dermatoskopiya va Mohs mikrografik jarrohligi kabi zamonaviy usullar klinikamizning asosiy ustunligidir.",
-    aboutHeader: "Sizning go'zalligingiz va sog'lig'ingiz - bizning kasbiy burchimiz",
+    seoTitle: "Dermatologiya Farg'ona | Radeski Skin Clinic — kosmetologiya, IPL, lazer",
+    seoText: "Radeski — Farg'onadagi dermatologiya va kosmetologiya klinikasi. IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks va Mohs mikrografik jarrohligi bilan xizmat ko'rsatamiz.",
+    aboutHeader: "Dermatologiya Farg'ona — Radeski Skin Clinic",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic dermatologiya, kosmetologiya va dermato-onkologiya sohalarida Farg'ona va butun vodiyda yuqori sifat standartlariga ega tibbiy xizmatlarni taqdim etadi.",
     aboutParagraph2: "Klinikamiz Germaniya, Italiya va AQShning yetakchi kompaniyalari ishlab chiqargan eng so'nggi va xavfsiz apparat va texnologiyalardan foydalanadi. Ashurov Dilshod Davlatovich boshchiligidagi shifokorlar guruhi muntazam ravishda Yevropa va MDH mamlakatlarida xalqaro sertifikatlardan o'tishadi.",
     features01: "Professional shifokorlar",
@@ -152,8 +152,8 @@ export const DICTIONARY = {
     priceEmpty: "По данному запросу цены не найдены.",
     priceNoticeTitle: "Важная информация!",
     priceNoticeBody: "Прейскурант носит информационный характер. Окончательная стоимость определяется врачом на приёме с учётом объёма лечения и индивидуальных показаний.",
-    articlesTitle: "Медицинские статьи и Новости",
-    articlesDesc: "Рекомендации наших врачей по уходу за кожей, заболеваниям и их лечению",
+    articlesTitle: "Статьи по дерматологии — Фергана",
+    articlesDesc: "Рекомендации врачей Radeski: акне, псориаз, витилиго, IPL, лазерная эпиляция и лечение волос",
     videosTitle: "Видео о клинике",
     videosDesc: "Короткие ролики об оборудовании, услугах и заботе о пациентах в клинике Radeski",
     branchesTitle: "Наши филиалы",
@@ -172,9 +172,9 @@ export const DICTIONARY = {
     years: "лет",
     yearsActive: "лет практики",
     reviewsCount: "проверенных отзывов",
-    seoTitle: "Radeski Skin & Aesthetic Clinic - Ключ к здоровой и красивой коже",
-    seoText: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное оборудование и квалифицированный медицинский персонал. Мы применяем новейшие технологии в диагностике, лечении кожных заболеваний, хирургических процедурах и эстетической косметологии. Передовые методы, такие как IPL, дерматоскопия и микрографическая хирургия по методу Mohs, являются ключевыми преимуществами нашей клиники.",
-    aboutHeader: "Ваша красота и здоровье — наш профессиональный долг",
+    seoTitle: "Дерматология Фергана | Radeski Skin Clinic — косметология, IPL, лазер",
+    seoText: "Radeski — клиника дерматологии и косметологии в Фергане. IPL, лазерная эпиляция, дерматоскопия, фототерапия, ботокс и хирургия Mohs.",
+    aboutHeader: "Дерматология Фергана — Radeski Skin Clinic",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic предлагает медицинские услуги высочайших стандартов в области дерматологии, косметологии и дерматоонкологии в Фергане и по всей Ферганской долине.",
     aboutParagraph2: "Наша клиника оснащена самым современным и безопасным оборудованием от ведущих производителей Германии, Италии и США. Команда врачей под руководством Ашурова Дильшода Давлатовича регулярно проходит стажировки и сертификации в Европе и странах СНГ.",
     features01: "Профессиональные врачи",
@@ -239,8 +239,8 @@ export const DICTIONARY = {
     priceEmpty: "No pricing items matched your filter or search.",
     priceNoticeTitle: "Important notice!",
     priceNoticeBody: "This price list is for reference. Final cost is determined at consultation based on treatment scope and clinical indications.",
-    articlesTitle: "Medical Articles & News",
-    articlesDesc: "Skin care recommendations, conditions, and treatments directly from our clinical team",
+    articlesTitle: "Dermatology articles — Fergana",
+    articlesDesc: "Advice from Radeski doctors on acne, psoriasis, vitiligo, IPL, laser hair removal and hair treatments",
     videosTitle: "Clinic videos",
     videosDesc: "Short videos about Radeski equipment, services, and patient care standards",
     branchesTitle: "Our branches",
@@ -259,9 +259,9 @@ export const DICTIONARY = {
     years: "years",
     yearsActive: "years of experience",
     reviewsCount: "verified testimonials",
-    seoTitle: "Radeski Skin & Aesthetic Clinic - The Key to Healthy and Beautiful Skin",
-    seoText: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic and cosmetic facilities. We employ gold-standard technology in diagnosing and treating dermatological conditions, surgical procedures, and genetic-level skin rejuvenation. Advanced procedures like IPL, clinical dermatoscopy, and Mohs micrographic surgery form the core of our specialized solutions.",
-    aboutHeader: "Your beauty and health is our professional dedication",
+    seoTitle: "Dermatology Fergana | Radeski Skin Clinic — cosmetology, IPL, laser",
+    seoText: "Radeski Skin Clinic in Fergana: dermatology, IPL, laser hair removal, dermatoscopy, phototherapy, Botox and Mohs surgery.",
+    aboutHeader: "Dermatology Fergana — Radeski Skin Clinic",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic provides premier medical services in clinical dermatology, aesthetic cosmetology, and dermato-oncology across regional Fergana.",
     aboutParagraph2: "Our facility is equipped with state-of-the-art clinical devices from world leaders in Germany, Italy, and the USA. Led by Dr. Dilshod Davlatovich Ashurov, our specialized medical team is regularly trained and certified at European and international institutes.",
     features01: "Professional Physicians",
@@ -555,9 +555,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       en: "Dermatology"
     },
     description: {
-      uz: "Teri kasalliklarini diagnostika qilish va samarali tibbiy davolash (vitiligo, psoriaz, ekzema, toshmalar).",
-      ru: "Диагностика и клиническое лечение всех видов заболеваний кожи (псориаз, витилиго, экзема, акне).",
-      en: "Medical diagnostics and targeted clinical therapeutics for all skin diseases including psoriasis and eczema."
+      uz: "Farg'onada teri kasalliklarini diagnostika qilish va samarali tibbiy davolash (vitiligo, psoriaz, ekzema, toshmalar). Radeski dermatologiya bo'limi.",
+      ru: "Диагностика и клиническое лечение заболеваний кожи в Фергане (псориаз, витилиго, экзема, акне). Отделение дерматологии Radeski.",
+      en: "Medical diagnostics and treatment of skin diseases in Fergana (psoriasis, vitiligo, eczema, acne). Radeski dermatology department."
     },
     icon: "ScanFace",
     subServices: [
@@ -598,9 +598,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       en: "Device-based cosmetology"
     },
     description: {
-      uz: "Radeski klinikasidagi zamonaviy apparatlar: IPL foto-yangilash (InMode), lazer biorevitalizatsiya va ultratovush tozalash.",
-      ru: "Современное оборудование клиники Radeski: фотоомоложение IPL (InMode), лазерная биоревитализация и ультразвуковая чистка.",
-      en: "Modern Radeski Clinic devices: IPL photo-rejuvenation (InMode), laser biorevitalization, and ultrasonic cleansing."
+      uz: "Farg'onada Radeski apparatlari: IPL foto-yangilash (InMode), lazer biorevitalizatsiya va ultratovush tozalash — apparatli kosmetologiya.",
+      ru: "Аппаратная косметология в Фергане: фотоомоложение IPL (InMode), лазерная биоревитализация и ультразвуковая чистка в клинике Radeski.",
+      en: "Device-based cosmetology in Fergana: IPL photo-rejuvenation (InMode), laser biorevitalization, and ultrasonic cleansing at Radeski."
     },
     icon: "WandSparkles",
     subServices: [
@@ -693,9 +693,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       en: "Laser Hair Removal"
     },
     description: {
-      uz: "Istalmagan tana sochlarini og'riqsiz va butunlay yo'qotuvchi professional lazer tizimlari.",
-      ru: "Безопасное и безболезненное удаление нежелательных волос на любом типе кожи диодным и александритовым лазером.",
-      en: "Safe laser-targeted destruction of unwanted hair roots using specialized cooling clinical lasers."
+      uz: "Farg'onada professional lazer epilyatsiya — istalmagan sochlarni og'riqsiz yo'qotish. Radeski Skin Clinic.",
+      ru: "Лазерная эпиляция в Фергане — безопасное удаление нежелательных волос. Клиника Radeski.",
+      en: "Laser hair removal in Fergana — safe clinical epilation at Radeski Skin Clinic."
     },
     icon: "Zap",
     subServices: [
@@ -718,9 +718,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       en: "Trichology - Hair & Scalp Treatment"
     },
     description: {
-      uz: "Soch to'kilishini kompleks tashxislash, trixoskopiya, dori va mezoterapiya bilan sochlarni tiklash.",
-      ru: "Комплексная диагностика заболеваний кожи головы, трихоскопия, лечение выпадения волос (алопеции).",
-      en: "Expert trichological scanning, computerized hair shaft check, and active therapy for alopecias."
+      uz: "Farg'onada trixologiya: soch to'kilishini tashxislash, trixoskopiya, mezoterapiya va PRP.",
+      ru: "Трихология в Фергане: диагностика выпадения волос, трихоскопия, мезотерапия и PRP.",
+      en: "Trichology in Fergana: hair-loss diagnosis, trichoscopy, mesotherapy and PRP."
     },
     icon: "ScanSearch",
     subServices: [

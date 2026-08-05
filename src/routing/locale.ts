@@ -44,7 +44,9 @@ export function detectBrowserLocale(): Locale {
 }
 
 export function getPreferredLocale(): Locale {
-  return getStoredLocale() ?? detectBrowserLocale();
+  // Default market language is Uzbek. Do not use browser language for first visit —
+  // Googlebot is usually `en`, which previously indexed English titles for radeski.uz.
+  return getStoredLocale() ?? 'uz';
 }
 
 export function localeToHreflang(locale: Locale): string {

@@ -64,9 +64,9 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
             <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
               {d.navAbout}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary tracking-tight mt-4">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary tracking-tight mt-4">
               {d.aboutHeader}
-            </h2>
+            </h1>
             <p className="text-brand-text-secondary mt-6 leading-relaxed text-sm sm:text-base font-light">
               {d.aboutParagraph1}
             </p>

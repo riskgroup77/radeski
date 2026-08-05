@@ -8,6 +8,7 @@ import ServicePageHero from './ServicePageHero';
 import { resolveCategoryIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
 import { resolveServiceRichContent } from '../utils/serviceContent';
 import { getLocalizedImage } from '../utils/localizedImage';
+import { buildServiceH1 } from '../seo/pageMeta';
 
 interface ServiceSubPageProps {
   locale: Locale;
@@ -64,7 +65,7 @@ export default function ServiceSubPage({
 
         <ServicePageHero
           badge={category.title[locale]}
-          title={sub.name[locale]}
+          title={buildServiceH1(sub.name[locale], locale)}
           description={heroText}
           image={subImage}
           iconName={resolveSubServiceIcon(sub, category) || resolveCategoryIcon(category)}

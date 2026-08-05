@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Home -->
+  <url>
+    <loc>https://radeski.uz/uz</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Core pages uz/ru/en -->
+  <url><loc>https://radeski.uz/uz/services</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://radeski.uz/ru/services</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/en/services</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/uz/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/about</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/en/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/uz/doctors</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/doctors</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/doctors</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/prices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/prices</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/prices</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/articles</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/ru/articles</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/en/articles</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/branches</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/branches</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/branches</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/videos</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/ru/videos</loc><changefreq>weekly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/en/videos</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://radeski.uz/uz/results</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/ru/results</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/en/results</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://radeski.uz/uz/technologies</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/technologies</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/technologies</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/uz/clinic-equipment</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/clinic-equipment</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/clinic-equipment</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+
+  <!-- Service categories (UZ prioritized) -->
+  <url><loc>https://radeski.uz/uz/services/dermatologiya</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://radeski.uz/ru/services/dermatologiya</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/en/services/dermatologiya</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/uz/services/apparatnaya-kosmetologiya</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/ru/services/apparatnaya-kosmetologiya</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/en/services/apparatnaya-kosmetologiya</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/services/in-ekcionnaya-kosmetologiya</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/services/in-ekcionnaya-kosmetologiya</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/services/in-ekcionnaya-kosmetologiya</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/services/lazernaya-epilyaciya</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/ru/services/lazernaya-epilyaciya</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/en/services/lazernaya-epilyaciya</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/services/trihologiya-centr-lechenie-volos</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/services/trihologiya-centr-lechenie-volos</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/services/trihologiya-centr-lechenie-volos</loc><changefreq>weekly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/services/dermatoonkologiya</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/services/dermatoonkologiya</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/en/services/dermatoonkologiya</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/uz/services/hirurgicheskaya-dermatologiya</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/services/hirurgicheskaya-dermatologiya</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/en/services/hirurgicheskaya-dermatologiya</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Key sub-services -->
+  <url><loc>https://radeski.uz/uz/services/dermatologiya/fototerapiya</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/ru/services/dermatologiya/fototerapiya</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/uz/services/apparatnaya-kosmetologiya/ipl-inmode</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/ru/services/apparatnaya-kosmetologiya/ipl-inmode</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/uz/services/lazernaya-epilyaciya/alex-lazer</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://radeski.uz/ru/services/lazernaya-epilyaciya/alex-lazer</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+
+  <!-- Articles -->
+  <url><loc>https://radeski.uz/uz/articles/art-ipl-terapiya</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-ipl-terapiya</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-rozacea-ipl</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-rozacea-ipl</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-akne</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-akne</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-pryshchi-u-vzroslykh</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-postakne</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-postakne</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-vitiligo-daavlin</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-vitiligo-daavlin</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-psoriasis-daavlin-kokand</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-bolalarda-sogal-co2-deka</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-deka-moveo-epilyatsiya-tayyorgarlik</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-plazmotorapiya-soch-prp</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-plazmaferez-teri-kasalliklari</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-hair-transplant-contraindications</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-hair-transplant-contraindications</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-co2-lazer-deka</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-co2-lazer-deka</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+</urlset>

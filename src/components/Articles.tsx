@@ -50,9 +50,9 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
             <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full font-sans">
               {locale === 'uz' ? 'Blog & Maqolalar' : locale === 'ru' ? 'Блог и Статьи' : 'Medical Blog & Publications'}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary tracking-tight mt-3">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary tracking-tight mt-3">
               {d.articlesTitle}
-            </h2>
+            </h1>
             <p className="text-brand-text-muted mt-4 text-sm sm:text-base">
               {d.articlesDesc}
             </p>

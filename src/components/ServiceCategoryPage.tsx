@@ -9,6 +9,7 @@ import { getServiceSectionLabels, resolveCategoryRichContent } from '../utils/se
 import ServiceDetailContent from './ServiceDetailContent';
 import ServicePageHero from './ServicePageHero';
 import { getLocalizedImage } from '../utils/localizedImage';
+import { buildServiceH1 } from '../seo/pageMeta';
 
 interface ServiceCategoryPageProps {
   locale: Locale;
@@ -56,7 +57,7 @@ export default function ServiceCategoryPage({
 
         <ServicePageHero
           badge={d.navServices}
-          title={category.title[locale]}
+          title={buildServiceH1(category.title[locale], locale)}
           description={heroText}
           image={categoryImage}
           iconName={resolveCategoryIcon(category)}

@@ -56,11 +56,11 @@ const SLIDE_ICONS: Record<string, LucideIcon> = {
 function getHeroCopy(locale: Locale) {
   if (locale === 'uz') {
     return {
-      badge: 'Premium dermatologiya klinikasi',
-      titleLead: "Sog'lom teri —",
-      titleAccent: 'chiroyli kelajak',
+      badge: "Dermatologiya klinikasi — Farg'ona",
+      titleLead: "Dermatologiya Farg'ona |",
+      titleAccent: 'Radeski Skin Clinic',
       description:
-        "Zamonaviy dermatologiya va lazer texnologiyalari yordamida teri kasalliklarini davolash, estetik muammolarni hal qilish va tabiiy go'zallikni qaytarish.",
+        "IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks va Mohs — Farg'ona va vodiy uchun zamonaviy dermatologiya va kosmetologiya.",
       viewServices: "Xizmatlarni ko'rish",
       statPatients: 'Baxtli bemorlar',
       statDoctors: 'Mutaxassis shifokorlar',
@@ -70,11 +70,11 @@ function getHeroCopy(locale: Locale) {
   }
   if (locale === 'ru') {
     return {
-      badge: 'Премиальная дерматологическая клиника',
-      titleLead: 'Здоровая кожа —',
-      titleAccent: 'красивое будущее',
+      badge: 'Дерматологическая клиника — Фергана',
+      titleLead: 'Дерматология Фергана |',
+      titleAccent: 'Radeski Skin Clinic',
       description:
-        'Современная дерматология и лазерные технологии для лечения кожных заболеваний, эстетических проблем и восстановления естественной красоты.',
+        'IPL, лазерная эпиляция, дерматоскопия, фототерапия, ботокс и Mohs — современная дерматология и косметология для Ферганы и долины.',
       viewServices: 'Посмотреть услуги',
       statPatients: 'Довольных пациентов',
       statDoctors: 'Специалистов',
@@ -83,11 +83,11 @@ function getHeroCopy(locale: Locale) {
     };
   }
   return {
-    badge: 'Premium dermatology clinic',
-    titleLead: 'Healthy skin —',
-    titleAccent: 'a beautiful future',
+    badge: 'Dermatology clinic — Fergana',
+    titleLead: 'Dermatology Fergana |',
+    titleAccent: 'Radeski Skin Clinic',
     description:
-      'Modern dermatology and laser technologies to treat skin conditions, address aesthetic concerns and restore natural beauty.',
+      'IPL, laser hair removal, dermatoscopy, phototherapy, Botox and Mohs — modern dermatology and cosmetology in Fergana Valley.',
     viewServices: 'View services',
     statPatients: 'Happy patients',
     statDoctors: 'Specialist doctors',

@@ -85,6 +85,11 @@ import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
 import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
+import {
+  buildArticleSeoTitle,
+  buildServiceSeoTitle,
+  getTabSeo,
+} from './seo/pageMeta';
 
 export default function App() {
   return (
@@ -216,17 +221,25 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
       "name": "Radeski Skin & Aesthetic Clinic",
-      "alternateName": "Radeski Skin Clinic",
-      "url": "https://radeski.uz",
+      "alternateName": ["Radeski Skin Clinic", "Radeski", "Радески"],
+      "url": "https://radeski.uz/uz",
       "logo": `${window.location.origin}/gallery/logo.webp`,
-      "image": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1920",
+      "image": `${window.location.origin}/gallery/logo.webp`,
       "telephone": "+998732007373",
       "priceRange": "$$",
-      "medicalSpecialty": ["Dermatology", "Cosmetology", "Oncology"],
+      "inLanguage": ["uz", "ru", "en"],
+      "medicalSpecialty": ["Dermatology", "CosmeticSurgery", "Oncology"],
+      "description":
+        locale === 'uz'
+          ? "Farg'onadagi dermatologiya va kosmetologiya klinikasi: IPL, lazer, fototerapiya, dermatoskopiya."
+          : locale === 'ru'
+            ? "Клиника дерматологии и косметологии в Фергане: IPL, лазер, фототерапия, дерматоскопия."
+            : "Dermatology and cosmetology clinic in Fergana: IPL, laser, phototherapy, dermatoscopy.",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "O'zbekiston Ovozi ko'chasi, 1A-bino",
-        "addressLocality": "Fergana",
+        "addressLocality": "Farg'ona",
+        "addressRegion": "Farg'ona",
         "addressCountry": "UZ"
       },
       "geo": {
@@ -244,7 +257,12 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
         "reviewCount": "150"
-      }
+      },
+      "sameAs": [
+        "https://radeski.uz/uz",
+        "https://radeski.uz/ru",
+        "https://radeski.uz/en"
+      ]
     };
 
     // 3. Dynamically generate an array of 'FAQPage' schema structures based on Service Categories and current locale
@@ -293,222 +311,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     script.innerHTML = JSON.stringify(schemaData);
     document.head.appendChild(script);
 
-    // 6. Extensive route-based tab and locale SEO optimizations
-    const TAB_SEO: Record<string, Record<string, { title: string; desc: string; keywords: string }>> = {
-      uz: {
-        home: {
-          title: "Radeski Skin & Aesthetic Clinic",
-          desc: "Radeski dermatologiya va estetika klinikasi Farg'onada IPL, dermatoskopiya va Mohs mikrografik jarrohligi kabi zamonaviy usullar va malakali tibbiyot xodimlari bilan xizmat ko'rsatadi.",
-          keywords: "Radeski, dermatologiya, kosmetologiya Farg'ona, dermatoskopiya, botoks, IPL, lazer epilyatsiyasi, Mohs operatsiyasi, psoriaz, o'sma"
-        },
-        about: {
-          title: "Muntazam Litsenziyalangan Shifokorlar & Akkreditatsiya | Radeski Clinic",
-          desc: "Klinika tarixi, akkreditatsiyalarimiz, shifokorlarimizning litsenziya va ilmiy ko'rsatkichlari. Germaniya, Italiya va AQShning eng so'nggi va xavfsiz apparat va texnologiyalari.",
-          keywords: "Klinika haqida, Radeski tarixi, shifokor litsenziyalari, tibbiy akkreditatsiya, steril xona, tibbiy amaliyot yillari"
-        },
-        services: {
-          title: "12 ta Tibbiy Xizmatlar & Dermato-Onkologiya | Radeski Clinic",
-          desc: "Klinikamizda 12 ta ixtisoslashgan dermatologiya, kosmetologiya, dermato-onkologiya, trixologiya va mikrografik jarrohlik yo'nalishlarida samarali xizmatlar taqdim etiladi.",
-          keywords: "Dermatologiya xizmatlari, kosmetologik muolajalar, botoks inyeksiyalari, plazmoterapiya, akne davolash, dermatoskopiya"
-        },
-        doctors: {
-          title: "Malakali Mutaxassislar & Shifokorlar Reestri | Radeski Clinic",
-          desc: "Ashurov Dilshod Davlatovich boshchiligidagi malakali dermatovenerolog, dermatoonkolog, kosmetolog va lazer terapevtlari shifokorlik reestri va ularning tajribasi.",
-          keywords: "Radeski shifokorlari, Ashurov Dilshod, Kodirova Dilafruzxon, dermatolog Farg'ona, trixolog, dermatoonkolog, tajribali shifokorlar"
-        },
-        prices: {
-          title: "Shaffof Xizmatlar Narxlari (Preyskurant) | Radeski Clinic",
-          desc: "Radeski klinikasidagi dermatologik konsultatsiyalar, IPL Forever Young, biopsiya va barcha dermatologik muolajalarning shaffof va qulay narxlari.",
-          keywords: "Dermatolog narxi, kosmetologiya narxlari, IPL narxi Farg'ona, botoks narxlari, xizmat preyskuranti, maslahat narxi"
-        },
-        articles: {
-          title: "Teri Sog'lig'i Tavsiyalari, Psoriaz & Tibbiy Maqolalar | Radeski Clinic",
-          desc: "Teri parvarishi, akne, psoriaz, o'smalarni erta aniqlash va teri sog'ligini saqlash bo'yicha shifokorlarimiz tomonidan yozilgan ilmiy va ommabop maqolalar.",
-          keywords: "Tibbiy maqolalar, teri parvarishi, akne davolash maslahatlari, psoriazni nazorat qilish, trixologiya maqolalari"
-        },
-        videos: {
-          title: "Klinika Videolari & Tibbiy Xizmatlar | Radeski Clinic",
-          desc: "Radeski klinikasidagi IPL terapiya va zamonaviy dermatologiya xizmatlari haqida video materiallar.",
-          keywords: "Radeski video, dermatologiya videosi, IPL terapiya, dermatoskopiya, klinika tanishuv"
-        },
-        branches: {
-          title: "Filiallar | Radeski Clinic",
-          desc: "Radeski bosh klinikasi — Farg'ona shahri manzili, telefon va ish vaqti.",
-          keywords: "Radeski filial, Farg'ona klinika, dermatolog Farg'ona, klinika manzili"
-        },
-        results: {
-          title: "Davolash Natijalari — Oldin va Keyin | Radeski Clinic",
-          desc: "Akne, pigmentatsiya, kuperoz va trixologiya bo'yicha Radeski klinikasi davolash natijalari galereyasi.",
-          keywords: "davolash natijalari, oldin keyin, akne natija, IPL natija, teri davolash"
-        },
-        technologies: {
-          title: "Zamonaviy Texnologiyalar — Sciton IPL, Mohs, Excimer | Radeski",
-          desc: "Radeski klinikasidagi Sciton IPL Forever Young, Mohs jarrohligi, Excimer va UVB fototerapiya haqida batafsil.",
-          keywords: "Sciton IPL, Mohs, Excimer, UVB fototerapiya, zamonaviy dermatologiya Farg'ona"
-        },
-        'clinic-equipment': {
-          title: "Klinika Apparatlari — Daavlin, InMode, Lutronic | Radeski",
-          desc: "Radeski klinikasi apparatlari: plazmoforez, Daavlin NeoLux, M series, Aquex, IPL InMode, Derma V va Hollywood Spectra.",
-          keywords: "klinika apparatlari, Daavlin NeoLux, IPL InMode, Derma V, Hollywood Spectra, plazmoforez, fototerapiya Farg'ona"
-        },
-        terms: {
-          title: "Foydalanish shartlari | Radeski Skin & Aesthetic Clinic",
-          desc: "Radeski klinikasi veb-saytidan foydalanish qoidalari, foydalanuvchi huquqlari va majburiyatlari, onlayn qabul va intellektual mulk bo'yicha shartlar.",
-          keywords: "Foydalanish shartlari, Radeski, veb-sayt qoidalari, foydalanuvchi shartnomasi"
-        },
-        privacy: {
-          title: "Maxfiylik siyosati | Radeski Skin & Aesthetic Clinic",
-          desc: "Shaxsiy ma'lumotlaringizni qanday to'plash, saqlash va himoya qilishimiz haqida Radeski klinikasi maxfiylik siyosati.",
-          keywords: "Maxfiylik siyosati, shaxsiy ma'lumotlar, Radeski, ma'lumotlarni himoya qilish"
-        }
-      },
-      ru: {
-        home: {
-          title: "Главная - Ключ к здоровой и красивой коже | Radeski Skin & Aesthetic Clinic",
-          desc: "Клиника дерматологии и эстетики Radeski предоставляет высокоэффективные услуги в Фергане, используя современное оборудование IPL, дерматоскопию и хирургию Mohs.",
-          keywords: "Радески, дерматолог Фергана, косметология, лазерная эпиляция, ботокс Фергана, дерматоскопия, витилиго, операции Моса"
-        },
-        about: {
-          title: "О клинике, Аккредитация & Лицензии Врачей | Radeski Clinic",
-          desc: "История клиники Radeski, аккредитация и лицензии. Сведения об образовании, научных трудах и практике наших дерматоонкологов и специалистов.",
-          keywords: "О клинике Радески, лицензия врача, аккредитация клиники, стерилизация инструментов, отзывы пациентов"
-        },
-        services: {
-          title: "12 Медицинских Направлений & Лечение Кожи | Radeski Clinic",
-          desc: "Всесторонние услуги в сфере клинической дерматовенерологии, эстетической косметологии, трихологии, дерматоонкологии и хирургии кожи по методике Mohs в Фергане.",
-          keywords: "Услуги косметолога, дерматология цены, удаление родинок, трихоскопия волос, фотоомоложение кожи лица, IPL"
-        },
-        doctors: {
-          title: "Наши Врачи, Научные Степни & Биографии | Radeski Clinic",
-          desc: "Познакомьтесь с командой врачей во главе с Ашуровым Дильшодом Давлатовичем. Профессиональные биографии, стажировки в Германии и РФ, практика.",
-          keywords: "Врачи дерматологи Фергана, Ашуров Дильшод, Кодирова Дилафрузхон, трихолог, онкодерматолог, резюме врача"
-        },
-        prices: {
-          title: "Цены на Услуги и Процедуры (Прейскурант) | Radeski Clinic",
-          desc: "Прозрачный прейскурант медицинских и косметологических процедур в нашей клинике. Стоимость консультаций специалистов, инъекций и аппаратной терапии.",
-          keywords: "Сделать IPL цена, сколько стоит ботокс в Фергане, прейскурант клиники, консультация дерматолога цена"
-        },
-        articles: {
-          title: "Медицинский Блог, Советы по Уходу & Статьи | Radeski Clinic",
-          desc: "Научно-популярные статьи и практические рекомендации от наших практикующих врачей по дерматологии, уходу за проблемной кожей и трихологии.",
-          keywords: "Полезные статьи о коже, как лечить акне, уход за сухой кожей, советы трихолога, профилактика меланомы"
-        },
-        videos: {
-          title: "Видео о клинике и процедурах | Radeski Clinic",
-          desc: "Видеоматериалы об IPL-терапии и современных дерматологических услугах клиники Radeski.",
-          keywords: "видео Radeski, дерматология видео, IPL терапия, дерматоскопия, о клинике"
-        },
-        branches: {
-          title: "Филиал | Radeski Clinic",
-          desc: "Главная клиника Radeski в Фергане — адрес, телефон и график работы.",
-          keywords: "филиал Radeski, клиника Фергана, дерматолог Фергана, адрес клиники"
-        },
-        results: {
-          title: "Результаты лечения — до и после | Radeski Clinic",
-          desc: "Галерея результатов лечения акне, пигментации, купероза и трихологии в клинике Radeski.",
-          keywords: "результаты лечения, до и после, акне результат, IPL результат"
-        },
-        technologies: {
-          title: "Современные технологии — Sciton IPL, Mohs, Excimer | Radeski",
-          desc: "Sciton IPL Forever Young, хирургия Mohs, эксимерный лазер и UVB-фототерапия в клинике Radeski.",
-          keywords: "Sciton IPL, Mohs, эксимер, UVB фототерапия, современная дерматология Фергана"
-        },
-        'clinic-equipment': {
-          title: "Аппараты клиники — Daavlin, InMode, Lutronic | Radeski",
-          desc: "Аппараты клиники Radeski: плазмофорез, Daavlin NeoLux, M series, Aquex, IPL InMode, Derma V и Hollywood Spectra.",
-          keywords: "аппараты клиники, Daavlin NeoLux, IPL InMode, Derma V, Hollywood Spectra, плазмофорез, фототерапия Фергана"
-        },
-        terms: {
-          title: "Пользовательское соглашение | Radeski Skin & Aesthetic Clinic",
-          desc: "Правила использования официального сайта Radeski: права и обязанности пользователей, онлайн-запись и интеллектуальная собственность.",
-          keywords: "Пользовательское соглашение, Радески, правила сайта, условия использования"
-        },
-        privacy: {
-          title: "Политика конфиденциальности | Radeski Skin & Aesthetic Clinic",
-          desc: "Как клиника Radeski собирает, хранит и защищает ваши персональные данные при использовании сайта radeski.uz.",
-          keywords: "Политика конфиденциальности, персональные данные, Радески, защита информации"
-        }
-      },
-      en: {
-        home: {
-          title: "Home - The Key to Healthy and Beautiful Skin | Radeski Skin & Aesthetic Clinic",
-          desc: "Radeski Dermatology and Aesthetic Clinic serves the Fergana Valley with medical expertise and state-of-the-art diagnostic IPL and clinical dermatoscopy.",
-          keywords: "Radeski clinic, dermatologist Fergana, aesthetic skincare, laser hair removal, Botox, Sciton IPL, Mohs surgery, mole check"
-        },
-        about: {
-          title: "About Us, Clinical Credentials & Degrees | Radeski Clinic",
-          desc: "Learn about Radeski Clinic's history, active clinical registrations, certifications, and medical licensing indicators of our primary physicians.",
-          keywords: "About Radeski, clinical licensing, medical accreditation, sterilization box, customer ratings, physician qualifications"
-        },
-        services: {
-          title: "Our 12 Clinical Services & Therapy Segments | Radeski Clinic",
-          desc: "Explore our 12 specialized clinical departments covering clinical dermatology, non-invasive hardware cosmetology, injectables, hair treatment, and biopsies.",
-          keywords: "Dermatological services, acne removal, injectable solutions, IPL laser, clinical trichology, skin pathology"
-        },
-        doctors: {
-          title: "Our Specialists, Physicians & Surgeons Registry | Radeski",
-          desc: "Our medical crew is headed by Dr. Dilshod Davlatovich Ashurov. Internationally certified, peer-reviewed researchers and expert surgeons.",
-          keywords: "Dermatologists profiles, Dr. Dilshod Ashurov, Dr. Dilafruz Kodirova, trichologist profile, oncodermatologist, medical staff"
-        },
-        prices: {
-          title: "Service Fee Guide & Cost Estimator (Pricelist) | Radeski Clinic",
-          desc: "Transparent price schedule for dermatological checkups, Sciton IPL sessions, Mohs surgeries, trichoscopy, and specialized aesthetic procedures.",
-          keywords: "Dermatologist fee, facial IPL price, Botox cost in Fergana, biopsy pricing, clinic rates, service fees"
-        },
-        articles: {
-          title: "Skin Advice, Pathology Blogs & Board Articles | Radeski Clinic",
-          desc: "Professional health advises and skin care guidelines authored by our clinical team concerning acne, psoriasis, aging defense, and trichology.",
-          keywords: "Medical articles, dermatology blog, psoriasis management, skin moisture tips, hair care guidelines"
-        },
-        videos: {
-          title: "Clinic Videos & Procedures | Radeski Clinic",
-          desc: "Video tours of IPL therapy and modern dermatology services at Radeski Clinic.",
-          keywords: "Radeski videos, dermatology video, IPL therapy, dermatoscopy, clinic tour"
-        },
-        branches: {
-          title: "Branch | Radeski Clinic",
-          desc: "Radeski main clinic in Fergana — address, phone, and opening hours.",
-          keywords: "Radeski branch, Fergana clinic, Fergana dermatology, clinic address"
-        },
-        results: {
-          title: "Treatment Results — Before & After | Radeski Clinic",
-          desc: "Gallery of acne, pigmentation, rosacea, and trichology treatment outcomes at Radeski Clinic.",
-          keywords: "treatment results, before after, acne results, IPL outcomes"
-        },
-        technologies: {
-          title: "Modern Technologies — Sciton IPL, Mohs, Excimer | Radeski",
-          desc: "Sciton IPL Forever Young, Mohs surgery, Excimer laser and UVB phototherapy at Radeski Clinic.",
-          keywords: "Sciton IPL, Mohs, Excimer, UVB phototherapy, modern dermatology Fergana"
-        },
-        'clinic-equipment': {
-          title: "Clinic Equipment — Daavlin, InMode, Lutronic | Radeski",
-          desc: "Radeski Clinic devices: plasmapheresis, Daavlin NeoLux, M series, Aquex, IPL InMode, Derma V and Hollywood Spectra.",
-          keywords: "clinic equipment, Daavlin NeoLux, IPL InMode, Derma V, Hollywood Spectra, plasmapheresis, phototherapy Fergana"
-        },
-        terms: {
-          title: "Terms of Use | Radeski Skin & Aesthetic Clinic",
-          desc: "Rules for using the Radeski clinic website, including user obligations, online appointments, and intellectual property terms.",
-          keywords: "Terms of use, Radeski, website rules, user agreement"
-        },
-        privacy: {
-          title: "Privacy Policy | Radeski Skin & Aesthetic Clinic",
-          desc: "How Radeski Skin & Aesthetic Clinic collects, stores, and protects your personal data when you use radeski.uz.",
-          keywords: "Privacy policy, personal data, Radeski, data protection"
-        }
-      }
-    };
-
-    const activeSEO = (TAB_SEO[locale] && TAB_SEO[locale][currentPage])
-      || (TAB_SEO['uz'] && TAB_SEO['uz']['home']);
+    // 6. Route + locale SEO (language-specific titles for Google)
+    const activeSEO = getTabSeo(locale, currentPage);
 
     const seoTitle = activeArticlePreview
-      ? `${activeArticlePreview.title[locale]} | Radeski Clinic`
+      ? buildArticleSeoTitle(activeArticlePreview.title[locale], locale)
       : activeDoctorPreview
-        ? `${activeDoctorPreview.name[locale]} | Radeski Clinic`
+        ? buildServiceSeoTitle(activeDoctorPreview.name[locale], locale)
         : activeServiceSub
-          ? `${activeServiceSub.name[locale]} | Radeski Clinic`
+          ? buildServiceSeoTitle(activeServiceSub.name[locale], locale)
           : activeServiceCategory
-            ? `${activeServiceCategory.title[locale]} | Radeski Clinic`
+            ? buildServiceSeoTitle(activeServiceCategory.title[locale], locale)
             : activeSEO.title;
     const seoDesc = activeArticlePreview
       ? activeArticlePreview.summary[locale]
