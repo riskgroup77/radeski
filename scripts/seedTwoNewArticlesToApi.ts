@@ -22,6 +22,7 @@ import { ACNE_ARTICLE } from '../src/data/articles/acneArticle';
 import { POST_ACNE_ARTICLE } from '../src/data/articles/postAcneArticle';
 import { ROSACEA_ARTICLE } from '../src/data/articles/rosaceaArticle';
 import { PRP_HAIR_ARTICLE } from '../src/data/articles/prpHairArticle';
+import { PRP_LAB_TESTS_ARTICLE } from '../src/data/articles/prpLabTestsArticle';
 import { PLASMAPHERESIS_ARTICLE } from '../src/data/articles/plasmapheresisArticle';
 import { enrichArticle } from '../src/utils/enrichArticles';
 import {
@@ -38,6 +39,7 @@ const TARGETS = [
   POST_ACNE_ARTICLE,
   ROSACEA_ARTICLE,
   PRP_HAIR_ARTICLE,
+  PRP_LAB_TESTS_ARTICLE,
   PLASMAPHERESIS_ARTICLE,
   DEKA_CO2_ARTICLE,
   DEKA_MOVEO_ARTICLE,

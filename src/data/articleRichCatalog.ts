@@ -3,6 +3,7 @@ import { ACNE_ARTICLE_CATALOG } from './articles/acneArticle';
 import { POST_ACNE_ARTICLE_CATALOG } from './articles/postAcneArticle';
 import { ROSACEA_ARTICLE_CATALOG } from './articles/rosaceaArticle';
 import { PRP_HAIR_ARTICLE_CATALOG } from './articles/prpHairArticle';
+import { PRP_LAB_TESTS_ARTICLE_CATALOG } from './articles/prpLabTestsArticle';
 import { PLASMAPHERESIS_ARTICLE_CATALOG } from './articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE_CATALOG } from './articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE_CATALOG } from './articles/dekaMoveoEpilationArticle';
@@ -122,15 +123,25 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
   fungal: ['zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
   'mole-screening': ['nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
+  'prp-lab-tests': [
+    'prp-terapiya-oldidan-tahlillar',
+    'plazmotorapiya-oldidan-tahlillar',
+    'analizy-pered-prp',
+    'analizy pered prp',
+    'blood-tests-before-prp',
+    'какие анализы нужно сдать перед prp',
+    'qanday tahlillar topshirish kerak',
+    'ферритин перед prp',
+    'ferritin before prp',
+  ],
   'prp-hair': [
     'plazmotorapiya-soch',
-    'plazmotorapiya',
-    'плазмотерап',
-    'prp',
-    'platelet rich plasma',
     'soch uchun plazmo',
-    'трихолог',
-    'trixolog',
+    'плазмотерапия для волос',
+    'prp therapy for hair',
+    'platelet rich plasma hair',
+    'трихолог prp',
+    'trixolog prp',
   ],
   plasmapheresis: [
     'plazmaferez',
@@ -798,6 +809,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'post-acne': POST_ACNE_ARTICLE_CATALOG,
   rosacea: ROSACEA_ARTICLE_CATALOG,
   'prp-hair': PRP_HAIR_ARTICLE_CATALOG,
+  'prp-lab-tests': PRP_LAB_TESTS_ARTICLE_CATALOG,
   plasmapheresis: PLASMAPHERESIS_ARTICLE_CATALOG,
   'deka-co2': DEKA_CO2_ARTICLE_CATALOG,
   'deka-moveo': DEKA_MOVEO_ARTICLE_CATALOG,

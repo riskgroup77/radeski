@@ -3,6 +3,7 @@ import { ACNE_ARTICLE } from './data/articles/acneArticle';
 import { POST_ACNE_ARTICLE } from './data/articles/postAcneArticle';
 import { ROSACEA_ARTICLE } from './data/articles/rosaceaArticle';
 import { PRP_HAIR_ARTICLE } from './data/articles/prpHairArticle';
+import { PRP_LAB_TESTS_ARTICLE } from './data/articles/prpLabTestsArticle';
 import { PLASMAPHERESIS_ARTICLE } from './data/articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE } from './data/articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE } from './data/articles/dekaMoveoEpilationArticle';
@@ -892,6 +893,7 @@ export const ARTICLES: Article[] = [
   POST_ACNE_ARTICLE,
   ROSACEA_ARTICLE,
   PRP_HAIR_ARTICLE,
+  PRP_LAB_TESTS_ARTICLE,
   PLASMAPHERESIS_ARTICLE,
   DEKA_CO2_ARTICLE,
   DEKA_MOVEO_ARTICLE,

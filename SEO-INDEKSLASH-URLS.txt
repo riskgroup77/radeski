@@ -1,0 +1,131 @@
+================================================================================
+RADESKI.UZ — Google Search Console indekslash URL’lari
+================================================================================
+
+QANDAY ISHLATILADI
+1) Search Console oching: https://search.google.com/search-console
+2) Yuqoridagi "Проверка URL" qatoriga quyidagi manzillardan BIRINI yozing
+3) Enter bosing
+4) Agar "URL нет в индексе Google" (NET) yoki "есть" (BOR) chiqsa ham —
+   "Страница изменена?" yonidagi ЗАПРОСИТЬ ИНДЕКСИРОВАНИЕ ni bosing
+5) Kuniga taxminan 10–15 ta (ortiqcha takrorlamang)
+6) 3–7 kundan keyin qayta tekshiring: NET → БОР bo‘lishi mumkin
+
+"ЕСТЬ" (BOR) nima demak?
+  Google allaqachon biladi. Zapros = qayta skaner (title/SEO yangilanishi uchun).
+
+"НЕТ" (NET) nima demak?
+  Hali indeksda yo‘q. Zapros = navbatga qo‘yildi. Keyin Google o‘zi kiradi.
+  Search’da darhol chiqmaydi — odatda bir necha kun.
+
+QACHON SEARCH’DA KO‘RINADI?
+  Indeksga tushgach (BOR). Reyting alohida — kunlar/haftalar.
+  Qayta zapros tezlashtirmaydi.
+
+================================================================================
+A) BIRINCHI NAVBAT (siz allaqachon qilgansiz — 3–7 kundan keyin tekshiring)
+================================================================================
+https://radeski.uz/uz/qoqon
+https://radeski.uz/uz/services/dermatologiya
+https://radeski.uz/uz/services/apparatnaya-kosmetologiya
+https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh
+https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand
+
+================================================================================
+B) KEYINGI 10 TA (shu hafta)
+================================================================================
+https://radeski.uz/uz
+https://radeski.uz/uz/services
+https://radeski.uz/uz/services/dermatologiya/fototerapiya
+https://radeski.uz/uz/services/lazernaya-epilyaciya
+https://radeski.uz/uz/services/lazernaya-epilyaciya/alex-lazer
+https://radeski.uz/uz/services/apparatnaya-kosmetologiya/ipl-inmode
+https://radeski.uz/uz/branches
+https://radeski.uz/uz/doctors
+https://radeski.uz/uz/articles
+https://radeski.uz/uz/prices
+
+================================================================================
+C) MAQOLALAR (har kuni 3–5 tadan)
+================================================================================
+https://radeski.uz/uz/articles/art-akne
+https://radeski.uz/uz/articles/art-postakne
+https://radeski.uz/uz/articles/art-vitiligo-daavlin
+https://radeski.uz/uz/articles/art-ipl-terapiya
+https://radeski.uz/uz/articles/art-rozacea-ipl
+https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka
+https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik
+https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp
+https://radeski.uz/uz/articles/art-prp-terapiya-oldidan-tahlillar
+https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari
+https://radeski.uz/uz/articles/art-hair-transplant-contraindications
+https://radeski.uz/uz/articles/art-co2-lazer-deka
+
+================================================================================
+D) BOSHQA MUHIM SAHIFALAR
+================================================================================
+https://radeski.uz/uz/about
+https://radeski.uz/uz/videos
+https://radeski.uz/uz/results
+https://radeski.uz/uz/technologies
+https://radeski.uz/uz/clinic-equipment
+https://radeski.uz/uz/services/in-ekcionnaya-kosmetologiya
+https://radeski.uz/uz/services/trihologiya-centr-lechenie-volos
+https://radeski.uz/uz/services/dermatoonkologiya
+https://radeski.uz/uz/services/hirurgicheskaya-dermatologiya
+
+================================================================================
+E) RUSCHA (ixtiyoriy — o‘zbekcha tugagach)
+================================================================================
+https://radeski.uz/ru
+https://radeski.uz/ru/qoqon
+https://radeski.uz/ru/services/dermatologiya
+https://radeski.uz/ru/services/apparatnaya-kosmetologiya
+https://radeski.uz/ru/articles/art-pryshchi-u-vzroslykh
+https://radeski.uz/ru/articles/art-psoriasis-daavlin-kokand
+
+================================================================================
+faqat URL’lar (nusxa uchun, izohsiz)
+================================================================================
+https://radeski.uz/uz/qoqon
+https://radeski.uz/uz/services/dermatologiya
+https://radeski.uz/uz/services/apparatnaya-kosmetologiya
+https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh
+https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand
+https://radeski.uz/uz
+https://radeski.uz/uz/services
+https://radeski.uz/uz/services/dermatologiya/fototerapiya
+https://radeski.uz/uz/services/lazernaya-epilyaciya
+https://radeski.uz/uz/services/lazernaya-epilyaciya/alex-lazer
+https://radeski.uz/uz/services/apparatnaya-kosmetologiya/ipl-inmode
+https://radeski.uz/uz/branches
+https://radeski.uz/uz/doctors
+https://radeski.uz/uz/articles
+https://radeski.uz/uz/prices
+https://radeski.uz/uz/articles/art-akne
+https://radeski.uz/uz/articles/art-postakne
+https://radeski.uz/uz/articles/art-vitiligo-daavlin
+https://radeski.uz/uz/articles/art-ipl-terapiya
+https://radeski.uz/uz/articles/art-rozacea-ipl
+https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka
+https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik
+https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp
+https://radeski.uz/uz/articles/art-prp-terapiya-oldidan-tahlillar
+https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari
+https://radeski.uz/uz/articles/art-hair-transplant-contraindications
+https://radeski.uz/uz/articles/art-co2-lazer-deka
+https://radeski.uz/uz/about
+https://radeski.uz/uz/videos
+https://radeski.uz/uz/results
+https://radeski.uz/uz/technologies
+https://radeski.uz/uz/clinic-equipment
+https://radeski.uz/uz/services/in-ekcionnaya-kosmetologiya
+https://radeski.uz/uz/services/trihologiya-centr-lechenie-volos
+https://radeski.uz/uz/services/dermatoonkologiya
+https://radeski.uz/uz/services/hirurgicheskaya-dermatologiya
+https://radeski.uz/ru
+https://radeski.uz/ru/qoqon
+https://radeski.uz/ru/services/dermatologiya
+https://radeski.uz/ru/services/apparatnaya-kosmetologiya
+https://radeski.uz/ru/articles/art-pryshchi-u-vzroslykh
+https://radeski.uz/ru/articles/art-psoriasis-daavlin-kokand
