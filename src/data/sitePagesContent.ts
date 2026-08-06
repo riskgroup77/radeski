@@ -664,6 +664,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '0:48',
     category: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
   },
+  {
+    id: 'clinic-video-40',
+    sortOrder: 1,
+    title: {
+      uz: 'Klinikamizda ish kunlari qanday o‘tishini ko‘rsatamiz😉',
+      ru: 'Показываем, как проходит рабочий день в нашей клинике😉',
+      en: 'A look inside a working day at our clinic😉',
+    },
+    description: {
+      uz: 'Radeski Skin Clinic jamoasining ish kuni: qabul, diagnostika va bemorlarga e’tibor. Klinikamiz muhitini video orqali yaqindan ko‘ring.',
+      ru: 'Рабочий день команды Radeski Skin Clinic: приём, диагностика и забота о пациентах. Короткое видео о атмосфере и ритме нашей клиники.',
+      en: 'A day with the Radeski Skin Clinic team: consultations, diagnostics, and patient care. Watch a short glimpse of our clinic’s everyday pace.',
+    },
+    src: '/videos/40.mp4',
+    duration: '2:05',
+    category: { uz: 'Klinika hayoti', ru: 'Жизнь клиники', en: 'Clinic life' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [

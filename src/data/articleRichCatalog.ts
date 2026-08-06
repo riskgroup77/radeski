@@ -4,6 +4,7 @@ import { POST_ACNE_ARTICLE_CATALOG } from './articles/postAcneArticle';
 import { ROSACEA_ARTICLE_CATALOG } from './articles/rosaceaArticle';
 import { PRP_HAIR_ARTICLE_CATALOG } from './articles/prpHairArticle';
 import { PRP_LAB_TESTS_ARTICLE_CATALOG } from './articles/prpLabTestsArticle';
+import { TRICHOLOGIST_TRICHOSCOPY_ARTICLE_CATALOG } from './articles/trichologistTrichoscopyArticle';
 import { PLASMAPHERESIS_ARTICLE_CATALOG } from './articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE_CATALOG } from './articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE_CATALOG } from './articles/dekaMoveoEpilationArticle';
@@ -123,6 +124,16 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
   fungal: ['zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
   'mole-screening': ['nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
+  'trichologist-trichoscopy': [
+    'trixolog-va-trixoskopiya',
+    'trixolog-trixoskopiya',
+    'врач-трихолог и трихоскопия',
+    'trichologist and trichoscopy',
+    'трихоскопия',
+    'trixoskopiya',
+    'компьютерная трихоскопия',
+    'diagnosis of hair-loss causes',
+  ],
   'prp-lab-tests': [
     'prp-terapiya-oldidan-tahlillar',
     'plazmotorapiya-oldidan-tahlillar',
@@ -810,6 +821,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   rosacea: ROSACEA_ARTICLE_CATALOG,
   'prp-hair': PRP_HAIR_ARTICLE_CATALOG,
   'prp-lab-tests': PRP_LAB_TESTS_ARTICLE_CATALOG,
+  'trichologist-trichoscopy': TRICHOLOGIST_TRICHOSCOPY_ARTICLE_CATALOG,
   plasmapheresis: PLASMAPHERESIS_ARTICLE_CATALOG,
   'deka-co2': DEKA_CO2_ARTICLE_CATALOG,
   'deka-moveo': DEKA_MOVEO_ARTICLE_CATALOG,
