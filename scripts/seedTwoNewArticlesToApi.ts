@@ -24,6 +24,7 @@ import { ROSACEA_ARTICLE } from '../src/data/articles/rosaceaArticle';
 import { PRP_HAIR_ARTICLE } from '../src/data/articles/prpHairArticle';
 import { PRP_LAB_TESTS_ARTICLE } from '../src/data/articles/prpLabTestsArticle';
 import { TRICHOLOGIST_TRICHOSCOPY_ARTICLE } from '../src/data/articles/trichologistTrichoscopyArticle';
+import { TONGUE_SCC_ARTICLE } from '../src/data/articles/tongueSccArticle';
 import { PLASMAPHERESIS_ARTICLE } from '../src/data/articles/plasmapheresisArticle';
 import { enrichArticle } from '../src/utils/enrichArticles';
 import {
