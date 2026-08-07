@@ -681,6 +681,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '2:05',
     category: { uz: 'Klinika hayoti', ru: 'Жизнь клиники', en: 'Clinic life' },
   },
+  {
+    id: 'clinic-video-41',
+    sortOrder: 1,
+    title: {
+      uz: '🫧 Radeski Skin Clinic’da go‘zallik oyligi!',
+      ru: '🫧 Месяц красоты в Radeski Skin Clinic!',
+      en: '🫧 Beauty Month at Radeski Skin Clinic!',
+    },
+    description: {
+      uz: 'Bir qator kosmetologik muolajalar uchun aksiya: PRP + yuz tozalash — 600 000 so‘m; mezoterapiya + yuz tozalash — 700 000 so‘m; piling + yuz tozalash — 700 000 so‘m; karbonli piling + yuz tozalash — 800 000 so‘m.',
+      ru: 'Специальные пакеты процедур: PRP + чистка лица — 600 000 сум; мезотерапия + чистка лица — 700 000 сум; пилинг + чистка лица — 700 000 сум; карбоновый пилинг + чистка лица — 800 000 сум.',
+      en: 'Special treatment packages: PRP + facial cleansing — 600,000 UZS; mesotherapy + facial cleansing — 700,000 UZS; peel + facial cleansing — 700,000 UZS; carbon peel + facial cleansing — 800,000 UZS.',
+    },
+    src: '/videos/41.mp4',
+    duration: '0:40',
+    category: { uz: 'Aksiya', ru: 'Акция', en: 'Promo' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [
