@@ -19,6 +19,7 @@ import type {
 import {
   CLINIC_BRANCHES,
   CLINIC_PARTNERS,
+  CLINIC_VIDEOS,
   CUSTOMER_REVIEWS,
   TREATMENT_RESULTS,
 } from '../data/sitePagesContent';
@@ -143,7 +144,9 @@ export function useCmsData(): CmsDataState {
         : TREATMENT_RESULTS,
     );
     setVideos(
-      videosRes.length > 0 ? mapApiClinicVideos(videosRes.map(mapClinicVideoFromApi)) : [],
+      videosRes.length > 0
+        ? mapApiClinicVideos(videosRes.map(mapClinicVideoFromApi))
+        : mapApiClinicVideos(CLINIC_VIDEOS),
     );
     setClinicRatings(
       ratingsRes.length > 0 ? ratingsRes.map(mapClinicRatingFromApi) : mapLegacyRatings(),

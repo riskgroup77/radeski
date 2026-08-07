@@ -84,6 +84,7 @@ import { getCatalogPrices, enrichPrices } from '../utils/enrichPrices';
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
+import { mapApiClinicVideos } from '../utils/clinicVideos';
 import { getNextSortOrderInCategory } from '../utils/priceSortOrderStorage';
 import { isApiRecordId } from '../utils/apiRecord';
 import { getApiUrl } from '../api/client';
@@ -299,7 +300,7 @@ export default function AdminPanel({
   useEffect(() => {
     if (!isAuthenticated || activeTab !== 'videos') return;
     getAdminVideos()
-      .then((items) => setEditedVideos(items.map(mapClinicVideoFromApi)))
+      .then((items) => setEditedVideos(mapApiClinicVideos(items.map(mapClinicVideoFromApi))))
       .catch((err) => {
         if (!isUnauthorizedError(err)) setEditedVideos([]);
       });
