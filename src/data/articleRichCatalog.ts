@@ -6,6 +6,7 @@ import { PRP_HAIR_ARTICLE_CATALOG } from './articles/prpHairArticle';
 import { PRP_LAB_TESTS_ARTICLE_CATALOG } from './articles/prpLabTestsArticle';
 import { TRICHOLOGIST_TRICHOSCOPY_ARTICLE_CATALOG } from './articles/trichologistTrichoscopyArticle';
 import { TONGUE_SCC_ARTICLE_CATALOG } from './articles/tongueSccArticle';
+import { PENILE_SCC_ARTICLE_CATALOG } from './articles/penileSccArticle';
 import { BASAL_CELL_CARCINOMA_ARTICLE_CATALOG } from './articles/basalCellCarcinomaArticle';
 import { PLASMAPHERESIS_ARTICLE_CATALOG } from './articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE_CATALOG } from './articles/dekaCo2LaserArticle';
@@ -135,6 +136,16 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'basalioma',
     'жемчужная папула',
     'rak teri bazal',
+  ],
+  'penile-scc': [
+    'jinsiy-azo-yassi-hujayrali-rak',
+    'плоскоклеточный рак полового члена',
+    'рак полового члена',
+    'плоскоклеточный рак пениса',
+    'penile squamous cell carcinoma',
+    'penile cancer',
+    'опухоль полового члена',
+    'кейра эритроплазия',
   ],
   'tongue-scc': [
     'til-yassi-hujayrali-rak',
@@ -845,6 +856,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'prp-lab-tests': PRP_LAB_TESTS_ARTICLE_CATALOG,
   'trichologist-trichoscopy': TRICHOLOGIST_TRICHOSCOPY_ARTICLE_CATALOG,
   'tongue-scc': TONGUE_SCC_ARTICLE_CATALOG,
+  'penile-scc': PENILE_SCC_ARTICLE_CATALOG,
   'basal-cell-carcinoma': BASAL_CELL_CARCINOMA_ARTICLE_CATALOG,
   plasmapheresis: PLASMAPHERESIS_ARTICLE_CATALOG,
   'deka-co2': DEKA_CO2_ARTICLE_CATALOG,

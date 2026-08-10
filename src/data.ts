@@ -6,6 +6,7 @@ import { PRP_HAIR_ARTICLE } from './data/articles/prpHairArticle';
 import { PRP_LAB_TESTS_ARTICLE } from './data/articles/prpLabTestsArticle';
 import { TRICHOLOGIST_TRICHOSCOPY_ARTICLE } from './data/articles/trichologistTrichoscopyArticle';
 import { TONGUE_SCC_ARTICLE } from './data/articles/tongueSccArticle';
+import { PENILE_SCC_ARTICLE } from './data/articles/penileSccArticle';
 import { BASAL_CELL_CARCINOMA_ARTICLE } from './data/articles/basalCellCarcinomaArticle';
 import { PLASMAPHERESIS_ARTICLE } from './data/articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE } from './data/articles/dekaCo2LaserArticle';
@@ -899,6 +900,7 @@ export const ARTICLES: Article[] = [
   PRP_LAB_TESTS_ARTICLE,
   TRICHOLOGIST_TRICHOSCOPY_ARTICLE,
   TONGUE_SCC_ARTICLE,
+  PENILE_SCC_ARTICLE,
   BASAL_CELL_CARCINOMA_ARTICLE,
   PLASMAPHERESIS_ARTICLE,
   DEKA_CO2_ARTICLE,
