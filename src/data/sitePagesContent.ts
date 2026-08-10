@@ -173,7 +173,7 @@ export const CLINIC_PARTNERS: ClinicPartner[] = [
 export const CLINIC_VIDEOS: ClinicVideo[] = [
   {
     id: 'clinic-video-1',
-    sortOrder: 31,
+    sortOrder: 33,
     title: {
       uz: 'Janus Pro: kompyuterli yuz tahlili',
       ru: 'Janus Pro: компьютерный анализ лица',
@@ -190,7 +190,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-2',
-    sortOrder: 30,
+    sortOrder: 32,
     title: {
       uz: 'Lazer epilyatsiyasi — qo‘ltiq osti',
       ru: 'Лазерная эпиляция — подмышечная зона',
@@ -207,7 +207,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-3',
-    sortOrder: 29,
+    sortOrder: 31,
     title: {
       uz: 'DEKA SmartXide CO2 lazer muolajasi',
       ru: 'Лазерное лечение DEKA SmartXide CO2',
@@ -224,7 +224,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-4',
-    sortOrder: 28,
+    sortOrder: 30,
     title: {
       uz: 'Lazer epilyatsiyasi jarayoni',
       ru: 'Процесс лазерной эпиляции',
@@ -241,7 +241,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-5',
-    sortOrder: 27,
+    sortOrder: 29,
     title: {
       uz: 'Sosudist lazer va yuz yoshartirish',
       ru: 'Сосудистый лазер и омоложение лица',
@@ -258,7 +258,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-6',
-    sortOrder: 26,
+    sortOrder: 28,
     title: {
       uz: 'Soch to‘kilishi — davolash bosqichlari',
       ru: 'Выпадение волос — этапы лечения',
@@ -275,7 +275,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-7',
-    sortOrder: 25,
+    sortOrder: 27,
     title: {
       uz: 'Bosh terisi qichishishi sabablari',
       ru: 'Причины зуда кожи головы',
@@ -292,7 +292,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-8',
-    sortOrder: 24,
+    sortOrder: 26,
     title: {
       uz: 'Fototerapiya (NB-UVB) kabinasi',
       ru: 'Кабинет фототерапии (NB-UVB)',
@@ -309,7 +309,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-9',
-    sortOrder: 23,
+    sortOrder: 25,
     title: {
       uz: 'Samarasiz teri parvarishi usullari',
       ru: 'Неэффективные методы ухода за кожей',
@@ -326,7 +326,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-10',
-    sortOrder: 22,
+    sortOrder: 24,
     title: {
       uz: 'Soch transplantatsiyasi',
       ru: 'Трансплантация волос',
@@ -343,7 +343,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-12',
-    sortOrder: 21,
+    sortOrder: 23,
     title: {
       uz: 'InMode IPL — sog‘lom va yorqin teri',
       ru: 'InMode IPL — здоровая и сияющая кожа',
@@ -360,7 +360,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-13',
-    sortOrder: 20,
+    sortOrder: 22,
     title: {
       uz: 'DEKA CO₂ lazer muolajasi',
       ru: 'Процедура на лазере DEKA CO₂',
@@ -377,7 +377,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-14',
-    sortOrder: 19,
+    sortOrder: 21,
     title: {
       uz: 'Lutronic Derma V — pigment va tomirlar',
       ru: 'Lutronic Derma V — пигмент и сосуды',
@@ -394,7 +394,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-15',
-    sortOrder: 18,
+    sortOrder: 20,
     title: {
       uz: 'Tovon yorilishining sabablari',
       ru: 'Почему трескаются пятки',
@@ -411,7 +411,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-16',
-    sortOrder: 17,
+    sortOrder: 19,
     title: {
       uz: 'Soch ekishdan keyingi rejim',
       ru: 'Режим после пересадки волос',
@@ -428,7 +428,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-17',
-    sortOrder: 16,
+    sortOrder: 18,
     title: {
       uz: 'Trixolog tavsiya qiladigan muolajalar',
       ru: 'Процедуры, которые рекомендует трихолог',
@@ -445,7 +445,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-18',
-    sortOrder: 15,
+    sortOrder: 17,
     title: {
       uz: 'Melazmani Radeski’da davolash',
       ru: 'Лечение мелазмы в Radeski',
@@ -462,7 +462,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-19',
-    sortOrder: 14,
+    sortOrder: 16,
     title: {
       uz: 'Teri parvarishi uchun nima qilinadi?',
       ru: 'Что входит в уход за кожей?',
@@ -479,7 +479,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-20',
-    sortOrder: 13,
+    sortOrder: 15,
     title: {
       uz: 'Soqol va soch ekish',
       ru: 'Пересадка бороды и волос',
@@ -496,7 +496,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-21',
-    sortOrder: 12,
+    sortOrder: 14,
     title: {
       uz: 'Sochlar uchun PRP foydasi',
       ru: 'Польза PRP для волос',
@@ -513,7 +513,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-22',
-    sortOrder: 11,
+    sortOrder: 13,
     title: {
       uz: 'Trixologdan foydali tavsiyalar',
       ru: 'Полезные советы трихолога',
@@ -530,7 +530,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-30',
-    sortOrder: 10,
+    sortOrder: 12,
     title: {
       uz: 'Endi siz shifokor-dermatologdan 7 ta asosiy insaytni bilasiz!',
       ru: 'Теперь вы знаете 7 ключевых инсайтов от врача-дерматолога!',
@@ -547,7 +547,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-31',
-    sortOrder: 9,
+    sortOrder: 11,
     title: {
       uz: 'Kosmetologiya xizmatlari uchun super aksiya',
       ru: 'Супер-акция на услуги косметологии',
@@ -564,7 +564,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-34',
-    sortOrder: 8,
+    sortOrder: 10,
     title: {
       uz: 'Sochlar uchun plazmotorapiya 400 000 so‘m o‘rniga 250 000 so‘m!',
       ru: 'Плазмотерапия для волос: 250 000 сум вместо 400 000 сум!',
@@ -581,7 +581,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-35',
-    sortOrder: 7,
+    sortOrder: 9,
     title: {
       uz: 'Tibbiy pedikyur 230 000 so‘m o‘rniga 180 000 so‘m!',
       ru: 'Медицинский педикюр: 180 000 сум вместо 230 000 сум!',
@@ -598,7 +598,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-36',
-    sortOrder: 6,
+    sortOrder: 8,
     title: {
       uz: 'Qo‘qonda dermatologdan bepul konsultatsiya!',
       ru: 'Бесплатная консультация дерматолога в Коканде!',
@@ -615,7 +615,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-37',
-    sortOrder: 5,
+    sortOrder: 7,
     title: {
       uz: '1 daqiqada qabulga qanday yozilish mumkin?',
       ru: 'Как записаться на приём за 1 минуту?',
@@ -632,7 +632,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-38',
-    sortOrder: 4,
+    sortOrder: 6,
     title: {
       uz: 'DEKA Tetra Pro lazer: ajin, dog‘ va chandiqlarga zamonaviy yechim',
       ru: 'Лазер Tetra Pro от DEKA: новый уровень ухода от морщин, пятен и рубцов',
@@ -649,7 +649,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-39',
-    sortOrder: 3,
+    sortOrder: 5,
     title: {
       uz: 'Aquex Daavlin: kaft va tovon terlashiga og‘riqsiz yechim',
       ru: 'Aquex Daavlin: безопасное решение против потливости ладоней и стоп',
@@ -666,7 +666,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-40',
-    sortOrder: 2,
+    sortOrder: 4,
     title: {
       uz: 'Klinikamizda ish kunlari qanday o‘tishini ko‘rsatamiz😉',
       ru: 'Показываем, как проходит рабочий день в нашей клинике😉',
@@ -683,7 +683,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-41',
-    sortOrder: 1,
+    sortOrder: 3,
     title: {
       uz: '🫧 Radeski Skin Clinic’da go‘zallik oyligi!',
       ru: '🫧 Месяц красоты в Radeski Skin Clinic!',
@@ -697,6 +697,40 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     src: '/videos/41.mp4',
     duration: '0:40',
     category: { uz: 'Aksiya', ru: 'Акция', en: 'Promo' },
+  },
+  {
+    id: 'clinic-video-42',
+    sortOrder: 2,
+    title: {
+      uz: '🔍 Seboreyali dermatit qanday davolanadi?',
+      ru: '🔍 Как лечится себорейный дерматит?',
+      en: '🔍 How is seborrheic dermatitis treated?',
+    },
+    description: {
+      uz: 'Tizimli terapiya zamburug‘ga qarshi preparatlarni (itrakonazol, flukonazol) o‘z ichiga oladi — ular kasallik qaytalangan (retsidiv) davrda va og‘ir shakllarida qo‘llaniladi.\n\n📌 Tashqi terapiya:\n1. 2% ketokonazol, qatron (degot), rux pirition va siklopiroks saqlovchi shampunlar.\n2. Kortikosteroidli losyonlar (faqat qisqa kurslar bilan).\n\n📌 Bosh terisini parvarish qilish:\n1. Sirt faol moddalar (PAV) va sulfatlarsiz shampunlar bilan mayin tozalash.\n2. Bosh terisini namlantirish.\n3. Yog‘li tabiiy moylar va agressiv soch turmaklash usullarini butunlay istisno qilish.\n\nSeboreyali dermatitga qarshi samarali davolash choralarini tanlash uchun konsultatsiyamizga yoziling.',
+      ru: 'Системная терапия включает противогрибковые препараты (итраконазол, флуконазол) — их применяют при рецидивах и тяжёлых формах.\n\n📌 Наружная терапия:\n1. Шампуни с 2% кетоконазолом, дёгтем, пиритионом цинка и циклопироксом.\n2. Лосьоны с кортикостероидами (только короткими курсами).\n\n📌 Уход за кожей головы:\n1. Мягкое очищение шампунями без сульфатов и агрессивных ПАВ.\n2. Увлажнение кожи головы.\n3. Полный отказ от жирных натуральных масел и агрессивных способов укладки.\n\nЗапишитесь на консультацию, чтобы подобрать эффективную схему лечения себорейного дерматита.',
+      en: 'Systemic care may include antifungal medicines (itraconazole, fluconazole) — used for flares, recurrent disease, and more severe forms.\n\n📌 Topical care:\n1. Shampoos with 2% ketoconazole, tar, zinc pyrithione, or ciclopirox.\n2. Corticosteroid lotions (short courses only).\n\n📌 Scalp care steps:\n1. Gentle cleansing with sulfate-free, mild-surfactant shampoos.\n2. Moisturizing the scalp.\n3. Avoiding oily natural oils and aggressive styling.\n\nBook a consultation so we can choose an effective plan for seborrheic dermatitis.',
+    },
+    src: '/videos/42.mp4',
+    duration: '1:02',
+    category: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+  },
+  {
+    id: 'clinic-video-43',
+    sortOrder: 1,
+    title: {
+      uz: '👌 Silliq teri — o‘tmish izlarisiz: bu mumkin!',
+      ru: '👌 Гладкая кожа без следов прошлого — это реально!',
+      en: '👌 Smooth skin without traces of the past — it is possible!',
+    },
+    description: {
+      uz: 'Chandiqlarni lazer bilan olib tashlash jarayonini ko‘rsatamiz.\n\nMuolaja ilg‘or Tetra PRO apparatida o‘tkaziladi — u teri relyefini samarali va ehtiyotkor tekislaydi, yangilanishni va kollagen ishlab chiqarishni kuchaytiradi.\n\nChandiqlardan xalos bo‘ling va o‘zingizga ishonchni qaytaring.',
+      ru: 'Показываем процесс лазерного удаления шрамов.\n\nПроцедура проводится на передовом аппарате Tetra PRO — он эффективно и деликатно выравнивает рельеф кожи, запуская мощный процесс обновления и выработки коллагена.\n\nИзбавьтесь от рубцов и верните уверенность в себе.',
+      en: 'We show the laser scar-removal process step by step.\n\nThe procedure is done on the advanced Tetra PRO device — it reshapes skin texture effectively yet gently, boosting renewal and collagen production.\n\nLeave scars behind and regain confidence in your skin.',
+    },
+    src: '/videos/43.mp4',
+    duration: '0:52',
+    category: { uz: 'Lazer', ru: 'Лазер', en: 'Laser' },
   },
 ];
 
