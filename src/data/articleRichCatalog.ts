@@ -6,6 +6,7 @@ import { PRP_HAIR_ARTICLE_CATALOG } from './articles/prpHairArticle';
 import { PRP_LAB_TESTS_ARTICLE_CATALOG } from './articles/prpLabTestsArticle';
 import { TRICHOLOGIST_TRICHOSCOPY_ARTICLE_CATALOG } from './articles/trichologistTrichoscopyArticle';
 import { TONGUE_SCC_ARTICLE_CATALOG } from './articles/tongueSccArticle';
+import { BASAL_CELL_CARCINOMA_ARTICLE_CATALOG } from './articles/basalCellCarcinomaArticle';
 import { PLASMAPHERESIS_ARTICLE_CATALOG } from './articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE_CATALOG } from './articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE_CATALOG } from './articles/dekaMoveoEpilationArticle';
@@ -125,6 +126,16 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
   fungal: ['zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
   'mole-screening': ['nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
+  'basal-cell-carcinoma': [
+    'bazalioma-teri-raki',
+    'базальноклеточный рак кожи',
+    'basal cell carcinoma',
+    'базалиома',
+    'bazalioma',
+    'basalioma',
+    'жемчужная папула',
+    'rak teri bazal',
+  ],
   'tongue-scc': [
     'til-yassi-hujayrali-rak',
     'плоскоклеточный рак языка',
@@ -834,6 +845,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'prp-lab-tests': PRP_LAB_TESTS_ARTICLE_CATALOG,
   'trichologist-trichoscopy': TRICHOLOGIST_TRICHOSCOPY_ARTICLE_CATALOG,
   'tongue-scc': TONGUE_SCC_ARTICLE_CATALOG,
+  'basal-cell-carcinoma': BASAL_CELL_CARCINOMA_ARTICLE_CATALOG,
   plasmapheresis: PLASMAPHERESIS_ARTICLE_CATALOG,
   'deka-co2': DEKA_CO2_ARTICLE_CATALOG,
   'deka-moveo': DEKA_MOVEO_ARTICLE_CATALOG,
