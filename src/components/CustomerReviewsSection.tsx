@@ -129,10 +129,10 @@ export default function CustomerReviewsSection({
           : 'Share your experience',
     formDesc:
       locale === 'uz'
-        ? 'Fikringiz moderatsiyadan o\'tgach saytda chiqadi.'
+        ? 'Fikringiz yuborilgach darhol saytda ko‘rinadi.'
         : locale === 'ru'
-          ? 'Отзыв появится на сайте после модерации.'
-          : 'Your review will appear after moderation.',
+          ? 'После отправки отзыв сразу появится на сайте.'
+          : 'Your review will appear on the site right away.',
     name:
       locale === 'uz' ? 'Ismingiz' : locale === 'ru' ? 'Ваше имя' : 'Your name',
     service:
@@ -145,10 +145,10 @@ export default function CustomerReviewsSection({
       locale === 'uz' ? 'Fikr yuborish' : locale === 'ru' ? 'Отправить отзыв' : 'Submit review',
     success:
       locale === 'uz'
-        ? 'Rahmat! Fikringiz qabul qilindi va tez orada ko\'rib chiqiladi.'
+        ? 'Rahmat! Fikringiz qabul qilindi va saytda chop etildi.'
         : locale === 'ru'
-          ? 'Спасибо! Ваш отзыв принят и скоро будет проверен.'
-          : 'Thank you! Your review was received and will be reviewed shortly.',
+          ? 'Спасибо! Ваш отзыв принят и опубликован на сайте.'
+          : 'Thank you! Your review was accepted and published on the site.',
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -187,7 +187,7 @@ export default function CustomerReviewsSection({
         comment: localizedComment,
         service: selectedService?.title,
         date: new Date().toISOString().slice(0, 10),
-        published: false,
+        published: true,
       });
 
       setAuthorName('');

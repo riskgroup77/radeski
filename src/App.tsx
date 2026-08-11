@@ -27,6 +27,7 @@ import {
   getServiceCategoryIdFromPathname,
   getServiceSubIdFromPathname,
   getPromoSlugFromPathname,
+  getDaavlinSectionFromPathname,
   pagePath,
   absoluteUrl,
   switchLocaleInPath,
@@ -52,6 +53,7 @@ import DoctorPage from './components/DoctorPage';
 import VideosPage from './components/VideosPage';
 import BranchesPage from './components/BranchesPage';
 import TechnologiesPage from './components/TechnologiesPage';
+import DaavlinFotoKabinalariPage from './components/DaavlinFotoKabinalariPage';
 import ClinicEquipmentParkPage from './components/ClinicEquipmentParkPage';
 import ResultsPage from './components/ResultsPage';
 import Prices from './components/Prices';
@@ -65,8 +67,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Phone, MapPin, Clock, ArrowRight, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
 import { useCmsData } from './hooks/useCmsData';
-import { createAppointment, createReview } from './api/publicApi';
-import { mapReviewToCreatePayload } from './api/cmsMappers';
+import { createAppointment } from './api/publicApi';
+import { submitAndPublishCustomerReview } from './api/submitCustomerReview';
 import { resolveArticleRichContent } from './utils/articleContent';
 import { fetchClientCountFromApi } from './utils/clientCount';
 import { getPlatformLogo } from './utils/platformLogo';
@@ -125,6 +127,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const serviceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
   const serviceSubId = getServiceSubIdFromPathname(location.pathname);
   const promoSlug = getPromoSlugFromPathname(location.pathname);
+  const daavlinSection = getDaavlinSectionFromPathname(location.pathname);
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
   const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
@@ -540,7 +543,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}`}
+          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}-${daavlinSection}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -1000,7 +1003,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                 reviews={cmsReviews}
                 serviceCategories={dynamicServiceCategories}
                 onSubmitReview={async (review) => {
-                  await createReview(mapReviewToCreatePayload(review));
+                  await submitAndPublishCustomerReview(review);
+                  await refetchCms();
                 }}
               />
 
@@ -1039,7 +1043,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale}
               serviceCategories={dynamicServiceCategories}
               onSubmitReview={async (review) => {
-                await createReview(mapReviewToCreatePayload(review));
+                await submitAndPublishCustomerReview(review);
+                await refetchCms();
               }}
             />
           )}
@@ -1222,6 +1227,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
           {currentPage === 'technologies' && (
             <TechnologiesPage locale={locale} />
+          )}
+
+          {currentPage === 'daavlin-foto-kabinalari' && (
+            <DaavlinFotoKabinalariPage locale={locale} section={daavlinSection} />
           )}
 
           {currentPage === 'clinic-equipment' && (

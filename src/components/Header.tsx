@@ -83,6 +83,7 @@ export default function Header({
     { id: 'home', label: d.navHome },
     { id: 'about', label: d.navAbout },
     { id: 'services', label: d.navServices },
+    { id: 'daavlin-foto-kabinalari', label: d.navDaavlinFotoKabinalari },
     { id: 'doctors', label: d.navDoctors },
     { id: 'prices', label: d.navPrices },
     { id: 'articles', label: d.navArticles },

@@ -13,6 +13,7 @@ export type PageId =
   | 'results'
   | 'technologies'
   | 'clinic-equipment'
+  | 'daavlin-foto-kabinalari'
   | 'terms'
   | 'privacy'
   | 'admin'
@@ -81,6 +82,53 @@ export function getArticleIdFromPathname(pathname: string): string | null {
 /** @deprecated Use getArticleIdFromPathname */
 export const getArticleSlugFromPathname = getArticleIdFromPathname;
 
+export type DaavlinSectionId =
+  | 'about'
+  | 'radeski-skin-clinic'
+  | 'cabins'
+  | 'clinical-results'
+  | 'skin-diseases'
+  | 'contacts';
+
+export const DAAVLIN_SECTION_IDS: DaavlinSectionId[] = [
+  'about',
+  'radeski-skin-clinic',
+  'cabins',
+  'clinical-results',
+  'skin-diseases',
+  'contacts',
+];
+
+/** Map legacy Phothera-era slugs → distributor sections */
+const DAAVLIN_SECTION_ALIASES: Record<string, DaavlinSectionId> = {
+  conditions: 'skin-diseases',
+  faq: 'about',
+  options: 'cabins',
+  access: 'contacts',
+  'find-dermatologist': 'radeski-skin-clinic',
+  produkciya: 'cabins',
+  'o-nas': 'about',
+  'kozhnye-bolezni': 'skin-diseases',
+  kontakty: 'contacts',
+  'klinicheskie-rezultaty': 'clinical-results',
+};
+
+export function daavlinSectionPath(locale: Locale, section: DaavlinSectionId = 'about'): string {
+  const base = pagePath(locale, 'daavlin-foto-kabinalari');
+  if (section === 'about') return base;
+  return `${base}/${section}`;
+}
+
+export function getDaavlinSectionFromPathname(pathname: string): DaavlinSectionId {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments[1] !== 'daavlin-foto-kabinalari') return 'about';
+  const sub = segments[2];
+  if (!sub) return 'about';
+  if ((DAAVLIN_SECTION_IDS as string[]).includes(sub)) return sub as DaavlinSectionId;
+  if (DAAVLIN_SECTION_ALIASES[sub]) return DAAVLIN_SECTION_ALIASES[sub];
+  return 'about';
+}
+
 export function getPageFromPathname(pathname: string): PageId {
   const segments = pathname.split('/').filter(Boolean);
 
@@ -102,6 +150,7 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'results' ||
     pageSegment === 'technologies' ||
     pageSegment === 'clinic-equipment' ||
+    pageSegment === 'daavlin-foto-kabinalari' ||
     pageSegment === 'terms' ||
     pageSegment === 'privacy' ||
     pageSegment === 'fikr'

@@ -17,6 +17,7 @@ import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG } from './articles/psoriasisDa
 import { IPL_THERAPY_ARTICLE_CATALOG } from './articles/iplTherapyArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG } from './articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE_CATALOG } from './articles/adultAcneArticle';
+import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -100,6 +101,17 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
   psoriasis: ['psoria', 'псориаз', 'psoriasis', 'lishay'],
   'post-acne': ['postakne', 'post-akne', 'постакне', 'post-acne', 'post acne', 'chandiq', 'рубц', 'scar after'],
+  'laser-scar-resurfacing': [
+    'lazernaya-shlifovka-rubcov',
+    'лазерная шлифовка рубцов',
+    'лазерная шлифовка рубца',
+    'удаление рубцов лазером',
+    'коррекция рубцов лазером',
+    'удаление шрама лазером',
+    'chandiqlarni lazer shlifovkasi',
+    'laser scar resurfacing',
+    'laser scar correction',
+  ],
   'adult-acne': [
     'pryshchi-u-vzroslykh',
     'прыщи у взрослых',
@@ -867,6 +879,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'ipl-therapy': IPL_THERAPY_ARTICLE_CATALOG,
   'pediatric-warts-co2-deka': PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG,
   'adult-acne': ADULT_ACNE_ARTICLE_CATALOG,
+  'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

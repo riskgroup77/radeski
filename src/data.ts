@@ -17,6 +17,7 @@ import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from './data/articles/psoriasisDaavl
 import { IPL_THERAPY_ARTICLE } from './data/articles/iplTherapyArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from './data/articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE } from './data/articles/adultAcneArticle';
+import { LASER_SCAR_RESURFACING_ARTICLE } from './data/articles/laserScarResurfacingArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -27,6 +28,7 @@ export const DICTIONARY = {
     navHome: "Bosh sahifa",
     navAbout: "Klinika haqida",
     navServices: "Xizmatlar",
+    navDaavlinFotoKabinalari: "Daavlin Foto kabinalari",
     navDoctors: "Shifokorlar",
     navPrices: "Narxlar",
     navArticles: "Maqolalar",
@@ -114,6 +116,7 @@ export const DICTIONARY = {
     navHome: "Главная",
     navAbout: "О клинике",
     navServices: "Услуги",
+    navDaavlinFotoKabinalari: "Фотокабины Daavlin",
     navDoctors: "Врачи",
     navPrices: "Цены",
     navArticles: "Статьи",
@@ -201,6 +204,7 @@ export const DICTIONARY = {
     navHome: "Home",
     navAbout: "About Us",
     navServices: "Services",
+    navDaavlinFotoKabinalari: "Daavlin Photo Cabins",
     navDoctors: "Doctors",
     navPrices: "Prices",
     navArticles: "Articles",
@@ -911,4 +915,5 @@ export const ARTICLES: Article[] = [
   IPL_THERAPY_ARTICLE,
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
+  LASER_SCAR_RESURFACING_ARTICLE,
 ];

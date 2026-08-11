@@ -18,6 +18,7 @@ import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from '../src/data/articles/psoriasis
 import { IPL_THERAPY_ARTICLE } from '../src/data/articles/iplTherapyArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from '../src/data/articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE } from '../src/data/articles/adultAcneArticle';
+import { LASER_SCAR_RESURFACING_ARTICLE } from '../src/data/articles/laserScarResurfacingArticle';
 import { ACNE_ARTICLE } from '../src/data/articles/acneArticle';
 import { POST_ACNE_ARTICLE } from '../src/data/articles/postAcneArticle';
 import { ROSACEA_ARTICLE } from '../src/data/articles/rosaceaArticle';
@@ -57,6 +58,7 @@ const TARGETS = [
   IPL_THERAPY_ARTICLE,
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
+  LASER_SCAR_RESURFACING_ARTICLE,
 ];
 
 async function withRetry<T>(label: string, fn: () => Promise<T>): Promise<T> {

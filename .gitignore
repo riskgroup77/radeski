@@ -7,3 +7,7 @@ coverage/
 .env*
 !.env.example
 server/secrets.local.ts
+scripts/gsc-auto/chrome-profile/
+scripts/gsc-auto/.venv/
+scripts/gsc-auto/state.json
+scripts/gsc-auto/indexer.log

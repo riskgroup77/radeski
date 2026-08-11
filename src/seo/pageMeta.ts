@@ -118,6 +118,11 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       desc: "Daavlin NeoLux, Aquex, InMode IPL, Derma V, Hollywood Spectra va plazmoforez — Radeski apparatlar parki.",
       keywords: "Daavlin Farg'ona, InMode IPL Qo'qon, Hollywood Spectra, fototerapiya apparati, klinika jihozlari",
     },
+    'daavlin-foto-kabinalari': {
+      title: "Daavlin Foto kabinalari — NB-UVB fototerapiya | Radeski Farg'ona | Qo'qon",
+      desc: "Narrowband UVB (311–313 nm) fototerapiya Daavlin kabinalarida: psoriaz, vitiligo, ekzema va boshqa surunkali teri kasalliklari. Radeski Skin Clinic.",
+      keywords: "Daavlin fototerapiya, NB-UVB, foto kabina, psoriaz, vitiligo, ekzema, Farg'ona, Qo'qon",
+    },
     terms: {
       title: "Foydalanish shartlari | Radeski Skin Clinic",
       desc: "Radeski.uz saytidan foydalanish qoidalari va foydalanuvchi shartlari.",
@@ -193,6 +198,11 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       desc: "Daavlin NeoLux, Aquex, InMode IPL, Derma V, Hollywood Spectra и плазмофорез — Фергана | Коканд.",
       keywords: "Daavlin Фергана, InMode IPL Коканд, Hollywood Spectra, фототерапия, аппараты клиники",
     },
+    'daavlin-foto-kabinalari': {
+      title: "Фотокабины Daavlin — NB-UVB фототерапия | Radeski Фергана | Коканд",
+      desc: "Узкополосная UVB (311–313 нм) фототерапия в кабинах Daavlin: псориаз, витилиго, экзема и другие хронические заболевания кожи. Radeski Skin Clinic.",
+      keywords: "Daavlin фототерапия, NB-UVB, фотокабина, псориаз, витилиго, экзема, Фергана, Коканд",
+    },
     terms: {
       title: "Пользовательское соглашение | Radeski Skin Clinic",
       desc: "Правила использования сайта Radeski.uz.",
@@ -267,6 +277,11 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       title: "Equipment — Daavlin, InMode, Lutronic | Radeski Fergana | Kokand",
       desc: "Daavlin NeoLux, Aquex, InMode IPL, Derma V, Hollywood Spectra and plasmapheresis — Fergana | Kokand.",
       keywords: "Daavlin Fergana, InMode IPL Kokand, Hollywood Spectra, phototherapy devices",
+    },
+    'daavlin-foto-kabinalari': {
+      title: "Daavlin Photo Cabins — NB-UVB Phototherapy | Radeski Fergana | Kokand",
+      desc: "Narrowband UVB (311–313 nm) phototherapy in Daavlin cabins for psoriasis, vitiligo, eczema and other chronic skin conditions at Radeski Skin Clinic.",
+      keywords: "Daavlin phototherapy, NB-UVB, photo cabin, psoriasis, vitiligo, eczema, Fergana, Kokand",
     },
     terms: {
       title: "Terms of Use | Radeski Skin Clinic",

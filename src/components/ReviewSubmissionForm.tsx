@@ -94,10 +94,10 @@ export default function ReviewSubmissionForm({
           : 'Share your experience',
     formDesc:
       locale === 'uz'
-        ? "Fikringiz moderatsiyadan o'tgach saytda chiqadi."
+        ? 'Fikringiz yuborilgach darhol saytda ko‘rinadi.'
         : locale === 'ru'
-          ? 'Отзыв появится на сайте после модерации.'
-          : 'Your review will appear after moderation.',
+          ? 'После отправки отзыв сразу появится на сайте.'
+          : 'Your review will appear on the site right away.',
     name: locale === 'uz' ? 'Ismingiz' : locale === 'ru' ? 'Ваше имя' : 'Your name',
     service:
       locale === 'uz' ? 'Xizmat turi (ixtiyoriy)' : locale === 'ru' ? 'Услуга (необязательно)' : 'Service (optional)',
@@ -112,10 +112,10 @@ export default function ReviewSubmissionForm({
           : 'I also want to write a comment',
     success:
       locale === 'uz'
-        ? "Rahmat! Fikringiz qabul qilindi. Tez orada ko'rib chiqiladi."
+        ? 'Rahmat! Fikringiz qabul qilindi va saytda chop etildi.'
         : locale === 'ru'
-          ? 'Спасибо! Ваш отзыв принят и скоро будет проверен.'
-          : 'Thank you! Your review was received and will be reviewed shortly.',
+          ? 'Спасибо! Ваш отзыв принят и опубликован на сайте.'
+          : 'Thank you! Your review was accepted and published on the site.',
     done: locale === 'uz' ? 'Tayyor' : locale === 'ru' ? 'Готово' : 'Done',
   };
 
@@ -180,7 +180,7 @@ export default function ReviewSubmissionForm({
         comment: localizedComment,
         service: selectedService?.title,
         date: new Date().toISOString().slice(0, 10),
-        published: false,
+        published: true,
       });
 
       setAuthorName('');

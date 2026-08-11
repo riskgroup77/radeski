@@ -649,7 +649,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-39',
-    sortOrder: 5,
+    sortOrder: 6,
     title: {
       uz: 'Aquex Daavlin: kaft va tovon terlashiga og‘riqsiz yechim',
       ru: 'Aquex Daavlin: безопасное решение против потливости ладоней и стоп',
@@ -666,7 +666,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-40',
-    sortOrder: 4,
+    sortOrder: 5,
     title: {
       uz: 'Klinikamizda ish kunlari qanday o‘tishini ko‘rsatamiz😉',
       ru: 'Показываем, как проходит рабочий день в нашей клинике😉',
@@ -683,7 +683,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-41',
-    sortOrder: 3,
+    sortOrder: 4,
     title: {
       uz: '🫧 Radeski Skin Clinic’da go‘zallik oyligi!',
       ru: '🫧 Месяц красоты в Radeski Skin Clinic!',
@@ -700,7 +700,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-42',
-    sortOrder: 2,
+    sortOrder: 3,
     title: {
       uz: '🔍 Seboreyali dermatit qanday davolanadi?',
       ru: '🔍 Как лечится себорейный дерматит?',
@@ -717,7 +717,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-43',
-    sortOrder: 1,
+    sortOrder: 2,
     title: {
       uz: '👌 Silliq teri — o‘tmish izlarisiz: bu mumkin!',
       ru: '👌 Гладкая кожа без следов прошлого — это реально!',
@@ -731,6 +731,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     src: '/videos/43.mp4',
     duration: '0:52',
     category: { uz: 'Lazer', ru: 'Лазер', en: 'Laser' },
+  },
+  {
+    id: 'clinic-video-44',
+    sortOrder: 1,
+    title: {
+      uz: '👌 Deka Moveo lazer epilyatsiyasi endi Qo‘qonda!',
+      ru: '👌 Лазерная эпиляция Deka Moveo теперь в Коканде!',
+      en: '👌 Deka Moveo laser hair removal is now in Kokand!',
+    },
+    description: {
+      uz: 'Qo‘qondagi Radeski Skin Clinic’da premium toifadagi Deka Moveo aleksandrit lazeri yordamida.\n\nNima uchun aynan Deka Moveo’ni tanlashadi:\n\n🔥 To‘liq kurs sizni istalmagan tuklardan biryo‘la xalos qiladi.\n🧊 Kontaktli sovutish tizimiga ega noyob safir nasadkasi muolajani mutlaqo qulay tarzda o‘tishini ta’minlaydi.\n⚡️ Seans minimal vaqtni oladi.\n☀️ Terining istalgan turi va hatto qoraygan teriga ham mos keladi.',
+      ru: 'В Radeski Skin Clinic в Коканде — на премиальном александритовом лазере Deka Moveo.\n\nПочему выбирают именно Deka Moveo:\n\n🔥 Полный курс помогает надолго избавиться от нежелательных волос.\n🧊 Уникальная сапфировая насадка с контактным охлаждением делает процедуру максимально комфортной.\n⚡️ Сеанс занимает минимум времени.\n☀️ Подходит для любого типа кожи — в том числе для уже загорелой.',
+      en: 'At Radeski Skin Clinic in Kokand — with the premium Deka Moveo alexandrite laser.\n\nWhy people choose Deka Moveo:\n\n🔥 A full course helps you leave unwanted hair behind for the long term.\n🧊 A unique sapphire tip with contact cooling keeps the session comfortable.\n⚡️ Each appointment takes minimal time.\n☀️ Suitable for all skin types — including tanned skin.',
+    },
+    src: '/videos/44.mp4',
+    duration: '0:45',
+    category: { uz: 'Lazer epilyatsiya', ru: 'Лазерная эпиляция', en: 'Laser hair removal' },
   },
 ];
 
