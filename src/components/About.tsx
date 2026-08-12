@@ -1,9 +1,17 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Globe2, MapPin, ArrowRight } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS, CLINIC_EXPERIENCE_YEARS } from '../data';
-import { APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from '../config/links';
+import { CLINIC_HISTORY } from '../data/clinicHistoryContent';
+import {
+  APPOINTMENT_LINK_REL,
+  APPOINTMENT_LINK_TARGET,
+  LIEGE_BRANCH_MAP_OPEN_URL,
+  RADE_SKIN_CLINIC_WEBSITE,
+  resolveClinicRatingUrl,
+} from '../config/links';
+import { pagePath } from '../routing/paths';
 import ClinicAdvantagesCards from './ClinicAdvantagesCards';
 
 interface AboutProps {
@@ -102,6 +110,147 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
             />
           </motion.div>
         </div>
+
+        {/* History & strategic evolution */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.55 }}
+          className="mb-20"
+        >
+          <div className="rounded-3xl border border-brand-gold/25 bg-gradient-to-br from-brand-offwhite via-brand-white to-brand-gold-light/10 p-8 sm:p-10 lg:p-12 shadow-sm">
+            <div className="max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">
+                {CLINIC_HISTORY.eyebrow[locale]}
+              </span>
+              <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-text-primary tracking-tight">
+                {CLINIC_HISTORY.title[locale]}
+              </h2>
+              <p className="mt-3 text-base sm:text-lg font-medium text-brand-text-secondary leading-relaxed">
+                {CLINIC_HISTORY.subtitle[locale]}
+              </p>
+              <p className="mt-4 text-sm sm:text-base text-brand-text-muted font-light leading-relaxed">
+                {CLINIC_HISTORY.intro[locale]}
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center gap-2 sm:gap-3">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-brand-text-muted mr-1">
+                {CLINIC_HISTORY.evolutionLabel[locale]}:
+              </span>
+              {CLINIC_HISTORY.evolutionSteps.map((step, idx) => (
+                <span key={step[locale]} className="inline-flex items-center gap-2">
+                  <span className="rounded-full border border-brand-gold/30 bg-white px-3 py-1.5 text-xs font-semibold text-brand-text-primary shadow-xs">
+                    {step[locale]}
+                  </span>
+                  {idx < CLINIC_HISTORY.evolutionSteps.length - 1 && (
+                    <ArrowRight className="hidden sm:block h-3.5 w-3.5 text-brand-gold/70 shrink-0" aria-hidden />
+                  )}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {CLINIC_HISTORY.stats.map((stat) => (
+                <div
+                  key={stat.label[locale]}
+                  className="rounded-2xl border border-brand-sectiongray bg-white/80 px-5 py-4 text-center sm:text-left"
+                >
+                  <span className="text-2xl font-extrabold text-brand-gold block">{stat.value}</span>
+                  <span className="text-xs text-brand-text-muted font-medium mt-1 block">{stat.label[locale]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-10 relative">
+            <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-brand-gold/60 via-brand-gold/30 to-transparent hidden sm:block" aria-hidden />
+            <div className="space-y-8">
+              {CLINIC_HISTORY.stages.map((stage, idx) => (
+                <motion.article
+                  key={stage.id}
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? -16 : 16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.45, delay: idx * 0.06 }}
+                  className="relative sm:pl-14"
+                >
+                  <div className="hidden sm:flex absolute left-3 top-6 h-6 w-6 items-center justify-center rounded-full border-2 border-brand-gold bg-brand-white shadow-sm">
+                    <span className="h-2 w-2 rounded-full bg-brand-gold" />
+                  </div>
+                  <div className="rounded-2xl border border-brand-sectiongray bg-brand-white p-6 sm:p-8 shadow-xs hover:shadow-md transition-shadow">
+                    <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+                      <div>
+                        <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-brand-gold bg-brand-gold-light/15 px-2.5 py-1 rounded-full">
+                          {stage.year[locale]}
+                        </span>
+                        <h3 className="mt-3 text-xl sm:text-2xl font-extrabold text-brand-text-primary tracking-tight">
+                          {stage.title[locale]}
+                        </h3>
+                        <p className="mt-1 flex items-center gap-1.5 text-sm font-medium text-brand-text-muted">
+                          <MapPin className="h-4 w-4 text-brand-gold shrink-0" aria-hidden />
+                          {stage.place[locale]}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      {stage.paragraphs.map((para) => (
+                        <p key={para[locale].slice(0, 48)} className="text-sm sm:text-base text-brand-text-secondary leading-relaxed font-light">
+                          {para[locale]}
+                        </p>
+                      ))}
+                    </div>
+                    {stage.highlight && (
+                      <div className="mt-5 flex flex-wrap gap-3">
+                        <a
+                          href={RADE_SKIN_CLINIC_WEBSITE}
+                          target={APPOINTMENT_LINK_TARGET}
+                          rel={APPOINTMENT_LINK_REL}
+                          className="inline-flex items-center gap-2 rounded-xl border border-brand-gold/30 bg-brand-gold-light/10 px-4 py-2.5 text-xs font-bold text-brand-text-primary hover:bg-brand-gold/10 transition-colors"
+                        >
+                          <Globe2 className="h-4 w-4 text-brand-gold" aria-hidden />
+                          {stage.highlight[locale]}
+                        </a>
+                        <a
+                          href={LIEGE_BRANCH_MAP_OPEN_URL}
+                          target={APPOINTMENT_LINK_TARGET}
+                          rel={APPOINTMENT_LINK_REL}
+                          className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray px-4 py-2.5 text-xs font-semibold text-brand-text-secondary hover:border-brand-gold/40 transition-colors"
+                        >
+                          <MapPin className="h-4 w-4" aria-hidden />
+                          {locale === 'uz' ? 'Lyuj manzili' : locale === 'ru' ? 'Адрес в Льеже' : 'Liège address'}
+                        </a>
+                      </div>
+                    )}
+                    {stage.id === 'kokand' && (
+                      <div className="mt-5">
+                        <a
+                          href={pagePath(locale, 'qoqon')}
+                          className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:text-brand-gold-dark transition-colors"
+                        >
+                          {locale === 'uz' ? 'Qo‘qon filiali sahifasi' : locale === 'ru' ? 'Страница филиала в Коканде' : 'Kokand branch page'}
+                          <ArrowRight className="h-4 w-4" aria-hidden />
+                        </a>
+                      </div>
+                    )}
+                    {stage.id === 'fergana' && (
+                      <div className="mt-5">
+                        <a
+                          href={pagePath(locale, 'branches')}
+                          className="inline-flex items-center gap-2 text-sm font-bold text-brand-gold hover:text-brand-gold-dark transition-colors"
+                        >
+                          {locale === 'uz' ? 'Barcha filiallar' : locale === 'ru' ? 'Все филиалы' : 'All branches'}
+                          <ArrowRight className="h-4 w-4" aria-hidden />
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* Benefits cards bento grid */}
         <div className="mb-20">
