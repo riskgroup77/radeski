@@ -23,7 +23,7 @@ export const CLINIC_HISTORY = {
   ),
   evolutionLabel: L('Rivojlanish yo‘li', 'Путь развития', 'Growth path'),
   evolutionSteps: [
-    L('Lyuj', 'Льеж', 'Liège'),
+    L('Belgiya', 'Бельгия', 'Belgium'),
     L('Farg‘ona', 'Фергана', 'Fergana'),
     L('Qo‘qon', 'Коканд', 'Kokand'),
     L('O‘zbekiston tarmog‘i', 'Национальная сеть Узбекистана', 'Uzbekistan network'),
@@ -32,7 +32,7 @@ export const CLINIC_HISTORY = {
   stats: [
     {
       value: '2020',
-      label: L('Lyujda boshlanish', 'Старт в Льеже', 'Founded in Liège'),
+      label: L('Belgiyada boshlanish', 'Старт в Бельгии', 'Founded in Belgium'),
     },
     {
       value: '3',
@@ -45,15 +45,15 @@ export const CLINIC_HISTORY = {
   ],
   stages: [
     {
-      id: 'liege',
+      id: 'belgium',
       year: L('2020', '2020', '2020'),
-      place: L('Lyuj, Belgiya', 'Льеж, Бельгия', 'Liège, Belgium'),
+      place: L('Belgiya', 'Бельгия', 'Belgium'),
       title: L('Yevropa bosqichi', 'Европейский этап', 'European foundation'),
       paragraphs: [
         L(
-          'Radeski Skin Clinic tarixi 2020-yilda Belgiyaning Lyuj shahrida boshlangan: Rossiyadan kelgan ikki dermatolog shifokor teri kasalliklari bo‘yicha zamonaviy yordam beradigan ixtisoslashtirilgan klinika ochgan.',
-          'История Radeski Skin Clinic началась в 2020 году в городе Льеж, Бельгия, где два врача-дерматолога из России создали специализированную дерматологическую клинику, ориентированную на оказание современной медицинской помощи пациентам с заболеваниями кожи.',
-          'Radeski Skin Clinic began in 2020 in Liège, Belgium, where two dermatologists from Russia opened a specialized clinic focused on modern medical care for patients with skin disease.',
+          'Radeski Skin Clinic tarixi 2020-yilda Belgiyada boshlangan: Rossiyadan kelgan ikki dermatolog shifokor teri kasalliklari bo‘yicha zamonaviy yordam beradigan ixtisoslashtirilgan klinika ochgan.',
+          'История Radeski Skin Clinic началась в 2020 году в Бельгии, где два врача-дерматолога из России создали специализированную дерматологическую клинику, ориентированную на оказание современной медицинской помощи пациентам с заболеваниями кожи.',
+          'Radeski Skin Clinic began in 2020 in Belgium, where two dermatologists from Russia opened a specialized clinic focused on modern medical care for patients with skin disease.',
         ),
         L(
           'Yevropa bosqichi loyihaning poydevori bo‘ldi: shifokorlar ekspertizasi, maxsus diagnostika va davolash yondashuvi hamda yuqori sifatli tibbiy yordamga yo‘naltirilgan klinik model shakllandi.',
@@ -61,15 +61,15 @@ export const CLINIC_HISTORY = {
           'The European stage became the project’s foundation: a clinical model built on physician expertise, specialized diagnosis and treatment, and a commitment to high-quality care.',
         ),
         L(
-          'Lyujdagi klinika muvaffaqiyatli faoliyatda davom etadi — bu dastlabki konsepsiyaning barqarorligini va brendning xalqaro asosini tasdiqlaydi.',
-          'Клиника в Льеже продолжает успешно функционировать, что подтверждает жизнеспособность первоначальной концепции и создает международную основу для дальнейшего развития бренда.',
-          'The Liège clinic continues to operate successfully — confirming the original concept and providing an international base for brand growth.',
+          'Belgiyadagi klinika muvaffaqiyatli faoliyatda davom etadi — bu dastlabki konsepsiyaning barqarorligini va brendning xalqaro asosini tasdiqlaydi.',
+          'Клиника в Бельгии продолжает успешно функционировать, что подтверждает жизнеспособность первоначальной концепции и создает международную основу для дальнейшего развития бренда.',
+          'The Belgium clinic continues to operate successfully — confirming the original concept and providing an international base for brand growth.',
         ),
       ],
       highlight: L(
-        'Rade Skin Clinic — Lyuj filiali hozir ham ochiq',
-        'Филиал Rade Skin Clinic в Льеже работает и сегодня',
-        'Rade Skin Clinic — Liège branch still open today',
+        'Rade Skin Clinic — Belgiya filiali hozir ham ochiq',
+        'Филиал Rade Skin Clinic в Бельгии работает и сегодня',
+        'Rade Skin Clinic — Belgium branch still open today',
       ),
     },
     {
@@ -120,9 +120,9 @@ export const CLINIC_HISTORY = {
       title: L('Milliy ekotizmgacha', 'К национальной экосистеме', 'Toward a national ecosystem'),
       paragraphs: [
         L(
-          'Radeski Skin Clinic rivoji ketma-ket bosqichlardan o‘tdi: Lyuj → Farg‘ona → Qo‘qon → O‘zbekiston milliy tarmog‘i → Markaziy Osiyo yo‘nalishi.',
-          'Таким образом, развитие Radeski Skin Clinic прошло несколько последовательных этапов: Льеж → Фергана → Коканд → национальная сеть Узбекистана → Центральная Азия.',
-          'Radeski Skin Clinic evolved in clear stages: Liège → Fergana → Kokand → a national Uzbek network → Central Asia.',
+          'Radeski Skin Clinic rivoji ketma-ket bosqichlardan o‘tdi: Belgiya → Farg‘ona → Qo‘qon → O‘zbekiston milliy tarmog‘i → Markaziy Osiyo yo‘nalishi.',
+          'Таким образом, развитие Radeski Skin Clinic прошло несколько последовательных этапов: Бельгия → Фергана → Коканд → национальная сеть Узбекистана → Центральная Азия.',
+          'Radeski Skin Clinic evolved in clear stages: Belgium → Fergana → Kokand → a national Uzbek network → Central Asia.',
         ),
         L(
           'Loyiha davomida uchta klinik maydon yaratildi, mutaxassislar jamoasi shakllandi va mintaqaviy bozorda bemorlar bilan amaliy tajriba to‘plandi.',

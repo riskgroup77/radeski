@@ -219,7 +219,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                           className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray px-4 py-2.5 text-xs font-semibold text-brand-text-secondary hover:border-brand-gold/40 transition-colors"
                         >
                           <MapPin className="h-4 w-4" aria-hidden />
-                          {locale === 'uz' ? 'Lyuj manzili' : locale === 'ru' ? 'Адрес в Льеже' : 'Liège address'}
+                          {locale === 'uz' ? 'Belgiya manzili' : locale === 'ru' ? 'Адрес в Бельгии' : 'Belgium address'}
                         </a>
                       </div>
                     )}
