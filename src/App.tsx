@@ -15,9 +15,7 @@ import {
   normalizeLocaleParam,
   saveLocale,
   getPreferredLocale,
-  localeToHreflang,
   localeToOgLocale,
-  LOCALES,
 } from './routing/locale';
 import {
   PageId,
@@ -29,13 +27,8 @@ import {
   getPromoSlugFromPathname,
   getDaavlinSectionFromPathname,
   pagePath,
-  absoluteUrl,
   switchLocaleInPath,
-  pagePathForAllLocales,
   articlePath,
-  doctorPath,
-  serviceCategoryPath,
-  serviceSubPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
 import { DICTIONARY, GALLERY_IMAGS, getClinicRatingSummary } from './data';
@@ -93,6 +86,12 @@ import {
   buildServiceSeoTitle,
   getTabSeo,
 } from './seo/pageMeta';
+import {
+  getCanonicalUrl,
+  syncCanonicalLink,
+  syncHreflangLinks,
+  type RouteSeoContext,
+} from './seo/routeSeo';
 
 export default function App() {
   return (
@@ -342,8 +341,23 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     // Update document language
     document.documentElement.lang = locale;
 
-    const canonicalPath = forcePage === 'admin' ? '/admin' : location.pathname;
-    const canonicalUrl = absoluteUrl(canonicalPath);
+    const seoContext: RouteSeoContext = {
+      pathname: location.pathname,
+      forcePage,
+      currentPage,
+      articleId,
+      doctorId,
+      serviceCategoryId,
+      serviceSubId,
+      promoSlug,
+      daavlinSection,
+      resolvedArticleId: activeArticlePreview?.id ?? articleId ?? undefined,
+      resolvedDoctorId: activeDoctorPreview?.id ?? doctorId ?? undefined,
+      resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
+      resolvedServiceSubId: activeServiceSub?.id ?? serviceSubId ?? undefined,
+    };
+
+    const canonicalUrl = getCanonicalUrl(seoContext);
 
     // Helper functions to safely update or append heads meta
     const updateMeta = (name: string, content: string) => {
@@ -380,54 +394,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     updateOg('og:url', canonicalUrl);
     updateOg('og:locale', localeToOgLocale(locale));
 
-    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      document.head.appendChild(canonical);
-    }
-    canonical.href = canonicalUrl;
+    syncCanonicalLink(seoContext);
+    syncHreflangLinks(seoContext);
 
-    document.querySelectorAll('link[data-radeski-hreflang]').forEach((node) => node.remove());
-
-    if (forcePage !== 'admin') {
-      const pageForAlternates: PageId = currentPage === 'articles' && articleId ? 'articles' : currentPage;
-      LOCALES.forEach((altLocale) => {
-        const altPath = articleId
-          ? articlePath(altLocale, activeArticlePreview?.id ?? articleId)
-          : doctorId
-            ? doctorPath(altLocale, activeDoctorPreview?.id ?? doctorId)
-            : serviceSubId && serviceCategoryId
-              ? serviceSubPath(altLocale, serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
-              : serviceCategoryId
-                ? serviceCategoryPath(altLocale, serviceCategoryId)
-                : pagePathForAllLocales(pageForAlternates)[altLocale];
-        const link = document.createElement('link');
-        link.rel = 'alternate';
-        link.hreflang = localeToHreflang(altLocale);
-        link.href = absoluteUrl(altPath);
-        link.setAttribute('data-radeski-hreflang', 'true');
-        document.head.appendChild(link);
-      });
-
-      const defaultPath = articleId
-        ? articlePath('uz', activeArticlePreview?.id ?? articleId)
-        : doctorId
-          ? doctorPath('uz', activeDoctorPreview?.id ?? doctorId)
-          : serviceSubId && serviceCategoryId
-            ? serviceSubPath('uz', serviceCategoryId, activeServiceSub?.id ?? serviceSubId)
-            : serviceCategoryId
-              ? serviceCategoryPath('uz', serviceCategoryId)
-              : pagePath('uz', pageForAlternates);
-      const defaultLink = document.createElement('link');
-      defaultLink.rel = 'alternate';
-      defaultLink.hreflang = 'x-default';
-      defaultLink.href = absoluteUrl(defaultPath);
-      defaultLink.setAttribute('data-radeski-hreflang', 'true');
-      document.head.appendChild(defaultLink);
-    }
-
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, daavlinSection]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {

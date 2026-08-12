@@ -237,6 +237,13 @@ export function absoluteUrl(path: string): string {
   return `${SITE_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
+/** Strip query/hash and trailing slash for stable canonical URLs. */
+export function normalizeCanonicalPath(pathname: string): string {
+  const path = pathname.split('?')[0].split('#')[0];
+  if (!path || path === '/') return '/uz';
+  return path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+}
+
 export function pagePathForAllLocales(page: PageId): Record<Locale, string> {
   return {
     uz: pagePath('uz', page),

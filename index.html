@@ -10,11 +10,7 @@
     <meta name="keywords" content="dermatologiya Farg'ona, dermatolog Farg'ona, kosmetologiya Farg'ona, Radeski, IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks, psoriaz, vitiligo, Qo'qon" />
     <meta name="author" content="Radeski Skin & Aesthetic Clinic" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <link rel="canonical" href="https://radeski.uz/uz" />
-    <link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz" />
-    <link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru" />
-    <link rel="alternate" hreflang="en-US" href="https://radeski.uz/en" />
-    <link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz" />
+    <!-- Canonical + hreflang are set per URL (early script + React) to avoid duplicate-home signals on inner pages -->
 
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />
@@ -31,6 +27,23 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      (function () {
+        var origin = 'https://radeski.uz';
+        var path = location.pathname.replace(/\/+$/, '') || '/uz';
+        if (path === '/') path = '/uz';
+        var href = origin + path;
+        var link = document.querySelector('link[rel="canonical"]');
+        if (!link) {
+          link = document.createElement('link');
+          link.rel = 'canonical';
+          document.head.appendChild(link);
+        }
+        link.href = href;
+        var og = document.querySelector('meta[property="og:url"]');
+        if (og) og.setAttribute('content', href);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
