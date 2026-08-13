@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import {
   ArrowUpRight,
   CheckCircle2,
-  CornerUpLeft,
   Phone,
   MapPin,
   Clock,
@@ -18,7 +17,7 @@ import {
   BadgeCheck,
 } from 'lucide-react';
 import type { Locale } from '../types';
-import type { DaavlinSectionId } from '../routing/paths';
+import type { DaavlinSectionId, DaavlinModelId } from '../routing/paths';
 import {
   DAAVLIN_ABOUT,
   DAAVLIN_CABINS,
@@ -31,6 +30,7 @@ import {
   DAAVLIN_SHARED,
 } from '../data/daavlinFotoKabinalariContent';
 import {
+  daavlinModelPath,
   daavlinSectionPath,
   doctorsListPath,
   pagePath,
@@ -78,19 +78,16 @@ function SectionNav({ locale, section }: { locale: Locale; section: DaavlinSecti
 }
 
 function Hero({
-  locale,
   section,
   title,
   subtitle,
   tagline,
 }: {
-  locale: Locale;
   section: DaavlinSectionId;
   title: string;
   subtitle: string;
   tagline?: string;
 }) {
-  const s = DAAVLIN_SHARED;
   const heroSrc = DAAVLIN_SECTION_MEDIA[section].hero;
   return (
     <motion.div
@@ -102,9 +99,7 @@ function Hero({
         <MediaImage src={heroSrc} alt={title} className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/88 via-brand-dark-navy/40 to-brand-dark-navy/10" />
         <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">{s.eyebrow[locale]}</span>
-          <p className="mt-1 text-sm font-medium text-white/70">{s.brandTitle[locale]}</p>
-          <h1 className="mt-1 text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
+          <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
             {title}
           </h1>
           <p className="mt-2 max-w-2xl text-sm font-light text-white/85 sm:text-base">{subtitle}</p>
@@ -971,13 +966,13 @@ function CabinsBody({ locale }: { locale: Locale }) {
         <p className="mb-4 px-1 text-sm font-light text-brand-text-secondary sm:text-base">{c.lineupIntro[locale]}</p>
         <div className="mb-6 flex flex-wrap gap-2 px-1">
           {c.lineup.map((item) => (
-            <a
+            <Link
               key={item.id}
-              href={`#model-${item.id}`}
+              to={daavlinModelPath(locale, item.id as DaavlinModelId)}
               className="rounded-full border border-brand-sectiongray bg-brand-white px-3 py-1.5 text-xs font-semibold text-brand-text-secondary no-underline transition-colors hover:border-brand-gold hover:text-brand-text-primary"
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -1048,6 +1043,18 @@ function CabinsBody({ locale }: { locale: Locale }) {
                       </li>
                     ))}
                   </ul>
+
+                  <Link
+                    to={daavlinModelPath(locale, item.id as DaavlinModelId)}
+                    className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-brand-dark-navy px-4 py-2.5 text-xs font-bold text-white no-underline transition-colors hover:bg-brand-dark-navy/90 sm:text-sm"
+                  >
+                    {locale === 'uz'
+                      ? 'Model haqida batafsil'
+                      : locale === 'ru'
+                        ? 'Подробнее о модели'
+                        : 'Full model details'}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </div>
             </motion.article>
@@ -1330,17 +1337,8 @@ export default function DaavlinFotoKabinalariPage({ locale, section }: DaavlinFo
   return (
     <section id="daavlin-foto-kabinalari-page" className="min-h-screen bg-brand-offwhite py-12 sm:py-16">
       <div className="site-container">
-        <Link
-          to={pagePath(locale, 'home')}
-          className="mb-6 inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-3.5 py-2 text-xs font-semibold text-brand-text-secondary no-underline transition-all hover:bg-brand-offwhite hover:text-brand-text-primary"
-        >
-          <CornerUpLeft className="h-4 w-4" />
-          {locale === 'uz' ? 'Bosh sahifaga qaytish' : locale === 'ru' ? 'На главную' : 'Back to home'}
-        </Link>
-
         <SectionNav locale={locale} section={section} />
         <Hero
-          locale={locale}
           section={section}
           title={meta.title[locale]}
           subtitle={meta.subtitle[locale]}

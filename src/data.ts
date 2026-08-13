@@ -18,6 +18,7 @@ import { IPL_THERAPY_ARTICLE } from './data/articles/iplTherapyArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from './data/articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE } from './data/articles/adultAcneArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './data/articles/laserScarResurfacingArticle';
+import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './data/articles/acneDermatologistVsCosmetologistArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -28,7 +29,10 @@ export const DICTIONARY = {
     navHome: "Bosh sahifa",
     navAbout: "Klinika haqida",
     navServices: "Xizmatlar",
-    navDaavlinFotoKabinalari: "Daavlin Foto kabinalari",
+    navDaavlinFotoKabinalari: "Daavlin — O‘zbekiston Milliy Fototerapiya Markazi",
+    navDaavlinShort: "Daavlin",
+    navDermoScan: "DermoScan",
+    navScience: "Ilm-fan",
     navDoctors: "Shifokorlar",
     navPrices: "Narxlar",
     navArticles: "Maqolalar",
@@ -116,7 +120,10 @@ export const DICTIONARY = {
     navHome: "Главная",
     navAbout: "О клинике",
     navServices: "Услуги",
-    navDaavlinFotoKabinalari: "Фотокабины Daavlin",
+    navDaavlinFotoKabinalari: "Daavlin — Национальный центр фототерапии Узбекистана",
+    navDaavlinShort: "Daavlin",
+    navDermoScan: "DermoScan",
+    navScience: "Наука",
     navDoctors: "Врачи",
     navPrices: "Цены",
     navArticles: "Статьи",
@@ -204,7 +211,10 @@ export const DICTIONARY = {
     navHome: "Home",
     navAbout: "About Us",
     navServices: "Services",
-    navDaavlinFotoKabinalari: "Daavlin Photo Cabins",
+    navDaavlinFotoKabinalari: "National Phototherapy Center of Uzbekistan by Daavlin",
+    navDaavlinShort: "Daavlin",
+    navDermoScan: "DermoScan",
+    navScience: "Science",
     navDoctors: "Doctors",
     navPrices: "Prices",
     navArticles: "Articles",
@@ -916,4 +926,5 @@ export const ARTICLES: Article[] = [
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   LASER_SCAR_RESURFACING_ARTICLE,
+  ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE,
 ];

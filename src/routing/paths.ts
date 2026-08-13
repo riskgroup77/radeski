@@ -14,6 +14,9 @@ export type PageId =
   | 'technologies'
   | 'clinic-equipment'
   | 'daavlin-foto-kabinalari'
+  | 'dermoscan'
+  | 'science'
+  | 'brend'
   | 'terms'
   | 'privacy'
   | 'admin'
@@ -119,11 +122,42 @@ export function daavlinSectionPath(locale: Locale, section: DaavlinSectionId = '
   return `${base}/${section}`;
 }
 
+export type DaavlinModelId =
+  | '7-series'
+  | 'dermapal'
+  | 'm-series'
+  | 'ml24000'
+  | 'neolux'
+  | 'aquex';
+
+export const DAAVLIN_MODEL_IDS: DaavlinModelId[] = [
+  '7-series',
+  'dermapal',
+  'm-series',
+  'ml24000',
+  'neolux',
+  'aquex',
+];
+
+export function daavlinModelPath(locale: Locale, modelId: DaavlinModelId): string {
+  return `${pagePath(locale, 'daavlin-foto-kabinalari')}/models/${modelId}`;
+}
+
+export function getDaavlinModelIdFromPathname(pathname: string): DaavlinModelId | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments[1] !== 'daavlin-foto-kabinalari' || segments[2] !== 'models' || !segments[3]) {
+    return null;
+  }
+  const id = segments[3];
+  return (DAAVLIN_MODEL_IDS as string[]).includes(id) ? (id as DaavlinModelId) : null;
+}
+
 export function getDaavlinSectionFromPathname(pathname: string): DaavlinSectionId {
   const segments = pathname.split('/').filter(Boolean);
   if (segments[1] !== 'daavlin-foto-kabinalari') return 'about';
   const sub = segments[2];
   if (!sub) return 'about';
+  if (sub === 'models') return 'cabins';
   if ((DAAVLIN_SECTION_IDS as string[]).includes(sub)) return sub as DaavlinSectionId;
   if (DAAVLIN_SECTION_ALIASES[sub]) return DAAVLIN_SECTION_ALIASES[sub];
   return 'about';
@@ -151,6 +185,9 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'technologies' ||
     pageSegment === 'clinic-equipment' ||
     pageSegment === 'daavlin-foto-kabinalari' ||
+    pageSegment === 'dermoscan' ||
+    pageSegment === 'science' ||
+    pageSegment === 'brend' ||
     pageSegment === 'terms' ||
     pageSegment === 'privacy' ||
     pageSegment === 'fikr'
@@ -226,6 +263,11 @@ export function switchLocaleInPath(pathname: string, nextLocale: Locale): string
 
   segments[0] = nextLocale;
   return `/${segments.join('/')}`;
+}
+
+export function brandPath(locale: Locale, section?: string): string {
+  const base = pagePath(locale, 'brend');
+  return section ? `${base}#${section}` : base;
 }
 
 export function feedbackPath(locale: Locale): string {

@@ -2,6 +2,7 @@ import type { Locale } from '../types';
 import {
   type PageId,
   type DaavlinSectionId,
+  type DaavlinModelId,
   absoluteUrl,
   articlePath,
   doctorPath,
@@ -10,6 +11,7 @@ import {
   pagePathForAllLocales,
   pagePath,
   daavlinSectionPath,
+  daavlinModelPath,
   promoServicePath,
   normalizeCanonicalPath,
 } from '../routing/paths';
@@ -25,6 +27,7 @@ export type RouteSeoContext = {
   serviceSubId?: string | null;
   promoSlug?: string | null;
   daavlinSection?: DaavlinSectionId;
+  daavlinModelId?: DaavlinModelId | null;
   resolvedArticleId?: string;
   resolvedDoctorId?: string;
   resolvedServiceCategoryId?: string;
@@ -47,6 +50,9 @@ export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): s
   }
 
   if (ctx.currentPage === 'daavlin-foto-kabinalari') {
+    if (ctx.daavlinModelId) {
+      return daavlinModelPath(altLocale, ctx.daavlinModelId);
+    }
     return daavlinSectionPath(altLocale, ctx.daavlinSection ?? 'about');
   }
 

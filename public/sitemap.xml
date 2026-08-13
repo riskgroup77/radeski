@@ -78,6 +78,33 @@
   <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/contacts</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/contacts</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
   <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/contacts</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/7-series</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/7-series</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/7-series</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/dermapal</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/dermapal</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/dermapal</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/m-series</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/m-series</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/m-series</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/ml24000</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/ml24000</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/ml24000</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/neolux</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/neolux</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/neolux</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/aquex</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/aquex</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/aquex</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://radeski.uz/uz/dermoscan</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/dermoscan</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/dermoscan</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/science</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/science</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/science</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/brend</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/brend</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/brend</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
 
   <!-- Service categories (UZ prioritized) -->
   <url><loc>https://radeski.uz/uz/services/dermatologiya</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
@@ -137,4 +164,7 @@
   <url><loc>https://radeski.uz/ru/articles/art-hair-transplant-contraindications</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://radeski.uz/uz/articles/art-co2-lazer-deka</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://radeski.uz/ru/articles/art-co2-lazer-deka</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://radeski.uz/ru/articles/art-akne-dermatolog-kosmetolog</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radeski.uz/en/articles/art-akne-dermatolog-kosmetolog</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
 </urlset>

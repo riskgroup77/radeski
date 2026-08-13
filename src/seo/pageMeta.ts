@@ -119,9 +119,24 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Daavlin Farg'ona, InMode IPL Qo'qon, Hollywood Spectra, fototerapiya apparati, klinika jihozlari",
     },
     'daavlin-foto-kabinalari': {
-      title: "Daavlin Foto kabinalari — NB-UVB fototerapiya | Radeski Farg'ona | Qo'qon",
-      desc: "Narrowband UVB (311–313 nm) fototerapiya Daavlin kabinalarida: psoriaz, vitiligo, ekzema va boshqa surunkali teri kasalliklari. Radeski Skin Clinic.",
-      keywords: "Daavlin fototerapiya, NB-UVB, foto kabina, psoriaz, vitiligo, ekzema, Farg'ona, Qo'qon",
+      title: "Daavlin — O‘zbekiston Milliy Fototerapiya Markazi | Radeski Farg'ona | Qo'qon",
+      desc: "Narrowband UVB (311–313 nm) fototerapiya Daavlin kabinalarida: psoriaz, vitiligo, ekzema va boshqa surunkali teri kasalliklari. O‘zbekiston Milliy Fototerapiya Markazi — Radeski Skin Clinic.",
+      keywords: "Milliy Fototerapiya Markazi, Daavlin, NB-UVB, fototerapiya, psoriaz, vitiligo, ekzema, Farg'ona, Qo'qon",
+    },
+    dermoscan: {
+      title: "DermaScan — AI qo'llab-quvvatlangan dermatologiya | Radeski Skin Clinic",
+      desc: "DermaScan mobil ilovasi: teri holatini raqamli kuzatish, AI tahlili va shifokor bilan uzluksiz hamkorlik. Radeski Skin Clinic raqamli ekotizimi.",
+      keywords: "DermaScan, AI dermatologiya, teri kuzatuvi, sun'iy intellekt, raqamli dermatologiya, Radeski",
+    },
+    science: {
+      title: "Ilm-fan | Radeski Skin Clinic — tadqiqot, ta'lim, xalqaro hamkorlik",
+      desc: "Radeski Skin Clinic da ilm-fan: klinik amaliyot, tadqiqot, nashrlar, yosh shifokorlarni tayyorlash va xalqaro hamkorlik. Farg'ona | Qo'qon.",
+      keywords: "ilm-fan, dermatologiya tadqiqoti, klinik protokollar, yosh shifokorlar, Radeski, Farg'ona, Qo'qon",
+    },
+    brend: {
+      title: "Radeski klinik brendi | Missiya, falsafa, ekotizim",
+      desc: "Radeski Skin Clinic brendi: professional tibbiyot, texnologiya, ilm-fan va ochiqlik. Dermatologiya ekotizimi Farg'ona va Qo'qonda.",
+      keywords: "Radeski brend, klinik brend, dermatologiya ekotizimi, missiya, Farg'ona, Qo'qon",
     },
     terms: {
       title: "Foydalanish shartlari | Radeski Skin Clinic",
@@ -199,9 +214,24 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Daavlin Фергана, InMode IPL Коканд, Hollywood Spectra, фототерапия, аппараты клиники",
     },
     'daavlin-foto-kabinalari': {
-      title: "Фотокабины Daavlin — NB-UVB фототерапия | Radeski Фергана | Коканд",
-      desc: "Узкополосная UVB (311–313 нм) фототерапия в кабинах Daavlin: псориаз, витилиго, экзема и другие хронические заболевания кожи. Radeski Skin Clinic.",
-      keywords: "Daavlin фототерапия, NB-UVB, фотокабина, псориаз, витилиго, экзема, Фергана, Коканд",
+      title: "Daavlin — Национальный центр фототерапии Узбекистана | Radeski Фергана | Коканд",
+      desc: "Узкополосная UVB (311–313 нм) фототерапия в кабинах Daavlin: псориаз, витилиго, экзема и другие хронические заболевания кожи. Национальный центр фототерапии Узбекистана — Radeski Skin Clinic.",
+      keywords: "Национальный центр фототерапии, Daavlin, NB-UVB, фототерапия, псориаз, витилиго, экзема, Фергана, Коканд",
+    },
+    dermoscan: {
+      title: "DermaScan — AI-SUPPORTED DERMATOLOGY | Radeski Skin Clinic",
+      desc: "Мобильное приложение DermaScan: цифровое наблюдение за кожей, AI-анализ и непрерывное взаимодействие врача и пациента. Цифровая экосистема Radeski.",
+      keywords: "DermaScan, AI дерматология, наблюдение за кожей, искусственный интеллект, цифровая дерматология, Radeski",
+    },
+    science: {
+      title: "Наука | Radeski Skin Clinic — исследования, образование, международное сотрудничество",
+      desc: "Наука в Radeski Skin Clinic: клиническая практика, исследования, публикации, подготовка молодых врачей и международное сотрудничество. Фергана | Коканд.",
+      keywords: "наука, исследования в дерматологии, клинические протоколы, молодые врачи, Radeski, Фергана, Коканд",
+    },
+    brend: {
+      title: "Бренд Radeski Skin Clinic | Миссия, философия, экосистема",
+      desc: "Бренд Radeski Skin Clinic: профессиональная медицина, технологии, наука и доступность. Дерматологическая экосистема в Фергане и Коканде.",
+      keywords: "бренд Radeski, клинический бренд, экосистема дерматологии, миссия, Фергана, Коканд",
     },
     terms: {
       title: "Пользовательское соглашение | Radeski Skin Clinic",
@@ -279,9 +309,24 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Daavlin Fergana, InMode IPL Kokand, Hollywood Spectra, phototherapy devices",
     },
     'daavlin-foto-kabinalari': {
-      title: "Daavlin Photo Cabins — NB-UVB Phototherapy | Radeski Fergana | Kokand",
-      desc: "Narrowband UVB (311–313 nm) phototherapy in Daavlin cabins for psoriasis, vitiligo, eczema and other chronic skin conditions at Radeski Skin Clinic.",
-      keywords: "Daavlin phototherapy, NB-UVB, photo cabin, psoriasis, vitiligo, eczema, Fergana, Kokand",
+      title: "National Phototherapy Center of Uzbekistan by Daavlin | Radeski Fergana | Kokand",
+      desc: "Narrowband UVB (311–313 nm) phototherapy in Daavlin cabins for psoriasis, vitiligo, eczema and other chronic skin conditions. National Phototherapy Center of Uzbekistan — Radeski Skin Clinic.",
+      keywords: "National Phototherapy Center, Daavlin, NB-UVB, phototherapy, psoriasis, vitiligo, eczema, Fergana, Kokand",
+    },
+    dermoscan: {
+      title: "DermaScan — AI-Supported Dermatology | Radeski Skin Clinic",
+      desc: "DermaScan mobile app: digital skin monitoring, AI-assisted analysis, and continuous physician–patient collaboration. Radeski digital dermatology ecosystem.",
+      keywords: "DermaScan, AI dermatology, skin monitoring, artificial intelligence, digital dermatology, Radeski",
+    },
+    science: {
+      title: "Science | Radeski Skin Clinic — research, education, international collaboration",
+      desc: "Science at Radeski Skin Clinic: clinical practice, research, publications, training young physicians, and international collaboration. Fergana | Kokand.",
+      keywords: "science, dermatology research, clinical protocols, young physicians, Radeski, Fergana, Kokand",
+    },
+    brend: {
+      title: "The Radeski Skin Clinic brand | Mission, philosophy, ecosystem",
+      desc: "The Radeski Skin Clinic brand: professional medicine, technology, science and accessibility. A dermatology ecosystem in Fergana and Kokand.",
+      keywords: "Radeski brand, clinic brand, dermatology ecosystem, mission, Fergana, Kokand",
     },
     terms: {
       title: "Terms of Use | Radeski Skin Clinic",

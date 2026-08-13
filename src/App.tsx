@@ -26,6 +26,7 @@ import {
   getServiceSubIdFromPathname,
   getPromoSlugFromPathname,
   getDaavlinSectionFromPathname,
+  getDaavlinModelIdFromPathname,
   pagePath,
   switchLocaleInPath,
   articlePath,
@@ -47,6 +48,11 @@ import VideosPage from './components/VideosPage';
 import BranchesPage from './components/BranchesPage';
 import TechnologiesPage from './components/TechnologiesPage';
 import DaavlinFotoKabinalariPage from './components/DaavlinFotoKabinalariPage';
+import DaavlinModelPage from './components/DaavlinModelPage';
+import DermoScanPage from './components/DermoScanPage';
+import SciencePage from './components/SciencePage';
+import BrandPage from './components/BrandPage';
+import { DAAVLIN_MODEL_DEEP } from './data/daavlinModelDeepContent';
 import ClinicEquipmentParkPage from './components/ClinicEquipmentParkPage';
 import ResultsPage from './components/ResultsPage';
 import Prices from './components/Prices';
@@ -127,6 +133,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const serviceSubId = getServiceSubIdFromPathname(location.pathname);
   const promoSlug = getPromoSlugFromPathname(location.pathname);
   const daavlinSection = getDaavlinSectionFromPathname(location.pathname);
+  const daavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
   const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
@@ -317,6 +324,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     // 6. Route + locale SEO (language-specific titles for Google)
     const activeSEO = getTabSeo(locale, currentPage);
 
+    const daavlinModelSeo = daavlinModelId ? DAAVLIN_MODEL_DEEP[daavlinModelId] : null;
+
     const seoTitle = activeArticlePreview
       ? buildArticleSeoTitle(activeArticlePreview.title[locale], locale)
       : activeDoctorPreview
@@ -325,7 +334,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           ? buildServiceSeoTitle(activeServiceSub.name[locale], locale)
           : activeServiceCategory
             ? buildServiceSeoTitle(activeServiceCategory.title[locale], locale)
-            : activeSEO.title;
+            : daavlinModelSeo
+              ? daavlinModelSeo.seoTitle[locale]
+              : activeSEO.title;
     const seoDesc = activeArticlePreview
       ? activeArticlePreview.summary[locale]
       : activeDoctorPreview
@@ -334,7 +345,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           ? activeServiceSub.description[locale]
           : activeServiceCategory
             ? activeServiceCategory.description[locale]
-            : activeSEO.desc;
+            : daavlinModelSeo
+              ? daavlinModelSeo.seoDesc[locale]
+              : activeSEO.desc;
 
     document.title = seoTitle;
 
@@ -351,6 +364,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       serviceSubId,
       promoSlug,
       daavlinSection,
+      daavlinModelId,
       resolvedArticleId: activeArticlePreview?.id ?? articleId ?? undefined,
       resolvedDoctorId: activeDoctorPreview?.id ?? doctorId ?? undefined,
       resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
@@ -397,7 +411,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     syncCanonicalLink(seoContext);
     syncHreflangLinks(seoContext);
 
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, daavlinSection]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, daavlinSection, daavlinModelId]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {
@@ -513,7 +527,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}-${daavlinSection}`}
+          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}-${daavlinSection}-${daavlinModelId ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -1199,9 +1213,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <TechnologiesPage locale={locale} />
           )}
 
-          {currentPage === 'daavlin-foto-kabinalari' && (
-            <DaavlinFotoKabinalariPage locale={locale} section={daavlinSection} />
-          )}
+          {currentPage === 'daavlin-foto-kabinalari' &&
+            (daavlinModelId ? (
+              <DaavlinModelPage locale={locale} modelId={daavlinModelId} />
+            ) : (
+              <DaavlinFotoKabinalariPage locale={locale} section={daavlinSection} />
+            ))}
+          {currentPage === 'dermoscan' && <DermoScanPage locale={locale} />}
+          {currentPage === 'science' && <SciencePage locale={locale} />}
+          {currentPage === 'brend' && <BrandPage locale={locale} />}
 
           {currentPage === 'clinic-equipment' && (
             <ClinicEquipmentParkPage

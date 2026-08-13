@@ -35,7 +35,11 @@ export const DAAVLIN_SHARED = {
     'Radeski Distributor · Daavlin',
     'Radeski Distributor · Daavlin',
   ),
-  brandTitle: L('Daavlin Foto kabinalari', 'Фотокабины Daavlin', 'Daavlin Photo Cabins'),
+  brandTitle: L(
+    'Daavlin — O‘zbekiston Milliy Fototerapiya Markazi',
+    'Daavlin — Национальный центр фототерапии Узбекистана',
+    'National Phototherapy Center of Uzbekistan by Daavlin',
+  ),
   /** Fallback if a section has no dedicated hero */
   heroImage: '/daavlin/daavlin-about-hero.webp',
   ctaFototerapiya: L('Fototerapiya xizmati', 'Услуга фототерапии', 'Phototherapy service'),

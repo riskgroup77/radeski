@@ -666,7 +666,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-40',
-    sortOrder: 5,
+    sortOrder: 6,
     title: {
       uz: 'Klinikamizda ish kunlari qanday o‘tishini ko‘rsatamiz😉',
       ru: 'Показываем, как проходит рабочий день в нашей клинике😉',
@@ -683,7 +683,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-41',
-    sortOrder: 4,
+    sortOrder: 5,
     title: {
       uz: '🫧 Radeski Skin Clinic’da go‘zallik oyligi!',
       ru: '🫧 Месяц красоты в Radeski Skin Clinic!',
@@ -700,7 +700,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-42',
-    sortOrder: 3,
+    sortOrder: 4,
     title: {
       uz: '🔍 Seboreyali dermatit qanday davolanadi?',
       ru: '🔍 Как лечится себорейный дерматит?',
@@ -717,7 +717,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-43',
-    sortOrder: 2,
+    sortOrder: 3,
     title: {
       uz: '👌 Silliq teri — o‘tmish izlarisiz: bu mumkin!',
       ru: '👌 Гладкая кожа без следов прошлого — это реально!',
@@ -734,7 +734,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-44',
-    sortOrder: 1,
+    sortOrder: 2,
     title: {
       uz: '👌 Deka Moveo lazer epilyatsiyasi endi Qo‘qonda!',
       ru: '👌 Лазерная эпиляция Deka Moveo теперь в Коканде!',
@@ -748,6 +748,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     src: '/videos/44.mp4',
     duration: '0:45',
     category: { uz: 'Lazer epilyatsiya', ru: 'Лазерная эпиляция', en: 'Laser hair removal' },
+  },
+  {
+    id: 'clinic-video-45',
+    sortOrder: 1,
+    title: {
+      uz: '🧬 100 yoki 1000 bemor — bu juda ko‘p odamga yordam berganimizdir',
+      ru: '🧬 100 или 1000 пациентов — это очень много людей, которым мы помогли',
+      en: '🧬 100 or 1,000 patients — that is a great many people we were able to help',
+    },
+    description: {
+      uz: 'Ba’zan raqamlar ortidagi insonlarni unutib qo‘yamiz: 100 yoki 1000 bemor — bu yordam olgan juda ko‘p odam.\n\nRadeski jamoasi har kuni shu uchun ishlaydi: siz sog‘lom bo‘ling, o‘zingizni yaxshi his qiling.',
+      ru: 'Иногда за цифрами теряются живые люди: 100 или 1000 пациентов — это очень много тех, кому мы смогли помочь.\n\nКоманда Radeski каждый день работает ради этого: чтобы вы были здоровы и чувствовали себя счастливее.',
+      en: 'Numbers can hide the people behind them: 100 or 1,000 patients means a great many lives we were able to support.\n\nThe Radeski team works every day for this: so you can be healthier and happier.',
+    },
+    src: '/videos/45.mp4',
+    duration: '0:14',
+    category: { uz: 'Klinika', ru: 'О клинике', en: 'Clinic' },
   },
 ];
 
