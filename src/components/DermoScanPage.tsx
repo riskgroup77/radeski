@@ -4,12 +4,14 @@ import {
   ArrowUpRight,
   CheckCircle2,
   ChevronRight,
+  Play,
 } from 'lucide-react';
 import type { Locale } from '../types';
 import { DERMO_SCAN } from '../data/dermoScanContent';
 import { doctorsListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import PageHeroBanner from './PageHeroBanner';
 
 interface DermoScanPageProps {
   locale: Locale;
@@ -60,28 +62,25 @@ function HeroBanner({ locale }: { locale: Locale }) {
   const c = DERMO_SCAN;
 
   return (
-    <div className="overflow-hidden border-b border-brand-sectiongray bg-brand-dark-navy">
-      <div className="relative min-h-[280px] overflow-hidden aspect-[16/10] sm:aspect-[16/7] sm:min-h-[360px]">
-        <MediaImage src={IMG.hero} alt={c.title[locale]} className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy via-brand-dark-navy/50 to-brand-dark-navy/10" />
-        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
-          <div className="site-container">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">
-              {c.eyebrow[locale]}
-            </span>
-            <h1 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-              {c.title[locale]}
-            </h1>
-            <p className="mt-2 max-w-2xl text-base font-light text-white/90 sm:text-lg">
-              {c.subtitle[locale]}
-            </p>
-            <p className="mt-4 max-w-3xl text-sm font-light leading-relaxed text-white/75 sm:text-base">
-              {c.heroIntro[locale]}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <PageHeroBanner
+      image={IMG.hero}
+      badge={c.eyebrow[locale]}
+      title={c.title[locale]}
+      titleAccent={c.subtitle[locale]}
+      description={c.heroIntro[locale]}
+      appointmentLabel={ctaAppointment[locale]}
+      secondaryCta={
+        <Link
+          to={doctorsListPath(locale)}
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
+        >
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
+            <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
+          </span>
+          {ctaDoctors[locale]}
+        </Link>
+      }
+    />
   );
 }
 

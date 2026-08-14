@@ -15,6 +15,7 @@ import {
   Building2,
   Home,
   BadgeCheck,
+  Play,
 } from 'lucide-react';
 import type { Locale } from '../types';
 import type { DaavlinSectionId, DaavlinModelId } from '../routing/paths';
@@ -38,6 +39,7 @@ import {
 } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import PageHeroBanner from './PageHeroBanner';
 
 interface DaavlinFotoKabinalariPageProps {
   locale: Locale;
@@ -51,9 +53,9 @@ function SectionNav({ locale, section }: { locale: Locale; section: DaavlinSecti
   return (
     <nav
       aria-label="Daavlin Distributor sections"
-      className="mb-8 rounded-2xl border border-brand-sectiongray bg-brand-white p-1.5 sm:p-2 shadow-sm"
+      className="mb-10 rounded-2xl border border-brand-sectiongray bg-brand-white p-2 shadow-sm sm:mb-12 sm:p-2.5"
     >
-      <ul className="m-0 grid list-none grid-cols-2 gap-1.5 p-0 sm:grid-cols-3 lg:grid-cols-6">
+      <ul className="m-0 grid list-none grid-cols-2 gap-2 p-0 sm:grid-cols-3 lg:grid-cols-6">
         {DAAVLIN_SECTION_NAV.map((item) => {
           const active = item.id === section;
           return (
@@ -61,7 +63,7 @@ function SectionNav({ locale, section }: { locale: Locale; section: DaavlinSecti
               <Link
                 to={daavlinSectionPath(locale, item.id)}
                 aria-current={active ? 'page' : undefined}
-                className={`flex h-full min-h-[3rem] w-full items-center justify-center rounded-xl px-2 py-2.5 text-center text-[11px] font-semibold leading-snug no-underline transition-all sm:min-h-[3.25rem] sm:text-xs lg:text-[13px] ${
+                className={`flex h-full min-h-[3.5rem] w-full items-center justify-center rounded-xl px-2.5 py-3 text-center text-xs font-semibold leading-snug no-underline transition-all sm:min-h-[3.75rem] sm:text-[13px] lg:text-sm ${
                   active
                     ? 'bg-brand-gold text-white shadow-sm'
                     : 'border border-transparent text-brand-text-secondary hover:border-brand-sectiongray hover:bg-brand-offwhite hover:text-brand-text-primary'
@@ -78,37 +80,52 @@ function SectionNav({ locale, section }: { locale: Locale; section: DaavlinSecti
 }
 
 function Hero({
+  locale,
   section,
   title,
   subtitle,
   tagline,
 }: {
+  locale: Locale;
   section: DaavlinSectionId;
   title: string;
   subtitle: string;
   tagline?: string;
 }) {
+  const s = DAAVLIN_SHARED;
   const heroSrc = DAAVLIN_SECTION_MEDIA[section].hero;
+  const secondaryLabel =
+    section === 'cabins'
+      ? s.ctaEquipment[locale]
+      : locale === 'uz'
+        ? 'Kabinalar qatori'
+        : locale === 'ru'
+          ? 'Модельный ряд'
+          : 'Model range';
+  const secondaryTo =
+    section === 'cabins' ? pagePath(locale, 'clinic-equipment') : daavlinSectionPath(locale, 'cabins');
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mb-8 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm"
-    >
-      <div className="relative min-h-[200px] overflow-hidden bg-brand-offwhite aspect-[21/9] sm:aspect-[16/7]">
-        <MediaImage src={heroSrc} alt={title} className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy/88 via-brand-dark-navy/40 to-brand-dark-navy/10" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-          <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl">
-            {title}
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm font-light text-white/85 sm:text-base">{subtitle}</p>
-          {tagline ? (
-            <p className="mt-3 max-w-3xl text-xs font-medium text-brand-gold-light sm:text-sm">{tagline}</p>
-          ) : null}
-        </div>
-      </div>
-    </motion.div>
+    <PageHeroBanner
+      image={heroSrc}
+      badge={s.eyebrow[locale]}
+      title="Daavlin"
+      titleAccent={title}
+      description={subtitle}
+      note={tagline}
+      appointmentLabel={s.ctaBook[locale]}
+      secondaryCta={
+        <Link
+          to={secondaryTo}
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
+        >
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
+            <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
+          </span>
+          {secondaryLabel}
+        </Link>
+      }
+    />
   );
 }
 
@@ -1335,15 +1352,16 @@ export default function DaavlinFotoKabinalariPage({ locale, section }: DaavlinFo
   const tagline = section === 'about' ? DAAVLIN_ABOUT.heroTag[locale] : undefined;
 
   return (
-    <section id="daavlin-foto-kabinalari-page" className="min-h-screen bg-brand-offwhite py-12 sm:py-16">
-      <div className="site-container">
+    <section id="daavlin-foto-kabinalari-page" className="min-h-screen bg-brand-offwhite pb-12 sm:pb-16">
+      <Hero
+        locale={locale}
+        section={section}
+        title={meta.title[locale]}
+        subtitle={meta.subtitle[locale]}
+        tagline={tagline}
+      />
+      <div className="site-container pt-8 sm:pt-10">
         <SectionNav locale={locale} section={section} />
-        <Hero
-          section={section}
-          title={meta.title[locale]}
-          subtitle={meta.subtitle[locale]}
-          tagline={tagline}
-        />
 
         {section === 'about' && <AboutBody locale={locale} />}
         {section === 'radeski-skin-clinic' && <ClinicBody locale={locale} />}

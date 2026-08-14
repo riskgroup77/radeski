@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowUpRight, CheckCircle2, ChevronLeft } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, ChevronLeft, Play } from 'lucide-react';
 import type { Locale } from '../types';
 import type { DaavlinModelId } from '../routing/paths';
 import { DAAVLIN_CABINS, DAAVLIN_SHARED } from '../data/daavlinFotoKabinalariContent';
@@ -13,6 +13,7 @@ import {
 } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import PageHeroBanner from './PageHeroBanner';
 
 interface DaavlinModelPageProps {
   locale: Locale;
@@ -85,28 +86,25 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
 
   return (
     <section id={`daavlin-model-${model.id}`} className="min-h-screen bg-brand-offwhite pb-12 sm:pb-16">
-      <div className="overflow-hidden border-b border-brand-sectiongray bg-brand-dark-navy">
-        <div className="relative min-h-[280px] overflow-hidden aspect-[16/10] sm:aspect-[16/7] sm:min-h-[380px]">
-          <MediaImage src={model.image} alt={model.name} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy via-brand-dark-navy/55 to-brand-dark-navy/20" />
-          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
-            <div className="site-container">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">
-                {s.brandTitle[locale]}
-              </span>
-              <p className="mt-2 inline-flex rounded-full bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-gold-light">
-                {model.badge[locale]}
-              </p>
-              <h1 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-                {model.name}
-              </h1>
-              <p className="mt-3 max-w-2xl text-base font-light text-white/90 sm:text-lg">
-                {model.tagline[locale]}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageHeroBanner
+        image={model.image}
+        badge={model.badge[locale]}
+        title={model.name}
+        titleAccent="Daavlin"
+        description={model.tagline[locale]}
+        appointmentLabel={s.ctaBook[locale]}
+        secondaryCta={
+          <Link
+            to={daavlinSectionPath(locale, 'cabins')}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
+          >
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
+              <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
+            </span>
+            {backLabel[locale]}
+          </Link>
+        }
+      />
 
       <div className="site-container pt-8 sm:pt-10">
         <div className="mb-8 flex flex-wrap gap-3">

@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Play } from 'lucide-react';
 import type { Locale } from '../types';
 import { BRAND, BRAND_ARCHITECTURE } from '../data/brandContent';
 import { doctorsListPath, pagePath } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import PageHeroBanner from './PageHeroBanner';
 
 interface BrandPageProps {
   locale: Locale;
@@ -47,26 +48,25 @@ export default function BrandPage({ locale }: BrandPageProps) {
 
   return (
     <section id="brand-page" className="min-h-screen bg-brand-offwhite pb-12 sm:pb-16">
-      <div className="overflow-hidden border-b border-brand-sectiongray bg-brand-dark-navy">
-        <div className="relative min-h-[280px] overflow-hidden aspect-[16/10] sm:aspect-[16/7] sm:min-h-[360px]">
-          <MediaImage src="/brand/brand-hero.webp" alt={c.title[locale]} className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy via-brand-dark-navy/55 to-brand-dark-navy/15" />
-          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 lg:p-14">
-            <div className="site-container">
-              <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">
-                {c.eyebrow[locale]}
-              </span>
-              <h1 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-                {c.title[locale]}
-              </h1>
-              <p className="mt-2 max-w-2xl text-base font-light text-white/90 sm:text-lg">{c.subtitle[locale]}</p>
-              <p className="mt-4 max-w-3xl text-sm font-light leading-relaxed text-white/75 sm:text-base">
-                {c.intro[locale]}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageHeroBanner
+        image="/brand/brand-hero.webp"
+        badge={c.eyebrow[locale]}
+        title={c.title[locale]}
+        titleAccent={c.subtitle[locale]}
+        description={c.intro[locale]}
+        appointmentLabel={ctaAppointment[locale]}
+        secondaryCta={
+          <Link
+            to={pagePath(locale, 'about')}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
+          >
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
+              <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
+            </span>
+            {locale === 'uz' ? 'Klinika haqida' : locale === 'ru' ? 'О клинике' : 'About the clinic'}
+          </Link>
+        }
+      />
 
       <div className="site-container pt-10 sm:pt-14">
         <motion.div
