@@ -19,6 +19,7 @@ import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG } from './articles/pediatricWa
 import { ADULT_ACNE_ARTICLE_CATALOG } from './articles/adultAcneArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
+import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -121,6 +122,14 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'а не у косметолога',
     'not just a cosmetologist',
     'косметолог или дерматолог',
+  ],
+  'rosacea-radeski': [
+    'rozatseya-davolash-radeski',
+    'лечение розацеа в radeski skin clinic',
+    'rosacea treatment at radeski skin clinic',
+    'art-rozatseya-davolash-radeski',
+    'покраснение и сосуды на лице',
+    'yuz qizarishi va tomirlar',
   ],
   'adult-acne': [
     'pryshchi-u-vzroslykh',
@@ -891,6 +900,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'adult-acne': ADULT_ACNE_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
+  'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

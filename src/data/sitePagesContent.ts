@@ -766,6 +766,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '0:14',
     category: { uz: 'Klinika', ru: 'О клинике', en: 'Clinic' },
   },
+  {
+    id: 'clinic-video-46',
+    sortOrder: 0,
+    title: {
+      uz: 'IPL — bu shunchaki “dog‘ni yo‘qotish” emas',
+      ru: 'IPL — это не просто «убрать пятно»',
+      en: 'IPL is more than “erasing a spot”',
+    },
+    description: {
+      uz: 'Intensiv impulsli yorug‘lik terining chuqur qatlamlariga yetib, hujayra darajasida tabiiy tiklanishni ishga tushiradi.\n\nProtsedura nima beradi:\n\n↳ Pigment dog‘larini kamaytirish\n↳ Teri tusini tekislash\n↳ Filtrsiz, sog‘lom porlash\n\nBu niqoblash emas. Bu terini ichkaridan tiklash.',
+      ru: 'Интенсивный импульсный свет проникает в глубокие слои кожи и запускает естественное восстановление на клеточном уровне.\n\nЧто даёт процедура:\n\n↳ Осветление пигментных пятен\n↳ Более ровный тон кожи\n↳ Здоровое сияние без фильтров\n\nЭто не маскировка. Это восстановление кожи изнутри.',
+      en: 'Intense pulsed light reaches deeper skin layers and starts natural repair at cell level.\n\nWhat the session can do:\n\n↳ Fade pigment spots\n↳ Even out skin tone\n↳ A healthy glow — no filters\n\nThis is not covering a mark. It is helping the skin recover from within.',
+    },
+    src: '/videos/46.mp4',
+    duration: '0:46',
+    category: { uz: 'IPL', ru: 'IPL', en: 'IPL' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [
