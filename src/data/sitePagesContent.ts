@@ -768,7 +768,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-46',
-    sortOrder: 0,
+    sortOrder: 1,
     title: {
       uz: 'IPL — bu shunchaki “dog‘ni yo‘qotish” emas',
       ru: 'IPL — это не просто «убрать пятно»',
@@ -782,6 +782,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     src: '/videos/46.mp4',
     duration: '0:46',
     category: { uz: 'IPL', ru: 'IPL', en: 'IPL' },
+  },
+  {
+    id: 'clinic-video-47',
+    sortOrder: 0,
+    title: {
+      uz: '💉 Hamma jim turibdi, lekin biz aytamiz!',
+      ru: '💉 Все молчат — а мы скажем прямо',
+      en: '💉 Everyone stays quiet — we will say it out loud',
+    },
+    description: {
+      uz: 'Shifokorlarimiz dalillarga asoslangan tibbiyot va haqiqatan ishlaydigan, tasdiqlangan davolash usullariga tayanadi.\n\nChunki bizning asosiy vazifamiz — umid sotish emas, balki sizni davolash!',
+      ru: 'Наши врачи опираются на доказательную медицину и методы лечения, эффективность которых подтверждена на практике.\n\nПотому что наша главная задача — не продавать надежду, а помогать вам лечиться!',
+      en: 'Our doctors rely on evidence-based medicine and treatment methods that are proven to work in practice.\n\nBecause our main job is not to sell hope — it is to help you get better.',
+    },
+    src: '/videos/47.mp4',
+    duration: '1:08',
+    category: { uz: 'Klinika', ru: 'О клинике', en: 'Clinic' },
   },
 ];
 

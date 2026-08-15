@@ -21,6 +21,7 @@ import { ADULT_ACNE_ARTICLE } from '../src/data/articles/adultAcneArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from '../src/data/articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from '../src/data/articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from '../src/data/articles/rosaceaRadeskiArticle';
+import { MOLLUSCUM_CONTAGIOSUM_ARTICLE } from '../src/data/articles/molluscumContagiosumArticle';
 import { ACNE_ARTICLE } from '../src/data/articles/acneArticle';
 import { POST_ACNE_ARTICLE } from '../src/data/articles/postAcneArticle';
 import { ROSACEA_ARTICLE } from '../src/data/articles/rosaceaArticle';
@@ -63,6 +64,7 @@ const TARGETS = [
   LASER_SCAR_RESURFACING_ARTICLE,
   ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE,
   ROSACEA_RADESKI_ARTICLE,
+  MOLLUSCUM_CONTAGIOSUM_ARTICLE,
 ];
 
 async function withRetry<T>(label: string, fn: () => Promise<T>): Promise<T> {

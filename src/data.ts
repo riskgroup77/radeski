@@ -20,6 +20,7 @@ import { ADULT_ACNE_ARTICLE } from './data/articles/adultAcneArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './data/articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './data/articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './data/articles/rosaceaRadeskiArticle';
+import { MOLLUSCUM_CONTAGIOSUM_ARTICLE } from './data/articles/molluscumContagiosumArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -929,4 +930,5 @@ export const ARTICLES: Article[] = [
   LASER_SCAR_RESURFACING_ARTICLE,
   ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE,
   ROSACEA_RADESKI_ARTICLE,
+  MOLLUSCUM_CONTAGIOSUM_ARTICLE,
 ];
