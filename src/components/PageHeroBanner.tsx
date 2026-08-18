@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Calendar, Star } from 'lucide-react';
+import { Calendar, Check, Star } from 'lucide-react';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import MediaImage from './MediaImage';
 
@@ -10,6 +10,12 @@ interface PageHeroBannerProps {
   titleAccent?: string;
   description: string;
   note?: string;
+  /** Bullet highlights shown between intro copy and CTAs (equipment pages). */
+  highlights?: string[];
+  /** Short callout under highlights, e.g. “Best for …”. */
+  highlightFooter?: string;
+  /** Compact spec tags under highlights. */
+  specTags?: string[];
   appointmentLabel: string;
   secondaryCta?: ReactNode;
   after?: ReactNode;
@@ -50,12 +56,59 @@ function HeroCtaRow({
   );
 }
 
+function HeroHighlights({
+  highlights,
+  highlightFooter,
+  specTags,
+}: Pick<PageHeroBannerProps, 'highlights' | 'highlightFooter' | 'specTags'>) {
+  if (!highlights?.length && !highlightFooter && !specTags?.length) return null;
+
+  return (
+    <div className="mt-5 flex flex-1 flex-col gap-4 sm:mt-6">
+      {highlights && highlights.length > 0 ? (
+        <ul className="space-y-2.5 rounded-2xl border border-white/55 bg-white/30 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] backdrop-blur-sm sm:p-5">
+          {highlights.map((item) => (
+            <li key={item} className="flex items-start gap-2.5 text-sm leading-snug text-brand-text-primary/90">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold/35 bg-white/70">
+                <Check className="h-3 w-3 text-brand-gold" strokeWidth={2.5} />
+              </span>
+              <span className="font-medium">{item}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+
+      {specTags && specTags.length > 0 ? (
+        <div className="flex flex-wrap gap-2">
+          {specTags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-lg border border-white/70 bg-white/45 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-text-secondary backdrop-blur-sm sm:text-xs"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      ) : null}
+
+      {highlightFooter ? (
+        <p className="rounded-xl border border-brand-gold/25 bg-brand-gold/10 px-4 py-3 text-sm font-semibold leading-snug text-brand-text-primary/90">
+          {highlightFooter}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 function HeroCopy({
   badge,
   title,
   titleAccent,
   description,
   note,
+  highlights,
+  highlightFooter,
+  specTags,
   appointmentLabel,
   secondaryCta,
   ctaPosition = 'inline',
@@ -66,10 +119,19 @@ function HeroCopy({
   | 'titleAccent'
   | 'description'
   | 'note'
+  | 'highlights'
+  | 'highlightFooter'
+  | 'specTags'
   | 'appointmentLabel'
   | 'secondaryCta'
   | 'ctaPosition'
 >) {
+  const hasMiddleContent =
+    Boolean(note) ||
+    Boolean(highlights?.length) ||
+    Boolean(highlightFooter) ||
+    Boolean(specTags?.length);
+
   const textBlock = (
     <>
       <span className={`mb-5 sm:mb-6 ${glassBadgeClass}`}>
@@ -92,7 +154,7 @@ function HeroCopy({
       </p>
 
       {note ? (
-        <p className="mt-4 max-w-lg text-sm font-medium leading-relaxed text-brand-text-primary/85 sm:text-[15px]">
+        <p className="mt-4 max-w-xl text-sm font-normal leading-relaxed text-brand-text-primary/88 sm:text-[15px]">
           {note}
         </p>
       ) : null}
@@ -103,7 +165,18 @@ function HeroCopy({
     return (
       <div className="flex h-full min-h-0 flex-1 flex-col">
         {textBlock}
-        <div className="mt-auto pt-12 sm:pt-14 lg:pt-16 xl:pt-[4.5rem]">
+        <HeroHighlights
+          highlights={highlights}
+          highlightFooter={highlightFooter}
+          specTags={specTags}
+        />
+        <div
+          className={
+            hasMiddleContent
+              ? 'mt-auto pt-6 sm:pt-8'
+              : 'mt-auto pt-12 sm:pt-14 lg:pt-16 xl:pt-[4.5rem]'
+          }
+        >
           <HeroCtaRow appointmentLabel={appointmentLabel} secondaryCta={secondaryCta} />
         </div>
       </div>
@@ -113,7 +186,8 @@ function HeroCopy({
   return (
     <>
       {textBlock}
-      <div className="mt-8 sm:mt-10">
+      <HeroHighlights highlights={highlights} highlightFooter={highlightFooter} specTags={specTags} />
+      <div className={hasMiddleContent ? 'mt-6 sm:mt-8' : 'mt-8 sm:mt-10'}>
         <HeroCtaRow appointmentLabel={appointmentLabel} secondaryCta={secondaryCta} />
       </div>
     </>
@@ -127,6 +201,9 @@ export default function PageHeroBanner({
   titleAccent,
   description,
   note,
+  highlights,
+  highlightFooter,
+  specTags,
   appointmentLabel,
   secondaryCta,
   after,
@@ -158,6 +235,9 @@ export default function PageHeroBanner({
                 titleAccent={titleAccent}
                 description={description}
                 note={note}
+                highlights={highlights}
+                highlightFooter={highlightFooter}
+                specTags={specTags}
                 appointmentLabel={appointmentLabel}
                 secondaryCta={secondaryCta}
                 ctaPosition={resolvedCtaPosition}
@@ -211,6 +291,9 @@ export default function PageHeroBanner({
               titleAccent={titleAccent}
               description={description}
               note={note}
+              highlights={highlights}
+              highlightFooter={highlightFooter}
+              specTags={specTags}
               appointmentLabel={appointmentLabel}
               secondaryCta={secondaryCta}
               ctaPosition={resolvedCtaPosition}

@@ -93,6 +93,10 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         title={model.name}
         titleAccent={model.brandAccent?.[locale] ?? 'Daavlin'}
         description={model.tagline[locale]}
+        note={model.summary[locale]}
+        highlights={model.benefits[locale]}
+        specTags={model.specs[locale]}
+        highlightFooter={model.bestFor[locale]}
         appointmentLabel={s.ctaBook[locale]}
         secondaryCta={
           <Link to={daavlinSectionPath(locale, 'cabins')} className={heroSecondaryCtaClass}>
