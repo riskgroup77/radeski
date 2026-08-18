@@ -37,7 +37,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     purchaseNote: string;
     rentMonthly: string;
     rentDuration: string;
-    rentDeposit: string;
     rentTotal: string;
     rentMonths: string;
     leaseDown: string;
@@ -63,7 +62,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     purchaseNote: 'Daavlin xalqaro spravochnik, AQSh dollar',
     rentMonthly: 'Oylik ijara',
     rentDuration: 'Ijara muddati (oy)',
-    rentDeposit: 'Zalog / depozit (ixtiyoriy)',
     rentTotal: 'Jami to‘lov',
     rentMonths: 'oy',
     leaseDown: 'Boshlang‘ich to‘lov (%)',
@@ -89,7 +87,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     purchaseNote: 'Международный справочник Daavlin',
     rentMonthly: 'Аренда в месяц',
     rentDuration: 'Срок аренды (мес.)',
-    rentDeposit: 'Залог / депозит (необяз.)',
     rentTotal: 'Итого к оплате',
     rentMonths: 'мес.',
     leaseDown: 'Первоначальный взнос (%)',
@@ -115,7 +112,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     purchaseNote: 'Daavlin international price list, USD',
     rentMonthly: 'Monthly rental',
     rentDuration: 'Rental period (months)',
-    rentDeposit: 'Deposit (optional)',
     rentTotal: 'Total payment',
     rentMonths: 'mo',
     leaseDown: 'Down payment (%)',

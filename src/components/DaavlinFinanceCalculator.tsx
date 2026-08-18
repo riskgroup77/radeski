@@ -58,7 +58,6 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
   const [variantIndex, setVariantIndex] = useState(0);
   const [exchangeRate, setExchangeRate] = useState(USD_UZS_REFERENCE);
   const [rentMonths, setRentMonths] = useState(12);
-  const [rentDeposit, setRentDeposit] = useState(0);
   const [leaseDownPct, setLeaseDownPct] = useState(20);
   const [leaseTermMonths, setLeaseTermMonths] = useState(36);
   const [leaseRatePct, setLeaseRatePct] = useState(20);
@@ -70,15 +69,14 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
     setLeaseTermMonths(config.leaseTermsMonths[1] ?? config.leaseTermsMonths[0] ?? 36);
     setLeaseRatePct(Math.round(config.leaseAnnualRate * 1000) / 10);
     setRentMonths(12);
-    setRentDeposit(0);
   }, [modelId, config]);
 
   const variant = config?.variants[variantIndex] ?? config?.variants[0];
   const purchaseUzs = (variant?.purchaseUsd ?? 0) * exchangeRate;
 
   const rentTotal = useMemo(
-    () => (variant ? variant.rentalMonthlyUzs * rentMonths + rentDeposit : 0),
-    [variant, rentMonths, rentDeposit],
+    () => (variant ? variant.rentalMonthlyUzs * rentMonths : 0),
+    [variant, rentMonths],
   );
 
   const leasePrincipal = useMemo(() => {
@@ -206,20 +204,6 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
                   value={rentMonths}
                   onChange={(e) => setRentMonths(Number(e.target.value))}
                   className="w-full accent-brand-gold"
-                />
-              </div>
-              <div>
-                <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-brand-text-muted">
-                  {ui.rentDeposit}
-                </label>
-                <input
-                  type="number"
-                  min={0}
-                  step={100000}
-                  value={rentDeposit || ''}
-                  onChange={(e) => setRentDeposit(Math.max(0, Number(e.target.value) || 0))}
-                  className="w-full rounded-xl border border-brand-sectiongray bg-brand-offwhite px-4 py-3 text-sm focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/20"
-                  placeholder="0"
                 />
               </div>
             </div>
