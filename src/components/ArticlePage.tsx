@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
   Calendar,
@@ -21,7 +21,7 @@ import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
 import { articlePath, articlesListPath, absoluteUrl } from '../routing/paths';
-import { findArticleByRouteParam, resolveArticleApiSlug } from '../utils/articles';
+import { findArticleByRouteParam, resolveArticleApiSlug, resolveArticleRouteKey } from '../utils/articles';
 import MediaImage from './MediaImage';
 import ArticleDetailContent from './ArticleDetailContent';
 import ArticleViewsBadge from './ArticleViewsBadge';
@@ -50,6 +50,7 @@ export default function ArticlePage({
   onOpenArticle: _onOpenArticle,
   onViewsUpdate,
 }: ArticlePageProps) {
+  const navigate = useNavigate();
   const d = dictionary || DICTIONARY[locale];
   const articlesRef = useRef(articles);
   articlesRef.current = articles;
@@ -113,12 +114,20 @@ export default function ArticlePage({
     };
   }, [articleId]);
 
+  useEffect(() => {
+    if (!activeArticle) return;
+    const canonicalKey = resolveArticleRouteKey(activeArticle);
+    if (articleId !== canonicalKey) {
+      navigate(articlePath(locale, canonicalKey), { replace: true });
+    }
+  }, [activeArticle, articleId, locale, navigate]);
+
   const relatedArticles = articles
     .filter((art) => art.id !== activeArticle?.id)
     .slice(0, 3);
 
   const shareUrl = activeArticle
-    ? absoluteUrl(articlePath(locale, activeArticle.id))
+    ? absoluteUrl(articlePath(locale, resolveArticleRouteKey(activeArticle)))
     : absoluteUrl(articlePath(locale, articleId));
 
   const articleImage = activeArticle
@@ -289,7 +298,7 @@ export default function ArticlePage({
                     return (
                     <Link
                       key={art.id}
-                      to={articlePath(locale, art.id)}
+                      to={articlePath(locale, resolveArticleRouteKey(art))}
                       className="group bg-brand-offwhite hover:bg-brand-white border border-brand-sectiongray rounded-xl overflow-hidden transition-all cursor-pointer"
                     >
                       {relatedImage && (

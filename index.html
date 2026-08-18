@@ -32,6 +32,13 @@
         var origin = 'https://radeski.uz';
         var path = location.pathname.replace(/\/+$/, '') || '/uz';
         if (path === '/') path = '/uz';
+        var segments = path.split('/').filter(Boolean);
+        var isArticleAlias =
+          segments.length >= 3 &&
+          segments[1] === 'articles' &&
+          segments[2] &&
+          segments[2].indexOf('art-') !== 0;
+        if (isArticleAlias) return;
         var href = origin + path;
         var link = document.querySelector('link[rel="canonical"]');
         if (!link) {

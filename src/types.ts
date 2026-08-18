@@ -171,6 +171,8 @@ export interface Article {
   image: string | null;
   images?: LocalizedImages;
   views: number;
+  /** API UUID when public route id differs (e.g. art-* vs backend id) */
+  apiId?: string;
   /** To'liq maqola qo'shimcha ma'lumotlari — frontend katalogi yoki backend */
   richContent?: Partial<Record<Locale, ArticleRichContent>>;
 }

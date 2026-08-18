@@ -72,7 +72,7 @@ import { resolveArticleRichContent } from './utils/articleContent';
 import { fetchClientCountFromApi } from './utils/clientCount';
 import { getPlatformLogo } from './utils/platformLogo';
 import { ApiError } from './api/client';
-import { findArticleByRouteParam } from './utils/articles';
+import { findArticleByRouteParam, resolveArticleRouteKey } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
@@ -365,7 +365,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       promoSlug,
       daavlinSection,
       daavlinModelId,
-      resolvedArticleId: activeArticlePreview?.id ?? articleId ?? undefined,
+      resolvedArticleRouteKey: activeArticlePreview
+        ? resolveArticleRouteKey(activeArticlePreview)
+        : undefined,
       resolvedDoctorId: activeDoctorPreview?.id ?? doctorId ?? undefined,
       resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
       resolvedServiceSubId: activeServiceSub?.id ?? serviceSubId ?? undefined,
@@ -889,7 +891,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                       }
                       renderItem={(art) => (
                         <Link
-                          to={articlePath(locale, art.id)}
+                          to={articlePath(locale, resolveArticleRouteKey(art))}
                           className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between group cursor-pointer h-full"
                         >
                           <div className="h-48 overflow-hidden bg-brand-offwhite relative">

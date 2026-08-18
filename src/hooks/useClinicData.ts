@@ -104,7 +104,10 @@ export function useClinicData(): ClinicDataState {
       let changed = false;
       const next = prev.map((article) => {
         const isMatch =
-          (match.id && article.id === match.id) ||
+          (match.id &&
+            (article.id === match.id ||
+              article.apiId === match.id ||
+              article.slug === match.id)) ||
           (match.slug && (article.slug === match.slug || article.id === match.slug));
         if (!isMatch) return article;
         if (article.views === normalizedViews) return article;

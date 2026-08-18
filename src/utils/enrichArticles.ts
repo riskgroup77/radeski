@@ -34,6 +34,8 @@ export function enrichArticle(article: Article): Article {
     ? {
         ...staticMatch,
         ...article,
+        id: staticMatch.id,
+        apiId: isApiArticleId(article.id) ? article.id : article.apiId,
         title: { ...staticMatch.title, ...article.title },
         author: { ...staticMatch.author, ...article.author },
         date: article.date || staticMatch.date,
@@ -43,7 +45,11 @@ export function enrichArticle(article: Article): Article {
         image: fromApi ? article.image : (article.image ?? staticMatch.image),
         images: fromApi ? article.images : (article.images ?? staticMatch.images),
       }
-    : article;
+    : {
+        ...article,
+        id: isApiArticleId(article.id) ? article.slug : article.id,
+        apiId: isApiArticleId(article.id) ? article.id : article.apiId,
+      };
 
   const enrichedContent = mergeLocalizedField(base.content, base, resolveArticleBody);
   const enrichedSummary = mergeLocalizedField(base.summary, base, resolveArticleSummary);

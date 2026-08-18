@@ -14,6 +14,7 @@ import {
   daavlinModelPath,
   promoServicePath,
   normalizeCanonicalPath,
+  getLocaleFromPathname,
 } from '../routing/paths';
 import { localeToHreflang, LOCALES } from '../routing/locale';
 
@@ -28,14 +29,26 @@ export type RouteSeoContext = {
   promoSlug?: string | null;
   daavlinSection?: DaavlinSectionId;
   daavlinModelId?: DaavlinModelId | null;
-  resolvedArticleId?: string;
+  /** Stable public route key for articles (art-* or slug, never UUID). */
+  resolvedArticleRouteKey?: string;
   resolvedDoctorId?: string;
   resolvedServiceCategoryId?: string;
   resolvedServiceSubId?: string;
 };
 
+function resolveArticleRouteKeyFromContext(ctx: RouteSeoContext): string | undefined {
+  return ctx.resolvedArticleRouteKey ?? undefined;
+}
+
 export function getCanonicalPath(ctx: RouteSeoContext): string {
   if (ctx.forcePage === 'admin') return '/admin';
+
+  const articleRouteKey = resolveArticleRouteKeyFromContext(ctx);
+  if (articleRouteKey && ctx.currentPage === 'articles') {
+    const locale = getLocaleFromPathname(ctx.pathname);
+    return articlePath(locale, articleRouteKey);
+  }
+
   return normalizeCanonicalPath(ctx.pathname);
 }
 
@@ -56,9 +69,9 @@ export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): s
     return daavlinSectionPath(altLocale, ctx.daavlinSection ?? 'about');
   }
 
-  const articleId = ctx.resolvedArticleId ?? ctx.articleId;
-  if (articleId) {
-    return articlePath(altLocale, articleId);
+  const articleRouteKey = resolveArticleRouteKeyFromContext(ctx);
+  if (articleRouteKey) {
+    return articlePath(altLocale, articleRouteKey);
   }
 
   const doctorId = ctx.resolvedDoctorId ?? ctx.doctorId;
@@ -75,10 +88,7 @@ export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): s
     return serviceCategoryPath(altLocale, categoryId);
   }
 
-  const pageForAlternates: PageId =
-    ctx.currentPage === 'articles' && articleId ? 'articles' : ctx.currentPage;
-
-  return pagePathForAllLocales(pageForAlternates)[altLocale];
+  return pagePathForAllLocales(ctx.currentPage)[altLocale];
 }
 
 export function resolveDefaultAlternatePath(ctx: RouteSeoContext): string {

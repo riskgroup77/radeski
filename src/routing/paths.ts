@@ -1,4 +1,5 @@
 import { Locale } from '../types';
+import { normalizeLocaleParam } from './locale';
 
 export type PageId =
   | 'home'
@@ -80,6 +81,11 @@ export function getArticleIdFromPathname(pathname: string): string | null {
     }
   }
   return null;
+}
+
+export function getLocaleFromPathname(pathname: string): Locale {
+  const segments = pathname.split('/').filter(Boolean);
+  return normalizeLocaleParam(segments[0]) ?? 'uz';
 }
 
 /** @deprecated Use getArticleIdFromPathname */

@@ -4,6 +4,7 @@ import type { Locale } from '../types';
 import { CLINIC_PHONE_KOKAND } from '../config/clinicContacts';
 import { KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
 import { pagePath, serviceCategoryPath, serviceSubPath, articlePath } from '../routing/paths';
+import { resolveArticleRouteKey } from '../utils/articles';
 import AppointmentBookingLink from './AppointmentBookingLink';
 
 interface KokandLandingPageProps {
@@ -255,7 +256,7 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
           {ARTICLES.map((a) => (
             <Link
               key={a.id}
-              to={articlePath(locale, a.id)}
+              to={articlePath(locale, resolveArticleRouteKey(a))}
               className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 text-sm font-semibold text-brand-text-primary no-underline"
             >
               {locale === 'uz' ? a.uz : locale === 'ru' ? a.ru : a.en}

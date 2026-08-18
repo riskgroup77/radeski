@@ -7,6 +7,7 @@ import ArticleHashtagList from './ArticleHashtagList';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
+import { resolveArticleRouteKey } from '../utils/articles';
 import MediaImage from './MediaImage';
 import { getLocalizedImage } from '../utils/localizedImage';
 import {
@@ -78,7 +79,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                 className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
               >
                 <Link
-                  to={articlePath(locale, art.id)}
+                  to={articlePath(locale, resolveArticleRouteKey(art))}
                   className="flex flex-col flex-1 cursor-pointer"
                 >
                   <div className="relative h-56 w-full overflow-hidden bg-brand-sectiongray">
@@ -136,7 +137,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                     By {art.author[locale]}
                   </span>
                   <Link
-                    to={articlePath(locale, art.id)}
+                    to={articlePath(locale, resolveArticleRouteKey(art))}
                     className="text-xs text-brand-gold font-bold group-hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer"
                   >
                     <span>{d.readMore}</span>
