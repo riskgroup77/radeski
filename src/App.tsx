@@ -72,7 +72,7 @@ import { resolveArticleRichContent } from './utils/articleContent';
 import { fetchClientCountFromApi } from './utils/clientCount';
 import { getPlatformLogo } from './utils/platformLogo';
 import { ApiError } from './api/client';
-import { findArticleByRouteParam, resolveArticleRouteKey } from './utils/articles';
+import { findArticleByRouteParam, resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
@@ -365,8 +365,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       promoSlug,
       daavlinSection,
       daavlinModelId,
-      resolvedArticleRouteKey: activeArticlePreview
-        ? resolveArticleRouteKey(activeArticlePreview)
+      resolvedArticleRouteKey: articleId
+        ? resolveArticleRedirectTarget(articleId) ??
+          (activeArticlePreview ? resolveArticleRouteKey(activeArticlePreview) : undefined)
         : undefined,
       resolvedDoctorId: activeDoctorPreview?.id ?? doctorId ?? undefined,
       resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
@@ -876,7 +877,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
                   <div className="px-1 sm:px-10">
                     <HomeCarousel
-                      items={dynamicArticles}
+                      items={filterPublicArticles(dynamicArticles)}
                       visibleCount={3}
                       autoPlayMs={5000}
                       arrowsInside

@@ -2,6 +2,25 @@ import type { Article } from '../types';
 import { ARTICLES } from '../data';
 import { isApiArticleId } from './articleViews';
 
+/** Retired article routes permanently redirect to the canonical replacement. */
+export const ARTICLE_ROUTE_REDIRECTS: Record<string, string> = {
+  'art-rozacea-ipl': 'art-rozatseya-davolash-radeski',
+  'rozacea-ipl': 'art-rozatseya-davolash-radeski',
+};
+
+export function resolveArticleRedirectTarget(routeParam: string): string | null {
+  return ARTICLE_ROUTE_REDIRECTS[routeParam] ?? null;
+}
+
+export function isArticlePubliclyListed(article: Pick<Article, 'id' | 'slug'>): boolean {
+  const routeKey = resolveArticleRouteKey(article);
+  return !ARTICLE_ROUTE_REDIRECTS[routeKey] && !ARTICLE_ROUTE_REDIRECTS[article.slug];
+}
+
+export function filterPublicArticles(articles: Article[]): Article[] {
+  return articles.filter(isArticlePubliclyListed);
+}
+
 export function findArticleByRouteParam(
   routeParam: string,
   articles: Article[],

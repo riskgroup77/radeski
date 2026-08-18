@@ -1,7 +1,3 @@
-# GSC — Проверка URL → ЗАПРОСИТЬ ИНДЕКСИРОВАНИЕ
-# Kuniga ~10–15 ta. ЕСТЬ = qayta skaner; НЕТ = birinchi marta indeks navbati.
-# Batafsil: loyihadagi SEO-INDEKSLASH-URLS.txt
-
 https://radeski.uz/uz/qoqon
 https://radeski.uz/uz/services/dermatologiya
 https://radeski.uz/uz/services/apparatnaya-kosmetologiya

@@ -21,7 +21,7 @@ import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
 import { articlePath, articlesListPath, absoluteUrl } from '../routing/paths';
-import { findArticleByRouteParam, resolveArticleApiSlug, resolveArticleRouteKey } from '../utils/articles';
+import { findArticleByRouteParam, resolveArticleApiSlug, resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles } from '../utils/articles';
 import MediaImage from './MediaImage';
 import ArticleDetailContent from './ArticleDetailContent';
 import ArticleViewsBadge from './ArticleViewsBadge';
@@ -65,6 +65,13 @@ export default function ArticlePage({
   );
   const [detailRefreshing, setDetailRefreshing] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const redirectTarget = resolveArticleRedirectTarget(articleId);
+    if (redirectTarget) {
+      navigate(articlePath(locale, redirectTarget), { replace: true });
+    }
+  }, [articleId, locale, navigate]);
 
   useEffect(() => {
     const preview = buildPreviewArticle(articleId, articlesRef.current);
@@ -122,7 +129,7 @@ export default function ArticlePage({
     }
   }, [activeArticle, articleId, locale, navigate]);
 
-  const relatedArticles = articles
+  const relatedArticles = filterPublicArticles(articles)
     .filter((art) => art.id !== activeArticle?.id)
     .slice(0, 3);
 

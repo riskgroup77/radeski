@@ -163,7 +163,7 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
   acne: ['akne', 'акне', 'acne', 'комедон'],
   'atopic-dermatitis': ['ekzem', 'atop', 'экзем', 'dermatit', 'allergik'],
-  rosacea: ['rozase', 'rozacea', 'розаце', 'rosacea', 'qizarish', 'derma v', 'ipl inmode'],
+  rosacea: ['rozacea-ipl', 'derma v lutronic', 'ipl inmode rozacea', 'rozatsea ipl'],
   vitiligo: [
     'vitili',
     'витили',

@@ -137,43 +137,305 @@
   <url><loc>https://radeski.uz/uz/services/lazernaya-epilyaciya/alex-lazer</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://radeski.uz/ru/services/lazernaya-epilyaciya/alex-lazer</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
 
-  <!-- Articles -->
-  <url><loc>https://radeski.uz/uz/articles/art-ipl-terapiya</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-ipl-terapiya</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-rozacea-ipl</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-rozacea-ipl</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-akne</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-akne</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-pryshchi-u-vzroslykh</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-postakne</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-postakne</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-vitiligo-daavlin</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-vitiligo-daavlin</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-psoriasis-daavlin-kokand</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-bolalarda-sogal-co2-deka</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-deka-moveo-epilyatsiya-tayyorgarlik</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-plazmotorapiya-soch-prp</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-plazmaferez-teri-kasalliklari</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-hair-transplant-contraindications</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-hair-transplant-contraindications</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-co2-lazer-deka</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-co2-lazer-deka</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-akne-dermatolog-kosmetolog</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/en/articles/art-akne-dermatolog-kosmetolog</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-rozatseya-davolash-radeski</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/en/articles/art-rozatseya-davolash-radeski</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-kontagioz-mollyusk-radeski</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/en/articles/art-kontagioz-mollyusk-radeski</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
-  <url><loc>https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
-  <url><loc>https://radeski.uz/ru/articles/art-bolalarda-sogal-lazer-radeski</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radeski.uz/en/articles/art-bolalarda-sogal-lazer-radeski</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <!-- Articles (hreflang) -->
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-ipl-terapiya</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-ipl-terapiya"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-ipl-terapiya"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-ipl-terapiya"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-ipl-terapiya</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-ipl-terapiya"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-ipl-terapiya"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-ipl-terapiya"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-akne</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-akne"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-akne"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-akne"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-akne</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-akne"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-akne"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-akne"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-pryshchi-u-vzroslykh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-pryshchi-u-vzroslykh</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-pryshchi-u-vzroslykh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-pryshchi-u-vzroslykh"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-postakne</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-postakne"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-postakne"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-postakne"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-postakne</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-postakne"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-postakne"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-postakne"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-vitiligo-daavlin</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-vitiligo-daavlin"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-vitiligo-daavlin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-vitiligo-daavlin"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-vitiligo-daavlin</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-vitiligo-daavlin"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-vitiligo-daavlin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-vitiligo-daavlin"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-psoriasis-daavlin-kokand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-psoriasis-daavlin-kokand</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-psoriasis-daavlin-kokand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-psoriasis-daavlin-kokand"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bolalarda-sogal-co2-deka"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-bolalarda-sogal-co2-deka</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bolalarda-sogal-co2-deka"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-co2-deka"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-deka-moveo-epilyatsiya-tayyorgarlik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-deka-moveo-epilyatsiya-tayyorgarlik</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-deka-moveo-epilyatsiya-tayyorgarlik"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-deka-moveo-epilyatsiya-tayyorgarlik"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-plazmotorapiya-soch-prp"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-plazmotorapiya-soch-prp</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-plazmotorapiya-soch-prp"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-plazmaferez-teri-kasalliklari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-plazmaferez-teri-kasalliklari</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-plazmaferez-teri-kasalliklari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-plazmaferez-teri-kasalliklari"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-hair-transplant-contraindications</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-hair-transplant-contraindications"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-hair-transplant-contraindications"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-hair-transplant-contraindications"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-hair-transplant-contraindications</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-hair-transplant-contraindications"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-hair-transplant-contraindications"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-hair-transplant-contraindications"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-co2-lazer-deka</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-co2-lazer-deka"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-co2-lazer-deka"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-co2-lazer-deka"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-co2-lazer-deka</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-co2-lazer-deka"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-co2-lazer-deka"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-co2-lazer-deka"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-akne-dermatolog-kosmetolog</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-akne-dermatolog-kosmetolog</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-akne-dermatolog-kosmetolog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-akne-dermatolog-kosmetolog"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-rozatseya-davolash-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-rozatseya-davolash-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-rozatseya-davolash-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-rozatseya-davolash-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-kontagioz-mollyusk-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-kontagioz-mollyusk-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-kontagioz-mollyusk-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-kontagioz-mollyusk-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-bolalarda-sogal-lazer-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-bolalarda-sogal-lazer-radeski</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bolalarda-sogal-lazer-radeski"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
 </urlset>

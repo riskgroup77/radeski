@@ -7,7 +7,7 @@ import ArticleHashtagList from './ArticleHashtagList';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
-import { resolveArticleRouteKey } from '../utils/articles';
+import { resolveArticleRouteKey, filterPublicArticles } from '../utils/articles';
 import MediaImage from './MediaImage';
 import { getLocalizedImage } from '../utils/localizedImage';
 import {
@@ -25,7 +25,7 @@ interface ArticlesProps {
 
 export default function Articles({ locale, articles, dictionary }: ArticlesProps) {
   const d = dictionary || DICTIONARY[locale];
-  const dynamicArticles = articles || [];
+  const dynamicArticles = filterPublicArticles(articles || []);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredArticles = useMemo(() => {
