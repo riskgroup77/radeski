@@ -12,6 +12,7 @@
     "seed:cms": "tsx scripts/seedCmsToApi.ts",
     "seed:videos": "tsx scripts/seedVideosToApi.ts",
     "seed:articles": "tsx scripts/seedArticlesToApi.ts",
+    "generate:nginx-redirects": "tsx scripts/generateArticleNginxRedirects.ts",
     "convert:videos": "node scripts/convertClinicVideos.mjs",
     "preview": "vite preview",
     "server": "tsx server/expressServer.ts",
