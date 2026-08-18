@@ -27,6 +27,7 @@ import {
   getPromoSlugFromPathname,
   getDaavlinSectionFromPathname,
   getDaavlinModelIdFromPathname,
+  getLegacyDaavlinModelRedirectPath,
   pagePath,
   switchLocaleInPath,
   articlePath,
@@ -134,6 +135,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const promoSlug = getPromoSlugFromPathname(location.pathname);
   const daavlinSection = getDaavlinSectionFromPathname(location.pathname);
   const daavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
+  const legacyDaavlinModelRedirect = getLegacyDaavlinModelRedirectPath(location.pathname);
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
   const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
@@ -1049,6 +1051,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale}
               category={activeServiceCategory}
               sub={activeServiceSub}
+              articles={dynamicArticles}
               dictionary={d}
               prices={dynamicPrices}
               onBackToCategory={() => goToServiceCategory(activeServiceCategory.id)}
@@ -1060,6 +1063,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <ServiceCategoryPage
               locale={locale}
               category={activeServiceCategory}
+              articles={dynamicArticles}
               dictionary={d}
               prices={dynamicPrices}
               onOpenAppointment={handleOpenAppointmentWithService}
@@ -1217,7 +1221,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           )}
 
           {currentPage === 'daavlin-foto-kabinalari' &&
-            (daavlinModelId ? (
+            (legacyDaavlinModelRedirect ? (
+              <Navigate to={legacyDaavlinModelRedirect} replace />
+            ) : daavlinModelId ? (
               <DaavlinModelPage locale={locale} modelId={daavlinModelId} />
             ) : (
               <DaavlinFotoKabinalariPage locale={locale} section={daavlinSection} />

@@ -108,6 +108,8 @@ function Hero({
   return (
     <PageHeroBanner
       image={heroSrc}
+      imageVariant={section === 'about' ? 'panoramic' : 'cover'}
+      imageAlt={section === 'about' ? s.lineupHeroAlt[locale] : ''}
       badge={s.eyebrow[locale]}
       title="Daavlin"
       titleAccent={title}
@@ -117,7 +119,7 @@ function Hero({
       secondaryCta={
         <Link
           to={secondaryTo}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/90 bg-white/60 px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-[0_4px_24px_-6px_rgba(7,27,46,0.12)] backdrop-blur-md transition-all hover:bg-white/85 hover:shadow-[0_8px_28px_-8px_rgba(7,27,46,0.18)]"
         >
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
             <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />

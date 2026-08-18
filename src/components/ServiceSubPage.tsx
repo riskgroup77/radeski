@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom';
 import { CornerUpLeft } from 'lucide-react';
-import { Locale, PriceItem, ServiceCategory, ServiceDetail } from '../types';
+import { Article, Locale, PriceItem, ServiceCategory, ServiceDetail } from '../types';
 import { DICTIONARY } from '../data';
 import { serviceCategoryPath, servicesListPath } from '../routing/paths';
 import ServiceDetailContent from './ServiceDetailContent';
 import ServicePageHero from './ServicePageHero';
 import { resolveCategoryIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
 import { resolveServiceRichContent } from '../utils/serviceContent';
-import { getLocalizedImage } from '../utils/localizedImage';
+import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { buildServiceH1 } from '../seo/pageMeta';
+import ServiceRelatedArticlesSection from './ServiceRelatedArticlesSection';
 
 interface ServiceSubPageProps {
   locale: Locale;
   category: ServiceCategory;
   sub: ServiceDetail;
+  articles?: Article[];
   dictionary?: Record<string, string>;
   prices?: PriceItem[];
   onBackToCategory: () => void;
@@ -32,6 +34,7 @@ export default function ServiceSubPage({
   locale,
   category,
   sub,
+  articles = [],
   dictionary,
   prices,
   onBackToCategory,
@@ -39,7 +42,7 @@ export default function ServiceSubPage({
 }: ServiceSubPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const rich = resolveServiceRichContent(sub, category, locale);
-  const subImage = getLocalizedImage(sub.images, locale) ?? sub.image ?? getLocalizedImage(category.images, locale) ?? category.image;
+  const subImage = resolveSubServiceImage(category, sub, locale);
   const heroText = heroDescription(rich.overview || sub.description[locale]);
 
   return (
@@ -81,6 +84,14 @@ export default function ServiceSubPage({
             prices={prices}
           />
         </div>
+
+        <ServiceRelatedArticlesSection
+          locale={locale}
+          categoryId={category.id}
+          subId={sub.id}
+          articles={articles}
+          dictionary={d}
+        />
       </div>
     </section>
   );

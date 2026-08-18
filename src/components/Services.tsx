@@ -4,7 +4,7 @@ import * as Icons from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import MediaImage from './MediaImage';
-import { getLocalizedImage } from '../utils/localizedImage';
+import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { getServiceLucideIcon, resolveCategoryIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
 
 interface ServicesProps {
@@ -55,10 +55,10 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
   }, [searchQuery, locale, dynamicCategories]);
 
   const getCategoryImage = (category: ServiceCategory) =>
-    getLocalizedImage(category.images, locale) ?? category.image ?? null;
+    resolveCategoryImage(category, locale);
 
-  const getSubImage = (sub: ServiceCategory['subServices'][number]) =>
-    getLocalizedImage(sub.images, locale) ?? sub.image ?? null;
+  const getSubImage = (sub: ServiceCategory['subServices'][number], category: ServiceCategory) =>
+    resolveSubServiceImage(category, sub, locale);
 
   const categoriesWithImages = useMemo(
     () => filteredCategories.filter((cat) => getCategoryImage(cat)),
@@ -253,17 +253,17 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                         onClick={() => onOpenSubService?.(category.id, sub.id)}
                         className="w-full p-2.5 sm:p-3 bg-brand-offwhite/60 hover:bg-brand-gold-light/10 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-start gap-3 cursor-pointer group/sub transition-all text-left"
                       >
-                        {getSubImage(sub) ? (
+                        {getSubImage(sub, category) ? (
                           <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-white shadow-xs group/thumb mt-0.5">
                             <MediaImage
-                              src={getSubImage(sub)!}
+                              src={getSubImage(sub, category)!}
                               alt={sub.name[locale]}
                               loading="lazy"
                               className="w-full h-full object-cover object-center"
                             />
                             <button
                               type="button"
-                              onClick={(e) => openImageLightbox(getSubImage(sub)!, sub.name[locale], e)}
+                              onClick={(e) => openImageLightbox(getSubImage(sub, category)!, sub.name[locale], e)}
                               className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-all cursor-pointer"
                               aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить' : 'Expand'}
                             >

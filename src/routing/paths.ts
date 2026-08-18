@@ -132,7 +132,9 @@ export type DaavlinModelId =
   | '7-series'
   | 'dermapal'
   | 'm-series'
-  | 'ml24000'
+  | 'deka-co2-laser'
+  | 'deka-alexandrite-laser'
+  | 'surgitron-radiofrequency'
   | 'neolux'
   | 'aquex';
 
@@ -140,7 +142,9 @@ export const DAAVLIN_MODEL_IDS: DaavlinModelId[] = [
   '7-series',
   'dermapal',
   'm-series',
-  'ml24000',
+  'deka-co2-laser',
+  'deka-alexandrite-laser',
+  'surgitron-radiofrequency',
   'neolux',
   'aquex',
 ];
@@ -156,6 +160,21 @@ export function getDaavlinModelIdFromPathname(pathname: string): DaavlinModelId 
   }
   const id = segments[3];
   return (DAAVLIN_MODEL_IDS as string[]).includes(id) ? (id as DaavlinModelId) : null;
+}
+
+/** Retired Daavlin model slugs → replacement canonical model page. */
+export const LEGACY_DAAVLIN_MODEL_REDIRECTS: Record<string, DaavlinModelId> = {
+  ml24000: 'deka-co2-laser',
+};
+
+export function getLegacyDaavlinModelRedirectPath(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments[1] !== 'daavlin-foto-kabinalari' || segments[2] !== 'models' || !segments[3]) {
+    return null;
+  }
+  const target = LEGACY_DAAVLIN_MODEL_REDIRECTS[segments[3]];
+  if (!target) return null;
+  return daavlinModelPath(getLocaleFromPathname(pathname), target);
 }
 
 export function getDaavlinSectionFromPathname(pathname: string): DaavlinSectionId {

@@ -90,7 +90,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         image={model.image}
         badge={model.badge[locale]}
         title={model.name}
-        titleAccent="Daavlin"
+        titleAccent={model.brandAccent?.[locale] ?? 'Daavlin'}
         description={model.tagline[locale]}
         appointmentLabel={s.ctaBook[locale]}
         secondaryCta={

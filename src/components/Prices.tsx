@@ -10,6 +10,7 @@ import { getCatalogCategoryNameRu } from '../utils/priceCatalog';
 import { resolvePriceName } from '../utils/priceDisplay';
 import { resolvePriceCategoryLabel } from '../utils/priceCategoryDisplay';
 import { sortPriceItemsInCategory } from '../utils/sortPriceItems';
+import AnimatedPriceValue from './AnimatedPriceValue';
 
 interface PricesProps {
   locale: Locale;
@@ -170,7 +171,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
               </div>
 
               <div className="divide-y divide-brand-sectiongray">
-                {section.items.map((item) => (
+                {section.items.map((item, itemIndex) => (
                   <div
                     key={item.id}
                     id={`price-item-${item.id}`}
@@ -186,9 +187,12 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
                       <span className="text-[10px] font-bold text-brand-text-muted uppercase tracking-widest block md:hidden">
                         {d.priceMobilePrice}
                       </span>
-                      <span className="text-brand-gold-dark font-extrabold text-sm sm:text-base whitespace-nowrap">
-                        {item.priceValue === 0 ? d.priceFree : item.price}
-                      </span>
+                      <AnimatedPriceValue
+                        item={item}
+                        freeLabel={d.priceFree}
+                        delay={Math.min(sectionIndex * 40 + itemIndex * 25, 600)}
+                        className="text-brand-gold-dark font-extrabold text-sm sm:text-base whitespace-nowrap"
+                      />
                     </div>
 
                     <div className="col-span-1 md:col-span-3 md:text-right flex items-center justify-between md:justify-end gap-2 mt-3 md:mt-0">

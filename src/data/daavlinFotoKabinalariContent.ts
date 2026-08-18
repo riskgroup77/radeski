@@ -41,7 +41,12 @@ export const DAAVLIN_SHARED = {
     'National Phototherapy Center of Uzbekistan by Daavlin',
   ),
   /** Fallback if a section has no dedicated hero */
-  heroImage: '/daavlin/daavlin-about-hero.webp',
+  heroImage: '/daavlin/daavlin-equipment-lineup.webp',
+  lineupHeroAlt: L(
+    'Daavlin fototerapiya uskunalari qatori — klinik va uy kabinalari',
+    'Линейка аппаратов Daavlin для фототерапии — клинические и домашние кабины',
+    'Daavlin phototherapy equipment lineup — clinical and home treatment systems',
+  ),
   ctaFototerapiya: L('Fototerapiya xizmati', 'Услуга фототерапии', 'Phototherapy service'),
   ctaEquipment: L('Apparatlar parki', 'Парк аппаратов', 'Equipment park'),
   ctaBook: L('Qabulga yozilish', 'Записаться на приём', 'Book an appointment'),
@@ -69,7 +74,7 @@ export const DAAVLIN_SECTION_MEDIA: Record<
   { hero: string; mid: string; gallery?: string[] }
 > = {
   about: {
-    hero: '/daavlin/daavlin-about-hero.webp',
+    hero: '/daavlin/daavlin-equipment-lineup.webp',
     mid: '/daavlin/daavlin-about-mid.webp',
     gallery: [
       '/daavlin/about-partnership.webp',
@@ -589,9 +594,9 @@ export const DAAVLIN_CABINS = {
     {
       title: L('Zona qamrovi', 'Зона покрытия', 'Coverage area'),
       text: L(
-        'To‘liq tana — NeoLux / 7 Series / ML24000. Qo‘l-oyoq — M Series. Lokal / bosh terisi — DermaPal.',
-        'Всё тело — NeoLux / 7 Series / ML24000. Кисти-стопы — M Series. Локально / кожа головы — DermaPal.',
-        'Full body — NeoLux / 7 Series / ML24000. Hands/feet — M Series. Spot / scalp — DermaPal.',
+        'To‘liq tana — NeoLux / 7 Series. Qo‘l-oyoq — M Series. Lokal / bosh terisi — DermaPal. Lazer va radioto‘lqin — DEKA / Surgitron.',
+        'Всё тело — NeoLux / 7 Series. Кисти-стопы — M Series. Локально / кожа головы — DermaPal. Лазер и радиоволна — DEKA / Surgitron.',
+        'Full body — NeoLux / 7 Series. Hands/feet — M Series. Spot / scalp — DermaPal. Laser and RF — DEKA / Surgitron.',
       ),
     },
     {
@@ -605,9 +610,9 @@ export const DAAVLIN_CABINS = {
     {
       title: L('Spektr va intensitet', 'Спектр и интенсивность', 'Spectrum & intensity'),
       text: L(
-        'Ko‘p hollarda NB-UVB. Og‘ir tanlangan UVA-1 — ML24000. Giperhidroza — Aquex (UV emas).',
-        'Чаще NB-UVB. Тяжёлый отобранный UVA-1 — ML24000. Гипергидроз — Aquex (не UV).',
-        'Often NB-UVB. Selected severe UVA-1 — ML24000. Hyperhidrosis — Aquex (not UV).',
+        'Ko‘p hollarda NB-UVB. Lazer va radioto‘lqin muolajalari — DEKA CO₂, DEKA aleksandrit va Surgitron. Giperhidroza — Aquex (UV emas).',
+        'Чаще NB-UVB. Лазерные и радиоволновые процедуры — DEKA CO₂, DEKA александрит и Surgitron. Гипергидроз — Aquex (не UV).',
+        'Often NB-UVB. Laser and radiofrequency treatments — DEKA CO₂, DEKA alexandrite and Surgitron. Hyperhidrosis — Aquex (not UV).',
       ),
     },
   ],
@@ -694,9 +699,9 @@ export const DAAVLIN_CABINS = {
   ],
   lineupTitle: L('Asosiy modelllar qatori', 'Основной модельный ряд', 'Core model range'),
   lineupIntro: L(
-    'Distributor va klinikada uchraydigan Daavlin qatoridan asosiy tizimlar. Har bir model — alohida vazifa: to‘liq tana, ekstremitetlar, nishonli zonalar yoki giperhidroza.',
-    'Ключевые системы ряда Daavlin у дистрибьютора и в клинике. У каждой модели своя роль: всё тело, конечности, точечные зоны или гипергидроз.',
-    'Key Daavlin systems available via the distributor and clinic. Each model has a clear role: full body, extremities, spot areas, or hyperhidrosis.',
+    'Daavlin fototerapiya qatori va Radeski Skin Clinic’dagi lazer hamda radioto‘lqin uskunalari. Har bir tizim — aniq klinik vazifa: to‘liq tana, ekstremitetlar, nishonli zonalar, lazer yoki radioto‘lqin.',
+    'Ряд Daavlin для фототерапии и лазерное/радиоволновое оборудование Radeski Skin Clinic. У каждой системы своя клиническая роль: всё тело, конечности, точечные зоны, лазер или радиоволна.',
+    'Daavlin phototherapy range plus laser and radiofrequency systems at Radeski Skin Clinic. Each platform has a clear clinical role: full body, extremities, spot areas, laser or RF surgery.',
   ),
   lineup: [
     {
@@ -874,61 +879,135 @@ export const DAAVLIN_CABINS = {
       ),
     },
     {
-      id: 'ml24000',
-      name: 'ML24000',
-      image: '/daavlin/model-ml24000.webp',
-      badge: L('Sof UVA1', 'Чистый UVA1', 'Pure UVA1'),
+      id: 'deka-co2-laser',
+      name: 'DEKA CO₂ Laser',
+      brandAccent: L('Radeski Skin Clinic', 'Radeski Skin Clinic', 'Radeski Skin Clinic'),
+      image: '/daavlin/model-deka-co2-laser.webp',
+      badge: L('Fraksion CO₂ lazer', 'Фракционный CO₂-лазер', 'Fractional CO₂ laser'),
       tagline: L(
-        'Kuchli. Unumdor. Sof UVA1 — bozordagi ixcham vertikal tizim',
-        'Мощный. Продуктивный. Чистый UVA1 — единственное компактное устройство с вертикальной ориентацией',
-        'Powerful. Productive. Pure UVA1 — a compact vertically oriented unit',
+        'SmartXide Punto — teri yangilanishi, chandiqlar va xavfsiz o‘smalar',
+        'SmartXide Punto — обновление кожи, рубцы и безопасные новообразования',
+        'SmartXide Punto — skin renewal, scars and benign lesions',
       ),
       summary: L(
-        'ML24000 — bozorda vertikal yo‘nalishdagi ixcham UVA1 terapiya qurilmasi. 24 ta yuqori intensivlikli vertikal lampa bemor o‘tkazuvchanligini 30–40% ga oshirishi mumkin, an’anaviy UVA1 qurilmalarga nisbatan taxminan ikki baravar kam joy egallab.',
-        'Мощный. Продуктивный. Чистый UVA1. Единственное компактное устройство с вертикальной ориентацией для терапии UVA1 на рынке. Двадцать четыре лампы высокой интенсивности, расположенные вертикально, обеспечивают увеличение пропускной способности пациентов на 30–40%, занимая при этом лишь половину пространства по сравнению с традиционными установками UVA1.',
-        'Powerful. Productive. Pure UVA1. A compact vertically oriented UVA1 therapy unit. Twenty-four high-intensity vertical lamps can raise patient throughput by 30–40% while taking about half the space of traditional UVA1 setups.',
+        'DEKA SmartXide Punto CO₂-lazer — fraksion uglerod dioksid texnologiyasi: mikrozonalar orqali kollagen yangilanishi, relef tekislash va nazoratli evaporatsiya. Radeski Skin Clinic’da postakne chandiqlari, yoshga bog‘liq o‘zgarishlar va shifokor ko‘rsatmasi bo‘yicha xavfsiz o‘smalarni olib tashlashda qo‘llaniladi.',
+        'CO₂-лазер DEKA SmartXide Punto — фракционная технология с микрозонами для обновления коллагена, выравнивания рельефа и контролируемой эвапорации. В Radeski Skin Clinic применяется при постакне, возрастных изменениях и удалении доброкачественных образований по показаниям врача.',
+        'DEKA SmartXide Punto CO₂ laser uses fractional micro-zones for collagen renewal, surface smoothing and controlled evaporation. At Radeski Skin Clinic it supports post-acne scars, photoageing and physician-indicated benign lesion removal.',
       ),
       details: [
         L(
-          'Yuqori doza protokollari UVB chaqirilgan eritemasiz bajarilishi mumkin — lyuminessent UVA1 qurilmalardagi holatdan farqli ravishda.',
-          'Протоколы с высокими дозами могут выполняться без вызванной UVB эритемой, как это бывает с люминесцентными устройствами UVA1.',
-          'High-dose protocols can be delivered without UVB-driven erythema of the kind seen with fluorescent UVA1 devices.',
+          'Fraksion rejim teri tiklanishini rag‘batlantiradi; PinPoint rejimi so‘g‘al, papilloma va ayrim nevuslarni minimal travma bilan olib tashlashga yordam beradi.',
+          'Фракционный режим стимулирует восстановление кожи; режим PinPoint помогает удалять бородавки, папилломы и отдельные невусы с минимальной травмой.',
+          'Fractional mode stimulates skin recovery; PinPoint mode helps remove warts, papillomas and selected nevi with minimal trauma.',
         ),
         L(
-          'Qulay tutqichlar odatda qiyin nurlanadigan tana zonalarini ishlashga yordam beradi. Har bir lampa orqasidagi maxsus reflektorlar oqimni tekislaydi. To‘rt ustunli modulli konstruksiya xona joyini tejaydi.',
-          'Удобно расположенные ручки позволяют легко обрабатывать участки тела, которые обычно трудно подвергнуть облучению. Специально разработанные отражатели за каждой из двадцати четырёх ламп повышают равномерность излучения. Уникальная модульная конструкция из четырёх колонн экономит пространство.',
-          'Conveniently placed handles help treat areas that are usually hard to irradiate. Dedicated reflectors behind each of the 24 lamps improve field uniformity. A unique four-column modular design saves room space.',
+          'Har bir bemor uchun energiya, chuqurlik va maydon dermatolog tomonidan individual sozlanadi — Farg‘ona va Qo‘qon filiallarida.',
+          'Энергия, глубина и зона воздействия индивидуально настраиваются дерматологом — в филиалах Ферганы и Коканда.',
+          'Energy, depth and treatment field are set individually by a dermatologist — at Fergana and Kokand branches.',
         ),
       ],
       benefits: LL(
-        [
-          'Sof UVA1',
-          '24 yuqori intensivlikli lampa',
-          '+30–40% o‘tkazuvchanlik potensiali',
-          'An’anaviy UVA1 dan ~2× kam joy',
-        ],
-        [
-          'Чистый UVA1',
-          '24 лампы высокой интенсивности',
-          '+30–40% пропускной способности',
-          '~Вдвое меньше места, чем у традиционных UVA1',
-        ],
-        [
-          'Pure UVA1',
-          '24 high-intensity lamps',
-          '+30–40% throughput potential',
-          '~Half the space of traditional UVA1',
-        ],
+        ['Fraksion CO₂', 'PinPoint rejimi', 'Postakne va chandiqlar', 'Dermatolog nazorati'],
+        ['Фракционный CO₂', 'Режим PinPoint', 'Постакне и рубцы', 'Контроль дерматолога'],
+        ['Fractional CO₂', 'PinPoint mode', 'Post-acne & scars', 'Dermatologist-led'],
       ),
       bestFor: L(
-        'Kimga: UVA1 protokoli kerak bo‘lgan klinik markazlar — joy tejamkorligi muhim bo‘lsa.',
-        'Кому: клиническим центрам с протоколами UVA1, где важна экономия площади.',
-        'Best for: clinics needing UVA1 protocols where floor space matters.',
+        'Kimga: postakne, chandiqlar, teri yangilanishi, shifokor tasdiqlagan xavfsiz o‘smalar.',
+        'Кому: постакне, рубцы, омоложение кожи, доброкачественные образования по назначению врача.',
+        'Best for: post-acne, scars, skin renewal, physician-approved benign lesions.',
       ),
       specs: LL(
-        ['24 vertikal lampa', 'Sof UVA1', '4 ustunli modul', 'Yuqori doza protokollari'],
-        ['24 вертикальные лампы', 'Чистый UVA1', 'Модуль из 4 колонн', 'Высокодозовые протоколы'],
-        ['24 vertical lamps', 'Pure UVA1', '4-column module', 'High-dose protocols'],
+        ['DEKA SmartXide Punto', 'Fraksion + PinPoint', 'CO₂ 10,6 mkm', 'Farg‘ona · Qo‘qon'],
+        ['DEKA SmartXide Punto', 'Фракционный + PinPoint', 'CO₂ 10,6 мкм', 'Фергана · Коканд'],
+        ['DEKA SmartXide Punto', 'Fractional + PinPoint', 'CO₂ 10.6 µm', 'Fergana · Kokand'],
+      ),
+    },
+    {
+      id: 'deka-alexandrite-laser',
+      name: 'DEKA Alexandrite Laser',
+      brandAccent: L('Radeski Skin Clinic', 'Radeski Skin Clinic', 'Radeski Skin Clinic'),
+      image: '/daavlin/model-deka-alexandrite-laser.webp',
+      badge: L('Aleksandrit lazer', 'Александритовый лazer', 'Alexandrite laser'),
+      tagline: L(
+        '755 nm — aniq nishon, tez epilyatsiya va pigment muolajalari',
+        '755 нм — точечное воздействие, эпиляция и пигмент',
+        '755 nm — precise targeting, hair removal and pigment care',
+      ),
+      summary: L(
+        'DEKA aleksandrit lazer 755 nm to‘lqin uzunligida ishlaydi — melanin va soch folikulasi ustiga yuqori selektiv ta’sir. Radeski Skin Clinic’da lazerniy epilyatsiya, pigment dog‘lari va ayrim vascular ko‘rinishlar uchun shifokor protokoli asosida qo‘llaniladi.',
+        'Александритовый лазер DEKA работает на длине волны 755 нм — высокая селективность к меланину и волосяным фолликулам. В Radeski Skin Clinic применяется для лазерной эпиляции, пигментных пятен и отдельных сосудистых проявлений по протоколу врача.',
+        'DEKA alexandrite laser at 755 nm offers high selectivity for melanin and hair follicles. At Radeski Skin Clinic it supports laser hair removal, pigmented spots and selected vascular concerns under medical protocol.',
+      ),
+      details: [
+        L(
+          'Soch turi, teri fototipi va muammo zonasi baholanadi; seanslar oralig‘i va energiya darajasi individual reja bo‘yicha belgilanadi.',
+          'Оцениваются тип волос, фототип кожи и зона; интервалы и уровень энергии задаются индивидуальным планом.',
+          'Hair type, skin phototype and treatment area are assessed; intervals and energy follow an individual plan.',
+        ),
+        L(
+          'Ko‘p hollarda bir necha seans kerak; dermatolog kuzatuvi va quyosh himoyasi haqida aniq tavsiyalar beriladi.',
+          'Часто требуется несколько сеансов; дерматолог даёт чёткие рекомендации по наблюдению и солнцезащите.',
+          'Several sessions are often needed; the dermatologist gives clear follow-up and sun-protection guidance.',
+        ),
+      ],
+      benefits: LL(
+        ['755 nm aleksandrit', 'Lazerniy epilyatsiya', 'Pigment protokollari', 'Individual reja'],
+        ['755 нм александрит', 'Лазерная эпиляция', 'Пигментные протоколы', 'Индивидуальный план'],
+        ['755 nm alexandrite', 'Laser hair removal', 'Pigment protocols', 'Individual plan'],
+      ),
+      bestFor: L(
+        'Kimga: ortiqcha tuk, pigment dog‘lari, shifokor ko‘rsatgan vascular yoki kosmetik muammolar.',
+        'Кому: нежелательные волосы, пигментация, сосудистые и косметические задачи по показаниям врача.',
+        'Best for: unwanted hair, pigmentation, physician-indicated vascular or cosmetic concerns.',
+      ),
+      specs: LL(
+        ['755 nm', 'DEKA aleksandrit', 'Epilyatsiya · pigment', 'Farg‘ona · Qo‘qon'],
+        ['755 нм', 'DEKA александрит', 'Эпиляция · пигмент', 'Фергана · Коканд'],
+        ['755 nm', 'DEKA alexandrite', 'Hair removal · pigment', 'Fergana · Kokand'],
+      ),
+    },
+    {
+      id: 'surgitron-radiofrequency',
+      name: 'Surgitron Radiofrequency',
+      brandAccent: L('Radeski Skin Clinic', 'Radeski Skin Clinic', 'Radeski Skin Clinic'),
+      image: '/daavlin/model-surgitron-radiofrequency.webp',
+      badge: L('Radioto‘lqin xirurgiya', 'Радиоволновая хирургия', 'Radiofrequency surgery'),
+      tagline: L(
+        'Yuqori aniqlik — yumshoq to‘qimalar va noqulay zonalar uchun',
+        'Высокая точность — для деликатных и трудных зон',
+        'High precision — for delicate and difficult areas',
+      ),
+      summary: L(
+        'Surgitron radioto‘lqin xirurgiya apparati teridagi xavfsiz o‘smalarni, papillomalarni, kontagioz mollyusklarni va ayrim ichki/epidermal o‘smalarni minimal issiqlik tarqalishi bilan olib tashlashga yordam beradi. Radeski Skin Clinic’da murakkab anatomik zonalar (ko‘z qovoqlari atrofi, inguinal hudud) uchun shifokor nazoratida qo‘llaniladi.',
+        'Аппарат Surgitron для радиоволновой хирургии помогает удалять доброкачественные образования, папилломы, контагиозный моллюск и отдельные внутри-/эпидермальные элементы с минимальным тепловым повреждением. В Radeski Skin Clinic применяется в сложных анатомических зонах под контролем врача.',
+        'Surgitron radiofrequency surgery helps remove benign lesions, papillomas, molluscum and selected intradermal/epidermal growths with minimal heat spread. At Radeski Skin Clinic it is used in complex anatomical areas under physician supervision.',
+      ),
+      details: [
+        L(
+          'Radioto‘lqin ignasi yumshoq kesish va koagulyatsiya beradi — tikuvsiz, ko‘pincha minimal iz bilan.',
+          'Радиоволновая игла обеспечивает мягкий разрез и коагуляцию — часто без швов и с минимальным рубцом.',
+          'The RF electrode provides gentle cutting and coagulation — often suture-free with minimal scarring.',
+        ),
+        L(
+          'Oldin dermatoskopik ko‘rik va ko‘rsatmalar aniqlanadi; kerak bo‘lsa lokal anesteziya qo‘llaniladi.',
+          'Предварительно проводится дерматоскопия и оценка показаний; при необходимости — местная анестезия.',
+          'Dermoscopic assessment and indications are confirmed first; local anaesthesia when needed.',
+        ),
+      ],
+      benefits: LL(
+        ['Minimal issiqlik zonasi', 'Murakkab zonalar', 'Papilloma · mollyusk', 'Anesteziya bilan'],
+        ['Минимальная зона нагрева', 'Сложные зоны', 'Папилломы · моллюск', 'С анестезией'],
+        ['Minimal heat spread', 'Complex areas', 'Papillomas · molluscum', 'With anaesthesia'],
+      ),
+      bestFor: L(
+        'Kimga: papillomalar, mollyusk, keratoma, xol (nevus) — shifokor tasdiqlagan holatlarda.',
+        'Кому: папилломы, моллюск, кератомы, родинки/невусы — при подтверждённых показаниях врача.',
+        'Best for: papillomas, molluscum, keratomas, moles/nevi — when medically indicated.',
+      ),
+      specs: LL(
+        ['Surgitron RF', 'Radioto‘lqin ignasi', 'Dermatoskopiya oldin', 'Farg‘ona · Qo‘qon'],
+        ['Surgitron RF', 'Радиоволновая игла', 'Дерматоскопия до процедуры', 'Фергана · Коканд'],
+        ['Surgitron RF', 'RF electrode', 'Dermoscopy first', 'Fergana · Kokand'],
       ),
     },
     {

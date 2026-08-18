@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, CornerUpLeft } from 'lucide-react';
-import { Locale, PriceItem, ServiceCategory } from '../types';
+import { Article, Locale, PriceItem, ServiceCategory } from '../types';
 import { DICTIONARY } from '../data';
 import { serviceSubPath, servicesListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
@@ -8,12 +8,14 @@ import { resolveCategoryIcon } from '../utils/serviceIcons';
 import { getServiceSectionLabels, resolveCategoryRichContent } from '../utils/serviceContent';
 import ServiceDetailContent from './ServiceDetailContent';
 import ServicePageHero from './ServicePageHero';
-import { getLocalizedImage } from '../utils/localizedImage';
+import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { buildServiceH1 } from '../seo/pageMeta';
+import ServiceRelatedArticlesSection from './ServiceRelatedArticlesSection';
 
 interface ServiceCategoryPageProps {
   locale: Locale;
   category: ServiceCategory;
+  articles?: Article[];
   dictionary?: Record<string, string>;
   prices?: PriceItem[];
   onOpenAppointment: (serviceId?: string) => void;
@@ -32,6 +34,7 @@ function heroDescription(text: string, maxLength = 300): string {
 export default function ServiceCategoryPage({
   locale,
   category,
+  articles = [],
   dictionary,
   prices,
   onOpenSub,
@@ -40,7 +43,7 @@ export default function ServiceCategoryPage({
   const d = dictionary || DICTIONARY[locale];
   const labels = getServiceSectionLabels(locale);
   const rich = resolveCategoryRichContent(category, locale);
-  const categoryImage = getLocalizedImage(category.images, locale) ?? category.image;
+  const categoryImage = resolveCategoryImage(category, locale);
   const heroText = heroDescription(rich.overview || category.description[locale]);
 
   return (
@@ -94,7 +97,7 @@ export default function ServiceCategoryPage({
 
             <div className="space-y-4">
               {category.subServices.map((sub) => {
-                const subImage = getLocalizedImage(sub.images, locale) ?? sub.image ?? categoryImage;
+                const subImage = resolveSubServiceImage(category, sub, locale);
                 return (
                   <article
                     key={sub.id}
@@ -142,6 +145,13 @@ export default function ServiceCategoryPage({
             </div>
           </div>
         )}
+
+        <ServiceRelatedArticlesSection
+          locale={locale}
+          categoryId={category.id}
+          articles={articles}
+          dictionary={d}
+        />
       </div>
     </section>
   );

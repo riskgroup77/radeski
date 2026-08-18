@@ -46,6 +46,29 @@ function getCompactAppointmentLabel(locale: Locale): string {
   return 'Book';
 }
 
+function DaavlinNavLabel({
+  locale,
+  size = 'nav',
+}: {
+  locale: Locale;
+  size?: 'nav' | 'mobile';
+}) {
+  const d = DICTIONARY[locale];
+  const subtitleClass =
+    size === 'mobile'
+      ? 'text-xs font-medium leading-snug'
+      : 'text-[9px] xl:text-[10px] 2xl:text-[10px] font-medium leading-snug';
+  const widthClass =
+    size === 'nav' ? 'max-w-[5.75rem] xl:max-w-[6.25rem] 2xl:max-w-[6.75rem]' : 'max-w-none';
+
+  return (
+    <span className={`inline-flex flex-col items-start text-left leading-[1.12] gap-0 ${widthClass}`}>
+      <span className="font-semibold whitespace-nowrap">{d.navDaavlinShort}</span>
+      <span className={`${subtitleClass} whitespace-normal`}>{d.navDaavlinSubtitle}</span>
+    </span>
+  );
+}
+
 export default function Header({
   currentPage,
   locale,
@@ -138,7 +161,7 @@ export default function Header({
 
   const servicesNavClass = navLinkClass('services');
   const aboutNavClass = navLinkClass('about');
-  const daavlinNavClass = navLinkClass('daavlin-foto-kabinalari');
+  const daavlinNavClass = navLinkClass('daavlin-foto-kabinalari').replace('whitespace-nowrap', 'whitespace-normal');
 
   const serviceDropdownItemClass = (categoryId: string) =>
     `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite ${
@@ -217,14 +240,14 @@ export default function Header({
           <button
             type="button"
             onClick={() => onNavigate('daavlin-foto-kabinalari')}
-            className={`${daavlinNavClass} inline-flex items-center gap-0.5`}
+            className={`${daavlinNavClass} inline-flex items-start gap-0.5 py-1`}
             aria-haspopup="menu"
             aria-expanded={isDaavlinDropdownOpen}
             title={d.navDaavlinFotoKabinalari}
           >
-            <span>{d.navDaavlinFotoKabinalari}</span>
+            <DaavlinNavLabel locale={locale} />
             <ChevronDown
-              className={`w-3 h-3 shrink-0 transition-transform duration-200 ${
+              className={`w-3 h-3 shrink-0 mt-1 transition-transform duration-200 ${
                 isDaavlinDropdownOpen ? 'rotate-180' : ''
               }`}
             />
@@ -392,7 +415,7 @@ export default function Header({
               to={pagePath(locale, 'daavlin-foto-kabinalari')}
               className={`flex-1 text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${daavlinNavClass}`}
             >
-              {item.label}
+              <DaavlinNavLabel locale={locale} size="mobile" />
             </Link>
             <button
               type="button"
