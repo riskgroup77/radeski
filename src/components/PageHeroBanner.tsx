@@ -15,6 +15,8 @@ interface PageHeroBannerProps {
   after?: ReactNode;
   /** Panoramic product lineups — split layout: copy left, image right. */
   imageVariant?: 'cover' | 'panoramic';
+  /** Cover heroes: push CTAs to the bottom of the glass panel. */
+  ctaPosition?: 'inline' | 'bottom';
   imageAlt?: string;
 }
 
@@ -27,8 +29,26 @@ const glassImageFrameClass =
 const glassBadgeClass =
   'inline-flex w-fit items-center gap-2 rounded-full border border-white/80 bg-white/50 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-gold shadow-sm backdrop-blur-md sm:text-xs';
 
-const primaryCtaClass =
+export const heroPrimaryCtaClass =
   'flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/90 bg-white/75 px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-[0_4px_24px_-6px_rgba(7,27,46,0.15)] backdrop-blur-md transition-all hover:bg-white/95 hover:shadow-[0_8px_28px_-8px_rgba(7,27,46,0.2)]';
+
+export const heroSecondaryCtaClass =
+  'flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/90 bg-white/60 px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-[0_4px_24px_-6px_rgba(7,27,46,0.12)] backdrop-blur-md transition-all hover:bg-white/85 hover:shadow-[0_8px_28px_-8px_rgba(7,27,46,0.18)]';
+
+function HeroCtaRow({
+  appointmentLabel,
+  secondaryCta,
+}: Pick<PageHeroBannerProps, 'appointmentLabel' | 'secondaryCta'>) {
+  return (
+    <div className="flex flex-col gap-3 sm:flex-row">
+      <AppointmentBookingLink className={heroPrimaryCtaClass}>
+        <Calendar className="h-4 w-4 shrink-0" />
+        {appointmentLabel}
+      </AppointmentBookingLink>
+      {secondaryCta}
+    </div>
+  );
+}
 
 function HeroCopy({
   badge,
@@ -38,11 +58,19 @@ function HeroCopy({
   note,
   appointmentLabel,
   secondaryCta,
+  ctaPosition = 'inline',
 }: Pick<
   PageHeroBannerProps,
-  'badge' | 'title' | 'titleAccent' | 'description' | 'note' | 'appointmentLabel' | 'secondaryCta'
+  | 'badge'
+  | 'title'
+  | 'titleAccent'
+  | 'description'
+  | 'note'
+  | 'appointmentLabel'
+  | 'secondaryCta'
+  | 'ctaPosition'
 >) {
-  return (
+  const textBlock = (
     <>
       <span className={`mb-5 sm:mb-6 ${glassBadgeClass}`}>
         <Star className="h-3.5 w-3.5 shrink-0 fill-brand-gold text-brand-gold" />
@@ -59,22 +87,34 @@ function HeroCopy({
         ) : null}
       </h1>
 
-      <p className="mt-5 text-sm font-light leading-relaxed text-brand-text-secondary sm:mt-6 sm:text-base">
+      <p className="mt-5 max-w-lg text-sm font-light leading-relaxed text-brand-text-secondary sm:mt-6 sm:text-base">
         {description}
       </p>
 
       {note ? (
-        <p className="mt-4 text-sm font-medium leading-relaxed text-brand-text-primary/85 sm:text-[15px]">
+        <p className="mt-4 max-w-lg text-sm font-medium leading-relaxed text-brand-text-primary/85 sm:text-[15px]">
           {note}
         </p>
       ) : null}
+    </>
+  );
 
-      <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
-        <AppointmentBookingLink className={primaryCtaClass}>
-          <Calendar className="h-4 w-4 shrink-0" />
-          {appointmentLabel}
-        </AppointmentBookingLink>
-        {secondaryCta}
+  if (ctaPosition === 'bottom') {
+    return (
+      <div className="flex h-full min-h-0 flex-1 flex-col">
+        {textBlock}
+        <div className="mt-auto pt-12 sm:pt-14 lg:pt-16 xl:pt-[4.5rem]">
+          <HeroCtaRow appointmentLabel={appointmentLabel} secondaryCta={secondaryCta} />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {textBlock}
+      <div className="mt-8 sm:mt-10">
+        <HeroCtaRow appointmentLabel={appointmentLabel} secondaryCta={secondaryCta} />
       </div>
     </>
   );
@@ -91,9 +131,11 @@ export default function PageHeroBanner({
   secondaryCta,
   after,
   imageVariant = 'cover',
+  ctaPosition,
   imageAlt = '',
 }: PageHeroBannerProps) {
   const isPanoramic = imageVariant === 'panoramic';
+  const resolvedCtaPosition = ctaPosition ?? (isPanoramic ? 'inline' : 'bottom');
 
   if (isPanoramic) {
     return (
@@ -118,6 +160,7 @@ export default function PageHeroBanner({
                 note={note}
                 appointmentLabel={appointmentLabel}
                 secondaryCta={secondaryCta}
+                ctaPosition={resolvedCtaPosition}
               />
             </div>
 
@@ -142,7 +185,7 @@ export default function PageHeroBanner({
   }
 
   return (
-    <section className="relative flex min-h-[640px] w-full flex-col overflow-hidden lg:min-h-[720px]">
+    <section className="relative flex min-h-[680px] w-full flex-col overflow-hidden lg:min-h-[760px] xl:min-h-[820px]">
       <MediaImage
         src={image}
         alt={imageAlt}
@@ -150,12 +193,18 @@ export default function PageHeroBanner({
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-dark-navy/55 via-brand-dark-navy/25 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-dark-navy/62 via-brand-dark-navy/28 to-brand-dark-navy/5"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-dark-navy/25 via-transparent to-transparent"
       />
 
-      <div className="site-container relative z-10 flex flex-1 flex-col pt-10 pb-10 sm:pt-12 sm:pb-12 lg:pt-14 lg:pb-14">
+      <div className="site-container relative z-10 flex flex-1 flex-col py-10 sm:py-12 lg:py-14 xl:py-16">
         <div className="relative flex min-h-0 max-w-xl flex-1 flex-col lg:max-w-2xl">
-          <div className={`relative z-10 flex flex-1 flex-col px-5 py-7 sm:px-7 sm:py-9 lg:px-9 lg:py-10 ${glassPanelClass}`}>
+          <div
+            className={`relative z-10 flex min-h-[420px] flex-1 flex-col px-5 py-8 sm:min-h-[460px] sm:px-7 sm:py-10 lg:min-h-[520px] lg:px-9 lg:py-11 xl:min-h-[580px] xl:py-12 ${glassPanelClass}`}
+          >
             <HeroCopy
               badge={badge}
               title={title}
@@ -164,8 +213,8 @@ export default function PageHeroBanner({
               note={note}
               appointmentLabel={appointmentLabel}
               secondaryCta={secondaryCta}
+              ctaPosition={resolvedCtaPosition}
             />
-            <div className="mt-auto hidden min-h-[4.5rem] lg:block" aria-hidden />
           </div>
         </div>
         {after}

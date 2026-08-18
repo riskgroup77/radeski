@@ -13,7 +13,7 @@ import {
 } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
-import PageHeroBanner from './PageHeroBanner';
+import PageHeroBanner, { heroSecondaryCtaClass } from './PageHeroBanner';
 import DaavlinFinanceCalculator from './DaavlinFinanceCalculator';
 
 interface DaavlinModelPageProps {
@@ -95,11 +95,8 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         description={model.tagline[locale]}
         appointmentLabel={s.ctaBook[locale]}
         secondaryCta={
-          <Link
-            to={daavlinSectionPath(locale, 'cabins')}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
-          >
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
+          <Link to={daavlinSectionPath(locale, 'cabins')} className={heroSecondaryCtaClass}>
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40 bg-white/70">
               <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
             </span>
             {backLabel[locale]}
@@ -107,22 +104,26 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         }
       />
 
-      <div className="site-container pt-8 sm:pt-10">
-        <div className="mb-8 flex flex-wrap gap-3">
+      <div className="site-container -mt-6 sm:-mt-8">
+        <nav
+          aria-label={locale === 'uz' ? 'Navigatsiya' : locale === 'ru' ? 'Навигация' : 'Navigation'}
+          className="mb-10 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-sectiongray/90 bg-brand-white/95 px-4 py-3.5 shadow-[0_8px_32px_-16px_rgba(7,27,46,0.12)] backdrop-blur-sm sm:px-5"
+        >
           <Link
             to={daavlinSectionPath(locale, 'cabins')}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-3.5 py-2 text-xs font-semibold text-brand-text-secondary no-underline transition-all hover:bg-brand-offwhite hover:text-brand-text-primary"
+            className="inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-semibold text-brand-text-secondary no-underline transition-colors hover:text-brand-gold sm:text-sm"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4 shrink-0" />
             {backLabel[locale]}
           </Link>
           <Link
             to={daavlinSectionPath(locale, 'about')}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-3.5 py-2 text-xs font-semibold text-brand-text-secondary no-underline transition-all hover:bg-brand-offwhite hover:text-brand-text-primary"
+            className="inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-semibold text-brand-text-secondary no-underline transition-colors hover:text-brand-gold sm:text-sm"
           >
             {hubLabel[locale]}
+            <ArrowUpRight className="h-4 w-4 shrink-0 opacity-70" />
           </Link>
-        </div>
+        </nav>
 
         <motion.article
           initial={{ opacity: 0, y: 12 }}
