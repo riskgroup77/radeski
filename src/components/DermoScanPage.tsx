@@ -12,6 +12,7 @@ import { doctorsListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import PageHeroBanner from './PageHeroBanner';
+import DermoScanAppInstallSection from './DermoScanAppInstallSection';
 
 interface DermoScanPageProps {
   locale: Locale;
@@ -103,7 +104,7 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
   const c = DERMO_SCAN;
 
   return (
-    <section id="dermoscan-page" className="min-h-screen bg-brand-offwhite pb-12 sm:pb-16">
+    <section id="dermoscan-page" className="min-h-screen bg-brand-offwhite pb-24 sm:pb-16">
       <HeroBanner locale={locale} />
       <div className="mb-10 border-b border-brand-sectiongray bg-brand-white sm:mb-14">
         <div className="site-container p-6 sm:p-8">
@@ -114,6 +115,8 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
       </div>
 
       <div className="site-container">
+        <DermoScanAppInstallSection locale={locale} />
+
         {/* Four pillars with photos */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}

@@ -14,6 +14,7 @@ import {
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import PageHeroBanner from './PageHeroBanner';
+import DaavlinFinanceCalculator from './DaavlinFinanceCalculator';
 
 interface DaavlinModelPageProps {
   locale: Locale;
@@ -238,6 +239,8 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
             ))}
           </div>
         </motion.div>
+
+        <DaavlinFinanceCalculator locale={locale} modelId={modelId} />
 
         <motion.div
           initial={{ opacity: 0, y: 14 }}
