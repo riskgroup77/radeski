@@ -1011,14 +1011,14 @@ function CabinsBody({ locale }: { locale: Locale }) {
                   index % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''
                 }`}
               >
-                <div className="relative min-h-[220px] bg-brand-offwhite lg:min-h-[320px]">
+                <div className="relative flex min-h-[220px] items-center justify-center bg-gradient-to-br from-white via-slate-50 to-brand-gold-light/10 p-6 sm:p-8 lg:min-h-[360px]">
                   <MediaImage
                     src={item.image}
                     alt={item.name}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="max-h-[240px] w-full object-contain drop-shadow-[0_20px_40px_rgba(7,27,46,0.12)] sm:max-h-[280px] lg:max-h-[320px]"
                     loading="lazy"
                   />
-                  <div className="absolute left-4 top-4 rounded-full bg-brand-dark-navy/85 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-gold">
+                  <div className="absolute left-4 top-4 rounded-full border border-brand-gold/20 bg-brand-white/95 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-brand-gold shadow-sm">
                     {item.badge[locale]}
                   </div>
                 </div>

@@ -13,7 +13,7 @@ import {
 } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
-import PageHeroBanner, { heroSecondaryCtaClass } from './PageHeroBanner';
+import PageHeroBanner, { heroSecondaryCtaSolidClass } from './PageHeroBanner';
 import DaavlinFinanceCalculator from './DaavlinFinanceCalculator';
 
 interface DaavlinModelPageProps {
@@ -89,6 +89,9 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
     <section id={`daavlin-model-${model.id}`} className="min-h-screen bg-brand-offwhite pb-12 sm:pb-16">
       <PageHeroBanner
         image={model.image}
+        imageVariant="panoramic"
+        productPhoto
+        imageAlt={model.name}
         badge={model.badge[locale]}
         title={model.name}
         titleAccent={model.brandAccent?.[locale] ?? 'Daavlin'}
@@ -99,8 +102,8 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         highlightFooter={model.bestFor[locale]}
         appointmentLabel={s.ctaBook[locale]}
         secondaryCta={
-          <Link to={daavlinSectionPath(locale, 'cabins')} className={heroSecondaryCtaClass}>
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40 bg-white/70">
+          <Link to={daavlinSectionPath(locale, 'cabins')} className={heroSecondaryCtaSolidClass}>
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/35 bg-brand-gold-light/20">
               <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
             </span>
             {backLabel[locale]}
@@ -108,7 +111,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         }
       />
 
-      <div className="site-container -mt-6 sm:-mt-8">
+      <div className="site-container pt-8 sm:pt-10">
         <nav
           aria-label={locale === 'uz' ? 'Navigatsiya' : locale === 'ru' ? 'Навигация' : 'Navigation'}
           className="mb-10 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-sectiongray/90 bg-brand-white/95 px-4 py-3.5 shadow-[0_8px_32px_-16px_rgba(7,27,46,0.12)] backdrop-blur-sm sm:px-5"
@@ -128,40 +131,6 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
             <ArrowUpRight className="h-4 w-4 shrink-0 opacity-70" />
           </Link>
         </nav>
-
-        <motion.article
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-10 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="relative min-h-[240px] bg-brand-offwhite lg:min-h-[420px]">
-              <MediaImage
-                src={model.image}
-                alt={model.name}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-              <p className="text-sm font-light leading-relaxed text-brand-text-secondary sm:text-base">
-                {model.summary[locale]}
-              </p>
-              <p className="mt-5 rounded-xl border border-brand-gold/20 bg-brand-gold-light/10 px-4 py-3 text-sm font-semibold leading-snug text-brand-text-primary">
-                {model.bestFor[locale]}
-              </p>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {model.specs[locale].map((spec) => (
-                  <li
-                    key={spec}
-                    className="rounded-lg border border-brand-sectiongray bg-brand-offwhite px-2.5 py-1 text-[11px] font-semibold text-brand-text-secondary"
-                  >
-                    {spec}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.article>
 
         <div className="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <motion.div
@@ -302,11 +271,11 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
                 to={daavlinModelPath(locale, item.id as DaavlinModelId)}
                 className="group overflow-hidden rounded-2xl border border-brand-sectiongray bg-brand-white no-underline shadow-xs transition-shadow hover:shadow-md"
               >
-                <div className="relative aspect-[16/10] bg-brand-offwhite">
+                <div className="relative flex min-h-[220px] items-center justify-center bg-gradient-to-br from-white via-slate-50 to-brand-gold-light/10 p-6 sm:p-8 lg:min-h-[360px]">
                   <MediaImage
                     src={item.image}
                     alt={item.name}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    className="max-h-[240px] w-full object-contain drop-shadow-[0_20px_40px_rgba(7,27,46,0.12)] transition-transform duration-300 group-hover:scale-[1.02] sm:max-h-[280px] lg:max-h-[320px]"
                     loading="lazy"
                   />
                 </div>
