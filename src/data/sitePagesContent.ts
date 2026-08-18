@@ -768,7 +768,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-46',
-    sortOrder: 1,
+    sortOrder: 2,
     title: {
       uz: 'IPL — bu shunchaki “dog‘ni yo‘qotish” emas',
       ru: 'IPL — это не просто «убрать пятно»',
@@ -785,7 +785,7 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
   },
   {
     id: 'clinic-video-47',
-    sortOrder: 0,
+    sortOrder: 1,
     title: {
       uz: '💉 Hamma jim turibdi, lekin biz aytamiz!',
       ru: '💉 Все молчат — а мы скажем прямо',
@@ -799,6 +799,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     src: '/videos/47.mp4',
     duration: '1:08',
     category: { uz: 'Klinika', ru: 'О клинике', en: 'Clinic' },
+  },
+  {
+    id: 'clinic-video-48',
+    sortOrder: 0,
+    title: {
+      uz: 'Kosmetologimizning tavsiyasini saqlab qo‘ying va qora nuqtalarni unuting 👌',
+      ru: 'Запомните совет нашего косметолога — и забудьте о чёрных точках 👌',
+      en: 'Keep your cosmetologist’s advice — and leave blackheads behind 👌',
+    },
+    description: {
+      uz: 'Qora nuqtalar (komedonlar) ko‘pincha noto‘g‘ri parvarish yoki o‘zingiz tanlagan “tez yechim”lardan kuchayadi.\n\nKosmetologimiz teri holatingizga mos reja beradi: tozalash, namlash va kerak bo‘lsa klinik muolajalar — shunda nuqtalar asta-sekin kamayadi, teri toza va barqaror ko‘rinadi.',
+      ru: 'Чёрные точки (комедоны) часто усиливаются из‑за неправильного ухода или «быстрых решений», которые выбирают сами.\n\nНаш косметолог подберёт план под вашу кожу: очищение, увлажнение и при необходимости клинические процедуры — тогда точки постепенно уменьшаются, а кожа выглядит чище и ровнее.',
+      en: 'Blackheads (comedones) often get worse with the wrong routine or DIY “quick fixes.”\n\nOur cosmetologist builds a plan for your skin: cleansing, hydration, and clinic sessions when needed — so spots fade gradually and the skin looks clearer and more even.',
+    },
+    src: '/videos/48.mp4',
+    duration: '0:24',
+    category: { uz: 'Kosmetologiya', ru: 'Косметология', en: 'Cosmetology' },
   },
 ];
 
