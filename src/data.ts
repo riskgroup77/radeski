@@ -21,6 +21,7 @@ import { LASER_SCAR_RESURFACING_ARTICLE } from './data/articles/laserScarResurfa
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './data/articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './data/articles/rosaceaRadeskiArticle';
 import { MOLLUSCUM_CONTAGIOSUM_ARTICLE } from './data/articles/molluscumContagiosumArticle';
+import { PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE } from './data/articles/pediatricWartsLaserRadeskiArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -931,4 +932,5 @@ export const ARTICLES: Article[] = [
   ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE,
   ROSACEA_RADESKI_ARTICLE,
   MOLLUSCUM_CONTAGIOSUM_ARTICLE,
+  PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE,
 ];

@@ -21,6 +21,7 @@ import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResu
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
 import { MOLLUSCUM_CONTAGIOSUM_ARTICLE_CATALOG } from './articles/molluscumContagiosumArticle';
+import { PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE_CATALOG } from './articles/pediatricWartsLaserRadeskiArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -73,6 +74,14 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'детских бородавок',
     'pediatric warts',
     'sogal co2 deka',
+  ],
+  'pediatric-warts-laser-radeski': [
+    'bolalarda-sogal-lazer-radeski',
+    'art-bolalarda-sogal-lazer-radeski',
+    'laser wart removal in children at radeski',
+    'laser wart removal children radeski',
+    'bolalarda sogal lazer radeski',
+    'pediatric warts laser radeski',
   ],
   'papilloma-warts': ['papillom', 'borodav', 'wart', 'hpv', "so'gal", 'бородав', 'папиллом', 'condylom'],
   hemangioma: ['gemangi', 'геманги', 'hemangi', 'vascular', 'qizil xol', 'angioma'],
@@ -912,6 +921,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,
   'molluscum-radeski': MOLLUSCUM_CONTAGIOSUM_ARTICLE_CATALOG,
+  'pediatric-warts-laser-radeski': PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:
