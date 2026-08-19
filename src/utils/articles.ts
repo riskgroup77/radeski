@@ -21,6 +21,31 @@ export function filterPublicArticles(articles: Article[]): Article[] {
   return articles.filter(isArticlePubliclyListed);
 }
 
+/** API ro‘yxatida yo‘q statik katalog maqolalarini qo‘shadi (masalan yangi art-* yozuvlar). */
+export function mergeArticlesWithStaticCatalog(apiArticles: Article[]): Article[] {
+  if (apiArticles.length === 0) return ARTICLES;
+
+  const apiSlugs = new Set(apiArticles.map((article) => article.slug));
+  const apiStaticIds = new Set(
+    apiArticles.map((article) => {
+      const staticMatch = ARTICLES.find(
+        (item) => item.slug === article.slug || item.id === article.id,
+      );
+      return staticMatch?.id ?? article.slug;
+    }),
+  );
+
+  const missingStatic = ARTICLES.filter(
+    (item) => !apiSlugs.has(item.slug) && !apiStaticIds.has(item.id),
+  );
+
+  if (missingStatic.length === 0) return apiArticles;
+
+  return [...apiArticles, ...missingStatic].sort((a, b) =>
+    (b.date || '').localeCompare(a.date || ''),
+  );
+}
+
 export function findArticleByRouteParam(
   routeParam: string,
   articles: Article[],

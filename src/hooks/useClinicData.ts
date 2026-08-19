@@ -8,6 +8,7 @@ import {
 } from '../api/mappers';
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
+import { mergeArticlesWithStaticCatalog } from '../utils/articles';
 import { enrichDoctors } from '../utils/enrichDoctors';
 import { enrichPrices } from '../utils/enrichPrices';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
@@ -93,7 +94,11 @@ export function useClinicData(): ClinicDataState {
     setPrices(enrichPrices(mappedPrices));
 
     const mappedArticles = articlesRes.map(mapArticleListItemFromApi);
-    setArticles(enrichArticles(mappedArticles.length > 0 ? mappedArticles : ARTICLES));
+    const mergedArticles =
+      mappedArticles.length > 0
+        ? mergeArticlesWithStaticCatalog(mappedArticles)
+        : ARTICLES;
+    setArticles(enrichArticles(mergedArticles));
 
     setLoading(false);
   }, []);
