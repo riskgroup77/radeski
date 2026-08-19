@@ -80,6 +80,7 @@ import MediaImage from './MediaImage';
 import { deleteLocalMedia, isLocalMediaRef, saveLocalMedia } from '../utils/localMediaStorage';
 import { getLocalizedImage } from '../utils/localizedImage';
 import { normalizeArticleViews } from '../utils/articleViews';
+import { resolveArticleAdminApiId } from '../utils/articles';
 import { getCatalogPrices, enrichPrices } from '../utils/enrichPrices';
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
@@ -867,7 +868,8 @@ export default function AdminPanel({
         const payload = mapArticleToCreatePayload(articleForm, {
           preserveImage: !articleImageFile,
         });
-        await updateArticle(articleForm.id, payload, articleImageFile);
+        const adminArticleId = resolveArticleAdminApiId(articleForm);
+        await updateArticle(adminArticleId, payload, articleImageFile);
       }
 
       const items = await getAdminArticles();
@@ -882,13 +884,13 @@ export default function AdminPanel({
     }
   };
 
-  const handleDeleteArticle = async (artId: string) => {
+  const handleDeleteArticle = async (art: Article) => {
     if (!confirm(locale === 'uz' ? "Ushbu maqolani o'chirmoqchimisiz?" : "Удалить эту статью?")) return;
 
     try {
-      await deleteArticle(artId);
+      await deleteArticle(resolveArticleAdminApiId(art));
       await onRefresh();
-      if (selectedArticleId === artId) setSelectedArticleId(null);
+      if (selectedArticleId === art.id) setSelectedArticleId(null);
       triggerSaveNotification(locale === 'uz' ? "Maqola o'chirildi!" : "Статья удалена!");
     } catch (err) {
       reportAdminError(err, 'Delete failed');
@@ -2554,7 +2556,7 @@ export default function AdminPanel({
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
-                          onClick={() => handleDeleteArticle(art.id)}
+                          onClick={() => handleDeleteArticle(art)}
                           className="p-1.5 bg-brand-white hover:bg-red-50 text-red-600 border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
                         >
                           <Trash2 className="w-3.5 h-3.5" />

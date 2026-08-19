@@ -93,3 +93,12 @@ export function resolveArticleApiSlug(routeParam: string, articles: Article[]): 
   if (match) return match.slug;
   return routeParam;
 }
+
+/** Admin API PUT/DELETE uchun haqiqiy UUID (statik art-* emas). */
+export function resolveArticleAdminApiId(
+  article: Pick<Article, 'id' | 'apiId'>,
+): string {
+  if (article.apiId && isApiArticleId(article.apiId)) return article.apiId;
+  if (isApiArticleId(article.id)) return article.id;
+  return article.id;
+}
