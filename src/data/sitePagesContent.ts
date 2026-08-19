@@ -817,6 +817,40 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '0:24',
     category: { uz: 'Kosmetologiya', ru: 'Косметология', en: 'Cosmetology' },
   },
+  {
+    id: 'clinic-video-49',
+    sortOrder: -2,
+    title: {
+      uz: '«Nega Radeski Skin Clinic?» — bemorimizning haqiqiy hikoyasi',
+      ru: '«Почему Radeski Skin Clinic?» — история нашего пациента',
+      en: '“Why Radeski Skin Clinic?” — a patient’s real story',
+    },
+    description: {
+      uz: 'Radeski Skin Clinic qabulxonasida bemoringiz ochiq muloqotda: qanday qilib klinikani tanlagani, shifokorlar bilan ishlashi va davolash jarayonidagi taassurotlari haqida gapiradi.\n\nBu reklama emas — haqiqiy inson tajribasi. Agar ishonchli dermatologik yordam izlayotgan bo‘lsangiz, videoni oxirigacha tomosha qiling.',
+      ru: 'В кабинете Radeski Skin Clinic наш пациент откровенно рассказывает: почему выбрал клинику, как проходило общение с врачами и какие впечатления остались от лечения.\n\nЭто не реклама — живая история человека. Если вы ищете надёжную дерматологическую помощь, посмотрите видео до конца.',
+      en: 'In the Radeski Skin Clinic consultation room, a patient speaks openly: why he chose the clinic, what working with the doctors was like, and how treatment felt.\n\nThis is not an ad — it is a real person’s experience. If you are looking for trustworthy dermatology care, watch through to the end.',
+    },
+    src: '/videos/49.mp4',
+    duration: '2:32',
+    category: { uz: 'Bemorlar fikri', ru: 'Отзывы пациентов', en: 'Patient stories' },
+  },
+  {
+    id: 'clinic-video-50',
+    sortOrder: -1,
+    title: {
+      uz: 'Davolash natijasi — bemorimiz o‘z so‘zi bilan',
+      ru: 'Результат лечения — словами нашего пациента',
+      en: 'Treatment results — in the patient’s own words',
+    },
+    description: {
+      uz: 'Bemorimiz klinikadagi muolajalar va ularning kundalik hayotiga ta’siri haqida davom etadi. Shaxsiy eslatmalar va samimiy fikrlar — Radeski jamoasining professional yondashuvi haqida.\n\nTo‘liq hikoya uchun 1-qism videoni ham ko‘ring: «Nega Radeski Skin Clinic?»',
+      ru: 'Пациент продолжает рассказ о процедурах в клинике и о том, как лечение повлияло на повседневную жизнь. Личные заметки и искренние слова — о профессиональном подходе команды Radeski.\n\nДля полной истории посмотрите также первую часть: «Почему Radeski Skin Clinic?»',
+      en: 'The patient continues about clinic sessions and how care affected daily life. Personal notes and sincere words about the Radeski team’s professional approach.\n\nFor the full story, also watch part one: “Why Radeski Skin Clinic?”',
+    },
+    src: '/videos/50.mp4',
+    duration: '2:00',
+    category: { uz: 'Bemorlar fikri', ru: 'Отзывы пациентов', en: 'Patient stories' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [
