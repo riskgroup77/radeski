@@ -15,6 +15,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'plasmapheresis',
   ],
   'apparatnaya-kosmetologiya': [
+    'ipl-radeski',
     'ipl-therapy',
     'rosacea-radeski',
     'post-acne',
@@ -64,7 +65,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     immunobiologicheskaya: ['psoriasis', 'psoriasis-daavlin-kokand', 'plasmapheresis'],
   },
   'apparatnaya-kosmetologiya': {
-    'ipl-inmode': ['ipl-therapy', 'rosacea-radeski'],
+    'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski'],
     'hollywood-spectra': ['post-acne', 'laser-scar-resurfacing', 'adult-acne', 'acne'],
     'lazer-biorev': ['post-acne', 'adult-acne'],
     'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist'],

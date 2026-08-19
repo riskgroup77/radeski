@@ -15,6 +15,7 @@ import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE_CATALOG } from './articles/ha
 import { VITILIGO_DAAVLIN_ARTICLE_CATALOG } from './articles/vitiligoDaavlinArticle';
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG } from './articles/psoriasisDaavlinKokandArticle';
 import { IPL_THERAPY_ARTICLE_CATALOG } from './articles/iplTherapyArticle';
+import { IPL_PHOTOTHERAPY_RADESKI_ARTICLE_CATALOG } from './articles/iplPhototherapyRadeskiArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG } from './articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE_CATALOG } from './articles/adultAcneArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
@@ -93,6 +94,15 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'псориаз коканд',
     'psoriasis kokand',
   ],
+  'ipl-radeski': [
+    'ipl-fototerapiya-radeski',
+    'art-ipl-fototerapiya-radeski',
+    'ipl-фототерапия в radeski',
+    'ipl phototherapy at radeski',
+    'ipl-fototerapiya radeski skin clinic',
+    'покраснений, пигментации и сосудистых',
+    'qizarish, pigment va tomirlar',
+  ],
   'ipl-therapy': [
     'ipl-terapiya-nima-fargona',
     'ipl-terapiya',
@@ -102,7 +112,7 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'ipl фергана',
     'ipl fergana',
     'ipl qoqon',
-    'ipl коканд',
+    'ipl kokand',
     'ipl kokand',
     'intense pulsed light',
     'impulsli yorug',
@@ -915,6 +925,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   vitiligo: VITILIGO_DAAVLIN_ARTICLE_CATALOG,
   'psoriasis-daavlin-kokand': PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG,
   'ipl-therapy': IPL_THERAPY_ARTICLE_CATALOG,
+  'ipl-radeski': IPL_PHOTOTHERAPY_RADESKI_ARTICLE_CATALOG,
   'pediatric-warts-co2-deka': PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG,
   'adult-acne': ADULT_ACNE_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,

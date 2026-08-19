@@ -15,6 +15,7 @@ import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE } from './data/articles/hairT
 import { VITILIGO_DAAVLIN_ARTICLE } from './data/articles/vitiligoDaavlinArticle';
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from './data/articles/psoriasisDaavlinKokandArticle';
 import { IPL_THERAPY_ARTICLE } from './data/articles/iplTherapyArticle';
+import { IPL_PHOTOTHERAPY_RADESKI_ARTICLE } from './data/articles/iplPhototherapyRadeskiArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from './data/articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE } from './data/articles/adultAcneArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './data/articles/laserScarResurfacingArticle';
@@ -929,6 +930,7 @@ export const ARTICLES: Article[] = [
   VITILIGO_DAAVLIN_ARTICLE,
   PSORIASIS_DAAVLIN_KOKAND_ARTICLE,
   IPL_THERAPY_ARTICLE,
+  IPL_PHOTOTHERAPY_RADESKI_ARTICLE,
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   LASER_SCAR_RESURFACING_ARTICLE,

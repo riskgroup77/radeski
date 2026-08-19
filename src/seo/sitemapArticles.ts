@@ -47,6 +47,11 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
   },
   {
+    routeKey: 'art-ipl-fototerapiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
     routeKey: 'art-kontagioz-mollyusk-radeski',
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
