@@ -4,6 +4,7 @@ import * as Icons from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import MediaImage from './MediaImage';
+import ServiceCategoryTeaserMedia from './ServiceCategoryTeaserMedia';
 import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { getServiceLucideIcon, resolveCategoryIcon, resolveSubServiceIcon } from '../utils/serviceIcons';
 
@@ -198,22 +199,23 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                 className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col h-full group"
               >
                 {getCategoryImage(category) ? (
-                  <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[200px] overflow-hidden bg-brand-offwhite shrink-0">
-                    <MediaImage
-                      src={getCategoryImage(category)!}
-                      alt={category.title[locale]}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <button
-                      type="button"
-                      onClick={(e) => openImageLightbox(getCategoryImage(category)!, category.title[locale], e)}
-                      className="absolute top-3 right-3 p-2 bg-black/35 hover:bg-black/50 text-white rounded-lg backdrop-blur-sm transition-all cursor-pointer"
-                      aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить изображение' : 'Expand image'}
-                    >
-                      <Icons.Maximize2 className="w-4 h-4" />
-                    </button>
-                  </div>
+                  <ServiceCategoryTeaserMedia
+                    categoryId={category.id}
+                    locale={locale}
+                    alt={category.title[locale]}
+                    fallbackImage={getCategoryImage(category)!}
+                    lightboxImageSrc={getCategoryImage(category)!}
+                    expandLabel={
+                      locale === 'uz'
+                        ? 'Rasmni kattalashtirish'
+                        : locale === 'ru'
+                          ? 'Увеличить изображение'
+                          : 'Expand image'
+                    }
+                    onExpand={openImageLightbox}
+                    className="aspect-[16/11] min-h-[200px] shrink-0 sm:aspect-[5/3]"
+                    imageClassName="group-hover:scale-105"
+                  />
                 ) : (
                   <div className="p-5 pb-0 flex items-center gap-3">
                     <div className="w-12 h-12 bg-brand-gold-light/10 rounded-xl flex items-center justify-center border border-brand-gold-light/20 shadow-xs">

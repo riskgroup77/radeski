@@ -14,6 +14,8 @@ import dermatoonkologiyaTeaserPoster from '../assets/services-teaser/dermatoonko
 export interface HomeServiceTeaserMedia {
   video: string;
   poster: string;
+  /** Optional HTMLVideoElement playbackRate (1 = normal). */
+  playbackRate?: number;
 }
 
 /** Hover-play clips for homepage service cards (video + matching poster frame). */
