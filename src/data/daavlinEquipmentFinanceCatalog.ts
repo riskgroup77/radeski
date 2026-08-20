@@ -8,7 +8,10 @@ export type FinanceVariant = {
   id: string;
   label: L;
   catalogSku?: string;
+  /** Admin / ichki ma’lumot — saytda ko‘rsatilmaydi */
   purchaseUsd: number;
+  /** Saytda ko‘rsatiladigan yagona narx (so‘m) */
+  purchaseUzs: number;
   rentalMonthlyUzs: number;
 };
 
@@ -24,6 +27,27 @@ export type ModelFinanceConfig = {
 };
 
 export const USD_UZS_REFERENCE = 12_800;
+
+function financeVariant(
+  id: string,
+  label: L,
+  purchaseUsd: number,
+  rentalMonthlyUzs: number,
+  catalogSku?: string,
+): FinanceVariant {
+  return {
+    id,
+    label,
+    catalogSku,
+    purchaseUsd,
+    purchaseUzs: Math.round(purchaseUsd * USD_UZS_REFERENCE),
+    rentalMonthlyUzs,
+  };
+}
+
+export function resolvePurchaseUzs(variant: FinanceVariant): number {
+  return variant.purchaseUzs;
+}
 
 export const DAAVLIN_FINANCE_UI: Record<
   Locale,
@@ -44,8 +68,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     leaseRate: string;
     leaseMonthly: string;
     leaseTotal: string;
-    leasePurchase: string;
-    exchangeRate: string;
     disclaimer: string;
     cta: string;
     monthUnit: string;
@@ -54,12 +76,12 @@ export const DAAVLIN_FINANCE_UI: Record<
   uz: {
     sectionTitle: 'Ijara va lizing kalkulyatori',
     sectionDesc:
-      'Xalqaro Daavlin katalogidagi rasmiy USD narxlari va Radeski distributor preyskurantidagi ijara stavkalari asosida taxminiy hisob-kitob. Aniq shartlar — shaxsiy konsultatsiyada.',
+      'Radeski distributor preyskurantidagi narx va ijara stavkalari asosida taxminiy hisob-kitob. Aniq shartlar — shaxsiy konsultatsiyada.',
     tabRent: 'Ijara (arenda)',
     tabLease: 'Lizing',
     variantLabel: 'Konfiguratsiya',
-    purchaseLabel: 'Rasmiy katalog narxi (USD)',
-    purchaseNote: 'Daavlin xalqaro spravochnik, AQSh dollar',
+    purchaseLabel: 'Uskuna narxi',
+    purchaseNote: 'Narx ma’lumot xarakterida; yakuniy shartlar shartnomada',
     rentMonthly: 'Oylik ijara',
     rentDuration: 'Ijara muddati (oy)',
     rentTotal: 'Jami to‘lov',
@@ -69,8 +91,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     leaseRate: 'Yillik stavka (%)',
     leaseMonthly: 'Oylik lizing to‘lovi',
     leaseTotal: 'Jami lizing bo‘yicha',
-    leasePurchase: 'Uskuna qiymati (so‘m)',
-    exchangeRate: 'USD → UZS kursi (hisob-kitob uchun)',
     disclaimer:
       'Kalkulyator ma’lumot xarakterida. DEKA va Surgitron narxlari bozor bahosi bo‘yicha taxminiy. Yakuniy shartlar shartnomada belgilanadi.',
     cta: 'Aniq hisob-kitob uchun murojaat qiling',
@@ -79,12 +99,12 @@ export const DAAVLIN_FINANCE_UI: Record<
   ru: {
     sectionTitle: 'Калькулятор аренды и лизинга',
     sectionDesc:
-      'Ориентировочный расчёт на основе официальных цен Daavlin (USD) и ставок аренды дистрибьютора Radeski. Точные условия — на индивидуальной консультации.',
+      'Ориентировочный расчёт на основе прайса дистрибьютора Radeski и ставок аренды. Точные условия — на индивидуальной консультации.',
     tabRent: 'Аренда',
     tabLease: 'Лизинг',
     variantLabel: 'Конфигурация',
-    purchaseLabel: 'Каталожная цена (USD)',
-    purchaseNote: 'Международный справочник Daavlin',
+    purchaseLabel: 'Стоимость оборудования',
+    purchaseNote: 'Цена носит информационный характер; итог — в договоре',
     rentMonthly: 'Аренда в месяц',
     rentDuration: 'Срок аренды (мес.)',
     rentTotal: 'Итого к оплате',
@@ -94,8 +114,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     leaseRate: 'Годовая ставка (%)',
     leaseMonthly: 'Ежемесячный платёж',
     leaseTotal: 'Итого по лизингу',
-    leasePurchase: 'Стоимость оборудования (сум)',
-    exchangeRate: 'Курс USD → UZS (для расчёта)',
     disclaimer:
       'Калькулятор носит информационный характер. Цены DEKA и Surgitron ориентировочные. Финальные условия — в договоре.',
     cta: 'Запросить точный расчёт',
@@ -104,12 +122,12 @@ export const DAAVLIN_FINANCE_UI: Record<
   en: {
     sectionTitle: 'Rental & leasing calculator',
     sectionDesc:
-      'Estimate based on official Daavlin catalog USD list prices and Radeski distributor rental rates. Final terms on individual consultation.',
+      'Estimate based on Radeski distributor list prices and rental rates. Final terms on individual consultation.',
     tabRent: 'Rental',
     tabLease: 'Leasing',
     variantLabel: 'Configuration',
-    purchaseLabel: 'Official catalog price (USD)',
-    purchaseNote: 'Daavlin international price list, USD',
+    purchaseLabel: 'Equipment price',
+    purchaseNote: 'Price is indicative; final terms in contract',
     rentMonthly: 'Monthly rental',
     rentDuration: 'Rental period (months)',
     rentTotal: 'Total payment',
@@ -119,8 +137,6 @@ export const DAAVLIN_FINANCE_UI: Record<
     leaseRate: 'Annual rate (%)',
     leaseMonthly: 'Monthly lease payment',
     leaseTotal: 'Total under lease',
-    leasePurchase: 'Equipment value (UZS)',
-    exchangeRate: 'USD → UZS rate (for calculation)',
     disclaimer:
       'Calculator is for guidance only. DEKA and Surgitron prices are market estimates. Final terms in contract.',
     cta: 'Request an exact quote',
@@ -133,27 +149,27 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: '7-series',
     catalogModel: t('7 Series', '7 Series', '7 Series'),
     variants: [
-      {
-        id: '7-cx-311-8',
-        label: t('7 Series CX 311-8 (8 lampa)', '7 Series CX 311-8 (8 ламп)', '7 Series CX 311-8 (8 lamps)'),
-        catalogSku: '808HO0008CX5',
-        purchaseUsd: 15_600,
-        rentalMonthlyUzs: 8_200_000,
-      },
-      {
-        id: '7-cx-311-12',
-        label: t('7 Series CX 311-12 (12 lampa)', '7 Series CX 311-12 (12 ламп)', '7 Series CX 311-12 (12 lamps)'),
-        catalogSku: '808HO0012CX5',
-        purchaseUsd: 16_120,
-        rentalMonthlyUzs: 8_500_000,
-      },
-      {
-        id: '7-cx-350-12',
-        label: t('7 Series CX 350-12 (UVA, 12 lampa)', '7 Series CX 350-12 (UVA, 12 ламп)', '7 Series CX 350-12 (UVA, 12 lamps)'),
-        catalogSku: '809HO1200CX5',
-        purchaseUsd: 16_120,
-        rentalMonthlyUzs: 8_500_000,
-      },
+      financeVariant(
+        '7-cx-311-8',
+        t('7 Series CX 311-8 (8 lampa)', '7 Series CX 311-8 (8 ламп)', '7 Series CX 311-8 (8 lamps)'),
+        15_600,
+        8_200_000,
+        '808HO0008CX5',
+      ),
+      financeVariant(
+        '7-cx-311-12',
+        t('7 Series CX 311-12 (12 lampa)', '7 Series CX 311-12 (12 ламп)', '7 Series CX 311-12 (12 lamps)'),
+        16_120,
+        8_500_000,
+        '808HO0012CX5',
+      ),
+      financeVariant(
+        '7-cx-350-12',
+        t('7 Series CX 350-12 (UVA, 12 lampa)', '7 Series CX 350-12 (UVA, 12 ламп)', '7 Series CX 350-12 (UVA, 12 lamps)'),
+        16_120,
+        8_500_000,
+        '809HO1200CX5',
+      ),
     ],
     leaseAnnualRate: 0.2,
     leaseMinDownPct: 15,
@@ -169,20 +185,20 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: 'dermapal',
     catalogModel: t('DermaPal', 'DermaPal', 'DermaPal'),
     variants: [
-      {
-        id: 'dp-nb-uvb',
-        label: t('DermaPal Digital NB/UVB', 'DermaPal Digital NB/UVB', 'DermaPal Digital NB/UVB'),
-        catalogSku: '935DPNBDT50CE',
-        purchaseUsd: 1_536,
-        rentalMonthlyUzs: 1_000_000,
-      },
-      {
-        id: 'dp-uva',
-        label: t('DermaPal Digital UVA', 'DermaPal Digital UVA', 'DermaPal Digital UVA'),
-        catalogSku: '935DPADT50CE',
-        purchaseUsd: 1_536,
-        rentalMonthlyUzs: 1_000_000,
-      },
+      financeVariant(
+        'dp-nb-uvb',
+        t('DermaPal Digital NB/UVB', 'DermaPal Digital NB/UVB', 'DermaPal Digital NB/UVB'),
+        1_536,
+        1_000_000,
+        '935DPNBDT50CE',
+      ),
+      financeVariant(
+        'dp-uva',
+        t('DermaPal Digital UVA', 'DermaPal Digital UVA', 'DermaPal Digital UVA'),
+        1_536,
+        1_000_000,
+        '935DPADT50CE',
+      ),
     ],
     leaseAnnualRate: 0.22,
     leaseMinDownPct: 10,
@@ -198,27 +214,27 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: 'm-series',
     catalogModel: t('M Series', 'M Series', 'M Series'),
     variants: [
-      {
-        id: 'm-cx-311-10',
-        label: t('M Series CX 311-10 (10 lampa)', 'M Series CX 311-10 (10 ламп)', 'M Series CX 311-10 (10 lamps)'),
-        catalogSku: '801MI0010CX5',
-        purchaseUsd: 12_272,
-        rentalMonthlyUzs: 6_800_000,
-      },
-      {
-        id: 'm-cx-350-10',
-        label: t('M Series CX 350-10 (UVA)', 'M Series CX 350-10 (UVA)', 'M Series CX 350-10 (UVA)'),
-        catalogSku: '801MI1000CX5',
-        purchaseUsd: 12_064,
-        rentalMonthlyUzs: 6_700_000,
-      },
-      {
-        id: 'm-cx-mix-4-6',
-        label: t('M Series CX 311/350 (4+6 lampa)', 'M Series CX 311/350 (4+6 ламп)', 'M Series CX 311/350 (4+6 lamps)'),
-        catalogSku: '801MI0604CX5',
-        purchaseUsd: 14_144,
-        rentalMonthlyUzs: 7_800_000,
-      },
+      financeVariant(
+        'm-cx-311-10',
+        t('M Series CX 311-10 (10 lampa)', 'M Series CX 311-10 (10 ламп)', 'M Series CX 311-10 (10 lamps)'),
+        12_272,
+        6_800_000,
+        '801MI0010CX5',
+      ),
+      financeVariant(
+        'm-cx-350-10',
+        t('M Series CX 350-10 (UVA)', 'M Series CX 350-10 (UVA)', 'M Series CX 350-10 (UVA)'),
+        12_064,
+        6_700_000,
+        '801MI1000CX5',
+      ),
+      financeVariant(
+        'm-cx-mix-4-6',
+        t('M Series CX 311/350 (4+6 lampa)', 'M Series CX 311/350 (4+6 ламп)', 'M Series CX 311/350 (4+6 lamps)'),
+        14_144,
+        7_800_000,
+        '801MI0604CX5',
+      ),
     ],
     leaseAnnualRate: 0.2,
     leaseMinDownPct: 15,
@@ -234,12 +250,12 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: 'deka-co2-laser',
     catalogModel: t('DEKA CO₂ Laser SmartXide Punto', 'DEKA CO₂ Laser SmartXide Punto', 'DEKA CO₂ Laser SmartXide Punto'),
     variants: [
-      {
-        id: 'deka-co2-punto',
-        label: t('SmartXide Punto CO₂ (klinik)', 'SmartXide Punto CO₂ (клиника)', 'SmartXide Punto CO₂ (clinical)'),
-        purchaseUsd: 95_000,
-        rentalMonthlyUzs: 52_000_000,
-      },
+      financeVariant(
+        'deka-co2-punto',
+        t('SmartXide Punto CO₂ (klinik)', 'SmartXide Punto CO₂ (клиника)', 'SmartXide Punto CO₂ (clinical)'),
+        95_000,
+        52_000_000,
+      ),
     ],
     leaseAnnualRate: 0.18,
     leaseMinDownPct: 20,
@@ -255,12 +271,12 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: 'deka-alexandrite-laser',
     catalogModel: t('DEKA Alexandrite 755 nm', 'DEKA Alexandrite 755 nm', 'DEKA Alexandrite 755 nm'),
     variants: [
-      {
-        id: 'deka-alex-755',
-        label: t('Aleksandrit 755 nm (epilyatsiya / pigment)', 'Александрит 755 нм (эпиляция / пигмент)', 'Alexandrite 755 nm (hair / pigment)'),
-        purchaseUsd: 115_000,
-        rentalMonthlyUzs: 62_000_000,
-      },
+      financeVariant(
+        'deka-alex-755',
+        t('Aleksandrit 755 nm (epilyatsiya / pigment)', 'Александрит 755 нм (эпиляция / пигмент)', 'Alexandrite 755 nm (hair / pigment)'),
+        115_000,
+        62_000_000,
+      ),
     ],
     leaseAnnualRate: 0.18,
     leaseMinDownPct: 20,
@@ -276,12 +292,12 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: 'surgitron-radiofrequency',
     catalogModel: t('Surgitron Radiofrequency', 'Surgitron Radiofrequency', 'Surgitron Radiofrequency'),
     variants: [
-      {
-        id: 'surgitron-std',
-        label: t('Surgitron RF (4 MHz, klinik)', 'Surgitron RF (4 МГц, клиника)', 'Surgitron RF (4 MHz, clinical)'),
-        purchaseUsd: 28_000,
-        rentalMonthlyUzs: 16_500_000,
-      },
+      financeVariant(
+        'surgitron-std',
+        t('Surgitron RF (4 MHz, klinik)', 'Surgitron RF (4 МГц, клиника)', 'Surgitron RF (4 MHz, clinical)'),
+        28_000,
+        16_500_000,
+      ),
     ],
     leaseAnnualRate: 0.2,
     leaseMinDownPct: 15,
@@ -297,27 +313,27 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: 'neolux',
     catalogModel: t('NeoLux', 'NeoLux', 'NeoLux'),
     variants: [
-      {
-        id: 'neolux-cx-311-48',
-        label: t('NeoLux CX 311-48 (48 lampa, 6 ft)', 'NeoLux CX 311-48 (48 ламп, 6 ft)', 'NeoLux CX 311-48 (48 lamps, 6 ft)'),
-        catalogSku: '864NL0048CX',
-        purchaseUsd: 66_300,
-        rentalMonthlyUzs: 38_000_000,
-      },
-      {
-        id: 'neolux-cx-2424',
-        label: t('NeoLux CX 311/350 24+24', 'NeoLux CX 311/350 24+24', 'NeoLux CX 311/350 24+24'),
-        catalogSku: '864NL2424CX',
-        purchaseUsd: 63_240,
-        rentalMonthlyUzs: 36_500_000,
-      },
-      {
-        id: 'neolux-plus-311-40',
-        label: t('NeoLux Plus CX 311-40 (2 m)', 'NeoLux Plus CX 311-40 (2 m)', 'NeoLux Plus CX 311-40 (2 m)'),
-        catalogSku: '862NL0040CX',
-        purchaseUsd: 67_116,
-        rentalMonthlyUzs: 39_000_000,
-      },
+      financeVariant(
+        'neolux-cx-311-48',
+        t('NeoLux CX 311-48 (48 lampa, 6 ft)', 'NeoLux CX 311-48 (48 ламп, 6 ft)', 'NeoLux CX 311-48 (48 lamps, 6 ft)'),
+        66_300,
+        38_000_000,
+        '864NL0048CX',
+      ),
+      financeVariant(
+        'neolux-cx-2424',
+        t('NeoLux CX 311/350 24+24', 'NeoLux CX 311/350 24+24', 'NeoLux CX 311/350 24+24'),
+        63_240,
+        36_500_000,
+        '864NL2424CX',
+      ),
+      financeVariant(
+        'neolux-plus-311-40',
+        t('NeoLux Plus CX 311-40 (2 m)', 'NeoLux Plus CX 311-40 (2 m)', 'NeoLux Plus CX 311-40 (2 m)'),
+        67_116,
+        39_000_000,
+        '862NL0040CX',
+      ),
     ],
     leaseAnnualRate: 0.18,
     leaseMinDownPct: 20,
@@ -333,13 +349,13 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
     modelId: 'aquex',
     catalogModel: t('Aquex', 'Aquex', 'Aquex'),
     variants: [
-      {
-        id: 'aquex-base',
-        label: t('Aquex ionoforez tizimi', 'Aquex — система ионофореза', 'Aquex iontophoresis system'),
-        catalogSku: '101960AQUEX',
-        purchaseUsd: 3_570,
-        rentalMonthlyUzs: 2_200_000,
-      },
+      financeVariant(
+        'aquex-base',
+        t('Aquex ionoforez tizimi', 'Aquex — система ионофореза', 'Aquex iontophoresis system'),
+        3_570,
+        2_200_000,
+        '101960AQUEX',
+      ),
     ],
     leaseAnnualRate: 0.22,
     leaseMinDownPct: 10,

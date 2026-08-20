@@ -16,7 +16,7 @@ interface PageHeroBannerProps {
   highlightFooter?: string;
   /** Compact spec tags under highlights. */
   specTags?: string[];
-  appointmentLabel: string;
+  appointmentLabel?: string;
   secondaryCta?: ReactNode;
   after?: ReactNode;
   /** Panoramic product lineups — split layout: copy left, image right. */
@@ -54,13 +54,17 @@ function HeroCtaRow({
   secondaryCta,
   solidButtons = false,
 }: Pick<PageHeroBannerProps, 'appointmentLabel' | 'secondaryCta'> & { solidButtons?: boolean }) {
+  if (!appointmentLabel && !secondaryCta) return null;
+
   const primaryClass = solidButtons ? heroPrimaryCtaSolidClass : heroPrimaryCtaClass;
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
-      <AppointmentBookingLink className={primaryClass}>
-        <Calendar className="h-4 w-4 shrink-0" />
-        {appointmentLabel}
-      </AppointmentBookingLink>
+      {appointmentLabel ? (
+        <AppointmentBookingLink className={primaryClass}>
+          <Calendar className="h-4 w-4 shrink-0" />
+          {appointmentLabel}
+        </AppointmentBookingLink>
+      ) : null}
       {secondaryCta}
     </div>
   );
@@ -151,6 +155,7 @@ function HeroCopy({
     Boolean(highlights?.length) ||
     Boolean(highlightFooter) ||
     Boolean(specTags?.length);
+  const showCtas = Boolean(appointmentLabel || secondaryCta);
 
   const badgeClass = lightSurface
     ? 'inline-flex w-fit items-center gap-2 rounded-full border border-brand-gold/25 bg-brand-gold-light/20 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-gold shadow-sm sm:text-xs'
@@ -199,14 +204,18 @@ function HeroCopy({
           className={
             hasMiddleContent
               ? 'mt-auto pt-6 sm:pt-8'
-              : 'mt-auto pt-12 sm:pt-14 lg:pt-16 xl:pt-[4.5rem]'
+              : showCtas
+                ? 'mt-auto pt-12 sm:pt-14 lg:pt-16 xl:pt-[4.5rem]'
+                : 'mt-auto'
           }
         >
-          <HeroCtaRow
-            appointmentLabel={appointmentLabel}
-            secondaryCta={secondaryCta}
-            solidButtons={solidButtons}
-          />
+          {showCtas ? (
+            <HeroCtaRow
+              appointmentLabel={appointmentLabel}
+              secondaryCta={secondaryCta}
+              solidButtons={solidButtons}
+            />
+          ) : null}
         </div>
       </div>
     );
@@ -221,13 +230,15 @@ function HeroCopy({
         specTags={specTags}
         lightSurface={lightSurface}
       />
-      <div className={hasMiddleContent ? 'mt-6 sm:mt-8' : 'mt-8 sm:mt-10'}>
-        <HeroCtaRow
-          appointmentLabel={appointmentLabel}
-          secondaryCta={secondaryCta}
-          solidButtons={solidButtons}
-        />
-      </div>
+      {showCtas ? (
+        <div className={hasMiddleContent ? 'mt-6 sm:mt-8' : 'mt-8 sm:mt-10'}>
+          <HeroCtaRow
+            appointmentLabel={appointmentLabel}
+            secondaryCta={secondaryCta}
+            solidButtons={solidButtons}
+          />
+        </div>
+      ) : null}
     </>
   );
 }

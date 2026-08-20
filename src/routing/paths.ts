@@ -17,6 +17,7 @@ export type PageId =
   | 'daavlin-foto-kabinalari'
   | 'dermoscan'
   | 'science'
+  | 'obrazovaniya'
   | 'brend'
   | 'terms'
   | 'privacy'
@@ -124,8 +125,8 @@ const DAAVLIN_SECTION_ALIASES: Record<string, DaavlinSectionId> = {
 
 export function daavlinSectionPath(locale: Locale, section: DaavlinSectionId = 'about'): string {
   const base = pagePath(locale, 'daavlin-foto-kabinalari');
-  if (section === 'about') return base;
-  return `${base}/${section}`;
+  if (section === 'contacts') return `${base}#aloqa`;
+  return base;
 }
 
 export type DaavlinModelId =
@@ -163,14 +164,30 @@ export function getDaavlinModelIdFromPathname(pathname: string): DaavlinModelId 
 }
 
 /** Retired Daavlin model slugs → replacement canonical model page. */
-export const LEGACY_DAAVLIN_MODEL_REDIRECTS: Record<string, DaavlinModelId> = {
-  ml24000: 'deka-co2-laser',
-};
+export const LEGACY_DAAVLIN_MODEL_REDIRECTS: Record<string, DaavlinModelId> = {};
+
+export function getClinicLaserModelRedirectPath(pathname: string): string | null {
+  const modelId = getDaavlinModelIdFromPathname(pathname);
+  if (
+    !modelId ||
+    !(['deka-co2-laser', 'deka-alexandrite-laser', 'surgitron-radiofrequency'] as const).includes(
+      modelId as 'deka-co2-laser' | 'deka-alexandrite-laser' | 'surgitron-radiofrequency',
+    )
+  ) {
+    return null;
+  }
+  const locale = getLocaleFromPathname(pathname);
+  return `${serviceCategoryPath(locale, 'apparatnaya-kosmetologiya')}#${modelId}`;
+}
 
 export function getLegacyDaavlinModelRedirectPath(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
   if (segments[1] !== 'daavlin-foto-kabinalari' || segments[2] !== 'models' || !segments[3]) {
     return null;
+  }
+  if (segments[3] === 'ml24000') {
+    const locale = getLocaleFromPathname(pathname);
+    return `${serviceCategoryPath(locale, 'apparatnaya-kosmetologiya')}#deka-co2-laser`;
   }
   const target = LEGACY_DAAVLIN_MODEL_REDIRECTS[segments[3]];
   if (!target) return null;
@@ -212,6 +229,7 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'daavlin-foto-kabinalari' ||
     pageSegment === 'dermoscan' ||
     pageSegment === 'science' ||
+    pageSegment === 'obrazovaniya' ||
     pageSegment === 'brend' ||
     pageSegment === 'terms' ||
     pageSegment === 'privacy' ||

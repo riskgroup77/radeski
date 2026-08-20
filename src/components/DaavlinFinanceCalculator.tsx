@@ -7,11 +7,10 @@ import type { DaavlinModelId } from '../routing/paths';
 import { daavlinSectionPath } from '../routing/paths';
 import {
   DAAVLIN_FINANCE_UI,
-  USD_UZS_REFERENCE,
   calcLeaseMonthly,
-  formatUsd,
   formatUzs,
   getModelFinance,
+  resolvePurchaseUzs,
 } from '../data/daavlinEquipmentFinanceCatalog';
 
 interface DaavlinFinanceCalculatorProps {
@@ -56,7 +55,6 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
 
   const [tab, setTab] = useState<Tab>('rent');
   const [variantIndex, setVariantIndex] = useState(0);
-  const [exchangeRate, setExchangeRate] = useState(USD_UZS_REFERENCE);
   const [rentMonths, setRentMonths] = useState(12);
   const [leaseDownPct, setLeaseDownPct] = useState(20);
   const [leaseTermMonths, setLeaseTermMonths] = useState(36);
@@ -72,7 +70,7 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
   }, [modelId, config]);
 
   const variant = config?.variants[variantIndex] ?? config?.variants[0];
-  const purchaseUzs = (variant?.purchaseUsd ?? 0) * exchangeRate;
+  const purchaseUzs = variant ? resolvePurchaseUzs(variant) : 0;
 
   const rentTotal = useMemo(
     () => (variant ? variant.rentalMonthlyUzs * rentMonths : 0),
@@ -160,33 +158,11 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
             ))}
           </select>
 
-          <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-brand-sectiongray bg-brand-offwhite/60 px-4 py-3">
-              <p className="text-[10px] font-bold uppercase tracking-wide text-brand-text-muted">{ui.purchaseLabel}</p>
-              <p className="mt-1 text-base font-extrabold text-brand-text-primary">{formatUsd(variant.purchaseUsd)}</p>
-              <p className="mt-0.5 text-[10px] text-brand-text-muted">{ui.purchaseNote}</p>
-            </div>
-            <div className="rounded-xl border border-brand-gold/25 bg-brand-gold-light/10 px-4 py-3">
-              <p className="text-[10px] font-bold uppercase tracking-wide text-brand-gold">{ui.leasePurchase}</p>
-              <p className="mt-1 text-base font-extrabold text-brand-text-primary">{formatUzs(purchaseUzs, locale)}</p>
-            </div>
+          <div className="mb-6 rounded-xl border border-brand-gold/25 bg-brand-gold-light/10 px-4 py-3">
+            <p className="text-[10px] font-bold uppercase tracking-wide text-brand-gold">{ui.purchaseLabel}</p>
+            <p className="mt-1 text-base font-extrabold text-brand-text-primary">{formatUzs(purchaseUzs, locale)}</p>
+            <p className="mt-0.5 text-[10px] text-brand-text-muted">{ui.purchaseNote}</p>
           </div>
-
-          <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-brand-text-muted">
-            {ui.exchangeRate}
-          </label>
-          <input
-            type="range"
-            min={11000}
-            max={15000}
-            step={100}
-            value={exchangeRate}
-            onChange={(e) => setExchangeRate(Number(e.target.value))}
-            className="mb-1 w-full accent-brand-gold"
-          />
-          <p className="mb-6 text-sm font-semibold text-brand-text-secondary">
-            1 USD = {new Intl.NumberFormat('uz-UZ').format(exchangeRate)} so'm
-          </p>
 
           {tab === 'rent' ? (
             <div className="space-y-5">

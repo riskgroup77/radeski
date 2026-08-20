@@ -38,6 +38,10 @@ export const DICTIONARY = {
     navDaavlinSubtitle: "O‘zbekiston Milliy Fototerapiya Markazi",
     navDermoScan: "DermaScan",
     navScience: "Ilm-fan",
+    navObrazovaniya: "Obrazovaniya",
+    obrazovaniyaComingSoonTitle: "Endi sayt to'ldiriladi",
+    obrazovaniyaComingSoonDesc:
+      "Ta'lim va malaka oshirish bo'limi tez orada ochiladi. Hozircha bosh sahifadan klinika xizmatlari bilan tanishishingiz mumkin.",
     navDoctors: "Shifokorlar",
     navPrices: "Narxlar",
     navArticles: "Maqolalar",
@@ -130,6 +134,10 @@ export const DICTIONARY = {
     navDaavlinSubtitle: "Национальный центр фототерапии Узбекистана",
     navDermoScan: "DermaScan",
     navScience: "Наука",
+    navObrazovaniya: "Образование",
+    obrazovaniyaComingSoonTitle: "Сайт сейчас наполняется",
+    obrazovaniyaComingSoonDesc:
+      "Раздел обучения и повышения квалификации скоро откроется. Пока вы можете ознакомиться с услугами клиники на главной странице.",
     navDoctors: "Врачи",
     navPrices: "Цены",
     navArticles: "Статьи",
@@ -222,6 +230,10 @@ export const DICTIONARY = {
     navDaavlinSubtitle: "National Phototherapy Center of Uzbekistan",
     navDermoScan: "DermaScan",
     navScience: "Science",
+    navObrazovaniya: "Education",
+    obrazovaniyaComingSoonTitle: "The site is being filled in",
+    obrazovaniyaComingSoonDesc:
+      "The training and professional development section will open soon. For now, explore clinic services from the home page.",
     navDoctors: "Doctors",
     navPrices: "Prices",
     navArticles: "Articles",

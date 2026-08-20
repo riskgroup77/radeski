@@ -7,7 +7,7 @@ import {
   BRAND_NAV_OVERVIEW,
   BRAND_NAV_TITLE,
 } from '../data/brandContent';
-import { DAAVLIN_CABINS } from '../data/daavlinFotoKabinalariContent';
+import { DAAVLIN_NAV_LINEUP } from '../data/daavlinFotoKabinalariContent';
 import {
   DAAVLIN_MODELS_NAV_ALL,
   DAAVLIN_MODELS_NAV_TITLE,
@@ -21,7 +21,6 @@ import {
   servicesListPath,
   brandPath,
   daavlinModelPath,
-  daavlinSectionPath,
   getServiceCategoryIdFromPathname,
   getDaavlinModelIdFromPathname,
   type DaavlinModelId,
@@ -95,7 +94,7 @@ export default function Header({
     locale === 'ru' ? 'Открыть на карте' : locale === 'en' ? 'Open in map' : 'Xaritada ochish';
   const activeServiceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
   const activeDaavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
-  const daavlinModels = DAAVLIN_CABINS.lineup;
+  const daavlinModels = DAAVLIN_NAV_LINEUP;
 
   const navServiceCategories = useMemo(
     () => (serviceCategories.length > 0 ? serviceCategories : SERVICE_CATEGORIES),
@@ -139,6 +138,7 @@ export default function Header({
     { id: 'results', label: d.navResults },
     { id: 'dermoscan', label: d.navDermoScan },
     { id: 'science', label: d.navScience },
+    { id: 'obrazovaniya', label: d.navObrazovaniya },
   ];
 
   const getLanguageLabel = (l: Locale) => {
@@ -278,7 +278,7 @@ export default function Header({
                 ))}
                 <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
                   <Link
-                    to={daavlinSectionPath(locale, 'cabins')}
+                    to={pagePath(locale, 'clinic-equipment')}
                     onClick={() => setIsDaavlinDropdownOpen(false)}
                     className="block px-4 py-2.5 text-[12px] font-semibold text-brand-gold hover:bg-brand-gold-light/10"
                   >
@@ -454,7 +454,7 @@ export default function Header({
                 </Link>
               ))}
               <Link
-                to={daavlinSectionPath(locale, 'cabins')}
+                to={pagePath(locale, 'clinic-equipment')}
                 onClick={() => {
                   setIsMobileDaavlinOpen(false);
                   setIsMobileMenuOpen(false);

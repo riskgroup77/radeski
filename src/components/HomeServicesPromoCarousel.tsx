@@ -330,6 +330,26 @@ export default function HomeServicesPromoCarousel({
   const slides = useMemo(() => buildHomePromoSlides(), []);
 
   const [paused, setPaused] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    const playVideo = () => {
+      void video.play().catch(() => {
+        // Autoplay blocked — poster image stays visible until interaction.
+      });
+    };
+
+    if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      playVideo();
+      return;
+    }
+
+    video.addEventListener('loadeddata', playVideo, { once: true });
+    return () => video.removeEventListener('loadeddata', playVideo);
+  }, []);
 
   return (
     <section
@@ -341,12 +361,25 @@ export default function HomeServicesPromoCarousel({
         src="/hero-dermatology-bg.png"
         alt=""
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover object-center [filter:none]"
+        className="hero-bg-poster absolute inset-0 z-0 h-full w-full object-cover object-center"
         width={1920}
         height={1080}
         fetchPriority="high"
         decoding="async"
       />
+      <video
+        ref={heroVideoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/hero-dermatology-bg.png"
+        aria-hidden
+        className="hero-bg-video absolute inset-0 z-[1] h-full w-full object-cover object-center"
+      >
+        <source src="/heroVideo.mp4" type="video/mp4" />
+      </video>
 
       <div className="site-container relative z-10 pt-10 pb-12 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-8 lg:gap-10 xl:gap-14 lg:items-stretch">

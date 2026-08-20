@@ -133,6 +133,11 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       desc: "Radeski Skin Clinic da ilm-fan: klinik amaliyot, tadqiqot, nashrlar, yosh shifokorlarni tayyorlash va xalqaro hamkorlik. Farg'ona | Qo'qon.",
       keywords: "ilm-fan, dermatologiya tadqiqoti, klinik protokollar, yosh shifokorlar, Radeski, Farg'ona, Qo'qon",
     },
+    obrazovaniya: {
+      title: "Obrazovaniya | Radeski Skin Clinic",
+      desc: "Ta'lim va malaka oshirish bo'limi tez orada. Radeski Skin Clinic — Farg'ona va Qo'qon.",
+      keywords: "obrazovaniya, ta'lim, malaka oshirish, dermatologiya, Radeski, Farg'ona",
+    },
     brend: {
       title: "Radeski klinik brendi | Missiya, falsafa, ekotizim",
       desc: "Radeski Skin Clinic brendi: professional tibbiyot, texnologiya, ilm-fan va ochiqlik. Dermatologiya ekotizimi Farg'ona va Qo'qonda.",
@@ -228,6 +233,11 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       desc: "Наука в Radeski Skin Clinic: клиническая практика, исследования, публикации, подготовка молодых врачей и международное сотрудничество. Фергана | Коканд.",
       keywords: "наука, исследования в дерматологии, клинические протоколы, молодые врачи, Radeski, Фергана, Коканд",
     },
+    obrazovaniya: {
+      title: "Образование | Radeski Skin Clinic",
+      desc: "Раздел обучения и повышения квалификации скоро откроется. Radeski Skin Clinic — Фергана и Коканд.",
+      keywords: "образование, обучение, повышение квалификации, дерматология, Radeski, Фергана",
+    },
     brend: {
       title: "Бренд Radeski Skin Clinic | Миссия, философия, экосистема",
       desc: "Бренд Radeski Skin Clinic: профессиональная медицина, технологии, наука и доступность. Дерматологическая экосистема в Фергане и Коканде.",
@@ -322,6 +332,11 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       title: "Science | Radeski Skin Clinic — research, education, international collaboration",
       desc: "Science at Radeski Skin Clinic: clinical practice, research, publications, training young physicians, and international collaboration. Fergana | Kokand.",
       keywords: "science, dermatology research, clinical protocols, young physicians, Radeski, Fergana, Kokand",
+    },
+    obrazovaniya: {
+      title: "Education | Radeski Skin Clinic",
+      desc: "Training and professional development section opening soon. Radeski Skin Clinic — Fergana and Kokand.",
+      keywords: "education, training, professional development, dermatology, Radeski, Fergana",
     },
     brend: {
       title: "The Radeski Skin Clinic brand | Mission, philosophy, ecosystem",

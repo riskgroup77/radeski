@@ -148,6 +148,28 @@ export const DAAVLIN_ABOUT = {
     'Фототерапия — безопасное и эффективное лечение псориаза, витилиго, атопического дерматита и экземы',
     'Phototherapy — safe, effective care for psoriasis, vitiligo, atopic dermatitis and eczema',
   ),
+  heroHighlights: LL(
+    [
+      'O‘zbekiston bo‘ylab Daavlin fototerapiya uskunalari rasmiy vakilligi',
+      'Psoriaz, vitiligo, atopik dermatit va ekzema uchun NB-UVB terapiya',
+      'Klinika, shifokor va uy rejimi uchun sertifikatlangan yechimlar',
+    ],
+    [
+      'Официальное представительство аппаратов Daavlin для фототерапии в Узбекистане',
+      'NB-UVB-терапия при псориазе, витилиго, атопическом дерматите и экземе',
+      'Сертифицированные решения для клиники, врача и домашнего режима',
+    ],
+    [
+      'Official Daavlin phototherapy representation across Uzbekistan',
+      'NB-UVB therapy for psoriasis, vitiligo, atopic dermatitis and eczema',
+      'Certified solutions for clinics, physicians and home regimens',
+    ],
+  ),
+  heroInfoFooter: L(
+    'Kabina tanlash, o‘rnatish va maslahat bo‘yicha — o‘ngdagi aloqa panelida telefon orqali bog‘laning.',
+    'По подбору кабины, установке и консультации — свяжитесь по телефону в контактной панели справа.',
+    'For cabin selection, installation and advice — call us via the contact panel on the right.',
+  ),
   storyEyebrow: L('Hikoya', 'История', 'Our story'),
   missionLabel: L('Missiyamiz', 'Наша миссия', 'Our mission'),
   missionQuote: L(
@@ -699,9 +721,9 @@ export const DAAVLIN_CABINS = {
   ],
   lineupTitle: L('Asosiy modelllar qatori', 'Основной модельный ряд', 'Core model range'),
   lineupIntro: L(
-    'Daavlin fototerapiya qatori va Radeski Skin Clinic’dagi lazer hamda radioto‘lqin uskunalari. Har bir tizim — aniq klinik vazifa: to‘liq tana, ekstremitetlar, nishonli zonalar, lazer yoki radioto‘lqin.',
-    'Ряд Daavlin для фототерапии и лазерное/радиоволновое оборудование Radeski Skin Clinic. У каждой системы своя клиническая роль: всё тело, конечности, точечные зоны, лазер или радиоволна.',
-    'Daavlin phototherapy range plus laser and radiofrequency systems at Radeski Skin Clinic. Each platform has a clear clinical role: full body, extremities, spot areas, laser or RF surgery.',
+    'Daavlin fototerapiya kabinalari — to‘liq tana, qo‘l-oyoq, lokal zona va ionoforez uchun. Har bir model aniq klinik vazifa va Radeski Distributor xizmati bilan.',
+    'Кабины Daavlin для фототерапии — всё тело, конечности, локальные зоны и ионофорез. Каждая модель решает конкретную клиническую задачу при поддержке дистрибьютора Radeski.',
+    'Daavlin phototherapy cabins — full body, hands and feet, local zones and iontophoresis. Each model serves a defined clinical role with Radeski Distributor support.',
   ),
   lineup: [
     {
@@ -1133,6 +1155,17 @@ export const DAAVLIN_CABINS = {
     'Which model fits your clinic or patient — we select it with a specialist. Leave a request or call: managers aim to respond within about 10 minutes.',
   ),
 };
+
+/** Radeski Skin Clinic lazer/RF — Daavlin navdan chiqadi, «Klinikadagi apparatlar» bo‘limida */
+export const DAAVLIN_CLINIC_LASER_MODEL_IDS = [
+  'deka-co2-laser',
+  'deka-alexandrite-laser',
+  'surgitron-radiofrequency',
+] as const;
+
+export const DAAVLIN_NAV_LINEUP = DAAVLIN_CABINS.lineup.filter(
+  (item) => !(DAAVLIN_CLINIC_LASER_MODEL_IDS as readonly string[]).includes(item.id),
+);
 
 /** Клинические результаты */
 export const DAAVLIN_RESULTS = {

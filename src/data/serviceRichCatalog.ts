@@ -76,6 +76,21 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
             'Q-switch lazer asosidagi yuz tozalash va teri yangilanishi. Karbon piling, gold toning va pigmentatsiya protokollari.',
         },
         {
+          title: 'DEKA CO₂ Laser SmartXide Punto',
+          description:
+            'Fraksion CO₂ lazer — postakne chandiqlari, teri yangilanishi va PinPoint rejimida xavfsiz o‘smalar.',
+        },
+        {
+          title: 'DEKA Alexandrite Laser 755 nm',
+          description:
+            'Aleksandrit lazer — lazerniy epilyatsiya, pigment dog‘lari va shifokor protokoli asosida muolajalar.',
+        },
+        {
+          title: 'Surgitron Radiofrequency',
+          description:
+            'Radioto‘lqin jarrohligi — papillomalar, mollyusk va shifokor tasdiqlagan o‘smalarni minimal iz bilan olib tashlash.',
+        },
+        {
           title: 'Lazer biorevitalizatsiya',
           description:
             'Lazer energiyasi bilan chuqur namlantirish va teri tiklanishi. Teri quruqligi, elastiklik pasayishi va tabiiy yorqinlik yo\'qolishida qo\'llaniladi.',
@@ -125,6 +140,21 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
             'Лазерное очищение и обновление кожи на базе Q-switch. Карбоновый пилинг, gold toning и протоколы при пигментации.',
         },
         {
+          title: 'DEKA CO₂ Laser SmartXide Punto',
+          description:
+            'Фракционный CO₂-лазер — рубцы постакне, обновление кожи и удаление образований в режиме PinPoint.',
+        },
+        {
+          title: 'DEKA Alexandrite Laser 755 nm',
+          description:
+            'Александритовый лазер — лазерная эпиляция, пигментные пятна и протоколы по назначению врача.',
+        },
+        {
+          title: 'Surgitron Radiofrequency',
+          description:
+            'Радиоволновая хирургия — папилломы, моллюск и доброкачественные образования с минимальным рубцом.',
+        },
+        {
           title: 'Лазерная биоревитализация',
           description:
             'Глубокое увлажнение и восстановление кожи лазерной энергией. При сухости, снижении эластичности и потере естественного сияния.',
@@ -172,6 +202,21 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
           title: 'Hollywood Spectra (Lutronic)',
           description:
             'Q-switch laser facial cleansing and skin renewal. Carbon peel, gold toning and pigmentation protocols.',
+        },
+        {
+          title: 'DEKA CO₂ Laser SmartXide Punto',
+          description:
+            'Fractional CO₂ laser — post-acne scars, skin renewal and PinPoint benign lesion treatment.',
+        },
+        {
+          title: 'DEKA Alexandrite Laser 755 nm',
+          description:
+            'Alexandrite laser — hair removal, pigmented spots and physician-led protocols.',
+        },
+        {
+          title: 'Surgitron Radiofrequency',
+          description:
+            'Radiofrequency surgery — papillomas, molluscum and benign lesions with minimal scarring.',
         },
         {
           title: 'Laser biorevitalization',

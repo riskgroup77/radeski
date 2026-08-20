@@ -66,7 +66,7 @@ export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): s
     if (ctx.daavlinModelId) {
       return daavlinModelPath(altLocale, ctx.daavlinModelId);
     }
-    return daavlinSectionPath(altLocale, ctx.daavlinSection ?? 'about');
+    return pagePath(altLocale, 'daavlin-foto-kabinalari');
   }
 
   const articleRouteKey = resolveArticleRouteKeyFromContext(ctx);

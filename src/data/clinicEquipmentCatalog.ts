@@ -42,6 +42,9 @@ export const APPARATLI_KOSMETOLOGIYA_EQUIPMENT_IDS = [
   'daavlin-neolux',
   'daavlin-m-series',
   'daavlin-aquex',
+  'deka-co2-laser',
+  'deka-alexandrite-laser',
+  'surgitron-radiofrequency',
   'ipl-inmode',
   'derma-v-lutronic',
   'hollywood-spectra-lutronic',
@@ -214,6 +217,155 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       L('Konsultatsiya va teri tayyorgarligi', 'Консультация и подготовка кожи', 'Consultation and skin preparation'),
       L('Aquex ionoforez seansi', 'Сеанс ионофореза Aquex', 'Aquex iontophoresis session'),
       L('Parvarish va kuzatuv tavsiyasi', 'Рекомендации по уходу и наблюдению', 'Aftercare and follow-up advice'),
+    ],
+  },
+  'deka-co2-laser': {
+    id: 'deka-co2-laser',
+    title: L('DEKA CO₂ Laser SmartXide Punto', 'DEKA CO₂ Laser SmartXide Punto', 'DEKA CO₂ Laser SmartXide Punto'),
+    shortDescription: L(
+      'Fraksion CO₂ lazer — teri yangilanishi, postakne chandiqlari va PinPoint rejimi.',
+      'Фракционный CO₂-лазер — обновление кожи, рубцы постакне и режим PinPoint.',
+      'Fractional CO₂ laser — skin renewal, post-acne scars and PinPoint mode.',
+    ),
+    fullDescription: L(
+      'DEKA SmartXide Punto CO₂-lazer Radeski Skin Clinic’da fraksion mikrozonalar orqali kollagen yangilanishini rag‘batlantiradi, teri relefini tekislaydi va shifokor ko‘rsatmasi bo‘yicha xavfsiz o‘smalarni nazoratli olib tashlaydi. PinPoint rejimi so‘g‘al va papillomalarni minimal travma bilan davolash imkonini beradi. Farg‘ona va Qo‘qon filiallarida har bir bemor uchun energiya, chuqurlik va maydon dermatolog tomonidan individual sozlanadi.',
+      'Лазер DEKA SmartXide Punto CO₂ в Radeski Skin Clinic стимулирует обновление коллагена через фракционные микрозоны, выравнивает рельеф и по показаниям удаляет доброкачественные образования. Режим PinPoint позволяет работать с бородавками и папилломами с минимальной травмой. В филиалах Ферганы и Коканда энергия, глубина и зона настраиваются индивидуально дерматологом.',
+      'DEKA SmartXide Punto CO₂ at Radeski Skin Clinic stimulates collagen renewal through fractional micro-zones, smooths texture and removes benign lesions when indicated. PinPoint mode supports warts and papillomas with minimal trauma. At Fergana and Kokand branches, energy, depth and treatment field are set individually by a dermatologist.',
+    ),
+    manufacturer: L('DEKA (Italiya)', 'DEKA (Италия)', 'DEKA (Italy)'),
+    image: '/daavlin/model-deka-co2-laser.webp',
+    serviceLinks: [
+      {
+        categoryId: 'apparatnaya-kosmetologiya',
+        subId: 'lazer-biorev',
+        label: L('Fraksion CO₂ teri yangilanishi', 'Фракционное CO₂-омоложение', 'Fractional CO₂ renewal'),
+      },
+      {
+        categoryId: 'hirurgicheskaya-dermatologiya',
+        subId: 'moh-surgery',
+        label: L('PinPoint — o‘smalar olib tashlash', 'PinPoint — удаление образований', 'PinPoint — lesion removal'),
+      },
+    ],
+    priceCategoryIds: [
+      'lazernoe-udalenie-dobrokachestvennyh-novoobrazovaniy-na-deka-smarxide-punto-so2-lazere',
+      'lazernaya-ablyatsionnaya-shlifovka-kozhi-poverhnostnaya',
+      'lazernaya-ablyatsionnaya-shlifovka-kozhi-srednyaya',
+      'lazernaya-ablyatsionnaya-shlifovka-kozhi-glubokaya',
+    ],
+    directions: [
+      L('Fraksion CO₂ teri yangilanishi', 'Фракционное CO₂-обновление', 'Fractional CO₂ skin renewal'),
+      L('Postakne chandiqlari va relef', 'Постакне и рубцы', 'Post-acne scars and texture'),
+      L('PinPoint — so‘g‘al va papillomalar', 'PinPoint — бородavки и папилломы', 'PinPoint — warts and papillomas'),
+    ],
+    indications: [
+      L('Postakne chandiqlari va teri teksturasi', 'Рубцы постакне и текстура кожи', 'Post-acne scars and skin texture'),
+      L('Yoshga bog‘liq teri o‘zgarishlari', 'Возрастные изменения кожи', 'Age-related skin changes'),
+      L('Shifokor tasdiqlagan xavfsiz o‘smalar', 'Доброкачественные образования по назначению врача', 'Physician-approved benign lesions'),
+    ],
+    clinicUsage: [
+      L(
+        'Preyskurantda DEKA SmartXide CO₂ bilan olib tashlash va ablyatsion shlifovka (yuza, o‘rta, chuqur) pozitsiyalari mavjud. Aniq protokol konsultatsiyada belgilanadi.',
+        'В прейскуранте — удаление на DEKA SmartXide CO₂ и абляционная шлифовка (поверхностная, средняя, глубокая). Протокол определяется на консультации.',
+        'Price list includes DEKA SmartXide CO₂ removal and ablative resurfacing (superficial, medium, deep). Protocol is set at consultation.',
+      ),
+    ],
+    process: [
+      L('Dermatolog ko‘rigi va muammo bahosi', 'Осмотр дерматолога и оценка задачи', 'Dermatologist exam and goal assessment'),
+      L('CO₂ yoki PinPoint seansi', 'Сеанс CO₂ или PinPoint', 'CO₂ or PinPoint session'),
+      L('Parvarish, SPF va kuzatuv', 'Уход, SPF и наблюдение', 'Aftercare, SPF and follow-up'),
+    ],
+  },
+  'deka-alexandrite-laser': {
+    id: 'deka-alexandrite-laser',
+    title: L('DEKA Alexandrite Laser 755 nm', 'DEKA Alexandrite Laser 755 nm', 'DEKA Alexandrite Laser 755 nm'),
+    shortDescription: L(
+      '755 nm aleksandrit lazer — lazerniy epilyatsiya va pigment muolajalari.',
+      'Александритовый лазер 755 нм — лазерная эпиляция и работа с пигментом.',
+      '755 nm alexandrite laser — laser hair removal and pigment care.',
+    ),
+    fullDescription: L(
+      'DEKA aleksandrit lazer 755 nm to‘lqin uzunligida melanin va soch folikulasi ustiga yuqori selektiv ta’sir qiladi. Radeski Skin Clinic’da lazerniy epilyatsiya, pigment dog‘lari va ayrim vascular ko‘rinishlar uchun shifokor protokoli asosida qo‘llaniladi. Soch turi, teri fototipi va zona baholanadi; seanslar oralig‘i va energiya individual reja bo‘yicha belgilanadi.',
+      'Александритовый лазер DEKA 755 нм селективно воздействует на меланин и волосяной фолликул. В Radeski Skin Clinic применяется для лазерной эпиляции, пигментных пятен и отдельных сосудистых проявлений по протоколу врача. Оцениваются тип волос, фототип и зона; интервалы и энергия задаются индивидуальным планом.',
+      'DEKA alexandrite laser at 755 nm selectively targets melanin and hair follicles. At Radeski Skin Clinic it supports laser hair removal, pigmented spots and selected vascular signs under medical protocol. Hair type, phototype and zone are assessed; intervals and energy follow an individual plan.',
+    ),
+    manufacturer: L('DEKA (Italiya)', 'DEKA (Италия)', 'DEKA (Italy)'),
+    image: '/daavlin/model-deka-alexandrite-laser.webp',
+    serviceLinks: [
+      {
+        categoryId: 'apparatnaya-kosmetologiya',
+        subId: 'ipl-inmode',
+        label: L('Lazerniy epilyatsiya', 'Лазерная эпиляция', 'Laser hair removal'),
+      },
+    ],
+    priceCategoryIds: ['lazernaya-epilyatsiya'],
+    directions: [
+      L('Lazerniy epilyatsiya', 'Лазерная эпиляция', 'Laser hair removal'),
+      L('Pigment dog‘lari', 'Пигментные пятна', 'Pigment spots'),
+      L('Ayrim vascular ko‘rinishlar', 'Отдельные сосудистые проявления', 'Selected vascular signs'),
+    ],
+    indications: [
+      L('Ortiqcha tuk o‘sishi', 'Нежелательные волосы', 'Unwanted hair growth'),
+      L('Pigmentatsiya va dog‘lar', 'Пигментация и пятна', 'Pigmentation and spots'),
+      L('Teri turi va kontraindikatsiyalar hisobga olinadi', 'С учётом типа кожи и противопоказаний', 'With skin type and contraindications in mind'),
+    ],
+    clinicUsage: [
+      L(
+        'Preyskurantda lazer epilyatsiya pozitsiyalari mavjud — zona va seanslar soni shifokor belgilaydi. Test seans yoki to‘liq kurs individual tanlanadi.',
+        'В прейскуранте — позиции лазерной эпиляции; зону и число сеансов назначает врач. Тест или полный курс выбирается индивидуально.',
+        'Price list includes laser hair removal positions; zone and session count are set by the physician. Test spot or full course is chosen individually.',
+      ),
+    ],
+    process: [
+      L('Teri va soch turi baholanadi', 'Оцениваются кожа и тип волос', 'Skin and hair type assessment'),
+      L('DEKA aleksandrit seansi', 'Сеанс александритового лазера DEKA', 'DEKA alexandrite laser session'),
+      L('Oraliq va quyosh himoyasi tavsiyasi', 'Интервалы и рекомендации SPF', 'Intervals and sun protection advice'),
+    ],
+  },
+  'surgitron-radiofrequency': {
+    id: 'surgitron-radiofrequency',
+    title: L('Surgitron Radiofrequency', 'Surgitron Radiofrequency', 'Surgitron Radiofrequency'),
+    shortDescription: L(
+      'Radioto‘lqin jarrohligi — papillomalar, mollyusk va xavfsiz o‘smalarni minimal iz bilan olib tashlash.',
+      'Радиоволновая хирургия — удаление папиллом, моллюска и доброкачественных образований с минимальным рубцом.',
+      'Radiofrequency surgery — papillomas, molluscum and benign lesions with minimal scarring.',
+    ),
+    fullDescription: L(
+      'Surgitron radioto‘lqin ignasi yumshoq kesish va koagulyatsiya beradi — atrofdagi sog‘lom to‘qimagaga minimal issiqlik tarqalishi bilan. Radeski Skin Clinic’da papillomalar, kontagioz mollyusk, keratoma va shifokor tasdiqlagan xavfsiz o‘smalar olib tashlanadi; murakkab anatomik zonalar (ko‘z qovoqlari atrofi, inguinal hudud) uchun mos. Har bir o‘sma oldin dermatoskopik baholanadi.',
+      'Радиоволновая игла Surgitron обеспечивает мягкий разрез и коagulyацию с минимальным нагревом соседних тканей. В Radeski Skin Clinic удаляют папилломы, контагиозный моллюск, кератомы и доброкачественные образования по показаниям; подходит для деликатных зон. Каждое образование предварительно оценивают дерматоскопически.',
+      'Surgitron RF provides gentle cutting and coagulation with minimal heat spread to surrounding tissue. At Radeski Skin Clinic papillomas, molluscum, keratomas and physician-approved benign lesions are removed; suited to delicate anatomical areas. Each lesion is assessed dermoscopically first.',
+    ),
+    manufacturer: L('Ellman (AQSh)', 'Ellman (США)', 'Ellman (USA)'),
+    image: '/daavlin/model-surgitron-radiofrequency.webp',
+    serviceLinks: [
+      {
+        categoryId: 'hirurgicheskaya-dermatologiya',
+        subId: 'moh-surgery',
+        label: L('Radioto‘lqin jarrohligi', 'Радиоволновая хирургия', 'Radiofrequency surgery'),
+      },
+    ],
+    priceCategoryIds: ['hirurgicheskaya-dermatologiya', 'hirurgicheskaya-dematologiya', 'kriohirurgiya'],
+    priceKeywords: ['радиоволнов', 'radioto', 'surgitron', 'моллюск', 'mollyusk', 'papillom'],
+    directions: [
+      L('Xirurgik dermatologiya — radioto‘lqin', 'Хирургическая дерматология — радиоволна', 'Surgical dermatology — RF'),
+      L('Papilloma va mollyusk olib tashlash', 'Удаление папиллом и моллюска', 'Papilloma and molluscum removal'),
+      L('Murakkab anatomik zonalar', 'Сложные анатомические зоны', 'Complex anatomical areas'),
+    ],
+    indications: [
+      L('Papillomalar va yumshoq fibromalar', 'Папилломы и мягкие фибромы', 'Papillomas and soft fibromas'),
+      L('Kontagioz mollyusk', 'Контагиозный моллюск', 'Molluscum contagiosum'),
+      L('Keratoma va shifokor tasdiqlagan nevuslar', 'Кератомы и нevусы по показаниям', 'Keratomas and indicated nevi'),
+    ],
+    clinicUsage: [
+      L(
+        'Preyskurantda radioto‘lqin xirurgiyasi pozitsiyalari mavjud — ichki/epidermal o‘smalar, murakkab zonalar va mollyusk uchun alohida tariflar. Anesteziya kerak bo‘lsa shifokor belgilaydi.',
+        'В прейскуранте — позиции радиоволновой хирургии: внутридермальные/эпидермальные образования, сложные зоны и моллюск. Анестезия назначается при необходимости.',
+        'Price list includes radiofrequency surgery positions — intradermal/epidermal lesions, complex zones and molluscum. Anaesthesia when needed is ordered by the physician.',
+      ),
+    ],
+    process: [
+      L('Dermatoskopik ko‘rik va ko‘rsatmalar', 'Дерматоскопия и показания', 'Dermoscopy and indications'),
+      L('Surgitron RF muolajasi', 'Процедура Surgitron RF', 'Surgitron RF procedure'),
+      L('Parvarish va kuzatuv tavsiyalari', 'Рекомendatsii по уходу и наблюдению', 'Aftercare and follow-up advice'),
     ],
   },
   'ipl-inmode': {

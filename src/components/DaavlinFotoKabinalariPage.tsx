@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
+import { useHashScroll } from '../routing/useHashScroll';
 import {
   ArrowUpRight,
   CheckCircle2,
@@ -15,10 +16,9 @@ import {
   Building2,
   Home,
   BadgeCheck,
-  Play,
 } from 'lucide-react';
 import type { Locale } from '../types';
-import type { DaavlinSectionId, DaavlinModelId } from '../routing/paths';
+import type { DaavlinModelId } from '../routing/paths';
 import {
   DAAVLIN_ABOUT,
   DAAVLIN_CABINS,
@@ -43,90 +43,38 @@ import PageHeroBanner from './PageHeroBanner';
 
 interface DaavlinFotoKabinalariPageProps {
   locale: Locale;
-  section: DaavlinSectionId;
 }
 
 const benefitIcons = [ShieldCheck, Sparkles, Activity, Cpu];
 const audienceIcons = [Stethoscope, Building2, Home];
 
-function SectionNav({ locale, section }: { locale: Locale; section: DaavlinSectionId }) {
-  return (
-    <nav
-      aria-label="Daavlin Distributor sections"
-      className="mb-10 rounded-2xl border border-brand-sectiongray bg-brand-white p-2 shadow-sm sm:mb-12 sm:p-2.5"
-    >
-      <ul className="m-0 grid list-none grid-cols-2 gap-2 p-0 sm:grid-cols-3 lg:grid-cols-6">
-        {DAAVLIN_SECTION_NAV.map((item) => {
-          const active = item.id === section;
-          return (
-            <li key={item.id} className="min-w-0">
-              <Link
-                to={daavlinSectionPath(locale, item.id)}
-                aria-current={active ? 'page' : undefined}
-                className={`flex h-full min-h-[3.5rem] w-full items-center justify-center rounded-xl px-2.5 py-3 text-center text-xs font-semibold leading-snug no-underline transition-all sm:min-h-[3.75rem] sm:text-[13px] lg:text-sm ${
-                  active
-                    ? 'bg-brand-gold text-white shadow-sm'
-                    : 'border border-transparent text-brand-text-secondary hover:border-brand-sectiongray hover:bg-brand-offwhite hover:text-brand-text-primary'
-                }`}
-              >
-                <span className="block w-full text-balance">{item.label[locale]}</span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-  );
-}
-
 function Hero({
   locale,
-  section,
   title,
   subtitle,
   tagline,
 }: {
   locale: Locale;
-  section: DaavlinSectionId;
   title: string;
   subtitle: string;
   tagline?: string;
 }) {
+  const c = DAAVLIN_ABOUT;
   const s = DAAVLIN_SHARED;
-  const heroSrc = DAAVLIN_SECTION_MEDIA[section].hero;
-  const secondaryLabel =
-    section === 'cabins'
-      ? s.ctaEquipment[locale]
-      : locale === 'uz'
-        ? 'Kabinalar qatori'
-        : locale === 'ru'
-          ? 'Модельный ряд'
-          : 'Model range';
-  const secondaryTo =
-    section === 'cabins' ? pagePath(locale, 'clinic-equipment') : daavlinSectionPath(locale, 'cabins');
+  const heroSrc = DAAVLIN_SECTION_MEDIA.about.hero;
 
   return (
     <PageHeroBanner
       image={heroSrc}
-      imageVariant={section === 'about' ? 'panoramic' : 'cover'}
-      imageAlt={section === 'about' ? s.lineupHeroAlt[locale] : ''}
+      imageVariant="panoramic"
+      imageAlt={s.lineupHeroAlt[locale]}
       badge={s.eyebrow[locale]}
       title="Daavlin"
       titleAccent={title}
       description={subtitle}
       note={tagline}
-      appointmentLabel={s.ctaBook[locale]}
-      secondaryCta={
-        <Link
-          to={secondaryTo}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/90 bg-white/60 px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-[0_4px_24px_-6px_rgba(7,27,46,0.12)] backdrop-blur-md transition-all hover:bg-white/85 hover:shadow-[0_8px_28px_-8px_rgba(7,27,46,0.18)]"
-        >
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
-            <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
-          </span>
-          {secondaryLabel}
-        </Link>
-      }
+      highlights={c.heroHighlights[locale]}
+      highlightFooter={c.heroInfoFooter[locale]}
     />
   );
 }
@@ -475,21 +423,21 @@ function AboutBody({ locale }: { locale: Locale }) {
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
-            to={daavlinSectionPath(locale, 'cabins')}
+            to={pagePath(locale, 'clinic-equipment')}
             className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline hover:bg-brand-gold-dark sm:text-sm"
           >
             {s.ctaExplore[locale]}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <Link
-            to={daavlinSectionPath(locale, 'contacts')}
+            to={pagePath(locale, 'clinic-equipment')}
             className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline sm:text-sm"
           >
-            {DAAVLIN_SECTION_NAV.find((n) => n.id === 'contacts')?.label[locale]}
+            {s.ctaEquipment[locale]}
             <ArrowUpRight className="h-4 w-4 text-brand-gold" />
           </Link>
           <Link
-            to={daavlinSectionPath(locale, 'radeski-skin-clinic')}
+            to={pagePath(locale, 'branches')}
             className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold text-brand-text-muted no-underline hover:text-brand-text-primary sm:text-sm"
           >
             Radeski Skin Clinic
@@ -1245,132 +1193,129 @@ function DiseasesBody({ locale }: { locale: Locale }) {
   );
 }
 
-function ContactsBody({ locale }: { locale: Locale }) {
+function StickyContactSidebar({ locale }: { locale: Locale }) {
   const c = DAAVLIN_CONTACTS;
   const s = DAAVLIN_SHARED;
   const media = DAAVLIN_SECTION_MEDIA.contacts;
+
   return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-1 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="relative min-h-[240px] bg-brand-offwhite">
-          <MediaImage src={media.mid} alt={c.title[locale]} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+    <aside id="aloqa" className="scroll-mt-28">
+      <div className="overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-[0_16px_48px_-16px_rgba(7,27,46,0.18)]">
+        <div className="relative h-36 bg-brand-offwhite sm:h-40">
+          <MediaImage
+            src={media.mid}
+            alt={c.title[locale]}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark-navy via-brand-dark-navy/55 to-brand-dark-navy/15" />
+          <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">{s.eyebrow[locale]}</p>
+            <h2 className="mt-1.5 text-xl font-extrabold tracking-tight text-white sm:text-[1.35rem]">
+              {c.title[locale]}
+            </h2>
+            <p className="mt-1 text-xs font-light text-white/75">{c.subtitle[locale]}</p>
+          </div>
         </div>
-        <div className="p-6 sm:p-8">
-          <p className="mb-6 text-sm font-light leading-relaxed text-brand-text-secondary sm:text-base">{c.intro[locale]}</p>
-          <div className="grid grid-cols-1 gap-3">
+
+        <div className="space-y-5 p-5 sm:p-6">
+          <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{c.intro[locale]}</p>
+
+          <div className="space-y-3">
             <a
               href={`tel:${s.phonePrimary.replace(/\s/g, '')}`}
-              className="flex items-start gap-3 rounded-xl border border-brand-sectiongray bg-brand-offwhite p-4 no-underline"
+              className="group flex items-start gap-3 rounded-2xl border border-brand-gold/25 bg-gradient-to-br from-brand-gold/10 to-brand-white p-4 no-underline transition-all hover:border-brand-gold/45 hover:shadow-sm"
             >
-              <Phone className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold" />
-              <div>
-                <p className="mb-1 text-xs font-bold uppercase text-brand-text-muted">Tel</p>
-                <p className="text-sm font-semibold text-brand-text-primary">{s.phonePrimary}</p>
-                <p className="text-sm font-semibold text-brand-text-primary">{s.phoneSecondary}</p>
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gold text-white shadow-sm">
+                <Phone className="h-4 w-4" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-brand-text-muted">
+                  {locale === 'uz' ? 'Telefon' : locale === 'ru' ? 'Телефон' : 'Phone'}
+                </p>
+                <p className="mt-0.5 text-sm font-bold text-brand-text-primary group-hover:text-brand-gold">
+                  {s.phonePrimary}
+                </p>
+                <p className="text-sm font-semibold text-brand-text-secondary">{s.phoneSecondary}</p>
               </div>
             </a>
-            <div className="flex items-start gap-3 rounded-xl border border-brand-sectiongray bg-brand-offwhite p-4">
+
+            <div className="flex items-start gap-3 rounded-2xl border border-brand-sectiongray bg-brand-offwhite/70 p-4">
               <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold" />
               <div>
-                <p className="mb-1 text-xs font-bold uppercase text-brand-text-muted">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-brand-text-muted">
                   {locale === 'uz' ? 'Manzil' : locale === 'ru' ? 'Адрес' : 'Address'}
                 </p>
-                <p className="text-sm font-semibold leading-snug text-brand-text-primary">{s.address[locale]}</p>
+                <p className="mt-1 text-sm font-semibold leading-snug text-brand-text-primary">{s.address[locale]}</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 rounded-xl border border-brand-sectiongray bg-brand-offwhite p-4">
+
+            <div className="flex items-start gap-3 rounded-2xl border border-brand-sectiongray bg-brand-offwhite/70 p-4">
               <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold" />
               <div>
-                <p className="mb-1 text-xs font-bold uppercase text-brand-text-muted">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-brand-text-muted">
                   {locale === 'uz' ? 'Ish vaqti' : locale === 'ru' ? 'Режим работы' : 'Hours'}
                 </p>
-                <p className="text-sm font-semibold leading-snug text-brand-text-primary">{s.hours[locale]}</p>
+                <p className="mt-1 text-sm font-semibold leading-snug text-brand-text-primary">{s.hours[locale]}</p>
               </div>
             </div>
           </div>
+
+          <div className="rounded-2xl border border-brand-sectiongray bg-brand-offwhite/50 p-4">
+            <h3 className="mb-3 text-sm font-extrabold text-brand-text-primary">{c.helpTitle[locale]}</h3>
+            <ul className="m-0 list-none space-y-2 p-0">
+              {c.helpBullets[locale].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2 text-xs font-light leading-relaxed text-brand-text-secondary sm:text-[13px]"
+                >
+                  <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-gold" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-3 border-t border-brand-sectiongray pt-4">
+            <p className="text-sm font-semibold text-brand-text-primary">{c.requestTitle[locale]}</p>
+            <p className="text-xs font-light leading-relaxed text-brand-text-secondary">{c.requestBody[locale]}</p>
+            <div className="flex flex-col gap-2.5">
+              <a
+                href={`tel:${s.phonePrimary.replace(/\s/g, '')}`}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-4 py-3 text-xs font-bold text-white no-underline transition-colors hover:bg-brand-gold-dark sm:text-sm"
+              >
+                <Phone className="h-4 w-4" />
+                {s.phonePrimary}
+              </a>
+            </div>
+          </div>
+
+          <p className="border-t border-brand-sectiongray pt-4 text-[11px] font-light leading-relaxed text-brand-text-muted">
+            {c.legal[locale]}
+          </p>
         </div>
       </div>
-
-      {media.gallery ? (
-        <PhotoGallery
-          images={media.gallery}
-          alts={[
-            locale === 'uz' ? 'Klinik kirish' : locale === 'ru' ? 'Вход в клинику' : 'Clinic entrance',
-            locale === 'uz' ? 'Qabulxona' : locale === 'ru' ? 'Ресепшн' : 'Reception',
-            locale === 'uz' ? 'Davolash kabinasi' : locale === 'ru' ? 'Кабинет лечения' : 'Treatment cabin',
-          ]}
-        />
-      ) : null}
-
-      <Card>
-        <h2 className="mb-4 text-base font-extrabold text-brand-text-primary">{c.helpTitle[locale]}</h2>
-        <BulletList items={c.helpBullets[locale]} />
-      </Card>
-      <Card>
-        <h2 className="mb-2 text-base font-extrabold text-brand-text-primary">{c.requestTitle[locale]}</h2>
-        <p className="mb-4 text-sm font-light leading-relaxed text-brand-text-secondary">{c.requestBody[locale]}</p>
-        <div className="mb-4 flex flex-wrap gap-3">
-          <a
-            href={`tel:${s.phonePrimary.replace(/\s/g, '')}`}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline hover:bg-brand-gold-dark sm:text-sm"
-          >
-            {s.phonePrimary}
-            <Phone className="h-4 w-4" />
-          </a>
-          <AppointmentBookingLink className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline sm:text-sm">
-            {s.ctaBook[locale]}
-            <ArrowUpRight className="h-4 w-4 text-brand-gold" />
-          </AppointmentBookingLink>
-          <a
-            href="https://radeski-distributor.uz/kontakty"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold text-brand-text-muted no-underline hover:text-brand-text-primary sm:text-sm"
-          >
-            {s.ctaDistributor[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-        </div>
-        <p className="text-xs font-light text-brand-text-muted">{c.legal[locale]}</p>
-      </Card>
-    </div>
+    </aside>
   );
 }
 
-export default function DaavlinFotoKabinalariPage({ locale, section }: DaavlinFotoKabinalariPageProps) {
-  const meta =
-    section === 'radeski-skin-clinic'
-      ? DAAVLIN_CLINIC
-      : section === 'cabins'
-        ? DAAVLIN_CABINS
-        : section === 'clinical-results'
-          ? DAAVLIN_RESULTS
-          : section === 'skin-diseases'
-            ? DAAVLIN_DISEASES
-            : section === 'contacts'
-              ? DAAVLIN_CONTACTS
-              : DAAVLIN_ABOUT;
-
-  const tagline = section === 'about' ? DAAVLIN_ABOUT.heroTag[locale] : undefined;
+export default function DaavlinFotoKabinalariPage({ locale }: DaavlinFotoKabinalariPageProps) {
+  const meta = DAAVLIN_ABOUT;
+  const tagline = DAAVLIN_ABOUT.heroTag[locale];
+  useHashScroll(160);
 
   return (
     <section id="daavlin-foto-kabinalari-page" className="min-h-screen bg-brand-offwhite pb-12 sm:pb-16">
-      <Hero
-        locale={locale}
-        section={section}
-        title={meta.title[locale]}
-        subtitle={meta.subtitle[locale]}
-        tagline={tagline}
-      />
+      <Hero locale={locale} title={meta.title[locale]} subtitle={meta.subtitle[locale]} tagline={tagline} />
       <div className="site-container pt-8 sm:pt-10">
-        <SectionNav locale={locale} section={section} />
-
-        {section === 'about' && <AboutBody locale={locale} />}
-        {section === 'radeski-skin-clinic' && <ClinicBody locale={locale} />}
-        {section === 'cabins' && <CabinsBody locale={locale} />}
-        {section === 'clinical-results' && <ResultsBody locale={locale} />}
-        {section === 'skin-diseases' && <DiseasesBody locale={locale} />}
-        {section === 'contacts' && <ContactsBody locale={locale} />}
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,380px)] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_420px]">
+          <div className="min-w-0">
+            <AboutBody locale={locale} />
+          </div>
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <StickyContactSidebar locale={locale} />
+          </div>
+        </div>
       </div>
     </section>
   );

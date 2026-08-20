@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowUpRight, CheckCircle2, ChevronLeft, Play } from 'lucide-react';
 import type { Locale } from '../types';
 import type { DaavlinModelId } from '../routing/paths';
-import { DAAVLIN_CABINS, DAAVLIN_SHARED } from '../data/daavlinFotoKabinalariContent';
+import { DAAVLIN_CABINS, DAAVLIN_NAV_LINEUP, DAAVLIN_SHARED } from '../data/daavlinFotoKabinalariContent';
 import { DAAVLIN_MODEL_DEEP } from '../data/daavlinModelDeepContent';
 import {
   daavlinModelPath,
@@ -66,7 +66,7 @@ const moreLabel: Record<Locale, string> = {
 export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPageProps) {
   const model = DAAVLIN_CABINS.lineup.find((item) => item.id === modelId);
   const deep = DAAVLIN_MODEL_DEEP[modelId];
-  const others = DAAVLIN_CABINS.lineup.filter((item) => item.id !== modelId);
+  const others = DAAVLIN_NAV_LINEUP.filter((item) => item.id !== modelId);
   const s = DAAVLIN_SHARED;
 
   if (!model || !deep) {
@@ -76,7 +76,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
           {locale === 'uz' ? 'Model topilmadi' : locale === 'ru' ? 'Модель не найдена' : 'Model not found'}
         </p>
         <Link
-          to={daavlinSectionPath(locale, 'cabins')}
+                    to={pagePath(locale, 'clinic-equipment')}
           className="mt-4 inline-block font-semibold text-brand-gold no-underline"
         >
           {backLabel[locale]}
@@ -102,7 +102,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         highlightFooter={model.bestFor[locale]}
         appointmentLabel={s.ctaBook[locale]}
         secondaryCta={
-          <Link to={daavlinSectionPath(locale, 'cabins')} className={heroSecondaryCtaSolidClass}>
+          <Link to={pagePath(locale, 'clinic-equipment')} className={heroSecondaryCtaSolidClass}>
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/35 bg-brand-gold-light/20">
               <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
             </span>
@@ -117,7 +117,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
           className="mb-10 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-sectiongray/90 bg-brand-white/95 px-4 py-3.5 shadow-[0_8px_32px_-16px_rgba(7,27,46,0.12)] backdrop-blur-sm sm:px-5"
         >
           <Link
-            to={daavlinSectionPath(locale, 'cabins')}
+                    to={pagePath(locale, 'clinic-equipment')}
             className="inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-semibold text-brand-text-secondary no-underline transition-colors hover:text-brand-gold sm:text-sm"
           >
             <ChevronLeft className="h-4 w-4 shrink-0" />

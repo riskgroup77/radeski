@@ -31,7 +31,16 @@ export default defineConfig(({ mode }) => {
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {
-        ignored: ['**/*.rar', '**/*.zip', '**/*.7z'],
+        ignored: [
+          '**/*.rar',
+          '**/*.zip',
+          '**/*.7z',
+          '**/*.MOV',
+          '**/*.mov',
+          '**/*.MP4',
+          '**/*.mp4',
+          '**/.video-frames/**',
+        ],
       },
       proxy: {
         '/api': {

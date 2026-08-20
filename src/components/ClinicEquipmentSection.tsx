@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import {
   ChevronDown,
@@ -25,6 +25,7 @@ import { resolvePriceName } from '../utils/priceDisplay';
 import { pagePath, serviceSubPath } from '../routing/paths';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import { useHashScroll } from '../routing/useHashScroll';
 
 interface ClinicEquipmentSectionProps {
   locale: Locale;
@@ -229,9 +230,19 @@ export default function ClinicEquipmentSection({
   prices,
   embedded = false,
 }: ClinicEquipmentSectionProps) {
+  const location = useLocation();
   const labels = getEquipmentSectionLabels(locale);
   const equipmentList = getCategoryEquipmentList(category.id);
   const [openId, setOpenId] = useState<string | null>(null);
+  useHashScroll(180);
+
+  useEffect(() => {
+    const hashId = location.hash.replace('#', '').trim();
+    if (!hashId) return;
+    if (equipmentList.some((entry) => entry.id === hashId)) {
+      setOpenId(hashId);
+    }
+  }, [location.hash, equipmentList]);
 
   if (equipmentList.length === 0) return null;
 
@@ -245,7 +256,8 @@ export default function ClinicEquipmentSection({
           return (
             <article
               key={entry.id}
-              className={`bg-brand-offwhite/70 border rounded-xl overflow-hidden transition-colors ${
+              id={entry.id}
+              className={`scroll-mt-28 bg-brand-offwhite/70 border rounded-xl overflow-hidden transition-colors ${
                 isOpen ? 'border-brand-gold/40 shadow-sm' : 'border-brand-sectiongray'
               }`}
             >

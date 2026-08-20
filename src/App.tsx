@@ -28,6 +28,7 @@ import {
   getDaavlinSectionFromPathname,
   getDaavlinModelIdFromPathname,
   getLegacyDaavlinModelRedirectPath,
+  getClinicLaserModelRedirectPath,
   pagePath,
   switchLocaleInPath,
   articlePath,
@@ -52,6 +53,7 @@ import DaavlinFotoKabinalariPage from './components/DaavlinFotoKabinalariPage';
 import DaavlinModelPage from './components/DaavlinModelPage';
 import DermoScanPage from './components/DermoScanPage';
 import SciencePage from './components/SciencePage';
+import ObrazovaniyaPage from './components/ObrazovaniyaPage';
 import BrandPage from './components/BrandPage';
 import { DAAVLIN_MODEL_DEEP } from './data/daavlinModelDeepContent';
 import ClinicEquipmentParkPage from './components/ClinicEquipmentParkPage';
@@ -80,6 +82,7 @@ import ArticleViewsBadge from './components/ArticleViewsBadge';
 import ArticleHashtagList from './components/ArticleHashtagList';
 
 import HomeCarousel from './components/HomeCarousel';
+import DoctorsHomeMarquee from './components/DoctorsHomeMarquee';
 import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
 import QrFeedbackPage from './components/QrFeedbackPage';
@@ -136,6 +139,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const daavlinSection = getDaavlinSectionFromPathname(location.pathname);
   const daavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
   const legacyDaavlinModelRedirect = getLegacyDaavlinModelRedirectPath(location.pathname);
+  const clinicLaserModelRedirect = getClinicLaserModelRedirectPath(location.pathname);
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
   const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
@@ -653,76 +657,20 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </button>
                   </div>
 
-                  <div className="px-1 sm:px-10">
-                    <HomeCarousel
-                      items={homeDoctorsCarousel}
-                      visibleCount={3}
-                      autoPlayMs={5000}
-                      variant="slide"
-                      arrowsInside
-                      getKey={(doc) => doc.id}
-                      gridClassName="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-                      ariaLabel={
-                        locale === 'uz'
-                          ? 'Shifokorlar karuseli'
-                          : locale === 'ru'
-                            ? 'Карусель врачей'
-                            : 'Doctors carousel'
-                      }
-                      renderItem={(doc) => (
-                        <div className="bg-brand-white rounded-xl border border-brand-sectiongray overflow-hidden shadow-xs hover:shadow-sm transition-all flex flex-col justify-between">
-                          <div className="relative aspect-[3/4] overflow-hidden bg-brand-offwhite">
-                            {doc.photo ? (
-                              <MediaImage
-                                src={doc.photo}
-                                alt={doc.name[locale]}
-                                className="absolute inset-0 w-full h-full object-cover object-center"
-                              />
-                            ) : (
-                              <div className="absolute inset-0 flex items-center justify-center text-brand-text-muted text-xs">—</div>
-                            )}
-                            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-brand-dark-navy/50 to-transparent pointer-events-none" />
-                            <span className="absolute bottom-3 left-3 bg-brand-gold text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
-                              {doc.experience[locale]}{' '}
-                              {locale === 'uz' ? 'yil tajriba' : locale === 'ru' ? 'лет практики' : 'years practice'}
-                            </span>
-                          </div>
-                          <div className="p-5">
-                            <span className="text-[10px] font-bold text-brand-gold tracking-wide uppercase font-mono">
-                              {doc.role[locale]}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => goToDoctor(doc.id)}
-                              className="text-left w-full font-extrabold text-brand-text-primary text-md sm:text-base tracking-tight leading-snug mt-1 hover:text-brand-gold transition-colors cursor-pointer"
-                            >
-                              {doc.name[locale]}
-                            </button>
-                            {doc.education[locale] && (
-                              <div className="mt-2">
-                                <span className="text-xs font-extrabold text-brand-text-primary uppercase tracking-wide">
-                                  {d.education}
-                                </span>
-                                <p className="text-sm mt-1 font-semibold text-brand-text-primary line-clamp-2 leading-relaxed">
-                                  {doc.education[locale]}
-                                </p>
-                              </div>
-                            )}
-                            <p className="text-xs text-brand-text-muted mt-2 line-clamp-2 leading-relaxed font-light">
-                              {doc.bio[locale]}
-                            </p>
-                            <button
-                              type="button"
-                              onClick={() => goToDoctor(doc.id)}
-                              className="mt-4 py-2.5 w-full text-center bg-brand-gold-light/10 hover:bg-brand-gold-light/20 text-brand-gold-dark font-bold text-xs rounded-lg transition-colors cursor-pointer"
-                            >
-                              {d.viewProfile}
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    />
-                  </div>
+                  <DoctorsHomeMarquee
+                    doctors={homeDoctorsCarousel}
+                    locale={locale}
+                    educationLabel={d.education}
+                    viewProfileLabel={d.viewProfile}
+                    onDoctorClick={goToDoctor}
+                    ariaLabel={
+                      locale === 'uz'
+                        ? 'Shifokorlar karuseli'
+                        : locale === 'ru'
+                          ? 'Карусель врачей'
+                          : 'Doctors carousel'
+                    }
+                  />
                 </div>
               </section>
 
@@ -1223,13 +1171,18 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           {currentPage === 'daavlin-foto-kabinalari' &&
             (legacyDaavlinModelRedirect ? (
               <Navigate to={legacyDaavlinModelRedirect} replace />
+            ) : clinicLaserModelRedirect ? (
+              <Navigate to={clinicLaserModelRedirect} replace />
             ) : daavlinModelId ? (
               <DaavlinModelPage locale={locale} modelId={daavlinModelId} />
+            ) : daavlinSection !== 'about' && location.pathname.split('/').filter(Boolean)[2] !== 'models' ? (
+              <Navigate to={pagePath(locale, 'daavlin-foto-kabinalari')} replace />
             ) : (
-              <DaavlinFotoKabinalariPage locale={locale} section={daavlinSection} />
+              <DaavlinFotoKabinalariPage locale={locale} />
             ))}
           {currentPage === 'dermoscan' && <DermoScanPage locale={locale} />}
           {currentPage === 'science' && <SciencePage locale={locale} />}
+          {currentPage === 'obrazovaniya' && <ObrazovaniyaPage locale={locale} />}
           {currentPage === 'brend' && <BrandPage locale={locale} />}
 
           {currentPage === 'clinic-equipment' && (
