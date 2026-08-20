@@ -10,6 +10,12 @@ import hirurgicheskayaTeaserVideo from '../assets/services-teaser/hirurgicheskay
 import hirurgicheskayaTeaserPoster from '../assets/services-teaser/hirurgicheskaya-dermatologiya-poster.jpg';
 import dermatoonkologiyaTeaserVideo from '../assets/services-teaser/dermatoonkologiya.mp4';
 import dermatoonkologiyaTeaserPoster from '../assets/services-teaser/dermatoonkologiya-poster.jpg';
+import trihologiyaTeaserVideo from '../assets/services-teaser/trihologiya-centr-lechenie-volos.mp4';
+import trihologiyaTeaserPoster from '../assets/services-teaser/trihologiya-centr-lechenie-volos-poster.jpg';
+import dermatopatologiyaTeaserVideo from '../assets/services-teaser/dermatopatologiya.mp4';
+import dermatopatologiyaTeaserPoster from '../assets/services-teaser/dermatopatologiya-poster.jpg';
+import clinikaPatologiiNogtejTeaserVideo from '../assets/services-teaser/clinika-patologii-nogtej.mp4';
+import clinikaPatologiiNogtejTeaserPoster from '../assets/services-teaser/clinika-patologii-nogtej-poster.jpg';
 
 export interface HomeServiceTeaserMedia {
   video: string;
@@ -43,6 +49,18 @@ export const HOME_SERVICE_TEASER_MEDIA: Partial<Record<string, HomeServiceTeaser
   dermatoonkologiya: {
     video: dermatoonkologiyaTeaserVideo,
     poster: dermatoonkologiyaTeaserPoster,
+  },
+  'trihologiya-centr-lechenie-volos': {
+    video: trihologiyaTeaserVideo,
+    poster: trihologiyaTeaserPoster,
+  },
+  dermatopatologiya: {
+    video: dermatopatologiyaTeaserVideo,
+    poster: dermatopatologiyaTeaserPoster,
+  },
+  'clinika-patologii-nogtej': {
+    video: clinikaPatologiiNogtejTeaserVideo,
+    poster: clinikaPatologiiNogtejTeaserPoster,
   },
 };
 
