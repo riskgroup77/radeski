@@ -18,6 +18,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'ipl-radeski',
     'ipl-therapy',
     'rosacea-radeski',
+    'hollywood-spectra-pigmentation',
     'post-acne',
     'laser-scar-resurfacing',
     'adult-acne',
@@ -66,7 +67,13 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
   },
   'apparatnaya-kosmetologiya': {
     'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski'],
-    'hollywood-spectra': ['post-acne', 'laser-scar-resurfacing', 'adult-acne', 'acne'],
+    'hollywood-spectra': [
+      'hollywood-spectra-pigmentation',
+      'post-acne',
+      'laser-scar-resurfacing',
+      'adult-acne',
+      'acne',
+    ],
     'lazer-biorev': ['post-acne', 'adult-acne'],
     'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist'],
   },

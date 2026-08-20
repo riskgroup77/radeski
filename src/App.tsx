@@ -83,6 +83,7 @@ import ArticleHashtagList from './components/ArticleHashtagList';
 
 import HomeCarousel from './components/HomeCarousel';
 import DoctorsHomeMarquee from './components/DoctorsHomeMarquee';
+import ServiceTeaserCard from './components/ServiceTeaserCard';
 import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
 import QrFeedbackPage from './components/QrFeedbackPage';
@@ -592,47 +593,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-5 xl:gap-6">
-                    {homeServiceTeaserCategories.map(category => (
-                      <div
+                    {homeServiceTeaserCategories.map((category) => (
+                      <ServiceTeaserCard
                         key={category.id}
-                        className="bg-brand-white border border-brand-sectiongray rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-lg transition-all flex flex-col overflow-hidden h-full group"
-                      >
-                        {(() => {
-                          const catImage = getLocalizedImage(category.images, locale) ?? category.image;
-                          return catImage ? (
-                          <div className="relative aspect-[16/11] sm:aspect-[5/3] min-h-[180px] sm:min-h-[260px] lg:min-h-[300px] overflow-hidden bg-brand-offwhite">
-                            <MediaImage
-                              src={catImage}
-                              alt={category.title[locale]}
-                              loading="lazy"
-                              className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
-                            />
-                          </div>
-                        ) : null;
-                        })()}
-                        <div className="p-5 sm:p-6 lg:p-7 flex flex-col flex-1 justify-between">
-                          <div>
-                            <button
-                              type="button"
-                              onClick={() => goToServiceCategory(category.id)}
-                              className="text-left w-full font-extrabold text-brand-text-primary text-lg sm:text-xl leading-snug hover:text-brand-gold transition-colors cursor-pointer"
-                            >
-                              {category.title[locale]}
-                            </button>
-                            <p className="mt-3 text-sm sm:text-base text-brand-text-secondary font-light leading-relaxed line-clamp-4">
-                              {category.description[locale]}
-                            </p>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => goToServiceCategory(category.id)}
-                            className="mt-6 text-xs sm:text-sm text-brand-gold hover:text-brand-gold-dark font-bold text-left inline-flex items-center gap-1 cursor-pointer"
-                          >
-                            <span>{d.viewDetails}</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      </div>
+                        category={category}
+                        locale={locale}
+                        viewDetailsLabel={d.viewDetails}
+                        onOpen={goToServiceCategory}
+                      />
                     ))}
                   </div>
                 </div>

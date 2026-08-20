@@ -23,6 +23,7 @@ import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
 import { MOLLUSCUM_CONTAGIOSUM_ARTICLE_CATALOG } from './articles/molluscumContagiosumArticle';
 import { PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE_CATALOG } from './articles/pediatricWartsLaserRadeskiArticle';
+import { HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE_CATALOG } from './articles/hollywoodSpectraPigmentationArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -150,6 +151,18 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'art-rozatseya-davolash-radeski',
     'покраснение и сосуды на лице',
     'yuz qizarishi va tomirlar',
+  ],
+  'hollywood-spectra-pigmentation': [
+    'pigmentaciya-hollywood-spectra-radeski',
+    'art-pigmentaciya-hollywood-spectra-radeski',
+    'лечение пигментации на hollywood spectra',
+    'hollywood spectra pigmentation treatment',
+    'hollywood spectra lutronic pigmentatsiya',
+    'лечение пигментации в ташкенте',
+    'удаление пигментных пятен лазером',
+    'лечение мелазмы лазером',
+    'lazer bilan pigment dog',
+    'melazma davolash lazer',
   ],
   'molluscum-radeski': [
     'kontagioz-mollyusk-radeski',
@@ -933,6 +946,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,
   'molluscum-radeski': MOLLUSCUM_CONTAGIOSUM_ARTICLE_CATALOG,
   'pediatric-warts-laser-radeski': PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE_CATALOG,
+  'hollywood-spectra-pigmentation': HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:
