@@ -26,16 +26,16 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
     'moh-surgery': '/karusel/co2-lazer-osmalar.jpg',
   },
   'shkola-psoriaza': {
-    'consult-group': '/karusel/fototerapiya.webp',
+    'consult-group': '/brand/brand-phototherapy.webp',
   },
   'shkola-dermatoskopii': {
-    'dermatosc-lessons': '/karusel/dermataskopiya.jpeg',
+    'dermatosc-lessons': '/brand/brand-academy.webp',
   },
   'clinika-patologii-nogtej': {
     'podolog-dermatolog': '/karusel/podologiya.jpg',
   },
   dermatopatologiya: {
-    gistolog: '/brand/brand-oncology.webp',
+    gistolog: '/science/science-data.webp',
   },
   'in-ekcionnaya-kosmetologiya': {
     konturnaya: '/gallery/4.webp',
@@ -44,19 +44,19 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
   },
 };
 
-/** Category-level hero/card image when CMS image is missing. */
+/** Category-level hero/card image — curated per specialty (preferred over generic CMS uploads). */
 export const SERVICE_CATEGORY_IMAGES: Record<string, string> = {
   dermatologiya: '/karusel/dermataskopiya.jpeg',
   'apparatnaya-kosmetologiya': '/karusel/ipl.webp',
-  'in-ekcionnaya-kosmetologiya': '/gallery/4.webp',
+  'in-ekcionnaya-kosmetologiya': '/brand/brand-medical.webp',
   'lazernaya-epilyaciya': '/karusel/lazerniy-epilyatsiya.jpg',
-  'trihologiya-centr-lechenie-volos': '/karusel/soch-mezoterapiya.jpg',
+  'trihologiya-centr-lechenie-volos': '/brand/brand-trichology.webp',
   dermatoonkologiya: '/brand/brand-oncology.webp',
   'hirurgicheskaya-dermatologiya': '/karusel/co2-lazer-osmalar.jpg',
-  'shkola-psoriaza': '/karusel/fototerapiya.webp',
-  'shkola-dermatoskopii': '/karusel/dermataskopiya.jpeg',
+  'shkola-psoriaza': '/brand/brand-phototherapy.webp',
+  'shkola-dermatoskopii': '/brand/brand-academy.webp',
   'clinika-patologii-nogtej': '/karusel/podologiya.jpg',
-  dermatopatologiya: '/brand/brand-oncology.webp',
+  dermatopatologiya: '/science/science-data.webp',
 };
 
 export function catalogSubServiceImage(
