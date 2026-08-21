@@ -23,15 +23,9 @@ export function resolveSubServiceImage(
 ): string | null {
   const catalogImage = resolveCatalogSubImage(category, sub);
   const fromData = getLocalizedImage(sub.images, locale) ?? sub.image ?? null;
-  const categoryImage = getLocalizedImage(category.images, locale) ?? category.image ?? null;
 
-  // CMS/API subs often lack images or reuse the category hero — prefer catalog thumbnail.
-  if (catalogImage && (!fromData || fromData === categoryImage)) {
-    return catalogImage;
-  }
-
-  if (fromData) return fromData;
   if (catalogImage) return catalogImage;
+  if (fromData) return fromData;
 
   return catalogCategoryImage(category.id) ?? null;
 }

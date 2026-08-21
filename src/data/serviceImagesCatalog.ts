@@ -8,10 +8,10 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
     immunobiologicheskaya: '/services/immunobiological-therapy.webp',
   },
   'apparatnaya-kosmetologiya': {
-    'ipl-inmode': '/karusel/ipl.webp',
-    'hollywood-spectra': '/karusel/karbon-peeling.jpeg',
-    'lazer-biorev': '/services/laser-biorevitalization.webp',
-    'ultratovush-yuz': '/services/ultrasonic-facial-cleansing.webp',
+    'ipl-inmode': '/services/apparatnaya/ipl-inmode.jpg',
+    'hollywood-spectra': '/services/apparatnaya/hollywood-spectra.jpg',
+    'lazer-biorev': '/services/apparatnaya/lazer-biorev.jpg',
+    'ultratovush-yuz': '/services/apparatnaya/ultratovush-yuz.jpg',
   },
   'lazernaya-epilyaciya': {
     'alex-lazer': '/karusel/lazerniy-epilyatsiya.jpg',
