@@ -63,6 +63,8 @@ export default function ServiceCategoryPage({
           title={buildServiceH1(category.title[locale], locale)}
           description={heroText}
           image={categoryImage}
+          categoryId={category.id}
+          locale={locale}
           iconName={resolveCategoryIcon(category)}
           appointmentLabel={d.appointmentBtn}
         />

@@ -56,11 +56,11 @@ const SLIDE_ICONS: Record<string, LucideIcon> = {
 function getHeroCopy(locale: Locale) {
   if (locale === 'uz') {
     return {
-      badge: 'Teri va estetika klinikasi',
+      badge: 'Teri, soch va tirnoqlar tibbiy klinikasi',
       titleLead: 'Radeski Skin Clinic',
-      titleAccent: '— kosmetologiya, IPL, lazer',
+      titleAccent: '— teri, soch va tirnoqlar uchun zamonaviy estetik korreksiyali tibbiy klinika',
       description:
-        'IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks va Mohs — zamonaviy teri va estetika xizmatlari.',
+        'Teri, soch va tirnoqlar uchun tibbiy yordam hamda zamonaviy estetik korreksiya — dermatologiya, trixologiya, podologiya va apparatli muolajalar.',
       viewServices: "Xizmatlarni ko'rish",
       statPatients: 'Baxtli bemorlar',
       statDoctors: 'Mutaxassis shifokorlar',
@@ -70,11 +70,11 @@ function getHeroCopy(locale: Locale) {
   }
   if (locale === 'ru') {
     return {
-      badge: 'Клиника кожи и эстетики',
+      badge: 'Медицинская клиника кожи, волос и ногтей',
       titleLead: 'Radeski Skin Clinic',
-      titleAccent: '— косметология, IPL, лазер',
+      titleAccent: '— медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией',
       description:
-        'IPL, лазерная эпиляция, дерматоскопия, фототерапия, ботокс и Mohs — современные услуги для кожи и эстетики.',
+        'Медицинская помощь коже, волосам и ногтям и современная эстетическая коррекция — дерматология, трихология, подология и аппаратные методы.',
       viewServices: 'Посмотреть услуги',
       statPatients: 'Довольных пациентов',
       statDoctors: 'Специалистов',
@@ -83,11 +83,11 @@ function getHeroCopy(locale: Locale) {
     };
   }
   return {
-    badge: 'Skin & aesthetic clinic',
+    badge: 'Medical clinic for skin, hair & nails',
     titleLead: 'Radeski Skin Clinic',
-    titleAccent: '— cosmetology, IPL, laser',
+    titleAccent: '— medical clinic for skin, hair and nails with modern aesthetic correction',
     description:
-      'IPL, laser hair removal, dermatoscopy, phototherapy, Botox and Mohs — modern skin and aesthetic care.',
+      'Medical care for skin, hair and nails plus modern aesthetic correction — dermatology, trichology, podology and device-based treatments.',
     viewServices: 'View services',
     statPatients: 'Happy patients',
     statDoctors: 'Specialist doctors',

@@ -30,6 +30,7 @@ import {
   getLegacyDaavlinModelRedirectPath,
   getClinicLaserModelRedirectPath,
   pagePath,
+  daavlinSectionPath,
   switchLocaleInPath,
   articlePath,
 } from './routing/paths';
@@ -56,7 +57,6 @@ import SciencePage from './components/SciencePage';
 import ObrazovaniyaPage from './components/ObrazovaniyaPage';
 import BrandPage from './components/BrandPage';
 import { DAAVLIN_MODEL_DEEP } from './data/daavlinModelDeepContent';
-import ClinicEquipmentParkPage from './components/ClinicEquipmentParkPage';
 import ResultsPage from './components/ResultsPage';
 import Prices from './components/Prices';
 import Articles from './components/Articles';
@@ -149,6 +149,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
   if (legacyContactsRedirect && parsedLocale) {
     return <Navigate to={pagePath(parsedLocale, 'branches')} replace />;
+  }
+
+  const clinicEquipmentLegacy =
+    !forcePage && location.pathname.split('/').filter(Boolean)[1] === 'clinic-equipment';
+
+  if (clinicEquipmentLegacy && parsedLocale) {
+    return <Navigate to={daavlinSectionPath(parsedLocale, 'contacts')} replace />;
   }
 
   const changeLocale = (nextLocale: Locale) => {
@@ -1152,14 +1159,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           {currentPage === 'science' && <SciencePage locale={locale} />}
           {currentPage === 'obrazovaniya' && <ObrazovaniyaPage locale={locale} />}
           {currentPage === 'brend' && <BrandPage locale={locale} />}
-
-          {currentPage === 'clinic-equipment' && (
-            <ClinicEquipmentParkPage
-              locale={locale}
-              prices={dynamicPrices}
-              serviceCategories={dynamicServiceCategories}
-            />
-          )}
 
           {currentPage === 'results' && (
             <ResultsPage

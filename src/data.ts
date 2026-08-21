@@ -24,6 +24,8 @@ import { ROSACEA_RADESKI_ARTICLE } from './data/articles/rosaceaRadeskiArticle';
 import { MOLLUSCUM_CONTAGIOSUM_ARTICLE } from './data/articles/molluscumContagiosumArticle';
 import { PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE } from './data/articles/pediatricWartsLaserRadeskiArticle';
 import { HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE } from './data/articles/hollywoodSpectraPigmentationArticle';
+import { DERMA_V_VASCULAR_ARTICLE } from './data/articles/dermaVVascularArticle';
+import { ATOPIC_DERMATITIS_ARTICLE } from './data/articles/atopicDermatitisArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -39,7 +41,7 @@ export const DICTIONARY = {
     navDaavlinSubtitle: "O‘zbekiston Milliy Fototerapiya Markazi",
     navDermoScan: "DermaScan",
     navScience: "Ilm-fan",
-    navObrazovaniya: "Obrazovaniya",
+    navObrazovaniya: "Ta'lim",
     obrazovaniyaComingSoonTitle: "Endi sayt to'ldiriladi",
     obrazovaniyaComingSoonDesc:
       "Ta'lim va malaka oshirish bo'limi tez orada ochiladi. Hozircha bosh sahifadan klinika xizmatlari bilan tanishishingiz mumkin.",
@@ -106,9 +108,9 @@ export const DICTIONARY = {
     years: "yil",
     yearsActive: "yillik tajriba",
     reviewsCount: "ko'rib chiqilgan fikrlar",
-    seoTitle: "Radeski Skin Clinic — kosmetologiya, IPL, lazer",
-    seoText: "Radeski Skin Clinic — teri, estetika va kosmetologiya: IPL, lazer epilyatsiya, dermatoskopiya, fototerapiya, botoks va Mohs mikrografik jarrohligi.",
-    aboutHeader: "Radeski Skin Clinic — kosmetologiya, IPL, lazer",
+    seoTitle: "Radeski Skin Clinic — teri, soch va tirnoqlar uchun zamonaviy estetik korreksiyali tibbiy klinika",
+    seoText: "Radeski Skin Clinic — teri, soch va tirnoqlar bo'yicha tibbiy yordam hamda zamonaviy estetik korreksiya. Dermatologiya, trixologiya, podologiya, IPL, lazer va inyeksiyalar. Farg'ona va Qo'qon.",
+    aboutHeader: "Radeski Skin Clinic — teri, soch va tirnoqlar uchun zamonaviy estetik korreksiyali tibbiy klinika",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic dermatologiya, kosmetologiya va dermato-onkologiya sohalarida Farg'ona, Qo'qon va butun vodiyda yuqori sifat standartlariga ega tibbiy xizmatlarni taqdim etadi.",
     aboutParagraph2: "Klinikamiz Germaniya, Italiya va AQShning yetakchi kompaniyalari ishlab chiqargan eng so'nggi va xavfsiz apparat va texnologiyalardan foydalanadi. Ashurov Dilshod Davlatovich boshchiligidagi shifokorlar guruhi muntazam ravishda Yevropa va MDH mamlakatlarida xalqaro sertifikatlardan o'tishadi.",
     features01: "Professional shifokorlar",
@@ -202,9 +204,9 @@ export const DICTIONARY = {
     years: "лет",
     yearsActive: "лет практики",
     reviewsCount: "проверенных отзывов",
-    seoTitle: "Radeski Skin Clinic — косметология, IPL, лазер",
-    seoText: "Radeski Skin Clinic — кожа, эстетика и косметология: IPL, лазерная эпиляция, дерматоскопия, фототерапия, ботокс и хирургия Mohs.",
-    aboutHeader: "Radeski Skin Clinic — косметология, IPL, лазер",
+    seoTitle: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией",
+    seoText: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией. Дерматология, трихология, подология, IPL, лазер и инъекции. Фергана и Коканд.",
+    aboutHeader: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic предлагает медицинские услуги высочайших стандартов в области дерматологии, косметологии и дерматоонкологии в Фергане, Коканде и по всей Ферганской долине.",
     aboutParagraph2: "Наша клиника оснащена самым современным и безопасным оборудованием от ведущих производителей Германии, Италии и США. Команда врачей под руководством Ашурова Дильшода Давлатовича регулярно проходит стажировки и сертификации в Европе и странах СНГ.",
     features01: "Профессиональные врачи",
@@ -298,9 +300,9 @@ export const DICTIONARY = {
     years: "years",
     yearsActive: "years of experience",
     reviewsCount: "verified testimonials",
-    seoTitle: "Radeski Skin Clinic — cosmetology, IPL, laser",
-    seoText: "Radeski Skin Clinic — skin, aesthetics and cosmetology: IPL, laser hair removal, dermatoscopy, phototherapy, Botox and Mohs surgery.",
-    aboutHeader: "Radeski Skin Clinic — cosmetology, IPL, laser",
+    seoTitle: "Radeski Skin Clinic — medical clinic for skin, hair and nails with modern aesthetic correction",
+    seoText: "Radeski Skin Clinic — medical care for skin, hair and nails with modern aesthetic correction. Dermatology, trichology, podology, IPL, laser and injectables. Fergana and Kokand.",
+    aboutHeader: "Radeski Skin Clinic — medical clinic for skin, hair and nails with modern aesthetic correction",
     aboutParagraph1: "Radeski Skin & Aesthetic Clinic provides premier medical services in clinical dermatology, aesthetic cosmetology, and dermato-oncology across Fergana, Kokand and the valley.",
     aboutParagraph2: "Our facility is equipped with state-of-the-art clinical devices from world leaders in Germany, Italy, and the USA. Led by Dr. Dilshod Davlatovich Ashurov, our specialized medical team is regularly trained and certified at European and international institutes.",
     features01: "Professional Physicians",
@@ -952,4 +954,6 @@ export const ARTICLES: Article[] = [
   MOLLUSCUM_CONTAGIOSUM_ARTICLE,
   PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE,
   HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE,
+  DERMA_V_VASCULAR_ARTICLE,
+  ATOPIC_DERMATITIS_ARTICLE,
 ];

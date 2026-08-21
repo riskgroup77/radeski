@@ -1,11 +1,8 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowUpRight, CheckCircle2, ChevronRight, Play } from 'lucide-react';
+import { CheckCircle2, ChevronRight } from 'lucide-react';
 import type { Locale } from '../types';
 import { SCIENCE } from '../data/scienceContent';
-import { doctorsListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
-import AppointmentBookingLink from './AppointmentBookingLink';
 import PageHeroBanner from './PageHeroBanner';
 
 interface SciencePageProps {
@@ -37,18 +34,6 @@ const ACTIVITY_IMAGES: Record<string, string> = {
   '07': IMG.mentorship,
 };
 
-const ctaDoctors: Record<Locale, string> = {
-  uz: 'Shifokorlar bilan tanishing',
-  ru: 'Познакомиться с врачами',
-  en: 'Meet our physicians',
-};
-
-const ctaAppointment: Record<Locale, string> = {
-  uz: 'Qabulga yozilish',
-  ru: 'Записаться на приём',
-  en: 'Book an appointment',
-};
-
 function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: string }) {
   return (
     <div className="mb-8 sm:mb-10">
@@ -75,18 +60,6 @@ export default function SciencePage({ locale }: SciencePageProps) {
         title={c.title[locale]}
         titleAccent={c.subtitle[locale]}
         description={c.heroIntro[locale]}
-        appointmentLabel={ctaAppointment[locale]}
-        secondaryCta={
-          <Link
-            to={doctorsListPath(locale)}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
-          >
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
-              <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
-            </span>
-            {ctaDoctors[locale]}
-          </Link>
-        }
       />
 
       <div className="mb-10 border-b border-brand-sectiongray bg-brand-white sm:mb-14">
@@ -308,22 +281,6 @@ export default function SciencePage({ locale }: SciencePageProps) {
               </motion.article>
             ))}
           </div>
-        </div>
-
-        <div className="flex flex-wrap gap-3">
-          <Link
-            to={doctorsListPath(locale)}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline transition-all hover:bg-brand-gold-dark sm:text-sm"
-          >
-            {ctaDoctors[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <AppointmentBookingLink
-            locale={locale}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline transition-all hover:bg-brand-offwhite sm:text-sm"
-          >
-            {ctaAppointment[locale]}
-          </AppointmentBookingLink>
         </div>
       </div>
     </section>

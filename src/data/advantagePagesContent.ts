@@ -213,7 +213,7 @@ export const EQUIPMENT_PARK_PAGE: AdvantagePageContent = {
 };
 
 export function getAdvantagePageContent(
-  page: 'technologies' | 'clinic-equipment',
+  page: 'technologies',
 ): AdvantagePageContent {
   return page === 'technologies' ? TECHNOLOGIES_PAGE : EQUIPMENT_PARK_PAGE;
 }

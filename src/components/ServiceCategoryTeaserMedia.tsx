@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, type MouseEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react';
 import { Maximize2 } from 'lucide-react';
 import type { Locale } from '../types';
 import { getHomeServiceTeaserMedia } from '../data/homeServiceTeaserVideos';
@@ -14,6 +14,8 @@ interface ServiceCategoryTeaserMediaProps {
   expandLabel?: string;
   lightboxImageSrc?: string;
   onExpand?: (src: string, alt: string, event: MouseEvent) => void;
+  /** hover — play on pointer enter (services grid); always — loop on page hero */
+  motionMode?: 'hover' | 'always';
 }
 
 export default function ServiceCategoryTeaserMedia({
@@ -26,6 +28,7 @@ export default function ServiceCategoryTeaserMedia({
   expandLabel,
   lightboxImageSrc,
   onExpand,
+  motionMode = 'hover',
 }: ServiceCategoryTeaserMediaProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [motionActive, setMotionActive] = useState(false);
@@ -47,12 +50,25 @@ export default function ServiceCategoryTeaserMedia({
   }, [playbackRate, videoSrc]);
 
   const stopMotion = useCallback(() => {
+    if (motionMode === 'always') return;
     const video = videoRef.current;
     setMotionActive(false);
     if (!video) return;
     video.pause();
     video.currentTime = 0;
-  }, []);
+  }, [motionMode]);
+
+  useEffect(() => {
+    if (motionMode !== 'always' || !videoSrc) return;
+    startMotion();
+    return () => {
+      const video = videoRef.current;
+      setMotionActive(false);
+      if (!video) return;
+      video.pause();
+      video.currentTime = 0;
+    };
+  }, [motionMode, videoSrc, startMotion]);
 
   if (!posterImage && !fallbackImage) {
     return null;
@@ -63,10 +79,10 @@ export default function ServiceCategoryTeaserMedia({
   return (
     <div
       className={`relative overflow-hidden bg-brand-offwhite ${className}`}
-      onMouseEnter={startMotion}
-      onMouseLeave={stopMotion}
-      onFocus={startMotion}
-      onBlur={stopMotion}
+      onMouseEnter={motionMode === 'hover' ? startMotion : undefined}
+      onMouseLeave={motionMode === 'hover' ? stopMotion : undefined}
+      onFocus={motionMode === 'hover' ? startMotion : undefined}
+      onBlur={motionMode === 'hover' ? stopMotion : undefined}
     >
       <MediaImage
         src={posterImage ?? fallbackImage!}

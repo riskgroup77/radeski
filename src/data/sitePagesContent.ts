@@ -851,6 +851,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '2:00',
     category: { uz: 'Bemorlar fikri', ru: 'Отзывы пациентов', en: 'Patient stories' },
   },
+  {
+    id: 'clinic-video-51',
+    sortOrder: -3,
+    title: {
+      uz: 'DEKA Tetra PRO — ajinlar, chandiqlar va pigmentga qarshi premium lazer 👌',
+      ru: 'DEKA Tetra PRO — премиальный лазер против морщин, рубцов и пигментации 👌',
+      en: 'DEKA Tetra PRO — premium laser for wrinkles, scars, and pigmentation 👌',
+    },
+    description: {
+      uz: 'Ajinlar va chandiqlarni kamaytirish, yuz ovalini tiklash, pigment dog\'larini yengillashtirish va hatto xirurg skalpelsiz qovoqlarni ko\'tarish — ilgari faqat orzu bo\'lgan narsalar bugun mumkin.\n\nRadeski Skin Clinic\'da DEKA\'ning yangi avlod premium lazeri Tetra PRO bilan bu — haqiqiy natija. Zamonaviy lazer texnologiyasi teri yangilanishi, tekis rang va aniqroq konturga yo\'l ochadi.\n\n😉 Yoshlikni uzaytiradigan texnologiyadan foydalaning — hoziroq Radeski Skin Clinic\'ga muolajaga yoziling!',
+      ru: 'Уменьшение морщин и рубцов, восстановление овала лица, работа с пигментацией и даже подтяжка век без хирургического скальпеля — то, что раньше казалось мечтой, сегодня доступно.\n\nВ Radeski Skin Clinic это реальность благодаря премиальному лазеру нового поколения DEKA Tetra PRO. Современная лазерная технология помогает обновить кожу, выровнять тон и подчеркнуть контур.\n\n😉 Воспользуйтесь технологией, которая продлевает молодость — запишитесь на процедуру в Radeski Skin Clinic уже сейчас!',
+      en: 'Softening wrinkles and scars, restoring facial contour, addressing pigmentation, and even lifting the eyelids without a scalpel — once a dream, now within reach.\n\nAt Radeski Skin Clinic, DEKA\'s new-generation premium Tetra PRO laser makes it real. Advanced laser technology supports skin renewal, even tone, and a sharper contour.\n\n😉 Choose technology that helps preserve a youthful look — book your session at Radeski Skin Clinic today!',
+    },
+    src: '/videos/51.mp4',
+    duration: '1:04',
+    category: { uz: 'Apparatli kosmetologiya', ru: 'Аппаратная косметология', en: 'Device-based cosmetology' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [

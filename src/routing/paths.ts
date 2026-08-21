@@ -13,7 +13,6 @@ export type PageId =
   | 'qoqon'
   | 'results'
   | 'technologies'
-  | 'clinic-equipment'
   | 'daavlin-foto-kabinalari'
   | 'dermoscan'
   | 'science'
@@ -225,7 +224,6 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'qoqon' ||
     pageSegment === 'results' ||
     pageSegment === 'technologies' ||
-    pageSegment === 'clinic-equipment' ||
     pageSegment === 'daavlin-foto-kabinalari' ||
     pageSegment === 'dermoscan' ||
     pageSegment === 'science' ||

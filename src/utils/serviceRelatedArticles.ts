@@ -9,6 +9,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'adult-acne',
     'acne-dermatologist-vs-cosmetologist',
     'rosacea-radeski',
+    'derma-v-vascular',
     'vitiligo',
     'psoriasis-daavlin-kokand',
     'psoriasis',
@@ -18,6 +19,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'ipl-radeski',
     'ipl-therapy',
     'rosacea-radeski',
+    'derma-v-vascular',
     'hollywood-spectra-pigmentation',
     'post-acne',
     'laser-scar-resurfacing',
@@ -66,7 +68,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     immunobiologicheskaya: ['psoriasis', 'psoriasis-daavlin-kokand', 'plasmapheresis'],
   },
   'apparatnaya-kosmetologiya': {
-    'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski'],
+    'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski', 'derma-v-vascular'],
     'hollywood-spectra': [
       'hollywood-spectra-pigmentation',
       'post-acne',

@@ -21,6 +21,7 @@ import {
   servicesListPath,
   brandPath,
   daavlinModelPath,
+  daavlinSectionPath,
   getServiceCategoryIdFromPathname,
   getDaavlinModelIdFromPathname,
   type DaavlinModelId,
@@ -278,7 +279,7 @@ export default function Header({
                 ))}
                 <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
                   <Link
-                    to={pagePath(locale, 'clinic-equipment')}
+                    to={daavlinSectionPath(locale, 'cabins')}
                     onClick={() => setIsDaavlinDropdownOpen(false)}
                     className="block px-4 py-2.5 text-[12px] font-semibold text-brand-gold hover:bg-brand-gold-light/10"
                   >
@@ -454,7 +455,7 @@ export default function Header({
                 </Link>
               ))}
               <Link
-                to={pagePath(locale, 'clinic-equipment')}
+                to={daavlinSectionPath(locale, 'cabins')}
                 onClick={() => {
                   setIsMobileDaavlinOpen(false);
                   setIsMobileMenuOpen(false);

@@ -24,6 +24,8 @@ import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticl
 import { MOLLUSCUM_CONTAGIOSUM_ARTICLE_CATALOG } from './articles/molluscumContagiosumArticle';
 import { PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE_CATALOG } from './articles/pediatricWartsLaserRadeskiArticle';
 import { HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE_CATALOG } from './articles/hollywoodSpectraPigmentationArticle';
+import { DERMA_V_VASCULAR_ARTICLE_CATALOG } from './articles/dermaVVascularArticle';
+import { ATOPIC_DERMATITIS_ARTICLE_CATALOG } from './articles/atopicDermatitisArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -164,6 +166,19 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'lazer bilan pigment dog',
     'melazma davolash lazer',
   ],
+  'derma-v-vascular': [
+    'sosudistaya-setochka-derma-v-radeski',
+    'art-sosudistaya-setochka-derma-v-radeski',
+    'лечение сосудистой сеточки на лице',
+    'lutronic derma v',
+    'derma v lazer',
+    'tomir to\'ri davolash',
+    'yuzdagi tomir to\'ri',
+    'facial spider vein treatment',
+    'vascular network laser',
+    'лечение купероза лазером',
+    'удаление сосудистой сеточки',
+  ],
   'molluscum-radeski': [
     'kontagioz-mollyusk-radeski',
     'контагиозный моллюск',
@@ -185,7 +200,7 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'pimples in adults',
   ],
   acne: ['akne', 'акне', 'acne', 'комедон'],
-  'atopic-dermatitis': ['ekzem', 'atop', 'экзем', 'dermatit', 'allergik'],
+  'atopic-dermatitis': ['ekzem', 'atop', 'экзем', 'dermatit', 'allergik', 'atopik dermatit', 'blog-1786978734429'],
   rosacea: ['rozacea-ipl', 'derma v lutronic', 'ipl inmode rozacea', 'rozatsea ipl'],
   vitiligo: [
     'vitili',
@@ -947,6 +962,8 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'molluscum-radeski': MOLLUSCUM_CONTAGIOSUM_ARTICLE_CATALOG,
   'pediatric-warts-laser-radeski': PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE_CATALOG,
   'hollywood-spectra-pigmentation': HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE_CATALOG,
+  'derma-v-vascular': DERMA_V_VASCULAR_ARTICLE_CATALOG,
+  'atopic-dermatitis': ATOPIC_DERMATITIS_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

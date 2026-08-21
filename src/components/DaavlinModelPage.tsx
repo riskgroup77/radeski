@@ -3,18 +3,13 @@ import { motion } from 'motion/react';
 import { ArrowUpRight, CheckCircle2, ChevronLeft, Play } from 'lucide-react';
 import type { Locale } from '../types';
 import type { DaavlinModelId } from '../routing/paths';
-import { DAAVLIN_CABINS, DAAVLIN_NAV_LINEUP, DAAVLIN_SHARED } from '../data/daavlinFotoKabinalariContent';
+import { DAAVLIN_CABINS, DAAVLIN_NAV_LINEUP } from '../data/daavlinFotoKabinalariContent';
 import { DAAVLIN_MODEL_DEEP } from '../data/daavlinModelDeepContent';
-import {
-  daavlinModelPath,
-  daavlinSectionPath,
-  doctorsListPath,
-  pagePath,
-} from '../routing/paths';
+import { daavlinModelPath, daavlinSectionPath } from '../routing/paths';
 import MediaImage from './MediaImage';
-import AppointmentBookingLink from './AppointmentBookingLink';
 import PageHeroBanner, { heroSecondaryCtaSolidClass } from './PageHeroBanner';
 import DaavlinFinanceCalculator from './DaavlinFinanceCalculator';
+import DaavlinContactsCta from './DaavlinContactsCta';
 
 interface DaavlinModelPageProps {
   locale: Locale;
@@ -63,11 +58,16 @@ const moreLabel: Record<Locale, string> = {
   en: 'Full details',
 };
 
+const contactNote: Record<Locale, string> = {
+  uz: 'Model bo‘yicha narx, yetkazib berish va o‘rnatish uchun Daavlin distribyutori bilan bog‘laning.',
+  ru: 'По цене, поставке и установке модели свяжитесь с дистрибьютором Daavlin.',
+  en: 'Contact the Daavlin distributor for pricing, delivery, and installation of this model.',
+};
+
 export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPageProps) {
   const model = DAAVLIN_CABINS.lineup.find((item) => item.id === modelId);
   const deep = DAAVLIN_MODEL_DEEP[modelId];
   const others = DAAVLIN_NAV_LINEUP.filter((item) => item.id !== modelId);
-  const s = DAAVLIN_SHARED;
 
   if (!model || !deep) {
     return (
@@ -76,7 +76,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
           {locale === 'uz' ? 'Model topilmadi' : locale === 'ru' ? 'Модель не найдена' : 'Model not found'}
         </p>
         <Link
-                    to={pagePath(locale, 'clinic-equipment')}
+          to={daavlinSectionPath(locale, 'cabins')}
           className="mt-4 inline-block font-semibold text-brand-gold no-underline"
         >
           {backLabel[locale]}
@@ -100,9 +100,9 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         highlights={model.benefits[locale]}
         specTags={model.specs[locale]}
         highlightFooter={model.bestFor[locale]}
-        appointmentLabel={s.ctaBook[locale]}
+        primaryCta={<DaavlinContactsCta locale={locale} variant="hero" />}
         secondaryCta={
-          <Link to={pagePath(locale, 'clinic-equipment')} className={heroSecondaryCtaSolidClass}>
+          <Link to={daavlinSectionPath(locale, 'cabins')} className={heroSecondaryCtaSolidClass}>
             <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/35 bg-brand-gold-light/20">
               <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
             </span>
@@ -117,7 +117,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
           className="mb-10 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-brand-sectiongray/90 bg-brand-white/95 px-4 py-3.5 shadow-[0_8px_32px_-16px_rgba(7,27,46,0.12)] backdrop-blur-sm sm:px-5"
         >
           <Link
-                    to={pagePath(locale, 'clinic-equipment')}
+            to={daavlinSectionPath(locale, 'cabins')}
             className="inline-flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs font-semibold text-brand-text-secondary no-underline transition-colors hover:text-brand-gold sm:text-sm"
           >
             <ChevronLeft className="h-4 w-4 shrink-0" />
@@ -235,30 +235,14 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
           </ol>
         </motion.div>
 
-        <div className="mb-10 flex flex-wrap gap-3">
-          <Link
-            to={daavlinSectionPath(locale, 'contacts')}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline transition-all hover:bg-brand-gold-dark sm:text-sm"
-          >
-            {locale === 'uz' ? 'Konsultatsiya / buyurtma' : locale === 'ru' ? 'Консультация / заказ' : 'Consult / order'}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <AppointmentBookingLink className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline transition-all hover:bg-brand-offwhite sm:text-sm">
-            {s.ctaBook[locale]}
-          </AppointmentBookingLink>
-          <Link
-            to={doctorsListPath(locale)}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline transition-all hover:bg-brand-offwhite sm:text-sm"
-          >
-            {s.ctaDoctors[locale]}
-          </Link>
-          <Link
-            to={pagePath(locale, 'clinic-equipment')}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline transition-all hover:bg-brand-offwhite sm:text-sm"
-          >
-            {s.ctaEquipment[locale]}
-          </Link>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-10"
+        >
+          <DaavlinContactsCta locale={locale} variant="card" note={contactNote[locale]} />
+        </motion.div>
 
         <div>
           <h2 className="mb-4 text-lg font-extrabold text-brand-text-primary sm:text-xl">

@@ -6,6 +6,7 @@ import { DERMO_SCAN } from '../data/dermoScanContent';
 import MediaImage from './MediaImage';
 
 const BANNER_DISMISS_KEY = 'dermoscan-install-banner-dismissed';
+export const DERMOSCAN_APP_INSTALL_SECTION_ID = 'dermoscan-app-install';
 
 const SCREENSHOTS = [
   '/dermoscan/dermoscan-seq-01.webp',
@@ -147,7 +148,7 @@ function MobileInstallBanner({
 export default function DermoScanAppInstallSection({ locale }: DermoScanAppInstallSectionProps) {
   const c = DERMO_SCAN.appInstall;
   const [toast, setToast] = useState(false);
-  const sectionId = 'dermoscan-app-install';
+  const sectionId = DERMOSCAN_APP_INSTALL_SECTION_ID;
 
   const showComingSoon = useCallback(() => {
     setToast(true);

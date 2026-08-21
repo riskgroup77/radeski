@@ -489,6 +489,7 @@ export const DERMO_SCAN = {
     bannerTitle: L('DermaScan ilovasi', 'Приложение DermaScan', 'DermaScan app'),
     bannerSubtitle: L('Tez orada Play Market va App Store’da', 'Скоро в Play Market и App Store', 'Coming soon to Play Market & App Store'),
     bannerAction: L('Batafsil', 'Подробнее', 'Learn more'),
+    heroDownloadCta: L('Mobil ilovani yuklab olish', 'Скачать мобильное приложение', 'Download the mobile app'),
     screenshotsTitle: L('Ilova ko‘rinishi', 'Интерфейс приложения', 'App preview'),
   },
 };

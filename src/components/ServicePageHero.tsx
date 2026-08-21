@@ -1,6 +1,9 @@
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
+import type { Locale } from '../types';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import ServiceCategoryTeaserMedia from './ServiceCategoryTeaserMedia';
+import { getHomeServiceTeaserMedia } from '../data/homeServiceTeaserVideos';
 import { getServiceLucideIcon } from '../utils/serviceIcons';
 
 interface ServicePageHeroProps {
@@ -10,6 +13,8 @@ interface ServicePageHeroProps {
   image?: string | null;
   iconName?: string;
   appointmentLabel: string;
+  categoryId?: string;
+  locale?: Locale;
   secondaryAction?: {
     label: string;
     onClick: () => void;
@@ -23,15 +28,27 @@ export default function ServicePageHero({
   image,
   iconName,
   appointmentLabel,
+  categoryId,
+  locale,
   secondaryAction,
 }: ServicePageHeroProps) {
   const IconComponent = iconName ? getServiceLucideIcon(iconName) : null;
+  const hasTeaserVideo = Boolean(categoryId && locale && getHomeServiceTeaserMedia(categoryId));
 
   return (
     <div className="bg-brand-white rounded-3xl border border-brand-sectiongray overflow-hidden shadow-md">
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-0">
         <div className="relative min-h-[260px] sm:min-h-[320px] md:min-h-[420px] lg:min-h-[460px] bg-brand-sectiongray/40 order-1">
-          {image ? (
+          {hasTeaserVideo && categoryId && locale ? (
+            <ServiceCategoryTeaserMedia
+              categoryId={categoryId}
+              locale={locale}
+              alt={title}
+              fallbackImage={image ?? undefined}
+              motionMode="always"
+              className="absolute inset-0 h-full w-full"
+            />
+          ) : image ? (
             <MediaImage
               src={image}
               alt={title}

@@ -56,10 +56,10 @@ export function buildServiceH1(name: string, locale: Locale): string {
 export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   uz: {
     home: {
-      title: "Radeski Skin Clinic — kosmetologiya, IPL, lazer",
-      desc: "Radeski Skin Clinic — teri, estetika va kosmetologiya: IPL, lazer epilyatsiya, fototerapiya, botoks, dermatoskopiya va Mohs. Tel: +998 73 200-73-73.",
+      title: "Radeski Skin Clinic — teri, soch va tirnoqlar uchun zamonaviy estetik korreksiyali tibbiy klinika",
+      desc: "Radeski Skin Clinic — teri, soch va tirnoqlar bo'yicha tibbiy yordam hamda zamonaviy estetik korreksiya. Dermatologiya, trixologiya, podologiya, IPL, lazer va inyeksiyalar. Tel: +998 73 200-73-73.",
       keywords:
-        "Radeski Skin Clinic, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya, botoks, teri klinikasi, estetika",
+        "Radeski Skin Clinic, teri klinikasi, soch va tirnoq, tibbiy klinika, estetik korreksiya, dermatologiya, trixologiya, podologiya",
     },
     about: {
       title: "Klinika haqida | Radeski Skin Clinic — dermatologiya Farg'ona | Qo'qon",
@@ -98,7 +98,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Radeski filial, dermatolog Farg'ona, dermatolog Qo'qon, klinika manzili, Rade Skin Clinic",
     },
     qoqon: {
-      title: "Dermatolog Qo'qon | Farg'ona | Radeski Skin Clinic — kosmetologiya, IPL, lazer",
+      title: "Dermatolog Qo'qon | Farg'ona | Radeski Skin Clinic — teri, soch va tirnoqlar tibbiy klinikasi",
       desc: "Qo'qonda Radeski Skin Clinic: dermatologiya, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya. Manzil: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73. Farg'ona filiali ham mavjud.",
       keywords:
         "dermatolog Qo'qon, dermatologiya Qo'qon, kosmetologiya Qo'qon, IPL Qo'qon, lazer epilyatsiya Qo'qon, Radeski Qo'qon, dermatolog Farg'ona, akne Qo'qon",
@@ -112,11 +112,6 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       title: "Texnologiyalar — IPL, Mohs, Excimer | Radeski Farg'ona | Qo'qon",
       desc: "Sciton IPL, Mohs mikrografik jarrohligi, Excimer va UVB fototerapiya — Radeski Skin Clinic Farg'ona va Qo'qon.",
       keywords: "IPL Farg'ona, IPL Qo'qon, Mohs, Excimer, UVB fototerapiya, zamonaviy dermatologiya",
-    },
-    'clinic-equipment': {
-      title: "Apparatlar — Daavlin, InMode, Lutronic | Radeski Farg'ona | Qo'qon",
-      desc: "Daavlin NeoLux, Aquex, InMode IPL, Derma V, Hollywood Spectra va plazmoforez — Radeski apparatlar parki.",
-      keywords: "Daavlin Farg'ona, InMode IPL Qo'qon, Hollywood Spectra, fototerapiya apparati, klinika jihozlari",
     },
     'daavlin-foto-kabinalari': {
       title: "Daavlin — O‘zbekiston Milliy Fototerapiya Markazi | Radeski Farg'ona | Qo'qon",
@@ -156,10 +151,10 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   },
   ru: {
     home: {
-      title: "Radeski Skin Clinic — косметология, IPL, лазер",
-      desc: "Radeski Skin Clinic — кожа, эстетика и косметология: IPL, лазерная эпиляция, фототерапия, ботокс, дерматоскопия и Mohs. Тел: +998 73 200-73-73.",
+      title: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией",
+      desc: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией. Дерматология, трихология, подология, IPL, лазер и инъекции. Тел: +998 73 200-73-73.",
       keywords:
-        "Radeski Skin Clinic, косметология, IPL, лазерная эпиляция, фототерапия, ботокс, клиника кожи, эстетика",
+        "Radeski Skin Clinic, медицинская клиника кожи, волос и ногтей, эстетическая коррекция, дерматология, трихология, подология",
     },
     about: {
       title: "О клинике | Radeski Skin Clinic — дерматология Фергана | Коканд",
@@ -198,7 +193,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "филиал Radeski, дерматолог Фергана, дерматолог Коканд, адрес клиники",
     },
     qoqon: {
-      title: "Дерматолог Коканд | Фергана | Radeski Skin Clinic — косметология, IPL, лазер",
+      title: "Дерматолог Коканд | Фергана | Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей",
       desc: "Клиника Radeski в Коканде: дерматология, косметология, IPL, лазерная эпиляция, фототерапия. Адрес: 47-МФЙ, Хукандий 144А. Тел: +998 95 210 73 73. Также филиал в Фергане.",
       keywords:
         "дерматолог Коканд, дерматология Коканд, косметология Коканд, IPL Коканд, лазерная эпиляция Коканд, Radeski Коканд, дерматолог Фергана, акне Коканд",
@@ -212,11 +207,6 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       title: "Технологии — IPL, Mohs, Excimer | Radeski Фергана | Коканд",
       desc: "Sciton IPL, хирургия Mohs, эксимерный лазер и UVB-фототерапия в клинике Radeski — Фергана и Коканд.",
       keywords: "IPL Фергана, IPL Коканд, Mohs, Excimer, UVB фототерапия, современная дерматология",
-    },
-    'clinic-equipment': {
-      title: "Аппараты — Daavlin, InMode, Lutronic | Radeski Фергана | Коканд",
-      desc: "Daavlin NeoLux, Aquex, InMode IPL, Derma V, Hollywood Spectra и плазмофорез — Фергана | Коканд.",
-      keywords: "Daavlin Фергана, InMode IPL Коканд, Hollywood Spectra, фототерапия, аппараты клиники",
     },
     'daavlin-foto-kabinalari': {
       title: "Daavlin — Национальный центр фототерапии Узбекистана | Radeski Фергана | Коканд",
@@ -256,10 +246,10 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   },
   en: {
     home: {
-      title: "Radeski Skin Clinic — cosmetology, IPL, laser",
-      desc: "Radeski Skin Clinic — skin, aesthetics and cosmetology: IPL, laser hair removal, phototherapy, Botox, dermatoscopy and Mohs. Tel: +998 73 200-73-73.",
+      title: "Radeski Skin Clinic — medical clinic for skin, hair and nails with modern aesthetic correction",
+      desc: "Radeski Skin Clinic — medical care for skin, hair and nails with modern aesthetic correction. Dermatology, trichology, podology, IPL, laser and injectables. Tel: +998 73 200-73-73.",
       keywords:
-        "Radeski Skin Clinic, cosmetology, IPL, laser hair removal, phototherapy, Botox, skin clinic, aesthetics",
+        "Radeski Skin Clinic, medical skin clinic, hair and nails, aesthetic correction, dermatology, trichology, podology",
     },
     about: {
       title: "About the clinic | Radeski Skin Clinic — dermatology Fergana | Kokand",
@@ -298,7 +288,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Radeski branch, dermatologist Fergana, dermatologist Kokand, clinic address",
     },
     qoqon: {
-      title: "Dermatologist Kokand | Fergana | Radeski Skin Clinic — cosmetology, IPL, laser",
+      title: "Dermatologist Kokand | Fergana | Radeski Skin Clinic — medical skin, hair and nails clinic",
       desc: "Radeski Skin Clinic in Kokand: dermatology, cosmetology, IPL, laser hair removal, phototherapy. Address: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73. Also a Fergana branch.",
       keywords:
         "dermatologist Kokand, dermatology Kokand, cosmetology Kokand, IPL Kokand, laser hair removal Kokand, Radeski Kokand, dermatologist Fergana, acne Kokand",
@@ -312,11 +302,6 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       title: "Technologies — IPL, Mohs, Excimer | Radeski Fergana | Kokand",
       desc: "Sciton IPL, Mohs micrographic surgery, Excimer and UVB phototherapy at Radeski — Fergana and Kokand.",
       keywords: "IPL Fergana, IPL Kokand, Mohs, Excimer, UVB phototherapy, modern dermatology",
-    },
-    'clinic-equipment': {
-      title: "Equipment — Daavlin, InMode, Lutronic | Radeski Fergana | Kokand",
-      desc: "Daavlin NeoLux, Aquex, InMode IPL, Derma V, Hollywood Spectra and plasmapheresis — Fergana | Kokand.",
-      keywords: "Daavlin Fergana, InMode IPL Kokand, Hollywood Spectra, phototherapy devices",
     },
     'daavlin-foto-kabinalari': {
       title: "National Phototherapy Center of Uzbekistan by Daavlin | Radeski Fergana | Kokand",

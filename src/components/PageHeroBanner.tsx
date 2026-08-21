@@ -17,6 +17,8 @@ interface PageHeroBannerProps {
   /** Compact spec tags under highlights. */
   specTags?: string[];
   appointmentLabel?: string;
+  /** Custom primary CTA (e.g. Daavlin phone links). Replaces appointment button when set. */
+  primaryCta?: ReactNode;
   secondaryCta?: ReactNode;
   after?: ReactNode;
   /** Panoramic product lineups — split layout: copy left, image right. */
@@ -51,20 +53,24 @@ export const heroSecondaryCtaSolidClass =
 
 function HeroCtaRow({
   appointmentLabel,
+  primaryCta,
   secondaryCta,
   solidButtons = false,
-}: Pick<PageHeroBannerProps, 'appointmentLabel' | 'secondaryCta'> & { solidButtons?: boolean }) {
-  if (!appointmentLabel && !secondaryCta) return null;
+}: Pick<PageHeroBannerProps, 'appointmentLabel' | 'primaryCta' | 'secondaryCta'> & {
+  solidButtons?: boolean;
+}) {
+  if (!appointmentLabel && !primaryCta && !secondaryCta) return null;
 
   const primaryClass = solidButtons ? heroPrimaryCtaSolidClass : heroPrimaryCtaClass;
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
-      {appointmentLabel ? (
-        <AppointmentBookingLink className={primaryClass}>
-          <Calendar className="h-4 w-4 shrink-0" />
-          {appointmentLabel}
-        </AppointmentBookingLink>
-      ) : null}
+      {primaryCta ??
+        (appointmentLabel ? (
+          <AppointmentBookingLink className={primaryClass}>
+            <Calendar className="h-4 w-4 shrink-0" />
+            {appointmentLabel}
+          </AppointmentBookingLink>
+        ) : null)}
       {secondaryCta}
     </div>
   );
@@ -132,6 +138,7 @@ function HeroCopy({
   highlightFooter,
   specTags,
   appointmentLabel,
+  primaryCta,
   secondaryCta,
   ctaPosition = 'inline',
   lightSurface = false,
@@ -147,6 +154,7 @@ function HeroCopy({
   | 'highlightFooter'
   | 'specTags'
   | 'appointmentLabel'
+  | 'primaryCta'
   | 'secondaryCta'
   | 'ctaPosition'
 > & { lightSurface?: boolean; solidButtons?: boolean }) {
@@ -155,7 +163,7 @@ function HeroCopy({
     Boolean(highlights?.length) ||
     Boolean(highlightFooter) ||
     Boolean(specTags?.length);
-  const showCtas = Boolean(appointmentLabel || secondaryCta);
+  const showCtas = Boolean(appointmentLabel || primaryCta || secondaryCta);
 
   const badgeClass = lightSurface
     ? 'inline-flex w-fit items-center gap-2 rounded-full border border-brand-gold/25 bg-brand-gold-light/20 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-brand-gold shadow-sm sm:text-xs'
@@ -212,6 +220,7 @@ function HeroCopy({
           {showCtas ? (
             <HeroCtaRow
               appointmentLabel={appointmentLabel}
+              primaryCta={primaryCta}
               secondaryCta={secondaryCta}
               solidButtons={solidButtons}
             />
@@ -234,6 +243,7 @@ function HeroCopy({
         <div className={hasMiddleContent ? 'mt-6 sm:mt-8' : 'mt-8 sm:mt-10'}>
           <HeroCtaRow
             appointmentLabel={appointmentLabel}
+            primaryCta={primaryCta}
             secondaryCta={secondaryCta}
             solidButtons={solidButtons}
           />
@@ -254,6 +264,7 @@ export default function PageHeroBanner({
   highlightFooter,
   specTags,
   appointmentLabel,
+  primaryCta,
   secondaryCta,
   after,
   imageVariant = 'cover',
@@ -298,6 +309,7 @@ export default function PageHeroBanner({
                 highlightFooter={highlightFooter}
                 specTags={specTags}
                 appointmentLabel={appointmentLabel}
+                primaryCta={primaryCta}
                 secondaryCta={secondaryCta}
                 ctaPosition={resolvedCtaPosition}
                 lightSurface={useProductLayout}
@@ -373,6 +385,7 @@ export default function PageHeroBanner({
               highlightFooter={highlightFooter}
               specTags={specTags}
               appointmentLabel={appointmentLabel}
+              primaryCta={primaryCta}
               secondaryCta={secondaryCta}
               ctaPosition={resolvedCtaPosition}
             />

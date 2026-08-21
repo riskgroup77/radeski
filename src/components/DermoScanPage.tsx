@@ -1,21 +1,39 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
-  ArrowUpRight,
   CheckCircle2,
   ChevronRight,
-  Play,
+  Smartphone,
 } from 'lucide-react';
 import type { Locale } from '../types';
 import { DERMO_SCAN } from '../data/dermoScanContent';
-import { doctorsListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
-import AppointmentBookingLink from './AppointmentBookingLink';
-import PageHeroBanner from './PageHeroBanner';
-import DermoScanAppInstallSection from './DermoScanAppInstallSection';
+import PageHeroBanner, { heroPrimaryCtaSolidClass } from './PageHeroBanner';
+import DermoScanAppInstallSection, { DERMOSCAN_APP_INSTALL_SECTION_ID } from './DermoScanAppInstallSection';
 
 interface DermoScanPageProps {
   locale: Locale;
+}
+
+function scrollToAppInstall() {
+  document.getElementById(DERMOSCAN_APP_INSTALL_SECTION_ID)?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  });
+}
+
+function DownloadAppButton({
+  locale,
+  className,
+}: {
+  locale: Locale;
+  className: string;
+}) {
+  return (
+    <button type="button" onClick={scrollToAppInstall} className={className}>
+      <Smartphone className="h-4 w-4 shrink-0" />
+      {DERMO_SCAN.appInstall.heroDownloadCta[locale]}
+    </button>
+  );
 }
 
 const IMG = {
@@ -45,18 +63,6 @@ const FEATURE_IMAGES: Record<string, string> = {
   '07': IMG.together,
 };
 
-const ctaDoctors: Record<Locale, string> = {
-  uz: 'Shifokorlar bilan tanishing',
-  ru: 'Познакомиться с врачами',
-  en: 'Meet our physicians',
-};
-
-const ctaAppointment: Record<Locale, string> = {
-  uz: 'Qabulga yozilish',
-  ru: 'Записаться на приём',
-  en: 'Book an appointment',
-};
-
 const unificationImages = [IMG.app, IMG.philosophy, IMG.analysis, IMG.monitor];
 
 function HeroBanner({ locale }: { locale: Locale }) {
@@ -69,17 +75,11 @@ function HeroBanner({ locale }: { locale: Locale }) {
       title={c.title[locale]}
       titleAccent={c.subtitle[locale]}
       description={c.heroIntro[locale]}
-      appointmentLabel={ctaAppointment[locale]}
-      secondaryCta={
-        <Link
-          to={doctorsListPath(locale)}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/80 bg-white px-6 py-3.5 text-sm font-bold text-brand-text-primary no-underline shadow-lg shadow-black/10 transition-colors hover:bg-white/90"
-        >
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-gold/40">
-            <Play className="ml-0.5 h-3 w-3 fill-brand-gold text-brand-gold" />
-          </span>
-          {ctaDoctors[locale]}
-        </Link>
+      primaryCta={
+        <DownloadAppButton
+          locale={locale}
+          className={`${heroPrimaryCtaSolidClass} w-full cursor-pointer border-0 sm:w-auto`}
+        />
       }
     />
   );
@@ -556,21 +556,10 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
           </motion.article>
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <Link
-            to={doctorsListPath(locale)}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline transition-all hover:bg-brand-gold-dark sm:text-sm"
-          >
-            {ctaDoctors[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <AppointmentBookingLink
-            locale={locale}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline transition-all hover:bg-brand-offwhite sm:text-sm"
-          >
-            {ctaAppointment[locale]}
-          </AppointmentBookingLink>
-        </div>
+        <DownloadAppButton
+          locale={locale}
+          className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white transition-all hover:bg-brand-gold-dark sm:text-sm cursor-pointer border-0"
+        />
       </div>
     </section>
   );

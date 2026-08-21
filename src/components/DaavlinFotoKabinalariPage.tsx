@@ -27,19 +27,16 @@ import {
   DAAVLIN_DISEASES,
   DAAVLIN_RESULTS,
   DAAVLIN_SECTION_MEDIA,
-  DAAVLIN_SECTION_NAV,
   DAAVLIN_SHARED,
 } from '../data/daavlinFotoKabinalariContent';
 import {
   daavlinModelPath,
   daavlinSectionPath,
-  doctorsListPath,
   pagePath,
-  serviceSubPath,
 } from '../routing/paths';
 import MediaImage from './MediaImage';
-import AppointmentBookingLink from './AppointmentBookingLink';
 import PageHeroBanner from './PageHeroBanner';
+import DaavlinContactsCta from './DaavlinContactsCta';
 
 interface DaavlinFotoKabinalariPageProps {
   locale: Locale;
@@ -186,7 +183,6 @@ function SplitSection({
 
 function AboutBody({ locale }: { locale: Locale }) {
   const c = DAAVLIN_ABOUT;
-  const s = DAAVLIN_SHARED;
   const media = DAAVLIN_SECTION_MEDIA.about;
   const partnershipImg = media.gallery?.[0] ?? media.mid;
   const clinicImg = media.gallery?.[1] ?? media.mid;
@@ -393,65 +389,33 @@ function AboutBody({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      {/* Closing gallery strip */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        {[partnershipImg, cabinImg, clinicImg, resultsImg].map((src, i) => (
+      {/* Closing gallery mosaic — bento grid without empty cells */}
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:grid-rows-2">
+        {[
+          { src: partnershipImg, className: 'col-span-2 row-span-2 min-h-[240px] md:min-h-[340px]' },
+          { src: cabinImg, className: 'min-h-[140px] md:min-h-0' },
+          { src: clinicImg, className: 'min-h-[140px] md:min-h-0' },
+          { src: media.gallery?.[5] ?? resultsImg, className: 'min-h-[140px] md:min-h-0' },
+          { src: media.gallery?.[6] ?? missionBand, className: 'min-h-[140px] md:min-h-0' },
+        ].map((item, i) => (
           <motion.div
-            key={`${src}-${i}`}
+            key={`${item.src}-${i}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-            className={`overflow-hidden rounded-2xl border border-brand-sectiongray bg-brand-offwhite ${
-              i === 0 ? 'col-span-2 aspect-[16/9] lg:col-span-2 lg:aspect-auto lg:min-h-[200px]' : 'aspect-[4/3]'
-            }`}
+            transition={{ delay: i * 0.04 }}
+            className={`overflow-hidden rounded-2xl border border-brand-sectiongray bg-brand-offwhite ${item.className}`}
           >
-            <MediaImage src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+            <MediaImage src={item.src} alt="" className="h-full w-full object-cover" loading="lazy" />
           </motion.div>
         ))}
       </div>
-
-      {/* CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="rounded-3xl border border-brand-sectiongray bg-gradient-to-br from-brand-white via-brand-white to-brand-gold/10 p-6 shadow-sm sm:p-8"
-      >
-        <p className="mb-5 max-w-2xl text-sm font-light leading-relaxed text-brand-text-secondary sm:text-base">
-          {c.helpNote[locale]}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            to={pagePath(locale, 'clinic-equipment')}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline hover:bg-brand-gold-dark sm:text-sm"
-          >
-            {s.ctaExplore[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <Link
-            to={pagePath(locale, 'clinic-equipment')}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline sm:text-sm"
-          >
-            {s.ctaEquipment[locale]}
-            <ArrowUpRight className="h-4 w-4 text-brand-gold" />
-          </Link>
-          <Link
-            to={pagePath(locale, 'branches')}
-            className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold text-brand-text-muted no-underline hover:text-brand-text-primary sm:text-sm"
-          >
-            Radeski Skin Clinic
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </motion.div>
     </div>
   );
 }
 
 function ClinicBody({ locale }: { locale: Locale }) {
   const c = DAAVLIN_CLINIC;
-  const s = DAAVLIN_SHARED;
   const media = DAAVLIN_SECTION_MEDIA['radeski-skin-clinic'];
   const consultImg = media.gallery?.[0] ?? media.mid;
   const cabinImg = media.gallery?.[1] ?? media.mid;
@@ -679,38 +643,8 @@ function ClinicBody({ locale }: { locale: Locale }) {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="rounded-3xl border border-brand-sectiongray bg-gradient-to-br from-brand-white via-brand-white to-brand-gold/10 p-6 shadow-sm sm:p-8"
       >
-        <p className="mb-5 max-w-2xl text-sm font-light leading-relaxed text-brand-text-secondary sm:text-base">
-          {c.note[locale]}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            to={doctorsListPath(locale)}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline hover:bg-brand-gold-dark sm:text-sm"
-          >
-            {s.ctaDoctors[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <AppointmentBookingLink className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline sm:text-sm">
-            {s.ctaBook[locale]}
-            <ArrowUpRight className="h-4 w-4 text-brand-gold" />
-          </AppointmentBookingLink>
-          <Link
-            to={serviceSubPath(locale, 'dermatologiya', 'fototerapiya')}
-            className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold text-brand-text-muted no-underline hover:text-brand-text-primary sm:text-sm"
-          >
-            {s.ctaFototerapiya[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <Link
-            to={daavlinSectionPath(locale, 'contacts')}
-            className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold text-brand-text-muted no-underline hover:text-brand-text-primary sm:text-sm"
-          >
-            {DAAVLIN_SECTION_NAV.find((n) => n.id === 'contacts')?.label[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
+        <DaavlinContactsCta locale={locale} variant="card" note={c.note[locale]} />
       </motion.div>
     </div>
   );
@@ -718,7 +652,6 @@ function ClinicBody({ locale }: { locale: Locale }) {
 
 function CabinsBody({ locale }: { locale: Locale }) {
   const c = DAAVLIN_CABINS;
-  const s = DAAVLIN_SHARED;
   const media = DAAVLIN_SECTION_MEDIA.cabins;
   const homeImg = media.gallery?.[0] ?? media.mid;
   const clinicImg = media.gallery?.[1] ?? media.mid;
@@ -1036,34 +969,8 @@ function CabinsBody({ locale }: { locale: Locale }) {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="rounded-3xl border border-brand-sectiongray bg-gradient-to-br from-brand-white via-brand-white to-brand-gold/10 p-6 shadow-sm sm:p-8"
       >
-        <p className="mb-5 max-w-2xl text-sm font-light leading-relaxed text-brand-text-secondary sm:text-base">
-          {c.closing[locale]}
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <Link
-            to={daavlinSectionPath(locale, 'contacts')}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline hover:bg-brand-gold-dark sm:text-sm"
-          >
-            {DAAVLIN_SECTION_NAV.find((n) => n.id === 'contacts')?.label[locale]}
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-          <Link
-            to={pagePath(locale, 'clinic-equipment')}
-            className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline sm:text-sm"
-          >
-            {s.ctaEquipment[locale]}
-            <ArrowUpRight className="h-4 w-4 text-brand-gold" />
-          </Link>
-          <Link
-            to={daavlinSectionPath(locale, 'radeski-skin-clinic')}
-            className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold text-brand-text-muted no-underline hover:text-brand-text-primary sm:text-sm"
-          >
-            Radeski Skin Clinic
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
+        <DaavlinContactsCta locale={locale} variant="card" note={c.closing[locale]} />
       </motion.div>
     </div>
   );
@@ -1124,18 +1031,15 @@ function ResultsBody({ locale }: { locale: Locale }) {
         <h2 className="mb-4 text-base font-extrabold text-brand-text-primary">{c.bulletsTitle[locale]}</h2>
         <BulletList items={c.bullets[locale]} />
       </Card>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col gap-4">
         <Link
           to={pagePath(locale, 'results')}
-          className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline hover:bg-brand-gold-dark sm:text-sm"
+          className="inline-flex w-fit items-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white no-underline hover:bg-brand-gold-dark sm:text-sm"
         >
           {s.ctaResults[locale]}
           <ArrowUpRight className="h-4 w-4" />
         </Link>
-        <AppointmentBookingLink className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline sm:text-sm">
-          {s.ctaBook[locale]}
-          <ArrowUpRight className="h-4 w-4 text-brand-gold" />
-        </AppointmentBookingLink>
+        <DaavlinContactsCta locale={locale} variant="strip" />
       </div>
     </div>
   );

@@ -82,6 +82,9 @@ export const DAAVLIN_SECTION_MEDIA: Record<
       '/daavlin/daavlin-results-mid.webp',
       '/daavlin/about-mission-band.webp',
       '/daavlin/daavlin-cabins-mid.webp',
+      '/daavlin/daavlin-about-uv-session.webp',
+      '/daavlin/daavlin-about-showroom.webp',
+      '/daavlin/daavlin-about-control-panel.webp',
     ],
   },
   'radeski-skin-clinic': {

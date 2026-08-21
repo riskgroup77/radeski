@@ -3,9 +3,9 @@ import type { LocalizedImages } from '../types';
 /** Default thumbnail for each sub-service (categoryId → subId → public path). */
 export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
   dermatologiya: {
-    'det-derm': '/services/pediatric-dermatology.webp',
-    fototerapiya: '/karusel/fototerapiya.webp',
-    immunobiologicheskaya: '/services/immunobiological-therapy.webp',
+    'det-derm': '/services/dermatologiya/det-derm.jpg',
+    fototerapiya: '/services/dermatologiya/fototerapiya.jpg',
+    immunobiologicheskaya: '/services/dermatologiya/immunobiologicheskaya.jpg',
   },
   'apparatnaya-kosmetologiya': {
     'ipl-inmode': '/services/apparatnaya/ipl-inmode.jpg',
@@ -38,9 +38,9 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
     gistolog: '/science/science-data.webp',
   },
   'in-ekcionnaya-kosmetologiya': {
-    konturnaya: '/gallery/4.webp',
-    botulino: '/gallery/5.webp',
-    biorev: '/gallery/6.webp',
+    konturnaya: '/services/in-ekcionnaya/konturnaya.jpg',
+    botulino: '/services/in-ekcionnaya/botulino.jpg',
+    biorev: '/services/in-ekcionnaya/biorev.jpg',
   },
 };
 
