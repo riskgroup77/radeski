@@ -11,3 +11,26 @@ scripts/gsc-auto/chrome-profile/
 scripts/gsc-auto/.venv/
 scripts/gsc-auto/state.json
 scripts/gsc-auto/indexer.log
+
+# ── Raw source videos (project root) — convert → public/videos, never commit ──
+/vid*.MP4
+/vid*.mp4
+/vid*.MOV
+/vid*.mov
+/[0-9]*.MP4
+/[0-9]*.mp4
+/[0-9]*.MOV
+/[0-9]*.mov
+Hailuo_*.mp4
+PixVerse_*.mp4
+grok-video-*.mp4
+heroVideo.mp4
+66580717-*.mp4
+
+# Clinic insight videos — uploaded to API + VPS via deploy scripts, not GitHub
+public/videos/*.mp4
+
+# Scratch / temp
+.tmp-*.json
+.video-frames/
+openapi-temp.json

@@ -46,11 +46,27 @@ def main() -> None:
         client,
         f"""set -euo pipefail
 cd {APP_DIR}
+# Clinic videos live on VPS + API, not in git — preserve across hard reset.
+VIDEO_BACKUP="/tmp/radeski-videos-backup"
+rm -rf "$VIDEO_BACKUP"
+if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
+  cp -a public/videos "$VIDEO_BACKUP"
+fi
 git fetch origin main
 git reset --hard origin/main
+if [ -d "$VIDEO_BACKUP" ]; then
+  mkdir -p public/videos
+  cp -a "$VIDEO_BACKUP"/. public/videos/
+  rm -rf "$VIDEO_BACKUP"
+fi
 if [ -f .env ]; then set -a; . ./.env; set +a; fi
 export VITE_API_URL="${{VITE_API_URL:-https://api.radeski.uz}}"
 npm run build
+# Ensure static /videos/* remain in dist after build
+if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
+  mkdir -p dist/videos
+  cp -a public/videos/. dist/videos/
+fi
 nginx -t
 systemctl reload nginx
 echo DEPLOY_OK
