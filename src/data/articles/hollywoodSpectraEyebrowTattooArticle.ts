@@ -472,11 +472,11 @@ export const HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-08-22',
-  image: '/services/apparatnaya/hollywood-spectra.jpg',
+  image: '/articles/hollywood-spectra-eyebrow-tattoo-cover.jpg',
   images: {
-    uz: '/services/apparatnaya/hollywood-spectra.jpg',
-    ru: '/services/apparatnaya/hollywood-spectra.jpg',
-    en: '/services/apparatnaya/hollywood-spectra.jpg',
+    uz: '/articles/hollywood-spectra-eyebrow-tattoo-cover.jpg',
+    ru: '/articles/hollywood-spectra-eyebrow-tattoo-cover.jpg',
+    en: '/articles/hollywood-spectra-eyebrow-tattoo-cover.jpg',
   },
   views: 0,
 };
