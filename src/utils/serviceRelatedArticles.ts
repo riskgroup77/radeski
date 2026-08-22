@@ -71,6 +71,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski', 'derma-v-vascular'],
     'hollywood-spectra': [
       'hollywood-spectra-pigmentation',
+      'hollywood-spectra-eyebrow-tattoo',
       'post-acne',
       'laser-scar-resurfacing',
       'adult-acne',

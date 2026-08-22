@@ -26,6 +26,7 @@ import { PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE_CATALOG } from './articles/pediat
 import { HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE_CATALOG } from './articles/hollywoodSpectraPigmentationArticle';
 import { DERMA_V_VASCULAR_ARTICLE_CATALOG } from './articles/dermaVVascularArticle';
 import { ATOPIC_DERMATITIS_ARTICLE_CATALOG } from './articles/atopicDermatitisArticle';
+import { HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE_CATALOG } from './articles/hollywoodSpectraEyebrowTattooArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -165,6 +166,17 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'лечение мелазмы лазером',
     'lazer bilan pigment dog',
     'melazma davolash lazer',
+  ],
+  'hollywood-spectra-eyebrow-tattoo': [
+    'tatuaj-brovey-hollywood-spectra-radeski',
+    'art-tatuaj-brovey-hollywood-spectra-radeski',
+    'удаление татуажа бровей',
+    'удаление татуажа бровей лазером',
+    'eyebrow permanent makeup removal',
+    'eyebrow tattoo removal hollywood spectra',
+    'qosh tatuajini olib tashlash',
+    'qosh tatuaji hollywood spectra',
+    'перманентный макияж бровей удаление',
   ],
   'derma-v-vascular': [
     'sosudistaya-setochka-derma-v-radeski',
@@ -964,6 +976,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'hollywood-spectra-pigmentation': HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE_CATALOG,
   'derma-v-vascular': DERMA_V_VASCULAR_ARTICLE_CATALOG,
   'atopic-dermatitis': ATOPIC_DERMATITIS_ARTICLE_CATALOG,
+  'hollywood-spectra-eyebrow-tattoo': HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

@@ -71,6 +71,11 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
   },
+  {
+    routeKey: 'art-tatuaj-brovey-hollywood-spectra-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
 ];
 
 export function buildArticleSitemapXml(): string {
