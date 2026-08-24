@@ -28,6 +28,11 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     locales: ['uz', 'ru'],
     priority: { uz: 0.8, ru: 0.75 },
   },
+  {
+    routeKey: 'art-deka-moveo-fergana-faq',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
   { routeKey: 'art-plazmotorapiya-soch-prp', locales: ['uz', 'ru'], priority: { uz: 0.8, ru: 0.75 } },
   { routeKey: 'art-plazmaferez-teri-kasalliklari', locales: ['uz', 'ru'], priority: { uz: 0.75, ru: 0.7 } },
   {

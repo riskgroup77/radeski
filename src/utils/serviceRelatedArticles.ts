@@ -27,7 +27,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'acne',
   ],
   'in-ekcionnaya-kosmetologiya': ['plasmapheresis'],
-  'lazernaya-epilyaciya': ['deka-moveo'],
+  'lazernaya-epilyaciya': ['deka-moveo', 'deka-moveo-fergana-faq'],
   'trihologiya-centr-lechenie-volos': [
     'trichologist-trichoscopy',
     'prp-hair',
@@ -81,7 +81,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist'],
   },
   'lazernaya-epilyaciya': {
-    'alex-lazer': ['deka-moveo'],
+    'alex-lazer': ['deka-moveo', 'deka-moveo-fergana-faq'],
   },
   'trihologiya-centr-lechenie-volos': {
     trixoskop: [

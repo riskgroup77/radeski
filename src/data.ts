@@ -11,6 +11,7 @@ import { BASAL_CELL_CARCINOMA_ARTICLE } from './data/articles/basalCellCarcinoma
 import { PLASMAPHERESIS_ARTICLE } from './data/articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE } from './data/articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE } from './data/articles/dekaMoveoEpilationArticle';
+import { DEKA_MOVEO_FERGANA_FAQ_ARTICLE } from './data/articles/dekaMoveoFerganaFaqArticle';
 import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE } from './data/articles/hairTransplantContraindicationsArticle';
 import { VITILIGO_DAAVLIN_ARTICLE } from './data/articles/vitiligoDaavlinArticle';
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from './data/articles/psoriasisDaavlinKokandArticle';
@@ -942,6 +943,7 @@ export const ARTICLES: Article[] = [
   PLASMAPHERESIS_ARTICLE,
   DEKA_CO2_ARTICLE,
   DEKA_MOVEO_ARTICLE,
+  DEKA_MOVEO_FERGANA_FAQ_ARTICLE,
   HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE,
   VITILIGO_DAAVLIN_ARTICLE,
   PSORIASIS_DAAVLIN_KOKAND_ARTICLE,

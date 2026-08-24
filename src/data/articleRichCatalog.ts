@@ -11,6 +11,7 @@ import { BASAL_CELL_CARCINOMA_ARTICLE_CATALOG } from './articles/basalCellCarcin
 import { PLASMAPHERESIS_ARTICLE_CATALOG } from './articles/plasmapheresisArticle';
 import { DEKA_CO2_ARTICLE_CATALOG } from './articles/dekaCo2LaserArticle';
 import { DEKA_MOVEO_ARTICLE_CATALOG } from './articles/dekaMoveoEpilationArticle';
+import { DEKA_MOVEO_FERGANA_FAQ_ARTICLE_CATALOG } from './articles/dekaMoveoFerganaFaqArticle';
 import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE_CATALOG } from './articles/hairTransplantContraindicationsArticle';
 import { VITILIGO_DAAVLIN_ARTICLE_CATALOG } from './articles/vitiligoDaavlinArticle';
 import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG } from './articles/psoriasisDaavlinKokandArticle';
@@ -59,6 +60,16 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'epilyatsiya-tayyorgarlik',
     'лазерной эпиляции',
     'laser hair removal',
+  ],
+  'deka-moveo-fergana-faq': [
+    'deka-moveo-fergana-faq',
+    'art-deka-moveo-fergana-faq',
+    'lazer epilyatsiya deka moveo fargona',
+    'лазерная эпиляция deka moveo в фергане',
+    'deka moveo laser hair removal fergana',
+    'deka moveo savollar',
+    'вопросы и ответы deka moveo',
+    '755 nm aleksandrit',
   ],
   'deka-co2': [
     'co2-lazer-deka',
@@ -961,6 +972,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   plasmapheresis: PLASMAPHERESIS_ARTICLE_CATALOG,
   'deka-co2': DEKA_CO2_ARTICLE_CATALOG,
   'deka-moveo': DEKA_MOVEO_ARTICLE_CATALOG,
+  'deka-moveo-fergana-faq': DEKA_MOVEO_FERGANA_FAQ_ARTICLE_CATALOG,
   'hair-transplant-contraindications': HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE_CATALOG,
   vitiligo: VITILIGO_DAAVLIN_ARTICLE_CATALOG,
   'psoriasis-daavlin-kokand': PSORIASIS_DAAVLIN_KOKAND_ARTICLE_CATALOG,

@@ -272,6 +272,33 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://radeski.uz/uz/articles/art-deka-moveo-fergana-faq</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-deka-moveo-fergana-faq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-deka-moveo-fergana-faq</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-deka-moveo-fergana-faq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-deka-moveo-fergana-faq</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-deka-moveo-fergana-faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-deka-moveo-fergana-faq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp</loc>
     <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-plazmotorapiya-soch-prp"/>
     <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-plazmotorapiya-soch-prp"/>
