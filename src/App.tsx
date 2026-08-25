@@ -94,6 +94,7 @@ import { sortDoctorsFeaturedFirst } from './utils/doctors';
 import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
 import {
   buildArticleSeoTitle,
+  resolveArticleSeo,
   buildServiceSeoTitle,
   getTabSeo,
 } from './seo/pageMeta';
@@ -340,8 +341,21 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
     const daavlinModelSeo = daavlinModelId ? DAAVLIN_MODEL_DEEP[daavlinModelId] : null;
 
-    const seoTitle = activeArticlePreview
-      ? buildArticleSeoTitle(activeArticlePreview.title[locale], locale)
+    const resolvedArticleRouteKey = articleId
+      ? resolveArticleRedirectTarget(articleId) ??
+        (activeArticlePreview ? resolveArticleRouteKey(activeArticlePreview) : undefined)
+      : undefined;
+
+    const articleRichTags = activeArticlePreview
+      ? resolveArticleRichContent(activeArticlePreview, locale).tags
+      : [];
+
+    const articleSeo = activeArticlePreview
+      ? resolveArticleSeo(resolvedArticleRouteKey, activeArticlePreview, locale, articleRichTags)
+      : null;
+
+    const seoTitle = articleSeo?.title
+      ? articleSeo.title
       : activeDoctorPreview
         ? buildServiceSeoTitle(activeDoctorPreview.name[locale], locale)
         : activeServiceSub
@@ -351,8 +365,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             : daavlinModelSeo
               ? daavlinModelSeo.seoTitle[locale]
               : activeSEO.title;
-    const seoDesc = activeArticlePreview
-      ? activeArticlePreview.summary[locale]
+    const seoDesc = articleSeo?.desc
+      ? articleSeo.desc
       : activeDoctorPreview
         ? activeDoctorPreview.bio[locale]
         : activeServiceSub
@@ -379,10 +393,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       promoSlug,
       daavlinSection,
       daavlinModelId,
-      resolvedArticleRouteKey: articleId
-        ? resolveArticleRedirectTarget(articleId) ??
-          (activeArticlePreview ? resolveArticleRouteKey(activeArticlePreview) : undefined)
-        : undefined,
+      resolvedArticleRouteKey,
       resolvedDoctorId: activeDoctorPreview?.id ?? doctorId ?? undefined,
       resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
       resolvedServiceSubId: activeServiceSub?.id ?? serviceSubId ?? undefined,
@@ -411,9 +422,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       meta.setAttribute('content', content);
     };
 
-    const seoKeywords = activeArticlePreview
-      ? resolveArticleRichContent(activeArticlePreview, locale).tags.join(', ')
-      : activeSEO.keywords;
+    const seoKeywords = articleSeo?.keywords
+      ? articleSeo.keywords
+      : activeArticlePreview
+        ? articleRichTags.join(', ')
+        : activeSEO.keywords;
 
     // Update main Search Engine optimization tags
     updateMeta('description', seoDesc);

@@ -45,6 +45,56 @@ export function buildArticleSeoTitle(title: string, locale: Locale): string {
   return `${title} | Radeski — dermatology ${cities}`;
 }
 
+/** Per-article SEO overrides keyed by public route id (art-*). */
+export const ARTICLE_SEO_OVERRIDES: Partial<
+  Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
+> = {
+  'art-lasemd-ultra-kokand': {
+    uz: {
+      title: "Qo'qonda LaseMD Ultra tuliy lazer — Radeski Skin Clinic",
+      desc: "Qo'qonda LaseMD Ultra 1927 nm tuliy lazer: pigmentatsiya, postakne, keng porlar va teri yoshartirish. Ko'rsatmalar, qarshi ko'rsatmalar va tiklanish.",
+      keywords:
+        "tuliy lazer Qo'qon, LaseMD Ultra Qo'qon, LaseMD Ultra 1927 nm, pigmentatsiya davolash Qo'qon, lazer yoshartirish Qo'qon, postakne lazer Qo'qon, Radeski Skin Clinic Qo'qon",
+    },
+    ru: {
+      title: 'Тулиевый лазер LaseMD Ultra в Коканде — Radeski Skin Clinic',
+      desc: 'Тулиевый лазер LaseMD Ultra 1927 нм в Коканде: лечение пигментации, постакне, расширенных пор и омоложение кожи. Показания, противопоказания и восстановление.',
+      keywords:
+        'тулиевый лазер Коканд, LaseMD Ultra Коканд, LaseMD Ultra 1927 нм, лечение пигментации Коканд, лазерное омоложение Коканд, лазер от постакне Коканд, тулиевый лазер 1927 нм, Radeski Skin Clinic Коканд',
+    },
+    en: {
+      title: 'LaseMD Ultra Thulium Laser in Kokand — Radeski Skin Clinic',
+      desc: 'LaseMD Ultra 1927 nm thulium laser in Kokand: pigmentation, post-acne, enlarged pores, and skin rejuvenation. Indications, contraindications, and recovery.',
+      keywords:
+        'thulium laser Kokand, LaseMD Ultra Kokand, LaseMD Ultra 1927 nm, pigmentation treatment Kokand, laser rejuvenation Kokand, post-acne laser Kokand, Radeski Skin Clinic Kokand',
+    },
+  },
+};
+
+export function resolveArticleSeo(
+  routeKey: string | undefined,
+  article: { title: Record<Locale, string>; summary: Record<Locale, string> } | null,
+  locale: Locale,
+  richTags: string[],
+): { title: string; desc: string; keywords: string } {
+  const override = routeKey ? ARTICLE_SEO_OVERRIDES[routeKey]?.[locale] : undefined;
+  if (override) {
+    return {
+      title: override.title,
+      desc: override.desc,
+      keywords: override.keywords ?? richTags.join(', '),
+    };
+  }
+  if (article) {
+    return {
+      title: buildArticleSeoTitle(article.title[locale], locale),
+      desc: article.summary[locale],
+      keywords: richTags.join(', '),
+    };
+  }
+  return { title: '', desc: '', keywords: '' };
+}
+
 export function buildServiceH1(name: string, locale: Locale): string {
   const cities = localSeoCities(locale);
   if (locale === 'uz') return `${name} — ${cities}`;

@@ -21,6 +21,8 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'rosacea-radeski',
     'derma-v-vascular',
     'hollywood-spectra-pigmentation',
+    'hollywood-spectra-eyebrow-tattoo',
+    'lasemd-ultra-kokand',
     'post-acne',
     'laser-scar-resurfacing',
     'adult-acne',
@@ -77,7 +79,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'adult-acne',
       'acne',
     ],
-    'lazer-biorev': ['post-acne', 'adult-acne'],
+    'lazer-biorev': ['post-acne', 'adult-acne', 'lasemd-ultra-kokand'],
     'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist'],
   },
   'lazernaya-epilyaciya': {
