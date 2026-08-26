@@ -33,22 +33,15 @@ interface DoctorPageProps {
   onOpenAppointment: () => void;
 }
 
-function ItemChips({ items, columns = 3 }: { items: string[]; columns?: 2 | 3 | 4 }) {
-  const colClass =
-    columns === 4
-      ? 'sm:grid-cols-3 lg:grid-cols-4'
-      : columns === 2
-        ? 'sm:grid-cols-2'
-        : 'sm:grid-cols-2 lg:grid-cols-3';
-
+function ItemChips({ items, compact = false }: { items: string[]; compact?: boolean }) {
   return (
-    <div className={`grid grid-cols-1 ${colClass} gap-1.5`}>
+    <div className={`grid grid-cols-1 ${compact ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3'} gap-1.5`}>
       {items.map((item) => (
         <span
           key={item}
-          className="inline-flex items-start gap-1.5 rounded-lg bg-brand-offwhite/80 border border-brand-sectiongray/60 px-2.5 py-1.5 text-[11px] sm:text-xs leading-snug text-brand-text-secondary"
+          className="inline-flex items-start gap-1.5 rounded-lg bg-brand-offwhite/80 border border-brand-sectiongray/60 px-2 py-1 text-[11px] leading-snug text-brand-text-secondary"
         >
-          <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />
+          <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />
           <span>{item}</span>
         </span>
       ))}
@@ -56,28 +49,28 @@ function ItemChips({ items, columns = 3 }: { items: string[]; columns?: 2 | 3 | 
   );
 }
 
-function SpecialtyTabs({ subsections }: { subsections: DoctorProfileSubsection[] }) {
+function SpecialtyTabs({ subsections, compact = false }: { subsections: DoctorProfileSubsection[]; compact?: boolean }) {
   const [active, setActive] = useState(0);
   const current = subsections[active];
 
   return (
-    <div className="rounded-2xl border border-brand-sectiongray bg-brand-white p-4 sm:p-5">
-      <div className="flex flex-wrap gap-2 mb-4">
+    <div className="rounded-xl border border-brand-sectiongray bg-brand-offwhite/30 p-3 sm:p-4">
+      <div className="flex flex-wrap gap-1.5 mb-3">
         {subsections.map((subsection, index) => (
           <button
             key={subsection.title}
             type="button"
             onClick={() => setActive(index)}
-            className={`inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-bold transition-all cursor-pointer ${
               active === index
                 ? 'bg-brand-gold text-white shadow-sm'
-                : 'bg-brand-offwhite text-brand-text-secondary hover:bg-brand-sectiongray/70'
+                : 'bg-white text-brand-text-secondary hover:bg-brand-sectiongray/50 border border-brand-sectiongray/60'
             }`}
           >
             {subsection.title}
             <span
-              className={`rounded-full px-1.5 py-0.5 text-[10px] font-extrabold ${
-                active === index ? 'bg-white/20 text-white' : 'bg-white text-brand-gold'
+              className={`rounded-full px-1.5 py-0.5 text-[9px] font-extrabold ${
+                active === index ? 'bg-white/20 text-white' : 'bg-brand-offwhite text-brand-gold'
               }`}
             >
               {subsection.items.length}
@@ -85,12 +78,12 @@ function SpecialtyTabs({ subsections }: { subsections: DoctorProfileSubsection[]
           </button>
         ))}
       </div>
-      <ItemChips items={current.items} columns={3} />
+      <ItemChips items={current.items} compact={compact} />
     </div>
   );
 }
 
-function InfoCard({
+function InfoBlock({
   title,
   icon: Icon,
   paragraphs,
@@ -103,19 +96,19 @@ function InfoCard({
 }) {
   return (
     <div
-      className={`rounded-2xl border p-4 sm:p-5 h-full ${
+      className={`rounded-xl border px-3 py-3 sm:px-4 sm:py-3.5 ${
         accent
-          ? 'border-brand-gold/30 bg-gradient-to-br from-brand-gold-light/15 to-brand-offwhite'
-          : 'border-brand-sectiongray bg-brand-white'
+          ? 'border-brand-gold/30 bg-gradient-to-r from-brand-gold-light/10 to-brand-offwhite/50'
+          : 'border-brand-sectiongray/70 bg-white'
       }`}
     >
-      <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wide text-brand-text-primary mb-3">
-        <Icon className="h-4 w-4 text-brand-gold shrink-0" />
+      <h3 className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wide text-brand-text-primary mb-2">
+        <Icon className="h-3.5 w-3.5 text-brand-gold shrink-0" />
         {title}
       </h3>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         {paragraphs.map((paragraph) => (
-          <p key={paragraph} className="text-xs sm:text-sm leading-relaxed text-brand-text-secondary font-light">
+          <p key={paragraph} className="text-[11px] sm:text-xs leading-relaxed text-brand-text-secondary font-light">
             {paragraph}
           </p>
         ))}
@@ -124,7 +117,7 @@ function InfoCard({
   );
 }
 
-function DoctorProfileDetails({ profile }: { profile: DoctorProfileContent }) {
+function DoctorProfileDetails({ profile, compact = false }: { profile: DoctorProfileContent; compact?: boolean }) {
   const { specialtySection, diagnosticsSection, infoSections } = useMemo(() => {
     let specialty: DoctorProfileSection | undefined;
     let diagnostics: DoctorProfileSection | undefined;
@@ -146,15 +139,15 @@ function DoctorProfileDetails({ profile }: { profile: DoctorProfileContent }) {
   const infoIcons = [Stethoscope, GraduationCap, MapPin];
 
   return (
-    <div className="space-y-5 sm:space-y-6">
-      <div className="rounded-2xl border border-brand-sectiongray bg-brand-offwhite/40 p-4 sm:p-5">
-        <h2 className="text-xs font-extrabold uppercase tracking-wide text-brand-text-primary flex items-center gap-2 mb-3">
-          <Check className="h-4 w-4 text-brand-gold" />
+    <div className="space-y-4">
+      <div className="rounded-xl border border-brand-sectiongray/70 bg-brand-offwhite/40 px-3 py-3 sm:px-4 sm:py-3.5">
+        <h2 className="text-[11px] font-extrabold uppercase tracking-wide text-brand-text-primary flex items-center gap-1.5 mb-2">
+          <Check className="h-3.5 w-3.5 text-brand-gold" />
           {profile.aboutTitle}
         </h2>
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {profile.about.map((paragraph) => (
-            <p key={paragraph} className="text-xs sm:text-sm leading-relaxed text-brand-text-secondary font-light">
+            <p key={paragraph} className="text-[11px] sm:text-xs leading-relaxed text-brand-text-secondary font-light">
               {paragraph}
             </p>
           ))}
@@ -163,31 +156,31 @@ function DoctorProfileDetails({ profile }: { profile: DoctorProfileContent }) {
 
       {specialtySection?.subsections && (
         <div>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-brand-text-muted mb-3 flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-brand-gold" />
+          <h2 className="text-[11px] font-bold uppercase tracking-widest text-brand-text-muted mb-2 flex items-center gap-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-brand-gold" />
             {specialtySection.title}
           </h2>
-          <SpecialtyTabs subsections={specialtySection.subsections} />
+          <SpecialtyTabs subsections={specialtySection.subsections} compact={compact} />
         </div>
       )}
 
       {diagnosticsSection?.items && (
-        <div className="rounded-2xl border border-brand-sectiongray bg-brand-white p-4 sm:p-5">
-          <h2 className="text-xs font-extrabold uppercase tracking-wide text-brand-text-primary flex items-center gap-2 mb-2">
-            <FlaskConical className="h-4 w-4 text-brand-gold" />
+        <div className="rounded-xl border border-brand-sectiongray/70 bg-white px-3 py-3 sm:px-4 sm:py-3.5">
+          <h2 className="text-[11px] font-extrabold uppercase tracking-wide text-brand-text-primary flex items-center gap-1.5 mb-1.5">
+            <FlaskConical className="h-3.5 w-3.5 text-brand-gold" />
             {diagnosticsSection.title}
           </h2>
           {diagnosticsSection.paragraphs?.map((paragraph) => (
-            <p key={paragraph} className="text-xs sm:text-sm text-brand-text-muted mb-3 font-light">
+            <p key={paragraph} className="text-[11px] sm:text-xs text-brand-text-muted mb-2 font-light leading-relaxed">
               {paragraph}
             </p>
           ))}
-          <ItemChips items={diagnosticsSection.items} columns={2} />
+          <ItemChips items={diagnosticsSection.items} compact={compact} />
         </div>
       )}
 
       {infoSections.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {infoSections.map((section, index) => {
             const Icon = infoIcons[index] ?? Check;
             const isReception =
@@ -196,8 +189,8 @@ function DoctorProfileDetails({ profile }: { profile: DoctorProfileContent }) {
               section.title.toLowerCase().includes('appointment');
 
             return (
-              <div key={section.title} className={isReception ? 'md:col-span-2 xl:col-span-1' : ''}>
-                <InfoCard
+              <div key={section.title} className={isReception ? 'sm:col-span-2' : ''}>
+                <InfoBlock
                   title={section.title}
                   icon={Icon}
                   paragraphs={section.paragraphs ?? []}
@@ -233,67 +226,71 @@ function DoctorProfileLayout({
       animate={{ opacity: 1, y: 0 }}
       className="bg-brand-white rounded-2xl sm:rounded-3xl border border-brand-sectiongray shadow-sm overflow-hidden"
     >
-      <div className="border-b border-brand-sectiongray bg-gradient-to-br from-brand-offwhite via-brand-white to-brand-offwhite p-5 sm:p-7 lg:p-8">
-        <div className="flex flex-col lg:flex-row gap-5 lg:gap-7 lg:items-center">
-          <div className="shrink-0 mx-auto lg:mx-0 w-[9.5rem] sm:w-40">
+      <div className="flex flex-col md:flex-row md:items-start">
+        {/* Katta rasm — chapda, o'zgarmas */}
+        <div className="w-full md:w-[38%] lg:w-[36%] shrink-0 bg-brand-offwhite border-b md:border-b-0 md:border-r border-brand-sectiongray md:sticky md:top-24 md:self-start">
+          <div className="flex items-start justify-center p-4 sm:p-6 md:p-8">
             {doctor.photo ? (
               <MediaImage
                 src={doctor.photo}
                 alt={doctor.name[locale]}
-                className="w-full aspect-[3/4] rounded-2xl object-cover object-top shadow-md border border-brand-sectiongray/60"
+                className="w-full h-auto max-h-[min(78vh,720px)] object-contain object-top"
               />
             ) : (
-              <div className="flex aspect-[3/4] items-center justify-center rounded-2xl bg-brand-offwhite text-brand-text-muted text-sm">
+              <div className="flex items-center justify-center w-full min-h-[280px] text-brand-text-muted text-sm">
                 {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет фото' : 'No photo'}
               </div>
             )}
           </div>
+        </div>
 
-          <div className="flex-1 min-w-0 text-center lg:text-left">
+        {/* Matn — o'ngda, tartibli */}
+        <div className="w-full md:w-[62%] lg:w-[64%] p-5 sm:p-7 lg:p-8 flex flex-col min-w-0">
+          <div>
             <span className="text-[10px] font-bold text-brand-gold tracking-widest uppercase font-mono leading-none block mb-1.5">
               {doctor.role[locale]}
             </span>
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-brand-text-primary leading-tight">
+            <h1 className="text-xl sm:text-2xl lg:text-[1.65rem] font-extrabold text-brand-text-primary leading-tight">
               {doctor.name[locale]}
             </h1>
 
-            <div className="mt-3 flex flex-wrap items-center justify-center lg:justify-start gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-gold-light/15 px-3 py-1.5 text-[11px] font-semibold text-brand-text-primary">
+            <div className="flex flex-wrap gap-2 mt-3 pb-4 border-b border-brand-offwhite">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-brand-text-muted">
                 <Award className="h-3.5 w-3.5 text-brand-gold" />
                 {doctor.experience[locale]}{' '}
                 {locale === 'uz' ? 'yillik tajriba' : locale === 'ru' ? 'лет практики' : 'years experience'}
               </span>
               {doctor.education[locale] && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-offwhite px-3 py-1.5 text-[11px] font-semibold text-brand-text-secondary max-w-full">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-brand-text-muted">
                   <Briefcase className="h-3.5 w-3.5 text-brand-gold shrink-0" />
-                  <span className="truncate">{doctor.education[locale]}</span>
+                  {doctor.education[locale]}
                 </span>
               )}
             </div>
 
-            <div className="mt-4 flex flex-col sm:flex-row gap-2.5 justify-center lg:justify-start">
-              <button
-                type="button"
-                onClick={onOpenAppointment}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-3 text-xs font-bold text-white shadow-md transition-all hover:bg-brand-gold-dark active:scale-[0.98] cursor-pointer"
-              >
-                <Calendar className="h-4 w-4" />
-                {d.appointmentBtn}
-              </button>
-              <button
-                type="button"
-                onClick={onBackToList}
-                className="inline-flex items-center justify-center rounded-xl border border-brand-sectiongray bg-white px-5 py-3 text-xs font-semibold text-brand-text-secondary transition-all hover:bg-brand-offwhite active:scale-[0.98] cursor-pointer"
-              >
-                {d.closeBtn}
-              </button>
+            <div className="mt-4">
+              <DoctorProfileDetails profile={profile} compact />
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="p-5 sm:p-7 lg:p-8">
-        <DoctorProfileDetails profile={profile} />
+          <div className="mt-6 pt-4 border-t border-brand-offwhite flex flex-wrap gap-2.5">
+            <button
+              type="button"
+              onClick={onOpenAppointment}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-gold px-5 py-2.5 text-xs font-bold text-white shadow-md transition-all hover:bg-brand-gold-dark active:scale-[0.98] cursor-pointer"
+            >
+              <Calendar className="h-4 w-4" />
+              {d.appointmentBtn}
+            </button>
+            <button
+              type="button"
+              onClick={onBackToList}
+              className="inline-flex items-center justify-center rounded-xl border border-brand-sectiongray bg-brand-offwhite px-5 py-2.5 text-xs font-semibold text-brand-text-secondary transition-all hover:bg-brand-sectiongray/60 active:scale-[0.98] cursor-pointer"
+            >
+              {d.closeBtn}
+            </button>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
@@ -444,8 +441,8 @@ export default function DoctorPage({
   }
 
   return (
-    <section className="py-8 sm:py-12 bg-brand-white min-h-screen">
-      <div className="site-container max-w-5xl">
+    <section className="py-10 sm:py-16 bg-brand-white min-h-screen">
+      <div className="site-container">
         <Link
           to={doctorsListPath(locale)}
           onClick={(event) => {
