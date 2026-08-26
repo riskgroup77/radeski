@@ -327,19 +327,26 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 0.125rem;
+  gap: 0.3125rem;
+}
+
+@media (min-width: 1280px) {
+  .header-nav-primary,
+  .header-nav-secondary {
+    gap: 0.4375rem;
+  }
 }
 
 @media (min-width: 1536px) {
   .header-nav-primary,
   .header-nav-secondary {
-    gap: 0.1875rem;
+    gap: 0.5625rem;
   }
 }
 
 .header-nav-secondary-row {
   border-top: 1px solid rgba(226, 232, 240, 0.9);
-  padding: 0.3125rem 0 0.4375rem;
+  padding: 0.4375rem 0 0.5625rem;
 }
 
 .header-nav-secondary {
@@ -358,7 +365,7 @@ h1, h2, h3, h4, h5, h6 {
 .header-nav-divider {
   width: 1px;
   height: 0.875rem;
-  margin: 0 0.3125rem;
+  margin: 0 0.4375rem;
   flex-shrink: 0;
   background: linear-gradient(
     to bottom,

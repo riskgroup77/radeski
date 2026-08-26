@@ -34,11 +34,12 @@ export default function InstitutionalMegaMenu({
         : 'Topics are being prepared separately — this section will be filled in soon.';
 
   return (
-    <div
-      className="absolute left-0 right-0 top-full z-[190] border-b border-brand-gold/15 bg-white/98 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.35)] backdrop-blur-md animate-in fade-in slide-in-from-top-1 duration-200"
-      role="region"
-      aria-label={section.dropdownTitle[locale]}
-    >
+    <div className="absolute left-0 right-0 top-full z-[190] pt-1">
+      <div
+        className="border-b border-brand-gold/15 bg-white/98 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.35)] backdrop-blur-md animate-in fade-in slide-in-from-top-1 duration-200"
+        role="region"
+        aria-label={section.dropdownTitle[locale]}
+      >
       <div className="site-container py-4 sm:py-5">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-3 border-b border-brand-sectiongray/70 pb-3">
           <div>
@@ -59,7 +60,7 @@ export default function InstitutionalMegaMenu({
         </div>
 
         {section.topics.length > 0 ? (
-          <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-x-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {section.topics.map((topic) => (
               <Link
                 key={topic.id}
@@ -82,6 +83,7 @@ export default function InstitutionalMegaMenu({
             {comingSoonNote}
           </p>
         )}
+      </div>
       </div>
     </div>
   );

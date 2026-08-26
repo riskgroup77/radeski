@@ -249,8 +249,8 @@ export default function Header({
   const navLinkClass = (page: PageId, tier: 'primary' | 'secondary' = 'primary') => {
     const sizeClass =
       tier === 'primary'
-        ? 'px-2 xl:px-2.5 py-1.5 text-[11px] xl:text-[12px] 2xl:text-[12px] leading-tight'
-        : 'px-1.5 xl:px-2 py-1 text-[10px] xl:text-[11px] leading-tight';
+        ? 'px-2.5 xl:px-3 py-1.5 text-[11px] xl:text-[12px] 2xl:text-[12px] leading-tight'
+        : 'px-2 xl:px-2.5 py-1.5 text-[10px] xl:text-[11px] leading-tight';
 
     return `${sizeClass} rounded-md font-medium transition-all cursor-pointer whitespace-nowrap ${
       currentPage === page || (page === 'about' && currentPage === 'brend')
@@ -762,7 +762,6 @@ export default function Header({
           ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 sm:py-3'
           : 'bg-white py-3 sm:py-4 border-b border-slate-100'
       }`}
-      onMouseLeave={() => setActiveMegaMenu(null)}
     >
       <div className="hidden sm:block w-full border-b border-slate-50 pb-2.5 mb-2.5">
         <div className="site-container flex justify-between items-center gap-3 lg:gap-4 min-w-0">
@@ -836,7 +835,7 @@ export default function Header({
 
       <div className="site-container">
         <div className="flex items-center min-h-[48px] sm:min-h-[52px] gap-2 xl:gap-3">
-        <div className="relative z-20 flex items-center gap-2 shrink-0">
+        <div className="relative z-20 flex items-center gap-2 shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
           <Link
             to={pagePath(locale, 'home')}
             onClick={(event) => {
@@ -856,11 +855,14 @@ export default function Header({
           </AppointmentBookingLink>
         </div>
 
-        <nav className="header-nav-primary relative z-30 hidden xl:flex items-center justify-center flex-1 min-w-0 overflow-visible">
+        <nav
+          className="header-nav-primary relative z-30 hidden xl:flex items-center justify-center flex-1 min-w-0 overflow-visible"
+          onMouseEnter={() => setActiveMegaMenu(null)}
+        >
           {PRIMARY_NAV_IDS.map((id) => renderDesktopNavItem(findNavItem(id), 'primary'))}
         </nav>
 
-        <div className="hidden sm:flex items-center gap-2 xl:gap-2 shrink-0 ml-auto">
+        <div className="hidden sm:flex items-center gap-2 xl:gap-2 shrink-0 ml-auto" onMouseEnter={() => setActiveMegaMenu(null)}>
           <div className="relative">
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
@@ -935,23 +937,37 @@ export default function Header({
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
         </div>
-
-        <div className="header-nav-secondary-row hidden xl:block">
-          <nav className="header-nav-secondary" aria-label={locale === 'ru' ? 'Дополнительное меню' : locale === 'en' ? 'Secondary menu' : "Qo'shimcha menyu"}>
-            {SECONDARY_NAV_IDS.map((id) => renderDesktopNavItem(findNavItem(id), 'secondary'))}
-            <span className="header-nav-divider" aria-hidden="true" />
-            {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalDesktopNav(sectionId))}
-          </nav>
-        </div>
       </div>
 
-      {activeMegaMenu && (
-        <InstitutionalMegaMenu
-          locale={locale}
-          activeSectionId={activeMegaMenu}
-          onNavigate={() => setActiveMegaMenu(null)}
-        />
-      )}
+      <div
+        className="header-mega-menu-zone hidden xl:block relative w-full"
+        onMouseLeave={() => setActiveMegaMenu(null)}
+      >
+          <div className="site-container">
+            <div className="header-nav-secondary-row">
+              <nav
+                className="header-nav-secondary"
+                aria-label={locale === 'ru' ? 'Дополнительное меню' : locale === 'en' ? 'Secondary menu' : "Qo'shimcha menyu"}
+              >
+                {SECONDARY_NAV_IDS.map((id) => (
+                  <div key={id} className="shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
+                    {renderDesktopNavItem(findNavItem(id), 'secondary')}
+                  </div>
+                ))}
+                <span className="header-nav-divider" aria-hidden="true" />
+                {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalDesktopNav(sectionId))}
+              </nav>
+            </div>
+          </div>
+
+          {activeMegaMenu && (
+            <InstitutionalMegaMenu
+              locale={locale}
+              activeSectionId={activeMegaMenu}
+              onNavigate={() => setActiveMegaMenu(null)}
+            />
+          )}
+      </div>
 
       {isMobileMenuOpen && (
         <div className="xl:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-150 shadow-xl py-4 px-4 animate-in fade-in slide-in-from-top-3 duration-200 max-h-[min(80vh,720px)] overflow-y-auto">
