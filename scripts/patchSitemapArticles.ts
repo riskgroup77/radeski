@@ -9,10 +9,13 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sitemapPath = path.join(root, 'public', 'sitemap.xml');
 const xml = readFileSync(sitemapPath, 'utf8');
 
-const startMarker = '  <!-- Articles';
+const commentMarker = '  <!-- Articles';
+const firstArticleMarker = '  <url>\n    <loc>https://radeski.uz/uz/articles/art-';
 const endMarker = '</urlset>';
 
-const startIdx = xml.indexOf(startMarker);
+const startIdx = xml.includes(commentMarker)
+  ? xml.indexOf(commentMarker)
+  : xml.indexOf(firstArticleMarker);
 const endIdx = xml.lastIndexOf(endMarker);
 if (startIdx === -1 || endIdx === -1) {
   throw new Error('Could not locate Articles section in sitemap.xml');

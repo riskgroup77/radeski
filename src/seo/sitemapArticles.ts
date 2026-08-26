@@ -86,6 +86,41 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
   },
+  {
+    routeKey: 'art-lazernaya-shlifovka-rubcov',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-prp-terapiya-oldidan-tahlillar',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.8, ru: 0.75, en: 0.7 },
+  },
+  {
+    routeKey: 'art-trixolog-trixoskopiya',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-bazalioma-teri-raki',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-atopic-dermatitis',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-jinsiy-azo-yassi-hujayrali-rak',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.8, ru: 0.75, en: 0.7 },
+  },
+  {
+    routeKey: 'art-til-yassi-hujayrali-rak',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.8, ru: 0.75, en: 0.7 },
+  },
 ];
 
 export function buildArticleSitemapXml(): string {

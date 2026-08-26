@@ -104,6 +104,11 @@ import {
   syncHreflangLinks,
   type RouteSeoContext,
 } from './seo/routeSeo';
+import {
+  buildArticleSchema,
+  buildMedicalBusinessSchema,
+  buildServiceFaqSchemas,
+} from './seo/structuredData';
 
 export default function App() {
   return (
@@ -241,95 +246,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     const existingScript = document.getElementById('clinical-schema-jsonld');
     if (existingScript) existingScript.remove();
 
-    // 2. Define medical business schema payload
-    const medicalBusinessSchema = {
-      "@context": "https://schema.org",
-      "@type": "MedicalBusiness",
-      "name": "Radeski Skin & Aesthetic Clinic",
-      "alternateName": ["Radeski Skin Clinic", "Radeski", "Радески"],
-      "url": "https://radeski.uz/uz",
-      "logo": `${window.location.origin}/gallery/logo.webp`,
-      "image": `${window.location.origin}/gallery/logo.webp`,
-      "telephone": "+998732007373",
-      "priceRange": "$$",
-      "inLanguage": ["uz", "ru", "en"],
-      "medicalSpecialty": ["Dermatology", "CosmeticSurgery", "Oncology"],
-      "description":
-        locale === 'uz'
-          ? "Farg'onadagi dermatologiya va kosmetologiya klinikasi: IPL, lazer, fototerapiya, dermatoskopiya."
-          : locale === 'ru'
-            ? "Клиника дерматологии и косметологии в Фергане: IPL, лазер, фототерапия, дерматоскопия."
-            : "Dermatology and cosmetology clinic in Fergana: IPL, laser, phototherapy, dermatoscopy.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "O'zbekiston Ovozi ko'chasi, 1A-bino",
-        "addressLocality": "Farg'ona",
-        "addressRegion": "Farg'ona",
-        "addressCountry": "UZ"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "40.3864",
-        "longitude": "71.7864"
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "08:00",
-        "closes": "18:00"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "150"
-      },
-      "sameAs": [
-        "https://radeski.uz/uz",
-        "https://radeski.uz/ru",
-        "https://radeski.uz/en"
-      ]
-    };
+    // 2. Build schema payloads (MedicalBusiness + FAQ + Article when applicable)
+    const origin = window.location.origin;
+    const medicalBusinessSchema = buildMedicalBusinessSchema(locale, origin, cmsClinicRatings);
+    const faqPageSchemas = buildServiceFaqSchemas(locale, dynamicServiceCategories);
+    const schemaData: Record<string, unknown>[] = [medicalBusinessSchema, ...faqPageSchemas];
 
-    // 3. Dynamically generate an array of 'FAQPage' schema structures based on Service Categories and current locale
-    const faqPageSchemas = dynamicServiceCategories.map(category => {
-      const categoryTitle = category.title[locale] || category.title['uz'];
-      const categoryDesc = category.description[locale] || category.description['uz'];
-      const subServicesList = category.subServices.map(sub => sub.name[locale] || sub.name['uz']).join(', ');
+    if (activeArticlePreview) {
+      schemaData.push(buildArticleSchema(locale, activeArticlePreview, origin));
+    }
 
-      let question = '';
-      let answer = '';
-
-      if (locale === 'uz') {
-        question = `Radeski klinikasida ${categoryTitle} xizmati va uning qanday turlari mavjud?`;
-        answer = `Radeski klinikasida ${categoryTitle} xizmati eng yuqori tibbiy standartlar asosida taqdim etiladi. Xizmat tavsifi: ${categoryDesc} Ushbu yo'nalish bo'yicha quyidagi ixtisoslashgan xizmatlar ko'rsatiladi: ${subServicesList}.`;
-      } else if (locale === 'ru') {
-        question = `Как оказывается услуга ${categoryTitle} в клинике Radeski и какие процедуры входят?`;
-        answer = `В клинике Radeski услуга ${categoryTitle} оказывается на самом высоком уровне надежности и безопасности. Описание: ${categoryDesc} Наше отделение предлагает следующие специализированные процедуры: ${subServicesList}.`;
-      } else {
-        question = `What is the ${categoryTitle} medical service at Radeski Clinic and what procedures are included?`;
-        answer = `${categoryTitle} services at Radeski Clinic are delivered according to premier global healthcare standards. Description: ${categoryDesc} Our specialized center offers: ${subServicesList}.`;
-      }
-
-      return {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": question,
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": answer
-            }
-          }
-        ]
-      };
-    });
-
-    // 4. Combine schemas into a single array
-    const schemaData = [medicalBusinessSchema, ...faqPageSchemas];
-
-    // 5. Inject script element
+    // 3. Inject script element
     const script = document.createElement('script');
     script.id = 'clinical-schema-jsonld';
     script.type = 'application/ld+json';
@@ -441,7 +368,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     syncCanonicalLink(seoContext);
     syncHreflangLinks(seoContext);
 
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, daavlinSection, daavlinModelId]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, daavlinSection, daavlinModelId]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {

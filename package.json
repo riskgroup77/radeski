@@ -15,6 +15,8 @@
     "generate:nginx-redirects": "tsx scripts/generateArticleNginxRedirects.ts",
     "generate:nginx-site-redirects": "tsx scripts/generateSiteNginxRedirects.ts",
     "validate:sitemap": "tsx scripts/validateSitemapSeo.ts",
+    "patch:sitemap-articles": "tsx scripts/patchSitemapArticles.ts",
+    "patch:sitemap-doctors": "tsx scripts/patchSitemapDoctors.ts",
     "prune:sitemap": "tsx scripts/pruneSitemapRedirects.ts",
     "convert:videos": "node scripts/convertClinicVideos.mjs",
     "preview": "vite preview",
