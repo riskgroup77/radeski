@@ -167,6 +167,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
     id: 'tele-dermatology',
     pageId: 'tele-dermatology',
     label: L('TeleDermatologiya', 'Теледermatология', 'TeleDermatology'),
+    navShort: L('TeleDerma', 'Теледerma', 'TeleDerma'),
     dropdownTitle: L('TeleDermatologiya', 'Теледermatология', 'TeleDermatology'),
     dropdownHint: L(
       'Masofaviy dermatologik maslahat va raqamli kuzatuv',
@@ -183,7 +184,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
       'Национальный центр патологии кожи',
       'National Center of Skin Pathology',
     ),
-    navShort: L('Patologiya markazi', 'Центр патологии', 'Skin Pathology Center'),
+    navShort: L('Patologiya', 'Патология', 'Pathology'),
     navSubtitle: L(
       'Teri patologiyasi milliy markazi',
       'Национальный центр патологии кожи',

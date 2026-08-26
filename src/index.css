@@ -322,6 +322,52 @@ h1, h2, h3, h4, h5, h6 {
   word-break: break-word;
 }
 
+.header-nav-primary,
+.header-nav-secondary {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.125rem;
+}
+
+@media (min-width: 1536px) {
+  .header-nav-primary,
+  .header-nav-secondary {
+    gap: 0.1875rem;
+  }
+}
+
+.header-nav-secondary-row {
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 0.3125rem 0 0.4375rem;
+}
+
+.header-nav-secondary {
+  justify-content: center;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.header-nav-secondary::-webkit-scrollbar {
+  display: none;
+}
+
+.header-nav-divider {
+  width: 1px;
+  height: 0.875rem;
+  margin: 0 0.3125rem;
+  flex-shrink: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(196, 154, 79, 0.38),
+    transparent
+  );
+}
+
 .site-container {
   width: 100%;
   padding-left: 1rem;
