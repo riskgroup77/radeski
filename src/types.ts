@@ -18,6 +18,24 @@ export interface Translation {
   description: string;
 }
 
+export interface DoctorProfileSubsection {
+  title: string;
+  items: string[];
+}
+
+export interface DoctorProfileSection {
+  title: string;
+  paragraphs?: string[];
+  items?: string[];
+  subsections?: DoctorProfileSubsection[];
+}
+
+export interface DoctorProfileContent {
+  aboutTitle: string;
+  about: string[];
+  sections: DoctorProfileSection[];
+}
+
 export interface Doctor {
   id: string;
   name: {
@@ -49,6 +67,11 @@ export interface Doctor {
   credentials?: DoctorCredentials;
   sortOrder?: number;
   isFeatured?: boolean;
+  profile?: {
+    uz: DoctorProfileContent;
+    ru: DoctorProfileContent;
+    en: DoctorProfileContent;
+  };
 }
 
 export interface PriceItem {

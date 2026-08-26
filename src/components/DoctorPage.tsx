@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Award, Briefcase, Calendar, Check, CornerUpLeft } from 'lucide-react';
-import { Locale, Doctor } from '../types';
+import { Locale, Doctor, DoctorProfileContent } from '../types';
 import { DICTIONARY } from '../data';
 import { doctorsListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
@@ -15,6 +15,77 @@ interface DoctorPageProps {
   onOpenAppointment: () => void;
 }
 
+function DoctorProfileDetails({ profile }: { profile: DoctorProfileContent }) {
+  return (
+    <div className="mt-5 space-y-6 text-sm">
+      <div>
+        <h2 className="text-sm font-extrabold text-brand-text-primary uppercase tracking-wide flex items-center gap-1.5 mb-2">
+          <Check className="w-4 h-4 text-brand-gold" />
+          {profile.aboutTitle}
+        </h2>
+        <div className="space-y-3">
+          {profile.about.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed font-light"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </div>
+
+      {profile.sections.map((section) => (
+        <div key={section.title}>
+          <h2 className="text-xs font-bold text-brand-text-muted uppercase tracking-widest mb-2">
+            {section.title}
+          </h2>
+
+          {section.paragraphs?.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed font-light mb-3"
+            >
+              {paragraph}
+            </p>
+          ))}
+
+          {section.subsections?.map((subsection) => (
+            <div key={subsection.title} className="mb-4 last:mb-0">
+              <h3 className="text-sm font-bold text-brand-text-primary mb-2">{subsection.title}</h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5">
+                {subsection.items.map((item) => (
+                  <li
+                    key={item}
+                    className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed font-light flex gap-2"
+                  >
+                    <span className="text-brand-gold shrink-0 mt-0.5">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {section.items && (
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5">
+              {section.items.map((item) => (
+                <li
+                  key={item}
+                  className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed font-light flex gap-2"
+                >
+                  <span className="text-brand-gold shrink-0 mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function DoctorPage({
   locale,
   doctorId,
@@ -25,6 +96,7 @@ export default function DoctorPage({
 }: DoctorPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const doctor = doctors.find((doc) => doc.id === doctorId) ?? null;
+  const profile = doctor?.profile?.[locale];
 
   if (!doctor) {
     return (
@@ -120,19 +192,23 @@ export default function DoctorPage({
                     </div>
                   )}
 
-                  <div>
-                    <h2 className="text-xs font-bold text-brand-text-muted uppercase tracking-widest flex items-center gap-1.5 mb-2">
-                      <Check className="w-4 h-4 text-brand-gold" />
-                      {locale === 'uz'
-                        ? 'Professional shifokor falsafasi'
-                        : locale === 'ru'
-                          ? 'Философия практики'
-                          : 'Expert Focus & Ethics'}
-                    </h2>
-                    <p className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed font-light">
-                      {doctor.bio[locale]}
-                    </p>
-                  </div>
+                  {profile ? (
+                    <DoctorProfileDetails profile={profile} />
+                  ) : (
+                    <div>
+                      <h2 className="text-xs font-bold text-brand-text-muted uppercase tracking-widest flex items-center gap-1.5 mb-2">
+                        <Check className="w-4 h-4 text-brand-gold" />
+                        {locale === 'uz'
+                          ? 'Professional shifokor falsafasi'
+                          : locale === 'ru'
+                            ? 'Философия практики'
+                            : 'Expert Focus & Ethics'}
+                      </h2>
+                      <p className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed font-light">
+                        {doctor.bio[locale]}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
 

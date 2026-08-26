@@ -1,6 +1,7 @@
 import type { Doctor } from '../types';
 import { DOCTORS } from '../data';
 import { resolveMediaUrl } from '../api/client';
+import { getDoctorProfileOverlay } from '../data/doctorProfiles';
 
 function normalizeDoctorName(value: string): string {
   return value
@@ -40,7 +41,13 @@ export function enrichDoctors(apiDoctors: Doctor[]): Doctor[] {
   return apiDoctors.map((doctor) => {
     const catalog = findCatalogDoctor(doctor);
     const photo = resolveDoctorPhoto(doctor.photo, catalog?.photo);
-    if (photo === doctor.photo) return doctor;
-    return { ...doctor, photo };
+    const profile = getDoctorProfileOverlay(doctor) ?? doctor.profile;
+    const next = {
+      ...doctor,
+      ...(photo !== doctor.photo ? { photo } : {}),
+      ...(profile ? { profile } : {}),
+    };
+    if (next.photo === doctor.photo && !profile) return doctor;
+    return next;
   });
 }

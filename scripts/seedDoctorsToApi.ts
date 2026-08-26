@@ -123,9 +123,9 @@ const DOCTORS: DoctorCreatePayload[] = [
     name_uz: "Turg'unov Shohruz Ilxomjon o'g'li",
     name_ru: 'Тургунов Шохруз Илхомжон угли',
     name_en: 'Shohruz Ilxomjon ugli Turgunov',
-    role_uz: 'Shifokor-dermatovenerolog',
-    role_ru: 'Врач-дерматовенеролог',
-    role_en: 'Dermatovenerologist',
+    role_uz: 'Dermatovenerolog · Trixolog',
+    role_ru: 'Дерматовенеролог · Трихолог',
+    role_en: 'Dermatovenerologist · Trichologist',
     experience_uz: '3',
     experience_ru: '3',
     experience_en: '3',
@@ -133,11 +133,11 @@ const DOCTORS: DoctorCreatePayload[] = [
     education_ru: 'Ферганский медицинский институт общественного здоровья',
     education_en: 'Fergana Medical Institute of Public Health',
     bio_uz:
-      "Shifokor-dermatovenerolog. Dermatologiya yo'nalishida 3 yillik amaliy ish tajribasiga ega. Hozirgi kunda Radeski Skin Clinic klinikasida shifokor-dermatolog sifatida faoliyat yuritadi. Dermatologiya va estetik tibbiyot sohalarida zamonaviy diagnostika hamda davolash usullarini amaliyotga tatbiq etib kelmoqda. Teri, soch va tirnoq kasalliklarini tashxislash va davolashda ilmiy asoslangan yondashuvni qo'llaydi. Shuningdek, 1 yildan buyon dermatologiya fanidan talabalarga dars berib, yosh mutaxassislar tayyorlash jarayonida faol ishtirok etmoqda. Ilmiy faoliyat bilan shug'ullanib, tibbiyotning turli yo'nalishlariga oid bir nechta ilmiy maqolalar muallifi hisoblanadi. Har bir bemorga individual yondashish, zamonaviy va dalillarga asoslangan tibbiyot tamoyillariga amal qilish hamda yuqori sifatli tibbiy xizmat ko'rsatish uning faoliyatining ustuvor yo'nalishlaridan biridir.",
+      "Turg'unov Shohruz Ilxomjon o'g'li — teri, soch va tirnoq kasalliklarini tashxislash va davolash bilan shug'ullanuvchi dermatovenerolog-trixolog. Dermatologiya sohasida 3+ yildan ortiq amaliy tajribaga ega.",
     bio_ru:
-      'Врач-дерматовенеролог. Имеет 3-летний практический опыт в области дерматологии. В настоящее время работает врачом-дерматологом в клинике Radeski Skin Clinic. Внедряет в практику современные методы диагностики и лечения в дерматологии и эстетической медицине. В диагностике и лечении заболеваний кожи, волос и ногтей применяет научно обоснованный подход. Кроме того, более года преподаёт дерматологию студентам, активно участвуя в подготовке молодых специалистов. Занимается научной деятельностью, является автором нескольких научных статей по различным направлениям медицины. Индивидуальный подход к каждому пациенту, следование принципам современной доказательной медицины и оказание высококачественной медицинской помощи — одни из приоритетных направлений его работы.',
+      'Тургунов Шохруз Илхомжон угли — дерматовенеролог-трихолог, занимающийся диагностикой и лечением заболеваний кожи, волос и ногтей. Имеет более 3 лет практического опыта в дерматологии.',
     bio_en:
-      'Dermatovenerologist with 3 years of practical experience in dermatology. He currently practices as a dermatologist at Radeski Skin Clinic, applying modern diagnostic and treatment methods in dermatology and aesthetic medicine. He uses an evidence-based approach in diagnosing and treating skin, hair and nail conditions. For over a year he has been teaching dermatology to students, actively contributing to the training of young specialists. Engaged in research, he is the author of several scientific papers across various fields of medicine. An individual approach to every patient, adherence to modern evidence-based medicine and delivery of high-quality medical care are among the top priorities of his work.',
+      'Shohruz Ilxomjon ugli Turgunov is a dermatovenerologist and trichologist specializing in skin, hair and nail conditions. He has more than 3 years of hands-on experience in dermatology.',
     sort_order: 14,
     is_featured: false,
   },
