@@ -1,0 +1,224 @@
+import type { Locale } from '../types';
+import type { PageId } from '../routing/paths';
+import { pagePath } from '../routing/paths';
+
+type L = Record<Locale, string>;
+
+const L = (uz: string, ru: string, en: string): L => ({ uz, ru, en });
+
+export type InstitutionalNavId =
+  | 'obrazovaniya'
+  | 'science'
+  | 'tele-dermatology'
+  | 'skin-pathology-center';
+
+export type InstitutionalNavTopic = {
+  id: string;
+  label: L;
+  /** Optional anchor on the section landing page */
+  hash?: string;
+};
+
+export type InstitutionalNavSection = {
+  id: InstitutionalNavId;
+  pageId: PageId;
+  label: L;
+  /** Compact label for top navbar (optional) */
+  navShort?: L;
+  /** Second line under navShort (optional) */
+  navSubtitle?: L;
+  dropdownTitle: L;
+  dropdownHint: L;
+  topics: InstitutionalNavTopic[];
+};
+
+export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
+  {
+    id: 'obrazovaniya',
+    pageId: 'obrazovaniya',
+    label: L("Ta'lim", 'Образование', 'Education'),
+    dropdownTitle: L("Ta'lim yo'nalishlari", 'Направления образования', 'Education programs'),
+    dropdownHint: L(
+      "Dermatologiya va estetik tibbiyot bo'yicha malaka oshirish dasturlari",
+      'Программы профессионального развития в дерматологии и эстетической медицине',
+      'Professional development programs in dermatology and aesthetic medicine',
+    ),
+    topics: [
+      {
+        id: 'certification-courses',
+        label: L('Sertifikatsiya kurslari', 'Сертификационные курсы', 'Certification programs'),
+      },
+      {
+        id: 'residency',
+        label: L('Ordinatura', 'Ординатура', 'Dermatology residency'),
+      },
+      {
+        id: 'continuing-education',
+        label: L('Malaka oshirish', 'Повышение квалификации', 'Continuing medical education'),
+      },
+      {
+        id: 'masterclasses',
+        label: L('Master-klasslar', 'Мастер-классы', 'Masterclasses'),
+      },
+      {
+        id: 'hands-on-training',
+        label: L('Amaliy treninglar', 'Практические тренинги', 'Hands-on training'),
+      },
+      {
+        id: 'young-specialists',
+        label: L(
+          'Yosh mutaxassislarni tayyorlash',
+          'Подготовка молодых специалистов',
+          'Training early-career specialists',
+        ),
+      },
+      {
+        id: 'hair-transplant-training',
+        label: L(
+          "Soch transplantatsiyasi bo'yicha o'qitish",
+          'Обучение пересадке волос',
+          'Hair transplant training',
+        ),
+      },
+      {
+        id: 'laser-training',
+        label: L(
+          "Lazer texnologiyalari bo'yicha o'qitish",
+          'Обучение лазерным технологиям',
+          'Laser technology training',
+        ),
+      },
+      {
+        id: 'international-programs',
+        label: L(
+          "Xalqaro ta'lim dasturlari",
+          'Международные образовательные программы',
+          'International education programs',
+        ),
+      },
+    ],
+  },
+  {
+    id: 'science',
+    pageId: 'science',
+    label: L('Ilm-fan', 'Наука', 'Science'),
+    dropdownTitle: L('Ilmiy yo\'nalishlar', 'Научные направления', 'Research areas'),
+    dropdownHint: L(
+      'Klinik amaliyot, tadqiqot va bilim yaratish',
+      'Клиническая практика, исследования и создание знаний',
+      'Clinical practice, research, and knowledge creation',
+    ),
+    topics: [
+      {
+        id: 'clinical-research',
+        label: L('Klinik tadqiqotlar', 'Клинические исследования', 'Clinical research'),
+        hash: 'clinical-research',
+      },
+      {
+        id: 'publications',
+        label: L('Ilmiy nashrlar', 'Публикации', 'Publications'),
+        hash: 'publications',
+      },
+      {
+        id: 'clinical-database',
+        label: L('Klinik ma\'lumotlar bazasi', 'Клиническая база данных', 'Clinical database'),
+        hash: 'clinical-database',
+      },
+      {
+        id: 'research-projects',
+        label: L('Ilmiy loyihalar', 'Научные проекты', 'Research projects'),
+        hash: 'research-projects',
+      },
+      {
+        id: 'international-research',
+        label: L('Xalqaro tadqiqotlar', 'Международные исследования', 'International research'),
+        hash: 'international-research',
+      },
+      {
+        id: 'protocol-development',
+        label: L(
+          'Klinik protokollarni ishlab chiqish',
+          'Разработка протоколов',
+          'Clinical protocol development',
+        ),
+        hash: 'protocol-development',
+      },
+      {
+        id: 'patents-ip',
+        label: L(
+          'Patentlar va intellektual mulk',
+          'Патенты и интеллектуальная собственность',
+          'Patents and intellectual property',
+        ),
+        hash: 'patents-ip',
+      },
+      {
+        id: 'real-world-data',
+        label: L(
+          'Real-world ma\'lumotlarni tahlil qilish',
+          'Анализ real-world data',
+          'Real-world data analysis',
+        ),
+        hash: 'real-world-data',
+      },
+    ],
+  },
+  {
+    id: 'tele-dermatology',
+    pageId: 'tele-dermatology',
+    label: L('TeleDermatologiya', 'Теледermatология', 'TeleDermatology'),
+    dropdownTitle: L('TeleDermatologiya', 'Теледermatология', 'TeleDermatology'),
+    dropdownHint: L(
+      'Masofaviy dermatologik maslahat va raqamli kuzatuv',
+      'Дистанционная дерматологическая консультация и цифровое сопровождение',
+      'Remote dermatology consultations and digital follow-up care',
+    ),
+    topics: [],
+  },
+  {
+    id: 'skin-pathology-center',
+    pageId: 'skin-pathology-center',
+    label: L(
+      'Teri patologiyasi milliy markazi',
+      'Национальный центр патологии кожи',
+      'National Center of Skin Pathology',
+    ),
+    navShort: L('Patologiya markazi', 'Центр патологии', 'Skin Pathology Center'),
+    navSubtitle: L(
+      'Teri patologiyasi milliy markazi',
+      'Национальный центр патологии кожи',
+      'National Center of Skin Pathology',
+    ),
+    dropdownTitle: L(
+      'Teri patologiyasi markazi',
+      'Центр патологии кожи',
+      'Skin pathology center',
+    ),
+    dropdownHint: L(
+      'Gistologik va morfologik tashxis, ilmiy-tadqiqot va standartlar',
+      'Гистологическая и морфологическая диагностика, исследования и стандарты',
+      'Histologic and morphologic diagnosis, research, and standards',
+    ),
+    topics: [],
+  },
+];
+
+export function getInstitutionalNavSection(id: InstitutionalNavId): InstitutionalNavSection {
+  const section = INSTITUTIONAL_NAV_SECTIONS.find((item) => item.id === id);
+  if (!section) throw new Error(`Unknown institutional nav section: ${id}`);
+  return section;
+}
+
+export function institutionalTopicHref(
+  locale: Locale,
+  section: InstitutionalNavSection,
+  topic?: InstitutionalNavTopic,
+): string {
+  const base = pagePath(locale, section.pageId);
+  if (!topic) return base;
+  return `${base}#${topic.hash ?? topic.id}`;
+}
+
+export function isInstitutionalNavPage(page: PageId): page is InstitutionalNavSection['pageId'] {
+  return INSTITUTIONAL_NAV_SECTIONS.some((section) => section.pageId === page);
+}

@@ -55,6 +55,8 @@ import DaavlinModelPage from './components/DaavlinModelPage';
 import DermoScanPage from './components/DermoScanPage';
 import SciencePage from './components/SciencePage';
 import ObrazovaniyaPage from './components/ObrazovaniyaPage';
+import TeleDermatologyPage from './components/TeleDermatologyPage';
+import SkinPathologyCenterPage from './components/SkinPathologyCenterPage';
 import BrandPage from './components/BrandPage';
 import { DAAVLIN_MODEL_DEEP } from './data/daavlinModelDeepContent';
 import ResultsPage from './components/ResultsPage';
@@ -1098,6 +1100,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           {currentPage === 'dermoscan' && <DermoScanPage locale={locale} />}
           {currentPage === 'science' && <SciencePage locale={locale} />}
           {currentPage === 'obrazovaniya' && <ObrazovaniyaPage locale={locale} />}
+          {currentPage === 'tele-dermatology' && <TeleDermatologyPage locale={locale} />}
+          {currentPage === 'skin-pathology-center' && <SkinPathologyCenterPage locale={locale} />}
           {currentPage === 'brend' && <BrandPage locale={locale} />}
 
           {currentPage === 'results' && (

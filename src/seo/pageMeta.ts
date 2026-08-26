@@ -179,9 +179,19 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "ilm-fan, dermatologiya tadqiqoti, klinik protokollar, yosh shifokorlar, Radeski, Farg'ona, Qo'qon",
     },
     obrazovaniya: {
-      title: "Obrazovaniya | Radeski Skin Clinic",
-      desc: "Ta'lim va malaka oshirish bo'limi tez orada. Radeski Skin Clinic — Farg'ona va Qo'qon.",
-      keywords: "obrazovaniya, ta'lim, malaka oshirish, dermatologiya, Radeski, Farg'ona",
+      title: "Ta'lim va malaka oshirish | Radeski Skin Clinic",
+      desc: "Dermatologiya va estetik tibbiyot bo'yicha sertifikatsiya kurslari, ordinatura, master-klasslar, amaliy treninglar va xalqaro dasturlar. Radeski — Farg'ona | Qo'qon.",
+      keywords: "ta'lim, malaka oshirish, ordinatura, master-klass, dermatologiya o'qitish, Radeski, Farg'ona",
+    },
+    'tele-dermatology': {
+      title: "TeleDermatologiya | Radeski Skin Clinic",
+      desc: "Masofaviy dermatologik maslahat, onlayn kuzatuv va raqamli hamkorlik. Radeski Skin Clinic — Farg'ona | Qo'qon.",
+      keywords: "teledermatologiya, onlayn dermatolog, masofaviy maslahat, Radeski, Farg'ona",
+    },
+    'skin-pathology-center': {
+      title: "Teri patologiyasi milliy markazi | Radeski Skin Clinic",
+      desc: "Gistologik va morfologik tashxis, ilmiy-tadqiqot va teri patologiyasi bo'yicha standartlar. Radeski — Farg'ona | Qo'qon.",
+      keywords: "teri patologiyasi, gistologiya, morfologik tashxis, milliy markaz, Radeski, Farg'ona",
     },
     brend: {
       title: "Radeski klinik brendi | Missiya, falsafa, ekotizim",
@@ -274,9 +284,19 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "наука, исследования в дерматологии, клинические протоколы, молодые врачи, Radeski, Фергана, Коканд",
     },
     obrazovaniya: {
-      title: "Образование | Radeski Skin Clinic",
-      desc: "Раздел обучения и повышения квалификации скоро откроется. Radeski Skin Clinic — Фергана и Коканд.",
-      keywords: "образование, обучение, повышение квалификации, дерматология, Radeski, Фергана",
+      title: "Образование и повышение квалификации | Radeski Skin Clinic",
+      desc: "Сертификационные курсы, ординатура, мастер-классы, практические тренинги и международные программы в дерматологии. Radeski — Фергана | Коканд.",
+      keywords: "образование, повышение квалификации, ординатура, мастер-классы, обучение дерматологии, Radeski, Фергана",
+    },
+    'tele-dermatology': {
+      title: "Теледermatология | Radeski Skin Clinic",
+      desc: "Дистанционная дерматологическая консультация, онлайн-сопровождение и цифровое взаимодействие с пациентом. Radeski — Фергана | Коканд.",
+      keywords: "теледermatология, онлайн дерматолог, дистанционная консультация, Radeski, Фергана",
+    },
+    'skin-pathology-center': {
+      title: "Национальный центр патологии кожи | Radeski Skin Clinic",
+      desc: "Гистологическая и морфологическая диагностика, научные исследования и стандарты в патологии кожи. Radeski — Фергана | Коканд.",
+      keywords: "патология кожи, гистология, морфологическая диагностика, национальный центр, Radeski, Фергана",
     },
     brend: {
       title: "Бренд Radeski Skin Clinic | Миссия, философия, экосистема",
@@ -369,9 +389,19 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "science, dermatology research, clinical protocols, young physicians, Radeski, Fergana, Kokand",
     },
     obrazovaniya: {
-      title: "Education | Radeski Skin Clinic",
-      desc: "Training and professional development section opening soon. Radeski Skin Clinic — Fergana and Kokand.",
-      keywords: "education, training, professional development, dermatology, Radeski, Fergana",
+      title: "Education & professional development | Radeski Skin Clinic",
+      desc: "Certification programs, residency, masterclasses, hands-on training, and international courses in dermatology and aesthetic medicine. Radeski — Fergana | Kokand.",
+      keywords: "education, professional development, residency, masterclasses, dermatology training, Radeski, Fergana",
+    },
+    'tele-dermatology': {
+      title: "TeleDermatology | Radeski Skin Clinic",
+      desc: "Remote dermatology consultations, online follow-up, and digital care pathways. Radeski Skin Clinic — Fergana | Kokand.",
+      keywords: "teledermatology, online dermatologist, remote consultation, Radeski, Fergana",
+    },
+    'skin-pathology-center': {
+      title: "National Center of Skin Pathology | Radeski Skin Clinic",
+      desc: "Histologic and morphologic diagnosis, research, and standards in skin pathology. Radeski — Fergana | Kokand.",
+      keywords: "skin pathology, histology, morphologic diagnosis, national center, Radeski, Fergana",
     },
     brend: {
       title: "The Radeski Skin Clinic brand | Mission, philosophy, ecosystem",

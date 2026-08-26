@@ -14,6 +14,13 @@ import {
 } from '../data/daavlinModelDeepContent';
 import SiteLogo from './SiteLogo';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import InstitutionalMegaMenu from './InstitutionalMegaMenu';
+import {
+  getInstitutionalNavSection,
+  institutionalTopicHref,
+  type InstitutionalNavId,
+  type InstitutionalNavSection,
+} from '../data/institutionalNavContent';
 import {
   PageId,
   pagePath,
@@ -40,12 +47,6 @@ interface HeaderProps {
   onOpenServiceCategory?: (categoryId: string) => void;
 }
 
-function getCompactAppointmentLabel(locale: Locale): string {
-  if (locale === 'uz') return 'Qabul';
-  if (locale === 'ru') return 'Запись';
-  return 'Book';
-}
-
 function DaavlinNavLabel({
   locale,
   size = 'nav',
@@ -69,6 +70,50 @@ function DaavlinNavLabel({
   );
 }
 
+function getCompactAppointmentLabel(locale: Locale): string {
+  if (locale === 'uz') return 'Qabul';
+  if (locale === 'ru') return 'Запись';
+  return 'Book';
+}
+
+const INSTITUTIONAL_NAV_ORDER: InstitutionalNavId[] = [
+  'obrazovaniya',
+  'science',
+  'tele-dermatology',
+  'skin-pathology-center',
+];
+
+function InstitutionalNavLabel({
+  section,
+  locale,
+  size = 'nav',
+}: {
+  section: InstitutionalNavSection;
+  locale: Locale;
+  size?: 'nav' | 'mobile';
+}) {
+  const title = section.navShort?.[locale] ?? section.label[locale];
+  const subtitle = section.navSubtitle?.[locale];
+
+  if (!subtitle) {
+    return <span className="whitespace-nowrap">{title}</span>;
+  }
+
+  const subtitleClass =
+    size === 'mobile'
+      ? 'text-xs font-medium leading-snug'
+      : 'text-[9px] xl:text-[10px] font-medium leading-snug';
+  const widthClass =
+    size === 'nav' ? 'max-w-[5.75rem] xl:max-w-[6.75rem] 2xl:max-w-[7.25rem]' : 'max-w-none';
+
+  return (
+    <span className={`inline-flex flex-col items-start text-left leading-[1.12] gap-0 ${widthClass}`}>
+      <span className="font-semibold whitespace-nowrap">{title}</span>
+      <span className={`${subtitleClass} whitespace-normal`}>{subtitle}</span>
+    </span>
+  );
+}
+
 export default function Header({
   currentPage,
   locale,
@@ -86,6 +131,10 @@ export default function Header({
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [isMobileDaavlinOpen, setIsMobileDaavlinOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<InstitutionalNavId | null>(null);
+  const [isMobileInstitutionalOpen, setIsMobileInstitutionalOpen] = useState<InstitutionalNavId | null>(
+    null,
+  );
   const location = useLocation();
   const d = DICTIONARY[locale];
   const topBar = getHeaderTopBarContacts(locale);
@@ -121,9 +170,11 @@ export default function Header({
     setIsMobileServicesOpen(false);
     setIsMobileAboutOpen(false);
     setIsMobileDaavlinOpen(false);
+    setIsMobileInstitutionalOpen(null);
     setIsServicesDropdownOpen(false);
     setIsAboutDropdownOpen(false);
     setIsDaavlinDropdownOpen(false);
+    setActiveMegaMenu(null);
   }, [location.pathname]);
 
   const navItems: { id: PageId; label: string }[] = [
@@ -138,8 +189,6 @@ export default function Header({
     { id: 'branches', label: d.navBranches },
     { id: 'results', label: d.navResults },
     { id: 'dermoscan', label: d.navDermoScan },
-    { id: 'science', label: d.navScience },
-    { id: 'obrazovaniya', label: d.navObrazovaniya },
   ];
 
   const getLanguageLabel = (l: Locale) => {
@@ -177,6 +226,119 @@ export default function Header({
         ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
+
+  const institutionalNavClass = (pageId: PageId) =>
+    navLinkClass(pageId).replace('whitespace-nowrap', 'whitespace-normal');
+
+  const renderInstitutionalDesktopNav = (sectionId: InstitutionalNavId) => {
+    const section = getInstitutionalNavSection(sectionId);
+    const isActive = currentPage === section.pageId;
+
+    return (
+      <div
+        key={sectionId}
+        className="relative shrink-0"
+        onMouseEnter={() => setActiveMegaMenu(sectionId)}
+      >
+        <button
+          type="button"
+          onClick={() => onNavigate(section.pageId)}
+          className={`${institutionalNavClass(section.pageId)} inline-flex items-start gap-0.5 py-1 ${
+            isActive || activeMegaMenu === sectionId
+              ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
+              : ''
+          }`}
+          aria-haspopup="menu"
+          aria-expanded={activeMegaMenu === sectionId}
+        >
+          <InstitutionalNavLabel section={section} locale={locale} />
+          <ChevronDown
+            className={`w-3 h-3 shrink-0 mt-1 transition-transform duration-200 ${
+              activeMegaMenu === sectionId ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+      </div>
+    );
+  };
+
+  const renderInstitutionalMobileNav = (sectionId: InstitutionalNavId) => {
+    const section = getInstitutionalNavSection(sectionId);
+    const isOpen = isMobileInstitutionalOpen === sectionId;
+
+    return (
+      <div key={sectionId} className="rounded-lg overflow-hidden">
+        <div className="flex items-center">
+          <Link
+            to={pagePath(locale, section.pageId)}
+            className={`flex-1 text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${institutionalNavClass(section.pageId)}`}
+          >
+            <InstitutionalNavLabel section={section} locale={locale} size="mobile" />
+          </Link>
+          <button
+            type="button"
+            onClick={() =>
+              setIsMobileInstitutionalOpen((current) => (current === sectionId ? null : sectionId))
+            }
+            className={`mr-1 rounded-lg p-3 ${institutionalNavClass(section.pageId)}`}
+            aria-expanded={isOpen}
+            aria-label={section.dropdownTitle[locale]}
+          >
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+        </div>
+        {isOpen && (
+          <div className="mt-1 ml-2 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5">
+            <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-gold">
+              {section.dropdownTitle[locale]}
+            </p>
+            <p className="px-3 pb-1 text-xs font-light leading-relaxed text-brand-text-secondary">
+              {section.dropdownHint[locale]}
+            </p>
+            {section.topics.length > 0 ? (
+              section.topics.map((topic) => (
+                <Link
+                  key={topic.id}
+                  to={institutionalTopicHref(locale, section, topic)}
+                  onClick={() => {
+                    setIsMobileInstitutionalOpen(null);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="px-3 py-2.5 rounded-lg text-sm text-brand-text-secondary hover:bg-brand-offwhite"
+                >
+                  {topic.label[locale]}
+                </Link>
+              ))
+            ) : (
+              <p className="px-3 py-2 text-xs font-light text-brand-text-secondary">
+                {locale === 'uz'
+                  ? "Mavzular tez orada qo'shiladi."
+                  : locale === 'ru'
+                    ? 'Темы будут добавлены в ближайшее время.'
+                    : 'Topics will be added soon.'}
+              </p>
+            )}
+            <Link
+              to={pagePath(locale, section.pageId)}
+              onClick={() => {
+                setIsMobileInstitutionalOpen(null);
+                setIsMobileMenuOpen(false);
+              }}
+              className="px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+            >
+              {locale === 'uz'
+                ? "Bo'lim haqida"
+                : locale === 'ru'
+                  ? 'О разделе'
+                  : 'Section overview'}
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const renderDesktopNavItem = (item: { id: PageId; label: string }) => {
     if (item.id === 'about') {
@@ -540,6 +702,7 @@ export default function Header({
           ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 sm:py-3'
           : 'bg-white py-3 sm:py-4 border-b border-slate-100'
       }`}
+      onMouseLeave={() => setActiveMegaMenu(null)}
     >
       <div className="hidden sm:block w-full border-b border-slate-50 pb-2.5 mb-2.5">
         <div className="site-container flex justify-between items-center gap-3 lg:gap-4 min-w-0">
@@ -634,6 +797,7 @@ export default function Header({
 
         <nav className="relative z-30 hidden xl:flex items-center justify-center gap-0 flex-1 min-w-0 px-1 overflow-visible">
           {navItems.map((item) => renderDesktopNavItem(item))}
+          {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalDesktopNav(sectionId))}
         </nav>
 
         <div className="hidden sm:flex items-center gap-2 xl:gap-2.5 shrink-0 ml-auto xl:ml-0">
@@ -712,10 +876,19 @@ export default function Header({
         </button>
       </div>
 
+      {activeMegaMenu && (
+        <InstitutionalMegaMenu
+          locale={locale}
+          activeSectionId={activeMegaMenu}
+          onNavigate={() => setActiveMegaMenu(null)}
+        />
+      )}
+
       {isMobileMenuOpen && (
         <div className="xl:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-150 shadow-xl py-4 px-4 animate-in fade-in slide-in-from-top-3 duration-200 max-h-[min(80vh,720px)] overflow-y-auto">
           <nav className="flex flex-col gap-1 mb-4">
             {navItems.map((item) => renderMobileNavItem(item))}
+            {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalMobileNav(sectionId))}
           </nav>
 
           <div className="border-t border-brand-sectiongray pt-4 flex flex-col gap-3">
