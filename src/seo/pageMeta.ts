@@ -69,6 +69,26 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         'thulium laser Kokand, LaseMD Ultra Kokand, LaseMD Ultra 1927 nm, pigmentation treatment Kokand, laser rejuvenation Kokand, post-acne laser Kokand, Radeski Skin Clinic Kokand',
     },
   },
+  'art-thulium-laser-hair-kokand': {
+    uz: {
+      title: "Qo'qonda soch uchun tuliy lazer | Soch to'kilishini davolash — Radeski Skin Clinic",
+      desc: "Qo'qonda soch uchun tuliy lazer. Soch to'kilishi va inchelashni kompleks davolashda zamonaviy usul. Radeski Skin Clinic — mutaxassis konsultatsiyasi.",
+      keywords:
+        "tuliy lazer Qo'qon, soch uchun tuliy lazer Qo'qon, soch to'kilishi davolash Qo'qon, trixolog Qo'qon, alopeciya davolash Qo'qon, soch tiklash Qo'qon, soch o'sishi Qo'qon, lazer soch davolash Qo'qon",
+    },
+    ru: {
+      title: 'Тулиевый лазер для волос в Коканде | Лечение выпадения волос — Radeski Skin Clinic',
+      desc: 'Тулиевый лазер для волос в Коканде. Современный метод в комплексном лечении выпадения и истончения волос в Radeski Skin Clinic. Консультация специалиста.',
+      keywords:
+        'тулиевый лазер Коканд, тулиевый лазер для волос Коканд, лечение выпадения волос Коканд, трихолог Коканд, лечение алопеции Коканд, восстановление волос Коканд, рост волос Коканд, лазерное лечение волос Коканд',
+    },
+    en: {
+      title: 'Thulium Laser for Hair in Kokand | Hair Loss Treatment — Radeski Skin Clinic',
+      desc: 'Thulium laser for hair in Kokand. A modern method in comprehensive treatment of hair loss and thinning at Radeski Skin Clinic. Specialist consultation.',
+      keywords:
+        'thulium laser Kokand, thulium laser for hair Kokand, hair loss treatment Kokand, trichologist Kokand, alopecia treatment Kokand, hair restoration Kokand, hair growth Kokand, laser hair treatment Kokand',
+    },
+  },
 };
 
 export function resolveArticleSeo(

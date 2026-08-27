@@ -29,6 +29,7 @@ import { DERMA_V_VASCULAR_ARTICLE_CATALOG } from './articles/dermaVVascularArtic
 import { ATOPIC_DERMATITIS_ARTICLE_CATALOG } from './articles/atopicDermatitisArticle';
 import { HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE_CATALOG } from './articles/hollywoodSpectraEyebrowTattooArticle';
 import { LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG } from './articles/lasemdUltraKokandArticle';
+import { THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG } from './articles/thuliumLaserHairKokandArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -200,6 +201,20 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'lazer yoshartirish qoqon',
     'laser rejuvenation kokand',
     'postakne lazer qoqon',
+  ],
+  'thulium-laser-hair-kokand': [
+    'thulium-laser-hair-kokand',
+    'art-thulium-laser-hair-kokand',
+    'тулиевый лазер для волос коканд',
+    'тулиевый лазер коканд волосы',
+    'лечение выпадения волос коканд',
+    'трихолог коканд',
+    'лечение алопеции коканд',
+    'tuliy lazer soch qoqon',
+    'soch to\'kilishi qoqon',
+    'thulium laser hair kokand',
+    'hair loss treatment kokand',
+    'trichologist kokand',
   ],
   'derma-v-vascular': [
     'sosudistaya-setochka-derma-v-radeski',
@@ -1002,6 +1017,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'atopic-dermatitis': ATOPIC_DERMATITIS_ARTICLE_CATALOG,
   'hollywood-spectra-eyebrow-tattoo': HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE_CATALOG,
   'lasemd-ultra-kokand': LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG,
+  'thulium-laser-hair-kokand': THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

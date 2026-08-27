@@ -29,6 +29,7 @@ import { DERMA_V_VASCULAR_ARTICLE } from './data/articles/dermaVVascularArticle'
 import { ATOPIC_DERMATITIS_ARTICLE } from './data/articles/atopicDermatitisArticle';
 import { HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE } from './data/articles/hollywoodSpectraEyebrowTattooArticle';
 import { LASEMD_ULTRA_KOKAND_ARTICLE } from './data/articles/lasemdUltraKokandArticle';
+import { THULIUM_LASER_HAIR_KOKAND_ARTICLE } from './data/articles/thuliumLaserHairKokandArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -962,4 +963,5 @@ export const ARTICLES: Article[] = [
   ATOPIC_DERMATITIS_ARTICLE,
   HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE,
   LASEMD_ULTRA_KOKAND_ARTICLE,
+  THULIUM_LASER_HAIR_KOKAND_ARTICLE,
 ];
