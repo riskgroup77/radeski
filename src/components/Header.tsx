@@ -90,17 +90,6 @@ const INSTITUTIONAL_NAV_ORDER: InstitutionalNavId[] = [
   'skin-pathology-center',
 ];
 
-const PRIMARY_NAV_IDS: PageId[] = [
-  'home',
-  'about',
-  'services',
-  'daavlin-foto-kabinalari',
-  'doctors',
-  'prices',
-];
-
-const SECONDARY_NAV_IDS: PageId[] = ['articles', 'videos', 'branches', 'results', 'dermoscan'];
-
 function InstitutionalNavLabel({
   section,
   locale,
@@ -198,42 +187,18 @@ export default function Header({
   }, [location.pathname]);
 
   const navItems: { id: PageId; label: string }[] = [
-    ...PRIMARY_NAV_IDS.map((id) => ({ id, label: getNavLabel(id) })),
-    ...SECONDARY_NAV_IDS.map((id) => ({ id, label: getNavLabel(id) })),
+    { id: 'home', label: d.navHome },
+    { id: 'about', label: d.navAbout },
+    { id: 'services', label: d.navServices },
+    { id: 'daavlin-foto-kabinalari', label: d.navDaavlinFotoKabinalari },
+    { id: 'doctors', label: d.navDoctors },
+    { id: 'prices', label: d.navPrices },
+    { id: 'articles', label: d.navArticles },
+    { id: 'videos', label: d.navVideos },
+    { id: 'branches', label: d.navBranches },
+    { id: 'results', label: d.navResults },
+    { id: 'dermoscan', label: d.navDermoScan },
   ];
-
-  function getNavLabel(id: PageId): string {
-    switch (id) {
-      case 'home':
-        return d.navHome;
-      case 'about':
-        return d.navAbout;
-      case 'services':
-        return d.navServices;
-      case 'daavlin-foto-kabinalari':
-        return d.navDaavlinShort;
-      case 'doctors':
-        return d.navDoctors;
-      case 'prices':
-        return d.navPrices;
-      case 'articles':
-        return d.navArticles;
-      case 'videos':
-        return d.navVideos;
-      case 'branches':
-        return d.navBranches;
-      case 'results':
-        return d.navResults;
-      case 'dermoscan':
-        return d.navDermoScan;
-      default:
-        return id;
-    }
-  }
-
-  function findNavItem(id: PageId) {
-    return navItems.find((item) => item.id === id)!;
-  }
 
   const getLanguageLabel = (l: Locale) => {
     switch (l) {
@@ -246,24 +211,14 @@ export default function Header({
     }
   };
 
-  const navLinkClass = (page: PageId, tier: 'primary' | 'secondary' = 'primary') => {
-    const sizeClass =
-      tier === 'primary'
-        ? 'px-2.5 xl:px-3 py-1.5 text-[11px] xl:text-[12px] 2xl:text-[12px] leading-tight'
-        : 'px-2 xl:px-2.5 py-1.5 text-[10px] xl:text-[11px] leading-tight';
-
-    return `${sizeClass} rounded-md font-medium transition-all cursor-pointer whitespace-nowrap ${
+  const navLinkClass = (page: PageId) =>
+    `px-1.5 xl:px-2 2xl:px-2.5 py-1.5 rounded-md text-[11px] xl:text-[12px] 2xl:text-[13px] font-medium transition-all cursor-pointer whitespace-nowrap leading-tight ${
       currentPage === page || (page === 'about' && currentPage === 'brend')
-        ? tier === 'primary'
-          ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
-          : 'bg-brand-gold-light/10 text-brand-gold-dark font-semibold'
-        : tier === 'primary'
-          ? 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-offwhite'
-          : 'text-brand-text-secondary/90 hover:text-brand-text-primary hover:bg-brand-offwhite/80'
+        ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
+        : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-offwhite'
     }`;
-  };
 
-  const mobileNavClass = (page: PageId) => navLinkClass(page, 'primary');
+  const mobileNavClass = (page: PageId) => navLinkClass(page);
   const mobileAboutNavClass = mobileNavClass('about');
   const mobileServicesNavClass = mobileNavClass('services');
   const mobileDaavlinNavClass = mobileNavClass('daavlin-foto-kabinalari');
@@ -282,7 +237,8 @@ export default function Header({
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
 
-  const institutionalNavClass = (pageId: PageId) => navLinkClass(pageId, 'secondary');
+  const institutionalNavClass = (pageId: PageId) =>
+    navLinkClass(pageId).replace('whitespace-nowrap', 'whitespace-normal');
 
   const renderInstitutionalDesktopNav = (sectionId: InstitutionalNavId) => {
     const section = getInstitutionalNavSection(sectionId);
@@ -297,18 +253,18 @@ export default function Header({
         <button
           type="button"
           onClick={() => onNavigate(section.pageId)}
-          className={`${institutionalNavClass(section.pageId)} inline-flex items-center gap-0.5 ${
+          className={`${institutionalNavClass(section.pageId)} inline-flex items-start gap-0.5 py-1 ${
             isActive || activeMegaMenu === sectionId
-              ? 'bg-brand-gold-light/10 text-brand-gold-dark font-semibold'
+              ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
               : ''
           }`}
           aria-haspopup="menu"
           aria-expanded={activeMegaMenu === sectionId}
           title={section.label[locale]}
         >
-          <InstitutionalNavLabel section={section} locale={locale} compact />
+          <InstitutionalNavLabel section={section} locale={locale} />
           <ChevronDown
-            className={`w-2.5 h-2.5 shrink-0 transition-transform duration-200 ${
+            className={`w-3 h-3 shrink-0 mt-1 transition-transform duration-200 ${
               activeMegaMenu === sectionId ? 'rotate-180' : ''
             }`}
           />
@@ -395,11 +351,14 @@ export default function Header({
     );
   };
 
-  const renderDesktopNavItem = (item: { id: PageId; label: string }, tier: 'primary' | 'secondary' = 'primary') => {
-    const linkClass = navLinkClass(item.id, tier);
-    const aboutClass = navLinkClass('about', tier);
-    const servicesClass = navLinkClass('services', tier);
-    const daavlinClass = navLinkClass('daavlin-foto-kabinalari', tier);
+  const renderDesktopNavItem = (item: { id: PageId; label: string }) => {
+    const linkClass = navLinkClass(item.id);
+    const aboutClass = navLinkClass('about');
+    const servicesClass = navLinkClass('services');
+    const daavlinClass = navLinkClass('daavlin-foto-kabinalari').replace(
+      'whitespace-nowrap',
+      'whitespace-normal',
+    );
 
     if (item.id === 'about') {
       return (
@@ -468,7 +427,7 @@ export default function Header({
             aria-expanded={isDaavlinDropdownOpen}
             title={d.navDaavlinFotoKabinalari}
           >
-            <DaavlinNavLabel locale={locale} compact />
+            <DaavlinNavLabel locale={locale} />
             <ChevronDown
               className={`w-2.5 h-2.5 shrink-0 transition-transform duration-200 ${
                 isDaavlinDropdownOpen ? 'rotate-180' : ''
@@ -833,8 +792,7 @@ export default function Header({
         </div>
       </div>
 
-      <div className="site-container">
-        <div className="flex items-center min-h-[48px] sm:min-h-[52px] gap-2 xl:gap-3">
+      <div className="site-container flex items-center min-h-[52px] sm:min-h-[60px] gap-2 xl:gap-3">
         <div className="relative z-20 flex items-center gap-2 shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
           <Link
             to={pagePath(locale, 'home')}
@@ -855,14 +813,16 @@ export default function Header({
           </AppointmentBookingLink>
         </div>
 
-        <nav
-          className="header-nav-primary relative z-30 hidden xl:flex items-center justify-center flex-1 min-w-0 overflow-visible"
-          onMouseEnter={() => setActiveMegaMenu(null)}
-        >
-          {PRIMARY_NAV_IDS.map((id) => renderDesktopNavItem(findNavItem(id), 'primary'))}
+        <nav className="relative z-30 hidden xl:flex items-center justify-center gap-0 flex-1 min-w-0 px-1 overflow-visible">
+          {navItems.map((item) => (
+            <div key={item.id} className="shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
+              {renderDesktopNavItem(item)}
+            </div>
+          ))}
+          {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalDesktopNav(sectionId))}
         </nav>
 
-        <div className="hidden sm:flex items-center gap-2 xl:gap-2 shrink-0 ml-auto" onMouseEnter={() => setActiveMegaMenu(null)}>
+        <div className="hidden sm:flex items-center gap-2 xl:gap-2.5 shrink-0 ml-auto xl:ml-0" onMouseEnter={() => setActiveMegaMenu(null)}>
           <div className="relative">
             <button
               onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
@@ -936,37 +896,19 @@ export default function Header({
         >
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
-        </div>
       </div>
 
       <div
-        className="header-mega-menu-zone hidden xl:block relative w-full"
+        className="hidden xl:block relative w-full"
         onMouseLeave={() => setActiveMegaMenu(null)}
       >
-          <div className="site-container">
-            <div className="header-nav-secondary-row">
-              <nav
-                className="header-nav-secondary"
-                aria-label={locale === 'ru' ? 'Дополнительное меню' : locale === 'en' ? 'Secondary menu' : "Qo'shimcha menyu"}
-              >
-                {SECONDARY_NAV_IDS.map((id) => (
-                  <div key={id} className="shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
-                    {renderDesktopNavItem(findNavItem(id), 'secondary')}
-                  </div>
-                ))}
-                <span className="header-nav-divider" aria-hidden="true" />
-                {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalDesktopNav(sectionId))}
-              </nav>
-            </div>
-          </div>
-
-          {activeMegaMenu && (
-            <InstitutionalMegaMenu
-              locale={locale}
-              activeSectionId={activeMegaMenu}
-              onNavigate={() => setActiveMegaMenu(null)}
-            />
-          )}
+        {activeMegaMenu && (
+          <InstitutionalMegaMenu
+            locale={locale}
+            activeSectionId={activeMegaMenu}
+            onNavigate={() => setActiveMegaMenu(null)}
+          />
+        )}
       </div>
 
       {isMobileMenuOpen && (
