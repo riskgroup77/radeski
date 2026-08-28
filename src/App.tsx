@@ -25,6 +25,7 @@ import {
   getServiceCategoryIdFromPathname,
   getServiceSubIdFromPathname,
   getPromoSlugFromPathname,
+  getConditionSlugFromPathname,
   getDaavlinSectionFromPathname,
   getDaavlinModelIdFromPathname,
   getLegacyDaavlinModelRedirectPath,
@@ -44,6 +45,9 @@ import { findPromoSlideBySlug } from './data/homePromoCarousel';
 import About from './components/About';
 import Services from './components/Services';
 import ServiceCategoryPage from './components/ServiceCategoryPage';
+import DermatologyConditionPage from './components/DermatologyConditionPage';
+import { isDermatologyConditionSlug, getDermatologyConditionNavItem } from './data/dermatologyConditionsNav';
+import { getDermatologyConditionTopic } from './utils/dermatologyConditions';
 import ServiceSubPage from './components/ServiceSubPage';
 import Doctors from './components/Doctors';
 import DoctorPage from './components/DoctorPage';
@@ -145,6 +149,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const serviceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
   const serviceSubId = getServiceSubIdFromPathname(location.pathname);
   const promoSlug = getPromoSlugFromPathname(location.pathname);
+  const conditionSlug = getConditionSlugFromPathname(location.pathname);
   const daavlinSection = getDaavlinSectionFromPathname(location.pathname);
   const daavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
   const legacyDaavlinModelRedirect = getLegacyDaavlinModelRedirectPath(location.pathname);
@@ -283,9 +288,21 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       ? resolveArticleSeo(resolvedArticleRouteKey, activeArticlePreview, locale, articleRichTags)
       : null;
 
+    const activeConditionPreview =
+      conditionSlug && isDermatologyConditionSlug(conditionSlug)
+        ? getDermatologyConditionTopic(conditionSlug, locale)
+        : null;
+
     const seoTitle = articleSeo?.title
       ? articleSeo.title
-      : activeDoctorPreview
+      : activeConditionPreview && conditionSlug
+        ? buildServiceSeoTitle(
+            getDermatologyConditionNavItem(conditionSlug)?.label[locale] ??
+              getDermatologyConditionNavItem(conditionSlug)?.label.uz ??
+              conditionSlug,
+            locale,
+          )
+        : activeDoctorPreview
         ? buildServiceSeoTitle(activeDoctorPreview.name[locale], locale)
         : activeServiceSub
           ? buildServiceSeoTitle(activeServiceSub.name[locale], locale)
@@ -296,7 +313,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               : activeSEO.title;
     const seoDesc = articleSeo?.desc
       ? articleSeo.desc
-      : activeDoctorPreview
+      : activeConditionPreview
+        ? activeConditionPreview.description
+        : activeDoctorPreview
         ? activeDoctorPreview.bio[locale]
         : activeServiceSub
           ? activeServiceSub.description[locale]
@@ -320,6 +339,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       serviceCategoryId,
       serviceSubId,
       promoSlug,
+      conditionSlug,
       daavlinSection,
       daavlinModelId,
       resolvedArticleRouteKey,
@@ -370,7 +390,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     syncCanonicalLink(seoContext);
     syncHreflangLinks(seoContext);
 
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, daavlinSection, daavlinModelId]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, conditionSlug, daavlinSection, daavlinModelId]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {
@@ -486,7 +506,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
-          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}-${daavlinSection}-${daavlinModelId ?? ''}`}
+          key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}-${conditionSlug ?? ''}-${daavlinSection}-${daavlinModelId ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -511,7 +531,32 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             </section>
           )}
 
-          {!promoSlug && currentPage === 'home' && (
+          {conditionSlug && isDermatologyConditionSlug(conditionSlug) && (
+            <DermatologyConditionPage
+              locale={locale}
+              slug={conditionSlug}
+              category={
+                activeServiceCategory ??
+                dynamicServiceCategories.find((c) => c.id === 'dermatologiya') ?? {
+                  id: 'dermatologiya',
+                  title: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+                  description: { uz: '', ru: '', en: '' },
+                  icon: 'ScanFace',
+                  subServices: [],
+                }
+              }
+            />
+          )}
+
+          {conditionSlug && !isDermatologyConditionSlug(conditionSlug) && (
+            <section className="py-20 text-center min-h-[50vh]">
+              <p className="text-brand-text-muted">
+                {locale === 'uz' ? 'Sahifa topilmadi' : locale === 'ru' ? 'Страница не найдена' : 'Page not found'}
+              </p>
+            </section>
+          )}
+
+          {!promoSlug && !conditionSlug && currentPage === 'home' && (
             <div id="home-dashboard">
               {/* Hero Slider banner */}
               <Hero

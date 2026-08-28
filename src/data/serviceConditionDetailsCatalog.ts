@@ -286,8 +286,172 @@ const GLOBAL_DEFAULT: ServiceConditionDetailMeta = {
   ],
 };
 
+/** Slug-based condition IDs map to legacy catalog keys for shared rich content. */
+const CONDITION_META_ALIASES: Record<string, string> = {
+  psoriaz: 'cat-dermatologiya-psoriaz',
+  vitiligo: 'cat-dermatologiya-vitiligo',
+  'teri-allergiyasi': 'cat-dermatologiya-allergik-toshma-va-kontakt-dermatit',
+  ekzema: 'cat-dermatologiya-ekzema-va-atopik-dermatit',
+  'seboreyali-dermatit': 'cat-dermatologiya-seborreya-va-teri-zamburugi',
+};
+
+function resolveConditionCatalogKey(conditionId: string): string {
+  return CONDITION_META_ALIASES[conditionId] ?? conditionId;
+}
+
+function resolveConditionOverride(conditionId: string): Partial<ServiceConditionDetailMeta> {
+  const aliasKey = CONDITION_META_ALIASES[conditionId];
+  const direct = CONDITION_DETAIL_OVERRIDES[conditionId] ?? {};
+  if (!aliasKey) return direct;
+  const aliased = CONDITION_DETAIL_OVERRIDES[aliasKey] ?? {};
+  return { ...aliased, ...direct };
+}
+
+function conditionImage(slug: string): string {
+  return `/services/dermatologiya/conditions/${slug}.jpg`;
+}
+
 /** Aniq kasallik / muammo bo'yicha kengaytirilgan ma'lumot */
 export const CONDITION_DETAIL_OVERRIDES: Record<string, Partial<ServiceConditionDetailMeta>> = {
+  psoriaz: {
+    image: conditionImage('psoriaz'),
+  },
+  vitiligo: {
+    image: conditionImage('vitiligo'),
+  },
+  'teri-allergiyasi': {
+    image: conditionImage('teri-allergiyasi'),
+  },
+  ekzema: {
+    image: conditionImage('ekzema'),
+    fullDescription: L(
+      'Ekzema — terining surunkali yallig\'lanishi: qichish, qizarish, quruqlik va ba\'zan nam chiqarish. Stress, iqlim o\'zgarishi, agressiv kosmetika yoki allergenlar kuchaytirishi mumkin. Radeski klinikasida avvalo triggerlarni aniqlash, keyin parvarish rejasi va zarur bo\'lsa mahalliy yoki sistemli terapiya belgilanadi.',
+      'Экзема — хроническое воспаление кожи с зудом, покраснением и сухостью. Усиливается стрессом, климатом и раздражителями. В Radeski выявляют триггеры и назначают уход с местной или системной терапией.',
+      'Eczema is chronic skin inflammation with itch, redness and dryness. Triggers include stress, climate and irritants. At Radeski we identify triggers and prescribe care plus topical or systemic therapy when needed.',
+    ),
+    treatments: [
+      L('Emolient va yumshatuvchi parvarish', 'Эмоленты и смягчающий уход', 'Emollients and soothing care'),
+      L('Mahalliy yallig\'lanishga qarshi krem va moylar', 'Местные противовоспалительные средства', 'Topical anti-inflammatory creams'),
+      L('Triggerlarni bartaraf etish maslahati', 'Рекомендации по устранению триггеров', 'Trigger avoidance counseling'),
+    ],
+    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'det-derm' }],
+  },
+  'atopik-dermatit': {
+    image: conditionImage('atopik-dermatit'),
+    fullDescription: L(
+      'Atopik dermatit — bolalar va kattalarda uchraydigan surunkali qichish va quruq, sezgir teri. Oilaviy allergiya va astma bilan bog\'liq bo\'lishi mumkin. Radeski klinikasida yoshga mos parvarish, allergiya testlari va uzoq muddatli remissiya uchun individual reja tuziladi.',
+      'Атопический дерматит — хронический зуд и сухая чувствительная кожа у детей и взрослых. Часто сочетается с аллергией в анамнезе. В Radeski составляют возрастной уход, аллергопробы и план длительной ремиссии.',
+      'Atopic dermatitis causes chronic itch and dry, sensitive skin in children and adults, often with allergy history. At Radeski we plan age-appropriate care, allergy testing and long-term remission strategy.',
+    ),
+    treatments: [
+      L('Bolalar va kattalar uchun emolientlar', 'Эмоленты для детей и взрослых', 'Emollients for children and adults'),
+      L('Allergo-proba va triggerlarni aniqlash', 'Аллергопробы и выявление триггеров', 'Allergy testing and trigger mapping'),
+      L('Surunkali kuzatuv va parvarish rejasi', 'Длительное наблюдение и план ухода', 'Long-term follow-up and care plan'),
+    ],
+    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'det-derm' }],
+  },
+  'teri-doglari': {
+    image: conditionImage('teri-doglari'),
+    priceCategoryIds: ['fotoomolozhenie-ipl-lumecca', 'hooywood-spectra-lechenie-pigmentatsii-post-akne', 'konsultatsii'],
+    fullDescription: L(
+      'Teri dog\'lari — melasma, post-akne pigmentatsiyasi, freckle va quyosh dog\'lari. Sabab: gormonlar, UV nurlanish, yallig\'lanishdan keyingi rang o\'zgarishi. Radeski klinikasida avvalo xavfsizlik baholanadi, keyin IPL, lazer yoki biorevitalizatsiya protokollari tanlanadi.',
+      'Пигментные пятна — мелasma, постакне, веснушки и солнечная пигментация. Причины: гормоны, УФ, воспаление. В Radeski оценивают безопасность и подбирают IPL, лазер или биоревитализацию.',
+      'Skin spots include melasma, post-acne pigmentation, freckles and sun spots from hormones, UV and inflammation. At Radeski safety is assessed first, then IPL, laser or biorevitalization protocols are chosen.',
+    ),
+    treatments: [
+      L('IPL foto-yangilash (InMode Lumecca)', 'IPL-фотоомоложение (InMode Lumecca)', 'IPL photo-rejuvenation (InMode Lumecca)'),
+      L('Hollywood Spectra pigment protokollari', 'Протоколы Hollywood Spectra для пигмента', 'Hollywood Spectra pigmentation protocols'),
+      L('Quyosh himoyasi va parvarish rejasi', 'Солнцезащита и план ухода', 'Sun protection and care plan'),
+    ],
+    serviceLinks: [
+      { categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' },
+      { categoryId: 'apparatnaya-kosmetologiya', subId: 'hollywood-spectra' },
+    ],
+  },
+  acne: {
+    image: conditionImage('acne'),
+    priceCategoryIds: ['konsultatsii', 'esteticheskaya-kosmetologiya', 'inektsionnaya-kosmetologiya'],
+    fullDescription: L(
+      'Acne (ugri) — folikula va yog\' bezlarining yallig\'lanishi: qizil toshmalar, qopqora nuqtalar, ba\'zan chandiqlar. Gormonlar, stress va noto\'g\'ri parvarish kuchaytiradi. Radeski klinikasida dermatolog akne turini baholaydi — keyin dori-darmon, parvarish va apparat muolajalari kombinatsiyasi qo\'llaniladi.',
+      'Акне — воспаление фолликулов и сальных желез: угри, комедоны, рубцы. В Radeski дерматолог определяет тип акне и назначает сочетание медикаментов, ухода и аппаратных процедур.',
+      'Acne is follicle and sebaceous gland inflammation — pimples, comedones and sometimes scars. At Radeski a dermatologist classifies acne type and combines medication, care and device treatments.',
+    ),
+    treatments: [
+      L('Mahalliy va og\'ir holatda sistemli terapiya', 'Местная и при необходимости системная терапия', 'Topical and systemic therapy when needed'),
+      L('Ultratovush tozalash va apparat protokollari', 'Ультразвуковая чистка и аппаратные протоколы', 'Ultrasonic cleansing and device protocols'),
+      L('Parvarish va diet bo\'yicha maslahat', 'Рекомендации по уходу и питанию', 'Care and lifestyle guidance'),
+    ],
+    serviceLinks: [
+      { categoryId: 'apparatnaya-kosmetologiya', subId: 'ultratovush-yuz' },
+      { categoryId: 'apparatnaya-kosmetologiya', subId: 'hollywood-spectra' },
+    ],
+  },
+  rozasea: {
+    image: conditionImage('rozasea'),
+    priceCategoryIds: ['derma-v-sosudistyy-lazer-lechenie-sosudistyh-zvezdochek-kuperoza-i-rozatsii', 'fotoomolozhenie-ipl-lumecca', 'konsultatsii'],
+    fullDescription: L(
+      'Rozasea — yuzda doimiy yoki vaqtinchalik qizarish, kengaygan qon tomirlari, ba\'zan toshmalar va sezgirlik. Issiqlik, alkogol, achchiq taom va stress kuchaytirishi mumkin. Radeski klinikasida Derma V vaskulyar lazer, IPL va parvarish protokollari bilan holat nazorat qilinadi.',
+      'Розацеа — покраснение лица, сосудистая сетка, высыпания и чувствительность. В Radeski применяют сосудистый лазер Derma V, IPL и протоколы ухода.',
+      'Rosacea causes facial redness, visible vessels, bumps and sensitivity. At Radeski Derma V vascular laser, IPL and care protocols help control flares.',
+    ),
+    treatments: [
+      L('Derma V vaskulyar lazer', 'Сосудистый лазер Derma V', 'Derma V vascular laser'),
+      L('IPL foto-yangilash', 'IPL-фотоомоложение', 'IPL photo-rejuvenation'),
+      L('Triggerlardan saqlanish va parvarish', 'Исключение триггеров и уход', 'Trigger avoidance and skincare'),
+    ],
+    serviceLinks: [{ categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' }],
+  },
+  postacne: {
+    image: conditionImage('postacne'),
+    priceCategoryIds: ['lazernaya-ablyatsionnaya-shlifovka-kozhi-poverhnostnaya', 'inektsionnaya-kosmetologiya', 'hooywood-spectra-lechenie-pigmentatsii-post-akne'],
+    fullDescription: L(
+      'Postacne — akne davolanganidan keyin qolgan chandiqlar, ko\'ngillik va pigment dog\'lari. Teri tekisligi va rangi buziladi. Radeski klinikasida lazer resurfacing, biorevitalizatsiya va pigment protokollari chuqur va yuzaki o\'zgarishlarni bosqichma-bosqich yaxshilaydi.',
+      'Постакне — рубцы, воронки и пигментация после акне. В Radeski лазерная шлифовка, биоревитализация и протоколы для пигмента постепенно улучшают рельеф и тон.',
+      'Post-acne leaves scars, pits and pigmentation after active acne. At Radeski laser resurfacing, biorevitalization and pigment protocols gradually improve texture and tone.',
+    ),
+    treatments: [
+      L('Lazer resurfacing va biorevitalizatsiya', 'Лазерная шлифовка и биоревitalizatsiya', 'Laser resurfacing and biorevitalization'),
+      L('Hollywood Spectra post-akne protokollari', 'Протоколы Hollywood Spectra при постакне', 'Hollywood Spectra post-acne protocols'),
+      L('Uy parvarishi va quyosh himoyasi', 'Домашний уход и SPF', 'Home care and sun protection'),
+    ],
+    serviceLinks: [
+      { categoryId: 'apparatnaya-kosmetologiya', subId: 'hollywood-spectra' },
+      { categoryId: 'in-ekcionnaya-kosmetologiya', subId: 'biorev' },
+    ],
+  },
+  'seboreyali-dermatit': {
+    image: conditionImage('seboreyali-dermatit'),
+  },
+  'yuz-qizarishi': {
+    image: conditionImage('yuz-qizarishi'),
+    priceCategoryIds: ['derma-v-sosudistyy-lazer-lechenie-sosudistyh-zvezdochek-kuperoza-i-rozatsii', 'fotoomolozhenie-ipl-lumecca', 'konsultatsii'],
+    fullDescription: L(
+      'Yuz qizarishi — rozasea, kuperoz, sezgir teri yoki post-protsedura reaksiyasi sababli paydo bo\'lishi mumkin. Kengaygan kapillyarlar ko\'rinadi, issiqlik va stress holatni kuchaytiradi. Radeski klinikasida sabab aniqlangach, lazer, IPL va yumshoq parvarish protokollari tanlanadi.',
+      'Покраснение лица может быть при розацеа, куперозе или чувствительной коже. В Radeski после выявления причины назначают лазер, IPL и щадящий уход.',
+      'Facial redness may come from rosacea, couperose or sensitive skin. At Radeski the cause is identified first, then laser, IPL and gentle care protocols are selected.',
+    ),
+    treatments: [
+      L('Vaskulyar lazer (Derma V)', 'Сосудистый лазер (Derma V)', 'Vascular laser (Derma V)'),
+      L('IPL va yuz parvarishi', 'IPL и уход за лицом', 'IPL and facial care'),
+      L('Triggerlarni kamaytirish bo\'yicha maslahat', 'Советы по снижению триггеров', 'Advice on reducing triggers'),
+    ],
+    serviceLinks: [{ categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' }],
+  },
+  'teri-qichishi': {
+    image: conditionImage('teri-qichishi'),
+    priceCategoryIds: ['konsultatsii', 'allergo-proba-10-punktov', 'laboratoriya'],
+    fullDescription: L(
+      'Terning qichishi (pruritus) — ekzema, allergiya, quruq teri, zamburug\' yoki ichki kasallik belgisi bo\'lishi mumkin. O\'z-o\'zidan krem surish ba\'zan sababni yashiradi. Radeski klinikasida dermatolog ko\'rigi, kerak bo\'lsa allergo-test va laboratoriya yordamida asosiy sabab aniqlanadi.',
+      'Зуд кожи может быть симптомом экземы, аллергии, сухости или грибка. В Radeski дерматолог проводит осмотр, аллергопробы и анализы для выявления причины.',
+      'Skin itching may signal eczema, allergy, dryness or fungal infection. At Radeski a dermatologist exam plus allergy tests and labs identify the underlying cause.',
+    ),
+    treatments: [
+      L('Sababga qarab mahalliy yoki sistemli terapiya', 'Местная или системная терапия по причине', 'Cause-based topical or systemic therapy'),
+      L('Allergo-proba va laboratoriya', 'Аллергопробы и лаборатория', 'Allergy testing and labs'),
+      L('Emolient va yumshoq parvarish', 'Эмоленты и мягкий уход', 'Emollients and gentle care'),
+    ],
+    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'det-derm' }],
+  },
   'cat-dermatologiya-psoriaz': {
     image: galleryImage(1),
     priceCategoryIds: ['fototerapiya', 'konsultatsii', 'laboratoriya'],
@@ -404,8 +568,9 @@ export function resolveConditionDetailMeta(
   categoryId: string,
   subCatalogKey?: string | null,
 ): ServiceConditionDetailMeta {
-  const override = CONDITION_DETAIL_OVERRIDES[conditionId] ?? {};
-  const whyRadeski = CONDITION_WHY_RADESKI[conditionId];
+  const catalogKey = resolveConditionCatalogKey(conditionId);
+  const override = resolveConditionOverride(conditionId);
+  const whyRadeski = CONDITION_WHY_RADESKI[catalogKey] ?? CONDITION_WHY_RADESKI[conditionId];
   const subDefault = subCatalogKey ? SUB_CONDITION_DEFAULTS[subCatalogKey] : undefined;
   const catDefault = CATEGORY_CONDITION_DEFAULTS[categoryId] ?? GLOBAL_DEFAULT;
   const base = subDefault ?? catDefault;

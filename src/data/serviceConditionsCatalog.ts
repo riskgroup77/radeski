@@ -104,44 +104,105 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
   dermatologiya: {
     uz: [
       {
+        id: 'psoriaz',
         title: 'Psoriaz',
         description:
-          'Psoriaz — autoimmun xarakterli surunkali teri kasalligi bo\'lib, qizil dog\'lar va qalqonsimon oq-qizil qoplama bilan namoyon bo\'ladi. Tizza, tirsak, bosh terisi va tana qismlarida uchraydi. Radeski klinikasida fototerapiya (UVB 311 nm), mahalliy terapiya va og\'ir holatlarda immunobiologik preparatlar qo\'llaniladi. Maqsad — asoratlarni kamaytirish va remissiya muddatini uzaytirish.',
+          'Psoriaz — immun tizimi faoliyati buzilishi bilan bog\'liq surunkali kasallik. Qizil dog\'lar va qalqonsimon qoplama tizza, tirsak va bosh terisida paydo bo\'ladi. Radeski klinikasida UVB fototerapiya, mahalliy terapiya va og\'ir holatlarda immunobiologik preparatlar qo\'llaniladi.',
       },
       {
+        id: 'vitiligo',
         title: 'Vitiligo',
         description:
-          'Vitiligo — terida pigment (melanin) yo\'qolishi natijasida oq dog\'lar paydo bo\'lishi. Immun tizimi melanotsitlarga ta\'sir qiladi. Tor to\'lqinli UVB fototerapiya pigment qayta tiklanishini rag\'batlantiradi. Davolash uzoq muddatli, individual rejim asosida olib boriladi.',
+          'Vitiligo — terida pigment yo\'qolishi natijasida oq, chegarasi aniq dog\'lar hosil bo\'lishi. Yuz, qo\'llar va tizzalarda ko\'p uchraydi. Tor to\'lqinli UVB va Excimer lazer repigmentatsiyani rag\'batlantiradi.',
       },
       {
-        title: 'Ekzema va atopik dermatit',
+        id: 'teri-allergiyasi',
+        title: 'Teri allergiyasi',
         description:
-          'Ekzema — qichish, qizarish va teri quruqligi bilan kechadigan surunkali yallig\'lanish. Atopik dermatit bolalarda ham katta yoshlarda ham uchraydi. Allergenlarni aniqlash, parvarish rejasi va zarur bo\'lsa dori-darmonlar bilan kompleks yondashuv qo\'llaniladi.',
+          'Teri allergiyasi — kosmetika, oziq-ovqat, metall yoki muhit moddalariga reaksiya: qizarish, qichish va toshma. Allergo-testlar, triggerlarni aniqlash va maxsus terapiya rejalashtiriladi.',
       },
       {
-        title: 'Allergik toshma va kontakt dermatit',
+        id: 'ekzema',
+        title: 'Ekzema',
         description:
-          'Allergik reaksiyalar mahsulotlar, oziq-ovqat yoki muhit allergenlari bilan bog\'liq bo\'lishi mumkin. Teri qizaradi, qichishadi va toshma chiqadi. Allergiya testlari, triggerlarni aniqlash va maxsus terapiya rejalashtiriladi.',
+          'Ekzema — surunkali yallig\'lanish bilan qichish, qizarish va teri quruqligi. Stress, iqlim va tirnashchi moddalar kuchaytirishi mumkin. Parvarish rejasi va mahalliy terapiya asosiy yondashuv.',
       },
       {
-        title: 'Seborreya va teri zamburug\'i',
+        id: 'atopik-dermatit',
+        title: 'Atopik dermatit',
         description:
-          'Seborreya — yog\'li teri, qichish va qalqonsimon qoplama bilan kechadi, ko\'pincha bosh terisida. Zamburug\'i (mikoz) tirnoq va teri qatlamlarini zararlaydi. Antifungal va yallig\'lanishga qarshi davolash, shuningdek parvarish tavsiyalari beriladi.',
+          'Atopik dermatit — bolalar va kattalarda uchraydigan surunkali qichish va quruq teri. Allergiya anamnezi bilan bog\'liq bo\'lishi mumkin. Emolientlar, triggerlardan saqlanish va shifokor nazoratidagi terapiya.',
+      },
+      {
+        id: 'teri-doglari',
+        title: "Teri dog'lari (pigmentatsiya)",
+        description:
+          'Pigment dog\'lari — melasma, post-akne dog\'lari va quyosh ta\'siridan rang o\'zgarishi. Dermatolog ko\'rigi va apparat muolajalari (IPL, lazer) individual tanlanadi.',
+      },
+      {
+        id: 'acne',
+        title: 'Acne (ugri)',
+        description:
+          'Acne — folikula va yog\' bezlarining yallig\'lanishi: qizil toshmalar, qopqora nuqtalar va ba\'zan chandiqlar. Gormonlar, stress va noto\'g\'ri parvarish kuchaytiradi. Kompleks davolash — dori, parvarish va apparat.',
+      },
+      {
+        id: 'rozasea',
+        title: 'Rozasea',
+        description:
+          'Rozasea — yuzda doimiy qizarish, kengaygan qon tomirlari va ba\'zan toshmalar. Issiqlik, alkogol va stress kuchaytirishi mumkin. IPL, vaskulyar lazer va parvarish protokollari qo\'llaniladi.',
+      },
+      {
+        id: 'postacne',
+        title: 'Postacne',
+        description:
+          'Postacne — akne tugagach qolgan chandiqlar, ko\'ngillik va pigment dog\'lari. Lazer resurfacing, biorevitalizatsiya va apparatli protokollar teri tekisligini tiklashga yordam beradi.',
+      },
+      {
+        id: 'seboreyali-dermatit',
+        title: 'Seboreyali dermatit',
+        description:
+          'Seboreyali dermatit — bosh terisi va yuzda yog\'li teri, qichish va qalqonsimon qoplama. Stress va zamburug\' faolligi kuchaytirishi mumkin. Antifungal va yallig\'lanishga qarshi terapiya.',
+      },
+      {
+        id: 'yuz-qizarishi',
+        title: 'Yuz qizarishi',
+        description:
+          'Yuz qizarishi — rozasea, kuperoz yoki sezgir teri sababli doimiy yoki vaqtinchalik qizillik. Qon tomirlari kengaygan bo\'lsa, lazer va IPL muolajalari ko\'rsatiladi.',
+      },
+      {
+        id: 'teri-qichishi',
+        title: 'Terning qichishi',
+        description:
+          'Terning qichishi (pruritus) — ekzema, allergiya, quruq teri yoki ichki kasallik belgisi bo\'lishi mumkin. Sababni aniqlash uchun dermatolog ko\'rigi va kerak bo\'lsa qo\'shimcha tekshiruvlar o\'tkaziladi.',
       },
     ],
     ru: [
-      { title: 'Псориаз', description: 'Хроническое аутоиммунное заболевание с красными бляшками и шелушением. Лечение: фототерапия UVB, местная терапия, биологические препараты при тяжелом течении.' },
-      { title: 'Витилиго', description: 'Потеря пигмента с белыми пятнами на коже. Узкополосная UVB-фототерапия стимулирует репигментацию по индивидуальному плану.' },
-      { title: 'Экзема и атопический дерматит', description: 'Хроническое воспаление с зудом и сухостью. Комплексный подход: выявление триггеров, уход и медикаментозная терапия.' },
-      { title: 'Аллергический дерматит', description: 'Кожные высыпания при контакте с аллергенами. Диагностика, исключение триггеров и целенаправленное лечение.' },
-      { title: 'Себорея и микоз', description: 'Жирная кожа, перхоть, грибковые поражения. Противогрибковая и противовоспалительная терапия с рекомендациями по уходу.' },
+      { id: 'psoriaz', title: 'Псориаз', description: 'Хроническое иммунное заболевание с красными бляшками и шелушением. Лечение: UVB-фототерапия, местная терапия, биологические препараты.' },
+      { id: 'vitiligo', title: 'Витилиго', description: 'Белые чёткие пятна при гибели меланоцитов. Узкополосный UVB и эксимер стимулируют репигментацию.' },
+      { id: 'teri-allergiyasi', title: 'Аллергия кожи', description: 'Кожные реакции на косметику, продукты и раздражители. Аллергопробы и целенаправленная терапия.' },
+      { id: 'ekzema', title: 'Экзема', description: 'Хроническое воспаление с зудом и покраснением. Уход и местная терапия по индивидуальному плану.' },
+      { id: 'atopik-dermatit', title: 'Атопический дерматит', description: 'Хронический зуд и сухость кожи у детей и взрослых. Эмоленты и контроль триггеров.' },
+      { id: 'teri-doglari', title: 'Пигментные пятна', description: 'Мелasma, постакне и солнечная пигментация. Осмотр и аппаратные методы (IPL, лазер).' },
+      { id: 'acne', title: 'Акне', description: 'Воспаление фолликулов: угри, комедоны. Комплекс: медикаменты, уход и аппаратные процедуры.' },
+      { id: 'rozasea', title: 'Розацеа', description: 'Покраснение лица, сосуды, высыпания. IPL, сосудистый лазер и уход.' },
+      { id: 'postacne', title: 'Постакне', description: 'Рубцы и пигментация после акне. Лазерное обновление и биоревитализация.' },
+      { id: 'seboreyali-dermatit', title: 'Себорейный дерматит', description: 'Жирная кожа, перхоть, зуд. Противовоспалительная и противогрибковая терапия.' },
+      { id: 'yuz-qizarishi', title: 'Покраснение лица', description: 'Розацеа, купероз или чувствительная кожа. Лазер и IPL при расширенных сосудах.' },
+      { id: 'teri-qichishi', title: 'Зуд кожи', description: 'Может быть симптомом экземы, аллергии или сухости. Диагностика и лечение причины.' },
     ],
     en: [
-      { title: 'Psoriasis', description: 'Chronic autoimmune disease with red plaques and scaling. Treatment includes UVB phototherapy, topical therapy and biologics for severe cases.' },
-      { title: 'Vitiligo', description: 'Loss of pigment causing white patches. Narrow-band UVB phototherapy stimulates repigmentation on an individual plan.' },
-      { title: 'Eczema and atopic dermatitis', description: 'Chronic inflammation with itching and dryness. Comprehensive approach: trigger identification, care and medication.' },
-      { title: 'Allergic dermatitis', description: 'Skin rashes from allergen contact. Diagnostics, trigger avoidance and targeted treatment.' },
-      { title: 'Seborrhea and fungal infections', description: 'Oily skin, dandruff and mycosis. Antifungal and anti-inflammatory therapy with care guidance.' },
+      { id: 'psoriaz', title: 'Psoriasis', description: 'Chronic immune-mediated plaques and scaling. UVB phototherapy, topicals and biologics for severe cases.' },
+      { id: 'vitiligo', title: 'Vitiligo', description: 'Sharply bordered white patches from melanocyte loss. Narrow-band UVB and Excimer laser support repigmentation.' },
+      { id: 'teri-allergiyasi', title: 'Skin allergy', description: 'Reactions to cosmetics, food and irritants. Allergy testing and targeted therapy.' },
+      { id: 'ekzema', title: 'Eczema', description: 'Chronic inflammation with itch and redness. Care plan and topical therapy.' },
+      { id: 'atopik-dermatit', title: 'Atopic dermatitis', description: 'Chronic itch and dryness in children and adults. Emollients and trigger control.' },
+      { id: 'teri-doglari', title: 'Skin spots (pigmentation)', description: 'Melasma, post-acne and sun spots. Exam and device treatments (IPL, laser).' },
+      { id: 'acne', title: 'Acne', description: 'Follicle inflammation: pimples and comedones. Combined medical, care and device approach.' },
+      { id: 'rozasea', title: 'Rosacea', description: 'Facial redness, vessels and bumps. IPL, vascular laser and care protocols.' },
+      { id: 'postacne', title: 'Post-acne', description: 'Scars and pigmentation after acne. Laser renewal and biorevitalization.' },
+      { id: 'seboreyali-dermatit', title: 'Seborrheic dermatitis', description: 'Oily skin, flaking and itch. Anti-inflammatory and antifungal therapy.' },
+      { id: 'yuz-qizarishi', title: 'Facial redness', description: 'Rosacea, couperose or sensitive skin. Laser and IPL for visible vessels.' },
+      { id: 'teri-qichishi', title: 'Skin itching', description: 'May signal eczema, allergy or dryness. Diagnosis and cause-based treatment.' },
     ],
   },
   dermatoskopiya: {

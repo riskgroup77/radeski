@@ -5,6 +5,7 @@ export type PageId =
   | 'home'
   | 'about'
   | 'services'
+  | 'conditions'
   | 'doctors'
   | 'prices'
   | 'articles'
@@ -219,6 +220,7 @@ export function getPageFromPathname(pathname: string): PageId {
   if (
     pageSegment === 'about' ||
     pageSegment === 'services' ||
+    pageSegment === 'conditions' ||
     pageSegment === 'doctors' ||
     pageSegment === 'prices' ||
     pageSegment === 'videos' ||
@@ -258,6 +260,22 @@ export function promoServicePath(locale: Locale, promoSlug: string): string {
 export function getPromoSlugFromPathname(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
   if (segments.length >= 3 && segments[1] === 'promo') {
+    try {
+      return decodeURIComponent(segments[2]);
+    } catch {
+      return segments[2];
+    }
+  }
+  return null;
+}
+
+export function conditionPath(locale: Locale, slug: string): string {
+  return `/${locale}/conditions/${encodeURIComponent(slug)}`;
+}
+
+export function getConditionSlugFromPathname(pathname: string): string | null {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length >= 3 && segments[1] === 'conditions') {
     try {
       return decodeURIComponent(segments[2]);
     } catch {

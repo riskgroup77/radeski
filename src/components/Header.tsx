@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Phone, MapPin, ChevronDown, Clock } from 'lucide-react';
+import { Menu, X, Globe, Phone, MapPin, ChevronDown, ChevronRight, Clock } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import {
@@ -22,14 +22,20 @@ import {
   type InstitutionalNavSection,
 } from '../data/institutionalNavContent';
 import {
+  DERMATOLOGY_CATEGORY_ID,
+  DERMATOLOGY_CONDITION_NAV,
+} from '../data/dermatologyConditionsNav';
+import {
   PageId,
   pagePath,
   serviceCategoryPath,
   servicesListPath,
+  conditionPath,
   brandPath,
   daavlinModelPath,
   daavlinSectionPath,
   getServiceCategoryIdFromPathname,
+  getConditionSlugFromPathname,
   getDaavlinModelIdFromPathname,
   type DaavlinModelId,
 } from '../routing/paths';
@@ -144,6 +150,8 @@ export default function Header({
   const [isMobileInstitutionalOpen, setIsMobileInstitutionalOpen] = useState<InstitutionalNavId | null>(
     null,
   );
+  const [isDermConditionsFlyoutOpen, setIsDermConditionsFlyoutOpen] = useState(false);
+  const [isMobileDermConditionsOpen, setIsMobileDermConditionsOpen] = useState(false);
   const location = useLocation();
   const d = DICTIONARY[locale];
   const topBar = getHeaderTopBarContacts(locale);
@@ -152,6 +160,7 @@ export default function Header({
   const mapOpenLabel =
     locale === 'ru' ? 'Открыть на карте' : locale === 'en' ? 'Open in map' : 'Xaritada ochish';
   const activeServiceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
+  const activeConditionSlug = getConditionSlugFromPathname(location.pathname);
   const activeDaavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
   const daavlinModels = DAAVLIN_NAV_LINEUP;
 
@@ -165,6 +174,13 @@ export default function Header({
 
   const allServicesLabel =
     locale === 'uz' ? "Barcha xizmatlar ro'yxati" : locale === 'ru' ? 'Все услуги' : 'All services';
+
+  const dermConditionsTitle =
+    locale === 'uz'
+      ? 'Dermatologik holatlar'
+      : locale === 'ru'
+        ? 'Дерматологические состояния'
+        : 'Dermatology conditions';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -181,6 +197,8 @@ export default function Header({
     setIsMobileDaavlinOpen(false);
     setIsMobileInstitutionalOpen(null);
     setIsServicesDropdownOpen(false);
+    setIsDermConditionsFlyoutOpen(false);
+    setIsMobileDermConditionsOpen(false);
     setIsAboutDropdownOpen(false);
     setIsDaavlinDropdownOpen(false);
     setActiveMegaMenu(null);
@@ -229,6 +247,150 @@ export default function Header({
         ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
+
+  const conditionDropdownItemClass = (slug: string) =>
+    `block px-4 py-2 text-[12px] font-medium transition-colors hover:bg-brand-offwhite ${
+      activeConditionSlug === slug
+        ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
+        : 'text-brand-text-secondary hover:text-brand-text-primary'
+    }`;
+
+  const renderServiceDropdownItem = (category: ServiceCategory) => {
+    if (category.id === DERMATOLOGY_CATEGORY_ID) {
+      return (
+        <div
+          key={category.id}
+          className="relative"
+          onMouseEnter={() => setIsDermConditionsFlyoutOpen(true)}
+          onMouseLeave={() => setIsDermConditionsFlyoutOpen(false)}
+        >
+          <Link
+            to={serviceCategoryPath(locale, category.id)}
+            role="menuitem"
+            onClick={() => {
+              onOpenServiceCategory?.(category.id);
+              setIsServicesDropdownOpen(false);
+              setIsDermConditionsFlyoutOpen(false);
+            }}
+            className={`${serviceDropdownItemClass(category.id)} flex items-center justify-between gap-2`}
+          >
+            <span>{category.title[locale] || category.title.uz}</span>
+            <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
+          </Link>
+
+          {isDermConditionsFlyoutOpen && (
+            <div className="absolute left-full top-0 pl-1 z-[210]">
+              <div
+                className="min-w-[250px] max-w-[290px] max-h-[min(70vh,420px)] overflow-y-auto bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-left-2 duration-200"
+                role="menu"
+              >
+                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
+                  {dermConditionsTitle}
+                </p>
+                {DERMATOLOGY_CONDITION_NAV.map((item) => (
+                  <Link
+                    key={item.slug}
+                    to={conditionPath(locale, item.slug)}
+                    role="menuitem"
+                    onClick={() => {
+                      setIsServicesDropdownOpen(false);
+                      setIsDermConditionsFlyoutOpen(false);
+                    }}
+                    className={conditionDropdownItemClass(item.slug)}
+                  >
+                    {item.label[locale]}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <Link
+        key={category.id}
+        to={serviceCategoryPath(locale, category.id)}
+        role="menuitem"
+        onClick={() => {
+          onOpenServiceCategory?.(category.id);
+          setIsServicesDropdownOpen(false);
+        }}
+        className={serviceDropdownItemClass(category.id)}
+      >
+        {category.title[locale] || category.title.uz}
+      </Link>
+    );
+  };
+
+  const renderMobileServiceCategoryItem = (category: ServiceCategory) => {
+    if (category.id !== DERMATOLOGY_CATEGORY_ID) {
+      return (
+        <Link
+          key={category.id}
+          to={serviceCategoryPath(locale, category.id)}
+          onClick={() => {
+            onOpenServiceCategory?.(category.id);
+            setIsMobileServicesOpen(false);
+            setIsMobileMenuOpen(false);
+          }}
+          className={`px-3 py-2.5 rounded-lg text-sm transition-colors ${serviceDropdownItemClass(category.id)}`}
+        >
+          {category.title[locale] || category.title.uz}
+        </Link>
+      );
+    }
+
+    return (
+      <div key={category.id} className="rounded-lg overflow-hidden">
+        <div className="flex items-center">
+          <Link
+            to={serviceCategoryPath(locale, category.id)}
+            onClick={() => {
+              onOpenServiceCategory?.(category.id);
+              setIsMobileServicesOpen(false);
+              setIsMobileMenuOpen(false);
+            }}
+            className={`flex-1 px-3 py-2.5 rounded-lg text-sm transition-colors ${serviceDropdownItemClass(category.id)}`}
+          >
+            {category.title[locale] || category.title.uz}
+          </Link>
+          <button
+            type="button"
+            onClick={() => setIsMobileDermConditionsOpen((open) => !open)}
+            className="mr-1 rounded-lg p-2.5 text-brand-text-secondary hover:bg-brand-offwhite"
+            aria-expanded={isMobileDermConditionsOpen}
+            aria-label={dermConditionsTitle}
+          >
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${
+                isMobileDermConditionsOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+        </div>
+        {isMobileDermConditionsOpen && (
+          <div className="ml-3 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 pb-1">
+            {DERMATOLOGY_CONDITION_NAV.map((item) => (
+              <Link
+                key={item.slug}
+                to={conditionPath(locale, item.slug)}
+                onClick={() => {
+                  setIsMobileDermConditionsOpen(false);
+                  setIsMobileServicesOpen(false);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`px-3 py-2 rounded-lg text-xs transition-colors ${conditionDropdownItemClass(item.slug)}`}
+              >
+                {item.label[locale]}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const daavlinModelItemClass = (modelId: string) =>
     `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite ${
@@ -513,20 +675,7 @@ export default function Header({
               <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
                 {servicesDropdownTitle}
               </p>
-              {navServiceCategories.map((category) => (
-                <Link
-                  key={category.id}
-                  to={serviceCategoryPath(locale, category.id)}
-                  role="menuitem"
-                  onClick={() => {
-                    onOpenServiceCategory?.(category.id);
-                    setIsServicesDropdownOpen(false);
-                  }}
-                  className={serviceDropdownItemClass(category.id)}
-                >
-                  {category.title[locale] || category.title.uz}
-                </Link>
-              ))}
+              {navServiceCategories.map((category) => renderServiceDropdownItem(category))}
               <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
                 <Link
                   to={servicesListPath(locale)}
@@ -683,20 +832,7 @@ export default function Header({
             <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-gold">
               {servicesDropdownTitle}
             </p>
-            {navServiceCategories.map((category) => (
-              <Link
-                key={category.id}
-                to={serviceCategoryPath(locale, category.id)}
-                onClick={() => {
-                  onOpenServiceCategory?.(category.id);
-                  setIsMobileServicesOpen(false);
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`px-3 py-2.5 rounded-lg text-sm transition-colors ${serviceDropdownItemClass(category.id)}`}
-              >
-                {category.title[locale] || category.title.uz}
-              </Link>
-            ))}
+            {navServiceCategories.map((category) => renderMobileServiceCategoryItem(category))}
             <Link
               to={servicesListPath(locale)}
               onClick={() => {

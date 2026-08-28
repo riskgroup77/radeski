@@ -13,6 +13,7 @@ import {
   daavlinSectionPath,
   daavlinModelPath,
   promoServicePath,
+  conditionPath,
   normalizeCanonicalPath,
   getLocaleFromPathname,
 } from '../routing/paths';
@@ -27,6 +28,7 @@ export type RouteSeoContext = {
   serviceCategoryId?: string | null;
   serviceSubId?: string | null;
   promoSlug?: string | null;
+  conditionSlug?: string | null;
   daavlinSection?: DaavlinSectionId;
   daavlinModelId?: DaavlinModelId | null;
   /** Stable public route key for articles (art-* or slug, never UUID). */
@@ -60,6 +62,10 @@ export function getCanonicalUrl(ctx: RouteSeoContext): string {
 export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): string {
   if (ctx.promoSlug) {
     return promoServicePath(altLocale, ctx.promoSlug);
+  }
+
+  if (ctx.conditionSlug) {
+    return conditionPath(altLocale, ctx.conditionSlug);
   }
 
   if (ctx.currentPage === 'daavlin-foto-kabinalari') {
