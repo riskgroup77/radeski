@@ -229,6 +229,56 @@ export default function Header({
     }
   };
 
+  const renderLanguageSwitcher = (variant: 'topbar' | 'main' = 'main') => {
+    const buttonClass =
+      variant === 'topbar'
+        ? 'flex items-center gap-1 px-2 py-1 rounded-md bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[10px] lg:text-[11px] xl:text-xs font-semibold text-slate-700 transition-all cursor-pointer'
+        : 'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 transition-all cursor-pointer';
+
+    return (
+      <div className="relative shrink-0">
+        <button
+          type="button"
+          onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+          className={buttonClass}
+          aria-expanded={isLangDropdownOpen}
+          aria-haspopup="menu"
+        >
+          <Globe className={variant === 'topbar' ? 'w-3.5 h-3.5 text-slate-500' : 'w-4 h-4 text-slate-500'} />
+          <span>{locale.toUpperCase()}</span>
+        </button>
+
+        {isLangDropdownOpen && (
+          <>
+            <div className="fixed inset-0 z-10" onClick={() => setIsLangDropdownOpen(false)} />
+            <div className="absolute right-0 mt-2 w-36 bg-white border border-slate-150 rounded-xl shadow-xl z-20 py-1 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+              {(['uz', 'ru', 'en'] as Locale[]).map((lang) => (
+                <button
+                  key={lang}
+                  type="button"
+                  onClick={() => {
+                    onChangeLocale(lang);
+                    setIsLangDropdownOpen(false);
+                  }}
+                  className={`w-full text-left px-4 py-2 text-xs font-medium transition-colors hover:bg-brand-offwhite flex items-center gap-2 cursor-pointer ${
+                    locale === lang
+                      ? 'text-brand-gold-dark font-bold bg-brand-gold-light/10'
+                      : 'text-brand-text-secondary'
+                  }`}
+                >
+                  <span className="w-5 text-center text-[10px] leading-none px-1 py-0.5 rounded bg-slate-100 text-slate-500 uppercase font-mono font-bold">
+                    {lang}
+                  </span>
+                  {getLanguageLabel(lang)}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    );
+  };
+
   const navLinkClass = (page: PageId) =>
     `px-1.5 xl:px-2 2xl:px-2.5 py-1.5 rounded-md text-[11px] xl:text-[12px] 2xl:text-[13px] font-medium transition-all cursor-pointer whitespace-nowrap leading-tight ${
       currentPage === page || (page === 'about' && currentPage === 'brend')
@@ -991,15 +1041,16 @@ export default function Header({
             </a>
           </div>
 
-          <div className="shrink-0 text-right whitespace-nowrap">
-            <span className="text-brand-gold font-semibold font-mono text-[11px] lg:text-xs xl:text-sm">
+          <div className="shrink-0 flex items-center gap-2 lg:gap-3">
+            <span className="text-brand-gold font-semibold font-mono text-[11px] lg:text-xs xl:text-sm whitespace-nowrap">
               {d.workingHoursValue}
             </span>
+            {renderLanguageSwitcher('topbar')}
           </div>
         </div>
       </div>
 
-      <div className="site-container flex items-center min-h-[52px] sm:min-h-[60px] gap-2 xl:gap-3">
+      <div className="header-main-row w-full flex items-center min-h-[52px] sm:min-h-[60px] gap-2 xl:gap-3 pl-2 pr-2 sm:pl-3 sm:pr-3 lg:pl-4 lg:pr-4 xl:pl-5 xl:pr-5">
         <div className="relative z-20 flex items-center gap-2 shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
           <Link
             to={pagePath(locale, 'home')}
@@ -1029,44 +1080,7 @@ export default function Header({
           {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalDesktopNav(sectionId))}
         </nav>
 
-        <div className="hidden sm:flex items-center gap-2 xl:gap-2.5 shrink-0 ml-auto xl:ml-0" onMouseEnter={() => setActiveMegaMenu(null)}>
-          <div className="relative">
-            <button
-              onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 transition-all cursor-pointer"
-            >
-              <Globe className="w-4 h-4 text-slate-500" />
-              <span>{locale.toUpperCase()}</span>
-            </button>
-
-            {isLangDropdownOpen && (
-              <>
-                <div className="fixed inset-0 z-10" onClick={() => setIsLangDropdownOpen(false)} />
-                <div className="absolute right-0 mt-2 w-36 bg-white border border-slate-150 rounded-xl shadow-xl z-20 py-1 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                  {(['uz', 'ru', 'en'] as Locale[]).map((lang) => (
-                    <button
-                      key={lang}
-                      onClick={() => {
-                        onChangeLocale(lang);
-                        setIsLangDropdownOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-2 text-xs font-medium transition-colors hover:bg-brand-offwhite flex items-center gap-2 cursor-pointer ${
-                        locale === lang
-                          ? 'text-brand-gold-dark font-bold bg-brand-gold-light/10'
-                          : 'text-brand-text-secondary'
-                      }`}
-                    >
-                      <span className="w-5 text-center text-[10px] leading-none px-1 py-0.5 rounded bg-slate-100 text-slate-500 uppercase font-mono font-bold">
-                        {lang}
-                      </span>
-                      {getLanguageLabel(lang)}
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-
+        <div className="hidden sm:flex items-center shrink-0 ml-auto" onMouseEnter={() => setActiveMegaMenu(null)}>
           <AppointmentBookingLink className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--nav bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl active:scale-[0.98] transition-colors cursor-pointer no-underline">
             {d.appointmentBtn}
           </AppointmentBookingLink>

@@ -302,6 +302,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
 }
 
+.header-main-row {
+  max-width: 100%;
+}
+
 .header-address-link {
   display: inline-flex;
   align-items: center;
