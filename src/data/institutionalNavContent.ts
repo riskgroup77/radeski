@@ -214,9 +214,9 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
   {
     id: 'tele-dermatology',
     pageId: 'tele-dermatology',
-    label: L('TeleDermatolog', 'TeleDermatolog', 'TeleDermatolog'),
-    navShort: L('TeleDermatolog', 'TeleDermatolog', 'TeleDermatolog'),
-    dropdownTitle: L('TeleDermatolog', 'TeleDermatolog', 'TeleDermatolog'),
+    label: L('TeleDermatologiya', 'Теледерматология', 'TeleDermatology'),
+    navShort: L('TeleDermatologiya', 'Теледерматология', 'TeleDermatology'),
+    dropdownTitle: L('TeleDermatologiya', 'Теледерматология', 'TeleDermatology'),
     dropdownHint: L(
       'Masofaviy dermatolog maslahati va onlayn teri kuzatuvi',
       'Дистанционная консультация и онлайн-сопровождение пациентов с заболеваниями кожи',
@@ -232,7 +232,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
       'Национальный центр патологии кожи',
       'National Center of Skin Pathology',
     ),
-    navShort: L('Patologiya', 'Патология', 'Pathology'),
+    navShort: L('DermaPath', 'DermaPath', 'DermaPath'),
     navSubtitle: L(
       'Teri patologiyasi milliy markazi',
       'Национальный центр патологии кожи',

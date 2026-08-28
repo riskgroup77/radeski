@@ -229,7 +229,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "malaka oshirish, sertifikatsiya kursi, master-klass, lazer trening, dermatologiya o'qitish, Radeski, Farg'ona",
     },
     'tele-dermatology': {
-      title: "TeleDermatolog | Radeski Skin Clinic",
+      title: "TeleDermatologiya | Radeski Skin Clinic",
       desc: "Masofaviy dermatolog maslahati, onlayn teri kuzatuvi va raqamli hamkorlik. Radeski Skin Clinic — Farg'ona | Qo'qon.",
       keywords: "teledermatolog, masofaviy dermatolog, onlayn dermatolog maslahati, Radeski, Farg'ona",
     },
@@ -339,7 +339,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "повышение квалификации, сертификационные курсы, мастер-классы, лазерное обучение, Radeski, Фергана",
     },
     'tele-dermatology': {
-      title: "TeleDermatolog | Radeski Skin Clinic",
+      title: "Теледерматология | Radeski Skin Clinic",
       desc: "Дистанционная консультация, онлайн-сопровождение и цифровое взаимодействие с пациентами. Radeski — Фергана | Коканд.",
       keywords: "teledermatolog, онлайн дерматолог, дистанционная консультация, Radeski, Фергана",
     },
@@ -449,7 +449,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "professional development, CME, certification courses, laser training, dermatology education, Radeski, Fergana",
     },
     'tele-dermatology': {
-      title: "TeleDermatolog | Radeski Skin Clinic",
+      title: "TeleDermatology | Radeski Skin Clinic",
       desc: "Remote dermatology consultations, online skin care follow-up, and digital care pathways. Radeski Skin Clinic — Fergana | Kokand.",
       keywords: "teledermatologist, online dermatology, remote dermatology consultation, Radeski, Fergana",
     },

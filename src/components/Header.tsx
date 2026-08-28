@@ -89,11 +89,11 @@ function getCompactAppointmentLabel(locale: Locale): string {
 }
 
 const INSTITUTIONAL_NAV_ORDER: InstitutionalNavId[] = [
+  'skin-pathology-center',
   'obrazovaniya',
   'malaka-oshirish',
   'science',
   'tele-dermatology',
-  'skin-pathology-center',
 ];
 
 function InstitutionalNavLabel({
