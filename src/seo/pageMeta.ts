@@ -204,9 +204,9 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "ta'lim, malaka oshirish, ordinatura, master-klass, dermatologiya o'qitish, Radeski, Farg'ona",
     },
     'tele-dermatology': {
-      title: "Teletibbiyot | Radeski Skin Clinic",
-      desc: "Masofaviy tibbiy maslahat, onlayn kuzatuv va raqamli hamkorlik. Radeski Skin Clinic — Farg'ona | Qo'qon.",
-      keywords: "teletibbiyot, onlayn maslahat, masofaviy konsultatsiya, Radeski, Farg'ona",
+      title: "TeleDermatolog | Radeski Skin Clinic",
+      desc: "Masofaviy dermatolog maslahati, onlayn teri kuzatuvi va raqamli hamkorlik. Radeski Skin Clinic — Farg'ona | Qo'qon.",
+      keywords: "teledermatolog, masofaviy dermatolog, onlayn dermatolog maslahati, Radeski, Farg'ona",
     },
     'skin-pathology-center': {
       title: "Teri patologiyasi milliy markazi | Radeski Skin Clinic",
@@ -309,9 +309,9 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "образование, повышение квалификации, ординатура, мастер-классы, обучение дерматологии, Radeski, Фергана",
     },
     'tele-dermatology': {
-      title: "Телемедицина | Radeski Skin Clinic",
-      desc: "Дистанционная медицинская консультация, онлайн-сопровождение и цифровое взаимодействие с пациентом. Radeski — Фергана | Коканд.",
-      keywords: "телемедицина, онлайн консультация, дистанционная консультация, Radeski, Фергана",
+      title: "TeleDermatolog | Radeski Skin Clinic",
+      desc: "Дистанционная консультация, онлайн-сопровождение и цифровое взаимодействие с пациентами. Radeski — Фергана | Коканд.",
+      keywords: "teledermatolog, онлайн дерматолог, дистанционная консультация, Radeski, Фергана",
     },
     'skin-pathology-center': {
       title: "Национальный центр патологии кожи | Radeski Skin Clinic",
@@ -414,9 +414,9 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "education, professional development, residency, masterclasses, dermatology training, Radeski, Fergana",
     },
     'tele-dermatology': {
-      title: "Telemedicine | Radeski Skin Clinic",
-      desc: "Remote medical consultations, online follow-up, and digital care pathways. Radeski Skin Clinic — Fergana | Kokand.",
-      keywords: "telemedicine, online consultation, remote consultation, Radeski, Fergana",
+      title: "TeleDermatolog | Radeski Skin Clinic",
+      desc: "Remote dermatology consultations, online skin care follow-up, and digital care pathways. Radeski Skin Clinic — Fergana | Kokand.",
+      keywords: "teledermatologist, online dermatology, remote dermatology consultation, Radeski, Fergana",
     },
     'skin-pathology-center': {
       title: "National Center of Skin Pathology | Radeski Skin Clinic",
