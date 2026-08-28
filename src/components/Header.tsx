@@ -1050,7 +1050,7 @@ export default function Header({
         </div>
       </div>
 
-      <div className="header-main-row w-full flex items-center min-h-[52px] sm:min-h-[60px] gap-2 xl:gap-3 pl-2 pr-2 sm:pl-3 sm:pr-3 lg:pl-4 lg:pr-4 xl:pl-5 xl:pr-5">
+      <div className="header-main-row w-full flex items-center min-h-[52px] sm:min-h-[60px] gap-2 xl:gap-3 pl-0 pr-0">
         <div className="relative z-20 flex items-center gap-2 shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
           <Link
             to={pagePath(locale, 'home')}
