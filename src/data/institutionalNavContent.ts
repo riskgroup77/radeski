@@ -8,6 +8,7 @@ const L = (uz: string, ru: string, en: string): L => ({ uz, ru, en });
 
 export type InstitutionalNavId =
   | 'obrazovaniya'
+  | 'malaka-oshirish'
   | 'science'
   | 'tele-dermatology'
   | 'skin-pathology-center';
@@ -17,6 +18,8 @@ export type InstitutionalNavTopic = {
   label: L;
   /** Optional anchor on the section landing page */
   hash?: string;
+  /** Link to another site page instead of the parent section */
+  targetPageId?: PageId;
 };
 
 export type InstitutionalNavSection = {
@@ -55,6 +58,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
       {
         id: 'continuing-education',
         label: L('Malaka oshirish', 'Повышение квалификации', 'Continuing medical education'),
+        targetPageId: 'malaka-oshirish',
       },
       {
         id: 'masterclasses',
@@ -95,6 +99,50 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
           'Международные образовательные программы',
           'International education programs',
         ),
+      },
+    ],
+  },
+  {
+    id: 'malaka-oshirish',
+    pageId: 'malaka-oshirish',
+    label: L('Malaka oshirish', 'Повышение квалификации', 'Professional development'),
+    navShort: L('Malaka oshirish', 'Повышение квалиф.', 'CME'),
+    dropdownTitle: L('Malaka oshirish yo‘nalishlari', 'Направления повышения квалификации', 'Development tracks'),
+    dropdownHint: L(
+      'Sertifikatsiya, master-klass, amaliy trening va lazer kurslari',
+      'Сертификация, мастер-классы, практические тренинги и лазерные курсы',
+      'Certification, masterclasses, hands-on training, and laser courses',
+    ),
+    topics: [
+      {
+        id: 'certification-courses',
+        label: L('Sertifikatsiya kurslari', 'Сертификационные курсы', 'Certification programs'),
+        hash: 'certification-courses',
+      },
+      {
+        id: 'residency',
+        label: L('Ordinatura va stajirovka', 'Ординатура и стажировка', 'Residency and internships'),
+        hash: 'residency',
+      },
+      {
+        id: 'masterclasses',
+        label: L('Master-klasslar', 'Мастер-классы', 'Masterclasses'),
+        hash: 'masterclasses',
+      },
+      {
+        id: 'hands-on-training',
+        label: L('Amaliy treninglar', 'Практические тренинги', 'Hands-on training'),
+        hash: 'hands-on-training',
+      },
+      {
+        id: 'laser-training',
+        label: L('Lazer texnologiyalari', 'Лазерные технологии', 'Laser technology training'),
+        hash: 'laser-training',
+      },
+      {
+        id: 'international-programs',
+        label: L('Xalqaro dasturlar', 'Международные программы', 'International programs'),
+        hash: 'international-programs',
       },
     ],
   },
@@ -215,6 +263,11 @@ export function institutionalTopicHref(
   section: InstitutionalNavSection,
   topic?: InstitutionalNavTopic,
 ): string {
+  if (topic?.targetPageId) {
+    const base = pagePath(locale, topic.targetPageId);
+    if (topic.hash) return `${base}#${topic.hash}`;
+    return base;
+  }
   const base = pagePath(locale, section.pageId);
   if (!topic) return base;
   return `${base}#${topic.hash ?? topic.id}`;

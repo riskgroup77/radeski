@@ -18,6 +18,7 @@ export type PageId =
   | 'dermoscan'
   | 'science'
   | 'obrazovaniya'
+  | 'malaka-oshirish'
   | 'tele-dermatology'
   | 'skin-pathology-center'
   | 'brend'
@@ -232,6 +233,7 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'dermoscan' ||
     pageSegment === 'science' ||
     pageSegment === 'obrazovaniya' ||
+    pageSegment === 'malaka-oshirish' ||
     pageSegment === 'tele-dermatology' ||
     pageSegment === 'skin-pathology-center' ||
     pageSegment === 'brend' ||

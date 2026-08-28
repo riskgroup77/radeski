@@ -199,9 +199,14 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "ilm-fan, dermatologiya tadqiqoti, klinik protokollar, yosh shifokorlar, Radeski, Farg'ona, Qo'qon",
     },
     obrazovaniya: {
-      title: "Ta'lim va malaka oshirish | Radeski Skin Clinic",
-      desc: "Dermatologiya va estetik tibbiyot bo'yicha sertifikatsiya kurslari, ordinatura, master-klasslar, amaliy treninglar va xalqaro dasturlar. Radeski — Farg'ona | Qo'qon.",
-      keywords: "ta'lim, malaka oshirish, ordinatura, master-klass, dermatologiya o'qitish, Radeski, Farg'ona",
+      title: "Ta'lim | Radeski Skin Clinic",
+      desc: "Dermatologiya va estetik tibbiyot bo'yicha sertifikatsiya kurslari, ordinatura, master-klasslar va amaliy treninglar. Radeski — Farg'ona | Qo'qon.",
+      keywords: "ta'lim, ordinatura, master-klass, dermatologiya o'qitish, Radeski, Farg'ona",
+    },
+    'malaka-oshirish': {
+      title: "Malaka oshirish | Radeski Skin Clinic — kurslar, trening, sertifikat",
+      desc: "Dermatologiya va kosmetologiya bo'yicha malaka oshirish: sertifikatsiya, master-klass, lazer treningi, amaliyot va xalqaro dasturlar. Farg'ona | Qo'qon.",
+      keywords: "malaka oshirish, sertifikatsiya kursi, master-klass, lazer trening, dermatologiya o'qitish, Radeski, Farg'ona",
     },
     'tele-dermatology': {
       title: "TeleDermatolog | Radeski Skin Clinic",
@@ -304,9 +309,14 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "наука, исследования в дерматологии, клинические протоколы, молодые врачи, Radeski, Фергана, Коканд",
     },
     obrazovaniya: {
-      title: "Образование и повышение квалификации | Radeski Skin Clinic",
-      desc: "Сертификационные курсы, ординатура, мастер-классы, практические тренинги и международные программы в дерматологии. Radeski — Фергана | Коканд.",
-      keywords: "образование, повышение квалификации, ординатура, мастер-классы, обучение дерматологии, Radeski, Фергана",
+      title: "Образование | Radeski Skin Clinic",
+      desc: "Сертификационные курсы, ординатура, мастер-классы и практические тренинги в дерматологии. Radeski — Фергана | Коканд.",
+      keywords: "образование, ординатура, мастер-классы, обучение дерматологии, Radeski, Фергана",
+    },
+    'malaka-oshirish': {
+      title: "Повышение квалификации | Radeski Skin Clinic — курсы, тренинги, сертификаты",
+      desc: "Повышение квалификации в дерматологии и косметологии: сертификация, мастер-классы, лазерные тренинги, практика и международные программы. Фергана | Коканд.",
+      keywords: "повышение квалификации, сертификационные курсы, мастер-классы, лазерное обучение, Radeski, Фергана",
     },
     'tele-dermatology': {
       title: "TeleDermatolog | Radeski Skin Clinic",
@@ -409,9 +419,14 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "science, dermatology research, clinical protocols, young physicians, Radeski, Fergana, Kokand",
     },
     obrazovaniya: {
-      title: "Education & professional development | Radeski Skin Clinic",
-      desc: "Certification programs, residency, masterclasses, hands-on training, and international courses in dermatology and aesthetic medicine. Radeski — Fergana | Kokand.",
-      keywords: "education, professional development, residency, masterclasses, dermatology training, Radeski, Fergana",
+      title: "Education | Radeski Skin Clinic",
+      desc: "Certification programs, residency, masterclasses, and hands-on training in dermatology and aesthetic medicine. Radeski — Fergana | Kokand.",
+      keywords: "education, residency, masterclasses, dermatology training, Radeski, Fergana",
+    },
+    'malaka-oshirish': {
+      title: "Professional development | Radeski Skin Clinic — courses, training, certification",
+      desc: "Dermatology and cosmetology CME: certification, masterclasses, laser training, clinical practice, and international programs. Fergana | Kokand.",
+      keywords: "professional development, CME, certification courses, laser training, dermatology education, Radeski, Fergana",
     },
     'tele-dermatology': {
       title: "TeleDermatolog | Radeski Skin Clinic",
