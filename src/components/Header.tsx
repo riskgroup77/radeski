@@ -260,7 +260,7 @@ export default function Header({
       return (
         <div
           key={category.id}
-          className="relative"
+          className="relative overflow-visible"
           onMouseEnter={() => setIsDermConditionsFlyoutOpen(true)}
           onMouseLeave={() => setIsDermConditionsFlyoutOpen(false)}
         >
@@ -279,9 +279,10 @@ export default function Header({
           </Link>
 
           {isDermConditionsFlyoutOpen && (
-            <div className="absolute left-full top-0 pl-1 z-[210]">
+            <div className="absolute left-full top-0 z-[210] flex items-stretch">
+              <div className="w-2 shrink-0" aria-hidden="true" />
               <div
-                className="min-w-[250px] max-w-[290px] max-h-[min(70vh,420px)] overflow-y-auto bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-left-2 duration-200"
+                className="min-w-[250px] max-w-[290px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-left-2 duration-200"
                 role="menu"
               >
                 <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
@@ -647,7 +648,7 @@ export default function Header({
     return (
       <div
         key={item.id}
-        className="relative shrink-0"
+        className="relative shrink-0 overflow-visible"
         onMouseEnter={() => setIsServicesDropdownOpen(true)}
         onMouseLeave={() => setIsServicesDropdownOpen(false)}
       >
@@ -667,9 +668,9 @@ export default function Header({
         </button>
 
         {isServicesDropdownOpen && (
-          <div className="absolute top-full left-0 pt-2 z-[200]">
+          <div className="absolute top-full left-0 pt-2 z-[200] overflow-visible">
             <div
-              className="min-w-[280px] max-w-[340px] max-h-[min(70vh,460px)] overflow-y-auto bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
+              className="min-w-[280px] max-w-[340px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
               role="menu"
             >
               <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
