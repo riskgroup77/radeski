@@ -12,6 +12,11 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
     'derm-total-body': '/services/dermatoskopiya/total-body.jpg',
     'derm-skin-passport': '/services/dermatoskopiya/skin-passport.jpg',
   },
+  trixoskopiya: {
+    'trix-konsult': '/services/trixoskopiya/osmotr.jpg',
+    'trix-alopecia': '/services/trixoskopiya/alopecia.jpg',
+    'trix-monitoring': '/services/trixoskopiya/monitoring.jpg',
+  },
   'apparatnaya-kosmetologiya': {
     'ipl-inmode': '/services/apparatnaya/ipl-inmode.jpg',
     'hollywood-spectra': '/services/apparatnaya/hollywood-spectra.jpg',
@@ -53,6 +58,7 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
 export const SERVICE_CATEGORY_IMAGES: Record<string, string> = {
   dermatologiya: '/karusel/dermataskopiya.jpeg',
   dermatoskopiya: '/services/dermatoskopiya/hero.jpg',
+  trixoskopiya: '/services/trixoskopiya/hero.jpg',
   'apparatnaya-kosmetologiya': '/karusel/ipl.webp',
   'in-ekcionnaya-kosmetologiya': '/brand/brand-medical.webp',
   'lazernaya-epilyaciya': '/karusel/lazerniy-epilyatsiya.jpg',

@@ -97,6 +97,17 @@ export const CATEGORY_CONDITION_DEFAULTS: Record<string, ServiceConditionDetailM
       ),
     ],
   },
+  trixoskopiya: {
+    image: '/services/trixoskopiya/hero.jpg',
+    priceCategoryIds: ['trihologiya', 'trihologiya-2', 'konsultatsii'],
+    clinicApproach: [
+      L(
+        'Kompyuter trixoskop va trixolog nazorati; aniq tashxis asosida mezoterapiya, PRP yoki dori-darmonlar individual reja bilan belgilanadi.',
+        'Компьютерная трихоскопия и контроль трихолога; на основе диагноза назначаются мезотерапия, PRP или медикаменты по индивидуальному плану.',
+        'Computer trichoscopy and trichologist oversight; mesotherapy, PRP or medications follow an individual plan based on diagnosis.',
+      ),
+    ],
+  },
   'in-ekcionnaya-kosmetologiya': {
     image: galleryImage(2),
     priceCategoryIds: ['inektsionnaya-kosmetologiya', 'rejuran', 'teosyal', 'konsultatsii'],
@@ -246,6 +257,9 @@ export const SUB_CONDITION_DEFAULTS: Record<string, ServiceConditionDetailMeta> 
   'derm-konsult': CATEGORY_CONDITION_DEFAULTS.dermatoskopiya,
   'derm-total-body': CATEGORY_CONDITION_DEFAULTS.dermatoskopiya,
   'derm-skin-passport': CATEGORY_CONDITION_DEFAULTS.dermatoskopiya,
+  'trix-konsult': CATEGORY_CONDITION_DEFAULTS.trixoskopiya,
+  'trix-alopecia': CATEGORY_CONDITION_DEFAULTS.trixoskopiya,
+  'trix-monitoring': CATEGORY_CONDITION_DEFAULTS.trixoskopiya,
   konturnaya: CATEGORY_CONDITION_DEFAULTS['in-ekcionnaya-kosmetologiya'],
   botulino: CATEGORY_CONDITION_DEFAULTS['in-ekcionnaya-kosmetologiya'],
   biorev: CATEGORY_CONDITION_DEFAULTS['in-ekcionnaya-kosmetologiya'],

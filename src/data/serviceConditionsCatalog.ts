@@ -173,6 +173,35 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       { title: 'Papillomas and pigmented spots', description: 'Dermoscopic assessment clarifies observation or treatment plan.' },
     ],
   },
+  trixoskopiya: {
+    uz: [
+      {
+        title: 'Androgenezik alopeciya',
+        description:
+          'Erkak va ayollarda soch chizig\'i va tepada suyultirish. Trixoskopiya follikula miniatyuralanishi va soch qalinligi o\'zgarishini ko\'rsatadi — keyin individual terapiya belgilanadi.',
+      },
+      {
+        title: 'Yoynasimon (o\'choqli) alopeciya',
+        description:
+          'Kal joylar paydo bo\'lganda trixoskop yallig\'lanish va follikula shikastlanish belgilarini aniqlaydi. Erta murojaat tiklanish imkoniyatini oshiradi.',
+      },
+      {
+        title: 'Seboreya va bosh terisi yallig\'lanishi',
+        description:
+          'Kepak, qichish va yog\'lanish trixoskop orqali baholanadi. Asosiy sabab aniqlangach, parvarish va dori-darmonlar rejalashtiriladi.',
+      },
+    ],
+    ru: [
+      { title: 'Андrogenная алопеция', description: 'Трихоскопия показывает миниaturization фолликулов и истончение — назначается индивидуальная терапия.' },
+      { title: 'Очаговая алопеция', description: 'При залысинах трихоскопия выявляет признаки воспаления. Раннее обращение повышает шансы восстановления.' },
+      { title: 'Себорея и воспаление кожи головы', description: 'Перхоть и зуд оцениваются трихоскопически, затем составляется план лечения.' },
+    ],
+    en: [
+      { title: 'Androgenic alopecia', description: 'Trichoscopy reveals follicle miniaturization and thinning — individual therapy follows.' },
+      { title: 'Patchy alopecia', description: 'Trichoscopy detects inflammation markers in bald patches. Early visit improves recovery chances.' },
+      { title: 'Seborrhea and scalp inflammation', description: 'Flaking and itching are assessed trichoscopically, then a care and treatment plan is made.' },
+    ],
+  },
   'in-ekcionnaya-kosmetologiya': {
     uz: [
       {
@@ -596,6 +625,48 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
     en: [
       { title: 'Alopecia', description: 'Trichoscopy identifies hair loss cause, then an individual treatment plan is made.' },
       { title: 'Scalp seborrhea', description: 'Itching and flaking. Combined therapy and care are recommended.' },
+    ],
+  },
+  'trix-konsult': {
+    uz: [
+      { title: 'Birinchi murojaat', description: 'Trixoskopik ko\'rik soch va bosh terisi holatini aniq baholaydi — keyingi davolash yo\'nalishi belgilanadi.' },
+      { title: 'Bosh terisi muammolari', description: 'Qichish, kepak yoki qizarish trixoskop orqali chuqurroq tahlil qilinadi.' },
+    ],
+    ru: [
+      { title: 'Первичное обращение', description: 'Трихоскопический осмотр оценивает состояние волос и кожи головы — определяется тактика лечения.' },
+      { title: 'Проблемы кожи головы', description: 'Зуд, перхоть или покраснение анализируются трихоскопически.' },
+    ],
+    en: [
+      { title: 'First visit', description: 'Trichoscopic exam assesses scalp and hair — treatment direction is defined.' },
+      { title: 'Scalp problems', description: 'Itching, flaking or redness are analyzed with trichoscopy.' },
+    ],
+  },
+  'trix-alopecia': {
+    uz: [
+      { title: 'Diffuz soch to\'kilishi', description: 'Butun boshda suyultirish — trixoskop telogen yoki diffuz alopeciya belgilarini ko\'rsatadi.' },
+      { title: 'Androgenezik alopeciya', description: 'Follikula miniatyuralanishi va soch ingichkalashuvi trixoskopda aniq ko\'rinadi.' },
+    ],
+    ru: [
+      { title: 'Диффузное выпадение', description: 'Редение по всей голове — трихоскопия показывает признаки телогена или диффузной алопеции.' },
+      { title: 'Андrogenная алопеция', description: 'Мiniaturization фолликулов и истончение волос видны на трихоскопии.' },
+    ],
+    en: [
+      { title: 'Diffuse hair loss', description: 'Thinning across the scalp — trichoscopy shows telogen or diffuse alopecia markers.' },
+      { title: 'Androgenic alopecia', description: 'Follicle miniaturization and hair thinning are clearly visible on trichoscopy.' },
+    ],
+  },
+  'trix-monitoring': {
+    uz: [
+      { title: 'Mezoterapiya natijasi', description: 'Kurs tugagach trixoskop orqali soch zichligi va follikula holati qayta baholanadi.' },
+      { title: 'PRP samaradorligi', description: 'Plazmoterapiya seanslari keyin o\'sish va tiklanish dinamikasi trixoskop bilan kuzatiladi.' },
+    ],
+    ru: [
+      { title: 'Результат мезотерапии', description: 'После курса трихоскопия повторно оценивает плотность и состояние фолликулов.' },
+      { title: 'Эффективность PRP', description: 'После плазмотерапии динамика роста отслеживается трихоскопически.' },
+    ],
+    en: [
+      { title: 'Mesotherapy results', description: 'After the course, trichoscopy re-assesses density and follicle status.' },
+      { title: 'PRP effectiveness', description: 'Growth dynamics after plasma therapy are tracked with trichoscopy.' },
     ],
   },
   biopsiya: {

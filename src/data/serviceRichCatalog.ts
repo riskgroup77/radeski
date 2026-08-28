@@ -517,6 +517,143 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
       ],
     },
   },
+  trixoskopiya: {
+    uz: {
+      aboutTitle: "Nima uchun trixoskopiyadan aynan Radeski trixologiya markazida o'tish kerak?",
+      overview:
+        "Trixoskopiya — soch va bosh terisini maxsus raqamli trixoskop yordamida ko'p baravar kattalashtirib tahlil qilish usuli. Radeski Skin Clinic'da bu tekshiruv og'riqsiz, invaziv emas va soch to'kilishi sababini aniq aniqlash hamda keyingi davolash rejasini to'g'ri tuzish uchun asos bo'ladi.",
+      aboutSections: [
+        {
+          title: 'Aniq diagnostika',
+          description:
+            "Kompyuter trixoskopiyasi follikula holati, soch qalinligi, bosh terisi yallig'lanishi va miniatyuralanish belgilarini ko'z bilan ko'rinmaydigan darajada ko'rsatadi.",
+        },
+        {
+          title: 'Trixolog nazorati',
+          description:
+            "Tekshiruvni malakali trixolog olib boradi. Natija tushuntiriladi — mezoterapiya, PRP, dori-darmonlar yoki apparat muolajalari individual reja asosida belgilanadi.",
+        },
+        {
+          title: 'Monitoring va qayta tekshiruv',
+          description:
+            "Davolash kursidan keyin qayta trixoskopiya orqali soch zichligi va follikula holatidagi o'zgarishlar hujjatlashtiriladi va solishtiriladi.",
+        },
+      ],
+      aboutFooter:
+        "Radeski trixologiya markazida trixoskopiya — soch to'kilishini taxmin qilmasdan, aniq sababni topish va samarali davolash yo'lini tanlash vositasidir.",
+      indications: [
+        'Kuchaygan yoki davomiy soch to\'kilishi',
+        'Sochning noziklashishi va siyraklashishi',
+        'Yoynasimon (o\'choqli) alopeciya belgilari',
+        'Bosh terisida qichishish, kepak yoki seboreya',
+        'Mezoterapiya yoki PRP kursidan keyin natijani baholash',
+      ],
+      solutions: [
+        'Trixoskopik ko\'rik',
+        'Alopeciya turini farqlash',
+        'Soch zichligi va follikula tahlili',
+        'Shaxsiy davolash rejasi',
+        'Qayta tekshiruv va monitoring',
+      ],
+      benefits: CLINIC_BENEFITS.uz,
+      process: [
+        'Anamnez va vizual ko\'rik',
+        'Trixoskop bilan chuqur baholash',
+        'Natijani tushuntirish',
+        'Davolash yoki kuzatuv rejasi',
+      ],
+    },
+    ru: {
+      aboutTitle: 'Почему трихоскопию стоит пройти именно в трихологическом центре Radeski?',
+      overview:
+        'Трихоскопия — цифровой анализ волос и кожи головы с профессиональным увеличением. Исследование безболезненное и помогает точно определить причину выпадения волос.',
+      aboutSections: [
+        {
+          title: 'Точная диагностика',
+          description:
+            'Компьютерная трихоскопия показывает состояние фолликулов, толщину волос и признаки воспаления с увеличением, недоступным невооружённому глазу.',
+        },
+        {
+          title: 'Контроль трихолога',
+          description:
+            'Осмотр проводит квалифицированный трихолог. Результат объясняется — мезотерапия, PRP или медикаменты назначаются по индивидуальному плану.',
+        },
+        {
+          title: 'Мониторинг лечения',
+          description:
+            'Повторная трихоскопия после курса лечения документирует изменения плотности волос и состояния фолликулов.',
+        },
+      ],
+      aboutFooter:
+        'В центре Radeski трихоскопия — точная диагностика причины выпадения и основа эффективного лечения.',
+      indications: [
+        'Усиленное или хроническое выпадение',
+        'Истончение и редение волос',
+        'Очаговая алопеция',
+        'Зуд, перхоть или себорея',
+        'Оценка результата после мезотерапии или PRP',
+      ],
+      solutions: [
+        'Трихоскопический осмотр',
+        'Дифференциация типа алопеции',
+        'Анализ плотности и фолликулов',
+        'Индивидуальный план лечения',
+        'Повторный контроль',
+      ],
+      benefits: CLINIC_BENEFITS.ru,
+      process: [
+        'Анамнез и визуальный осмотр',
+        'Трихоскопическая оценка',
+        'Объяснение результата',
+        'План лечения или наблюдения',
+      ],
+    },
+    en: {
+      aboutTitle: 'Why choose trichoscopy at Radeski trichology center?',
+      overview:
+        'Trichoscopy analyzes hair and scalp with professional digital magnification — painless and essential for pinpointing hair-loss causes.',
+      aboutSections: [
+        {
+          title: 'Precise diagnostics',
+          description:
+            'Computer trichoscopy reveals follicle status, hair thickness and inflammation markers beyond naked-eye view.',
+        },
+        {
+          title: 'Trichologist-led care',
+          description:
+            'A qualified trichologist performs the exam and explains results — mesotherapy, PRP or medications follow an individual plan.',
+        },
+        {
+          title: 'Treatment monitoring',
+          description:
+            'Follow-up trichoscopy after treatment documents changes in hair density and follicle health over time.',
+        },
+      ],
+      aboutFooter:
+        'At Radeski, trichoscopy is precise cause-finding and the foundation for effective hair-loss treatment.',
+      indications: [
+        'Increased or ongoing hair shedding',
+        'Hair thinning and reduced density',
+        'Patchy alopecia signs',
+        'Scalp itching, flaking or seborrhea',
+        'Post mesotherapy or PRP result assessment',
+      ],
+      solutions: [
+        'Trichoscopic examination',
+        'Alopecia type differentiation',
+        'Density and follicle analysis',
+        'Personalized treatment plan',
+        'Follow-up monitoring',
+      ],
+      benefits: CLINIC_BENEFITS.en,
+      process: [
+        'History and visual exam',
+        'Trichoscopic assessment',
+        'Results explanation',
+        'Treatment or follow-up plan',
+      ],
+    },
+  },
   'in-ekcionnaya-kosmetologiya': {
     uz: {
       overview:
@@ -1479,6 +1616,75 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       solutions: ['Digital photography', 'Lesion mapping', 'Archive and comparison', 'Follow-up reminders', 'Physician review'],
       benefits: ['Precise monitoring', 'Early change detection', 'Documentation', 'Convenient follow-up', 'Modern approach'],
       process: ['Dermoscopic exam', 'Photography', 'Archive creation', 'Next visit scheduled'],
+    },
+  },
+  'trix-konsult': {
+    uz: {
+      overview: 'Trixoskopik ko\'rik — trixolog maslahati bilan birgalikda bajariladigan asosiy diagnostik xizmat. Bosh terisi va soch holati og\'riqsiz, tez va aniq baholanadi.',
+      indications: ['Birinchi murojaat soch to\'kilishi bilan', 'Bosh terisi qichishishi yoki kepak', 'Soch noziklashishi', 'Davolashdan oldin baholash', 'Seboreya yoki yallig\'lanish shubhasi'],
+      solutions: ['Vizual va trixoskopik ko\'rik', 'Follikula holati tahlili', 'Soch zichligi o\'lchovi', 'Shifokor tushuntirishi', 'Keyingi qadamlar rejasi'],
+      benefits: ['Og\'riqsiz', 'Tez', 'Aniq', 'Invaziv emas', 'Mutaxassis nazorati'],
+      process: ['Konsultatsiya', 'Trixoskop tekshiruvi', 'Xulosa', 'Davolash yoki kuzatuv rejasi'],
+    },
+    ru: {
+      overview: 'Трихоскопический осмотр с консультацией трихолога — базовая диагностическая услуга для оценки состояния волос и кожи головы.',
+      indications: ['Первичное обращение с выпадением', 'Зуд или перхоть', 'Истончение волос', 'Оценка перед лечением', 'Подозрение на себорею'],
+      solutions: ['Визуальный и трихоскопический осмотр', 'Анализ фолликулов', 'Измерение плотности', 'Разъяснение врача', 'План дальнейших шагов'],
+      benefits: ['Безболезненно', 'Быстро', 'Точно', 'Неинвазивно', 'Контроль специалиста'],
+      process: ['Консультация', 'Трихоскопия', 'Заключение', 'План лечения'],
+    },
+    en: {
+      overview: 'Trichoscopic examination with trichologist consultation — core diagnostic service for scalp and hair assessment.',
+      indications: ['First visit for hair loss', 'Scalp itching or flaking', 'Hair thinning', 'Pre-treatment assessment', 'Suspected seborrhea'],
+      solutions: ['Visual and trichoscopic exam', 'Follicle analysis', 'Density measurement', 'Physician explanation', 'Next-step plan'],
+      benefits: ['Painless', 'Fast', 'Accurate', 'Non-invasive', 'Specialist-led'],
+      process: ['Consultation', 'Trichoscopy', 'Conclusion', 'Treatment plan'],
+    },
+  },
+  'trix-alopecia': {
+    uz: {
+      overview: 'Soch to\'kilishi diagnostikasi — trixoskop belgilari bo\'yicha androgenezik, diffuz, yoynasimon yoki telogen to\'kilish turini farqlash va asosiy sababni aniqlash.',
+      indications: ['Androgenezik alopeciya shubhasi', 'Yoynasimon kal joylar', 'Diffuz suyultirish', 'Stress yoki gormondan keyin to\'kilish', 'Autoimmun alopeciya belgilari'],
+      solutions: ['Trixoskopik belgilarni tahlil', 'Alopeciya turini aniqlash', 'Laboratoriya yo\'naltirish', 'Individual davolash rejasi', 'Prognoz va kuzatuv'],
+      benefits: ['Aniq tur farqlash', 'Sababni topish', 'To\'g\'ri terapiya', 'Vaqt tejash', 'Hujjatlashtirilgan natija'],
+      process: ['Anamnez', 'Trixoskop skanerlash', 'Tashxis yo\'nalishi', 'Davolash rejasi'],
+    },
+    ru: {
+      overview: 'Диагностика выпадения волос — дифференциация андrogenной, диффузной, очаговой и телогеновой алопеции по трихоскопическим признакам.',
+      indications: ['Подозрение на АГА', 'Очаговые залысины', 'Диффузное истончение', 'Выпадение после стресса', 'Признаки аутоиммунной алопеции'],
+      solutions: ['Анализ трихоскопических признаков', 'Определение типа алопеции', 'Направление на анализы', 'Индивидуальный план', 'Прогноз и наблюдение'],
+      benefits: ['Точная дифференциация', 'Выявление причины', 'Правильная терапия', 'Экономия времени', 'Документированный результат'],
+      process: ['Анамнез', 'Трихоскопия', 'Диагностическое заключение', 'План лечения'],
+    },
+    en: {
+      overview: 'Hair loss diagnosis — differentiating androgenic, diffuse, patchy and telogen shedding by trichoscopic markers.',
+      indications: ['Suspected androgenic alopecia', 'Patchy bald spots', 'Diffuse thinning', 'Post-stress shedding', 'Autoimmune alopecia signs'],
+      solutions: ['Trichoscopic marker analysis', 'Alopecia type identification', 'Lab referral if needed', 'Individual treatment plan', 'Prognosis and follow-up'],
+      benefits: ['Accurate differentiation', 'Cause identification', 'Correct therapy', 'Time-saving', 'Documented findings'],
+      process: ['History', 'Trichoscopy scan', 'Diagnostic conclusion', 'Treatment plan'],
+    },
+  },
+  'trix-monitoring': {
+    uz: {
+      overview: 'Davolash natijasini monitoring — mezoterapiya, PRP yoki dori-darmonlar kursidan keyin trixoskopik qayta tekshiruv. Soch zichligi va follikula holatidagi o\'zgarishlar solishtiriladi.',
+      indications: ['Mezoterapiya kursidan keyin', 'PRP seanslari tugagach', 'Dori-darmon terapiyasi davomida', 'Natija sezilmay qolganda', 'Davolash rejasi tuzatish kerak bo\'lganda'],
+      solutions: ['Qayta trixoskop skanerlash', 'Oldingi natijalar bilan solishtirish', 'Soch zichligi o\'lchovi', 'Reja tuzatish tavsiyasi', 'Keyingi qadam belgilash'],
+      benefits: ['Aniq samaradorlik bahosi', 'Vaqtida tuzatish', 'Hujjatlashtirish', 'Motivatsiya va ishonch', 'Shaxsiy yondashuv'],
+      process: ['Oldingi ma\'lumotlarni ko\'rib chiqish', 'Trixoskop tekshiruvi', 'Solishtirish va tahlil', 'Yangilangan reja'],
+    },
+    ru: {
+      overview: 'Мониторинг результата лечения — повторная трихоскопия после курса мезотерапии, PRP или медикаментов с сравнением плотности и фолликулов.',
+      indications: ['После курса мезотерапии', 'После PRP', 'На фоне медикаментов', 'Если эффект слабый', 'Нужна коррекция плана'],
+      solutions: ['Повторное сканирование', 'Сравнение с предыдущими данными', 'Измерение плотности', 'Коррекция плана', 'Определение следующих шагов'],
+      benefits: ['Объективная оценка', 'Своевременная коррекция', 'Документирование', 'Мотивация пациента', 'Персональный подход'],
+      process: ['Обзор предыдущих данных', 'Трихоскопия', 'Сравнение и анализ', 'Обновлённый план'],
+    },
+    en: {
+      overview: 'Treatment result monitoring — follow-up trichoscopy after mesotherapy, PRP or medication, comparing density and follicle changes over time.',
+      indications: ['After mesotherapy course', 'After PRP sessions', 'During medication therapy', 'When results plateau', 'Plan adjustment needed'],
+      solutions: ['Repeat trichoscopy scan', 'Comparison with prior data', 'Density measurement', 'Plan adjustment advice', 'Next steps defined'],
+      benefits: ['Objective effectiveness review', 'Timely correction', 'Documentation', 'Patient motivation', 'Personalized approach'],
+      process: ['Review prior records', 'Trichoscopy exam', 'Comparison and analysis', 'Updated plan'],
     },
   },
   trixoskop: {

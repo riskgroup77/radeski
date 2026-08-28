@@ -536,7 +536,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                       onClick={() => goToPage('services')}
                       className="text-xs font-bold text-brand-gold hover:text-brand-gold-dark flex items-center gap-1 cursor-pointer shrink-0"
                     >
-                      <span>{locale === 'uz' ? "Barcha 12 ta xizmatni ko'rish" : locale === 'ru' ? "Посмотреть все 12 направлений" : "Explore all 12 services"}</span>
+                      <span>{locale === 'uz' ? "Barcha 13 ta xizmatni ko'rish" : locale === 'ru' ? "Посмотреть все 13 направлений" : "Explore all 13 services"}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>

@@ -250,6 +250,7 @@ const CATEGORY_ALIASES: Record<string, string> = {
   'injektsionnaya-kosmetologiya': 'inektsionnaya-kosmetologiya',
   'in-ekcionnaya-kosmetologiya': 'inektsionnaya-kosmetologiya',
   'trihologiya-centr-lechenie-volos': 'trihologiya',
+  trixoskopiya: 'trihologiya',
   dermatoonkolog: 'dermatoonkologiya',
   'lazernaya-epilyaciya': 'lazernaya-epilyatsiya',
   tserave: 'cerave',
@@ -325,6 +326,7 @@ const API_PARENT_FOR_PRICE_CATEGORIES: Record<string, string[]> = {
     'dermatoonkolog',
     'konsultatsii',
   ],
+  trixoskopiya: ['trihologiya', 'trihologiya-2', 'konsultatsii'],
   'lazernaya-epilyaciya': ['lazernaya-epilyatsiya'],
   'hirurgicheskaya-dermatologiya': [
     'hirurgicheskaya-dermatologiya',

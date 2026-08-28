@@ -679,6 +679,49 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     ]
   },
   {
+    id: "trixoskopiya",
+    title: {
+      uz: "Trixoskopiya",
+      ru: "Трихоскопия",
+      en: "Trichoscopy"
+    },
+    description: {
+      uz: "Farg'onada professional trixoskopiya — soch va bosh terisini raqamli kattalashtirish bilan tahlil qilib, to'kilish sababini aniq aniqlash. Radeski trixologiya markazi.",
+      ru: "Профессиональная трихоскопия в Фергане — цифровой анализ волос и кожи головы для точного определения причины выпадения. Трихологический центр Radeski.",
+      en: "Professional trichoscopy in Fergana — digital magnification analysis of hair and scalp to pinpoint hair-loss causes. Radeski trichology center."
+    },
+    icon: "ScanSearch",
+    subServices: [
+      {
+        id: "trix-konsult",
+        name: { uz: "Trixoskopik ko'rik", ru: "Трихоскопический осмотр", en: "Trichoscopic examination" },
+        description: {
+          uz: "Trixolog maslahati va kompyuter trixoskop yordamida bosh terisi va soch holatini og'riqsiz, chuqur baholash.",
+          ru: "Консультация трихолога и компьютерная трихоскопия — безболезненная оценка состояния волос и кожи головы.",
+          en: "Trichologist consultation with computerized trichoscopy — painless in-depth assessment of scalp and hair condition."
+        }
+      },
+      {
+        id: "trix-alopecia",
+        name: { uz: "Soch to'kilishi diagnostikasi", ru: "Диагностика выпадения волос", en: "Hair loss diagnosis" },
+        description: {
+          uz: "Androgenezik, diffuz yoki yoynasimon alopeciya turini trixoskop belgilari bo'yicha farqlash va sababni aniqlash.",
+          ru: "Дифференциация андrogenной, диффузной и очаговой алопеции по трихоскопическим признакам и определение причины.",
+          en: "Differentiating androgenic, diffuse or patchy alopecia by trichoscopic markers and identifying the underlying cause."
+        }
+      },
+      {
+        id: "trix-monitoring",
+        name: { uz: "Davolash natijasini monitoring", ru: "Мониторинг результата лечения", en: "Treatment result monitoring" },
+        description: {
+          uz: "Mezoterapiya, PRP yoki dori-darmonlar kursidan keyin trixoskopik qayta tekshiruv — soch zichligi va follikula holatini solishtirish.",
+          ru: "Повторная трихоскопия после курса мезотерапии, PRP или медикаментов — сравнение плотности волос и состояния фолликулов.",
+          en: "Follow-up trichoscopy after mesotherapy, PRP or medication — comparing hair density and follicle status over time."
+        }
+      }
+    ]
+  },
+  {
     id: "apparatnaya-kosmetologiya",
     title: {
       uz: "Apparatli kosmetologiyasi",

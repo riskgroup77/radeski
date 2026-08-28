@@ -22,6 +22,12 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'hollywood-spectra-pigmentation',
     'papilloma-warts',
   ],
+  trixoskopiya: [
+    'trichologist-trichoscopy',
+    'prp-hair',
+    'prp-lab-tests',
+    'hair-transplant-contraindications',
+  ],
   'apparatnaya-kosmetologiya': [
     'ipl-radeski',
     'ipl-therapy',
@@ -80,6 +86,11 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'derm-konsult': ['basal-cell-carcinoma', 'molluscum-radeski', 'papilloma-warts'],
     'derm-total-body': ['basal-cell-carcinoma', 'mole-screening'],
     'derm-skin-passport': ['basal-cell-carcinoma'],
+  },
+  trixoskopiya: {
+    'trix-konsult': ['trichologist-trichoscopy', 'prp-lab-tests'],
+    'trix-alopecia': ['trichologist-trichoscopy', 'prp-hair', 'hair-transplant-contraindications'],
+    'trix-monitoring': ['trichologist-trichoscopy', 'prp-hair'],
   },
   'apparatnaya-kosmetologiya': {
     'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski', 'derma-v-vascular'],
