@@ -14,7 +14,6 @@ import {
 } from '../data/daavlinModelDeepContent';
 import SiteLogo from './SiteLogo';
 import AppointmentBookingLink from './AppointmentBookingLink';
-import InstitutionalMegaMenu from './InstitutionalMegaMenu';
 import {
   getInstitutionalNavSection,
   institutionalTopicHref,
@@ -404,35 +403,96 @@ export default function Header({
   const institutionalNavClass = (pageId: PageId) =>
     navLinkClass(pageId).replace('whitespace-nowrap', 'whitespace-normal');
 
+  const institutionalDropdownItemClass = () =>
+    `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite text-brand-text-secondary hover:text-brand-text-primary`;
+
+  const institutionalOverviewLabel =
+    locale === 'uz' ? "Bo'lim haqida" : locale === 'ru' ? 'О разделе' : 'Section overview';
+
   const renderInstitutionalDesktopNav = (sectionId: InstitutionalNavId) => {
     const section = getInstitutionalNavSection(sectionId);
     const isActive = currentPage === section.pageId;
+    const isOpen = activeMegaMenu === sectionId;
+    const sectionIndex = INSTITUTIONAL_NAV_ORDER.indexOf(sectionId);
+    const dropdownAlignRight = sectionIndex >= INSTITUTIONAL_NAV_ORDER.length - 2;
 
     return (
       <div
         key={sectionId}
-        className="relative shrink-0"
-        onMouseEnter={() => setActiveMegaMenu(sectionId)}
+        className="relative shrink-0 overflow-visible"
+        onMouseEnter={() => {
+          setActiveMegaMenu(sectionId);
+          setIsServicesDropdownOpen(false);
+          setIsAboutDropdownOpen(false);
+          setIsDaavlinDropdownOpen(false);
+        }}
+        onMouseLeave={() => setActiveMegaMenu(null)}
       >
         <button
           type="button"
           onClick={() => onNavigate(section.pageId)}
           className={`${institutionalNavClass(section.pageId)} inline-flex items-start gap-0.5 py-1 ${
-            isActive || activeMegaMenu === sectionId
+            isActive || isOpen
               ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
               : ''
           }`}
           aria-haspopup="menu"
-          aria-expanded={activeMegaMenu === sectionId}
+          aria-expanded={isOpen}
           title={section.label[locale]}
         >
           <InstitutionalNavLabel section={section} locale={locale} />
           <ChevronDown
             className={`w-3 h-3 shrink-0 mt-1 transition-transform duration-200 ${
-              activeMegaMenu === sectionId ? 'rotate-180' : ''
+              isOpen ? 'rotate-180' : ''
             }`}
           />
         </button>
+
+        {isOpen && (
+          <div
+            className={`absolute top-full pt-2 z-[200] overflow-visible ${
+              dropdownAlignRight ? 'right-0' : 'left-0'
+            }`}
+          >
+            <div
+              className="min-w-[260px] max-w-[320px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
+              role="menu"
+            >
+              <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
+                {section.dropdownTitle[locale]}
+              </p>
+
+              {section.topics.length > 0 ? (
+                section.topics.map((topic) => (
+                  <Link
+                    key={topic.id}
+                    to={institutionalTopicHref(locale, section, topic)}
+                    role="menuitem"
+                    onClick={() => setActiveMegaMenu(null)}
+                    className={institutionalDropdownItemClass()}
+                  >
+                    {topic.label[locale]}
+                  </Link>
+                ))
+              ) : (
+                <p className="px-4 py-2.5 text-[12px] font-light leading-relaxed text-brand-text-secondary">
+                  {section.dropdownHint[locale]}
+                </p>
+              )}
+
+              <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
+                <Link
+                  to={pagePath(locale, section.pageId)}
+                  role="menuitem"
+                  onClick={() => setActiveMegaMenu(null)}
+                  className="block px-4 py-2.5 text-[12px] font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+                >
+                  {institutionalOverviewLabel}
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   };
@@ -529,7 +589,10 @@ export default function Header({
         <div
           key={item.id}
           className="relative shrink-0"
-          onMouseEnter={() => setIsAboutDropdownOpen(true)}
+          onMouseEnter={() => {
+            setIsAboutDropdownOpen(true);
+            setActiveMegaMenu(null);
+          }}
           onMouseLeave={() => setIsAboutDropdownOpen(false)}
         >
           <button
@@ -580,7 +643,10 @@ export default function Header({
         <div
           key={item.id}
           className="relative shrink-0"
-          onMouseEnter={() => setIsDaavlinDropdownOpen(true)}
+          onMouseEnter={() => {
+            setIsDaavlinDropdownOpen(true);
+            setActiveMegaMenu(null);
+          }}
           onMouseLeave={() => setIsDaavlinDropdownOpen(false)}
         >
           <button
@@ -650,7 +716,10 @@ export default function Header({
       <div
         key={item.id}
         className="relative shrink-0 overflow-visible"
-        onMouseEnter={() => setIsServicesDropdownOpen(true)}
+        onMouseEnter={() => {
+          setIsServicesDropdownOpen(true);
+          setActiveMegaMenu(null);
+        }}
         onMouseLeave={() => setIsServicesDropdownOpen(false)}
       >
         <button
@@ -1034,19 +1103,6 @@ export default function Header({
         >
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
-      </div>
-
-      <div
-        className="hidden xl:block relative w-full"
-        onMouseLeave={() => setActiveMegaMenu(null)}
-      >
-        {activeMegaMenu && (
-          <InstitutionalMegaMenu
-            locale={locale}
-            activeSectionId={activeMegaMenu}
-            onNavigate={() => setActiveMegaMenu(null)}
-          />
-        )}
       </div>
 
       {isMobileMenuOpen && (
