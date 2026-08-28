@@ -4,6 +4,11 @@ import type { Locale, ServiceCategory } from '../types';
 import type { CustomerReview } from '../data/sitePagesContent';
 import HomeCarousel from './HomeCarousel';
 import { emptyLocalized } from './LocalizedFieldGroup';
+import {
+  countReviewsByServiceCategory,
+  filterReviewsByServiceCategory,
+  type ReviewServiceFilterId,
+} from '../utils/customerReviewServiceFilter';
 
 interface CustomerReviewsSectionProps {
   locale: Locale;
@@ -95,6 +100,19 @@ export default function CustomerReviewsSection({
     [reviews],
   );
 
+  const [serviceFilter, setServiceFilter] = useState<ReviewServiceFilterId>('all');
+  const reviewCountByCategory = useMemo(
+    () => countReviewsByServiceCategory(publishedReviews, serviceCategories),
+    [publishedReviews, serviceCategories],
+  );
+
+  const filteredReviews = useMemo(
+    () => filterReviewsByServiceCategory(publishedReviews, serviceCategories, serviceFilter),
+    [publishedReviews, serviceCategories, serviceFilter],
+  );
+
+  const filterCategories = serviceCategories;
+
   const [authorName, setAuthorName] = useState('');
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState('');
@@ -121,6 +139,20 @@ export default function CustomerReviewsSection({
         : locale === 'ru'
           ? 'Реальные впечатления пациентов, прошедших лечение в клинике Radeski.'
           : 'Real experiences from patients treated at Radeski Clinic.',
+    filterLabel:
+      locale === 'uz'
+        ? 'Xizmat turi bo\'yicha'
+        : locale === 'ru'
+          ? 'По типу услуги'
+          : 'Filter by service',
+    filterAll:
+      locale === 'uz' ? 'Hammasi' : locale === 'ru' ? 'Все' : 'All',
+    filterEmpty:
+      locale === 'uz'
+        ? 'Ushbu xizmat bo\'yicha hozircha fikrlar yo\'q. Boshqa turini tanlang yoki «Hammasi» ni ko\'ring.'
+        : locale === 'ru'
+          ? 'По этой услуге отзывов пока нет. Выберите другой тип или «Все».'
+          : 'No reviews for this service yet. Choose another type or view All.',
     formTitle:
       locale === 'uz'
         ? 'O\'z fikringizni qoldiring'
@@ -186,6 +218,7 @@ export default function CustomerReviewsSection({
         rating,
         comment: localizedComment,
         service: selectedService?.title,
+        serviceCategoryId: selectedService?.id,
         date: new Date().toISOString().slice(0, 10),
         published: true,
       });
@@ -225,12 +258,62 @@ export default function CustomerReviewsSection({
           <p className="text-brand-text-muted mt-4 text-sm sm:text-base leading-relaxed">{labels.desc}</p>
         </div>
 
+        {publishedReviews.length > 0 && filterCategories.length > 0 ? (
+          <div className="mb-8 lg:mb-10">
+            <p className="text-center text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-text-muted mb-3">
+              {labels.filterLabel}
+            </p>
+            <div
+              className="flex flex-wrap justify-center gap-2 px-1 max-w-5xl mx-auto"
+              role="tablist"
+              aria-label={labels.filterLabel}
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected={serviceFilter === 'all'}
+                onClick={() => setServiceFilter('all')}
+                className={`px-3.5 py-2 rounded-full text-[11px] sm:text-xs font-semibold border transition-colors cursor-pointer ${
+                  serviceFilter === 'all'
+                    ? 'bg-brand-gold border-brand-gold text-white shadow-sm'
+                    : 'bg-brand-white border-brand-sectiongray text-brand-text-secondary hover:border-brand-gold/40 hover:text-brand-text-primary'
+                }`}
+              >
+                {labels.filterAll}
+                <span className="ml-1.5 opacity-80">({publishedReviews.length})</span>
+              </button>
+              {filterCategories.map((category) => {
+                const count = reviewCountByCategory.get(category.id) ?? 0;
+                const isActive = serviceFilter === category.id;
+                return (
+                  <button
+                    key={category.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setServiceFilter(category.id)}
+                    className={`px-3.5 py-2 rounded-full text-[11px] sm:text-xs font-semibold border transition-colors cursor-pointer max-w-[220px] truncate ${
+                      isActive
+                        ? 'bg-brand-gold border-brand-gold text-white shadow-sm'
+                        : 'bg-brand-white border-brand-sectiongray text-brand-text-secondary hover:border-brand-gold/40 hover:text-brand-text-primary'
+                    }`}
+                    title={category.title[locale] || category.title.uz}
+                  >
+                    {category.title[locale] || category.title.uz}
+                    {count > 0 ? <span className="ml-1.5 opacity-80">({count})</span> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.95fr)] gap-5 lg:gap-6 xl:gap-7 items-start">
           <div className="min-w-0">
-            {publishedReviews.length > 0 ? (
+            {filteredReviews.length > 0 ? (
               <div className="relative">
                 <HomeCarousel
-                  items={publishedReviews}
+                  items={filteredReviews}
                   visibleCount={4}
                   autoPlayMs={5000}
                   arrowsInside
@@ -267,6 +350,18 @@ export default function CustomerReviewsSection({
                     </div>
                   )}
                 />
+              </div>
+            ) : publishedReviews.length > 0 ? (
+              <div className="min-h-[220px] rounded-xl border border-dashed border-brand-sectiongray bg-brand-offwhite/30 px-5 py-8 flex flex-col items-center justify-center text-center">
+                <Quote className="w-10 h-10 text-brand-gold/25 mb-4" aria-hidden="true" />
+                <p className="text-brand-text-muted text-sm sm:text-base max-w-md leading-relaxed">{labels.filterEmpty}</p>
+                <button
+                  type="button"
+                  onClick={() => setServiceFilter('all')}
+                  className="mt-4 px-4 py-2 rounded-lg text-xs font-bold bg-brand-gold/10 text-brand-gold hover:bg-brand-gold/15 transition-colors cursor-pointer"
+                >
+                  {labels.filterAll}
+                </button>
               </div>
             ) : (
               <div className="min-h-[220px] rounded-xl border border-dashed border-brand-sectiongray bg-brand-offwhite/30 px-5 py-8 flex flex-col items-center justify-center text-center">

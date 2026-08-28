@@ -179,6 +179,7 @@ export default function ReviewSubmissionForm({
         rating,
         comment: localizedComment,
         service: selectedService?.title,
+        serviceCategoryId: selectedService?.id,
         date: new Date().toISOString().slice(0, 10),
         published: true,
       });

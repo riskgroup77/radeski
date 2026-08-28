@@ -64,6 +64,8 @@ export interface CustomerReview {
   rating: number;
   comment: LocalizedText;
   service?: LocalizedText;
+  /** Main service category id — used for review filtering on the homepage. */
+  serviceCategoryId?: string;
   date: string;
   published: boolean;
 }
@@ -79,6 +81,7 @@ export const CUSTOMER_REVIEWS: CustomerReview[] = [
       en: 'After IPL sessions my skin became noticeably brighter and smoother. The doctor explained every step — truly professional care.',
     },
     service: { uz: 'IPL terapiya', ru: 'IPL-терапия', en: 'IPL therapy' },
+    serviceCategoryId: 'apparatnaya-kosmetologiya',
     date: '2025-11-12',
     published: true,
   },
@@ -92,6 +95,7 @@ export const CUSTOMER_REVIEWS: CustomerReview[] = [
       en: 'The dermatoscopy exam was quick and comfortable. Results were clear and the doctor answered all my questions in detail.',
     },
     service: { uz: 'Dermatoskopiya', ru: 'Дерматоскопия', en: 'Dermatoscopy' },
+    serviceCategoryId: 'dermatoskopiya',
     date: '2025-10-28',
     published: true,
   },
@@ -105,6 +109,7 @@ export const CUSTOMER_REVIEWS: CustomerReview[] = [
       en: 'After acne treatment my face cleared up significantly. Clinic conditions and staff attitude are excellent.',
     },
     service: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+    serviceCategoryId: 'dermatologiya',
     date: '2025-09-15',
     published: true,
   },
@@ -118,6 +123,7 @@ export const CUSTOMER_REVIEWS: CustomerReview[] = [
       en: 'Very happy with the cosmetic treatment results. The effect looks natural and lasts a long time.',
     },
     service: { uz: 'Kosmetologiya', ru: 'Косметология', en: 'Cosmetology' },
+    serviceCategoryId: 'apparatnaya-kosmetologiya',
     date: '2025-08-03',
     published: true,
   },
