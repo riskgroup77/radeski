@@ -30,6 +30,7 @@ import { ATOPIC_DERMATITIS_ARTICLE_CATALOG } from './articles/atopicDermatitisAr
 import { HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE_CATALOG } from './articles/hollywoodSpectraEyebrowTattooArticle';
 import { LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG } from './articles/lasemdUltraKokandArticle';
 import { THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG } from './articles/thuliumLaserHairKokandArticle';
+import { ONYCHOCRYPTOSIS_KOKAND_ARTICLE_CATALOG } from './articles/onychocryptosisKokandArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -215,6 +216,19 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'thulium laser hair kokand',
     'hair loss treatment kokand',
     'trichologist kokand',
+  ],
+  'onychocryptosis-kokand': [
+    'onixokriptoz-klinik-holat',
+    'art-onixokriptoz-klinik-holat',
+    'onychocryptosis-kokand',
+    "o'sib ketgan tirnoq",
+    'вросший ноготь',
+    'ingrown toenail',
+    'onixokriptoz',
+    'онихокриптоз',
+    'titan sim tirnoq',
+    'podologiya qoqon',
+    'tirnoq patologiyasi qoqon',
   ],
   'derma-v-vascular': [
     'sosudistaya-setochka-derma-v-radeski',
@@ -1018,6 +1032,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'hollywood-spectra-eyebrow-tattoo': HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE_CATALOG,
   'lasemd-ultra-kokand': LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG,
   'thulium-laser-hair-kokand': THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG,
+  'onychocryptosis-kokand': ONYCHOCRYPTOSIS_KOKAND_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

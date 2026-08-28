@@ -89,6 +89,26 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         'thulium laser Kokand, thulium laser for hair Kokand, hair loss treatment Kokand, trichologist Kokand, alopecia treatment Kokand, hair restoration Kokand, hair growth Kokand, laser hair treatment Kokand',
     },
   },
+  'art-onixokriptoz-klinik-holat': {
+    uz: {
+      title: "O'sib ketgan tirnoq (onixokriptoz): klinik holat — Radeski Qo'qon",
+      desc: "Haqiqiy klinik holat: o'sib ketgan tirnoq davolash jarayoni kelishidan 6 oylik natijagacha. Titan sim korreksiyasi, do va keyin rasmlar. Karimova Iroda, Radeski Skin Clinic Qo'qon.",
+      keywords:
+        "o'sib ketgan tirnoq Qo'qon, onixokriptoz davolash, podolog Qo'qon, titan sim tirnoq, tirnoq patologiyasi, Radeski Skin Clinic Qo'qon, klinik holat do keyin",
+    },
+    ru: {
+      title: 'Вросший ноготь (онихокриптоз): клинический случай — Radeski Коканд',
+      desc: 'Реальный клинический случай: лечение вросшего ногтя от обращения до результата через 6 месяцев. Коррекция титановой нитью, фото до и после. Каримова Ирода, Radeski Skin Clinic Коканд.',
+      keywords:
+        'вросший ноготь Коканд, лечение онихокриптоза, подолог Коканд, титановая нить, патология ногтей, Radeski Skin Clinic Коканд, до и после',
+    },
+    en: {
+      title: 'Ingrown Toenail (Onychocryptosis): Clinical Case — Radeski Kokand',
+      desc: 'Real clinical case: ingrown toenail treatment from first visit to 6-month outcome. Titanium wire correction, before and after photos. Iroda Karimova, Radeski Skin Clinic Kokand.',
+      keywords:
+        'ingrown toenail Kokand, onychocryptosis treatment, podiatrist Kokand, titanium wire brace, nail pathology, Radeski Skin Clinic Kokand, before and after',
+    },
+  },
 };
 
 export function resolveArticleSeo(

@@ -117,6 +117,11 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
   },
   {
+    routeKey: 'art-onixokriptoz-klinik-holat',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
     routeKey: 'art-jinsiy-azo-yassi-hujayrali-rak',
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.8, ru: 0.75, en: 0.7 },

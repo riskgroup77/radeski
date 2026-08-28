@@ -66,7 +66,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   ],
   'shkola-psoriaza': ['psoriasis-daavlin-kokand', 'psoriasis'],
   'shkola-dermatoskopii': ['basal-cell-carcinoma', 'mole-screening'],
-  'clinika-patologii-nogtej': ['fungal'],
+  'clinika-patologii-nogtej': ['fungal', 'onychocryptosis-kokand'],
   dermatopatologiya: ['basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
 };
 
@@ -129,7 +129,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'dermatosc-lessons': ['basal-cell-carcinoma', 'mole-screening'],
   },
   'clinika-patologii-nogtej': {
-    'podolog-dermatolog': ['fungal'],
+    'podolog-dermatolog': ['fungal', 'onychocryptosis-kokand'],
   },
   dermatopatologiya: {
     gistolog: ['basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],

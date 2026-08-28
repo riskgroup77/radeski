@@ -112,6 +112,17 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
           {children}
         </td>
       ),
+      img: ({ src, alt }: { src?: string; alt?: string }) => (
+        <figure className="my-6 sm:my-8">
+          <img
+            src={src}
+            alt={alt ?? ''}
+            loading="lazy"
+            decoding="async"
+            className="w-full max-w-3xl mx-auto rounded-2xl border border-brand-sectiongray shadow-sm object-cover"
+          />
+        </figure>
+      ),
     }),
     [],
   );
