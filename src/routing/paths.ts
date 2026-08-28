@@ -133,7 +133,9 @@ export function daavlinSectionPath(locale: Locale, section: DaavlinSectionId = '
 }
 
 export type DaavlinModelId =
+  | '1-series'
   | '7-series'
+  | 'uv-series'
   | 'dermapal'
   | 'm-series'
   | 'deka-co2-laser'
@@ -143,7 +145,9 @@ export type DaavlinModelId =
   | 'aquex';
 
 export const DAAVLIN_MODEL_IDS: DaavlinModelId[] = [
+  '1-series',
   '7-series',
+  'uv-series',
   'dermapal',
   'm-series',
   'deka-co2-laser',

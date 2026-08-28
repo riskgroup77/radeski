@@ -86,6 +86,138 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
       ),
     ],
   },
+  '1-series': {
+    id: '1-series',
+    seoTitle: t(
+      'Daavlin 1 Series — lokal fototerapiya paneli | Radeski',
+      'Daavlin 1 Series — панель локальной фототерапии | Radeski',
+      'Daavlin 1 Series — localized phototherapy panel | Radeski',
+    ),
+    seoDesc: t(
+      '1 Series: 4 U-shaklli lampa, portativ panel, NB-UVB / UVA / UVA1. Qo‘l, oyoq, yuz va lokal zonalarga uy hamda klinika uchun. O‘zbekiston Milliy Fototerapiya Markazi — Radeski.',
+      '1 Series: 4 U-образные лампы, портативная панель, NB-UVB / UVA / UVA1. Для кистей, стоп, лица и локальных зон — дом и клиника. Национальный центр фототерапии — Radeski.',
+      '1 Series: 4 U-shaped lamps, portable panel, NB-UVB / UVA / UVA1. For hands, feet, face and local areas — home and clinic. National Phototherapy Center — Radeski.',
+    ),
+    roleTitle: t('Modelning klinik roli', 'Клиническая роль модели', 'Clinical role of the model'),
+    roleBody: t(
+      '1 Series lokal fototerapiya uchun eng mos portativ yechimlardan biri: kichik o‘lcham, yuqori chiqish va moslashuvchan joylashuv. Psoriaz, vitiligo yoki ekzema o‘choqlarini uyda yoki klinik kabinetda davolashda qo‘llaniladi.',
+      '1 Series — одно из лучших портативных решений для локальной фототерапии: компактный размер, высокий выход и гибкое размещение. Применяется при очагах псoriasis, витилиго или экземы дома или в кабинете.',
+      '1 Series is a leading portable option for localized phototherapy: compact size, high output and flexible positioning. Used for psoriasis, vitiligo or eczema spots at home or in clinic.',
+    ),
+    clinicTitle: t('Radeski / distributor yo‘nalishi', 'Направление Radeski / дистрибьютора', 'Radeski / distributor focus'),
+    clinicBody: t(
+      'Radeski distributor sifatida 1 Series ni uy kursi, kichik filial yoki lokal protokollar uchun tavsiya qiladi. ClearLink™ va dosimetriya opsiyalari bilan bemor xavfsizligi va kurs sifatini nazorat qilish osonlashadi.',
+      'Как дистрибьютор Radeski рекомендует 1 Series для домашних курсов, небольших филиалов и локальных протоколов. ClearLink™ и опции дозиметрии упрощают контроль безопасности и качества курса.',
+      'As distributor, Radeski recommends 1 Series for home courses, small branches and localized protocols. ClearLink™ and dosimetry options simplify safety and course-quality control.',
+    ),
+    featuresTitle: t('Texnik va foydalanish nuqtalari', 'Технические и практические моменты', 'Technical and practical points'),
+    features: [
+      t(
+        '4 ta 180° U-shaklli lampa — qisqa seans va yuqori birlik maydoni samaradorligi.',
+        '4 U-образные лампы 180° — короткий сеанс и высокая эффективность на единицу площади.',
+        'Four 180° U-shaped lamps — short sessions and high efficiency per unit area.',
+      ),
+      t(
+        'Gorizontal, vertikal yoki yon holat — qo‘l, oyoq, yuz va lokal zonalarga moslashuv.',
+        'Горизонтальное, вертикальное или боковое положение — адаптация под кисти, стопы, лицо и локальные зоны.',
+        'Flat, upright or side orientation — adapts to hands, feet, face and local zones.',
+      ),
+      t(
+        'UV o‘tkazuvchi akril ekran + UV himoya ko‘zoynak — xavfsiz foydalanish.',
+        'UV-пропускающий акриловый экран + защитные очки — безопасное использование.',
+        'UV-transmitting acrylic shield + UV-blocking eyewear — safe use.',
+      ),
+      t(
+        'ClearLink™ va Flex Dosimetry — uy kursida dozani nazorat qilish uchun.',
+        'ClearLink™ и Flex Dosimetry — для контроля дозы в домашнем курсе.',
+        'ClearLink™ and Flex Dosimetry — for dose control in home courses.',
+      ),
+    ],
+    pathwayTitle: t('Qanday tanlanadi', 'Как обычно выбирают', 'How it is typically selected'),
+    pathway: [
+      t(
+        'Lokal fotosezgir jarayon va davolash maydoni aniqlanadi.',
+        'Определяется локальный фоточувствительный процесс и зона лечения.',
+        'Localized photoresponsive disease and treatment field are defined.',
+      ),
+      t(
+        'Lampa turi (NB-UVB, UVA, UVA1) va uy/klinika rejimi tanlanadi.',
+        'Выбираются тип ламп (NB-UVB, UVA, UVA1) и режим дом/клиника.',
+        'Lamp type (NB-UVB, UVA, UVA1) and home/clinic plan are chosen.',
+      ),
+      t(
+        'Bemorga joylashuv, vaqt va kuzatuv bo‘yicha o‘qitish beriladi.',
+        'Проводится обучение по размещению, времени и наблюдению.',
+        'Training covers positioning, timing and follow-up.',
+      ),
+    ],
+  },
+  'uv-series': {
+    id: 'uv-series',
+    seoTitle: t(
+      'Daavlin UV Series — ixcham to‘liq tana kabinasi | Radeski',
+      'Daavlin UV Series — компактная кабина на всё тело | Radeski',
+      'Daavlin UV Series — compact full-body cabin | Radeski',
+    ),
+    seoDesc: t(
+      'UV Series: 24 lampagacha, NB-UVB / UVA, dosimetriya, ClearLink™. Klinik to‘liq tana fototerapiyasi ixcham kabinada. O‘zbekiston Milliy Fototerapiya Markazi — Radeski.',
+      'UV Series: до 24 ламп, NB-UVB / UVA, дозиметрия, ClearLink™. Клиническая фототерапия всего тела в компактной кабине. Национальный центр фототерапии — Radeski.',
+      'UV Series: up to 24 lamps, NB-UVB / UVA, dosimetry, ClearLink™. Clinical full-body phototherapy in a compact cabin. National Phototherapy Center — Radeski.',
+    ),
+    roleTitle: t('Modelning klinik roli', 'Клиническая роль модели', 'Clinical role of the model'),
+    roleBody: t(
+      'UV Series katta klinik kabinalarning terapevtik samaradorligini ixchamroq formatga joylashtiradi. Psoriaz, vitiligo, ekzema va boshqa surunkali kasalliklarda to‘liq tana kurslari uchun tanlanadi.',
+      'UV Series переносит терапевтическую эффективность больших клинических кабин в более компактный формат. Выбирается для курсов на всё тело при псoriasis, витилиго, экземе и других хронических заболеваниях.',
+      'UV Series brings large-cabin therapeutic effectiveness into a more compact format. Chosen for full-body courses in psoriasis, vitiligo, eczema and other chronic conditions.',
+    ),
+    clinicTitle: t('Radeski / distributor yo‘nalishi', 'Направление Radeski / дистрибьютора', 'Radeski / distributor focus'),
+    clinicBody: t(
+      'Milliy markaz va hamkor klinikalarda UV Series zamonaviy fototerapiya kabineti uchun mos. O‘rnatish, dosimetriya kalibrlash va xodimlarni o‘qitish distributor tomonidan qo‘llab-quvvatlanadi.',
+      'В национальном центре и у партнёров UV Series подходит для современного фототерапевтического кабинета. Установка, калибровка дозиметрии и обучение персонала поддерживаются дистрибьютором.',
+      'At the national center and partner clinics, UV Series fits a modern phototherapy room. Installation, dosimetry calibration and staff training are supported by the distributor.',
+    ),
+    featuresTitle: t('Texnik va foydalanish nuqtalari', 'Технические и практические моменты', 'Technical and practical points'),
+    features: [
+      t(
+        '24 lampagacha konfiguratsiya — CXE 311-24, 311/350 12+12, 350-24.',
+        'Конфигурации до 24 ламп — CXE 311-24, 311/350 12+12, 350-24.',
+        'Configurations up to 24 lamps — CXE 311-24, 311/350 12+12, 350-24.',
+      ),
+      t(
+        'NB-UVB va UVA spektrlari — shifokor protokoliga mos tanlov.',
+        'Спектры NB-UVB и UVA — выбор по протоколу врача.',
+        'NB-UVB and UVA spectra — selection per physician protocol.',
+      ),
+      t(
+        'ClearLink™ + dosimetriya — seans vaqtini va dozani standartlashtirish.',
+        'ClearLink™ + дозиметрия — стандартизация времени и дозы сеанса.',
+        'ClearLink™ + dosimetry — standardize session time and dose.',
+      ),
+      t(
+        'Fan Kit (220V) — uzun muddatli barqaror ishlash uchun ixtiyoriy.',
+        'Fan Kit (220V) — опционально для стабильной длительной работы.',
+        'Fan Kit (220V) — optional for stable long-term operation.',
+      ),
+    ],
+    pathwayTitle: t('Qanday tanlanadi', 'Как обычно выбирают', 'How it is typically selected'),
+    pathway: [
+      t(
+        'To‘liq tana fototerapiya kursi va kasallik shakli tasdiqlanadi.',
+        'Подтверждается курс фототерапии всего тела и форма заболевания.',
+        'Full-body phototherapy course and disease pattern are confirmed.',
+      ),
+      t(
+        'Lampa soni, spektr va kabina joylashuvi bo‘yicha UV Series modeli tanlanadi.',
+        'По числу ламп, спектру и размещению кабинета выбирается модель UV Series.',
+        'UV Series model is chosen by lamp count, spectrum and room layout.',
+      ),
+      t(
+        'O‘rnatish, kalibrlash va klinik protokol bo‘yicha xodimlar o‘qitiladi.',
+        'Проводятся установка, калибровка и обучение персонала по клиническому протоколу.',
+        'Install, calibration and staff training on the clinical protocol follow.',
+      ),
+    ],
+  },
   dermapal: {
     id: 'dermapal',
     seoTitle: t(

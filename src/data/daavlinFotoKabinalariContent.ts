@@ -619,9 +619,9 @@ export const DAAVLIN_CABINS = {
     {
       title: L('Zona qamrovi', 'Зона покрытия', 'Coverage area'),
       text: L(
-        'To‘liq tana — NeoLux / 7 Series. Qo‘l-oyoq — M Series. Lokal / bosh terisi — DermaPal. Lazer va radioto‘lqin — DEKA / Surgitron.',
-        'Всё тело — NeoLux / 7 Series. Кисти-стопы — M Series. Локально / кожа головы — DermaPal. Лазер и радиоволна — DEKA / Surgitron.',
-        'Full body — NeoLux / 7 Series. Hands/feet — M Series. Spot / scalp — DermaPal. Laser and RF — DEKA / Surgitron.',
+        'To‘liq tana — NeoLux / UV Series / 7 Series. Lokal / uy — 1 Series. Qo‘l-oyoq — M Series. Lokal / bosh terisi — DermaPal. Lazer va radioto‘lqin — DEKA / Surgitron.',
+        'Всё тело — NeoLux / UV Series / 7 Series. Локально / дом — 1 Series. Кисти-стопы — M Series. Локально / кожа головы — DermaPal. Лазер и радиоволна — DEKA / Surgitron.',
+        'Full body — NeoLux / UV Series / 7 Series. Local / home — 1 Series. Hands/feet — M Series. Spot / scalp — DermaPal. Laser and RF — DEKA / Surgitron.',
       ),
     },
     {
@@ -785,6 +785,122 @@ export const DAAVLIN_CABINS = {
         ['To‘liq tana paneli', '4–12 lampa', '~0,3 m²', 'ClearLink™'],
         ['Панель на всё тело', '4–12 ламп', '~0,3 м²', 'ClearLink™'],
         ['Full-body panel', '4–12 lamps', '~0.3 m²', 'ClearLink™'],
+      ),
+    },
+    {
+      id: '1-series',
+      name: '1 Series',
+      image: '/daavlin/model-1-series.webp',
+      badge: L('Lokal / uy', 'Локально / дом', 'Local / home'),
+      tagline: L(
+        'Ixcham portativ panel — lokal zonalarga fototerapiya',
+        'Компактная портативная панель — локальная фототерапия',
+        'Compact portable panel — localized phototherapy',
+      ),
+      summary: L(
+        '1 Series — kichik, portativ va kuchli panel: qo‘l, oyoq, yuz va boshqa lokal zonalarni davolash uchun. 4 ta maxsus U-shaklli lampa bir lampa hajmida ikki lampa quvvatiga yaqin chiqish beradi. Gorizontal, vertikal yoki yon tomonga qo‘yish mumkin; uyda ham, klinikada ham qulay.',
+        '1 Series — небольшая, портативная и мощная панель для лечения локальных зон: кисти, стопы, лицо и другие участки. 4 специальные U-образные лампы дают мощность, близкую к двум обычным лампам, в компактном корпусе. Можно расположить горизонтально, вертикально или на боку — удобно дома и в клинике.',
+        '1 Series is a small, portable yet powerful panel for localized areas — hands, feet, face and more. Four special U-shaped lamps deliver near two-lamp output in a compact footprint. Use it flat, upright or on its side — convenient at home or in clinic.',
+      ),
+      details: [
+        L(
+          'Tor diapazonli UVB (NB-UVB), UVA, UVA1 va Blue Light lampalari mavjud. ClearLink™ va Flex Dosimetry opsiyalari bilan uy kursini xavfsiz boshqarish mumkin.',
+          'Доступны лампы узкополосного UVB (NB-UVB), UVA, UVA1 и Blue Light. С ClearLink™ и Flex Dosimetry можно безопасно вести домашний курс.',
+          'Narrowband UVB (NB-UVB), UVA, UVA1 and Blue Light lamps are available. ClearLink™ and Flex Dosimetry options help manage safe home courses.',
+        ),
+        L(
+          'UV o‘tkazuvchi akril himoya ekrani lampalarni himoya qiladi; qo‘l va oyoq davolashda qulay yuzaga xizmat qiladi. Ixtiyoriy stend bilan aylanish va burchakni sozlash osonlashadi.',
+          'UV-пропускающий акриловый экран защищает лампы и даёт удобную поверхность для лечения кистей и стоп. Опциональная стойка облегчает поворот и настройку угла.',
+          'A UV-transmitting acrylic shield protects lamps and provides a comfortable surface for hand and foot treatments. An optional stand simplifies pivot and angle adjustment.',
+        ),
+      ],
+      benefits: LL(
+        [
+          '4 ta U-shaklli lampa — yuqori samaradorlik',
+          'Portativ (≈4,1 kg)',
+          'NB-UVB / UVA / UVA1',
+          'ClearLink™ opsiyasi',
+        ],
+        [
+          '4 U-образные лампы — высокая эффективность',
+          'Портативность (≈4,1 кг)',
+          'NB-UVB / UVA / UVA1',
+          'Опция ClearLink™',
+        ],
+        [
+          '4 U-shaped lamps — high efficiency',
+          'Portable (≈4.1 kg)',
+          'NB-UVB / UVA / UVA1',
+          'ClearLink™ option',
+        ],
+      ),
+      bestFor: L(
+        'Kimga: lokal psoriaz, vitiligo, ekzema o‘choqlari; uy kursi yoki kichik klinik kabinet.',
+        'Кому: локальные очаги псориаза, витилиго, экземы; домашний курс или небольшой кабинет.',
+        'Best for: localized psoriasis, vitiligo, eczema; home courses or small clinic rooms.',
+      ),
+      specs: LL(
+        ['4 lampa', '23,5×45,7 cm maydon', 'ClearLink™ opsiya', 'Uy rozetkasi'],
+        ['4 лампы', 'Площадь 23,5×45,7 см', 'Опция ClearLink™', 'Бытовая розетка'],
+        ['4 lamps', '23.5×45.7 cm field', 'ClearLink™ option', 'Standard outlet'],
+      ),
+    },
+    {
+      id: 'uv-series',
+      name: 'UV Series',
+      image: '/daavlin/model-uv-series.webp',
+      badge: L('To‘liq tana kabina', 'Кабина на всё тело', 'Full-body cabin'),
+      tagline: L(
+        'To‘liq tana fototerapiya — ixcham kabina formatida',
+        'Фототерапия всего тела — в компактной кабине',
+        'Full-body phototherapy in a compact cabin',
+      ),
+      summary: L(
+        'UV Series to‘liq tana uchun terapevtik samaradorlikni ixcham o‘lchamda birlashtiradi. 24 tagacha lampali konfiguratsiyalar, NB-UVB va UVA kombinatsiyalari, dosimetriya va ClearLink™ boshqaruvi bilan zamonaviy klinik kabinet uchun mos.',
+        'UV Series сочетает терапевтическую эффективность для всего тела с компактным форматом. Конфигурации до 24 ламп, комбинации NB-UVB и UVA, дозиметрия и управление ClearLink™ — для современного клинического кабинета.',
+        'UV Series combines full-body therapeutic effectiveness with a compact footprint. Configurations up to 24 lamps, NB-UVB and UVA combinations, dosimetry and ClearLink™ control — suited to a modern clinical room.',
+      ),
+      details: [
+        L(
+          'CXE 311-24, 311/350 12+12 va 350-24 kabi modellarda tor diapazonli UVB va UVA spektrlari tanlanadi. Har bir seans dozasi shifokor protokoli va dosimetriya sertifikatiga mos boshqariladi.',
+          'В моделях CXE 311-24, 311/350 12+12 и 350-24 выбираются спектры узкополосного UVB и UVA. Доза каждого сеанса контролируется по протоколу врача и сертификату дозиметрии.',
+          'Models such as CXE 311-24, 311/350 12+12 and 350-24 offer narrowband UVB and UVA spectra. Each session dose follows physician protocol and dosimetry certification.',
+        ),
+        L(
+          'Panelli eshiklar va vertikal lampalar bemor qulayligini saqlab, klinikada joy tejash imkonini beradi. Ventilyator to‘plami (Fan Kit) uzun muddatli barqaror ishlash uchun mavjud.',
+          'Панельные двери и вертикальные лампы сохраняют комфорт пациента и экономят место в клинике. Комплект вентиляторов (Fan Kit) доступен для стабильной долгосрочной работы.',
+          'Panel doors and vertical lamps maintain patient comfort while saving clinic space. A fan kit is available for stable long-term operation.',
+        ),
+      ],
+      benefits: LL(
+        [
+          '24 lampagacha konfiguratsiya',
+          'NB-UVB + UVA kombinatsiyalar',
+          'Dosimetriya sertifikati',
+          'ClearLink™ boshqaruv',
+        ],
+        [
+          'Конфигурации до 24 ламп',
+          'Комбинации NB-UVB + UVA',
+          'Сертификат дозиметрии',
+          'Управление ClearLink™',
+        ],
+        [
+          'Up to 24-lamp configurations',
+          'NB-UVB + UVA combinations',
+          'Dosimetry certificate',
+          'ClearLink™ control',
+        ],
+      ),
+      bestFor: L(
+        'Kimga: klinik to‘liq tana kurslari — psoriaz, vitiligo, ekzema va boshqa fotosezgir kasalliklar.',
+        'Кому: клинические курсы на всё тело — псориаз, витилиго, экзема и другие фоточувствительные заболевания.',
+        'Best for: clinical full-body courses — psoriasis, vitiligo, eczema and other photoresponsive disease.',
+      ),
+      specs: LL(
+        ['To‘liq tana kabina', '24 lampagacha', 'ClearLink™ + dosimetriya', 'NB-UVB / UVA'],
+        ['Кабина на всё тело', 'До 24 ламп', 'ClearLink™ + дозиметрия', 'NB-UVB / UVA'],
+        ['Full-body cabin', 'Up to 24 lamps', 'ClearLink™ + dosimetry', 'NB-UVB / UVA'],
       ),
     },
     {
