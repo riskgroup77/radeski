@@ -4,6 +4,8 @@ import apparatnayaTeaserVideo from '../assets/services-teaser/apparatnaya-kosmet
 import apparatnayaTeaserPoster from '../assets/services-teaser/apparatnaya-kosmetologiya-poster.jpg';
 import inekcionnayaTeaserVideo from '../assets/services-teaser/in-ekcionnaya-kosmetologiya.mp4';
 import inekcionnayaTeaserPoster from '../assets/services-teaser/in-ekcionnaya-kosmetologiya-poster.jpg';
+import dermatoscopiyaTeaserVideo from '../assets/services-teaser/dermatoskopiya.mp4';
+import dermatoscopiyaTeaserPoster from '../assets/services-teaser/dermatoskopiya-poster.jpg';
 import lazernayaEpilyaciyaTeaserVideo from '../assets/services-teaser/lazernaya-epilyaciya.mp4';
 import lazernayaEpilyaciyaTeaserPoster from '../assets/services-teaser/lazernaya-epilyaciya-poster.jpg';
 import hirurgicheskayaTeaserVideo from '../assets/services-teaser/hirurgicheskaya-dermatologiya.mp4';
@@ -37,6 +39,10 @@ export const HOME_SERVICE_TEASER_MEDIA: Partial<Record<string, HomeServiceTeaser
   'in-ekcionnaya-kosmetologiya': {
     video: inekcionnayaTeaserVideo,
     poster: inekcionnayaTeaserPoster,
+  },
+  dermatoskopiya: {
+    video: dermatoscopiyaTeaserVideo,
+    poster: dermatoscopiyaTeaserPoster,
   },
   'lazernaya-epilyaciya': {
     video: lazernayaEpilyaciyaTeaserVideo,

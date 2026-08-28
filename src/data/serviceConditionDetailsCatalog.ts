@@ -81,6 +81,22 @@ export const CATEGORY_CONDITION_DEFAULTS: Record<string, ServiceConditionDetailM
       ),
     ],
   },
+  dermatoskopiya: {
+    image: '/services/dermatoskopiya/hero.jpg',
+    priceCategoryIds: [
+      'tsifrovaya-dematologiya-dermatoskopiya',
+      'pasport-kozhi',
+      'dermatoonkolog',
+      'konsultatsii',
+    ],
+    clinicApproach: [
+      L(
+        'Professional dermatoskop va dermatolog nazorati; shubhali holatlarda biopsiya yoki kuzatuv rejasi belgilanadi.',
+        'Профессиональный дерматоскоп и контроль дерматолога; при подозрении — биопсия или план наблюдения.',
+        'Professional dermatoscope and dermatologist oversight; biopsy or surveillance plan when suspicious.',
+      ),
+    ],
+  },
   'in-ekcionnaya-kosmetologiya': {
     image: galleryImage(2),
     priceCategoryIds: ['inektsionnaya-kosmetologiya', 'rejuran', 'teosyal', 'konsultatsii'],
@@ -227,6 +243,9 @@ export const SUB_CONDITION_DEFAULTS: Record<string, ServiceConditionDetailMeta> 
     ),
     clinicApproach: CATEGORY_CONDITION_DEFAULTS.dermatologiya.clinicApproach,
   },
+  'derm-konsult': CATEGORY_CONDITION_DEFAULTS.dermatoskopiya,
+  'derm-total-body': CATEGORY_CONDITION_DEFAULTS.dermatoskopiya,
+  'derm-skin-passport': CATEGORY_CONDITION_DEFAULTS.dermatoskopiya,
   konturnaya: CATEGORY_CONDITION_DEFAULTS['in-ekcionnaya-kosmetologiya'],
   botulino: CATEGORY_CONDITION_DEFAULTS['in-ekcionnaya-kosmetologiya'],
   biorev: CATEGORY_CONDITION_DEFAULTS['in-ekcionnaya-kosmetologiya'],

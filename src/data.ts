@@ -636,6 +636,49 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     ]
   },
   {
+    id: "dermatoskopiya",
+    title: {
+      uz: "Dermatoskopiya",
+      ru: "Дерматоскопия",
+      en: "Dermoscopy"
+    },
+    description: {
+      uz: "Farg'onada professional dermatoskopiya — teridagi hol, dog' va o'smalarni kattalashtirilgan optik ko'rik bilan erta aniqlash. Radeski Skin Clinic.",
+      ru: "Профессиональная дерматоскопия в Фергане — ранняя диагностика родинок, пятен и новообразований под оптическим увеличением. Клиника Radeski.",
+      en: "Professional dermoscopy in Fergana — early detection of moles, spots and skin lesions with optical magnification. Radeski Skin Clinic."
+    },
+    icon: "ScanEye",
+    subServices: [
+      {
+        id: "derm-konsult",
+        name: { uz: "Dermatoskopik ko'rik", ru: "Дерматоскопический осмотр", en: "Dermoscopic examination" },
+        description: {
+          uz: "Dermatolog ko'rigi va professional dermatoskop yordamida shubhali hol va o'smalarni og'riqsiz baholash.",
+          ru: "Осмотр дерматолога с профессиональным дерматоскопом — безболезненная оценка подозрительных родинок и образований.",
+          en: "Physician examination with a professional dermatoscope — painless assessment of suspicious moles and lesions."
+        }
+      },
+      {
+        id: "derm-total-body",
+        name: { uz: "Butun tana dermatoskopiyasi", ru: "Дерматоскопия всего тела", en: "Full-body dermoscopy" },
+        description: {
+          uz: "Tana bo'ylab tizimli ko'rik — ko'p sonli hol va yashirin zonalarni aniqlash, xavfli o'zgarishlarni erta topish.",
+          ru: "Системный осмотр всего тела — выявление множественных и скрытых родинок, ранняя диагностика опасных изменений.",
+          en: "Systematic full-body screening — detecting multiple and hidden moles, early identification of high-risk changes."
+        }
+      },
+      {
+        id: "derm-skin-passport",
+        name: { uz: "Raqamli teri pasporti", ru: "Цифровой паспорт кожи", en: "Digital skin passport" },
+        description: {
+          uz: "Hol va o'smalarning raqamli suratlari arxivlanadi — vaqt o'tishi bilan o'zgarishlarni solishtirish va monitoring qilish.",
+          ru: "Цифровая фиксация родинок и образований — сравнение изменений во времени и план наблюдения.",
+          en: "Digital archiving of moles and lesions — comparing changes over time and structured follow-up monitoring."
+        }
+      }
+    ]
+  },
+  {
     id: "apparatnaya-kosmetologiya",
     title: {
       uz: "Apparatli kosmetologiyasi",

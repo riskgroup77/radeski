@@ -319,6 +319,12 @@ const API_PARENT_FOR_PRICE_CATEGORIES: Record<string, string[]> = {
     'arenda-apparatov',
   ],
   'in-ekcionnaya-kosmetologiya': ['inektsionnaya-kosmetologiya', 'teosyal', 'rejuran'],
+  dermatoskopiya: [
+    'tsifrovaya-dematologiya-dermatoskopiya',
+    'pasport-kozhi',
+    'dermatoonkolog',
+    'konsultatsii',
+  ],
   'lazernaya-epilyaciya': ['lazernaya-epilyatsiya'],
   'hirurgicheskaya-dermatologiya': [
     'hirurgicheskaya-dermatologiya',

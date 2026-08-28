@@ -15,6 +15,13 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriasis',
     'plasmapheresis',
   ],
+  dermatoskopiya: [
+    'basal-cell-carcinoma',
+    'molluscum-radeski',
+    'pediatric-warts-laser-radeski',
+    'hollywood-spectra-pigmentation',
+    'papilloma-warts',
+  ],
   'apparatnaya-kosmetologiya': [
     'ipl-radeski',
     'ipl-therapy',
@@ -68,6 +75,11 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     ],
     fototerapiya: ['vitiligo', 'psoriasis-daavlin-kokand', 'psoriasis'],
     immunobiologicheskaya: ['psoriasis', 'psoriasis-daavlin-kokand', 'plasmapheresis'],
+  },
+  dermatoskopiya: {
+    'derm-konsult': ['basal-cell-carcinoma', 'molluscum-radeski', 'papilloma-warts'],
+    'derm-total-body': ['basal-cell-carcinoma', 'mole-screening'],
+    'derm-skin-passport': ['basal-cell-carcinoma'],
   },
   'apparatnaya-kosmetologiya': {
     'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski', 'derma-v-vascular'],

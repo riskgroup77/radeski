@@ -137,7 +137,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
           </h1>
           <p className="text-brand-text-muted mt-4 text-sm sm:text-base">
             {locale === 'uz'
-              ? "Radeski klinikada IPL, lazer epilyatsiya, fototerapiya, dermatoskopiya, trixologiya va inyeksion kosmetologiya — 12 ta ixtisoslashgan yo'nalish."
+              ? "Radeski klinikada IPL, lazer epilyatsiya, fototerapiya, dermatoskopiya, trixologiya va inyeksion kosmetologiya — 13 ta ixtisoslashgan yo'nalish."
               : locale === 'ru'
                 ? 'В клинике Radeski: IPL, лазерная эпиляция, фототерапия, дерматоскопия, трихология и инъекционная косметология — 12 направлений.'
                 : 'At Radeski Clinic: IPL, laser hair removal, phototherapy, dermatoscopy, trichology and injectables — 12 specialties.'}

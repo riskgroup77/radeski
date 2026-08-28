@@ -7,6 +7,7 @@ export const CATEGORY_ICON_BY_ID: Record<string, string> = {
   dermatologiya: 'ScanFace',
   'apparatnaya-kosmetologiya': 'WandSparkles',
   'in-ekcionnaya-kosmetologiya': 'Syringe',
+  dermatoskopiya: 'ScanEye',
   'lazernaya-epilyaciya': 'Zap',
   'trihologiya-centr-lechenie-volos': 'ScanSearch',
   dermatoonkologiya: 'ScanEye',

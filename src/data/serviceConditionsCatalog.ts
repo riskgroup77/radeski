@@ -144,6 +144,35 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       { title: 'Seborrhea and fungal infections', description: 'Oily skin, dandruff and mycosis. Antifungal and anti-inflammatory therapy with care guidance.' },
     ],
   },
+  dermatoskopiya: {
+    uz: [
+      {
+        title: 'Shubhali hol (nevus) o\'zgarishi',
+        description:
+          'Rang, shakl yoki hajm o\'zgarishi melanoma belgisi bo\'lishi mumkin. Dermatoskopiya xavfli va xavfsiz o\'zgarishlarni farqlashga yordam beradi.',
+      },
+      {
+        title: 'Ko\'p sonli hol va dog\'lar',
+        description:
+          '50 dan ortiq hol bo\'lsa, tizimli butun tana ko\'rigi tavsiya etiladi. Yashirin zonalardagi o\'zgarishlar ham baholanadi.',
+      },
+      {
+        title: 'Papilloma va pigment dog\'',
+        description:
+          'Virus yoki yoshga bog\'liq o\'smalar dermatoskop orqali aniqroq baholanadi — kerak bo\'lsa biopsiya yoki davolash rejalashtiriladi.',
+      },
+    ],
+    ru: [
+      { title: 'Изменение родинки', description: 'Дерматоскопия помогает отличить опасные изменения от доброкачественных.' },
+      { title: 'Множественные родинки', description: 'При большом числе nevus рекомендуется системный осмотр всего тела.' },
+      { title: 'Папилломы и пигментные пятна', description: 'Дерматоскопическая оценка уточняет тактику — наблюдение или лечение.' },
+    ],
+    en: [
+      { title: 'Changing mole (nevus)', description: 'Dermoscopy helps distinguish dangerous from benign changes.' },
+      { title: 'Multiple moles', description: 'With many nevi, systematic full-body screening is recommended.' },
+      { title: 'Papillomas and pigmented spots', description: 'Dermoscopic assessment clarifies observation or treatment plan.' },
+    ],
+  },
   'in-ekcionnaya-kosmetologiya': {
     uz: [
       {

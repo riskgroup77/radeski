@@ -380,6 +380,143 @@ export const CATEGORY_RICH_CATALOG: Record<string, LocalizedRich> = {
       process: STANDARD_PROCESS.en,
     },
   },
+  dermatoskopiya: {
+    uz: {
+      aboutTitle: "Nima uchun dermatoskopiyadan aynan Radeski Skin Clinic'da o'tish kerak?",
+      overview:
+        "Dermatoskopiya — teridagi hol, dog' va o'smalarni professional optik kattalashtirish yordamida baholash usuli. Radeski Skin Clinic'da bu tekshiruv og'riqsiz, invaziv emas va melanoma hamda boshqa xavfli o'zgarishlarni erta bosqichda aniqlashga yordam beradi.",
+      aboutSections: [
+        {
+          title: 'Yuqori aniqlikdagi diagnostika',
+          description:
+            "Professional dermatoskop pigment tarmoqlari, naqshlar va chegaralarni ko'z bilan ko'rinmaydigan darajada kattalashtirilgan holda ko'rsatadi.",
+        },
+        {
+          title: 'Dermatolog nazorati',
+          description:
+            "Tekshiruvni malakali dermatolog olib boradi. Natija tushuntiriladi va keyingi qadamlar — kuzatish, biopsiya yoki davolash — aniq reja asosida belgilanadi.",
+        },
+        {
+          title: 'Raqamli monitoring',
+          description:
+            "Kerak bo'lsa, hol va o'smalarning suratlari saqlanadi — keyingi ko'riklarda o'zgarishlarni solishtirish osonlashadi.",
+        },
+      ],
+      aboutFooter:
+        "Radeski Skin Clinic'da dermatoskopiya — teri salomatligi uchun aniq diagnostika va xavfsiz keyingi yo'nalish tanlash vositasidir.",
+      indications: [
+        'Yangi yoki o\'zgarayotgan hol va dog\'lar',
+        'Ko\'p sonli nevus va pigment o\'smalar',
+        'Oilaviy melanoma anamnezi',
+        'Yuqori quyosh ta\'siri tarixi',
+        'Yillik profilaktik teri tekshiruvi',
+      ],
+      solutions: [
+        'Dermatoskopik ko\'rik',
+        'Butun tana dermatoskopiyasi',
+        'Raqamli teri pasporti',
+        'Xavf baholash va kuzatish rejasi',
+        'Biopsiyaga yo\'naltirish',
+      ],
+      benefits: CLINIC_BENEFITS.uz,
+      process: [
+        'Anamnez va vizual ko\'rik',
+        'Dermatoskop bilan chuqur baholash',
+        'Natijani tushuntirish',
+        'Kuzatuv yoki qo\'shimcha tekshiruv rejasi',
+      ],
+    },
+    ru: {
+      aboutTitle: 'Почему дерматоскопию стоит пройти именно в Radeski Skin Clinic?',
+      overview:
+        'Дерматоскопия — оценка родинок, пятен и новообразований с профессиональным оптическим увеличением. Исследование безболезненное и помогает выявить меланому на ранней стадии.',
+      aboutSections: [
+        {
+          title: 'Высокоточная диагностика',
+          description:
+            'Профессиональный дерматоскоп показывает пигментные сети и границы с увеличением, недоступным невооружённому глазу.',
+        },
+        {
+          title: 'Контроль дерматолога',
+          description:
+            'Осмотр проводит квалифицированный дерматолог. Результат объясняется, дальнейшие шаги определяются по чёткому плану.',
+        },
+        {
+          title: 'Цифровой мониторинг',
+          description:
+            'При необходимости фиксируются изображения родинок для сравнения при повторных визитах.',
+        },
+      ],
+      aboutFooter:
+        'В Radeski Skin Clinic дерматоскопия — точная диагностика и безопасный выбор дальнейшей тактики.',
+      indications: [
+        'Новые или изменяющиеся родинки',
+        'Множественные nevus',
+        'Семейный анамнез меланомы',
+        'Выраженная инсоляция',
+        'Ежегодный профилактический осмотр',
+      ],
+      solutions: [
+        'Дерматоскопический осмотр',
+        'Дерматоскопия всего тела',
+        'Цифровой паспорт кожи',
+        'Оценка риска',
+        'Направление на биопсию',
+      ],
+      benefits: CLINIC_BENEFITS.ru,
+      process: [
+        'Анамнез и визуальный осмотр',
+        'Дерматоскопическая оценка',
+        'Объяснение результата',
+        'План наблюдения',
+      ],
+    },
+    en: {
+      aboutTitle: 'Why choose dermoscopy at Radeski Skin Clinic?',
+      overview:
+        'Dermoscopy evaluates moles, spots and skin lesions with professional optical magnification — painless and helpful for early melanoma detection.',
+      aboutSections: [
+        {
+          title: 'High-precision diagnostics',
+          description:
+            'A professional dermatoscope reveals pigment patterns and borders beyond naked-eye view.',
+        },
+        {
+          title: 'Physician-led care',
+          description:
+            'A qualified dermatologist performs the exam and explains results with a clear follow-up plan.',
+        },
+        {
+          title: 'Digital monitoring',
+          description:
+            'Lesion images can be archived for comparison at future visits.',
+        },
+      ],
+      aboutFooter:
+        'At Radeski Skin Clinic, dermoscopy is precise diagnostics and a safe foundation for next steps.',
+      indications: [
+        'New or changing moles',
+        'Multiple nevi',
+        'Family history of melanoma',
+        'Significant sun exposure',
+        'Annual preventive screening',
+      ],
+      solutions: [
+        'Dermoscopic examination',
+        'Full-body dermoscopy',
+        'Digital skin passport',
+        'Risk assessment',
+        'Biopsy referral when needed',
+      ],
+      benefits: CLINIC_BENEFITS.en,
+      process: [
+        'History and visual exam',
+        'Dermoscopic assessment',
+        'Results explanation',
+        'Follow-up plan',
+      ],
+    },
+  },
   'in-ekcionnaya-kosmetologiya': {
     uz: {
       overview:
@@ -1273,6 +1410,75 @@ export const SUB_SERVICE_RICH_CATALOG: Record<string, LocalizedRich> = {
       solutions: ['Alexandrite laser sessions', 'Cooled safe treatment', 'Individual settings', 'Course-based plan', 'Maintenance sessions'],
       benefits: ['High effectiveness', 'Painless and comfortable', 'Cooling protection', 'Predictable results', 'Specialist supervision'],
       process: ['Consultation and assessment', 'Treatment area preparation', 'Laser session with cooling', 'Soothing aftercare', 'Next session scheduling'],
+    },
+  },
+  'derm-konsult': {
+    uz: {
+      overview: 'Dermatoskopik ko\'rik — dermatolog maslahati bilan birgalikda bajariladigan asosiy diagnostik xizmat. Shubhali hol va o\'smalar og\'riqsiz, tez va aniq baholanadi.',
+      indications: ['Bitta yoki bir nechta shubhali hol', 'Yangi paydo bo\'lgan dog\'', 'Rang yoki shakl o\'zgarishi', 'Qichish yoki qizarish bilan hol', 'Kosmetik muolajadan oldin tekshiruv'],
+      solutions: ['Vizual va dermatoskopik ko\'rik', 'Xavf baholash', 'Kuzatish tavsiyasi', 'Biopsiya yo\'naltirish', 'Shifokor tushuntirishi'],
+      benefits: ['Og\'riqsiz', 'Tez', 'Aniq', 'Xavfsiz', 'Mutaxassis nazorati'],
+      process: ['Konsultatsiya', 'Dermatoskop tekshiruvi', 'Xulosa', 'Keyingi qadamlar'],
+    },
+    ru: {
+      overview: 'Дерматоскопический осмотр с консультацией дерматолога — базовая диагностическая услуга для оценки родинок и образований.',
+      indications: ['Подозрительная родинка', 'Новое пятно', 'Изменение цвета или формы', 'Зуд или покраснение', 'Проверка перед процедурами'],
+      solutions: ['Визуальный и дерматоскопический осмотр', 'Оценка риска', 'Рекомендации по наблюдению', 'Направление на биопсию', 'Разъяснение врача'],
+      benefits: ['Безболезненно', 'Быстро', 'Точно', 'Безопасно', 'Контроль специалиста'],
+      process: ['Консультация', 'Дерматоскопия', 'Заключение', 'Дальнейшие шаги'],
+    },
+    en: {
+      overview: 'Dermoscopic examination with dermatologist consultation — core diagnostic service for assessing moles and skin lesions.',
+      indications: ['Suspicious mole', 'New spot', 'Color or shape change', 'Itching or redness', 'Pre-procedure check'],
+      solutions: ['Visual and dermoscopic exam', 'Risk assessment', 'Follow-up advice', 'Biopsy referral', 'Physician explanation'],
+      benefits: ['Painless', 'Fast', 'Accurate', 'Safe', 'Specialist-led'],
+      process: ['Consultation', 'Dermoscopy', 'Conclusion', 'Next steps'],
+    },
+  },
+  'derm-total-body': {
+    uz: {
+      overview: 'Butun tana dermatoskopiyasi — tana bo\'ylab tizimli ko\'rik. Ko\'p sonli yoki yashirin hol va o\'smalarni aniqlash, xavfli o\'zgarishlarni erta topish uchun tavsiya etiladi.',
+      indications: ['50 dan ortiq hol', 'Orqa va yelka kabi ko\'rinmaydigan zonalar', 'Oilaviy melanoma xavfi', 'Oldin xavfli hol anamnezi', 'Yillik profilaktika'],
+      solutions: ['Tizimli zona bo\'yicha ko\'rik', 'Dermatoskop bilan har bir hol bahosi', 'Xavfli hol belgilash', 'Suratga olish', 'Kuzatish jadvali'],
+      benefits: ['Keng qamrovli', 'Erta aniqlash', 'Tizimli yondashuv', 'Aniq hujjatlashtirish', 'Xavfsiz'],
+      process: ['Anamnez', 'Tana bo\'ylab ko\'rik', 'Dermatoskop tekshiruvi', 'Xulosa va reja'],
+    },
+    ru: {
+      overview: 'Дерматоскопия всего тела — системный осмотр для выявления множественных и скрытых родинок.',
+      indications: ['Более 50 родинок', 'Труднодоступные зоны', 'Семейный риск меланомы', 'Анамнез опасных родинок', 'Ежегодный скрининг'],
+      solutions: ['Системный осмотр по зонам', 'Дерматоскопическая оценка каждой родинки', 'Маркировка рискованных', 'Фотофиксация', 'График наблюдения'],
+      benefits: ['Полный охват', 'Ранняя диагностика', 'Системный подход', 'Документирование', 'Безопасно'],
+      process: ['Анамнез', 'Осмотр тела', 'Дерматоскопия', 'Заключение и план'],
+    },
+    en: {
+      overview: 'Full-body dermoscopy — systematic screening to find multiple and hidden moles across the body.',
+      indications: ['More than 50 moles', 'Hard-to-see areas', 'Family melanoma risk', 'History of atypical moles', 'Annual screening'],
+      solutions: ['Zone-by-zone exam', 'Dermoscopic assessment of each lesion', 'Risk lesion marking', 'Photography', 'Follow-up schedule'],
+      benefits: ['Comprehensive', 'Early detection', 'Systematic approach', 'Documentation', 'Safe'],
+      process: ['History', 'Body examination', 'Dermoscopy', 'Conclusion and plan'],
+    },
+  },
+  'derm-skin-passport': {
+    uz: {
+      overview: 'Raqamli teri pasporti — hol va o\'smalarning yuqori sifatli suratlarini arxivlash. Vaqt o\'tishi bilan o\'zgarishlarni solishtirish va monitoring qilish imkonini beradi.',
+      indications: ['Ko\'p holli bemorlar', 'Oldin shubhali hol bo\'lganlar', 'Uzoq muddatli kuzatuv kerak bo\'lganda', 'Oilaviy xavf guruhida', 'Har yili qayta tekshiruv'],
+      solutions: ['Raqamli suratga olish', 'Hol xaritalash', 'Arxiv va taqqoslash', 'Kuzatuv eslatmalari', 'Shifokor tahlili'],
+      benefits: ['Aniq monitoring', 'O\'zgarishlarni erta ko\'rish', 'Hujjatlashtirish', 'Qulay kuzatuv', 'Zamonaviy usul'],
+      process: ['Dermatoskop ko\'rigi', 'Suratga olish', 'Arxiv yaratish', 'Keyingi ko\'rik vaqti'],
+    },
+    ru: {
+      overview: 'Цифровой паспорт кожи — архивирование качественных изображений родинок для сравнения и мониторинга во времени.',
+      indications: ['Множественные родинки', 'Анамнез подозрительных родинок', 'Длительное наблюдение', 'Группа семейного риска', 'Ежегодный контроль'],
+      solutions: ['Цифровая фотофиксация', 'Картирование родинок', 'Архив и сравнение', 'Напоминания о наблюдении', 'Анализ врача'],
+      benefits: ['Точный мониторинг', 'Раннее выявление изменений', 'Документирование', 'Удобное наблюдение', 'Современный метод'],
+      process: ['Дерматоскопический осмотр', 'Фотофиксация', 'Создание архива', 'Следующий визит'],
+    },
+    en: {
+      overview: 'Digital skin passport — archiving high-quality mole images for comparison and long-term monitoring.',
+      indications: ['Many moles', 'History of atypical moles', 'Long-term surveillance', 'Family risk group', 'Annual follow-up'],
+      solutions: ['Digital photography', 'Lesion mapping', 'Archive and comparison', 'Follow-up reminders', 'Physician review'],
+      benefits: ['Precise monitoring', 'Early change detection', 'Documentation', 'Convenient follow-up', 'Modern approach'],
+      process: ['Dermoscopic exam', 'Photography', 'Archive creation', 'Next visit scheduled'],
     },
   },
   trixoskop: {

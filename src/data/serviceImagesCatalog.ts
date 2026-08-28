@@ -7,6 +7,11 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
     fototerapiya: '/services/dermatologiya/fototerapiya.jpg',
     immunobiologicheskaya: '/services/dermatologiya/immunobiologicheskaya.jpg',
   },
+  dermatoskopiya: {
+    'derm-konsult': '/services/dermatoskopiya/osmotr.jpg',
+    'derm-total-body': '/services/dermatoskopiya/total-body.jpg',
+    'derm-skin-passport': '/services/dermatoskopiya/skin-passport.jpg',
+  },
   'apparatnaya-kosmetologiya': {
     'ipl-inmode': '/services/apparatnaya/ipl-inmode.jpg',
     'hollywood-spectra': '/services/apparatnaya/hollywood-spectra.jpg',
@@ -47,6 +52,7 @@ export const SERVICE_SUB_IMAGES: Record<string, Record<string, string>> = {
 /** Category-level hero/card image — curated per specialty (preferred over generic CMS uploads). */
 export const SERVICE_CATEGORY_IMAGES: Record<string, string> = {
   dermatologiya: '/karusel/dermataskopiya.jpeg',
+  dermatoskopiya: '/services/dermatoskopiya/hero.jpg',
   'apparatnaya-kosmetologiya': '/karusel/ipl.webp',
   'in-ekcionnaya-kosmetologiya': '/brand/brand-medical.webp',
   'lazernaya-epilyaciya': '/karusel/lazerniy-epilyatsiya.jpg',
