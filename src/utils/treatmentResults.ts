@@ -22,14 +22,20 @@ function mergeStaticExtras(apiItem: TreatmentResult): TreatmentResult {
   };
 }
 
-/** API dan kelgan natijalar bo'lsa ularni ko'rsatadi, aks holda statik do1–do3 */
+/** API dan kelgan natijalar + statik katalogdagi yangi yozuvlar */
 export function resolvePublicTreatmentResults(apiItems: TreatmentResult[] = []): TreatmentResult[] {
   const sortedApi = sortTreatmentResults(
     apiItems.filter((result) => result.published !== false).map(mergeStaticExtras),
   );
 
   if (sortedApi.length > 0) {
-    return sortedApi;
+    const apiTitles = new Set(sortedApi.map((item) => item.title.uz.trim().toLowerCase()));
+    const staticOnly = TREATMENT_RESULTS.filter(
+      (item) =>
+        item.published !== false &&
+        !apiTitles.has(item.title.uz.trim().toLowerCase()),
+    );
+    return sortTreatmentResults([...sortedApi, ...staticOnly]);
   }
 
   return sortTreatmentResults(TREATMENT_RESULTS);
