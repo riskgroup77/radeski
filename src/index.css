@@ -379,6 +379,14 @@ h1, h2, h3, h4, h5, h6 {
   );
 }
 
+.header-mobile-nav-panel {
+  -webkit-overflow-scrolling: touch;
+}
+
+#main-app-header [role='menu'] a {
+  word-break: break-word;
+}
+
 .site-container {
   width: 100%;
   padding-left: 1rem;

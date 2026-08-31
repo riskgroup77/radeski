@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe, Phone, MapPin, ChevronDown, ChevronRight, Clock } from 'lucide-react';
 import { Locale, ServiceCategory, type Article } from '../types';
@@ -13,6 +13,7 @@ import {
   DAAVLIN_MODELS_NAV_TITLE,
 } from '../data/daavlinModelDeepContent';
 import SiteLogo from './SiteLogo';
+import NavSideFlyout from './NavSideFlyout';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import {
   getInstitutionalNavSection,
@@ -132,6 +133,129 @@ function InstitutionalNavLabel({
       <span className="font-semibold whitespace-nowrap">{title}</span>
       <span className={`${subtitleClass} whitespace-normal`}>{subtitle}</span>
     </span>
+  );
+}
+
+function ServiceDermConditionsDropdownRow({
+  locale,
+  category,
+  isFlyoutOpen,
+  onFlyoutOpen,
+  onFlyoutClose,
+  onNavigateCategory,
+  onNavigateCondition,
+  itemClass,
+  conditionItemClass,
+  flyoutTitle,
+}: {
+  locale: Locale;
+  category: ServiceCategory;
+  isFlyoutOpen: boolean;
+  onFlyoutOpen: () => void;
+  onFlyoutClose: () => void;
+  onNavigateCategory: () => void;
+  onNavigateCondition: () => void;
+  itemClass: string;
+  conditionItemClass: (slug: string) => string;
+  flyoutTitle: string;
+}) {
+  const rowRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={rowRef}
+      className="relative overflow-visible"
+      onMouseEnter={onFlyoutOpen}
+      onMouseLeave={onFlyoutClose}
+    >
+      <Link
+        to={serviceCategoryPath(locale, category.id)}
+        role="menuitem"
+        onClick={onNavigateCategory}
+        className={`${itemClass} flex items-center justify-between gap-2`}
+      >
+        <span className="min-w-0 break-words">{category.title[locale] || category.title.uz}</span>
+        <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
+      </Link>
+
+      <NavSideFlyout isOpen={isFlyoutOpen} anchorRef={rowRef} title={flyoutTitle}>
+        {DERMATOLOGY_CONDITION_NAV.map((item) => (
+          <Link
+            key={item.slug}
+            to={conditionPath(locale, item.slug)}
+            role="menuitem"
+            onClick={onNavigateCondition}
+            className={conditionItemClass(item.slug)}
+          >
+            {item.label[locale]}
+          </Link>
+        ))}
+      </NavSideFlyout>
+    </div>
+  );
+}
+
+function ArticleCategoryDropdownRow({
+  locale,
+  group,
+  isFlyoutOpen,
+  onFlyoutOpen,
+  onFlyoutClose,
+  onNavigateCategory,
+  onNavigateArticle,
+  itemClass,
+  articleItemClass,
+  flyoutTitle,
+}: {
+  locale: Locale;
+  group: ReturnType<typeof buildArticleNavGroups>[number];
+  isFlyoutOpen: boolean;
+  onFlyoutOpen: () => void;
+  onFlyoutClose: () => void;
+  onNavigateCategory: () => void;
+  onNavigateArticle: () => void;
+  itemClass: string;
+  articleItemClass: (routeKey: string) => string;
+  flyoutTitle: string;
+}) {
+  const rowRef = useRef<HTMLDivElement>(null);
+  const { category, articles: categoryArticles } = group;
+
+  return (
+    <div
+      ref={rowRef}
+      className="relative overflow-visible"
+      onMouseEnter={onFlyoutOpen}
+      onMouseLeave={onFlyoutClose}
+    >
+      <Link
+        to={serviceCategoryPath(locale, category.id)}
+        role="menuitem"
+        onClick={onNavigateCategory}
+        className={`${itemClass} flex items-center justify-between gap-2`}
+      >
+        <span className="min-w-0 break-words">{category.title[locale] || category.title.uz}</span>
+        <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
+      </Link>
+
+      <NavSideFlyout isOpen={isFlyoutOpen} anchorRef={rowRef} title={flyoutTitle}>
+        {categoryArticles.map((article) => {
+          const routeKey = resolveArticleRouteKey(article);
+          return (
+            <Link
+              key={article.id}
+              to={articlePath(locale, routeKey)}
+              role="menuitem"
+              onClick={onNavigateArticle}
+              className={articleItemClass(routeKey)}
+              title={article.title[locale] || article.title.uz}
+            >
+              {article.title[locale] || article.title.uz}
+            </Link>
+          );
+        })}
+      </NavSideFlyout>
+    </div>
   );
 }
 
@@ -345,11 +469,14 @@ export default function Header({
     }`;
 
   const articleDropdownItemClass = (routeKey: string) =>
-    `block px-4 py-2 text-[12px] font-medium transition-colors hover:bg-brand-offwhite ${
+    `block px-4 py-2 text-[12px] font-medium leading-snug break-words transition-colors hover:bg-brand-offwhite ${
       activeArticleRouteKey === routeKey
         ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
+
+  const navDropdownPanelClass =
+    'min-w-[260px] sm:min-w-[280px] max-w-[min(340px,calc(100vw-1.5rem))] max-h-[min(70vh,520px)] overflow-y-auto overscroll-contain bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200';
 
   const articleCategoryDropdownItemClass = (categoryId: string) =>
     `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite ${
@@ -361,54 +488,26 @@ export default function Header({
   const renderServiceDropdownItem = (category: ServiceCategory) => {
     if (category.id === DERMATOLOGY_CATEGORY_ID) {
       return (
-        <div
+        <ServiceDermConditionsDropdownRow
           key={category.id}
-          className="relative overflow-visible"
-          onMouseEnter={() => setIsDermConditionsFlyoutOpen(true)}
-          onMouseLeave={() => setIsDermConditionsFlyoutOpen(false)}
-        >
-          <Link
-            to={serviceCategoryPath(locale, category.id)}
-            role="menuitem"
-            onClick={() => {
-              onOpenServiceCategory?.(category.id);
-              setIsServicesDropdownOpen(false);
-              setIsDermConditionsFlyoutOpen(false);
-            }}
-            className={`${serviceDropdownItemClass(category.id)} flex items-center justify-between gap-2`}
-          >
-            <span>{category.title[locale] || category.title.uz}</span>
-            <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
-          </Link>
-
-          {isDermConditionsFlyoutOpen && (
-            <div className="absolute left-full top-0 z-[210] flex items-stretch">
-              <div className="w-2 shrink-0" aria-hidden="true" />
-              <div
-                className="min-w-[250px] max-w-[290px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-left-2 duration-200"
-                role="menu"
-              >
-                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
-                  {dermConditionsTitle}
-                </p>
-                {DERMATOLOGY_CONDITION_NAV.map((item) => (
-                  <Link
-                    key={item.slug}
-                    to={conditionPath(locale, item.slug)}
-                    role="menuitem"
-                    onClick={() => {
-                      setIsServicesDropdownOpen(false);
-                      setIsDermConditionsFlyoutOpen(false);
-                    }}
-                    className={conditionDropdownItemClass(item.slug)}
-                  >
-                    {item.label[locale]}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+          locale={locale}
+          category={category}
+          isFlyoutOpen={isDermConditionsFlyoutOpen}
+          onFlyoutOpen={() => setIsDermConditionsFlyoutOpen(true)}
+          onFlyoutClose={() => setIsDermConditionsFlyoutOpen(false)}
+          onNavigateCategory={() => {
+            onOpenServiceCategory?.(category.id);
+            setIsServicesDropdownOpen(false);
+            setIsDermConditionsFlyoutOpen(false);
+          }}
+          onNavigateCondition={() => {
+            setIsServicesDropdownOpen(false);
+            setIsDermConditionsFlyoutOpen(false);
+          }}
+          itemClass={serviceDropdownItemClass(category.id)}
+          conditionItemClass={conditionDropdownItemClass}
+          flyoutTitle={dermConditionsTitle}
+        />
       );
     }
 
@@ -429,61 +528,30 @@ export default function Header({
   };
 
   const renderArticleDropdownItem = (group: ReturnType<typeof buildArticleNavGroups>[number]) => {
-    const { category, articles: categoryArticles } = group;
+    const { category } = group;
     const isFlyoutOpen = activeArticleCategoryFlyout === category.id;
 
     return (
-      <div
+      <ArticleCategoryDropdownRow
         key={category.id}
-        className="relative overflow-visible"
-        onMouseEnter={() => setActiveArticleCategoryFlyout(category.id)}
-        onMouseLeave={() => setActiveArticleCategoryFlyout(null)}
-      >
-        <Link
-          to={serviceCategoryPath(locale, category.id)}
-          role="menuitem"
-          onClick={() => {
-            onOpenServiceCategory?.(category.id);
-            setIsArticlesDropdownOpen(false);
-            setActiveArticleCategoryFlyout(null);
-          }}
-          className={`${articleCategoryDropdownItemClass(category.id)} flex items-center justify-between gap-2`}
-        >
-          <span>{category.title[locale] || category.title.uz}</span>
-          <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
-        </Link>
-
-        {isFlyoutOpen && (
-          <div className="absolute left-full top-0 z-[210] flex items-stretch">
-            <div className="w-2 shrink-0" aria-hidden="true" />
-            <div
-              className="min-w-[250px] max-w-[320px] max-h-[min(70vh,420px)] overflow-y-auto overflow-x-hidden bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-left-2 duration-200"
-              role="menu"
-            >
-              <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
-                {articlesInCategoryTitle}
-              </p>
-              {categoryArticles.map((article) => {
-                const routeKey = resolveArticleRouteKey(article);
-                return (
-                  <Link
-                    key={article.id}
-                    to={articlePath(locale, routeKey)}
-                    role="menuitem"
-                    onClick={() => {
-                      setIsArticlesDropdownOpen(false);
-                      setActiveArticleCategoryFlyout(null);
-                    }}
-                    className={articleDropdownItemClass(routeKey)}
-                  >
-                    {article.title[locale] || article.title.uz}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
-      </div>
+        locale={locale}
+        group={group}
+        isFlyoutOpen={isFlyoutOpen}
+        onFlyoutOpen={() => setActiveArticleCategoryFlyout(category.id)}
+        onFlyoutClose={() => setActiveArticleCategoryFlyout(null)}
+        onNavigateCategory={() => {
+          onOpenServiceCategory?.(category.id);
+          setIsArticlesDropdownOpen(false);
+          setActiveArticleCategoryFlyout(null);
+        }}
+        onNavigateArticle={() => {
+          setIsArticlesDropdownOpen(false);
+          setActiveArticleCategoryFlyout(null);
+        }}
+        itemClass={articleCategoryDropdownItemClass(category.id)}
+        articleItemClass={articleDropdownItemClass}
+        flyoutTitle={articlesInCategoryTitle}
+      />
     );
   };
 
@@ -493,7 +561,7 @@ export default function Header({
 
     return (
       <div key={category.id} className="rounded-lg overflow-hidden">
-        <div className="flex items-center">
+        <div className="flex items-stretch min-h-[44px]">
           <Link
             to={serviceCategoryPath(locale, category.id)}
             onClick={() => {
@@ -502,7 +570,7 @@ export default function Header({
               setIsMobileArticleCategoryOpen(null);
               setIsMobileMenuOpen(false);
             }}
-            className={`flex-1 px-3 py-2.5 rounded-lg text-sm transition-colors ${articleCategoryDropdownItemClass(category.id)}`}
+            className={`flex-1 min-w-0 px-3 py-2.5 rounded-lg text-sm leading-snug break-words transition-colors touch-manipulation ${articleCategoryDropdownItemClass(category.id)}`}
           >
             {category.title[locale] || category.title.uz}
           </Link>
@@ -513,9 +581,9 @@ export default function Header({
                 current === category.id ? null : category.id,
               )
             }
-            className="mr-1 rounded-lg p-2.5 text-brand-text-secondary hover:bg-brand-offwhite"
+            className="mr-1 shrink-0 rounded-lg px-3 py-2.5 min-w-[44px] min-h-[44px] inline-flex items-center justify-center text-brand-text-secondary hover:bg-brand-offwhite touch-manipulation"
             aria-expanded={isOpen}
-            aria-label={articlesInCategoryTitle}
+            aria-label={`${articlesInCategoryTitle}: ${category.title[locale] || category.title.uz}`}
           >
             <ChevronDown
               className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
@@ -523,9 +591,10 @@ export default function Header({
           </button>
         </div>
         {isOpen && (
-          <div className="ml-3 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 pb-1">
+          <div className="ml-3 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 pb-1 max-h-[min(45vh,360px)] overflow-y-auto overscroll-contain">
             {categoryArticles.map((article) => {
               const routeKey = resolveArticleRouteKey(article);
+              const title = article.title[locale] || article.title.uz;
               return (
                 <Link
                   key={article.id}
@@ -535,9 +604,10 @@ export default function Header({
                     setIsMobileArticlesOpen(false);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`px-3 py-2 rounded-lg text-xs transition-colors ${articleDropdownItemClass(routeKey)}`}
+                  className={`px-3 py-2.5 min-h-[44px] rounded-lg text-xs leading-snug break-words transition-colors touch-manipulation ${articleDropdownItemClass(routeKey)}`}
+                  title={title}
                 >
-                  {article.title[locale] || article.title.uz}
+                  {title}
                 </Link>
               );
             })}
@@ -969,16 +1039,13 @@ export default function Header({
           </button>
 
           {isArticlesDropdownOpen && articleNavGroups.length > 0 && (
-            <div className="absolute top-full left-0 pt-2 z-[200] overflow-visible">
-              <div
-                className="min-w-[280px] max-w-[340px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
-                role="menu"
-              >
-                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
+            <div className="absolute top-full right-0 pt-2 z-[200] overflow-visible">
+              <div className={`${navDropdownPanelClass} overflow-visible`} role="menu">
+                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1 sticky top-0 bg-white z-[1]">
                   {articlesDropdownTitle}
                 </p>
                 {articleNavGroups.map((group) => renderArticleDropdownItem(group))}
-                <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
+                <div className="border-t border-brand-sectiongray/60 mt-1 pt-1 sticky bottom-0 bg-white">
                   <Link
                     to={articlesListPath(locale)}
                     onClick={() => setIsArticlesDropdownOpen(false)}
@@ -1022,15 +1089,12 @@ export default function Header({
 
         {isServicesDropdownOpen && (
           <div className="absolute top-full left-0 pt-2 z-[200] overflow-visible">
-            <div
-              className="min-w-[280px] max-w-[340px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
-              role="menu"
-            >
-              <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
+            <div className={`${navDropdownPanelClass} overflow-visible`} role="menu">
+              <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1 sticky top-0 bg-white z-[1]">
                 {servicesDropdownTitle}
               </p>
               {navServiceCategories.map((category) => renderServiceDropdownItem(category))}
-              <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
+              <div className="border-t border-brand-sectiongray/60 mt-1 pt-1 sticky bottom-0 bg-white">
                 <Link
                   to={servicesListPath(locale)}
                   onClick={() => setIsServicesDropdownOpen(false)}
@@ -1169,21 +1233,35 @@ export default function Header({
     if (item.id === 'articles') {
       return (
         <div key={item.id} className="rounded-lg overflow-hidden">
-          <button
-            type="button"
-            onClick={() => setIsMobileArticlesOpen((open) => !open)}
-            className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors inline-flex items-center justify-between ${mobileNavClass('articles')}`}
-          >
-            <span>{item.label}</span>
-            <ChevronDown
-              className={`w-4 h-4 transition-transform duration-200 ${
-                isMobileArticlesOpen ? 'rotate-180' : ''
-              }`}
-            />
-          </button>
+          <div className="flex items-stretch min-h-[48px]">
+            <Link
+              to={articlesListPath(locale)}
+              className={`flex-1 min-w-0 text-left px-4 py-3 rounded-lg text-base font-medium transition-colors touch-manipulation ${mobileNavClass('articles')}`}
+            >
+              {item.label}
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                setIsMobileArticlesOpen((open) => !open);
+                if (isMobileArticlesOpen) {
+                  setIsMobileArticleCategoryOpen(null);
+                }
+              }}
+              className={`mr-1 shrink-0 rounded-lg px-3 py-3 min-w-[48px] min-h-[48px] inline-flex items-center justify-center touch-manipulation ${mobileNavClass('articles')}`}
+              aria-expanded={isMobileArticlesOpen}
+              aria-label={articlesDropdownTitle}
+            >
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-200 ${
+                  isMobileArticlesOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+          </div>
 
           {isMobileArticlesOpen && (
-            <div className="mt-1 ml-2 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 max-h-[50vh] overflow-y-auto">
+            <div className="mt-1 ml-2 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 pb-1">
               <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-gold">
                 {articlesDropdownTitle}
               </p>
@@ -1194,7 +1272,7 @@ export default function Header({
                   setIsMobileArticlesOpen(false);
                   setIsMobileMenuOpen(false);
                 }}
-                className="px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+                className="px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10 touch-manipulation"
               >
                 {allArticlesLabel}
               </Link>
@@ -1391,7 +1469,7 @@ export default function Header({
       </div>
 
       {isMobileMenuOpen && (
-        <div className="xl:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-150 shadow-xl py-4 px-4 animate-in fade-in slide-in-from-top-3 duration-200 max-h-[min(80vh,720px)] overflow-y-auto">
+        <div className="xl:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-150 shadow-xl py-4 px-4 animate-in fade-in slide-in-from-top-3 duration-200 max-h-[min(85vh,800px)] overflow-y-auto overscroll-contain header-mobile-nav-panel">
           <nav className="flex flex-col gap-1 mb-4">
             {navItems.map((item) => renderMobileNavItem(item))}
             {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalMobileNav(sectionId))}
