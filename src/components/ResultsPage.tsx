@@ -1,10 +1,41 @@
-import { useState } from 'react';
-import { motion } from 'motion/react';
-import { Sparkles, ArrowLeftRight, CalendarClock } from 'lucide-react';
+import { useState, useEffect, type MouseEvent } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Sparkles, ArrowLeftRight, CalendarClock, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { TreatmentResult } from '../data/sitePagesContent';
 import MediaImage from './MediaImage';
+
+type ResultGalleryItem = { src: string; alt: string; label: string };
+
+function buildResultGallery(result: TreatmentResult, locale: Locale): ResultGalleryItem[] {
+  const title = result.title[locale];
+  const beforeLabel = locale === 'uz' ? 'Oldin' : locale === 'ru' ? 'До' : 'Before';
+  const afterLabel = locale === 'uz' ? 'Keyin' : locale === 'ru' ? 'После' : 'After';
+  const stepLabel = locale === 'uz' ? 'bosqich' : locale === 'ru' ? 'этап' : 'stage';
+  const combinedLabel =
+    locale === 'uz' ? 'Oldin · Keyin' : locale === 'ru' ? 'До · После' : 'Before · After';
+
+  if (result.comparisonImage) {
+    return [{ src: result.comparisonImage, alt: `${title} — ${combinedLabel}`, label: combinedLabel }];
+  }
+
+  const items: ResultGalleryItem[] = [];
+  if (result.beforeImage) {
+    items.push({ src: result.beforeImage, alt: `${title} — ${beforeLabel}`, label: beforeLabel });
+  }
+  result.journeyImages?.forEach((src, index) => {
+    items.push({
+      src,
+      alt: `${title} — ${stepLabel} ${index + 2}`,
+      label: `${stepLabel} ${index + 2}`,
+    });
+  });
+  if (result.afterImage) {
+    items.push({ src: result.afterImage, alt: `${title} — ${afterLabel}`, label: afterLabel });
+  }
+  return items;
+}
 
 interface ResultsPageProps {
   locale: Locale;
@@ -17,6 +48,68 @@ interface ResultsPageProps {
 export default function ResultsPage({ locale, dictionary, results, loading = false, onOpenAppointment }: ResultsPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const [activeFilter, setActiveFilter] = useState<string>('all');
+  const [expandedGallery, setExpandedGallery] = useState<{
+    items: ResultGalleryItem[];
+    index: number;
+    title: string;
+  } | null>(null);
+
+  const expandedItem = expandedGallery ? expandedGallery.items[expandedGallery.index] : null;
+
+  useEffect(() => {
+    if (!expandedGallery) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setExpandedGallery(null);
+        return;
+      }
+      if (expandedGallery.items.length <= 1) return;
+      if (event.key === 'ArrowLeft') {
+        setExpandedGallery((current) =>
+          current
+            ? {
+                ...current,
+                index: (current.index - 1 + current.items.length) % current.items.length,
+              }
+            : null,
+        );
+      }
+      if (event.key === 'ArrowRight') {
+        setExpandedGallery((current) =>
+          current
+            ? {
+                ...current,
+                index: (current.index + 1) % current.items.length,
+              }
+            : null,
+        );
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [expandedGallery]);
+
+  const openLightbox = (result: TreatmentResult, src: string, event?: MouseEvent) => {
+    event?.stopPropagation();
+    const items = buildResultGallery(result, locale);
+    const index = items.findIndex((item) => item.src === src);
+    if (index < 0) return;
+    setExpandedGallery({ items, index, title: result.title[locale] });
+  };
+
+  const navigateLightbox = (direction: 'prev' | 'next', event: MouseEvent) => {
+    event.stopPropagation();
+    setExpandedGallery((current) => {
+      if (!current || current.items.length <= 1) return current;
+      const nextIndex =
+        direction === 'prev'
+          ? (current.index - 1 + current.items.length) % current.items.length
+          : (current.index + 1) % current.items.length;
+      return { ...current, index: nextIndex };
+    });
+  };
 
   const serviceFilters = [
     { id: 'all', label: locale === 'uz' ? 'Barchasi' : locale === 'ru' ? 'Все' : 'All' },
@@ -89,24 +182,35 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
             >
               <div className={result.comparisonImage ? '' : 'grid grid-cols-2 gap-0.5 bg-brand-sectiongray'}>
                 {result.comparisonImage ? (
-                  <div className="relative aspect-[4/3] bg-brand-offwhite">
+                  <button
+                    type="button"
+                    onClick={(event) => openLightbox(result, result.comparisonImage!, event)}
+                    className="relative aspect-[4/3] bg-brand-offwhite w-full cursor-zoom-in group"
+                    aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить изображение' : 'Expand image'}
+                  >
                     <MediaImage
                       src={result.comparisonImage}
                       alt={`${result.title[locale]} — ${locale === 'uz' ? 'Oldin / Keyin' : locale === 'ru' ? 'До / После' : 'Before / After'}`}
-                      className="absolute inset-0 w-full h-full object-cover object-center"
+                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                     <span className="absolute top-1.5 left-1/2 -translate-x-1/2 text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-black/55 text-white whitespace-nowrap">
                       {locale === 'uz' ? 'Oldin · Keyin' : locale === 'ru' ? 'До · После' : 'Before · After'}
                     </span>
-                  </div>
+                  </button>
                 ) : (
                 <>
-                <div className="relative aspect-square bg-brand-offwhite">
+                <button
+                  type="button"
+                  onClick={(event) => result.beforeImage && openLightbox(result, result.beforeImage, event)}
+                  disabled={!result.beforeImage}
+                  className="relative aspect-square bg-brand-offwhite cursor-zoom-in group disabled:cursor-default"
+                  aria-label={locale === 'uz' ? 'Oldin rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить фото «до»' : 'Expand before image'}
+                >
                   {result.beforeImage ? (
                     <MediaImage
                       src={result.beforeImage}
                       alt={`${result.title[locale]} — before`}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-[10px] text-brand-text-muted bg-brand-offwhite">
@@ -118,13 +222,19 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                     {locale === 'uz' ? 'Oldin' : locale === 'ru' ? 'До' : 'Before'}
                   </span>
                   )}
-                </div>
-                <div className="relative aspect-square bg-brand-offwhite">
+                </button>
+                <button
+                  type="button"
+                  onClick={(event) => result.afterImage && openLightbox(result, result.afterImage, event)}
+                  disabled={!result.afterImage}
+                  className="relative aspect-square bg-brand-offwhite cursor-zoom-in group disabled:cursor-default"
+                  aria-label={locale === 'uz' ? 'Keyin rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить фото «после»' : 'Expand after image'}
+                >
                   {result.afterImage ? (
                     <MediaImage
                       src={result.afterImage}
                       alt={`${result.title[locale]} — after`}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-[10px] text-brand-text-muted bg-brand-offwhite">
@@ -136,7 +246,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                     {locale === 'uz' ? 'Keyin' : locale === 'ru' ? 'После' : 'After'}
                   </span>
                   )}
-                </div>
+                </button>
                 </>
                 )}
               </div>
@@ -170,19 +280,28 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                     </p>
                     <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-0.5 px-0.5 scrollbar-thin">
                       {result.journeyImages.map((src, stepIndex) => (
-                        <div
+                        <button
                           key={src}
-                          className="relative shrink-0 w-[72px] sm:w-[80px] aspect-[3/4] rounded-md overflow-hidden bg-brand-offwhite border border-brand-sectiongray"
+                          type="button"
+                          onClick={(event) => openLightbox(result, src, event)}
+                          className="relative shrink-0 w-[72px] sm:w-[80px] aspect-[3/4] rounded-md overflow-hidden bg-brand-offwhite border border-brand-sectiongray cursor-zoom-in group"
+                          aria-label={
+                            locale === 'uz'
+                              ? `${stepIndex + 2}-bosqichni kattalashtirish`
+                              : locale === 'ru'
+                                ? `Увеличить этап ${stepIndex + 2}`
+                                : `Expand stage ${stepIndex + 2}`
+                          }
                         >
                           <MediaImage
                             src={src}
                             alt={`${result.title[locale]} — ${locale === 'uz' ? 'bosqich' : locale === 'ru' ? 'этап' : 'stage'} ${stepIndex + 2}`}
-                            className="absolute inset-0 w-full h-full object-cover object-center"
+                            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.05]"
                           />
                           <span className="absolute bottom-1 left-1 text-[8px] font-bold px-1 py-0.5 rounded bg-black/60 text-white">
                             {stepIndex + 2}
                           </span>
-                        </div>
+                        </button>
                       ))}
                     </div>
                   </div>
@@ -223,6 +342,84 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {expandedGallery && expandedItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setExpandedGallery(null)}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#0a121e]/92 backdrop-blur-sm"
+          >
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setExpandedGallery(null);
+              }}
+              className="absolute top-4 right-4 text-white hover:text-slate-300 p-2.5 hover:bg-white/10 rounded-full transition-all z-10 cursor-pointer"
+              aria-label={locale === 'uz' ? 'Yopish' : locale === 'ru' ? 'Закрыть' : 'Close'}
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {expandedGallery.items.length > 1 && (
+              <span className="absolute top-5 left-1/2 -translate-x-1/2 text-white/80 text-xs font-mono tracking-wider">
+                {expandedGallery.index + 1} / {expandedGallery.items.length}
+              </span>
+            )}
+
+            <div
+              onClick={(event) => event.stopPropagation()}
+              className="relative w-full max-w-5xl max-h-[85vh] flex items-center justify-center"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={expandedItem.src}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.2 }}
+                  className="max-w-full max-h-[80vh] flex items-center justify-center"
+                >
+                  <MediaImage
+                    src={expandedItem.src}
+                    alt={expandedItem.alt}
+                    className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-white/10"
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {expandedGallery.items.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(event) => navigateLightbox('prev', event)}
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all cursor-pointer"
+                    aria-label={locale === 'uz' ? 'Oldingi rasm' : locale === 'ru' ? 'Предыдущее' : 'Previous'}
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(event) => navigateLightbox('next', event)}
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all cursor-pointer"
+                    aria-label={locale === 'uz' ? 'Keyingi rasm' : locale === 'ru' ? 'Следующее' : 'Next'}
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </>
+              )}
+            </div>
+
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center px-4 max-w-xl">
+              <p className="text-white/90 text-sm font-medium">{expandedGallery.title}</p>
+              <p className="text-white/65 text-xs mt-1">{expandedItem.label}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
