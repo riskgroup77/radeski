@@ -990,6 +990,28 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
 
 export const TREATMENT_RESULTS: TreatmentResult[] = [
   {
+    id: 'alopecia-areata-child-yoqubov',
+    sortOrder: -1,
+    title: {
+      uz: 'Bolalarda alopeciya areata',
+      ru: 'Алопеция areata у ребёнка',
+      en: 'Pediatric alopecia areata',
+    },
+    description: {
+      uz: 'Bosh terisidagi bir nechta silliq, sochsiz dog‘lar (fokusli alopeciya) — dermatoxirurg Yo‘qubov Farrux nazoratidagi davolashdan keyin soch qoplamasi asta-sekin tiklandi. Faol yo‘qolish to‘xtadi, teri holati barqarorlashdi.',
+      ru: 'Множественные гладкие очаги безволосья на коже головы (очаговая алопеция) — после лечения под наблюдением дерматохирурга Якубова Фарруха волосяной покров постепенно восстановился. Активное выпадение прекратилось, состояние кожи стабилизировалось.',
+      en: 'Multiple smooth bald patches on the scalp (alopecia areata) — under dermatoxirurg Dr. Farrukh Yoqubov’s care, hair coverage gradually restored. Active shedding stopped and scalp condition stabilized.',
+    },
+    service: { uz: 'Trihologiya', ru: 'Трихология', en: 'Trichology' },
+    beforeImage: '/results/alopecia-areata-child-before.jpg',
+    afterImage: '/results/alopecia-areata-child-after.jpg',
+    journeyImages: [
+      '/results/alopecia-areata-child-step-2.jpg',
+      '/results/alopecia-areata-child-step-3.jpg',
+    ],
+    sessions: { uz: 'Kurs davolash + nazorat', ru: 'Курс лечения + контроль', en: 'Treatment course + follow-up' },
+  },
+  {
     id: 'pustular-psoriasis-yoqubov',
     sortOrder: 0,
     title: {
