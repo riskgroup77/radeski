@@ -44,6 +44,8 @@ export interface TreatmentResult {
   afterImage: string;
   /** Birlashtirilgan oldin/keyin rasm (masalan do1.jpg) */
   comparisonImage?: string;
+  /** Oldin va keyin orasidagi davolash bosqichlari (qadam-baqadam) */
+  journeyImages?: string[];
   sessions: LocalizedText;
   sortOrder?: number;
   published?: boolean;
@@ -987,6 +989,31 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
 ];
 
 export const TREATMENT_RESULTS: TreatmentResult[] = [
+  {
+    id: 'pustular-psoriasis-yoqubov',
+    sortOrder: 0,
+    title: {
+      uz: 'Pustuloz psoriaz',
+      ru: 'Пустулёзный псориаз',
+      en: 'Pustular psoriasis',
+    },
+    description: {
+      uz: 'Ko‘krak va orqa qismni qamrab olgan og‘ir pustuloz psoriaz — dermatoxirurg Yo‘qubov Farrux boshchiligidagi kompleks terapiya natijasida bosqichma-bosqich tinchlandi. Faol pustulalar va qalin qoplamalar yo‘qolgan, teri deyarli toza holatga qaytdi.',
+      ru: 'Тяжёлый пустулёзный псориаз с поражением грудной клетки и спины — под руководством дерматохирурга Якубова Фарруха прошёл поэтапную ремиссию. Активные пустулы и плотные бляшки исчезли, кожа практически восстановилась.',
+      en: 'Severe pustular psoriasis affecting the chest and back achieved step-by-step remission under dermatoxirurg Dr. Farrukh Yoqubov. Active pustules and thick plaques cleared; skin returned to a near-normal state.',
+    },
+    service: { uz: 'Psoriaz', ru: 'Псориаз', en: 'Psoriasis' },
+    beforeImage: '/results/pustular-psoriasis-before.jpg',
+    afterImage: '/results/pustular-psoriasis-after.jpg',
+    journeyImages: [
+      '/results/pustular-psoriasis-step-2.jpg',
+      '/results/pustular-psoriasis-step-3.jpg',
+      '/results/pustular-psoriasis-step-4.jpg',
+      '/results/pustular-psoriasis-step-5.jpg',
+      '/results/pustular-psoriasis-step-6.jpg',
+    ],
+    sessions: { uz: 'Kompleks kurs', ru: 'Комплексный курс', en: 'Comprehensive course' },
+  },
   {
     id: 'do1-acne',
     sortOrder: 1,

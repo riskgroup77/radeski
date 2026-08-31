@@ -158,6 +158,35 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                 <p className="text-brand-text-muted text-xs mt-1.5 leading-relaxed font-light line-clamp-2">
                   {result.description[locale]}
                 </p>
+
+                {result.journeyImages && result.journeyImages.length > 0 && (
+                  <div className="mt-3 pt-3 border-t border-brand-sectiongray">
+                    <p className="text-[9px] font-bold text-brand-text-secondary uppercase tracking-wide mb-2">
+                      {locale === 'uz'
+                        ? 'Davolash bosqichlari'
+                        : locale === 'ru'
+                          ? 'Этапы лечения'
+                          : 'Treatment stages'}
+                    </p>
+                    <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-0.5 px-0.5 scrollbar-thin">
+                      {result.journeyImages.map((src, stepIndex) => (
+                        <div
+                          key={src}
+                          className="relative shrink-0 w-[72px] sm:w-[80px] aspect-[3/4] rounded-md overflow-hidden bg-brand-offwhite border border-brand-sectiongray"
+                        >
+                          <MediaImage
+                            src={src}
+                            alt={`${result.title[locale]} — ${locale === 'uz' ? 'bosqich' : locale === 'ru' ? 'этап' : 'stage'} ${stepIndex + 2}`}
+                            className="absolute inset-0 w-full h-full object-cover object-center"
+                          />
+                          <span className="absolute bottom-1 left-1 text-[8px] font-bold px-1 py-0.5 rounded bg-black/60 text-white">
+                            {stepIndex + 2}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.article>
           ))
