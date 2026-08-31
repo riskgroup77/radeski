@@ -31,6 +31,12 @@ import { HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE_CATALOG } from './articles/hol
 import { LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG } from './articles/lasemdUltraKokandArticle';
 import { THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG } from './articles/thuliumLaserHairKokandArticle';
 import { ONYCHOCRYPTOSIS_KOKAND_ARTICLE_CATALOG } from './articles/onychocryptosisKokandArticle';
+import { IPL_LUMECCA_PIGMENTATION_ARTICLE_CATALOG } from './articles/iplLumeccaPigmentationArticle';
+import { DERMA_V_REDNESS_ARTICLE_CATALOG } from './articles/dermaVRednessArticle';
+import { TETRA_PRO_LIFTING_ARTICLE_CATALOG } from './articles/tetraProLiftingArticle';
+import { HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG } from './articles/hollywoodSpectraPoresArticle';
+import { MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG } from './articles/morpheus8RfLiftingArticle';
+import { DEKA_CO2_SCARS_ARTICLE_CATALOG } from './articles/dekaCo2ScarsArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -216,6 +222,54 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'thulium laser hair kokand',
     'hair loss treatment kokand',
     'trichologist kokand',
+  ],
+  'ipl-lumecca-pigmentation-radeski': [
+    'ipl-lumecca-pigmentatsiya-radeski',
+    'art-ipl-lumecca-pigmentatsiya-radeski',
+    'ipl lumecca pigmentatsiya',
+    'lumecca foto-yoshartirish',
+    'фотоомоложение ipl lumecca',
+    'ipl lumecca pigmentation',
+  ],
+  'derma-v-redness-radeski': [
+    'derma-v-qizarish-radeski',
+    'art-derma-v-qizarish-radeski',
+    'derma v kuperoz',
+    'derma v qon tomir',
+    'лечение купероза derma v',
+    'derma v vascular redness',
+  ],
+  'tetra-pro-lifting-radeski': [
+    'tetra-pro-yuz-tortish-radeski',
+    'art-tetra-pro-yuz-tortish-radeski',
+    'tetra pro blefaroplastika',
+    'deka tetra pro',
+    'лазер tetra pro',
+    'tetra pro non-surgical blepharoplasty',
+  ],
+  'hollywood-spectra-pores-radeski': [
+    'hollywood-spectra-poralar-radeski',
+    'art-hollywood-spectra-poralar-radeski',
+    'hollywood spectra poralar',
+    'hollywood spectra karbon piling',
+    'сужение пор hollywood spectra',
+    'hollywood spectra pores',
+  ],
+  'morpheus8-rf-lifting-radeski': [
+    'morpheus8-rf-lifting-radeski',
+    'art-morpheus8-rf-lifting-radeski',
+    'morpheus8 rf lifting',
+    'inmode morpheus8',
+    'rf morpheus8 лifting',
+    'morpheus8 microneedle rf',
+  ],
+  'deka-co2-scars-radeski': [
+    'deka-co2-chandiqlar-radeski',
+    'art-deka-co2-chandiqlar-radeski',
+    'smartxide touch chandiqlar',
+    'deka co2 postakne',
+    'рубцы postakne deka co2',
+    'deka smartxide scars',
   ],
   'onychocryptosis-kokand': [
     'onixokriptoz-klinik-holat',
@@ -1033,6 +1087,12 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'lasemd-ultra-kokand': LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG,
   'thulium-laser-hair-kokand': THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG,
   'onychocryptosis-kokand': ONYCHOCRYPTOSIS_KOKAND_ARTICLE_CATALOG,
+  'ipl-lumecca-pigmentation-radeski': IPL_LUMECCA_PIGMENTATION_ARTICLE_CATALOG,
+  'derma-v-redness-radeski': DERMA_V_REDNESS_ARTICLE_CATALOG,
+  'tetra-pro-lifting-radeski': TETRA_PRO_LIFTING_ARTICLE_CATALOG,
+  'hollywood-spectra-pores-radeski': HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG,
+  'morpheus8-rf-lifting-radeski': MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG,
+  'deka-co2-scars-radeski': DEKA_CO2_SCARS_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

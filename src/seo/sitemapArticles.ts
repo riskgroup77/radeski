@@ -122,6 +122,36 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
   },
   {
+    routeKey: 'art-ipl-lumecca-pigmentatsiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-derma-v-qizarish-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-tetra-pro-yuz-tortish-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-hollywood-spectra-poralar-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-morpheus8-rf-lifting-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-deka-co2-chandiqlar-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
     routeKey: 'art-jinsiy-azo-yassi-hujayrali-rak',
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.8, ru: 0.75, en: 0.7 },

@@ -31,6 +31,12 @@ import { HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE } from './data/articles/hollyw
 import { LASEMD_ULTRA_KOKAND_ARTICLE } from './data/articles/lasemdUltraKokandArticle';
 import { THULIUM_LASER_HAIR_KOKAND_ARTICLE } from './data/articles/thuliumLaserHairKokandArticle';
 import { ONYCHOCRYPTOSIS_KOKAND_ARTICLE } from './data/articles/onychocryptosisKokandArticle';
+import { IPL_LUMECCA_PIGMENTATION_ARTICLE } from './data/articles/iplLumeccaPigmentationArticle';
+import { DERMA_V_REDNESS_ARTICLE } from './data/articles/dermaVRednessArticle';
+import { TETRA_PRO_LIFTING_ARTICLE } from './data/articles/tetraProLiftingArticle';
+import { HOLLYWOOD_SPECTRA_PORES_ARTICLE } from './data/articles/hollywoodSpectraPoresArticle';
+import { MORPHEUS8_RF_LIFTING_ARTICLE } from './data/articles/morpheus8RfLiftingArticle';
+import { DEKA_CO2_SCARS_ARTICLE } from './data/articles/dekaCo2ScarsArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -1052,4 +1058,10 @@ export const ARTICLES: Article[] = [
   LASEMD_ULTRA_KOKAND_ARTICLE,
   THULIUM_LASER_HAIR_KOKAND_ARTICLE,
   ONYCHOCRYPTOSIS_KOKAND_ARTICLE,
+  IPL_LUMECCA_PIGMENTATION_ARTICLE,
+  DERMA_V_REDNESS_ARTICLE,
+  TETRA_PRO_LIFTING_ARTICLE,
+  HOLLYWOOD_SPECTRA_PORES_ARTICLE,
+  MORPHEUS8_RF_LIFTING_ARTICLE,
+  DEKA_CO2_SCARS_ARTICLE,
 ];
