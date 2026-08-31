@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe, Phone, MapPin, ChevronDown, ChevronRight, Clock } from 'lucide-react';
-import { Locale, ServiceCategory } from '../types';
-import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
+import { Locale, ServiceCategory, type Article } from '../types';
+import { DICTIONARY, SERVICE_CATEGORIES, ARTICLES } from '../data';
 import {
   BRAND_NAV_OVERVIEW,
   BRAND_NAV_TITLE,
@@ -29,15 +29,20 @@ import {
   pagePath,
   serviceCategoryPath,
   servicesListPath,
+  articlesListPath,
+  articlePath,
   conditionPath,
   brandPath,
   daavlinModelPath,
   daavlinSectionPath,
   getServiceCategoryIdFromPathname,
   getConditionSlugFromPathname,
+  getArticleIdFromPathname,
   getDaavlinModelIdFromPathname,
   type DaavlinModelId,
 } from '../routing/paths';
+import { buildArticleNavGroups } from '../utils/articleNavGroups';
+import { resolveArticleRouteKey } from '../utils/articles';
 import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY, getHeaderTopBarContacts } from '../config/clinicContacts';
 import { getClinicMapOpenUrl, KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
 import { handleHomeLogoClick } from '../utils/scrollToTop';
@@ -49,6 +54,7 @@ interface HeaderProps {
   onChangeLocale: (locale: Locale) => void;
   onOpenAppointment: () => void;
   serviceCategories?: ServiceCategory[];
+  articles?: Article[];
   onOpenServiceCategory?: (categoryId: string) => void;
 }
 
@@ -135,15 +141,18 @@ export default function Header({
   onNavigate,
   onChangeLocale,
   serviceCategories = [],
+  articles = [],
   onOpenServiceCategory,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isArticlesDropdownOpen, setIsArticlesDropdownOpen] = useState(false);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isDaavlinDropdownOpen, setIsDaavlinDropdownOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isMobileArticlesOpen, setIsMobileArticlesOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [isMobileDaavlinOpen, setIsMobileDaavlinOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<InstitutionalNavId | null>(null);
@@ -151,7 +160,9 @@ export default function Header({
     null,
   );
   const [isDermConditionsFlyoutOpen, setIsDermConditionsFlyoutOpen] = useState(false);
+  const [activeArticleCategoryFlyout, setActiveArticleCategoryFlyout] = useState<string | null>(null);
   const [isMobileDermConditionsOpen, setIsMobileDermConditionsOpen] = useState(false);
+  const [isMobileArticleCategoryOpen, setIsMobileArticleCategoryOpen] = useState<string | null>(null);
   const location = useLocation();
   const d = DICTIONARY[locale];
   const topBar = getHeaderTopBarContacts(locale);
@@ -161,6 +172,7 @@ export default function Header({
     locale === 'ru' ? 'Открыть на карте' : locale === 'en' ? 'Open in map' : 'Xaritada ochish';
   const activeServiceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
   const activeConditionSlug = getConditionSlugFromPathname(location.pathname);
+  const activeArticleRouteKey = getArticleIdFromPathname(location.pathname);
   const activeDaavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
   const daavlinModels = DAAVLIN_NAV_LINEUP;
 
@@ -169,11 +181,34 @@ export default function Header({
     [serviceCategories],
   );
 
+  const navArticles = useMemo(
+    () => (articles.length > 0 ? articles : ARTICLES),
+    [articles],
+  );
+
+  const articleNavGroups = useMemo(
+    () => buildArticleNavGroups(navArticles, navServiceCategories),
+    [navArticles, navServiceCategories],
+  );
+
   const servicesDropdownTitle =
     locale === 'uz' ? 'Asosiy sohalar' : locale === 'ru' ? 'Основные направления' : 'Main areas';
 
   const allServicesLabel =
     locale === 'uz' ? "Barcha xizmatlar ro'yxati" : locale === 'ru' ? 'Все услуги' : 'All services';
+
+  const articlesDropdownTitle =
+    locale === 'uz'
+      ? "Maqola yo'nalishlari"
+      : locale === 'ru'
+        ? 'Направления статей'
+        : 'Article topics';
+
+  const allArticlesLabel =
+    locale === 'uz' ? "Barcha maqolalar ro'yxati" : locale === 'ru' ? 'Все статьи' : 'All articles';
+
+  const articlesInCategoryTitle =
+    locale === 'uz' ? 'Maqolalar' : locale === 'ru' ? 'Статьи' : 'Articles';
 
   const dermConditionsTitle =
     locale === 'uz'
@@ -196,9 +231,13 @@ export default function Header({
     setIsMobileAboutOpen(false);
     setIsMobileDaavlinOpen(false);
     setIsMobileInstitutionalOpen(null);
+    setIsMobileArticlesOpen(false);
     setIsServicesDropdownOpen(false);
+    setIsArticlesDropdownOpen(false);
     setIsDermConditionsFlyoutOpen(false);
+    setActiveArticleCategoryFlyout(null);
     setIsMobileDermConditionsOpen(false);
+    setIsMobileArticleCategoryOpen(null);
     setIsAboutDropdownOpen(false);
     setIsDaavlinDropdownOpen(false);
     setActiveMegaMenu(null);
@@ -305,6 +344,20 @@ export default function Header({
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
 
+  const articleDropdownItemClass = (routeKey: string) =>
+    `block px-4 py-2 text-[12px] font-medium transition-colors hover:bg-brand-offwhite ${
+      activeArticleRouteKey === routeKey
+        ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
+        : 'text-brand-text-secondary hover:text-brand-text-primary'
+    }`;
+
+  const articleCategoryDropdownItemClass = (categoryId: string) =>
+    `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite ${
+      activeServiceCategoryId === categoryId && currentPage === 'services'
+        ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
+        : 'text-brand-text-secondary hover:text-brand-text-primary'
+    }`;
+
   const renderServiceDropdownItem = (category: ServiceCategory) => {
     if (category.id === DERMATOLOGY_CATEGORY_ID) {
       return (
@@ -372,6 +425,125 @@ export default function Header({
       >
         {category.title[locale] || category.title.uz}
       </Link>
+    );
+  };
+
+  const renderArticleDropdownItem = (group: ReturnType<typeof buildArticleNavGroups>[number]) => {
+    const { category, articles: categoryArticles } = group;
+    const isFlyoutOpen = activeArticleCategoryFlyout === category.id;
+
+    return (
+      <div
+        key={category.id}
+        className="relative overflow-visible"
+        onMouseEnter={() => setActiveArticleCategoryFlyout(category.id)}
+        onMouseLeave={() => setActiveArticleCategoryFlyout(null)}
+      >
+        <Link
+          to={serviceCategoryPath(locale, category.id)}
+          role="menuitem"
+          onClick={() => {
+            onOpenServiceCategory?.(category.id);
+            setIsArticlesDropdownOpen(false);
+            setActiveArticleCategoryFlyout(null);
+          }}
+          className={`${articleCategoryDropdownItemClass(category.id)} flex items-center justify-between gap-2`}
+        >
+          <span>{category.title[locale] || category.title.uz}</span>
+          <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
+        </Link>
+
+        {isFlyoutOpen && (
+          <div className="absolute left-full top-0 z-[210] flex items-stretch">
+            <div className="w-2 shrink-0" aria-hidden="true" />
+            <div
+              className="min-w-[250px] max-w-[320px] max-h-[min(70vh,420px)] overflow-y-auto overflow-x-hidden bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-left-2 duration-200"
+              role="menu"
+            >
+              <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
+                {articlesInCategoryTitle}
+              </p>
+              {categoryArticles.map((article) => {
+                const routeKey = resolveArticleRouteKey(article);
+                return (
+                  <Link
+                    key={article.id}
+                    to={articlePath(locale, routeKey)}
+                    role="menuitem"
+                    onClick={() => {
+                      setIsArticlesDropdownOpen(false);
+                      setActiveArticleCategoryFlyout(null);
+                    }}
+                    className={articleDropdownItemClass(routeKey)}
+                  >
+                    {article.title[locale] || article.title.uz}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderMobileArticleCategoryItem = (group: ReturnType<typeof buildArticleNavGroups>[number]) => {
+    const { category, articles: categoryArticles } = group;
+    const isOpen = isMobileArticleCategoryOpen === category.id;
+
+    return (
+      <div key={category.id} className="rounded-lg overflow-hidden">
+        <div className="flex items-center">
+          <Link
+            to={serviceCategoryPath(locale, category.id)}
+            onClick={() => {
+              onOpenServiceCategory?.(category.id);
+              setIsMobileArticlesOpen(false);
+              setIsMobileArticleCategoryOpen(null);
+              setIsMobileMenuOpen(false);
+            }}
+            className={`flex-1 px-3 py-2.5 rounded-lg text-sm transition-colors ${articleCategoryDropdownItemClass(category.id)}`}
+          >
+            {category.title[locale] || category.title.uz}
+          </Link>
+          <button
+            type="button"
+            onClick={() =>
+              setIsMobileArticleCategoryOpen((current) =>
+                current === category.id ? null : category.id,
+              )
+            }
+            className="mr-1 rounded-lg p-2.5 text-brand-text-secondary hover:bg-brand-offwhite"
+            aria-expanded={isOpen}
+            aria-label={articlesInCategoryTitle}
+          >
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+        </div>
+        {isOpen && (
+          <div className="ml-3 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 pb-1">
+            {categoryArticles.map((article) => {
+              const routeKey = resolveArticleRouteKey(article);
+              return (
+                <Link
+                  key={article.id}
+                  to={articlePath(locale, routeKey)}
+                  onClick={() => {
+                    setIsMobileArticleCategoryOpen(null);
+                    setIsMobileArticlesOpen(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`px-3 py-2 rounded-lg text-xs transition-colors ${articleDropdownItemClass(routeKey)}`}
+                >
+                  {article.title[locale] || article.title.uz}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -473,6 +645,7 @@ export default function Header({
         onMouseEnter={() => {
           setActiveMegaMenu(sectionId);
           setIsServicesDropdownOpen(false);
+          setIsArticlesDropdownOpen(false);
           setIsAboutDropdownOpen(false);
           setIsDaavlinDropdownOpen(false);
         }}
@@ -642,6 +815,7 @@ export default function Header({
           onMouseEnter={() => {
             setIsAboutDropdownOpen(true);
             setActiveMegaMenu(null);
+            setIsArticlesDropdownOpen(false);
           }}
           onMouseLeave={() => setIsAboutDropdownOpen(false)}
         >
@@ -696,6 +870,7 @@ export default function Header({
           onMouseEnter={() => {
             setIsDaavlinDropdownOpen(true);
             setActiveMegaMenu(null);
+            setIsArticlesDropdownOpen(false);
           }}
           onMouseLeave={() => setIsDaavlinDropdownOpen(false)}
         >
@@ -754,11 +929,68 @@ export default function Header({
       );
     }
 
-    if (item.id !== 'services') {
+    if (item.id !== 'services' && item.id !== 'articles') {
       return (
         <Link key={item.id} to={pagePath(locale, item.id)} className={linkClass}>
           {item.label}
         </Link>
+      );
+    }
+
+    if (item.id === 'articles') {
+      const articlesClass = navLinkClass('articles');
+
+      return (
+        <div
+          key={item.id}
+          className="relative shrink-0 overflow-visible"
+          onMouseEnter={() => {
+            setIsArticlesDropdownOpen(true);
+            setActiveMegaMenu(null);
+          }}
+          onMouseLeave={() => {
+            setIsArticlesDropdownOpen(false);
+            setActiveArticleCategoryFlyout(null);
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => onNavigate('articles')}
+            className={`${articlesClass} inline-flex items-center gap-0.5`}
+            aria-haspopup="menu"
+            aria-expanded={isArticlesDropdownOpen}
+          >
+            {item.label}
+            <ChevronDown
+              className={`w-3 h-3 transition-transform duration-200 ${
+                isArticlesDropdownOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+
+          {isArticlesDropdownOpen && articleNavGroups.length > 0 && (
+            <div className="absolute top-full left-0 pt-2 z-[200] overflow-visible">
+              <div
+                className="min-w-[280px] max-w-[340px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
+                role="menu"
+              >
+                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
+                  {articlesDropdownTitle}
+                </p>
+                {articleNavGroups.map((group) => renderArticleDropdownItem(group))}
+                <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
+                  <Link
+                    to={articlesListPath(locale)}
+                    onClick={() => setIsArticlesDropdownOpen(false)}
+                    className="block px-4 py-2.5 text-[12px] font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+                  >
+                    {allArticlesLabel}
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       );
     }
 
@@ -768,6 +1000,7 @@ export default function Header({
         className="relative shrink-0 overflow-visible"
         onMouseEnter={() => {
           setIsServicesDropdownOpen(true);
+          setIsArticlesDropdownOpen(false);
           setActiveMegaMenu(null);
         }}
         onMouseLeave={() => setIsServicesDropdownOpen(false)}
@@ -921,7 +1154,7 @@ export default function Header({
       );
     }
 
-    if (item.id !== 'services') {
+    if (item.id !== 'services' && item.id !== 'articles') {
       return (
         <Link
           key={item.id}
@@ -930,6 +1163,44 @@ export default function Header({
         >
           {item.label}
         </Link>
+      );
+    }
+
+    if (item.id === 'articles') {
+      return (
+        <div key={item.id} className="rounded-lg overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setIsMobileArticlesOpen((open) => !open)}
+            className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors inline-flex items-center justify-between ${mobileNavClass('articles')}`}
+          >
+            <span>{item.label}</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${
+                isMobileArticlesOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+
+          {isMobileArticlesOpen && (
+            <div className="mt-1 ml-2 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 max-h-[50vh] overflow-y-auto">
+              <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-gold">
+                {articlesDropdownTitle}
+              </p>
+              {articleNavGroups.map((group) => renderMobileArticleCategoryItem(group))}
+              <Link
+                to={articlesListPath(locale)}
+                onClick={() => {
+                  setIsMobileArticlesOpen(false);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+              >
+                {allArticlesLabel}
+              </Link>
+            </div>
+          )}
+        </div>
       );
     }
 

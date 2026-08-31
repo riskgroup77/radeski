@@ -500,6 +500,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           onChangeLocale={changeLocale}
           onOpenAppointment={() => handleOpenAppointmentWithService()}
           serviceCategories={dynamicServiceCategories}
+          articles={dynamicArticles}
           onOpenServiceCategory={goToServiceCategory}
         />
       )}
