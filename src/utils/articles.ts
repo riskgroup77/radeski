@@ -94,6 +94,29 @@ export function resolveArticleApiSlug(routeParam: string, articles: Article[]): 
   return routeParam;
 }
 
+/** Aparat promo maqolalari — portret rasmlar to'liq ko'rsatiladi. */
+export const EQUIPMENT_PROMO_ARTICLE_IDS = new Set([
+  'art-ipl-lumecca-pigmentatsiya-radeski',
+  'art-derma-v-qizarish-radeski',
+  'art-tetra-pro-yuz-tortish-radeski',
+  'art-hollywood-spectra-poralar-radeski',
+  'art-morpheus8-rf-lifting-radeski',
+  'art-deka-co2-chandiqlar-radeski',
+]);
+
+export function isEquipmentPromoArticle(article: Pick<Article, 'id' | 'slug'>): boolean {
+  const routeKey = resolveArticleRouteKey(article);
+  return (
+    EQUIPMENT_PROMO_ARTICLE_IDS.has(article.id) ||
+    EQUIPMENT_PROMO_ARTICLE_IDS.has(routeKey) ||
+    EQUIPMENT_PROMO_ARTICLE_IDS.has(`art-${article.slug}`)
+  );
+}
+
+export function isEquipmentPromoImageSrc(src: string | undefined | null): boolean {
+  return Boolean(src && /-promo\.(png|webp|jpe?g)$/i.test(src));
+}
+
 /** Admin API PUT/DELETE uchun haqiqiy UUID (statik art-* emas). */
 export function resolveArticleAdminApiId(
   article: Pick<Article, 'id' | 'apiId'>,

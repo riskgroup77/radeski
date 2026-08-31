@@ -22,6 +22,7 @@ import {
   stripArticleHashtagSection,
 } from '../utils/articleContent';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import { isEquipmentPromoImageSrc } from '../utils/articles';
 
 interface ArticleDetailContentProps {
   article: Article;
@@ -112,17 +113,24 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
           {children}
         </td>
       ),
-      img: ({ src, alt }: { src?: string; alt?: string }) => (
-        <figure className="my-6 sm:my-8">
-          <img
-            src={src}
-            alt={alt ?? ''}
-            loading="lazy"
-            decoding="async"
-            className="w-full max-w-3xl mx-auto h-auto rounded-2xl border border-brand-sectiongray shadow-sm bg-neutral-600"
-          />
-        </figure>
-      ),
+      img: ({ src, alt }: { src?: string; alt?: string }) => {
+        const promo = isEquipmentPromoImageSrc(src);
+        return (
+          <figure className={`my-6 sm:my-8 ${promo ? 'max-w-md mx-auto' : ''}`}>
+            <img
+              src={src}
+              alt={alt ?? ''}
+              loading="lazy"
+              decoding="async"
+              className={
+                promo
+                  ? 'w-full h-auto rounded-2xl border border-brand-sectiongray shadow-sm bg-neutral-600'
+                  : 'w-full max-w-3xl mx-auto h-auto rounded-2xl border border-brand-sectiongray shadow-sm object-cover'
+              }
+            />
+          </figure>
+        );
+      },
     }),
     [],
   );

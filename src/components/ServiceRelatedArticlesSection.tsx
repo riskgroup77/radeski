@@ -3,7 +3,7 @@ import { ArrowUpRight, BookOpen } from 'lucide-react';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
-import { resolveArticleRouteKey } from '../utils/articles';
+import { resolveArticleRouteKey, isEquipmentPromoArticle } from '../utils/articles';
 import { getRelatedArticlesForService } from '../utils/serviceRelatedArticles';
 import ArticleCoverMedia from './ArticleCoverMedia';
 import ArticleHashtagList from './ArticleHashtagList';
@@ -69,10 +69,11 @@ export default function ServiceRelatedArticlesSection({
                   src={image}
                   alt={art.title[locale]}
                   variant="compact"
-                  imageClassName="group-hover:scale-[1.01] transition-transform duration-300"
+                  promoPortrait={isEquipmentPromoArticle(art)}
+                  imageClassName="group-hover:scale-[1.02] transition-transform duration-300"
                 />
               ) : (
-                <div className="w-full aspect-[819/1024] bg-brand-offwhite flex items-center justify-center text-brand-text-muted text-xs">
+                <div className="h-36 bg-brand-offwhite flex items-center justify-center text-brand-text-muted text-xs">
                   {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
                 </div>
               )}

@@ -7,7 +7,7 @@ import ArticleHashtagList from './ArticleHashtagList';
 import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
-import { resolveArticleRouteKey, filterPublicArticles } from '../utils/articles';
+import { resolveArticleRouteKey, filterPublicArticles, isEquipmentPromoArticle } from '../utils/articles';
 import ArticleCoverMedia from './ArticleCoverMedia';
 import { getLocalizedImage } from '../utils/localizedImage';
 import {
@@ -87,10 +87,11 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                       src={(getLocalizedImage(art.images, locale) ?? art.image)!}
                       alt={art.title[locale]}
                       variant="card"
-                      imageClassName="group-hover:scale-[1.01] transition-transform duration-300"
+                      promoPortrait={isEquipmentPromoArticle(art)}
+                      imageClassName="group-hover:scale-[1.02] transition-transform duration-300"
                     />
                   ) : (
-                    <div className="relative w-full aspect-[819/1024] bg-brand-sectiongray flex items-center justify-center text-brand-text-muted text-xs">
+                    <div className="relative h-56 w-full bg-brand-sectiongray flex items-center justify-center text-brand-text-muted text-xs">
                       {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
                     </div>
                   )}

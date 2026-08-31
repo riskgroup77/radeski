@@ -21,7 +21,7 @@ import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
 import { articlePath, articlesListPath, absoluteUrl } from '../routing/paths';
-import { findArticleByRouteParam, resolveArticleApiSlug, resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles } from '../utils/articles';
+import { findArticleByRouteParam, resolveArticleApiSlug, resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles, isEquipmentPromoArticle } from '../utils/articles';
 import ArticleCoverMedia from './ArticleCoverMedia';
 import ArticleDetailContent from './ArticleDetailContent';
 import ArticleViewsBadge from './ArticleViewsBadge';
@@ -236,11 +236,20 @@ export default function ArticlePage({
               </div>
             </div>
 
-            <div className="w-full max-w-md mx-auto mb-8 rounded-2xl overflow-hidden border border-brand-offwhite">
+            <div
+              className={`w-full mb-8 rounded-2xl overflow-hidden border border-brand-offwhite ${
+                isEquipmentPromoArticle(activeArticle) ? 'max-w-md mx-auto' : ''
+              }`}
+            >
               {articleImage ? (
-                <ArticleCoverMedia src={articleImage} alt={activeArticle.title[locale]} variant="hero" />
+                <ArticleCoverMedia
+                  src={articleImage}
+                  alt={activeArticle.title[locale]}
+                  variant="hero"
+                  promoPortrait={isEquipmentPromoArticle(activeArticle)}
+                />
               ) : (
-                <div className="w-full aspect-[819/1024] bg-brand-sectiongray flex items-center justify-center text-brand-text-muted text-sm">
+                <div className="w-full h-[280px] sm:h-[380px] bg-brand-sectiongray flex items-center justify-center text-brand-text-muted text-sm">
                   {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
                 </div>
               )}
@@ -309,7 +318,8 @@ export default function ArticlePage({
                           src={relatedImage}
                           alt={art.title[locale]}
                           variant="compact"
-                          imageClassName="group-hover:scale-[1.01] transition-transform"
+                          promoPortrait={isEquipmentPromoArticle(art)}
+                          imageClassName="group-hover:scale-[1.02] transition-transform"
                         />
                       )}
                       <div className="p-4">
