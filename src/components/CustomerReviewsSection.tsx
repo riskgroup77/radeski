@@ -7,6 +7,8 @@ import { emptyLocalized } from './LocalizedFieldGroup';
 import {
   countReviewsByServiceCategory,
   filterReviewsByServiceCategory,
+  GENERAL_REVIEW_CATEGORY_ID,
+  getGeneralReviewCategoryLabel,
   type ReviewServiceFilterId,
 } from '../utils/customerReviewServiceFilter';
 
@@ -106,12 +108,22 @@ export default function CustomerReviewsSection({
     [publishedReviews, serviceCategories],
   );
 
+  const activeFilterCategories = useMemo(() => {
+    return serviceCategories
+      .map((category) => ({
+        id: category.id,
+        label: category.title[locale] || category.title.uz,
+        count: reviewCountByCategory.get(category.id) ?? 0,
+      }))
+      .filter((category) => category.count > 0);
+  }, [serviceCategories, reviewCountByCategory, locale]);
+
+  const generalReviewCount = reviewCountByCategory.get(GENERAL_REVIEW_CATEGORY_ID) ?? 0;
+
   const filteredReviews = useMemo(
     () => filterReviewsByServiceCategory(publishedReviews, serviceCategories, serviceFilter),
     [publishedReviews, serviceCategories, serviceFilter],
   );
-
-  const filterCategories = serviceCategories;
 
   const [authorName, setAuthorName] = useState('');
   const [rating, setRating] = useState(5);
@@ -283,7 +295,6 @@ export default function CustomerReviewsSection({
                 <span className="ml-1.5 opacity-80">({publishedReviews.length})</span>
               </button>
               {filterCategories.map((category) => {
-                const count = reviewCountByCategory.get(category.id) ?? 0;
                 const isActive = serviceFilter === category.id;
                 return (
                   <button
@@ -297,13 +308,29 @@ export default function CustomerReviewsSection({
                         ? 'bg-brand-gold border-brand-gold text-white shadow-sm'
                         : 'bg-brand-white border-brand-sectiongray text-brand-text-secondary hover:border-brand-gold/40 hover:text-brand-text-primary'
                     }`}
-                    title={category.title[locale] || category.title.uz}
+                    title={category.label}
                   >
-                    {category.title[locale] || category.title.uz}
-                    {count > 0 ? <span className="ml-1.5 opacity-80">({count})</span> : null}
+                    {category.label}
+                    <span className="ml-1.5 opacity-80">({category.count})</span>
                   </button>
                 );
               })}
+              {generalReviewCount > 0 ? (
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={serviceFilter === GENERAL_REVIEW_CATEGORY_ID}
+                  onClick={() => setServiceFilter(GENERAL_REVIEW_CATEGORY_ID)}
+                  className={`px-3.5 py-2 rounded-full text-[11px] sm:text-xs font-semibold border transition-colors cursor-pointer ${
+                    serviceFilter === GENERAL_REVIEW_CATEGORY_ID
+                      ? 'bg-brand-gold border-brand-gold text-white shadow-sm'
+                      : 'bg-brand-white border-brand-sectiongray text-brand-text-secondary hover:border-brand-gold/40 hover:text-brand-text-primary'
+                  }`}
+                >
+                  {getGeneralReviewCategoryLabel(locale)}
+                  <span className="ml-1.5 opacity-80">({generalReviewCount})</span>
+                </button>
+              ) : null}
             </div>
           </div>
         ) : null}
