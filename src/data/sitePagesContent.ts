@@ -874,6 +874,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '1:04',
     category: { uz: 'Apparatli kosmetologiya', ru: 'Аппаратная косметология', en: 'Device-based cosmetology' },
   },
+  {
+    id: 'clinic-video-52',
+    sortOrder: -4,
+    title: {
+      uz: 'Soch uchun og\'riqsiz lazer mezoterapiya — tuliy lazer',
+      ru: 'Безболезненная мезотерапия для волос на тулиевом лазере',
+      en: 'Painless thulium laser mesotherapy for hair',
+    },
+    description: {
+      uz: 'Soch to\'kilishi, inchelash yoki sifati yomonlashgani sizni bezovta qiladimi?\n\nRadeski Skin Clinic da zamonaviy muolaja mavjud — tuliy lazer yordamida bosh terisi uchun **og\'riqsiz lazer mezoterapiya**.\n\nTuliy lazer bosh terisida mikrokanallar hosil qiladi; bu esa muolaja doirasida qo\'llaniladigan faol moddalarning chuqurroq va samaraliroq singishiga yordam berishi mumkin.\n\nKlassik igna bilan mezoterapiyadan farqli o\'laroq, bu usul ko\'p sonli ukolslarsiz o\'tkaziladi — jarayon ancha qulay.\n\nSoch uchun lazer mezoterapiya quyidagi holatlarda kompleks dasturlarning bir qismi bo\'lishi mumkin:\n— soch to\'kilishi va inchelash;\n— soch zichligining kamayishi;\n— bosh terisi holatining yomonlashishi;\n— bosh terisi va soch parvarishini yaxshilash zarurati.\n\nSoch to\'kilishini davolash dasturi har doim trixolog shifokor konsultatsiyasi va bosh terisi hamda soch diagnostikasidan keyin individual tanlanadi.\n\nRadeski Skin Clinic dagi tuliy lazer — zamonaviy texnologiya va sochingiz salomatligiga individual yondashuv.\n\nKonsultatsiyaga yoziling va tuliy lazer bilan og\'riqsiz soch mezoterapiyasi sizga mos kelishini bilib oling.',
+      ru: 'Вас беспокоит выпадение волос, их истончение или ухудшение качества?\n\nВ Radeski Skin Clinic доступна современная процедура — **безболезненная лазерная мезотерапия** кожи головы с использованием тулиевого лазера.\n\nТулиевый лазер создаёт микроканалы в коже головы, что может способствовать более эффективному проникновению активных компонентов, применяемых в рамках процедуры.\n\nВ отличие от классической инъекционной мезотерапии, процедура проводится без множественных уколов — это делает её заметно комфортнее.\n\nЛазерная мезотерапия для волос может использоваться в комплексных программах при:\n— выпадении и истончении волос;\n— снижении плотности;\n— ухудшении состояния кожи головы;\n— необходимости улучшить уход за кожей головы и волосами.\n\nПрограмма лечения выпадения волос всегда подбирается индивидуально — после консультации врача-трихолога и диагностики состояния кожи головы и волос.\n\nТулиевый лазер в Radeski Skin Clinic — современные технологии и индивидуальный подход к здоровью ваших волос.\n\nЗапишитесь на консультацию и узнайте, подходит ли вам безболезненная мезотерапия для волос на тулиевом лазере.',
+      en: 'Are you concerned about hair shedding, thinning, or a decline in hair quality?\n\nRadeski Skin Clinic offers a modern option — **painless laser mesotherapy** for the scalp using thulium laser technology.\n\nThe thulium laser creates micro-channels in the scalp that may help active ingredients used during the session penetrate more effectively.\n\nUnlike classic injection mesotherapy, the procedure avoids multiple needle punctures, making it significantly more comfortable.\n\nLaser mesotherapy for hair may be part of a comprehensive plan when you have:\n— shedding and thinning;\n— reduced hair density;\n— a worsening scalp condition;\n— a need to improve scalp and hair care.\n\nAny hair-loss program is tailored individually after a trichologist consultation and assessment of the scalp and hair.\n\nThulium laser at Radeski Skin Clinic — advanced technology and a personalized approach to your hair health.\n\nBook a consultation to find out whether painless thulium laser mesotherapy is right for you.',
+    },
+    src: '/videos/52.mp4',
+    duration: '1:04',
+    category: { uz: 'Trixologiya', ru: 'Трихология', en: 'Trichology' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [
