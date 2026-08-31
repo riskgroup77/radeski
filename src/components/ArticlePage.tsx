@@ -22,7 +22,7 @@ import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
 import { articlePath, articlesListPath, absoluteUrl } from '../routing/paths';
 import { findArticleByRouteParam, resolveArticleApiSlug, resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles } from '../utils/articles';
-import MediaImage from './MediaImage';
+import ArticleCoverMedia from './ArticleCoverMedia';
 import ArticleDetailContent from './ArticleDetailContent';
 import ArticleViewsBadge from './ArticleViewsBadge';
 
@@ -236,15 +236,11 @@ export default function ArticlePage({
               </div>
             </div>
 
-            <div className="h-[280px] sm:h-[380px] lg:h-[420px] w-full rounded-2xl overflow-hidden bg-brand-sectiongray mb-8 border border-brand-offwhite">
+            <div className="w-full max-w-md mx-auto mb-8 rounded-2xl overflow-hidden border border-brand-offwhite">
               {articleImage ? (
-                <MediaImage
-                  src={articleImage}
-                  alt={activeArticle.title[locale]}
-                  className="w-full h-full object-cover"
-                />
+                <ArticleCoverMedia src={articleImage} alt={activeArticle.title[locale]} variant="hero" />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-sm">
+                <div className="w-full aspect-[819/1024] bg-brand-sectiongray flex items-center justify-center text-brand-text-muted text-sm">
                   {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
                 </div>
               )}
@@ -309,13 +305,12 @@ export default function ArticlePage({
                       className="group bg-brand-offwhite hover:bg-brand-white border border-brand-sectiongray rounded-xl overflow-hidden transition-all cursor-pointer"
                     >
                       {relatedImage && (
-                        <div className="h-28 overflow-hidden bg-brand-sectiongray">
-                          <MediaImage
-                            src={relatedImage}
-                            alt={art.title[locale]}
-                            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform"
-                          />
-                        </div>
+                        <ArticleCoverMedia
+                          src={relatedImage}
+                          alt={art.title[locale]}
+                          variant="compact"
+                          imageClassName="group-hover:scale-[1.01] transition-transform"
+                        />
                       )}
                       <div className="p-4">
                       <span className="text-[10px] text-brand-text-muted font-mono">{art.date}</span>

@@ -5,7 +5,7 @@ import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
 import { resolveArticleRouteKey } from '../utils/articles';
 import { getRelatedArticlesForService } from '../utils/serviceRelatedArticles';
-import MediaImage from './MediaImage';
+import ArticleCoverMedia from './ArticleCoverMedia';
 import ArticleHashtagList from './ArticleHashtagList';
 import { getLocalizedImage } from '../utils/localizedImage';
 import { resolveArticleSummary } from '../utils/articleContent';
@@ -65,16 +65,14 @@ export default function ServiceRelatedArticlesSection({
               className="group bg-brand-white hover:bg-brand-offwhite border border-brand-sectiongray rounded-2xl overflow-hidden transition-all shadow-sm hover:shadow-md cursor-pointer flex flex-col"
             >
               {image ? (
-                <div className="h-36 overflow-hidden bg-brand-sectiongray">
-                  <MediaImage
-                    src={image}
-                    alt={art.title[locale]}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                  />
-                </div>
+                <ArticleCoverMedia
+                  src={image}
+                  alt={art.title[locale]}
+                  variant="compact"
+                  imageClassName="group-hover:scale-[1.01] transition-transform duration-300"
+                />
               ) : (
-                <div className="h-36 bg-brand-offwhite flex items-center justify-center text-brand-text-muted text-xs">
+                <div className="w-full aspect-[819/1024] bg-brand-offwhite flex items-center justify-center text-brand-text-muted text-xs">
                   {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
                 </div>
               )}

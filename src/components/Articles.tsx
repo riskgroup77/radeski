@@ -8,7 +8,7 @@ import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
 import { resolveArticleRouteKey, filterPublicArticles } from '../utils/articles';
-import MediaImage from './MediaImage';
+import ArticleCoverMedia from './ArticleCoverMedia';
 import { getLocalizedImage } from '../utils/localizedImage';
 import {
   formatArticleHashtags,
@@ -82,20 +82,18 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
                   to={articlePath(locale, resolveArticleRouteKey(art))}
                   className="flex flex-col flex-1 cursor-pointer"
                 >
-                  <div className="relative h-56 w-full overflow-hidden bg-brand-sectiongray">
-                    {getLocalizedImage(art.images, locale) ?? art.image ? (
-                      <MediaImage
-                        src={(getLocalizedImage(art.images, locale) ?? art.image)!}
-                        alt={art.title[locale]}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-brand-text-muted text-xs">
-                        {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
-                      </div>
-                    )}
-                  </div>
+                  {getLocalizedImage(art.images, locale) ?? art.image ? (
+                    <ArticleCoverMedia
+                      src={(getLocalizedImage(art.images, locale) ?? art.image)!}
+                      alt={art.title[locale]}
+                      variant="card"
+                      imageClassName="group-hover:scale-[1.01] transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="relative w-full aspect-[819/1024] bg-brand-sectiongray flex items-center justify-center text-brand-text-muted text-xs">
+                      {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
+                    </div>
+                  )}
 
                   <div className="p-6 flex-1">
                     <div className="flex gap-4 items-center text-[10px] sm:text-xs text-brand-text-muted font-mono mb-3 flex-wrap">

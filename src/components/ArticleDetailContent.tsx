@@ -119,7 +119,7 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
             alt={alt ?? ''}
             loading="lazy"
             decoding="async"
-            className="w-full max-w-3xl mx-auto rounded-2xl border border-brand-sectiongray shadow-sm object-cover"
+            className="w-full max-w-3xl mx-auto h-auto rounded-2xl border border-brand-sectiongray shadow-sm bg-neutral-600"
           />
         </figure>
       ),
