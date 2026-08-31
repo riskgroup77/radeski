@@ -990,6 +990,30 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
 
 export const TREATMENT_RESULTS: TreatmentResult[] = [
   {
+    id: 'alopecia-areata-boy-yoqubov',
+    sortOrder: -2,
+    title: {
+      uz: 'Bolada keng alopeciya areata',
+      ru: 'Обширная алопеция areata у ребёнка',
+      en: 'Widespread alopecia areata in a child',
+    },
+    description: {
+      uz: 'Peshona, chakka va bosh tepasidagi keng sochsiz maydonlar, orqa soch chizig‘ida ofiaz shaklidagi yo‘qolish — Yo‘qubov Farrux rahbarligidagi trixologik davolashdan so‘ng soch butunlay tiklandi, bosh terisi sog‘lom holatga qaytdi.',
+      ru: 'Обширные безволосые зоны на лбу, висках и макушке, ophiasis-переход по задней линии роста — после трихологического лечения под руководством Якубова Фарруха волосы полностью восстановились, кожа головы вернулась в здоровое состояние.',
+      en: 'Extensive bald areas on the forehead, temples and crown, with ophiasis-pattern loss at the nape — after trichological treatment led by Dr. Farrukh Yoqubov, hair fully regrew and the scalp returned to a healthy state.',
+    },
+    service: { uz: 'Trihologiya', ru: 'Трихология', en: 'Trichology' },
+    beforeImage: '/results/alopecia-areata-boy-before.jpg',
+    afterImage: '/results/alopecia-areata-boy-after.jpg',
+    journeyImages: [
+      '/results/alopecia-areata-boy-step-2.jpg',
+      '/results/alopecia-areata-boy-step-3.jpg',
+      '/results/alopecia-areata-boy-step-4.jpg',
+      '/results/alopecia-areata-boy-step-5.jpg',
+    ],
+    sessions: { uz: 'Individual kurs + kuzatuv', ru: 'Индивидуальный курс + наблюдение', en: 'Individual course + monitoring' },
+  },
+  {
     id: 'alopecia-areata-child-yoqubov',
     sortOrder: -1,
     title: {
