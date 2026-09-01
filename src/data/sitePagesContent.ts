@@ -1032,7 +1032,7 @@ export const TREATMENT_RESULTS: TreatmentResult[] = [
     },
     service: { uz: 'Trihologiya', ru: 'Трихология', en: 'Trichology' },
     beforeImage: '/results/alopecia-areata-child-before.jpg',
-    afterImage: '/results/alopecia-areata-child-after.jpg',
+    afterImage: '/results/alopecia-areata-child-after-v2.jpg',
     journeyImages: [
       '/results/alopecia-areata-child-step-2.jpg',
       '/results/alopecia-areata-child-step-3.jpg',
