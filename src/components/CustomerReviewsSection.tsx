@@ -270,7 +270,7 @@ export default function CustomerReviewsSection({
           <p className="text-brand-text-muted mt-4 text-sm sm:text-base leading-relaxed">{labels.desc}</p>
         </div>
 
-        {publishedReviews.length > 0 && filterCategories.length > 0 ? (
+        {publishedReviews.length > 0 && activeFilterCategories.length > 0 ? (
           <div className="mb-8 lg:mb-10">
             <p className="text-center text-[10px] sm:text-xs font-bold uppercase tracking-wider text-brand-text-muted mb-3">
               {labels.filterLabel}
@@ -294,7 +294,7 @@ export default function CustomerReviewsSection({
                 {labels.filterAll}
                 <span className="ml-1.5 opacity-80">({publishedReviews.length})</span>
               </button>
-              {filterCategories.map((category) => {
+              {activeFilterCategories.map((category) => {
                 const isActive = serviceFilter === category.id;
                 return (
                   <button
