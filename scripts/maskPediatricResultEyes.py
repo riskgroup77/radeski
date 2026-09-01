@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1] / "public" / "results"
 # Normalized (x1, y1, x2, y2) — rasm o'lchamining ulushi
 EYE_MASKS: dict[str, tuple[float, float, float, float]] = {
     "alopecia-areata-child-before.jpg": (0.16, 0.34, 0.84, 0.51),
-    "alopecia-areata-child-after.jpg": (0.18, 0.30, 0.82, 0.47),
+    "alopecia-areata-child-after.jpg": (0.10, 0.50, 0.90, 0.66),
     "alopecia-areata-child-step-2.jpg": (0.22, 0.76, 0.78, 0.93),
     "alopecia-areata-boy-before.jpg": (0.48, 0.38, 0.99, 0.55),
     "alopecia-areata-boy-after.jpg": (0.42, 0.36, 0.98, 0.53),
@@ -44,7 +44,16 @@ def apply_eye_mask(path: Path, region_norm: tuple[float, float, float, float]) -
 
 
 def main() -> None:
-    for filename, region in EYE_MASKS.items():
+    import sys
+
+    only = sys.argv[1:] if len(sys.argv) > 1 else None
+    targets = (
+        {name: EYE_MASKS[name] for name in only if name in EYE_MASKS}
+        if only
+        else EYE_MASKS
+    )
+
+    for filename, region in targets.items():
         path = ROOT / filename
         if not path.exists():
             print(f"Skip missing: {path}")
