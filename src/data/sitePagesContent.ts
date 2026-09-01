@@ -46,6 +46,8 @@ export interface TreatmentResult {
   comparisonImage?: string;
   /** Oldin va keyin orasidagi davolash bosqichlari (qadam-baqadam) */
   journeyImages?: string[];
+  /** Bolalar suratlarida ko'zlar maxfiylik uchun yashirilgan */
+  privacyEyeMasked?: boolean;
   sessions: LocalizedText;
   sortOrder?: number;
   published?: boolean;
@@ -992,6 +994,7 @@ export const TREATMENT_RESULTS: TreatmentResult[] = [
   {
     id: 'alopecia-areata-boy-yoqubov',
     sortOrder: -2,
+    privacyEyeMasked: true,
     title: {
       uz: 'Bolada keng alopeciya areata',
       ru: 'Обширная алопеция areata у ребёнка',
@@ -1016,6 +1019,7 @@ export const TREATMENT_RESULTS: TreatmentResult[] = [
   {
     id: 'alopecia-areata-child-yoqubov',
     sortOrder: -1,
+    privacyEyeMasked: true,
     title: {
       uz: 'Bolalarda alopeciya areata',
       ru: 'Алопеция areata у ребёнка',
