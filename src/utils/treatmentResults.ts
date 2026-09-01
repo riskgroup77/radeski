@@ -14,11 +14,21 @@ function mergeStaticExtras(apiItem: TreatmentResult): TreatmentResult {
     STATIC_RESULTS_BY_ID.get(apiItem.id) ??
     STATIC_RESULTS_BY_TITLE.get(apiItem.title.uz.trim().toLowerCase());
   if (!staticItem) return apiItem;
+
+  const usePrivacyImages = staticItem.privacyEyeMasked === true;
+
   return {
     ...apiItem,
     id: apiItem.id || staticItem.id,
-    journeyImages: apiItem.journeyImages?.length ? apiItem.journeyImages : staticItem.journeyImages,
+    beforeImage: usePrivacyImages ? staticItem.beforeImage : apiItem.beforeImage,
+    afterImage: usePrivacyImages ? staticItem.afterImage : apiItem.afterImage,
+    journeyImages: usePrivacyImages
+      ? staticItem.journeyImages
+      : apiItem.journeyImages?.length
+        ? apiItem.journeyImages
+        : staticItem.journeyImages,
     comparisonImage: apiItem.comparisonImage ?? staticItem.comparisonImage,
+    privacyEyeMasked: staticItem.privacyEyeMasked ?? apiItem.privacyEyeMasked,
   };
 }
 
