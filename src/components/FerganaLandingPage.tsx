@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Clock, ArrowRight, Stethoscope, Sparkles, Zap, Sun } from 'lucide-react';
 import type { Locale } from '../types';
-import { CLINIC_PHONE_KOKAND } from '../config/clinicContacts';
-import { KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
-import { pagePath, serviceCategoryPath, serviceSubPath, articlePath } from '../routing/paths';
+import { CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
+import { getClinicMapOpenUrl } from '../config/links';
 import {
   COMPETITIVE_ADVANTAGES,
   POSITIONING_FORMULA,
@@ -11,10 +10,11 @@ import {
   getLocalizedCopy,
   localCommercialPath,
 } from '../data/localCommercialSeoCatalog';
+import { pagePath, serviceCategoryPath, serviceSubPath, articlePath } from '../routing/paths';
 import { resolveArticleRouteKey } from '../utils/articles';
 import AppointmentBookingLink from './AppointmentBookingLink';
 
-interface KokandLandingPageProps {
+interface FerganaLandingPageProps {
   locale: Locale;
   appointmentLabel: string;
 }
@@ -24,7 +24,7 @@ const SERVICES: { id: string; icon: typeof Stethoscope; uz: string; ru: string; 
     id: 'dermatologiya',
     icon: Stethoscope,
     uz: 'Dermatologiya — akne, psoriaz, vitiligo, ekzema',
-    ru: 'Дерматология — акне, псориаз, витилиго, экзема',
+    ru: 'Дерматология — акне, псориаз, витилиgo, экзема',
     en: 'Dermatology — acne, psoriasis, vitiligo, eczema',
   },
   {
@@ -45,118 +45,118 @@ const SERVICES: { id: string; icon: typeof Stethoscope; uz: string; ru: string; 
     id: 'dermatologiya',
     icon: Sun,
     uz: 'Fototerapiya (Daavlin) — vitiligo, psoriaz',
-    ru: 'Фототерапия (Daavlin) — витилиго, псориаз',
+    ru: 'Фототерапия (Daavlin) — витилиgo, псoriasis',
     en: 'Phototherapy (Daavlin) — vitiligo, psoriasis',
   },
 ];
 
 const ARTICLES = [
-  { id: 'art-pryshchi-u-vzroslykh', uz: 'Kattalarda akne', ru: 'Акне у взрослых', en: 'Adult acne' },
-  { id: 'art-psoriasis-daavlin-kokand', uz: 'Psoriaz — Daavlin Qo‘qon', ru: 'Псориаз — Daavlin Коканд', en: 'Psoriasis — Daavlin Kokand' },
-  { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиго', en: 'Vitiligo treatment' },
-  { id: 'art-ipl-terapiya', uz: 'IPL terapiya', ru: 'IPL-терапия', en: 'IPL therapy' },
+  { id: 'art-akne', uz: 'Akne davolash', ru: 'Лечение акне', en: 'Acne treatment' },
+  { id: 'art-ipl-terapiya', uz: 'IPL terapiya Farg‘ona', ru: 'IPL-терапия Фергана', en: 'IPL therapy Fergana' },
+  { id: 'art-deka-moveo-fergana-faq', uz: 'DEKA MOVEO lazer', ru: 'Лазер DEKA MOVEO', en: 'DEKA MOVEO laser' },
+  { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиgo', en: 'Vitiligo treatment' },
 ];
 
 function copy(locale: Locale) {
   if (locale === 'uz') {
     return {
-      badge: 'Radeski Skin Clinic — Qo‘qon filiali',
-      h1: 'Dermatolog Qo‘qon | Radeski Skin Clinic',
+      badge: 'Radeski Skin Clinic — Farg‘ona bosh klinikasi',
+      h1: 'Dermatolog Farg‘ona | Radeski Skin Clinic',
       lead:
-        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, IPL, lazer epilyatsiya va fototerapiya. Manzil: 47-MFI, Huqandiy mavzesi, 144A.',
-      address: "Qo'qon sh., 47-MFI, Huqandiy mavzesi, 144A",
+        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, IPL, lazer va fototerapiya. Manzil: O‘zbekiston Ovozi ko‘chasi, 1A.',
+      address: "Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1A-bino",
       hours: 'Dushanba – Shanba: 08:00 – 18:00',
-      servicesTitle: 'Qo‘qonda xizmatlar',
-      commercialTitle: 'Qo‘qon bo‘yicha qidiruv sahifalari',
-      articlesTitle: 'Qo‘qon uchun foydali maqolalar',
+      servicesTitle: 'Farg‘onada xizmatlar',
+      commercialTitle: 'Farg‘ona bo‘yicha qidiruv sahifalari',
+      articlesTitle: 'Farg‘ona uchun foydali maqolalar',
       mapCta: 'Xaritada ochish',
       allBranches: 'Barcha filiallar',
-      whyTitle: 'Nima uchun Qo‘qonda Radeski?',
+      whyTitle: 'Nima uchun Farg‘onada Radeski?',
       faqTitle: 'Tez-tez so‘raladigan savollar',
       faqs: [
         {
-          q: 'Qo‘qonda dermatolog qayerda?',
-          a: 'Radeski Skin Clinic Qo‘qon filiali: 47-MFI, Huqandiy mavzesi, 144A. Telefon: +998 95 210 73 73.',
+          q: 'Farg‘onada dermatolog qayerda?',
+          a: 'Radeski Skin Clinic bosh klinikasi: O‘zbekiston Ovozi ko‘chasi, 1A. Telefon: +998 (73) 200-73-73.',
         },
         {
-          q: 'Qo‘qonda akne va kosmetologiya bormi?',
-          a: 'Ha. Dermatologiya, apparatli kosmetologiya (IPL), lazer epilyatsiya, fototerapiya va inyeksiyalar mavjud.',
+          q: 'Farg‘onada trixolog va podolog bormi?',
+          a: 'Ha. Dermatologiya, trixologiya, podologiya, dermatoskopiya va apparat muolajalari bir klinikada.',
         },
         {
           q: 'Qabulga qanday yozilaman?',
-          a: 'Saytdagi «Qabulga yozilish» orqali yoki +998 95 210 73 73 raqamiga qo‘ng‘iroq qiling.',
+          a: 'Saytdagi «Qabulga yozilish» tugmasi yoki +998 (73) 200-73-73 raqami orqali.',
         },
       ],
     };
   }
   if (locale === 'ru') {
     return {
-      badge: 'Radeski Skin Clinic — филиал в Коканде',
-      h1: 'Дерматолог Коканд | Radeski Skin Clinic',
+      badge: 'Radeski Skin Clinic — главная клиника в Фергане',
+      h1: 'Дерматолог Фергана | Radeski Skin Clinic',
       lead:
-        'Дерматология, косметология, IPL, лазерная эпиляция и фототерапия в Коканде. Адрес: 47-МФЙ, массив Хукандий, 144А. Квалифицированные врачи и современное оборудование.',
-      address: 'г. Коканд, 47-МФЙ, массив Хукандий, 144А',
+        'Специализированная клиника кожи, волос и ногтей: дерматология, трихология, подология, IPL, лазер и фототерапия. Адрес: ул. Узбекистон Овози, 1А.',
+      address: 'г. Фергана, ул. Узбекистон Овози, дом 1А',
       hours: 'Понедельник – Суббота: 08:00 – 18:00',
-      servicesTitle: 'Услуги в Коканде',
-      commercialTitle: 'Коммерческие страницы по Коканду',
-      articlesTitle: 'Полезные статьи для Коканда',
+      servicesTitle: 'Услуги в Фергане',
+      commercialTitle: 'Коммерческие страницы по Фергане',
+      articlesTitle: 'Полезные статьи для Ферганы',
       mapCta: 'Открыть на карте',
       allBranches: 'Все филиалы',
-      whyTitle: 'Почему Radeski в Коканде?',
+      whyTitle: 'Почему Radeski в Фергане?',
       faqTitle: 'Частые вопросы',
       faqs: [
         {
-          q: 'Где дерматолог в Коканде?',
-          a: 'Филиал Radeski Skin Clinic: 47-МФЙ, массив Хукандий, 144А. Телефон: +998 95 210 73 73.',
+          q: 'Где дерматолог в Фергане?',
+          a: 'Главная клиника Radeski Skin Clinic: ул. Узбекистон Овози, 1А. Тел: +998 (73) 200-73-73.',
         },
         {
-          q: 'Есть ли лечение акне и косметология в Коканде?',
-          a: 'Да. Дерматология, аппаратная косметология (IPL), лазерная эпиляция, фототерапия и инъекции.',
+          q: 'Есть ли трихолог и подолог в Фергане?',
+          a: 'Да. Дерматология, трихология, подология, дерматоскопия и аппаратные процедуры в одной клинике.',
         },
         {
           q: 'Как записаться на приём?',
-          a: 'Через кнопку «Записаться» на сайте или по телефону +998 95 210 73 73.',
+          a: 'Через кнопку «Записаться» на сайте или по телефону +998 (73) 200-73-73.',
         },
       ],
     };
   }
   return {
-    badge: 'Radeski Skin Clinic — Kokand branch',
-    h1: 'Dermatologist Kokand | Radeski Skin Clinic',
+    badge: 'Radeski Skin Clinic — Fergana main clinic',
+    h1: 'Dermatologist Fergana | Radeski Skin Clinic',
     lead:
-      'Dermatology, cosmetology, IPL, laser hair removal and phototherapy in Kokand. Address: 47-MFI, Huqandiy Block, 144A. Qualified doctors and modern equipment.',
-    address: '144A Huqandiy Block, 47-MFI, Kokand City',
+      'Specialized clinic for skin, hair and nails: dermatology, trichology, podology, IPL, laser and phototherapy. Address: 1A Uzbekiston Ovozi St.',
+    address: '1A Uzbekiston Ovozi St., Fergana City',
     hours: 'Monday – Saturday: 08:00 – 18:00',
-    servicesTitle: 'Services in Kokand',
-    commercialTitle: 'Kokand search landing pages',
-    articlesTitle: 'Helpful articles for Kokand',
+    servicesTitle: 'Services in Fergana',
+    commercialTitle: 'Fergana search landing pages',
+    articlesTitle: 'Helpful articles for Fergana',
     mapCta: 'Open on map',
     allBranches: 'All branches',
-    whyTitle: 'Why Radeski in Kokand?',
+    whyTitle: 'Why Radeski in Fergana?',
     faqTitle: 'FAQ',
     faqs: [
       {
-        q: 'Where to find a dermatologist in Kokand?',
-        a: 'Radeski Skin Clinic Kokand branch: 47-MFI, Huqandiy Block, 144A. Phone: +998 95 210 73 73.',
+        q: 'Where to find a dermatologist in Fergana?',
+        a: 'Radeski Skin Clinic main branch: 1A Uzbekiston Ovozi St. Phone: +998 (73) 200-73-73.',
       },
       {
-        q: 'Is acne and cosmetology available in Kokand?',
-        a: 'Yes — dermatology, device cosmetology (IPL), laser hair removal, phototherapy and injectables.',
+        q: 'Are trichologist and podiatrist available?',
+        a: 'Yes — dermatology, trichology, podology, dermoscopy and device treatments in one clinic.',
       },
       {
         q: 'How do I book an appointment?',
-        a: 'Use Book online on the website or call +998 95 210 73 73.',
+        a: 'Use Book online on the website or call +998 (73) 200-73-73.',
       },
     ],
   };
 }
 
-export default function KokandLandingPage({ locale, appointmentLabel }: KokandLandingPageProps) {
+export default function FerganaLandingPage({ locale, appointmentLabel }: FerganaLandingPageProps) {
   const t = copy(locale);
-  const commercialLinks = getCityCommercialLinks('qoqon');
+  const commercialLinks = getCityCommercialLinks('fargona');
 
   return (
-    <section id="kokand-landing" className="py-12 bg-brand-offwhite min-h-screen">
+    <section id="fergana-landing" className="py-12 bg-brand-offwhite min-h-screen">
       <div className="site-container max-w-4xl">
         <span className="inline-flex text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
           {t.badge}
@@ -174,15 +174,15 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
             {appointmentLabel}
           </AppointmentBookingLink>
           <a
-            href={`tel:${CLINIC_PHONE_KOKAND.tel}`}
+            href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
             className="inline-flex items-center gap-2 px-6 py-3 border border-brand-sectiongray bg-brand-white text-brand-text-primary font-semibold text-sm rounded-xl no-underline"
           >
             <Phone className="w-4 h-4 text-brand-gold" />
-            {CLINIC_PHONE_KOKAND.display}
+            {CLINIC_PHONE_PRIMARY.display}
           </a>
           <Link
             to={pagePath(locale, 'branches')}
-            className="inline-flex items-center gap-2 px-6 py-3 text-brand-gold font-semibold text-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 text-brand-gold font-semibold text-sm no-underline"
           >
             {t.allBranches}
             <ArrowRight className="w-4 h-4" />
@@ -196,8 +196,11 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
           </li>
           <li className="flex gap-2 p-4 bg-brand-white rounded-xl border border-brand-sectiongray text-sm">
             <Phone className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-            <a href={`tel:${CLINIC_PHONE_KOKAND.tel}`} className="text-brand-text-primary no-underline hover:text-brand-gold">
-              {CLINIC_PHONE_KOKAND.display}
+            <a
+              href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
+              className="text-brand-text-primary no-underline hover:text-brand-gold"
+            >
+              {CLINIC_PHONE_PRIMARY.display}
             </a>
           </li>
           <li className="flex gap-2 p-4 bg-brand-white rounded-xl border border-brand-sectiongray text-sm">
@@ -207,7 +210,7 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
         </ul>
 
         <a
-          href={KOKAND_BRANCH_MAP_OPEN_URL}
+          href={getClinicMapOpenUrl()}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-gold"
@@ -230,7 +233,7 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
           {commercialLinks.map((item) => (
             <Link
               key={item.slug}
-              to={localCommercialPath(locale, 'qoqon', item.slug)}
+              to={localCommercialPath(locale, 'fargona', item.slug)}
               className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 text-sm font-semibold text-brand-text-primary no-underline"
             >
               {getLocalizedCopy(item.h1, locale)}
@@ -287,9 +290,9 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
         </div>
 
         <p className="mt-8 text-sm text-brand-text-muted">
-          {locale === 'uz' ? "Farg'ona filiali: " : locale === 'ru' ? 'Филиал в Фергане: ' : 'Fergana branch: '}
-          <Link to={pagePath(locale, 'fargona')} className="text-brand-gold font-semibold no-underline hover:underline">
-            {locale === 'uz' ? 'Dermatolog Farg‘ona' : locale === 'ru' ? 'Дерматолог Фергана' : 'Dermatologist Fergana'}
+          {locale === 'uz' ? "Qo'qon filiali: " : locale === 'ru' ? 'Филиал в Коканде: ' : 'Kokand branch: '}
+          <Link to={pagePath(locale, 'qoqon')} className="text-brand-gold font-semibold no-underline hover:underline">
+            {locale === 'uz' ? 'Dermatolog Qo‘qon' : locale === 'ru' ? 'Дерматолог Коканд' : 'Dermatologist Kokand'}
           </Link>
         </p>
       </div>

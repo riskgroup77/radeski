@@ -188,10 +188,16 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Radeski filial, dermatolog Farg'ona, dermatolog Qo'qon, klinika manzili, Rade Skin Clinic",
     },
     qoqon: {
-      title: "Dermatolog Qo'qon | Farg'ona | Radeski Skin Clinic — teri, soch va tirnoqlar tibbiy klinikasi",
-      desc: "Qo'qonda Radeski Skin Clinic: dermatologiya, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya. Manzil: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73. Farg'ona filiali ham mavjud.",
+      title: "Dermatolog Qo'qon | Radeski Skin Clinic — teri, soch va tirnoqlar ixtisoslashgan klinikasi",
+      desc: "Qo'qonda Radeski Skin Clinic: dermatologiya, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya. Manzil: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.",
       keywords:
-        "dermatolog Qo'qon, dermatologiya Qo'qon, kosmetologiya Qo'qon, IPL Qo'qon, lazer epilyatsiya Qo'qon, Radeski Qo'qon, dermatolog Farg'ona, akne Qo'qon",
+        "dermatolog Qo'qon, dermatologiya Qo'qon, kosmetologiya Qo'qon, IPL Qo'qon, lazer epilyatsiya Qo'qon, Radeski Qo'qon, akne Qo'qon",
+    },
+    fargona: {
+      title: "Dermatolog Farg'ona | Radeski Skin Clinic — teri, soch va tirnoqlar ixtisoslashgan klinikasi",
+      desc: "Farg'onada Radeski bosh klinikasi: dermatologiya, trixologiya, podologiya, IPL, lazer, dermatoskopiya. Manzil: O'zbekiston Ovozi 1A. Tel: +998 73 200-73-73.",
+      keywords:
+        "dermatolog Farg'ona, trixolog Farg'ona, podolog Farg'ona, IPL Farg'ona, lazer epilyatsiya Farg'ona, Radeski Farg'ona, akne Farg'ona",
     },
     results: {
       title: "Natijalar — oldin va keyin | Radeski Farg'ona | Qo'qon",
@@ -298,10 +304,16 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "филиал Radeski, дерматолог Фергана, дерматолог Коканд, адрес клиники",
     },
     qoqon: {
-      title: "Дерматолог Коканд | Фергана | Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей",
-      desc: "Клиника Radeski в Коканде: дерматология, косметология, IPL, лазерная эпиляция, фототерапия. Адрес: 47-МФЙ, Хукандий 144А. Тел: +998 95 210 73 73. Также филиал в Фергане.",
+      title: 'Дерматолог Коканд | Radeski Skin Clinic — специализированная клиника кожи, волос и ногтей',
+      desc: 'Клиника Radeski в Коканде: дерматология, косметология, IPL, лазерная эпиляция, фототерапия. Адрес: 47-МФЙ, Хукандий 144А. Тел: +998 95 210 73 73.',
       keywords:
-        "дерматолог Коканд, дерматология Коканд, косметология Коканд, IPL Коканд, лазерная эпиляция Коканд, Radeski Коканд, дерматолог Фергана, акне Коканд",
+        'дерматолог Коканд, дерматология Коканд, косметология Коканд, IPL Коканд, лазерная эпиляция Коканд, Radeski Коканд, акне Коканд',
+    },
+    fargona: {
+      title: 'Дерматолог Фергана | Radeski Skin Clinic — специализированная клиника кожи, волос и ногтей',
+      desc: 'Главная клиника Radeski в Фергане: дерматология, трихология, подология, IPL, лазер, дерматоскопия. Адрес: ул. Узбекистон Овози 1А. Тел: +998 73 200-73-73.',
+      keywords:
+        'дерматолог Фергана, трихолог Фергана, подолог Фергана, IPL Фергана, лазерная эпиляция Фергана, Radeski Фергана, акне Фергана',
     },
     results: {
       title: "Результаты — до и после | Radeski Фергана | Коканд",
@@ -408,10 +420,16 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Radeski branch, dermatologist Fergana, dermatologist Kokand, clinic address",
     },
     qoqon: {
-      title: "Dermatologist Kokand | Fergana | Radeski Skin Clinic — medical skin, hair and nails clinic",
-      desc: "Radeski Skin Clinic in Kokand: dermatology, cosmetology, IPL, laser hair removal, phototherapy. Address: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73. Also a Fergana branch.",
+      title: 'Dermatologist Kokand | Radeski Skin Clinic — specialized skin, hair and nails clinic',
+      desc: 'Radeski Skin Clinic in Kokand: dermatology, cosmetology, IPL, laser hair removal, phototherapy. Address: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.',
       keywords:
-        "dermatologist Kokand, dermatology Kokand, cosmetology Kokand, IPL Kokand, laser hair removal Kokand, Radeski Kokand, dermatologist Fergana, acne Kokand",
+        'dermatologist Kokand, dermatology Kokand, cosmetology Kokand, IPL Kokand, laser hair removal Kokand, Radeski Kokand, acne Kokand',
+    },
+    fargona: {
+      title: 'Dermatologist Fergana | Radeski Skin Clinic — specialized skin, hair and nails clinic',
+      desc: 'Radeski main clinic in Fergana: dermatology, trichology, podology, IPL, laser, dermoscopy. Address: 1A Uzbekiston Ovozi St. Tel: +998 73 200-73-73.',
+      keywords:
+        'dermatologist Fergana, trichologist Fergana, podiatrist Fergana, IPL Fergana, laser hair removal Fergana, Radeski Fergana, acne Fergana',
     },
     results: {
       title: "Results — before and after | Radeski Fergana | Kokand",

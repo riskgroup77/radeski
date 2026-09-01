@@ -12,6 +12,7 @@ export type PageId =
   | 'videos'
   | 'branches'
   | 'qoqon'
+  | 'fargona'
   | 'results'
   | 'technologies'
   | 'daavlin-foto-kabinalari'
@@ -231,6 +232,7 @@ export function getPageFromPathname(pathname: string): PageId {
     pageSegment === 'videos' ||
     pageSegment === 'branches' ||
     pageSegment === 'qoqon' ||
+    pageSegment === 'fargona' ||
     pageSegment === 'results' ||
     pageSegment === 'technologies' ||
     pageSegment === 'daavlin-foto-kabinalari' ||

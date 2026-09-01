@@ -17,6 +17,12 @@ import {
   normalizeCanonicalPath,
   getLocaleFromPathname,
 } from '../routing/paths';
+import { localCommercialPath, type LocalSeoCity } from '../data/localCommercialSeoCatalog';
+import {
+  getLocalCommercialFromPathname,
+  localCommercialPath,
+  type LocalSeoCity,
+} from '../data/localCommercialSeoCatalog';
 import { localeToHreflang, LOCALES } from '../routing/locale';
 
 export type RouteSeoContext = {
@@ -29,6 +35,8 @@ export type RouteSeoContext = {
   serviceSubId?: string | null;
   promoSlug?: string | null;
   conditionSlug?: string | null;
+  localCommercialCity?: LocalSeoCity | null;
+  localCommercialSlug?: string | null;
   daavlinSection?: DaavlinSectionId;
   daavlinModelId?: DaavlinModelId | null;
   /** Stable public route key for articles (art-* or slug, never UUID). */
@@ -60,6 +68,10 @@ export function getCanonicalUrl(ctx: RouteSeoContext): string {
 
 /** Locale alternate URL for the same logical page (hreflang). */
 export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): string {
+  if (ctx.localCommercialCity && ctx.localCommercialSlug) {
+    return localCommercialPath(altLocale, ctx.localCommercialCity, ctx.localCommercialSlug);
+  }
+
   if (ctx.promoSlug) {
     return promoServicePath(altLocale, ctx.promoSlug);
   }
