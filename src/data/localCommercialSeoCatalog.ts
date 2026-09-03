@@ -290,7 +290,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'lazer-epilyatsiya', 'lazernaya-epilyaciya', {
       name: L('Lazer epilyatsiya', 'Лазерная эпиляция', 'Laser hair removal'),
       promoSlug: 'lazer-epilyatsiya',
-      articleRouteKeys: ['art-deka-moveo-fergana-faq'],
+      articleRouteKeys: ['art-deka-moveo-fergana-faq', 'art-lazer-epilyatsiya-samara-xatolar'],
       problem: L('Ortiqcha tukni uzoq muddat kamaytirish.', 'Длительное уменьшение роста волос.', 'Long-term hair reduction.'),
       whoFor: [L('Barcha anatomik zonalar', 'Все зоны', 'All body areas')],
       methods: [L('DEKA MOVEO lazer', 'Лазер DEKA MOVEO', 'DEKA MOVEO laser'), L('Kurs rejasi', 'Курс процедур', 'Treatment course')],
@@ -413,7 +413,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'lazer-epilyatsiya', 'lazernaya-epilyaciya', {
       name: L('Lazer epilyatsiya', 'Лазерная эпиляция', 'Laser hair removal'),
       promoSlug: 'lazer-epilyatsiya',
-      articleRouteKeys: ['art-deka-moveo-fergana-faq'],
+      articleRouteKeys: ['art-deka-moveo-fergana-faq', 'art-lazer-epilyatsiya-samara-xatolar'],
       problem: L('Ortiqcha tuk.', 'Избыточный рост волос.', 'Unwanted hair.'),
       whoFor: [L('Barcha zonalar', 'Все зоны', 'All zones')],
       methods: [L('DEKA MOVEO', 'DEKA MOVEO', 'DEKA MOVEO')],

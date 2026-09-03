@@ -37,6 +37,7 @@ import { TETRA_PRO_LIFTING_ARTICLE } from './data/articles/tetraProLiftingArticl
 import { HOLLYWOOD_SPECTRA_PORES_ARTICLE } from './data/articles/hollywoodSpectraPoresArticle';
 import { MORPHEUS8_RF_LIFTING_ARTICLE } from './data/articles/morpheus8RfLiftingArticle';
 import { DEKA_CO2_SCARS_ARTICLE } from './data/articles/dekaCo2ScarsArticle';
+import { LAZER_EPILYATSIYA_MISTAKES_ARTICLE } from './data/articles/lazerEpilyatsiyaMistakesArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -1064,4 +1065,5 @@ export const ARTICLES: Article[] = [
   HOLLYWOOD_SPECTRA_PORES_ARTICLE,
   MORPHEUS8_RF_LIFTING_ARTICLE,
   DEKA_CO2_SCARS_ARTICLE,
+  LAZER_EPILYATSIYA_MISTAKES_ARTICLE,
 ];

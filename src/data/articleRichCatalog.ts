@@ -37,6 +37,7 @@ import { TETRA_PRO_LIFTING_ARTICLE_CATALOG } from './articles/tetraProLiftingArt
 import { HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG } from './articles/hollywoodSpectraPoresArticle';
 import { MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG } from './articles/morpheus8RfLiftingArticle';
 import { DEKA_CO2_SCARS_ARTICLE_CATALOG } from './articles/dekaCo2ScarsArticle';
+import { LAZER_EPILYATSIYA_MISTAKES_ARTICLE_CATALOG } from './articles/lazerEpilyatsiyaMistakesArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -79,6 +80,15 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'deka moveo savollar',
     'вопросы и ответы deka moveo',
     '755 nm aleksandrit',
+  ],
+  'lazer-epilyatsiya-samara-xatolar': [
+    'lazer-epilyatsiya-nima-uchun-samara-bermaydi',
+    'art-lazer-epilyatsiya-samara-xatolar',
+    'lazer epilyatsiya samara bermaydi',
+    'лазерная эпиляция не работает',
+    'laser hair removal not working',
+    'lazer epilyatsiya xatolari',
+    'ошибки лазерной эпиляции',
   ],
   'deka-co2': [
     'co2-lazer-deka',
@@ -1093,6 +1103,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'hollywood-spectra-pores-radeski': HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG,
   'morpheus8-rf-lifting-radeski': MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG,
   'deka-co2-scars-radeski': DEKA_CO2_SCARS_ARTICLE_CATALOG,
+  'lazer-epilyatsiya-samara-xatolar': LAZER_EPILYATSIYA_MISTAKES_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:
