@@ -2,6 +2,7 @@
 """Pull latest main and rebuild radeski.uz on VPS."""
 from __future__ import annotations
 
+import getpass
 import os
 import sys
 import time
@@ -36,12 +37,16 @@ def run(client: paramiko.SSHClient, cmd: str, timeout: int = 900) -> str:
 
 
 def main() -> None:
-    if not PASSWORD:
+    password = PASSWORD
+    if not password and sys.stdin.isatty():
+        # Hidden prompt — the password never lands in shell history or env.
+        password = getpass.getpass(f"{USER}@{HOST} parol: ")
+    if not password:
         print("Set RADESKI_DEPLOY_PASSWORD", file=sys.stderr)
         sys.exit(1)
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(HOST, username=USER, password=PASSWORD, timeout=30)
+    client.connect(HOST, username=USER, password=password, timeout=30)
     run(
         client,
         f"""set -euo pipefail
