@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { publicApi } from '../api';
+import { loadPublicData, type PublicDataOptions } from '../api/publicDataSource';
 import {
   mapBranchFromApi,
   mapClinicRatingFromApi,
@@ -78,17 +79,10 @@ interface CmsDataState {
   clientCount: number;
   loading: boolean;
   error: string | null;
-  refetch: () => Promise<void>;
+  /** `live: true` skips the browser cache/snapshot (e.g. right after a visitor posts a review). */
+  refetch: (options?: PublicDataOptions) => Promise<void>;
 }
 
-async function safeApi<T>(label: string, fn: () => Promise<T>, fallback: T): Promise<T> {
-  try {
-    return await fn();
-  } catch (error) {
-    console.warn(`[cms-data] ${label} failed, using fallback`, error);
-    return fallback;
-  }
-}
 
 function mergeCatalogVideos(apiVideos: ClinicVideo[], catalog: ClinicVideo[]): ClinicVideo[] {
   if (apiVideos.length === 0) return mapApiClinicVideos(catalog);
@@ -96,7 +90,8 @@ function mergeCatalogVideos(apiVideos: ClinicVideo[], catalog: ClinicVideo[]): C
   return mapApiClinicVideos(apiVideos);
 }
 
-export function useCmsData(): CmsDataState {
+export function useCmsData(options: PublicDataOptions = {}): CmsDataState {
+  const live = Boolean(options.live);
   const [partners, setPartners] = useState<ClinicPartner[]>(CLINIC_PARTNERS);
   const [reviews, setReviews] = useState<CustomerReview[]>(CUSTOMER_REVIEWS);
   const [branches, setBranches] = useState<ClinicBranch[]>(CLINIC_BRANCHES);
@@ -107,7 +102,8 @@ export function useCmsData(): CmsDataState {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const refetch = useCallback(async () => {
+  const refetch = useCallback(async (refetchOptions?: PublicDataOptions) => {
+    const liveFetch = live || Boolean(refetchOptions?.live);
     setLoading(true);
     setError(null);
 
@@ -120,13 +116,13 @@ export function useCmsData(): CmsDataState {
       ratingsRes,
       countRes,
     ] = await Promise.all([
-      safeApi('partners', () => publicApi.getPartners(), []),
-      safeApi('reviews', () => publicApi.getReviews(true), []),
-      safeApi('branches', () => publicApi.getBranches(), []),
-      safeApi('treatment-results', () => publicApi.getTreatmentResults(), []),
-      safeApi('videos', () => publicApi.getVideos(), []),
-      safeApi('clinic-ratings', () => publicApi.getClinicRatings(), []),
-      safeApi('client-count', () => publicApi.getClientCount(), { client_count: getCachedClientCount() }),
+      loadPublicData('partners', () => publicApi.getPartners(), [], { live: liveFetch }),
+      loadPublicData('reviews', () => publicApi.getReviews(true), [], { live: liveFetch }),
+      loadPublicData('branches', () => publicApi.getBranches(), [], { live: liveFetch }),
+      loadPublicData('treatmentResults', () => publicApi.getTreatmentResults(), [], { live: liveFetch }),
+      loadPublicData('videos', () => publicApi.getVideos(), [], { live: liveFetch }),
+      loadPublicData('clinicRatings', () => publicApi.getClinicRatings(), [], { live: liveFetch }),
+      loadPublicData('clientCount', () => publicApi.getClientCount(), { client_count: getCachedClientCount() }, { live: liveFetch }),
     ]);
 
     const apiFailed =
@@ -162,7 +158,7 @@ export function useCmsData(): CmsDataState {
     setCachedClientCount(count);
 
     setLoading(false);
-  }, []);
+  }, [live]);
 
   useEffect(() => {
     void refetch();

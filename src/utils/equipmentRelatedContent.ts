@@ -2,7 +2,7 @@ import type { Article } from '../types';
 import type { ClinicVideo, TreatmentResult } from '../data/sitePagesContent';
 import type { ClinicEquipmentId } from '../data/clinicEquipmentCatalog';
 import type { Locale } from '../types';
-import { findArticleCatalogKey } from '../data/articleRichCatalog';
+import { findArticleCatalogKey } from '../data/articleCatalogKeys';
 import { filterPublicArticles } from './articles';
 
 export const EQUIPMENT_ARTICLE_KEYS: Record<ClinicEquipmentId, string[]> = {

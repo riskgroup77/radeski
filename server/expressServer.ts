@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ChatApiError, handleDeepSeekChat } from './deepseekChatHandler';
 import { handleGoogleReviewsSync } from './googleReviewsSyncHandler';
+import { chatRateLimit } from './chatRateLimit';
+import { handleReviewSubmit, reviewRateLimit } from './reviewSubmitHandler';
 import { getDeepSeekModel, isDeepSeekConfigured, loadProjectEnv } from './loadEnv';
 
 loadProjectEnv();
@@ -10,9 +12,13 @@ loadProjectEnv();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
+// nginx on the same host proxies /api/chat — trust its X-Forwarded-For for the client IP.
+app.set('trust proxy', 'loopback');
+app.disable('x-powered-by');
+
 app.use(express.json({ limit: '48kb' }));
 
-app.post('/api/chat', async (req, res) => {
+app.post('/api/chat', chatRateLimit, async (req, res) => {
   try {
     const reply = await handleDeepSeekChat(req.body);
     res.json({ reply });
@@ -24,6 +30,11 @@ app.post('/api/chat', async (req, res) => {
     console.error('[chat]', error);
     res.status(500).json({ error: 'Chat service error' });
   }
+});
+
+// Visitor reviews: saved + published server-side (admin credentials never reach the browser).
+app.post('/api/reviews/submit', reviewRateLimit, (req, res) => {
+  void handleReviewSubmit(req, res);
 });
 
 const healthHandler: express.RequestHandler = (_req, res) => {

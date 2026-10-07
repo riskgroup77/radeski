@@ -72,6 +72,49 @@ Online booking: ${CLINIC_FACTS.booking}
 Services: ${CLINIC_FACTS.specialties}`;
 }
 
+/** Limits for anything the browser sends — the endpoint is public. */
+const MAX_HISTORY_MESSAGES = 20;
+const MAX_USER_MESSAGE_CHARS = 2500;
+const MAX_ASSISTANT_MESSAGE_CHARS = 4000;
+const CONTEXT_LIMITS = { serviceSummary: 2400, doctorSummary: 1000, articlesSummary: 1400 };
+
+function cleanText(value, maxLength) {
+  if (typeof value !== 'string') return '';
+  // Drop control characters (keep newlines/tabs) and cap the length.
+  return value.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim().slice(0, maxLength);
+}
+
+/**
+ * The page sends a short catalogue summary as context. Only the three known fields are
+ * accepted, as plain capped strings, so a caller cannot smuggle extra instructions or
+ * oversized payloads into the system prompt.
+ */
+function sanitizeContext(context) {
+  const result = {};
+  if (!context || typeof context !== 'object') return result;
+  for (const [key, limit] of Object.entries(CONTEXT_LIMITS)) {
+    const text = cleanText(context[key], limit);
+    if (text) result[key] = text;
+  }
+  return result;
+}
+
+/** Only user/assistant turns with text survive; system or tool roles from the client are dropped. */
+function sanitizeMessages(messages) {
+  if (!Array.isArray(messages)) return [];
+  return messages
+    .filter((message) => message && (message.role === 'user' || message.role === 'assistant'))
+    .map((message) => ({
+      role: message.role,
+      content: cleanText(
+        message.content,
+        message.role === 'user' ? MAX_USER_MESSAGE_CHARS + 1 : MAX_ASSISTANT_MESSAGE_CHARS,
+      ),
+    }))
+    .filter((message) => message.content)
+    .slice(-MAX_HISTORY_MESSAGES);
+}
+
 function buildClinicSystemInstruction(locale, context) {
   const langRule =
     locale === 'uz'
@@ -109,10 +152,11 @@ RULES:
 - Prices may be indicative; exact quotes come from consultation.
 - For booking, mention Hipolink or the clinic phone.`;
 
+  const safeContext = sanitizeContext(context);
   const extra = [
-    context?.serviceSummary ? `Xizmatlar: ${context.serviceSummary}` : '',
-    context?.doctorSummary ? `Shifokorlar: ${context.doctorSummary}` : '',
-    context?.articlesSummary ? `Maqolalar: ${context.articlesSummary}` : '',
+    safeContext.serviceSummary ? `Xizmatlar: ${safeContext.serviceSummary}` : '',
+    safeContext.doctorSummary ? `Shifokorlar: ${safeContext.doctorSummary}` : '',
+    safeContext.articlesSummary ? `Maqolalar: ${safeContext.articlesSummary}` : '',
   ]
     .filter(Boolean)
     .join('\n');
@@ -139,33 +183,30 @@ export function parseChatBody(raw) {
 }
 
 export async function handleDeepSeekChat(body) {
-  const apiKey = getDeepSeekApiKey();
-  if (!apiKey) {
-    throw new ChatApiError('DEEPSEEK_API_KEY is not configured on the server', 503);
-  }
-
   const locale = body.locale === 'ru' || body.locale === 'en' ? body.locale : 'uz';
-  const messages = Array.isArray(body.messages) ? body.messages.slice(-24) : [];
+  const messages = sanitizeMessages(body.messages);
 
   if (messages.length === 0) {
     throw new ChatApiError('Messages are required', 400);
   }
 
   const last = messages[messages.length - 1];
-  if (last.role !== 'user' || !last.content?.trim()) {
+  if (last.role !== 'user') {
     throw new ChatApiError('Last message must be from user', 400);
   }
 
-  if (last.content.length > 2500) {
+  if (last.content.length > MAX_USER_MESSAGE_CHARS) {
     throw new ChatApiError('Message is too long', 400);
+  }
+
+  const apiKey = getDeepSeekApiKey();
+  if (!apiKey) {
+    throw new ChatApiError('DEEPSEEK_API_KEY is not configured on the server', 503);
   }
 
   const apiMessages = [
     { role: 'system', content: buildClinicSystemInstruction(locale, body.context) },
-    ...messages.map((message) => ({
-      role: message.role,
-      content: message.content.trim(),
-    })),
+    ...messages,
   ];
 
   const response = await fetch(`${getDeepSeekApiBase()}/chat/completions`, {
@@ -185,9 +226,11 @@ export async function handleDeepSeekChat(body) {
   const data = await response.json();
 
   if (!response.ok) {
+    // Keep provider details (balance, keys, request ids) in the server log, not in the page.
+    console.error('[chat] DeepSeek error', response.status, data?.error?.message);
     throw new ChatApiError(
-      data?.error?.message || `DeepSeek API error (${response.status})`,
-      response.status >= 500 ? 502 : response.status,
+      response.status === 429 ? 'AI is busy' : 'AI assistant is temporarily unavailable',
+      503,
     );
   }
 

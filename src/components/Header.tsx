@@ -66,6 +66,8 @@ interface HeaderProps {
   serviceCategories?: ServiceCategory[];
   articles?: Article[];
   onOpenServiceCategory?: (categoryId: string) => void;
+  /** DICTIONARY merged with admin-edited clinic texts (working hours…). */
+  dictionary?: Record<string, string>;
 }
 
 /** Scroll distance after which the contact rows collapse and the header turns compact. */
@@ -341,6 +343,7 @@ export default function Header({
   serviceCategories = [],
   articles = [],
   onOpenServiceCategory,
+  dictionary,
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -369,7 +372,7 @@ export default function Header({
   const articlesMenuRef = useRef<HTMLDivElement>(null);
   const servicesMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const d = DICTIONARY[locale];
+  const d = { ...DICTIONARY[locale], ...dictionary };
   const topBar = getHeaderTopBarContacts(locale);
   const cityLabels = getCityLabels(locale);
   const ferganaMapUrl = topBar.ferganaMapUrl || getClinicMapOpenUrl();

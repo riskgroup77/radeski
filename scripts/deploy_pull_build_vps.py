@@ -1,94 +1,25 @@
 #!/usr/bin/env python3
-"""Pull latest main and rebuild radeski.uz on VPS."""
+"""Pull latest main and rebuild radeski.uz on the VPS (code deploy only).
+
+Authentication: SSH key (see setup_ssh_key_vps.py), RADESKI_DEPLOY_PASSWORD, or a hidden
+password prompt. Server-side edits are backed up before the hard reset (see vps_common).
+
+For the one-time server upgrade (nginx cache, security headers, cron) use
+vps_upgrade_radeski.py instead.
+"""
 from __future__ import annotations
 
-import getpass
-import os
-import sys
-import time
-
-import paramiko
-
-HOST = os.environ.get("RADESKI_DEPLOY_HOST", "161.35.107.0")
-USER = os.environ.get("RADESKI_DEPLOY_USER", "root")
-PASSWORD = os.environ.get("RADESKI_DEPLOY_PASSWORD", "")
-APP_DIR = "/var/www/radeski"
-
-
-def run(client: paramiko.SSHClient, cmd: str, timeout: int = 900) -> str:
-    print(f"\n>>> {cmd[:180]}{'...' if len(cmd) > 180 else ''}")
-    _, stdout, stderr = client.exec_command(cmd, get_pty=True, timeout=timeout)
-    chunks: list[str] = []
-    while not stdout.channel.exit_status_ready():
-        if stdout.channel.recv_ready():
-            chunks.append(stdout.channel.recv(4096).decode("utf-8", errors="replace"))
-        time.sleep(0.2)
-    chunks.append(stdout.read().decode("utf-8", errors="replace"))
-    err = stderr.read().decode("utf-8", errors="replace")
-    code = stdout.channel.recv_exit_status()
-    out = "".join(chunks)
-    safe = out.encode("ascii", errors="replace").decode("ascii")
-    print(safe[-5000:] if len(safe) > 5000 else safe)
-    if err.strip():
-        print(err[-1500:])
-    if code != 0:
-        raise RuntimeError(f"Exit {code} for: {cmd}")
-    return out
+from vps_common import DEPLOY_SCRIPT, connect, run
 
 
 def main() -> None:
-    password = PASSWORD
-    if not password and sys.stdin.isatty():
-        # Hidden prompt — the password never lands in shell history or env.
-        password = getpass.getpass(f"{USER}@{HOST} parol: ")
-    if not password:
-        print("Set RADESKI_DEPLOY_PASSWORD", file=sys.stderr)
-        sys.exit(1)
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(HOST, username=USER, password=password, timeout=30)
-    run(
-        client,
-        f"""set -euo pipefail
-cd {APP_DIR}
-# Clinic videos live on VPS + API, not in git — preserve across hard reset.
-VIDEO_BACKUP="/tmp/radeski-videos-backup"
-rm -rf "$VIDEO_BACKUP"
-if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
-  cp -a public/videos "$VIDEO_BACKUP"
-fi
-git fetch origin main
-# Files are sometimes hot-patched on the VPS over SFTP — keep a recoverable copy of any
-# server-side edits before the hard reset throws them away.
-BACKUP_DIR="/root/radeski-predeploy-backups/$(date +%Y%m%d-%H%M%S)"
-if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-  mkdir -p "$BACKUP_DIR"
-  git diff HEAD > "$BACKUP_DIR/server-changes.patch"
-  git status --porcelain > "$BACKUP_DIR/status.txt"
-  echo "Server-side changes backed up to $BACKUP_DIR"
-fi
-git reset --hard origin/main
-if [ -d "$VIDEO_BACKUP" ]; then
-  mkdir -p public/videos
-  cp -a "$VIDEO_BACKUP"/. public/videos/
-  rm -rf "$VIDEO_BACKUP"
-fi
-if [ -f .env ]; then set -a; . ./.env; set +a; fi
-export VITE_API_URL="${{VITE_API_URL:-https://api.radeski.uz}}"
-npm run build
-# Ensure static /videos/* remain in dist after build
-if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
-  mkdir -p dist/videos
-  cp -a public/videos/. dist/videos/
-fi
-nginx -t
-systemctl reload nginx
-echo DEPLOY_OK
-git log -1 --oneline
-""",
-        timeout=900,
-    )
-    client.close()
+    client = connect()
+    try:
+        run(client, DEPLOY_SCRIPT, timeout=1800)
+        # The Express app (AI chat, review publishing) runs from the same checkout.
+        run(client, "systemctl restart radeski-chat && sleep 2 && systemctl is-active radeski-chat", check=False)
+    finally:
+        client.close()
     print("Done.")
 
 

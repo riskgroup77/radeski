@@ -343,11 +343,11 @@ export const ATOPIC_DERMATITIS_ARTICLE: Article = {
     en: 'Dr. Ashurov',
   },
   date: '2026-08-17',
-  image: '/articles/atopic-dermatitis-cover.png',
+  image: '/articles/atopic-dermatitis-cover.webp',
   images: {
-    uz: '/articles/atopic-dermatitis-cover.png',
-    ru: '/articles/atopic-dermatitis-cover.png',
-    en: '/articles/atopic-dermatitis-cover.png',
+    uz: '/articles/atopic-dermatitis-cover.webp',
+    ru: '/articles/atopic-dermatitis-cover.webp',
+    en: '/articles/atopic-dermatitis-cover.webp',
   },
   views: 0,
 };

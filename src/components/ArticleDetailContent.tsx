@@ -15,12 +15,11 @@ import {
   getArticleDisclaimer,
   getArticleSectionLabels,
   formatArticleHashtags,
-  resolveArticleBody,
-  resolveArticleRichContent,
   resolveArticleReadingMinutes,
   resolveArticleSummary,
   stripArticleHashtagSection,
 } from '../utils/articleContent';
+import { resolveArticleBody, resolveArticleRichContent } from '../utils/articleContentFull';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import { isEquipmentPromoImageSrc } from '../utils/articles';
 

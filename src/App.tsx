@@ -5,7 +5,8 @@
  * hdkbscdbki
  */
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { Suspense, useState, useEffect, useMemo } from 'react';
+import { lazyPage } from './utils/lazyPage';
 import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
 import { Locale } from './types';
 import ScrollToTop from './routing/ScrollToTop';
@@ -15,7 +16,6 @@ import {
   normalizeLocaleParam,
   saveLocale,
   getPreferredLocale,
-  localeToOgLocale,
 } from './routing/locale';
 import {
   PageId,
@@ -38,55 +38,26 @@ import {
   servicesListPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
-import { DICTIONARY, GALLERY_IMAGS, getClinicRatingSummary } from './data';
+import { DICTIONARY, getClinicRatingSummary } from './data';
 import { clearAllLocalMedia } from './utils/localMediaStorage';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import PromoServicePage from './components/PromoServicePage';
 import { findPromoSlideBySlug } from './data/homePromoCarousel';
-import About from './components/About';
-import Services from './components/Services';
-import ServiceCategoryPage from './components/ServiceCategoryPage';
-import DermatologyConditionPage from './components/DermatologyConditionPage';
-import { isDermatologyConditionSlug, getDermatologyConditionNavItem } from './data/dermatologyConditionsNav';
-import { getDermatologyConditionTopic } from './utils/dermatologyConditions';
-import ServiceSubPage from './components/ServiceSubPage';
-import ClinicEquipmentPage from './components/ClinicEquipmentPage';
-import Doctors from './components/Doctors';
-import DoctorPage from './components/DoctorPage';
-import VideosPage from './components/VideosPage';
-import BranchesPage from './components/BranchesPage';
-import TechnologiesPage from './components/TechnologiesPage';
-import DaavlinFotoKabinalariPage from './components/DaavlinFotoKabinalariPage';
-import DaavlinModelPage from './components/DaavlinModelPage';
-import DermoScanPage from './components/DermoScanPage';
-import SciencePage from './components/SciencePage';
-import ObrazovaniyaPage from './components/ObrazovaniyaPage';
-import EducationProgramPage from './components/EducationProgramPage';
-import MalakaOshirishPage from './components/MalakaOshirishPage';
-import TeleDermatologyPage from './components/TeleDermatologyPage';
-import SkinPathologyCenterPage from './components/SkinPathologyCenterPage';
-import BrandPage from './components/BrandPage';
-import { DAAVLIN_MODEL_DEEP } from './data/daavlinModelDeepContent';
-import ResultsPage from './components/ResultsPage';
-import Prices from './components/Prices';
-import Articles from './components/Articles';
-import ArticlePage from './components/ArticlePage';
+import { isDermatologyConditionSlug } from './data/dermatologyConditionsNav';
 import Footer from './components/Footer';
-import AdminPanel from './components/AdminPanel';
-import LegalPage from './components/LegalPage';
+import NotFoundPage from './components/NotFoundPage';
 import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
 import { Phone, MapPin, Clock, ArrowRight, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
 import { useCmsData } from './hooks/useCmsData';
 import { createAppointment } from './api/publicApi';
+import { clearPublicDataCache } from './api/publicDataSource';
 import { submitAndPublishCustomerReview } from './api/submitCustomerReview';
-import { resolveArticleRichContent } from './utils/articleContent';
 import { fetchClientCountFromApi } from './utils/clientCount';
 import { getPlatformLogo } from './utils/platformLogo';
 import { ApiError } from './api/client';
-import { findArticleByRouteParam, resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles } from './utils/articles';
+import { findArticleByRouteParam, resolveArticleRouteKey, filterPublicArticles } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
@@ -97,45 +68,55 @@ import DoctorsHomeMarquee from './components/DoctorsHomeMarquee';
 import ServiceTeaserCard from './components/ServiceTeaserCard';
 import PartnersCarousel from './components/PartnersCarousel';
 import CustomerReviewsSection from './components/CustomerReviewsSection';
-import QrFeedbackPage from './components/QrFeedbackPage';
-import KokandLandingPage from './components/KokandLandingPage';
-import FerganaLandingPage from './components/FerganaLandingPage';
-import LocalCommercialLandingPage from './components/LocalCommercialLandingPage';
 import {
   getLocalCommercialFromPathname,
   getLocalCommercialLanding,
-  getLocalizedCopy,
   isCityCommercialPathAttempt,
 } from './data/localCommercialSeoCatalog';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
 import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
-import {
-  buildArticleSeoTitle,
-  resolveArticleSeo,
-  buildServiceSeoTitle,
-  getTabSeo,
-} from './seo/pageMeta';
-import {
-  getCanonicalUrl,
-  syncCanonicalLink,
-  syncHreflangLinks,
-  type RouteSeoContext,
-} from './seo/routeSeo';
-import {
-  buildArticleSchema,
-  buildMedicalBusinessSchema,
-  buildEducationCoursesSchema,
-  buildServiceFaqSchemas,
-} from './seo/structuredData';
-import { OBRAZOVANIYA } from './data/obrazovaniyaContent';
+import { applyRouteHead, resolveRouteHead } from './seo/resolveRouteHead';
 import {
   getEducationProgramSlugFromPathname,
   resolveEducationProgram,
 } from './utils/educationPrograms';
 import { resolveClinicEquipment } from './utils/clinicEquipmentRoutes';
-import { getLocalizedEquipmentText } from './data/clinicEquipmentCatalog';
+
+// Route pages load on demand — the first paint only needs the shell + home page.
+const PromoServicePage = lazyPage(() => import('./components/PromoServicePage'));
+const About = lazyPage(() => import('./components/About'));
+const Services = lazyPage(() => import('./components/Services'));
+const ServiceCategoryPage = lazyPage(() => import('./components/ServiceCategoryPage'));
+const DermatologyConditionPage = lazyPage(() => import('./components/DermatologyConditionPage'));
+const ServiceSubPage = lazyPage(() => import('./components/ServiceSubPage'));
+const ClinicEquipmentPage = lazyPage(() => import('./components/ClinicEquipmentPage'));
+const Doctors = lazyPage(() => import('./components/Doctors'));
+const DoctorPage = lazyPage(() => import('./components/DoctorPage'));
+const VideosPage = lazyPage(() => import('./components/VideosPage'));
+const BranchesPage = lazyPage(() => import('./components/BranchesPage'));
+const TechnologiesPage = lazyPage(() => import('./components/TechnologiesPage'));
+const DaavlinFotoKabinalariPage = lazyPage(() => import('./components/DaavlinFotoKabinalariPage'));
+const DaavlinModelPage = lazyPage(() => import('./components/DaavlinModelPage'));
+const DermoScanPage = lazyPage(() => import('./components/DermoScanPage'));
+const SciencePage = lazyPage(() => import('./components/SciencePage'));
+const ObrazovaniyaPage = lazyPage(() => import('./components/ObrazovaniyaPage'));
+const EducationProgramPage = lazyPage(() => import('./components/EducationProgramPage'));
+const MalakaOshirishPage = lazyPage(() => import('./components/MalakaOshirishPage'));
+const TeleDermatologyPage = lazyPage(() => import('./components/TeleDermatologyPage'));
+const SkinPathologyCenterPage = lazyPage(() => import('./components/SkinPathologyCenterPage'));
+const BrandPage = lazyPage(() => import('./components/BrandPage'));
+const ResultsPage = lazyPage(() => import('./components/ResultsPage'));
+const Prices = lazyPage(() => import('./components/Prices'));
+const Articles = lazyPage(() => import('./components/Articles'));
+const ArticlePage = lazyPage(() => import('./components/ArticlePage'));
+const AdminPanel = lazyPage(() => import('./components/AdminPanel'));
+const LegalPage = lazyPage(() => import('./components/LegalPage'));
+const QrFeedbackPage = lazyPage(() => import('./components/QrFeedbackPage'));
+const KokandLandingPage = lazyPage(() => import('./components/KokandLandingPage'));
+const FerganaLandingPage = lazyPage(() => import('./components/FerganaLandingPage'));
+const LocalCommercialLandingPage = lazyPage(() => import('./components/LocalCommercialLandingPage'));
 
 export default function App() {
   return (
@@ -186,20 +167,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
   const { goToPage, goToArticle, goToDoctor, goToServiceCategory, goToServiceSub, changeLocale: navigateLocale } = useAppNavigation(locale);
   const invalidLocale = Boolean(localeParam && !parsedLocale && !forcePage);
-  const legacyContactsRedirect =
-    !forcePage && location.pathname.split('/').filter(Boolean)[1] === 'contacts';
-
-  if (legacyContactsRedirect && parsedLocale) {
-    return <Navigate to={pagePath(parsedLocale, 'branches')} replace />;
-  }
-
-  const clinicEquipmentLegacy =
-    !forcePage && location.pathname.split('/').filter(Boolean)[1] === 'clinic-equipment';
-
-  if (clinicEquipmentLegacy && parsedLocale) {
-    return <Navigate to={daavlinSectionPath(parsedLocale, 'contacts')} replace />;
-  }
-
   const changeLocale = (nextLocale: Locale) => {
     saveLocale(nextLocale);
     if (forcePage === 'admin') {
@@ -218,7 +185,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     error: dataError,
     refetch: refetchClinicData,
     updateArticleViews,
-  } = useClinicData();
+    dictionaryOverrides,
+  } = useClinicData({ live: forcePage === 'admin' });
 
   const {
     partners: cmsPartners,
@@ -231,7 +199,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     error: cmsError,
     clientCount: cmsClientCount,
     refetch: refetchCms,
-  } = useCmsData();
+  } = useCmsData({ live: forcePage === 'admin' });
 
   const activeServiceCategory = serviceCategoryId
     ? dynamicServiceCategories.find((category) => category.id === serviceCategoryId) ?? null
@@ -253,226 +221,57 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     ? dynamicDoctors.find((doc) => doc.id === doctorId) ?? null
     : null;
 
-  const isSeoErrorPage =
-    invalidCityCommercialSlug ||
-    Boolean(promoSlug && !activePromoSlide) ||
-    Boolean(conditionSlug && !isDermatologyConditionSlug(conditionSlug));
+  // DICTIONARY + clinic texts the admin edited (stored in the CMS, so every visitor sees them).
+  const fullDictionary = useMemo(() => {
+    const merged = { ...DICTIONARY } as typeof DICTIONARY;
+    for (const lang of ['uz', 'ru', 'en'] as const) {
+      merged[lang] = { ...DICTIONARY[lang], ...(dictionaryOverrides[lang] ?? {}) };
+    }
+    return merged;
+  }, [dictionaryOverrides]);
 
-  const [dynamicDictionary, setDynamicDictionary] = useState(() => {
-    const saved = localStorage.getItem('radeski_dictionary_v1');
-    return saved ? JSON.parse(saved) : DICTIONARY;
-  });
-
-  const d = { ...DICTIONARY[locale], ...(dynamicDictionary[locale] || {}) };
+  const d = fullDictionary[locale];
 
   // Inline Consultation / Be Beautiful form states
   const [inlinePhone, setInlinePhone] = useState('');
   const [inlineSubmitted, setInlineSubmitted] = useState(false);
   const [inlineLoading, setInlineLoading] = useState(false);
 
-  const handleSaveLocalData = (type: string, data: unknown) => {
-    if (type === 'dictionary') {
-      localStorage.setItem('radeski_dictionary_v1', JSON.stringify(data));
-      setDynamicDictionary(data as typeof DICTIONARY);
-    }
-  };
+  // Clinic texts are saved to the CMS by the admin panel itself; nothing is kept locally anymore.
+  const handleSaveLocalData = (_type: string, _data: unknown) => {};
 
   const handleResetLocalData = () => {
-    localStorage.removeItem('radeski_dictionary_v1');
     void clearAllLocalMedia();
-    setDynamicDictionary(DICTIONARY);
+    void refetchClinicData();
     void refetchCms();
   };
 
-  // Automatically inject schema.org metadata and SEO tags dynamically on load / locale / tab change
+  // One-off cleanup of the old browser-only copy of the clinic texts.
   useEffect(() => {
-    // 1. Remove previous schema configurations
-    const existingScript = document.getElementById('clinical-schema-jsonld');
-    if (existingScript) existingScript.remove();
-
-    // 2. Build schema payloads (MedicalBusiness + FAQ + Article when applicable)
-    const origin = window.location.origin;
-    const medicalBusinessSchema = buildMedicalBusinessSchema(locale, origin, cmsClinicRatings);
-    const faqPageSchemas = buildServiceFaqSchemas(locale, dynamicServiceCategories);
-    const schemaData: Record<string, unknown>[] = [medicalBusinessSchema, ...faqPageSchemas];
-
-    if (activeArticlePreview) {
-      schemaData.push(buildArticleSchema(locale, activeArticlePreview, origin));
+    try {
+      localStorage.removeItem('radeski_dictionary_v1');
+    } catch {
+      // ignore
     }
+  }, []);
 
-    if (currentPage === 'obrazovaniya') {
-      const schemaPrograms = activeEducationProgram
-        ? [activeEducationProgram]
-        : OBRAZOVANIYA.programs.items;
-      schemaData.push(
-        ...buildEducationCoursesSchema(
-          locale,
-          origin,
-          schemaPrograms.map((program) => ({
-            id: program.id,
-            title: program.title,
-            description: program.seo.description,
-            keywords: program.seo.keywords,
-          })),
-        ),
-      );
-    }
-
-    // 3. Inject script element
-    const script = document.createElement('script');
-    script.id = 'clinical-schema-jsonld';
-    script.type = 'application/ld+json';
-    script.innerHTML = JSON.stringify(schemaData);
-    document.head.appendChild(script);
-
-    // 6. Route + locale SEO (language-specific titles for Google)
-    const activeSEO = getTabSeo(locale, currentPage);
-
-    const daavlinModelSeo = daavlinModelId ? DAAVLIN_MODEL_DEEP[daavlinModelId] : null;
-
-    const resolvedArticleRouteKey = articleId
-      ? resolveArticleRedirectTarget(articleId) ??
-        (activeArticlePreview ? resolveArticleRouteKey(activeArticlePreview) : undefined)
-      : undefined;
-
-    const articleRichTags = activeArticlePreview
-      ? resolveArticleRichContent(activeArticlePreview, locale).tags
-      : [];
-
-    const articleSeo = activeArticlePreview
-      ? resolveArticleSeo(resolvedArticleRouteKey, activeArticlePreview, locale, articleRichTags)
-      : null;
-
-    const activeConditionPreview =
-      conditionSlug && isDermatologyConditionSlug(conditionSlug)
-        ? getDermatologyConditionTopic(conditionSlug, locale)
-        : null;
-
-    const educationProgramSeo = activeEducationProgram
-      ? {
-          title: activeEducationProgram.seo.title[locale],
-          desc: activeEducationProgram.seo.description[locale],
-          keywords: activeEducationProgram.seo.keywords[locale],
-        }
-      : null;
-
-    const seoTitle = educationProgramSeo?.title
-      ? educationProgramSeo.title
-      : activeLocalCommercial
-      ? getLocalizedCopy(activeLocalCommercial.seo.title, locale)
-      : articleSeo?.title
-      ? articleSeo.title
-      : activeConditionPreview && conditionSlug
-        ? buildServiceSeoTitle(
-            getDermatologyConditionNavItem(conditionSlug)?.label[locale] ??
-              getDermatologyConditionNavItem(conditionSlug)?.label.uz ??
-              conditionSlug,
-            locale,
-          )
-        : activeDoctorPreview
-        ? buildServiceSeoTitle(activeDoctorPreview.name[locale], locale)
-        : activeEquipment
-          ? buildServiceSeoTitle(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
-          : activeServiceSub
-          ? buildServiceSeoTitle(activeServiceSub.name[locale], locale)
-          : activeServiceCategory
-            ? buildServiceSeoTitle(activeServiceCategory.title[locale], locale)
-            : daavlinModelSeo
-              ? daavlinModelSeo.seoTitle[locale]
-              : activeSEO.title;
-    const seoDesc = educationProgramSeo?.desc
-      ? educationProgramSeo.desc
-      : activeLocalCommercial
-      ? getLocalizedCopy(activeLocalCommercial.seo.desc, locale)
-      : articleSeo?.desc
-      ? articleSeo.desc
-      : activeConditionPreview
-        ? activeConditionPreview.description
-        : activeDoctorPreview
-        ? activeDoctorPreview.bio[locale]
-        : activeEquipment
-          ? getLocalizedEquipmentText(activeEquipment.shortDescription, locale)
-          : activeServiceSub
-          ? activeServiceSub.description[locale]
-          : activeServiceCategory
-            ? activeServiceCategory.description[locale]
-            : daavlinModelSeo
-              ? daavlinModelSeo.seoDesc[locale]
-              : activeSEO.desc;
-
-    document.title = seoTitle;
-
-    // Update document language
-    document.documentElement.lang = locale;
-
-    const seoContext: RouteSeoContext = {
-      pathname: location.pathname,
-      forcePage,
-      currentPage,
-      articleId,
-      doctorId,
-      serviceCategoryId,
-      serviceSubId,
-      promoSlug,
-      conditionSlug,
-      localCommercialCity: localCommercialRoute?.city ?? null,
-      localCommercialSlug: localCommercialRoute?.slug ?? null,
-      daavlinSection,
-      daavlinModelId,
-      resolvedArticleRouteKey,
-      resolvedDoctorId: activeDoctorPreview?.id ?? doctorId ?? undefined,
-      resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
-      resolvedServiceSubId: activeEquipment?.id ?? activeServiceSub?.id ?? serviceSubId ?? undefined,
-    };
-
-    const canonicalUrl = getCanonicalUrl(seoContext);
-
-    // Helper functions to safely update or append heads meta
-    const updateMeta = (name: string, content: string) => {
-      let meta = document.querySelector(`meta[name="${name}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('name', name);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-
-    const updateOg = (property: string, content: string) => {
-      let meta = document.querySelector(`meta[property="${property}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute('property', property);
-        document.head.appendChild(meta);
-      }
-      meta.setAttribute('content', content);
-    };
-
-    const seoKeywords = educationProgramSeo?.keywords
-      ? educationProgramSeo.keywords
-      : activeLocalCommercial
-      ? getLocalizedCopy(activeLocalCommercial.seo.keywords, locale)
-      : articleSeo?.keywords
-      ? articleSeo.keywords
-      : activeArticlePreview
-        ? articleRichTags.join(', ')
-        : activeSEO.keywords;
-
-    // Update main Search Engine optimization tags
-    updateMeta('description', seoDesc);
-    updateMeta('keywords', seoKeywords);
-    updateMeta('robots', isSeoErrorPage ? 'noindex, nofollow' : 'index, follow');
-
-    // Update Social sharing graph protocols
-    updateOg('og:title', seoTitle);
-    updateOg('og:description', seoDesc);
-    updateOg('og:url', canonicalUrl);
-    updateOg('og:locale', localeToOgLocale(locale));
-
-    syncCanonicalLink(seoContext);
-    syncHreflangLinks(seoContext);
-
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, activeEquipment, forcePage, promoSlug, conditionSlug, daavlinSection, daavlinModelId, activeLocalCommercial, localCommercialRoute, isSeoErrorPage, activePromoSlide, dataLoading, invalidCityCommercialSlug, activeEducationProgram, educationProgramSlug]);
+  // <head> (title, meta, canonical, hreflang, JSON-LD) for this URL. The same resolver feeds
+  // the build-time prerender, so crawlers without JavaScript see identical tags.
+  useEffect(() => {
+    applyRouteHead(
+      resolveRouteHead({
+        pathname: location.pathname,
+        locale,
+        origin: window.location.origin,
+        forcePage,
+        serviceCategories: dynamicServiceCategories,
+        articles: dynamicArticles,
+        doctors: dynamicDoctors,
+        clinicRatings: cmsClinicRatings,
+        dataLoading,
+      }),
+    );
+  }, [location.pathname, locale, forcePage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, dataLoading]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {
@@ -530,6 +329,21 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
   const isQrFeedbackPage = currentPage === 'fikr';
 
+  // Redirects run after every hook so the hook order never changes between renders.
+  const legacyContactsRedirect =
+    !forcePage && location.pathname.split('/').filter(Boolean)[1] === 'contacts';
+
+  if (legacyContactsRedirect && parsedLocale) {
+    return <Navigate to={pagePath(parsedLocale, 'branches')} replace />;
+  }
+
+  const clinicEquipmentLegacy =
+    !forcePage && location.pathname.split('/').filter(Boolean)[1] === 'clinic-equipment';
+
+  if (clinicEquipmentLegacy && parsedLocale) {
+    return <Navigate to={daavlinSectionPath(parsedLocale, 'contacts')} replace />;
+  }
+
   if (invalidLocale) {
     return (
       <Navigate
@@ -581,6 +395,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         <Header
           currentPage={currentPage}
           locale={locale}
+          dictionary={d}
           onNavigate={goToPage}
           onChangeLocale={changeLocale}
           onOpenAppointment={() => handleOpenAppointmentWithService()}
@@ -599,6 +414,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
         >
+          <Suspense fallback={<PageLoadingFallback />}>
           {activeLocalCommercial && (
             <LocalCommercialLandingPage
               locale={locale}
@@ -696,7 +512,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                 onOpenAppointment={() => handleOpenAppointmentWithService()}
                 onNavigate={goToPage}
                 clientCount={cmsClientCount}
-                doctorsCount={20}
+                doctorsCount={dynamicDoctors.length > 0 ? dynamicDoctors.length : undefined}
               />
 
               {/* 12 Departments - Services Carousel teaser */}
@@ -1035,7 +851,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                 serviceCategories={dynamicServiceCategories}
                 onSubmitReview={async (review) => {
                   await submitAndPublishCustomerReview(review);
-                  await refetchCms();
+                  clearPublicDataCache();
+                  await refetchCms({ live: true });
                 }}
               />
 
@@ -1075,7 +892,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               serviceCategories={dynamicServiceCategories}
               onSubmitReview={async (review) => {
                 await submitAndPublishCustomerReview(review);
-                await refetchCms();
+                clearPublicDataCache();
+                await refetchCms({ live: true });
               }}
             />
           )}
@@ -1156,6 +974,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale}
               doctorId={doctorId}
               doctors={dynamicDoctors}
+              loading={dataLoading}
               dictionary={d}
               onBackToList={() => goToPage('doctors')}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
@@ -1205,7 +1024,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <AdminPanel
               locale={locale}
               dictionary={d}
-              fullDictionary={dynamicDictionary}
+              fullDictionary={fullDictionary}
               doctors={dynamicDoctors}
               serviceCategories={dynamicServiceCategories}
               prices={dynamicPrices}
@@ -1217,8 +1036,16 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               customerReviews={cmsReviews}
               onSaveLocalData={handleSaveLocalData}
               onResetLocalData={handleResetLocalData}
-              onRefresh={refetchClinicData}
-              onRefreshCms={refetchCms}
+              onRefresh={() => {
+                // The admin just changed content — drop this browser's cached copies so the
+                // public pages (other tabs) show the edit immediately.
+                clearPublicDataCache();
+                return refetchClinicData();
+              }}
+              onRefreshCms={() => {
+                clearPublicDataCache();
+                return refetchCms();
+              }}
               onClose={() => goToPage('home')}
             />
           )}
@@ -1283,6 +1110,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           {currentPage === 'tele-dermatology' && <TeleDermatologyPage locale={locale} />}
           {currentPage === 'skin-pathology-center' && <SkinPathologyCenterPage locale={locale} />}
           {currentPage === 'brend' && <BrandPage locale={locale} />}
+          {currentPage === 'not-found' && <NotFoundPage locale={locale} />}
 
           {currentPage === 'results' && (
             <ResultsPage
@@ -1294,6 +1122,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
+          </Suspense>
         </motion.main>
       </AnimatePresence>
 
@@ -1301,6 +1130,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {!isQrFeedbackPage && (
         <Footer
           locale={locale}
+          dictionary={d}
           onNavigate={goToPage}
           onOpenAppointment={() => handleOpenAppointmentWithService()}
           currentPage={currentPage}
@@ -1311,6 +1141,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         <ClinicAiChat locale={locale} context={clinicAiContext} />
       )}
 
+    </div>
+  );
+}
+
+/** Shown for the split second a route's code chunk is downloading. */
+function PageLoadingFallback() {
+  return (
+    <div className="min-h-[60vh] flex items-start justify-center pt-24" aria-busy="true">
+      <div className="h-1 w-40 overflow-hidden rounded-full bg-brand-sectiongray">
+        <div className="app-loading-bar__fill h-full w-1/3 bg-brand-gold" />
+      </div>
     </div>
   );
 }

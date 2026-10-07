@@ -322,7 +322,7 @@ export default function HomeServicesPromoCarousel({
   locale,
   appointmentLabel,
   clientCount = 12000,
-  doctorsCount = 20,
+  doctorsCount,
   onNavigate,
 }: HomeServicesPromoCarouselProps) {
   const labels = useMemo(() => getPromoCarouselLabels(locale), [locale]);
@@ -338,7 +338,7 @@ export default function HomeServicesPromoCarousel({
       aria-label={labels.aria}
     >
       <img
-        src="/hero-dermatology-bg.png"
+        src="/hero-dermatology-bg.webp"
         alt=""
         aria-hidden
         className="absolute inset-0 h-full w-full object-cover object-center"
@@ -408,7 +408,7 @@ export default function HomeServicesPromoCarousel({
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-extrabold text-brand-text-primary tabular-nums leading-none">
-                      {formatStatCount(doctorsCount)}
+                      {doctorsCount ? formatStatCount(doctorsCount) : '—'}
                     </p>
                     <p className="mt-1 text-xs sm:text-sm text-brand-text-muted font-medium">{copy.statDoctors}</p>
                   </div>

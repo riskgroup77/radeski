@@ -45,7 +45,7 @@ async function main() {
   if (!TARGET) throw new Error('liege-rade-skin branch missing in CLINIC_BRANCHES');
 
   const username = process.env.ADMIN_USERNAME?.trim() || 'admin';
-  const password = process.env.ADMIN_PASSWORD?.trim() || 'radeski2026';
+  const password = process.env.ADMIN_PASSWORD?.trim() || (() => { throw new Error('ADMIN_PASSWORD env var is required'); })();
 
   console.log('Logging in...');
   const token = (await withRetry('login', () => adminLogin({ username, password }))).access_token;

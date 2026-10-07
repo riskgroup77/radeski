@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import * as Icons from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Maximize2, Search, SearchX, X } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import MediaImage from './MediaImage';
@@ -147,7 +147,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
         {/* Search and Category Quick Filters */}
         <div className="mb-10 flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative w-full md:max-w-md">
-            <Icons.Search className="absolute left-3 top-3.5 w-4.5 h-4.5 text-brand-text-muted" />
+            <Search className="absolute left-3 top-3.5 w-4.5 h-4.5 text-brand-text-muted" />
             <input
               id="service-search"
               type="text"
@@ -243,7 +243,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                       className="mb-4 text-xs text-brand-gold hover:text-brand-gold-dark font-bold inline-flex items-center gap-1 cursor-pointer"
                     >
                       <span>{d.viewDetails}</span>
-                      <Icons.ArrowUpRight className="w-3.5 h-3.5" />
+                      <ArrowUpRight className="w-3.5 h-3.5" />
                     </button>
                   )}
 
@@ -269,7 +269,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                               className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-all cursor-pointer"
                               aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить' : 'Expand'}
                             >
-                              <Icons.Maximize2 className="w-4 h-4 text-white drop-shadow-md" />
+                              <Maximize2 className="w-4 h-4 text-white drop-shadow-md" />
                             </button>
                           </div>
                         ) : (
@@ -285,7 +285,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                             {sub.description[locale]}
                           </span>
                         </div>
-                        <Icons.ChevronRight className="w-4 h-4 text-brand-text-muted group-hover/sub:text-brand-gold group-hover/sub:translate-x-0.5 transition-all shrink-0 mt-1" />
+                        <ChevronRight className="w-4 h-4 text-brand-text-muted group-hover/sub:text-brand-gold group-hover/sub:translate-x-0.5 transition-all shrink-0 mt-1" />
                       </button>
                     ))}
                   </div>
@@ -295,7 +295,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                     className="mt-5 w-full py-2.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-xs rounded-xl active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm shadow-brand-gold/15"
                   >
                     <span>{d.appointmentBtn}</span>
-                    <Icons.ArrowUpRight className="w-3.5 h-3.5" />
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </motion.div>
@@ -305,7 +305,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
         {/* Simple Fallback */}
         {filteredCategories.length === 0 && (
           <div className="text-center py-16 bg-brand-white rounded-2xl border border-brand-sectiongray">
-            <Icons.SearchX className="w-12 h-12 text-brand-text-muted mx-auto mb-4" />
+            <SearchX className="w-12 h-12 text-brand-text-muted mx-auto mb-4" />
             <p className="text-brand-text-muted text-sm">
               {locale === 'uz' ? "Hech qanday xizmat topilmadi." : 
                locale === 'ru' ? "Услуги не найдены." : 
@@ -334,7 +334,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
               className="absolute top-4 right-4 text-white hover:text-slate-300 p-2.5 hover:bg-white/10 rounded-full transition-all z-10"
               aria-label={locale === 'uz' ? 'Yopish' : locale === 'ru' ? 'Закрыть' : 'Close'}
             >
-              <Icons.X className="w-6 h-6" />
+              <X className="w-6 h-6" />
             </button>
 
             {lightboxIndex >= 0 && categoriesWithImages.length > 1 && (
@@ -372,7 +372,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                     className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all"
                     aria-label={locale === 'uz' ? 'Oldingi rasm' : locale === 'ru' ? 'Предыдущее' : 'Previous'}
                   >
-                    <Icons.ChevronLeft className="w-6 h-6" />
+                    <ChevronLeft className="w-6 h-6" />
                   </button>
                   <button
                     type="button"
@@ -380,7 +380,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                     className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-all"
                     aria-label={locale === 'uz' ? 'Keyingi rasm' : locale === 'ru' ? 'Следующее' : 'Next'}
                   >
-                    <Icons.ChevronRight className="w-6 h-6" />
+                    <ChevronRight className="w-6 h-6" />
                   </button>
                 </>
               )}

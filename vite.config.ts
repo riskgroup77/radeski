@@ -5,7 +5,7 @@ import {defineConfig, loadEnv} from 'vite';
 import { clinicChatPlugin } from './server/viteChatPlugin';
 import { loadProjectEnv } from './server/loadEnv';
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
   loadProjectEnv(loadEnv(mode, process.cwd(), ''));
 
   // Mirrors the nginx setup on radeski.uz so dev and production share one code path.
@@ -22,6 +22,10 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
+    },
+    build: {
+      // The SSR bundle (build-time prerender) needs no copy of public/ (hundreds of MB of media).
+      copyPublicDir: !isSsrBuild,
     },
     server: {
       port: 3000,

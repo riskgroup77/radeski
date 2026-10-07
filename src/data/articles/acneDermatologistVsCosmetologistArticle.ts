@@ -563,11 +563,11 @@ export const ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-08-13',
-  image: '/articles/adult-acne-cover.png',
+  image: '/articles/adult-acne-cover.webp',
   images: {
-    uz: '/articles/adult-acne-cover.png',
-    ru: '/articles/adult-acne-cover.png',
-    en: '/articles/adult-acne-cover.png',
+    uz: '/articles/adult-acne-cover.webp',
+    ru: '/articles/adult-acne-cover.webp',
+    en: '/articles/adult-acne-cover.webp',
   },
   views: 0,
 };

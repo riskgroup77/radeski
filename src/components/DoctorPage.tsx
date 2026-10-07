@@ -31,6 +31,8 @@ interface DoctorPageProps {
   dictionary?: Record<string, string>;
   onBackToList: () => void;
   onOpenAppointment: () => void;
+  /** Doctors are still loading — show a placeholder instead of "not found". */
+  loading?: boolean;
 }
 
 function ItemChips({ items, compact = false }: { items: string[]; compact?: boolean }) {
@@ -408,10 +410,30 @@ export default function DoctorPage({
   dictionary,
   onBackToList,
   onOpenAppointment,
+  loading = false,
 }: DoctorPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const doctor = doctors.find((doc) => doc.id === doctorId) ?? null;
   const profile = doctor?.profile?.[locale];
+
+  if (!doctor && loading) {
+    return (
+      <section className="py-16 bg-brand-white min-h-screen" aria-busy="true">
+        <div className="site-container max-w-4xl">
+          <div className="flex flex-col md:flex-row gap-8 animate-pulse">
+            <div className="w-full md:w-[38%] aspect-[4/5] rounded-2xl bg-brand-sectiongray" />
+            <div className="flex-1 space-y-4 pt-2">
+              <div className="h-4 w-32 rounded bg-brand-sectiongray" />
+              <div className="h-8 w-3/4 rounded bg-brand-sectiongray" />
+              <div className="h-4 w-full rounded bg-brand-sectiongray" />
+              <div className="h-4 w-5/6 rounded bg-brand-sectiongray" />
+              <div className="h-4 w-2/3 rounded bg-brand-sectiongray" />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!doctor) {
     return (

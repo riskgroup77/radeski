@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
-import ReactMarkdown from 'react-markdown';
+import { Suspense, lazy, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
   Bot,
@@ -16,36 +15,14 @@ import { getChatUiLabels, getQuickPrompts, getWelcomeMessage } from '../types/ch
 import { useClinicAiChat } from '../hooks/useClinicAiChat';
 import { openAppointmentBooking } from '../config/links';
 
+// react-markdown (+ micromark/unified, ~250 KB) is only needed once an answer arrives.
+const ChatMarkdown = lazy(() => import('./ChatMarkdown'));
+
 interface ClinicAiChatProps {
   locale: Locale;
   context?: ClinicAiContext;
 }
 
-const markdownComponents = {
-  p: ({ children }: { children?: ReactNode }) => (
-    <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>
-  ),
-  ul: ({ children }: { children?: ReactNode }) => (
-    <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>
-  ),
-  ol: ({ children }: { children?: ReactNode }) => (
-    <ol className="list-decimal pl-4 mb-2 space-y-1">{children}</ol>
-  ),
-  li: ({ children }: { children?: ReactNode }) => <li className="leading-relaxed">{children}</li>,
-  strong: ({ children }: { children?: ReactNode }) => (
-    <strong className="font-semibold text-brand-text-primary">{children}</strong>
-  ),
-  a: ({ href, children }: { href?: string; children?: ReactNode }) => (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-brand-gold underline underline-offset-2 hover:text-brand-gold-dark"
-    >
-      {children}
-    </a>
-  ),
-};
 
 /** Welcome bubble appears after a short delay so it never covers the page on first paint. */
 const WELCOME_PREVIEW_DELAY_MS = 6000;
@@ -206,9 +183,11 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
                         <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
                       ) : (
                         <div className="prose-chat">
-                          <ReactMarkdown components={markdownComponents}>
-                            {message.content}
-                          </ReactMarkdown>
+                          <Suspense
+                            fallback={<p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>}
+                          >
+                            <ChatMarkdown>{message.content}</ChatMarkdown>
+                          </Suspense>
                         </div>
                       )}
                     </div>

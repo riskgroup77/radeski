@@ -1,47 +1,32 @@
 import { useCallback, useEffect, useState } from 'react';
 import { publicApi } from '../api';
-import {
-  mapArticleListItemFromApi,
-  mapDoctorFromApi,
-  mapPriceFromApi,
-  mapServiceCategoryFromApi,
-} from '../api/mappers';
-import { enrichServiceCategories } from '../utils/enrichServices';
-import { enrichArticles } from '../utils/enrichArticles';
-import { mergeArticlesWithStaticCatalog } from '../utils/articles';
-import { enrichDoctors } from '../utils/enrichDoctors';
-import { enrichPrices } from '../utils/enrichPrices';
+import { loadPublicData, type PublicDataOptions } from '../api/publicDataSource';
+import { transformClinicData } from '../api/clinicDataTransform';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
-import { ARTICLES, DOCTORS, PRICES, SERVICE_CATEGORIES } from '../data';
-import { hydrateServiceAboutFromSiteTexts } from '../data/serviceAboutCatalog';
+import { ARTICLES } from '../data';
 import { normalizeArticleViews } from '../utils/articleViews';
-import { sortDoctorsFeaturedFirst } from '../utils/doctors';
+import { dictionaryOverridesFromSiteTexts, type DictionaryOverrides } from '../data/dictionaryOverrides';
 
 interface ClinicDataState {
   doctors: Doctor[];
   serviceCategories: ServiceCategory[];
   prices: PriceItem[];
   articles: Article[];
+  /** Clinic texts edited in the admin panel (address, hours) — applied over DICTIONARY. */
+  dictionaryOverrides: DictionaryOverrides;
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
   updateArticleViews: (match: { id?: string; slug?: string }, views: number) => void;
 }
 
-async function safeApi<T>(label: string, fn: () => Promise<T>, fallback: T): Promise<T> {
-  try {
-    return await fn();
-  } catch (error) {
-    console.warn(`[clinic-data] ${label} failed, using fallback`, error);
-    return fallback;
-  }
-}
-
-export function useClinicData(): ClinicDataState {
+export function useClinicData(options: PublicDataOptions = {}): ClinicDataState {
+  const live = Boolean(options.live);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
   const [prices, setPrices] = useState<PriceItem[]>([]);
   const [articles, setArticles] = useState<Article[]>(ARTICLES);
+  const [dictionaryOverrides, setDictionaryOverrides] = useState<DictionaryOverrides>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -56,52 +41,33 @@ export function useClinicData(): ClinicDataState {
       articlesRes,
       siteTextsRes,
     ] = await Promise.all([
-      safeApi('doctors', () => publicApi.getDoctors(), []),
-      safeApi('services', () => publicApi.getServices(), []),
-      safeApi('prices', () => publicApi.getPrices(), []),
-      safeApi('articles', () => publicApi.getArticles(), []),
-      safeApi('site-texts', () => publicApi.getSiteTexts(), []),
+      loadPublicData('doctors', () => publicApi.getDoctors(), [], { live }),
+      loadPublicData('services', () => publicApi.getServices(), [], { live }),
+      loadPublicData('prices', () => publicApi.getPrices(), [], { live }),
+      loadPublicData('articles', () => publicApi.getArticles(), [], { live }),
+      loadPublicData('siteTexts', () => publicApi.getSiteTexts(), [], { live }),
     ]);
 
-    const apiFailed =
-      doctorsRes.length === 0 &&
-      servicesRes.length === 0 &&
-      pricesRes.length === 0 &&
-      articlesRes.length === 0;
+    const data = transformClinicData({
+      doctors: doctorsRes,
+      services: servicesRes,
+      prices: pricesRes,
+      articles: articlesRes,
+      siteTexts: siteTextsRes,
+    });
 
-    if (apiFailed) {
-      setError('API vaqtincha ishlamayapti — mahalliy ma\'lumotlar ko\'rsatilmoqda');
+    if (data.apiFailed) {
+      setError("API vaqtincha ishlamayapti — mahalliy ma'lumotlar ko'rsatilmoqda");
     }
 
-    hydrateServiceAboutFromSiteTexts(siteTextsRes);
-
-    setDoctors(
-      sortDoctorsFeaturedFirst(
-        doctorsRes.length > 0
-          ? enrichDoctors(doctorsRes.map(mapDoctorFromApi))
-          : DOCTORS,
-      ),
-    );
-
-    const mappedServices = (
-      servicesRes.length > 0
-        ? servicesRes.map(mapServiceCategoryFromApi)
-        : SERVICE_CATEGORIES
-    ).sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
-    setServiceCategories(enrichServiceCategories(mappedServices));
-
-    const mappedPrices = pricesRes.length > 0 ? pricesRes.map(mapPriceFromApi) : PRICES;
-    setPrices(enrichPrices(mappedPrices));
-
-    const mappedArticles = articlesRes.map(mapArticleListItemFromApi);
-    const mergedArticles =
-      mappedArticles.length > 0
-        ? mergeArticlesWithStaticCatalog(mappedArticles)
-        : ARTICLES;
-    setArticles(enrichArticles(mergedArticles));
+    setDoctors(data.doctors);
+    setServiceCategories(data.serviceCategories);
+    setPrices(data.prices);
+    setArticles(data.articles);
+    setDictionaryOverrides(dictionaryOverridesFromSiteTexts(siteTextsRes));
 
     setLoading(false);
-  }, []);
+  }, [live]);
 
   const updateArticleViews = useCallback((match: { id?: string; slug?: string }, views: number) => {
     const normalizedViews = normalizeArticleViews(views);
@@ -132,6 +98,7 @@ export function useClinicData(): ClinicDataState {
     serviceCategories,
     prices,
     articles,
+    dictionaryOverrides,
     loading,
     error,
     refetch,

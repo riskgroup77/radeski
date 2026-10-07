@@ -3,7 +3,7 @@
  *
  * Usage:
  *   set ADMIN_USERNAME=admin
- *   set ADMIN_PASSWORD=radeski2026
+ *   set ADMIN_PASSWORD=<admin parol>
  *   npm run seed:cms
  */
 import 'dotenv/config';
@@ -221,7 +221,7 @@ async function seedVideos(token: string) {
 
 async function main() {
   const username = process.env.ADMIN_USERNAME?.trim() || 'admin';
-  const password = process.env.ADMIN_PASSWORD?.trim() || 'radeski2026';
+  const password = process.env.ADMIN_PASSWORD?.trim() || (() => { throw new Error('ADMIN_PASSWORD env var is required'); })();
 
   console.log('Logging in...');
   const tokenRes = await adminLogin({ username, password });

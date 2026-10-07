@@ -78,7 +78,7 @@ async function main() {
     await withRetry('login', () =>
       adminLogin({
         username: process.env.ADMIN_USERNAME?.trim() || 'admin',
-        password: process.env.ADMIN_PASSWORD?.trim() || 'radeski2026',
+        password: process.env.ADMIN_PASSWORD?.trim() || (() => { throw new Error('ADMIN_PASSWORD env var is required'); })(),
       }),
     )
   ).access_token;

@@ -9,14 +9,16 @@ import { CLINIC_MAP_EMBED_URL, CLINIC_SOCIAL_LINKS } from '../config/links';
 import { handleHomeLogoClick } from '../utils/scrollToTop';
 
 interface FooterProps {
+  /** DICTIONARY merged with admin-edited clinic texts (working hours…). */
+  dictionary?: Record<string, string>;
   locale: Locale;
   onNavigate: (page: PageId) => void;
   onOpenAppointment: () => void;
   currentPage?: PageId;
 }
 
-export default function Footer({ locale, onNavigate, onOpenAppointment, currentPage }: FooterProps) {
-  const d = DICTIONARY[locale];
+export default function Footer({ locale, onNavigate, onOpenAppointment, currentPage, dictionary }: FooterProps) {
+  const d = { ...DICTIONARY[locale], ...dictionary };
   const isAdmin = currentPage === 'admin';
 
   return (

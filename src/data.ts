@@ -1,59 +1,4 @@
 import { ServiceCategory, Doctor, Article } from './types';
-import { ACNE_ARTICLE } from './data/articles/acneArticle';
-import { POST_ACNE_ARTICLE } from './data/articles/postAcneArticle';
-import { ROSACEA_ARTICLE } from './data/articles/rosaceaArticle';
-import { PRP_HAIR_ARTICLE } from './data/articles/prpHairArticle';
-import { PRP_LAB_TESTS_ARTICLE } from './data/articles/prpLabTestsArticle';
-import { TRICHOLOGIST_TRICHOSCOPY_ARTICLE } from './data/articles/trichologistTrichoscopyArticle';
-import { TONGUE_SCC_ARTICLE } from './data/articles/tongueSccArticle';
-import { PENILE_SCC_ARTICLE } from './data/articles/penileSccArticle';
-import { BASAL_CELL_CARCINOMA_ARTICLE } from './data/articles/basalCellCarcinomaArticle';
-import { PLASMAPHERESIS_ARTICLE } from './data/articles/plasmapheresisArticle';
-import { DEKA_CO2_ARTICLE } from './data/articles/dekaCo2LaserArticle';
-import { DEKA_MOVEO_ARTICLE } from './data/articles/dekaMoveoEpilationArticle';
-import { DEKA_MOVEO_FERGANA_FAQ_ARTICLE } from './data/articles/dekaMoveoFerganaFaqArticle';
-import { HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE } from './data/articles/hairTransplantContraindicationsArticle';
-import { VITILIGO_DAAVLIN_ARTICLE } from './data/articles/vitiligoDaavlinArticle';
-import { PSORIASIS_DAAVLIN_KOKAND_ARTICLE } from './data/articles/psoriasisDaavlinKokandArticle';
-import { IPL_THERAPY_ARTICLE } from './data/articles/iplTherapyArticle';
-import { IPL_PHOTOTHERAPY_RADESKI_ARTICLE } from './data/articles/iplPhototherapyRadeskiArticle';
-import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from './data/articles/pediatricWartsCo2DekaArticle';
-import { ADULT_ACNE_ARTICLE } from './data/articles/adultAcneArticle';
-import { LASER_SCAR_RESURFACING_ARTICLE } from './data/articles/laserScarResurfacingArticle';
-import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './data/articles/acneDermatologistVsCosmetologistArticle';
-import { ROSACEA_RADESKI_ARTICLE } from './data/articles/rosaceaRadeskiArticle';
-import { MOLLUSCUM_CONTAGIOSUM_ARTICLE } from './data/articles/molluscumContagiosumArticle';
-import { PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE } from './data/articles/pediatricWartsLaserRadeskiArticle';
-import { HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE } from './data/articles/hollywoodSpectraPigmentationArticle';
-import { DERMA_V_VASCULAR_ARTICLE } from './data/articles/dermaVVascularArticle';
-import { ATOPIC_DERMATITIS_ARTICLE } from './data/articles/atopicDermatitisArticle';
-import { HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE } from './data/articles/hollywoodSpectraEyebrowTattooArticle';
-import { LASEMD_ULTRA_KOKAND_ARTICLE } from './data/articles/lasemdUltraKokandArticle';
-import { THULIUM_LASER_HAIR_KOKAND_ARTICLE } from './data/articles/thuliumLaserHairKokandArticle';
-import { ONYCHOCRYPTOSIS_KOKAND_ARTICLE } from './data/articles/onychocryptosisKokandArticle';
-import { IPL_LUMECCA_PIGMENTATION_ARTICLE } from './data/articles/iplLumeccaPigmentationArticle';
-import { DERMA_V_REDNESS_ARTICLE } from './data/articles/dermaVRednessArticle';
-import { TETRA_PRO_LIFTING_ARTICLE } from './data/articles/tetraProLiftingArticle';
-import { HOLLYWOOD_SPECTRA_PORES_ARTICLE } from './data/articles/hollywoodSpectraPoresArticle';
-import { MORPHEUS8_RF_LIFTING_ARTICLE } from './data/articles/morpheus8RfLiftingArticle';
-import { DEKA_CO2_SCARS_ARTICLE } from './data/articles/dekaCo2ScarsArticle';
-import { LAZER_EPILYATSIYA_MISTAKES_ARTICLE } from './data/articles/lazerEpilyatsiyaMistakesArticle';
-import { ALOPECIA_AREATA_KLINIK_HOLAT_ARTICLE } from './data/articles/alopeciaAreataKlinikHolatArticle';
-import { FIZIOTERAPIYA_DERMATOVENEREOLOGIYA_ARTICLE } from './data/articles/fizioterapiyaDermatovenereologiyaArticle';
-import { BIOREVITALIZATSIYA_RADESKI_ARTICLE } from './data/articles/biorevitalizatsiyaRadeskiArticle';
-import { BOTULINOTERAPIYA_RADESKI_ARTICLE } from './data/articles/botulinoterapiyaRadeskiArticle';
-import { DERMATOPATOLOGIYA_RADESKI_ARTICLE } from './data/articles/dermatopatologiyaRadeskiArticle';
-import { PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE } from './data/articles/photoFinderDiagnostikaRadeskiArticle';
-import { DNEVNOJ_STACIONAR_RADESKI_ARTICLE } from './data/articles/dnevnojStacionarRadeskiArticle';
-import { IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE } from './data/articles/immunobiologiyaTerapiyaRadeskiArticle';
-import { KONTURnaya_GUBY_RADESKI_ARTICLE } from './data/articles/konturnayaGubyRadeskiArticle';
-import { SOCH_TOKILISHI_PROFILAKTIKA_RADESKI_ARTICLE } from './data/articles/sochTokilishiProfilaktikaRadeskiArticle';
-import { PSORIAZ_KLINIK_KEYS_BAHRIDINOV_RADESKI_ARTICLE } from './data/articles/psoriazKlinikKeysBahridinovRadeskiArticle';
-import { KLINIKA_PATOLOGII_NOGTEJ_RADESKI_ARTICLE } from './data/articles/klinikaPatologiiNogtejRadeskiArticle';
-import { KLINICHESKOE_ISSLEDOVANIE_RADESKI_ARTICLE } from './data/articles/klinicheskoeIssledovanieRadeskiArticle';
-import { KONTUR_PLASTIKA_RADESKI_ARTICLE } from './data/articles/konturPlastikaRadeskiArticle';
-import { LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE } from './data/articles/lazerBiorevitalizatsiyaRadeskiArticle';
-import { NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE } from './data/articles/normalVsPathologicalHairLossRadeskiArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -466,7 +411,7 @@ export const DOCTORS: Doctor[] = [
       ru: "Ташкентская Медицинская Академия (ТМА), Московский институт дерматовенерологии, Дерматологическая Клиника Мюнхена.",
       en: "Tashkent Medical Academy, Moscow Institute of Dermatovenerology, Munich Clinic of Dermatology."
     },
-    photo: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600"
+    photo: "/uploads/doctors/5aeb1fb3719d4f14aed004db86dbca8b.jpg"
   },
   {
     id: "kodirova-dilafruzxon",
@@ -495,7 +440,7 @@ export const DOCTORS: Doctor[] = [
       ru: "Андижанский Государственный Медицинский Институт, Санкт-Петербургская академия эстетической медицины.",
       en: "Andijan State Medical Institute, Saint Petersburg Academy of Aesthetic Medicine."
     },
-    photo: "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&q=80&w=600"
+    photo: "/uploads/doctors/8bdd6d7f153f427dbd4d5b83e1028869.jpg"
   },
   {
     id: "yoqubov-farrux",
@@ -524,7 +469,7 @@ export const DOCTORS: Doctor[] = [
       ru: "Ташкентская Медицинская Академия, Специализированный курс в Киевском институте онкологии.",
       en: "Tashkent Medical Academy, Kyiv Oncological Institute Specialized Course."
     },
-    photo: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=600"
+    photo: "/uploads/doctors/07fb22ec5dee44cc8b8bafeadfc40939.jpg"
   },
   {
     id: "mangasaryan-lorena",
@@ -553,7 +498,7 @@ export const DOCTORS: Doctor[] = [
       ru: "Ташкентский Государственный Стоматологический Институт, Московский институт косметологии.",
       en: "Tashkent State Dental Institute, Moscow Institute of Cosmetology Postgrad."
     },
-    photo: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=600"
+    photo: "/uploads/doctors/0d43c451ff6e4a0e8a36faa55155c402.jpg"
   },
   {
     id: "kamolova-barno",
@@ -582,7 +527,7 @@ export const DOCTORS: Doctor[] = [
       ru: "Ферганский медицинский институт общественного здоровья, Курсы повышения квалификации в Сеуле, Южная Корея.",
       en: "Fergana Public Health Medical Institute, Aesthetic Cosmetology Practicum in Seoul, South Korea."
     },
-    photo: "https://images.unsplash.com/photo-1622902098748-028726098130?auto=format&fit=crop&q=80&w=600"
+    photo: "/uploads/doctors/e7122e32fff143dfacda4b43b1fcd4f5.jpeg"
   },
   {
     id: "abdvaliyev-begali",
@@ -611,7 +556,7 @@ export const DOCTORS: Doctor[] = [
       ru: "Андижанский Государственный Медицинский Институт, Профессиональная переподготовка по трихологии в Москве.",
       en: "Andijan State Medical Institute, Moscow Advanced Academy of Trichology Certification."
     },
-    photo: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=600"
+    photo: "/uploads/doctors/c2ee369fef4c4226b64c2ed230f3c187.jpg"
   }
 ];
 
@@ -1042,60 +987,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
   }
 ];
 
-export const ARTICLES: Article[] = [
-  ACNE_ARTICLE,
-  POST_ACNE_ARTICLE,
-  ROSACEA_ARTICLE,
-  PRP_HAIR_ARTICLE,
-  PRP_LAB_TESTS_ARTICLE,
-  TRICHOLOGIST_TRICHOSCOPY_ARTICLE,
-  TONGUE_SCC_ARTICLE,
-  PENILE_SCC_ARTICLE,
-  BASAL_CELL_CARCINOMA_ARTICLE,
-  PLASMAPHERESIS_ARTICLE,
-  DEKA_CO2_ARTICLE,
-  DEKA_MOVEO_ARTICLE,
-  DEKA_MOVEO_FERGANA_FAQ_ARTICLE,
-  HAIR_TRANSPLANT_CONTRAINDICATIONS_ARTICLE,
-  VITILIGO_DAAVLIN_ARTICLE,
-  PSORIASIS_DAAVLIN_KOKAND_ARTICLE,
-  IPL_THERAPY_ARTICLE,
-  IPL_PHOTOTHERAPY_RADESKI_ARTICLE,
-  PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
-  ADULT_ACNE_ARTICLE,
-  LASER_SCAR_RESURFACING_ARTICLE,
-  ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE,
-  ROSACEA_RADESKI_ARTICLE,
-  MOLLUSCUM_CONTAGIOSUM_ARTICLE,
-  PEDIATRIC_WARTS_LASER_RADESKI_ARTICLE,
-  HOLLYWOOD_SPECTRA_PIGMENTATION_ARTICLE,
-  DERMA_V_VASCULAR_ARTICLE,
-  ATOPIC_DERMATITIS_ARTICLE,
-  HOLLYWOOD_SPECTRA_EYEBROW_TATTOO_ARTICLE,
-  LASEMD_ULTRA_KOKAND_ARTICLE,
-  THULIUM_LASER_HAIR_KOKAND_ARTICLE,
-  ONYCHOCRYPTOSIS_KOKAND_ARTICLE,
-  IPL_LUMECCA_PIGMENTATION_ARTICLE,
-  DERMA_V_REDNESS_ARTICLE,
-  TETRA_PRO_LIFTING_ARTICLE,
-  HOLLYWOOD_SPECTRA_PORES_ARTICLE,
-  MORPHEUS8_RF_LIFTING_ARTICLE,
-  DEKA_CO2_SCARS_ARTICLE,
-  LAZER_EPILYATSIYA_MISTAKES_ARTICLE,
-  ALOPECIA_AREATA_KLINIK_HOLAT_ARTICLE,
-  FIZIOTERAPIYA_DERMATOVENEREOLOGIYA_ARTICLE,
-  BIOREVITALIZATSIYA_RADESKI_ARTICLE,
-  BOTULINOTERAPIYA_RADESKI_ARTICLE,
-  DERMATOPATOLOGIYA_RADESKI_ARTICLE,
-  PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE,
-  DNEVNOJ_STACIONAR_RADESKI_ARTICLE,
-  IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE,
-  KONTURnaya_GUBY_RADESKI_ARTICLE,
-  SOCH_TOKILISHI_PROFILAKTIKA_RADESKI_ARTICLE,
-  PSORIAZ_KLINIK_KEYS_BAHRIDINOV_RADESKI_ARTICLE,
-  KLINIKA_PATOLOGII_NOGTEJ_RADESKI_ARTICLE,
-  KLINICHESKOE_ISSLEDOVANIE_RADESKI_ARTICLE,
-  KONTUR_PLASTIKA_RADESKI_ARTICLE,
-  LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE,
-  NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE,
-];
+/**
+ * Static article cards (title, summary, image…) — generated from src/data/articles by
+ * scripts/buildArticleIndex.ts, so the main bundle no longer carries every article body.
+ * Full texts load with the article page (see utils/articleContentFull.ts).
+ */
+export { STATIC_ARTICLES as ARTICLES } from './data/articleIndex.generated';

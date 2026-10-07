@@ -1,4 +1,5 @@
 import { apiRequest, getApiUrl } from './client';
+import { fetchWithRateLimitRetry } from './publicDataSource';
 import {
   ApiDoctor,
   ApiServiceCategory,
@@ -57,7 +58,9 @@ export async function getArticleBySlug(slug: string): Promise<ApiArticle> {
   const pending = inflightArticleBySlug.get(key);
   if (pending) return pending;
 
-  const promise = apiRequest<ApiArticle>(`/api/articles/${encodeURIComponent(key)}`).finally(() => {
+  const promise = fetchWithRateLimitRetry(() =>
+    apiRequest<ApiArticle>(`/api/articles/${encodeURIComponent(key)}`),
+  ).finally(() => {
     inflightArticleBySlug.delete(key);
   });
   inflightArticleBySlug.set(key, promise);

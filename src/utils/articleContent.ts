@@ -1,11 +1,11 @@
-import type { Article, ArticleRichContent, Locale } from '../types';
-import {
-  ARTICLE_RICH_CATALOG,
-  DISCLAIMER,
-  findArticleCatalogKey,
-} from '../data/articleRichCatalog';
-
-const LOCALES: Locale[] = ['uz', 'ru', 'en'];
+/**
+ * Article helpers for cards, lists and SEO. They read the lightweight generated index
+ * (summary, tags, word counts) — the full bodies live in articleContentFull.ts, which only
+ * the article page loads.
+ */
+import type { Article, Locale } from '../types';
+import { DISCLAIMER, findArticleCatalogKey } from '../data/articleCatalogKeys';
+import { ARTICLE_CATALOG_LIGHT, type ArticleCatalogLight } from '../data/articleIndex.generated';
 
 const SECTION_LABELS: Record<
   Locale,
@@ -60,7 +60,7 @@ export function getArticleDisclaimer(locale: Locale): string {
   return DISCLAIMER[locale];
 }
 
-function isSubstantialText(text: string | undefined | null, minLength = 400): boolean {
+export function isSubstantialText(text: string | undefined | null, minLength = 400): boolean {
   return Boolean(text && text.trim().length >= minLength);
 }
 
@@ -104,28 +104,7 @@ export function estimateReadingMinutes(text: string): number {
   return Math.max(1, Math.round(words / 180));
 }
 
-export function resolveArticleRichContent(
-  article: Article,
-  locale: Locale,
-): ArticleRichContent {
-  const catalogKey = findArticleCatalogKey(article);
-  const catalog = ARTICLE_RICH_CATALOG[catalogKey] ?? ARTICLE_RICH_CATALOG['general-dermatology'];
-  const fromCatalog = catalog[locale];
-  const existing = article.richContent?.[locale];
-
-  return {
-    keyTakeaways:
-      existing?.keyTakeaways?.length ? existing.keyTakeaways : fromCatalog.keyTakeaways,
-    faq: existing?.faq?.length ? existing.faq : fromCatalog.faq,
-    tags: existing?.tags?.length ? existing.tags : fromCatalog.tags,
-    whenToSeeDoctor:
-      existing?.whenToSeeDoctor?.length
-        ? existing.whenToSeeDoctor
-        : fromCatalog.whenToSeeDoctor,
-  };
-}
-
-function isStructuredArticleMarkdown(text: string): boolean {
+export function isStructuredArticleMarkdown(text: string): boolean {
   return /^##\s+/m.test(text);
 }
 
@@ -155,7 +134,7 @@ export function formatArticleHashtags(tags: string[]): string[] {
   return result;
 }
 
-function appendHashtagSection(body: string, tags: string[], locale: Locale): string {
+export function appendHashtagSection(body: string, tags: string[], locale: Locale): string {
   const hashtags = formatArticleHashtags(tags);
   if (!hashtags.length) return body;
 
@@ -184,35 +163,18 @@ export function stripArticleHashtagSection(body: string): string {
     .trimEnd();
 }
 
-export function resolveArticleBody(article: Article, locale: Locale): string {
-  const catalogKey = findArticleCatalogKey(article);
-  const catalog = ARTICLE_RICH_CATALOG[catalogKey] ?? ARTICLE_RICH_CATALOG['general-dermatology'];
-  const catalogBody = catalog[locale]?.body?.trim() || '';
-  const apiContent = article.content[locale]?.trim() || '';
+function getCatalogLight(article: Article, locale: Locale): ArticleCatalogLight {
+  const catalog =
+    ARTICLE_CATALOG_LIGHT[findArticleCatalogKey(article)] ?? ARTICLE_CATALOG_LIGHT['general-dermatology'];
+  return catalog[locale];
+}
 
-  const preferCatalog =
-    catalogBody.length > 0 &&
-    (!apiContent ||
-      !isStructuredArticleMarkdown(apiContent) ||
-      catalogBody.length > apiContent.length + 150);
-
-  let body = '';
-  if (preferCatalog) body = catalogBody;
-  else if (isSubstantialText(apiContent)) body = apiContent;
-  else if (catalogBody) body = catalogBody;
-  else {
-    const uzFallback = article.content.uz?.trim() || '';
-    body = uzFallback || ARTICLE_RICH_CATALOG['general-dermatology'][locale]?.body || '';
-  }
-
-  const tags = resolveArticleRichContent(article, locale).tags;
-  return appendHashtagSection(body, tags, locale);
+function countWords(text: string): number {
+  return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
 export function resolveArticleSummary(article: Article, locale: Locale): string {
-  const catalogKey = findArticleCatalogKey(article);
-  const catalog = ARTICLE_RICH_CATALOG[catalogKey] ?? ARTICLE_RICH_CATALOG['general-dermatology'];
-  const catalogSummary = catalog[locale]?.summary?.trim() || '';
+  const catalogSummary = getCatalogLight(article, locale)?.summary?.trim() || '';
   const apiSummary = article.summary[locale]?.trim() || '';
 
   if (catalogSummary && (!apiSummary || catalogSummary.length >= apiSummary.length + 20)) {
@@ -225,23 +187,42 @@ export function resolveArticleSummary(article: Article, locale: Locale): string 
 }
 
 export function resolveArticleTags(article: Article, locale: Locale): string[] {
-  return resolveArticleRichContent(article, locale).tags;
+  const existing = article.richContent?.[locale]?.tags;
+  return existing?.length ? existing : getCatalogLight(article, locale)?.tags ?? [];
 }
 
+/**
+ * Reading time from word counts — same choice of text as resolveArticleBody (catalog body vs
+ * API text, plus the appended hashtag block) without needing the bodies themselves.
+ */
 export function resolveArticleReadingMinutes(article: Article, locale: Locale): number {
-  const body = resolveArticleBody(article, locale);
-  const summary = resolveArticleSummary(article, locale);
-  return estimateReadingMinutes(`${summary}\n${body}`);
-}
+  const light = getCatalogLight(article, locale);
+  const apiContent = article.content[locale]?.trim() || '';
+  const catalogLength = light?.bodyLength ?? 0;
 
-export function buildArticleRichContentMap(
-  article: Article,
-): Partial<Record<Locale, ArticleRichContent>> {
-  const result: Partial<Record<Locale, ArticleRichContent>> = {};
+  const preferCatalog =
+    catalogLength > 0 &&
+    (!apiContent ||
+      !isStructuredArticleMarkdown(apiContent) ||
+      catalogLength > apiContent.length + 150);
 
-  for (const locale of LOCALES) {
-    result[locale] = resolveArticleRichContent(article, locale);
+  let bodyWords: number;
+  if (preferCatalog) bodyWords = light.bodyWords;
+  else if (isSubstantialText(apiContent)) bodyWords = countWords(stripArticleHashtagSection(apiContent));
+  else if (catalogLength > 0) bodyWords = light.bodyWords;
+  else {
+    const uzFallback = article.content.uz?.trim() || '';
+    bodyWords = uzFallback
+      ? countWords(stripArticleHashtagSection(uzFallback))
+      : ARTICLE_CATALOG_LIGHT['general-dermatology'][locale]?.bodyWords ?? 0;
   }
 
-  return result;
+  const hashtags = formatArticleHashtags(resolveArticleTags(article, locale));
+  // "<!--article-hashtags-->", "##", the heading and one word per hashtag.
+  const hashtagBlockWords = hashtags.length
+    ? 2 + countWords(SECTION_LABELS[locale].hashtags) + hashtags.length
+    : 0;
+
+  const summaryWords = countWords(resolveArticleSummary(article, locale));
+  return Math.max(1, Math.round((summaryWords + bodyWords + hashtagBlockWords) / 180));
 }

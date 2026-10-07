@@ -1,39 +1,32 @@
+import { ApiError } from './client';
 import { createReview } from './publicApi';
-import { adminLogin, patchReview } from './adminApi';
 import { mapReviewToCreatePayload } from './cmsMappers';
 import type { CustomerReview } from '../data/sitePagesContent';
 import type { ApiReviewOut } from './cmsTypes';
 
-function reviewPublishCredentials(): { username: string; password: string } {
-  const username =
-    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADMIN_USERNAME) ||
-    (typeof process !== 'undefined' ? process.env.ADMIN_USERNAME : undefined) ||
-    'admin';
-  const password =
-    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_ADMIN_PASSWORD) ||
-    (typeof process !== 'undefined' ? process.env.ADMIN_PASSWORD : undefined) ||
-    'radeski2026';
-
-  return {
-    username: String(username).trim() || 'admin',
-    password: String(password).trim() || 'radeski2026',
-  };
-}
-
 /**
- * Public review create always stores unpublished on the API.
- * Immediately publishes via admin so reviews appear on the site without manual approval.
+ * Saves a visitor review. Publishing happens on our server (POST /api/reviews/submit), which
+ * holds the admin credentials — the browser never sees them. If that endpoint is not
+ * reachable, the review is still saved and waits for moderation in the admin panel.
  */
-export async function submitAndPublishCustomerReview(
-  review: CustomerReview,
-): Promise<ApiReviewOut> {
-  const created = await createReview(mapReviewToCreatePayload({ ...review, published: true }));
+export async function submitAndPublishCustomerReview(review: CustomerReview): Promise<ApiReviewOut> {
+  const payload = mapReviewToCreatePayload({ ...review, published: true });
 
-  if (created.published) {
-    return created;
+  try {
+    const response = await fetch('/api/reviews/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (response.ok) return (await response.json()) as ApiReviewOut;
+    if (response.status === 400 || response.status === 429) {
+      const body = await response.json().catch(() => ({}));
+      throw new ApiError(response.status, body?.error ?? body, body?.error);
+    }
+    // 404/5xx: publishing service unavailable — fall through to a plain (moderated) submit.
+  } catch (error) {
+    if (error instanceof ApiError) throw error;
   }
 
-  const { username, password } = reviewPublishCredentials();
-  const { access_token } = await adminLogin({ username, password });
-  return patchReview(created.id, { published: true }, access_token);
+  return createReview(payload);
 }

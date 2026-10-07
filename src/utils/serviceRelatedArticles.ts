@@ -1,5 +1,5 @@
 import type { Article } from '../types';
-import { findArticleCatalogKey } from '../data/articleRichCatalog';
+import { findArticleCatalogKey } from '../data/articleCatalogKeys';
 import { filterPublicArticles } from './articles';
 
 /** Article catalog keys shown on service category pages (broad match). */

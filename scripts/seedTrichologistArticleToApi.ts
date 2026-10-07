@@ -8,10 +8,12 @@ import { mapArticleToCreatePayload } from '../src/api/mappers';
 import { TRICHOLOGIST_TRICHOSCOPY_ARTICLE } from '../src/data/articles/trichologistTrichoscopyArticle';
 import { enrichArticle } from '../src/utils/enrichArticles';
 import {
-  buildArticleRichContentMap,
-  resolveArticleBody,
   resolveArticleSummary,
 } from '../src/utils/articleContent';
+import {
+  buildArticleRichContentMap,
+  resolveArticleBody,
+} from '../src/utils/articleContentFull';
 
 const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 800);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
@@ -57,7 +59,7 @@ function buildSeedArticle() {
 
 async function main() {
   const username = process.env.ADMIN_USERNAME?.trim() || 'admin';
-  const password = process.env.ADMIN_PASSWORD?.trim() || 'radeski2026';
+  const password = process.env.ADMIN_PASSWORD?.trim() || (() => { throw new Error('ADMIN_PASSWORD env var is required'); })();
 
   console.log('Logging in...');
   const token = (await withRetry('login', () => adminLogin({ username, password }))).access_token;

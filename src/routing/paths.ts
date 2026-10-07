@@ -26,7 +26,8 @@ export type PageId =
   | 'terms'
   | 'privacy'
   | 'admin'
-  | 'fikr';
+  | 'fikr'
+  | 'not-found';
 
 export const PUBLIC_PAGES: PageId[] = [
   'home',
@@ -250,7 +251,12 @@ export function getPageFromPathname(pathname: string): PageId {
     return pageSegment;
   }
 
-  return 'home';
+  // Promo landings render on top of the home shell (see App.tsx).
+  if (pageSegment === 'promo') return 'home';
+
+  // Anything else is not a page of this site — render a real 404 (noindex) instead of
+  // silently showing the home page, which Google indexed as endless duplicates.
+  return 'not-found';
 }
 
 export function serviceCategoryPath(locale: Locale, categoryId: string): string {

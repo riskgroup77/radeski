@@ -50,7 +50,7 @@ const UPDATES = [
 
 async function main() {
   const username = process.env.ADMIN_USERNAME || 'admin';
-  const password = process.env.ADMIN_PASSWORD || 'radeski2026';
+  const password = process.env.ADMIN_PASSWORD || (() => { throw new Error('ADMIN_PASSWORD env var is required'); })();
   const tokenRes = await adminLogin({ username, password });
   const token = tokenRes.access_token;
 

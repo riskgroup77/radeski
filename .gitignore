@@ -34,3 +34,7 @@ public/videos/*.mp4
 .tmp-*.json
 .video-frames/
 openapi-temp.json
+
+# Generated at build time / by cron (scripts/buildSiteSnapshot.mjs)
+public/data/site-snapshot.json
+dist-ssr/

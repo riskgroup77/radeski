@@ -1,5 +1,35 @@
-import * as Icons from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import {
+  Activity,
+  Baby,
+  BookHeart,
+  CircleDot,
+  ClipboardList,
+  Dna,
+  Droplets,
+  FlaskConical,
+  Footprints,
+  GraduationCap,
+  Hand,
+  HeartPulse,
+  MessageCircle,
+  Microscope,
+  Pill,
+  Presentation,
+  Radio,
+  ScanEye,
+  ScanFace,
+  ScanSearch,
+  SmilePlus,
+  Sparkles,
+  Sun,
+  SunMedium,
+  Syringe,
+  UsersRound,
+  WandSparkles,
+  Waves,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react';
 import type { ServiceCategory, ServiceDetail } from '../types';
 
 /** 12 ta asosiy xizmat yo'nalishi ikonkalari */
@@ -140,7 +170,43 @@ export function resolveSubServiceIcon(
   return resolveCategoryIcon(category);
 }
 
+/**
+ * Icons that service data can refer to by name. Listing them explicitly (instead of
+ * `import * as Icons`) keeps the other ~1,500 lucide icons out of the bundle (~850 KB).
+ * Add a name here when the CMS starts using a new icon.
+ */
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  Activity,
+  Baby,
+  BookHeart,
+  CircleDot,
+  ClipboardList,
+  Dna,
+  Droplets,
+  FlaskConical,
+  Footprints,
+  GraduationCap,
+  Hand,
+  HeartPulse,
+  MessageCircle,
+  Microscope,
+  Pill,
+  Presentation,
+  Radio,
+  ScanEye,
+  ScanFace,
+  ScanSearch,
+  SmilePlus,
+  Sparkles,
+  Sun,
+  SunMedium,
+  Syringe,
+  UsersRound,
+  WandSparkles,
+  Waves,
+  Zap,
+};
+
 export function getServiceLucideIcon(iconName: string): LucideIcon {
-  const icons = Icons as unknown as Record<string, LucideIcon>;
-  return icons[iconName] || Icons.ClipboardList;
+  return SERVICE_ICONS[iconName] ?? ClipboardList;
 }

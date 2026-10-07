@@ -74,7 +74,7 @@ function normalizeKey(value: string): string {
 
 async function main() {
   const username = process.env.ADMIN_USERNAME?.trim() || 'admin';
-  const password = process.env.ADMIN_PASSWORD?.trim() || 'radeski2026';
+  const password = process.env.ADMIN_PASSWORD?.trim() || (() => { throw new Error('ADMIN_PASSWORD env var is required'); })();
 
   if (TARGET.length !== 2) throw new Error(`Expected 2 videos, got ${TARGET.length}`);
 

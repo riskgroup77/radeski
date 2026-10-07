@@ -66,7 +66,7 @@ function normalizeKey(value: string): string {
 
 async function main() {
   const username = process.env.ADMIN_USERNAME?.trim() || 'admin';
-  const password = process.env.ADMIN_PASSWORD?.trim() || 'radeski2026';
+  const password = process.env.ADMIN_PASSWORD?.trim() || (() => { throw new Error('ADMIN_PASSWORD env var is required'); })();
 
   console.log(`Videos to upload: ${TARGET.length}`);
   for (const video of TARGET) {

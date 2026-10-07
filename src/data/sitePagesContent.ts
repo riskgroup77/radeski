@@ -1006,7 +1006,7 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
     website: RADE_SKIN_CLINIC_WEBSITE,
     email: RADE_SKIN_CLINIC_EMAIL,
     isMain: false,
-    image: '/gallery/rade-skin-clinic-liege.png',
+    image: '/gallery/rade-skin-clinic-liege.webp',
     sortOrder: 3,
   },
 ];

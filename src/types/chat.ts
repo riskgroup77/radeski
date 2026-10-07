@@ -77,6 +77,9 @@ export function getChatUiLabels(locale: Locale) {
       send: 'Yuborish',
       thinking: 'Javob tayyorlanmoqda...',
       error: 'Javob olishda xatolik. Qayta urinib ko\'ring.',
+      unavailable:
+        "AI yordamchi hozir javob bera olmaydi. Savolingiz bo'yicha klinikaga qo'ng'iroq qiling: +998 (73) 200-73-73 yoki onlayn qabulga yoziling.",
+      tooManyMessages: "Juda ko'p xabar yuborildi. Bir necha daqiqadan so'ng qayta urinib ko'ring.",
       close: 'Yopish',
       open: 'AI chat',
     };
@@ -89,6 +92,9 @@ export function getChatUiLabels(locale: Locale) {
       send: 'Отправить',
       thinking: 'Готовлю ответ...',
       error: 'Ошибка при получении ответа. Попробуйте снова.',
+      unavailable:
+        'AI-ассистент сейчас недоступен. Позвоните в клинику: +998 (73) 200-73-73 или запишитесь онлайн.',
+      tooManyMessages: 'Слишком много сообщений. Попробуйте снова через несколько минут.',
       close: 'Закрыть',
       open: 'AI чат',
     };
@@ -100,6 +106,9 @@ export function getChatUiLabels(locale: Locale) {
     send: 'Send',
     thinking: 'Preparing answer...',
     error: 'Could not get a reply. Please try again.',
+    unavailable:
+      'The AI assistant is unavailable right now. Please call the clinic: +998 (73) 200-73-73 or book online.',
+    tooManyMessages: 'Too many messages. Please try again in a few minutes.',
     close: 'Close',
     open: 'AI chat',
   };

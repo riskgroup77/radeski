@@ -46,6 +46,7 @@ import {
   getAdminTreatmentResults,
   createClinicRating,
   updateClinicRating,
+ bulkUpdateSiteTexts,
 } from '../api/adminApi';
 import {
   mapDoctorToCreatePayload,
@@ -92,6 +93,7 @@ import { getApiUrl } from '../api/client';
 import { getHealth } from '../api/publicApi';
 import { getPlatformLogo } from '../utils/platformLogo';
 import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
+import { buildDictionarySiteTextItems } from '../data/dictionaryOverrides';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo, TreatmentResult, ClinicPartner, CustomerReview } from '../data/sitePagesContent';
 import { googleReviewSourceLabel } from '../utils/googleReviewMeta';
@@ -471,6 +473,8 @@ export default function AdminPanel({
     onSaveLocalData('dictionary', editedFullDict);
 
     try {
+      // Address / working hours go to the CMS so every visitor sees them (not just this browser).
+      await bulkUpdateSiteTexts({ items: buildDictionarySiteTextItems(editedFullDict) });
       for (const rating of editedRatings) {
         const payload = mapClinicRatingToCreatePayload(rating);
         const isApiRecord = isApiRecordId(rating.id);
@@ -480,7 +484,7 @@ export default function AdminPanel({
           await createClinicRating(payload);
         }
       }
-      await onRefreshCms();
+      await Promise.all([onRefresh(), onRefreshCms()]);
       triggerSaveNotification(
         locale === 'uz' ? "Klinika ma'lumotlari muvaffaqiyatli saqlandi!" :
         locale === 'ru' ? "Информация о клинике успешно сохранена!" :

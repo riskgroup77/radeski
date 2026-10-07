@@ -1,10 +1,6 @@
 import type { Article, Locale } from '../types';
 import { ARTICLES } from '../data';
-import {
-  resolveArticleBody,
-  resolveArticleRichContent,
-  resolveArticleSummary,
-} from './articleContent';
+import { resolveArticleSummary } from './articleContent';
 import { isApiArticleId, normalizeArticleViews } from './articleViews';
 
 const LOCALES: Locale[] = ['uz', 'ru', 'en'];
@@ -51,22 +47,13 @@ export function enrichArticle(article: Article): Article {
         apiId: isApiArticleId(article.id) ? article.id : article.apiId,
       };
 
-  const enrichedContent = mergeLocalizedField(base.content, base, resolveArticleBody);
+  // Bodies and rich sections are resolved on the article page (articleContentFull.ts) —
+  // list items only carry what cards need, keeping article texts out of the main bundle.
   const enrichedSummary = mergeLocalizedField(base.summary, base, resolveArticleSummary);
-
-  const richContent: Article['richContent'] = {};
-  for (const locale of LOCALES) {
-    richContent[locale] = resolveArticleRichContent(
-      { ...base, content: enrichedContent, summary: enrichedSummary },
-      locale,
-    );
-  }
 
   return {
     ...base,
-    content: enrichedContent,
     summary: enrichedSummary,
-    richContent,
     views: normalizeArticleViews(base.views),
   };
 }

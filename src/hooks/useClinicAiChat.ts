@@ -7,6 +7,8 @@ import {
   type ClinicAiContext,
 } from '../types/chat';
 import { sendClinicChatMessage } from '../api/chatApi';
+import { getChatUiLabels } from '../types/chat';
+import { ApiError } from '../api/client';
 
 export function useClinicAiChat(locale: Locale, context?: ClinicAiContext) {
   const [messages, setMessages] = useState<ChatMessage[]>(() => [createWelcomeMessage(locale)]);
@@ -40,8 +42,10 @@ export function useClinicAiChat(locale: Locale, context?: ClinicAiContext) {
         });
         setMessages((prev) => [...prev, createChatMessage('assistant', reply)]);
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Chat failed';
-        setError(message);
+        // Never show raw server/provider errors to patients — explain and offer the phone.
+        const labels = getChatUiLabels(locale);
+        const status = err instanceof ApiError ? err.status : 0;
+        setError(status === 429 ? labels.tooManyMessages : labels.unavailable);
       } finally {
         setIsLoading(false);
       }

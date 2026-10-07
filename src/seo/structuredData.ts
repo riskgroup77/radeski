@@ -1,3 +1,4 @@
+import { isApiRecordId } from '../utils/apiRecord';
 import type { Article, Locale, ServiceCategory } from '../types';
 import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
 import { absoluteUrl, articlePath } from '../routing/paths';
@@ -5,6 +6,7 @@ import { resolveArticleRouteKey } from '../utils/articles';
 import { getLocalizedImage } from '../utils/localizedImage';
 
 type ClinicRatingLike = {
+  id?: string;
   rating: string | number;
   count: number;
 };
@@ -73,8 +75,11 @@ function branchPlace(
 export function buildMedicalBusinessSchema(
   locale: Locale,
   origin: string,
-  ratings: ClinicRatingLike[] = [],
+  allRatings: ClinicRatingLike[] = [],
 ): Record<string, unknown> {
+  // Only ratings the admin entered in the CMS (API records) are published as structured data.
+  // The built-in fallback numbers are not verified and must not reach Google as reviews.
+  const ratings = allRatings.filter((item) => isApiRecordId(item.id));
   const totalReviews = ratings.reduce((sum, item) => sum + (item.count || 0), 0);
   const weighted =
     totalReviews > 0

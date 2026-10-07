@@ -5,7 +5,7 @@
  *
  * Usage:
  *   set ADMIN_USERNAME=admin
- *   set ADMIN_PASSWORD=radeski2026
+ *   set ADMIN_PASSWORD=<admin parol>
  *   npx tsx scripts/syncPricesToApi.ts
  */
 import 'dotenv/config';

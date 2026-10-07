@@ -53,9 +53,9 @@ export default function Doctors({
           <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full">
             {d.navDoctors}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary mt-3 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-brand-text-primary mt-3 tracking-tight">
             {d.doctorsTitle}
-          </h2>
+          </h1>
           <p className="text-brand-text-muted mt-4 text-sm sm:text-base leading-relaxed">
             {d.doctorsDesc}
           </p>
