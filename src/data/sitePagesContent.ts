@@ -70,6 +70,10 @@ export interface CustomerReview {
   service?: LocalizedText;
   /** Main service category id — used for review filtering on the homepage. */
   serviceCategoryId?: string;
+  /** Google Maps dan avtomatik import qilingan sharh */
+  source?: 'site' | 'google';
+  googleReviewId?: string;
+  googleAuthorUri?: string;
   date: string;
   published: boolean;
 }
@@ -895,6 +899,23 @@ export const CLINIC_VIDEOS: ClinicVideo[] = [
     duration: '1:04',
     category: { uz: 'Trixologiya', ru: 'Трихология', en: 'Trichology' },
   },
+  {
+    id: 'clinic-video-53',
+    sortOrder: -5,
+    title: {
+      uz: '🔥 3 ta zona — 2 ta narxida!',
+      ru: '🔥 Три зоны по цене двух!',
+      en: '🔥 Three Zones for the Price of Two!',
+    },
+    description: {
+      uz: 'Radeski Skin Clinic lazerli epilyatsiyaga super aksiya e\'lon qiladi.\n\n🌵 Istalgan 2 ta zonaga epilyatsiya qildirganingizda, 3-zonani sovg\'a sifatida olasiz.\n\nTaklifimizdan foydalanishga ulgurib, keraksiz tuklar haqida butunlay unutib qo\'ying!\n\n📞 Qabulga yoziling — Farg\'ona va Qo\'qon filiallarida DEKA MOVEO aleksandrit lazer.',
+      ru: 'Radeski Skin Clinic запускает выгодную акцию на лазерную эпиляцию.\n\n🌵 Оплатите процедуру на любых двух зонах — третью зону проведём бесплатно в подарок.\n\nУспейте воспользоваться предложением и надолго забыть о нежелательных волосах!\n\n📞 Запишитесь на приём — филиалы в Фергане и Коканде, александритовый лазер DEKA MOVEO.',
+      en: 'Radeski Skin Clinic is running a special laser hair removal offer.\n\n🌵 Pay for any two treatment zones and get the third zone free.\n\nBook while the promotion lasts and leave unwanted hair behind for good!\n\n📞 Appointments available at our Fergana and Kokand branches — DEKA MOVEO alexandrite laser.',
+    },
+    src: '/videos/53.mp4',
+    duration: '0:35',
+    category: { uz: 'Lazer epilyatsiya', ru: 'Лазерная эпиляция', en: 'Laser hair removal' },
+  },
 ];
 
 export const CLINIC_BRANCHES: ClinicBranch[] = [
@@ -991,6 +1012,82 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
 ];
 
 export const TREATMENT_RESULTS: TreatmentResult[] = [
+  {
+    id: 'vitiligo-face-uvb-1-5mo',
+    sortOrder: -3,
+    title: {
+      uz: 'Vitiligo — yuzdagi repigmentatsiya',
+      ru: 'Витилиго — репигментация на лице',
+      en: 'Vitiligo — facial repigmentation',
+    },
+    description: {
+      uz: 'Ko‘z atrofi va yonoqdagi vitiligo: Wood lampa ostida depigmentatsiya zonlari aniq ko‘rinadi (oldin). Tor tasma UVB fototerapiya (Daavlin) kursidan keyin — taxminan 1,5 oy ichida tabiiy rang asta-sekin tiklandi, yuz terisi yaxlitroq va barqarorroq ko‘rinishga keldi (keyin). Vitiligo davolab bo‘lmaydigan kasallik emas — individual protokol va muntazam kurs muhim.',
+      ru: 'Витилиго в области глаза и щеки: под лампой Вуда хорошо видны зоны обесцвечивания (до). После курса узкополосной UVB-фототерапии (Daavlin) — примерно за 1,5 месяца естественный цвет кожи постепенно восстановился, кожа лица стала более ровной и стабильной (после). Витилиго — не «неизлечимое» заболевание при правильно подобранном протоколе и регулярном курсе.',
+      en: 'Vitiligo around the eye and cheek: depigmented areas are clearly visible under Wood’s lamp (before). After narrow-band UVB phototherapy (Daavlin) — over about 1.5 months, natural pigment gradually returned and facial skin looked more even and stable (after). Vitiligo is not untreatable when the protocol and course are individualized and consistent.',
+    },
+    service: { uz: 'Vitiligo', ru: 'Витилиго', en: 'Vitiligo' },
+    comparisonImage: '/results/vitiligo-face-uvb-comparison.jpg',
+    beforeImage: '/results/vitiligo-face-uvb-comparison.jpg',
+    afterImage: '/results/vitiligo-face-uvb-comparison.jpg',
+    sessions: { uz: '1,5 oy kurs', ru: '1,5 месяца курса', en: '1.5-month course' },
+  },
+  {
+    id: 'psoriasis-plaque-limb-comparison',
+    sortOrder: -2.9,
+    title: {
+      uz: 'Psoriaz — plakali o‘choq (qo‘l/oyoq)',
+      ru: 'Псориаз — бляшечное поражение',
+      en: 'Psoriasis — plaque lesion',
+    },
+    description: {
+      uz: 'Oldin: qalin oq-qizil plakalar, aniq chegarali qattiq qoplamalar va masshtabli parchalanish. Keyin: faol qoplamalar sezilarli kamaygan, teri tekisroq va toza ko‘rinishga yaqinlashgan — kompleks terapiya (fototerapiya, mahalliy vositalar va kurs rejasi) natijasida remissiya.',
+      ru: 'До: плотные бело-красные бляшки с чёткими границами, выраженное шелушение. После: активные элементы заметно уменьшились, кожа стала ровнее и ближе к чистому состоянию — результат комплексной терапии (фототерапия, местные средства, курс).',
+      en: 'Before: thick white-red plaques with sharp borders and heavy scaling. After: active lesions clearly reduced; skin smoother and closer to clear — outcome of combined therapy (phototherapy, topicals, structured course).',
+    },
+    service: { uz: 'Psoriaz', ru: 'Псориаз', en: 'Psoriasis' },
+    comparisonImage: '/results/psoriasis-plaque-do-posle-comparison.jpg',
+    beforeImage: '/results/psoriasis-plaque-do-posle-comparison.jpg',
+    afterImage: '/results/psoriasis-plaque-do-posle-comparison.jpg',
+    sessions: { uz: 'Individual kurs', ru: 'Индивидуальный курс', en: 'Individual course' },
+  },
+  {
+    id: 'co2-scar-forehead-comparison',
+    sortOrder: -2.8,
+    title: {
+      uz: 'Operatsiyadan keyingi chandiq — fraksional CO₂ lazer',
+      ru: 'Постоперационный рубец — фракционный CO₂-лазер',
+      en: 'Post-surgical scar — fractional CO₂ laser',
+    },
+    description: {
+      uz: 'Qosh ustidagi surur chandiq oldin: qizil, chuqur chiziqli, tekstura buzilgan. Fraksional DEKA CO₂ lazer bilan shlifovkadan keyin chandiq tekislangan, rang yengillagan, teri yuzasi silliqroq — minimal invaziv usul, shifokor nazoratida.',
+      ru: 'Рубец над бровью до лечения: красноватый, вдавленный, с нарушенной текстурой. После шлифовки фракционным CO₂-лазером (DEKA) рубец выровнялся, покраснение уменьшилось, кожа стала гладче — малоинвазивный метод под контролем врача.',
+      en: 'Scar above the brow before treatment: red, indented, uneven texture. After fractional CO₂ (DEKA) resurfacing the scar flattened, redness faded, and skin texture improved — minimally invasive care under medical supervision.',
+    },
+    service: { uz: 'CO₂ lazer', ru: 'CO₂-лазер', en: 'CO₂ laser' },
+    comparisonImage: '/results/co2-scar-forehead-do-posle-comparison.jpg',
+    beforeImage: '/results/co2-scar-forehead-do-posle-comparison.jpg',
+    afterImage: '/results/co2-scar-forehead-do-posle-comparison.jpg',
+    sessions: { uz: '1–3 seans (reja bo‘yicha)', ru: '1–3 сеанса (по плану)', en: '1–3 sessions (as planned)' },
+  },
+  {
+    id: 'co2-postacne-cheek-comparison',
+    sortOrder: -2.7,
+    title: {
+      uz: 'Postakne — fraksional CO₂ lazer shlifovkasi',
+      ru: 'Постакне — лазерная шлифовка фракционным CO₂',
+      en: 'Post-acne — fractional CO₂ laser resurfacing',
+    },
+    description: {
+      uz: 'Yonoqda postakne: chuqur atrofik chandiqalar, dog‘lar va nozik tekstura. Fraksional CO₂ lazer kursidan keyin chuqurlik kamaygan, pigmentatsiya yengillagan, teri yorqinroq va tekisroq — og‘riqsiz protokol, tiklanish vaqtiga qarab shifokor tavsiyasi.',
+      ru: 'Постакне на щеке: атрофические рубцы, пигментация, неровный рельеф. После курса фракционного CO₂-лазера глубина рубцов уменьшилась, пятна осветлились, кожа стала ровнее и свежее — протокол с учётом периода восстановления.',
+      en: 'Post-acne on the cheek: atrophic scars, pigmentation, uneven texture. After fractional CO₂ resurfacing, scar depth and spots improved; skin looks smoother and brighter — protocol tailored to recovery time.',
+    },
+    service: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
+    comparisonImage: '/results/co2-postacne-cheek-do-posle-comparison.jpg',
+    beforeImage: '/results/co2-postacne-cheek-do-posle-comparison.jpg',
+    afterImage: '/results/co2-postacne-cheek-do-posle-comparison.jpg',
+    sessions: { uz: 'Kurs + kuzatuv', ru: 'Курс + наблюдение', en: 'Course + follow-up' },
+  },
   {
     id: 'alopecia-areata-boy-yoqubov',
     sortOrder: -2,

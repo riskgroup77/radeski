@@ -362,7 +362,7 @@ export default function HomeServicesPromoCarousel({
               {copy.badge}
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl font-extrabold text-brand-text-primary leading-[1.12] tracking-tight">
+            <h1 className="text-[1.75rem] min-[380px]:text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[2.6rem] xl:text-5xl font-extrabold text-brand-text-primary leading-[1.12] tracking-tight">
               {copy.titleLead}{' '}
               <span className="text-brand-gold font-bold not-italic">{copy.titleAccent}</span>
             </h1>

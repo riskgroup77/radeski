@@ -6,7 +6,9 @@ import type {
   CustomerReview,
   TreatmentResult,
 } from '../data/sitePagesContent';
+import { GOOGLE_REVIEWS_CONFIG } from '../config/googleReviews';
 import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl, KOKAND_BRANCH_MAP_OPEN_URL, LIEGE_BRANCH_MAP_OPEN_URL, RADE_SKIN_CLINIC_EMAIL, RADE_SKIN_CLINIC_PHONE, RADE_SKIN_CLINIC_WEBSITE } from '../config/links';
+import { extractGoogleReviewId } from '../utils/googleReviewMeta';
 import { resolveMediaUrl } from './client';
 import type {
   ApiBranchOut,
@@ -57,14 +59,25 @@ export function mapPartnerFromApi(api: ApiPartnerOut): ClinicPartner {
 }
 
 export function mapReviewFromApi(api: ApiReviewOut): CustomerReview {
+  const googleReviewId = extractGoogleReviewId(api.service_en);
+  const isGoogle = googleReviewId !== null;
+
   return {
     id: api.id,
     authorName: api.author_name,
     rating: api.rating,
     comment: localized(api.comment_uz, api.comment_ru, api.comment_en),
-    service: api.service_uz
-      ? localized(api.service_uz, api.service_ru, api.service_en)
-      : undefined,
+    service: isGoogle
+      ? localized(
+          GOOGLE_REVIEWS_CONFIG.serviceLabel.uz,
+          GOOGLE_REVIEWS_CONFIG.serviceLabel.ru,
+          GOOGLE_REVIEWS_CONFIG.serviceLabel.en,
+        )
+      : api.service_uz
+        ? localized(api.service_uz, api.service_ru, api.service_en)
+        : undefined,
+    source: isGoogle ? 'google' : 'site',
+    googleReviewId: googleReviewId ?? undefined,
     date: api.created_at.slice(0, 10),
     published: api.published,
   };

@@ -38,6 +38,22 @@ import { HOLLYWOOD_SPECTRA_PORES_ARTICLE } from './data/articles/hollywoodSpectr
 import { MORPHEUS8_RF_LIFTING_ARTICLE } from './data/articles/morpheus8RfLiftingArticle';
 import { DEKA_CO2_SCARS_ARTICLE } from './data/articles/dekaCo2ScarsArticle';
 import { LAZER_EPILYATSIYA_MISTAKES_ARTICLE } from './data/articles/lazerEpilyatsiyaMistakesArticle';
+import { ALOPECIA_AREATA_KLINIK_HOLAT_ARTICLE } from './data/articles/alopeciaAreataKlinikHolatArticle';
+import { FIZIOTERAPIYA_DERMATOVENEREOLOGIYA_ARTICLE } from './data/articles/fizioterapiyaDermatovenereologiyaArticle';
+import { BIOREVITALIZATSIYA_RADESKI_ARTICLE } from './data/articles/biorevitalizatsiyaRadeskiArticle';
+import { BOTULINOTERAPIYA_RADESKI_ARTICLE } from './data/articles/botulinoterapiyaRadeskiArticle';
+import { DERMATOPATOLOGIYA_RADESKI_ARTICLE } from './data/articles/dermatopatologiyaRadeskiArticle';
+import { PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE } from './data/articles/photoFinderDiagnostikaRadeskiArticle';
+import { DNEVNOJ_STACIONAR_RADESKI_ARTICLE } from './data/articles/dnevnojStacionarRadeskiArticle';
+import { IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE } from './data/articles/immunobiologiyaTerapiyaRadeskiArticle';
+import { KONTURnaya_GUBY_RADESKI_ARTICLE } from './data/articles/konturnayaGubyRadeskiArticle';
+import { SOCH_TOKILISHI_PROFILAKTIKA_RADESKI_ARTICLE } from './data/articles/sochTokilishiProfilaktikaRadeskiArticle';
+import { PSORIAZ_KLINIK_KEYS_BAHRIDINOV_RADESKI_ARTICLE } from './data/articles/psoriazKlinikKeysBahridinovRadeskiArticle';
+import { KLINIKA_PATOLOGII_NOGTEJ_RADESKI_ARTICLE } from './data/articles/klinikaPatologiiNogtejRadeskiArticle';
+import { KLINICHESKOE_ISSLEDOVANIE_RADESKI_ARTICLE } from './data/articles/klinicheskoeIssledovanieRadeskiArticle';
+import { KONTUR_PLASTIKA_RADESKI_ARTICLE } from './data/articles/konturPlastikaRadeskiArticle';
+import { LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE } from './data/articles/lazerBiorevitalizatsiyaRadeskiArticle';
+import { NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE } from './data/articles/normalVsPathologicalHairLossRadeskiArticle';
 export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
@@ -1066,4 +1082,20 @@ export const ARTICLES: Article[] = [
   MORPHEUS8_RF_LIFTING_ARTICLE,
   DEKA_CO2_SCARS_ARTICLE,
   LAZER_EPILYATSIYA_MISTAKES_ARTICLE,
+  ALOPECIA_AREATA_KLINIK_HOLAT_ARTICLE,
+  FIZIOTERAPIYA_DERMATOVENEREOLOGIYA_ARTICLE,
+  BIOREVITALIZATSIYA_RADESKI_ARTICLE,
+  BOTULINOTERAPIYA_RADESKI_ARTICLE,
+  DERMATOPATOLOGIYA_RADESKI_ARTICLE,
+  PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE,
+  DNEVNOJ_STACIONAR_RADESKI_ARTICLE,
+  IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE,
+  KONTURnaya_GUBY_RADESKI_ARTICLE,
+  SOCH_TOKILISHI_PROFILAKTIKA_RADESKI_ARTICLE,
+  PSORIAZ_KLINIK_KEYS_BAHRIDINOV_RADESKI_ARTICLE,
+  KLINIKA_PATOLOGII_NOGTEJ_RADESKI_ARTICLE,
+  KLINICHESKOE_ISSLEDOVANIE_RADESKI_ARTICLE,
+  KONTUR_PLASTIKA_RADESKI_ARTICLE,
+  LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE,
+  NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE,
 ];

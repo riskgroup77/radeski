@@ -1,5 +1,6 @@
 import type { Doctor } from '../types';
 import { SHOHRUZ_TURGUNOV_PROFILE } from './doctors/shohruzTurgunovProfile';
+import { USMONOVA_MOHINABONU_PROFILE } from './doctors/usmonovaMohinabonuProfile';
 
 function normalizeDoctorName(value: string): string {
   return value
@@ -19,7 +20,18 @@ function matchesShohruzTurgunov(doctor: Doctor): boolean {
   return haystack.includes('turgunov') && haystack.includes('shohruz');
 }
 
+function matchesUsmonovaMohinabonu(doctor: Doctor): boolean {
+  const haystack = normalizeDoctorName(
+    [doctor.id, doctor.name.uz, doctor.name.ru, doctor.name.en].join(' '),
+  );
+  return (
+    (haystack.includes('usmanova') || haystack.includes('usmonova')) &&
+    haystack.includes('mohinabonu')
+  );
+}
+
 export function getDoctorProfileOverlay(doctor: Doctor): Doctor['profile'] | undefined {
   if (matchesShohruzTurgunov(doctor)) return SHOHRUZ_TURGUNOV_PROFILE;
+  if (matchesUsmonovaMohinabonu(doctor)) return USMONOVA_MOHINABONU_PROFILE;
   return undefined;
 }

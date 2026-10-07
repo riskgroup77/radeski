@@ -185,7 +185,7 @@ export function getClinicLaserModelRedirectPath(pathname: string): string | null
     return null;
   }
   const locale = getLocaleFromPathname(pathname);
-  return `${serviceCategoryPath(locale, 'apparatnaya-kosmetologiya')}#${modelId}`;
+  return serviceEquipmentPath(locale, modelId);
 }
 
 export function getLegacyDaavlinModelRedirectPath(pathname: string): string | null {
@@ -195,7 +195,7 @@ export function getLegacyDaavlinModelRedirectPath(pathname: string): string | nu
   }
   if (segments[3] === 'ml24000') {
     const locale = getLocaleFromPathname(pathname);
-    return `${serviceCategoryPath(locale, 'apparatnaya-kosmetologiya')}#deka-co2-laser`;
+    return serviceEquipmentPath(locale, 'deka-co2-laser');
   }
   const target = LEGACY_DAAVLIN_MODEL_REDIRECTS[segments[3]];
   if (!target) return null;
@@ -295,6 +295,10 @@ export function getConditionSlugFromPathname(pathname: string): string | null {
 
 export function serviceSubPath(locale: Locale, categoryId: string, subId: string): string {
   return `/${locale}/services/${encodeURIComponent(categoryId)}/${encodeURIComponent(subId)}`;
+}
+
+export function serviceEquipmentPath(locale: Locale, equipmentId: string): string {
+  return serviceSubPath(locale, 'apparatnaya-kosmetologiya', equipmentId);
 }
 
 export function getServiceCategoryIdFromPathname(pathname: string): string | null {

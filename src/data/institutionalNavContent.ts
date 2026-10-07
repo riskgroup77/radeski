@@ -1,6 +1,8 @@
 import type { Locale } from '../types';
 import type { PageId } from '../routing/paths';
 import { pagePath } from '../routing/paths';
+import type { EducationProgramId } from './obrazovaniyaContent';
+import { educationProgramPath } from '../utils/educationPrograms';
 
 type L = Record<Locale, string>;
 
@@ -20,6 +22,8 @@ export type InstitutionalNavTopic = {
   hash?: string;
   /** Link to another site page instead of the parent section */
   targetPageId?: PageId;
+  /** Dedicated education program page under /obrazovaniya/... */
+  educationProgramId?: EducationProgramId;
 };
 
 export type InstitutionalNavSection = {
@@ -50,23 +54,27 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
       {
         id: 'certification-courses',
         label: L('Sertifikatsiya kurslari', 'Сертификационные курсы', 'Certification programs'),
+        educationProgramId: 'certification-courses',
       },
       {
         id: 'residency',
         label: L('Ordinatura', 'Ординатура', 'Dermatology residency'),
+        educationProgramId: 'residency',
       },
       {
         id: 'continuing-education',
         label: L('Malaka oshirish', 'Повышение квалификации', 'Continuing medical education'),
-        targetPageId: 'malaka-oshirish',
+        educationProgramId: 'continuing-education',
       },
       {
         id: 'masterclasses',
         label: L('Master-klasslar', 'Мастер-классы', 'Masterclasses'),
+        educationProgramId: 'masterclasses',
       },
       {
         id: 'hands-on-training',
         label: L('Amaliy treninglar', 'Практические тренинги', 'Hands-on training'),
+        educationProgramId: 'hands-on-training',
       },
       {
         id: 'young-specialists',
@@ -75,6 +83,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
           'Подготовка молодых специалистов',
           'Training early-career specialists',
         ),
+        educationProgramId: 'young-specialists',
       },
       {
         id: 'hair-transplant-training',
@@ -83,6 +92,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
           'Обучение пересадке волос',
           'Hair transplant training',
         ),
+        educationProgramId: 'hair-transplant-training',
       },
       {
         id: 'laser-training',
@@ -91,6 +101,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
           'Обучение лазерным технологиям',
           'Laser technology training',
         ),
+        educationProgramId: 'laser-training',
       },
       {
         id: 'international-programs',
@@ -99,6 +110,7 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
           'Международные образовательные программы',
           'International education programs',
         ),
+        educationProgramId: 'international-programs',
       },
     ],
   },
@@ -117,32 +129,32 @@ export const INSTITUTIONAL_NAV_SECTIONS: InstitutionalNavSection[] = [
       {
         id: 'certification-courses',
         label: L('Sertifikatsiya kurslari', 'Сертификационные курсы', 'Certification programs'),
-        hash: 'certification-courses',
+        educationProgramId: 'certification-courses',
       },
       {
         id: 'residency',
         label: L('Ordinatura va stajirovka', 'Ординатура и стажировка', 'Residency and internships'),
-        hash: 'residency',
+        educationProgramId: 'residency',
       },
       {
         id: 'masterclasses',
         label: L('Master-klasslar', 'Мастер-классы', 'Masterclasses'),
-        hash: 'masterclasses',
+        educationProgramId: 'masterclasses',
       },
       {
         id: 'hands-on-training',
         label: L('Amaliy treninglar', 'Практические тренинги', 'Hands-on training'),
-        hash: 'hands-on-training',
+        educationProgramId: 'hands-on-training',
       },
       {
         id: 'laser-training',
         label: L('Lazer texnologiyalari', 'Лазерные технологии', 'Laser technology training'),
-        hash: 'laser-training',
+        educationProgramId: 'laser-training',
       },
       {
         id: 'international-programs',
         label: L('Xalqaro dasturlar', 'Международные программы', 'International programs'),
-        hash: 'international-programs',
+        educationProgramId: 'international-programs',
       },
     ],
   },
@@ -263,6 +275,9 @@ export function institutionalTopicHref(
   section: InstitutionalNavSection,
   topic?: InstitutionalNavTopic,
 ): string {
+  if (topic?.educationProgramId) {
+    return educationProgramPath(locale, topic.educationProgramId);
+  }
   if (topic?.targetPageId) {
     const base = pagePath(locale, topic.targetPageId);
     if (topic.hash) return `${base}#${topic.hash}`;

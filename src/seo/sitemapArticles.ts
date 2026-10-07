@@ -62,6 +62,81 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
   },
   {
+    routeKey: 'art-fizioterapiya-dermatovenereologiya',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-biorevitalizatsiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-botulinoterapiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-dermatopatologiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-photofinder-diagnostika-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-dnevnoj-stacionar-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-immunobiologiya-terapiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-konturnaya-guby-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-soch-profilaktika-inyeksii-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-psoriaz-klinik-keys-bahridinov-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.88, ru: 0.83, en: 0.78 },
+  },
+  {
+    routeKey: 'art-klinika-patologii-nogtej-stopy-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-klinicheskoe-issledovanie-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-kontur-plastika-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-lazer-biorevitalizatsiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-soch-tokilishi-normal-patologiya-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.88, ru: 0.85, en: 0.8 },
+  },
+  {
     routeKey: 'art-kontagioz-mollyusk-radeski',
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
@@ -110,6 +185,11 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     routeKey: 'art-trixolog-trixoskopiya',
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
+  },
+  {
+    routeKey: 'art-alopecia-areata-klinik-holat',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.88, ru: 0.83, en: 0.78 },
   },
   {
     routeKey: 'art-bazalioma-teri-raki',

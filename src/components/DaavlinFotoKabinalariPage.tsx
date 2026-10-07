@@ -1103,7 +1103,7 @@ function StickyContactSidebar({ locale }: { locale: Locale }) {
   const media = DAAVLIN_SECTION_MEDIA.contacts;
 
   return (
-    <aside id="aloqa" className="scroll-mt-28">
+    <aside id="aloqa" className="scroll-mt-2">
       <div className="overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-[0_16px_48px_-16px_rgba(7,27,46,0.18)]">
         <div className="relative h-36 bg-brand-offwhite sm:h-40">
           <MediaImage
@@ -1216,7 +1216,7 @@ export default function DaavlinFotoKabinalariPage({ locale }: DaavlinFotoKabinal
           <div className="min-w-0">
             <AboutBody locale={locale} />
           </div>
-          <div className="lg:sticky lg:top-28 lg:self-start">
+          <div className="lg:sticky lg:sticky-below-header lg:self-start">
             <StickyContactSidebar locale={locale} />
           </div>
         </div>

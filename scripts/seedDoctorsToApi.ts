@@ -4,7 +4,7 @@
  *
  * Usage:
  *   set ADMIN_USERNAME=admin
- *   set ADMIN_PASSWORD=radeski2026
+ *   set ADMIN_PASSWORD=<admin parol>
  *   npx tsx scripts/seedDoctorsToApi.ts
  */
 import 'dotenv/config';
@@ -57,9 +57,9 @@ const DOCTORS: DoctorCreatePayload[] = [
     name_uz: 'Usmanova Mohinabonu Anvarovna',
     name_ru: 'Усманова Мохинабону Анваровна',
     name_en: 'Mohinabonu Anvarovna Usmanova',
-    role_uz: 'Shifokor-dermatolog, dermatokosmetolog',
-    role_ru: 'Врач-дерматолог, дерматокосметолог',
-    role_en: 'Dermatologist, Dermatocosmetologist',
+    role_uz: 'Dermatovenerolog · Dermatokosmetolog · Trixolog · Podolog',
+    role_ru: 'Дерматовенеролог · Дерматокосметолог · Трихолог · Подолог',
+    role_en: 'Dermatovenerologist · Dermatocosmetologist · Trichologist · Podiatrist',
     experience_uz: '3',
     experience_ru: '3',
     experience_en: '3',
@@ -67,11 +67,11 @@ const DOCTORS: DoctorCreatePayload[] = [
     education_ru: 'Ферганский медицинский институт общественного здоровья (ФМИОЗ)',
     education_en: 'Fergana Medical Institute of Public Health',
     bio_uz:
-      "Usmanova Mohinabonu — shifokor-dermatolog va dermatokosmetolog. U dermatologiya sohasida 3 yillik amaliy tajribaga ega bo'lib, teri, soch va tirnoq kasalliklarini tashxislash, davolash hamda profilaktika qilish yo'nalishlarida faoliyat yuritadi. Hozirda Radeski Skin Clinic klinikasida dermatokosmetolog sifatida ishlaydi. Kasbiy faoliyati davomida dermatologiya va dermatokosmetologiyaning zamonaviy diagnostika va davolash usullarini puxta o'zlashtirgan hamda bemorlarga individual yondashuv asosida malakali tibbiy yordam ko'rsatib kelmoqda. Shuningdek, teri parvarishi, akne va post-akne holatlari, pigmentatsiya buzilishlari hamda estetik dermatologik muolajalar bo'yicha amaliy tajribaga ega. U o'z kasbiy malakasini muntazam oshirib boradi, zamonaviy ilmiy tadqiqotlar natijalari va klinik tavsiyalarni amaliyotiga tatbiq etishga alohida e'tibor qaratadi. Bir yildan buyon dermatologiya fanidan talabalarga dars berib kelmoqda. Kasbiy faoliyatida ilmiy asoslangan tibbiyot tamoyillariga qat'iy amal qiladi hamda bemor xavfsizligi, tibbiy etika va individual yondashuvni ustuvor yo'nalishlar sifatida e'tirof etadi.",
+      "Usmonova Mohinabonu — dermatovenerolog, dermatokosmetolog, trixolog va podolog. 3+ yillik amaliy tajribaga ega. Teri, soch, tirnoq va oyoq terisi kasalliklarini diagnostika qilish, davolash va korreksiya qilish bilan shug'ullanadi. Radeski Skin Clinic da individual yondashuv va zamonaviy davolash protokollari asosida qabul qiladi.",
     bio_ru:
-      'Усманова Мохинабону — врач-дерматолог и дерматокосметолог. Имеет 3-летний практический опыт в области дерматологии, занимается диагностикой, лечением и профилактикой заболеваний кожи, волос и ногтей. В настоящее время работает дерматокосметологом в клинике Radeski Skin Clinic. За время профессиональной деятельности в совершенстве освоила современные методы диагностики и лечения в дерматологии и дерматокосметологии и оказывает квалифицированную медицинскую помощь на основе индивидуального подхода к каждому пациенту. Также обладает практическим опытом в уходе за кожей, лечении акне и постакне, коррекции нарушений пигментации и проведении эстетических дерматологических процедур. Регулярно повышает квалификацию, уделяя особое внимание внедрению результатов современных научных исследований и клинических рекомендаций в практику. Более года преподаёт дерматологию студентам. В работе строго придерживается принципов доказательной медицины, а безопасность пациента, медицинскую этику и индивидуальный подход считает приоритетными направлениями.',
+      'Усманова Мохинабону — дерматовенеролог, дерматокосметолог, трихолог и подолог с более чем 3-летним практическим опытом. Занимается диагностикой, лечением и коррекцией заболеваний кожи, волос, ногтей и стоп. Принимает пациентов в Radeski Skin Clinic с индивидуальным подходом и современными протоколами лечения.',
     bio_en:
-      'Mohinabonu Usmanova is a dermatologist and dermatocosmetologist with 3 years of practical experience in dermatology, specializing in the diagnosis, treatment and prevention of skin, hair and nail conditions. She currently works as a dermatocosmetologist at Radeski Skin Clinic. Throughout her career she has mastered modern diagnostic and treatment methods in dermatology and dermatocosmetology, providing qualified medical care based on an individual approach to each patient. She also has hands-on experience in skin care, treatment of acne and post-acne, correction of pigmentation disorders and aesthetic dermatological procedures. She regularly upgrades her qualifications, paying particular attention to applying the results of modern research and clinical guidelines in practice. For over a year she has been teaching dermatology to students. In her work she strictly follows the principles of evidence-based medicine and regards patient safety, medical ethics and an individualized approach as her top priorities.',
+      'Mohinabonu Usmonova is a dermatovenerologist, dermatocosmetologist, trichologist and podiatrist with 3+ years of clinical experience. She diagnoses, treats and corrects skin, hair, nail and foot conditions at Radeski Skin Clinic using individualized care and modern treatment protocols.',
     sort_order: 11,
     is_featured: false,
   },

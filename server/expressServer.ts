@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ChatApiError, handleDeepSeekChat } from './deepseekChatHandler';
+import { handleGoogleReviewsSync } from './googleReviewsSyncHandler';
 import { getDeepSeekModel, isDeepSeekConfigured, loadProjectEnv } from './loadEnv';
 
 loadProjectEnv();
@@ -32,6 +33,10 @@ const healthHandler: express.RequestHandler = (_req, res) => {
 
 app.get('/api/chat/health', healthHandler);
 app.get('/api/chat-health', healthHandler);
+
+/** Cron yoki admin qo'lda ishga tushirish: x-radeski-sync-secret header talab qilinadi */
+app.post('/api/internal/sync-google-reviews', handleGoogleReviewsSync);
+app.get('/api/internal/sync-google-reviews', handleGoogleReviewsSync);
 
 const distPath = path.resolve(__dirname, '../dist');
 app.use(express.static(distPath));

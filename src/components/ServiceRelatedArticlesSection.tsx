@@ -15,6 +15,8 @@ interface ServiceRelatedArticlesSectionProps {
   categoryId: string;
   subId?: string;
   articles: Article[];
+  /** When set, skip catalog filtering and render these articles directly. */
+  presetArticles?: Article[];
   dictionary?: Record<string, string>;
 }
 
@@ -35,10 +37,11 @@ export default function ServiceRelatedArticlesSection({
   categoryId,
   subId,
   articles,
+  presetArticles,
   dictionary,
 }: ServiceRelatedArticlesSectionProps) {
   const d = dictionary || DICTIONARY[locale];
-  const related = getRelatedArticlesForService(articles, categoryId, subId);
+  const related = presetArticles ?? getRelatedArticlesForService(articles, categoryId, subId);
 
   if (related.length === 0) return null;
 
@@ -55,7 +58,7 @@ export default function ServiceRelatedArticlesSection({
         <p className="text-sm text-brand-text-muted mt-2 max-w-3xl">{SECTION_DESC[locale]}</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
         {related.map((art) => {
           const image = getLocalizedImage(art.images, locale) ?? art.image;
           return (
@@ -68,12 +71,12 @@ export default function ServiceRelatedArticlesSection({
                 <ArticleCoverMedia
                   src={image}
                   alt={art.title[locale]}
-                  variant="compact"
+                  variant="related"
                   promoPortrait={isEquipmentPromoArticle(art)}
                   imageClassName="group-hover:scale-[1.02] transition-transform duration-300"
                 />
               ) : (
-                <div className="h-36 bg-brand-offwhite flex items-center justify-center text-brand-text-muted text-xs">
+                <div className="h-52 sm:h-56 bg-brand-offwhite flex items-center justify-center text-brand-text-muted text-xs">
                   {locale === 'uz' ? "Rasm yo'q" : locale === 'ru' ? 'Нет изображения' : 'No image'}
                 </div>
               )}

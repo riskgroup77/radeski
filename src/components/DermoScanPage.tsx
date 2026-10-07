@@ -107,7 +107,7 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
     <section id="dermoscan-page" className="min-h-screen bg-brand-offwhite pb-24 sm:pb-16">
       <HeroBanner locale={locale} />
       <div className="mb-10 border-b border-brand-sectiongray bg-brand-white sm:mb-14">
-        <div className="site-container p-6 sm:p-8">
+        <div className="site-container py-6 sm:py-8">
           <p className="max-w-3xl border-l-4 border-brand-gold pl-4 text-sm font-light leading-relaxed text-brand-text-secondary sm:pl-5 sm:text-base">
             {c.heroDescription[locale]}
           </p>

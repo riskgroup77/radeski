@@ -34,6 +34,8 @@ import {
   daavlinSectionPath,
   switchLocaleInPath,
   articlePath,
+  serviceCategoryPath,
+  servicesListPath,
 } from './routing/paths';
 import { useAppNavigation } from './routing/useAppNavigation';
 import { DICTIONARY, GALLERY_IMAGS, getClinicRatingSummary } from './data';
@@ -49,6 +51,7 @@ import DermatologyConditionPage from './components/DermatologyConditionPage';
 import { isDermatologyConditionSlug, getDermatologyConditionNavItem } from './data/dermatologyConditionsNav';
 import { getDermatologyConditionTopic } from './utils/dermatologyConditions';
 import ServiceSubPage from './components/ServiceSubPage';
+import ClinicEquipmentPage from './components/ClinicEquipmentPage';
 import Doctors from './components/Doctors';
 import DoctorPage from './components/DoctorPage';
 import VideosPage from './components/VideosPage';
@@ -59,6 +62,7 @@ import DaavlinModelPage from './components/DaavlinModelPage';
 import DermoScanPage from './components/DermoScanPage';
 import SciencePage from './components/SciencePage';
 import ObrazovaniyaPage from './components/ObrazovaniyaPage';
+import EducationProgramPage from './components/EducationProgramPage';
 import MalakaOshirishPage from './components/MalakaOshirishPage';
 import TeleDermatologyPage from './components/TeleDermatologyPage';
 import SkinPathologyCenterPage from './components/SkinPathologyCenterPage';
@@ -101,6 +105,7 @@ import {
   getLocalCommercialFromPathname,
   getLocalCommercialLanding,
   getLocalizedCopy,
+  isCityCommercialPathAttempt,
 } from './data/localCommercialSeoCatalog';
 import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
@@ -121,8 +126,16 @@ import {
 import {
   buildArticleSchema,
   buildMedicalBusinessSchema,
+  buildEducationCoursesSchema,
   buildServiceFaqSchemas,
 } from './seo/structuredData';
+import { OBRAZOVANIYA } from './data/obrazovaniyaContent';
+import {
+  getEducationProgramSlugFromPathname,
+  resolveEducationProgram,
+} from './utils/educationPrograms';
+import { resolveClinicEquipment } from './utils/clinicEquipmentRoutes';
+import { getLocalizedEquipmentText } from './data/clinicEquipmentCatalog';
 
 export default function App() {
   return (
@@ -160,10 +173,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const conditionSlug = getConditionSlugFromPathname(location.pathname);
   const daavlinSection = getDaavlinSectionFromPathname(location.pathname);
   const daavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
+  const educationProgramSlug = getEducationProgramSlugFromPathname(location.pathname);
+  const activeEducationProgram = resolveEducationProgram(educationProgramSlug, locale);
   const localCommercialRoute = getLocalCommercialFromPathname(location.pathname);
   const activeLocalCommercial = localCommercialRoute
     ? getLocalCommercialLanding(localCommercialRoute.city, localCommercialRoute.slug) ?? null
     : null;
+  const invalidCityCommercialSlug =
+    isCityCommercialPathAttempt(location.pathname) && !activeLocalCommercial;
   const legacyDaavlinModelRedirect = getLegacyDaavlinModelRedirectPath(location.pathname);
   const clinicLaserModelRedirect = getClinicLaserModelRedirectPath(location.pathname);
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
@@ -220,8 +237,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     ? dynamicServiceCategories.find((category) => category.id === serviceCategoryId) ?? null
     : null;
 
+  const activeEquipment =
+    activeServiceCategory && serviceSubId ? resolveClinicEquipment(serviceSubId) : null;
+
   const activeServiceSub =
-    activeServiceCategory && serviceSubId
+    activeServiceCategory && serviceSubId && !activeEquipment
       ? activeServiceCategory.subServices.find((sub) => sub.id === serviceSubId) ?? null
       : null;
 
@@ -232,6 +252,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const activeDoctorPreview = doctorId
     ? dynamicDoctors.find((doc) => doc.id === doctorId) ?? null
     : null;
+
+  const isSeoErrorPage =
+    invalidCityCommercialSlug ||
+    Boolean(promoSlug && !activePromoSlide) ||
+    Boolean(conditionSlug && !isDermatologyConditionSlug(conditionSlug));
 
   const [dynamicDictionary, setDynamicDictionary] = useState(() => {
     const saved = localStorage.getItem('radeski_dictionary_v1');
@@ -275,6 +300,24 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       schemaData.push(buildArticleSchema(locale, activeArticlePreview, origin));
     }
 
+    if (currentPage === 'obrazovaniya') {
+      const schemaPrograms = activeEducationProgram
+        ? [activeEducationProgram]
+        : OBRAZOVANIYA.programs.items;
+      schemaData.push(
+        ...buildEducationCoursesSchema(
+          locale,
+          origin,
+          schemaPrograms.map((program) => ({
+            id: program.id,
+            title: program.title,
+            description: program.seo.description,
+            keywords: program.seo.keywords,
+          })),
+        ),
+      );
+    }
+
     // 3. Inject script element
     const script = document.createElement('script');
     script.id = 'clinical-schema-jsonld';
@@ -305,7 +348,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         ? getDermatologyConditionTopic(conditionSlug, locale)
         : null;
 
-    const seoTitle = activeLocalCommercial
+    const educationProgramSeo = activeEducationProgram
+      ? {
+          title: activeEducationProgram.seo.title[locale],
+          desc: activeEducationProgram.seo.description[locale],
+          keywords: activeEducationProgram.seo.keywords[locale],
+        }
+      : null;
+
+    const seoTitle = educationProgramSeo?.title
+      ? educationProgramSeo.title
+      : activeLocalCommercial
       ? getLocalizedCopy(activeLocalCommercial.seo.title, locale)
       : articleSeo?.title
       ? articleSeo.title
@@ -318,14 +371,18 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           )
         : activeDoctorPreview
         ? buildServiceSeoTitle(activeDoctorPreview.name[locale], locale)
-        : activeServiceSub
+        : activeEquipment
+          ? buildServiceSeoTitle(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
+          : activeServiceSub
           ? buildServiceSeoTitle(activeServiceSub.name[locale], locale)
           : activeServiceCategory
             ? buildServiceSeoTitle(activeServiceCategory.title[locale], locale)
             : daavlinModelSeo
               ? daavlinModelSeo.seoTitle[locale]
               : activeSEO.title;
-    const seoDesc = activeLocalCommercial
+    const seoDesc = educationProgramSeo?.desc
+      ? educationProgramSeo.desc
+      : activeLocalCommercial
       ? getLocalizedCopy(activeLocalCommercial.seo.desc, locale)
       : articleSeo?.desc
       ? articleSeo.desc
@@ -333,7 +390,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         ? activeConditionPreview.description
         : activeDoctorPreview
         ? activeDoctorPreview.bio[locale]
-        : activeServiceSub
+        : activeEquipment
+          ? getLocalizedEquipmentText(activeEquipment.shortDescription, locale)
+          : activeServiceSub
           ? activeServiceSub.description[locale]
           : activeServiceCategory
             ? activeServiceCategory.description[locale]
@@ -363,7 +422,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       resolvedArticleRouteKey,
       resolvedDoctorId: activeDoctorPreview?.id ?? doctorId ?? undefined,
       resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
-      resolvedServiceSubId: activeServiceSub?.id ?? serviceSubId ?? undefined,
+      resolvedServiceSubId: activeEquipment?.id ?? activeServiceSub?.id ?? serviceSubId ?? undefined,
     };
 
     const canonicalUrl = getCanonicalUrl(seoContext);
@@ -389,7 +448,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       meta.setAttribute('content', content);
     };
 
-    const seoKeywords = activeLocalCommercial
+    const seoKeywords = educationProgramSeo?.keywords
+      ? educationProgramSeo.keywords
+      : activeLocalCommercial
       ? getLocalizedCopy(activeLocalCommercial.seo.keywords, locale)
       : articleSeo?.keywords
       ? articleSeo.keywords
@@ -400,6 +461,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     // Update main Search Engine optimization tags
     updateMeta('description', seoDesc);
     updateMeta('keywords', seoKeywords);
+    updateMeta('robots', isSeoErrorPage ? 'noindex, nofollow' : 'index, follow');
 
     // Update Social sharing graph protocols
     updateOg('og:title', seoTitle);
@@ -410,7 +472,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     syncCanonicalLink(seoContext);
     syncHreflangLinks(seoContext);
 
-  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, forcePage, promoSlug, conditionSlug, daavlinSection, daavlinModelId, activeLocalCommercial, localCommercialRoute]);
+  }, [locale, currentPage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, location.pathname, articleId, doctorId, activeArticlePreview, activeDoctorPreview, serviceCategoryId, serviceSubId, activeServiceCategory, activeServiceSub, activeEquipment, forcePage, promoSlug, conditionSlug, daavlinSection, daavlinModelId, activeLocalCommercial, localCommercialRoute, isSeoErrorPage, activePromoSlide, dataLoading, invalidCityCommercialSlug, activeEducationProgram, educationProgramSlug]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {
@@ -479,8 +541,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
   return (
     <div
-      className={`bg-brand-white min-h-screen text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white ${
-        isQrFeedbackPage ? 'pt-0' : 'pt-[158px] sm:pt-[136px]'
+      className={`bg-brand-white min-h-screen overflow-x-clip text-brand-text-primary antialiased selection:bg-brand-gold selection:text-white ${
+        isQrFeedbackPage ? 'pt-0' : 'app-header-offset'
       }`}
     >
 
@@ -503,10 +565,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       )}
 
       {dataLoading && currentPage !== 'admin' && !isQrFeedbackPage && (
-        <div className="fixed inset-0 z-30 bg-white/60 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
-          <div className="px-4 py-2 bg-white border border-brand-sectiongray rounded-xl shadow-sm text-sm text-brand-text-muted">
-            {locale === 'uz' ? 'Ma\'lumotlar yuklanmoqda...' : locale === 'ru' ? 'Загрузка данных...' : 'Loading data...'}
-          </div>
+        // Static content is already on screen — show a slim, non-blocking bar under the header
+        // instead of veiling the whole page while the API refreshes it.
+        <div
+          className="fixed inset-x-0 top-(--app-header-live-h) z-30 h-0.5 overflow-hidden pointer-events-none"
+          role="progressbar"
+          aria-label={locale === 'uz' ? "Ma'lumotlar yuklanmoqda" : locale === 'ru' ? 'Загрузка данных' : 'Loading data'}
+        >
+          <div className="app-loading-bar__fill h-full w-1/3 bg-brand-gold" />
         </div>
       )}
 
@@ -539,6 +605,43 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               landing={activeLocalCommercial}
               appointmentLabel={d.appointmentBtn}
             />
+          )}
+
+          {invalidCityCommercialSlug && (
+            <section className="py-20 px-4 text-center min-h-[50vh]">
+              <h1 className="text-2xl font-extrabold text-brand-text-primary mb-3">
+                {locale === 'uz' ? 'Sahifa topilmadi' : locale === 'ru' ? 'Страница не найдена' : 'Page not found'}
+              </h1>
+              <p className="text-brand-text-muted mb-6 max-w-md mx-auto">
+                {locale === 'uz'
+                  ? "So'ralgan sahifa mavjud emas yoki o'chirilgan. Bosh sahifa yoki shahar bo'limiga qayting."
+                  : locale === 'ru'
+                    ? 'Запрошенная страница не существует или была удалена. Вернитесь на главную или в раздел города.'
+                    : 'The requested page does not exist or was removed. Return to home or the city hub.'}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <button type="button" onClick={() => goToPage('home')} className="px-5 py-2.5 bg-brand-gold text-white font-bold text-xs rounded-xl cursor-pointer">
+                  {locale === 'uz' ? 'Bosh sahifa' : locale === 'ru' ? 'Главная' : 'Home'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => goToPage(location.pathname.includes('/fargona/') ? 'fargona' : 'qoqon')}
+                  className="px-5 py-2.5 border border-brand-sectiongray bg-brand-white text-brand-text-primary font-semibold text-xs rounded-xl cursor-pointer"
+                >
+                  {location.pathname.includes('/fargona/')
+                    ? locale === 'uz'
+                      ? 'Farg\'ona bo\'limi'
+                      : locale === 'ru'
+                        ? 'Раздел Фергана'
+                        : 'Fergana hub'
+                    : locale === 'uz'
+                      ? 'Qo\'qon bo\'limi'
+                      : locale === 'ru'
+                        ? 'Раздел Коканд'
+                        : 'Kokand hub'}
+                </button>
+              </div>
+            </section>
           )}
 
           {!activeLocalCommercial && promoSlug && activePromoSlide && (
@@ -985,6 +1088,19 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
+          {currentPage === 'services' && activeServiceCategory && activeEquipment && (
+            <ClinicEquipmentPage
+              locale={locale}
+              category={activeServiceCategory}
+              equipment={activeEquipment}
+              articles={dynamicArticles}
+              dictionary={d}
+              prices={dynamicPrices}
+              videos={cmsVideos}
+              results={cmsTreatmentResults}
+            />
+          )}
+
           {currentPage === 'services' && activeServiceCategory && activeServiceSub && (
             <ServiceSubPage
               locale={locale}
@@ -998,7 +1114,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {currentPage === 'services' && activeServiceCategory && !activeServiceSub && !serviceSubId && (
+          {currentPage === 'services' && activeServiceCategory && !activeServiceSub && !activeEquipment && !serviceSubId && (
             <ServiceCategoryPage
               locale={locale}
               category={activeServiceCategory}
@@ -1011,40 +1127,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {currentPage === 'services' && serviceSubId && activeServiceCategory && !activeServiceSub && !dataLoading && (
-            <div className="py-20 px-4 text-center min-h-[50vh]">
-              <p className="text-brand-text-muted mb-6">
-                {locale === 'uz'
-                  ? 'Muolaja topilmadi yoki o\'chirilgan.'
-                  : locale === 'ru'
-                    ? 'Процедура не найдена или была удалена.'
-                    : 'Procedure not found or has been removed.'}
-              </p>
-              <button
-                onClick={() => goToServiceCategory(activeServiceCategory.id)}
-                className="px-5 py-2.5 bg-brand-gold text-white font-bold text-xs rounded-xl cursor-pointer mr-2"
-              >
-                {locale === 'uz' ? 'Kategoriyaga qaytish' : locale === 'ru' ? 'К категории' : 'Back to category'}
-              </button>
-            </div>
-          )}
+          {currentPage === 'services' &&
+            serviceSubId &&
+            activeServiceCategory &&
+            !activeServiceSub &&
+            !activeEquipment &&
+            !dataLoading && (
+              <Navigate to={serviceCategoryPath(locale, activeServiceCategory.id)} replace />
+            )}
 
           {currentPage === 'services' && serviceCategoryId && !activeServiceCategory && !dataLoading && (
-            <div className="py-20 px-4 text-center min-h-[50vh]">
-              <p className="text-brand-text-muted mb-6">
-                {locale === 'uz'
-                  ? 'Xizmat topilmadi yoki o\'chirilgan.'
-                  : locale === 'ru'
-                    ? 'Услуга не найдена или была удалена.'
-                    : 'Service not found or has been removed.'}
-              </p>
-              <button
-                onClick={() => goToPage('services')}
-                className="px-5 py-2.5 bg-brand-gold text-white font-bold text-xs rounded-xl cursor-pointer"
-              >
-                {locale === 'uz' ? 'Xizmatlar ro\'yxatiga qaytish' : locale === 'ru' ? 'К списку услуг' : 'Back to services'}
-              </button>
-            </div>
+            <Navigate to={servicesListPath(locale)} replace />
           )}
 
           {currentPage === 'services' && !serviceCategoryId && (
@@ -1151,11 +1244,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             />
           )}
 
-          {!activeLocalCommercial && currentPage === 'qoqon' && !localCommercialRoute && (
+          {!activeLocalCommercial && !invalidCityCommercialSlug && currentPage === 'qoqon' && !localCommercialRoute && (
             <KokandLandingPage locale={locale} appointmentLabel={d.appointmentBtn} />
           )}
 
-          {!activeLocalCommercial && currentPage === 'fargona' && !localCommercialRoute && (
+          {!activeLocalCommercial && !invalidCityCommercialSlug && currentPage === 'fargona' && !localCommercialRoute && (
             <FerganaLandingPage locale={locale} appointmentLabel={d.appointmentBtn} />
           )}
 
@@ -1177,7 +1270,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             ))}
           {currentPage === 'dermoscan' && <DermoScanPage locale={locale} />}
           {currentPage === 'science' && <SciencePage locale={locale} />}
-          {currentPage === 'obrazovaniya' && <ObrazovaniyaPage locale={locale} />}
+          {currentPage === 'obrazovaniya' && educationProgramSlug && !activeEducationProgram && (
+            <Navigate to={pagePath(locale, 'obrazovaniya')} replace />
+          )}
+          {currentPage === 'obrazovaniya' && activeEducationProgram && (
+            <EducationProgramPage locale={locale} program={activeEducationProgram} />
+          )}
+          {currentPage === 'obrazovaniya' && !educationProgramSlug && (
+            <ObrazovaniyaPage locale={locale} />
+          )}
           {currentPage === 'malaka-oshirish' && <MalakaOshirishPage locale={locale} />}
           {currentPage === 'tele-dermatology' && <TeleDermatologyPage locale={locale} />}
           {currentPage === 'skin-pathology-center' && <SkinPathologyCenterPage locale={locale} />}

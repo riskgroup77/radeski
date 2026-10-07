@@ -145,7 +145,7 @@ function SectionBlock({ section, locale }: { section: PromoSection; locale: Loca
   const Icon = sectionIcon(section.id);
 
   return (
-    <section id={section.id} className="scroll-mt-28">
+    <section id={section.id} className="scroll-mt-2">
       <div className="flex items-center gap-2.5 mb-4">
         <span className="w-9 h-9 rounded-xl bg-brand-gold-light/15 flex items-center justify-center shrink-0">
           <Icon className="w-5 h-5 text-brand-gold" />
@@ -324,7 +324,7 @@ export default function PromoServicePage({ locale, slide, appointmentLabel }: Pr
           </div>
 
           <aside className="hidden lg:block">
-            <div className="sticky top-24 space-y-4">
+            <div className="sticky sticky-below-header space-y-4">
               <nav className="rounded-2xl border border-brand-sectiongray bg-brand-white p-4 shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-wide text-brand-text-muted mb-3">
                   {locale === 'uz' ? "Bo'limlar" : locale === 'ru' ? 'Разделы' : 'Sections'}

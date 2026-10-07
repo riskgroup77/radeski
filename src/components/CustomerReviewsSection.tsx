@@ -11,6 +11,7 @@ import {
   getGeneralReviewCategoryLabel,
   type ReviewServiceFilterId,
 } from '../utils/customerReviewServiceFilter';
+import { getReviewDisplayService, googleReviewSourceLabel } from '../utils/googleReviewMeta';
 
 interface CustomerReviewsSectionProps {
   locale: Locale;
@@ -367,9 +368,15 @@ export default function CustomerReviewsSection({
                           {getInitials(review.authorName)}
                         </div>
                         <p className="font-extrabold text-brand-text-primary text-[11px] sm:text-xs">{review.authorName}</p>
-                        {review.service?.[locale] || review.service?.uz ? (
+                        {getReviewDisplayService(review, locale) ? (
                           <span className="text-[8px] font-bold uppercase tracking-wide text-brand-gold line-clamp-1">
-                            {review.service?.[locale] || review.service?.uz}
+                            {getReviewDisplayService(review, locale)}
+                          </span>
+                        ) : null}
+                        {review.source === 'google' ? (
+                          <span className="inline-flex items-center gap-1 text-[8px] font-semibold text-brand-text-muted">
+                            <span aria-hidden="true">G</span>
+                            {googleReviewSourceLabel(locale)}
                           </span>
                         ) : null}
                         <span className="text-[8px] text-brand-text-muted font-mono">{review.date}</span>

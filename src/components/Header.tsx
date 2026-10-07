@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe, Phone, MapPin, ChevronDown, ChevronRight, Clock } from 'lucide-react';
 import { Locale, ServiceCategory, type Article } from '../types';
@@ -14,6 +14,7 @@ import {
 } from '../data/daavlinModelDeepContent';
 import SiteLogo from './SiteLogo';
 import NavSideFlyout from './NavSideFlyout';
+import NavDropdownPanel from './NavDropdownPanel';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import {
   getInstitutionalNavSection,
@@ -22,31 +23,39 @@ import {
   type InstitutionalNavSection,
 } from '../data/institutionalNavContent';
 import {
-  DERMATOLOGY_CATEGORY_ID,
-  DERMATOLOGY_CONDITION_NAV,
-} from '../data/dermatologyConditionsNav';
-import {
   PageId,
   pagePath,
   serviceCategoryPath,
   servicesListPath,
   articlesListPath,
   articlePath,
-  conditionPath,
   brandPath,
   daavlinModelPath,
   daavlinSectionPath,
   getServiceCategoryIdFromPathname,
+  getServiceSubIdFromPathname,
   getConditionSlugFromPathname,
   getArticleIdFromPathname,
   getDaavlinModelIdFromPathname,
   type DaavlinModelId,
 } from '../routing/paths';
+import {
+  categoryHasServiceNavFlyout,
+  getServiceNavFlyoutContent,
+  isServiceNavFlyoutItemActive,
+  type ServiceNavFlyoutItem,
+} from '../utils/serviceNavFlyout';
 import { buildArticleNavGroups } from '../utils/articleNavGroups';
 import { resolveArticleRouteKey } from '../utils/articles';
-import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY, getHeaderTopBarContacts } from '../config/clinicContacts';
+import { getHeaderTopBarContacts } from '../config/clinicContacts';
 import { getClinicMapOpenUrl, KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
 import { handleHomeLogoClick } from '../utils/scrollToTop';
+import {
+  NAV_SIDE_FLYOUT_SELECTOR,
+  useNavDropdownHoverZone,
+  useNavSideFlyoutController,
+} from '../utils/navDropdownHover';
+import { usePriorityNav } from '../hooks/usePriorityNav';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -59,32 +68,36 @@ interface HeaderProps {
   onOpenServiceCategory?: (categoryId: string) => void;
 }
 
+/** Scroll distance after which the contact rows collapse and the header turns compact. */
+const SCROLL_COLLAPSE_PX = 24;
+
+/** Two-line nav labels (brand subtitles) only on very wide screens; elsewhere single line. */
+const NAV_SUBTITLE_CLASS = 'hidden min-[1800px]:block';
+
 function DaavlinNavLabel({
   locale,
   size = 'nav',
-  compact = false,
 }: {
   locale: Locale;
   size?: 'nav' | 'mobile';
-  compact?: boolean;
 }) {
   const d = DICTIONARY[locale];
 
-  if (compact && size === 'nav') {
-    return <span className="whitespace-nowrap">{d.navDaavlinShort}</span>;
+  if (size === 'mobile') {
+    return (
+      <span className="inline-flex flex-col items-start text-left leading-[1.15]">
+        <span className="font-semibold">{d.navDaavlinShort}</span>
+        <span className="text-xs font-medium leading-snug">{d.navDaavlinSubtitle}</span>
+      </span>
+    );
   }
 
-  const subtitleClass =
-    size === 'mobile'
-      ? 'text-xs font-medium leading-snug'
-      : 'text-[9px] xl:text-[10px] 2xl:text-[10px] font-medium leading-snug';
-  const widthClass =
-    size === 'nav' ? 'max-w-[5.75rem] xl:max-w-[6.25rem] 2xl:max-w-[6.75rem]' : 'max-w-none';
-
   return (
-    <span className={`inline-flex flex-col items-start text-left leading-[1.12] gap-0 ${widthClass}`}>
-      <span className="font-semibold whitespace-nowrap">{d.navDaavlinShort}</span>
-      <span className={`${subtitleClass} whitespace-normal`}>{d.navDaavlinSubtitle}</span>
+    <span className="inline-flex flex-col items-start text-left leading-[1.12] min-[1800px]:max-w-[7rem]">
+      <span className="whitespace-nowrap">{d.navDaavlinShort}</span>
+      <span className={`${NAV_SUBTITLE_CLASS} text-[10px] font-medium leading-snug whitespace-normal`}>
+        {d.navDaavlinSubtitle}
+      </span>
     </span>
   );
 }
@@ -95,6 +108,18 @@ function getCompactAppointmentLabel(locale: Locale): string {
   return 'Book';
 }
 
+function getMoreLabel(locale: Locale): string {
+  if (locale === 'uz') return 'Yana';
+  if (locale === 'ru') return 'Ещё';
+  return 'More';
+}
+
+function getCityLabels(locale: Locale) {
+  if (locale === 'ru') return { fergana: 'Фергана', kokand: 'Коканд' };
+  if (locale === 'en') return { fergana: 'Fergana', kokand: 'Kokand' };
+  return { fergana: "Farg'ona", kokand: "Qo'qon" };
+}
+
 const INSTITUTIONAL_NAV_ORDER: InstitutionalNavId[] = [
   'skin-pathology-center',
   'obrazovaniya',
@@ -103,70 +128,99 @@ const INSTITUTIONAL_NAV_ORDER: InstitutionalNavId[] = [
   'tele-dermatology',
 ];
 
+/** Page nav items whose desktop trigger opens a dropdown (and shows a chevron). */
+const DROPDOWN_PAGE_IDS = new Set<PageId>(['about', 'services', 'daavlin-foto-kabinalari', 'articles']);
+
+type DesktopNavEntry =
+  | { key: string; kind: 'page'; item: { id: PageId; label: string } }
+  | { key: string; kind: 'institutional'; sectionId: InstitutionalNavId };
+
 function InstitutionalNavLabel({
   section,
   locale,
   size = 'nav',
-  compact = false,
 }: {
   section: InstitutionalNavSection;
   locale: Locale;
   size?: 'nav' | 'mobile';
-  compact?: boolean;
 }) {
   const title = section.navShort?.[locale] ?? section.label[locale];
   const subtitle = section.navSubtitle?.[locale];
 
-  if (compact || !subtitle) {
-    return <span className="whitespace-nowrap">{title}</span>;
+  if (!subtitle) {
+    return <span className={size === 'nav' ? 'whitespace-nowrap' : ''}>{title}</span>;
   }
 
-  const subtitleClass =
-    size === 'mobile'
-      ? 'text-xs font-medium leading-snug'
-      : 'text-[9px] xl:text-[10px] font-medium leading-snug';
-  const widthClass =
-    size === 'nav' ? 'max-w-[5.75rem] xl:max-w-[6.75rem] 2xl:max-w-[7.25rem]' : 'max-w-none';
+  if (size === 'mobile') {
+    return (
+      <span className="inline-flex flex-col items-start text-left leading-[1.15]">
+        <span className="font-semibold">{title}</span>
+        <span className="text-xs font-medium leading-snug">{subtitle}</span>
+      </span>
+    );
+  }
 
   return (
-    <span className={`inline-flex flex-col items-start text-left leading-[1.12] gap-0 ${widthClass}`}>
-      <span className="font-semibold whitespace-nowrap">{title}</span>
-      <span className={`${subtitleClass} whitespace-normal`}>{subtitle}</span>
+    <span className="inline-flex flex-col items-start text-left leading-[1.12] min-[1800px]:max-w-[7.25rem]">
+      <span className="whitespace-nowrap">{title}</span>
+      <span className={`${NAV_SUBTITLE_CLASS} text-[10px] font-medium leading-snug whitespace-normal`}>
+        {subtitle}
+      </span>
     </span>
   );
 }
 
-function ServiceDermConditionsDropdownRow({
+function ServiceCategoryDropdownRow({
   locale,
   category,
   isFlyoutOpen,
-  onFlyoutOpen,
-  onFlyoutClose,
+  onRowEnter,
+  onRowLeave,
   onNavigateCategory,
-  onNavigateCondition,
+  onNavigateFlyoutItem,
   itemClass,
-  conditionItemClass,
-  flyoutTitle,
+  flyoutItemClass,
+  onKeepParentOpen,
 }: {
   locale: Locale;
   category: ServiceCategory;
   isFlyoutOpen: boolean;
-  onFlyoutOpen: () => void;
-  onFlyoutClose: () => void;
+  onRowEnter: () => void;
+  onRowLeave: (event: React.MouseEvent) => void;
   onNavigateCategory: () => void;
-  onNavigateCondition: () => void;
+  onNavigateFlyoutItem: () => void;
   itemClass: string;
-  conditionItemClass: (slug: string) => string;
-  flyoutTitle: string;
+  flyoutItemClass: (item: ServiceNavFlyoutItem) => string;
+  onKeepParentOpen?: () => void;
 }) {
   const rowRef = useRef<HTMLDivElement>(null);
+  const flyoutContent = getServiceNavFlyoutContent(category, locale);
+
+  const handleRowEnter = () => {
+    onKeepParentOpen?.();
+    onRowEnter();
+  };
+
+  if (!flyoutContent) {
+    return (
+      <Link
+        to={serviceCategoryPath(locale, category.id)}
+        role="menuitem"
+        onClick={onNavigateCategory}
+        className={itemClass}
+      >
+        {category.title[locale] || category.title.uz}
+      </Link>
+    );
+  }
 
   return (
     <div
       ref={rowRef}
+      data-nav-service-row={category.id}
       className="relative overflow-visible"
-      onMouseEnter={onFlyoutOpen}
-      onMouseLeave={onFlyoutClose}
+      onMouseEnter={handleRowEnter}
+      onMouseLeave={onRowLeave}
     >
       <Link
         to={serviceCategoryPath(locale, category.id)}
@@ -178,16 +232,22 @@ function ServiceDermConditionsDropdownRow({
         <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
       </Link>
 
-      <NavSideFlyout isOpen={isFlyoutOpen} anchorRef={rowRef} title={flyoutTitle}>
-        {DERMATOLOGY_CONDITION_NAV.map((item) => (
+      <NavSideFlyout
+        isOpen={isFlyoutOpen}
+        anchorRef={rowRef}
+        title={flyoutContent.title}
+        onMouseEnter={handleRowEnter}
+        onMouseLeave={onRowLeave}
+      >
+        {flyoutContent.items.map((item) => (
           <Link
-            key={item.slug}
-            to={conditionPath(locale, item.slug)}
+            key={item.key}
+            to={item.href}
             role="menuitem"
-            onClick={onNavigateCondition}
-            className={conditionItemClass(item.slug)}
+            onClick={onNavigateFlyoutItem}
+            className={flyoutItemClass(item)}
           >
-            {item.label[locale]}
+            {item.label}
           </Link>
         ))}
       </NavSideFlyout>
@@ -199,34 +259,42 @@ function ArticleCategoryDropdownRow({
   locale,
   group,
   isFlyoutOpen,
-  onFlyoutOpen,
-  onFlyoutClose,
+  onRowEnter,
+  onRowLeave,
   onNavigateCategory,
   onNavigateArticle,
   itemClass,
   articleItemClass,
   flyoutTitle,
+  onKeepParentOpen,
 }: {
   locale: Locale;
   group: ReturnType<typeof buildArticleNavGroups>[number];
   isFlyoutOpen: boolean;
-  onFlyoutOpen: () => void;
-  onFlyoutClose: () => void;
+  onRowEnter: () => void;
+  onRowLeave: (event: React.MouseEvent) => void;
   onNavigateCategory: () => void;
   onNavigateArticle: () => void;
   itemClass: string;
   articleItemClass: (routeKey: string) => string;
   flyoutTitle: string;
+  onKeepParentOpen?: () => void;
 }) {
   const rowRef = useRef<HTMLDivElement>(null);
   const { category, articles: categoryArticles } = group;
 
+  const handleRowEnter = () => {
+    onKeepParentOpen?.();
+    onRowEnter();
+  };
+
   return (
     <div
       ref={rowRef}
+      data-nav-article-row={category.id}
       className="relative overflow-visible"
-      onMouseEnter={onFlyoutOpen}
-      onMouseLeave={onFlyoutClose}
+      onMouseEnter={handleRowEnter}
+      onMouseLeave={onRowLeave}
     >
       <Link
         to={serviceCategoryPath(locale, category.id)}
@@ -238,7 +306,13 @@ function ArticleCategoryDropdownRow({
         <ChevronRight className="w-3.5 h-3.5 shrink-0 text-brand-gold/80" />
       </Link>
 
-      <NavSideFlyout isOpen={isFlyoutOpen} anchorRef={rowRef} title={flyoutTitle}>
+      <NavSideFlyout
+        isOpen={isFlyoutOpen}
+        anchorRef={rowRef}
+        title={flyoutTitle}
+        onMouseEnter={handleRowEnter}
+        onMouseLeave={onRowLeave}
+      >
         {categoryArticles.map((article) => {
           const routeKey = resolveArticleRouteKey(article);
           return (
@@ -275,6 +349,7 @@ export default function Header({
   const [isArticlesDropdownOpen, setIsArticlesDropdownOpen] = useState(false);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isDaavlinDropdownOpen, setIsDaavlinDropdownOpen] = useState(false);
+  const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileArticlesOpen, setIsMobileArticlesOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
@@ -283,22 +358,48 @@ export default function Header({
   const [isMobileInstitutionalOpen, setIsMobileInstitutionalOpen] = useState<InstitutionalNavId | null>(
     null,
   );
-  const [isDermConditionsFlyoutOpen, setIsDermConditionsFlyoutOpen] = useState(false);
+  const [activeServiceCategoryFlyout, setActiveServiceCategoryFlyout] = useState<string | null>(null);
   const [activeArticleCategoryFlyout, setActiveArticleCategoryFlyout] = useState<string | null>(null);
-  const [isMobileDermConditionsOpen, setIsMobileDermConditionsOpen] = useState(false);
+  const [isMobileServiceFlyoutOpen, setIsMobileServiceFlyoutOpen] = useState<string | null>(null);
   const [isMobileArticleCategoryOpen, setIsMobileArticleCategoryOpen] = useState<string | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const mainRowRef = useRef<HTMLDivElement>(null);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
+  const moreCloseTimerRef = useRef<number | null>(null);
+  const articlesMenuRef = useRef<HTMLDivElement>(null);
+  const servicesMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const d = DICTIONARY[locale];
   const topBar = getHeaderTopBarContacts(locale);
+  const cityLabels = getCityLabels(locale);
   const ferganaMapUrl = topBar.ferganaMapUrl || getClinicMapOpenUrl();
   const kokandMapUrl = topBar.kokandMapUrl || KOKAND_BRANCH_MAP_OPEN_URL;
   const mapOpenLabel =
     locale === 'ru' ? 'Открыть на карте' : locale === 'en' ? 'Open in map' : 'Xaritada ochish';
+  const callLabel = locale === 'ru' ? 'Позвонить' : locale === 'en' ? 'Call' : 'Telefon';
   const activeServiceCategoryId = getServiceCategoryIdFromPathname(location.pathname);
+  const activeServiceSubId = getServiceSubIdFromPathname(location.pathname);
   const activeConditionSlug = getConditionSlugFromPathname(location.pathname);
   const activeArticleRouteKey = getArticleIdFromPathname(location.pathname);
   const activeDaavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
   const daavlinModels = DAAVLIN_NAV_LINEUP;
+
+  const branchContacts = [
+    {
+      key: 'fergana',
+      city: cityLabels.fergana,
+      address: topBar.ferganaAddress,
+      mapUrl: ferganaMapUrl,
+      phone: topBar.primaryPhone,
+    },
+    {
+      key: 'kokand',
+      city: cityLabels.kokand,
+      address: topBar.kokandAddress,
+      mapUrl: kokandMapUrl,
+      phone: topBar.kokandPhone,
+    },
+  ];
 
   const navServiceCategories = useMemo(
     () => (serviceCategories.length > 0 ? serviceCategories : SERVICE_CATEGORIES),
@@ -313,6 +414,55 @@ export default function Header({
   const articleNavGroups = useMemo(
     () => buildArticleNavGroups(navArticles, navServiceCategories),
     [navArticles, navServiceCategories],
+  );
+
+  const articleCategoryFlyout = useNavSideFlyoutController(
+    articlesMenuRef,
+    setActiveArticleCategoryFlyout,
+    300,
+  );
+
+  const closeArticlesMenu = () => {
+    articleCategoryFlyout.cancelClose();
+    setIsArticlesDropdownOpen(false);
+    setActiveArticleCategoryFlyout(null);
+  };
+
+  const serviceCategoryFlyout = useNavSideFlyoutController(
+    servicesMenuRef,
+    setActiveServiceCategoryFlyout,
+    300,
+  );
+
+  const closeServicesMenu = () => {
+    serviceCategoryFlyout.cancelClose();
+    setIsServicesDropdownOpen(false);
+    setActiveServiceCategoryFlyout(null);
+  };
+
+  const servicesMenuHover = useNavDropdownHoverZone(
+    () => {
+      setIsServicesDropdownOpen(true);
+      setIsArticlesDropdownOpen(false);
+      setActiveMegaMenu(null);
+      setIsMoreDropdownOpen(false);
+    },
+    closeServicesMenu,
+    servicesMenuRef,
+    isServicesDropdownOpen,
+    560,
+  );
+
+  const articlesMenuHover = useNavDropdownHoverZone(
+    () => {
+      setIsArticlesDropdownOpen(true);
+      setActiveMegaMenu(null);
+      setIsMoreDropdownOpen(false);
+    },
+    closeArticlesMenu,
+    articlesMenuRef,
+    isArticlesDropdownOpen,
+    560,
   );
 
   const servicesDropdownTitle =
@@ -334,19 +484,141 @@ export default function Header({
   const articlesInCategoryTitle =
     locale === 'uz' ? 'Maqolalar' : locale === 'ru' ? 'Статьи' : 'Articles';
 
-  const dermConditionsTitle =
-    locale === 'uz'
-      ? 'Dermatologik holatlar'
-      : locale === 'ru'
-        ? 'Дерматологические состояния'
-        : 'Dermatology conditions';
+  const closeAllDesktopMenus = () => {
+    closeServicesMenu();
+    closeArticlesMenu();
+    setIsAboutDropdownOpen(false);
+    setIsDaavlinDropdownOpen(false);
+    setIsMoreDropdownOpen(false);
+    setActiveMegaMenu(null);
+    setIsLangDropdownOpen(false);
+  };
+
+  // Compact header after scrolling (rAF-throttled, passive).
+  useEffect(() => {
+    let frame = 0;
+    const handleScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        setIsScrolled(window.scrollY > SCROLL_COLLAPSE_PX);
+      });
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  // Publish real header heights as CSS variables so page offsets, sticky elements and
+  // anchor scrolling follow the header on every device instead of hard-coded pixels.
+  //   --app-header-h          expanded height (page top padding) — measured at the top only
+  //   --app-header-live-h     current height (mobile menu panel)
+  //   --app-header-compact-h  main row only (sticky offsets / scroll padding while scrolled)
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    const mainRow = mainRowRef.current;
+    if (!header || !mainRow) return;
+
+    const root = document.documentElement;
+    const publish = () => {
+      const liveHeight = Math.ceil(header.getBoundingClientRect().height);
+      root.style.setProperty('--app-header-live-h', `${liveHeight}px`);
+      root.style.setProperty(
+        '--app-header-compact-h',
+        `${Math.ceil(mainRow.getBoundingClientRect().height)}px`,
+      );
+      if (window.scrollY <= SCROLL_COLLAPSE_PX) {
+        root.style.setProperty('--app-header-h', `${liveHeight}px`);
+      }
+    };
+
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(header);
+    observer.observe(mainRow);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    if (!isArticlesDropdownOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (articlesMenuRef.current?.contains(target)) return;
+      if (target instanceof Element && target.closest(NAV_SIDE_FLYOUT_SELECTOR)) return;
+      closeArticlesMenu();
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
+  }, [isArticlesDropdownOpen]);
+
+  useEffect(() => {
+    if (!isServicesDropdownOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (servicesMenuRef.current?.contains(target)) return;
+      if (target instanceof Element && target.closest(NAV_SIDE_FLYOUT_SELECTOR)) return;
+      closeServicesMenu();
+    };
+
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
+  }, [isServicesDropdownOpen]);
+
+  useEffect(() => {
+    if (!isMoreDropdownOpen) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (target instanceof Node && moreMenuRef.current?.contains(target)) return;
+      setIsMoreDropdownOpen(false);
+    };
+
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
+  }, [isMoreDropdownOpen]);
+
+  // Escape closes every open menu.
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      closeAllDesktopMenus();
+      setIsMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  });
+
+  // Lock page scroll behind the open mobile menu.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = 'hidden';
+    // Floating widgets (AI chat) hide themselves while the drawer is open.
+    root.setAttribute('data-mobile-nav-open', '');
+    return () => {
+      root.style.overflow = previous;
+      root.removeAttribute('data-mobile-nav-open');
+    };
+  }, [isMobileMenuOpen]);
+
+  // The desktop nav is hidden below lg — make sure the drawer never stays open after rotating
+  // a tablet or resizing a window up to desktop width.
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 1024px)');
+    const onChange = () => {
+      if (query.matches) setIsMobileMenuOpen(false);
+    };
+    query.addEventListener('change', onChange);
+    return () => query.removeEventListener('change', onChange);
   }, []);
 
   useEffect(() => {
@@ -358,28 +630,48 @@ export default function Header({
     setIsMobileArticlesOpen(false);
     setIsServicesDropdownOpen(false);
     setIsArticlesDropdownOpen(false);
-    setIsDermConditionsFlyoutOpen(false);
+    setActiveServiceCategoryFlyout(null);
     setActiveArticleCategoryFlyout(null);
-    setIsMobileDermConditionsOpen(false);
+    setIsMobileServiceFlyoutOpen(null);
     setIsMobileArticleCategoryOpen(null);
     setIsAboutDropdownOpen(false);
     setIsDaavlinDropdownOpen(false);
+    setIsMoreDropdownOpen(false);
     setActiveMegaMenu(null);
   }, [location.pathname]);
 
-  const navItems: { id: PageId; label: string }[] = [
-    { id: 'home', label: d.navHome },
-    { id: 'about', label: d.navAbout },
-    { id: 'services', label: d.navServices },
-    { id: 'daavlin-foto-kabinalari', label: d.navDaavlinFotoKabinalari },
-    { id: 'doctors', label: d.navDoctors },
-    { id: 'prices', label: d.navPrices },
-    { id: 'articles', label: d.navArticles },
-    { id: 'videos', label: d.navVideos },
-    { id: 'branches', label: d.navBranches },
-    { id: 'results', label: d.navResults },
-    { id: 'dermoscan', label: d.navDermoScan },
-  ];
+  const navItems = useMemo<{ id: PageId; label: string }[]>(
+    () => [
+      { id: 'home', label: d.navHome },
+      { id: 'about', label: d.navAbout },
+      { id: 'services', label: d.navServices },
+      { id: 'daavlin-foto-kabinalari', label: d.navDaavlinFotoKabinalari },
+      { id: 'doctors', label: d.navDoctors },
+      { id: 'prices', label: d.navPrices },
+      { id: 'articles', label: d.navArticles },
+      { id: 'videos', label: d.navVideos },
+      { id: 'branches', label: d.navBranches },
+      { id: 'results', label: d.navResults },
+      { id: 'dermoscan', label: d.navDermoScan },
+    ],
+    [d],
+  );
+
+  const desktopNavEntries = useMemo<DesktopNavEntry[]>(
+    () => [
+      ...navItems.map((item) => ({ key: item.id, kind: 'page' as const, item })),
+      ...INSTITUTIONAL_NAV_ORDER.map((sectionId) => ({
+        key: sectionId,
+        kind: 'institutional' as const,
+        sectionId,
+      })),
+    ],
+    [navItems],
+  );
+
+  const priorityNav = usePriorityNav(desktopNavEntries.length);
+  const visibleDesktopEntries = desktopNavEntries.slice(0, priorityNav.visibleCount);
+  const overflowDesktopEntries = desktopNavEntries.slice(priorityNav.visibleCount);
 
   const getLanguageLabel = (l: Locale) => {
     switch (l) {
@@ -395,8 +687,8 @@ export default function Header({
   const renderLanguageSwitcher = (variant: 'topbar' | 'main' = 'main') => {
     const buttonClass =
       variant === 'topbar'
-        ? 'flex items-center gap-1 px-2 py-1 rounded-md bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[10px] lg:text-[11px] xl:text-xs font-semibold text-slate-700 transition-all cursor-pointer'
-        : 'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 transition-all cursor-pointer';
+        ? 'flex items-center gap-1 px-2 py-1 rounded-md bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700 transition-colors cursor-pointer'
+        : 'flex items-center justify-center gap-1 h-10 px-2.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-sm font-bold text-slate-700 transition-colors cursor-pointer';
 
     return (
       <div className="relative shrink-0">
@@ -406,6 +698,7 @@ export default function Header({
           className={buttonClass}
           aria-expanded={isLangDropdownOpen}
           aria-haspopup="menu"
+          aria-label={getLanguageLabel(locale)}
         >
           <Globe className={variant === 'topbar' ? 'w-3.5 h-3.5 text-slate-500' : 'w-4 h-4 text-slate-500'} />
           <span>{locale.toUpperCase()}</span>
@@ -414,7 +707,7 @@ export default function Header({
         {isLangDropdownOpen && (
           <>
             <div className="fixed inset-0 z-10" onClick={() => setIsLangDropdownOpen(false)} />
-            <div className="absolute right-0 mt-2 w-36 bg-white border border-slate-150 rounded-xl shadow-xl z-20 py-1 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="absolute right-0 mt-2 w-36 bg-white border border-slate-150 rounded-xl shadow-xl z-20 py-1 overflow-hidden">
               {(['uz', 'ru', 'en'] as Locale[]).map((lang) => (
                 <button
                   key={lang}
@@ -442,17 +735,67 @@ export default function Header({
     );
   };
 
-  const navLinkClass = (page: PageId) =>
-    `px-1.5 xl:px-2 2xl:px-2.5 py-1.5 rounded-md text-[11px] xl:text-[12px] 2xl:text-[13px] font-medium transition-all cursor-pointer whitespace-nowrap leading-tight ${
-      currentPage === page || (page === 'about' && currentPage === 'brend')
+  const isPageActive = (page: PageId) =>
+    currentPage === page || (page === 'about' && currentPage === 'brend');
+
+  const isDesktopEntryActive = (entry: DesktopNavEntry) =>
+    entry.kind === 'page'
+      ? isPageActive(entry.item.id)
+      : currentPage === getInstitutionalNavSection(entry.sectionId).pageId;
+
+  // Active/open states only change colour — never weight or padding — so the measured
+  // widths used by the priority+ nav stay exact.
+  const navTriggerClass = (highlighted: boolean) =>
+    `inline-flex items-center gap-1 px-2 xl:px-2.5 py-2 rounded-lg text-[13px] 2xl:text-sm font-medium leading-tight whitespace-nowrap transition-colors cursor-pointer ${
+      highlighted
+        ? 'bg-brand-gold-light/15 text-brand-gold-dark'
+        : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-offwhite'
+    }`;
+
+  const mobileNavClass = (highlighted: boolean) =>
+    `rounded-lg font-medium transition-colors ${
+      highlighted
         ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
         : 'text-brand-text-secondary hover:text-brand-text-primary hover:bg-brand-offwhite'
     }`;
 
-  const mobileNavClass = (page: PageId) => navLinkClass(page);
-  const mobileAboutNavClass = mobileNavClass('about');
-  const mobileServicesNavClass = mobileNavClass('services');
-  const mobileDaavlinNavClass = mobileNavClass('daavlin-foto-kabinalari');
+  const navChevron = (isOpen: boolean) => (
+    <ChevronDown
+      className={`w-3 h-3 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+      aria-hidden="true"
+    />
+  );
+
+  const renderDesktopTriggerContent = (entry: DesktopNavEntry, isOpen = false) => {
+    if (entry.kind === 'institutional') {
+      const section = getInstitutionalNavSection(entry.sectionId);
+      return (
+        <>
+          <InstitutionalNavLabel section={section} locale={locale} />
+          {navChevron(isOpen)}
+        </>
+      );
+    }
+
+    const { id, label } = entry.item;
+    if (id === 'daavlin-foto-kabinalari') {
+      return (
+        <>
+          <DaavlinNavLabel locale={locale} />
+          {navChevron(isOpen)}
+        </>
+      );
+    }
+    if (DROPDOWN_PAGE_IDS.has(id)) {
+      return (
+        <>
+          {label}
+          {navChevron(isOpen)}
+        </>
+      );
+    }
+    return label;
+  };
 
   const serviceDropdownItemClass = (categoryId: string) =>
     `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite ${
@@ -461,9 +804,16 @@ export default function Header({
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
 
-  const conditionDropdownItemClass = (slug: string) =>
-    `block px-4 py-2 text-[12px] font-medium transition-colors hover:bg-brand-offwhite ${
-      activeConditionSlug === slug
+  const serviceFlyoutItemClass = (categoryId: string, item: ServiceNavFlyoutItem) =>
+    `block px-4 py-2 text-[12px] font-medium leading-snug break-words transition-colors hover:bg-brand-offwhite ${
+      isServiceNavFlyoutItemActive(
+        item,
+        categoryId,
+        activeServiceCategoryId,
+        activeConditionSlug,
+        activeServiceSubId,
+        location.hash,
+      )
         ? 'text-brand-gold-dark font-semibold bg-brand-gold-light/10'
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
@@ -475,8 +825,11 @@ export default function Header({
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
 
-  const navDropdownPanelClass =
-    'min-w-[260px] sm:min-w-[280px] max-w-[min(340px,calc(100vw-1.5rem))] max-h-[min(70vh,520px)] overflow-y-auto overscroll-contain bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200';
+  const navDropdownShellClass =
+    'w-max min-w-[260px] max-w-[min(340px,calc(100vw-1.5rem))] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2';
+
+  const navDropdownScrollClass =
+    'max-h-[min(calc(100dvh-var(--app-header-live-h)-7rem),520px)] overflow-y-auto overscroll-contain';
 
   const articleCategoryDropdownItemClass = (categoryId: string) =>
     `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite ${
@@ -486,44 +839,50 @@ export default function Header({
     }`;
 
   const renderServiceDropdownItem = (category: ServiceCategory) => {
-    if (category.id === DERMATOLOGY_CATEGORY_ID) {
+    const hasFlyout = categoryHasServiceNavFlyout(category, locale);
+    const isFlyoutOpen = activeServiceCategoryFlyout === category.id;
+
+    if (!hasFlyout) {
       return (
-        <ServiceDermConditionsDropdownRow
+        <Link
           key={category.id}
-          locale={locale}
-          category={category}
-          isFlyoutOpen={isDermConditionsFlyoutOpen}
-          onFlyoutOpen={() => setIsDermConditionsFlyoutOpen(true)}
-          onFlyoutClose={() => setIsDermConditionsFlyoutOpen(false)}
-          onNavigateCategory={() => {
+          to={serviceCategoryPath(locale, category.id)}
+          role="menuitem"
+          onClick={() => {
             onOpenServiceCategory?.(category.id);
             setIsServicesDropdownOpen(false);
-            setIsDermConditionsFlyoutOpen(false);
           }}
-          onNavigateCondition={() => {
-            setIsServicesDropdownOpen(false);
-            setIsDermConditionsFlyoutOpen(false);
-          }}
-          itemClass={serviceDropdownItemClass(category.id)}
-          conditionItemClass={conditionDropdownItemClass}
-          flyoutTitle={dermConditionsTitle}
-        />
+          className={serviceDropdownItemClass(category.id)}
+        >
+          {category.title[locale] || category.title.uz}
+        </Link>
       );
     }
 
     return (
-      <Link
+      <ServiceCategoryDropdownRow
         key={category.id}
-        to={serviceCategoryPath(locale, category.id)}
-        role="menuitem"
-        onClick={() => {
+        locale={locale}
+        category={category}
+        isFlyoutOpen={isFlyoutOpen}
+        onRowEnter={() => {
+          servicesMenuHover.keepOpen();
+          serviceCategoryFlyout.enter(category.id);
+        }}
+        onRowLeave={(event) => serviceCategoryFlyout.leave(category.id, event)}
+        onNavigateCategory={() => {
           onOpenServiceCategory?.(category.id);
           setIsServicesDropdownOpen(false);
+          setActiveServiceCategoryFlyout(null);
         }}
-        className={serviceDropdownItemClass(category.id)}
-      >
-        {category.title[locale] || category.title.uz}
-      </Link>
+        onNavigateFlyoutItem={() => {
+          setIsServicesDropdownOpen(false);
+          setActiveServiceCategoryFlyout(null);
+        }}
+        itemClass={serviceDropdownItemClass(category.id)}
+        flyoutItemClass={(item) => serviceFlyoutItemClass(category.id, item)}
+        onKeepParentOpen={servicesMenuHover.keepOpen}
+      />
     );
   };
 
@@ -537,8 +896,11 @@ export default function Header({
         locale={locale}
         group={group}
         isFlyoutOpen={isFlyoutOpen}
-        onFlyoutOpen={() => setActiveArticleCategoryFlyout(category.id)}
-        onFlyoutClose={() => setActiveArticleCategoryFlyout(null)}
+        onRowEnter={() => {
+          articlesMenuHover.keepOpen();
+          articleCategoryFlyout.enter(category.id);
+        }}
+        onRowLeave={(event) => articleCategoryFlyout.leave(category.id, event)}
         onNavigateCategory={() => {
           onOpenServiceCategory?.(category.id);
           setIsArticlesDropdownOpen(false);
@@ -551,6 +913,7 @@ export default function Header({
         itemClass={articleCategoryDropdownItemClass(category.id)}
         articleItemClass={articleDropdownItemClass}
         flyoutTitle={articlesInCategoryTitle}
+        onKeepParentOpen={articlesMenuHover.keepOpen}
       />
     );
   };
@@ -618,7 +981,9 @@ export default function Header({
   };
 
   const renderMobileServiceCategoryItem = (category: ServiceCategory) => {
-    if (category.id !== DERMATOLOGY_CATEGORY_ID) {
+    const flyoutContent = getServiceNavFlyoutContent(category, locale);
+
+    if (!flyoutContent) {
       return (
         <Link
           key={category.id}
@@ -628,55 +993,61 @@ export default function Header({
             setIsMobileServicesOpen(false);
             setIsMobileMenuOpen(false);
           }}
-          className={`px-3 py-2.5 rounded-lg text-sm transition-colors ${serviceDropdownItemClass(category.id)}`}
+          className={`px-3 py-2.5 min-h-[44px] rounded-lg text-sm transition-colors ${serviceDropdownItemClass(category.id)}`}
         >
           {category.title[locale] || category.title.uz}
         </Link>
       );
     }
 
+    const isOpen = isMobileServiceFlyoutOpen === category.id;
+
     return (
       <div key={category.id} className="rounded-lg overflow-hidden">
-        <div className="flex items-center">
+        <div className="flex items-stretch min-h-[44px]">
           <Link
             to={serviceCategoryPath(locale, category.id)}
             onClick={() => {
               onOpenServiceCategory?.(category.id);
               setIsMobileServicesOpen(false);
+              setIsMobileServiceFlyoutOpen(null);
               setIsMobileMenuOpen(false);
             }}
-            className={`flex-1 px-3 py-2.5 rounded-lg text-sm transition-colors ${serviceDropdownItemClass(category.id)}`}
+            className={`flex-1 min-w-0 px-3 py-2.5 rounded-lg text-sm leading-snug break-words transition-colors touch-manipulation ${serviceDropdownItemClass(category.id)}`}
           >
             {category.title[locale] || category.title.uz}
           </Link>
           <button
             type="button"
-            onClick={() => setIsMobileDermConditionsOpen((open) => !open)}
-            className="mr-1 rounded-lg p-2.5 text-brand-text-secondary hover:bg-brand-offwhite"
-            aria-expanded={isMobileDermConditionsOpen}
-            aria-label={dermConditionsTitle}
+            onClick={() =>
+              setIsMobileServiceFlyoutOpen((current) =>
+                current === category.id ? null : category.id,
+              )
+            }
+            className="mr-1 shrink-0 rounded-lg px-3 py-2.5 min-w-[44px] min-h-[44px] inline-flex items-center justify-center text-brand-text-secondary hover:bg-brand-offwhite touch-manipulation"
+            aria-expanded={isOpen}
+            aria-label={`${flyoutContent.title}: ${category.title[locale] || category.title.uz}`}
           >
             <ChevronDown
-              className={`w-4 h-4 transition-transform duration-200 ${
-                isMobileDermConditionsOpen ? 'rotate-180' : ''
-              }`}
+              className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
             />
           </button>
         </div>
-        {isMobileDermConditionsOpen && (
-          <div className="ml-3 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 pb-1">
-            {DERMATOLOGY_CONDITION_NAV.map((item) => (
+        {isOpen && (
+          <div className="ml-3 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 pb-1 max-h-[min(45vh,360px)] overflow-y-auto overscroll-contain">
+            {flyoutContent.items.map((item) => (
               <Link
-                key={item.slug}
-                to={conditionPath(locale, item.slug)}
+                key={item.key}
+                to={item.href}
                 onClick={() => {
-                  setIsMobileDermConditionsOpen(false);
+                  setIsMobileServiceFlyoutOpen(null);
                   setIsMobileServicesOpen(false);
                   setIsMobileMenuOpen(false);
                 }}
-                className={`px-3 py-2 rounded-lg text-xs transition-colors ${conditionDropdownItemClass(item.slug)}`}
+                className={`px-3 py-2.5 min-h-[44px] rounded-lg text-xs leading-snug break-words transition-colors touch-manipulation ${serviceFlyoutItemClass(category.id, item)}`}
+                title={item.label}
               >
-                {item.label[locale]}
+                {item.label}
               </Link>
             ))}
           </div>
@@ -692,86 +1063,71 @@ export default function Header({
         : 'text-brand-text-secondary hover:text-brand-text-primary'
     }`;
 
-  const institutionalNavClass = (pageId: PageId) =>
-    navLinkClass(pageId).replace('whitespace-nowrap', 'whitespace-normal');
-
   const institutionalDropdownItemClass = () =>
     `block px-4 py-2.5 text-[13px] font-medium transition-colors hover:bg-brand-offwhite text-brand-text-secondary hover:text-brand-text-primary`;
 
   const institutionalOverviewLabel =
     locale === 'uz' ? "Bo'lim haqida" : locale === 'ru' ? 'О разделе' : 'Section overview';
 
-  const renderInstitutionalDesktopNav = (sectionId: InstitutionalNavId) => {
+  const renderInstitutionalDesktopNav = (entry: Extract<DesktopNavEntry, { kind: 'institutional' }>) => {
+    const { sectionId } = entry;
     const section = getInstitutionalNavSection(sectionId);
-    const isActive = currentPage === section.pageId;
     const isOpen = activeMegaMenu === sectionId;
-    const sectionIndex = INSTITUTIONAL_NAV_ORDER.indexOf(sectionId);
-    const dropdownAlignRight = sectionIndex >= INSTITUTIONAL_NAV_ORDER.length - 2;
 
     return (
       <div
         key={sectionId}
-        className="relative shrink-0 overflow-visible"
+        className="relative shrink-0"
         onMouseEnter={() => {
           setActiveMegaMenu(sectionId);
           setIsServicesDropdownOpen(false);
           setIsArticlesDropdownOpen(false);
           setIsAboutDropdownOpen(false);
           setIsDaavlinDropdownOpen(false);
+          setIsMoreDropdownOpen(false);
         }}
         onMouseLeave={() => setActiveMegaMenu(null)}
       >
         <button
           type="button"
           onClick={() => onNavigate(section.pageId)}
-          className={`${institutionalNavClass(section.pageId)} inline-flex items-start gap-0.5 py-1 ${
-            isActive || isOpen
-              ? 'bg-brand-gold-light/15 text-brand-gold-dark font-semibold'
-              : ''
-          }`}
+          className={navTriggerClass(isDesktopEntryActive(entry) || isOpen)}
           aria-haspopup="menu"
           aria-expanded={isOpen}
           title={section.label[locale]}
         >
-          <InstitutionalNavLabel section={section} locale={locale} />
-          <ChevronDown
-            className={`w-3 h-3 shrink-0 mt-1 transition-transform duration-200 ${
-              isOpen ? 'rotate-180' : ''
-            }`}
-          />
+          {renderDesktopTriggerContent(entry, isOpen)}
         </button>
 
         {isOpen && (
-          <div
-            className={`absolute top-full pt-2 z-[200] overflow-visible ${
-              dropdownAlignRight ? 'right-0' : 'left-0'
-            }`}
-          >
+          <NavDropdownPanel align="right">
             <div
-              className="min-w-[260px] max-w-[320px] overflow-visible bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
+              className="w-max min-w-[260px] max-w-[320px] bg-white border border-slate-150 rounded-xl shadow-2xl py-2"
               role="menu"
             >
               <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
                 {section.dropdownTitle[locale]}
               </p>
 
-              {section.topics.length > 0 ? (
-                section.topics.map((topic) => (
-                  <Link
-                    key={topic.id}
-                    to={institutionalTopicHref(locale, section, topic)}
-                    role="menuitem"
-                    onClick={() => setActiveMegaMenu(null)}
-                    className={institutionalDropdownItemClass()}
-                  >
-                    {topic.label[locale]}
-                  </Link>
-                ))
-              ) : (
-                <p className="px-4 py-2.5 text-[12px] font-light leading-relaxed text-brand-text-secondary">
-                  {section.dropdownHint[locale]}
-                </p>
-              )}
+              <div className={navDropdownScrollClass}>
+                {section.topics.length > 0 ? (
+                  section.topics.map((topic) => (
+                    <Link
+                      key={topic.id}
+                      to={institutionalTopicHref(locale, section, topic)}
+                      role="menuitem"
+                      onClick={() => setActiveMegaMenu(null)}
+                      className={institutionalDropdownItemClass()}
+                    >
+                      {topic.label[locale]}
+                    </Link>
+                  ))
+                ) : (
+                  <p className="px-4 py-2.5 text-[12px] font-light leading-relaxed text-brand-text-secondary">
+                    {section.dropdownHint[locale]}
+                  </p>
+                )}
+              </div>
 
               <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
                 <Link
@@ -784,7 +1140,7 @@ export default function Header({
                 </Link>
               </div>
             </div>
-          </div>
+          </NavDropdownPanel>
         )}
       </div>
     );
@@ -793,13 +1149,14 @@ export default function Header({
   const renderInstitutionalMobileNav = (sectionId: InstitutionalNavId) => {
     const section = getInstitutionalNavSection(sectionId);
     const isOpen = isMobileInstitutionalOpen === sectionId;
+    const highlighted = currentPage === section.pageId;
 
     return (
       <div key={sectionId} className="rounded-lg overflow-hidden">
         <div className="flex items-center">
           <Link
             to={pagePath(locale, section.pageId)}
-            className={`flex-1 text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${institutionalNavClass(section.pageId)}`}
+            className={`flex-1 min-w-0 text-left px-4 py-3 text-base ${mobileNavClass(highlighted)}`}
           >
             <InstitutionalNavLabel section={section} locale={locale} size="mobile" />
           </Link>
@@ -808,7 +1165,7 @@ export default function Header({
             onClick={() =>
               setIsMobileInstitutionalOpen((current) => (current === sectionId ? null : sectionId))
             }
-            className={`mr-1 rounded-lg p-3 ${institutionalNavClass(section.pageId)}`}
+            className={`mr-1 shrink-0 p-3 min-w-[44px] min-h-[44px] inline-flex items-center justify-center ${mobileNavClass(highlighted)}`}
             aria-expanded={isOpen}
             aria-label={section.dropdownTitle[locale]}
           >
@@ -834,7 +1191,7 @@ export default function Header({
                     setIsMobileInstitutionalOpen(null);
                     setIsMobileMenuOpen(false);
                   }}
-                  className="px-3 py-2.5 rounded-lg text-sm text-brand-text-secondary hover:bg-brand-offwhite"
+                  className="px-3 py-2.5 min-h-[44px] rounded-lg text-sm text-brand-text-secondary hover:bg-brand-offwhite"
                 >
                   {topic.label[locale]}
                 </Link>
@@ -854,13 +1211,9 @@ export default function Header({
                 setIsMobileInstitutionalOpen(null);
                 setIsMobileMenuOpen(false);
               }}
-              className="px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+              className="px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
             >
-              {locale === 'uz'
-                ? "Bo'lim haqida"
-                : locale === 'ru'
-                  ? 'О разделе'
-                  : 'Section overview'}
+              {institutionalOverviewLabel}
             </Link>
           </div>
         )}
@@ -868,14 +1221,9 @@ export default function Header({
     );
   };
 
-  const renderDesktopNavItem = (item: { id: PageId; label: string }) => {
-    const linkClass = navLinkClass(item.id);
-    const aboutClass = navLinkClass('about');
-    const servicesClass = navLinkClass('services');
-    const daavlinClass = navLinkClass('daavlin-foto-kabinalari').replace(
-      'whitespace-nowrap',
-      'whitespace-normal',
-    );
+  const renderDesktopPageNav = (entry: Extract<DesktopNavEntry, { kind: 'page' }>) => {
+    const { item } = entry;
+    const highlighted = isDesktopEntryActive(entry);
 
     if (item.id === 'about') {
       return (
@@ -886,28 +1234,24 @@ export default function Header({
             setIsAboutDropdownOpen(true);
             setActiveMegaMenu(null);
             setIsArticlesDropdownOpen(false);
+            setIsMoreDropdownOpen(false);
           }}
           onMouseLeave={() => setIsAboutDropdownOpen(false)}
         >
           <button
             type="button"
             onClick={() => onNavigate('about')}
-            className={`${aboutClass} inline-flex items-center gap-0.5`}
+            className={navTriggerClass(highlighted || isAboutDropdownOpen)}
             aria-haspopup="menu"
             aria-expanded={isAboutDropdownOpen}
           >
-            {item.label}
-            <ChevronDown
-              className={`w-3 h-3 transition-transform duration-200 ${
-                isAboutDropdownOpen ? 'rotate-180' : ''
-              }`}
-            />
+            {renderDesktopTriggerContent(entry, isAboutDropdownOpen)}
           </button>
 
           {isAboutDropdownOpen && (
-            <div className="absolute top-full left-0 pt-2 z-[200]">
+            <NavDropdownPanel>
               <div
-                className="min-w-[280px] max-w-[340px] max-h-[min(70vh,520px)] overflow-y-auto bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
+                className="w-max min-w-[260px] max-w-[340px] bg-white border border-slate-150 rounded-xl shadow-2xl py-2"
                 role="menu"
               >
                 <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1">
@@ -926,7 +1270,7 @@ export default function Header({
                   {BRAND_NAV_OVERVIEW[locale]}
                 </Link>
               </div>
-            </div>
+            </NavDropdownPanel>
           )}
         </div>
       );
@@ -941,29 +1285,25 @@ export default function Header({
             setIsDaavlinDropdownOpen(true);
             setActiveMegaMenu(null);
             setIsArticlesDropdownOpen(false);
+            setIsMoreDropdownOpen(false);
           }}
           onMouseLeave={() => setIsDaavlinDropdownOpen(false)}
         >
           <button
             type="button"
             onClick={() => onNavigate('daavlin-foto-kabinalari')}
-            className={`${daavlinClass} inline-flex items-center gap-0.5`}
+            className={navTriggerClass(highlighted || isDaavlinDropdownOpen)}
             aria-haspopup="menu"
             aria-expanded={isDaavlinDropdownOpen}
             title={d.navDaavlinFotoKabinalari}
           >
-            <DaavlinNavLabel locale={locale} />
-            <ChevronDown
-              className={`w-2.5 h-2.5 shrink-0 transition-transform duration-200 ${
-                isDaavlinDropdownOpen ? 'rotate-180' : ''
-              }`}
-            />
+            {renderDesktopTriggerContent(entry, isDaavlinDropdownOpen)}
           </button>
 
           {isDaavlinDropdownOpen && (
-            <div className="absolute top-full left-0 pt-2 z-[200]">
+            <NavDropdownPanel>
               <div
-                className="min-w-[260px] max-w-[360px] max-h-[min(70vh,520px)] overflow-y-auto bg-white border border-slate-150 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2 duration-200"
+                className="w-max min-w-[260px] max-w-[360px] bg-white border border-slate-150 rounded-xl shadow-2xl py-2"
                 role="menu"
               >
                 <p className="px-4 py-2 text-[10px] font-semibold leading-snug text-brand-gold border-b border-brand-sectiongray/60 mb-1">
@@ -972,17 +1312,19 @@ export default function Header({
                 <p className="px-4 pb-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-gold/80">
                   {DAAVLIN_MODELS_NAV_TITLE[locale]}
                 </p>
-                {daavlinModels.map((model) => (
-                  <Link
-                    key={model.id}
-                    to={daavlinModelPath(locale, model.id as DaavlinModelId)}
-                    role="menuitem"
-                    onClick={() => setIsDaavlinDropdownOpen(false)}
-                    className={daavlinModelItemClass(model.id)}
-                  >
-                    {model.name}
-                  </Link>
-                ))}
+                <div className={navDropdownScrollClass}>
+                  {daavlinModels.map((model) => (
+                    <Link
+                      key={model.id}
+                      to={daavlinModelPath(locale, model.id as DaavlinModelId)}
+                      role="menuitem"
+                      onClick={() => setIsDaavlinDropdownOpen(false)}
+                      className={daavlinModelItemClass(model.id)}
+                    >
+                      {model.name}
+                    </Link>
+                  ))}
+                </div>
                 <div className="border-t border-brand-sectiongray/60 mt-1 pt-1">
                   <Link
                     to={daavlinSectionPath(locale, 'cabins')}
@@ -993,59 +1335,41 @@ export default function Header({
                   </Link>
                 </div>
               </div>
-            </div>
+            </NavDropdownPanel>
           )}
         </div>
       );
     }
 
-    if (item.id !== 'services' && item.id !== 'articles') {
-      return (
-        <Link key={item.id} to={pagePath(locale, item.id)} className={linkClass}>
-          {item.label}
-        </Link>
-      );
-    }
-
     if (item.id === 'articles') {
-      const articlesClass = navLinkClass('articles');
-
       return (
         <div
           key={item.id}
-          className="relative shrink-0 overflow-visible"
-          onMouseEnter={() => {
-            setIsArticlesDropdownOpen(true);
-            setActiveMegaMenu(null);
-          }}
-          onMouseLeave={() => {
-            setIsArticlesDropdownOpen(false);
-            setActiveArticleCategoryFlyout(null);
-          }}
+          ref={articlesMenuRef}
+          className="relative shrink-0"
+          onMouseEnter={articlesMenuHover.keepOpen}
+          onMouseLeave={(event) => articlesMenuHover.scheduleClose(event)}
         >
           <button
             type="button"
             onClick={() => onNavigate('articles')}
-            className={`${articlesClass} inline-flex items-center gap-0.5`}
+            className={navTriggerClass(highlighted || isArticlesDropdownOpen)}
             aria-haspopup="menu"
             aria-expanded={isArticlesDropdownOpen}
           >
-            {item.label}
-            <ChevronDown
-              className={`w-3 h-3 transition-transform duration-200 ${
-                isArticlesDropdownOpen ? 'rotate-180' : ''
-              }`}
-            />
+            {renderDesktopTriggerContent(entry, isArticlesDropdownOpen)}
           </button>
 
           {isArticlesDropdownOpen && articleNavGroups.length > 0 && (
-            <div className="absolute top-full right-0 pt-2 z-[200] overflow-visible">
-              <div className={`${navDropdownPanelClass} overflow-visible`} role="menu">
-                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1 sticky top-0 bg-white z-[1]">
+            <NavDropdownPanel className="-mt-1 pt-1">
+              <div className={navDropdownShellClass} role="menu">
+                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1 bg-white">
                   {articlesDropdownTitle}
                 </p>
-                {articleNavGroups.map((group) => renderArticleDropdownItem(group))}
-                <div className="border-t border-brand-sectiongray/60 mt-1 pt-1 sticky bottom-0 bg-white">
+                <div className={navDropdownScrollClass}>
+                  {articleNavGroups.map((group) => renderArticleDropdownItem(group))}
+                </div>
+                <div className="border-t border-brand-sectiongray/60 mt-1 pt-1 bg-white">
                   <Link
                     to={articlesListPath(locale)}
                     onClick={() => setIsArticlesDropdownOpen(false)}
@@ -1055,76 +1379,188 @@ export default function Header({
                   </Link>
                 </div>
               </div>
-            </div>
+            </NavDropdownPanel>
+          )}
+        </div>
+      );
+    }
+
+    if (item.id === 'services') {
+      return (
+        <div
+          key={item.id}
+          ref={servicesMenuRef}
+          className="relative shrink-0"
+          onMouseEnter={servicesMenuHover.keepOpen}
+          onMouseLeave={(event) => servicesMenuHover.scheduleClose(event)}
+        >
+          <button
+            type="button"
+            onClick={() => onNavigate('services')}
+            className={navTriggerClass(highlighted || isServicesDropdownOpen)}
+            aria-haspopup="menu"
+            aria-expanded={isServicesDropdownOpen}
+          >
+            {renderDesktopTriggerContent(entry, isServicesDropdownOpen)}
+          </button>
+
+          {isServicesDropdownOpen && (
+            <NavDropdownPanel className="-mt-1 pt-1">
+              <div className={navDropdownShellClass} role="menu">
+                <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1 bg-white">
+                  {servicesDropdownTitle}
+                </p>
+                <div className={navDropdownScrollClass}>
+                  {navServiceCategories.map((category) => renderServiceDropdownItem(category))}
+                </div>
+                <div className="border-t border-brand-sectiongray/60 mt-1 pt-1 bg-white">
+                  <Link
+                    to={servicesListPath(locale)}
+                    onClick={() => setIsServicesDropdownOpen(false)}
+                    className="block px-4 py-2.5 text-[12px] font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+                  >
+                    {allServicesLabel}
+                  </Link>
+                </div>
+              </div>
+            </NavDropdownPanel>
           )}
         </div>
       );
     }
 
     return (
-      <div
+      <Link
         key={item.id}
-        className="relative shrink-0 overflow-visible"
-        onMouseEnter={() => {
-          setIsServicesDropdownOpen(true);
-          setIsArticlesDropdownOpen(false);
-          setActiveMegaMenu(null);
-        }}
-        onMouseLeave={() => setIsServicesDropdownOpen(false)}
+        to={pagePath(locale, item.id)}
+        className={`${navTriggerClass(highlighted)} shrink-0`}
+        onMouseEnter={() => setActiveMegaMenu(null)}
+        onClick={
+          item.id === 'home' ? (event) => handleHomeLogoClick(event, currentPage === 'home') : undefined
+        }
       >
-        <button
-          type="button"
-          onClick={() => onNavigate('services')}
-          className={`${servicesClass} inline-flex items-center gap-0.5`}
-          aria-haspopup="menu"
-          aria-expanded={isServicesDropdownOpen}
-        >
-          {item.label}
-          <ChevronDown
-            className={`w-3 h-3 transition-transform duration-200 ${
-              isServicesDropdownOpen ? 'rotate-180' : ''
-            }`}
-          />
-        </button>
-
-        {isServicesDropdownOpen && (
-          <div className="absolute top-full left-0 pt-2 z-[200] overflow-visible">
-            <div className={`${navDropdownPanelClass} overflow-visible`} role="menu">
-              <p className="px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-brand-gold border-b border-brand-sectiongray/60 mb-1 sticky top-0 bg-white z-[1]">
-                {servicesDropdownTitle}
-              </p>
-              {navServiceCategories.map((category) => renderServiceDropdownItem(category))}
-              <div className="border-t border-brand-sectiongray/60 mt-1 pt-1 sticky bottom-0 bg-white">
-                <Link
-                  to={servicesListPath(locale)}
-                  onClick={() => setIsServicesDropdownOpen(false)}
-                  className="block px-4 py-2.5 text-[12px] font-semibold text-brand-gold hover:bg-brand-gold-light/10"
-                >
-                  {allServicesLabel}
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+        {item.label}
+      </Link>
     );
   };
 
+  const renderDesktopNavEntry = (entry: DesktopNavEntry) =>
+    entry.kind === 'page' ? renderDesktopPageNav(entry) : renderInstitutionalDesktopNav(entry);
+
+  const openMoreMenu = () => {
+    if (moreCloseTimerRef.current) window.clearTimeout(moreCloseTimerRef.current);
+    moreCloseTimerRef.current = null;
+    setIsMoreDropdownOpen(true);
+    setIsServicesDropdownOpen(false);
+    setIsArticlesDropdownOpen(false);
+    setIsAboutDropdownOpen(false);
+    setIsDaavlinDropdownOpen(false);
+    setActiveMegaMenu(null);
+  };
+
+  const scheduleMoreMenuClose = () => {
+    if (moreCloseTimerRef.current) window.clearTimeout(moreCloseTimerRef.current);
+    moreCloseTimerRef.current = window.setTimeout(() => setIsMoreDropdownOpen(false), 220);
+  };
+
+  const getDesktopEntryLink = (entry: DesktopNavEntry) => {
+    if (entry.kind === 'institutional') {
+      const section = getInstitutionalNavSection(entry.sectionId);
+      return {
+        href: pagePath(locale, section.pageId),
+        title: section.navShort?.[locale] ?? section.label[locale],
+        subtitle: section.navSubtitle?.[locale],
+      };
+    }
+    if (entry.item.id === 'daavlin-foto-kabinalari') {
+      return {
+        href: pagePath(locale, entry.item.id),
+        title: d.navDaavlinShort,
+        subtitle: d.navDaavlinSubtitle,
+      };
+    }
+    return { href: pagePath(locale, entry.item.id), title: entry.item.label, subtitle: undefined };
+  };
+
+  const moreHighlighted = overflowDesktopEntries.some(isDesktopEntryActive) || isMoreDropdownOpen;
+
+  const renderMoreMenu = () => (
+    <div
+      ref={moreMenuRef}
+      className="relative shrink-0"
+      onMouseEnter={openMoreMenu}
+      onMouseLeave={scheduleMoreMenuClose}
+    >
+      <button
+        type="button"
+        onClick={() => (isMoreDropdownOpen ? setIsMoreDropdownOpen(false) : openMoreMenu())}
+        className={navTriggerClass(moreHighlighted)}
+        aria-haspopup="menu"
+        aria-expanded={isMoreDropdownOpen}
+      >
+        {getMoreLabel(locale)}
+        {navChevron(isMoreDropdownOpen)}
+      </button>
+
+      {isMoreDropdownOpen && (
+        <NavDropdownPanel align="right">
+          <div
+            className="w-max min-w-[240px] max-w-[min(320px,calc(100vw-1.5rem))] bg-white border border-slate-150 rounded-xl shadow-2xl py-2"
+            role="menu"
+          >
+            <div className={navDropdownScrollClass}>
+              {overflowDesktopEntries.map((entry) => {
+                const link = getDesktopEntryLink(entry);
+                const active = isDesktopEntryActive(entry);
+                return (
+                  <Link
+                    key={entry.key}
+                    to={link.href}
+                    role="menuitem"
+                    onClick={() => setIsMoreDropdownOpen(false)}
+                    className={`block px-4 py-2.5 transition-colors hover:bg-brand-offwhite ${
+                      active ? 'bg-brand-gold-light/10' : ''
+                    }`}
+                  >
+                    <span
+                      className={`block text-[13px] font-semibold leading-snug ${
+                        active ? 'text-brand-gold-dark' : 'text-brand-text-primary'
+                      }`}
+                    >
+                      {link.title}
+                    </span>
+                    {link.subtitle && (
+                      <span className="block text-[11px] font-medium leading-snug text-brand-text-muted mt-0.5">
+                        {link.subtitle}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </NavDropdownPanel>
+      )}
+    </div>
+  );
+
   const renderMobileNavItem = (item: { id: PageId; label: string }) => {
+    const highlighted = isPageActive(item.id);
+
     if (item.id === 'about') {
       return (
         <div key={item.id} className="rounded-lg overflow-hidden">
           <div className="flex items-center">
             <Link
               to={pagePath(locale, 'about')}
-              className={`flex-1 text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${mobileAboutNavClass}`}
+              className={`flex-1 min-w-0 text-left px-4 py-3 text-base ${mobileNavClass(highlighted)}`}
             >
               {item.label}
             </Link>
             <button
               type="button"
               onClick={() => setIsMobileAboutOpen((open) => !open)}
-              className={`mr-1 rounded-lg p-3 ${mobileAboutNavClass}`}
+              className={`mr-1 shrink-0 p-3 min-w-[44px] min-h-[44px] inline-flex items-center justify-center ${mobileNavClass(highlighted)}`}
               aria-expanded={isMobileAboutOpen}
               aria-label={BRAND_NAV_TITLE[locale]}
             >
@@ -1146,7 +1582,7 @@ export default function Header({
                   setIsMobileAboutOpen(false);
                   setIsMobileMenuOpen(false);
                 }}
-                className="px-3 py-2.5 rounded-lg text-sm text-brand-text-secondary hover:bg-brand-offwhite"
+                className="px-3 py-2.5 min-h-[44px] rounded-lg text-sm text-brand-text-secondary hover:bg-brand-offwhite"
               >
                 {BRAND_NAV_OVERVIEW[locale]}
               </Link>
@@ -1162,14 +1598,14 @@ export default function Header({
           <div className="flex items-center">
             <Link
               to={pagePath(locale, 'daavlin-foto-kabinalari')}
-              className={`flex-1 text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${mobileDaavlinNavClass}`}
+              className={`flex-1 min-w-0 text-left px-4 py-3 text-base ${mobileNavClass(highlighted)}`}
             >
               <DaavlinNavLabel locale={locale} size="mobile" />
             </Link>
             <button
               type="button"
               onClick={() => setIsMobileDaavlinOpen((open) => !open)}
-              className={`mr-1 rounded-lg p-3 ${mobileDaavlinNavClass}`}
+              className={`mr-1 shrink-0 p-3 min-w-[44px] min-h-[44px] inline-flex items-center justify-center ${mobileNavClass(highlighted)}`}
               aria-expanded={isMobileDaavlinOpen}
               aria-label={DAAVLIN_MODELS_NAV_TITLE[locale]}
             >
@@ -1193,7 +1629,7 @@ export default function Header({
                     setIsMobileDaavlinOpen(false);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`px-3 py-2.5 rounded-lg text-sm hover:bg-brand-offwhite ${
+                  className={`px-3 py-2.5 min-h-[44px] rounded-lg text-sm hover:bg-brand-offwhite ${
                     activeDaavlinModelId === model.id
                       ? 'font-semibold text-brand-gold-dark bg-brand-gold-light/10'
                       : 'text-brand-text-secondary'
@@ -1208,7 +1644,7 @@ export default function Header({
                   setIsMobileDaavlinOpen(false);
                   setIsMobileMenuOpen(false);
                 }}
-                className="px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+                className="px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
               >
                 {DAAVLIN_MODELS_NAV_ALL[locale]}
               </Link>
@@ -1223,7 +1659,7 @@ export default function Header({
         <Link
           key={item.id}
           to={pagePath(locale, item.id)}
-          className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${mobileNavClass(item.id)}`}
+          className={`w-full text-left px-4 py-3 text-base ${mobileNavClass(highlighted)}`}
         >
           {item.label}
         </Link>
@@ -1236,7 +1672,7 @@ export default function Header({
           <div className="flex items-stretch min-h-[48px]">
             <Link
               to={articlesListPath(locale)}
-              className={`flex-1 min-w-0 text-left px-4 py-3 rounded-lg text-base font-medium transition-colors touch-manipulation ${mobileNavClass('articles')}`}
+              className={`flex-1 min-w-0 text-left px-4 py-3 text-base touch-manipulation ${mobileNavClass(highlighted)}`}
             >
               {item.label}
             </Link>
@@ -1248,7 +1684,7 @@ export default function Header({
                   setIsMobileArticleCategoryOpen(null);
                 }
               }}
-              className={`mr-1 shrink-0 rounded-lg px-3 py-3 min-w-[48px] min-h-[48px] inline-flex items-center justify-center touch-manipulation ${mobileNavClass('articles')}`}
+              className={`mr-1 shrink-0 px-3 py-3 min-w-[48px] min-h-[48px] inline-flex items-center justify-center touch-manipulation ${mobileNavClass(highlighted)}`}
               aria-expanded={isMobileArticlesOpen}
               aria-label={articlesDropdownTitle}
             >
@@ -1287,7 +1723,8 @@ export default function Header({
         <button
           type="button"
           onClick={() => setIsMobileServicesOpen((open) => !open)}
-          className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors inline-flex items-center justify-between ${mobileServicesNavClass}`}
+          className={`w-full text-left px-4 py-3 text-base inline-flex items-center justify-between ${mobileNavClass(highlighted)}`}
+          aria-expanded={isMobileServicesOpen}
         >
           <span>{item.label}</span>
           <ChevronDown
@@ -1298,7 +1735,7 @@ export default function Header({
         </button>
 
         {isMobileServicesOpen && (
-          <div className="mt-1 ml-2 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5 max-h-[50vh] overflow-y-auto">
+          <div className="mt-1 ml-2 pl-3 border-l-2 border-brand-gold/20 flex flex-col gap-0.5">
             <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-gold">
               {servicesDropdownTitle}
             </p>
@@ -1309,7 +1746,7 @@ export default function Header({
                 setIsMobileServicesOpen(false);
                 setIsMobileMenuOpen(false);
               }}
-              className="px-3 py-2.5 rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
+              className="px-3 py-2.5 min-h-[44px] rounded-lg text-sm font-semibold text-brand-gold hover:bg-brand-gold-light/10"
             >
               {allServicesLabel}
             </Link>
@@ -1319,245 +1756,242 @@ export default function Header({
     );
   };
 
+  const renderPhoneLink = (phone: { display: string; tel: string }, className = '') => (
+    <a
+      href={`tel:${phone.tel}`}
+      className={`phone-call-link shrink-0 cursor-pointer ${className}`}
+      aria-label={`${callLabel}: ${phone.display}`}
+    >
+      <span className="phone-call-link__wrap">
+        <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+        <span className="phone-call-link__number phone-call-link__number--topbar whitespace-nowrap">
+          {phone.display}
+        </span>
+      </span>
+    </a>
+  );
+
   return (
     <header
       id="main-app-header"
-      className={`fixed top-0 left-0 right-0 z-40 overflow-visible transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 sm:py-3'
-          : 'bg-white py-3 sm:py-4 border-b border-slate-100'
+      ref={headerRef}
+      className={`fixed top-0 left-0 right-0 z-40 bg-white transition-shadow duration-300 ${
+        isScrolled ? 'shadow-md' : 'border-b border-slate-100'
       }`}
     >
-      <div className="hidden sm:block w-full border-b border-slate-50 pb-2.5 mb-2.5">
-        <div className="site-container flex justify-between items-center gap-3 lg:gap-4 min-w-0">
-          <div className="header-topbar-row min-w-0 flex-1">
-            <a
-              href={ferganaMapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={mapOpenLabel}
-              className="header-topbar-row__item header-address-link text-slate-600 font-medium"
-              aria-label={`${topBar.ferganaAddress} — ${mapOpenLabel}`}
-            >
-              <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" aria-hidden="true" />
-              <span>{topBar.ferganaAddress}</span>
-            </a>
+      {/* Tablet & desktop contact bar — collapses once the page is scrolled. */}
+      <div className={`header-collapse hidden md:grid ${isScrolled ? 'is-collapsed' : ''}`} aria-hidden={isScrolled}>
+        <div className="header-collapse__inner">
+          <div className="site-container flex items-center gap-4 xl:gap-6 py-2 border-b border-slate-100 header-topbar">
+            {branchContacts.map((branch) => (
+              <div key={branch.key} className="flex items-center gap-2 xl:gap-3 min-w-0">
+                <a
+                  href={branch.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`${branch.address} — ${mapOpenLabel}`}
+                  className="header-address-link min-w-0 text-slate-600 font-medium"
+                  tabIndex={isScrolled ? -1 : undefined}
+                >
+                  <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" aria-hidden="true" />
+                  <span className="shrink-0 font-semibold text-slate-700 xl:hidden">{branch.city}</span>
+                  <span className="hidden xl:block min-w-0 truncate">{branch.address}</span>
+                </a>
+                {renderPhoneLink(branch.phone)}
+              </div>
+            ))}
 
-            <span className="header-topbar-row__divider" aria-hidden="true">
-              |
-            </span>
-
-            <a
-              href={`tel:${topBar.kokandPhone.tel}`}
-              className="header-topbar-row__item phone-call-link cursor-pointer"
-              aria-label={`${locale === 'ru' ? 'Позвонить' : locale === 'en' ? 'Call' : 'Telefon'}: ${topBar.kokandPhone.display}`}
-            >
-              <span className="phone-call-link__wrap">
-                <Phone className="w-3.5 h-3.5 shrink-0" />
-                <span className="phone-call-link__number phone-call-link__number--topbar">
-                  {topBar.kokandPhone.display}
-                </span>
+            <div className="ml-auto shrink-0 flex items-center gap-3">
+              <span className="hidden lg:inline-flex items-center gap-1.5 text-brand-gold font-semibold whitespace-nowrap">
+                <Clock className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                <span className="2xl:hidden">{d.workingHoursShort ?? d.workingHoursValue}</span>
+                <span className="hidden 2xl:inline">{d.workingHoursValue}</span>
               </span>
-            </a>
-
-            <a
-              href={`tel:${topBar.primaryPhone.tel}`}
-              className="header-topbar-row__item phone-call-link cursor-pointer"
-              aria-label={`${locale === 'ru' ? 'Позвонить' : locale === 'en' ? 'Call' : 'Telefon'}: ${topBar.primaryPhone.display}`}
-            >
-              <span className="phone-call-link__wrap">
-                <Phone className="w-3.5 h-3.5 shrink-0" />
-                <span className="phone-call-link__number phone-call-link__number--topbar">
-                  {topBar.primaryPhone.display}
-                </span>
-              </span>
-            </a>
-
-            <span className="header-topbar-row__divider" aria-hidden="true">
-              |
-            </span>
-
-            <a
-              href={kokandMapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={mapOpenLabel}
-              className="header-topbar-row__item header-address-link text-slate-600 font-medium"
-              aria-label={`${topBar.kokandAddress} — ${mapOpenLabel}`}
-            >
-              <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" aria-hidden="true" />
-              <span>{topBar.kokandAddress}</span>
-            </a>
-          </div>
-
-          <div className="shrink-0 flex items-center gap-2 lg:gap-3">
-            <span className="text-brand-gold font-semibold font-mono text-[11px] lg:text-xs xl:text-sm whitespace-nowrap">
-              {d.workingHoursValue}
-            </span>
-            {renderLanguageSwitcher('topbar')}
+              {renderLanguageSwitcher('topbar')}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="header-main-row w-full flex items-center min-h-[52px] sm:min-h-[60px] gap-2 xl:gap-3 pl-0 pr-0">
-        <div className="relative z-20 flex items-center gap-2 shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
-          <Link
-            to={pagePath(locale, 'home')}
-            onClick={(event) => {
-              if (currentPage === 'home') {
-                handleHomeLogoClick(event, true);
-              } else {
-                onNavigate('home');
-              }
-            }}
-            className="relative z-20 flex items-center cursor-pointer group shrink-0"
-          >
-            <SiteLogo variant="header" className="group-hover:opacity-90 transition-opacity" />
-          </Link>
+      <div
+        ref={mainRowRef}
+        className="site-container flex items-center gap-1.5 min-[360px]:gap-2 lg:gap-3 h-[60px] lg:h-[68px]"
+      >
+        <Link
+          to={pagePath(locale, 'home')}
+          onClick={(event) => {
+            if (currentPage === 'home') {
+              handleHomeLogoClick(event, true);
+            } else {
+              onNavigate('home');
+            }
+          }}
+          onMouseEnter={() => setActiveMegaMenu(null)}
+          className="relative flex items-center cursor-pointer group shrink-0"
+          aria-label="Radeski Skin Clinic"
+        >
+          <SiteLogo variant="header" className="group-hover:opacity-90 transition-opacity" />
+        </Link>
 
-          <AppointmentBookingLink className="sm:hidden header-appointment-btn header-appointment-btn--compact bg-brand-gold hover:bg-brand-gold-dark text-white rounded-lg active:scale-[0.98] transition-colors cursor-pointer no-underline shrink-0">
-            {getCompactAppointmentLabel(locale)}
-          </AppointmentBookingLink>
-        </div>
+        <nav
+          ref={priorityNav.containerRef}
+          className="relative hidden lg:flex flex-1 min-w-0 items-center justify-center"
+          aria-label={locale === 'ru' ? 'Основное меню' : locale === 'en' ? 'Main menu' : 'Asosiy menyu'}
+        >
+          <div className="flex items-center gap-0.5 xl:gap-1">
+            {visibleDesktopEntries.map(renderDesktopNavEntry)}
+            {overflowDesktopEntries.length > 0 && renderMoreMenu()}
+          </div>
 
-        <nav className="relative z-30 hidden xl:flex items-center justify-center gap-0 flex-1 min-w-0 px-1 overflow-visible">
-          {navItems.map((item) => (
-            <div key={item.id} className="shrink-0" onMouseEnter={() => setActiveMegaMenu(null)}>
-              {renderDesktopNavItem(item)}
+          {/* Invisible measuring row for the priority+ nav (same markup and classes as the triggers). */}
+          <div className="absolute inset-0 overflow-hidden invisible pointer-events-none" aria-hidden="true">
+            <div ref={priorityNav.measureRef} className="flex w-max items-center gap-0.5 xl:gap-1">
+              {desktopNavEntries.map((entry) => (
+                <span key={entry.key} className={`${navTriggerClass(isDesktopEntryActive(entry))} shrink-0`}>
+                  {renderDesktopTriggerContent(entry)}
+                </span>
+              ))}
+              <span data-nav-more="" className={`${navTriggerClass(false)} shrink-0`}>
+                {getMoreLabel(locale)}
+                {navChevron(false)}
+              </span>
             </div>
-          ))}
-          {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalDesktopNav(sectionId))}
+          </div>
         </nav>
 
-        <div className="hidden sm:flex items-center shrink-0 ml-auto" onMouseEnter={() => setActiveMegaMenu(null)}>
-          <AppointmentBookingLink className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--nav bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl active:scale-[0.98] transition-colors cursor-pointer no-underline">
-            {d.appointmentBtn}
-          </AppointmentBookingLink>
-        </div>
+        <div
+          className="ml-auto lg:ml-0 flex items-center gap-1.5 min-[360px]:gap-2 shrink-0"
+          onMouseEnter={() => setActiveMegaMenu(null)}
+        >
+          <div className="hidden min-[360px]:block md:hidden">{renderLanguageSwitcher('main')}</div>
 
-        <div className="flex sm:hidden items-center gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={() => {
-              const list: Locale[] = ['uz', 'ru', 'en'];
-              const nextIndex = (list.indexOf(locale) + 1) % list.length;
-              onChangeLocale(list[nextIndex]);
-            }}
-            className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 text-sm font-bold text-slate-700"
-          >
-            {locale.toUpperCase()}
-          </button>
+          <AppointmentBookingLink className="sm:hidden header-appointment-btn header-appointment-btn--compact bg-brand-gold hover:bg-brand-gold-dark text-white rounded-lg active:scale-[0.98] transition-colors cursor-pointer no-underline">
+            {getCompactAppointmentLabel(locale)}
+          </AppointmentBookingLink>
+
+          {/* Wrapper owns visibility: .cta-pulse-ring sets display and would override `hidden`. */}
+          <div className="hidden sm:block">
+            <AppointmentBookingLink className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--nav bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl active:scale-[0.98] transition-colors cursor-pointer no-underline">
+              {d.appointmentBtn}
+            </AppointmentBookingLink>
+          </div>
 
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
-            aria-label="Menu"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 cursor-pointer"
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-nav-panel"
           >
-            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
+      </div>
 
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="hidden sm:inline-flex xl:hidden p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer shrink-0"
-          aria-label="Menu"
-        >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+      {/* Phone contact strip — one compact row, collapses once the page is scrolled. */}
+      <div
+        className={`header-collapse grid md:hidden ${isScrolled || isMobileMenuOpen ? 'is-collapsed' : ''}`}
+        aria-hidden={isScrolled}
+      >
+        <div className="header-collapse__inner">
+          <div className="site-container grid grid-cols-2 gap-2 pb-2">
+            {branchContacts.map((branch) => (
+              <a
+                key={branch.key}
+                href={`tel:${branch.phone.tel}`}
+                className="flex flex-col items-center justify-center min-w-0 rounded-lg border border-brand-gold/20 bg-brand-gold-light/5 px-1 py-1.5 leading-tight no-underline"
+                aria-label={`${callLabel} ${branch.city}: ${branch.phone.display}`}
+                tabIndex={isScrolled ? -1 : undefined}
+              >
+                <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+                  <Phone className="w-3 h-3 text-brand-gold" aria-hidden="true" />
+                  {branch.city}
+                </span>
+                <span className="phone-call-link__number text-[11px] min-[380px]:text-[12px] tracking-normal whitespace-nowrap">
+                  {branch.phone.display}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       {isMobileMenuOpen && (
-        <div className="xl:hidden absolute top-full left-0 right-0 bg-white border-b border-slate-150 shadow-xl py-4 px-4 animate-in fade-in slide-in-from-top-3 duration-200 max-h-[min(85vh,800px)] overflow-y-auto overscroll-contain header-mobile-nav-panel">
-          <nav className="flex flex-col gap-1 mb-4">
-            {navItems.map((item) => renderMobileNavItem(item))}
-            {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalMobileNav(sectionId))}
-          </nav>
+        <>
+          <div
+            className="lg:hidden fixed inset-x-0 bottom-0 top-(--app-header-live-h) bg-slate-900/30"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            id="mobile-nav-panel"
+            className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-xl max-h-[calc(100dvh-var(--app-header-live-h))] overflow-y-auto overscroll-contain header-mobile-nav-panel"
+          >
+            <div className="site-container py-4">
+              <div className="flex items-center justify-between gap-3 mb-3 min-[360px]:hidden">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  <Globe className="inline w-3.5 h-3.5 mr-1 -mt-0.5" aria-hidden="true" />
+                  {getLanguageLabel(locale)}
+                </span>
+                <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-0.5">
+                  {(['uz', 'ru', 'en'] as Locale[]).map((lang) => (
+                    <button
+                      key={lang}
+                      type="button"
+                      onClick={() => onChangeLocale(lang)}
+                      className={`px-3 py-1.5 rounded-md text-xs font-bold uppercase ${
+                        lang === locale ? 'bg-white text-brand-gold-dark shadow-sm' : 'text-slate-600'
+                      }`}
+                      aria-pressed={lang === locale}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-          <div className="border-t border-brand-sectiongray pt-4 flex flex-col gap-3">
-            <div className="grid grid-cols-1 gap-2">
-              <a
-                href={`tel:${CLINIC_PHONE_KOKAND.tel}`}
-                className="phone-call-link w-full justify-center py-3 text-sm border border-brand-gold/25 rounded-xl bg-brand-gold-light/5 hover:bg-brand-gold-light/10 cursor-pointer"
-              >
-                <span className="phone-call-link__wrap">
-                  <Phone className="w-4 h-4 shrink-0" />
-                  <span className="phone-call-link__number text-sm">{CLINIC_PHONE_KOKAND.display}</span>
-                </span>
-              </a>
-              <a
-                href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
-                className="phone-call-link w-full justify-center py-3 text-sm border border-brand-gold/25 rounded-xl bg-brand-gold-light/5 hover:bg-brand-gold-light/10 cursor-pointer"
-              >
-                <span className="phone-call-link__wrap">
-                  <Phone className="w-4 h-4 shrink-0" />
-                  <span className="phone-call-link__number text-sm">{CLINIC_PHONE_PRIMARY.display}</span>
-                </span>
-              </a>
+              <nav className="flex flex-col gap-1 mb-4">
+                {navItems.map((item) => renderMobileNavItem(item))}
+                {INSTITUTIONAL_NAV_ORDER.map((sectionId) => renderInstitutionalMobileNav(sectionId))}
+              </nav>
+
+              <div className="border-t border-brand-sectiongray pt-4 flex flex-col gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {branchContacts.map((branch) => (
+                    <div
+                      key={branch.key}
+                      className="rounded-xl border border-brand-gold/25 bg-brand-gold-light/5 p-3 flex flex-col gap-2 min-w-0"
+                    >
+                      <a
+                        href={branch.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="header-address-link items-start text-[13px] text-slate-700 leading-snug"
+                        title={mapOpenLabel}
+                      >
+                        <MapPin className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
+                        <span className="min-w-0 break-words">{branch.address}</span>
+                      </a>
+                      {renderPhoneLink(branch.phone, 'self-start')}
+                    </div>
+                  ))}
+                </div>
+                <p className="flex items-start gap-1.5 text-xs text-slate-600 leading-snug">
+                  <Clock className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>{d.workingHoursValue}</span>
+                </p>
+                <AppointmentBookingLink
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--mobile w-full bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl text-center transition-colors no-underline"
+                >
+                  {d.appointmentBtn}
+                </AppointmentBookingLink>
+              </div>
             </div>
-            <AppointmentBookingLink
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="cta-pulse-ring cta-pulse-ring--button header-appointment-btn header-appointment-btn--mobile w-full bg-brand-gold hover:bg-brand-gold-dark text-white rounded-xl text-center transition-colors no-underline"
-            >
-              {d.appointmentBtn}
-            </AppointmentBookingLink>
           </div>
-        </div>
+        </>
       )}
-
-      <div className="sm:hidden border-t border-slate-100 bg-slate-50/95">
-        <div className="site-container py-2.5 flex flex-col gap-2">
-          <a
-            href={ferganaMapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={mapOpenLabel}
-            className="header-address-link flex items-start justify-center gap-1.5 text-[11px] text-slate-700 text-center leading-snug px-1"
-            aria-label={`${topBar.ferganaAddress} — ${mapOpenLabel}`}
-          >
-            <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
-            <span>{topBar.ferganaAddress}</span>
-          </a>
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            <a
-              href={`tel:${CLINIC_PHONE_KOKAND.tel}`}
-              className="phone-call-link phone-call-link--subheader"
-              aria-label={`${CLINIC_PHONE_KOKAND.display}`}
-            >
-              <span className="phone-call-link__wrap">
-                <Phone className="w-4 h-4 shrink-0" />
-                <span className="phone-call-link__number text-sm whitespace-nowrap">{CLINIC_PHONE_KOKAND.display}</span>
-              </span>
-            </a>
-            <a
-              href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
-              className="phone-call-link phone-call-link--subheader"
-              aria-label={`${CLINIC_PHONE_PRIMARY.display}`}
-            >
-              <span className="phone-call-link__wrap">
-                <Phone className="w-4 h-4 shrink-0" />
-                <span className="phone-call-link__number text-sm whitespace-nowrap">{CLINIC_PHONE_PRIMARY.display}</span>
-              </span>
-            </a>
-          </div>
-          <a
-            href={kokandMapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={mapOpenLabel}
-            className="header-address-link flex items-start justify-center gap-1.5 text-[11px] text-slate-700 text-center leading-snug px-1"
-            aria-label={`${topBar.kokandAddress} — ${mapOpenLabel}`}
-          >
-            <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
-            <span>{topBar.kokandAddress}</span>
-          </a>
-          <p className="flex items-start justify-center gap-1.5 text-[11px] sm:text-xs text-slate-600 text-center leading-snug px-1">
-            <Clock className="w-3.5 h-3.5 text-brand-gold shrink-0 mt-0.5" aria-hidden="true" />
-            <span>{d.workingHoursShort ?? d.workingHoursValue}</span>
-          </p>
-        </div>
-      </div>
     </header>
   );
 }

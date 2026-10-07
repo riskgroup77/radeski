@@ -90,6 +90,12 @@ async function safeApi<T>(label: string, fn: () => Promise<T>, fallback: T): Pro
   }
 }
 
+function mergeCatalogVideos(apiVideos: ClinicVideo[], catalog: ClinicVideo[]): ClinicVideo[] {
+  if (apiVideos.length === 0) return mapApiClinicVideos(catalog);
+  // API mavjud bo'lsa — faqat API; statik katalog qo'shilmasin (kontent takrorlanmasin).
+  return mapApiClinicVideos(apiVideos);
+}
+
 export function useCmsData(): CmsDataState {
   const [partners, setPartners] = useState<ClinicPartner[]>(CLINIC_PARTNERS);
   const [reviews, setReviews] = useState<CustomerReview[]>(CUSTOMER_REVIEWS);
@@ -145,7 +151,7 @@ export function useCmsData(): CmsDataState {
     );
     setVideos(
       videosRes.length > 0
-        ? mapApiClinicVideos(videosRes.map(mapClinicVideoFromApi))
+        ? mergeCatalogVideos(videosRes.map(mapClinicVideoFromApi), CLINIC_VIDEOS)
         : mapApiClinicVideos(CLINIC_VIDEOS),
     );
     setClinicRatings(

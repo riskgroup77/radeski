@@ -1,24 +1,26 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { CheckCircle2, ChevronRight, Phone } from 'lucide-react';
 import type { Locale } from '../types';
 import { MALAKA_OSHIRISH } from '../data/malakaOshirishContent';
-import MediaImage from './MediaImage';
-import PageHeroBanner from './PageHeroBanner';
+import EducationMediaFrame from './EducationMediaFrame';
+import EducationOverlayHero from './EducationOverlayHero';
 import { openAppointmentBooking } from '../config/links';
+import { educationProgramPath, type EducationProgramId } from '../utils/educationPrograms';
 
 interface MalakaOshirishPageProps {
   locale: Locale;
 }
 
 const IMG = {
-  hero: '/malaka-oshirish/malaka-hero.webp',
-  workshop: '/malaka-oshirish/malaka-workshop.webp',
-  masterclass: '/malaka-oshirish/malaka-masterclass.webp',
-  dermoscopy: '/malaka-oshirish/malaka-dermoscopy.webp',
-  laser: '/malaka-oshirish/malaka-laser.webp',
-  certificate: '/malaka-oshirish/malaka-certificate.webp',
-  youngDoctors: '/malaka-oshirish/malaka-young-doctors.webp',
-  international: '/malaka-oshirish/malaka-international.webp',
+  hero: '/malaka-oshirish/malaka-hero-v2.webp',
+  workshop: '/malaka-oshirish/malaka-workshop-v2.webp',
+  masterclass: '/malaka-oshirish/malaka-masterclass-v2.webp',
+  dermoscopy: '/malaka-oshirish/malaka-dermoscopy-v2.webp',
+  laser: '/malaka-oshirish/malaka-laser-v2.webp',
+  certificate: '/malaka-oshirish/malaka-certificate-v2.webp',
+  youngDoctors: '/malaka-oshirish/malaka-young-doctors-v2.webp',
+  international: '/malaka-oshirish/malaka-international-v2.webp',
 } as const;
 
 const PROGRAM_IMAGES: Record<string, string> = {
@@ -28,6 +30,15 @@ const PROGRAM_IMAGES: Record<string, string> = {
   'hands-on-training': IMG.workshop,
   'laser-training': IMG.laser,
   'international-programs': IMG.international,
+};
+
+const MALAKA_PROGRAM_LINKS: Partial<Record<string, EducationProgramId>> = {
+  'certification-courses': 'certification-courses',
+  residency: 'residency',
+  masterclasses: 'masterclasses',
+  'hands-on-training': 'hands-on-training',
+  'laser-training': 'laser-training',
+  'international-programs': 'international-programs',
 };
 
 function SectionHeading({ eyebrow, title }: { eyebrow?: string; title: string }) {
@@ -50,16 +61,17 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
 
   return (
     <section id="malaka-oshirish-page" className="min-h-screen bg-brand-offwhite pb-12 sm:pb-16">
-      <PageHeroBanner
+      <EducationOverlayHero
         image={IMG.hero}
-        badge={c.eyebrow[locale]}
+        imageAlt={c.title[locale]}
+        eyebrow={c.eyebrow[locale]}
         title={c.title[locale]}
         titleAccent={c.subtitle[locale]}
         description={c.heroIntro[locale]}
       />
 
       <div className="mb-10 border-b border-brand-sectiongray bg-brand-white sm:mb-14">
-        <div className="site-container p-6 sm:p-8">
+        <div className="site-container py-6 sm:py-8">
           <p className="max-w-3xl border-l-4 border-brand-gold pl-4 text-sm font-light leading-relaxed text-brand-text-secondary sm:pl-5 sm:text-base">
             {c.heroDescription[locale]}
           </p>
@@ -76,10 +88,9 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
           viewport={{ once: true }}
           className="mb-12 overflow-hidden rounded-3xl border border-brand-gold/25 bg-brand-white shadow-sm sm:mb-16"
         >
-          <div className="relative min-h-[160px] sm:min-h-[200px]">
-            <MediaImage src={IMG.dermoscopy} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <EducationMediaFrame src={IMG.dermoscopy} alt="" variant="banner" imageClassName="object-[center_40%]">
             <div className="absolute inset-0 bg-brand-dark-navy/82" />
-            <div className="relative p-6 sm:p-8">
+            <div className="relative flex h-full flex-col justify-end p-6 sm:p-8">
               <p className="mb-4 text-xs font-bold uppercase tracking-widest text-brand-gold">
                 {c.formulaTitle[locale]}
               </p>
@@ -96,7 +107,7 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
                 ))}
               </div>
             </div>
-          </div>
+          </EducationMediaFrame>
         </motion.div>
 
         <motion.article
@@ -106,14 +117,12 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
           className="mb-12 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm sm:mb-16"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="relative min-h-[240px] bg-brand-offwhite lg:min-h-[420px]">
-              <MediaImage
-                src={IMG.youngDoctors}
-                alt={c.forWho.title[locale]}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
+            <EducationMediaFrame
+              src={IMG.youngDoctors}
+              alt={c.forWho.title[locale]}
+              variant="split"
+              className="bg-brand-offwhite"
+            />
             <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
               <SectionHeading eyebrow={c.forWho.title[locale]} title={c.forWho.question[locale]} />
               <p className="mb-5 text-sm font-light leading-relaxed text-brand-text-secondary sm:text-base">
@@ -155,14 +164,12 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
                 ))}
               </ul>
             </div>
-            <div className="relative order-1 min-h-[240px] bg-brand-offwhite lg:order-2 lg:min-h-[380px]">
-              <MediaImage
-                src={IMG.workshop}
-                alt={c.advantages.title[locale]}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-              />
-            </div>
+            <EducationMediaFrame
+              src={IMG.workshop}
+              alt={c.advantages.title[locale]}
+              variant="split"
+              className="order-1 bg-brand-offwhite lg:order-2"
+            />
           </div>
         </motion.article>
 
@@ -176,28 +183,27 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                className="scroll-mt-28 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm"
+                className="scroll-mt-2 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm"
               >
                 <div
                   className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''}`}
                 >
-                  <div className="relative min-h-[220px] bg-brand-offwhite lg:min-h-[320px]">
-                    <MediaImage
-                      src={PROGRAM_IMAGES[item.id]}
-                      alt={item.title[locale]}
-                      className="absolute inset-0 h-full w-full object-cover"
-                      loading="lazy"
-                    />
+                  <EducationMediaFrame
+                    src={PROGRAM_IMAGES[item.id]}
+                    alt={item.title[locale]}
+                    variant="split"
+                    className="bg-brand-offwhite"
+                  >
                     <div className="absolute left-4 top-4 rounded-xl bg-brand-dark-navy/85 px-3 py-1.5">
                       <span className="text-sm font-extrabold text-brand-gold">{item.num}</span>
                     </div>
-                  </div>
+                  </EducationMediaFrame>
                   <div className="flex flex-col justify-center p-5 sm:p-6 lg:p-8">
                     <h3 className="mb-3 text-lg font-extrabold text-brand-text-primary">{item.title[locale]}</h3>
                     <p className="mb-4 text-sm font-light leading-relaxed text-brand-text-secondary">
                       {item.description[locale]}
                     </p>
-                    <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <ul className="mb-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
                       {item.bullets.map((bullet) => (
                         <li key={bullet.uz} className="flex items-start gap-2 text-sm font-light text-brand-text-secondary">
                           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" />
@@ -205,6 +211,19 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
                         </li>
                       ))}
                     </ul>
+                    {MALAKA_PROGRAM_LINKS[item.id] ? (
+                      <Link
+                        to={educationProgramPath(locale, MALAKA_PROGRAM_LINKS[item.id]!)}
+                        className="inline-flex items-center gap-2 rounded-xl bg-brand-gold px-4 py-2.5 text-sm font-bold text-white no-underline transition-colors hover:bg-brand-gold-dark"
+                      >
+                        {locale === 'uz'
+                          ? "To'liq dastur sahifasi"
+                          : locale === 'ru'
+                            ? 'Страница программы'
+                            : 'Program page'}
+                        <ChevronRight className="h-4 w-4" />
+                      </Link>
+                    ) : null}
                   </div>
                 </div>
               </motion.article>

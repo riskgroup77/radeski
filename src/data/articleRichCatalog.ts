@@ -38,6 +38,22 @@ import { HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG } from './articles/hollywoodSpe
 import { MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG } from './articles/morpheus8RfLiftingArticle';
 import { DEKA_CO2_SCARS_ARTICLE_CATALOG } from './articles/dekaCo2ScarsArticle';
 import { LAZER_EPILYATSIYA_MISTAKES_ARTICLE_CATALOG } from './articles/lazerEpilyatsiyaMistakesArticle';
+import { ALOPECIA_AREATA_KLINIK_HOLAT_ARTICLE_CATALOG } from './articles/alopeciaAreataKlinikHolatArticle';
+import { FIZIOTERAPIYA_DERMATOVENEREOLOGIYA_ARTICLE_CATALOG } from './articles/fizioterapiyaDermatovenereologiyaArticle';
+import { BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG } from './articles/biorevitalizatsiyaRadeskiArticle';
+import { BOTULINOTERAPIYA_RADESKI_ARTICLE_CATALOG } from './articles/botulinoterapiyaRadeskiArticle';
+import { DERMATOPATOLOGIYA_RADESKI_ARTICLE_CATALOG } from './articles/dermatopatologiyaRadeskiArticle';
+import { PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE_CATALOG } from './articles/photoFinderDiagnostikaRadeskiArticle';
+import { DNEVNOJ_STACIONAR_RADESKI_ARTICLE_CATALOG } from './articles/dnevnojStacionarRadeskiArticle';
+import { IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE_CATALOG } from './articles/immunobiologiyaTerapiyaRadeskiArticle';
+import { KONTURnaya_GUBY_RADESKI_ARTICLE_CATALOG } from './articles/konturnayaGubyRadeskiArticle';
+import { SOCH_TOKILISHI_PROFILAKTIKA_RADESKI_ARTICLE_CATALOG } from './articles/sochTokilishiProfilaktikaRadeskiArticle';
+import { PSORIAZ_KLINIK_KEYS_BAHRIDINOV_RADESKI_ARTICLE_CATALOG } from './articles/psoriazKlinikKeysBahridinovRadeskiArticle';
+import { KLINIKA_PATOLOGII_NOGTEJ_RADESKI_ARTICLE_CATALOG } from './articles/klinikaPatologiiNogtejRadeskiArticle';
+import { KLINICHESKOE_ISSLEDOVANIE_RADESKI_ARTICLE_CATALOG } from './articles/klinicheskoeIssledovanieRadeskiArticle';
+import { KONTUR_PLASTIKA_RADESKI_ARTICLE_CATALOG } from './articles/konturPlastikaRadeskiArticle';
+import { LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG } from './articles/lazerBiorevitalizatsiyaRadeskiArticle';
+import { NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE_CATALOG } from './articles/normalVsPathologicalHairLossRadeskiArticle';
 
 type LocalizedArticleCatalog = Record<
   Locale,
@@ -382,6 +398,142 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'trixoskopiya',
     'компьютерная трихоскопия',
     'diagnosis of hair-loss causes',
+  ],
+  'fizioterapiya-dermatovenereologiya': [
+    'fizioterapiya-dermatologiyada',
+    'art-fizioterapiya-dermatovenereologiya',
+    'fizioterapiya dermatovenerologiyada',
+    'физиотерапия в дерматовенерологии',
+    'physiotherapy in dermatovenereology',
+    'darsonval uhf magnitoterapiya',
+    'past intensivlikdagi lazer',
+  ],
+  'biorevitalizatsiya-radeski': [
+    'biorevitalizatsiya-gialuron-kislota-radeski',
+    'art-biorevitalizatsiya-radeski',
+    'biorevitalizatsiya gialuron kislotasi',
+    'биоревитализация гиалуроновая кислота',
+    'biorevitalization hyaluronic acid',
+    'inyeksion biorevitalizatsiya',
+    'инъекционная биоревитализация',
+  ],
+  'botulinoterapiya-radeski': [
+    'botulinoterapiya-mimik-ajinlar-radeski',
+    'art-botulinoterapiya-radeski',
+    'botulinoterapiya botoks dysport',
+    'ботулинотерапия ботокс диспорт',
+    'botulinum therapy botox',
+    'mimik ajinlar botoks',
+    'мимические морщины ботокс',
+    'kseomin relatoks',
+  ],
+  'dermatopatologiya-radeski': [
+    'dermatopatologiya-gistologiya-radeski',
+    'art-dermatopatologiya-radeski',
+    'dermatopatologiya gistologiya',
+    'дерматопатология гистология',
+    'dermatopathology histology',
+    'teri biopsiyasi gistologiya',
+    'melanoma breslow clark',
+    'immunogistokimyoviy tahlil',
+  ],
+  'photofinder-diagnostika-radeski': [
+    'photofinder-novoobrazovaniya-diagnostika-radeski',
+    'art-photofinder-diagnostika-radeski',
+    'photofinder diagnostika',
+    'fotofinder novoobrazovaniya',
+    'photoFinder teri osmalar',
+    'dermatoskopiya mapping',
+  ],
+  'dnevnoj-stacionar-radeski': [
+    'dnevnoj-stacionar-radeski',
+    'art-dnevnoj-stacionar-radeski',
+    'dnevnoj stacionar',
+    'дневной стационар',
+    'day hospital dermatology',
+    'kunduzgi statsionar',
+  ],
+  'immunobiologiya-radeski': [
+    'immunobiologik-terapiya-radeski',
+    'art-immunobiologiya-terapiya-radeski',
+    'immunobiologik terapiya stelara',
+    'immunobiologicheskaya terapiya',
+    'ustekinumab psoriaz',
+    'biologicheskie preparaty psoriaz',
+  ],
+  'konturnaya-guby-radeski': [
+    'konturnaya-plastika-guby-radeski',
+    'art-konturnaya-guby-radeski',
+    'uvelichenie gub gialuronka',
+    'lab hajmi filler',
+    'surgiderm 30xp guby',
+    'parizhskie guby',
+  ],
+  'soch-profilaktika-inyeksii-radeski': [
+    'soch-tokilishi-profilaktika-inyeksii-radeski',
+    'art-soch-profilaktika-inyeksii-radeski',
+    'vypadenie volos profilaktika',
+    'soch tokilishi inyeksiya',
+    'mezoterapiya volos prp',
+    'vitaminy ot vypadeniya volos',
+  ],
+  'psoriaz-klinik-keys-bahridinov-radeski': [
+    'psoriaz-klinik-keys-bahridinov-radeski',
+    'art-psoriaz-klinik-keys-bahridinov-radeski',
+    'psoriaz klinik holat',
+    'psoriaz bahridinov',
+    'klinicheskiy sluchay psoriaz',
+    'uva 308 psoriaz',
+    'kalsipotriol psoriaz',
+  ],
+  'klinika-patologii-nogtej-stopy-radeski': [
+    'klinika-patologii-nogtej-stopy-radeski',
+    'art-klinika-patologii-nogtej-stopy-radeski',
+    'podolog podiatr',
+    'onixokriptoz podofix',
+    'tibbiy pedikyur',
+    'skoba frezera',
+  ],
+  'klinicheskoe-issledovanie-radeski': [
+    'klinicheskoe-issledovanie-radeski',
+    'art-klinicheskoe-issledovanie-radeski',
+    'klinicheskie issledovaniya',
+    'gcp sertifikat',
+    'faza klinicheskih ispytaniy',
+  ],
+  'kontur-plastika-radeski': [
+    'kontur-plastika-gialuron-radeski',
+    'art-kontur-plastika-radeski',
+    'kontur plastika filler',
+    'surgiderm 30xp',
+    'parizhskie guby',
+  ],
+  'lazer-biorevitalizatsiya-radeski': [
+    'lazer-biorevitalizatsiya-radeski',
+    'art-lazer-biorevitalizatsiya-radeski',
+    'lazer biorevitalizatsiya',
+    'bezinektsionnaya biorevitalizatsiya',
+    'atermal lazer',
+  ],
+  'soch-tokilishi-normal-patologiya-radeski': [
+    'soch-tokilishi-normal-va-patologiya-radeski',
+    'art-soch-tokilishi-normal-patologiya-radeski',
+    'normalnoe vypadenie volos',
+    'patologicheskoe vypadenie volos',
+    'как отличить нормальное выпадение волос от патологического',
+    'telogenovoe vypadenie volos',
+    'норма выпадения волос в день',
+    'diagnostika vypadeniya volos',
+  ],
+  'alopecia-areata-klinik-holat': [
+    'soch-tokilishi-diagnostika-shampun-yetarli-emas',
+    'art-alopecia-areata-klinik-holat',
+    'ochoqli alopetsiya klinik holat',
+    'очаговая алопеция клинический случай',
+    'alopecia areata clinical case',
+    'soch tokilishi shampun yetarli emas',
+    'выпадение волос шампунь недостаточно',
+    'hair loss shampoo not enough',
   ],
   'prp-lab-tests': [
     'prp-terapiya-oldidan-tahlillar',
@@ -1104,6 +1256,22 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'morpheus8-rf-lifting-radeski': MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG,
   'deka-co2-scars-radeski': DEKA_CO2_SCARS_ARTICLE_CATALOG,
   'lazer-epilyatsiya-samara-xatolar': LAZER_EPILYATSIYA_MISTAKES_ARTICLE_CATALOG,
+  'alopecia-areata-klinik-holat': ALOPECIA_AREATA_KLINIK_HOLAT_ARTICLE_CATALOG,
+  'fizioterapiya-dermatovenereologiya': FIZIOTERAPIYA_DERMATOVENEREOLOGIYA_ARTICLE_CATALOG,
+  'biorevitalizatsiya-radeski': BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG,
+  'botulinoterapiya-radeski': BOTULINOTERAPIYA_RADESKI_ARTICLE_CATALOG,
+  'dermatopatologiya-radeski': DERMATOPATOLOGIYA_RADESKI_ARTICLE_CATALOG,
+  'photofinder-diagnostika-radeski': PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE_CATALOG,
+  'dnevnoj-stacionar-radeski': DNEVNOJ_STACIONAR_RADESKI_ARTICLE_CATALOG,
+  'immunobiologiya-radeski': IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE_CATALOG,
+  'konturnaya-guby-radeski': KONTURnaya_GUBY_RADESKI_ARTICLE_CATALOG,
+  'soch-profilaktika-inyeksii-radeski': SOCH_TOKILISHI_PROFILAKTIKA_RADESKI_ARTICLE_CATALOG,
+  'psoriaz-klinik-keys-bahridinov-radeski': PSORIAZ_KLINIK_KEYS_BAHRIDINOV_RADESKI_ARTICLE_CATALOG,
+  'klinika-patologii-nogtej-stopy-radeski': KLINIKA_PATOLOGII_NOGTEJ_RADESKI_ARTICLE_CATALOG,
+  'klinicheskoe-issledovanie-radeski': KLINICHESKOE_ISSLEDOVANIE_RADESKI_ARTICLE_CATALOG,
+  'kontur-plastika-radeski': KONTUR_PLASTIKA_RADESKI_ARTICLE_CATALOG,
+  'lazer-biorevitalizatsiya-radeski': LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG,
+  'soch-tokilishi-normal-patologiya-radeski': NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

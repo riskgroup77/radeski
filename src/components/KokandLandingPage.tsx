@@ -3,7 +3,7 @@ import { MapPin, Phone, Clock, ArrowRight, Stethoscope, Sparkles, Zap, Sun } fro
 import type { Locale } from '../types';
 import { CLINIC_PHONE_KOKAND } from '../config/clinicContacts';
 import { KOKAND_BRANCH_MAP_OPEN_URL } from '../config/links';
-import { pagePath, serviceCategoryPath, serviceSubPath, articlePath } from '../routing/paths';
+import { pagePath, serviceCategoryPath, serviceSubPath, articlePath, doctorPath } from '../routing/paths';
 import {
   COMPETITIVE_ADVANTAGES,
   POSITIONING_FORMULA,
@@ -55,6 +55,39 @@ const ARTICLES = [
   { id: 'art-psoriasis-daavlin-kokand', uz: 'Psoriaz — Daavlin Qo‘qon', ru: 'Псориаз — Daavlin Коканд', en: 'Psoriasis — Daavlin Kokand' },
   { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиго', en: 'Vitiligo treatment' },
   { id: 'art-ipl-terapiya', uz: 'IPL terapiya', ru: 'IPL-терапия', en: 'IPL therapy' },
+  { id: 'art-alopecia-areata-klinik-holat', uz: "Soch to'kilishi — klinik holat", ru: 'Выпадение волос — клинический случай', en: 'Hair loss — clinical case' },
+  { id: 'art-trixolog-trixoskopiya', uz: 'Trixolog va trixoskopiya', ru: 'Трихolog и трихоскопия', en: 'Trichologist and trichoscopy' },
+  { id: 'art-onixokriptoz-klinik-holat', uz: 'Onixokriptoz — klinik holat', ru: 'Онихокриптоз — клинический случай', en: 'Ingrown nail — clinical case' },
+  { id: 'art-lasemd-ultra-kokand', uz: 'LaseMD Ultra Qo‘qon', ru: 'LaseMD Ultra Коканд', en: 'LaseMD Ultra Kokand' },
+  { id: 'art-bazalioma-teri-raki', uz: 'Bazalioma va dermatoskopiya', ru: 'Базалиoma и дерматоскопия', en: 'Basal cell carcinoma screening' },
+];
+
+const KOKAND_DOCTORS = [
+  {
+    id: '9285e6b7-e5c0-4c51-9c7a-00fd3a4af62f',
+    uz: "Turg'unov Shohruz — dermatovenerolog-trixolog",
+    ru: 'Тургунов Шохруз — дерматовenerolog-трихolog',
+    en: 'Dr. Shohruz Turgunov — dermatovenereologist-trichologist',
+  },
+];
+
+const SEO_CLUSTERS: { title: { uz: string; ru: string; en: string }; slugs: string[] }[] = [
+  {
+    title: { uz: 'Kasalliklar', ru: 'Заболевания', en: 'Conditions' },
+    slugs: ['akne-davolash', 'psoriaz-davolash', 'vitiligo-davolash', 'rozasea-davolash'],
+  },
+  {
+    title: { uz: 'Diagnostika', ru: 'Диагностика', en: 'Diagnostics' },
+    slugs: ['dermatoskopiya', 'xol-tekshiruvi', 'biopsiya', 'onko-dermatolog'],
+  },
+  {
+    title: { uz: 'Trixologiya', ru: 'Трихология', en: 'Trichology' },
+    slugs: ['trixolog', 'soch-tokilish', 'trixoskopiya'],
+  },
+  {
+    title: { uz: 'Mutaxassislar', ru: 'Специалисты', en: 'Specialists' },
+    slugs: ['dermatolog', 'podolog'],
+  },
 ];
 
 function copy(locale: Locale) {
@@ -63,11 +96,13 @@ function copy(locale: Locale) {
       badge: 'Radeski Skin Clinic — Qo‘qon filiali',
       h1: 'Dermatolog Qo‘qon | Radeski Skin Clinic',
       lead:
-        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, IPL, lazer epilyatsiya va fototerapiya. Manzil: 47-MFI, Huqandiy mavzesi, 144A.',
+        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, dermatoskopiya, onkodermatologiya, IPL, lazer epilyatsiya va fototerapiya. Qo‘qon filialida alohida SEO-klastrlar: akne, psoriaz, vitiligo, rozasea, trixoskopiya, xol tekshiruvi, biopsiya. Manzil: 47-MFI, Huqandiy mavzesi, 144A.',
       address: "Qo'qon sh., 47-MFI, Huqandiy mavzesi, 144A",
       hours: 'Dushanba – Shanba: 08:00 – 18:00',
       servicesTitle: 'Qo‘qonda xizmatlar',
       commercialTitle: 'Qo‘qon bo‘yicha qidiruv sahifalari',
+      clustersTitle: 'Qo‘qon SEO yo‘nalishlari',
+      doctorsTitle: 'Qo‘qon filialidagi mutaxassislar',
       articlesTitle: 'Qo‘qon uchun foydali maqolalar',
       mapCta: 'Xaritada ochish',
       allBranches: 'Barcha filiallar',
@@ -94,11 +129,13 @@ function copy(locale: Locale) {
       badge: 'Radeski Skin Clinic — филиал в Коканде',
       h1: 'Дерматолог Коканд | Radeski Skin Clinic',
       lead:
-        'Дерматология, косметология, IPL, лазерная эпиляция и фототерапия в Коканде. Адрес: 47-МФЙ, массив Хукандий, 144А. Квалифицированные врачи и современное оборудование.',
+        'Специализированная клиника кожи, волос и ногтей в Коканде: дерматология, трихология, подология, дерматоскопия, онкодermatология, IPL, лазерная эпиляция и фототерапия. Отдельные страницы по акне, псoriasis, витилиgo, розацеа, трихоскопии, проверке родинок и биопсии. Адрес: 47-МФЙ, массив Хукандий, 144А.',
       address: 'г. Коканд, 47-МФЙ, массив Хукандий, 144А',
       hours: 'Понедельник – Суббота: 08:00 – 18:00',
       servicesTitle: 'Услуги в Коканде',
       commercialTitle: 'Коммерческие страницы по Коканду',
+      clustersTitle: 'SEO-направления Коканда',
+      doctorsTitle: 'Специалисты филиала в Коканде',
       articlesTitle: 'Полезные статьи для Коканда',
       mapCta: 'Открыть на карте',
       allBranches: 'Все филиалы',
@@ -124,11 +161,13 @@ function copy(locale: Locale) {
     badge: 'Radeski Skin Clinic — Kokand branch',
     h1: 'Dermatologist Kokand | Radeski Skin Clinic',
     lead:
-      'Dermatology, cosmetology, IPL, laser hair removal and phototherapy in Kokand. Address: 47-MFI, Huqandiy Block, 144A. Qualified doctors and modern equipment.',
+      'Specialized skin, hair and nail clinic in Kokand: dermatology, trichology, podology, dermoscopy, oncodermatology, IPL, laser hair removal and phototherapy. Dedicated pages for acne, psoriasis, vitiligo, rosacea, trichoscopy, mole screening and biopsy. Address: 47-MFI, Huqandiy Block, 144A.',
     address: '144A Huqandiy Block, 47-MFI, Kokand City',
     hours: 'Monday – Saturday: 08:00 – 18:00',
     servicesTitle: 'Services in Kokand',
     commercialTitle: 'Kokand search landing pages',
+    clustersTitle: 'Kokand SEO clusters',
+    doctorsTitle: 'Specialists at Kokand branch',
     articlesTitle: 'Helpful articles for Kokand',
     mapCta: 'Open on map',
     allBranches: 'All branches',
@@ -224,6 +263,50 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
             </li>
           ))}
         </ul>
+
+        <h2 className="mt-12 text-xl sm:text-2xl font-extrabold text-brand-text-primary">{t.clustersTitle}</h2>
+        <div className="mt-4 space-y-6">
+          {SEO_CLUSTERS.map((cluster) => {
+            const links = commercialLinks.filter((item) => cluster.slugs.includes(item.slug));
+            if (!links.length) return null;
+            const title = locale === 'uz' ? cluster.title.uz : locale === 'ru' ? cluster.title.ru : cluster.title.en;
+            return (
+              <div key={cluster.title.uz}>
+                <h3 className="text-sm font-bold text-brand-gold uppercase tracking-wide mb-2">{title}</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {links.map((item) => (
+                    <Link
+                      key={item.slug}
+                      to={localCommercialPath(locale, 'qoqon', item.slug)}
+                      className="p-3 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 text-sm font-semibold text-brand-text-primary no-underline"
+                    >
+                      {getLocalizedCopy(item.h1, locale)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <h2 className="mt-12 text-xl sm:text-2xl font-extrabold text-brand-text-primary">{t.doctorsTitle}</h2>
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {KOKAND_DOCTORS.map((doc) => (
+            <Link
+              key={doc.id}
+              to={doctorPath(locale, doc.id)}
+              className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 text-sm font-semibold text-brand-text-primary no-underline"
+            >
+              {locale === 'uz' ? doc.uz : locale === 'ru' ? doc.ru : doc.en}
+            </Link>
+          ))}
+          <Link
+            to={pagePath(locale, 'doctors')}
+            className="p-4 bg-brand-gold-light/10 rounded-xl border border-brand-gold/20 text-sm font-semibold text-brand-gold no-underline"
+          >
+            {locale === 'uz' ? 'Barcha shifokorlar →' : locale === 'ru' ? 'Все врачи →' : 'All doctors →'}
+          </Link>
+        </div>
 
         <h2 className="mt-12 text-xl sm:text-2xl font-extrabold text-brand-text-primary">{t.commercialTitle}</h2>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">

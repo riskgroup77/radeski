@@ -47,9 +47,29 @@ const markdownComponents = {
   ),
 };
 
+/** Welcome bubble appears after a short delay so it never covers the page on first paint. */
+const WELCOME_PREVIEW_DELAY_MS = 6000;
+const WELCOME_DISMISSED_KEY = 'radeski_chat_welcome_dismissed_v1';
+
+function isWelcomeDismissed(): boolean {
+  try {
+    return sessionStorage.getItem(WELCOME_DISMISSED_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function rememberWelcomeDismissed(): void {
+  try {
+    sessionStorage.setItem(WELCOME_DISMISSED_KEY, '1');
+  } catch {
+    // storage unavailable (private mode) — bubble may reappear next page load
+  }
+}
+
 export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
   const [open, setOpen] = useState(false);
-  const [showWelcomePreview, setShowWelcomePreview] = useState(true);
+  const [showWelcomePreview, setShowWelcomePreview] = useState(false);
   const [draft, setDraft] = useState('');
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -72,15 +92,23 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
   useEffect(() => {
     if (open) {
       setShowWelcomePreview(false);
+      rememberWelcomeDismissed();
       inputRef.current?.focus();
     }
   }, [open]);
 
+  const dismissWelcomePreview = () => {
+    setShowWelcomePreview(false);
+    rememberWelcomeDismissed();
+  };
+
   const welcomeText = getWelcomeMessage(locale);
 
   useEffect(() => {
-    setShowWelcomePreview(true);
     setUsedQuickPrompts([]);
+    if (isWelcomeDismissed()) return;
+    const timer = window.setTimeout(() => setShowWelcomePreview(true), WELCOME_PREVIEW_DELAY_MS);
+    return () => window.clearTimeout(timer);
   }, [locale]);
 
   const bookingLabel = useMemo(() => {
@@ -107,7 +135,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
   };
 
   return (
-    <div className="clinic-ai-chat fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] flex flex-col items-end gap-3">
+    <div className="clinic-ai-chat fixed z-[60] flex flex-col items-end gap-3">
       <AnimatePresence>
         {open && (
           <motion.section
@@ -115,7 +143,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="w-[min(100vw-1.5rem,400px)] h-[min(78vh,620px)] bg-white rounded-2xl shadow-2xl shadow-brand-dark-navy/20 border border-brand-sectiongray flex flex-col overflow-hidden"
+            className="w-[min(100vw-1.5rem,400px)] h-[min(calc(100dvh-var(--app-header-compact-h)-6.5rem),620px)] bg-white rounded-2xl shadow-2xl shadow-brand-dark-navy/20 border border-brand-sectiongray flex flex-col overflow-hidden"
             aria-label={labels.title}
           >
             <header className="bg-gradient-to-r from-brand-deep-blue to-brand-dark-navy text-white px-4 py-3.5 flex items-start justify-between gap-3 shrink-0">
@@ -269,17 +297,17 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="clinic-ai-chat-welcome-preview w-[min(100vw-2rem,320px)] bg-white border border-brand-sectiongray rounded-2xl rounded-br-md shadow-lg shadow-brand-dark-navy/10 p-3.5 relative"
+            className="clinic-ai-chat-welcome-preview w-[min(100vw-5.5rem,320px)] bg-white border border-brand-sectiongray rounded-2xl rounded-br-md shadow-lg shadow-brand-dark-navy/10 p-3 sm:p-3.5 relative"
           >
             <button
               type="button"
-              onClick={() => setShowWelcomePreview(false)}
+              onClick={dismissWelcomePreview}
               className="absolute top-2 right-2 p-1 rounded-md text-brand-text-muted hover:text-brand-text-primary hover:bg-brand-offwhite cursor-pointer"
               aria-label={labels.close}
             >
               <X className="w-3.5 h-3.5" />
             </button>
-            <p className="text-sm text-brand-text-primary leading-relaxed pr-5">{welcomeText}</p>
+            <p className="text-[13px] sm:text-sm text-brand-text-primary leading-relaxed pr-5">{welcomeText}</p>
             <button
               type="button"
               onClick={() => setOpen(true)}

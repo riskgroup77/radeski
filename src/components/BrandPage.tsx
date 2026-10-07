@@ -155,7 +155,7 @@ export default function BrandPage({ locale }: BrandPageProps) {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              className="scroll-mt-[180px] overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm"
+              className="scroll-mt-2 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white shadow-sm"
             >
               <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 <div className="relative min-h-[220px] bg-brand-offwhite lg:min-h-[300px]">

@@ -14,6 +14,10 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriasis-daavlin-kokand',
     'psoriasis',
     'plasmapheresis',
+    'fizioterapiya-dermatovenereologiya',
+    'immunobiologiya-radeski',
+    'dnevnoj-stacionar-radeski',
+    'psoriaz-klinik-keys-bahridinov-radeski',
   ],
   dermatoskopiya: [
     'basal-cell-carcinoma',
@@ -21,9 +25,12 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'pediatric-warts-laser-radeski',
     'hollywood-spectra-pigmentation',
     'papilloma-warts',
+    'photofinder-diagnostika-radeski',
   ],
   trixoskopiya: [
     'trichologist-trichoscopy',
+    'soch-tokilishi-normal-patologiya-radeski',
+    'alopecia-areata-klinik-holat',
     'prp-hair',
     'prp-lab-tests',
     'hair-transplant-contraindications',
@@ -47,15 +54,24 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'adult-acne',
     'acne',
   ],
-  'in-ekcionnaya-kosmetologiya': ['plasmapheresis'],
+  'in-ekcionnaya-kosmetologiya': [
+    'botulinoterapiya-radeski',
+    'biorevitalizatsiya-radeski',
+    'konturnaya-guby-radeski',
+    'kontur-plastika-radeski',
+    'plasmapheresis',
+  ],
   'lazernaya-epilyaciya': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
   'trihologiya-centr-lechenie-volos': [
     'trichologist-trichoscopy',
+    'soch-tokilishi-normal-patologiya-radeski',
     'prp-hair',
     'prp-lab-tests',
     'hair-transplant-contraindications',
+    'soch-profilaktika-inyeksii-radeski',
   ],
   dermatoonkologiya: [
+    'dermatopatologiya-radeski',
     'basal-cell-carcinoma',
     'papilloma-warts',
     'mole-screening',
@@ -71,10 +87,15 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'pediatric-warts-co2-deka',
     'pediatric-warts-laser-radeski',
   ],
-  'shkola-psoriaza': ['psoriasis-daavlin-kokand', 'psoriasis'],
+  'shkola-psoriaza': [
+    'psoriasis-daavlin-kokand',
+    'psoriasis',
+    'immunobiologiya-radeski',
+    'psoriaz-klinik-keys-bahridinov-radeski',
+  ],
   'shkola-dermatoskopii': ['basal-cell-carcinoma', 'mole-screening'],
-  'clinika-patologii-nogtej': ['fungal', 'onychocryptosis-kokand'],
-  dermatopatologiya: ['basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
+  'clinika-patologii-nogtej': ['fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
+  dermatopatologiya: ['dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
 };
 
 /** More specific article catalog keys per sub-service (merged with category keys on sub pages). */
@@ -86,17 +107,28 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'molluscum-radeski',
       'atopic-dermatitis',
     ],
-    fototerapiya: ['vitiligo', 'psoriasis-daavlin-kokand', 'psoriasis'],
-    immunobiologicheskaya: ['psoriasis', 'psoriasis-daavlin-kokand', 'plasmapheresis'],
+    fototerapiya: [
+      'fizioterapiya-dermatovenereologiya',
+      'vitiligo',
+      'psoriasis-daavlin-kokand',
+      'psoriasis',
+      'psoriaz-klinik-keys-bahridinov-radeski',
+    ],
+    immunobiologicheskaya: ['immunobiologiya-radeski', 'psoriasis', 'psoriasis-daavlin-kokand', 'plasmapheresis'],
   },
   dermatoskopiya: {
     'derm-konsult': ['basal-cell-carcinoma', 'molluscum-radeski', 'papilloma-warts'],
     'derm-total-body': ['basal-cell-carcinoma', 'mole-screening'],
-    'derm-skin-passport': ['basal-cell-carcinoma'],
+    'derm-skin-passport': ['basal-cell-carcinoma', 'photofinder-diagnostika-radeski'],
   },
   trixoskopiya: {
-    'trix-konsult': ['trichologist-trichoscopy', 'prp-lab-tests'],
-    'trix-alopecia': ['trichologist-trichoscopy', 'prp-hair', 'hair-transplant-contraindications'],
+    'trix-konsult': ['soch-tokilishi-normal-patologiya-radeski', 'trichologist-trichoscopy', 'prp-lab-tests'],
+    'trix-alopecia': [
+      'soch-tokilishi-normal-patologiya-radeski',
+      'trichologist-trichoscopy',
+      'prp-hair',
+      'hair-transplant-contraindications',
+    ],
     'trix-monitoring': ['trichologist-trichoscopy', 'prp-hair'],
   },
   'apparatnaya-kosmetologiya': {
@@ -109,15 +141,33 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'adult-acne',
       'acne',
     ],
-    'lazer-biorev': ['post-acne', 'adult-acne', 'lasemd-ultra-kokand'],
+    'lazer-biorev': [
+      'lazer-biorevitalizatsiya-radeski',
+      'biorevitalizatsiya-radeski',
+      'post-acne',
+      'adult-acne',
+      'lasemd-ultra-kokand',
+    ],
     'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist'],
+  },
+  'in-ekcionnaya-kosmetologiya': {
+    botulino: ['botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
+    biorev: ['biorevitalizatsiya-radeski', 'botulinoterapiya-radeski', 'plasmapheresis'],
+    konturnaya: [
+      'kontur-plastika-radeski',
+      'konturnaya-guby-radeski',
+      'biorevitalizatsiya-radeski',
+      'botulinoterapiya-radeski',
+    ],
   },
   'lazernaya-epilyaciya': {
     'alex-lazer': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
   },
   'trihologiya-centr-lechenie-volos': {
     trixoskop: [
+      'soch-tokilishi-normal-patologiya-radeski',
       'trichologist-trichoscopy',
+      'alopecia-areata-klinik-holat',
       'prp-hair',
       'prp-lab-tests',
       'hair-transplant-contraindications',
@@ -130,16 +180,16 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'moh-surgery': ['basal-cell-carcinoma', 'deka-co2'],
   },
   'shkola-psoriaza': {
-    'consult-group': ['psoriasis-daavlin-kokand', 'psoriasis'],
+    'consult-group': ['psoriasis-daavlin-kokand', 'psoriasis', 'psoriaz-klinik-keys-bahridinov-radeski'],
   },
   'shkola-dermatoskopii': {
     'dermatosc-lessons': ['basal-cell-carcinoma', 'mole-screening'],
   },
   'clinika-patologii-nogtej': {
-    'podolog-dermatolog': ['fungal', 'onychocryptosis-kokand'],
+    'podolog-dermatolog': ['fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
   },
   dermatopatologiya: {
-    gistolog: ['basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
+    gistolog: ['dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
   },
 };
 

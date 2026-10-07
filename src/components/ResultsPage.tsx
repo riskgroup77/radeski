@@ -185,13 +185,13 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                   <button
                     type="button"
                     onClick={(event) => openLightbox(result, result.comparisonImage!, event)}
-                    className="relative aspect-[4/3] bg-brand-offwhite w-full cursor-zoom-in group"
+                    className="relative aspect-[2/1] w-full cursor-zoom-in group overflow-hidden bg-brand-sectiongray"
                     aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить изображение' : 'Expand image'}
                   >
                     <MediaImage
                       src={result.comparisonImage}
                       alt={`${result.title[locale]} — ${locale === 'uz' ? 'Oldin / Keyin' : locale === 'ru' ? 'До / После' : 'Before / After'}`}
-                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                      className="absolute inset-0 h-full w-full object-cover object-[center_42%] transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                     <span className="absolute top-1.5 left-1/2 -translate-x-1/2 text-[8px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-black/55 text-white whitespace-nowrap">
                       {locale === 'uz' ? 'Oldin · Keyin' : locale === 'ru' ? 'До · После' : 'Before · After'}

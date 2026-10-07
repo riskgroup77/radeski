@@ -94,6 +94,7 @@ import { getPlatformLogo } from '../utils/platformLogo';
 import LocalizedFieldGroup, { isLocalizedFilled, emptyLocalized } from './LocalizedFieldGroup';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo, TreatmentResult, ClinicPartner, CustomerReview } from '../data/sitePagesContent';
+import { googleReviewSourceLabel } from '../utils/googleReviewMeta';
 
 function compareAdminPriceRows(a: PriceItem, b: PriceItem): number {
   const categoryCompare = a.category.localeCompare(b.category);
@@ -3165,8 +3166,10 @@ export default function AdminPanel({
                   </h3>
                   <p className="text-[10px] text-brand-text-muted mt-1">
                     {locale === 'uz'
-                      ? `${editedCustomerReviews.filter((r) => !r.published).length} ta yangi fikr moderatsiyada`
-                      : `${editedCustomerReviews.filter((r) => !r.published).length} pending reviews`}
+                      ? `${editedCustomerReviews.filter((r) => !r.published).length} ta yangi fikr moderatsiyada · Google Maps sharxlari avtomatik sinxronlanadi`
+                      : locale === 'ru'
+                        ? `${editedCustomerReviews.filter((r) => !r.published).length} отзывов на модерации · Google Maps синхронизируются автоматически`
+                        : `${editedCustomerReviews.filter((r) => !r.published).length} pending reviews · Google Maps reviews sync automatically`}
                   </p>
                 </div>
 
@@ -3197,6 +3200,11 @@ export default function AdminPanel({
                           <span className="font-extrabold text-sm text-brand-text-primary">{review.authorName}</span>
                           <span className="text-[10px] font-mono text-brand-gold">{review.rating}/5</span>
                           <span className="text-[10px] text-brand-text-muted font-mono">{review.date}</span>
+                          {review.source === 'google' ? (
+                            <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
+                              {googleReviewSourceLabel(locale)}
+                            </span>
+                          ) : null}
                           {!review.published && (
                             <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-full bg-amber-200 text-amber-900">
                               {locale === 'uz' ? 'Kutilmoqda' : locale === 'ru' ? 'Ожидает' : 'Pending'}
@@ -3221,12 +3229,14 @@ export default function AdminPanel({
                             ? (locale === 'uz' ? 'Yashirish' : locale === 'ru' ? 'Скрыть' : 'Unpublish')
                             : (locale === 'uz' ? 'Chop etish' : locale === 'ru' ? 'Опубликовать' : 'Publish')}
                         </button>
-                        <button
-                          onClick={() => handleEditCustomerReview(review)}
-                          className="p-1.5 bg-brand-white hover:bg-brand-gold-light/20 text-brand-gold-dark border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
-                        >
-                          <Edit2 className="w-3.5 h-3.5" />
-                        </button>
+                        {review.source !== 'google' ? (
+                          <button
+                            onClick={() => handleEditCustomerReview(review)}
+                            className="p-1.5 bg-brand-white hover:bg-brand-gold-light/20 text-brand-gold-dark border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"
+                          >
+                            <Edit2 className="w-3.5 h-3.5" />
+                          </button>
+                        ) : null}
                         <button
                           onClick={() => handleDeleteCustomerReview(review.id)}
                           className="p-1.5 bg-brand-white hover:bg-red-50 text-red-600 border border-brand-sectiongray rounded-lg transition-colors cursor-pointer"

@@ -228,7 +228,7 @@ function DoctorProfileLayout({
     >
       <div className="flex flex-col md:flex-row md:items-start">
         {/* Katta rasm — chapda, o'zgarmas */}
-        <div className="w-full md:w-[38%] lg:w-[36%] shrink-0 bg-brand-offwhite border-b md:border-b-0 md:border-r border-brand-sectiongray md:sticky md:top-24 md:self-start">
+        <div className="w-full md:w-[38%] lg:w-[36%] shrink-0 bg-brand-offwhite border-b md:border-b-0 md:border-r border-brand-sectiongray md:sticky md:sticky-below-header md:self-start">
           <div className="flex items-start justify-center p-4 sm:p-6 md:p-8">
             {doctor.photo ? (
               <MediaImage

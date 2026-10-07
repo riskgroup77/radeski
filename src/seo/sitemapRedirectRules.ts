@@ -5,6 +5,7 @@ import {
   pagePath,
   serviceCategoryPath,
 } from '../routing/paths';
+import { serviceEquipmentPath } from '../routing/paths';
 
 /** Paths (without origin) that must never appear in sitemap.xml — they redirect elsewhere. */
 export const SITEMAP_EXCLUDED_PATH_SUFFIXES: string[] = [
@@ -90,7 +91,7 @@ export function buildSiteRedirectPairs(): SiteRedirectPair[] {
   for (const locale of locales) {
     for (const modelId of CLINIC_LASER_MODELS) {
       const from = `/${locale}/daavlin-foto-kabinalari/models/${modelId}`;
-      const to = `${serviceCategoryPath(locale, 'apparatnaya-kosmetologiya')}#${modelId}`;
+      const to = serviceEquipmentPath(locale, modelId);
       pairs.set(from, to);
       pairs.set(`${from}/`, to);
     }

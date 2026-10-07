@@ -1,4 +1,5 @@
 import type { Locale, PriceItem } from '../types';
+import { CLINIC_EQUIPMENT_IMAGES } from './clinicEquipmentImages';
 
 export interface LocalizedEquipmentText {
   uz: string;
@@ -67,7 +68,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'Plasmapheresis separates blood plasma and reinfuses purified plasma. At Radeski Clinic it supports skin renewal, immune balance, and complex dermatology protocols. Treatment is planned after physician consultation and lab assessment.',
     ),
     manufacturer: L('Professional plasmapheresis system', 'Профессиональная система плазмофореза', 'Professional plasmapheresis system'),
-    image: '/gallery/4.webp',
+    image: CLINIC_EQUIPMENT_IMAGES.plazmoforez,
     serviceLinks: [
       { categoryId: 'dermatologiya', subId: 'fototerapiya' },
       { categoryId: 'in-ekcionnaya-kosmetologiya', subId: 'biorev' },
@@ -110,7 +111,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'Daavlin NeoLux is a professional phototherapy system. Narrow-band UVB treats psoriasis, vitiligo, eczema and other chronic skin conditions. At Radeski Clinic, dosing, courses and remission monitoring are supervised by a dermatologist.',
     ),
     manufacturer: L('Daavlin (AQSh)', 'Daavlin (США)', 'Daavlin (USA)'),
-    image: '/gallery/7.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['daavlin-neolux'],
     serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya' }],
     priceCategoryIds: ['daavlin-neolux'],
     directions: [
@@ -149,7 +150,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'Daavlin M series is Daavlin\'s modular phototherapy system for body, limbs and large areas. At Radeski Clinic it supports effective course treatment for psoriasis, vitiligo and other photosensitive conditions.',
     ),
     manufacturer: L('Daavlin (AQSh)', 'Daavlin (США)', 'Daavlin (USA)'),
-    image: '/gallery/6.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['daavlin-m-series'],
     serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya' }],
     priceCategoryIds: ['m-series'],
     directions: [
@@ -188,7 +189,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'Daavlin Aquex delivers medications into the skin via iontophoresis. It supports local treatment of skin conditions, hydration and deep delivery of prescribed agents. At Radeski Clinic it is used under dermatologist supervision with individualized protocols.',
     ),
     manufacturer: L('Daavlin (AQSh)', 'Daavlin (США)', 'Daavlin (USA)'),
-    image: '/gallery/5.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['daavlin-aquex'],
     serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya' }],
     priceCategoryIds: ['fizioterapiya'],
     priceKeywords: ['ионофорез', 'ionoforez', 'aquex'],
@@ -233,7 +234,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'DEKA SmartXide Punto CO₂ at Radeski Skin Clinic stimulates collagen renewal through fractional micro-zones, smooths texture and removes benign lesions when indicated. PinPoint mode supports warts and papillomas with minimal trauma. At Fergana and Kokand branches, energy, depth and treatment field are set individually by a dermatologist.',
     ),
     manufacturer: L('DEKA (Italiya)', 'DEKA (Италия)', 'DEKA (Italy)'),
-    image: '/daavlin/model-deka-co2-laser.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['deka-co2-laser'],
     serviceLinks: [
       {
         categoryId: 'apparatnaya-kosmetologiya',
@@ -289,7 +290,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'DEKA alexandrite laser at 755 nm selectively targets melanin and hair follicles. At Radeski Skin Clinic it supports laser hair removal, pigmented spots and selected vascular signs under medical protocol. Hair type, phototype and zone are assessed; intervals and energy follow an individual plan.',
     ),
     manufacturer: L('DEKA (Italiya)', 'DEKA (Италия)', 'DEKA (Italy)'),
-    image: '/daavlin/model-deka-alexandrite-laser.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['deka-alexandrite-laser'],
     serviceLinks: [
       {
         categoryId: 'apparatnaya-kosmetologiya',
@@ -335,7 +336,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'Surgitron RF provides gentle cutting and coagulation with minimal heat spread to surrounding tissue. At Radeski Skin Clinic papillomas, molluscum, keratomas and physician-approved benign lesions are removed; suited to delicate anatomical areas. Each lesion is assessed dermoscopically first.',
     ),
     manufacturer: L('Ellman (AQSh)', 'Ellman (США)', 'Ellman (USA)'),
-    image: '/daavlin/model-surgitron-radiofrequency.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['surgitron-radiofrequency'],
     serviceLinks: [
       {
         categoryId: 'hirurgicheskaya-dermatologiya',
@@ -382,7 +383,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'InMode IPL is a high-intensity pulsed-light system for non-surgical treatment of pigment, vessels, redness and age-related changes. At Radeski Clinic, face, neck, décolleté and individual zones are listed in the price catalog.',
     ),
     manufacturer: L('InMode', 'InMode', 'InMode'),
-    image: '/gallery/3.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['ipl-inmode'],
     serviceLinks: [{ categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' }],
     priceCategoryIds: ['fotoomolozhenie-ipl-lumecca'],
     directions: [
@@ -421,7 +422,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'Derma V is Lutronic\'s laser system for vascular and pigment concerns. It precisely treats couperose, rosacea, spider veins and pigment spots. At Radeski Clinic it is used on face and body under dermatologist supervision.',
     ),
     manufacturer: L('Lutronic', 'Lutronic', 'Lutronic'),
-    image: '/gallery/2.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['derma-v-lutronic'],
     serviceLinks: [{ categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' }],
     priceCategoryIds: ['derma-v-sosudistyy-lazer-lechenie-sosudistyh-zvezdochek-kuperoza-i-rozatsii'],
     directions: [
@@ -460,7 +461,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       'Hollywood Spectra is Lutronic\'s Q-switch laser system for facial cleansing and skin renewal. Protocols include carbon peeling, gold toning and pigmentation treatment. At Radeski Clinic it addresses acne, post-acne redness, pigment spots and dullness.',
     ),
     manufacturer: L('Lutronic', 'Lutronic', 'Lutronic'),
-    image: '/gallery/8.webp',
+    image: CLINIC_EQUIPMENT_IMAGES['hollywood-spectra-lutronic'],
     serviceLinks: [{ categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' }],
     priceCategoryIds: ['hooywood-spectra-lechenie-pigmentatsii-post-akne'],
     directions: [

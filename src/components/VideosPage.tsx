@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Clock, X } from 'lucide-react';
+import { Play, Clock } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo } from '../data/sitePagesContent';
 import ResolvedVideo from './ResolvedVideo';
+import ClinicVideoModal from './ClinicVideoModal';
 
 interface VideosPageProps {
   locale: Locale;
@@ -103,43 +104,14 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
       </div>
 
       <AnimatePresence>
-        {activeVideo && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-[#0c1424]/80 backdrop-blur-sm"
-              onClick={() => setActiveVideoId(null)}
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 12 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 12 }}
-              className="relative w-full max-w-sm bg-brand-white rounded-2xl overflow-hidden shadow-2xl border border-brand-sectiongray"
-            >
-              <button
-                type="button"
-                onClick={() => setActiveVideoId(null)}
-                className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 cursor-pointer"
-                aria-label={d.closeBtn}
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <ResolvedVideo
-                src={activeVideo.src}
-                controls
-                autoPlay
-                className="w-full aspect-[9/16] bg-black object-cover"
-                playsInline
-              />
-              <div className="p-5">
-                <h3 className="text-base font-extrabold text-brand-text-primary">{activeVideo.title[locale]}</h3>
-                <p className="text-sm text-brand-text-muted mt-2 leading-relaxed">{activeVideo.description[locale]}</p>
-              </div>
-            </motion.div>
-          </div>
-        )}
+        {activeVideo ? (
+          <ClinicVideoModal
+            video={activeVideo}
+            locale={locale}
+            dictionary={d}
+            onClose={() => setActiveVideoId(null)}
+          />
+        ) : null}
       </AnimatePresence>
     </section>
   );

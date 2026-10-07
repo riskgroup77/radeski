@@ -18,11 +18,6 @@ import {
   getLocaleFromPathname,
 } from '../routing/paths';
 import { localCommercialPath, type LocalSeoCity } from '../data/localCommercialSeoCatalog';
-import {
-  getLocalCommercialFromPathname,
-  localCommercialPath,
-  type LocalSeoCity,
-} from '../data/localCommercialSeoCatalog';
 import { localeToHreflang, LOCALES } from '../routing/locale';
 
 export type RouteSeoContext = {

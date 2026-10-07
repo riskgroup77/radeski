@@ -41,7 +41,7 @@ export function useClinicData(): ClinicDataState {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
   const [prices, setPrices] = useState<PriceItem[]>([]);
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>(ARTICLES);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

@@ -102,7 +102,9 @@ export default function HomeCarousel<T>({
     >
       <div
         className={`grid flex-1 auto-rows-fr ${gridGapClassName} ${gridClassName} ${
-          isSlide ? 'overflow-hidden' : ''
+          // fade: entering/leaving cards slide 24px sideways — clip that so phones never get a
+          // momentary horizontal scroll, but leave room for the card shadows.
+          isSlide ? 'overflow-hidden' : 'overflow-x-clip [overflow-clip-margin:12px]'
         }`}
       >
         <AnimatePresence mode="popLayout" initial={false}>

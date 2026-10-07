@@ -89,6 +89,26 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         'thulium laser Kokand, thulium laser for hair Kokand, hair loss treatment Kokand, trichologist Kokand, alopecia treatment Kokand, hair restoration Kokand, hair growth Kokand, laser hair treatment Kokand',
     },
   },
+  'art-soch-tokilishi-normal-patologiya-radeski': {
+    uz: {
+      title: 'Normal soch to\'kilishi va patologik to\'kilishni farqlash | Radeski Skin Clinic',
+      desc: 'Kuniga 50–100 soch normalmi? Patologik to\'kilish belgilari, telogen alopetsiya sabablari, qachon trixolog va trixoskopiya kerak — Radeski Skin Clinic.',
+      keywords:
+        'soch to\'kilishi, kuchli soch to\'kilishi, soch to\'kilishi sabablari, normal soch to\'kilishi, patologik soch to\'kilishi, alopetsiya, telogen to\'kilish, trixolog, trixoskopiya, ayollarda soch to\'kilishi, Radeski Skin Clinic',
+    },
+    ru: {
+      title: 'Как отличить нормальное выпадение волос от патологического | Radeski Skin Clinic',
+      desc: 'Как понять, является ли выпадение волос нормой? Признаки патологического выпадения, причины алопеции, телогеновое выпадение и когда нужны трихолог и трихоскопия.',
+      keywords:
+        'выпадение волос, сильное выпадение волос, причины выпадения волос, почему выпадают волосы, норма выпадения волос в день, патологическое выпадение волос, алопеция, телогеновое выпадение волос, трихолог, трихоскопия, диагностика выпадения волос, лечение выпадения волос, выпадение волос у женщин, выпадение волос у мужчин, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Normal vs Pathological Hair Loss: How to Tell | Radeski Skin Clinic',
+      desc: 'Is daily hair shedding normal? Signs of pathological hair loss, telogen effluvium, alopecia causes, and when to see a trichologist for trichoscopy at Radeski Skin Clinic.',
+      keywords:
+        'hair loss, excessive hair shedding, causes of hair loss, normal daily hair shedding, pathological hair loss, alopecia, telogen effluvium, trichologist, trichoscopy, hair loss diagnosis, hair loss treatment, hair loss in women, hair loss in men, Radeski Skin Clinic',
+    },
+  },
   'art-onixokriptoz-klinik-holat': {
     uz: {
       title: "O'sib ketgan tirnoq (onixokriptoz): klinik holat — Radeski Qo'qon",
@@ -225,9 +245,9 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "ilm-fan, dermatologiya tadqiqoti, klinik protokollar, yosh shifokorlar, Radeski, Farg'ona, Qo'qon",
     },
     obrazovaniya: {
-      title: "Ta'lim | Radeski Skin Clinic",
-      desc: "Dermatologiya va estetik tibbiyot bo'yicha sertifikatsiya kurslari, ordinatura, master-klasslar va amaliy treninglar. Radeski — Farg'ona | Qo'qon.",
-      keywords: "ta'lim, ordinatura, master-klass, dermatologiya o'qitish, Radeski, Farg'ona",
+      title: "Ta'lim | Radeski Skin Clinic — teri, soch va tirnoq bo'yicha o'qitish",
+      desc: "Sertifikatsiya kurslari, ordinatura, malaka oshirish, master-klasslar, amaliy treninglar, soch transplantatsiyasi va lazer texnologiyalari. Teri, soch va tirnoq bo'yicha zamonaviy estetik korrektsiya. Farg'ona | Qo'qon.",
+      keywords: "ta'lim, sertifikatsiya kurslari, ordinatura, malaka oshirish, master-klass, amaliy trening, soch transplantatsiyasi o'qitish, lazer texnologiyalari, dermatologiya o'qitish, estetik tibbiyot, Radeski, Farg'ona, Qo'qon",
     },
     'malaka-oshirish': {
       title: "Malaka oshirish | Radeski Skin Clinic — kurslar, trening, sertifikat",
@@ -341,9 +361,9 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "наука, исследования в дерматологии, клинические протоколы, молодые врачи, Radeski, Фергана, Коканд",
     },
     obrazovaniya: {
-      title: "Образование | Radeski Skin Clinic",
-      desc: "Сертификационные курсы, ординатура, мастер-классы и практические тренинги в дерматологии. Radeski — Фергана | Коканд.",
-      keywords: "образование, ординатура, мастер-классы, обучение дерматологии, Radeski, Фергана",
+      title: "Образование | Radeski Skin Clinic — кожа, волосы и ногти",
+      desc: "Сертификационные курсы, ординатура, повышение квалификации, мастер-классы, практические тренинги, обучение пересадке волос и лазерным технологиям. Современная эстетическая коррекция. Фергана | Коканд.",
+      keywords: "образование, сертификационные курсы, ординатура, повышение квалификации, мастер-классы, практические тренинги, пересадка волос обучение, лазерные технологии, обучение дерматологии, эстетическая медицина, Radeski, Фергана, Коканд",
     },
     'malaka-oshirish': {
       title: "Повышение квалификации | Radeski Skin Clinic — курсы, тренинги, сертификаты",
@@ -457,9 +477,9 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "science, dermatology research, clinical protocols, young physicians, Radeski, Fergana, Kokand",
     },
     obrazovaniya: {
-      title: "Education | Radeski Skin Clinic",
-      desc: "Certification programs, residency, masterclasses, and hands-on training in dermatology and aesthetic medicine. Radeski — Fergana | Kokand.",
-      keywords: "education, residency, masterclasses, dermatology training, Radeski, Fergana",
+      title: "Education | Radeski Skin Clinic — skin, hair, and nails",
+      desc: "Certification programs, residency, continuing education, masterclasses, hands-on training, hair transplant and laser technology courses. Modern aesthetic correction. Fergana | Kokand.",
+      keywords: "education, certification courses, residency, continuing medical education, masterclasses, hands-on training, hair transplant training, laser technology, dermatology training, aesthetic medicine, Radeski, Fergana, Kokand",
     },
     'malaka-oshirish': {
       title: "Professional development | Radeski Skin Clinic — courses, training, certification",

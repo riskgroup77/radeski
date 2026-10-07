@@ -304,7 +304,7 @@ export default function ArticlePage({
                       ? 'Другие полезные статьи'
                       : 'More helpful articles'}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
                   {relatedArticles.map((art) => {
                     const relatedImage = getLocalizedImage(art.images, locale) ?? art.image;
                     return (
@@ -317,7 +317,7 @@ export default function ArticlePage({
                         <ArticleCoverMedia
                           src={relatedImage}
                           alt={art.title[locale]}
-                          variant="compact"
+                          variant="related"
                           promoPortrait={isEquipmentPromoArticle(art)}
                           imageClassName="group-hover:scale-[1.02] transition-transform"
                         />

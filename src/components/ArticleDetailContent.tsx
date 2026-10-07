@@ -58,7 +58,7 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
         return (
           <h2
             id={id}
-            className="scroll-mt-28 text-xl sm:text-2xl font-extrabold text-brand-text-primary mt-10 mb-4 leading-tight"
+            className="scroll-mt-2 text-xl sm:text-2xl font-extrabold text-brand-text-primary mt-10 mb-4 leading-tight"
           >
             {children}
           </h2>
@@ -70,7 +70,7 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
         return (
           <h3
             id={id}
-            className="scroll-mt-28 text-lg font-bold text-brand-text-primary mt-7 mb-3 leading-snug"
+            className="scroll-mt-2 text-lg font-bold text-brand-text-primary mt-7 mb-3 leading-snug"
           >
             {children}
           </h3>
@@ -282,7 +282,7 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
 
       {toc.length > 0 && (
         <aside className="hidden lg:block">
-          <div className="sticky top-28 bg-brand-offwhite/80 border border-brand-sectiongray rounded-2xl p-5">
+          <div className="sticky sticky-below-header bg-brand-offwhite/80 border border-brand-sectiongray rounded-2xl p-5">
             <h3 className="text-xs font-bold uppercase tracking-wider text-brand-gold mb-4">
               {labels.tableOfContents}
             </h3>

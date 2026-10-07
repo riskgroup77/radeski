@@ -53,6 +53,15 @@ if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
   cp -a public/videos "$VIDEO_BACKUP"
 fi
 git fetch origin main
+# Files are sometimes hot-patched on the VPS over SFTP — keep a recoverable copy of any
+# server-side edits before the hard reset throws them away.
+BACKUP_DIR="/root/radeski-predeploy-backups/$(date +%Y%m%d-%H%M%S)"
+if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+  mkdir -p "$BACKUP_DIR"
+  git diff HEAD > "$BACKUP_DIR/server-changes.patch"
+  git status --porcelain > "$BACKUP_DIR/status.txt"
+  echo "Server-side changes backed up to $BACKUP_DIR"
+fi
 git reset --hard origin/main
 if [ -d "$VIDEO_BACKUP" ]; then
   mkdir -p public/videos

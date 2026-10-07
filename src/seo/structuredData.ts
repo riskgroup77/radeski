@@ -169,6 +169,45 @@ export function buildServiceFaqSchemas(
   });
 }
 
+type LocalizedText = Record<Locale, string>;
+
+export function buildEducationCoursesSchema(
+  locale: Locale,
+  origin: string,
+  programs: Array<{
+    id: string;
+    title: LocalizedText;
+    description: LocalizedText;
+    keywords: LocalizedText;
+  }>,
+): Record<string, unknown>[] {
+  const pageUrl = `${origin}/${locale}/obrazovaniya`;
+
+  return programs.map((program) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    '@id': `${pageUrl}#${program.id}`,
+    name: program.title[locale] || program.title.uz,
+    description: program.description[locale] || program.description.uz,
+    keywords: program.keywords[locale] || program.keywords.uz,
+    provider: {
+      '@type': 'MedicalOrganization',
+      name: 'Radeski Skin Clinic',
+      url: `${origin}/${locale}`,
+    },
+    inLanguage: locale === 'uz' ? 'uz-UZ' : locale === 'ru' ? 'ru-RU' : 'en-US',
+    url: `${pageUrl}#${program.id}`,
+    isAccessibleForFree: false,
+    educationalLevel: 'Professional',
+    teaches:
+      locale === 'uz'
+        ? 'Dermatologiya, trixologiya, podologiya va estetik korrektsiya'
+        : locale === 'ru'
+          ? 'Дерматология, трихология, подология и эстетическая коррекция'
+          : 'Dermatology, trichology, podology, and aesthetic correction',
+  }));
+}
+
 export function buildArticleSchema(
   locale: Locale,
   article: Article,

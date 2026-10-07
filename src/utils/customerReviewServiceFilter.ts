@@ -48,6 +48,7 @@ const SERVICE_TEXT_ALIASES: Record<string, string> = {
   podologiya: 'clinika-patologii-nogtej',
   padolog: 'clinika-patologii-nogtej',
   podolog: 'clinika-patologii-nogtej',
+  'google maps': GENERAL_REVIEW_CATEGORY_ID,
   'tirnoq patologiyasi': 'clinika-patologii-nogtej',
   dermatologiya: 'dermatologiya',
   dermatolog: 'dermatologiya',
