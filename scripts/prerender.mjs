@@ -5,8 +5,12 @@
  * (`try_files $uri $uri/index.html /index.html`), so crawlers get real per-page HTML; the
  * React app then takes over in the browser.
  *
+ * Also refreshes the doctor block of dist/sitemap.xml from the CMS (readable slugs) and
+ * leaves dist/.seo-manifest.json (content hash + images per URL) for seoPostBuild.mjs.
+ *
  * A failure here never breaks the build — affected URLs simply fall back to the SPA shell.
  */
+import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -14,6 +18,36 @@ import { pathToFileURL } from 'node:url';
 const root = process.cwd();
 const dist = path.join(root, 'dist');
 const ssrEntry = path.join(root, 'dist-ssr', 'entry.js');
+const ORIGIN = 'https://radeski.uz';
+const LOCALES = ['uz', 'ru', 'en'];
+const DOCTOR_BLOCK_START = '  <!-- Doctor profiles -->';
+const DOCTOR_BLOCK_END = '  <url><loc>https://radeski.uz/uz/prices</loc>';
+
+function doctorSitemapBlock(keys) {
+  const lines = [DOCTOR_BLOCK_START];
+  for (const key of keys) {
+    for (const locale of LOCALES) {
+      lines.push('  <url>');
+      lines.push(`    <loc>${ORIGIN}/${locale}/doctors/${encodeURIComponent(key)}</loc>`);
+      lines.push('    <changefreq>monthly</changefreq>');
+      lines.push(`    <priority>${locale === 'uz' ? '0.75' : locale === 'ru' ? '0.7' : '0.65'}</priority>`);
+      lines.push('  </url>');
+    }
+  }
+  return lines.join('\n');
+}
+
+/** Hash of what a crawler reads (title, meta, body) — ignores hashed asset names. */
+function contentHash(html) {
+  const pick = (re) => (html.match(re) || [, ''])[1];
+  const material = [
+    pick(/<title>([\s\S]*?)<\/title>/),
+    pick(/<meta name="description" content="([^"]*)"/),
+    pick(/<link rel="canonical" href="([^"]*)"/),
+    pick(/<div id="root">([\s\S]*?)<\/div>\s*<script type="module"/) || pick(/<div id="root">([\s\S]*)$/),
+  ].join('\n');
+  return createHash('sha1').update(material).digest('hex');
+}
 
 async function main() {
   const { createPrerenderer } = await import(pathToFileURL(ssrEntry).href);
@@ -30,32 +64,43 @@ async function main() {
   const snapshot = snapshotFile ? JSON.parse(readFileSync(snapshotFile, 'utf8')) : { data: {} };
   if (!snapshotFile) console.warn('[prerender] no site snapshot — using built-in content only');
 
-  const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');
+  const prerenderer = createPrerenderer(snapshot);
+
+  // Doctor profiles come from the CMS: rebuild that sitemap block with readable slugs.
+  const sitemapPath = path.join(dist, 'sitemap.xml');
+  let sitemap = readFileSync(sitemapPath, 'utf8');
+  const start = sitemap.indexOf(DOCTOR_BLOCK_START);
+  const end = sitemap.indexOf(DOCTOR_BLOCK_END);
+  if (snapshot.data?.doctors?.length && start !== -1 && end > start) {
+    sitemap = `${sitemap.slice(0, start)}${doctorSitemapBlock(prerenderer.doctorKeys)}\n\n${sitemap.slice(end)}`;
+    writeFileSync(sitemapPath, sitemap);
+  }
+
   const pathnames = [...new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname))]
     // "/" is the SPA shell itself (it redirects to the saved language).
     .filter((pathname) => pathname !== '/' && pathname !== '');
 
-  const render = createPrerenderer(snapshot);
-  let written = 0;
+  const manifest = {};
   let noindex = 0;
   const failed = [];
 
   for (const pathname of pathnames) {
     try {
-      const { html, head } = render(pathname, template);
+      const { html, head, images, published } = prerenderer.render(pathname, template);
       const relative = decodeURIComponent(pathname).replace(/^\/+/, '').replace(/\/+$/, '');
       if (!relative || relative.includes('..')) continue;
       const file = path.join(dist, relative, 'index.html');
       mkdirSync(path.dirname(file), { recursive: true });
       writeFileSync(file, html);
-      written += 1;
+      manifest[`${ORIGIN}${pathname}`] = { hash: contentHash(html), images, published };
       if (head.robots.startsWith('noindex')) noindex += 1;
     } catch (error) {
       failed.push(`${pathname}: ${error instanceof Error ? error.message : error}`);
     }
   }
 
-  console.log(`[prerender] ${written}/${pathnames.length} pages written to dist/`);
+  writeFileSync(path.join(dist, '.seo-manifest.json'), JSON.stringify(manifest));
+  console.log(`[prerender] ${Object.keys(manifest).length}/${pathnames.length} pages written to dist/`);
   if (noindex) console.warn(`[prerender] ${noindex} sitemap URLs resolve to noindex pages — check the sitemap`);
   if (failed.length) console.warn(`[prerender] failed:\n  ${failed.slice(0, 20).join('\n  ')}`);
 }

@@ -38,3 +38,5 @@ openapi-temp.json
 # Generated at build time / by cron (scripts/buildSiteSnapshot.mjs)
 public/data/site-snapshot.json
 dist-ssr/
+# SEO content hashes / lastmod dates (scripts/seoPostBuild.mjs) — kept on the server between deploys
+.seo-state.json

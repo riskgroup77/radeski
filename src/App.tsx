@@ -34,6 +34,7 @@ import {
   daavlinSectionPath,
   switchLocaleInPath,
   articlePath,
+  doctorPath,
   serviceCategoryPath,
   servicesListPath,
 } from './routing/paths';
@@ -83,6 +84,7 @@ import {
   resolveEducationProgram,
 } from './utils/educationPrograms';
 import { resolveClinicEquipment } from './utils/clinicEquipmentRoutes';
+import { doctorRouteKey, findDoctorByRouteParam } from './utils/doctorSlug';
 
 // Route pages load on demand — the first paint only needs the shell + home page.
 const PromoServicePage = lazyPage(() => import('./components/PromoServicePage'));
@@ -218,8 +220,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     : null;
 
   const activeDoctorPreview = doctorId
-    ? dynamicDoctors.find((doc) => doc.id === doctorId) ?? null
+    ? findDoctorByRouteParam(doctorId, dynamicDoctors) ?? null
     : null;
+  // Old UUID / legacy links → the readable slug URL.
+  const doctorCanonicalKey = activeDoctorPreview ? doctorRouteKey(activeDoctorPreview) : null;
 
   // DICTIONARY + clinic texts the admin edited (stored in the CMS, so every visitor sees them).
   const fullDictionary = useMemo(() => {
@@ -269,9 +273,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         doctors: dynamicDoctors,
         clinicRatings: cmsClinicRatings,
         dataLoading,
+        videos: cmsVideos,
       }),
     );
-  }, [location.pathname, locale, forcePage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, dataLoading]);
+  }, [location.pathname, locale, forcePage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, dataLoading, cmsVideos]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {
@@ -330,6 +335,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const isQrFeedbackPage = currentPage === 'fikr';
 
   // Redirects run after every hook so the hook order never changes between renders.
+  if (doctorId && doctorCanonicalKey && doctorId !== doctorCanonicalKey && parsedLocale) {
+    return <Navigate to={doctorPath(parsedLocale, doctorCanonicalKey)} replace />;
+  }
+
   const legacyContactsRedirect =
     !forcePage && location.pathname.split('/').filter(Boolean)[1] === 'contacts';
 

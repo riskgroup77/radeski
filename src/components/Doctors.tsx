@@ -5,6 +5,7 @@ import { Locale, Doctor } from '../types';
 import { DICTIONARY, DOCTORS } from '../data';
 import MediaImage from './MediaImage';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
+import { doctorRouteKey } from '../utils/doctorSlug';
 
 interface DoctorsProps {
   locale: Locale;
@@ -73,7 +74,7 @@ export default function Doctors({
               <div>
                 <button
                   type="button"
-                  onClick={() => onOpenDoctor(doc.id)}
+                  onClick={() => onOpenDoctor(doctorRouteKey(doc))}
                   className="relative aspect-[3/4] w-full overflow-hidden bg-brand-offwhite block cursor-pointer"
                   aria-label={doc.name[locale]}
                 >
@@ -105,7 +106,7 @@ export default function Doctors({
                   </span>
                   <button
                     type="button"
-                    onClick={() => onOpenDoctor(doc.id)}
+                    onClick={() => onOpenDoctor(doctorRouteKey(doc))}
                     className="text-left w-full text-lg font-extrabold text-brand-text-primary leading-snug group-hover:text-brand-gold transition-colors cursor-pointer"
                   >
                     {doc.name[locale]}
@@ -123,7 +124,7 @@ export default function Doctors({
                 <button
                   id={`view-profile-btn-${doc.id}`}
                   type="button"
-                  onClick={() => onOpenDoctor(doc.id)}
+                  onClick={() => onOpenDoctor(doctorRouteKey(doc))}
                   className="flex-1 py-2.5 bg-brand-dark-navy hover:bg-brand-deep-blue text-white font-semibold text-xs rounded-xl active:scale-98 transition-all cursor-pointer text-center"
                 >
                   {d.viewProfile}

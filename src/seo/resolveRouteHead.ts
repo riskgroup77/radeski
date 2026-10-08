@@ -6,6 +6,10 @@
  * JavaScript (Yandex, social previews) see the same titles as Google does.
  */
 import type { Article, Doctor, Locale, ServiceCategory } from '../types';
+import type { ClinicVideo } from '../data/sitePagesContent';
+import { DICTIONARY } from '../data';
+import { slugifyDoctorName } from '../utils/doctorSlug';
+import { getLocalizedImage } from '../utils/localizedImage';
 import {
   getArticleIdFromPathname,
   getConditionSlugFromPathname,
@@ -16,6 +20,10 @@ import {
   getPromoSlugFromPathname,
   getServiceCategoryIdFromPathname,
   getServiceSubIdFromPathname,
+  absoluteUrl,
+  doctorPath,
+  pagePath,
+  serviceCategoryPath,
   type PageId,
 } from '../routing/paths';
 import { localeToOgLocale } from '../routing/locale';
@@ -36,14 +44,18 @@ import { resolveClinicEquipment } from '../utils/clinicEquipmentRoutes';
 import { findArticleByRouteParam, resolveArticleRedirectTarget, resolveArticleRouteKey } from '../utils/articles';
 import { resolveArticleTags } from '../utils/articleContent';
 import { getNotFoundTitle } from '../components/NotFoundPage';
-import { buildServiceSeoTitle, getTabSeo, resolveArticleSeo } from './pageMeta';
+import { TITLE_MAX_LENGTH, buildServiceSeoTitle, fitDescription, getTabSeo, resolveArticleSeo } from './pageMeta';
 import { buildHreflangLinks, getCanonicalUrl, type HreflangLink, type RouteSeoContext } from './routeSeo';
 import {
   buildArticleSchema,
   buildEducationCoursesSchema,
   buildMedicalBusinessSchema,
-  buildServiceFaqSchemas,
+  buildBreadcrumbSchema,
+  buildDoctorSchema,
+  buildVideoListSchema,
+  type BreadcrumbItem,
 } from './structuredData';
+import { doctorRouteKey, findDoctorByRouteParam } from '../utils/doctorSlug';
 
 export interface RouteHeadInput {
   pathname: string;
@@ -56,6 +68,8 @@ export interface RouteHeadInput {
   clinicRatings: { id?: string; rating: string | number; count: number }[];
   /** While data is loading an unknown doctor id is not yet a 404. */
   dataLoading?: boolean;
+  /** Clinic videos (videos page VideoObject list). */
+  videos?: ClinicVideo[];
 }
 
 export interface RouteHead {
@@ -65,10 +79,14 @@ export interface RouteHead {
   keywords: string;
   robots: string;
   canonical: string;
+  /** Share image for link previews (article cover / doctor photo / logo). */
+  ogImage: string;
   hreflang: HreflangLink[];
   ogLocale: string;
   jsonLd: Record<string, unknown>[];
   /** Resolved route facts, reused by the prerender to build the page body. */
+  /** Visible breadcrumb trail (also emitted as BreadcrumbList). Empty on the home page. */
+  breadcrumbs: BreadcrumbItem[];
   route: {
     currentPage: PageId;
     article: Article | null;
@@ -108,7 +126,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       ? activeServiceCategory.subServices.find((sub) => sub.id === serviceSubId) ?? null
       : null;
   const activeArticle = articleId ? findArticleByRouteParam(articleId, articles) ?? null : null;
-  const activeDoctor = doctorId ? doctors.find((doc) => doc.id === doctorId) ?? null : null;
+  const activeDoctor = doctorId ? findDoctorByRouteParam(doctorId, doctors) ?? null : null;
 
   const isErrorPage =
     currentPage === 'not-found' ||
@@ -118,11 +136,30 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     Boolean(doctorId && !input.dataLoading && !activeDoctor);
 
   // JSON-LD: MedicalBusiness + service FAQs (+ article / courses where relevant).
-  const jsonLd: Record<string, unknown>[] = [
-    buildMedicalBusinessSchema(locale, origin, clinicRatings),
-    ...buildServiceFaqSchemas(locale, serviceCategories),
-  ];
-  if (activeArticle) jsonLd.push(buildArticleSchema(locale, activeArticle, origin));
+  // FAQ markup is only emitted where the questions are visible (article pages add their own),
+  // never the old template FAQs for every service on every page.
+  const jsonLd: Record<string, unknown>[] = [buildMedicalBusinessSchema(locale, origin, clinicRatings)];
+
+  if (activeDoctor) {
+    jsonLd.push(buildDoctorSchema(locale, activeDoctor, origin, absoluteUrl(doctorPath(locale, doctorRouteKey(activeDoctor)))));
+  }
+  if (activeArticle) {
+    const authorDoctor = findArticleAuthorDoctor(activeArticle, doctors);
+    jsonLd.push(
+      buildArticleSchema(
+        locale,
+        activeArticle,
+        origin,
+        authorDoctor
+          ? { doctor: authorDoctor, url: absoluteUrl(doctorPath(locale, doctorRouteKey(authorDoctor))) }
+          : null,
+      ),
+    );
+  }
+  if (currentPage === 'videos' && input.videos?.length) {
+    const videoList = buildVideoListSchema(locale, input.videos, origin);
+    if (videoList) jsonLd.push(videoList);
+  }
   if (currentPage === 'obrazovaniya') {
     const programs = activeEducationProgram ? [activeEducationProgram] : OBRAZOVANIYA.programs.items;
     jsonLd.push(
@@ -233,18 +270,39 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     daavlinSection,
     daavlinModelId,
     resolvedArticleRouteKey,
-    resolvedDoctorId: activeDoctor?.id ?? doctorId ?? undefined,
+    resolvedDoctorId: activeDoctor ? doctorRouteKey(activeDoctor) : doctorId ?? undefined,
     resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
     resolvedServiceSubId: activeEquipment?.id ?? activeServiceSub?.id ?? serviceSubId ?? undefined,
   };
 
+  const canonical = getCanonicalUrl(seoContext);
+  const breadcrumbs = isErrorPage
+    ? []
+    : buildBreadcrumbs({
+        locale,
+        currentPage,
+        title,
+        article: activeArticle,
+        doctor: activeDoctor,
+        serviceCategory: activeServiceCategory,
+        serviceSubName: activeEquipment
+          ? getLocalizedEquipmentText(activeEquipment.title, locale)
+          : activeServiceSub?.name[locale] ?? null,
+        localCity: localCommercialRoute?.city ?? null,
+        hasDetail: Boolean(activeLocalCommercial || activeEducationProgram || daavlinModelSeo || activeCondition),
+        sectionTitle: tabSeo.title,
+      }).map((item) => (item.path ? item : { ...item, path: canonical }));
+  if (breadcrumbs.length > 1) jsonLd.push(buildBreadcrumbSchema(breadcrumbs));
+
   return {
     lang: locale,
-    title,
-    description,
+    title: trimBrandTail(title),
+    breadcrumbs,
+    description: fitDescription(description),
     keywords,
-    robots: isErrorPage ? 'noindex, nofollow' : 'index, follow',
-    canonical: getCanonicalUrl(seoContext),
+    robots: isErrorPage ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1',
+    ogImage: resolveOgImage(origin, locale, activeArticle, activeDoctor, activeServiceSub ?? activeServiceCategory),
+    canonical,
     hreflang: buildHreflangLinks(seoContext),
     ogLocale: localeToOgLocale(locale),
     jsonLd,
@@ -258,6 +316,109 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     },
   };
 }
+
+/**
+ * Last resort for long titles: shorten or drop the brand tail so the page's own words are
+ * what fits in the ~60 visible characters. The topic text itself is never cut.
+ */
+function trimBrandTail(title: string): string {
+  if (title.length <= TITLE_MAX_LENGTH) return title;
+  const tail = title.match(/\s+[|—–-]\s+Radeski(?: Skin Clinic)?$/);
+  if (!tail) return title;
+  const shorter = `${title.slice(0, tail.index)} | Radeski`;
+  return shorter.length <= TITLE_MAX_LENGTH ? shorter : title.slice(0, tail.index);
+}
+
+function resolveOgImage(
+  origin: string,
+  locale: Locale,
+  article: Article | null,
+  doctor: Doctor | null,
+  service: { image?: string | null; images?: Article['images'] } | null,
+): string {
+  const path = article
+    ? getLocalizedImage(article.images, locale) ?? article.image
+    : doctor
+      ? doctor.photo
+      : service
+        ? getLocalizedImage(service.images, locale) ?? service.image
+        : null;
+  if (!path) return `${origin}/gallery/logo.webp`;
+  return path.startsWith('http') ? path : `${origin}${path.startsWith('/') ? '' : '/'}${path}`;
+}
+
+/** The doctor an article is attributed to (author name matches a doctor's name). */
+function findArticleAuthorDoctor(article: Article, doctors: Doctor[]): Doctor | undefined {
+  const author = slugifyDoctorName(article.author?.uz || '');
+  if (!author) return undefined;
+  return doctors.find((doctor) => {
+    const name = slugifyDoctorName(doctor.name.uz);
+    return name && (name === author || name.startsWith(`${author}-`) || author.startsWith(`${name}-`));
+  });
+}
+
+const SECTION_PAGE: Partial<Record<PageId, keyof (typeof DICTIONARY)['uz']>> = {
+  about: 'navAbout',
+  services: 'navServices',
+  doctors: 'navDoctors',
+  prices: 'navPrices',
+  articles: 'navArticles',
+  videos: 'navVideos',
+  branches: 'navBranches',
+  results: 'navResults',
+  dermoscan: 'navDermoScan',
+  'daavlin-foto-kabinalari': 'navDaavlinShort',
+};
+
+function buildBreadcrumbs(ctx: {
+  locale: Locale;
+  currentPage: PageId;
+  title: string;
+  article: Article | null;
+  doctor: Doctor | null;
+  serviceCategory: ServiceCategory | null;
+  serviceSubName: string | null;
+  localCity: 'fargona' | 'qoqon' | null;
+  hasDetail: boolean;
+  /** Title of the section page itself (from the tab SEO table). */
+  sectionTitle: string;
+}): BreadcrumbItem[] {
+  const { locale, currentPage } = ctx;
+  const d = DICTIONARY[locale] as Record<string, string>;
+  if (currentPage === 'home' && !ctx.localCity) return [];
+
+  const items: BreadcrumbItem[] = [{ name: d.navHome, path: pagePath(locale, 'home') }];
+  const shortTitle = ctx.title.split(' | ')[0].split(' — ')[0];
+
+  if (ctx.localCity) {
+    items.push({
+      name: ctx.localCity === 'fargona' ? (locale === 'ru' ? 'Фергана' : locale === 'en' ? 'Fergana' : "Farg'ona") : locale === 'ru' ? 'Коканд' : locale === 'en' ? 'Kokand' : "Qo'qon",
+      path: pagePath(locale, ctx.localCity),
+    });
+    if (currentPage !== ctx.localCity || ctx.hasDetail) items.push({ name: shortTitle, path: '' });
+    return items;
+  }
+
+  const sectionKey = SECTION_PAGE[currentPage];
+  const sectionName = sectionKey ? d[sectionKey] : ctx.sectionTitle.split(' | ')[0].split(' — ')[0];
+  items.push({ name: sectionName, path: pagePath(locale, currentPage === 'conditions' ? 'services' : currentPage) });
+
+  if (ctx.serviceCategory) {
+    items.push({
+      name: ctx.serviceCategory.title[locale] || ctx.serviceCategory.title.uz,
+      path: serviceCategoryPath(locale, ctx.serviceCategory.id),
+    });
+    if (ctx.serviceSubName) items.push({ name: ctx.serviceSubName, path: '' });
+  } else if (ctx.article) {
+    items.push({ name: ctx.article.title[locale] || ctx.article.title.uz, path: '' });
+  } else if (ctx.doctor) {
+    items.push({ name: ctx.doctor.name[locale] || ctx.doctor.name.uz, path: '' });
+  } else if (ctx.hasDetail) {
+    items.push({ name: shortTitle, path: '' });
+  }
+  return items;
+}
+
 
 /** Browser side: writes a RouteHead into the live document. */
 export function applyRouteHead(head: RouteHead): void {
@@ -288,6 +449,9 @@ export function applyRouteHead(head: RouteHead): void {
   setMeta('property', 'og:description', head.description);
   setMeta('property', 'og:url', head.canonical);
   setMeta('property', 'og:locale', head.ogLocale);
+  setMeta('property', 'og:image', head.ogImage);
+  setMeta('name', 'twitter:title', head.title);
+  setMeta('name', 'twitter:description', head.description);
 
   let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
   if (!canonical) {

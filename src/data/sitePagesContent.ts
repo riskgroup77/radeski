@@ -13,6 +13,8 @@ export interface ClinicVideo {
   thumbnail?: string;
   sortOrder?: number;
   isActive?: boolean;
+  /** Upload date from the CMS (VideoObject uploadDate). */
+  createdAt?: string;
 }
 
 export interface ClinicBranch {

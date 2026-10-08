@@ -1,5 +1,6 @@
 import type { Doctor, Locale } from '../types';
 import MediaImage from './MediaImage';
+import { doctorRouteKey } from '../utils/doctorSlug';
 
 interface DoctorsHomeMarqueeProps {
   doctors: Doctor[];
@@ -49,7 +50,7 @@ function DoctorCard({
         </span>
         <button
           type="button"
-          onClick={() => onDoctorClick(doctor.id)}
+          onClick={() => onDoctorClick(doctorRouteKey(doctor))}
           className="mt-1 w-full cursor-pointer text-left text-md font-extrabold leading-snug tracking-tight text-brand-text-primary transition-colors hover:text-brand-gold sm:text-base"
         >
           {doctor.name[locale]}
@@ -69,7 +70,7 @@ function DoctorCard({
         </p>
         <button
           type="button"
-          onClick={() => onDoctorClick(doctor.id)}
+          onClick={() => onDoctorClick(doctorRouteKey(doctor))}
           className="mt-4 w-full cursor-pointer rounded-lg bg-brand-gold-light/10 py-2.5 text-center text-xs font-bold text-brand-gold-dark transition-colors hover:bg-brand-gold-light/20"
         >
           {viewProfileLabel}

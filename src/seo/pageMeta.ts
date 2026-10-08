@@ -23,26 +23,52 @@ export function localSeoKokand(locale: Locale): string {
   return 'Kokand';
 }
 
+/** Google shows ~60 characters of a title; longer ones are cut mid-word. */
+export const TITLE_MAX_LENGTH = 60;
+/** ~155–160 characters of a description are shown in results. */
+export const DESCRIPTION_MAX_LENGTH = 158;
+
+/** First candidate that fits — the name always stays whole, the brand/city tail shrinks. */
+function fitTitle(candidates: string[]): string {
+  return candidates.find((title) => title.length <= TITLE_MAX_LENGTH) ?? candidates[candidates.length - 1];
+}
+
+function mainCity(locale: Locale): string {
+  return locale === 'ru' ? 'Фергана' : locale === 'en' ? 'Fergana' : "Farg'ona";
+}
+
 export function buildServiceSeoTitle(name: string, locale: Locale): string {
   const cities = localSeoCities(locale);
-  if (locale === 'uz') {
-    return `${name} — dermatologiya ${cities} | Radeski Skin Clinic`;
-  }
-  if (locale === 'ru') {
-    return `${name} — дерматолог ${cities} | Radeski Skin Clinic`;
-  }
-  return `${name} — dermatology ${cities} | Radeski Skin Clinic`;
+  const topic = locale === 'uz' ? 'dermatologiya' : locale === 'ru' ? 'дерматолог' : 'dermatology';
+  return fitTitle([
+    `${name} — ${topic} ${cities} | Radeski Skin Clinic`,
+    `${name} — ${topic} ${cities} | Radeski`,
+    `${name} — ${mainCity(locale)} | Radeski Skin Clinic`,
+    `${name} | Radeski Skin Clinic`,
+    `${name} | Radeski`,
+  ]);
 }
 
 export function buildArticleSeoTitle(title: string, locale: Locale): string {
   const cities = localSeoCities(locale);
-  if (locale === 'uz') {
-    return `${title} | Radeski — dermatologiya ${cities}`;
-  }
-  if (locale === 'ru') {
-    return `${title} | Radeski — дерматология ${cities}`;
-  }
-  return `${title} | Radeski — dermatology ${cities}`;
+  const topic = locale === 'uz' ? 'dermatologiya' : locale === 'ru' ? 'дерматология' : 'dermatology';
+  return fitTitle([
+    `${title} | Radeski — ${topic} ${cities}`,
+    `${title} | Radeski Skin Clinic`,
+    `${title} | Radeski`,
+    title,
+  ]);
+}
+
+/** Trims a description to what search results show — at a sentence end when possible. */
+export function fitDescription(text: string): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= DESCRIPTION_MAX_LENGTH) return clean;
+  const cut = clean.slice(0, DESCRIPTION_MAX_LENGTH);
+  const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('? '));
+  if (sentenceEnd >= 90) return cut.slice(0, sentenceEnd + 1);
+  const wordEnd = cut.lastIndexOf(' ');
+  return `${cut.slice(0, wordEnd > 90 ? wordEnd : DESCRIPTION_MAX_LENGTH - 1).replace(/[,;:—–-]+$/, '')}…`;
 }
 
 /** Per-article SEO overrides keyed by public route id (art-*). */
@@ -166,55 +192,55 @@ export function buildServiceH1(name: string, locale: Locale): string {
 export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   uz: {
     home: {
-      title: "Radeski Skin Clinic — teri, soch va tirnoqlar uchun zamonaviy estetik korreksiyali tibbiy klinika",
+      title: "Dermatolog Farg'ona va Qo'qon — Radeski Skin Clinic",
       desc: "Radeski Skin Clinic — teri, soch va tirnoqlar bo'yicha tibbiy yordam hamda zamonaviy estetik korreksiya. Dermatologiya, trixologiya, podologiya, IPL, lazer va inyeksiyalar. Tel: +998 73 200-73-73.",
       keywords:
         "Radeski Skin Clinic, teri klinikasi, soch va tirnoq, tibbiy klinika, estetik korreksiya, dermatologiya, trixologiya, podologiya",
     },
     about: {
-      title: "Klinika haqida | Radeski Skin Clinic — dermatologiya Farg'ona | Qo'qon",
+      title: "Klinika haqida — Radeski Skin Clinic, Farg'ona",
       desc: "Radeski Skin Clinic tarixi, litsenziyalar va akkreditatsiya. Farg'ona va Qo'qonda zamonaviy dermatologiya, kosmetologiya va dermato-onkologiya.",
       keywords: "Radeski klinika, dermatologiya Farg'ona, dermatologiya Qo'qon, litsenziya, akkreditatsiya, Ashurov Dilshod",
     },
     services: {
-      title: "Dermatologiya va kosmetologiya xizmatlari Farg'ona | Qo'qon | Radeski",
+      title: "Dermatologiya va kosmetologiya xizmatlari — Radeski",
       desc: "12 yo'nalish: dermatologiya, apparatli kosmetologiya, IPL, lazer epilyatsiya, trixologiya, inyeksiyalar, Mohs jarrohligi. Farg'ona va Qo'qon.",
       keywords:
         "dermatologiya xizmatlari Farg'ona, kosmetologiya Qo'qon, IPL Farg'ona, lazer epilyatsiya Qo'qon, trixologiya, botoks, fototerapiya",
     },
     doctors: {
-      title: "Dermatolog Farg'ona | Qo'qon — shifokorlar | Radeski Skin Clinic",
+      title: "Dermatolog shifokorlar Farg'ona, Qo'qon — Radeski",
       desc: "Radeski shifokorlari: dermatovenerolog, dermatoonkolog, kosmetolog va lazer mutaxassislari. Ashurov Dilshod Davlatovich jamoasi — Farg'ona va Qo'qon.",
       keywords: "dermatolog Farg'ona, dermatolog Qo'qon, Radeski shifokorlari, Ashurov Dilshod, kosmetolog Farg'ona, trixolog",
     },
     prices: {
-      title: "Narxlar — dermatologiya va kosmetologiya Farg'ona | Qo'qon | Radeski",
+      title: "Dermatologiya va kosmetologiya narxlari — Radeski",
       desc: "Radeski preyskuranti: konsultatsiya, IPL, lazer epilyatsiya, botoks va boshqa muolajalar narxlari Farg'ona va Qo'qonda.",
       keywords: "dermatolog narxi Farg'ona, dermatolog narxi Qo'qon, IPL narxi, botoks narxi, kosmetologiya narxlari, preyskurant",
     },
     articles: {
-      title: "Maqolalar — teri sog'ligi, akne, psoriaz | Radeski Farg'ona | Qo'qon",
+      title: "Teri, soch va tirnoq haqida maqolalar — Radeski",
       desc: "Dermatologiya blogi: akne, psoriaz, vitiligo, IPL, lazer epilyatsiya va soch muammolari — Farg'ona va Qo'qon bemorlari uchun.",
       keywords: "dermatologiya maqolalar, akne davolash, psoriaz, vitiligo, IPL terapiya, Farg'ona, Qo'qon",
     },
     videos: {
-      title: "Videolar — dermatologiya va muolajalar | Radeski Farg'ona | Qo'qon",
+      title: "Muolajalar videolari — Radeski Skin Clinic",
       desc: "Radeski klinikasi videolari: IPL, fototerapiya, lazer va boshqa dermatologiya xizmatlari — Farg'ona | Qo'qon.",
       keywords: "Radeski video, dermatologiya video, IPL, klinika Farg'ona, klinika Qo'qon",
     },
     branches: {
-      title: "Filiallar — Farg'ona | Qo'qon | Belgiya | Radeski Skin Clinic",
+      title: "Filiallar: Farg'ona, Qo'qon, Belgiya — Radeski",
       desc: "Radeski filiallari: Farg'ona, Qo'qon va Rade Skin Clinic (Liège). Manzil, telefon va ish vaqti. Qo'qon: dermatolog, IPL, lazer.",
       keywords: "Radeski filial, dermatolog Farg'ona, dermatolog Qo'qon, klinika manzili, Rade Skin Clinic",
     },
     qoqon: {
-      title: "Dermatolog Qo'qon | Radeski Skin Clinic — teri, soch va tirnoqlar ixtisoslashgan klinikasi",
+      title: "Dermatolog Qo'qon — Radeski Skin Clinic",
       desc: "Qo'qonda Radeski Skin Clinic: dermatologiya, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya. Manzil: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.",
       keywords:
         "dermatolog Qo'qon, dermatologiya Qo'qon, kosmetologiya Qo'qon, IPL Qo'qon, lazer epilyatsiya Qo'qon, Radeski Qo'qon, akne Qo'qon",
     },
     fargona: {
-      title: "Dermatolog Farg'ona | Radeski Skin Clinic — teri, soch va tirnoqlar ixtisoslashgan klinikasi",
+      title: "Dermatolog Farg'ona — Radeski Skin Clinic",
       desc: "Farg'onada Radeski bosh klinikasi: dermatologiya, trixologiya, podologiya, IPL, lazer, dermatoskopiya. Manzil: O'zbekiston Ovozi 1A. Tel: +998 73 200-73-73.",
       keywords:
         "dermatolog Farg'ona, trixolog Farg'ona, podolog Farg'ona, IPL Farg'ona, lazer epilyatsiya Farg'ona, Radeski Farg'ona, akne Farg'ona",
@@ -225,32 +251,32 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "davolash natijalari, oldin keyin, akne, IPL natija, Farg'ona, Qo'qon",
     },
     technologies: {
-      title: "Texnologiyalar — IPL, Mohs, Excimer | Radeski Farg'ona | Qo'qon",
+      title: "IPL, Mohs, Excimer texnologiyalari — Radeski",
       desc: "Sciton IPL, Mohs mikrografik jarrohligi, Excimer va UVB fototerapiya — Radeski Skin Clinic Farg'ona va Qo'qon.",
       keywords: "IPL Farg'ona, IPL Qo'qon, Mohs, Excimer, UVB fototerapiya, zamonaviy dermatologiya",
     },
     'daavlin-foto-kabinalari': {
-      title: "Daavlin — O‘zbekiston Milliy Fototerapiya Markazi | Radeski Farg'ona | Qo'qon",
+      title: "Daavlin fototerapiya markazi — Radeski Farg'ona",
       desc: "Narrowband UVB (311–313 nm) fototerapiya Daavlin kabinalarida: psoriaz, vitiligo, ekzema va boshqa surunkali teri kasalliklari. O‘zbekiston Milliy Fototerapiya Markazi — Radeski Skin Clinic.",
       keywords: "Milliy Fototerapiya Markazi, Daavlin, NB-UVB, fototerapiya, psoriaz, vitiligo, ekzema, Farg'ona, Qo'qon",
     },
     dermoscan: {
-      title: "DermaScan — AI qo'llab-quvvatlangan dermatologiya | Radeski Skin Clinic",
+      title: "DermaScan — AI dermatologiya | Radeski",
       desc: "DermaScan mobil ilovasi: teri holatini raqamli kuzatish, AI tahlili va shifokor bilan uzluksiz hamkorlik. Radeski Skin Clinic raqamli ekotizimi.",
       keywords: "DermaScan, AI dermatologiya, teri kuzatuvi, sun'iy intellekt, raqamli dermatologiya, Radeski",
     },
     science: {
-      title: "Ilm-fan | Radeski Skin Clinic — tadqiqot, ta'lim, xalqaro hamkorlik",
+      title: "Ilm-fan va tadqiqotlar — Radeski Skin Clinic",
       desc: "Radeski Skin Clinic da ilm-fan: klinik amaliyot, tadqiqot, nashrlar, yosh shifokorlarni tayyorlash va xalqaro hamkorlik. Farg'ona | Qo'qon.",
       keywords: "ilm-fan, dermatologiya tadqiqoti, klinik protokollar, yosh shifokorlar, Radeski, Farg'ona, Qo'qon",
     },
     obrazovaniya: {
-      title: "Ta'lim | Radeski Skin Clinic — teri, soch va tirnoq bo'yicha o'qitish",
+      title: "Dermatologiya bo'yicha ta'lim — Radeski",
       desc: "Sertifikatsiya kurslari, ordinatura, malaka oshirish, master-klasslar, amaliy treninglar, soch transplantatsiyasi va lazer texnologiyalari. Teri, soch va tirnoq bo'yicha zamonaviy estetik korrektsiya. Farg'ona | Qo'qon.",
       keywords: "ta'lim, sertifikatsiya kurslari, ordinatura, malaka oshirish, master-klass, amaliy trening, soch transplantatsiyasi o'qitish, lazer texnologiyalari, dermatologiya o'qitish, estetik tibbiyot, Radeski, Farg'ona, Qo'qon",
     },
     'malaka-oshirish': {
-      title: "Malaka oshirish | Radeski Skin Clinic — kurslar, trening, sertifikat",
+      title: "Malaka oshirish kurslari — Radeski Skin Clinic",
       desc: "Dermatologiya va kosmetologiya bo'yicha malaka oshirish: sertifikatsiya, master-klass, lazer treningi, amaliyot va xalqaro dasturlar. Farg'ona | Qo'qon.",
       keywords: "malaka oshirish, sertifikatsiya kursi, master-klass, lazer trening, dermatologiya o'qitish, Radeski, Farg'ona",
     },
@@ -282,18 +308,18 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   },
   ru: {
     home: {
-      title: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией",
+      title: "Дерматолог в Фергане и Коканде — Radeski Skin Clinic",
       desc: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией. Дерматология, трихология, подология, IPL, лазер и инъекции. Тел: +998 73 200-73-73.",
       keywords:
         "Radeski Skin Clinic, медицинская клиника кожи, волос и ногтей, эстетическая коррекция, дерматология, трихология, подология",
     },
     about: {
-      title: "О клинике | Radeski Skin Clinic — дерматология Фергана | Коканд",
+      title: "О клинике — Radeski Skin Clinic, Фергана",
       desc: "История, лицензии и аккредитация Radeski Skin Clinic. Современная дерматология и косметология в Фергане и Коканде.",
       keywords: "клиника Radeski, дерматолог Фергана, дерматолог Коканд, лицензия, аккредитация, Ашуров Дильшод",
     },
     services: {
-      title: "Услуги дерматологии и косметологии Фергана | Коканд | Radeski",
+      title: "Услуги дерматологии и косметологии — Radeski",
       desc: "12 направлений: дерматология, аппаратная косметология, IPL, лазерная эпиляция, трихология, инъекции, хирургия Mohs — Фергана и Коканд.",
       keywords:
         "услуги дерматолога Фергана, косметология Коканд, IPL Фергана, лазерная эпиляция Коканд, трихология, ботокс, фототерапия",
@@ -304,7 +330,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "дерматолог Фергана, дерматолог Коканд, врачи Radeski, Ашуров Дильшод, косметолог Фергана, трихолог",
     },
     prices: {
-      title: "Цены — дерматология и косметология Фергана | Коканд | Radeski",
+      title: "Цены на дерматологию и косметологию — Radeski",
       desc: "Прейскурант Radeski: консультации, IPL, лазерная эпиляция, ботокс и другие процедуры в Фергане и Коканде.",
       keywords: "цена дерматолога Фергана, цена дерматолога Коканд, цена IPL, ботокс цена, прейскурант косметологии",
     },
@@ -324,13 +350,13 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "филиал Radeski, дерматолог Фергана, дерматолог Коканд, адрес клиники",
     },
     qoqon: {
-      title: 'Дерматолог Коканд | Radeski Skin Clinic — специализированная клиника кожи, волос и ногтей',
+      title: 'Дерматолог в Коканде — Radeski Skin Clinic',
       desc: 'Клиника Radeski в Коканде: дерматология, косметология, IPL, лазерная эпиляция, фототерапия. Адрес: 47-МФЙ, Хукандий 144А. Тел: +998 95 210 73 73.',
       keywords:
         'дерматолог Коканд, дерматология Коканд, косметология Коканд, IPL Коканд, лазерная эпиляция Коканд, Radeski Коканд, акне Коканд',
     },
     fargona: {
-      title: 'Дерматолог Фергана | Radeski Skin Clinic — специализированная клиника кожи, волос и ногтей',
+      title: 'Дерматолог в Фергане — Radeski Skin Clinic',
       desc: 'Главная клиника Radeski в Фергане: дерматология, трихология, подология, IPL, лазер, дерматоскопия. Адрес: ул. Узбекистон Овози 1А. Тел: +998 73 200-73-73.',
       keywords:
         'дерматолог Фергана, трихолог Фергана, подолог Фергана, IPL Фергана, лазерная эпиляция Фергана, Radeski Фергана, акне Фергана',
@@ -346,7 +372,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "IPL Фергана, IPL Коканд, Mohs, Excimer, UVB фототерапия, современная дерматология",
     },
     'daavlin-foto-kabinalari': {
-      title: "Daavlin — Национальный центр фототерапии Узбекистана | Radeski Фергана | Коканд",
+      title: "Центр фототерапии Daavlin — Radeski Фергана",
       desc: "Узкополосная UVB (311–313 нм) фототерапия в кабинах Daavlin: псориаз, витилиго, экзема и другие хронические заболевания кожи. Национальный центр фототерапии Узбекистана — Radeski Skin Clinic.",
       keywords: "Национальный центр фототерапии, Daavlin, NB-UVB, фототерапия, псориаз, витилиго, экзема, Фергана, Коканд",
     },
@@ -356,7 +382,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "DermaScan, AI дерматология, наблюдение за кожей, искусственный интеллект, цифровая дерматология, Radeski",
     },
     science: {
-      title: "Наука | Radeski Skin Clinic — исследования, образование, международное сотрудничество",
+      title: "Наука и исследования — Radeski Skin Clinic",
       desc: "Наука в Radeski Skin Clinic: клиническая практика, исследования, публикации, подготовка молодых врачей и международное сотрудничество. Фергана | Коканд.",
       keywords: "наука, исследования в дерматологии, клинические протоколы, молодые врачи, Radeski, Фергана, Коканд",
     },
@@ -366,7 +392,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "образование, сертификационные курсы, ординатура, повышение квалификации, мастер-классы, практические тренинги, пересадка волос обучение, лазерные технологии, обучение дерматологии, эстетическая медицина, Radeski, Фергана, Коканд",
     },
     'malaka-oshirish': {
-      title: "Повышение квалификации | Radeski Skin Clinic — курсы, тренинги, сертификаты",
+      title: "Повышение квалификации — Radeski Skin Clinic",
       desc: "Повышение квалификации в дерматологии и косметологии: сертификация, мастер-классы, лазерные тренинги, практика и международные программы. Фергана | Коканд.",
       keywords: "повышение квалификации, сертификационные курсы, мастер-классы, лазерное обучение, Radeski, Фергана",
     },
@@ -398,34 +424,34 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   },
   en: {
     home: {
-      title: "Radeski Skin Clinic — medical clinic for skin, hair and nails with modern aesthetic correction",
+      title: "Dermatologist in Fergana & Kokand — Radeski Skin Clinic",
       desc: "Radeski Skin Clinic — medical care for skin, hair and nails with modern aesthetic correction. Dermatology, trichology, podology, IPL, laser and injectables. Tel: +998 73 200-73-73.",
       keywords:
         "Radeski Skin Clinic, medical skin clinic, hair and nails, aesthetic correction, dermatology, trichology, podology",
     },
     about: {
-      title: "About the clinic | Radeski Skin Clinic — dermatology Fergana | Kokand",
+      title: "About the clinic — Radeski Skin Clinic, Fergana",
       desc: "History, licensing and accreditation of Radeski Skin Clinic in Fergana and Kokand.",
       keywords: "Radeski clinic, dermatologist Fergana, dermatologist Kokand, license, accreditation, Dilshod Ashurov",
     },
     services: {
-      title: "Dermatology & cosmetology services Fergana | Kokand | Radeski",
+      title: "Dermatology & cosmetology services — Radeski",
       desc: "12 specialties: dermatology, device cosmetology, IPL, laser hair removal, trichology, injectables and Mohs surgery — Fergana and Kokand.",
       keywords:
         "dermatology services Fergana, cosmetology Kokand, IPL Fergana, laser hair removal Kokand, trichology, Botox, phototherapy",
     },
     doctors: {
-      title: "Dermatologist Fergana | Kokand — doctors | Radeski Skin Clinic",
+      title: "Dermatologists in Fergana & Kokand — Radeski",
       desc: "Radeski physicians: dermatologists, dermato-oncologists, cosmetologists and laser specialists — Fergana and Kokand.",
       keywords: "dermatologist Fergana, dermatologist Kokand, Radeski doctors, Dilshod Ashurov, cosmetologist Fergana",
     },
     prices: {
-      title: "Prices — dermatology & cosmetology Fergana | Kokand | Radeski",
+      title: "Dermatology & cosmetology prices — Radeski",
       desc: "Radeski price list: consultations, IPL, laser hair removal, Botox and more in Fergana and Kokand.",
       keywords: "dermatologist price Fergana, dermatologist price Kokand, IPL price, Botox cost, cosmetology prices",
     },
     articles: {
-      title: "Articles — skin health, acne, psoriasis | Radeski Fergana | Kokand",
+      title: "Skin, hair & nail health articles — Radeski",
       desc: "Dermatology blog: acne, psoriasis, vitiligo, IPL, laser hair removal and hair treatments — Fergana and Kokand.",
       keywords: "dermatology articles, acne treatment, psoriasis, vitiligo, IPL therapy, Fergana, Kokand",
     },
@@ -440,13 +466,13 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Radeski branch, dermatologist Fergana, dermatologist Kokand, clinic address",
     },
     qoqon: {
-      title: 'Dermatologist Kokand | Radeski Skin Clinic — specialized skin, hair and nails clinic',
+      title: 'Dermatologist in Kokand — Radeski Skin Clinic',
       desc: 'Radeski Skin Clinic in Kokand: dermatology, cosmetology, IPL, laser hair removal, phototherapy. Address: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.',
       keywords:
         'dermatologist Kokand, dermatology Kokand, cosmetology Kokand, IPL Kokand, laser hair removal Kokand, Radeski Kokand, acne Kokand',
     },
     fargona: {
-      title: 'Dermatologist Fergana | Radeski Skin Clinic — specialized skin, hair and nails clinic',
+      title: 'Dermatologist in Fergana — Radeski Skin Clinic',
       desc: 'Radeski main clinic in Fergana: dermatology, trichology, podology, IPL, laser, dermoscopy. Address: 1A Uzbekiston Ovozi St. Tel: +998 73 200-73-73.',
       keywords:
         'dermatologist Fergana, trichologist Fergana, podiatrist Fergana, IPL Fergana, laser hair removal Fergana, Radeski Fergana, acne Fergana',
@@ -462,7 +488,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "IPL Fergana, IPL Kokand, Mohs, Excimer, UVB phototherapy, modern dermatology",
     },
     'daavlin-foto-kabinalari': {
-      title: "National Phototherapy Center of Uzbekistan by Daavlin | Radeski Fergana | Kokand",
+      title: "Daavlin phototherapy center — Radeski Fergana",
       desc: "Narrowband UVB (311–313 nm) phototherapy in Daavlin cabins for psoriasis, vitiligo, eczema and other chronic skin conditions. National Phototherapy Center of Uzbekistan — Radeski Skin Clinic.",
       keywords: "National Phototherapy Center, Daavlin, NB-UVB, phototherapy, psoriasis, vitiligo, eczema, Fergana, Kokand",
     },
@@ -472,7 +498,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "DermaScan, AI dermatology, skin monitoring, artificial intelligence, digital dermatology, Radeski",
     },
     science: {
-      title: "Science | Radeski Skin Clinic — research, education, international collaboration",
+      title: "Science & research — Radeski Skin Clinic",
       desc: "Science at Radeski Skin Clinic: clinical practice, research, publications, training young physicians, and international collaboration. Fergana | Kokand.",
       keywords: "science, dermatology research, clinical protocols, young physicians, Radeski, Fergana, Kokand",
     },
@@ -482,7 +508,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "education, certification courses, residency, continuing medical education, masterclasses, hands-on training, hair transplant training, laser technology, dermatology training, aesthetic medicine, Radeski, Fergana, Kokand",
     },
     'malaka-oshirish': {
-      title: "Professional development | Radeski Skin Clinic — courses, training, certification",
+      title: "Professional development courses — Radeski",
       desc: "Dermatology and cosmetology CME: certification, masterclasses, laser training, clinical practice, and international programs. Fergana | Kokand.",
       keywords: "professional development, CME, certification courses, laser training, dermatology education, Radeski, Fergana",
     },
@@ -497,7 +523,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "skin pathology, histology, morphologic diagnosis, national center, Radeski, Fergana",
     },
     brend: {
-      title: "The Radeski Skin Clinic brand | Mission, philosophy, ecosystem",
+      title: "Radeski Skin Clinic brand: mission & philosophy",
       desc: "The Radeski Skin Clinic brand: professional medicine, technology, science and accessibility. A dermatology ecosystem in Fergana and Kokand.",
       keywords: "Radeski brand, clinic brand, dermatology ecosystem, mission, Fergana, Kokand",
     },

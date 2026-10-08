@@ -25,6 +25,21 @@ export const CLINIC_REVIEW_LINKS = {
   twoGis: 'https://2gis.kg/bishkek?m=72.367424%2C41.175575%2F7.43',
 } as const;
 
+/**
+ * Google Place ID (ChIJ…) — when set, the review button opens Google's "write a review"
+ * dialog directly. Until then it opens the clinic card (by CID), where "Write a review" is one click.
+ */
+export const GOOGLE_PLACE_ID = '';
+const GOOGLE_MAPS_CID = '15680829413729509608';
+
+/** Where patients can leave a public review (shown to everyone — no rating-based gating). */
+export const CLINIC_PUBLIC_REVIEW_LINKS = {
+  google: GOOGLE_PLACE_ID
+    ? `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`
+    : `https://maps.google.com/?cid=${GOOGLE_MAPS_CID}`,
+  yandex: 'https://yandex.uz/maps/org/138616043960/reviews/',
+} as const;
+
 /** Radeski bosh klinika — aniq koordinatalar (Google Maps) */
 export const CLINIC_GEO = {
   lat: 40.3833622,

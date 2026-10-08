@@ -132,6 +132,8 @@ if ! git diff --quiet "$PREV" HEAD -- package-lock.json || [ ! -x node_modules/.
 fi
 if [ -f .env ]; then set -a; . ./.env; set +a; fi
 export VITE_API_URL="${{VITE_API_URL:-https://api.radeski.uz}}"
+# Notify Yandex/Bing (IndexNow) about pages whose content changed in this deploy.
+export INDEXNOW=1
 npm run build
 if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
   mkdir -p dist/videos

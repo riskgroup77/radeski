@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDoctorSitemapXml } from '../src/seo/sitemapDoctors.ts';
+import { doctorRouteKey } from '../src/utils/doctorSlug.ts';
 
 const API_URL = process.env.VITE_API_URL?.trim() || 'https://api.radeski.uz';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -14,8 +15,11 @@ async function fetchDoctorIds(): Promise<string[]> {
   if (!res.ok) {
     throw new Error(`API doctors fetch failed: ${res.status}`);
   }
-  const data = (await res.json()) as Array<{ id: string }>;
-  return data.map((doctor) => doctor.id).filter(Boolean);
+  const data = (await res.json()) as Array<{ id: string; name_uz?: string; name_en?: string }>;
+  // Readable slugs (/uz/doctors/ashurov-dilshod-davlatovich) — same keys the site links to.
+  return data
+    .map((doctor) => doctorRouteKey({ id: doctor.id, name: { uz: doctor.name_uz ?? '', ru: '', en: doctor.name_en ?? '' } }))
+    .filter(Boolean);
 }
 
 function upsertDoctorBlock(xml: string, block: string): string {

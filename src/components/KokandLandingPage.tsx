@@ -64,7 +64,9 @@ const ARTICLES = [
 
 const KOKAND_DOCTORS = [
   {
-    id: '9285e6b7-e5c0-4c51-9c7a-00fd3a4af62f',
+    // Doctor URL slug (see utils/doctorSlug.ts). The old UUID here pointed at a doctor that
+    // no longer exists in the CMS, so the link opened "Doctor not found".
+    slug: 'turgunov-shohruz-ilxomjon-ogli',
     uz: "Turg'unov Shohruz — dermatovenerolog-trixolog",
     ru: 'Тургунов Шохруз — дерматовenerolog-трихolog',
     en: 'Dr. Shohruz Turgunov — dermatovenereologist-trichologist',
@@ -293,8 +295,8 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
           {KOKAND_DOCTORS.map((doc) => (
             <Link
-              key={doc.id}
-              to={doctorPath(locale, doc.id)}
+              key={doc.slug}
+              to={doctorPath(locale, doc.slug)}
               className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 text-sm font-semibold text-brand-text-primary no-underline"
             >
               {locale === 'uz' ? doc.uz : locale === 'ru' ? doc.ru : doc.en}

@@ -17,8 +17,9 @@ import { CLINIC_BRANCHES } from '../data/sitePagesContent';
 import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
 import { PRICE_CATEGORY_ORDER } from '../data/priceCategoryLabels';
 import { transformClinicData, type RawClinicData } from '../api/clinicDataTransform';
-import { mapClinicRatingFromApi } from '../api/cmsMappers';
-import type { ApiClinicRatingOut } from '../api/cmsTypes';
+import { mapClinicRatingFromApi, mapClinicVideoFromApi } from '../api/cmsMappers';
+import type { ApiClinicRatingOut, ApiClinicVideoOut } from '../api/cmsTypes';
+import { buildFaqSchema } from '../seo/structuredData';
 import {
   SITE_ORIGIN,
   articlePath,
@@ -37,9 +38,10 @@ import { resolvePriceCategoryLabel } from '../utils/priceCategoryDisplay';
 import { getCatalogCategoryNameRu } from '../utils/priceCatalog';
 import { sortPriceItemsInCategory } from '../utils/sortPriceItems';
 import { resolveRouteHead, type RouteHead } from '../seo/resolveRouteHead';
+import { doctorRouteKey } from '../utils/doctorSlug';
 
 export interface PrerenderSnapshot {
-  data: Partial<RawClinicData> & { clinicRatings?: ApiClinicRatingOut[] };
+  data: Partial<RawClinicData> & { clinicRatings?: ApiClinicRatingOut[]; videos?: ApiClinicVideoOut[] };
 }
 
 const NAV_PAGES: PageId[] = ['home', 'about', 'services', 'doctors', 'prices', 'articles', 'results', 'branches'];
@@ -173,7 +175,7 @@ function PageContent({
       <ul>
         {clinic.doctors.map((doc) => (
           <li key={doc.id}>
-            <a href={doctorPath(locale, doc.id)}>{doc.name[locale]}</a> — {doc.role[locale]}
+            <a href={doctorPath(locale, doctorRouteKey(doc))}>{doc.name[locale]}</a> — {doc.role[locale]}
           </li>
         ))}
       </ul>
@@ -235,6 +237,16 @@ function PrerenderBody({
         </nav>
       </header>
       <main>
+        {head.breadcrumbs.length > 1 && (
+          <nav aria-label="breadcrumb">
+            {head.breadcrumbs.map((crumb, index) => (
+              <span key={crumb.path + index}>
+                {index > 0 && ' › '}
+                {index < head.breadcrumbs.length - 1 ? <a href={crumb.path}>{crumb.name}</a> : crumb.name}
+              </span>
+            ))}
+          </nav>
+        )}
         <h1>{resolveHeading(head, locale)}</h1>
         <p>{head.description}</p>
         <PageContent head={head} locale={locale} clinic={clinic} />
@@ -274,8 +286,23 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
   });
   const clinicRatings = (raw.clinicRatings ?? []).map(mapClinicRatingFromApi);
   const overrides = dictionaryOverridesFromSiteTexts(raw.siteTexts ?? []);
+  const videos = (raw.videos ?? []).map(mapClinicVideoFromApi);
 
-  return function render(pathname: string, template: string): { html: string; head: RouteHead } {
+  /** Images shown on a page (for the image sitemap). */
+  const pageImages = (head: RouteHead): string[] => {
+    const { article, doctor } = head.route;
+    const paths = article
+      ? [article.images?.uz, article.images?.ru, article.images?.en, article.image]
+      : doctor
+        ? [doctor.photo]
+        : [];
+    return [...new Set(paths.filter(Boolean).map((p) => (p!.startsWith('http') ? p! : `${SITE_ORIGIN}${p!.startsWith('/') ? '' : '/'}${p}`)))];
+  };
+
+  function render(
+    pathname: string,
+    template: string,
+  ): { html: string; head: RouteHead; images: string[]; published?: string } {
     const locale = getLocaleFromPathname(pathname);
     const head = resolveRouteHead({
       pathname,
@@ -286,7 +313,13 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
       doctors: clinic.doctors,
       clinicRatings,
       dataLoading: false,
+      videos,
     });
+    // Article FAQ is visible on the page, so it may be marked up (needs the full article text).
+    if (head.route.article) {
+      const faq = buildFaqSchema(resolveArticleRichContent(head.route.article, locale).faq);
+      if (faq) head.jsonLd.push(faq);
+    }
 
     const body = renderToStaticMarkup(<PrerenderBody head={head} locale={locale} clinic={clinic} overrides={overrides} />);
 
@@ -300,6 +333,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
     html = setMetaContent(html, 'property', 'og:title', head.title);
     html = setMetaContent(html, 'property', 'og:description', head.description);
     html = setMetaContent(html, 'property', 'og:locale', head.ogLocale);
+    html = setMetaContent(html, 'property', 'og:image', head.ogImage);
     html = setMetaContent(html, 'name', 'twitter:title', head.title);
     html = setMetaContent(html, 'name', 'twitter:description', head.description);
 
@@ -321,6 +355,12 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
         : `${html.slice(0, inlineScript)}${headLinks}\n    ${html.slice(inlineScript)}`;
     html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
 
-    return { html, head };
+    return { html, head, images: pageImages(head), published: head.route.article?.date || undefined };
+  }
+
+  return {
+    render,
+    /** Doctor URL keys for the sitemap (CMS doctors, slug form). */
+    doctorKeys: clinic.doctors.map((doctor) => doctorRouteKey(doctor)),
   };
 }

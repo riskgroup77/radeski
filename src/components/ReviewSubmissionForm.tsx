@@ -3,6 +3,7 @@ import { Star, Send, CheckCircle2 } from 'lucide-react';
 import type { Locale, ServiceCategory } from '../types';
 import type { CustomerReview } from '../data/sitePagesContent';
 import { emptyLocalized } from './LocalizedFieldGroup';
+import PublicReviewLinks from './PublicReviewLinks';
 
 export interface ReviewSubmissionFormProps {
   locale: Locale;
@@ -217,6 +218,7 @@ export default function ReviewSubmissionForm({
               ? 'Спасибо, что воспользовались нашими услугами!'
               : 'Thank you for visiting Radeski Clinic!'}
         </p>
+        <PublicReviewLinks locale={locale} className="mt-5" />
         <button
           type="button"
           onClick={() => {
@@ -242,6 +244,10 @@ export default function ReviewSubmissionForm({
           <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
           <p>{labels.success}</p>
         </div>
+      ) : null}
+
+      {submitted ? (
+        <PublicReviewLinks locale={locale} className="mt-4" />
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

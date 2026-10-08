@@ -23,6 +23,7 @@ import {
 import { DICTIONARY } from '../data';
 import { doctorsListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
+import { findDoctorByRouteParam } from '../utils/doctorSlug';
 
 interface DoctorPageProps {
   locale: Locale;
@@ -413,7 +414,7 @@ export default function DoctorPage({
   loading = false,
 }: DoctorPageProps) {
   const d = dictionary || DICTIONARY[locale];
-  const doctor = doctors.find((doc) => doc.id === doctorId) ?? null;
+  const doctor = findDoctorByRouteParam(doctorId, doctors) ?? null;
   const profile = doctor?.profile?.[locale];
 
   if (!doctor && loading) {

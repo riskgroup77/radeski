@@ -168,6 +168,7 @@ export function mapClinicVideoFromApi(api: ApiClinicVideoOut): ClinicVideo {
     category: localized(api.category_uz || '', api.category_ru, api.category_en),
     sortOrder: api.sort_order,
     isActive: api.is_active,
+    createdAt: (api as { created_at?: string }).created_at || undefined,
   };
 }
 

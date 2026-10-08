@@ -1,4 +1,4 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 import {
   BookOpen,
@@ -22,6 +22,7 @@ import {
 import { resolveArticleBody, resolveArticleRichContent } from '../utils/articleContentFull';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import { isEquipmentPromoImageSrc } from '../utils/articles';
+import { buildFaqSchema } from '../seo/structuredData';
 
 interface ArticleDetailContentProps {
   article: Article;
@@ -43,11 +44,24 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
     () => stripArticleHashtagSection(resolveArticleBody(article, locale)),
     [article, locale],
   );
-  const rich = resolveArticleRichContent(article, locale);
+  const rich = useMemo(() => resolveArticleRichContent(article, locale), [article, locale]);
   const readingMinutes = resolveArticleReadingMinutes(article, locale);
   const toc = useMemo(() => extractArticleHeadings(body), [body]);
   const hashtags = useMemo(() => formatArticleHashtags(rich.tags), [rich.tags]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  // FAQPage markup for the questions shown below (prerendered pages carry the same block).
+  useEffect(() => {
+    const schema = buildFaqSchema(rich.faq);
+    document.getElementById('article-faq-jsonld')?.remove();
+    if (!schema) return;
+    const script = document.createElement('script');
+    script.id = 'article-faq-jsonld';
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+    return () => script.remove();
+  }, [rich.faq]);
 
   const markdownComponents = useMemo(
     () => ({

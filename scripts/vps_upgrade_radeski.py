@@ -42,6 +42,9 @@ check "nosniff header"           "$(curl -sI --max-time 20 https://radeski.uz/uz
 check "HTML no-cache"            "$(curl -sI --max-time 20 https://radeski.uz/uz | grep -ci '^cache-control: no-cache')" 1
 check "API docs hidden"          "$(code https://api.radeski.uz/docs)" 404
 check "openapi hidden"           "$(code https://api.radeski.uz/openapi.json)" 404
+check "IndexNow key file"        "$(code https://radeski.uz/5d7aae4b827e366bd372b102fbf9e1a8.txt)" 200
+check "sitemap has lastmod"      "$(curl -s --max-time 20 https://radeski.uz/sitemap.xml | grep -c '<lastmod>' | awk '{print ($1>400)?1:0}')" 1
+check "doctor slug page"         "$(curl -s --max-time 20 https://radeski.uz/uz/doctors/ashurov-dilshod-davlatovich | grep -c 'BreadcrumbList')" 1
 check "chat health"              "$(code https://radeski.uz/api/chat-health)" 200
 check "review endpoint (node)"   "$(code -X POST -H 'Content-Type: application/json' -d '{}' https://radeski.uz/api/reviews/submit)" 400
 exit $fail
