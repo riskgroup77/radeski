@@ -24,7 +24,7 @@ const SERVICES: { id: string; icon: typeof Stethoscope; uz: string; ru: string; 
     id: 'dermatologiya',
     icon: Stethoscope,
     uz: 'Dermatologiya — akne, psoriaz, vitiligo, ekzema',
-    ru: 'Дерматология — акне, псориаз, витилиgo, экзема',
+    ru: 'Дерматология — акне, псориаз, витилиго, экзема',
     en: 'Dermatology — acne, psoriasis, vitiligo, eczema',
   },
   {
@@ -45,7 +45,7 @@ const SERVICES: { id: string; icon: typeof Stethoscope; uz: string; ru: string; 
     id: 'dermatologiya',
     icon: Sun,
     uz: 'Fototerapiya (Daavlin) — vitiligo, psoriaz',
-    ru: 'Фототерапия (Daavlin) — витилиgo, псoriasis',
+    ru: 'Фототерапия (Daavlin) — витилиго, псориаз',
     en: 'Phototherapy (Daavlin) — vitiligo, psoriasis',
   },
 ];
@@ -54,7 +54,7 @@ const ARTICLES = [
   { id: 'art-akne', uz: 'Akne davolash', ru: 'Лечение акне', en: 'Acne treatment' },
   { id: 'art-ipl-terapiya', uz: 'IPL terapiya Farg‘ona', ru: 'IPL-терапия Фергана', en: 'IPL therapy Fergana' },
   { id: 'art-deka-moveo-fergana-faq', uz: 'DEKA MOVEO lazer', ru: 'Лазер DEKA MOVEO', en: 'DEKA MOVEO laser' },
-  { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиgo', en: 'Vitiligo treatment' },
+  { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиго', en: 'Vitiligo treatment' },
 ];
 
 function copy(locale: Locale) {

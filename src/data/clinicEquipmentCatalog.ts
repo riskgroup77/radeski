@@ -256,7 +256,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     directions: [
       L('Fraksion CO₂ teri yangilanishi', 'Фракционное CO₂-обновление', 'Fractional CO₂ skin renewal'),
       L('Postakne chandiqlari va relef', 'Постакне и рубцы', 'Post-acne scars and texture'),
-      L('PinPoint — so‘g‘al va papillomalar', 'PinPoint — бородavки и папилломы', 'PinPoint — warts and papillomas'),
+      L('PinPoint — so‘g‘al va papillomalar', 'PinPoint — бородавки и папилломы', 'PinPoint — warts and papillomas'),
     ],
     indications: [
       L('Postakne chandiqlari va teri teksturasi', 'Рубцы постакне и текстура кожи', 'Post-acne scars and skin texture'),
@@ -332,7 +332,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     ),
     fullDescription: L(
       'Surgitron radioto‘lqin ignasi yumshoq kesish va koagulyatsiya beradi — atrofdagi sog‘lom to‘qimagaga minimal issiqlik tarqalishi bilan. Radeski Skin Clinic’da papillomalar, kontagioz mollyusk, keratoma va shifokor tasdiqlagan xavfsiz o‘smalar olib tashlanadi; murakkab anatomik zonalar (ko‘z qovoqlari atrofi, inguinal hudud) uchun mos. Har bir o‘sma oldin dermatoskopik baholanadi.',
-      'Радиоволновая игла Surgitron обеспечивает мягкий разрез и коagulyацию с минимальным нагревом соседних тканей. В Radeski Skin Clinic удаляют папилломы, контагиозный моллюск, кератомы и доброкачественные образования по показаниям; подходит для деликатных зон. Каждое образование предварительно оценивают дерматоскопически.',
+      'Радиоволновая игла Surgitron обеспечивает мягкий разрез и коагуляцию с минимальным нагревом соседних тканей. В Radeski Skin Clinic удаляют папилломы, контагиозный моллюск, кератомы и доброкачественные образования по показаниям; подходит для деликатных зон. Каждое образование предварительно оценивают дерматоскопически.',
       'Surgitron RF provides gentle cutting and coagulation with minimal heat spread to surrounding tissue. At Radeski Skin Clinic papillomas, molluscum, keratomas and physician-approved benign lesions are removed; suited to delicate anatomical areas. Each lesion is assessed dermoscopically first.',
     ),
     manufacturer: L('Ellman (AQSh)', 'Ellman (США)', 'Ellman (USA)'),
@@ -354,7 +354,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     indications: [
       L('Papillomalar va yumshoq fibromalar', 'Папилломы и мягкие фибромы', 'Papillomas and soft fibromas'),
       L('Kontagioz mollyusk', 'Контагиозный моллюск', 'Molluscum contagiosum'),
-      L('Keratoma va shifokor tasdiqlagan nevuslar', 'Кератомы и нevусы по показаниям', 'Keratomas and indicated nevi'),
+      L('Keratoma va shifokor tasdiqlagan nevuslar', 'Кератомы и невусы по показаниям', 'Keratomas and indicated nevi'),
     ],
     clinicUsage: [
       L(
@@ -366,7 +366,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     process: [
       L('Dermatoskopik ko‘rik va ko‘rsatmalar', 'Дерматоскопия и показания', 'Dermoscopy and indications'),
       L('Surgitron RF muolajasi', 'Процедура Surgitron RF', 'Surgitron RF procedure'),
-      L('Parvarish va kuzatuv tavsiyalari', 'Рекомendatsii по уходу и наблюдению', 'Aftercare and follow-up advice'),
+      L('Parvarish va kuzatuv tavsiyalari', 'Рекомендации по уходу и наблюдению', 'Aftercare and follow-up advice'),
     ],
   },
   'ipl-inmode': {

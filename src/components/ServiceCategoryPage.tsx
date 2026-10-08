@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { subServiceRouteKey } from '../utils/serviceSubSlug';
 import { ArrowRight, CornerUpLeft } from 'lucide-react';
 import { Article, Locale, PriceItem, ServiceCategory } from '../types';
 import { DICTIONARY } from '../data';
@@ -11,6 +12,7 @@ import ServicePageHero from './ServicePageHero';
 import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { buildServiceH1 } from '../seo/pageMeta';
 import ServiceRelatedArticlesSection from './ServiceRelatedArticlesSection';
+import CityServiceLinks from './CityServiceLinks';
 
 interface ServiceCategoryPageProps {
   locale: Locale;
@@ -122,8 +124,8 @@ export default function ServiceCategoryPage({
 
                       <div className="p-5 sm:p-6 lg:p-7 flex flex-col justify-center">
                         <Link
-                          to={serviceSubPath(locale, category.id, sub.id)}
-                          onClick={() => onOpenSub(sub.id)}
+                          to={serviceSubPath(locale, category.id, subServiceRouteKey(sub))}
+                          onClick={() => onOpenSub(subServiceRouteKey(sub))}
                           className="text-lg sm:text-xl font-extrabold text-brand-text-primary leading-snug hover:text-brand-gold transition-colors no-underline"
                         >
                           {sub.name[locale]}
@@ -132,8 +134,8 @@ export default function ServiceCategoryPage({
                           {sub.description[locale]}
                         </p>
                         <Link
-                          to={serviceSubPath(locale, category.id, sub.id)}
-                          onClick={() => onOpenSub(sub.id)}
+                          to={serviceSubPath(locale, category.id, subServiceRouteKey(sub))}
+                          onClick={() => onOpenSub(subServiceRouteKey(sub))}
                           className="mt-4 inline-flex items-center gap-1.5 text-sm text-brand-gold hover:text-brand-gold-dark font-bold no-underline w-fit"
                         >
                           <span>{labels.readMore}</span>
@@ -147,6 +149,8 @@ export default function ServiceCategoryPage({
             </div>
           </div>
         )}
+
+        <CityServiceLinks locale={locale} serviceCategoryId={category.id} />
 
         <ServiceRelatedArticlesSection
           locale={locale}

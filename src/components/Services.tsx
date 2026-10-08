@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, type MouseEvent } from 'react';
+import { subServiceRouteKey } from '../utils/serviceSubSlug';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Maximize2, Search, SearchX, X } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
@@ -252,7 +253,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                       <button
                         key={sub.id}
                         type="button"
-                        onClick={() => onOpenSubService?.(category.id, sub.id)}
+                        onClick={() => onOpenSubService?.(category.id, subServiceRouteKey(sub))}
                         className="w-full p-2.5 sm:p-3 bg-brand-offwhite/60 hover:bg-brand-gold-light/10 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-start gap-3 cursor-pointer group/sub transition-all text-left"
                       >
                         {getSubImage(sub, category) ? (

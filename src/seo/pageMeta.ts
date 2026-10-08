@@ -50,6 +50,19 @@ export function buildServiceSeoTitle(name: string, locale: Locale): string {
   ]);
 }
 
+/** Service / condition pages: "Botulinoterapiya (Botoks) Farg'ona va Qo'qonda | Radeski Skin Clinic". */
+export function buildServicePageSeoTitle(name: string, locale: Locale): string {
+  const both =
+    locale === 'uz' ? "Farg'ona va Qo'qonda" : locale === 'ru' ? 'в Фергане и Коканде' : 'in Fergana & Kokand';
+  return fitTitle([
+    `${name} ${both} | Radeski Skin Clinic`,
+    `${name} ${both} | Radeski`,
+    `${name} — ${mainCity(locale)} | Radeski Skin Clinic`,
+    `${name} | Radeski Skin Clinic`,
+    `${name} | Radeski`,
+  ]);
+}
+
 export function buildArticleSeoTitle(title: string, locale: Locale): string {
   const cities = localSeoCities(locale);
   const topic = locale === 'uz' ? 'dermatologiya' : locale === 'ru' ? 'дерматология' : 'dermatology';
@@ -186,11 +199,11 @@ export function resolveArticleSeo(
   return { title: '', desc: '', keywords: '' };
 }
 
+/** Visible service heading: "Lazer epilyatsiyasi Farg'ona va Qo'qonda" (no "|" in an H1). */
 export function buildServiceH1(name: string, locale: Locale): string {
-  const cities = localSeoCities(locale);
-  if (locale === 'uz') return `${name} — ${cities}`;
-  if (locale === 'ru') return `${name} — ${cities}`;
-  return `${name} — ${cities}`;
+  if (locale === 'uz') return `${name} Farg'ona va Qo'qonda`;
+  if (locale === 'ru') return `${name} в Фергане и Коканде`;
+  return `${name} in Fergana and Kokand`;
 }
 
 /** Tab-level SEO. Each locale uses its own search keywords. */

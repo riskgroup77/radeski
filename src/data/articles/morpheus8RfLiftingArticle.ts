@@ -70,9 +70,9 @@ Jarrohliksiz lifting va teri qattiqigini tiklash uchun Radeski Skin Clinic shifo
 function ruBody(): string {
   return `## Хочу: подтянуть овал лица и восстановить плотность кожи
 
-С возрастом или после похудения **снижается контур**, **упругость**, кожа выглядит «обвисшей». Многие ищут безоперационный лifting и восстановление плотности.
+С возрастом или после похудения **снижается контур**, **упругость**, кожа выглядит «обвисшей». Многие ищут безоперационный лифтинг и восстановление плотности.
 
-![InMode Morpheus8 — RF-микроигольчатый лifting](/articles/morpheus8-rf-promo.png)
+![InMode Morpheus8 — RF-микроигольчатый лифтинг](/articles/morpheus8-rf-promo.png)
 
 *В Radeski Skin Clinic мы работаем с овалом лица и плотностью кожи на микроигольчатом RF Morpheus8.*
 
@@ -117,7 +117,7 @@ function ruBody(): string {
 
 ## Запишитесь на консультацию
 
-Для безоперационного лifting и восстановления плотности врач Radeski Skin Clinic подберёт протокол **Morpheus8**.`;
+Для безоперационного лифтинга и восстановления плотности врач Radeski Skin Clinic подберёт протокол **Morpheus8**.`;
 }
 
 function enBody(): string {
@@ -200,7 +200,7 @@ export const MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Подтяжка овала лица и восстановление плотности: протокол RF-микроигольчатого лifting Morpheus8 — Radeski Skin Clinic.',
+      'Подтяжка овала лица и восстановление плотности: протокол RF-микроигольчатого лифтинга Morpheus8 — Radeski Skin Clinic.',
     body: ruBody(),
     keyTakeaways: [
       'Morpheus8 доставляет RF-энергию в дерму',
@@ -209,12 +209,12 @@ export const MORPHEUS8_RF_LIFTING_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Безоперационный подход',
       'Консультация и противопоказания обязательны',
     ],
-    tags: ['Morpheus8', 'InMode', 'RF лifting', 'Овал лица', 'Radeski Skin Clinic', 'Микроигольчатый RF'],
+    tags: ['Morpheus8', 'InMode', 'RF лифтинг', 'Овал лица', 'Radeski Skin Clinic', 'Микроигольчатый RF'],
     whenToSeeDoctor: [
       'Активная инфекция кожи',
       'Импланты или электронные устройства',
       'Беременность или лактация',
-      'Кeloиды или нарушение заживления',
+      'Келоиды или нарушение заживления',
     ],
     faq: [
       { question: 'Больно ли?', answer: 'С местной анестезией чаще описывают лёгкий дискомфорт.' },

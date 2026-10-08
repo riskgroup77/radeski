@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle2, MapPin, Phone, Stethoscope } from 'lucide-react';
-import type { Locale } from '../types';
+import { useMemo } from 'react';
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock, MapPin, Phone, Stethoscope } from 'lucide-react';
+import type { Article, Locale, PriceItem } from '../types';
 import {
   COMPETITIVE_ADVANTAGES,
   POSITIONING_FORMULA,
@@ -18,11 +19,16 @@ import {
   serviceCategoryPath,
 } from '../routing/paths';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import CityServiceLinks from './CityServiceLinks';
+import { findArticleByRouteParam } from '../utils/articles';
+import { formatUzs, resolveLocalLandingDetails } from '../utils/localLandingDetails';
 
 interface LocalCommercialLandingPageProps {
   locale: Locale;
   landing: LocalCommercialLanding;
   appointmentLabel: string;
+  prices?: PriceItem[];
+  articles?: Article[];
 }
 
 function t(copy: { uz: string; ru: string; en: string }, locale: Locale): string {
@@ -33,7 +39,33 @@ export default function LocalCommercialLandingPage({
   locale,
   landing,
   appointmentLabel,
+  prices = [],
+  articles = [],
 }: LocalCommercialLandingPageProps) {
+  const details = useMemo(() => resolveLocalLandingDetails(landing, prices, locale), [landing, prices, locale]);
+  const copy = {
+    about:
+      locale === 'uz'
+        ? `${details.serviceName} haqida`
+        : locale === 'ru'
+          ? `${details.serviceName}: что важно знать`
+          : `About: ${details.serviceName}`,
+    steps: locale === 'uz' ? 'Qabul qanday o‘tadi?' : locale === 'ru' ? 'Как проходит приём?' : 'How does the visit go?',
+    prices:
+      locale === 'uz'
+        ? `${details.serviceName}: narxlar`
+        : locale === 'ru'
+          ? `${details.serviceName}: цены`
+          : `${details.serviceName}: prices`,
+    priceNote:
+      locale === 'uz'
+        ? 'Narxlar ma’lumot uchun; aniq narx shifokor ko‘rigida aytiladi.'
+        : locale === 'ru'
+          ? 'Цены справочные; точная стоимость определяется на приёме.'
+          : 'Prices are for reference; the exact cost is confirmed at the visit.',
+    allPrices: locale === 'uz' ? 'Barcha narxlar' : locale === 'ru' ? 'Все цены' : 'All prices',
+    branch: locale === 'uz' ? 'Manzil va ish vaqti' : locale === 'ru' ? 'Адрес и время работы' : 'Address and hours',
+  };
   const isKokand = landing.city === 'qoqon';
   const hubPage = isKokand ? 'qoqon' : 'fargona';
   const phone = isKokand ? CLINIC_PHONE_KOKAND : CLINIC_PHONE_PRIMARY;
@@ -105,10 +137,37 @@ export default function LocalCommercialLandingPage({
           </Link>
         </div>
 
-        <div className="mt-10 p-5 sm:p-6 bg-brand-white rounded-2xl border border-brand-sectiongray">
-          <h2 className="text-lg font-extrabold text-brand-text-primary">{t(landing.problemTitle, locale)}</h2>
-          <p className="mt-2 text-sm text-brand-text-secondary leading-relaxed">{t(landing.problemText, locale)}</p>
-        </div>
+        {details.about.length > 0 ? (
+          <div className="mt-10 p-5 sm:p-6 bg-brand-white rounded-2xl border border-brand-sectiongray">
+            <h2 className="text-lg font-extrabold text-brand-text-primary">{copy.about}</h2>
+            {details.about.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)} className="mt-2 text-sm text-brand-text-secondary leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-10 p-5 sm:p-6 bg-brand-white rounded-2xl border border-brand-sectiongray">
+            <h2 className="text-lg font-extrabold text-brand-text-primary">{t(landing.problemTitle, locale)}</h2>
+            <p className="mt-2 text-sm text-brand-text-secondary leading-relaxed">{t(landing.problemText, locale)}</p>
+          </div>
+        )}
+
+        {details.steps.length > 0 && (
+          <>
+            <h2 className="mt-10 text-xl font-extrabold text-brand-text-primary">{copy.steps}</h2>
+            <ol className="mt-3 space-y-2">
+              {details.steps.map((step, index) => (
+                <li key={step} className="flex gap-3 text-sm text-brand-text-secondary">
+                  <span className="w-6 h-6 shrink-0 rounded-full bg-brand-gold text-white text-xs font-bold flex items-center justify-center">
+                    {index + 1}
+                  </span>
+                  <span className="pt-0.5">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </>
+        )}
 
         <h2 className="mt-10 text-xl font-extrabold text-brand-text-primary">{whoForTitle}</h2>
         <ul className="mt-3 space-y-2">
@@ -131,6 +190,32 @@ export default function LocalCommercialLandingPage({
         </ul>
         {landing.equipmentNote && (
           <p className="mt-3 text-sm text-brand-text-muted italic">{t(landing.equipmentNote, locale)}</p>
+        )}
+
+        {details.prices.length > 0 && (
+          <>
+            <h2 className="mt-10 text-xl font-extrabold text-brand-text-primary">{copy.prices}</h2>
+            <div className="mt-3 bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden">
+              <table className="w-full text-sm">
+                <tbody>
+                  {details.prices.map((row) => (
+                    <tr key={row.name} className="border-b last:border-b-0 border-brand-sectiongray">
+                      <td className="px-4 py-3 text-brand-text-secondary">{row.name}</td>
+                      <td className="px-4 py-3 text-right font-bold text-brand-text-primary whitespace-nowrap">
+                        {formatUzs(row.value, locale)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-2 text-xs text-brand-text-muted">
+              {copy.priceNote}{' '}
+              <Link to={pagePath(locale, 'prices')} className="text-brand-gold font-semibold no-underline hover:underline">
+                {copy.allPrices}
+              </Link>
+            </p>
+          </>
         )}
 
         <h2 className="mt-10 text-xl font-extrabold text-brand-text-primary">{advantagesTitle}</h2>
@@ -190,30 +275,48 @@ export default function LocalCommercialLandingPage({
                   to={articlePath(locale, key)}
                   className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 text-sm font-semibold text-brand-text-primary no-underline"
                 >
-                  {key.replace(/^art-/, '').replace(/-/g, ' ')}
+                  {(() => {
+                    const article = findArticleByRouteParam(key, articles);
+                    return article ? article.title[locale] || article.title.uz : key.replace(/^art-/, '').replace(/-/g, ' ');
+                  })()}
                 </Link>
               ))}
             </div>
           </>
         )}
 
+        <CityServiceLinks locale={locale} city={landing.city} excludeSlug={landing.slug} />
+
         <h2 className="mt-10 text-xl font-extrabold text-brand-text-primary">{faqTitle}</h2>
         <div className="mt-4 space-y-3">
-          {landing.faqs.map((faq) => (
-            <details key={faq.question.uz} className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray group">
+          {details.faqs.map((faq) => (
+            <details key={faq.question} className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray group">
               <summary className="font-semibold text-sm text-brand-text-primary cursor-pointer list-none flex justify-between gap-2">
-                {t(faq.question, locale)}
+                {faq.question}
                 <span className="text-brand-gold group-open:rotate-90 transition-transform">›</span>
               </summary>
-              <p className="mt-2 text-sm text-brand-text-secondary leading-relaxed">{t(faq.answer, locale)}</p>
+              <p className="mt-2 text-sm text-brand-text-secondary leading-relaxed">{faq.answer}</p>
             </details>
           ))}
         </div>
 
         <div className="mt-10 p-5 bg-brand-white rounded-2xl border border-brand-sectiongray flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div className="flex gap-2 text-sm">
-            <MapPin className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-            <span>{hubLabel}</span>
+          <div className="space-y-1.5 text-sm text-brand-text-secondary">
+            <h2 className="text-base font-extrabold text-brand-text-primary">{copy.branch}</h2>
+            <p className="flex gap-2">
+              <MapPin className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
+              <span>{details.branch.address[locale]}</span>
+            </p>
+            <p className="flex gap-2">
+              <Clock className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
+              <span>{details.branch.hours[locale]}</span>
+            </p>
+            <p className="flex gap-2">
+              <Phone className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
+              <a href={`tel:${phone.tel}`} className="text-brand-text-primary font-semibold no-underline">
+                {phone.display}
+              </a>
+            </p>
           </div>
           <a
             href={mapUrl}

@@ -222,7 +222,7 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'art-morpheus8-rf-lifting-radeski',
     'morpheus8 rf lifting',
     'inmode morpheus8',
-    'rf morpheus8 лifting',
+    'rf morpheus8 лифтинг',
     'morpheus8 microneedle rf',
   ],
   'deka-co2-scars-radeski': [

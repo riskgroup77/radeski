@@ -440,10 +440,6 @@
 
   <url><loc>https://radeski.uz/ru/services/apparatnaya-kosmetologiya/ipl-inmode</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
 
-  <url><loc>https://radeski.uz/uz/services/lazernaya-epilyaciya/alex-lazer</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-
-  <url><loc>https://radeski.uz/ru/services/lazernaya-epilyaciya/alex-lazer</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
-
   <!-- Articles (hreflang) -->
   <url>
     <loc>https://radeski.uz/uz/articles/art-ipl-terapiya</loc>

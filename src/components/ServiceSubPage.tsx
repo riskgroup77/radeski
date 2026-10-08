@@ -10,6 +10,7 @@ import { resolveServiceRichContent } from '../utils/serviceContent';
 import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { buildServiceH1 } from '../seo/pageMeta';
 import ServiceRelatedArticlesSection from './ServiceRelatedArticlesSection';
+import CityServiceLinks from './CityServiceLinks';
 
 interface ServiceSubPageProps {
   locale: Locale;
@@ -84,6 +85,8 @@ export default function ServiceSubPage({
             prices={prices}
           />
         </div>
+
+        <CityServiceLinks locale={locale} serviceCategoryId={category.id} />
 
         <ServiceRelatedArticlesSection
           locale={locale}

@@ -1623,11 +1623,11 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 268
     },
     "ru": {
-      "summary": "Как лечить сосудистую сеточку, кuperoz и постоянное покраснение лазером Lutronic Derma V: этапы, число сеансов и опыт Radeski Skin Clinic.",
+      "summary": "Как лечить сосудистую сеточку, купероз и постоянное покраснение лазером Lutronic Derma V: этапы, число сеансов и опыт Radeski Skin Clinic.",
       "tags": [
         "Derma V",
         "Lutronic",
-        "Кuperoz",
+        "Купероз",
         "Сосудистая сеточка",
         "Radeski Skin Clinic",
         "Сосудистый лазер"
@@ -1743,16 +1743,16 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 265
     },
     "ru": {
-      "summary": "Подтяжка овала лица и восстановление плотности: протокол RF-микроигольчатого лifting Morpheus8 — Radeski Skin Clinic.",
+      "summary": "Подтяжка овала лица и восстановление плотности: протокол RF-микроигольчатого лифтинга Morpheus8 — Radeski Skin Clinic.",
       "tags": [
         "Morpheus8",
         "InMode",
-        "RF лifting",
+        "RF лифтинг",
         "Овал лица",
         "Radeski Skin Clinic",
         "Микроигольчатый RF"
       ],
-      "bodyLength": 1810,
+      "bodyLength": 1811,
       "bodyWords": 238
     },
     "en": {
@@ -1882,7 +1882,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Коканд",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 6007,
+      "bodyLength": 6004,
       "bodyWords": 739
     },
     "en": {
@@ -1920,7 +1920,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "tags": [
         "Физиотерапия",
         "Фототерапия",
-        "Дermatология",
+        "Дерматология",
         "Дарсонваль",
         "УВЧ",
         "Лазерная терапия",
@@ -2140,12 +2140,12 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "summary": "Дневной стационар Radeski Skin Clinic: персональный врач-куратор, быстрое обследование, анализы и лечение — до 8 часов, без длительного отрыва от работы.",
       "tags": [
         "Дневной стационар",
-        "Дermatologiya",
+        "Дерматология",
         "Обследование",
         "Radeski Skin Clinic",
         "Фергана"
       ],
-      "bodyLength": 1352,
+      "bodyLength": 1351,
       "bodyWords": 166
     },
     "en": {
@@ -2176,7 +2176,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 217
     },
     "ru": {
-      "summary": "Иммунobiologическая терапия: псориаз, Stelara (устекинумаб), персональный подход и безопасность — Radeski Skin Clinic.",
+      "summary": "Иммунобиологическая терапия: псориаз, Stelara (устекинумаб), персональный подход и безопасность — Radeski Skin Clinic.",
       "tags": [
         "Иммунобиологическая терапия",
         "Псориаз",
@@ -2300,18 +2300,18 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 435
     },
     "ru": {
-      "summary": "Клинический случай псориаза: UVA 308 нм, кальцipotriol, результат за 8 недель — З. Бахриддинов, Radeski Skin Clinic Коканд.",
+      "summary": "Клинический случай псориаза: UVA 308 нм, кальципотриол, результат за 8 недель — З. Бахриддинов, Radeski Skin Clinic Коканд.",
       "tags": [
         "Псориаз",
         "Клинический случай",
         "Фототерапия",
         "UVA 308",
-        "Кальцipotriol",
+        "Кальципотриол",
         "Radeski Skin Clinic",
         "Коканд"
       ],
-      "bodyLength": 2634,
-      "bodyWords": 310
+      "bodyLength": 2648,
+      "bodyWords": 311
     },
     "en": {
       "summary": "Psoriasis clinical case: UVA 308 nm, calcipotriol, 8-week outcome — Z. Bahridinov, Radeski Skin Clinic Kokand.",
@@ -2391,7 +2391,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "дерматология",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1891,
+      "bodyLength": 1892,
       "bodyWords": 232
     },
     "en": {
@@ -2431,7 +2431,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Инъекционная косметология",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1694,
+      "bodyLength": 1695,
       "bodyWords": 201
     },
     "en": {
@@ -2465,8 +2465,8 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "summary": "Лазерная биоревитализация: без иглы, гиалуроновая кислота, холодный лазер — Radeski Skin Clinic.",
       "tags": [
         "Лазерная биоревитализация",
-        "Гиалuronовая kислота",
-        "Аппаратная кosmetologiya",
+        "Гиалуроновая кислота",
+        "Аппаратная косметология",
         "Увлажнение",
         "Radeski Skin Clinic"
       ],
@@ -3771,7 +3771,7 @@ export const STATIC_ARTICLES: Article[] = [
     },
     "summary": {
       "uz": "Qon tomir to'ri, kuperoz va doimiy qizarishni Lutronic Derma V lazer bilan qanday davolash mumkin: bosqichlar, seanslar va Radeski Skin Clinic tajribasi.",
-      "ru": "Как лечить сосудистую сеточку, кuperoz и постоянное покраснение лазером Lutronic Derma V: этапы, число сеансов и опыт Radeski Skin Clinic.",
+      "ru": "Как лечить сосудистую сеточку, купероз и постоянное покраснение лазером Lutronic Derma V: этапы, число сеансов и опыт Radeski Skin Clinic.",
       "en": "How Lutronic Derma V treats spider veins, couperose, and persistent facial redness: steps, session count, and Radeski Skin Clinic experience."
     },
     "content": {
@@ -3867,7 +3867,7 @@ export const STATIC_ARTICLES: Article[] = [
     },
     "summary": {
       "uz": "Yuz ovalini tortish va teri zichligini tiklash: InMode Morpheus8 RF mikroignali lifting protokoli va bosqichlar — Radeski Skin Clinic.",
-      "ru": "Подтяжка овала лица и восстановление плотности: протокол RF-микроигольчатого лifting Morpheus8 — Radeski Skin Clinic.",
+      "ru": "Подтяжка овала лица и восстановление плотности: протокол RF-микроигольчатого лифтинга Morpheus8 — Radeski Skin Clinic.",
       "en": "Facial contour tightening and skin density restoration: InMode Morpheus8 RF microneedling protocol and steps at Radeski Skin Clinic."
     },
     "content": {
@@ -4182,12 +4182,12 @@ export const STATIC_ARTICLES: Article[] = [
     "slug": "immunobiologik-terapiya-radeski",
     "title": {
       "uz": "Immunobiologik terapiya: psoriaz va Stelara",
-      "ru": "Иммунobiologическая терапия: псориаз и Stelara",
+      "ru": "Иммунобиологическая терапия: псориаз и Stelara",
       "en": "Immunobiological Therapy: Psoriasis and Stelara"
     },
     "summary": {
       "uz": "Immunobiologik terapiya: psoriaz, Stelara (ustekinumab), individual yondashuv va xavfsizlik — Radeski Skin Clinic.",
-      "ru": "Иммунobiologическая терапия: псориаз, Stelara (устекинумаб), персональный подход и безопасность — Radeski Skin Clinic.",
+      "ru": "Иммунобиологическая терапия: псориаз, Stelara (устекинумаб), персональный подход и безопасность — Radeski Skin Clinic.",
       "en": "Immunobiological therapy: psoriasis, Stelara (ustekinumab), personalized approach and safety — Radeski Skin Clinic."
     },
     "content": {
@@ -4283,7 +4283,7 @@ export const STATIC_ARTICLES: Article[] = [
     },
     "summary": {
       "uz": "Psoriaz klinik holati: UVA 308 nm, kalsipotriol, 8 haftalik natija — Z. Baxriddinov, Radeski Skin Clinic Qo'qon.",
-      "ru": "Клинический случай псориаза: UVA 308 нм, кальцipotriol, результат за 8 недель — З. Бахриддинов, Radeski Skin Clinic Коканд.",
+      "ru": "Клинический случай псориаза: UVA 308 нм, кальципотриол, результат за 8 недель — З. Бахриддинов, Radeski Skin Clinic Коканд.",
       "en": "Psoriasis clinical case: UVA 308 nm, calcipotriol, 8-week outcome — Z. Bahridinov, Radeski Skin Clinic Kokand."
     },
     "content": {

@@ -22,8 +22,35 @@ const ORIGIN = 'https://radeski.uz';
 const LOCALES = ['uz', 'ru', 'en'];
 const DOCTOR_BLOCK_START = '  <!-- Doctor profiles -->';
 const DOCTOR_BLOCK_END = '  <url><loc>https://radeski.uz/uz/prices</loc>';
+const SERVICE_BLOCK_START = '  <!-- Service pages (CMS) -->';
+const SERVICE_BLOCK_END = '  <!-- /Service pages (CMS) -->';
 const VIDEO_BLOCK_START = '  <!-- Video pages -->';
 const VIDEO_BLOCK_END = '  <!-- /Video pages -->';
+
+function removeBlock(sitemap, startMarker, endMarker) {
+  const start = sitemap.indexOf(startMarker);
+  const end = sitemap.indexOf(endMarker);
+  if (start === -1 || end < start) return sitemap;
+  return `${sitemap.slice(0, start).trimEnd()}\n${sitemap.slice(end + endMarker.length).trimStart()}`;
+}
+
+/** CMS service categories and sub-services the static sitemap does not list yet. */
+function serviceSitemapBlock(paths, sitemap) {
+  const lines = [SERVICE_BLOCK_START];
+  for (const servicePath of paths) {
+    for (const locale of LOCALES) {
+      const loc = `${ORIGIN}/${locale}/${servicePath}`;
+      if (sitemap.includes(`<loc>${loc}</loc>`)) continue;
+      lines.push('  <url>');
+      lines.push(`    <loc>${loc}</loc>`);
+      lines.push('    <changefreq>weekly</changefreq>');
+      lines.push(`    <priority>${locale === 'uz' ? '0.85' : locale === 'ru' ? '0.8' : '0.7'}</priority>`);
+      lines.push('  </url>');
+    }
+  }
+  lines.push(SERVICE_BLOCK_END);
+  return lines.length > 2 ? lines.join('\n') : '';
+}
 
 function doctorSitemapBlock(keys) {
   const lines = [DOCTOR_BLOCK_START];
@@ -92,12 +119,13 @@ async function main() {
     sitemap = `${sitemap.slice(0, start)}${doctorSitemapBlock(prerenderer.doctorKeys)}\n\n${sitemap.slice(end)}`;
   }
 
+  // Service categories / sub-services added in the admin panel (readable URLs).
+  sitemap = removeBlock(sitemap, SERVICE_BLOCK_START, SERVICE_BLOCK_END);
+  const serviceBlock = serviceSitemapBlock(prerenderer.servicePaths ?? [], sitemap);
+  if (serviceBlock) sitemap = sitemap.replace('</urlset>', `${serviceBlock}\n</urlset>`);
+
   // One watch page per clinic video (the page Google can show as a video result).
-  const videoStart = sitemap.indexOf(VIDEO_BLOCK_START);
-  const videoEnd = sitemap.indexOf(VIDEO_BLOCK_END);
-  if (videoStart !== -1 && videoEnd > videoStart) {
-    sitemap = `${sitemap.slice(0, videoStart).trimEnd()}\n${sitemap.slice(videoEnd + VIDEO_BLOCK_END.length).trimStart()}`;
-  }
+  sitemap = removeBlock(sitemap, VIDEO_BLOCK_START, VIDEO_BLOCK_END);
   if (prerenderer.videoKeys?.length) {
     sitemap = sitemap.replace('</urlset>', `${videoSitemapBlock(prerenderer.videoKeys)}\n</urlset>`);
   }

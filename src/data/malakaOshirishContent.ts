@@ -146,7 +146,7 @@ export const MALAKA_OSHIRISH = {
         title: L('Amaliy treninglar', 'Практические тренинги', 'Hands-on training'),
         description: L(
           'Apparat va uskunalar ustida bevosita amaliyot: dermatoskop, trixoskop, lazer platformalari, UVB kabinalari va inyeksion texnikalar modellar yoki simulyatsiya sharoitida.',
-          'Непosredственная практика на аппаратах: дерматоскоп, трихоскоп, лазерные платформы, UVB-кабины и инъекционные техники на моделях или в симуляции.',
+          'Непосредственная практика на аппаратах: дерматоскоп, трихоскоп, лазерные платформы, UVB-кабины и инъекционные техники на моделях или в симуляции.',
           'Direct practice on devices: dermatoscope, trichoscope, laser platforms, UVB cabins, and injection techniques on models or in simulation.',
         ),
         bullets: [

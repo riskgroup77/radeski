@@ -206,12 +206,12 @@ export const HOME_PROMO_SLIDES: HomePromoSlide[] = [
     badge: { uz: 'Fototerapiya', ru: 'Фототерапия', en: 'Phototherapy' },
     title: {
       uz: 'Fototerapiya (UVB 311 nm)',
-      ru: 'Фототерапия (УФB 311 нм)',
+      ru: 'Фототерапия (УФВ 311 нм)',
       en: 'Phototherapy (UVB 311 nm)',
     },
     description: {
       uz: 'Psoriaz, vitiligo va surunkali teri kasalliklarini dori-darmonsiz, ultrabinafsha nurlar bilan davolash.',
-      ru: 'Лечение псориаза, витилиго и хронических кожных заболеваний узкополосным УФB без медикаментов.',
+      ru: 'Лечение псориаза, витилиго и хронических кожных заболеваний узкополосным УФВ без медикаментов.',
       en: 'Drug-free narrow-band UVB treatment for psoriasis, vitiligo and chronic skin conditions.',
     },
     image: '/karusel/fototerapiya.webp',

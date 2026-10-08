@@ -182,7 +182,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       { id: 'teri-allergiyasi', title: 'Аллергия кожи', description: 'Кожные реакции на косметику, продукты и раздражители. Аллергопробы и целенаправленная терапия.' },
       { id: 'ekzema', title: 'Экзема', description: 'Хроническое воспаление с зудом и покраснением. Уход и местная терапия по индивидуальному плану.' },
       { id: 'atopik-dermatit', title: 'Атопический дерматит', description: 'Хронический зуд и сухость кожи у детей и взрослых. Эмоленты и контроль триггеров.' },
-      { id: 'teri-doglari', title: 'Пигментные пятна', description: 'Мелasma, постакне и солнечная пигментация. Осмотр и аппаратные методы (IPL, лазер).' },
+      { id: 'teri-doglari', title: 'Пигментные пятна', description: 'Мелазма, постакне и солнечная пигментация. Осмотр и аппаратные методы (IPL, лазер).' },
       { id: 'acne', title: 'Акне', description: 'Воспаление фолликулов: угри, комедоны. Комплекс: медикаменты, уход и аппаратные процедуры.' },
       { id: 'rozasea', title: 'Розацеа', description: 'Покраснение лица, сосуды, высыпания. IPL, сосудистый лазер и уход.' },
       { id: 'postacne', title: 'Постакне', description: 'Рубцы и пигментация после акне. Лазерное обновление и биоревитализация.' },
@@ -253,7 +253,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       },
     ],
     ru: [
-      { title: 'Андrogenная алопеция', description: 'Трихоскопия показывает миниaturization фолликулов и истончение — назначается индивидуальная терапия.' },
+      { title: 'Андрогенная алопеция', description: 'Трихоскопия показывает миниатюризацию фолликулов и истончение — назначается индивидуальная терапия.' },
       { title: 'Очаговая алопеция', description: 'При залысинах трихоскопия выявляет признаки воспаления. Раннее обращение повышает шансы восстановления.' },
       { title: 'Себорея и воспаление кожи головы', description: 'Перхоть и зуд оцениваются трихоскопически, затем составляется план лечения.' },
     ],
@@ -709,7 +709,7 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
     ],
     ru: [
       { title: 'Диффузное выпадение', description: 'Редение по всей голове — трихоскопия показывает признаки телогена или диффузной алопеции.' },
-      { title: 'Андrogenная алопеция', description: 'Мiniaturization фолликулов и истончение волос видны на трихоскопии.' },
+      { title: 'Андрогенная алопеция', description: 'Миниатюризация фолликулов и истончение волос видны на трихоскопии.' },
     ],
     en: [
       { title: 'Diffuse hair loss', description: 'Thinning across the scalp — trichoscopy shows telogen or diffuse alopecia markers.' },

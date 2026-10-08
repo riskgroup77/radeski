@@ -71,7 +71,7 @@ function ruBody(): string {
 
 - Тропность к суставам — эффективность при **псориатическом артрите**.
 - После **четвёртой инъекции** могут исчезнуть проявления **ониходистрофии**.
-- Реестр PSOLAR: около **87%** из более 12 тыс. пациентов через 4 года продолжили терапию ustekinumabом.
+- Реестр PSOLAR: около **87%** из более 12 тыс. пациентов через 4 года продолжили терапию устекинумабом.
 
 Stelara сохраняет максимальную действенность при многолетнем применении.
 
@@ -154,7 +154,7 @@ export const IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleC
   },
   ru: {
     summary:
-      'Иммунobiologическая терапия: псориаз, Stelara (устекинумаб), персональный подход и безопасность — Radeski Skin Clinic.',
+      'Иммунобиологическая терапия: псориаз, Stelara (устекинумаб), персональный подход и безопасность — Radeski Skin Clinic.',
     body: ruBody(),
     keyTakeaways: [
       'При тяжёлом псориазе назначаются биологические препараты индивидуально',
@@ -231,7 +231,7 @@ export const IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE: Article = {
   slug: 'immunobiologik-terapiya-radeski',
   title: {
     uz: 'Immunobiologik terapiya: psoriaz va Stelara',
-    ru: 'Иммунobiologическая терапия: псориаз и Stelara',
+    ru: 'Иммунобиологическая терапия: псориаз и Stelara',
     en: 'Immunobiological Therapy: Psoriasis and Stelara',
   },
   summary: {

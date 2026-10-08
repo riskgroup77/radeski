@@ -355,7 +355,7 @@ export const CONDITION_DETAIL_OVERRIDES: Record<string, Partial<ServiceCondition
     priceCategoryIds: ['fotoomolozhenie-ipl-lumecca', 'hooywood-spectra-lechenie-pigmentatsii-post-akne', 'konsultatsii'],
     fullDescription: L(
       'Teri dog\'lari — melasma, post-akne pigmentatsiyasi, freckle va quyosh dog\'lari. Sabab: gormonlar, UV nurlanish, yallig\'lanishdan keyingi rang o\'zgarishi. Radeski klinikasida avvalo xavfsizlik baholanadi, keyin IPL, lazer yoki biorevitalizatsiya protokollari tanlanadi.',
-      'Пигментные пятна — мелasma, постакне, веснушки и солнечная пигментация. Причины: гормоны, УФ, воспаление. В Radeski оценивают безопасность и подбирают IPL, лазер или биоревитализацию.',
+      'Пигментные пятна — мелазма, постакне, веснушки и солнечная пигментация. Причины: гормоны, УФ, воспаление. В Radeski оценивают безопасность и подбирают IPL, лазер или биоревитализацию.',
       'Skin spots include melasma, post-acne pigmentation, freckles and sun spots from hormones, UV and inflammation. At Radeski safety is assessed first, then IPL, laser or biorevitalization protocols are chosen.',
     ),
     treatments: [
@@ -410,7 +410,7 @@ export const CONDITION_DETAIL_OVERRIDES: Record<string, Partial<ServiceCondition
       'Post-acne leaves scars, pits and pigmentation after active acne. At Radeski laser resurfacing, biorevitalization and pigment protocols gradually improve texture and tone.',
     ),
     treatments: [
-      L('Lazer resurfacing va biorevitalizatsiya', 'Лазерная шлифовка и биоревitalizatsiya', 'Laser resurfacing and biorevitalization'),
+      L('Lazer resurfacing va biorevitalizatsiya', 'Лазерная шлифовка и биоревитализация', 'Laser resurfacing and biorevitalization'),
       L('Hollywood Spectra post-akne protokollari', 'Протоколы Hollywood Spectra при постакне', 'Hollywood Spectra post-acne protocols'),
       L('Uy parvarishi va quyosh himoyasi', 'Домашний уход и SPF', 'Home care and sun protection'),
     ],

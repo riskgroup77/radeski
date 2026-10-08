@@ -103,7 +103,7 @@ function ruBody(): string {
 
 Противопоказаний к дерматоскопии новообразований кожи **нет** — процедура полностью безопасна.
 
-Связанные услуги: [Дерматоскопия](/ru/services/dermatoskopiya), [Дермatoонкология](/ru/services/dermatoonkologiya), [Цены](/ru/prices).`;
+Связанные услуги: [Дерматоскопия](/ru/services/dermatoskopiya), [Дерматоонкология](/ru/services/dermatoonkologiya), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {

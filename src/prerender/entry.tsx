@@ -8,6 +8,8 @@
  * an empty <div id="root"> with the home-page title. In the browser React replaces it.
  */
 import type { ReactNode } from 'react';
+import { buildServiceH1 } from '../seo/pageMeta';
+import { subServiceRouteKey } from '../utils/serviceSubSlug';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
 import type { Article, Locale, PriceItem } from '../types';
@@ -42,6 +44,18 @@ import { doctorRouteKey } from '../utils/doctorSlug';
 import type { ClinicVideo } from '../data/sitePagesContent';
 import { mapApiClinicVideos } from '../utils/clinicVideos';
 import {
+  COMPETITIVE_ADVANTAGES,
+  getLocalizedCopy,
+  localCommercialPath,
+  getCityCommercialLinks,
+  type LocalCommercialLanding,
+} from '../data/localCommercialSeoCatalog';
+import { formatUzs, resolveLocalLandingDetails } from '../utils/localLandingDetails';
+import { findArticleByRouteParam } from '../utils/articles';
+import { getServiceSectionLabels, resolveCategoryRichContent, resolveServiceRichContent } from '../utils/serviceContent';
+import { ALL_LOCAL_COMMERCIAL_LANDINGS } from '../data/localCommercialSeoCatalog';
+import type { ServiceRichContent } from '../types';
+import {
   videoDescription,
   videoDurationLabel,
   videoDurationSeconds,
@@ -68,12 +82,14 @@ function escapeHtml(value: string): string {
 
 /** Visible H1: the entity name when there is one, otherwise the title without the brand tail. */
 function resolveHeading(head: RouteHead, locale: Locale): string {
-  const { article, doctor, serviceSub, serviceCategory, video } = head.route;
+  const { article, doctor, serviceSub, serviceCategory, video, localLanding } = head.route;
+  if (localLanding) return getLocalizedCopy(localLanding.h1, locale);
   if (article) return article.title[locale] || article.title.uz;
   if (video) return videoTitle(video, locale);
   if (doctor) return doctor.name[locale] || doctor.name.uz;
-  if (serviceSub) return serviceSub.name[locale] || serviceSub.name.uz;
-  if (serviceCategory) return serviceCategory.title[locale] || serviceCategory.title.uz;
+  // Same headings as the React service pages.
+  if (serviceSub) return buildServiceH1(serviceSub.name[locale] || serviceSub.name.uz, locale);
+  if (serviceCategory) return buildServiceH1(serviceCategory.title[locale] || serviceCategory.title.uz, locale);
   return head.title.split(' | ')[0];
 }
 
@@ -179,6 +195,171 @@ function VideoBody({ video, videos, locale }: { video: ClinicVideo; videos: Clin
   );
 }
 
+function LandingBody({
+  landing,
+  locale,
+  clinic,
+}: {
+  landing: LocalCommercialLanding;
+  locale: Locale;
+  clinic: ReturnType<typeof transformClinicData>;
+}) {
+  const details = resolveLocalLandingDetails(landing, clinic.prices, locale);
+  const t = (copy: { uz: string; ru: string; en: string }) => getLocalizedCopy(copy, locale);
+  const label = (uz: string, ru: string, en: string) => (locale === 'uz' ? uz : locale === 'ru' ? ru : en);
+  const others = getCityCommercialLinks(landing.city).filter((item) => item.slug !== landing.slug);
+  return (
+    <article>
+      <p>{t(landing.lead)}</p>
+      <section>
+        <h2>{label(`${details.serviceName} haqida`, `${details.serviceName}: что важно знать`, `About: ${details.serviceName}`)}</h2>
+        {(details.about.length ? details.about : [t(landing.problemText)]).map((text) => (
+          <p key={text.slice(0, 40)}>{text}</p>
+        ))}
+      </section>
+      {details.steps.length > 0 && (
+        <section>
+          <h2>{label('Qabul qanday o‘tadi?', 'Как проходит приём?', 'How does the visit go?')}</h2>
+          <ol>
+            {details.steps.map((step) => (
+              <li key={step}>{step}</li>
+            ))}
+          </ol>
+        </section>
+      )}
+      <section>
+        <h2>{t(landing.methodsTitle)}</h2>
+        <ul>
+          {[...landing.whoFor, ...landing.methods].map((item) => (
+            <li key={item.uz}>{t(item)}</li>
+          ))}
+        </ul>
+        {landing.equipmentNote && <p>{t(landing.equipmentNote)}</p>}
+      </section>
+      {details.prices.length > 0 && (
+        <section>
+          <h2>{label(`${details.serviceName}: narxlar`, `${details.serviceName}: цены`, `${details.serviceName}: prices`)}</h2>
+          <table>
+            <tbody>
+              {details.prices.map((row) => (
+                <tr key={row.name}>
+                  <td>{row.name}</td>
+                  <td>{formatUzs(row.value, locale)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p>
+            <a href={pagePath(locale, 'prices')}>{label('Barcha narxlar', 'Все цены', 'All prices')}</a>
+          </p>
+        </section>
+      )}
+      <section>
+        <h2>{label('Nima uchun Radeski?', 'Почему Radeski?', 'Why Radeski?')}</h2>
+        <ul>
+          {COMPETITIVE_ADVANTAGES.map((item) => (
+            <li key={item.uz}>{t(item)}</li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <h2>{label('Tez-tez so‘raladigan savollar', 'Частые вопросы', 'FAQ')}</h2>
+        {details.faqs.map((faq) => (
+          <div key={faq.question}>
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </div>
+        ))}
+      </section>
+      <section>
+        <h2>{label('Manzil va ish vaqti', 'Адрес и время работы', 'Address and hours')}</h2>
+        <p>
+          {details.branch.address[locale]} · {details.branch.hours[locale]} · {details.branch.phone}
+        </p>
+      </section>
+      <section>
+        <h2>{label('Bog‘liq sahifalar', 'Связанные страницы', 'Related pages')}</h2>
+        <ul>
+          <li>
+            <a href={serviceCategoryPath(locale, landing.serviceCategoryId)}>{label('Xizmat bo‘limi', 'Раздел услуг', 'Service category')}</a>
+          </li>
+          {(landing.articleRouteKeys ?? []).map((key) => {
+            const article = findArticleByRouteParam(key, clinic.articles);
+            return article ? (
+              <li key={key}>
+                <a href={articlePath(locale, key)}>{article.title[locale] || article.title.uz}</a>
+              </li>
+            ) : null;
+          })}
+          {others.map((item) => (
+            <li key={item.slug}>
+              <a href={localCommercialPath(locale, item.city, item.slug)}>{t(item.h1)}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  );
+}
+
+/** The same sections the service pages show: overview, conditions, process… */
+function RichServiceBody({ rich, locale }: { rich: ServiceRichContent; locale: Locale }) {
+  const labels = getServiceSectionLabels(locale);
+  const list = (title: string, items: string[]) =>
+    items.length > 0 && (
+      <section>
+        <h2>{title}</h2>
+        <ul>
+          {items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </section>
+    );
+  const topics = (title: string, items?: { title: string; description: string }[]) =>
+    items &&
+    items.length > 0 && (
+      <section>
+        <h2>{title}</h2>
+        {items.map((item) => (
+          <div key={item.title}>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </section>
+    );
+  return (
+    <>
+      {rich.overview && <p>{rich.overview}</p>}
+      {topics(rich.aboutTitle || labels.about, rich.aboutSections)}
+      {rich.aboutFooter && <p>{rich.aboutFooter}</p>}
+      {topics(labels.conditions, rich.conditions)}
+      {topics(labels.equipment, rich.equipment)}
+      {list(labels.indications, rich.indications)}
+      {list(labels.solutions, rich.solutions)}
+      {list(labels.process, rich.process)}
+    </>
+  );
+}
+
+function CityLinksList({ locale, serviceCategoryId }: { locale: Locale; serviceCategoryId: string }) {
+  const items = ALL_LOCAL_COMMERCIAL_LANDINGS.filter((item) => item.serviceCategoryId === serviceCategoryId);
+  if (items.length === 0) return null;
+  return (
+    <section>
+      <h2>{locale === 'uz' ? "Farg'ona va Qo'qon filiallarida" : locale === 'ru' ? 'В филиалах в Фергане и Коканде' : 'At the Fergana and Kokand branches'}</h2>
+      <ul>
+        {items.map((item) => (
+          <li key={`${item.city}-${item.slug}`}>
+            <a href={localCommercialPath(locale, item.city, item.slug)}>{getLocalizedCopy(item.h1, locale)}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 function PageContent({
   head,
   locale,
@@ -190,7 +371,9 @@ function PageContent({
   clinic: ReturnType<typeof transformClinicData>;
   videos: ClinicVideo[];
 }): ReactNode {
-  const { currentPage, article, doctor, serviceCategory, serviceSub, video } = head.route;
+  const { currentPage, article, doctor, serviceCategory, serviceSub, video, localLanding } = head.route;
+
+  if (localLanding) return <LandingBody landing={localLanding} locale={locale} clinic={clinic} />;
 
   if (article) return <ArticleBody article={article} locale={locale} />;
 
@@ -218,19 +401,31 @@ function PageContent({
     );
   }
 
-  if (serviceSub) return <p>{serviceSub.description[locale]}</p>;
+  if (serviceSub && serviceCategory) {
+    return (
+      <>
+        <p>{serviceSub.description[locale]}</p>
+        <RichServiceBody rich={resolveServiceRichContent(serviceSub, serviceCategory, locale)} locale={locale} />
+        <CityLinksList locale={locale} serviceCategoryId={serviceCategory.id} />
+      </>
+    );
+  }
 
   if (serviceCategory) {
     return (
+      <>
+      <RichServiceBody rich={resolveCategoryRichContent(serviceCategory, locale)} locale={locale} />
+      <CityLinksList locale={locale} serviceCategoryId={serviceCategory.id} />
       <ul>
         {serviceCategory.subServices.map((sub) => (
           <li key={sub.id}>
-            <a href={serviceSubPath(locale, serviceCategory.id, sub.id)}>{sub.name[locale]}</a>
+            <a href={serviceSubPath(locale, serviceCategory.id, subServiceRouteKey(sub))}>{sub.name[locale]}</a>
             {' — '}
             {sub.description[locale]}
           </li>
         ))}
       </ul>
+      </>
     );
   }
 
@@ -423,6 +618,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
       clinicRatings,
       dataLoading: false,
       videos,
+      prices: clinic.prices,
     });
     // Article FAQ is visible on the page, so it may be marked up (needs the full article text).
     if (head.route.article) {
@@ -475,6 +671,11 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
 
   return {
     render,
+    /** Service category + sub-service paths (readable keys) for the sitemap. */
+    servicePaths: clinic.serviceCategories.flatMap((category) => [
+      `services/${category.id}`,
+      ...category.subServices.map((sub) => `services/${category.id}/${subServiceRouteKey(sub)}`),
+    ]),
     /** Video watch page keys for the sitemap. */
     videoKeys: videos.map((video) => videoRouteKey(video)),
     /** Doctor URL keys for the sitemap (CMS doctors, slug form). */

@@ -101,7 +101,7 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
     roleTitle: t('Modelning klinik roli', 'Клиническая роль модели', 'Clinical role of the model'),
     roleBody: t(
       '1 Series lokal fototerapiya uchun eng mos portativ yechimlardan biri: kichik o‘lcham, yuqori chiqish va moslashuvchan joylashuv. Psoriaz, vitiligo yoki ekzema o‘choqlarini uyda yoki klinik kabinetda davolashda qo‘llaniladi.',
-      '1 Series — одно из лучших портативных решений для локальной фототерапии: компактный размер, высокий выход и гибкое размещение. Применяется при очагах псoriasis, витилиго или экземы дома или в кабинете.',
+      '1 Series — одно из лучших портативных решений для локальной фототерапии: компактный размер, высокий выход и гибкое размещение. Применяется при очагах псориаза, витилиго или экземы дома или в кабинете.',
       '1 Series is a leading portable option for localized phototherapy: compact size, high output and flexible positioning. Used for psoriasis, vitiligo or eczema spots at home or in clinic.',
     ),
     clinicTitle: t('Radeski / distributor yo‘nalishi', 'Направление Radeski / дистрибьютора', 'Radeski / distributor focus'),
@@ -167,7 +167,7 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
     roleTitle: t('Modelning klinik roli', 'Клиническая роль модели', 'Clinical role of the model'),
     roleBody: t(
       'UV Series katta klinik kabinalarning terapevtik samaradorligini ixchamroq formatga joylashtiradi. Psoriaz, vitiligo, ekzema va boshqa surunkali kasalliklarda to‘liq tana kurslari uchun tanlanadi.',
-      'UV Series переносит терапевтическую эффективность больших клинических кабин в более компактный формат. Выбирается для курсов на всё тело при псoriasis, витилиго, экземе и других хронических заболеваниях.',
+      'UV Series переносит терапевтическую эффективность больших клинических кабин в более компактный формат. Выбирается для курсов на всё тело при псориазе, витилиго, экземе и других хронических заболеваниях.',
       'UV Series brings large-cabin therapeutic effectiveness into a more compact format. Chosen for full-body courses in psoriasis, vitiligo, eczema and other chronic conditions.',
     ),
     clinicTitle: t('Radeski / distributor yo‘nalishi', 'Направление Radeski / дистрибьютора', 'Radeski / distributor focus'),
@@ -365,7 +365,7 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
     roleTitle: t('Qurilmaning klinik roli', 'Клиническая роль аппарата', 'Clinical role of the system'),
     roleBody: t(
       'DEKA CO₂-lazer fraksion mikrozonalar orqali kollagen yangilanishini rag‘batlantiradi, teri relefini tekislaydi va shifokor ko‘rsatmasi bo‘yicha xavfsiz o‘smalarni nazoratli olib tashlaydi. PinPoint rejimi so‘g‘al va papillomalar uchun minimal travma bilan ishlash imkonini beradi.',
-      'Лазер DEKA CO₂ стимулирует обновление коллагена через фракционные микрозоны, выравнивает рельеф и по показаниям удаляет доброкачественные образования. Режим PinPoint позволяет работать с бородavками и папилломами с минимальной травмой.',
+      'Лазер DEKA CO₂ стимулирует обновление коллагена через фракционные микрозоны, выравнивает рельеф и по показаниям удаляет доброкачественные образования. Режим PinPoint позволяет работать с бородавками и папилломами с минимальной травмой.',
       'DEKA CO₂ laser stimulates collagen renewal through fractional micro-zones, smooths skin texture and removes benign lesions when indicated. PinPoint mode supports warts and papillomas with minimal trauma.',
     ),
     clinicTitle: t('Radeski Skin Clinic yo‘nalishi', 'Направление Radeski Skin Clinic', 'Radeski Skin Clinic focus'),
@@ -377,13 +377,13 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
     featuresTitle: t('Asosiy imkoniyatlar', 'Ключевые возможности', 'Key capabilities'),
     features: [
       t('Fraksion CO₂ — teri yangilanishi va chandiqlar', 'Фракционный CO₂ — обновление кожи и рубцы', 'Fractional CO₂ — renewal and scars'),
-      t('PinPoint — so‘g‘al, papilloma, tanlangan nevuslar', 'PinPoint — бородavки, папилломы, отдельные невусы', 'PinPoint — warts, papillomas, selected nevi'),
+      t('PinPoint — so‘g‘al, papilloma, tanlangan nevuslar', 'PinPoint — бородавки, папилломы, отдельные невусы', 'PinPoint — warts, papillomas, selected nevi'),
       t('Individual parametrlar — har bir bemor uchun alohida', 'Индивидуальные параметры — для каждого пациента', 'Individual parameters — per patient'),
-      t('Dermatolog nazorati — xavfsizlik va natija kuzatuvi', 'Контроль дерматologa — безопасность и наблюдение', 'Dermatologist oversight — safety and follow-up'),
+      t('Dermatolog nazorati — xavfsizlik va natija kuzatuvi', 'Контроль дерматолога — безопасность и наблюдение', 'Dermatologist oversight — safety and follow-up'),
     ],
     pathwayTitle: t('Qanday boshlanadi', 'Как обычно начинают', 'How treatment usually starts'),
     pathway: [
-      t('Dermatolog ko‘rigi va muammo bahosi', 'Осмотр дерматologа и оценка задачи', 'Dermatologist exam and goal assessment'),
+      t('Dermatolog ko‘rigi va muammo bahosi', 'Осмотр дерматолога и оценка задачи', 'Dermatologist exam and goal assessment'),
       t('CO₂ yoki PinPoint rejimi tanlanadi', 'Выбор режима CO₂ или PinPoint', 'CO₂ or PinPoint mode is chosen'),
       t('Seanslar rejasi, parvarish va kuzatuv belgilanadi', 'План сеансов, уход и наблюдение', 'Session plan, aftercare and follow-up'),
     ],
@@ -441,7 +441,7 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
     roleTitle: t('Qurilmaning klinik roli', 'Клиническая роль аппарата', 'Clinical role of the system'),
     roleBody: t(
       'Surgitron radioto‘lqin ignasi yumshoq kesish va koagulyatsiya beradi — atrofdagi sog‘lom to‘qimagaga minimal issiqlik tarqalishi bilan. Murakkab anatomik zonalar va yumshoq papillomalar uchun mos.',
-      'Радиоволновая игла Surgitron обеспечивает мягкий разрез и коagulyatsiyu с минимальным нагревом соседних тканей. Подходит для деликатных зон и мягких пapillom.',
+      'Радиоволновая игла Surgitron обеспечивает мягкий разрез и коагуляцию с минимальным нагревом соседних тканей. Подходит для деликатных зон и мягких папиллом.',
       'Surgitron RF provides gentle cutting and coagulation with minimal heat spread to surrounding tissue — suited to delicate areas and soft papillomas.',
     ),
     clinicTitle: t('Radeski Skin Clinic yo‘nalishi', 'Направление Radeski Skin Clinic', 'Radeski Skin Clinic focus'),
@@ -460,8 +460,8 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
     pathwayTitle: t('Qanday boshlanadi', 'Как обычно начинают', 'How treatment usually starts'),
     pathway: [
       t('Dermatoskopik ko‘rik va ko‘rsatmalar', 'Дерматоскопия и показания', 'Dermoscopy and indications'),
-      t('RF olib tashlash yoki koagulyatsiya', 'RF-удаление или коagulyatsiya', 'RF removal or coagulation'),
-      t('Parvarish va kuzatuv tavsiyalari', 'Рекомendatsii по уходу и наблюдению', 'Aftercare and follow-up advice'),
+      t('RF olib tashlash yoki koagulyatsiya', 'RF-удаление или коагуляция', 'RF removal or coagulation'),
+      t('Parvarish va kuzatuv tavsiyalari', 'Рекомендации по уходу и наблюдению', 'Aftercare and follow-up advice'),
     ],
   },
   neolux: {

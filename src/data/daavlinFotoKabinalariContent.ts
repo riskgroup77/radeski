@@ -1068,7 +1068,7 @@ export const DAAVLIN_CABINS = {
       name: 'DEKA Alexandrite Laser',
       brandAccent: L('Radeski Skin Clinic', 'Radeski Skin Clinic', 'Radeski Skin Clinic'),
       image: '/daavlin/model-deka-alexandrite-laser.webp',
-      badge: L('Aleksandrit lazer', 'Александритовый лazer', 'Alexandrite laser'),
+      badge: L('Aleksandrit lazer', 'Александритовый лазер', 'Alexandrite laser'),
       tagline: L(
         '755 nm — aniq nishon, tez epilyatsiya va pigment muolajalari',
         '755 нм — точечное воздействие, эпиляция и пигмент',

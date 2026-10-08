@@ -67,7 +67,7 @@ export default function DermatologyConditionPage({
     locale === 'uz'
       ? 'Dermatologiya — kasalliklar'
       : locale === 'ru'
-        ? 'Дermatologiya — заболевания'
+        ? 'Дерматология — заболевания'
         : 'Dermatology — conditions';
 
   return (

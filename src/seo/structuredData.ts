@@ -438,6 +438,44 @@ export function buildVideoObjectSchema(
   };
 }
 
+/**
+ * A city service page as a Service offered by that branch, with the price range from the
+ * price list (Google uses it to understand what is offered where and for how much).
+ */
+export function buildLocalServiceSchema(
+  locale: Locale,
+  origin: string,
+  pageUrl: string,
+  city: 'fargona' | 'qoqon',
+  details: { serviceName: string; cityName: string; minPrice?: number; maxPrice?: number; prices: unknown[] },
+  description: string,
+): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${pageUrl}#service`,
+    name: `${details.serviceName} — ${details.cityName}`,
+    serviceType: details.serviceName,
+    description,
+    url: pageUrl,
+    inLanguage: inLanguageCode(locale),
+    provider: { '@id': `${origin}/#branch-${city === 'qoqon' ? 'kokand' : 'fergana'}` },
+    areaServed: { '@type': 'City', name: details.cityName },
+    ...(details.minPrice
+      ? {
+          offers: {
+            '@type': 'AggregateOffer',
+            priceCurrency: 'UZS',
+            lowPrice: details.minPrice,
+            highPrice: details.maxPrice ?? details.minPrice,
+            offerCount: details.prices.length,
+            url: `${origin}/${locale}/prices`,
+          },
+        }
+      : {}),
+  };
+}
+
 /** FAQPage for questions that are visible on the page (article FAQ sections). */
 export function buildFaqSchema(items: { question: string; answer: string }[]): Record<string, unknown> | null {
   const valid = items.filter((item) => item.question?.trim() && item.answer?.trim());

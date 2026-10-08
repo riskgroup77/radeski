@@ -56,10 +56,10 @@ const ARTICLES = [
   { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиго', en: 'Vitiligo treatment' },
   { id: 'art-ipl-terapiya', uz: 'IPL terapiya', ru: 'IPL-терапия', en: 'IPL therapy' },
   { id: 'art-alopecia-areata-klinik-holat', uz: "Soch to'kilishi — klinik holat", ru: 'Выпадение волос — клинический случай', en: 'Hair loss — clinical case' },
-  { id: 'art-trixolog-trixoskopiya', uz: 'Trixolog va trixoskopiya', ru: 'Трихolog и трихоскопия', en: 'Trichologist and trichoscopy' },
+  { id: 'art-trixolog-trixoskopiya', uz: 'Trixolog va trixoskopiya', ru: 'Трихолог и трихоскопия', en: 'Trichologist and trichoscopy' },
   { id: 'art-onixokriptoz-klinik-holat', uz: 'Onixokriptoz — klinik holat', ru: 'Онихокриптоз — клинический случай', en: 'Ingrown nail — clinical case' },
   { id: 'art-lasemd-ultra-kokand', uz: 'LaseMD Ultra Qo‘qon', ru: 'LaseMD Ultra Коканд', en: 'LaseMD Ultra Kokand' },
-  { id: 'art-bazalioma-teri-raki', uz: 'Bazalioma va dermatoskopiya', ru: 'Базалиoma и дерматоскопия', en: 'Basal cell carcinoma screening' },
+  { id: 'art-bazalioma-teri-raki', uz: 'Bazalioma va dermatoskopiya', ru: 'Базалиома и дерматоскопия', en: 'Basal cell carcinoma screening' },
 ];
 
 const KOKAND_DOCTORS = [
@@ -68,7 +68,7 @@ const KOKAND_DOCTORS = [
     // no longer exists in the CMS, so the link opened "Doctor not found".
     slug: 'turgunov-shohruz-ilxomjon-ogli',
     uz: "Turg'unov Shohruz — dermatovenerolog-trixolog",
-    ru: 'Тургунов Шохруз — дерматовenerolog-трихolog',
+    ru: 'Тургунов Шохруз — дерматовенеролог-трихолог',
     en: 'Dr. Shohruz Turgunov — dermatovenereologist-trichologist',
   },
 ];
@@ -131,7 +131,7 @@ function copy(locale: Locale) {
       badge: 'Radeski Skin Clinic — филиал в Коканде',
       h1: 'Дерматолог Коканд | Radeski Skin Clinic',
       lead:
-        'Специализированная клиника кожи, волос и ногтей в Коканде: дерматология, трихология, подология, дерматоскопия, онкодermatология, IPL, лазерная эпиляция и фототерапия. Отдельные страницы по акне, псoriasis, витилиgo, розацеа, трихоскопии, проверке родинок и биопсии. Адрес: 47-МФЙ, массив Хукандий, 144А.',
+        'Специализированная клиника кожи, волос и ногтей в Коканде: дерматология, трихология, подология, дерматоскопия, онкодерматология, IPL, лазерная эпиляция и фототерапия. Отдельные страницы по акне, псориазу, витилиго, розацеа, трихоскопии, проверке родинок и биопсии. Адрес: 47-МФЙ, массив Хукандий, 144А.',
       address: 'г. Коканд, 47-МФЙ, массив Хукандий, 144А',
       hours: 'Понедельник – Суббота: 08:00 – 18:00',
       servicesTitle: 'Услуги в Коканде',

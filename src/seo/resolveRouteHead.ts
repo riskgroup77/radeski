@@ -5,7 +5,8 @@
  * prerender writes it into each page's static HTML, so search engines that do not run
  * JavaScript (Yandex, social previews) see the same titles as Google does.
  */
-import type { Article, Doctor, Locale, ServiceCategory } from '../types';
+import type { Article, Doctor, Locale, PriceItem, ServiceCategory } from '../types';
+import { findSubServiceByRouteParam, subServiceRouteKey } from '../utils/serviceSubSlug';
 import type { ClinicVideo } from '../data/sitePagesContent';
 import { DICTIONARY } from '../data';
 import { slugifyDoctorName } from '../utils/doctorSlug';
@@ -44,7 +45,15 @@ import { resolveClinicEquipment } from '../utils/clinicEquipmentRoutes';
 import { findArticleByRouteParam, resolveArticleRedirectTarget, resolveArticleRouteKey } from '../utils/articles';
 import { resolveArticleTags } from '../utils/articleContent';
 import { getNotFoundTitle } from '../components/NotFoundPage';
-import { TITLE_MAX_LENGTH, buildServiceSeoTitle, fitDescription, fitTitle, getTabSeo, resolveArticleSeo } from './pageMeta';
+import {
+  TITLE_MAX_LENGTH,
+  buildServicePageSeoTitle,
+  buildServiceSeoTitle,
+  fitDescription,
+  fitTitle,
+  getTabSeo,
+  resolveArticleSeo,
+} from './pageMeta';
 import { buildHreflangLinks, getCanonicalUrl, type HreflangLink, type RouteSeoContext } from './routeSeo';
 import {
   buildArticleSchema,
@@ -54,10 +63,14 @@ import {
   buildDoctorSchema,
   buildVideoListSchema,
   buildVideoObjectSchema,
+  buildFaqSchema,
+  buildLocalServiceSchema,
   type BreadcrumbItem,
 } from './structuredData';
 import { doctorRouteKey, findDoctorByRouteParam } from '../utils/doctorSlug';
 import { VIDEO_SEO_TITLES } from './videoSeoTitles';
+import { formatUzs, resolveLocalLandingDetails, type LocalLandingDetails } from '../utils/localLandingDetails';
+import type { LocalCommercialLanding } from '../data/localCommercialSeoCatalog';
 import {
   findVideoByRouteParam,
   getVideoKeyFromPathname,
@@ -81,6 +94,8 @@ export interface RouteHeadInput {
   dataLoading?: boolean;
   /** Clinic videos (videos page list + watch pages). Empty while still loading. */
   videos?: ClinicVideo[];
+  /** Price list (city service pages show prices and "from" in their title/description). */
+  prices?: PriceItem[];
 }
 
 export interface RouteHead {
@@ -105,6 +120,7 @@ export interface RouteHead {
     serviceCategory: ServiceCategory | null;
     serviceSub: ServiceCategory['subServices'][number] | null;
     video: ClinicVideo | null;
+    localLanding: LocalCommercialLanding | null;
     isErrorPage: boolean;
   };
 }
@@ -128,6 +144,9 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     : null;
   const invalidCityCommercialSlug = isCityCommercialPathAttempt(pathname) && !activeLocalCommercial;
   const activePromoSlide = promoSlug ? findPromoSlideBySlug(promoSlug) : null;
+  const landingDetails = activeLocalCommercial
+    ? resolveLocalLandingDetails(activeLocalCommercial, input.prices ?? [], locale)
+    : null;
 
   const activeServiceCategory = serviceCategoryId
     ? serviceCategories.find((category) => category.id === serviceCategoryId) ?? null
@@ -135,7 +154,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
   const activeEquipment = activeServiceCategory && serviceSubId ? resolveClinicEquipment(serviceSubId) : null;
   const activeServiceSub =
     activeServiceCategory && serviceSubId && !activeEquipment
-      ? activeServiceCategory.subServices.find((sub) => sub.id === serviceSubId) ?? null
+      ? findSubServiceByRouteParam(serviceSubId, activeServiceCategory.subServices) ?? null
       : null;
   const activeArticle = articleId ? findArticleByRouteParam(articleId, articles) ?? null : null;
   const activeDoctor = doctorId ? findDoctorByRouteParam(doctorId, doctors) ?? null : null;
@@ -222,7 +241,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       : educationSeo?.title
         ? educationSeo.title
         : activeLocalCommercial
-          ? getLocalizedCopy(activeLocalCommercial.seo.title, locale)
+          ? buildLandingSeoTitle(activeLocalCommercial, landingDetails, locale)
           : articleSeo?.title
             ? articleSeo.title
             : activeVideo
@@ -231,7 +250,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
                   locale,
                 )
             : activeCondition && conditionSlug
-              ? buildServiceSeoTitle(
+              ? buildServicePageSeoTitle(
                   getDermatologyConditionNavItem(conditionSlug)?.label[locale] ??
                     getDermatologyConditionNavItem(conditionSlug)?.label.uz ??
                     conditionSlug,
@@ -240,11 +259,11 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
               : activeDoctor
                 ? buildServiceSeoTitle(activeDoctor.name[locale], locale)
                 : activeEquipment
-                  ? buildServiceSeoTitle(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
+                  ? buildServicePageSeoTitle(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
                   : activeServiceSub
-                    ? buildServiceSeoTitle(activeServiceSub.name[locale], locale)
+                    ? buildServicePageSeoTitle(activeServiceSub.name[locale], locale)
                     : activeServiceCategory
-                      ? buildServiceSeoTitle(activeServiceCategory.title[locale], locale)
+                      ? buildServicePageSeoTitle(activeServiceCategory.title[locale], locale)
                       : daavlinModelSeo
                         ? daavlinModelSeo.seoTitle[locale]
                         : tabSeo.title;
@@ -252,7 +271,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
   const description = educationSeo?.desc
     ? educationSeo.desc
     : activeLocalCommercial
-      ? getLocalizedCopy(activeLocalCommercial.seo.desc, locale)
+      ? buildLandingSeoDescription(activeLocalCommercial, landingDetails, locale)
       : articleSeo?.desc
         ? articleSeo.desc
         : activeVideo
@@ -299,7 +318,8 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     resolvedDoctorId: activeDoctor ? doctorRouteKey(activeDoctor) : doctorId ?? undefined,
     resolvedVideoKey: activeVideo ? videoRouteKey(activeVideo) : videoKey ?? undefined,
     resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
-    resolvedServiceSubId: activeEquipment?.id ?? activeServiceSub?.id ?? serviceSubId ?? undefined,
+    // An unknown sub-path shows the category page, so it is canonical to the category.
+    resolvedServiceSubId: activeEquipment?.id ?? (activeServiceSub ? subServiceRouteKey(activeServiceSub) : undefined),
   };
 
   const canonical = getCanonicalUrl(seoContext);
@@ -321,6 +341,11 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
         sectionTitle: tabSeo.title,
       }).map((item) => (item.path ? item : { ...item, path: canonical }));
   if (breadcrumbs.length > 1) jsonLd.push(buildBreadcrumbSchema(breadcrumbs));
+  if (activeLocalCommercial && landingDetails) {
+    jsonLd.push(buildLocalServiceSchema(locale, origin, canonical, activeLocalCommercial.city, landingDetails, fitDescription(description)));
+    const faq = buildFaqSchema(landingDetails.faqs);
+    if (faq) jsonLd.push(faq);
+  }
 
   return {
     lang: locale,
@@ -343,6 +368,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       serviceCategory: activeServiceCategory,
       serviceSub: activeServiceSub,
       video: activeVideo,
+      localLanding: activeLocalCommercial,
       isErrorPage,
     },
   };
@@ -392,6 +418,43 @@ function buildVideoSeoTitle(name: string, locale: Locale): string {
     name,
     shortenAtWord(name, TITLE_MAX_LENGTH),
   ]);
+}
+
+const SPECIALIST_LANDINGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog']);
+
+/** "Lazer epilyatsiya Farg'onada — narxlar | Radeski Skin Clinic" when prices are known. */
+function buildLandingSeoTitle(
+  landing: LocalCommercialLanding,
+  details: LocalLandingDetails | null,
+  locale: Locale,
+): string {
+  const base = getLocalizedCopy(landing.seo.title, locale);
+  if (!details?.minPrice) return base;
+  const h1 = getLocalizedCopy(landing.h1, locale);
+  const tail = SPECIALIST_LANDINGS.has(landing.slug)
+    ? { uz: 'qabul va narxlar', ru: 'запись и цены', en: 'booking & prices' }[locale]
+    : { uz: 'narxlar', ru: 'цены', en: 'prices' }[locale];
+  return fitTitle([`${h1} — ${tail} | Radeski Skin Clinic`, `${h1} — ${tail} | Radeski`, `${h1} — ${tail}`, base]);
+}
+
+/** Service, starting price and the first sentence about it — what searchers compare. */
+function buildLandingSeoDescription(
+  landing: LocalCommercialLanding,
+  details: LocalLandingDetails | null,
+  locale: Locale,
+): string {
+  const base = getLocalizedCopy(landing.seo.desc, locale);
+  if (!details) return base;
+  const h1 = getLocalizedCopy(landing.h1, locale);
+  const price = details.minPrice
+    ? locale === 'uz'
+      ? ` — ${formatUzs(details.minPrice, locale)}dan`
+      : locale === 'ru'
+        ? ` — от ${formatUzs(details.minPrice, locale)}`
+        : ` — from ${formatUzs(details.minPrice, locale)}`
+    : '';
+  const first = details.about[0]?.match(/^.+?[.!?](?=\s|$)/)?.[0] ?? '';
+  return first ? `${h1}${price}. ${first}` : `${h1}${price}. ${base}`;
 }
 
 /** Cuts a long headline at a word boundary, without a dangling "and"/"va"/"и" or comma. */

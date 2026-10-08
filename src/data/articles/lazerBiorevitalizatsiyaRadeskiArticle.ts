@@ -201,7 +201,7 @@ export const LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleC
       '5 дней SPF, без сауны и массажа',
       'Выбор между лазером и инъекциями индивидуален',
     ],
-    tags: ['Лазерная биоревитализация', 'Гиалuronовая kислота', 'Аппаратная кosmetologiya', 'Увлажнение', 'Radeski Skin Clinic'],
+    tags: ['Лазерная биоревитализация', 'Гиалуроновая кислота', 'Аппаратная косметология', 'Увлажнение', 'Radeski Skin Clinic'],
     whenToSeeDoctor: [
       'Хотите увлажнение без уколов',
       'Сухая, уставшая кожа',
@@ -210,7 +210,7 @@ export const LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleC
     faq: [
       {
         question: 'Больно ли?',
-        answer: 'Обычно лёгкое тепло или дискомfort; холодный лазер малотравматичен.',
+        answer: 'Обычно лёгкое тепло или дискомфорт; холодный лазер малотравматичен.',
       },
       {
         question: 'Когда виден результат?',

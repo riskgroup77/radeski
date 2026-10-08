@@ -109,7 +109,7 @@ function ruBody(): string {
 ## Кому подходит?
 
 - телеангиэктазии («звёздочки»);
-- кuperоз;
+- купероз;
 - покраснение лица;
 - сосудистые проявления на фоне розацеа.
 
@@ -200,7 +200,7 @@ export const DERMA_V_REDNESS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
   },
   ru: {
     summary:
-      'Как лечить сосудистую сеточку, кuperoz и постоянное покраснение лазером Lutronic Derma V: этапы, число сеансов и опыт Radeski Skin Clinic.',
+      'Как лечить сосудистую сеточку, купероз и постоянное покраснение лазером Lutronic Derma V: этапы, число сеансов и опыт Radeski Skin Clinic.',
     body: ruBody(),
     keyTakeaways: [
       'Derma V работает на 532 и 1064 нм избирательно на сосуды',
@@ -209,7 +209,7 @@ export const DERMA_V_REDNESS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Число сеансов зависит от распространённости сосудов',
       'Консультация дерматолога обязательна',
     ],
-    tags: ['Derma V', 'Lutronic', 'Кuperoz', 'Сосудистая сеточка', 'Radeski Skin Clinic', 'Сосудистый лазер'],
+    tags: ['Derma V', 'Lutronic', 'Купероз', 'Сосудистая сеточка', 'Radeski Skin Clinic', 'Сосудистый лазер'],
     whenToSeeDoctor: [
       'Покраснение быстро усиливается',
       'Боль или язва вокруг сосуда',

@@ -1,4 +1,5 @@
 import type { Locale, ServiceCategory } from '../types';
+import { subServiceRouteKey } from './serviceSubSlug';
 import {
   DERMATOLOGY_CATEGORY_ID,
   DERMATOLOGY_CONDITION_NAV,
@@ -79,10 +80,10 @@ export function getServiceNavFlyoutContent(
     return {
       title: proceduresFlyoutTitle(locale),
       items: category.subServices.map((sub) => ({
-        key: sub.id,
+        key: subServiceRouteKey(sub),
         kind: 'sub' as const,
         label: sub.name[locale] || sub.name.uz,
-        href: serviceSubPath(locale, category.id, sub.id),
+        href: serviceSubPath(locale, category.id, subServiceRouteKey(sub)),
       })),
     };
   }

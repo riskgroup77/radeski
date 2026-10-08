@@ -76,9 +76,9 @@ export const SUB_SERVICE_ICON_BY_ID: Record<string, string> = {
 };
 
 const CATEGORY_KEYWORD_RULES: { keywords: string[]; icon: string }[] = [
-  { keywords: ['dermatoonkolog', 'дерматоонкolog', 'onco', 'melanom', 'меланом'], icon: 'ScanEye' },
-  { keywords: ['dermatopatolog', 'дерматопатolog', 'patolog', 'патolog'], icon: 'Microscope' },
-  { keywords: ['trixolog', 'трихolog', 'soch', 'volos', 'волос', 'hair'], icon: 'ScanSearch' },
+  { keywords: ['dermatoonkolog', 'дерматоонколог', 'onco', 'melanom', 'меланом'], icon: 'ScanEye' },
+  { keywords: ['dermatopatolog', 'дерматопатолог', 'patolog', 'патолог'], icon: 'Microscope' },
+  { keywords: ['trixolog', 'трихолог', 'soch', 'volos', 'волос', 'hair'], icon: 'ScanSearch' },
   { keywords: ['epilyats', 'эпиля', 'aleksandrit', 'alexandrite'], icon: 'Zap' },
   { keywords: ['inyeksion', 'инъек', 'inject', 'botoks', 'botulin', 'kontur', 'контур', 'biorev', 'биорев'], icon: 'Syringe' },
   { keywords: ['apparat', 'аппарат', 'hardware', 'ipl', 'mikrotok', 'микроток'], icon: 'WandSparkles' },
@@ -87,15 +87,15 @@ const CATEGORY_KEYWORD_RULES: { keywords: string[]; icon: string }[] = [
   { keywords: ['tirnoq', 'nogte', 'ногт', 'nail', 'oyoq', 'stop', 'podolog', 'подолог'], icon: 'Footprints' },
   { keywords: ['jarroh', 'хирург', 'surgery', 'mohs', 'mikrograf'], icon: 'ScalpelLine' },
   { keywords: ['gen', 'forever young', 'fotoomolaj', 'фотоомолож'], icon: 'Dna' },
-  { keywords: ['dermatolog', 'дерматolog', 'teri kasall', 'кож'], icon: 'ScanFace' },
-  { keywords: ['kosmetolog', 'косметolog', 'estetik', 'aesthetic'], icon: 'WandSparkles' },
+  { keywords: ['dermatolog', 'дерматолог', 'teri kasall', 'кож'], icon: 'ScanFace' },
+  { keywords: ['kosmetolog', 'косметолог', 'estetik', 'aesthetic'], icon: 'WandSparkles' },
   { keywords: ['lazer', 'лазер', 'laser'], icon: 'Zap' },
 ];
 
 const SUB_SERVICE_KEYWORD_RULES: { keywords: string[]; icon: string }[] = [
   { keywords: ['bolalar', 'bolaga', 'детск', 'pediatric', 'child', 'infant', 'go\'dak'], icon: 'Baby' },
   { keywords: ['fototerapi', 'фототера', 'photother', 'uvb', 'ultrabinafsha', 'vitiligo', 'витилиго'], icon: 'Sun' },
-  { keywords: ['immunobiolog', 'иммунобиolog', 'biologik', 'biopreparat', 'биопрепарат', 'target'], icon: 'Pill' },
+  { keywords: ['immunobiolog', 'иммунобиолог', 'biologik', 'biopreparat', 'биопрепарат', 'target'], icon: 'Pill' },
   { keywords: ['radioto', 'radio', 'radioto\'lqin', 'радио', 'радиовол', 'to\'lqin'], icon: 'Radio' },
   { keywords: ['ipl', 'fotoomolaj', 'forever young', 'gen daraja', 'генн', 'sciton'], icon: 'SunMedium' },
   { keywords: ['mikrotok', 'микроток', 'microcurrent', 'limfodrenaj'], icon: 'Waves' },
@@ -125,7 +125,7 @@ const SUB_SERVICE_KEYWORD_RULES: { keywords: string[]; icon: string }[] = [
   { keywords: ['guruh', 'групп', 'group consult', 'maslahat'], icon: 'UsersRound' },
   { keywords: ['konsult', 'консульт', 'consult'], icon: 'MessageCircle' },
   { keywords: ['lazer', 'лазер', 'laser'], icon: 'Zap' },
-  { keywords: ['kosmetolog', 'косметolog', 'estetik', 'yoshartir', 'омолож'], icon: 'Sparkles' },
+  { keywords: ['kosmetolog', 'косметолог', 'estetik', 'yoshartir', 'омолож'], icon: 'Sparkles' },
 ];
 
 function matchIconByKeywords(

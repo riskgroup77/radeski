@@ -80,7 +80,7 @@ export const CLINIC_HISTORY = {
       paragraphs: [
         L(
           'Keyingi bosqich — asoschilaridan biri kasbiy faoliyatini kelib chiqish shahri Farg‘onada davom ettirish qaroriga keldi.',
-          'Следующим этапом развития проекта стало решение одного из основателей продолжить профессionalную деятельность в Узбекистане, в городе Фергана — регионе, с которым он связан своим происхождением.',
+          'Следующим этапом развития проекта стало решение одного из основателей продолжить профессиональную деятельность в Узбекистане, в городе Фергана — регионе, с которым он связан своим происхождением.',
           'The next step was a founder’s decision to continue practice in Fergana, Uzbekistan — the region of his origin.',
         ),
         L(

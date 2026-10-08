@@ -6,6 +6,7 @@
  */
 
 import React, { Suspense, useState, useEffect, useMemo } from 'react';
+import { findSubServiceByRouteParam, subServiceRouteKey } from './utils/serviceSubSlug';
 import { lazyPage } from './utils/lazyPage';
 import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
 import { Locale } from './types';
@@ -35,6 +36,7 @@ import {
   switchLocaleInPath,
   articlePath,
   doctorPath,
+  serviceSubPath,
   serviceCategoryPath,
   servicesListPath,
 } from './routing/paths';
@@ -214,7 +216,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
   const activeServiceSub =
     activeServiceCategory && serviceSubId && !activeEquipment
-      ? activeServiceCategory.subServices.find((sub) => sub.id === serviceSubId) ?? null
+      ? findSubServiceByRouteParam(serviceSubId, activeServiceCategory.subServices) ?? null
       : null;
 
   const activeArticlePreview = articleId
@@ -278,9 +280,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
         clinicRatings: cmsClinicRatings,
         dataLoading,
         videos: cmsVideos,
+        prices: dynamicPrices,
       }),
     );
-  }, [location.pathname, locale, forcePage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, dataLoading, cmsVideos]);
+  }, [location.pathname, locale, forcePage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, dataLoading, cmsVideos, dynamicPrices]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
   const handleOpenAppointmentWithService = (_catId?: string) => {
@@ -341,6 +344,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   // Redirects run after every hook so the hook order never changes between renders.
   if (doctorId && doctorCanonicalKey && doctorId !== doctorCanonicalKey && parsedLocale) {
     return <Navigate to={doctorPath(parsedLocale, doctorCanonicalKey)} replace />;
+  }
+
+  // Old UUID / legacy sub-service links → the readable URL.
+  if (parsedLocale && activeServiceCategory && activeServiceSub && serviceSubId !== subServiceRouteKey(activeServiceSub)) {
+    return (
+      <Navigate to={serviceSubPath(parsedLocale, activeServiceCategory.id, subServiceRouteKey(activeServiceSub))} replace />
+    );
   }
 
   const legacyContactsRedirect =
@@ -433,6 +443,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale}
               landing={activeLocalCommercial}
               appointmentLabel={d.appointmentBtn}
+              prices={dynamicPrices}
+              articles={dynamicArticles}
             />
           )}
 

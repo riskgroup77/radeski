@@ -59,6 +59,14 @@ export function getCanonicalPath(ctx: RouteSeoContext): string {
   if (ctx.resolvedVideoKey && ctx.currentPage === 'videos') {
     return videoPath(getLocaleFromPathname(ctx.pathname), ctx.resolvedVideoKey);
   }
+  // Service pages: old UUID / legacy sub-service links point at the readable URL, and an
+  // unknown sub-path (which shows the category) at the category.
+  if (ctx.currentPage === 'services' && ctx.serviceCategoryId && ctx.resolvedServiceCategoryId) {
+    const locale = getLocaleFromPathname(ctx.pathname);
+    return ctx.resolvedServiceSubId
+      ? serviceSubPath(locale, ctx.resolvedServiceCategoryId, ctx.resolvedServiceSubId)
+      : serviceCategoryPath(locale, ctx.resolvedServiceCategoryId);
+  }
 
   return normalizeCanonicalPath(ctx.pathname);
 }
@@ -103,7 +111,7 @@ export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): s
   }
 
   const categoryId = ctx.resolvedServiceCategoryId ?? ctx.serviceCategoryId;
-  const subId = ctx.resolvedServiceSubId ?? ctx.serviceSubId;
+  const subId = ctx.resolvedServiceSubId;
   if (categoryId && subId) {
     return serviceSubPath(altLocale, categoryId, subId);
   }
