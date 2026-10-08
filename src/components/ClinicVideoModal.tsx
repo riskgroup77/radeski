@@ -5,6 +5,7 @@ import type { Locale } from '../types';
 import type { ClinicVideo } from '../data/sitePagesContent';
 import { DICTIONARY } from '../data';
 import ResolvedVideo from './ResolvedVideo';
+import { videoPoster, videoTitle } from '../utils/videoMeta';
 
 interface ClinicVideoModalProps {
   video: ClinicVideo;
@@ -62,7 +63,7 @@ export default function ClinicVideoModal({
             id="clinic-video-modal-title"
             className="flex-1 min-w-0 text-sm sm:text-base font-extrabold text-brand-text-primary leading-snug line-clamp-2 pr-1"
           >
-            {video.title[locale]}
+            {videoTitle(video, locale)}
           </h3>
           <button
             type="button"
@@ -78,6 +79,7 @@ export default function ClinicVideoModal({
         <div className="relative bg-black shrink-0">
           <ResolvedVideo
             src={video.src}
+            poster={videoPoster(video)}
             controls
             autoPlay
             className="w-full aspect-[9/16] max-h-[min(62vh,640px)] bg-black object-contain mx-auto"

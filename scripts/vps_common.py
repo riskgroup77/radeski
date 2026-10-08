@@ -115,6 +115,8 @@ if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
 fi
 git fetch origin main
 BACKUP_DIR="/root/radeski-predeploy-backups/$(date +%Y%m%d-%H%M%S)"
+# Rewritten by every build (covers for newly uploaded videos) — not a manual server edit.
+git checkout -- public/video-thumbs/index.json 2>/dev/null || true
 if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
   mkdir -p "$BACKUP_DIR"
   git diff HEAD > "$BACKUP_DIR/server-changes.patch"

@@ -5,7 +5,8 @@
  *  1. <lastmod> per sitemap URL — the date the page's *content* last changed (tracked by a
  *     content hash in .seo-state.json, which persists on the server between deploys). A date
  *     that only moves when content moves is what makes search engines trust lastmod.
- *  2. Image sitemap entries (<image:image>) for article covers and doctor photos.
+ *  2. Image sitemap entries (<image:image>) for article covers, doctor photos, video covers.
+ *     Video sitemap entries (<video:video>) for the video watch pages.
  *  3. IndexNow (Yandex, Bing, Seznam, Naver…): notifies only the URLs whose content changed,
  *     when INDEXNOW=1 (set by the VPS deploy — never from local builds).
  *
@@ -25,6 +26,19 @@ const today = new Date().toISOString().slice(0, 10);
 
 function escapeXml(value) {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function videoTag(video) {
+  const lines = [
+    `<video:thumbnail_loc>${escapeXml(video.thumbnail)}</video:thumbnail_loc>`,
+    `<video:title>${escapeXml(video.title.slice(0, 100))}</video:title>`,
+    `<video:description>${escapeXml(video.description.slice(0, 2048))}</video:description>`,
+    `<video:content_loc>${escapeXml(video.contentUrl)}</video:content_loc>`,
+    video.duration ? `<video:duration>${Math.min(28800, Math.max(1, Math.round(video.duration)))}</video:duration>` : '',
+    `<video:publication_date>${escapeXml(video.publicationDate)}</video:publication_date>`,
+    '<video:family_friendly>yes</video:family_friendly>',
+  ].filter(Boolean);
+  return `\n    <video:video>\n      ${lines.join('\n      ')}\n    </video:video>`;
 }
 
 async function pingIndexNow(urls) {
@@ -69,16 +83,23 @@ async function main() {
   if (!sitemap.includes('xmlns:image=')) {
     sitemap = sitemap.replace('<urlset', '<urlset xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
   }
+  if (!sitemap.includes('xmlns:video=')) {
+    sitemap = sitemap.replace('<urlset', '<urlset xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
+  }
   sitemap = sitemap.replace(/<url>([\s\S]*?)<\/url>/g, (block, inner) => {
     const loc = inner.match(/<loc>([^<]+)<\/loc>/)?.[1];
     if (!loc) return block;
-    let body = inner.replace(/\s*<lastmod>[^<]*<\/lastmod>/g, '').replace(/\s*<image:image>[\s\S]*?<\/image:image>/g, '');
+    let body = inner
+      .replace(/\s*<lastmod>[^<]*<\/lastmod>/g, '')
+      .replace(/\s*<image:image>[\s\S]*?<\/image:image>/g, '')
+      .replace(/\s*<video:video>[\s\S]*?<\/video:video>/g, '');
     const lastmod = state[loc]?.lastmod;
     if (lastmod) body = body.replace(/(<loc>[^<]+<\/loc>)/, `$1<lastmod>${lastmod}</lastmod>`);
     const images = manifest[loc]?.images ?? [];
-    if (images.length) {
+    const video = manifest[loc]?.video;
+    if (images.length || video) {
       const tail = body.match(/\s*$/)?.[0] ?? '';
-      body = `${body.trimEnd()}${images.map((src) => `\n    <image:image><image:loc>${escapeXml(src)}</image:loc></image:image>`).join('')}${tail}`;
+      body = `${body.trimEnd()}${images.map((src) => `\n    <image:image><image:loc>${escapeXml(src)}</image:loc></image:image>`).join('')}${video ? videoTag(video) : ''}${tail}`;
     }
     return `<url>${body}</url>`;
   });
@@ -88,7 +109,8 @@ async function main() {
 
   const withLastmod = (sitemap.match(/<lastmod>/g) || []).length;
   const withImages = (sitemap.match(/<image:image>/g) || []).length;
-  console.log(`[seo] sitemap: ${withLastmod} lastmod, ${withImages} images; ${changed.length} changed URLs${firstRun ? ' (first run)' : ''}`);
+  const withVideos = (sitemap.match(/<video:video>/g) || []).length;
+  console.log(`[seo] sitemap: ${withLastmod} lastmod, ${withImages} images, ${withVideos} videos; ${changed.length} changed URLs${firstRun ? ' (first run)' : ''}`);
 
   if (process.env.INDEXNOW === '1' && changed.length) {
     await pingIndexNow(changed).catch((error) => console.warn('[indexnow] failed:', error));

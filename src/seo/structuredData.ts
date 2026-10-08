@@ -7,6 +7,16 @@ import { getLocalizedImage } from '../utils/localizedImage';
 import { CLINIC_GEO, CLINIC_REVIEW_LINKS, CLINIC_SOCIAL_LINKS, KOKAND_BRANCH_GEO } from '../config/links';
 import type { Doctor } from '../types';
 import type { ClinicVideo } from '../data/sitePagesContent';
+import {
+  isoDuration,
+  videoDescription,
+  videoDurationSeconds,
+  videoFileInfo,
+  videoPath,
+  videoPoster,
+  videoRouteKey,
+  videoTitle,
+} from '../utils/videoMeta';
 
 /** Stable @id of the clinic entity — branches, doctors and articles point to it. */
 export function clinicEntityId(origin: string): string {
@@ -361,29 +371,70 @@ export function buildArticleSchema(
  * Clinic videos for the videos page. Google requires a thumbnail and upload date, so only
  * videos that have both are listed — the markup appears as soon as thumbnails are added.
  */
+/** Absolute media URL on the site's own host (uploads are served by radeski.uz as well). */
+function siteMedia(origin: string, path: string | null | undefined): string | undefined {
+  const uploads = path?.match(/\/uploads\/[^\s?#]+/)?.[0];
+  return uploads ? `${origin}${uploads}` : absoluteMedia(origin, path);
+}
+
+/**
+ * Videos page: a summary list pointing at the watch pages. The VideoObject itself lives on
+ * each watch page, where the video is the main content — the only place Google shows it as
+ * a video result.
+ */
 export function buildVideoListSchema(
   locale: Locale,
-  videos: (ClinicVideo & { createdAt?: string })[],
+  videos: ClinicVideo[],
   origin: string,
 ): Record<string, unknown> | null {
-  const eligible = videos.filter((video) => video.thumbnail && video.createdAt && video.src);
-  if (eligible.length === 0) return null;
+  if (videos.length === 0) return null;
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: eligible.map((video, index) => ({
+    itemListElement: videos.map((video, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      item: {
-        '@type': 'VideoObject',
-        name: video.title[locale] || video.title.uz,
-        description: (video.description[locale] || video.description.uz || video.title.uz).slice(0, 2000),
-        thumbnailUrl: absoluteMedia(origin, video.thumbnail),
-        contentUrl: absoluteMedia(origin, video.src),
-        uploadDate: video.createdAt,
-        inLanguage: inLanguageCode(locale),
-      },
+      url: `${origin}${videoPath(locale, videoRouteKey(video))}`,
     })),
+  };
+}
+
+/** "2026-09-09T11:08:24.177681Z" → "2026-09-09T11:08:24Z" (a timezone is required by Google). */
+function normalizeUploadDate(value: string): string {
+  const trimmed = value.replace(/(T\d{2}:\d{2}:\d{2})\.\d+/, '$1');
+  return /T/.test(trimmed) && !/(Z|[+-]\d{2}:?\d{2})$/.test(trimmed) ? `${trimmed}Z` : trimmed;
+}
+
+/** VideoObject for one watch page (needs a cover image and an upload date). */
+export function buildVideoObjectSchema(
+  locale: Locale,
+  video: ClinicVideo,
+  origin: string,
+  pageUrl: string,
+): Record<string, unknown> | null {
+  const poster = videoPoster(video);
+  const uploadDate = video.createdAt;
+  if (!poster || !uploadDate || !video.src) return null;
+  const info = videoFileInfo(video);
+  const duration = isoDuration(videoDurationSeconds(video));
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    '@id': `${pageUrl}#video`,
+    name: videoTitle(video, locale),
+    description: videoDescription(video, locale).slice(0, 2000),
+    thumbnailUrl: [siteMedia(origin, poster)],
+    contentUrl: siteMedia(origin, video.src),
+    uploadDate: normalizeUploadDate(uploadDate),
+    ...(duration ? { duration } : {}),
+    ...(info?.width ? { width: info.width, height: info.height } : {}),
+    inLanguage: inLanguageCode(locale),
+    isFamilyFriendly: true,
+    ...(video.category[locale] || video.category.uz ? { genre: video.category[locale] || video.category.uz } : {}),
+    url: pageUrl,
+    mainEntityOfPage: pageUrl,
+    publisher: { '@id': clinicEntityId(origin) },
+    potentialAction: { '@type': 'WatchAction', target: pageUrl },
   };
 }
 

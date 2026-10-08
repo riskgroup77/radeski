@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "node scripts/buildSiteSnapshot.mjs --out public/data && tsx scripts/buildArticleIndex.ts && vite build && vite build --ssr src/prerender/entry.tsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/seoPostBuild.mjs",
+    "build": "node scripts/buildSiteSnapshot.mjs --out public/data && node scripts/buildVideoThumbnails.mjs && tsx scripts/buildArticleIndex.ts && vite build && vite build --ssr src/prerender/entry.tsx --outDir dist-ssr && node scripts/prerender.mjs && node scripts/seoPostBuild.mjs",
     "build:client": "vite build",
     "snapshot": "node scripts/buildSiteSnapshot.mjs --out public/data",
     "build:prices": "node scripts/buildPriceCatalogFromExcel.mjs && node scripts/generatePriceCategoryOrder.mjs && node scripts/normalizePriceCatalogRu.mjs && npx tsx scripts/buildPriceTranslationsUz.mjs && npx tsx scripts/buildPriceTranslationsEn.mjs",

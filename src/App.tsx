@@ -85,6 +85,7 @@ import {
 } from './utils/educationPrograms';
 import { resolveClinicEquipment } from './utils/clinicEquipmentRoutes';
 import { doctorRouteKey, findDoctorByRouteParam } from './utils/doctorSlug';
+import { findVideoByRouteParam, getVideoKeyFromPathname } from './utils/videoMeta';
 
 // Route pages load on demand — the first paint only needs the shell + home page.
 const PromoServicePage = lazyPage(() => import('./components/PromoServicePage'));
@@ -97,6 +98,7 @@ const ClinicEquipmentPage = lazyPage(() => import('./components/ClinicEquipmentP
 const Doctors = lazyPage(() => import('./components/Doctors'));
 const DoctorPage = lazyPage(() => import('./components/DoctorPage'));
 const VideosPage = lazyPage(() => import('./components/VideosPage'));
+const VideoWatchPage = lazyPage(() => import('./components/VideoWatchPage'));
 const BranchesPage = lazyPage(() => import('./components/BranchesPage'));
 const TechnologiesPage = lazyPage(() => import('./components/TechnologiesPage'));
 const DaavlinFotoKabinalariPage = lazyPage(() => import('./components/DaavlinFotoKabinalariPage'));
@@ -222,6 +224,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const activeDoctorPreview = doctorId
     ? findDoctorByRouteParam(doctorId, dynamicDoctors) ?? null
     : null;
+  const videoKey = currentPage === 'videos' ? getVideoKeyFromPathname(location.pathname) : null;
+  const activeVideo = videoKey ? findVideoByRouteParam(videoKey, cmsVideos) ?? null : null;
   // Old UUID / legacy links → the readable slug URL.
   const doctorCanonicalKey = activeDoctorPreview ? doctorRouteKey(activeDoctorPreview) : null;
 
@@ -1067,8 +1071,18 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <LegalPage locale={locale} type="privacy" />
           )}
 
-          {currentPage === 'videos' && (
+          {currentPage === 'videos' && !videoKey && (
             <VideosPage locale={locale} dictionary={d} videos={cmsVideos} loading={cmsLoading} />
+          )}
+
+          {currentPage === 'videos' && videoKey && (
+            activeVideo ? (
+              <VideoWatchPage video={activeVideo} videos={cmsVideos} locale={locale} dictionary={d} />
+            ) : cmsLoading || cmsVideos.length === 0 ? (
+              <VideosPage locale={locale} dictionary={d} videos={[]} loading />
+            ) : (
+              <NotFoundPage locale={locale} />
+            )
           )}
 
           {currentPage === 'branches' && (

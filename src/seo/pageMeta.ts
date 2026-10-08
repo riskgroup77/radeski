@@ -1,3 +1,4 @@
+import { ARTICLE_SEO_TITLES } from './articleSeoTitles';
 import type { Locale } from '../types';
 import type { PageId } from '../routing/paths';
 
@@ -29,7 +30,7 @@ export const TITLE_MAX_LENGTH = 60;
 export const DESCRIPTION_MAX_LENGTH = 158;
 
 /** First candidate that fits — the name always stays whole, the brand/city tail shrinks. */
-function fitTitle(candidates: string[]): string {
+export function fitTitle(candidates: string[]): string {
   return candidates.find((title) => title.length <= TITLE_MAX_LENGTH) ?? candidates[candidates.length - 1];
 }
 
@@ -164,16 +165,20 @@ export function resolveArticleSeo(
   richTags: string[],
 ): { title: string; desc: string; keywords: string } {
   const override = routeKey ? ARTICLE_SEO_OVERRIDES[routeKey]?.[locale] : undefined;
+  const shortTitle = routeKey ? ARTICLE_SEO_TITLES[routeKey]?.[locale] : undefined;
+  const fittedShortTitle = shortTitle
+    ? fitTitle([`${shortTitle} | Radeski Skin Clinic`, `${shortTitle} | Radeski`, shortTitle])
+    : undefined;
   if (override) {
     return {
-      title: override.title,
+      title: fittedShortTitle ?? override.title,
       desc: override.desc,
       keywords: override.keywords ?? richTags.join(', '),
     };
   }
   if (article) {
     return {
-      title: buildArticleSeoTitle(article.title[locale], locale),
+      title: fittedShortTitle ?? buildArticleSeoTitle(article.title[locale], locale),
       desc: article.summary[locale],
       keywords: richTags.join(', '),
     };

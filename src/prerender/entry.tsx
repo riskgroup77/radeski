@@ -39,6 +39,18 @@ import { getCatalogCategoryNameRu } from '../utils/priceCatalog';
 import { sortPriceItemsInCategory } from '../utils/sortPriceItems';
 import { resolveRouteHead, type RouteHead } from '../seo/resolveRouteHead';
 import { doctorRouteKey } from '../utils/doctorSlug';
+import type { ClinicVideo } from '../data/sitePagesContent';
+import { mapApiClinicVideos } from '../utils/clinicVideos';
+import {
+  videoDescription,
+  videoDurationLabel,
+  videoDurationSeconds,
+  videoFileInfo,
+  videoPath,
+  videoPoster,
+  videoRouteKey,
+  videoTitle,
+} from '../utils/videoMeta';
 
 export interface PrerenderSnapshot {
   data: Partial<RawClinicData> & { clinicRatings?: ApiClinicRatingOut[]; videos?: ApiClinicVideoOut[] };
@@ -56,8 +68,9 @@ function escapeHtml(value: string): string {
 
 /** Visible H1: the entity name when there is one, otherwise the title without the brand tail. */
 function resolveHeading(head: RouteHead, locale: Locale): string {
-  const { article, doctor, serviceSub, serviceCategory } = head.route;
+  const { article, doctor, serviceSub, serviceCategory, video } = head.route;
   if (article) return article.title[locale] || article.title.uz;
+  if (video) return videoTitle(video, locale);
   if (doctor) return doctor.name[locale] || doctor.name.uz;
   if (serviceSub) return serviceSub.name[locale] || serviceSub.name.uz;
   if (serviceCategory) return serviceCategory.title[locale] || serviceCategory.title.uz;
@@ -117,18 +130,83 @@ function PriceList({ prices, locale }: { prices: PriceItem[]; locale: Locale }) 
   );
 }
 
+/** Uploaded files are served by the site itself as well: keep the player on radeski.uz. */
+function sitePlayableSrc(src: string): string {
+  return src.match(/\/uploads\/[^\s?#]+/)?.[0] ?? src;
+}
+
+function VideoLink({ video, locale }: { video: ClinicVideo; locale: Locale }) {
+  const poster = videoPoster(video);
+  return (
+    <a href={videoPath(locale, videoRouteKey(video))}>
+      {poster && <img src={poster} alt={videoTitle(video, locale)} loading="lazy" width={180} height={320} />}
+      {videoTitle(video, locale)}
+    </a>
+  );
+}
+
+function VideoBody({ video, videos, locale }: { video: ClinicVideo; videos: ClinicVideo[]; locale: Locale }) {
+  const info = videoFileInfo(video);
+  const duration = videoDurationLabel(video);
+  const category = video.category[locale] || video.category.uz;
+  return (
+    <article>
+      <video
+        controls
+        playsInline
+        preload="none"
+        poster={videoPoster(video)}
+        src={sitePlayableSrc(video.src)}
+        width={info?.width}
+        height={info?.height}
+        title={videoTitle(video, locale)}
+      />
+      <p>
+        {[category, duration, video.createdAt?.slice(0, 10)].filter(Boolean).join(' · ')}
+      </p>
+      <p>{videoDescription(video, locale)}</p>
+      <ul>
+        {videos
+          .filter((item) => item.id !== video.id)
+          .slice(0, 6)
+          .map((item) => (
+            <li key={item.id}>
+              <VideoLink video={item} locale={locale} />
+            </li>
+          ))}
+      </ul>
+    </article>
+  );
+}
+
 function PageContent({
   head,
   locale,
   clinic,
+  videos,
 }: {
   head: RouteHead;
   locale: Locale;
   clinic: ReturnType<typeof transformClinicData>;
+  videos: ClinicVideo[];
 }): ReactNode {
-  const { currentPage, article, doctor, serviceCategory, serviceSub } = head.route;
+  const { currentPage, article, doctor, serviceCategory, serviceSub, video } = head.route;
 
   if (article) return <ArticleBody article={article} locale={locale} />;
+
+  if (video) return <VideoBody video={video} videos={videos} locale={locale} />;
+
+  if (currentPage === 'videos') {
+    return (
+      <ul>
+        {videos.map((item) => (
+          <li key={item.id}>
+            <VideoLink video={item} locale={locale} />
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   if (doctor) {
     return (
@@ -206,11 +284,13 @@ function PrerenderBody({
   locale,
   clinic,
   overrides,
+  videos,
 }: {
   head: RouteHead;
   locale: Locale;
   clinic: ReturnType<typeof transformClinicData>;
   overrides: DictionaryOverrides;
+  videos: ClinicVideo[];
 }) {
   const d = { ...DICTIONARY[locale], ...(overrides[locale] ?? {}) } as Record<string, string>;
   const navLabel: Partial<Record<PageId, string>> = {
@@ -249,7 +329,7 @@ function PrerenderBody({
         )}
         <h1>{resolveHeading(head, locale)}</h1>
         <p>{head.description}</p>
-        <PageContent head={head} locale={locale} clinic={clinic} />
+        <PageContent head={head} locale={locale} clinic={clinic} videos={videos} />
       </main>
       <footer>
         {CLINIC_BRANCHES.filter((branch) => branch.id !== 'liege-rade-skin').map((branch) => (
@@ -264,6 +344,32 @@ function PrerenderBody({
       </footer>
     </div>
   );
+}
+
+export interface VideoSitemapEntry {
+  thumbnail: string;
+  title: string;
+  description: string;
+  contentUrl: string;
+  duration?: number;
+  publicationDate: string;
+}
+
+/** <video:video> data for the sitemap — taken from the page's own VideoObject. */
+function videoSitemapEntry(head: RouteHead): VideoSitemapEntry | undefined {
+  const ld = head.jsonLd.find((item) => item['@type'] === 'VideoObject') as
+    | { thumbnailUrl: string[]; name: string; description: string; contentUrl: string; uploadDate: string }
+    | undefined;
+  if (!ld || !head.route.video) return undefined;
+  const seconds = videoDurationSeconds(head.route.video);
+  return {
+    thumbnail: ld.thumbnailUrl[0],
+    title: ld.name,
+    description: ld.description,
+    contentUrl: ld.contentUrl,
+    duration: seconds || undefined,
+    publicationDate: ld.uploadDate,
+  };
 }
 
 /** Replace the content attribute of the first <meta> matching `selector` (name or property). */
@@ -286,23 +392,26 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
   });
   const clinicRatings = (raw.clinicRatings ?? []).map(mapClinicRatingFromApi);
   const overrides = dictionaryOverridesFromSiteTexts(raw.siteTexts ?? []);
-  const videos = (raw.videos ?? []).map(mapClinicVideoFromApi);
+  // Same list the videos page shows: active, de-duplicated, in the admin's order.
+  const videos = mapApiClinicVideos((raw.videos ?? []).map(mapClinicVideoFromApi));
 
   /** Images shown on a page (for the image sitemap). */
   const pageImages = (head: RouteHead): string[] => {
-    const { article, doctor } = head.route;
+    const { article, doctor, video } = head.route;
     const paths = article
       ? [article.images?.uz, article.images?.ru, article.images?.en, article.image]
       : doctor
         ? [doctor.photo]
-        : [];
+        : video
+          ? [videoPoster(video)]
+          : [];
     return [...new Set(paths.filter(Boolean).map((p) => (p!.startsWith('http') ? p! : `${SITE_ORIGIN}${p!.startsWith('/') ? '' : '/'}${p}`)))];
   };
 
   function render(
     pathname: string,
     template: string,
-  ): { html: string; head: RouteHead; images: string[]; published?: string } {
+  ): { html: string; head: RouteHead; images: string[]; published?: string; video?: VideoSitemapEntry } {
     const locale = getLocaleFromPathname(pathname);
     const head = resolveRouteHead({
       pathname,
@@ -321,7 +430,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
       if (faq) head.jsonLd.push(faq);
     }
 
-    const body = renderToStaticMarkup(<PrerenderBody head={head} locale={locale} clinic={clinic} overrides={overrides} />);
+    const body = renderToStaticMarkup(<PrerenderBody head={head} locale={locale} clinic={clinic} overrides={overrides} videos={videos} />);
 
     let html = template
       .replace(/<html lang="[^"]*">/, `<html lang="${locale}">`)
@@ -355,11 +464,19 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
         : `${html.slice(0, inlineScript)}${headLinks}\n    ${html.slice(inlineScript)}`;
     html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
 
-    return { html, head, images: pageImages(head), published: head.route.article?.date || undefined };
+    return {
+      html,
+      head,
+      images: pageImages(head),
+      published: head.route.article?.date || head.route.video?.createdAt?.slice(0, 10) || undefined,
+      video: videoSitemapEntry(head),
+    };
   }
 
   return {
     render,
+    /** Video watch page keys for the sitemap. */
+    videoKeys: videos.map((video) => videoRouteKey(video)),
     /** Doctor URL keys for the sitemap (CMS doctors, slug form). */
     doctorKeys: clinic.doctors.map((doctor) => doctorRouteKey(doctor)),
   };

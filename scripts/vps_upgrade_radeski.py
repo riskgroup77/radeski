@@ -2,7 +2,8 @@
 """One-time (re-runnable) upgrade of the radeski.uz server after the October 2026 audit.
 
   1. Deploys the latest main (backs up server-side edits, installs deps if needed, builds:
-     data snapshot + article index + client + prerendered pages).
+     data snapshot + video covers (installs ffmpeg once) + article index + client +
+     prerendered pages).
   2. Restarts the Node app (AI chat limits, server-side review publishing).
   3. nginx: API response cache, security headers, HTML no-cache, prerender try_files,
      /api/reviews/submit route, API docs hidden (scripts/server/nginx_upgrade.py — rolls
@@ -44,6 +45,9 @@ check "API docs hidden"          "$(code https://api.radeski.uz/docs)" 404
 check "openapi hidden"           "$(code https://api.radeski.uz/openapi.json)" 404
 check "IndexNow key file"        "$(code https://radeski.uz/5d7aae4b827e366bd372b102fbf9e1a8.txt)" 200
 check "sitemap has lastmod"      "$(curl -s --max-time 20 https://radeski.uz/sitemap.xml | grep -c '<lastmod>' | awk '{print ($1>400)?1:0}')" 1
+check "video cover image"        "$(code https://radeski.uz/video-thumbs/e10ec999-99ab-46c2-87fb-f2a668bd923e.webp)" 200
+check "video watch page"         "$(curl -s --max-time 20 https://radeski.uz/uz/videos/3-ta-zona-2-ta-narxida-e10ec999 | grep -c 'VideoObject')" 1
+check "video sitemap"            "$(curl -s --max-time 20 https://radeski.uz/sitemap.xml | grep -c '<video:video>' | awk '{print ($1>100)?1:0}')" 1
 check "doctor slug page"         "$(curl -s --max-time 20 https://radeski.uz/uz/doctors/ashurov-dilshod-davlatovich | grep -c 'BreadcrumbList')" 1
 check "chat health"              "$(code https://radeski.uz/api/chat-health)" 200
 check "review endpoint (node)"   "$(code -X POST -H 'Content-Type: application/json' -d '{}' https://radeski.uz/api/reviews/submit)" 400
@@ -55,6 +59,13 @@ def main() -> None:
     client = connect()
     try:
         print("\n=== 1/6 Deploy latest code ===")
+        # ffmpeg: the build makes cover images for newly uploaded clinic videos.
+        run(
+            client,
+            "command -v ffmpeg >/dev/null || (apt-get update -qq && "
+            "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg >/dev/null); ffmpeg -version | head -1",
+            check=False,
+        )
         run(client, DEPLOY_SCRIPT, timeout=2400)
 
         print("\n=== 2/6 Restart Node app ===")

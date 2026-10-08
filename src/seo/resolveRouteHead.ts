@@ -44,7 +44,7 @@ import { resolveClinicEquipment } from '../utils/clinicEquipmentRoutes';
 import { findArticleByRouteParam, resolveArticleRedirectTarget, resolveArticleRouteKey } from '../utils/articles';
 import { resolveArticleTags } from '../utils/articleContent';
 import { getNotFoundTitle } from '../components/NotFoundPage';
-import { TITLE_MAX_LENGTH, buildServiceSeoTitle, fitDescription, getTabSeo, resolveArticleSeo } from './pageMeta';
+import { TITLE_MAX_LENGTH, buildServiceSeoTitle, fitDescription, fitTitle, getTabSeo, resolveArticleSeo } from './pageMeta';
 import { buildHreflangLinks, getCanonicalUrl, type HreflangLink, type RouteSeoContext } from './routeSeo';
 import {
   buildArticleSchema,
@@ -53,9 +53,20 @@ import {
   buildBreadcrumbSchema,
   buildDoctorSchema,
   buildVideoListSchema,
+  buildVideoObjectSchema,
   type BreadcrumbItem,
 } from './structuredData';
 import { doctorRouteKey, findDoctorByRouteParam } from '../utils/doctorSlug';
+import { VIDEO_SEO_TITLES } from './videoSeoTitles';
+import {
+  findVideoByRouteParam,
+  getVideoKeyFromPathname,
+  videoDescription,
+  videoPath,
+  videoPoster,
+  videoRouteKey,
+  videoTitle,
+} from '../utils/videoMeta';
 
 export interface RouteHeadInput {
   pathname: string;
@@ -68,7 +79,7 @@ export interface RouteHeadInput {
   clinicRatings: { id?: string; rating: string | number; count: number }[];
   /** While data is loading an unknown doctor id is not yet a 404. */
   dataLoading?: boolean;
-  /** Clinic videos (videos page VideoObject list). */
+  /** Clinic videos (videos page list + watch pages). Empty while still loading. */
   videos?: ClinicVideo[];
 }
 
@@ -93,6 +104,7 @@ export interface RouteHead {
     doctor: Doctor | null;
     serviceCategory: ServiceCategory | null;
     serviceSub: ServiceCategory['subServices'][number] | null;
+    video: ClinicVideo | null;
     isErrorPage: boolean;
   };
 }
@@ -127,13 +139,16 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       : null;
   const activeArticle = articleId ? findArticleByRouteParam(articleId, articles) ?? null : null;
   const activeDoctor = doctorId ? findDoctorByRouteParam(doctorId, doctors) ?? null : null;
+  const videoKey = currentPage === 'videos' ? getVideoKeyFromPathname(pathname) : null;
+  const activeVideo = videoKey ? findVideoByRouteParam(videoKey, input.videos ?? []) ?? null : null;
 
   const isErrorPage =
     currentPage === 'not-found' ||
     invalidCityCommercialSlug ||
     Boolean(promoSlug && !activePromoSlide) ||
     Boolean(conditionSlug && !isDermatologyConditionSlug(conditionSlug)) ||
-    Boolean(doctorId && !input.dataLoading && !activeDoctor);
+    Boolean(doctorId && !input.dataLoading && !activeDoctor) ||
+    Boolean(videoKey && input.videos?.length && !activeVideo);
 
   // JSON-LD: MedicalBusiness + service FAQs (+ article / courses where relevant).
   // FAQ markup is only emitted where the questions are visible (article pages add their own),
@@ -156,7 +171,11 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       ),
     );
   }
-  if (currentPage === 'videos' && input.videos?.length) {
+  if (activeVideo) {
+    const pageUrl = absoluteUrl(videoPath(locale, videoRouteKey(activeVideo)));
+    const videoObject = buildVideoObjectSchema(locale, activeVideo, origin, pageUrl);
+    if (videoObject) jsonLd.push(videoObject);
+  } else if (currentPage === 'videos' && !videoKey && input.videos?.length) {
     const videoList = buildVideoListSchema(locale, input.videos, origin);
     if (videoList) jsonLd.push(videoList);
   }
@@ -198,7 +217,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     : null;
 
   const title =
-    currentPage === 'not-found'
+    currentPage === 'not-found' || (videoKey && !activeVideo && isErrorPage)
       ? `${getNotFoundTitle(locale)} | Radeski Skin Clinic`
       : educationSeo?.title
         ? educationSeo.title
@@ -206,6 +225,11 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
           ? getLocalizedCopy(activeLocalCommercial.seo.title, locale)
           : articleSeo?.title
             ? articleSeo.title
+            : activeVideo
+              ? buildVideoSeoTitle(
+                  VIDEO_SEO_TITLES[activeVideo.id.slice(0, 8)]?.[locale] ?? videoTitle(activeVideo, locale),
+                  locale,
+                )
             : activeCondition && conditionSlug
               ? buildServiceSeoTitle(
                   getDermatologyConditionNavItem(conditionSlug)?.label[locale] ??
@@ -231,6 +255,8 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       ? getLocalizedCopy(activeLocalCommercial.seo.desc, locale)
       : articleSeo?.desc
         ? articleSeo.desc
+        : activeVideo
+          ? videoDescription(activeVideo, locale)
         : activeCondition
           ? activeCondition.description
           : activeDoctor
@@ -271,6 +297,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     daavlinModelId,
     resolvedArticleRouteKey,
     resolvedDoctorId: activeDoctor ? doctorRouteKey(activeDoctor) : doctorId ?? undefined,
+    resolvedVideoKey: activeVideo ? videoRouteKey(activeVideo) : videoKey ?? undefined,
     resolvedServiceCategoryId: activeServiceCategory?.id ?? serviceCategoryId ?? undefined,
     resolvedServiceSubId: activeEquipment?.id ?? activeServiceSub?.id ?? serviceSubId ?? undefined,
   };
@@ -284,6 +311,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
         title,
         article: activeArticle,
         doctor: activeDoctor,
+        videoName: activeVideo ? videoTitle(activeVideo, locale) : null,
         serviceCategory: activeServiceCategory,
         serviceSubName: activeEquipment
           ? getLocalizedEquipmentText(activeEquipment.title, locale)
@@ -301,7 +329,9 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     description: fitDescription(description),
     keywords,
     robots: isErrorPage ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1',
-    ogImage: resolveOgImage(origin, locale, activeArticle, activeDoctor, activeServiceSub ?? activeServiceCategory),
+    ogImage: activeVideo && videoPoster(activeVideo)
+      ? absoluteOgPath(origin, videoPoster(activeVideo)!)
+      : resolveOgImage(origin, locale, activeArticle, activeDoctor, activeServiceSub ?? activeServiceCategory),
     canonical,
     hreflang: buildHreflangLinks(seoContext),
     ogLocale: localeToOgLocale(locale),
@@ -312,6 +342,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       doctor: activeDoctor,
       serviceCategory: activeServiceCategory,
       serviceSub: activeServiceSub,
+      video: activeVideo,
       isErrorPage,
     },
   };
@@ -344,7 +375,35 @@ function resolveOgImage(
         ? getLocalizedImage(service.images, locale) ?? service.image
         : null;
   if (!path) return `${origin}/gallery/logo.webp`;
+  return absoluteOgPath(origin, path);
+}
+
+function absoluteOgPath(origin: string, path: string): string {
   return path.startsWith('http') ? path : `${origin}${path.startsWith('/') ? '' : '/'}${path}`;
+}
+
+/** "<video title> — video | Radeski", shortened to the visible title length. */
+function buildVideoSeoTitle(name: string, locale: Locale): string {
+  const label = locale === 'ru' ? 'видео' : 'video';
+  return fitTitle([
+    `${name} — ${label} | Radeski Skin Clinic`,
+    `${name} — ${label} | Radeski`,
+    `${name} | Radeski`,
+    name,
+    shortenAtWord(name, TITLE_MAX_LENGTH),
+  ]);
+}
+
+/** Cuts a long headline at a word boundary, without a dangling "and"/"va"/"и" or comma. */
+function shortenAtWord(text: string, max: number): string {
+  if (text.length <= max) return text;
+  let cut = text.slice(0, max + 1).replace(/\s+\S*$/, '');
+  for (;;) {
+    const trimmed = cut.replace(/[\s,;:—–-]+$/, '').replace(/\s+(va|yoki|bilan|и|или|от|для|and|or|a|the|of|for|from|to)$/i, '');
+    if (trimmed === cut) break;
+    cut = trimmed;
+  }
+  return cut;
 }
 
 /** The doctor an article is attributed to (author name matches a doctor's name). */
@@ -376,6 +435,7 @@ function buildBreadcrumbs(ctx: {
   title: string;
   article: Article | null;
   doctor: Doctor | null;
+  videoName: string | null;
   serviceCategory: ServiceCategory | null;
   serviceSubName: string | null;
   localCity: 'fargona' | 'qoqon' | null;
@@ -413,6 +473,8 @@ function buildBreadcrumbs(ctx: {
     items.push({ name: ctx.article.title[locale] || ctx.article.title.uz, path: '' });
   } else if (ctx.doctor) {
     items.push({ name: ctx.doctor.name[locale] || ctx.doctor.name.uz, path: '' });
+  } else if (ctx.videoName) {
+    items.push({ name: ctx.videoName, path: '' });
   } else if (ctx.hasDetail) {
     items.push({ name: shortTitle, path: '' });
   }

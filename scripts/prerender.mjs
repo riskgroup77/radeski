@@ -5,7 +5,7 @@
  * (`try_files $uri $uri/index.html /index.html`), so crawlers get real per-page HTML; the
  * React app then takes over in the browser.
  *
- * Also refreshes the doctor block of dist/sitemap.xml from the CMS (readable slugs) and
+ * Also refreshes the doctor and video blocks of dist/sitemap.xml from the CMS and
  * leaves dist/.seo-manifest.json (content hash + images per URL) for seoPostBuild.mjs.
  *
  * A failure here never breaks the build — affected URLs simply fall back to the SPA shell.
@@ -22,6 +22,8 @@ const ORIGIN = 'https://radeski.uz';
 const LOCALES = ['uz', 'ru', 'en'];
 const DOCTOR_BLOCK_START = '  <!-- Doctor profiles -->';
 const DOCTOR_BLOCK_END = '  <url><loc>https://radeski.uz/uz/prices</loc>';
+const VIDEO_BLOCK_START = '  <!-- Video pages -->';
+const VIDEO_BLOCK_END = '  <!-- /Video pages -->';
 
 function doctorSitemapBlock(keys) {
   const lines = [DOCTOR_BLOCK_START];
@@ -34,6 +36,21 @@ function doctorSitemapBlock(keys) {
       lines.push('  </url>');
     }
   }
+  return lines.join('\n');
+}
+
+function videoSitemapBlock(keys) {
+  const lines = [VIDEO_BLOCK_START];
+  for (const key of keys) {
+    for (const locale of LOCALES) {
+      lines.push('  <url>');
+      lines.push(`    <loc>${ORIGIN}/${locale}/videos/${encodeURIComponent(key)}</loc>`);
+      lines.push('    <changefreq>monthly</changefreq>');
+      lines.push(`    <priority>${locale === 'uz' ? '0.6' : '0.5'}</priority>`);
+      lines.push('  </url>');
+    }
+  }
+  lines.push(VIDEO_BLOCK_END);
   return lines.join('\n');
 }
 
@@ -73,8 +90,18 @@ async function main() {
   const end = sitemap.indexOf(DOCTOR_BLOCK_END);
   if (snapshot.data?.doctors?.length && start !== -1 && end > start) {
     sitemap = `${sitemap.slice(0, start)}${doctorSitemapBlock(prerenderer.doctorKeys)}\n\n${sitemap.slice(end)}`;
-    writeFileSync(sitemapPath, sitemap);
   }
+
+  // One watch page per clinic video (the page Google can show as a video result).
+  const videoStart = sitemap.indexOf(VIDEO_BLOCK_START);
+  const videoEnd = sitemap.indexOf(VIDEO_BLOCK_END);
+  if (videoStart !== -1 && videoEnd > videoStart) {
+    sitemap = `${sitemap.slice(0, videoStart).trimEnd()}\n${sitemap.slice(videoEnd + VIDEO_BLOCK_END.length).trimStart()}`;
+  }
+  if (prerenderer.videoKeys?.length) {
+    sitemap = sitemap.replace('</urlset>', `${videoSitemapBlock(prerenderer.videoKeys)}\n</urlset>`);
+  }
+  writeFileSync(sitemapPath, sitemap);
 
   const pathnames = [...new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname))]
     // "/" is the SPA shell itself (it redirects to the saved language).
@@ -86,13 +113,13 @@ async function main() {
 
   for (const pathname of pathnames) {
     try {
-      const { html, head, images, published } = prerenderer.render(pathname, template);
+      const { html, head, images, published, video } = prerenderer.render(pathname, template);
       const relative = decodeURIComponent(pathname).replace(/^\/+/, '').replace(/\/+$/, '');
       if (!relative || relative.includes('..')) continue;
       const file = path.join(dist, relative, 'index.html');
       mkdirSync(path.dirname(file), { recursive: true });
       writeFileSync(file, html);
-      manifest[`${ORIGIN}${pathname}`] = { hash: contentHash(html), images, published };
+      manifest[`${ORIGIN}${pathname}`] = { hash: contentHash(html), images, published, video };
       if (head.robots.startsWith('noindex')) noindex += 1;
     } catch (error) {
       failed.push(`${pathname}: ${error instanceof Error ? error.message : error}`);

@@ -19,6 +19,7 @@ import {
 } from '../routing/paths';
 import { localCommercialPath, type LocalSeoCity } from '../data/localCommercialSeoCatalog';
 import { localeToHreflang, LOCALES } from '../routing/locale';
+import { videoPath } from '../utils/videoMeta';
 
 export type RouteSeoContext = {
   pathname: string;
@@ -37,6 +38,8 @@ export type RouteSeoContext = {
   /** Stable public route key for articles (art-* or slug, never UUID). */
   resolvedArticleRouteKey?: string;
   resolvedDoctorId?: string;
+  /** Readable key of a video watch page (/:locale/videos/:key). */
+  resolvedVideoKey?: string;
   resolvedServiceCategoryId?: string;
   resolvedServiceSubId?: string;
 };
@@ -52,6 +55,9 @@ export function getCanonicalPath(ctx: RouteSeoContext): string {
   if (articleRouteKey && ctx.currentPage === 'articles') {
     const locale = getLocaleFromPathname(ctx.pathname);
     return articlePath(locale, articleRouteKey);
+  }
+  if (ctx.resolvedVideoKey && ctx.currentPage === 'videos') {
+    return videoPath(getLocaleFromPathname(ctx.pathname), ctx.resolvedVideoKey);
   }
 
   return normalizeCanonicalPath(ctx.pathname);
@@ -85,6 +91,10 @@ export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): s
   const articleRouteKey = resolveArticleRouteKeyFromContext(ctx);
   if (articleRouteKey) {
     return articlePath(altLocale, articleRouteKey);
+  }
+
+  if (ctx.resolvedVideoKey) {
+    return videoPath(altLocale, ctx.resolvedVideoKey);
   }
 
   const doctorId = ctx.resolvedDoctorId ?? ctx.doctorId;

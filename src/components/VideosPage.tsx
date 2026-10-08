@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Clock } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo } from '../data/sitePagesContent';
-import ResolvedVideo from './ResolvedVideo';
+import VideoPosterCard from './VideoPosterCard';
 import ClinicVideoModal from './ClinicVideoModal';
 
 interface VideosPageProps {
@@ -53,40 +52,10 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
                 key={video.id}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.04 }}
+                transition={{ delay: Math.min(index, 12) * 0.04 }}
                 className="group"
               >
-                <button
-                  type="button"
-                  onClick={() => setActiveVideoId(video.id)}
-                  className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-brand-dark-navy shadow-md hover:shadow-xl transition-shadow cursor-pointer"
-                >
-                  <ResolvedVideo
-                    src={video.src}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                    muted
-                    playsInline
-                    preload="metadata"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-slate-950/20" />
-                  <span className="absolute top-2 left-2 text-[9px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-brand-gold/90 text-white">
-                    {video.category[locale]}
-                  </span>
-                  <span className="absolute top-2 right-2 inline-flex items-center gap-1 text-[9px] font-mono font-semibold text-white/90 bg-black/40 px-1.5 py-0.5 rounded-md">
-                    <Clock className="w-2.5 h-2.5" />
-                    {video.duration}
-                  </span>
-                  <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="w-10 h-10 rounded-full bg-brand-gold/95 text-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                      <Play className="w-4 h-4 ml-0.5" fill="currentColor" />
-                    </span>
-                  </span>
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-left">
-                    <h2 className="font-extrabold text-white text-xs leading-snug line-clamp-2">
-                      {video.title[locale]}
-                    </h2>
-                  </div>
-                </button>
+                <VideoPosterCard video={video} locale={locale} onOpen={(item) => setActiveVideoId(item.id)} />
               </motion.article>
             ))}
           </div>
