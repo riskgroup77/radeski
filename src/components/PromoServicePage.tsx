@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import MediaImage from './MediaImage';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -249,12 +250,13 @@ export default function PromoServicePage({ locale, slide, appointmentLabel }: Pr
             <div className="bg-brand-white rounded-3xl border border-brand-sectiongray overflow-hidden shadow-md mb-8">
               <div className="grid grid-cols-1 md:grid-cols-2 min-h-0">
                 <div className="relative min-h-[260px] sm:min-h-[320px] md:min-h-[420px] lg:min-h-[480px] bg-brand-sectiongray/40 order-1">
-                  <img
+                  <MediaImage
                     src={slide.image}
                     alt={title}
                     className="absolute inset-0 w-full h-full object-cover object-center"
                     loading="eager"
-                    decoding="async"
+                    fetchPriority="high"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black/10 to-transparent hidden md:block pointer-events-none" />
                 </div>

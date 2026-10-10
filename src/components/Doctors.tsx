@@ -82,6 +82,7 @@ export default function Doctors({
                     <MediaImage
                       src={doc.photo}
                       alt={doc.name[locale]}
+                      sizes="(max-width: 640px) 100vw, 360px"
                       className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
                     />
                   ) : (

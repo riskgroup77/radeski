@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import MediaImage from './MediaImage';
 import ReactMarkdown from 'react-markdown';
 import {
   BookOpen,
@@ -130,11 +131,10 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
         const promo = isEquipmentPromoImageSrc(src);
         return (
           <figure className={`my-6 sm:my-8 ${promo ? 'max-w-md mx-auto' : ''}`}>
-            <img
+            <MediaImage
               src={src}
               alt={alt ?? ''}
-              loading="lazy"
-              decoding="async"
+              sizes={promo ? '448px' : '(max-width: 768px) 100vw, 768px'}
               className={
                 promo
                   ? 'w-full h-auto rounded-2xl border border-brand-sectiongray shadow-sm bg-neutral-600'

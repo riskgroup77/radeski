@@ -1,4 +1,5 @@
 import { incrementClientCount } from '../utils/clientCount';
+import { trackEvent } from '../utils/analytics';
 
 /** Onlayn qabul — Hipolink sahifasi */
 export const APPOINTMENT_BOOKING_URL =
@@ -99,5 +100,6 @@ export function resolveClinicRatingUrl(platform: string, url?: string): string |
 /** Tugma bosilganda yangi tabda ochish va mijozlar sonini +1 oshirish */
 export function openAppointmentBooking(): void {
   incrementClientCount();
+  trackEvent('booking_click', { link_url: APPOINTMENT_BOOKING_URL, page_path: window.location.pathname });
   window.open(APPOINTMENT_BOOKING_URL, APPOINTMENT_LINK_TARGET, APPOINTMENT_LINK_REL);
 }

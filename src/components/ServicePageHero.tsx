@@ -53,6 +53,8 @@ export default function ServicePageHero({
               src={image}
               alt={title}
               loading="eager"
+              fetchPriority="high"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
           ) : (

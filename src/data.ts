@@ -1,5 +1,4 @@
 import { ServiceCategory, Doctor, Article } from './types';
-export { PRICES } from './data/prices.ts';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
 export const CLINIC_EXPERIENCE_YEARS = 2;
@@ -675,7 +674,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
         name: { uz: "Soch to'kilishi diagnostikasi", ru: "Диагностика выпадения волос", en: "Hair loss diagnosis" },
         description: {
           uz: "Androgenezik, diffuz yoki yoynasimon alopeciya turini trixoskop belgilari bo'yicha farqlash va sababni aniqlash.",
-          ru: "Дифференциация андrogenной, диффузной и очаговой алопеции по трихоскопическим признакам и определение причины.",
+          ru: "Дифференциация андрогенной, диффузной и очаговой алопеции по трихоскопическим признакам и определение причины.",
           en: "Differentiating androgenic, diffuse or patchy alopecia by trichoscopic markers and identifying the underlying cause."
         }
       },

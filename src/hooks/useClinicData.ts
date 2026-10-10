@@ -11,6 +11,8 @@ interface ClinicDataState {
   doctors: Doctor[];
   serviceCategories: ServiceCategory[];
   prices: PriceItem[];
+  /** The price list is translated in a separate chunk; true until it is ready. */
+  pricesLoading: boolean;
   articles: Article[];
   /** Clinic texts edited in the admin panel (address, hours) — applied over DICTIONARY. */
   dictionaryOverrides: DictionaryOverrides;
@@ -25,6 +27,7 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
   const [prices, setPrices] = useState<PriceItem[]>([]);
+  const [pricesLoading, setPricesLoading] = useState(true);
   const [articles, setArticles] = useState<Article[]>(ARTICLES);
   const [dictionaryOverrides, setDictionaryOverrides] = useState<DictionaryOverrides>({});
   const [loading, setLoading] = useState(true);
@@ -34,16 +37,25 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
     setLoading(true);
     setError(null);
 
+    // Prices (largest collection + translation tables) load in parallel but separately, so
+    // pages that do not show prices never wait for them.
+    setPricesLoading(true);
+    void Promise.all([
+      loadPublicData('prices', () => publicApi.getPrices(), [], { live }),
+      import('../api/clinicPricesTransform'),
+    ])
+      .then(([pricesRes, { transformClinicPrices }]) => setPrices(transformClinicPrices(pricesRes)))
+      .catch((pricesError) => console.warn('[prices] failed to load', pricesError))
+      .finally(() => setPricesLoading(false));
+
     const [
       doctorsRes,
       servicesRes,
-      pricesRes,
       articlesRes,
       siteTextsRes,
     ] = await Promise.all([
       loadPublicData('doctors', () => publicApi.getDoctors(), [], { live }),
       loadPublicData('services', () => publicApi.getServices(), [], { live }),
-      loadPublicData('prices', () => publicApi.getPrices(), [], { live }),
       loadPublicData('articles', () => publicApi.getArticles(), [], { live }),
       loadPublicData('siteTexts', () => publicApi.getSiteTexts(), [], { live }),
     ]);
@@ -51,7 +63,7 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
     const data = transformClinicData({
       doctors: doctorsRes,
       services: servicesRes,
-      prices: pricesRes,
+      prices: [],
       articles: articlesRes,
       siteTexts: siteTextsRes,
     });
@@ -62,7 +74,6 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
 
     setDoctors(data.doctors);
     setServiceCategories(data.serviceCategories);
-    setPrices(data.prices);
     setArticles(data.articles);
     setDictionaryOverrides(dictionaryOverridesFromSiteTexts(siteTextsRes));
 
@@ -95,6 +106,7 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
 
   return {
     doctors,
+    pricesLoading,
     serviceCategories,
     prices,
     articles,

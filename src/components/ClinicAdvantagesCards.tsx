@@ -10,7 +10,13 @@ interface ClinicAdvantagesCardsProps {
   showHeading?: boolean;
 }
 
-const CARDS = [
+const CARDS: {
+  key: string;
+  icon: typeof Star;
+  iconFilled?: boolean;
+  titleKey: 'features01' | 'features02' | 'features04';
+  descKey: 'features01Desc' | 'features02Desc' | 'features04Desc';
+}[] = [
   {
     key: 'doctors',
     icon: Star,

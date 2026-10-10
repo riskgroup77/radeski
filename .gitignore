@@ -36,7 +36,34 @@ public/videos/*.mp4
 openapi-temp.json
 
 # Generated at build time / by cron (scripts/buildSiteSnapshot.mjs)
-public/data/site-snapshot.json
+public/data/site-snapshot*.json
 dist-ssr/
 # SEO content hashes / lastmod dates (scripts/seoPostBuild.mjs) — kept on the server between deploys
 .seo-state.json
+
+# Responsive image copies (scripts/buildImageVariants.mjs, generated at build)
+public/img-cache/
+
+# Local working files kept next to the project (reports, source photos/videos, archives,
+# one-off scripts and their outputs) — not part of the site; keeps them out of the public repo.
+/*.docx
+/*.xlsx
+/*.rtf
+/*.rar
+/*.zip
+/*.jpg
+/*.jpeg
+/*.jfif
+/*.png
+/*.PNG
+/*.webp
+/*.gif
+/*.mp4
+/*.MP4
+/RADESKI_*.txt
+/karusel/
+scripts/_*
+scripts/*-output.txt
+scripts/lab-*.json
+scripts/lab-*.txt
+scripts/live-results.json

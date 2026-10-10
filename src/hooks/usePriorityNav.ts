@@ -3,6 +3,9 @@ import { useLayoutEffect, useRef, useState } from 'react';
 /** Safety buffer so sub-pixel rounding never pushes the last item into the CTA. */
 const FIT_BUFFER_PX = 4;
 
+/** Tailwind `lg` — where the desktop nav (`hidden lg:flex`) is shown. */
+const DESKTOP_QUERY = '(min-width: 1024px)';
+
 /**
  * Priority+ navigation: shows as many nav items as fit the container and moves the rest
  * into a "More" menu. Widths come from an invisible measurement row that renders every
@@ -19,7 +22,12 @@ export function usePriorityNav(itemCount: number) {
     const measure = measureRef.current;
     if (!container || !measure) return;
 
+    // Below `lg` the desktop nav is display:none: skip measuring there, because reading
+    // layout here forces a full-page layout in the middle of the first render.
+    const desktop = window.matchMedia(DESKTOP_QUERY);
+
     const compute = () => {
+      if (!desktop.matches) return;
       const available = container.clientWidth - FIT_BUFFER_PX;
       // Container is display:none below the desktop breakpoint — keep the last value.
       if (available <= 0) return;
@@ -51,7 +59,11 @@ export function usePriorityNav(itemCount: number) {
     const observer = new ResizeObserver(compute);
     observer.observe(container);
     observer.observe(measure);
-    return () => observer.disconnect();
+    desktop.addEventListener('change', compute);
+    return () => {
+      observer.disconnect();
+      desktop.removeEventListener('change', compute);
+    };
   }, [itemCount]);
 
   return { containerRef, measureRef, visibleCount };

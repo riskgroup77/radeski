@@ -17,9 +17,10 @@ interface PricesProps {
   onOpenAppointment: (serviceId?: string) => void;
   prices?: PriceItem[];
   dictionary?: Record<string, string>;
+  loading?: boolean;
 }
 
-export default function Prices({ locale, onOpenAppointment, prices, dictionary }: PricesProps) {
+export default function Prices({ locale, onOpenAppointment, prices, dictionary, loading = false }: PricesProps) {
   const d = dictionary || DICTIONARY[locale];
   const dynamicPrices = prices || [];
   const [searchQuery, setSearchQuery] = useState('');
@@ -211,7 +212,13 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary }
             </motion.div>
           ))}
 
-          {pricesByCategory.length === 0 && (
+          {pricesByCategory.length === 0 && loading && (
+            <div className="py-16 text-center text-brand-text-muted text-sm" role="status">
+              {locale === 'uz' ? 'Narxlar yuklanmoqda...' : locale === 'ru' ? 'Загрузка цен...' : 'Loading prices...'}
+            </div>
+          )}
+
+          {pricesByCategory.length === 0 && !loading && (
             <div className="bg-brand-white rounded-2xl border border-brand-sectiongray shadow-sm text-center py-16">
               <HelpCircle className="w-12 h-12 text-brand-text-muted mx-auto mb-4" />
               <p className="text-brand-text-muted text-sm">{d.priceEmpty}</p>

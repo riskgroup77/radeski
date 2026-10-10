@@ -13,7 +13,7 @@ type UseCountUpOptions = {
 export function useCountUp(target: number, options: UseCountUpOptions = {}): number {
   const { duration = 1100, delay = 0, enabled = true } = options;
   const [value, setValue] = useState(0);
-  const frameRef = useRef<number>();
+  const frameRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (frameRef.current) cancelAnimationFrame(frameRef.current);

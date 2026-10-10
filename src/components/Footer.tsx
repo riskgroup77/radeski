@@ -167,6 +167,7 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
                 allowFullScreen={false}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                title="Radeski Skin Clinic — Google Maps"
                 id="footer-inline-map"
               />
             </div>

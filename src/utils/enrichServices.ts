@@ -26,7 +26,10 @@ function isCompleteRich(rich: ServiceDetail['richContent'] | ServiceCategory['ri
 
 function mergeRichContent(
   existing: ServiceDetail['richContent'],
-  catalog: Partial<Record<Locale, import('../types').ServiceRichContent>>,
+  // Catalog entries may omit `conditions` (filled with [] below).
+  catalog: Partial<
+    Record<Locale, Omit<import('../types').ServiceRichContent, 'conditions'> & { conditions?: import('../types').ServiceConditionTopic[] }>
+  >,
 ): ServiceDetail['richContent'] {
   const merged: NonNullable<ServiceDetail['richContent']> = { ...existing };
 

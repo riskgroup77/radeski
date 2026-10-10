@@ -22,7 +22,7 @@ interface CustomerReviewsSectionProps {
 
 function StarRatingDisplay({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-0.5" aria-label={`${rating} / 5`}>
+    <div className="flex items-center gap-0.5" role="img" aria-label={`${rating} / 5`}>
       {Array.from({ length: 5 }, (_, index) => (
         <Star
           key={index}
@@ -453,6 +453,7 @@ export default function CustomerReviewsSection({
                     </label>
                     <select
                       value={serviceId}
+                      aria-label={labels.service}
                       onChange={(e) => setServiceId(e.target.value)}
                       className="w-full px-3.5 py-2.5 bg-brand-white border border-brand-sectiongray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold/25 focus:border-brand-gold/40 cursor-pointer"
                     >

@@ -104,11 +104,12 @@ export default function ClinicEquipmentPage({
 
 
 
-  const relatedArticles = getRelatedArticlesForEquipment(articles, equipment.id);
+  const equipmentId = equipment.id as Parameters<typeof getRelatedArticlesForEquipment>[1];
+  const relatedArticles = getRelatedArticlesForEquipment(articles, equipmentId);
 
-  const relatedResults = getRelatedResultsForEquipment(results, equipment.id, locale);
+  const relatedResults = getRelatedResultsForEquipment(results, equipmentId, locale);
 
-  const relatedVideos = getRelatedVideosForEquipment(videos, equipment.id, locale);
+  const relatedVideos = getRelatedVideosForEquipment(videos, equipmentId, locale);
 
 
 

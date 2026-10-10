@@ -34,6 +34,7 @@ function DoctorCard({
           <MediaImage
             src={doctor.photo}
             alt={doctor.name[locale]}
+            sizes="300px"
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
         ) : (

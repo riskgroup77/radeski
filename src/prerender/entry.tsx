@@ -8,6 +8,7 @@
  * an empty <div id="root"> with the home-page title. In the browser React replaces it.
  */
 import type { ReactNode } from 'react';
+import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
 import { buildServiceH1 } from '../seo/pageMeta';
 import { subServiceRouteKey } from '../utils/serviceSubSlug';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -18,7 +19,8 @@ import { dictionaryOverridesFromSiteTexts, type DictionaryOverrides } from '../d
 import { CLINIC_BRANCHES } from '../data/sitePagesContent';
 import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
 import { PRICE_CATEGORY_ORDER } from '../data/priceCategoryLabels';
-import { transformClinicData, type RawClinicData } from '../api/clinicDataTransform';
+import { transformClinicData, type ClinicData, type RawClinicData } from '../api/clinicDataTransform';
+import { transformClinicPrices } from '../api/clinicPricesTransform';
 import { mapClinicRatingFromApi, mapClinicVideoFromApi } from '../api/cmsMappers';
 import type { ApiClinicRatingOut, ApiClinicVideoOut } from '../api/cmsTypes';
 import { buildFaqSchema } from '../seo/structuredData';
@@ -54,6 +56,24 @@ import { formatUzs, resolveLocalLandingDetails } from '../utils/localLandingDeta
 import { findArticleByRouteParam } from '../utils/articles';
 import { getServiceSectionLabels, resolveCategoryRichContent, resolveServiceRichContent } from '../utils/serviceContent';
 import { ALL_LOCAL_COMMERCIAL_LANDINGS } from '../data/localCommercialSeoCatalog';
+import { CLINIC_HISTORY } from '../data/clinicHistoryContent';
+import { SCIENCE } from '../data/scienceContent';
+import { DERMO_SCAN } from '../data/dermoScanContent';
+import { BRAND } from '../data/brandContent';
+import { MALAKA_OSHIRISH } from '../data/malakaOshirishContent';
+import { OBRAZOVANIYA } from '../data/obrazovaniyaContent';
+import { TECHNOLOGIES_PAGE, EQUIPMENT_PARK_PAGE } from '../data/advantagePagesContent';
+import { INSTITUTIONAL_NAV_SECTIONS } from '../data/institutionalNavContent';
+import {
+  DAAVLIN_ABOUT,
+  DAAVLIN_CABINS,
+  DAAVLIN_CLINIC,
+  DAAVLIN_CONTACTS,
+  DAAVLIN_DISEASES,
+  DAAVLIN_RESULTS,
+} from '../data/daavlinFotoKabinalariContent';
+import { getDaavlinSectionFromPathname } from '../routing/paths';
+import type { ApiTreatmentResultOut } from '../api/cmsTypes';
 import type { ServiceRichContent } from '../types';
 import {
   videoDescription,
@@ -66,8 +86,15 @@ import {
   videoTitle,
 } from '../utils/videoMeta';
 
+/** Clinic data plus the price list (in the browser prices load as a separate chunk). */
+type PrerenderClinic = ClinicData & { prices: PriceItem[] };
+
 export interface PrerenderSnapshot {
-  data: Partial<RawClinicData> & { clinicRatings?: ApiClinicRatingOut[]; videos?: ApiClinicVideoOut[] };
+  data: Partial<RawClinicData> & {
+    clinicRatings?: ApiClinicRatingOut[];
+    videos?: ApiClinicVideoOut[];
+    treatmentResults?: ApiTreatmentResultOut[];
+  };
 }
 
 const NAV_PAGES: PageId[] = ['home', 'about', 'services', 'doctors', 'prices', 'articles', 'results', 'branches'];
@@ -202,7 +229,7 @@ function LandingBody({
 }: {
   landing: LocalCommercialLanding;
   locale: Locale;
-  clinic: ReturnType<typeof transformClinicData>;
+  clinic: PrerenderClinic;
 }) {
   const details = resolveLocalLandingDetails(landing, clinic.prices, locale);
   const t = (copy: { uz: string; ru: string; en: string }) => getLocalizedCopy(copy, locale);
@@ -360,16 +387,99 @@ function CityLinksList({ locale, serviceCategoryId }: { locale: Locale; serviceC
   );
 }
 
+/** Keys whose text is not page content (labels, links, SEO duplicates of <head>, media). */
+const SKIP_CONTENT_KEYS = /^(seo|cta|ctas|button|buttons|label|labels|alt|aria|image|images|icon|href|url|link|links|video|poster|badge)$/i;
+const HEADING_KEYS = /^(title|heading|name|sectionTitle)$/i;
+
+type TextBlock = { heading: boolean; text: string };
+
+function isLocalizedCopy(value: unknown): value is Record<Locale, string> {
+  return Boolean(
+    value && typeof value === 'object' && typeof (value as Record<string, unknown>).uz === 'string' && typeof (value as Record<string, unknown>).ru === 'string',
+  );
+}
+
+/** Headings and sentences of a structured page-content object, in document order. */
+function collectPageText(value: unknown, locale: Locale, out: TextBlock[] = [], key = ''): TextBlock[] {
+  if (!value || typeof value !== 'object') return out;
+  if (isLocalizedCopy(value)) {
+    const text = (value[locale] || value.uz || '').trim();
+    const heading = HEADING_KEYS.test(key) && text.length <= 120;
+    if (text && (heading || text.length >= 25) && !out.some((block) => block.text === text)) out.push({ heading, text });
+    return out;
+  }
+  if (Array.isArray(value)) {
+    for (const item of value) collectPageText(item, locale, out, key);
+    return out;
+  }
+  for (const [childKey, child] of Object.entries(value)) {
+    if (SKIP_CONTENT_KEYS.test(childKey)) continue;
+    collectPageText(child, locale, out, childKey);
+  }
+  return out;
+}
+
+function StructuredPageText({ content, locale }: { content: unknown; locale: Locale }) {
+  const blocks = collectPageText(content, locale);
+  return (
+    <section>
+      {blocks.map((block, index) =>
+        block.heading ? <h2 key={index}>{block.text}</h2> : <p key={index}>{block.text}</p>,
+      )}
+    </section>
+  );
+}
+
+const DAAVLIN_SECTION_CONTENT: Record<string, unknown> = {
+  about: DAAVLIN_ABOUT,
+  'radeski-skin-clinic': DAAVLIN_CLINIC,
+  cabins: DAAVLIN_CABINS,
+  'clinical-results': DAAVLIN_RESULTS,
+  'skin-diseases': DAAVLIN_DISEASES,
+  contacts: DAAVLIN_CONTACTS,
+};
+
+/** Content objects behind the institutional pages (React renders the same data). */
+function institutionalContent(currentPage: PageId, pathname: string): unknown {
+  switch (currentPage) {
+    case 'about':
+      return CLINIC_HISTORY;
+    case 'science':
+      return SCIENCE;
+    case 'dermoscan':
+      return DERMO_SCAN;
+    case 'brend':
+      return BRAND;
+    case 'malaka-oshirish':
+      return MALAKA_OSHIRISH;
+    case 'obrazovaniya': {
+      // A program page shows that program; the section page shows the whole catalogue.
+      const program = resolveEducationProgram(getEducationProgramSlugFromPathname(pathname), getLocaleFromPathname(pathname));
+      return program ?? OBRAZOVANIYA;
+    }
+    case 'technologies':
+      return [TECHNOLOGIES_PAGE, EQUIPMENT_PARK_PAGE];
+    case 'daavlin-foto-kabinalari':
+      return DAAVLIN_SECTION_CONTENT[getDaavlinSectionFromPathname(pathname)] ?? DAAVLIN_ABOUT;
+    default:
+      return INSTITUTIONAL_NAV_SECTIONS.find((section) => section.pageId === currentPage) ?? null;
+  }
+}
+
 function PageContent({
   head,
   locale,
   clinic,
   videos,
+  results,
+  pathname,
 }: {
   head: RouteHead;
   locale: Locale;
-  clinic: ReturnType<typeof transformClinicData>;
+  clinic: PrerenderClinic;
   videos: ClinicVideo[];
+  results: ApiTreatmentResultOut[];
+  pathname: string;
 }): ReactNode {
   const { currentPage, article, doctor, serviceCategory, serviceSub, video, localLanding } = head.route;
 
@@ -471,6 +581,71 @@ function PageContent({
 
   if (currentPage === 'prices') return <PriceList prices={clinic.prices} locale={locale} />;
 
+  if (currentPage === 'branches') {
+    return (
+      <ul>
+        {CLINIC_BRANCHES.map((branch) => (
+          <li key={branch.id}>
+            <h2>{branch.name[locale]}</h2>
+            <p>{branch.address[locale]}</p>
+            <p>{branch.hours[locale]}</p>
+            <p>{branch.phone}</p>
+            <p>{branch.services[locale]}</p>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  if (currentPage === 'results') {
+    const field = (item: ApiTreatmentResultOut, name: 'title' | 'description' | 'service') =>
+      (item as unknown as Record<string, string | null | undefined>)[`${name}_${locale}`] ||
+      (item as unknown as Record<string, string | null | undefined>)[`${name}_uz`] ||
+      '';
+    return (
+      <ul>
+        {results.map((item) => (
+          <li key={item.id}>
+            <h2>{field(item, 'title')}</h2>
+            <p>{field(item, 'service')}</p>
+            <p>{field(item, 'description')}</p>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  if (currentPage === 'fargona' || currentPage === 'qoqon') {
+    const branch = CLINIC_BRANCHES.find((item) => item.id === (currentPage === 'qoqon' ? 'kokand-branch' : 'fergana-main'));
+    return (
+      <>
+        {branch && (
+          <section>
+            <h2>{branch.name[locale]}</h2>
+            <p>{branch.address[locale]}</p>
+            <p>{branch.hours[locale]}</p>
+            <p>{branch.phone}</p>
+            <p>{branch.services[locale]}</p>
+          </section>
+        )}
+        <section>
+          <ul>
+            {getCityCommercialLinks(currentPage).map((item) => (
+              <li key={item.slug}>
+                <a href={localCommercialPath(locale, item.city, item.slug)}>{getLocalizedCopy(item.h1, locale)}</a>
+                {' — '}
+                {getLocalizedCopy(item.lead, locale)}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </>
+    );
+  }
+
+  const content = institutionalContent(currentPage, pathname);
+  if (content) return <StructuredPageText content={content} locale={locale} />;
+
   return null;
 }
 
@@ -480,12 +655,16 @@ function PrerenderBody({
   clinic,
   overrides,
   videos,
+  results,
+  pathname,
 }: {
   head: RouteHead;
   locale: Locale;
-  clinic: ReturnType<typeof transformClinicData>;
+  clinic: PrerenderClinic;
   overrides: DictionaryOverrides;
   videos: ClinicVideo[];
+  results: ApiTreatmentResultOut[];
+  pathname: string;
 }) {
   const d = { ...DICTIONARY[locale], ...(overrides[locale] ?? {}) } as Record<string, string>;
   const navLabel: Partial<Record<PageId, string>> = {
@@ -524,7 +703,7 @@ function PrerenderBody({
         )}
         <h1>{resolveHeading(head, locale)}</h1>
         <p>{head.description}</p>
-        <PageContent head={head} locale={locale} clinic={clinic} videos={videos} />
+        <PageContent head={head} locale={locale} clinic={clinic} videos={videos} results={results} pathname={pathname} />
       </main>
       <footer>
         {CLINIC_BRANCHES.filter((branch) => branch.id !== 'liege-rade-skin').map((branch) => (
@@ -578,13 +757,16 @@ function setMetaContent(html: string, attribute: 'name' | 'property', key: strin
 
 export function createPrerenderer(snapshot: PrerenderSnapshot) {
   const raw = snapshot.data;
-  const clinic = transformClinicData({
-    doctors: raw.doctors ?? [],
-    services: raw.services ?? [],
-    prices: raw.prices ?? [],
-    articles: raw.articles ?? [],
-    siteTexts: raw.siteTexts ?? [],
-  });
+  const clinic: PrerenderClinic = {
+    ...transformClinicData({
+      doctors: raw.doctors ?? [],
+      services: raw.services ?? [],
+      prices: raw.prices ?? [],
+      articles: raw.articles ?? [],
+      siteTexts: raw.siteTexts ?? [],
+    }),
+    prices: transformClinicPrices(raw.prices ?? []),
+  };
   const clinicRatings = (raw.clinicRatings ?? []).map(mapClinicRatingFromApi);
   const overrides = dictionaryOverridesFromSiteTexts(raw.siteTexts ?? []);
   // Same list the videos page shows: active, de-duplicated, in the admin's order.
@@ -626,7 +808,15 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
       if (faq) head.jsonLd.push(faq);
     }
 
-    const body = renderToStaticMarkup(<PrerenderBody head={head} locale={locale} clinic={clinic} overrides={overrides} videos={videos} />);
+    const body = renderToStaticMarkup(<PrerenderBody
+        head={head}
+        locale={locale}
+        clinic={clinic}
+        overrides={overrides}
+        videos={videos}
+        results={raw.treatmentResults ?? []}
+        pathname={pathname}
+      />);
 
     let html = template
       .replace(/<html lang="[^"]*">/, `<html lang="${locale}">`)

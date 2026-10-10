@@ -526,20 +526,29 @@ export default function Header({
     if (!header || !mainRow) return;
 
     const root = document.documentElement;
-    const publish = () => {
-      const liveHeight = Math.ceil(header.getBoundingClientRect().height);
-      root.style.setProperty('--app-header-live-h', `${liveHeight}px`);
-      root.style.setProperty(
-        '--app-header-compact-h',
-        `${Math.ceil(mainRow.getBoundingClientRect().height)}px`,
-      );
-      if (window.scrollY <= SCROLL_COLLAPSE_PX) {
-        root.style.setProperty('--app-header-h', `${liveHeight}px`);
-      }
+    // Writing a variable on <html> restyles the whole page, so only write real changes.
+    const written = new Map<string, string>();
+    const setVar = (name: string, value: string) => {
+      if (written.get(name) === value) return;
+      written.set(name, value);
+      root.style.setProperty(name, value);
     };
-
-    publish();
-    const observer = new ResizeObserver(publish);
+    // Heights come from the ResizeObserver entries (measured by the browser after layout),
+    // never from getBoundingClientRect, which forced a full-page layout on every call. The
+    // first notification arrives before the first paint, so there is no visible jump.
+    const heights = new Map<Element, number>();
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        heights.set(entry.target, entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height);
+      }
+      const liveHeight = Math.ceil(heights.get(header) ?? 0);
+      const compactHeight = Math.ceil(heights.get(mainRow) ?? 0);
+      if (liveHeight) setVar('--app-header-live-h', `${liveHeight}px`);
+      if (compactHeight) setVar('--app-header-compact-h', `${compactHeight}px`);
+      if (liveHeight && window.scrollY <= SCROLL_COLLAPSE_PX) {
+        setVar('--app-header-h', `${liveHeight}px`);
+      }
+    });
     observer.observe(header);
     observer.observe(mainRow);
     return () => observer.disconnect();
@@ -701,7 +710,7 @@ export default function Header({
           className={buttonClass}
           aria-expanded={isLangDropdownOpen}
           aria-haspopup="menu"
-          aria-label={getLanguageLabel(locale)}
+          aria-label={`${locale.toUpperCase()} — ${getLanguageLabel(locale)}`}
         >
           <Globe className={variant === 'topbar' ? 'w-3.5 h-3.5 text-slate-500' : 'w-4 h-4 text-slate-500'} />
           <span>{locale.toUpperCase()}</span>

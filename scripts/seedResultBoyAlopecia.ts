@@ -26,7 +26,10 @@ async function main() {
     throw new Error('Set ADMIN_USERNAME and ADMIN_PASSWORD');
   }
 
-  const token = await adminLogin(process.env.ADMIN_USERNAME, process.env.ADMIN_PASSWORD);
+  const { access_token: token } = await adminLogin({
+    username: process.env.ADMIN_USERNAME,
+    password: process.env.ADMIN_PASSWORD,
+  });
   const existing = await getAdminTreatmentResults(token);
   const match = existing.find((i) => normalizeKey(i.title_uz) === normalizeKey(target.title.uz));
   const payload = mapTreatmentResultToCreatePayload(target);

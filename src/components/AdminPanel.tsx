@@ -873,7 +873,7 @@ export default function AdminPanel({
         const payload = mapArticleToCreatePayload(articleForm, {
           preserveImage: !articleImageFile,
         });
-        const adminArticleId = resolveArticleAdminApiId(articleForm);
+        const adminArticleId = resolveArticleAdminApiId({ id: articleForm.id ?? '', apiId: articleForm.apiId });
         await updateArticle(adminArticleId, payload, articleImageFile);
       }
 

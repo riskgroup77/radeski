@@ -1,3 +1,5 @@
+import { applyCompiled, compileLiteralPhrases } from './textMemo';
+
 /**
  * Ruscha preyskurant nomlarini tabiiy o'zbekchaga qayta tuzish.
  * So'zma-so'z emas, ma'no va tibbiy terminologiyaga mos tarjima.
@@ -348,12 +350,7 @@ function unprotectTerms(text: string): string {
 }
 
 function mapObjectPhrase(ruObject: string): string {
-  let obj = ruObject.trim();
-  for (const [from, to] of SORTED_OBJECT_PHRASES) {
-    const re = new RegExp(from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-    obj = obj.replace(re, to);
-  }
-  return obj.trim();
+  return applyCompiled(ruObject.trim(), compileLiteralPhrases(SORTED_OBJECT_PHRASES)).trim();
 }
 
 function withAccusative(objectUz: string): string {

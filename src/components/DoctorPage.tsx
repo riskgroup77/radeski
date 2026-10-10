@@ -237,6 +237,9 @@ function DoctorProfileLayout({
               <MediaImage
                 src={doctor.photo}
                 alt={doctor.name[locale]}
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="w-full h-auto max-h-[min(78vh,720px)] object-contain object-top"
               />
             ) : (
@@ -325,6 +328,9 @@ function DoctorSimpleLayout({
               <MediaImage
                 src={doctor.photo}
                 alt={doctor.name[locale]}
+                loading="eager"
+                fetchPriority="high"
+                sizes="(max-width: 768px) 100vw, 38vw"
                 className="w-full h-auto max-h-[min(78vh,720px)] md:max-h-none object-contain object-top"
               />
             ) : (

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import MediaImage from './MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, Globe2, MapPin, ArrowRight } from 'lucide-react';
 import { Locale } from '../types';
@@ -297,9 +298,10 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                 onClick={() => setActiveGalleryIdx(idx)}
                 className="group relative h-48 rounded-2xl overflow-hidden shadow-xs hover:shadow-md cursor-pointer border border-brand-sectiongray active:scale-99 transition-all"
               >
-                <img
+                <MediaImage
                   src={img.src}
                   alt={`Radeski clinic ${idx + 1}`}
+                  sizes="(max-width: 640px) 50vw, 25vw"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </button>

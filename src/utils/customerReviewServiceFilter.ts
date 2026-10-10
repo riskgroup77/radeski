@@ -1,4 +1,6 @@
-import type { LocalizedText, ServiceCategory } from '../types';
+import type { Locale, ServiceCategory } from '../types';
+
+type LocalizedText = Record<Locale, string>;
 import type { CustomerReview } from '../data/sitePagesContent';
 
 export type ReviewServiceFilterId = 'all' | string;

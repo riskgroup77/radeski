@@ -339,6 +339,9 @@ export default function PageHeroBanner({
                 <MediaImage
                   src={image}
                   alt={imageAlt || title}
+                  loading="eager"
+                  fetchPriority="high"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className={
                     useProductLayout
                       ? 'h-auto max-h-[220px] w-full object-contain object-center drop-shadow-[0_24px_48px_rgba(7,27,46,0.14)] sm:max-h-[280px] lg:max-h-[420px] xl:max-h-[460px]'
@@ -359,6 +362,9 @@ export default function PageHeroBanner({
       <MediaImage
         src={image}
         alt={imageAlt}
+        loading="eager"
+        fetchPriority="high"
+        sizes="100vw"
         className="absolute inset-0 h-full w-full object-cover object-center"
       />
       <div

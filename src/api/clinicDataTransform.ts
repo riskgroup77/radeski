@@ -2,23 +2,22 @@
  * Turns raw CMS payloads into the shapes the site renders (mapping, enrichment from the
  * built-in catalogs, sorting). Shared by useClinicData in the browser and the build-time
  * prerender, so both show exactly the same doctors, services and articles.
+ * Prices are transformed separately (clinicPricesTransform.ts, loaded on demand).
  */
-import type { Article, Doctor, PriceItem, ServiceCategory } from '../types';
+import type { Article, Doctor, ServiceCategory } from '../types';
 import type { ApiArticleListItem, ApiDoctor, ApiPrice, ApiServiceCategory } from './types';
 import type { ApiSiteTextOut } from './cmsTypes';
 import {
   mapArticleListItemFromApi,
   mapDoctorFromApi,
-  mapPriceFromApi,
   mapServiceCategoryFromApi,
 } from './mappers';
-import { ARTICLES, DOCTORS, PRICES, SERVICE_CATEGORIES } from '../data';
+import { ARTICLES, DOCTORS, SERVICE_CATEGORIES } from '../data';
 import { hydrateServiceAboutFromSiteTexts } from '../data/serviceAboutCatalog';
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
 import { mergeArticlesWithStaticCatalog } from '../utils/articles';
 import { enrichDoctors } from '../utils/enrichDoctors';
-import { enrichPrices } from '../utils/enrichPrices';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 
 export interface RawClinicData {
@@ -32,7 +31,6 @@ export interface RawClinicData {
 export interface ClinicData {
   doctors: Doctor[];
   serviceCategories: ServiceCategory[];
-  prices: PriceItem[];
   articles: Article[];
   /** Every collection came back empty — the site is running on built-in data only. */
   apiFailed: boolean;
@@ -51,8 +49,6 @@ export function transformClinicData(raw: RawClinicData): ClinicData {
     ),
   );
 
-  const prices = enrichPrices(raw.prices.length > 0 ? raw.prices.map(mapPriceFromApi) : PRICES);
-
   const mappedArticles = raw.articles.map(mapArticleListItemFromApi);
   const articles = enrichArticles(
     mappedArticles.length > 0 ? mergeArticlesWithStaticCatalog(mappedArticles) : ARTICLES,
@@ -61,7 +57,6 @@ export function transformClinicData(raw: RawClinicData): ClinicData {
   return {
     doctors,
     serviceCategories,
-    prices,
     articles,
     apiFailed:
       raw.doctors.length === 0 &&

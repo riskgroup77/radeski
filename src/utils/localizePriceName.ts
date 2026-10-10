@@ -1,4 +1,5 @@
 import type { Locale } from '../types';
+import { applyCompiled, compileBoundaryPhrases, memoizeText } from './textMemo';
 import { translatePriceRuToUz } from './translatePriceRuToUz';
 import { translatePriceRuToEn } from './translatePriceRuToEn';
 import { normalizePriceRu } from './normalizePriceRu';
@@ -183,24 +184,15 @@ function sortPhrases(phrases: [string, string][]): [string, string][] {
 
 const SORTED_PHRASES_UZ = sortPhrases(PHRASES_UZ);
 
+// TYPO_FIXES hold regex sources (not literals), compiled once.
+const TYPO_PATTERNS: [RegExp, string][] = TYPO_FIXES.map(([from, to]) => [new RegExp(from, 'gi'), to]);
+
 function applyTypos(text: string): string {
-  let result = text;
-  for (const [from, to] of TYPO_FIXES) {
-    result = result.replace(new RegExp(from, 'gi'), to);
-  }
-  return result;
+  return applyCompiled(text, TYPO_PATTERNS);
 }
 
 function applyPhrases(text: string, phrases: [string, string][]): string {
-  let result = text;
-  for (const [from, to] of phrases) {
-    const pattern = new RegExp(
-      `(?<![\\p{L}\\p{N}])${escapeRegExp(from)}(?![\\p{L}\\p{N}])`,
-      'giu',
-    );
-    result = result.replace(pattern, to);
-  }
-  return result.replace(/\s+/g, ' ').trim();
+  return applyCompiled(text, compileBoundaryPhrases(phrases)).replace(/\s+/g, ' ').trim();
 }
 
 function escapeRegExp(value: string): string {
@@ -227,7 +219,9 @@ function transliterateRuToLatin(text: string): string {
     .join('');
 }
 
-export function localizePriceName(nameRu: string, locale: Locale): string {
+export const localizePriceName = memoizeText((nameRu: string, locale: Locale) => localizePriceNameUncached(nameRu, locale));
+
+function localizePriceNameUncached(nameRu: string, locale: Locale): string {
   const normalized = applyTypos(nameRu.trim());
   if (!normalized) return '';
 

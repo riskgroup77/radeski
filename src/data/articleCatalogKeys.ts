@@ -510,21 +510,23 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   ],
 };
 
+// Prefer longer/more specific keywords first to avoid false matches (e.g. shared city names).
+// Built once: the header menu matches every article against every service on each render.
+let rankedKeywords: { key: string; keyword: string }[] | null = null;
+const catalogKeyCache = new Map<string, string>();
+
 export function findArticleCatalogKey(article: Pick<Article, 'id' | 'slug' | 'title'>): string {
   const haystack = `${article.id} ${article.slug} ${article.title.uz} ${article.title.ru} ${article.title.en}`.toLowerCase();
+  const cached = catalogKeyCache.get(haystack);
+  if (cached) return cached;
 
-  // Prefer longer/more specific keywords first to avoid false matches (e.g. shared city names).
-  const ranked = Object.entries(ARTICLE_CATALOG_KEYWORDS)
-    .flatMap(([key, keywords]) =>
-      keywords.map((keyword) => ({ key, keyword: keyword.toLowerCase() })),
-    )
+  rankedKeywords ??= Object.entries(ARTICLE_CATALOG_KEYWORDS)
+    .flatMap(([key, keywords]) => keywords.map((keyword) => ({ key, keyword: keyword.toLowerCase() })))
+    .filter(({ keyword }) => keyword.length >= 4)
     .sort((a, b) => b.keyword.length - a.keyword.length);
 
-  for (const { key, keyword } of ranked) {
-    if (keyword.length >= 4 && haystack.includes(keyword)) {
-      return key;
-    }
-  }
-
-  return 'general-dermatology';
+  const match = rankedKeywords.find(({ keyword }) => haystack.includes(keyword));
+  const key = match?.key ?? 'general-dermatology';
+  catalogKeyCache.set(haystack, key);
+  return key;
 }

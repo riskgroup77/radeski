@@ -56,7 +56,10 @@ async function main() {
     throw new Error('Set ADMIN_USERNAME and ADMIN_PASSWORD');
   }
 
-  const token = await adminLogin(process.env.ADMIN_USERNAME, process.env.ADMIN_PASSWORD);
+  const { access_token: token } = await adminLogin({
+    username: process.env.ADMIN_USERNAME,
+    password: process.env.ADMIN_PASSWORD,
+  });
   const existing = await getAdminTreatmentResults(token);
   const existingTitles = new Map(
     existing.map((item) => [normalizeKey(item.title_uz), item.id] as const),

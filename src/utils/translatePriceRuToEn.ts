@@ -2,6 +2,7 @@
  * Ruscha preyskurant nomlarini inglizchaga professional tarjima qilish.
  */
 import exactEn from '../data/priceTranslationsEn.json';
+import { applyCompiled, compileBoundaryPhrases, memoizeText } from './textMemo';
 import { normalizePriceRu } from './normalizePriceRu';
 
 const EXACT_PHRASES_EN: [string, string][] = [
@@ -385,7 +386,6 @@ const WORDS_EN: Record<string, string> = {
   зоны: 'area',
   бикини: 'bikini',
   бровей: 'eyebrows',
-  татуажа: 'permanent makeup',
   татуировки: 'tattoo',
   татуировка: 'tattoo',
   пигментации: 'pigmentation',
@@ -395,7 +395,6 @@ const WORDS_EN: Record<string, string> = {
   рубца: 'scar',
   рубц: 'scar',
   акне: 'acne',
-  розацеа: 'rosacea',
   розации: 'rosacea',
   купероза: 'couperose',
   купероз: 'couperose',
@@ -418,10 +417,6 @@ const WORDS_EN: Record<string, string> = {
   всём: 'whole',
   теле: 'body',
   телу: 'body',
-  чистка: 'cleansing',
-  механическая: 'manual',
-  ультразвуковая: 'ultrasonic',
-  уход: 'care',
   фотоомоложение: 'photorejuvenation',
   фототерапия: 'phototherapy',
   эпиляция: 'hair removal',
@@ -529,7 +524,6 @@ const WORDS_EN: Record<string, string> = {
   пальцев: 'fingers',
   тыл: 'sole',
   стоп: 'foot',
-  стопы: 'feet',
   задняя: 'back',
   часть: 'part',
   части: 'part',
@@ -859,15 +853,7 @@ function escapeRegExp(value: string): string {
 }
 
 function applyBoundaryPhrases(text: string, phrases: [string, string][]): string {
-  let result = text;
-  for (const [from, to] of phrases) {
-    const pattern = new RegExp(
-      `(?<![\\p{L}\\p{N}])${escapeRegExp(from)}(?![\\p{L}\\p{N}])`,
-      'giu',
-    );
-    result = result.replace(pattern, to);
-  }
-  return result;
+  return applyCompiled(text, compileBoundaryPhrases(phrases));
 }
 
 function tokenizeRussian(text: string): string[] {
@@ -969,7 +955,16 @@ function capitalizeSentence(text: string): string {
   return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
 }
 
+const translatePriceRuToEnCached = memoizeText((nameRu: string) => translatePriceRuToEnUncached(nameRu));
+
 export function translatePriceRuToEn(
+  nameRu: string,
+  options?: { skipCache?: boolean },
+): string {
+  return options?.skipCache ? translatePriceRuToEnUncached(nameRu, options) : translatePriceRuToEnCached(nameRu);
+}
+
+function translatePriceRuToEnUncached(
   nameRu: string,
   options?: { skipCache?: boolean },
 ): string {

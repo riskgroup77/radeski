@@ -41,7 +41,8 @@ function findFeaturedDoctor(
   slot: (typeof FEATURED_DOCTOR_SLOTS)[number],
   used: Set<string>,
 ): Doctor | null {
-  const byApiId = doctors.find((doctor) => !used.has(doctor.id) && slot.apiIds.includes(doctor.id));
+  const apiIds: readonly string[] = slot.apiIds;
+  const byApiId = doctors.find((doctor) => !used.has(doctor.id) && apiIds.includes(doctor.id));
   if (byApiId) return byApiId;
 
   const bySlug = doctors.find(

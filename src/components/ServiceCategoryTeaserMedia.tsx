@@ -98,7 +98,8 @@ export default function ServiceCategoryTeaserMedia({
           muted
           loop
           playsInline
-          preload="metadata"
+          // Hover teasers download only when hovered (the poster image shows until then).
+          preload={motionMode === 'always' ? 'metadata' : 'none'}
           poster={posterImage}
           aria-hidden
           className={`service-teaser-hover-video pointer-events-none absolute inset-0 z-[1] h-full w-full object-cover object-center transition-opacity duration-500 ${

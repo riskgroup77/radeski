@@ -8,7 +8,7 @@ import {
   getCategoryEquipmentList,
   getLocalizedEquipmentText,
 } from '../data/clinicEquipmentCatalog';
-import { getEquipmentSectionLabels } from './clinicEquipment';
+import { getEquipmentSectionLabels } from './clinicEquipmentLabels';
 import { conditionPath, serviceSubPath } from '../routing/paths';
 import { serviceEquipmentPath } from './clinicEquipmentRoutes';
 

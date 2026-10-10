@@ -50,6 +50,8 @@ function slimArticles(articles) {
 const REQUEST_DELAY_MS = 150;
 const REQUEST_TIMEOUT_MS = 20_000;
 const FILE_NAME = 'site-snapshot.json';
+const CORE_FILE_NAME = 'site-snapshot-core.json';
+const PRICES_FILE_NAME = 'site-snapshot-prices.json';
 
 function parseArgs(argv) {
   const outDirs = [];
@@ -121,14 +123,25 @@ async function main() {
     return;
   }
 
-  const snapshot = { generatedAt: new Date().toISOString(), data };
+  const generatedAt = new Date().toISOString();
+  const snapshot = { generatedAt, data };
   const body = JSON.stringify(snapshot);
+  // The browser loads the snapshot without the price list (the largest collection) and
+  // fetches prices separately, only on pages that show them. Scripts keep the full file.
+  const { prices, ...core } = data;
+  const files = {
+    [FILE_NAME]: body,
+    [CORE_FILE_NAME]: JSON.stringify({ generatedAt, data: core }),
+    [PRICES_FILE_NAME]: JSON.stringify({ generatedAt, data: { prices: prices ?? [] } }),
+  };
   for (const dir of outDirs) {
     mkdirSync(dir, { recursive: true });
-    const target = path.join(dir, FILE_NAME);
-    const tmp = `${target}.${process.pid}.tmp`;
-    writeFileSync(tmp, body);
-    renameSync(tmp, target); // atomic swap — readers never see a half-written file
+    for (const [name, content] of Object.entries(files)) {
+      const target = path.join(dir, name);
+      const tmp = `${target}.${process.pid}.tmp`;
+      writeFileSync(tmp, content);
+      renameSync(tmp, target); // atomic swap — readers never see a half-written file
+    }
   }
 
   const kb = Math.round(Buffer.byteLength(body) / 1024);

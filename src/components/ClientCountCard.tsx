@@ -37,7 +37,7 @@ function getCopy(locale: Locale) {
 }
 
 function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T>();
+  const ref = useRef<T | undefined>(undefined);
   const previous = ref.current;
   ref.current = value;
   return previous;

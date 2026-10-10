@@ -3,6 +3,7 @@
  * Qisman substring almashtirish ishlatilmaydi — faqat to'liq iboralar va so'zma-so'z lug'at.
  */
 import type { Locale } from '../types';
+import { applyCompiled, buildKeyIndex, compileBoundaryPhrases, compileLiteralPhrases, memoizeText } from './textMemo';
 import exactUz from '../data/priceTranslationsUz.json';
 import { COSMETIC_EXACT_PHRASES_UZ } from '../data/priceCosmeticExactUz';
 import { SURGERY_EXACT_PHRASES_UZ } from '../data/priceSurgeryExactUz';
@@ -277,7 +278,6 @@ const WORDS_UZ: Record<string, string> = {
   телеангиэтазии: 'teleangiektaziya',
   вен: 'venalar',
   вены: 'vena',
-  нижних: 'pastki',
   конечностях: 'oyoq-qo\'llarda',
   конечностей: 'oyoq-qo\'llar',
   крыльях: 'qanotlarida',
@@ -505,11 +505,7 @@ function normalizeKey(text: string): string {
 }
 
 function applyTypos(text: string): string {
-  let result = text;
-  for (const [from, to] of TYPO_FIXES) {
-    result = result.replace(new RegExp(escapeRegExp(from), 'gi'), to);
-  }
-  return result;
+  return applyCompiled(text, compileLiteralPhrases(TYPO_FIXES));
 }
 
 function escapeRegExp(value: string): string {
@@ -518,16 +514,10 @@ function escapeRegExp(value: string): string {
 
 /** So'z chegarasida iborani almashtirish — ichki qismni buzmaydi */
 function applyBoundaryPhrases(text: string, phrases: [string, string][]): string {
-  let result = text;
-  for (const [from, to] of phrases) {
-    const pattern = new RegExp(
-      `(?<![\\p{L}\\p{N}])${escapeRegExp(from)}(?![\\p{L}\\p{N}])`,
-      'giu',
-    );
-    result = result.replace(pattern, to);
-  }
-  return result;
+  return applyCompiled(text, compileBoundaryPhrases(phrases));
 }
+
+let exactPhraseIndex: Map<string, string> | null = null;
 
 function translateToken(token: string): string {
   if (!token) return token;
@@ -624,15 +614,17 @@ function cleanupUz(text: string): string {
     .trim();
 }
 
-export function translatePriceRuToUz(nameRu: string): string {
+export const translatePriceRuToUz = memoizeText((nameRu: string) => translatePriceRuToUzUncached(nameRu));
+
+function translatePriceRuToUzUncached(nameRu: string): string {
   const normalized = applyTypos(nameRu.trim());
   if (!normalized) return '';
 
   const exactKey = normalizeKey(normalized);
 
-  for (const [from, to] of EXACT_PHRASES_UZ) {
-    if (normalizeKey(from) === exactKey) return postProcessPriceUz(normalized, to);
-  }
+  exactPhraseIndex ??= buildKeyIndex(EXACT_PHRASES_UZ, normalizeKey);
+  const exact = exactPhraseIndex.get(exactKey);
+  if (exact !== undefined) return postProcessPriceUz(normalized, exact);
 
   const protectedText = protectTerms(normalized);
   const structural = tryStructuralTranslateRuToUz(protectedText, translateFragment);

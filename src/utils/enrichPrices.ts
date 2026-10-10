@@ -153,9 +153,9 @@ export function enrichPrices(apiPrices: PriceItem[]): PriceItem[] {
 
     const apiMatch = apiPrices.find((api) => {
       if (usedApiIds.has(api.id)) return false;
-      const apiNameKey = normalizeKey(api.name.ru || api.name.uz || api.name.en);
       const samePrice = Math.abs((api.priceValue ?? 0) - (catalogItem.priceValue ?? 0)) < 1;
       if (!samePrice) return false;
+      const apiNameKey = normalizeKey(api.name.ru || api.name.uz || api.name.en);
       if (apiNameKey === catalogNameKey) return true;
       return Boolean(findCatalogMatch(api, [catalogItem]));
     });

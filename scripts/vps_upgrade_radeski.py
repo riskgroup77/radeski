@@ -8,7 +8,8 @@
   3. nginx: API response cache, security headers, HTML no-cache, prerender try_files,
      /api/reviews/submit route, API docs hidden (scripts/server/nginx_upgrade.py — rolls
      itself back if `nginx -t` fails).
-  4. Cron: refresh /data/site-snapshot.json every 5 minutes.
+  4. Cron: refresh the data snapshot every 5 minutes; nightly rebuild (new CMS content gets
+     prerendered pages, sitemap entries, covers); nightly CMS database + uploads backup.
   5. Checks .env for the admin credentials review publishing needs (values never printed).
   6. Smoke tests the live site.
 
@@ -26,6 +27,16 @@ CRON_TEXT = (
     "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\\n"
     f"*/5 * * * * root cd {APP_DIR} && node scripts/buildSiteSnapshot.mjs --out dist/data "
     ">> /var/log/radeski-snapshot.log 2>&1\\n"
+)
+
+NIGHTLY_CRON_FILE = "/etc/cron.d/radeski-nightly"
+# Server clock is UTC: 21:30 / 22:30 UTC = 02:30 / 03:30 in Fergana (UTC+5).
+NIGHTLY_CRON_TEXT = (
+    "# Managed by scripts/vps_upgrade_radeski.py — nightly CMS backup and site rebuild\\n"
+    "SHELL=/bin/bash\\n"
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\\n"
+    f"30 21 * * * root python3 {APP_DIR}/scripts/server/backup_cms.py >> /var/log/radeski-backup.log 2>&1\\n"
+    f"30 22 * * * root bash {APP_DIR}/scripts/server/nightly_build.sh >> /var/log/radeski-nightly.log 2>&1\\n"
 )
 
 SMOKE_TESTS = r"""
@@ -49,6 +60,13 @@ check "video cover image"        "$(code https://radeski.uz/video-thumbs/e10ec99
 check "video watch page"         "$(curl -s --max-time 20 https://radeski.uz/uz/videos/3-ta-zona-2-ta-narxida-e10ec999 | grep -c 'VideoObject')" 1
 check "video sitemap"            "$(curl -s --max-time 20 https://radeski.uz/sitemap.xml | grep -c '<video:video>' | awk '{print ($1>100)?1:0}')" 1
 check "doctor slug page"         "$(curl -s --max-time 20 https://radeski.uz/uz/doctors/ashurov-dilshod-davlatovich | grep -c 'BreadcrumbList')" 1
+check "unknown page is 404"      "$(code https://radeski.uz/uz/bunday-sahifa-yoq)" 404
+check "new article path is 200"   "$(code https://radeski.uz/uz/articles/yangi-maqola-tekshiruv)" 200
+check "/uz/contacts -> 301"       "$(code https://radeski.uz/uz/contacts)" 301
+check "assets cached 1 year"      "$(curl -sI --max-time 20 https://radeski.uz$(curl -s --max-time 20 https://radeski.uz/uz | grep -oE '/assets/index-[^"]+\.js' | head -1) | grep -ci 'max-age=31536000')" 1
+check "image variant served"      "$(code https://radeski.uz/img-cache/index.json)" 200
+check "core snapshot"             "$(code https://radeski.uz/data/site-snapshot-core.json)" 200
+check "prices snapshot"           "$(code https://radeski.uz/data/site-snapshot-prices.json)" 200
 check "chat health"              "$(code https://radeski.uz/api/chat-health)" 200
 check "review endpoint (node)"   "$(code -X POST -H 'Content-Type: application/json' -d '{}' https://radeski.uz/api/reviews/submit)" 400
 exit $fail
@@ -79,6 +97,14 @@ def main() -> None:
             client,
             f"printf '{CRON_TEXT}' > {CRON_FILE} && chmod 644 {CRON_FILE} && "
             f"cd {APP_DIR} && node scripts/buildSiteSnapshot.mjs --out dist/data && echo CRON_OK",
+        )
+
+        print("\n=== 4b Nightly backup + rebuild cron, first backup now ===")
+        run(
+            client,
+            f"printf '{NIGHTLY_CRON_TEXT}' > {NIGHTLY_CRON_FILE} && chmod 644 {NIGHTLY_CRON_FILE} && "
+            f"python3 {APP_DIR}/scripts/server/backup_cms.py",
+            check=False,
         )
 
         print("\n=== 5/6 .env check (values are not shown) ===")

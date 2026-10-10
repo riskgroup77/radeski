@@ -8,7 +8,7 @@
 
   /* Asosiy brend ranglari */
   --color-brand-gold: #C09949;
-  --color-brand-gold-dark: #9C7C2B;
+  --color-brand-gold-dark: #86662A;
   --color-brand-gold-light: #D9B05B;
   --color-brand-gold-medium: #A6843F;
 
@@ -24,7 +24,7 @@
   /* Matn ranglari */
   --color-brand-text-primary: #1A1A1A;
   --color-brand-text-secondary: #2F2F2F;
-  --color-brand-text-muted: #767676;
+  --color-brand-text-muted: #6B6B6B;
 }
 
 /*
@@ -124,15 +124,20 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/*
+ * Pulse rings animate only transform + opacity of a pseudo-element, so they run on the
+ * compositor. (Animating box-shadow repainted the page every frame — seconds of main-thread
+ * time per load on a phone.)
+ */
 @keyframes cta-ring-spread {
   0% {
-    box-shadow: 0 0 0 0 rgba(192, 153, 73, 0.42);
+    transform: scale(1);
+    opacity: 0.55;
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(192, 153, 73, 0);
-  }
+  70%,
   100% {
-    box-shadow: 0 0 0 0 rgba(192, 153, 73, 0);
+    transform: scale(var(--cta-ring-scale-x, 1.35), var(--cta-ring-scale-y, 1.35));
+    opacity: 0;
   }
 }
 
@@ -146,23 +151,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@keyframes cta-ring-spread-button {
-  0% {
-    box-shadow:
-      0 0 0 0 rgba(255, 255, 255, 0.65),
-      0 6px 20px rgba(192, 153, 73, 0.35);
-  }
-  70% {
-    box-shadow:
-      0 0 0 14px rgba(255, 255, 255, 0),
-      0 6px 20px rgba(192, 153, 73, 0.35);
-  }
-  100% {
-    box-shadow:
-      0 0 0 0 rgba(255, 255, 255, 0),
-      0 6px 20px rgba(192, 153, 73, 0.35);
-  }
-}
+
 
 /*
  * Component classes live in the components layer so Tailwind utilities on the same element
@@ -170,13 +159,26 @@ h1, h2, h3, h4, h5, h6 {
  */
 @layer components {
   .cta-pulse-ring {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 9999px;
-    animation:
-      cta-soft-pulse 2.2s ease-in-out infinite,
-      cta-ring-spread 2.2s ease-out infinite;
+    animation: cta-soft-pulse 2.2s ease-in-out infinite;
+  }
+
+  .cta-pulse-ring::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 2px rgba(192, 153, 73, 0.6);
+    pointer-events: none;
+    animation: cta-ring-spread 2.2s ease-out infinite;
+  }
+
+  .cta-pulse-ring:hover::after {
+    animation-play-state: paused;
   }
 
   .cta-pulse-ring:hover {
@@ -186,9 +188,13 @@ h1, h2, h3, h4, h5, h6 {
 
   .cta-pulse-ring--button {
     border-radius: 0.875rem;
-    animation:
-      cta-soft-pulse-button 2s ease-in-out infinite,
-      cta-ring-spread-button 2s ease-out infinite;
+    --cta-ring-scale-x: 1.12;
+    --cta-ring-scale-y: 1.45;
+    animation: cta-soft-pulse-button 2s ease-in-out infinite;
+  }
+
+  .cta-pulse-ring--button::after {
+    animation-duration: 2s;
   }
 
   .cta-pulse-ring--button:hover {
@@ -244,7 +250,14 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem 1.5rem;
     min-height: 3.5rem;
     /* Full-width button: keep the ring pulse but drop the scale pulse so it never pokes past the screen edge. */
-    animation: cta-ring-spread-button 2s ease-out infinite;
+    animation: none;
+    --cta-ring-scale-x: 1.03;
+    --cta-ring-scale-y: 1.35;
+  }
+
+  .header-appointment-btn--compact::after {
+    animation: none;
+    display: none;
   }
 
   .header-appointment-btn--compact {
@@ -288,6 +301,9 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 9999px;
     z-index: -1;
     pointer-events: none;
+    box-shadow: 0 0 0 2px rgba(192, 153, 73, 0.5);
+    --cta-ring-scale-x: 1.08;
+    --cta-ring-scale-y: 1.4;
     animation: cta-ring-spread 2.2s ease-out infinite;
   }
 
@@ -456,14 +472,37 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 9999px;
 }
 
-.clinic-ai-chat-fab:not([aria-expanded="true"]) {
-  animation:
-    cta-soft-pulse 2.4s ease-in-out infinite,
-    cta-ring-spread 2.4s ease-out infinite;
+.clinic-ai-chat-fab {
+  position: relative;
 }
 
-.clinic-ai-chat-fab:hover {
+.clinic-ai-chat-fab:not([aria-expanded="true"]) {
+  animation: cta-soft-pulse 2.4s ease-in-out infinite;
+}
+
+.clinic-ai-chat-fab:not([aria-expanded="true"])::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px rgba(192, 153, 73, 0.6);
+  pointer-events: none;
+  animation: cta-ring-spread 2.4s ease-out infinite;
+}
+
+.clinic-ai-chat-fab:hover,
+.clinic-ai-chat-fab:hover::after {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-pulse-ring,
+  .cta-pulse-ring::after,
+  .phone-call-link__wrap::before,
+  .clinic-ai-chat-fab,
+  .clinic-ai-chat-fab::after {
+    animation: none !important;
+  }
 }
 
 .partners-marquee-track {
@@ -534,5 +573,24 @@ html[data-mobile-nav-open] .clinic-ai-chat {
     animation: none;
     width: 100%;
     opacity: 0.6;
+  }
+}
+
+/*
+ * Gold as a TEXT colour (#C09949 on white is 2.7:1) is darkened to #86662A (5.3:1) so small
+ * labels pass WCAG AA; gold backgrounds, borders and icons keep the brand colour.
+ */
+@layer utilities {
+  /* Doubled class: beats the generated utility (emitted later in this layer) while staying
+     weaker than or equal to state variants such as hover:text-white, which come after it. */
+  .text-brand-gold.text-brand-gold,
+  .text-brand-gold\/90.text-brand-gold\/90,
+  .text-brand-gold\/80.text-brand-gold\/80 {
+    color: #86662a;
+  }
+
+  .phone-call-link,
+  .phone-call-link__number {
+    color: #86662a;
   }
 }

@@ -123,10 +123,12 @@ const VerticalServiceCarousel = memo(function VerticalServiceCarousel({
     const el = measureRef.current;
     if (!el) return;
 
-    const update = () => setCardStepPx(el.offsetHeight + CARD_GAP_PX);
-    update();
-
-    const observer = new ResizeObserver(update);
+    // Size from the observer entry (delivered after layout, before paint) — reading
+    // offsetHeight here forced a full-page layout during the first render.
+    const observer = new ResizeObserver(([entry]) => {
+      const height = entry?.borderBoxSize?.[0]?.blockSize ?? entry?.contentRect.height ?? 0;
+      if (height) setCardStepPx(Math.round(height) + CARD_GAP_PX);
+    });
     observer.observe(el);
     return () => observer.disconnect();
   }, [locale, slideCount]);
@@ -215,7 +217,7 @@ const VerticalServiceCarousel = memo(function VerticalServiceCarousel({
       </div>
 
       {canRotate && (
-        <div className="mt-4 flex items-center justify-center gap-2">
+        <div className="mt-2 flex items-center justify-center">
           {slides.map((slide, idx) => (
             <button
               key={slide.id}
@@ -223,10 +225,14 @@ const VerticalServiceCarousel = memo(function VerticalServiceCarousel({
               aria-label={`${idx + 1}`}
               aria-current={headIndex === idx ? 'true' : undefined}
               onClick={() => goToSlide(idx)}
-              className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${
-                headIndex === idx ? 'w-8 bg-brand-gold' : 'w-2 bg-brand-gold/30 hover:bg-brand-gold/50'
-              }`}
-            />
+              className="group flex h-6 min-w-6 items-center justify-center px-0.5 cursor-pointer"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-[width,background-color] duration-300 ${
+                  headIndex === idx ? 'w-8 bg-brand-gold' : 'w-2 bg-brand-gold/30 group-hover:bg-brand-gold/50'
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}
@@ -284,13 +290,13 @@ const ServiceCard = memo(function ServiceCard({
           <Icon className="w-5 h-5 text-brand-gold" strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">
-          <h3
+          <h2
             className={`font-bold text-brand-text-primary leading-snug line-clamp-1 ${
               compact ? 'text-sm' : 'text-base'
             }`}
           >
             {title}
-          </h3>
+          </h2>
           <p className={`mt-1 text-brand-text-muted leading-relaxed line-clamp-2 ${compact ? 'text-xs' : 'text-sm'}`}>
             {description}
           </p>

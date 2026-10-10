@@ -6,6 +6,7 @@
  */
 
 import React, { Suspense, useState, useEffect, useMemo } from 'react';
+import { trackPageView } from './utils/analytics';
 import { findSubServiceByRouteParam, subServiceRouteKey } from './utils/serviceSubSlug';
 import { lazyPage } from './utils/lazyPage';
 import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
@@ -80,7 +81,6 @@ import ClinicAiChat from './components/ClinicAiChat';
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
 import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
-import { applyRouteHead, resolveRouteHead } from './seo/resolveRouteHead';
 import {
   getEducationProgramSlugFromPathname,
   resolveEducationProgram,
@@ -128,6 +128,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <RouteAnalytics />
       <Routes>
         <Route path="/" element={<RootRedirect />} />
         <Route path="/rus/*" element={<LocaleAliasRedirect locale="ru" />} />
@@ -139,6 +140,15 @@ export default function App() {
       </Routes>
     </>
   );
+}
+
+/** Page views for the analytics providers (single-page app: one per route change). */
+function RouteAnalytics() {
+  const location = useLocation();
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location.pathname, location.search]);
+  return null;
 }
 
 interface ClinicShellProps {
@@ -186,6 +196,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     doctors: dynamicDoctors,
     serviceCategories: dynamicServiceCategories,
     prices: dynamicPrices,
+    pricesLoading,
     articles: dynamicArticles,
     loading: dataLoading,
     error: dataError,
@@ -267,22 +278,31 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
   // <head> (title, meta, canonical, hreflang, JSON-LD) for this URL. The same resolver feeds
   // the build-time prerender, so crawlers without JavaScript see identical tags.
+  // Loaded on demand: the prerendered HTML already carries the right <head> for the first
+  // page, so the resolver (and the catalogs it reads) stays out of the startup bundle.
   useEffect(() => {
-    applyRouteHead(
-      resolveRouteHead({
-        pathname: location.pathname,
-        locale,
-        origin: window.location.origin,
-        forcePage,
-        serviceCategories: dynamicServiceCategories,
-        articles: dynamicArticles,
-        doctors: dynamicDoctors,
-        clinicRatings: cmsClinicRatings,
-        dataLoading,
-        videos: cmsVideos,
-        prices: dynamicPrices,
-      }),
-    );
+    let cancelled = false;
+    void import('./seo/resolveRouteHead').then(({ applyRouteHead, resolveRouteHead }) => {
+      if (cancelled) return;
+      applyRouteHead(
+        resolveRouteHead({
+          pathname: location.pathname,
+          locale,
+          origin: window.location.origin,
+          forcePage,
+          serviceCategories: dynamicServiceCategories,
+          articles: dynamicArticles,
+          doctors: dynamicDoctors,
+          clinicRatings: cmsClinicRatings,
+          dataLoading,
+          videos: cmsVideos,
+          prices: dynamicPrices,
+        }),
+      );
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [location.pathname, locale, forcePage, dynamicServiceCategories, dynamicArticles, dynamicDoctors, cmsClinicRatings, dataLoading, cmsVideos, dynamicPrices]);
 
   // Barcha "Qabulga yozilish" tugmalari Hipolink onlayn qabulga yo'naltiradi
@@ -721,13 +741,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                           target={APPOINTMENT_LINK_TARGET}
                           rel={APPOINTMENT_LINK_REL}
                           className={`${cardClassName} hover:border-brand-gold/35 hover:shadow-md hover:-translate-y-0.5 cursor-pointer group`}
-                          aria-label={`${plat.platform} — ${
-                            locale === 'uz'
-                              ? "sharhlarni ko'rish"
-                              : locale === 'ru'
-                                ? 'читать отзывы'
-                                : 'view reviews'
-                          }`}
                         >
                           {cardContent}
                         </a>
@@ -1021,6 +1034,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale} 
               onOpenAppointment={handleOpenAppointmentWithService} 
               prices={dynamicPrices}
+              loading={pricesLoading}
               dictionary={d}
             />
           )}

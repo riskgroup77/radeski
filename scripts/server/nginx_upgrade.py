@@ -5,7 +5,11 @@
     visitors never hit the CMS API rate limit — the API sees a handful of requests a minute.
   * Security headers (HSTS, nosniff, frame/referrer/permissions policy, frame-ancestors CSP).
   * HTML is served with `Cache-Control: no-cache` so a new deploy is picked up immediately.
-  * Prerendered pages: `try_files $uri $uri/index.html /index.html`.
+  * Prerendered pages: `try_files $uri $uri/index.html @radeski_spa`; app sections get the SPA
+    shell, any other path is a real 404 (the same shell renders the "not found" page).
+  * Caching: hashed /assets/ 1 year immutable, image variants / video covers 30 days, other
+    static files 7 days — one Cache-Control header each (expires + add_header sent two).
+  * Old URLs redirect server-side (301): /xx/contacts, /rus/…, /eng/…, /fikr.
   * POST /api/reviews/submit goes to the Node app (server-side review publishing).
   * api.radeski.uz: /docs, /redoc and /openapi.json return 404.
 
@@ -37,6 +41,15 @@ map "$request_method:$uri" $radeski_api_public {
 map "$radeski_api_public:$http_authorization" $radeski_api_skip_cache {
     default 1;
     "1:" 0;
+}
+
+# Paths the React app serves (it shows its own 404 page inside them); anything else -> 404.
+map $uri $radeski_spa_known {
+    default 0;
+    "/" 1;
+    "~^/admin(/|$)" 1;
+    "~^/(uz|ru|en)/?$" 1;
+    "~^/(uz|ru|en)/(about|services|conditions|doctors|prices|articles|videos|branches|qoqon|fargona|results|technologies|daavlin-foto-kabinalari|dermoscan|science|obrazovaniya|malaka-oshirish|tele-dermatology|skin-pathology-center|brend|terms|privacy|fikr|promo|clinic-equipment|admin)(/|$)" 1;
 }
 
 # HTML must be revalidated so visitors get a new deploy immediately (assets are hashed).
@@ -82,6 +95,60 @@ REVIEWS_LOCATION = f"""location = /api/reviews/submit {{
         proxy_set_header X-Forwarded-Proto $scheme;
         client_max_body_size 64k;
     }}
+
+    """
+
+PERF_MARKER = "# radeski-perf (managed by nginx_upgrade.py)"
+PERF_BLOCK = f"""{PERF_MARKER}
+    location ^~ /assets/ {{
+        {INCLUDE_HEADERS}
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        try_files $uri =404;
+    }}
+
+    location ^~ /img-cache/ {{
+        {INCLUDE_HEADERS}
+        add_header Cache-Control "public, max-age=2592000";
+        try_files $uri =404;
+    }}
+
+    location ^~ /video-thumbs/ {{
+        {INCLUDE_HEADERS}
+        add_header Cache-Control "public, max-age=2592000";
+        try_files $uri =404;
+    }}
+
+    location ~* \\.(?:mp4|webm)$ {{
+        {INCLUDE_HEADERS}
+        add_header Cache-Control "public, max-age=604800";
+        try_files $uri =404;
+    }}
+
+    location ~ ^/(uz|ru|en)/contacts/?$ {{
+        return 301 /$1/branches;
+    }}
+
+    location ~ ^/rus(/.*)?$ {{
+        return 301 /ru$1;
+    }}
+
+    location ~ ^/eng(/.*)?$ {{
+        return 301 /en$1;
+    }}
+
+    location = /fikr {{
+        return 301 /uz/fikr;
+    }}
+
+    location @radeski_spa {{
+        if ($radeski_spa_known = 0) {{
+            return 404;
+        }}
+        rewrite ^ /index.html break;
+    }}
+
+    error_page 404 /index.html;
+    # end radeski-perf
 
     """
 
@@ -154,12 +221,28 @@ def patch_site(text: str) -> str:
                 edits.append((l_body, l_body, f"\n{pad}{INCLUDE_API_CACHE}"))
             if re.match(r"location\s+/\s*\{", header):
                 new_body = re.sub(
-                    r"try_files\s+\$uri\s+\$uri/\s+/index\.html\s*;",
-                    "try_files $uri $uri/index.html /index.html;",
+                    r"try_files\s+\$uri\s+\$uri/(index\.html)?\s+/index\.html\s*;",
+                    "try_files $uri $uri/index.html @radeski_spa;",
                     body,
                 )
                 if new_body != body:
                     edits.append((l_body, l_end, new_body))
+            # One Cache-Control per response: `expires` + `add_header Cache-Control` sent two, and
+            # "immutable" on files whose names never change kept stale copies for a week.
+            if "expires" in body and "Cache-Control" in body:
+                new_body = re.sub(r"\n[ \t]*expires\s+\S+\s*;", "", body)
+                new_body = re.sub(
+                    r'add_header\s+Cache-Control\s+"public(, immutable)?"\s*;',
+                    'add_header Cache-Control "public, max-age=604800";',
+                    new_body,
+                )
+                if new_body != body and not any(e[0] == l_body for e in edits):
+                    edits.append((l_body, l_end, new_body))
+
+        if PERF_MARKER not in block:
+            root_loc = next((l for l in locations if re.match(r"location\s+/\s*\{", block[l[0]:l[1]])), None)
+            anchor = root_loc[0] if root_loc else s_end - s_start - 1
+            edits.append((anchor, anchor, PERF_BLOCK))
 
         if "location = /api/reviews/submit" not in block:
             api_loc = next(

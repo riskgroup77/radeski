@@ -1,3 +1,5 @@
+import { applyCompiled, buildKeyIndex, compileLiteralPhrases, memoizeText } from './textMemo';
+
 /**
  * Ruscha preyskurant nomlarini professional ko'rinishga keltirish.
  */
@@ -78,12 +80,11 @@ function escapeRegExp(value: string): string {
 }
 
 function applyTypos(text: string): string {
-  let result = text;
-  for (const [from, to] of TYPO_FIXES) {
-    result = result.replace(new RegExp(escapeRegExp(from), 'gi'), to);
-  }
-  return result;
+  return applyCompiled(text, compileLiteralPhrases(TYPO_FIXES));
 }
+
+let exactRuIndex: Map<string, string> | null = null;
+let categoryRuIndex: Map<string, string> | null = null;
 
 function normalizeKey(text: string): string {
   return text.toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ').trim();
@@ -107,14 +108,15 @@ function normalizeSpacing(text: string): string {
     .trim();
 }
 
-export function normalizePriceRu(nameRu: string): string {
+export const normalizePriceRu = memoizeText((nameRu: string) => normalizePriceRuUncached(nameRu));
+
+function normalizePriceRuUncached(nameRu: string): string {
   let text = nameRu.trim();
   if (!text) return '';
 
-  const exactKey = normalizeKey(text);
-  for (const [key, value] of Object.entries(EXACT_RU)) {
-    if (normalizeKey(key) === exactKey) return value;
-  }
+  exactRuIndex ??= buildKeyIndex(Object.entries(EXACT_RU), normalizeKey);
+  const exact = exactRuIndex.get(normalizeKey(text));
+  if (exact !== undefined) return exact;
 
   text = applyTypos(text);
   text = normalizeSpacing(text);
@@ -136,9 +138,9 @@ export function normalizePriceCategoryRu(nameRu: string): string {
 
   if (CATEGORY_RU[trimmed]) return CATEGORY_RU[trimmed];
 
-  for (const [key, value] of Object.entries(CATEGORY_RU)) {
-    if (normalizeKey(key) === normalizeKey(trimmed)) return value;
-  }
+  categoryRuIndex ??= buildKeyIndex(Object.entries(CATEGORY_RU), normalizeKey);
+  const category = categoryRuIndex.get(normalizeKey(trimmed));
+  if (category !== undefined) return category;
 
   return normalizePriceRu(trimmed);
 }

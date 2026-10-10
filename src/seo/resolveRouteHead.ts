@@ -6,6 +6,7 @@
  * JavaScript (Yandex, social previews) see the same titles as Google does.
  */
 import type { Article, Doctor, Locale, PriceItem, ServiceCategory } from '../types';
+import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { findSubServiceByRouteParam, subServiceRouteKey } from '../utils/serviceSubSlug';
 import type { ClinicVideo } from '../data/sitePagesContent';
 import { DICTIONARY } from '../data';
@@ -356,7 +357,11 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     robots: isErrorPage ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1',
     ogImage: activeVideo && videoPoster(activeVideo)
       ? absoluteOgPath(origin, videoPoster(activeVideo)!)
-      : resolveOgImage(origin, locale, activeArticle, activeDoctor, activeServiceSub ?? activeServiceCategory),
+      : resolveOgImage(origin, locale, activeArticle, activeDoctor, activeServiceSub ?? activeServiceCategory) ??
+        absoluteOgPath(
+          origin,
+          pageShareImage(locale, currentPage, activeServiceCategory, activeServiceSub, activeLocalCommercial, serviceCategories),
+        ),
     canonical,
     hreflang: buildHreflangLinks(seoContext),
     ogLocale: localeToOgLocale(locale),
@@ -392,7 +397,7 @@ function resolveOgImage(
   article: Article | null,
   doctor: Doctor | null,
   service: { image?: string | null; images?: Article['images'] } | null,
-): string {
+): string | null {
   const path = article
     ? getLocalizedImage(article.images, locale) ?? article.image
     : doctor
@@ -400,8 +405,33 @@ function resolveOgImage(
       : service
         ? getLocalizedImage(service.images, locale) ?? service.image
         : null;
-  if (!path) return `${origin}/gallery/logo.webp`;
+  if (!path) return null;
   return absoluteOgPath(origin, path);
+}
+
+const BRANCH_PHOTOS = { fargona: '/gallery/rasmfilial1.jpg', qoqon: '/gallery/rasmfilial2.jpg' } as const;
+
+/**
+ * Share picture when the page has no photo of its own: the service picture the page shows,
+ * the branch photo for city pages, otherwise a photo of the clinic (not the small logo).
+ */
+function pageShareImage(
+  locale: Locale,
+  currentPage: PageId,
+  category: ServiceCategory | null,
+  sub: ServiceCategory['subServices'][number] | null,
+  landing: LocalCommercialLanding | null,
+  serviceCategories: ServiceCategory[],
+): string {
+  if (category) {
+    return (sub ? resolveSubServiceImage(category, sub, locale) : null) ?? resolveCategoryImage(category, locale) ?? BRANCH_PHOTOS.fargona;
+  }
+  if (landing) {
+    const landingCategory = serviceCategories.find((item) => item.id === landing.serviceCategoryId);
+    return (landingCategory ? resolveCategoryImage(landingCategory, locale) : null) ?? BRANCH_PHOTOS[landing.city];
+  }
+  if (currentPage === 'qoqon') return BRANCH_PHOTOS.qoqon;
+  return BRANCH_PHOTOS.fargona;
 }
 
 function absoluteOgPath(origin: string, path: string): string {

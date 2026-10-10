@@ -106,6 +106,9 @@ def run(client: paramiko.SSHClient, cmd: str, timeout: int = 1800, check: bool =
 # Pull, back up server-side edits, install deps when needed, build (snapshot + article index +
 # client + prerender), keep clinic videos, reload nginx.
 DEPLOY_SCRIPT = f"""set -euo pipefail
+# Same lock as scripts/server/nightly_build.sh — wait for a running nightly build to finish.
+exec 9>/var/lock/radeski-build.lock
+flock -w 1200 9 || {{ echo "Another build is still running — try again later"; exit 1; }}
 cd {APP_DIR}
 PREV=$(git rev-parse HEAD)
 VIDEO_BACKUP="/tmp/radeski-videos-backup"

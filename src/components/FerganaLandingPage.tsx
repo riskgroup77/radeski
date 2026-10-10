@@ -268,7 +268,7 @@ export default function FerganaLandingPage({ locale, appointmentLabel }: Fergana
           {ARTICLES.map((a) => (
             <Link
               key={a.id}
-              to={articlePath(locale, resolveArticleRouteKey(a))}
+              to={articlePath(locale, resolveArticleRouteKey({ id: a.id, slug: a.id }))}
               className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 text-sm font-semibold text-brand-text-primary no-underline"
             >
               {locale === 'uz' ? a.uz : locale === 'ru' ? a.ru : a.en}

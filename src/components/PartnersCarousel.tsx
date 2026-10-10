@@ -29,6 +29,7 @@ function PartnerCard({
           <MediaImage
             src={partner.logo}
             alt={partner.name[locale] || partner.name.uz}
+            sizes="240px"
             className="relative z-10 max-h-14 w-full max-w-[240px] object-contain transition-transform duration-300 group-hover:scale-[1.03] sm:max-h-16 md:max-h-[72px]"
           />
         ) : (

@@ -1,4 +1,5 @@
 import type { PriceItem } from '../types';
+import { memoizeText } from './textMemo';
 import catalogData from '../data/priceCatalog.json';
 import { formatPriceValue } from '../api/mappers';
 import { localizePriceName } from './localizePriceName';
@@ -10,15 +11,23 @@ interface CatalogCategory {
   items: { nameRu: string; priceValue: number }[];
 }
 
-function normalizeKey(text: string): string {
-  return text
+const normalizeKey = memoizeText((text: string) =>
+  text
     .toLowerCase()
     .replace(/ё/g, 'е')
     .replace(/[^\p{L}\p{N}]+/gu, ' ')
-    .trim();
+    .trim(),
+);
+
+let catalogCache: PriceItem[] | null = null;
+
+/** The built-in price list, translated once per page load (copies, so callers may change them). */
+export function buildCatalogPriceItems(): PriceItem[] {
+  catalogCache ??= buildCatalogPriceItemsUncached();
+  return catalogCache.map((item) => ({ ...item, name: { ...item.name } }));
 }
 
-export function buildCatalogPriceItems(): PriceItem[] {
+function buildCatalogPriceItemsUncached(): PriceItem[] {
   const categories = catalogData.categories as CatalogCategory[];
   const items: PriceItem[] = [];
 

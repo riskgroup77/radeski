@@ -187,7 +187,6 @@ export default function BrandPage({ locale }: BrandPageProps) {
             <ArrowUpRight className="h-4 w-4" />
           </Link>
           <AppointmentBookingLink
-            locale={locale}
             className="inline-flex items-center gap-2 rounded-xl border border-brand-sectiongray bg-brand-white px-5 py-3 text-xs font-bold text-brand-text-primary no-underline transition-all hover:bg-brand-offwhite sm:text-sm"
           >
             {ctaAppointment[locale]}
