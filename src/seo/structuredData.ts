@@ -293,8 +293,10 @@ export function buildDoctorSchema(
   doctor: Doctor,
   origin: string,
   pageUrl: string,
+  practice?: { branchIds: ('fergana' | 'kokand')[]; specialties: string[] },
 ): Record<string, unknown> {
   const education = doctor.education?.[locale] || doctor.education?.uz;
+  const branches = practice?.branchIds.map((id) => ({ '@id': `${origin}/#branch-${id}` })) ?? [];
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -304,7 +306,8 @@ export function buildDoctorSchema(
     description: doctor.bio[locale] || doctor.bio.uz,
     image: absoluteMedia(origin, doctor.photo),
     url: pageUrl,
-    worksFor: { '@id': clinicEntityId(origin) },
+    worksFor: branches.length ? branches : { '@id': clinicEntityId(origin) },
+    ...(practice?.specialties.length ? { knowsAbout: practice.specialties } : {}),
     alumniOf: education ? { '@type': 'EducationalOrganization', name: education } : undefined,
     knowsLanguage: ['uz', 'ru'],
   };

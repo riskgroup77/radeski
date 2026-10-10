@@ -1,4 +1,8 @@
 import { useState, useEffect, type MouseEvent } from 'react';
+import { landingTopicKey } from '../data/localLandingTopics';
+import { ALL_LOCAL_COMMERCIAL_LANDINGS, getLocalizedCopy, localCommercialPath } from '../data/localCommercialSeoCatalog';
+import { topicForText } from '../utils/localProof';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, ArrowLeftRight, CalendarClock, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Locale } from '../types';
@@ -35,6 +39,44 @@ function buildResultGallery(result: TreatmentResult, locale: Locale): ResultGall
     items.push({ src: result.afterImage, alt: `${title} — ${afterLabel}`, label: afterLabel });
   }
   return items;
+}
+
+/** Problem -> where it is treated (city pages) -> booking: the step after seeing a result. */
+function ResultNextSteps({
+  result,
+  locale,
+  onOpenAppointment,
+}: {
+  result: TreatmentResult;
+  locale: Locale;
+  onOpenAppointment?: () => void;
+}) {
+  const topic = topicForText(`${result.title.uz} ${result.title.ru} ${result.service.uz} ${result.description.uz}`);
+  const landings = topic
+    ? ALL_LOCAL_COMMERCIAL_LANDINGS.filter((landing) => landingTopicKey(landing.slug) === topic)
+    : [];
+  return (
+    <div className="mt-3 pt-3 border-t border-brand-sectiongray flex flex-wrap items-center gap-x-3 gap-y-1.5">
+      {landings.map((landing) => (
+        <Link
+          key={`${landing.city}-${landing.slug}`}
+          to={localCommercialPath(locale, landing.city, landing.slug)}
+          className="text-[11px] font-bold text-brand-gold no-underline hover:underline"
+        >
+          {getLocalizedCopy(landing.h1, locale)}
+        </Link>
+      ))}
+      {onOpenAppointment && (
+        <button
+          type="button"
+          onClick={onOpenAppointment}
+          className="ml-auto text-[11px] font-bold px-3 py-1.5 rounded-lg bg-brand-gold hover:bg-brand-gold-dark text-white cursor-pointer"
+        >
+          {locale === 'uz' ? 'Qabulga yozilish' : locale === 'ru' ? 'Записаться' : 'Book'}
+        </button>
+      )}
+    </div>
+  );
 }
 
 interface ResultsPageProps {
@@ -268,6 +310,8 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                 <p className="text-brand-text-muted text-xs mt-1.5 leading-relaxed font-light line-clamp-2">
                   {result.description[locale]}
                 </p>
+
+                <ResultNextSteps result={result} locale={locale} onOpenAppointment={onOpenAppointment} />
 
                 {result.journeyImages && result.journeyImages.length > 0 && (
                   <div className="mt-3 pt-3 border-t border-brand-sectiongray">

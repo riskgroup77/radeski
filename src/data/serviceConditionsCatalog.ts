@@ -171,9 +171,9 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       },
       {
         id: 'teri-qichishi',
-        title: 'Terning qichishi',
+        title: 'Terining qichishi',
         description:
-          'Terning qichishi (pruritus) — ekzema, allergiya, quruq teri yoki ichki kasallik belgisi bo\'lishi mumkin. Sababni aniqlash uchun dermatolog ko\'rigi va kerak bo\'lsa qo\'shimcha tekshiruvlar o\'tkaziladi.',
+          'Terining qichishi (pruritus) — ekzema, allergiya, quruq teri yoki ichki kasallik belgisi bo\'lishi mumkin. Sababni aniqlash uchun dermatolog ko\'rigi va kerak bo\'lsa qo\'shimcha tekshiruvlar o\'tkaziladi.',
       },
     ],
     ru: [

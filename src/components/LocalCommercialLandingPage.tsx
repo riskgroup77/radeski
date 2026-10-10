@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useMemo } from 'react';
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock, MapPin, Phone, Stethoscope } from 'lucide-react';
-import type { Article, Locale, PriceItem } from '../types';
+import type { Article, Doctor, Locale, PriceItem } from '../types';
+import type { CustomerReview, TreatmentResult } from '../data/sitePagesContent';
+import LandingProofSections from './LandingProofSections';
+import { doctorsForLanding, resultsForLanding, reviewsForTopic } from '../utils/localProof';
+import { LOCAL_LANDING_CONTENT_UPDATED, landingTopicKey } from '../data/localLandingTopics';
 import {
   COMPETITIVE_ADVANTAGES,
   POSITIONING_FORMULA,
@@ -29,6 +33,9 @@ interface LocalCommercialLandingPageProps {
   appointmentLabel: string;
   prices?: PriceItem[];
   articles?: Article[];
+  doctors?: Doctor[];
+  results?: TreatmentResult[];
+  reviews?: CustomerReview[];
 }
 
 function t(copy: { uz: string; ru: string; en: string }, locale: Locale): string {
@@ -41,7 +48,18 @@ export default function LocalCommercialLandingPage({
   appointmentLabel,
   prices = [],
   articles = [],
+  doctors = [],
+  results = [],
+  reviews = [],
 }: LocalCommercialLandingPageProps) {
+  const proof = useMemo(
+    () => ({
+      doctors: doctorsForLanding(landing, doctors),
+      results: resultsForLanding(landing, results),
+      reviews: reviewsForTopic(landingTopicKey(landing.slug), reviews),
+    }),
+    [landing, doctors, results, reviews],
+  );
   const details = useMemo(() => resolveLocalLandingDetails(landing, prices, locale), [landing, prices, locale]);
   const copy = {
     about:
@@ -218,6 +236,8 @@ export default function LocalCommercialLandingPage({
           </>
         )}
 
+        <LandingProofSections locale={locale} doctors={proof.doctors} results={proof.results} reviews={proof.reviews} />
+
         <h2 className="mt-10 text-xl font-extrabold text-brand-text-primary">{advantagesTitle}</h2>
         <ul className="mt-3 space-y-2">
           {COMPETITIVE_ADVANTAGES.map((item) => (
@@ -330,6 +350,15 @@ export default function LocalCommercialLandingPage({
         </div>
 
         <p className="mt-6 text-xs text-brand-text-muted">
+          {locale === 'uz'
+            ? 'Material: Radeski Skin Clinic shifokorlari jamoasi · Yangilangan: '
+            : locale === 'ru'
+              ? 'Материал: команда врачей Radeski Skin Clinic · Обновлено: '
+              : 'Content: Radeski Skin Clinic medical team · Updated: '}
+          <time dateTime={LOCAL_LANDING_CONTENT_UPDATED}>{LOCAL_LANDING_CONTENT_UPDATED.split('-').reverse().join('.')}</time>
+        </p>
+
+        <p className="mt-2 text-xs text-brand-text-muted">
           {locale === 'uz'
             ? `Boshqa shahar: ${isKokand ? "Farg'ona" : "Qo'qon"} filiali — `
             : locale === 'ru'

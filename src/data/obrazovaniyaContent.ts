@@ -273,7 +273,7 @@ export const OBRAZOVANIYA = {
         seo: {
           title: L(
             'Malaka oshirish — Radeski Skin Clinic',
-            'Повышение квалификации — Radeski Skin Clinic',
+            'Повышение квалификации врачей-дерматологов — Radeski',
             'Continuing medical education — Radeski Skin Clinic',
           ),
           description: L(

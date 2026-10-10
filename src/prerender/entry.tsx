@@ -8,6 +8,11 @@
  * an empty <div id="root"> with the home-page title. In the browser React replaces it.
  */
 import type { ReactNode } from 'react';
+import { getConditionSlugFromPathname } from '../routing/paths';
+import { isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
+import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
+import { DERMATOLOGY_CONDITION_NAV } from '../data/dermatologyConditionsNav';
+import type { Doctor } from '../types';
 import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
 import { buildServiceH1 } from '../seo/pageMeta';
 import { subServiceRouteKey } from '../utils/serviceSubSlug';
@@ -73,7 +78,11 @@ import {
   DAAVLIN_RESULTS,
 } from '../data/daavlinFotoKabinalariContent';
 import { getDaavlinSectionFromPathname } from '../routing/paths';
-import type { ApiTreatmentResultOut } from '../api/cmsTypes';
+import type { ApiReviewOut, ApiTreatmentResultOut } from '../api/cmsTypes';
+import { mapReviewFromApi, mapTreatmentResultFromApi } from '../api/cmsMappers';
+import { CONDITION_LANDING_TOPIC, doctorBranches, doctorsForLanding, resultsForLanding, reviewsForDoctor, reviewsForTopic } from '../utils/localProof';
+import { resolveDoctorPageDetails } from '../utils/doctorPageDetails';
+import { LOCAL_LANDING_CONTENT_UPDATED, landingTopicKey } from '../data/localLandingTopics';
 import type { ServiceRichContent } from '../types';
 import {
   videoDescription,
@@ -94,6 +103,7 @@ export interface PrerenderSnapshot {
     clinicRatings?: ApiClinicRatingOut[];
     videos?: ApiClinicVideoOut[];
     treatmentResults?: ApiTreatmentResultOut[];
+    reviews?: ApiReviewOut[];
   };
 }
 
@@ -226,11 +236,18 @@ function LandingBody({
   landing,
   locale,
   clinic,
+  results,
+  reviews,
 }: {
   landing: LocalCommercialLanding;
   locale: Locale;
   clinic: PrerenderClinic;
+  results: ApiTreatmentResultOut[];
+  reviews: ApiReviewOut[];
 }) {
+  const proofDoctors = doctorsForLanding(landing, clinic.doctors);
+  const proofResults = resultsForLanding(landing, results.map(mapTreatmentResultFromApi));
+  const proofReviews = reviewsForTopic(landingTopicKey(landing.slug), reviews.map(mapReviewFromApi));
   const details = resolveLocalLandingDetails(landing, clinic.prices, locale);
   const t = (copy: { uz: string; ru: string; en: string }) => getLocalizedCopy(copy, locale);
   const label = (uz: string, ru: string, en: string) => (locale === 'uz' ? uz : locale === 'ru' ? ru : en);
@@ -281,6 +298,42 @@ function LandingBody({
           </p>
         </section>
       )}
+      {proofDoctors.length > 0 && (
+        <section>
+          <h2>{label('Qabul qiladigan shifokorlar', 'Врачи, которые ведут приём', 'Doctors who see patients')}</h2>
+          <ul>
+            {proofDoctors.map((doctor) => (
+              <li key={doctor.id}>
+                <a href={doctorPath(locale, doctorRouteKey(doctor))}>{doctor.name[locale]}</a> — {doctor.role[locale]}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {proofResults.length > 0 && (
+        <section>
+          <h2>{label('Klinik natijalar', 'Клинические результаты', 'Clinical results')}</h2>
+          <ul>
+            {proofResults.map((result) => (
+              <li key={result.id}>
+                <a href={pagePath(locale, 'results')}>{result.title[locale]}</a>
+                {result.sessions[locale] ? ` — ${result.sessions[locale]}` : ''}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {proofReviews.length > 0 && (
+        <section>
+          <h2>{label('Bemorlar fikri', 'Отзывы пациентов', 'Patient reviews')}</h2>
+          {proofReviews.map((review) => (
+            <blockquote key={review.id}>
+              <p>{review.comment[locale] || review.comment.uz}</p>
+              <footer>{review.authorName} · {review.rating}/5</footer>
+            </blockquote>
+          ))}
+        </section>
+      )}
       <section>
         <h2>{label('Nima uchun Radeski?', 'Почему Radeski?', 'Why Radeski?')}</h2>
         <ul>
@@ -302,6 +355,10 @@ function LandingBody({
         <h2>{label('Manzil va ish vaqti', 'Адрес и время работы', 'Address and hours')}</h2>
         <p>
           {details.branch.address[locale]} · {details.branch.hours[locale]} · {details.branch.phone}
+        </p>
+        <p>
+          {label('Material: Radeski Skin Clinic shifokorlari jamoasi · Yangilangan: ', 'Материал: команда врачей Radeski Skin Clinic · Обновлено: ', 'Content: Radeski Skin Clinic medical team · Updated: ')}
+          <time dateTime={LOCAL_LANDING_CONTENT_UPDATED}>{LOCAL_LANDING_CONTENT_UPDATED}</time>
         </p>
       </section>
       <section>
@@ -466,12 +523,38 @@ function institutionalContent(currentPage: PageId, pathname: string): unknown {
   }
 }
 
+/** A doctor's full profile (education, directions, diagnostics…) as plain HTML. */
+function DoctorProfileText({ profile }: { profile: NonNullable<Doctor['profile']>[Locale] }) {
+  return (
+    <>
+      <h2>{profile.aboutTitle}</h2>
+      {profile.about.map((text) => (
+        <p key={text.slice(0, 40)}>{text}</p>
+      ))}
+      {profile.sections.map((section) => (
+        <section key={section.title}>
+          <h2>{section.title}</h2>
+          {section.paragraphs?.map((text) => <p key={text.slice(0, 40)}>{text}</p>)}
+          {section.items && <ul>{section.items.map((item) => <li key={item}>{item}</li>)}</ul>}
+          {section.subsections?.map((sub) => (
+            <div key={sub.title}>
+              <h3>{sub.title}</h3>
+              <ul>{sub.items.map((item) => <li key={item}>{item}</li>)}</ul>
+            </div>
+          ))}
+        </section>
+      ))}
+    </>
+  );
+}
+
 function PageContent({
   head,
   locale,
   clinic,
   videos,
   results,
+  reviews,
   pathname,
 }: {
   head: RouteHead;
@@ -479,11 +562,12 @@ function PageContent({
   clinic: PrerenderClinic;
   videos: ClinicVideo[];
   results: ApiTreatmentResultOut[];
+  reviews: ApiReviewOut[];
   pathname: string;
 }): ReactNode {
   const { currentPage, article, doctor, serviceCategory, serviceSub, video, localLanding } = head.route;
 
-  if (localLanding) return <LandingBody landing={localLanding} locale={locale} clinic={clinic} />;
+  if (localLanding) return <LandingBody landing={localLanding} locale={locale} clinic={clinic} results={results} reviews={reviews} />;
 
   if (article) return <ArticleBody article={article} locale={locale} />;
 
@@ -502,12 +586,45 @@ function PageContent({
   }
 
   if (doctor) {
+    const practice = resolveDoctorPageDetails(doctor, clinic.prices, locale);
+    const doctorReviews = reviewsForDoctor(doctor, reviews.map(mapReviewFromApi));
+    const profile = doctor.profile?.[locale];
     return (
-      <section>
-        <p>{doctor.role[locale]}</p>
-        <p>{doctor.bio[locale]}</p>
-        {doctor.education?.[locale] && <p>{doctor.education[locale]}</p>}
-      </section>
+      <>
+        <section>
+          <p>{doctor.role[locale]}</p>
+          <p>{doctor.bio[locale]}</p>
+          {doctor.education?.[locale] && <p>{doctor.education[locale]}</p>}
+          {profile && <DoctorProfileText profile={profile} />}
+        </section>
+        {practice.branches.map((branch) => (
+          <section key={branch.id}>
+            <h2>{branch.name[locale]}</h2>
+            <p>{branch.address[locale]} · {branch.hours[locale]} · {branch.phone}</p>
+          </section>
+        ))}
+        {practice.landingLinks.length > 0 && (
+          <ul>
+            {practice.landingLinks.map((link) => (
+              <li key={`${link.city}-${link.slug}`}>
+                <a href={localCommercialPath(locale, link.city, link.slug)}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {doctorReviews.map((review) => (
+          <blockquote key={review.id}>
+            <p>{review.comment[locale] || review.comment.uz}</p>
+            <footer>{review.authorName} · {review.rating}/5</footer>
+          </blockquote>
+        ))}
+        {practice.faqs.map((faq) => (
+          <div key={faq.question}>
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </div>
+        ))}
+      </>
     );
   }
 
@@ -643,6 +760,36 @@ function PageContent({
     );
   }
 
+  if (currentPage === 'conditions') {
+    const slug = getConditionSlugFromPathname(pathname);
+    const topic = slug && isDermatologyConditionSlug(slug) ? getDermatologyConditionTopic(slug, locale) : null;
+    const treated = ALL_LOCAL_COMMERCIAL_LANDINGS.filter((landing) => landingTopicKey(landing.slug) === (CONDITION_LANDING_TOPIC[slug ?? ''] ?? 'dermatolog'));
+    return (
+      <>
+        {topic && (
+          <section>
+            {topic.aboutTitle && <h2>{topic.aboutTitle}</h2>}
+            {topic.aboutOverview && <p>{topic.aboutOverview}</p>}
+            {topic.aboutSections?.map((section) => (
+              <div key={section.title}>
+                <h3>{section.title}</h3>
+                <p>{section.description}</p>
+              </div>
+            ))}
+            {topic.aboutFooter && <p>{topic.aboutFooter}</p>}
+          </section>
+        )}
+        <ul>
+          {treated.map((landing) => (
+            <li key={`${landing.city}-${landing.slug}`}>
+              <a href={localCommercialPath(locale, landing.city, landing.slug)}>{getLocalizedCopy(landing.h1, locale)}</a>
+            </li>
+          ))}
+        </ul>
+      </>
+    );
+  }
+
   const content = institutionalContent(currentPage, pathname);
   if (content) return <StructuredPageText content={content} locale={locale} />;
 
@@ -656,6 +803,7 @@ function PrerenderBody({
   overrides,
   videos,
   results,
+  reviews,
   pathname,
 }: {
   head: RouteHead;
@@ -664,6 +812,7 @@ function PrerenderBody({
   overrides: DictionaryOverrides;
   videos: ClinicVideo[];
   results: ApiTreatmentResultOut[];
+  reviews: ApiReviewOut[];
   pathname: string;
 }) {
   const d = { ...DICTIONARY[locale], ...(overrides[locale] ?? {}) } as Record<string, string>;
@@ -703,7 +852,7 @@ function PrerenderBody({
         )}
         <h1>{resolveHeading(head, locale)}</h1>
         <p>{head.description}</p>
-        <PageContent head={head} locale={locale} clinic={clinic} videos={videos} results={results} pathname={pathname} />
+        <PageContent head={head} locale={locale} clinic={clinic} videos={videos} results={results} reviews={reviews} pathname={pathname} />
       </main>
       <footer>
         {CLINIC_BRANCHES.filter((branch) => branch.id !== 'liege-rade-skin').map((branch) => (
@@ -753,6 +902,50 @@ function setMetaContent(html: string, attribute: 'name' | 'property', key: strin
   return pattern.test(html)
     ? html.replace(pattern, (_m, start: string, end: string) => `${start}${escapeHtml(content)}${end}`)
     : html.replace('</head>', `    ${tag}\n  </head>`);
+}
+
+/** Plain-markdown summary of the clinic for AI assistants, built from the same data as the site. */
+function buildLlmsTxt(clinic: PrerenderClinic): string {
+  const url = (path: string) => `${SITE_ORIGIN}${path}`;
+  const lines: string[] = [
+    '# Radeski Skin Clinic',
+    '',
+    "> Teri, soch va tirnoq kasalliklari bo'yicha ixtisoslashgan tibbiy klinika (dermatologiya, trixologiya, podologiya, dermatoonkologiya, kosmetologiya) — Farg'ona va Qo'qon, O'zbekiston. Специализированная клиника кожи, волос и ногтей в Фергане и Коканде.",
+    '',
+    "Sayt uch tilda: /uz (asosiy), /ru, /en. Narxlar so'mda (UZS). Qabulga yozilish: saytdagi «Qabulga yozilish» tugmasi yoki filial telefoni.",
+    '',
+    '## Filiallar / Филиалы',
+  ];
+  for (const branch of CLINIC_BRANCHES.filter((item) => item.id !== 'liege-rade-skin')) {
+    lines.push(`- ${branch.name.uz}: ${branch.address.uz}; ${branch.hours.uz}; tel. ${branch.phone}`);
+  }
+  lines.push('', '## Shifokorlar / Врачи');
+  for (const doctor of clinic.doctors) {
+    const branches = doctorBranches(doctor).map((city) => (city === 'qoqon' ? "Qo'qon" : "Farg'ona")).join(', ');
+    lines.push(`- [${doctor.name.uz}](${url(doctorPath('uz', doctorRouteKey(doctor)))}): ${doctor.role.uz}${branches ? ` — ${branches}` : ''}`);
+  }
+  lines.push('', "## Xizmat yo'nalishlari / Направления");
+  for (const category of clinic.serviceCategories) {
+    lines.push(`- [${category.title.uz}](${url(serviceCategoryPath('uz', category.id))}) / [${category.title.ru}](${url(serviceCategoryPath('ru', category.id))})`);
+  }
+  for (const city of ['fargona', 'qoqon'] as const) {
+    lines.push('', city === 'qoqon' ? "## Qo'qonda xizmatlar (narx, shifokor, FAQ)" : "## Farg'onada xizmatlar (narx, shifokor, FAQ)");
+    for (const landing of getCityCommercialLinks(city)) {
+      lines.push(`- [${landing.h1.uz}](${url(localCommercialPath('uz', city, landing.slug))}) / [${landing.h1.ru}](${url(localCommercialPath('ru', city, landing.slug))})`);
+    }
+  }
+  lines.push('', '## Foydali sahifalar');
+  lines.push(`- [Narxlar / Цены](${url(pagePath('uz', 'prices'))})`);
+  lines.push(`- [Klinik natijalar](${url(pagePath('uz', 'results'))})`);
+  lines.push(`- [Maqolalar](${url(pagePath('uz', 'articles'))})`);
+  lines.push(`- [Videolar](${url(pagePath('uz', 'videos'))})`);
+  lines.push(`- [Filiallar va manzillar](${url(pagePath('uz', 'branches'))})`);
+  lines.push('', '## Maqolalar (tanlangan)');
+  for (const article of filterPublicArticles(clinic.articles).slice(0, 30)) {
+    lines.push(`- [${article.title.uz}](${url(articlePath('uz', resolveArticleRouteKey(article)))})`);
+  }
+  lines.push('', "Tibbiy ma'lumot tanishuv uchun; aniq tashxis va davolash rejasi shifokor ko'rigida belgilanadi.", '');
+  return lines.join('\n');
 }
 
 export function createPrerenderer(snapshot: PrerenderSnapshot) {
@@ -815,6 +1008,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
         overrides={overrides}
         videos={videos}
         results={raw.treatmentResults ?? []}
+        reviews={raw.reviews ?? []}
         pathname={pathname}
       />);
 
@@ -862,13 +1056,18 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
   return {
     render,
     /** Service category + sub-service paths (readable keys) for the sitemap. */
-    servicePaths: clinic.serviceCategories.flatMap((category) => [
+    servicePaths: [
+      ...DERMATOLOGY_CONDITION_NAV.map((item) => `conditions/${item.slug}`),
+      ...clinic.serviceCategories.flatMap((category) => [
       `services/${category.id}`,
       ...category.subServices.map((sub) => `services/${category.id}/${subServiceRouteKey(sub)}`),
-    ]),
+      ]),
+    ],
     /** Video watch page keys for the sitemap. */
     videoKeys: videos.map((video) => videoRouteKey(video)),
     /** Doctor URL keys for the sitemap (CMS doctors, slug form). */
     doctorKeys: clinic.doctors.map((doctor) => doctorRouteKey(doctor)),
+    /** /llms.txt — the clinic's key facts and pages for AI assistants (llmstxt.org format). */
+    llmsTxt: () => buildLlmsTxt(clinic),
   };
 }

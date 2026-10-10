@@ -33,7 +33,7 @@ export const DERMATOLOGY_CONDITION_NAV: DermatologyConditionNavItem[] = [
   { slug: 'postacne', label: { uz: 'Postacne', ru: 'Постакне', en: 'Post-acne' } },
   { slug: 'seboreyali-dermatit', label: { uz: 'Seboreyali dermatit', ru: 'Себорейный дерматит', en: 'Seborrheic dermatitis' } },
   { slug: 'yuz-qizarishi', label: { uz: 'Yuz qizarishi', ru: 'Покраснение лица', en: 'Facial redness' } },
-  { slug: 'teri-qichishi', label: { uz: 'Terning qichishi', ru: 'Зуд кожи', en: 'Skin itching' } },
+  { slug: 'teri-qichishi', label: { uz: 'Terining qichishi', ru: 'Зуд кожи', en: 'Skin itching' } },
 ];
 
 export function isDermatologyConditionSlug(value: string): value is DermatologyConditionSlug {

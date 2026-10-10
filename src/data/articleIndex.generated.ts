@@ -2133,8 +2133,8 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Farg'ona"
       ],
-      "bodyLength": 1434,
-      "bodyWords": 164
+      "bodyLength": 1433,
+      "bodyWords": 165
     },
     "ru": {
       "summary": "Дневной стационар Radeski Skin Clinic: персональный врач-куратор, быстрое обследование, анализы и лечение — до 8 часов, без длительного отрыва от работы.",
@@ -2527,6 +2527,94 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       ],
       "bodyLength": 4716,
       "bodyWords": 690
+    }
+  },
+  "psoriaz-tashxis-davolash-radeski": {
+    "uz": {
+      "summary": "Psoriaz qanday aniqlanadi va davolanadi: asosiy belgilar, dermatoskopiya va og‘irlikni baholash, tashqi vositalar, Daavlin UVB 311 nm fototerapiyasi, eksimer lazer va immunobiologik terapiya. Farg‘ona va Qo‘qonda.",
+      "tags": [
+        "Psoriaz",
+        "Fototerapiya",
+        "Daavlin",
+        "Dermatologiya",
+        "Farg‘ona",
+        "Qo‘qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3039,
+      "bodyWords": 356
+    },
+    "ru": {
+      "summary": "Как диагностируют и лечат псориаз: основные признаки, дерматоскопия и оценка тяжести, наружная терапия, фототерапия Daavlin UVB 311 нм, эксимерный лазер и иммунобиологическая терапия. Фергана и Коканд.",
+      "tags": [
+        "Псориаз",
+        "Фототерапия",
+        "Daavlin",
+        "Дерматология",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2815,
+      "bodyWords": 348
+    },
+    "en": {
+      "summary": "How psoriasis is diagnosed and treated: main signs, dermatoscopy and severity scoring, topical therapy, Daavlin narrowband UVB 311 nm, excimer laser and biologic therapy. Fergana and Kokand.",
+      "tags": [
+        "Psoriasis",
+        "Phototherapy",
+        "Daavlin",
+        "Dermatology",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 1904,
+      "bodyWords": 265
+    }
+  },
+  "soch-tokilishi-tahlillar-radeski": {
+    "uz": {
+      "summary": "Soch kuchli to‘kilsa qanday tahlillar topshirish kerak: eng ko‘p uchraydigan sabablar, ferritin, qalqonsimon bez, vitamin D va gormonlar, trixoskopiya va keyingi davolash. Farg‘ona va Qo‘qonda trixolog.",
+      "tags": [
+        "Soch to‘kilishi",
+        "Trixolog",
+        "Trixoskopiya",
+        "Tahlillar",
+        "Farg‘ona",
+        "Qo‘qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2561,
+      "bodyWords": 305
+    },
+    "ru": {
+      "summary": "Какие анализы сдать при сильном выпадении волос: частые причины, ферритин, щитовидная железа, витамин D и гормоны, трихоскопия и дальнейшее лечение. Трихолог в Фергане и Коканде.",
+      "tags": [
+        "Выпадение волос",
+        "Трихолог",
+        "Трихоскопия",
+        "Анализы",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2372,
+      "bodyWords": 303
+    },
+    "en": {
+      "summary": "Which tests to take for heavy hair loss: common causes, ferritin, thyroid, vitamin D and hormones, trichoscopy and next steps. Trichologist in Fergana and Kokand.",
+      "tags": [
+        "Hair loss",
+        "Trichologist",
+        "Trichoscopy",
+        "Blood tests",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 1519,
+      "bodyWords": 217
     }
   },
   "papilloma-warts": {
@@ -4462,6 +4550,70 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": "/articles/normal-vs-pathological-hair-loss-radeski.webp",
       "ru": "/articles/normal-vs-pathological-hair-loss-radeski.webp",
       "en": "/articles/normal-vs-pathological-hair-loss-radeski.webp"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-psoriaz-tashxis-davolash-radeski",
+    "slug": "psoriaz-tashxis-va-davolash-radeski",
+    "title": {
+      "uz": "Psoriaz: belgilari, tashxisi va davolash usullari",
+      "ru": "Псориаз: симптомы, диагностика и методы лечения",
+      "en": "Psoriasis: Symptoms, Diagnosis and Treatment"
+    },
+    "summary": {
+      "uz": "Psoriaz qanday aniqlanadi va davolanadi: asosiy belgilar, dermatoskopiya va og‘irlikni baholash, tashqi vositalar, Daavlin UVB 311 nm fototerapiyasi, eksimer lazer va immunobiologik terapiya. Farg‘ona va Qo‘qonda.",
+      "ru": "Как диагностируют и лечат псориаз: основные признаки, дерматоскопия и оценка тяжести, наружная терапия, фототерапия Daavlin UVB 311 нм, эксимерный лазер и иммунобиологическая терапия. Фергана и Коканд.",
+      "en": "How psoriasis is diagnosed and treated: main signs, dermatoscopy and severity scoring, topical therapy, Daavlin narrowband UVB 311 nm, excimer laser and biologic therapy. Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Radeski Skin Clinic shifokorlari jamoasi",
+      "ru": "Команда врачей Radeski Skin Clinic",
+      "en": "Radeski Skin Clinic medical team"
+    },
+    "date": "2026-10-10",
+    "image": "/karusel/fototerapiya.webp",
+    "images": {
+      "uz": "/karusel/fototerapiya.webp",
+      "ru": "/karusel/fototerapiya.webp",
+      "en": "/karusel/fototerapiya.webp"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-soch-tokilishi-tahlillar-radeski",
+    "slug": "soch-tokilishi-qanday-tahlillar-radeski",
+    "title": {
+      "uz": "Soch kuchli to‘kilmoqda: qanday tahlillar kerak?",
+      "ru": "Сильно выпадают волосы: какие анализы сдать?",
+      "en": "Heavy Hair Loss: Which Tests Do You Need?"
+    },
+    "summary": {
+      "uz": "Soch kuchli to‘kilsa qanday tahlillar topshirish kerak: eng ko‘p uchraydigan sabablar, ferritin, qalqonsimon bez, vitamin D va gormonlar, trixoskopiya va keyingi davolash. Farg‘ona va Qo‘qonda trixolog.",
+      "ru": "Какие анализы сдать при сильном выпадении волос: частые причины, ферритин, щитовидная железа, витамин D и гормоны, трихоскопия и дальнейшее лечение. Трихолог в Фергане и Коканде.",
+      "en": "Which tests to take for heavy hair loss: common causes, ferritin, thyroid, vitamin D and hormones, trichoscopy and next steps. Trichologist in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Radeski Skin Clinic shifokorlari jamoasi",
+      "ru": "Команда врачей Radeski Skin Clinic",
+      "en": "Radeski Skin Clinic medical team"
+    },
+    "date": "2026-10-10",
+    "image": "/karusel/soch-mezoterapiya.jpg",
+    "images": {
+      "uz": "/karusel/soch-mezoterapiya.jpg",
+      "ru": "/karusel/soch-mezoterapiya.jpg",
+      "en": "/karusel/soch-mezoterapiya.jpg"
     },
     "views": 0
   }

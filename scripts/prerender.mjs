@@ -155,6 +155,7 @@ async function main() {
   }
 
   writeFileSync(path.join(dist, '.seo-manifest.json'), JSON.stringify(manifest));
+  if (prerenderer.llmsTxt) writeFileSync(path.join(dist, 'llms.txt'), prerenderer.llmsTxt());
   console.log(`[prerender] ${Object.keys(manifest).length}/${pathnames.length} pages written to dist/`);
   if (noindex) console.warn(`[prerender] ${noindex} sitemap URLs resolve to noindex pages — check the sitemap`);
   if (failed.length) console.warn(`[prerender] failed:\n  ${failed.slice(0, 20).join('\n  ')}`);

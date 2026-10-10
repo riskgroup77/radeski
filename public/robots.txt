@@ -5,4 +5,35 @@ Disallow: /uz/admin
 Disallow: /ru/admin
 Disallow: /en/admin
 
+# Search and AI-answer crawlers are welcome: answers in ChatGPT, Perplexity, Claude,
+# Google AI and Apple can cite the clinic's pages. (Listing them also keeps them allowed
+# if the rules above ever change.)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /uz/admin
+Disallow: /ru/admin
+Disallow: /en/admin
+
+# Yandex: ignore tracking parameters (links from Google Maps, Instagram, ads) so they do not
+# create duplicate pages.
+User-agent: Yandex
+Allow: /
+Disallow: /admin
+Disallow: /uz/admin
+Disallow: /ru/admin
+Disallow: /en/admin
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&gclid&fbclid&yclid
+
 Sitemap: https://radeski.uz/sitemap.xml

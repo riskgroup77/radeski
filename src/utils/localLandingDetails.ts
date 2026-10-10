@@ -7,6 +7,7 @@ import {
 } from '../data/localCommercialSeoCatalog';
 import { getLocalLandingTopic, type LocalLandingTopic } from '../data/localLandingTopics';
 import { resolvePriceName } from './priceDisplay';
+import { formatUzs } from './formatUzs';
 
 /**
  * Everything a city service page shows beyond its catalog copy — shared by the React page,
@@ -55,11 +56,7 @@ export function landingBranch(city: LocalSeoCity): ClinicBranch {
   return CLINIC_BRANCHES.find((branch) => branch.id === id) ?? CLINIC_BRANCHES[0];
 }
 
-/** "90 000 so‘m" / "90 000 сум" / "90,000 UZS". */
-export function formatUzs(value: number, locale: Locale): string {
-  const digits = Math.round(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, locale === 'en' ? ',' : ' ');
-  return locale === 'uz' ? `${digits} so‘m` : locale === 'ru' ? `${digits} сум` : `${digits} UZS`;
-}
+export { formatUzs };
 
 /** Pages about a doctor rather than a procedure ("Dermatolog Farg'onada"). */
 const SPECIALIST_SLUGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog']);

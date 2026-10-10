@@ -1,4 +1,7 @@
 import { useMemo, useState } from 'react';
+import type { PriceItem } from '../types';
+import type { CustomerReview } from '../data/sitePagesContent';
+import DoctorPracticeInfo from './DoctorPracticeInfo';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
@@ -34,6 +37,8 @@ interface DoctorPageProps {
   onOpenAppointment: () => void;
   /** Doctors are still loading — show a placeholder instead of "not found". */
   loading?: boolean;
+  prices?: PriceItem[];
+  reviews?: CustomerReview[];
 }
 
 function ItemChips({ items, compact = false }: { items: string[]; compact?: boolean }) {
@@ -418,6 +423,8 @@ export default function DoctorPage({
   onBackToList,
   onOpenAppointment,
   loading = false,
+  prices = [],
+  reviews = [],
 }: DoctorPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const doctor = findDoctorByRouteParam(doctorId, doctors) ?? null;
@@ -502,6 +509,14 @@ export default function DoctorPage({
             onOpenAppointment={onOpenAppointment}
           />
         )}
+
+        <DoctorPracticeInfo
+          locale={locale}
+          doctor={doctor}
+          prices={prices}
+          reviews={reviews}
+          appointmentLabel={d.appointmentBtn}
+        />
       </div>
     </section>
   );

@@ -465,6 +465,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               appointmentLabel={d.appointmentBtn}
               prices={dynamicPrices}
               articles={dynamicArticles}
+              doctors={dynamicDoctors}
+              results={cmsTreatmentResults}
+              reviews={cmsReviews}
             />
           )}
 
@@ -1016,6 +1019,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               dictionary={d}
               onBackToList={() => goToPage('doctors')}
               onOpenAppointment={() => handleOpenAppointmentWithService()}
+              prices={dynamicPrices}
+              reviews={cmsReviews}
             />
           )}
 

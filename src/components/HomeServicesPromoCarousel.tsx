@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Calendar,
+  MapPin,
+  Phone,
   Footprints,
   Leaf,
   Microscope,
@@ -18,14 +20,15 @@ import {
 } from 'lucide-react';
 import type { Locale } from '../types';
 import { CLINIC_EXPERIENCE_YEARS } from '../data';
-import { formatPriceValue } from '../api/mappers';
+import { formatUzs } from '../utils/formatUzs';
 import {
   buildHomePromoSlides,
   getPromoCarouselLabels,
   getPromoText,
   type HomePromoSlide,
 } from '../data/homePromoCarousel';
-import { promoServicePath, type PageId } from '../routing/paths';
+import { pagePath, promoServicePath, type PageId } from '../routing/paths';
+import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
 import AppointmentBookingLink from './AppointmentBookingLink';
 
 const AUTO_PLAY_MS = 5000;
@@ -62,6 +65,10 @@ function getHeroCopy(locale: Locale) {
       description:
         'Teri, soch va tirnoqlar uchun tibbiy yordam hamda zamonaviy estetik korreksiya — dermatologiya, trixologiya, podologiya va apparatli muolajalar.',
       viewServices: "Xizmatlarni ko'rish",
+      call: "Qo'ng'iroq qilish",
+      directionsLabel: "Yo'nalishlar",
+      directions: ['Dermatologiya', 'Trixologiya', 'Podologiya', 'Dermatoonkologiya', 'Kosmetologiya'],
+      cities: { fargona: "Farg'ona", qoqon: "Qo'qon" },
       statPatients: 'Baxtli bemorlar',
       statDoctors: 'Mutaxassis shifokorlar',
       statExperience: 'Tajriba',
@@ -76,6 +83,10 @@ function getHeroCopy(locale: Locale) {
       description:
         'Медицинская помощь коже, волосам и ногтям и современная эстетическая коррекция — дерматология, трихология, подология и аппаратные методы.',
       viewServices: 'Посмотреть услуги',
+      call: 'Позвонить',
+      directionsLabel: 'Направления',
+      directions: ['Дерматология', 'Трихология', 'Подология', 'Дерматоонкология', 'Косметология'],
+      cities: { fargona: 'Фергана', qoqon: 'Коканд' },
       statPatients: 'Довольных пациентов',
       statDoctors: 'Специалистов',
       statExperience: 'Опыт',
@@ -89,6 +100,10 @@ function getHeroCopy(locale: Locale) {
     description:
       'Medical care for skin, hair and nails plus modern aesthetic correction — dermatology, trichology, podology and device-based treatments.',
     viewServices: 'View services',
+    call: 'Call us',
+    directionsLabel: 'Specialties',
+    directions: ['Dermatology', 'Trichology', 'Podiatry', 'Dermato-oncology', 'Cosmetology'],
+    cities: { fargona: 'Fergana', qoqon: 'Kokand' },
     statPatients: 'Happy patients',
     statDoctors: 'Specialist doctors',
     statExperience: 'Experience',
@@ -245,10 +260,7 @@ function getSlidePriceDisplay(slide: HomePromoSlide, locale: Locale) {
     return getPromoText(slide.fixedPriceText, locale);
   }
   if (slide.fallbackPriceValue) {
-    const formatted = formatPriceValue(slide.fallbackPriceValue);
-    if (locale === 'uz') return `${formatted} so'm`;
-    if (locale === 'ru') return `${formatted} сум`;
-    return `${formatted} UZS`;
+    return formatUzs(slide.fallbackPriceValue, locale);
   }
   return '';
 }
@@ -377,22 +389,59 @@ export default function HomeServicesPromoCarousel({
               {copy.description}
             </p>
 
-            <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row gap-3 max-w-md">
-              <AppointmentBookingLink className="flex-1 px-6 py-3.5 rounded-xl bg-white hover:bg-white/90 text-brand-text-primary font-bold text-sm not-italic transition-colors flex items-center justify-center gap-2 no-underline shadow-lg shadow-black/10 border border-white/80">
+            {/* What and where, readable at a glance: specialties + both branches. */}
+            <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={copy.directionsLabel}>
+              {copy.directions.map((direction) => (
+                <li
+                  key={direction}
+                  className="px-2.5 py-1 rounded-full bg-white/90 border border-brand-sectiongray text-[11px] sm:text-xs font-bold text-brand-text-primary"
+                >
+                  {direction}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {(['fargona', 'qoqon'] as const).map((city) => (
+                <Link
+                  key={city}
+                  to={pagePath(locale, city)}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/25 text-[11px] sm:text-xs font-bold text-brand-gold-dark no-underline hover:bg-brand-gold/20"
+                >
+                  <MapPin className="w-3 h-3" />
+                  {copy.cities[city]}
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-6 sm:mt-7 flex flex-col sm:flex-row gap-3 max-w-md">
+              <AppointmentBookingLink className="flex-1 px-6 py-3.5 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white font-bold text-sm not-italic transition-colors flex items-center justify-center gap-2 no-underline shadow-lg shadow-brand-gold/25">
                 <Calendar className="w-4 h-4 shrink-0" />
                 {appointmentLabel}
               </AppointmentBookingLink>
+              <a
+                href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
+                className="flex-1 px-6 py-3.5 rounded-xl bg-white hover:bg-white/90 text-brand-text-primary font-bold text-sm not-italic border border-white/80 transition-colors flex items-center justify-center gap-2 no-underline shadow-lg shadow-black/10"
+              >
+                <Phone className="w-4 h-4 text-brand-gold shrink-0" />
+                {copy.call}
+              </a>
+            </div>
+            <p className="mt-3 text-xs text-brand-text-secondary flex flex-wrap gap-x-3 gap-y-1">
+              <a href={`tel:${CLINIC_PHONE_PRIMARY.tel}`} className="font-semibold text-brand-text-primary no-underline hover:underline">
+                {copy.cities.fargona}: {CLINIC_PHONE_PRIMARY.display}
+              </a>
+              <a href={`tel:${CLINIC_PHONE_KOKAND.tel}`} className="font-semibold text-brand-text-primary no-underline hover:underline">
+                {copy.cities.qoqon}: {CLINIC_PHONE_KOKAND.display}
+              </a>
               <button
                 type="button"
                 onClick={() => onNavigate?.('services')}
-                className="flex-1 px-6 py-3.5 rounded-xl bg-white hover:bg-white/90 text-brand-text-primary font-bold text-sm not-italic border border-white/80 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-black/10"
+                className="inline-flex items-center gap-1 font-bold text-brand-gold cursor-pointer"
               >
-                <span className="w-7 h-7 rounded-full border border-brand-gold/40 flex items-center justify-center shrink-0">
-                  <Play className="w-3 h-3 text-brand-gold fill-brand-gold ml-0.5" />
-                </span>
+                <Play className="w-3 h-3 fill-current" />
                 {copy.viewServices}
               </button>
-            </div>
+            </p>
             </div>
 
             <div className="mt-6 sm:mt-7 lg:mt-auto max-w-3xl">

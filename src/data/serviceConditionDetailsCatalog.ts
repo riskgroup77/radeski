@@ -441,7 +441,7 @@ export const CONDITION_DETAIL_OVERRIDES: Record<string, Partial<ServiceCondition
     image: conditionImage('teri-qichishi'),
     priceCategoryIds: ['konsultatsii', 'allergo-proba-10-punktov', 'laboratoriya'],
     fullDescription: L(
-      'Terning qichishi (pruritus) — ekzema, allergiya, quruq teri, zamburug\' yoki ichki kasallik belgisi bo\'lishi mumkin. O\'z-o\'zidan krem surish ba\'zan sababni yashiradi. Radeski klinikasida dermatolog ko\'rigi, kerak bo\'lsa allergo-test va laboratoriya yordamida asosiy sabab aniqlanadi.',
+      'Terining qichishi (pruritus) — ekzema, allergiya, quruq teri, zamburug\' yoki ichki kasallik belgisi bo\'lishi mumkin. O\'z-o\'zidan krem surish ba\'zan sababni yashiradi. Radeski klinikasida dermatolog ko\'rigi, kerak bo\'lsa allergo-test va laboratoriya yordamida asosiy sabab aniqlanadi.',
       'Зуд кожи может быть симптомом экземы, аллергии, сухости или грибка. В Radeski дерматолог проводит осмотр, аллергопробы и анализы для выявления причины.',
       'Skin itching may signal eczema, allergy, dryness or fungal infection. At Radeski a dermatologist exam plus allergy tests and labs identify the underlying cause.',
     ),

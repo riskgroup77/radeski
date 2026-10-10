@@ -67,3 +67,7 @@ scripts/*-output.txt
 scripts/lab-*.json
 scripts/lab-*.txt
 scripts/live-results.json
+
+# Search Console service-account key and generated SEO reports
+gsc-service-account.json
+reports/

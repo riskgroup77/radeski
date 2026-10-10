@@ -233,7 +233,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     }),
     treatmentLanding('qoqon', 'soch-tokilish', 'trihologiya-centr-lechenie-volos', {
       name: L("Soch to'kilishi davolash", 'Лечение выпадения волос', 'Hair loss treatment'),
-      articleRouteKeys: ['art-thulium-laser-hair-kokand', 'art-plazmotorapiya-soch-prp'],
+      articleRouteKeys: ['art-soch-tokilishi-tahlillar-radeski', 'art-thulium-laser-hair-kokand', 'art-plazmotorapiya-soch-prp'],
       problem: L("Soch to'kilishi turli sabablarga ko'ra bo'lishi mumkin.", 'Выпадение волос имеет разные причины.', 'Hair loss has various causes.'),
       whoFor: [L('Soch siyraklashgan bemorlar', 'При поредении волос', 'Thinning hair')],
       methods: [L('Trixolog va trixoskopiya', 'Трихолог и трихоскопия', 'Trichologist and trichoscopy'), L('PRP va kurs davolash', 'PRP и курс лечения', 'PRP and treatment course')],
@@ -256,7 +256,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
       name: L('Psoriaz davolash', 'Лечение псориаза', 'Psoriasis treatment'),
       conditionSlug: 'psoriaz',
       promoSlug: 'fototerapiya',
-      articleRouteKeys: ['art-psoriasis-daavlin-kokand'],
+      articleRouteKeys: ['art-psoriaz-tashxis-davolash-radeski', 'art-psoriasis-daavlin-kokand'],
       problem: L('Psoriaz surunkali kasallik.', 'Псориаз — хроническое заболевание.', 'Psoriasis is chronic.'),
       whoFor: [L('Surunkali psoriaz', 'Хронический псориаз', 'Chronic psoriasis')],
       methods: [L('Terapiya', 'Терапия', 'Therapy'), L('Daavlin fototerapiya', 'Фототерапия Daavlin', 'Daavlin phototherapy')],
@@ -381,6 +381,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
       methods: [L('Dermatolog', 'Дерматолог', 'Dermatologist'), L('Terapiya', 'Терапия', 'Therapy')],
     }),
     treatmentLanding('fargona', 'psoriaz-davolash', 'dermatologiya', {
+      articleRouteKeys: ['art-psoriaz-tashxis-davolash-radeski'],
       name: L('Psoriaz davolash', 'Лечение псориаза', 'Psoriasis treatment'),
       conditionSlug: 'psoriaz',
       promoSlug: 'fototerapiya',
@@ -406,7 +407,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     }),
     treatmentLanding('fargona', 'soch-tokilish', 'trihologiya-centr-lechenie-volos', {
       name: L("Soch to'kilishi davolash", 'Лечение выпадения волос', 'Hair loss treatment'),
-      articleRouteKeys: ['art-plazmotorapiya-soch-prp'],
+      articleRouteKeys: ['art-soch-tokilishi-tahlillar-radeski', 'art-plazmotorapiya-soch-prp'],
       problem: L("Soch to'kilishi.", 'Выпадение волос.', 'Hair loss.'),
       whoFor: [L('Alopecia', 'Алопеция', 'Alopecia')],
       methods: [L('PRP', 'PRP', 'PRP'), L('Trixolog', 'Трихолог', 'Trichologist')],

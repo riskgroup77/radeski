@@ -6,6 +6,7 @@
  * JavaScript (Yandex, social previews) see the same titles as Google does.
  */
 import type { Article, Doctor, Locale, PriceItem, ServiceCategory } from '../types';
+import { resolveDoctorPageDetails, type DoctorPageDetails } from '../utils/doctorPageDetails';
 import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceImages';
 import { findSubServiceByRouteParam, subServiceRouteKey } from '../utils/serviceSubSlug';
 import type { ClinicVideo } from '../data/sitePagesContent';
@@ -71,6 +72,7 @@ import {
 import { doctorRouteKey, findDoctorByRouteParam } from '../utils/doctorSlug';
 import { VIDEO_SEO_TITLES } from './videoSeoTitles';
 import { formatUzs, resolveLocalLandingDetails, type LocalLandingDetails } from '../utils/localLandingDetails';
+import { LOCAL_LANDING_CONTENT_UPDATED } from '../data/localLandingTopics';
 import type { LocalCommercialLanding } from '../data/localCommercialSeoCatalog';
 import {
   findVideoByRouteParam,
@@ -175,8 +177,17 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
   // never the old template FAQs for every service on every page.
   const jsonLd: Record<string, unknown>[] = [buildMedicalBusinessSchema(locale, origin, clinicRatings)];
 
-  if (activeDoctor) {
-    jsonLd.push(buildDoctorSchema(locale, activeDoctor, origin, absoluteUrl(doctorPath(locale, doctorRouteKey(activeDoctor)))));
+  const doctorDetails = activeDoctor ? resolveDoctorPageDetails(activeDoctor, input.prices ?? [], locale) : null;
+  if (activeDoctor && doctorDetails) {
+    jsonLd.push(
+      buildDoctorSchema(locale, activeDoctor, origin, absoluteUrl(doctorPath(locale, doctorRouteKey(activeDoctor))), {
+        branchIds: doctorDetails.branches.map((branch) => (branch.id === 'kokand-branch' ? 'kokand' : 'fergana')),
+        specialties: doctorDetails.specialtyLabels,
+      }),
+    );
+    // The same FAQ is shown on the page (DoctorPracticeInfo).
+    const doctorFaq = buildFaqSchema(doctorDetails.faqs);
+    if (doctorFaq) jsonLd.push(doctorFaq);
   }
   if (activeArticle) {
     const authorDoctor = findArticleAuthorDoctor(activeArticle, doctors);
@@ -258,7 +269,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
                   locale,
                 )
               : activeDoctor
-                ? buildServiceSeoTitle(activeDoctor.name[locale], locale)
+                ? buildDoctorSeoTitle(activeDoctor, doctorDetails, locale)
                 : activeEquipment
                   ? buildServicePageSeoTitle(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
                   : activeServiceSub
@@ -280,7 +291,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
         : activeCondition
           ? activeCondition.description
           : activeDoctor
-            ? activeDoctor.bio[locale]
+            ? buildDoctorSeoDescription(activeDoctor, doctorDetails, locale)
             : activeEquipment
               ? getLocalizedEquipmentText(activeEquipment.shortDescription, locale)
               : activeServiceSub
@@ -344,6 +355,18 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
   if (breadcrumbs.length > 1) jsonLd.push(buildBreadcrumbSchema(breadcrumbs));
   if (activeLocalCommercial && landingDetails) {
     jsonLd.push(buildLocalServiceSchema(locale, origin, canonical, activeLocalCommercial.city, landingDetails, fitDescription(description)));
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'MedicalWebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: trimBrandTail(title),
+      inLanguage: locale === 'uz' ? 'uz-UZ' : locale === 'ru' ? 'ru-RU' : 'en-US',
+      about: { '@id': `${canonical}#service` },
+      author: { '@id': `${origin}/#clinic` },
+      publisher: { '@id': `${origin}/#clinic` },
+      dateModified: LOCAL_LANDING_CONTENT_UPDATED,
+    });
     const faq = buildFaqSchema(landingDetails.faqs);
     if (faq) jsonLd.push(faq);
   }
@@ -448,6 +471,36 @@ function buildVideoSeoTitle(name: string, locale: Locale): string {
     name,
     shortenAtWord(name, TITLE_MAX_LENGTH),
   ]);
+}
+
+/** "Ashurov Dilshod Davlatovich — dermatoonkolog, Farg'ona | Radeski" (specialty + city searched together). */
+function buildDoctorSeoTitle(doctor: Doctor, details: DoctorPageDetails | null, locale: Locale): string {
+  const name = doctor.name[locale] || doctor.name.uz;
+  const specialty = details?.specialtyLabels[0]?.toLowerCase();
+  const city = details?.branches.length
+    ? details.branches
+        .map((branch) => (branch.id === 'kokand-branch' ? { uz: "Qo'qon", ru: 'Коканд', en: 'Kokand' } : { uz: "Farg'ona", ru: 'Фергана', en: 'Fergana' })[locale])
+        .join(', ')
+    : null;
+  if (!specialty) return buildServiceSeoTitle(name, locale);
+  const tail = city ? `${specialty}, ${city}` : specialty;
+  return fitTitle([`${name} — ${tail} | Radeski Skin Clinic`, `${name} — ${tail} | Radeski`, `${name} — ${tail}`, buildServiceSeoTitle(name, locale)]);
+}
+
+function buildDoctorSeoDescription(doctor: Doctor, details: DoctorPageDetails | null, locale: Locale): string {
+  const bio = doctor.bio[locale] || doctor.bio.uz;
+  if (!details) return bio;
+  const role = doctor.role[locale] || doctor.role.uz;
+  const where = details.branches.map((branch) => branch.address[locale]).join('; ');
+  const price = details.price
+    ? locale === 'uz'
+      ? ` Birinchi qabul — ${formatUzs(details.price, locale)}.`
+      : locale === 'ru'
+        ? ` Первичный приём — ${formatUzs(details.price, locale)}.`
+        : ` First visit ${formatUzs(details.price, locale)}.`
+    : '';
+  const lead = `${doctor.name[locale] || doctor.name.uz} — ${role}.${price}`;
+  return where ? `${lead} ${where}. ${bio}` : `${lead} ${bio}`;
 }
 
 const SPECIALIST_LANDINGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog']);

@@ -1,4 +1,6 @@
 import type { Article, ArticleRichContent, Locale } from '../types';
+import { SOCH_TOKILISHI_TAHLILLAR_RADESKI_ARTICLE_CATALOG } from './articles/sochTokilishiTahlillarRadeskiArticle';
+import { PSORIAZ_TASHXIS_DAVOLASH_RADESKI_ARTICLE_CATALOG } from './articles/psoriazTashxisDavolashRadeskiArticle';
 import { ACNE_ARTICLE_CATALOG } from './articles/acneArticle';
 import { POST_ACNE_ARTICLE_CATALOG } from './articles/postAcneArticle';
 import { ROSACEA_ARTICLE_CATALOG } from './articles/rosaceaArticle';
@@ -769,6 +771,8 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'kontur-plastika-radeski': KONTUR_PLASTIKA_RADESKI_ARTICLE_CATALOG,
   'lazer-biorevitalizatsiya-radeski': LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG,
   'soch-tokilishi-normal-patologiya-radeski': NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE_CATALOG,
+  'psoriaz-tashxis-davolash-radeski': PSORIAZ_TASHXIS_DAVOLASH_RADESKI_ARTICLE_CATALOG,
+  'soch-tokilishi-tahlillar-radeski': SOCH_TOKILISHI_TAHLILLAR_RADESKI_ARTICLE_CATALOG,
   'papilloma-warts': {
     uz: {
       summary:

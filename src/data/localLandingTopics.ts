@@ -6,6 +6,9 @@ import type { LocalizedCopy, LocalCommercialFaq } from './localCommercialSeoCata
  * to it (exact `name.uz` of the CMS price items). Shared by both cities; the city-specific
  * parts (address, hours, phone, prices "from") are added around it.
  */
+/** When the city-page texts below were last revised (shown on the pages and in dateModified). */
+export const LOCAL_LANDING_CONTENT_UPDATED = '2026-10-10';
+
 export interface LocalLandingTopic {
   about: LocalizedCopy[];
   steps: LocalizedCopy[];

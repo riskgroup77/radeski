@@ -1,4 +1,8 @@
 import { Link } from 'react-router-dom';
+import { CONDITION_LANDING_TOPIC } from '../utils/localProof';
+import AppointmentBookingLink from './AppointmentBookingLink';
+import { LOCAL_LANDING_CONTENT_UPDATED, landingTopicKey } from '../data/localLandingTopics';
+import { ALL_LOCAL_COMMERCIAL_LANDINGS, getLocalizedCopy, localCommercialPath } from '../data/localCommercialSeoCatalog';
 import { ArrowLeft, HeartPulse } from 'lucide-react';
 import type { Locale, ServiceCategory } from '../types';
 import {
@@ -14,6 +18,47 @@ import {
   servicesListPath,
 } from '../routing/paths';
 import ConditionDetailBody from './ConditionDetailBody';
+
+function ConditionWhereTreated({ locale, slug }: { locale: Locale; slug: string }) {
+  const topic = CONDITION_LANDING_TOPIC[slug] ?? 'dermatolog';
+  const landings = ALL_LOCAL_COMMERCIAL_LANDINGS.filter((landing) => landingTopicKey(landing.slug) === topic);
+  return (
+    <section className="mt-8 p-5 sm:p-6 bg-white border border-brand-sectiongray rounded-2xl">
+      <h2 className="text-lg font-extrabold text-brand-text-primary">
+        {locale === 'uz' ? 'Qayerda davolanadi' : locale === 'ru' ? 'Где лечат' : 'Where it is treated'}
+      </h2>
+      <p className="mt-1 text-sm text-brand-text-muted">
+        {locale === 'uz'
+          ? 'Narxlar, qabul qiladigan shifokorlar va savol-javoblar — filial sahifasida.'
+          : locale === 'ru'
+            ? 'Цены, врачи и ответы на вопросы — на странице филиала.'
+            : 'Prices, doctors and FAQ are on the branch page.'}
+      </p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {landings.map((landing) => (
+          <Link
+            key={`${landing.city}-${landing.slug}`}
+            to={localCommercialPath(locale, landing.city, landing.slug)}
+            className="px-3.5 py-2 bg-brand-offwhite border border-brand-sectiongray rounded-xl text-sm font-semibold text-brand-text-primary no-underline hover:border-brand-gold/40"
+          >
+            {getLocalizedCopy(landing.h1, locale)}
+          </Link>
+        ))}
+        <AppointmentBookingLink className="px-4 py-2 rounded-xl bg-brand-gold hover:bg-brand-gold-dark text-white text-sm font-bold no-underline">
+          {locale === 'uz' ? 'Qabulga yozilish' : locale === 'ru' ? 'Записаться' : 'Book appointment'}
+        </AppointmentBookingLink>
+      </div>
+      <p className="mt-4 text-xs text-brand-text-muted">
+        {locale === 'uz'
+          ? 'Material: Radeski Skin Clinic shifokorlari jamoasi · Yangilangan: '
+          : locale === 'ru'
+            ? 'Материал: команда врачей Radeski Skin Clinic · Обновлено: '
+            : 'Content: Radeski Skin Clinic medical team · Updated: '}
+        <time dateTime={LOCAL_LANDING_CONTENT_UPDATED}>{LOCAL_LANDING_CONTENT_UPDATED.split('-').reverse().join('.')}</time>
+      </p>
+    </section>
+  );
+}
 
 interface DermatologyConditionPageProps {
   locale: Locale;
@@ -93,7 +138,7 @@ export default function DermatologyConditionPage({
           className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold hover:text-brand-gold-dark mb-4 no-underline"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          {locale === 'uz' ? 'Dermatologiyaga qaytish' : locale === 'ru' ? 'К dermatologii' : 'Back to dermatology'}
+          {locale === 'uz' ? 'Dermatologiyaga qaytish' : locale === 'ru' ? 'К дерматологии' : 'Back to dermatology'}
         </Link>
 
         <header className="mb-8 sm:mb-10">
@@ -112,6 +157,8 @@ export default function DermatologyConditionPage({
         <div className="bg-white border border-brand-sectiongray rounded-2xl shadow-sm p-5 sm:p-8">
           <ConditionDetailBody condition={condition} locale={locale} category={category} />
         </div>
+
+        <ConditionWhereTreated locale={locale} slug={slug} />
 
         <div className="mt-8 pt-6 border-t border-brand-sectiongray">
           <p className="text-xs font-bold uppercase tracking-wide text-brand-text-muted mb-3">

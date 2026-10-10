@@ -42,7 +42,7 @@ To'liq diagnostika ko'pincha **1–2 kun** yetadi. Og'ir bo'lmagan bemorlar uchu
 - Ko'p muolajalar uchun **ta'til yoki kasallik varaqasi** olish shart emas.
 - Shaxsiy kuzatuv va tez tekshiruv natijasi.
 
-Bog'liq xizmatlar: [Dermatologiya](/uz/services/dermatologiya), [Narxlar](/uz/prices), [Qabulga yozilish](/uz/appointment).`;
+Bog'liq xizmatlar: [Dermatologiya](/uz/services/dermatologiya), [Narxlar](/uz/prices), [Filiallar va qabul](/uz/branches).`;
 }
 
 function ruBody(): string {

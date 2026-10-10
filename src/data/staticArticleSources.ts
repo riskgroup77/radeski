@@ -1,4 +1,6 @@
 import type { Article } from '../types';
+import { SOCH_TOKILISHI_TAHLILLAR_RADESKI_ARTICLE } from './articles/sochTokilishiTahlillarRadeskiArticle';
+import { PSORIAZ_TASHXIS_DAVOLASH_RADESKI_ARTICLE } from './articles/psoriazTashxisDavolashRadeskiArticle';
 import { ACNE_ARTICLE } from './articles/acneArticle';
 import { POST_ACNE_ARTICLE } from './articles/postAcneArticle';
 import { ROSACEA_ARTICLE } from './articles/rosaceaArticle';
@@ -115,4 +117,6 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   KONTUR_PLASTIKA_RADESKI_ARTICLE,
   LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE,
   NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE,
+  PSORIAZ_TASHXIS_DAVOLASH_RADESKI_ARTICLE,
+  SOCH_TOKILISHI_TAHLILLAR_RADESKI_ARTICLE,
 ];
