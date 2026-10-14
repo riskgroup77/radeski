@@ -33,6 +33,8 @@ export interface DoctorProfileSection {
 export interface DoctorProfileContent {
   aboutTitle: string;
   about: string[];
+  /** The doctor's own words, shown as a highlighted quote under the intro. */
+  quote?: string;
   sections: DoctorProfileSection[];
 }
 

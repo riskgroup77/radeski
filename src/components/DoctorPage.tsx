@@ -13,6 +13,7 @@ import {
   FlaskConical,
   GraduationCap,
   MapPin,
+  Quote,
   Sparkles,
   Stethoscope,
 } from 'lucide-react';
@@ -126,25 +127,25 @@ function InfoBlock({
 }
 
 function DoctorProfileDetails({ profile, compact = false }: { profile: DoctorProfileContent; compact?: boolean }) {
-  const { specialtySection, diagnosticsSection, infoSections } = useMemo(() => {
+  const { specialtySection, listSections, infoSections } = useMemo(() => {
     let specialty: DoctorProfileSection | undefined;
-    let diagnostics: DoctorProfileSection | undefined;
+    const lists: DoctorProfileSection[] = [];
     const info: DoctorProfileSection[] = [];
 
     for (const section of profile.sections) {
       if (section.subsections?.length) specialty = section;
-      else if (section.items?.length) diagnostics = section;
+      else if (section.items?.length) lists.push(section);
       else if (section.paragraphs?.length) info.push(section);
     }
 
     return {
       specialtySection: specialty,
-      diagnosticsSection: diagnostics,
+      listSections: lists,
       infoSections: info,
     };
   }, [profile.sections]);
 
-  const infoIcons = [Stethoscope, GraduationCap, MapPin];
+  const infoIcons = [Stethoscope, GraduationCap];
 
   return (
     <div className="space-y-4">
@@ -160,6 +161,12 @@ function DoctorProfileDetails({ profile, compact = false }: { profile: DoctorPro
             </p>
           ))}
         </div>
+        {profile.quote && (
+          <blockquote className="mt-3 flex gap-2 rounded-lg border-l-2 border-brand-gold bg-white px-3 py-2.5">
+            <Quote className="h-3.5 w-3.5 shrink-0 text-brand-gold mt-0.5" aria-hidden="true" />
+            <p className="text-[11px] sm:text-xs leading-relaxed text-brand-text-primary italic">{profile.quote}</p>
+          </blockquote>
+        )}
       </div>
 
       {specialtySection?.subsections && (
@@ -172,29 +179,29 @@ function DoctorProfileDetails({ profile, compact = false }: { profile: DoctorPro
         </div>
       )}
 
-      {diagnosticsSection?.items && (
-        <div className="rounded-xl border border-brand-sectiongray/70 bg-white px-3 py-3 sm:px-4 sm:py-3.5">
+      {listSections.map((section) => (
+        <div key={section.title} className="rounded-xl border border-brand-sectiongray/70 bg-white px-3 py-3 sm:px-4 sm:py-3.5">
           <h2 className="text-[11px] font-extrabold uppercase tracking-wide text-brand-text-primary flex items-center gap-1.5 mb-1.5">
             <FlaskConical className="h-3.5 w-3.5 text-brand-gold" />
-            {diagnosticsSection.title}
+            {section.title}
           </h2>
-          {diagnosticsSection.paragraphs?.map((paragraph) => (
+          {section.paragraphs?.map((paragraph) => (
             <p key={paragraph} className="text-[11px] sm:text-xs text-brand-text-muted mb-2 font-light leading-relaxed">
               {paragraph}
             </p>
           ))}
-          <ItemChips items={diagnosticsSection.items} compact={compact} />
+          <ItemChips items={section.items ?? []} compact={compact} />
         </div>
-      )}
+      ))}
 
       {infoSections.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {infoSections.map((section, index) => {
-            const Icon = infoIcons[index] ?? Check;
             const isReception =
               section.title.toLowerCase().includes('qabul') ||
               section.title.toLowerCase().includes('приём') ||
               section.title.toLowerCase().includes('appointment');
+            const Icon = isReception ? MapPin : infoIcons[index] ?? Check;
 
             return (
               <div key={section.title} className={isReception ? 'sm:col-span-2' : ''}>

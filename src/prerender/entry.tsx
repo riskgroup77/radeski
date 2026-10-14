@@ -531,6 +531,7 @@ function DoctorProfileText({ profile }: { profile: NonNullable<Doctor['profile']
       {profile.about.map((text) => (
         <p key={text.slice(0, 40)}>{text}</p>
       ))}
+      {profile.quote && <blockquote><p>{profile.quote}</p></blockquote>}
       {profile.sections.map((section) => (
         <section key={section.title}>
           <h2>{section.title}</h2>
