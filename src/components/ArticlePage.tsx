@@ -236,11 +236,7 @@ export default function ArticlePage({
               </div>
             </div>
 
-            <div
-              className={`w-full mb-8 rounded-2xl overflow-hidden border border-brand-offwhite ${
-                isEquipmentPromoArticle(activeArticle) ? 'max-w-md mx-auto' : ''
-              }`}
-            >
+            <div className="w-full mb-8 rounded-2xl overflow-hidden border border-brand-offwhite">
               {articleImage ? (
                 <ArticleCoverMedia
                   src={articleImage}

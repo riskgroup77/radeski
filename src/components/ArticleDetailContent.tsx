@@ -22,12 +22,23 @@ import {
 } from '../utils/articleContent';
 import { resolveArticleBody, resolveArticleRichContent } from '../utils/articleContentFull';
 import AppointmentBookingLink from './AppointmentBookingLink';
-import { isEquipmentPromoImageSrc } from '../utils/articles';
+import { isEquipmentPromoArticle, isEquipmentPromoImageSrc } from '../utils/articles';
+import { getLocalizedImage } from '../utils/localizedImage';
 import { buildFaqSchema } from '../seo/structuredData';
 
 interface ArticleDetailContentProps {
   article: Article;
   locale: Locale;
+}
+
+/** Path part of an image URL, so '/x.jpg' and 'https://site/x.jpg?v=2' compare equal. */
+function imagePathKey(src: string | undefined | null): string {
+  if (!src) return '';
+  try {
+    return new URL(src, 'https://radeski.uz').pathname.toLowerCase();
+  } catch {
+    return src.split('?')[0].toLowerCase();
+  }
 }
 
 function slugifyHeading(text: string): string {
@@ -50,6 +61,10 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
   const toc = useMemo(() => extractArticleHeadings(body), [body]);
   const hashtags = useMemo(() => formatArticleHashtags(rich.tags), [rich.tags]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  // The hero above already shows the cover (and, for the equipment articles, the promo poster):
+  // the same picture is not repeated inside the text.
+  const coverKey = imagePathKey(getLocalizedImage(article.images, locale) ?? article.image);
+  const promoArticle = isEquipmentPromoArticle(article);
 
   // FAQPage markup for the questions shown below (prerendered pages carry the same block).
   useEffect(() => {
@@ -129,23 +144,21 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
       ),
       img: ({ src, alt }: { src?: string; alt?: string }) => {
         const promo = isEquipmentPromoImageSrc(src);
+        if ((coverKey && imagePathKey(src) === coverKey) || (promo && promoArticle)) return null;
+        // Capped height: portrait photos and posters stay within the screen, landscape ones are unchanged.
         return (
-          <figure className={`my-6 sm:my-8 ${promo ? 'max-w-md mx-auto' : ''}`}>
+          <figure className="my-6 sm:my-8">
             <MediaImage
               src={src}
               alt={alt ?? ''}
-              sizes={promo ? '448px' : '(max-width: 768px) 100vw, 768px'}
-              className={
-                promo
-                  ? 'w-full h-auto rounded-2xl border border-brand-sectiongray shadow-sm bg-neutral-600'
-                  : 'w-full max-w-3xl mx-auto h-auto rounded-2xl border border-brand-sectiongray shadow-sm object-cover'
-              }
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="mx-auto block h-auto w-auto max-w-full max-h-[420px] sm:max-h-[520px] rounded-2xl border border-brand-sectiongray shadow-sm object-contain"
             />
           </figure>
         );
       },
     }),
-    [],
+    [coverKey, promoArticle],
   );
 
   return (
