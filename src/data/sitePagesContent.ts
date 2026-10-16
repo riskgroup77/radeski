@@ -1015,6 +1015,44 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
 
 export const TREATMENT_RESULTS: TreatmentResult[] = [
   {
+    id: 'thulium-pigmentation-cheek-comparison',
+    sortOrder: -3.2,
+    title: {
+      uz: 'Tuliy lazer 1927 nm — yuzdagi pigmentatsiya',
+      ru: 'Тулиевый лазер 1927 нм — пигментация на лице',
+      en: '1927 nm thulium laser — facial pigmentation',
+    },
+    description: {
+      uz: "Oldin: yonoq va yuzning yon qismida aniq ko'rinadigan jigarrang pigment dog'lar, notekis teri rangi. Keyin: tuliy lazer 1927 nm (LaseMD Ultra) kursidan so'ng dog'lar sezilarli darajada oqargan, teri rangi tekisroq va bir xilroq bo'lgan. Natijani saqlash uchun muntazam quyoshdan himoya muhim.",
+      ru: 'До: выраженные коричневые пигментные пятна на щеке и боковой поверхности лица, неровный тон кожи. После курса тулиевого лазера 1927 нм (LaseMD Ultra): пятна заметно посветлели, тон кожи стал ровнее и однороднее. Для сохранения результата важна регулярная фотозащита.',
+      en: 'Before: pronounced brown pigment spots on the cheek and side of the face, uneven skin tone. After a course of the 1927 nm thulium laser (LaseMD Ultra): the spots are noticeably lighter and the skin tone is more even. Regular sun protection is important to keep the result.',
+    },
+    service: { uz: 'Tuliy lazer 1927 nm (LaseMD Ultra)', ru: 'Тулиевый лазер 1927 нм (LaseMD Ultra)', en: '1927 nm thulium laser (LaseMD Ultra)' },
+    comparisonImage: '/results/thulium-pigmentation-cheek-comparison.jpg',
+    beforeImage: '/results/thulium-pigmentation-cheek-comparison.jpg',
+    afterImage: '/results/thulium-pigmentation-cheek-comparison.jpg',
+    sessions: { uz: 'Individual kurs', ru: 'Индивидуальный курс', en: 'Individual course' },
+  },
+  {
+    id: 'thulium-tone-texture-cheek-comparison',
+    sortOrder: -3.1,
+    title: {
+      uz: 'Tuliy lazer 1927 nm — teri rangi va teksturasi',
+      ru: 'Тулиевый лазер 1927 нм — тон и текстура кожи',
+      en: '1927 nm thulium laser — skin tone and texture',
+    },
+    description: {
+      uz: "Oldin: yonoqda tarqoq mayda pigment dog'lar va notekis teri relyefi. Keyin: tuliy lazer 1927 nm (LaseMD Ultra) bilan ishlovdan so'ng dog'lar deyarli sezilmaydi, teri silliqroq va rangi bir tekis ko'rinadi.",
+      ru: 'До: рассеянные мелкие пигментные пятна на щеке и неровный рельеф кожи. После обработки тулиевым лазером 1927 нм (LaseMD Ultra): пятна почти незаметны, кожа выглядит более гладкой, тон — ровным.',
+      en: 'Before: scattered small pigment spots on the cheek and uneven skin texture. After treatment with the 1927 nm thulium laser (LaseMD Ultra): the spots are barely visible and the skin looks smoother with an even tone.',
+    },
+    service: { uz: 'Tuliy lazer 1927 nm (LaseMD Ultra)', ru: 'Тулиевый лазер 1927 нм (LaseMD Ultra)', en: '1927 nm thulium laser (LaseMD Ultra)' },
+    comparisonImage: '/results/thulium-tone-texture-cheek-comparison.jpg',
+    beforeImage: '/results/thulium-tone-texture-cheek-comparison.jpg',
+    afterImage: '/results/thulium-tone-texture-cheek-comparison.jpg',
+    sessions: { uz: 'Individual kurs', ru: 'Индивидуальный курс', en: 'Individual course' },
+  },
+  {
     id: 'vitiligo-face-uvb-1-5mo',
     sortOrder: -3,
     title: {

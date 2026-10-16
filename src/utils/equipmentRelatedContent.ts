@@ -24,6 +24,7 @@ export const EQUIPMENT_ARTICLE_KEYS: Record<ClinicEquipmentId, string[]> = {
     'adult-acne',
     'acne',
   ],
+  'lasemd-ultra-lutronic': ['lasemd-ultra-kokand', 'thulium-laser-hair-kokand', 'hollywood-spectra-pigmentation'],
 };
 
 const EQUIPMENT_RESULT_KEYWORDS: Record<ClinicEquipmentId, string[]> = {
@@ -37,6 +38,7 @@ const EQUIPMENT_RESULT_KEYWORDS: Record<ClinicEquipmentId, string[]> = {
   'ipl-inmode': ['ipl', 'inmode', 'lumecca', 'foto yangilash', 'фотоомолож'],
   'derma-v-lutronic': ['derma v', 'vascular', 'tomir', 'qizarish', 'rosacea'],
   'hollywood-spectra-lutronic': ['hollywood', 'spectra', 'karbon', 'carbon', 'peeling', 'tattoo', 'qosh'],
+  'lasemd-ultra-lutronic': ['tuliy', 'тулиев', 'thulium', 'lasemd', '1927'],
 };
 
 const EQUIPMENT_VIDEO_KEYWORDS: Record<ClinicEquipmentId, string[]> = {
@@ -50,6 +52,7 @@ const EQUIPMENT_VIDEO_KEYWORDS: Record<ClinicEquipmentId, string[]> = {
   'ipl-inmode': ['ipl', 'inmode'],
   'derma-v-lutronic': ['derma v', 'vascular'],
   'hollywood-spectra-lutronic': ['hollywood', 'spectra', 'karbon'],
+  'lasemd-ultra-lutronic': ['tuliy', 'тулиев', 'thulium', 'lasemd', '1927'],
 };
 
 function normalizeMatchText(value: string): string {

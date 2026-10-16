@@ -17,6 +17,14 @@ export function getEquipmentSectionLabels(locale: Locale) {
         allPrices: 'Barcha narxlar',
         book: 'Qabulga yozilish',
         noPrices: 'Aniq narx shifokor konsultatsiyasida belgilanadi.',
+        howItWorks: 'Qanday ishlaydi?',
+        expectedChanges: "Muolajadan keyin kuzatilishi mumkin bo'lgan o'zgarishlar",
+        suitability: 'Muolaja kimga mos?',
+        doctorAssesses: 'Muolajadan oldin shifokor baholaydi',
+        contraindications: "Qarshi ko'rsatmalar",
+        results: 'Natijalar: nimani kutish mumkin?',
+        conclusion: 'Xulosa',
+        faq: "Ko'p so'raladigan savollar",
       }
     : locale === 'ru'
       ? {
@@ -33,6 +41,14 @@ export function getEquipmentSectionLabels(locale: Locale) {
           allPrices: 'Все цены',
           book: 'Записаться',
           noPrices: 'Точная стоимость определяется на консультации врача.',
+          howItWorks: 'Как это работает?',
+          expectedChanges: 'Какие изменения могут наблюдаться после процедуры',
+          suitability: 'Кому подходит процедура?',
+          doctorAssesses: 'Перед процедурой врач оценивает',
+          contraindications: 'Противопоказания',
+          results: 'Результаты: чего ожидать?',
+          conclusion: 'Заключение',
+          faq: 'Частые вопросы',
         }
       : {
           sectionTitle: 'Clinic equipment',
@@ -48,5 +64,13 @@ export function getEquipmentSectionLabels(locale: Locale) {
           allPrices: 'All prices',
           book: 'Book appointment',
           noPrices: 'Exact pricing is confirmed at physician consultation.',
+          howItWorks: 'How does it work?',
+          expectedChanges: 'Changes you may notice after treatment',
+          suitability: 'Who is it for?',
+          doctorAssesses: 'Before treatment, the doctor assesses',
+          contraindications: 'Contraindications',
+          results: 'Results: what to expect',
+          conclusion: 'Conclusion',
+          faq: 'Frequently asked questions',
         };
 }

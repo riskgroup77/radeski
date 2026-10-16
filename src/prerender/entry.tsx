@@ -15,6 +15,8 @@ import { DERMATOLOGY_CONDITION_NAV } from '../data/dermatologyConditionsNav';
 import type { Doctor } from '../types';
 import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
 import { buildServiceH1 } from '../seo/pageMeta';
+import { getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
+import { getEquipmentSectionLabels } from '../utils/clinicEquipmentLabels';
 import { subServiceRouteKey } from '../utils/serviceSubSlug';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
@@ -119,12 +121,17 @@ function escapeHtml(value: string): string {
 
 /** Visible H1: the entity name when there is one, otherwise the title without the brand tail. */
 function resolveHeading(head: RouteHead, locale: Locale): string {
-  const { article, doctor, serviceSub, serviceCategory, video, localLanding } = head.route;
+  const { article, doctor, serviceSub, serviceCategory, equipment, video, localLanding } = head.route;
   if (localLanding) return getLocalizedCopy(localLanding.h1, locale);
   if (article) return article.title[locale] || article.title.uz;
   if (video) return videoTitle(video, locale);
   if (doctor) return doctor.name[locale] || doctor.name.uz;
   // Same headings as the React service pages.
+  if (equipment) {
+    return equipment.heading
+      ? getLocalizedEquipmentText(equipment.heading, locale)
+      : buildServiceH1(getLocalizedEquipmentText(equipment.title, locale), locale);
+  }
   if (serviceSub) return buildServiceH1(serviceSub.name[locale] || serviceSub.name.uz, locale);
   if (serviceCategory) return buildServiceH1(serviceCategory.title[locale] || serviceCategory.title.uz, locale);
   return head.title.split(' | ')[0];
@@ -549,6 +556,89 @@ function DoctorProfileText({ profile }: { profile: NonNullable<Doctor['profile']
   );
 }
 
+/** Device page text for crawlers — the same sections as EquipmentDetailContent. */
+function EquipmentBody({ equipment, locale }: { equipment: ClinicEquipmentEntry; locale: Locale }) {
+  const t = (text: ClinicEquipmentEntry['title']) => getLocalizedEquipmentText(text, locale);
+  const labels = getEquipmentSectionLabels(locale);
+  const details = equipment.details;
+  return (
+    <>
+      <p>{t(equipment.fullDescription)}</p>
+      {details?.about.map((text) => <p key={text.uz}>{t(text)}</p>)}
+      <p>{labels.manufacturer}: {t(equipment.manufacturer)}</p>
+      {details && (
+        <section>
+          <h2>{labels.howItWorks}</h2>
+          {details.howItWorks.paragraphs.map((text) => <p key={text.uz}>{t(text)}</p>)}
+          <ul>{details.howItWorks.effects.map((item) => <li key={item.uz}>{t(item)}</li>)}</ul>
+        </section>
+      )}
+      <section>
+        <h2>{labels.indications}</h2>
+        {details ? (
+          details.indications.map((item) => (
+            <div key={item.title.uz}>
+              <h3>{t(item.title)}</h3>
+              <p>{t(item.text)}</p>
+            </div>
+          ))
+        ) : (
+          <ul>{equipment.indications.map((item) => <li key={item.uz}>{t(item)}</li>)}</ul>
+        )}
+      </section>
+      {details && (
+        <>
+          <section>
+            <h2>{labels.suitability}</h2>
+            <p>{t(details.suitability.intro)}</p>
+            <ul>{details.suitability.checks.map((item) => <li key={item.uz}>{t(item)}</li>)}</ul>
+          </section>
+          <section>
+            <h2>{labels.contraindications}</h2>
+            <p>{t(details.contraindications.intro)}</p>
+            <ul>{details.contraindications.items.map((item) => <li key={item.uz}>{t(item)}</li>)}</ul>
+            <p>{t(details.contraindications.note)}</p>
+          </section>
+        </>
+      )}
+      <section>
+        <h2>{labels.clinicUsage}</h2>
+        {equipment.clinicUsage.map((text) => <p key={text.uz}>{t(text)}</p>)}
+      </section>
+      <section>
+        <h2>{labels.process}</h2>
+        <ol>
+          {details
+            ? details.steps.map((step) => <li key={step.title.uz}>{t(step.title)}: {t(step.text)}</li>)
+            : equipment.process.map((step) => <li key={step.uz}>{t(step)}</li>)}
+        </ol>
+      </section>
+      {details && (
+        <>
+          <section>
+            <h2>{labels.results}</h2>
+            <p>{t(details.results.intro)}</p>
+            <ul>{details.results.items.map((item) => <li key={item.uz}>{t(item)}</li>)}</ul>
+          </section>
+          <section>
+            <h2>{labels.faq}</h2>
+            {details.faq.map((item) => (
+              <div key={item.question.uz}>
+                <h3>{t(item.question)}</h3>
+                <p>{t(item.answer)}</p>
+              </div>
+            ))}
+          </section>
+          <section>
+            <h2>{labels.conclusion}</h2>
+            {details.conclusion.map((text) => <p key={text.uz}>{t(text)}</p>)}
+          </section>
+        </>
+      )}
+    </>
+  );
+}
+
 function PageContent({
   head,
   locale,
@@ -566,7 +656,7 @@ function PageContent({
   reviews: ApiReviewOut[];
   pathname: string;
 }): ReactNode {
-  const { currentPage, article, doctor, serviceCategory, serviceSub, video, localLanding } = head.route;
+  const { currentPage, article, doctor, serviceCategory, serviceSub, equipment, video, localLanding } = head.route;
 
   if (localLanding) return <LandingBody landing={localLanding} locale={locale} clinic={clinic} results={results} reviews={reviews} />;
 
@@ -628,6 +718,8 @@ function PageContent({
       </>
     );
   }
+
+  if (equipment) return <EquipmentBody equipment={equipment} locale={locale} />;
 
   if (serviceSub && serviceCategory) {
     return (

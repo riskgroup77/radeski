@@ -153,7 +153,7 @@ export default function ClinicEquipmentPage({
 
         <ServicePageHero
           badge={category.title[locale]}
-          title={buildServiceH1(title, locale)}
+          title={equipment.heading ? getLocalizedEquipmentText(equipment.heading, locale) : buildServiceH1(title, locale)}
           description={heroText}
           image={equipment.image}
           iconName={resolveCategoryIcon(category)}

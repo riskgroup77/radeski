@@ -33,7 +33,7 @@ import { localeToOgLocale } from '../routing/locale';
 import { findPromoSlideBySlug } from '../data/homePromoCarousel';
 import { DAAVLIN_MODEL_DEEP } from '../data/daavlinModelDeepContent';
 import { OBRAZOVANIYA } from '../data/obrazovaniyaContent';
-import { getLocalizedEquipmentText } from '../data/clinicEquipmentCatalog';
+import { getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
 import { getDermatologyConditionNavItem, isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
 import {
   getLocalCommercialFromPathname,
@@ -122,6 +122,8 @@ export interface RouteHead {
     doctor: Doctor | null;
     serviceCategory: ServiceCategory | null;
     serviceSub: ServiceCategory['subServices'][number] | null;
+    /** Device page under Apparat kosmetologiya (/services/apparatnaya-kosmetologiya/<id>). */
+    equipment: ClinicEquipmentEntry | null;
     video: ClinicVideo | null;
     localLanding: LocalCommercialLanding | null;
     isErrorPage: boolean;
@@ -271,7 +273,9 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
               : activeDoctor
                 ? buildDoctorSeoTitle(activeDoctor, doctorDetails, locale)
                 : activeEquipment
-                  ? buildServicePageSeoTitle(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
+                  ? activeEquipment.seo
+                    ? getLocalizedEquipmentText(activeEquipment.seo.title, locale)
+                    : buildServicePageSeoTitle(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
                   : activeServiceSub
                     ? buildServicePageSeoTitle(activeServiceSub.name[locale], locale)
                     : activeServiceCategory
@@ -293,7 +297,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
           : activeDoctor
             ? buildDoctorSeoDescription(activeDoctor, doctorDetails, locale)
             : activeEquipment
-              ? getLocalizedEquipmentText(activeEquipment.shortDescription, locale)
+              ? getLocalizedEquipmentText(activeEquipment.seo?.description ?? activeEquipment.shortDescription, locale)
               : activeServiceSub
                 ? activeServiceSub.description[locale]
                 : activeServiceCategory
@@ -310,7 +314,9 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
         ? articleSeo.keywords
         : activeArticle
           ? articleTags.join(', ')
-          : tabSeo.keywords;
+          : activeEquipment?.seo
+            ? getLocalizedEquipmentText(activeEquipment.seo.keywords, locale)
+            : tabSeo.keywords;
 
   const seoContext: RouteSeoContext = {
     pathname,
@@ -370,6 +376,16 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     const faq = buildFaqSchema(landingDetails.faqs);
     if (faq) jsonLd.push(faq);
   }
+  if (activeEquipment?.details) {
+    // The same questions are shown on the device page.
+    const faq = buildFaqSchema(
+      activeEquipment.details.faq.map((item) => ({
+        question: getLocalizedEquipmentText(item.question, locale),
+        answer: getLocalizedEquipmentText(item.answer, locale),
+      })),
+    );
+    if (faq) jsonLd.push(faq);
+  }
 
   return {
     lang: locale,
@@ -380,7 +396,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     robots: isErrorPage ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1',
     ogImage: activeVideo && videoPoster(activeVideo)
       ? absoluteOgPath(origin, videoPoster(activeVideo)!)
-      : resolveOgImage(origin, locale, activeArticle, activeDoctor, activeServiceSub ?? activeServiceCategory) ??
+      : resolveOgImage(origin, locale, activeArticle, activeDoctor, activeEquipment ?? activeServiceSub ?? activeServiceCategory) ??
         absoluteOgPath(
           origin,
           pageShareImage(locale, currentPage, activeServiceCategory, activeServiceSub, activeLocalCommercial, serviceCategories),
@@ -395,6 +411,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       doctor: activeDoctor,
       serviceCategory: activeServiceCategory,
       serviceSub: activeServiceSub,
+      equipment: activeEquipment,
       video: activeVideo,
       localLanding: activeLocalCommercial,
       isErrorPage,

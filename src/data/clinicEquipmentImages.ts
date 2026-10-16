@@ -15,4 +15,5 @@ export const CLINIC_EQUIPMENT_IMAGES: Record<ClinicEquipmentId, string> = {
   'ipl-inmode': '/services/apparatnaya/ipl-inmode.jpg',
   'derma-v-lutronic': '/articles/derma-v-promo.png',
   'hollywood-spectra-lutronic': '/articles/hollywood-spectra-pores-promo.png',
+  'lasemd-ultra-lutronic': '/articles/lasemd-ultra-kokand-cover.jpg',
 };

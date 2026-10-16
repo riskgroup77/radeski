@@ -1,14 +1,21 @@
 import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import {
+  BookOpenCheck,
   CheckCircle2,
+  CircleHelp,
   Cpu,
   ExternalLink,
+  Info,
   ListOrdered,
+  ShieldAlert,
   Sparkles,
   Stethoscope,
   Tag,
   Target,
+  TrendingUp,
+  UserCheck,
+  Zap,
 } from 'lucide-react';
 import type { Locale, PriceItem, ServiceCategory } from '../types';
 import {
@@ -76,6 +83,41 @@ function BulletGrid({ items }: { items: string[] }) {
   );
 }
 
+function TitledSteps({ items }: { items: { title: string; text: string }[] }) {
+  return (
+    <ol className="space-y-3">
+      {items.map((item, index) => (
+        <li
+          key={item.title}
+          className="relative rounded-xl border border-brand-sectiongray bg-brand-offwhite/40 py-4 pl-12 pr-4"
+        >
+          <span className="absolute left-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white">
+            {index + 1}
+          </span>
+          <h4 className="text-sm font-bold text-brand-text-primary">{item.title}</h4>
+          <p className="mt-1 text-sm leading-relaxed text-brand-text-secondary">{item.text}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function Paragraphs({ items }: { items: string[] }) {
+  return (
+    <div className="space-y-3">
+      {items.map((text) => (
+        <p key={text} className="text-sm leading-relaxed text-brand-text-secondary sm:text-base">
+          {text}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function SubHeading({ children }: { children: ReactNode }) {
+  return <h4 className="mb-3 mt-5 text-sm font-bold text-brand-text-primary">{children}</h4>;
+}
+
 function ProcessSteps({ items }: { items: string[] }) {
   if (items.length === 0) return null;
   return (
@@ -116,18 +158,26 @@ export default function EquipmentDetailContent({
   const directions = entry.directions.map((item) => getLocalizedEquipmentText(item, locale));
   const indications = entry.indications.map((item) => getLocalizedEquipmentText(item, locale));
   const processSteps = entry.process.map((item) => getLocalizedEquipmentText(item, locale));
+  const details = entry.details;
+  const t = (text: Parameters<typeof getLocalizedEquipmentText>[0]) => getLocalizedEquipmentText(text, locale);
 
   return (
     <div className="space-y-6">
       <SectionCard icon={Stethoscope} title={serviceLabels.about}>
-        <p className="text-sm leading-relaxed text-brand-text-secondary sm:text-base">
-          {getLocalizedEquipmentText(entry.fullDescription, locale)}
-        </p>
+        <Paragraphs items={[t(entry.fullDescription), ...(details?.about.map(t) ?? [])]} />
         <p className="mt-4 border-t border-brand-sectiongray/80 pt-4 text-sm text-brand-text-secondary">
           <span className="font-semibold text-brand-text-primary">{labels.manufacturer}: </span>
           {getLocalizedEquipmentText(entry.manufacturer, locale)}
         </p>
       </SectionCard>
+
+      {details ? (
+        <SectionCard icon={Zap} title={labels.howItWorks}>
+          <Paragraphs items={details.howItWorks.paragraphs.map(t)} />
+          <SubHeading>{labels.expectedChanges}</SubHeading>
+          <BulletGrid items={details.howItWorks.effects.map(t)} />
+        </SectionCard>
+      ) : null}
 
       {directions.length > 0 ? (
         <SectionCard icon={Cpu} title={labels.directions}>
@@ -144,10 +194,52 @@ export default function EquipmentDetailContent({
         </SectionCard>
       ) : null}
 
-      {indications.length > 0 ? (
+      {details ? (
+        <SectionCard icon={Target} title={serviceLabels.indications}>
+          <p className="mb-4 text-sm leading-relaxed text-brand-text-secondary sm:text-base">{t(details.indicationsIntro)}</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {details.indications.map((item, index) => (
+              <div key={item.title.uz} className="rounded-xl border border-brand-sectiongray bg-brand-offwhite/40 p-4">
+                <h4 className="text-sm font-bold text-brand-text-primary">
+                  {index + 1}. {t(item.title)}
+                </h4>
+                <p className="mt-1.5 text-sm leading-relaxed text-brand-text-secondary">{t(item.text)}</p>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+      ) : indications.length > 0 ? (
         <SectionCard icon={Target} title={serviceLabels.indications}>
           <BulletGrid items={indications} />
         </SectionCard>
+      ) : null}
+
+      {details ? (
+        <>
+          <SectionCard icon={UserCheck} title={labels.suitability}>
+            <Paragraphs items={[t(details.suitability.intro)]} />
+            <SubHeading>{labels.doctorAssesses}</SubHeading>
+            <BulletGrid items={details.suitability.checks.map(t)} />
+          </SectionCard>
+
+          <SectionCard icon={ShieldAlert} title={labels.contraindications}>
+            <p className="mb-4 text-sm leading-relaxed text-brand-text-secondary sm:text-base">
+              {t(details.contraindications.intro)}
+            </p>
+            <ul className="space-y-2">
+              {details.contraindications.items.map((item) => (
+                <li key={item.uz} className="flex items-start gap-2.5 text-sm leading-relaxed text-brand-text-secondary">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-gold" />
+                  <span>{t(item)}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 flex gap-2 rounded-xl border border-brand-gold/25 bg-brand-gold-light/10 p-3.5 text-sm leading-relaxed text-brand-text-secondary">
+              <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" />
+              <span>{t(details.contraindications.note)}</span>
+            </p>
+          </SectionCard>
+        </>
       ) : null}
 
       {entry.clinicUsage.length > 0 ? (
@@ -162,7 +254,20 @@ export default function EquipmentDetailContent({
         </SectionCard>
       ) : null}
 
-      {processSteps.length > 0 ? (
+      {details ? (
+        <>
+          <SectionCard icon={ListOrdered} title={serviceLabels.process}>
+            <TitledSteps items={details.steps.map((step) => ({ title: t(step.title), text: t(step.text) }))} />
+          </SectionCard>
+
+          <SectionCard icon={TrendingUp} title={labels.results}>
+            <Paragraphs items={[t(details.results.intro)]} />
+            <div className="mt-4">
+              <BulletGrid items={details.results.items.map(t)} />
+            </div>
+          </SectionCard>
+        </>
+      ) : processSteps.length > 0 ? (
         <SectionCard icon={ListOrdered} title={serviceLabels.process}>
           <ProcessSteps items={processSteps} />
         </SectionCard>
@@ -199,6 +304,28 @@ export default function EquipmentDetailContent({
           <p className="text-sm text-brand-text-muted">{labels.noPrices}</p>
         ) : null}
       </SectionCard>
+
+      {details ? (
+        <>
+          <SectionCard icon={CircleHelp} title={labels.faq}>
+            <div className="divide-y divide-brand-sectiongray overflow-hidden rounded-xl border border-brand-sectiongray">
+              {details.faq.map((item) => (
+                <details key={item.question.uz} className="group bg-brand-white">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-sm font-semibold text-brand-text-primary hover:bg-brand-offwhite/60">
+                    <h4>{t(item.question)}</h4>
+                    <span className="text-lg leading-none text-brand-gold transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="px-4 pb-4 text-sm leading-relaxed text-brand-text-secondary">{t(item.answer)}</p>
+                </details>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard icon={BookOpenCheck} title={labels.conclusion} highlight>
+            <Paragraphs items={details.conclusion.map(t)} />
+          </SectionCard>
+        </>
+      ) : null}
 
       {entry.serviceLinks.length > 0 ? (
         <div className="flex flex-wrap gap-2">

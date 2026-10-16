@@ -1,5 +1,6 @@
 import type { Locale, PriceItem } from '../types';
 import { CLINIC_EQUIPMENT_IMAGES } from './clinicEquipmentImages';
+import { LASEMD_ULTRA_LUTRONIC } from './equipment/lasemdUltraLutronic';
 
 export interface LocalizedEquipmentText {
   uz: string;
@@ -31,6 +32,39 @@ export interface ClinicEquipmentEntry {
   indications: LocalizedEquipmentText[];
   clinicUsage: LocalizedEquipmentText[];
   process: LocalizedEquipmentText[];
+  /** Page H1 when the device is not in both branches; otherwise "<title> Farg'ona va Qo'qonda". */
+  heading?: LocalizedEquipmentText;
+  /** Own <title>, meta description and keywords; otherwise built from title / shortDescription. */
+  seo?: {
+    title: LocalizedEquipmentText;
+    description: LocalizedEquipmentText;
+    keywords: LocalizedEquipmentText;
+  };
+  /** Full page content (thulium laser); entries without it keep the short layout. */
+  details?: ClinicEquipmentDetails;
+}
+
+export interface EquipmentTitledText {
+  title: LocalizedEquipmentText;
+  text: LocalizedEquipmentText;
+}
+
+export interface ClinicEquipmentDetails {
+  /** Paragraphs after fullDescription in the "about" card. */
+  about: LocalizedEquipmentText[];
+  howItWorks: { paragraphs: LocalizedEquipmentText[]; effects: LocalizedEquipmentText[] };
+  indicationsIntro: LocalizedEquipmentText;
+  indications: EquipmentTitledText[];
+  suitability: { intro: LocalizedEquipmentText; checks: LocalizedEquipmentText[] };
+  contraindications: {
+    intro: LocalizedEquipmentText;
+    items: LocalizedEquipmentText[];
+    note: LocalizedEquipmentText;
+  };
+  steps: EquipmentTitledText[];
+  results: { intro: LocalizedEquipmentText; items: LocalizedEquipmentText[] };
+  conclusion: LocalizedEquipmentText[];
+  faq: { question: LocalizedEquipmentText; answer: LocalizedEquipmentText }[];
 }
 
 function L(uz: string, ru: string, en: string): LocalizedEquipmentText {
@@ -49,6 +83,7 @@ export const APPARATLI_KOSMETOLOGIYA_EQUIPMENT_IDS = [
   'ipl-inmode',
   'derma-v-lutronic',
   'hollywood-spectra-lutronic',
+  'lasemd-ultra-lutronic',
 ] as const;
 
 export type ClinicEquipmentId = (typeof APPARATLI_KOSMETOLOGIYA_EQUIPMENT_IDS)[number];
@@ -486,6 +521,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
       L('Tinchlantiruvchi parvarish va SPF', 'Успокаивающий уход и SPF', 'Soothing care and SPF'),
     ],
   },
+  'lasemd-ultra-lutronic': LASEMD_ULTRA_LUTRONIC,
 };
 
 export function getClinicEquipment(id: ClinicEquipmentId, locale: Locale): ClinicEquipmentEntry {
