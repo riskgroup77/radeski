@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Radeski GSC</title>
+    <style>
+      body {
+        font-family: system-ui, Segoe UI, sans-serif;
+        margin: 0;
+        padding: 12px;
+        width: 360px;
+        color: #1a1a1a;
+        background: #faf8f4;
+      }
+      h1 {
+        font-size: 14px;
+        margin: 0 0 8px;
+        color: #8a6a20;
+      }
+      label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        margin: 8px 0 4px;
+      }
+      textarea,
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 12px;
+      }
+      textarea {
+        height: 120px;
+        resize: vertical;
+        font-family: ui-monospace, Consolas, monospace;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      button {
+        flex: 1;
+        border: 0;
+        border-radius: 8px;
+        padding: 10px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      #start {
+        background: #c9a227;
+        color: #fff;
+      }
+      #stop {
+        background: #eee;
+        color: #333;
+      }
+      #status {
+        margin-top: 10px;
+        font-size: 11px;
+        line-height: 1.35;
+        white-space: pre-wrap;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 8px;
+        max-height: 120px;
+        overflow: auto;
+      }
+      .hint {
+        font-size: 11px;
+        color: #666;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Radeski GSC Indexer</h1>
+    <p class="hint">
+      1) Chrome’da riskavan bilan Search Console oching<br />
+      2) URL’larni saqlang → Start<br />
+      3) Kerak bo‘lmasa Stop
+    </p>
+
+    <label>Resource ID</label>
+    <input id="resourceId" value="https://radeski.uz/" />
+
+    <label>Kechikish (soniya)</label>
+    <input id="delaySec" type="number" min="60" value="60" />
+
+    <label>URL’lar (har qatorga bittadan)</label>
+    <textarea id="urls"></textarea>
+
+    <div class="row">
+      <button id="start" type="button">Start</button>
+      <button id="stop" type="button">Stop</button>
+    </div>
+    <div id="status">Tayyor.</div>
+    <script src="popup.js"></script>
+  </body>
+</html>

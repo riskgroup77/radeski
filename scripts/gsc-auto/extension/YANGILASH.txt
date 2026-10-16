@@ -1,0 +1,11 @@
+YANGILASH (muhim — deep-link 404 tuzatildi)
+============================================
+1) chrome://extensions
+2) Radeski GSC Indexer → Remove (o'chirish)
+3) Load unpacked → yana shu papka:
+   C:\Users\User\Desktop\radeski\scripts\gsc-auto\extension
+4) Search Console Overview ni OCHING (radeski.uz) — 404 bo'lmasin
+5) Extension → Start
+
+Endi extension inspect?id=... deep-link ochmaydi.
+Yuqoridagi "Проверка URL" qatoriga yozib, tugmani bosadi.

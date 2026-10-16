@@ -1,0 +1,6 @@
+# GSC auto-indexer — local only. Chrome profile + secrets stay here.
+chrome-profile/
+*.log
+__pycache__/
+.venv/
+venv/

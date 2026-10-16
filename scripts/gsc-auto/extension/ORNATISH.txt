@@ -1,0 +1,25 @@
+RADESKI GSC INDEXER — Chrome extension
+========================================
+
+Papka:
+  C:\Users\User\Desktop\radeski\scripts\gsc-auto\extension
+
+O'RNATISH (riskavan@gmail.com Chrome profilida)
+1) Chrome oching (Profile: riskavan)
+2) Manzil qatoriga yozing:  chrome://extensions
+3) O'ng yuqorida "Режим разработчика" / Developer mode — YOQING
+4) "Загрузить распакованное расширение" / Load unpacked
+5) Shu papkani tanlang:  ...\scripts\gsc-auto\extension
+6) Extension paydo bo'ladi: "Radeski GSC Indexer"
+
+ISHLATISH
+1) https://search.google.com/search-console  oching (radeski.uz resursi)
+2) Extension ikonkasini bosing
+3) URL ro'yxatini tekshiring (o'zgartirish mumkin)
+4) START — o'zi Inspection ochib "Запросить индексирование" bosadi
+5) STOP — to'xtatadi
+
+ESLATMA
+- Kunlik kvota bo'lishi mumkin — ertaga davom
+- FAQAT o'z Search Console akkauntingizda ishlating
+- Playwright bot endi shart emas — extension yetarli
