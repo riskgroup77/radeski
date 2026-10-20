@@ -58,6 +58,7 @@ import {
   resolveArticleSeo,
 } from './pageMeta';
 import { SERVICE_CATEGORY_SEO } from './serviceCategorySeo';
+import { getCategoryFaq } from '../data/serviceCategoryFaq';
 import { buildHreflangLinks, getCanonicalUrl, type HreflangLink, type RouteSeoContext } from './routeSeo';
 import {
   buildArticleSchema,
@@ -85,6 +86,13 @@ import {
   videoRouteKey,
   videoTitle,
 } from '../utils/videoMeta';
+
+/** schema.org MedicalSpecialty of the main service categories. */
+const CATEGORY_MEDICAL_SPECIALTY: Record<string, string> = {
+  dermatologiya: 'Dermatology',
+  'apparatnaya-kosmetologiya': 'Dermatology',
+  'clinika-patologii-nogtej': 'Podiatric',
+};
 
 export interface RouteHeadInput {
   pathname: string;
@@ -409,6 +417,25 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     const faq = buildFaqSchema(landingDetails.faqs);
     if (faq) jsonLd.push(faq);
   }
+  if (categorySeo && activeServiceCategory) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'MedicalWebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: trimBrandTail(title),
+      description: fitDescription(description),
+      inLanguage: locale === 'uz' ? 'uz-UZ' : locale === 'ru' ? 'ru-RU' : 'en-US',
+      ...(CATEGORY_MEDICAL_SPECIALTY[activeServiceCategory.id]
+        ? { specialty: `https://schema.org/${CATEGORY_MEDICAL_SPECIALTY[activeServiceCategory.id]}` }
+        : {}),
+      author: { '@id': `${origin}/#clinic` },
+      publisher: { '@id': `${origin}/#clinic` },
+    });
+    // The same questions are shown on the category page (ServiceCategoryPage).
+    const faq = buildFaqSchema(getCategoryFaq(activeServiceCategory.id, locale));
+    if (faq) jsonLd.push(faq);
+  }
   if (activeEquipment?.details) {
     // The same questions are shown on the device page.
     const faq = buildFaqSchema(
@@ -553,7 +580,7 @@ function buildDoctorSeoDescription(doctor: Doctor, details: DoctorPageDetails | 
   return where ? `${lead} ${where}. ${bio}` : `${lead} ${bio}`;
 }
 
-const SPECIALIST_LANDINGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog']);
+const SPECIALIST_LANDINGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog', 'kosmetolog']);
 
 /** "Lazer epilyatsiya Farg'onada — narxlar | Radeski Skin Clinic" when prices are known. */
 function buildLandingSeoTitle(

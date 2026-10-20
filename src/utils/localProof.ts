@@ -49,7 +49,9 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
   'soch-tokilish': ['trixolog'],
   trixoskopiya: ['trixolog'],
   podolog: ['podolog'],
+  'ichga-osgan-tirnoq': ['podolog', 'dermatolog'],
   'tirnoq-zamburug': ['podolog', 'dermatolog'],
+  kosmetolog: ['kosmetolog', 'dermatolog'],
   dermatoskopiya: ['onkolog', 'dermatolog'],
   'xol-tekshiruvi': ['onkolog', 'dermatolog'],
   'onko-dermatolog': ['onkolog'],
@@ -89,6 +91,8 @@ const TOPIC_KEYWORDS: Record<string, RegExp> = {
   'soch-tokilish': /soch|волос|hair|alopes|алопец|trix|трих/i,
   trixoskopiya: /trixoskop|трихоскоп|trichoscop|soch|волос/i,
   podolog: /podolog|подолог|tirnoq|ноготь|ногт|nail|tovon|пятк/i,
+  // Before 'tirnoq-zamburug': its /tirnoq|ногт/ would also take ingrown-nail cases.
+  'ichga-osgan-tirnoq': /ichi?ga o.?sgan|o.?sib ketgan tirnoq|вросш|ingrown|onixokript|онихокрипт|titan/i,
   'tirnoq-zamburug': /tirnoq|ногт|nail|onixo|онихо|zamburug|грибок/i,
   dermatoskopiya: /dermatoskop|дерматоскоп|xol|родин|nevus|невус/i,
   'xol-tekshiruvi': /xol\b|родин|nevus|невус|dermatoskop/i,
@@ -96,11 +100,12 @@ const TOPIC_KEYWORDS: Record<string, RegExp> = {
   'osma-olib-tashlash': /o.?sma|новообраз|lazer bilan olib|удален|papillom|папиллом/i,
   biopsiya: /biops|биопс|gistolog|гистолог/i,
   'sogal-olib-tashlash': /so.?g.?al|бородав|wart|papillom|папиллом/i,
+  kosmetolog: /kosmetolog|косметолог|cosmetolog|piling|пилинг|peel|yuz tozalash|чистк/i,
 };
 
 /** Most specific city-page topic for a text (clinical case, review) — null when none fits. */
 export function topicForText(text: string): string | null {
-  const generic = new Set(['dermatolog', 'trixolog', 'podolog', 'dermatoskopiya']);
+  const generic = new Set(['dermatolog', 'trixolog', 'podolog', 'dermatoskopiya', 'kosmetolog']);
   const specific = Object.entries(TOPIC_KEYWORDS).filter(([topic]) => !generic.has(topic));
   const match = specific.find(([, pattern]) => pattern.test(text)) ?? Object.entries(TOPIC_KEYWORDS).find(([topic, pattern]) => generic.has(topic) && pattern.test(text));
   return match?.[0] ?? null;
@@ -123,6 +128,57 @@ export function reviewsForTopic(topic: string, reviews: CustomerReview[], limit 
     ? candidates.filter((review) => pattern.test(`${review.service?.uz ?? ''} ${review.service?.ru ?? ''} ${review.comment.uz} ${review.comment.ru ?? ''}`))
     : [];
   return [...matching].sort((a, b) => b.date.localeCompare(a.date)).slice(0, limit);
+}
+
+/** Specialists shown on a service category page (all branches), best match first. */
+const CATEGORY_SPECIALTIES: Record<string, Specialty[]> = {
+  dermatologiya: ['dermatolog'],
+  'apparatnaya-kosmetologiya': ['kosmetolog', 'dermatolog'],
+  'clinika-patologii-nogtej': ['podolog'],
+};
+
+/** Words that tie a clinical case or review to a service category. */
+const CATEGORY_KEYWORDS: Record<string, RegExp> = {
+  dermatologiya: /dermat|дермат|akne|акне|acne|psoria|псориа|vitiligo|витилиго|ekzema|экзем|rozas|розац/i,
+  'apparatnaya-kosmetologiya': /lazer|лазер|laser|ipl|piling|пилинг|peel|thulium|tuliy|тулий|spectra|derma v|pigment|пигмент|tomir|сосуд/i,
+  'clinika-patologii-nogtej': /podolog|подолог|tirnoq|ногт|nail|tovon|пятк|onixo|онихо|вросш|ingrown/i,
+};
+
+export function hasCategoryProof(categoryId: string): boolean {
+  return categoryId in CATEGORY_SPECIALTIES;
+}
+
+export function doctorsForCategory(categoryId: string, doctors: Doctor[], limit = 6): Doctor[] {
+  const wanted = CATEGORY_SPECIALTIES[categoryId];
+  if (!wanted) return [];
+  const rank = (doctor: Doctor) => {
+    const specialties = doctorSpecialties(doctor);
+    const index = wanted.findIndex((specialty) => specialties.includes(specialty));
+    return index === -1 ? Number.POSITIVE_INFINITY : index;
+  };
+  return doctors
+    .filter((doctor) => Number.isFinite(rank(doctor)))
+    .sort((a, b) => rank(a) - rank(b))
+    .slice(0, limit);
+}
+
+export function resultsForCategory(categoryId: string, results: TreatmentResult[], limit = 3): TreatmentResult[] {
+  const pattern = CATEGORY_KEYWORDS[categoryId];
+  if (!pattern) return [];
+  return results
+    .filter((item) => item.published !== false)
+    .filter((item) => pattern.test(`${item.title.uz} ${item.title.ru} ${item.service.uz} ${item.service.ru} ${item.description.uz}`))
+    .slice(0, limit);
+}
+
+export function reviewsForCategory(categoryId: string, reviews: CustomerReview[], limit = 3): CustomerReview[] {
+  const pattern = CATEGORY_KEYWORDS[categoryId];
+  if (!pattern) return [];
+  return reviews
+    .filter((review) => review.published && review.rating >= 4 && (review.comment.uz || review.comment.ru || '').trim().length >= 40)
+    .filter((review) => pattern.test(`${review.service?.uz ?? ''} ${review.service?.ru ?? ''} ${review.comment.uz} ${review.comment.ru ?? ''}`))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, limit);
 }
 
 /** Reviews that mention the doctor by surname (the way patients write them). */

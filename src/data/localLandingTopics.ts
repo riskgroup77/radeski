@@ -817,6 +817,124 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
     ],
     priceNames: VASCULAR_PRICES,
   },
+
+  kosmetolog: {
+    about: [
+      L(
+        'Kosmetolog — yuz va tana terisining sifati, rangi, relyefi va yoshga bog‘liq o‘zgarishlari bilan ishlaydigan mutaxassis. Radeski Skin Clinic’da kosmetologik muolajalarni dermatokosmetologlar — dermatologiya ma’lumotiga ega shifokorlar bajaradi: yuz tozalash, pilinglar, pigmentatsiya, akne va postakne, kengaygan g‘ovaklar, biorevitalizatsiya va botulinoterapiya.',
+        'Косметолог работает с качеством, цветом и рельефом кожи лица и тела, а также с возрастными изменениями. В Radeski Skin Clinic косметологические процедуры проводят дерматокосметологи — врачи с дерматологическим образованием: чистка лица, пилинги, пигментация, акне и постакне, расширенные поры, биоревитализация и ботулинотерапия.',
+        'A cosmetologist works with the quality, tone and texture of facial and body skin and with age-related changes. At Radeski Skin Clinic, cosmetic treatments are done by dermatocosmetologists — doctors trained in dermatology: facial cleansing, peels, pigmentation, acne and post-acne, enlarged pores, biorevitalization and botulinum therapy.',
+      ),
+      L(
+        'Birinchi qabulda yuz JANUS PRO apparatida skanerlanadi, so‘ng muolajalar teri holatiga qarab tanlanadi. Klinikada IPL (InMode), Hollywood Spectra, Derma V va fraksion CO₂ lazer kabi tibbiy apparatlar bor — muolajalar salon usulida emas, tibbiy protokol asosida o‘tkaziladi.',
+        'На первом приёме лицо сканируется на аппарате JANUS PRO, затем процедуры подбираются по состоянию кожи. В клинике есть медицинские аппараты — IPL (InMode), Hollywood Spectra, Derma V, фракционный CO₂-лазер, — поэтому процедуры проводятся по медицинскому протоколу, а не «салонно».',
+        'At the first visit the face is scanned with the JANUS PRO device, then treatments are chosen for the skin’s condition. The clinic has medical devices — IPL (InMode), Hollywood Spectra, Derma V and a fractional CO₂ laser — so treatments follow a medical protocol rather than a salon routine.',
+      ),
+      L(
+        'Dermatokosmetolog kosmetik muammoning sababini ham ko‘radi: akne, rozatsea yoki pigmentatsiya ortida kasallik bo‘lsa, davolash dermatolog bilan birga rejalashtiriladi.',
+        'Дерматокосметолог видит и причину косметической проблемы: если за акне, розацеа или пигментацией стоит заболевание, лечение планируется вместе с дерматологом.',
+        'A dermatocosmetologist also looks for the cause: if acne, rosacea or pigmentation is driven by a skin disease, treatment is planned together with a dermatologist.',
+      ),
+    ],
+    steps: [
+      L('Dermatokosmetolog ko‘rigi va JANUS PRO bilan yuzni skanerlash', 'Осмотр дерматокосметолога и сканирование лица на JANUS PRO', 'Dermatocosmetologist visit and JANUS PRO face scan'),
+      VISIT_STEPS.plan,
+      L('Muolaja: tozalash, piling, apparat yoki in’eksion protokol', 'Процедура: чистка, пилинг, аппаратный или инъекционный протокол', 'Treatment: cleansing, peel, device or injectable protocol'),
+      L('Uy parvarishi va quyoshdan himoya (SPF) bo‘yicha tavsiyalar', 'Рекомендации по домашнему уходу и защите от солнца (SPF)', 'Home care and sun protection (SPF) advice'),
+    ],
+    faqs: [
+      Q(
+        L('Kosmetolog va dermatokosmetolog o‘rtasida qanday farq bor?', 'Чем косметолог отличается от дерматокосметолога?', 'How is a cosmetologist different from a dermatocosmetologist?'),
+        L(
+          'Dermatokosmetolog — dermatologiya ma’lumotiga ega shifokor. U muammoning sababini aniqlaydi va kerak bo‘lsa davolashni ham tayinlaydi; muolajalar tibbiy ko‘rsatma va qarshi ko‘rsatmalarni hisobga olib tanlanadi.',
+          'Дерматокосметолог — врач с дерматологическим образованием. Он выясняет причину проблемы и при необходимости назначает лечение; процедуры подбираются с учётом показаний и противопоказаний.',
+          'A dermatocosmetologist is a doctor trained in dermatology who finds the cause of the problem and prescribes treatment when needed; procedures are chosen with indications and contraindications in mind.',
+        ),
+      ),
+      Q(
+        L('Muolajadan keyin qizarish bo‘ladimi?', 'Бывает ли покраснение после процедур?', 'Will my skin be red afterwards?'),
+        L(
+          'Ba’zi pilinglar va lazer muolajalaridan keyin qisqa muddatli qizarish yoki po‘st tashlash bo‘lishi mumkin. Shifokor parvarish va SPF bo‘yicha aniq tavsiya beradi.',
+          'После некоторых пилингов и лазерных процедур возможны кратковременное покраснение или шелушение. Врач даёт точные рекомендации по уходу и SPF.',
+          'Some peels and laser treatments can cause short-lived redness or flaking. The doctor gives clear aftercare and SPF advice.',
+        ),
+      ),
+      Q(
+        L('Birinchi qabulga nima bilan kelish kerak?', 'С чем прийти на первый приём?', 'What should I bring to the first visit?'),
+        L(
+          'Yuzni bo‘yanishsiz olib kelgan ma’qul. Ishlatayotgan krem va vositalaringiz, qabul qilayotgan dorilar haqida shifokorga ayting.',
+          'Лучше прийти без макияжа и рассказать врачу о кремах и средствах, которыми вы пользуетесь, и о принимаемых лекарствах.',
+          'It is best to come without make-up and tell the doctor about the creams and products you use and any medication you take.',
+        ),
+      ),
+    ],
+    priceNames: [
+      "Dermatokosmetolog shifokorining birinchi ko'rigi",
+      'Yuz tozalash: Innoaestetic kosmetikasi bilan ultratovush yuz tozalash',
+      'Yuz tozalash: PRX-T33 piling',
+      'Karbonli piling — Hollywood Spectra',
+      'Akne, qizarish va post-akneni davolash — Hollywood Spectra (gold toning)',
+      'Me Line pigmentatsiyaga qarshi piling',
+    ],
+  },
+
+  'ichga-osgan-tirnoq': {
+    about: [
+      L(
+        'Ichiga o‘sgan tirnoq (onixokriptoz) — tirnoq chetining barmoq terisiga botib o‘sishi. Ko‘pincha oyoq bosh barmog‘ida uchraydi va og‘riq, qizarish, shish, ba’zan yiringlash bilan kechadi. Ko‘p uchraydigan sabablar — tirnoqni juda qisqa yoki burchaklarini chuqur kesish, tor poyabzal va jarohatlar.',
+        'Вросший ноготь (онихокриптоз) — врастание края ногтя в кожу пальца. Чаще всего страдает большой палец стопы: появляются боль, покраснение, отёк, иногда нагноение. Частые причины — слишком короткая стрижка или глубоко срезанные уголки, тесная обувь и травмы.',
+        'An ingrown toenail (onychocryptosis) is the nail edge growing into the skin of the toe. It most often affects the big toe and causes pain, redness, swelling and sometimes infection. Common causes are cutting nails too short or the corners too deep, tight shoes and injuries.',
+      ),
+      L(
+        'Radeski Skin Clinic’da podolog muammoning darajasini baholab, usulni tanlaydi: teriga botgan tirnoq qismini ehtiyotkorlik bilan olib tashlash va titan ip bilan tirnoqning o‘sish yo‘nalishini asta-sekin to‘g‘rilash. Titan ip tirnoq chetlarini ko‘tarib, teriga bosimni kamaytiradi — ko‘p hollarda tirnoqni to‘liq olib tashlash shart emas.',
+        'В Radeski Skin Clinic подолог оценивает стадию и выбирает метод: аккуратное удаление вросшей в кожу части ногтя и постепенная коррекция направления роста титановой нитью. Нить приподнимает края ногтя и снижает давление на кожу — во многих случаях удалять ноготь полностью не нужно.',
+        'At Radeski Skin Clinic the podiatrist assesses the stage and chooses the method: careful removal of the part of the nail that has grown into the skin and gradual correction of its growth direction with a titanium wire. The wire lifts the nail edges and relieves pressure on the skin — in many cases the whole nail does not need removing.',
+      ),
+      L(
+        'Agar tirnoq ilgari olib tashlangan bo‘lsa-yu, muammo qaytgan bo‘lsa, faqat olib tashlash yetarli emas — o‘sish yo‘nalishini to‘g‘rilash kerak. Qo‘qon filialida II darajali onixokriptoz bo‘yicha shunday klinik holat va 6 oylik natija saytdagi maqolada bosqichma-bosqich ko‘rsatilgan.',
+        'Если ноготь уже удаляли, а проблема вернулась, одного удаления мало — нужно исправить направление роста. Такой клинический случай онихокриптоза II степени из филиала в Коканде с результатом через 6 месяцев пошагово разобран в статье на сайте.',
+        'If the nail was removed before and the problem came back, removal alone is not enough — the growth direction has to be corrected. A stage II case from the Kokand branch, with the result after 6 months, is shown step by step in an article on the site.',
+      ),
+    ],
+    steps: [
+      L('Podolog ko‘rigi: tirnoq cheti, yallig‘lanish va qaytalanish xavfini baholash', 'Осмотр подолога: край ногтя, воспаление и риск рецидива', 'Podiatrist exam: nail edge, inflammation and risk of recurrence'),
+      L('Teriga botgan qismni mahalliy og‘riqsizlantirish bilan olib tashlash va tozalash', 'Удаление вросшей части под местной анестезией и обработка', 'Removal of the ingrown part under local anaesthesia and cleaning'),
+      L('Tirnoqqa apparat bilan ishlov berish va titan ip o‘rnatish', 'Аппаратная обработка ногтя и установка титановой нити', 'Device treatment of the nail and fitting the titanium wire'),
+      L('Nazorat ko‘riklari va uy parvarishi: tirnoqni juda qisqa kesmaslik, burchaklarini chuqur olmaslik', 'Контрольные осмотры и домашний уход: не стричь ноготь слишком коротко и не срезать уголки глубоко', 'Follow-up visits and home care: do not cut the nail too short or the corners too deep'),
+    ],
+    faqs: [
+      Q(
+        L('Tirnoqni butunlay olib tashlash kerakmi?', 'Нужно ли удалять ноготь полностью?', 'Does the whole nail have to be removed?'),
+        L(
+          'Ko‘p hollarda yo‘q: teriga botgan qism olib tashlanadi, tirnoq esa titan ip bilan to‘g‘ri yo‘nalishda o‘stiriladi. Usulni podolog ko‘rikdan keyin tanlaydi.',
+          'Во многих случаях нет: удаляется вросшая часть, а ноготь с помощью титановой нити выращивается в правильном направлении. Метод выбирает подолог после осмотра.',
+          'In many cases no: the ingrown part is removed and the nail is guided to grow in the right direction with a titanium wire. The podiatrist chooses the method after the exam.',
+        ),
+      ),
+      Q(
+        L('Nega muammo operatsiyadan keyin qaytadi?', 'Почему проблема возвращается после операции?', 'Why does it come back after surgery?'),
+        L(
+          'Tirnoq olib tashlanib, uning o‘sish yo‘nalishi to‘g‘rilanmasa, yangi tirnoq yana teriga botishi mumkin. Shuning uchun titan ip bilan korreksiya qilinadi.',
+          'Если ноготь удалить, но не исправить направление роста, новый ноготь снова может врасти. Поэтому проводится коррекция титановой нитью.',
+          'If the nail is removed but its growth direction is not corrected, the new nail can grow in again. That is why it is corrected with a titanium wire.',
+        ),
+      ),
+      Q(
+        L('Bolalarni qabul qilasizmi?', 'Принимаете ли детей?', 'Do you see children?'),
+        L(
+          'Ha, kattalar va bolalardagi tirnoq muammolari bo‘yicha qabul qilinadi.',
+          'Да, принимаем взрослых и детей с проблемами ногтей.',
+          'Yes, adults and children with nail problems are seen.',
+        ),
+      ),
+    ],
+    priceNames: [
+      'Podologning birinchi konsultatsiyasi',
+      "O'sib ketgan tirnoqni olib tashlash",
+      "Titan ip (o'sib ketgan tirnoq uchun)",
+      'Tirnoqlarni apparat bilan tozalash',
+    ],
+  },
 };
 
 /** Topic key for a landing slug (the IPL pages carry the city in their slug). */

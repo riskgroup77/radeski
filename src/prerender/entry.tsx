@@ -13,6 +13,7 @@ import { isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
 import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
 import { DERMATOLOGY_CONDITION_NAV } from '../data/dermatologyConditionsNav';
 import type { Doctor } from '../types';
+import type { CustomerReview, TreatmentResult } from '../data/sitePagesContent';
 import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
 import { buildServiceH1 } from '../seo/pageMeta';
 import { getCategoryEquipmentList, getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
@@ -87,7 +88,18 @@ import { DAAVLIN_NAV_MODELS } from '../data/daavlinNav';
 import { getDaavlinSectionFromPathname } from '../routing/paths';
 import type { ApiReviewOut, ApiTreatmentResultOut } from '../api/cmsTypes';
 import { mapReviewFromApi, mapTreatmentResultFromApi } from '../api/cmsMappers';
-import { CONDITION_LANDING_TOPIC, doctorBranches, doctorsForLanding, resultsForLanding, reviewsForDoctor, reviewsForTopic } from '../utils/localProof';
+import {
+  CONDITION_LANDING_TOPIC,
+  doctorBranches,
+  doctorsForCategory,
+  doctorsForLanding,
+  resultsForCategory,
+  resultsForLanding,
+  reviewsForCategory,
+  reviewsForDoctor,
+  reviewsForTopic,
+} from '../utils/localProof';
+import { getCategoryFaq } from '../data/serviceCategoryFaq';
 import { resolveDoctorPageDetails } from '../utils/doctorPageDetails';
 import { LOCAL_LANDING_CONTENT_UPDATED, landingTopicKey } from '../data/localLandingTopics';
 import type { ServiceRichContent } from '../types';
@@ -244,6 +256,61 @@ function VideoBody({ video, videos, locale }: { video: ClinicVideo; videos: Clin
   );
 }
 
+/** Doctors, clinical cases and reviews on a topic — the crawler copy of LandingProofSections. */
+function ProofSections({
+  locale,
+  doctors,
+  results,
+  reviews,
+}: {
+  locale: Locale;
+  doctors: Doctor[];
+  results: TreatmentResult[];
+  reviews: CustomerReview[];
+}) {
+  const label = (uz: string, ru: string, en: string) => (locale === 'uz' ? uz : locale === 'ru' ? ru : en);
+  return (
+    <>
+    {doctors.length > 0 && (
+      <section>
+        <h2>{label('Qabul qiladigan shifokorlar', 'Врачи, которые ведут приём', 'Doctors who see patients')}</h2>
+        <ul>
+          {doctors.map((doctor) => (
+            <li key={doctor.id}>
+              <a href={doctorPath(locale, doctorRouteKey(doctor))}>{doctor.name[locale]}</a> — {doctor.role[locale]}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {results.length > 0 && (
+      <section>
+        <h2>{label('Klinik natijalar', 'Клинические результаты', 'Clinical results')}</h2>
+        <ul>
+          {results.map((result) => (
+            <li key={result.id}>
+              <a href={pagePath(locale, 'results')}>{result.title[locale]}</a>
+              {result.sessions[locale] ? ` — ${result.sessions[locale]}` : ''}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {reviews.length > 0 && (
+      <section>
+        <h2>{label('Bemorlar fikri', 'Отзывы пациентов', 'Patient reviews')}</h2>
+        {reviews.map((review) => (
+          <blockquote key={review.id}>
+            <p>{review.comment[locale] || review.comment.uz}</p>
+            <footer>{review.authorName} · {review.rating}/5</footer>
+          </blockquote>
+        ))}
+      </section>
+    )}
+    </>
+  );
+}
+
 function LandingBody({
   landing,
   locale,
@@ -310,42 +377,7 @@ function LandingBody({
           </p>
         </section>
       )}
-      {proofDoctors.length > 0 && (
-        <section>
-          <h2>{label('Qabul qiladigan shifokorlar', 'Врачи, которые ведут приём', 'Doctors who see patients')}</h2>
-          <ul>
-            {proofDoctors.map((doctor) => (
-              <li key={doctor.id}>
-                <a href={doctorPath(locale, doctorRouteKey(doctor))}>{doctor.name[locale]}</a> — {doctor.role[locale]}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      {proofResults.length > 0 && (
-        <section>
-          <h2>{label('Klinik natijalar', 'Клинические результаты', 'Clinical results')}</h2>
-          <ul>
-            {proofResults.map((result) => (
-              <li key={result.id}>
-                <a href={pagePath(locale, 'results')}>{result.title[locale]}</a>
-                {result.sessions[locale] ? ` — ${result.sessions[locale]}` : ''}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-      {proofReviews.length > 0 && (
-        <section>
-          <h2>{label('Bemorlar fikri', 'Отзывы пациентов', 'Patient reviews')}</h2>
-          {proofReviews.map((review) => (
-            <blockquote key={review.id}>
-              <p>{review.comment[locale] || review.comment.uz}</p>
-              <footer>{review.authorName} · {review.rating}/5</footer>
-            </blockquote>
-          ))}
-        </section>
-      )}
+      <ProofSections locale={locale} doctors={proofDoctors} results={proofResults} reviews={proofReviews} />
       <section>
         <h2>{label('Nima uchun Radeski?', 'Почему Radeski?', 'Why Radeski?')}</h2>
         <ul>
@@ -740,6 +772,23 @@ function PageContent({
     return (
       <>
       <RichServiceBody rich={resolveCategoryRichContent(serviceCategory, locale)} locale={locale} />
+      <ProofSections
+        locale={locale}
+        doctors={doctorsForCategory(serviceCategory.id, clinic.doctors)}
+        results={resultsForCategory(serviceCategory.id, results.map(mapTreatmentResultFromApi))}
+        reviews={reviewsForCategory(serviceCategory.id, reviews.map(mapReviewFromApi))}
+      />
+      {getCategoryFaq(serviceCategory.id, locale).length > 0 && (
+        <section>
+          <h2>{locale === 'uz' ? "Ko'p so'raladigan savollar" : locale === 'ru' ? 'Частые вопросы' : 'Frequently asked questions'}</h2>
+          {getCategoryFaq(serviceCategory.id, locale).map((faq) => (
+            <div key={faq.question}>
+              <h3>{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </div>
+          ))}
+        </section>
+      )}
       <CityLinksList locale={locale} serviceCategoryId={serviceCategory.id} />
       <ul>
         {serviceCategory.subServices.map((sub) => (
@@ -963,6 +1012,7 @@ function PrerenderBody({
           </nav>
         )}
         <h1>{resolveHeading(head, locale)}</h1>
+        <HeroImage head={head} alt={resolveHeading(head, locale)} />
         <p>{head.description}</p>
         <PageContent head={head} locale={locale} clinic={clinic} videos={videos} results={results} reviews={reviews} pathname={pathname} />
       </main>
@@ -1058,6 +1108,13 @@ function buildLlmsTxt(clinic: PrerenderClinic): string {
   }
   lines.push('', "Tibbiy ma'lumot tanishuv uchun; aniq tashxis va davolash rejasi shifokor ko'rigida belgilanadi.", '');
   return lines.join('\n');
+}
+
+/** The page's hero image in the crawler HTML (same file as the preload, described by the H1). */
+function HeroImage({ head, alt }: { head: RouteHead; alt: string }) {
+  const hero = resolveHeroPreload(head);
+  if (!hero) return null;
+  return <img src={hero.src} srcSet={hero.srcSet} sizes={hero.srcSet ? hero.sizes : undefined} alt={alt} />;
 }
 
 /** Hero image of service category and device pages, as the React hero will request it. */

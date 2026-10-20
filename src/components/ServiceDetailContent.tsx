@@ -49,7 +49,7 @@ function SectionCard({
         <span className="w-9 h-9 rounded-xl bg-brand-gold-light/15 flex items-center justify-center shrink-0">
           <Icon className="w-5 h-5 text-brand-gold" />
         </span>
-        <h3 className="text-lg sm:text-xl font-extrabold text-brand-text-primary">{title}</h3>
+        <h2 className="text-lg sm:text-xl font-extrabold text-brand-text-primary">{title}</h2>
       </div>
       {children}
     </article>
@@ -101,6 +101,9 @@ export default function ServiceDetailContent({
     ? resolveServiceRichContent(sub, category, locale)
     : resolveCategoryRichContent(category, locale);
   const rich = streamlineServiceRichContent(rawRich);
+  // The first topic stays open; the rest fold away but remain in the page (the crawler copy shows them all).
+  const moreAbout = rawRich.aboutSections?.slice(1) ?? [];
+  const moreLabel = locale === 'uz' ? "Batafsil o'qish" : locale === 'ru' ? 'Читать подробнее' : 'Read more';
 
   if (variant === 'compact') {
     return (
@@ -114,15 +117,29 @@ export default function ServiceDetailContent({
     <div className="space-y-6">
       <SectionCard icon={Stethoscope} title={labels.about}>
         {rich.aboutTitle && (
-          <h4 className="text-base font-bold text-brand-text-primary mb-2">{rich.aboutTitle}</h4>
+          <h3 className="text-base font-bold text-brand-text-primary mb-2">{rich.aboutTitle}</h3>
         )}
         <p className="text-sm sm:text-base text-brand-text-secondary leading-relaxed">{rich.overview}</p>
         {rich.aboutSections?.map((section, index) => (
           <div key={`${section.title}-${index}`} className="mt-4 pt-4 border-t border-brand-sectiongray/80">
-            <h5 className="text-sm font-bold text-brand-text-primary mb-1.5">{section.title}</h5>
+            <h4 className="text-sm font-bold text-brand-text-primary mb-1.5">{section.title}</h4>
             <p className="text-sm text-brand-text-secondary leading-relaxed">{section.description}</p>
           </div>
         ))}
+        {moreAbout.length > 0 && (
+          <details className="group mt-4">
+            <summary className="list-none cursor-pointer inline-flex items-center gap-1.5 text-sm font-bold text-brand-gold hover:text-brand-gold-dark group-open:hidden">
+              {moreLabel} ({moreAbout.length})
+              <span aria-hidden>›</span>
+            </summary>
+            {moreAbout.map((section, index) => (
+              <div key={`${section.title}-${index}`} className="mt-4 pt-4 border-t border-brand-sectiongray/80">
+                <h4 className="text-sm font-bold text-brand-text-primary mb-1.5">{section.title}</h4>
+                <p className="text-sm text-brand-text-secondary leading-relaxed">{section.description}</p>
+              </div>
+            ))}
+          </details>
+        )}
         {rich.aboutFooter && (
           <p className="mt-4 text-sm text-brand-text-secondary leading-relaxed border-t border-brand-gold/15 pt-4">
             {rich.aboutFooter}

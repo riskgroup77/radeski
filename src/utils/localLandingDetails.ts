@@ -59,7 +59,7 @@ export function landingBranch(city: LocalSeoCity): ClinicBranch {
 export { formatUzs };
 
 /** Pages about a doctor rather than a procedure ("Dermatolog Farg'onada"). */
-const SPECIALIST_SLUGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog']);
+const SPECIALIST_SLUGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog', 'kosmetolog']);
 
 const normalizeName = (text: string) => text.replace(/[ʻʼ‘’'`]/g, "'").trim().toLowerCase();
 

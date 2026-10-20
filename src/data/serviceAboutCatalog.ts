@@ -805,6 +805,155 @@ export const SERVICE_ABOUT_CATALOG: Record<string, LocalizedServiceAbout> = {
         'For deep hydration, renewal, and rejuvenation, trust mesotherapy and biorevitalization at Radeski Skin Clinic — professional care and quality products.',
     },
   ),
+  'clinika-patologii-nogtej': L(
+    {
+      aboutTitle: "Tirnoq va oyoq muammolari: Radeski Skin Clinic'da nimalar davolanadi?",
+      overview:
+        "Tirnoq va oyoq patologiyasi — oyoq panjasi, tovon va tirnoqlar kasalliklarini tibbiy usullar bilan davolash yo'nalishi. Radeski Skin Clinic'da qabulni podolog va dermatolog olib boradi: muolajalar apparat yordamida, steril asboblarda bajariladi, kerak bo'lsa laborator tahlil bilan tasdiqlanadi. Farg'ona va Qo'qon filiallarida kattalar va bolalar qabul qilinadi.",
+      aboutSections: [
+        {
+          title: "Ichiga o'sgan tirnoq (onixokriptoz)",
+          description:
+            "Tirnoq cheti barmoq terisiga botib o'sadi — og'riq, qizarish, shish, ba'zan yiringlash paydo bo'ladi. Ko'pincha oyoq bosh barmog'ida uchraydi; sabablari — tirnoqni juda qisqa yoki burchaklarini chuqur kesish, tor poyabzal va jarohatlar. Podolog teriga botgan qismni mahalliy og'riqsizlantirish bilan olib tashlaydi va kerak bo'lsa titan ip o'rnatadi: ip tirnoq chetlarini ko'tarib, uning o'sish yo'nalishini asta-sekin to'g'rilaydi. Ko'p hollarda tirnoqni to'liq olib tashlash shart emas, operatsiyadan keyin qaytgan holatlarda esa aynan korreksiya muammoning sababini bartaraf qiladi.",
+        },
+        {
+          title: "Tirnoq zamburug'i (onixomikoz)",
+          description:
+            "Tirnoq sarg'ayadi, qalinlashadi, mo'rtlashadi va ko'chadi. Zamburug' o'z-o'zidan o'tmaydi va boshqa tirnoqlarga hamda oila a'zolariga yuqishi mumkin. Tashxis laborator tahlil bilan tasdiqlanadi; davolashda tirnoqni apparat bilan tozalash, lazer terapiyasi va dori vositalari birga qo'llaniladi. Sog'lom tirnoq o'sib chiqquncha kuzatiladi: qo'l tirnoqlari 4–6 oyda, oyoq tirnoqlari 9–12 oyda to'liq yangilanadi.",
+        },
+        {
+          title: 'Qalinlashgan va shakli o\'zgargan tirnoqlar',
+          description:
+            "Yosh, jarohat, zamburug' yoki poyabzal bosimi tufayli tirnoq qalinlashib, egilib qolishi mumkin. Bunday tirnoqni oddiy qaychi bilan kesish qiyin va og'riqli. Podolog tirnoq plastinkasini maxsus apparat bilan qatlam-qatlam ingichkalashtiradi va shaklini to'g'rilaydi — og'riq va bosim kamayadi, tirnoqni keyin parvarish qilish osonlashadi.",
+        },
+        {
+          title: 'Qadoq, mozol va natoptish',
+          description:
+            "Noqulay poyabzal va oyoqqa notekis yuklama teri qalinlashuviga olib keladi. Yadrosiz mozol va natoptish apparat bilan og'riqsiz olib tashlanadi; yadroli mozolda yadro ham olib tashlanadi, aks holda u qayta paydo bo'ladi. Shifokor sababni ham tushuntiradi: poyabzal, yurish va uy parvarishi bo'yicha tavsiya beradi.",
+        },
+        {
+          title: 'Tovon yoriqlari va quruq teri',
+          description:
+            "Quruq, qalinlashgan tovon terisi yoriladi, yurganda og'riydi va infeksiya kirishi uchun eshik ochadi. Apparat bilan tibbiy ishlov qalinlashgan qatlamni yo'qotadi, yoriqlar parvarish vositalari bilan bitkaziladi. Yoriqlar tez-tez qaytsa, zamburug' yoki boshqa teri kasalligi bor-yo'qligi tekshiriladi.",
+        },
+        {
+          title: 'Qandli diabet va sezgir oyoqlar',
+          description:
+            "Qandli diabetda oyoq terisi va tirnoqlarga alohida ehtiyot kerak: kichik jarohat ham uzoq bitishi mumkin. Bunday bemorlarga tibbiy pedikyur va tirnoq muolajalari ehtiyotkorlik bilan, shifokor nazoratida bajariladi.",
+        },
+        {
+          title: 'Dermatologik yondashuv',
+          description:
+            "Tirnoq va tovondagi o'zgarishlar ba'zan psoriaz, ekzema yoki boshqa teri kasalligi belgisi bo'ladi. Klinikada podolog, dermatolog va laboratoriya bir joyda ishlaydi, shuning uchun tashxis va davolash boshqa joyga yo'naltirmasdan, bitta rejada olib boriladi.",
+        },
+        {
+          title: "Profilaktika: tirnoq va oyoqni qanday asrash kerak?",
+          description:
+            "Oyoq tirnoqlarini to'g'ri chiziq bo'ylab, burchaklarini chuqur kesmasdan qisqartiring. Barmoqlarni siqmaydigan, nafas oladigan poyabzal kiying, paypoqni har kuni almashtiring va oyoqni yuvgandan keyin barmoqlar orasini yaxshilab quriting. Hovuz, sauna va sport zalida shaxsiy shippak ishlating, boshqalarning sochiq va poyabzalidan foydalanmang. Tovon terisini muntazam namlantiring. Tirnoq rangi o'zgarsa, og'riq yoki qizarish paydo bo'lsa, muammo chuqurlashmasdan podologga murojaat qiling — erta bosqichda davolash ancha oson va tez.",
+        },
+      ],
+      aboutFooter:
+        "Og'riq, qizarish yoki tirnoq rangining o'zgarishini uyda o'zingiz davolashga urinmang — ichiga o'sgan tirnoqni kesish yoki zamburug'ni bir xil krem bilan davolash muammoni chuqurlashtirishi mumkin. Podolog ko'rigi sababni aniqlaydi va eng yumshoq usulni tanlaydi.",
+    },
+    {
+      aboutTitle: 'Проблемы ногтей и стоп: что лечат в Radeski Skin Clinic?',
+      overview:
+        'Патология ногтей и стопы — медицинское лечение заболеваний стоп, пяток и ногтей. В Radeski Skin Clinic приём ведут подолог и дерматолог: процедуры выполняются аппаратом и стерильными инструментами, при необходимости диагноз подтверждается лабораторным анализом. В филиалах в Фергане и Коканде принимают взрослых и детей.',
+      aboutSections: [
+        {
+          title: 'Вросший ноготь (онихокриптоз)',
+          description:
+            'Край ногтя врастает в кожу пальца — появляются боль, покраснение, отёк, иногда нагноение. Чаще страдает большой палец стопы; причины — слишком короткая стрижка или глубоко срезанные уголки, тесная обувь и травмы. Подолог удаляет вросшую часть под местной анестезией и при необходимости устанавливает титановую нить: она приподнимает края ногтя и постепенно исправляет направление его роста. Во многих случаях удалять ноготь полностью не нужно, а при рецидиве после операции именно коррекция устраняет причину.',
+        },
+        {
+          title: 'Грибок ногтей (онихомикоз)',
+          description:
+            'Ноготь желтеет, утолщается, крошится и отслаивается. Грибок не проходит сам и может передаться на другие ногти и членам семьи. Диагноз подтверждается лабораторным анализом; в лечении сочетаются аппаратная обработка ногтя, лазерная терапия и препараты. Наблюдение продолжается, пока не отрастёт здоровый ноготь: на руках ногти обновляются за 4–6 месяцев, на ногах — за 9–12 месяцев.',
+        },
+        {
+          title: 'Утолщённые и деформированные ногти',
+          description:
+            'Из-за возраста, травмы, грибка или давления обуви ноготь может утолщаться и искривляться. Обычными ножницами его трудно и больно стричь. Подолог послойно истончает ногтевую пластину специальным аппаратом и выравнивает форму — боль и давление уменьшаются, ухаживать за ногтем становится проще.',
+        },
+        {
+          title: 'Мозоли и натоптыши',
+          description:
+            'Неудобная обувь и неравномерная нагрузка на стопу приводят к утолщению кожи. Мозоли без стержня и натоптыши безболезненно удаляются аппаратом; у стержневой мозоли удаляется и стержень, иначе она появится снова. Врач объясняет и причину — даёт рекомендации по обуви, ходьбе и домашнему уходу.',
+        },
+        {
+          title: 'Трещины пяток и сухая кожа',
+          description:
+            'Сухая утолщённая кожа пяток трескается, болит при ходьбе и открывает путь инфекции. Медицинская аппаратная обработка убирает утолщённый слой, трещины заживают с помощью средств ухода. Если трещины возвращаются, проверяют, нет ли грибка или другого заболевания кожи.',
+        },
+        {
+          title: 'Сахарный диабет и чувствительные стопы',
+          description:
+            'При сахарном диабете кожа стоп и ногти требуют особой осторожности: даже небольшая ранка может долго заживать. Медицинский педикюр и процедуры на ногтях у таких пациентов выполняются бережно, под контролем врача.',
+        },
+        {
+          title: 'Дерматологический подход',
+          description:
+            'Изменения ногтей и пяток иногда оказываются признаком псориаза, экземы или другого заболевания кожи. Подолог, дерматолог и лаборатория работают в одной клинике, поэтому диагностика и лечение проходят по одному плану, без направлений в другие места.',
+        },
+        {
+          title: 'Профилактика: как сохранить здоровье ногтей и стоп',
+          description:
+            'Подстригайте ногти на ногах по прямой линии, не срезая уголки глубоко. Носите обувь, которая не сдавливает пальцы и пропускает воздух, меняйте носки ежедневно и тщательно просушивайте кожу между пальцами после мытья. В бассейне, сауне и спортзале пользуйтесь своими тапочками, не берите чужие полотенца и обувь. Регулярно увлажняйте кожу пяток. Если цвет ногтя изменился, появились боль или покраснение, обратитесь к подологу, пока проблема не стала глубже: на ранней стадии лечение проще и быстрее.',
+        },
+      ],
+      aboutFooter:
+        'Не пытайтесь лечить боль, покраснение или изменение цвета ногтя самостоятельно — подрезание вросшего ногтя или лечение грибка случайным кремом может усугубить проблему. Осмотр подолога выявит причину и подберёт самый щадящий метод.',
+    },
+    {
+      aboutTitle: 'Nail and foot problems: what is treated at Radeski Skin Clinic?',
+      overview:
+        'Nail and foot pathology is the medical treatment of foot, heel and nail conditions. At Radeski Skin Clinic patients are seen by a podiatrist and a dermatologist: procedures are done with a device and sterile instruments, and the diagnosis is confirmed by a lab test when needed. Adults and children are seen at the Fergana and Kokand branches.',
+      aboutSections: [
+        {
+          title: 'Ingrown toenail (onychocryptosis)',
+          description:
+            'The nail edge grows into the skin of the toe, causing pain, redness, swelling and sometimes infection. The big toe is affected most often; causes include cutting nails too short or the corners too deep, tight shoes and injuries. The podiatrist removes the ingrown part under local anaesthesia and, when needed, fits a titanium wire that lifts the nail edges and gradually corrects the growth direction. In many cases the whole nail does not need removing, and when the problem returns after surgery, correction is what addresses the cause.',
+        },
+        {
+          title: 'Nail fungus (onychomycosis)',
+          description:
+            'The nail turns yellow, thickens, crumbles and lifts. Fungus does not go away on its own and can spread to other nails and family members. The diagnosis is confirmed by a lab test; treatment combines device cleaning of the nail, laser therapy and medication. Follow-up continues until a healthy nail grows out: fingernails renew in 4–6 months, toenails in 9–12 months.',
+        },
+        {
+          title: 'Thickened and deformed nails',
+          description:
+            'Age, injury, fungus or shoe pressure can make a nail thick and curved, which is hard and painful to cut with ordinary scissors. The podiatrist thins the nail plate layer by layer with a special device and corrects its shape, relieving pain and pressure and making the nail easier to care for.',
+        },
+        {
+          title: 'Calluses and corns',
+          description:
+            'Uncomfortable shoes and uneven load on the foot thicken the skin. Calluses without a core are removed painlessly with a device; for a corn with a core, the core is removed too, otherwise it comes back. The doctor also explains the cause and advises on footwear, walking and home care.',
+        },
+        {
+          title: 'Cracked heels and dry skin',
+          description:
+            'Dry, thickened heel skin cracks, hurts when walking and lets infection in. Medical device treatment removes the thickened layer, and the cracks heal with care products. If cracks keep coming back, the skin is checked for fungus or another skin condition.',
+        },
+        {
+          title: 'Diabetes and sensitive feet',
+          description:
+            'With diabetes, the skin of the feet and the nails need extra care, because even a small wound can heal slowly. Medical pedicure and nail procedures for these patients are done gently, under a doctor’s supervision.',
+        },
+        {
+          title: 'A dermatological approach',
+          description:
+            'Changes in nails and heels are sometimes a sign of psoriasis, eczema or another skin disease. The podiatrist, dermatologist and lab work in one clinic, so diagnosis and treatment follow a single plan without referrals elsewhere.',
+        },
+        {
+          title: 'Prevention: how to keep nails and feet healthy',
+          description:
+            'Cut toenails straight across without trimming the corners deeply. Wear shoes that do not squeeze the toes and let the feet breathe, change socks daily and dry carefully between the toes after washing. Use your own slippers at pools, saunas and gyms, and do not share towels or shoes. Moisturise the heels regularly. If a nail changes colour or pain or redness appears, see a podiatrist before the problem gets deeper: early treatment is easier and faster.',
+        },
+      ],
+      aboutFooter:
+        'Do not try to treat pain, redness or nail discoloration on your own — cutting an ingrown nail or treating fungus with a random cream can make things worse. A podiatrist visit finds the cause and picks the gentlest method.',
+    },
+  ),
 };
 
 export function getServiceAboutContent(

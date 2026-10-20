@@ -983,6 +983,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               articles={dynamicArticles}
               dictionary={d}
               prices={dynamicPrices}
+              doctors={dynamicDoctors}
+              results={cmsTreatmentResults}
+              reviews={cmsReviews}
               onOpenAppointment={handleOpenAppointmentWithService}
               onOpenSub={(subId) => goToServiceSub(activeServiceCategory.id, subId)}
               onBackToList={() => goToPage('services')}

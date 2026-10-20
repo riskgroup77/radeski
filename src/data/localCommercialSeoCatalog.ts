@@ -218,11 +218,63 @@ function treatmentLanding(
   };
 }
 
+/** Replaces the template keywords with the queries patients actually type. */
+function withKeywords(landing: LocalCommercialLanding, keywords: LocalizedCopy): LocalCommercialLanding {
+  return { ...landing, seo: { ...landing.seo, keywords } };
+}
+
+/** "Kosmetolog" city page (device and injectable cosmetology by dermatocosmetologists). */
+function kosmetologLanding(city: LocalSeoCity, articleRouteKeys: string[]): LocalCommercialLanding {
+  const [uzCity, ruCity, enCity] = city === 'qoqon' ? ["Qo'qon", 'Коканд', 'Kokand'] : ["Farg'ona", 'Фергана', 'Fergana'];
+  return withKeywords(
+    specialistLanding(city, 'kosmetolog', 'apparatnaya-kosmetologiya', L('Kosmetolog', 'Косметолог', 'Cosmetologist'), articleRouteKeys),
+    L(
+      `kosmetolog ${uzCity}, dermatokosmetolog ${uzCity}, yuz tozalash ${uzCity}, piling ${uzCity}, apparatli kosmetologiya, akne davolash, pigmentatsiya, Radeski Skin Clinic`,
+      `косметолог ${ruCity}, дерматокосметолог ${ruCity}, чистка лица ${ruCity}, пилинг ${ruCity}, аппаратная косметология, лечение акне, пигментация, Radeski Skin Clinic`,
+      `cosmetologist ${enCity}, dermatocosmetologist ${enCity}, facial cleansing ${enCity}, chemical peel, device cosmetology, acne treatment, pigmentation, Radeski Skin Clinic`,
+    ),
+  );
+}
+
+/** "Ichiga o'sgan tirnoq" city page (ingrown toenail: removal and titanium-wire correction). */
+function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
+  const [uzCity, ruCity, enCity] = city === 'qoqon' ? ["Qo'qon", 'Коканд', 'Kokand'] : ["Farg'ona", 'Фергана', 'Fergana'];
+  return withKeywords(
+    treatmentLanding(city, 'ichga-osgan-tirnoq', 'clinika-patologii-nogtej', {
+      name: L("Ichiga o'sgan tirnoqni davolash", 'Лечение вросшего ногтя', 'Ingrown toenail treatment'),
+      promoSlug: 'podologiya',
+      articleRouteKeys: ['art-onixokriptoz-klinik-holat'],
+      problem: L(
+        "Tirnoq cheti teriga botib o'sadi: og'riq, qizarish va shish paydo bo'ladi, muammo qaytalanishi mumkin.",
+        'Край ногтя врастает в кожу: появляются боль, покраснение и отёк, проблема может возвращаться.',
+        'The nail edge grows into the skin, causing pain, redness and swelling, and the problem can recur.',
+      ),
+      whoFor: [
+        L("Yurganda barmoqda og'riq bo'lsa", 'Боль в пальце при ходьбе', 'Toe pain when walking'),
+        L("Tirnoq atrofi qizargan yoki shishgan bo'lsa", 'Покраснение или отёк вокруг ногтя', 'Redness or swelling around the nail'),
+        L("Operatsiyadan keyin muammo qaytgan bo'lsa", 'Проблема вернулась после операции', 'The problem came back after surgery'),
+      ],
+      methods: [
+        L("Teriga botgan qismni olib tashlash", 'Удаление вросшей части ногтя', 'Removal of the ingrown part'),
+        L('Titan ip bilan korreksiya', 'Коррекция титановой нитью', 'Titanium wire correction'),
+        L('Tirnoqni apparat bilan tozalash', 'Аппаратная обработка ногтя', 'Device nail treatment'),
+      ],
+    }),
+    L(
+      `ichiga o'sgan tirnoq ${uzCity}, ichga o'sgan tirnoq, o'sib ketgan tirnoq davolash, titan ip tirnoq, podolog ${uzCity}, onixokriptoz, Radeski Skin Clinic`,
+      `вросший ноготь ${ruCity}, лечение вросшего ногтя ${ruCity}, удаление вросшего ногтя, титановая нить ноготь, подолог ${ruCity}, онихокриптоз, Radeski Skin Clinic`,
+      `ingrown toenail ${enCity}, ingrown toenail treatment, titanium wire nail correction, podiatrist ${enCity}, onychocryptosis, Radeski Skin Clinic`,
+    ),
+  );
+}
+
 function buildKokandLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-psoriasis-daavlin-kokand']),
     specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-onixokriptoz-klinik-holat']),
+    kosmetologLanding('qoqon', ['art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
+    ingrownNailLanding('qoqon'),
     treatmentLanding('qoqon', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
       conditionSlug: 'acne',
@@ -371,7 +423,9 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-ipl-terapiya']),
     specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-plazmotorapiya-soch-prp']),
-    specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), []),
+    specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-onixokriptoz-klinik-holat']),
+    kosmetologLanding('fargona', ['art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
+    ingrownNailLanding('fargona'),
     treatmentLanding('fargona', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
       conditionSlug: 'acne',

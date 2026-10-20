@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
 import { subServiceRouteKey } from '../utils/serviceSubSlug';
 import { ArrowRight, CornerUpLeft } from 'lucide-react';
-import { Article, Locale, PriceItem, ServiceCategory } from '../types';
+import { Article, Doctor, Locale, PriceItem, ServiceCategory } from '../types';
+import type { CustomerReview, TreatmentResult } from '../data/sitePagesContent';
 import { DICTIONARY } from '../data';
 import { serviceSubPath, servicesListPath } from '../routing/paths';
 import MediaImage from './MediaImage';
@@ -13,6 +15,9 @@ import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceIm
 import { buildServiceH1 } from '../seo/pageMeta';
 import ServiceRelatedArticlesSection from './ServiceRelatedArticlesSection';
 import CityServiceLinks from './CityServiceLinks';
+import LandingProofSections from './LandingProofSections';
+import { getCategoryFaq } from '../data/serviceCategoryFaq';
+import { doctorsForCategory, resultsForCategory, reviewsForCategory } from '../utils/localProof';
 
 interface ServiceCategoryPageProps {
   locale: Locale;
@@ -20,6 +25,9 @@ interface ServiceCategoryPageProps {
   articles?: Article[];
   dictionary?: Record<string, string>;
   prices?: PriceItem[];
+  doctors?: Doctor[];
+  results?: TreatmentResult[];
+  reviews?: CustomerReview[];
   onOpenAppointment: (serviceId?: string) => void;
   onOpenSub: (subId: string) => void;
   onBackToList: () => void;
@@ -39,6 +47,9 @@ export default function ServiceCategoryPage({
   articles = [],
   dictionary,
   prices,
+  doctors = [],
+  results = [],
+  reviews = [],
   onOpenSub,
   onBackToList,
 }: ServiceCategoryPageProps) {
@@ -47,6 +58,15 @@ export default function ServiceCategoryPage({
   const rich = resolveCategoryRichContent(category, locale);
   const categoryImage = resolveCategoryImage(category, locale);
   const heroText = heroDescription(rich.overview || category.description[locale]);
+  const faqs = getCategoryFaq(category.id, locale);
+  const proof = useMemo(
+    () => ({
+      doctors: doctorsForCategory(category.id, doctors),
+      results: resultsForCategory(category.id, results),
+      reviews: reviewsForCategory(category.id, reviews),
+    }),
+    [category.id, doctors, results, reviews],
+  );
 
   return (
     <section id="service-category-page" className="py-8 sm:py-12 bg-brand-offwhite min-h-screen">
@@ -148,6 +168,27 @@ export default function ServiceCategoryPage({
               })}
             </div>
           </div>
+        )}
+
+        <LandingProofSections locale={locale} doctors={proof.doctors} results={proof.results} reviews={proof.reviews} />
+
+        {faqs.length > 0 && (
+          <>
+            <h2 className="mt-10 text-xl sm:text-2xl font-extrabold text-brand-text-primary tracking-tight">
+              {locale === 'uz' ? "Ko'p so'raladigan savollar" : locale === 'ru' ? 'Частые вопросы' : 'Frequently asked questions'}
+            </h2>
+            <div className="mt-4 space-y-3">
+              {faqs.map((faq) => (
+                <details key={faq.question} className="p-4 bg-brand-white rounded-xl border border-brand-sectiongray group">
+                  <summary className="font-semibold text-sm text-brand-text-primary cursor-pointer list-none flex justify-between gap-2">
+                    {faq.question}
+                    <span className="text-brand-gold group-open:rotate-90 transition-transform">›</span>
+                  </summary>
+                  <p className="mt-2 text-sm text-brand-text-secondary leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </>
         )}
 
         <CityServiceLinks locale={locale} serviceCategoryId={category.id} />

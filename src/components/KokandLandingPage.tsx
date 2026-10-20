@@ -87,8 +87,12 @@ const SEO_CLUSTERS: { title: { uz: string; ru: string; en: string }; slugs: stri
     slugs: ['trixolog', 'soch-tokilish', 'trixoskopiya'],
   },
   {
+    title: { uz: 'Tirnoq va oyoq', ru: 'Ногти и стопы', en: 'Nails and feet' },
+    slugs: ['ichga-osgan-tirnoq', 'tirnoq-zamburug'],
+  },
+  {
     title: { uz: 'Mutaxassislar', ru: 'Специалисты', en: 'Specialists' },
-    slugs: ['dermatolog', 'podolog'],
+    slugs: ['dermatolog', 'podolog', 'kosmetolog'],
   },
 ];
 

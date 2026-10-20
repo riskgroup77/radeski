@@ -16,6 +16,8 @@ export const DOCTOR_BRANCHES: Record<string, LocalSeoCity[]> = {
   'turgunov-shohruz-ilxomjon-ogli': ['qoqon'],
   // Clinical case published from the Kokand branch
   'baxriddinov-zuxriddin-muxiddinovich': ['qoqon'],
+  // Author of the ingrown-nail case "Radeski Skin Clinic, Qo'qon filiali" (onychocryptosisKokandArticle)
+  'karimova-iroda': ['qoqon'],
   // Profile: "Farg'ona va Qo'qon filiallari"
   'usmanova-mohinabonu-anvarovna': ['fargona', 'qoqon'],
 };
