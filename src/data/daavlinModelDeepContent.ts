@@ -598,14 +598,3 @@ export const DAAVLIN_MODEL_DEEP: Record<DaavlinModelId, DaavlinModelDeep> = {
   },
 };
 
-export const DAAVLIN_MODELS_NAV_TITLE: L = t(
-  'Asosiy modelllar va uskunalar',
-  'Основные модели и аппараты',
-  'Core models & devices',
-);
-
-export const DAAVLIN_MODELS_NAV_ALL: L = t(
-  'Barcha modelllar qatori',
-  'Весь модельный ряд',
-  'Full model range',
-);

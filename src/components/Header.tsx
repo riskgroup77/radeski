@@ -7,11 +7,7 @@ import {
   BRAND_NAV_OVERVIEW,
   BRAND_NAV_TITLE,
 } from '../data/brandContent';
-import { DAAVLIN_NAV_LINEUP } from '../data/daavlinFotoKabinalariContent';
-import {
-  DAAVLIN_MODELS_NAV_ALL,
-  DAAVLIN_MODELS_NAV_TITLE,
-} from '../data/daavlinModelDeepContent';
+import { DAAVLIN_MODELS_NAV_ALL, DAAVLIN_MODELS_NAV_TITLE, DAAVLIN_NAV_MODELS } from '../data/daavlinNav';
 import SiteLogo from './SiteLogo';
 import NavSideFlyout from './NavSideFlyout';
 import NavDropdownPanel from './NavDropdownPanel';
@@ -385,7 +381,7 @@ export default function Header({
   const activeConditionSlug = getConditionSlugFromPathname(location.pathname);
   const activeArticleRouteKey = getArticleIdFromPathname(location.pathname);
   const activeDaavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
-  const daavlinModels = DAAVLIN_NAV_LINEUP;
+  const daavlinModels = DAAVLIN_NAV_MODELS;
 
   const branchContacts = [
     {

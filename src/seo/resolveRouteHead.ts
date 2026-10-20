@@ -49,6 +49,7 @@ import { resolveArticleTags } from '../utils/articleContent';
 import { getNotFoundTitle } from '../components/NotFoundPage';
 import {
   TITLE_MAX_LENGTH,
+  buildEntityKeywords,
   buildServicePageSeoTitle,
   buildServiceSeoTitle,
   fitDescription,
@@ -56,6 +57,7 @@ import {
   getTabSeo,
   resolveArticleSeo,
 } from './pageMeta';
+import { SERVICE_CATEGORY_SEO } from './serviceCategorySeo';
 import { buildHreflangLinks, getCanonicalUrl, type HreflangLink, type RouteSeoContext } from './routeSeo';
 import {
   buildArticleSchema,
@@ -249,6 +251,16 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
       }
     : null;
 
+  // Main categories (dermatology, device cosmetology, nail & foot) have copy written for search;
+  // the category page only, not its sub-service or device pages.
+  const categorySeo =
+    activeServiceCategory && !activeServiceSub && !activeEquipment
+      ? SERVICE_CATEGORY_SEO[activeServiceCategory.id]?.[locale] ?? null
+      : null;
+  const conditionLabel = conditionSlug
+    ? getDermatologyConditionNavItem(conditionSlug)?.label[locale] ?? getDermatologyConditionNavItem(conditionSlug)?.label.uz ?? null
+    : null;
+
   const title =
     currentPage === 'not-found' || (videoKey && !activeVideo && isErrorPage)
       ? `${getNotFoundTitle(locale)} | Radeski Skin Clinic`
@@ -279,7 +291,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
                   : activeServiceSub
                     ? buildServicePageSeoTitle(activeServiceSub.name[locale], locale)
                     : activeServiceCategory
-                      ? buildServicePageSeoTitle(activeServiceCategory.title[locale], locale)
+                      ? categorySeo?.title ?? buildServicePageSeoTitle(activeServiceCategory.title[locale], locale)
                       : daavlinModelSeo
                         ? daavlinModelSeo.seoTitle[locale]
                         : tabSeo.title;
@@ -301,7 +313,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
               : activeServiceSub
                 ? activeServiceSub.description[locale]
                 : activeServiceCategory
-                  ? activeServiceCategory.description[locale]
+                  ? categorySeo?.desc ?? activeServiceCategory.description[locale]
                   : daavlinModelSeo
                     ? daavlinModelSeo.seoDesc[locale]
                     : tabSeo.desc;
@@ -316,7 +328,28 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
           ? articleTags.join(', ')
           : activeEquipment?.seo
             ? getLocalizedEquipmentText(activeEquipment.seo.keywords, locale)
-            : tabSeo.keywords;
+            : categorySeo
+              ? categorySeo.keywords
+              : activeDoctor
+                ? buildEntityKeywords(
+                    activeDoctor.name[locale],
+                    locale,
+                    [activeDoctor.role[locale]],
+                    doctorDetails?.branches.length
+                      ? doctorDetails.branches.map((branch) => (branch.id === 'kokand-branch' ? 'kokand' : 'fergana'))
+                      : undefined,
+                  )
+                : activeVideo
+                  ? buildEntityKeywords(videoTitle(activeVideo, locale), locale)
+                  : activeCondition && conditionLabel
+                    ? buildEntityKeywords(conditionLabel, locale)
+                    : activeEquipment
+                      ? buildEntityKeywords(getLocalizedEquipmentText(activeEquipment.title, locale), locale)
+                      : activeServiceSub && activeServiceCategory
+                        ? buildEntityKeywords(activeServiceSub.name[locale], locale, [activeServiceCategory.title[locale]])
+                        : activeServiceCategory
+                          ? buildEntityKeywords(activeServiceCategory.title[locale], locale)
+                          : tabSeo.keywords;
 
   const seoContext: RouteSeoContext = {
     pathname,

@@ -200,6 +200,24 @@ export function resolveArticleSeo(
 }
 
 /** Visible service heading: "Lazer epilyatsiyasi Farg'ona va Qo'qonda" (no "|" in an H1). */
+/**
+ * Keywords for a single page (doctor, service, condition, video): the page's own name, the
+ * name with each city, and any extra terms — instead of the generic list of its section.
+ */
+export function buildEntityKeywords(
+  name: string,
+  locale: Locale,
+  extra: string[] = [],
+  cityIds: ('fergana' | 'kokand')[] = ['fergana', 'kokand'],
+): string {
+  const cityName = { fergana: { uz: "Farg'ona", ru: 'Фергана', en: 'Fergana' }, kokand: { uz: "Qo'qon", ru: 'Коканд', en: 'Kokand' } };
+  const withCities = cityIds.map((city) => `${name} ${cityName[city][locale]}`);
+  const terms = [name, ...withCities, ...extra, 'Radeski Skin Clinic']
+    .map((term) => term.trim())
+    .filter(Boolean);
+  return [...new Set(terms)].join(', ');
+}
+
 export function buildServiceH1(name: string, locale: Locale): string {
   if (locale === 'uz') return `${name} Farg'ona va Qo'qonda`;
   if (locale === 'ru') return `${name} в Фергане и Коканде`;

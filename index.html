@@ -40,6 +40,9 @@
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load without blocking the first paint: text shows in the system font, then swaps. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" /></noscript>
     <script>
       (function () {
         var origin = 'https://radeski.uz';
@@ -66,6 +69,15 @@
     </script>
   </head>
   <body>
+    <script>
+      // Start downloading the site data now, in parallel with the app's JavaScript
+      // (src/api/publicDataSource.ts picks this up). The admin panel reads the live API instead.
+      if (location.pathname.indexOf('/admin') !== 0) {
+        window.__RADESKI_CORE_SNAPSHOT__ = fetch('/data/site-snapshot-core.json', { cache: 'no-cache' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .catch(function () { return null; });
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

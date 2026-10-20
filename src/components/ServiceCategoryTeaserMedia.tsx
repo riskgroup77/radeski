@@ -87,7 +87,9 @@ export default function ServiceCategoryTeaserMedia({
       <MediaImage
         src={posterImage ?? fallbackImage!}
         alt={alt}
-        loading="lazy"
+        // 'always' is the page hero: its poster is the page's main image, so it loads first.
+        loading={motionMode === 'always' ? 'eager' : 'lazy'}
+        fetchPriority={motionMode === 'always' ? 'high' : 'auto'}
         className={`relative z-0 h-full w-full object-cover object-center transition-all duration-500 ${
           motionActive ? 'scale-[1.02] opacity-0' : `opacity-100 ${imageClassName}`
         }`}

@@ -451,6 +451,9 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
         <motion.main
+          // At least one screen tall, so the footer stays below the fold while the page's code and
+          // data load (otherwise it renders mid-screen and jumps down: layout shift).
+          className="min-h-screen"
           key={`${currentPage}-${articleId ?? ''}-${doctorId ?? ''}-${serviceCategoryId ?? ''}-${serviceSubId ?? ''}-${promoSlug ?? ''}-${conditionSlug ?? ''}-${localCommercialRoute?.slug ?? ''}-${daavlinSection}-${daavlinModelId ?? ''}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

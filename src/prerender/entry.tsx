@@ -15,7 +15,9 @@ import { DERMATOLOGY_CONDITION_NAV } from '../data/dermatologyConditionsNav';
 import type { Doctor } from '../types';
 import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
 import { buildServiceH1 } from '../seo/pageMeta';
-import { getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
+import { getCategoryEquipmentList, getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
+import { getHomeServiceTeaserMedia } from '../data/homeServiceTeaserVideos';
+import { responsiveImage } from '../utils/imageVariants';
 import { getEquipmentSectionLabels } from '../utils/clinicEquipmentLabels';
 import { subServiceRouteKey } from '../utils/serviceSubSlug';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -38,6 +40,7 @@ import {
   getLocaleFromPathname,
   pagePath,
   serviceCategoryPath,
+  serviceEquipmentPath,
   serviceSubPath,
   type PageId,
 } from '../routing/paths';
@@ -77,8 +80,10 @@ import {
   DAAVLIN_CLINIC,
   DAAVLIN_CONTACTS,
   DAAVLIN_DISEASES,
+  DAAVLIN_NAV_LINEUP,
   DAAVLIN_RESULTS,
 } from '../data/daavlinFotoKabinalariContent';
+import { DAAVLIN_NAV_MODELS } from '../data/daavlinNav';
 import { getDaavlinSectionFromPathname } from '../routing/paths';
 import type { ApiReviewOut, ApiTreatmentResultOut } from '../api/cmsTypes';
 import { mapReviewFromApi, mapTreatmentResultFromApi } from '../api/cmsMappers';
@@ -745,6 +750,20 @@ function PageContent({
           </li>
         ))}
       </ul>
+      {serviceCategory.id === 'apparatnaya-kosmetologiya' && (
+        <section>
+          <h2>{getEquipmentSectionLabels(locale).sectionTitle}</h2>
+          <ul>
+            {getCategoryEquipmentList(serviceCategory.id).map((entry) => (
+              <li key={entry.id}>
+                <a href={serviceEquipmentPath(locale, entry.id)}>{getLocalizedEquipmentText(entry.title, locale)}</a>
+                {' — '}
+                {getLocalizedEquipmentText(entry.shortDescription, locale)}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       </>
     );
   }
@@ -1041,7 +1060,29 @@ function buildLlmsTxt(clinic: PrerenderClinic): string {
   return lines.join('\n');
 }
 
+/** Hero image of service category and device pages, as the React hero will request it. */
+function resolveHeroPreload(head: RouteHead): { src: string; srcSet?: string; sizes: string } | null {
+  const { serviceCategory, serviceSub, equipment } = head.route;
+  if (equipment) {
+    return { ...responsiveImage(equipment.image), sizes: '(max-width: 1024px) 100vw, 50vw' };
+  }
+  if (serviceCategory && !serviceSub) {
+    const poster = getHomeServiceTeaserMedia(serviceCategory.id)?.poster;
+    // Teaser posters have no width variants; MediaImage then uses its default sizes.
+    return poster ? { ...responsiveImage(poster), sizes: '(max-width: 640px) 100vw, 640px' } : null;
+  }
+  return null;
+}
+
 export function createPrerenderer(snapshot: PrerenderSnapshot) {
+  // The header's small Daavlin menu list must match the full lineup (see data/daavlinNav.ts).
+  const navMenu = DAAVLIN_NAV_MODELS.map((model) => `${model.id}:${model.name}`).join('|');
+  const lineup = DAAVLIN_NAV_LINEUP.map((model) => `${model.id}:${model.name}`).join('|');
+  if (navMenu !== lineup) {
+    throw new Error(`data/daavlinNav.ts is out of sync with DAAVLIN_NAV_LINEUP:
+  menu:   ${navMenu}
+  lineup: ${lineup}`);
+  }
   const raw = snapshot.data;
   const clinic: PrerenderClinic = {
     ...transformClinicData({
@@ -1119,8 +1160,18 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
     html = setMetaContent(html, 'name', 'twitter:title', head.title);
     html = setMetaContent(html, 'name', 'twitter:description', head.description);
 
+    // The hero image is the page's largest element (LCP): start downloading it with the HTML
+    // instead of after the app's JavaScript. Same URL / srcset the React hero requests.
+    const heroImage = resolveHeroPreload(head);
     const headLinks = [
       `<link rel="canonical" href="${escapeHtml(head.canonical)}" />`,
+      ...(heroImage
+        ? [
+            `<link rel="preload" as="image" href="${escapeHtml(heroImage.src)}" fetchpriority="high"${
+              heroImage.srcSet ? ` imagesrcset="${escapeHtml(heroImage.srcSet)}" imagesizes="${escapeHtml(heroImage.sizes)}"` : ''
+            } />`,
+          ]
+        : []),
       ...head.hreflang.map(
         (link) =>
           `<link rel="alternate" hreflang="${link.hreflang}" href="${escapeHtml(link.href)}" data-radeski-hreflang="true" />`,

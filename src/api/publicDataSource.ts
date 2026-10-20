@@ -51,19 +51,40 @@ const RATE_LIMIT_RETRY_MS = 1500;
 
 const snapshotPromises = new Map<string, Promise<SiteSnapshot | null>>();
 
+/** Started by an inline script in index.html, in parallel with the app's JavaScript. */
+function earlyCoreSnapshot(): Promise<unknown> | null {
+  if (typeof window === 'undefined') return null;
+  const early = (window as Window & { __RADESKI_CORE_SNAPSHOT__?: Promise<unknown> }).__RADESKI_CORE_SNAPSHOT__;
+  return early && typeof (early as Promise<unknown>).then === 'function' ? early : null;
+}
+
 function fetchSnapshot(url: string): Promise<SiteSnapshot | null> {
   let promise = snapshotPromises.get(url);
   if (!promise) {
-    promise = fetch(url, { cache: 'no-cache' })
-      .then(async (response) => {
-        if (!response.ok) return null;
-        const snapshot = (await response.json()) as SiteSnapshot;
-        return snapshot && typeof snapshot === 'object' && snapshot.data ? snapshot : null;
-      })
+    const early = url === CORE_SNAPSHOT_URL ? earlyCoreSnapshot() : null;
+    promise = (
+      early
+        ? early.then((snapshot) => {
+            const value = snapshot as SiteSnapshot | null;
+            return value && typeof value === 'object' && value.data ? value : null;
+          })
+        : Promise.resolve(null)
+    )
+      .then((snapshot) => snapshot ?? fetchSnapshotFromNetwork(url))
       .catch(() => null);
     snapshotPromises.set(url, promise);
   }
   return promise;
+}
+
+function fetchSnapshotFromNetwork(url: string): Promise<SiteSnapshot | null> {
+  return fetch(url, { cache: 'no-cache' })
+    .then(async (response) => {
+      if (!response.ok) return null;
+      const snapshot = (await response.json()) as SiteSnapshot;
+      return snapshot && typeof snapshot === 'object' && snapshot.data ? snapshot : null;
+    })
+    .catch(() => null);
 }
 
 /**

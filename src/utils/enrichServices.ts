@@ -8,6 +8,25 @@ import { filterExcludedServiceCategories } from './excludedServices';
 
 const LOCALES: Locale[] = ['uz', 'ru', 'en'];
 
+/**
+ * CMS category names with a known typo. Applied only while the CMS still holds the exact wrong
+ * text, so a name the admin edits later always wins (the admin panel saves the fixed name too).
+ */
+const CATEGORY_TITLE_FIXES: Record<string, Partial<Record<Locale, { from: string; to: string }>>> = {
+  'apparatnaya-kosmetologiya': { uz: { from: 'Apparatli kosmetologiyasi', to: 'Apparatli kosmetologiya' } },
+};
+
+function fixCategoryTitle(category: ServiceCategory): ServiceCategory['title'] {
+  const fixes = CATEGORY_TITLE_FIXES[category.id];
+  if (!fixes) return category.title;
+  const title = { ...category.title };
+  for (const locale of LOCALES) {
+    const fix = fixes[locale];
+    if (fix && title[locale]?.trim() === fix.from) title[locale] = fix.to;
+  }
+  return title;
+}
+
 function isCompleteRich(rich: ServiceDetail['richContent'] | ServiceCategory['richContent']): boolean {
   if (!rich) return false;
   return LOCALES.some((locale) => {
@@ -77,6 +96,7 @@ export function enrichServiceCategories(categories: ServiceCategory[]): ServiceC
     const catalogCategory = CATEGORY_RICH_CATALOG[category.id];
     const enrichedCategory: ServiceCategory = {
       ...category,
+      title: fixCategoryTitle(category),
       richContent: isCompleteRich(category.richContent)
         ? category.richContent
         : catalogCategory
