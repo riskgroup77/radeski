@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { MapPin, Phone, Clock, Mail, Send, Facebook } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY } from '../data';
@@ -17,7 +18,37 @@ interface FooterProps {
   currentPage?: PageId;
 }
 
+/**
+ * The Google map pulls ~250 KB of Maps scripts, so the iframe is only created once the
+ * footer is close to the screen (native loading="lazy" starts it far too early on mobile).
+ */
+function useNearViewport<T extends Element>() {
+  const ref = useRef<T>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || near) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setNear(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setNear(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px 0px' },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [near]);
+  return [ref, near] as const;
+}
+
 export default function Footer({ locale, onNavigate, onOpenAppointment, currentPage, dictionary }: FooterProps) {
+  const [mapRef, mapNear] = useNearViewport<HTMLDivElement>();
   const d = { ...DICTIONARY[locale], ...dictionary };
   const isAdmin = currentPage === 'admin';
 
@@ -158,18 +189,20 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
             <h4 className="text-white font-bold text-sm tracking-wider uppercase mb-5">
               {locale === 'uz' ? 'Xaritadagi joylashuvimiz' : locale === 'ru' ? 'Мы на карте' : 'Location map'}
             </h4>
-            <div className="w-full h-36 bg-slate-800 rounded-xl overflow-hidden border border-slate-700">
-              <iframe
-                src={CLINIC_MAP_EMBED_URL}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Radeski Skin Clinic — Google Maps"
-                id="footer-inline-map"
-              />
+            <div ref={mapRef} className="w-full h-36 bg-slate-800 rounded-xl overflow-hidden border border-slate-700">
+              {mapNear && (
+                <iframe
+                  src={CLINIC_MAP_EMBED_URL}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Radeski Skin Clinic — Google Maps"
+                  id="footer-inline-map"
+                />
+              )}
             </div>
           </div>
         </div>

@@ -1114,7 +1114,8 @@ function buildLlmsTxt(clinic: PrerenderClinic): string {
 function HeroImage({ head, alt }: { head: RouteHead; alt: string }) {
   const hero = resolveHeroPreload(head);
   if (!hero) return null;
-  return <img src={hero.src} srcSet={hero.srcSet} sizes={hero.srcSet ? hero.sizes : undefined} alt={alt} />;
+  // The box is sized before the file arrives so the text under it does not jump (CLS).
+  return <img className="prerender-hero" src={hero.src} srcSet={hero.srcSet} sizes={hero.srcSet ? hero.sizes : undefined} alt={alt} />;
 }
 
 /** Hero image of service category and device pages, as the React hero will request it. */

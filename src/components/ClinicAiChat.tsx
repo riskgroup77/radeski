@@ -276,7 +276,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="clinic-ai-chat-welcome-preview w-[min(100vw-5.5rem,320px)] bg-white border border-brand-sectiongray rounded-2xl rounded-br-md shadow-lg shadow-brand-dark-navy/10 p-3 sm:p-3.5 relative"
+            className="clinic-ai-chat-welcome-preview w-[min(100vw-5.5rem,320px)] bg-white border border-brand-sectiongray rounded-2xl rounded-br-md shadow-lg shadow-brand-dark-navy/10 p-3 sm:p-3.5 absolute bottom-full right-0 mb-3"
           >
             <button
               type="button"
