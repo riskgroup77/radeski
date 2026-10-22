@@ -1229,6 +1229,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
     html = setMetaContent(html, 'property', 'og:description', head.description);
     html = setMetaContent(html, 'property', 'og:locale', head.ogLocale);
     html = setMetaContent(html, 'property', 'og:image', head.ogImage);
+    html = setMetaContent(html, 'property', 'og:type', head.ogType);
     html = setMetaContent(html, 'name', 'twitter:title', head.title);
     html = setMetaContent(html, 'name', 'twitter:description', head.description);
 

@@ -120,6 +120,8 @@ export interface RouteHead {
   canonical: string;
   /** Share image for link previews (article cover / doctor photo / logo). */
   ogImage: string;
+  /** Open Graph type: 'article' on article pages, 'website' elsewhere. */
+  ogType: 'article' | 'website';
   hreflang: HreflangLink[];
   ogLocale: string;
   jsonLd: Record<string, unknown>[];
@@ -454,6 +456,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     description: fitDescription(description),
     keywords,
     robots: isErrorPage ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1',
+    ogType: activeArticle ? 'article' : 'website',
     ogImage: activeVideo && videoPoster(activeVideo)
       ? absoluteOgPath(origin, videoPoster(activeVideo)!)
       : resolveOgImage(origin, locale, activeArticle, activeDoctor, activeEquipment ?? activeServiceSub ?? activeServiceCategory) ??
@@ -735,6 +738,7 @@ export function applyRouteHead(head: RouteHead): void {
   setMeta('property', 'og:url', head.canonical);
   setMeta('property', 'og:locale', head.ogLocale);
   setMeta('property', 'og:image', head.ogImage);
+  setMeta('property', 'og:type', head.ogType);
   setMeta('name', 'twitter:title', head.title);
   setMeta('name', 'twitter:description', head.description);
 
