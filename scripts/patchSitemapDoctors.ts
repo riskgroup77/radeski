@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /** Insert or refresh doctor profile URLs in public/sitemap.xml (fetches live API doctors). */
-import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDoctorSitemapXml } from '../src/seo/sitemapDoctors.ts';
 import { doctorRouteKey } from '../src/utils/doctorSlug.ts';
+import { readSitemap, replaceUrlSection, writeSitemap } from './sitemapXml.ts';
 
 const API_URL = process.env.VITE_API_URL?.trim() || 'https://api.radeski.uz';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -22,32 +22,23 @@ async function fetchDoctorIds(): Promise<string[]> {
     .filter(Boolean);
 }
 
-function upsertDoctorBlock(xml: string, block: string): string {
-  const startMarker = '  <!-- Doctor profiles -->';
-  const endMarker = '  <url><loc>https://radeski.uz/uz/prices</loc>';
-
-  if (xml.includes(startMarker)) {
-    const startIdx = xml.indexOf(startMarker);
-    const endIdx = xml.indexOf(endMarker);
-    if (endIdx === -1) throw new Error('Could not find end marker after doctor profiles');
-    return `${xml.slice(0, startIdx)}${block}\n\n${xml.slice(endIdx)}`;
-  }
-
-  const insertAfter = '  <url><loc>https://radeski.uz/en/doctors</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>';
-  const insertIdx = xml.indexOf(insertAfter);
-  if (insertIdx === -1) {
-    throw new Error('Could not find doctors list block in sitemap.xml');
-  }
-  const after = insertIdx + insertAfter.length;
-  return `${xml.slice(0, after)}\n\n${block}\n${xml.slice(after)}`;
-}
+/** /uz/doctors/<slug> profile pages — not the /uz/doctors list pages. */
+const DOCTOR_PROFILE_LOC = /^https:\/\/radeski\.uz\/(uz|ru|en)\/doctors\/[^/]+$/;
 
 async function main() {
   const doctorIds = await fetchDoctorIds();
   console.log(`Fetched ${doctorIds.length} doctors from ${API_URL}`);
-  const block = buildDoctorSitemapXml(doctorIds);
-  const xml = readFileSync(sitemapPath, 'utf8');
-  writeFileSync(sitemapPath, upsertDoctorBlock(xml, block), 'utf8');
+  if (doctorIds.length === 0) {
+    throw new Error('API returned no doctors — refusing to wipe doctor profiles from sitemap.xml');
+  }
+  const sitemap = readSitemap(sitemapPath);
+  sitemap.xml = replaceUrlSection(sitemap.xml, {
+    isSectionUrl: (loc) => DOCTOR_PROFILE_LOC.test(loc),
+    comment: 'Doctor profiles',
+    block: buildDoctorSitemapXml(doctorIds),
+    insertAfter: '  <url><loc>https://radeski.uz/en/doctors</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>',
+  });
+  writeSitemap(sitemapPath, sitemap);
   console.log(`Updated doctor profiles in sitemap (${doctorIds.length * 3} URLs).`);
 }
 

@@ -138,6 +138,16 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     priority: { uz: 0.88, ru: 0.85, en: 0.8 },
   },
   {
+    routeKey: 'art-psoriaz-tashxis-davolash-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.88, ru: 0.85, en: 0.8 },
+  },
+  {
+    routeKey: 'art-soch-tokilishi-tahlillar-radeski',
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.88, ru: 0.85, en: 0.8 },
+  },
+  {
     routeKey: 'art-kontagioz-mollyusk-radeski',
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.85, ru: 0.8, en: 0.75 },
