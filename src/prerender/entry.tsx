@@ -12,10 +12,13 @@ import { getConditionSlugFromPathname } from '../routing/paths';
 import { isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
 import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
 import { DERMATOLOGY_CONDITION_NAV } from '../data/dermatologyConditionsNav';
-import type { Doctor, ServiceCategory } from '../types';
+import type { Doctor, ServiceCategory, ServiceConditionTopic } from '../types';
+import { getLocalizedConditionText } from '../data/serviceConditionDetailsCatalog';
+import { getConditionSectionLabels, resolveConditionDisplay } from '../utils/serviceConditionDetails';
 import { articleServiceLinks } from '../utils/articleServiceLinks';
 import type { CustomerReview, TreatmentResult } from '../data/sitePagesContent';
-import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
+import { educationProgramPath, getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
+import type { EducationProgramId } from '../data/obrazovaniyaContent';
 import { buildServiceH1 } from '../seo/pageMeta';
 import { getCategoryEquipmentList, getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
 import { getHomeServiceTeaserMedia } from '../data/homeServiceTeaserVideos';
@@ -38,12 +41,15 @@ import { buildFaqSchema } from '../seo/structuredData';
 import {
   SITE_ORIGIN,
   articlePath,
+  conditionPath,
+  daavlinModelPath,
   doctorPath,
   getLocaleFromPathname,
   pagePath,
   serviceCategoryPath,
   serviceEquipmentPath,
   serviceSubPath,
+  type DaavlinModelId,
   type PageId,
 } from '../routing/paths';
 import { filterPublicArticles, resolveArticleRouteKey } from '../utils/articles';
@@ -153,6 +159,75 @@ function resolveHeading(head: RouteHead, locale: Locale): string {
   if (serviceSub) return buildServiceH1(serviceSub.name[locale] || serviceSub.name.uz, locale);
   if (serviceCategory) return buildServiceH1(serviceCategory.title[locale] || serviceCategory.title.uz, locale);
   return head.title.split(' | ')[0];
+}
+
+/** Crawler copy of ConditionDetailBody: the same text the condition page shows. */
+function ConditionBody({ condition, locale, category }: { condition: ServiceConditionTopic; locale: Locale; category: ServiceCategory }) {
+  const labels = getConditionSectionLabels(locale);
+  const display = resolveConditionDisplay(condition, locale, category.id, null);
+  const { meta } = display;
+  const tr = (copy: Parameters<typeof getLocalizedConditionText>[0]) => getLocalizedConditionText(copy, locale);
+  const whyTitle = condition.aboutTitle ?? (meta.aboutTitle ? tr(meta.aboutTitle) : null);
+  const whyOverview = condition.aboutOverview ?? (meta.aboutOverview ? tr(meta.aboutOverview) : null);
+  const whySections =
+    condition.aboutSections ?? meta.aboutSections?.map((section) => ({ title: tr(section.title), description: tr(section.description) }));
+  const whyFooter = condition.aboutFooter ?? (meta.aboutFooter ? tr(meta.aboutFooter) : null);
+  return (
+    <section>
+      <p>{display.fullDescription}</p>
+      {whyTitle && <h2>{whyTitle}</h2>}
+      {whyOverview && <p>{whyOverview}</p>}
+      {whySections?.map((section) => (
+        <div key={section.title}>
+          <h3>{section.title}</h3>
+          <p>{section.description}</p>
+        </div>
+      ))}
+      {whyFooter && <p>{whyFooter}</p>}
+      {meta.clinicApproach && meta.clinicApproach.length > 0 && !whySections?.length && (
+        <>
+          <h3>{labels.clinicApproach}</h3>
+          {meta.clinicApproach.map((item, i) => (
+            <p key={i}>{tr(item)}</p>
+          ))}
+        </>
+      )}
+      {meta.treatments && meta.treatments.length > 0 && (
+        <>
+          <h3>{labels.treatments}</h3>
+          <ul>
+            {meta.treatments.map((item, i) => (
+              <li key={i}>{tr(item)}</li>
+            ))}
+          </ul>
+        </>
+      )}
+      {meta.process && meta.process.length > 0 && (
+        <>
+          <h3>{labels.process}</h3>
+          <ol>
+            {meta.process.map((step, i) => (
+              <li key={i}>{tr(step)}</li>
+            ))}
+          </ol>
+        </>
+      )}
+      {meta.serviceLinks?.map((link) => {
+        const sub = clinicSubName(category, link.subId, locale);
+        return (
+          <p key={`${link.categoryId}-${link.subId}`}>
+            <a href={serviceSubPath(locale, link.categoryId, link.subId)}>
+              {labels.relatedService}: {sub}
+            </a>
+          </p>
+        );
+      })}
+    </section>
+  );
+}
+
+function clinicSubName(category: ServiceCategory, subId: string, locale: Locale): string {
+  return category.subServices.find((sub) => sub.id === subId)?.name[locale] ?? subId;
 }
 
 function ArticleBody({ article, locale, categories }: { article: Article; locale: Locale; categories: ServiceCategory[] }) {
@@ -939,21 +1014,11 @@ function PageContent({
     const slug = getConditionSlugFromPathname(pathname);
     const topic = slug && isDermatologyConditionSlug(slug) ? getDermatologyConditionTopic(slug, locale) : null;
     const treated = ALL_LOCAL_COMMERCIAL_LANDINGS.filter((landing) => landingTopicKey(landing.slug) === (CONDITION_LANDING_TOPIC[slug ?? ''] ?? 'dermatolog'));
+    const dermatology = clinic.serviceCategories.find((category) => category.id === 'dermatologiya');
     return (
       <>
-        {topic && (
-          <section>
-            {topic.aboutTitle && <h2>{topic.aboutTitle}</h2>}
-            {topic.aboutOverview && <p>{topic.aboutOverview}</p>}
-            {topic.aboutSections?.map((section) => (
-              <div key={section.title}>
-                <h3>{section.title}</h3>
-                <p>{section.description}</p>
-              </div>
-            ))}
-            {topic.aboutFooter && <p>{topic.aboutFooter}</p>}
-          </section>
-        )}
+        {topic && dermatology && <ConditionBody condition={topic} locale={locale} category={dermatology} />}
+        <h2>{locale === 'uz' ? 'Qayerda davolanadi' : locale === 'ru' ? 'Где лечат' : 'Where it is treated'}</h2>
         <ul>
           {treated.map((landing) => (
             <li key={`${landing.city}-${landing.slug}`}>
@@ -969,6 +1034,57 @@ function PageContent({
   if (content) return <StructuredPageText content={content} locale={locale} />;
 
   return null;
+}
+
+/** Daavlin model pages that are published (the others redirect to the device pages). */
+const PRERENDER_DAAVLIN_MODELS: { id: DaavlinModelId; name: string }[] = [
+  { id: '7-series', name: 'Daavlin 7 Series' },
+  { id: 'm-series', name: 'Daavlin M Series' },
+  { id: 'neolux', name: 'Daavlin NeoLux' },
+  { id: 'aquex', name: 'Daavlin Aquex' },
+  { id: 'dermapal', name: 'Daavlin DermaPal' },
+];
+
+const SECTION_PAGE_LABELS: Partial<Record<PageId, Record<Locale, string>>> = {
+  'daavlin-foto-kabinalari': { uz: 'Daavlin fototerapiya', ru: 'Фототерапия Daavlin', en: 'Daavlin phototherapy' },
+  technologies: { uz: 'Texnologiyalar', ru: 'Технологии', en: 'Technologies' },
+  dermoscan: { uz: 'DermoScan diagnostika', ru: 'Диагностика DermoScan', en: 'DermoScan diagnostics' },
+  science: { uz: 'Ilm-fan', ru: 'Наука', en: 'Science' },
+  obrazovaniya: { uz: "Ta'lim", ru: 'Образование', en: 'Education' },
+  'malaka-oshirish': { uz: 'Malaka oshirish', ru: 'Повышение квалификации', en: 'Professional development' },
+  videos: { uz: 'Videolar', ru: 'Видео', en: 'Videos' },
+  brend: { uz: 'Brend', ru: 'Бренд', en: 'Brand' },
+};
+
+/**
+ * The links of the React header's drop-down menus, so crawlers reading the HTML reach the
+ * condition, Daavlin model and course pages the same way visitors do.
+ */
+function SectionsNav({ locale }: { locale: Locale }) {
+  return (
+    <nav aria-label="sections">
+      {DERMATOLOGY_CONDITION_NAV.map((item) => (
+        <a key={item.slug} href={conditionPath(locale, item.slug)}>
+          {item.label[locale]}
+        </a>
+      ))}
+      {PRERENDER_DAAVLIN_MODELS.map((model) => (
+        <a key={model.id} href={daavlinModelPath(locale, model.id)}>
+          {model.name}
+        </a>
+      ))}
+      {OBRAZOVANIYA.programs.items.map((program) => (
+        <a key={program.id} href={educationProgramPath(locale, program.id as EducationProgramId)}>
+          {program.title[locale]}
+        </a>
+      ))}
+      {(Object.keys(SECTION_PAGE_LABELS) as PageId[]).map((page) => (
+        <a key={page} href={pagePath(locale, page)}>
+          {SECTION_PAGE_LABELS[page]![locale]}
+        </a>
+      ))}
+    </nav>
+  );
 }
 
 function PrerenderBody({
@@ -1013,6 +1129,7 @@ function PrerenderBody({
             </a>
           ))}
         </nav>
+        <SectionsNav locale={locale} />
       </header>
       <main>
         {head.breadcrumbs.length > 1 && (

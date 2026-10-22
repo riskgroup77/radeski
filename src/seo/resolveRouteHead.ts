@@ -59,6 +59,7 @@ import {
 } from './pageMeta';
 import { SERVICE_CATEGORY_SEO } from './serviceCategorySeo';
 import { getCategoryFaq } from '../data/serviceCategoryFaq';
+import { getInstitutionalNavSection } from '../data/institutionalNavContent';
 import { buildHreflangLinks, getCanonicalUrl, type HreflangLink, type RouteSeoContext } from './routeSeo';
 import {
   buildArticleSchema,
@@ -86,6 +87,15 @@ import {
   videoRouteKey,
   videoTitle,
 } from '../utils/videoMeta';
+
+/**
+ * Menu sections whose page is still a "being prepared" placeholder (no topics yet): kept out of
+ * the index until they get content, so they do not count as thin pages. Fills in automatically.
+ */
+function isPlaceholderSection(page: PageId): boolean {
+  if (page !== 'tele-dermatology' && page !== 'skin-pathology-center') return false;
+  return getInstitutionalNavSection(page).topics.length === 0;
+}
 
 /** schema.org MedicalSpecialty of the main service categories. */
 const CATEGORY_MEDICAL_SPECIALTY: Record<string, string> = {
@@ -455,7 +465,11 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     breadcrumbs,
     description: fitDescription(description),
     keywords,
-    robots: isErrorPage ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1',
+    robots: isErrorPage
+      ? 'noindex, nofollow'
+      : isPlaceholderSection(currentPage)
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1',
     ogType: activeArticle ? 'article' : 'website',
     ogImage: activeVideo && videoPoster(activeVideo)
       ? absoluteOgPath(origin, videoPoster(activeVideo)!)

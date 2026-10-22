@@ -370,9 +370,7 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
                         <ol className="space-y-3">
                           {feature.flow.map((step, i) => (
                             <li key={`${step.role.uz}-${i}`} className="flex items-start gap-3">
-                              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-gold/15 text-xs font-extrabold text-brand-gold">
-                                {i + 1}
-                              </span>
+                              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-gold/15 text-xs font-extrabold text-brand-gold step-badge" data-step={i + 1} aria-hidden="true" />
                               <div>
                                 <span className="text-xs font-bold uppercase text-brand-gold">{step.role[locale]}</span>
                                 <p className="text-sm font-light text-brand-text-secondary">{step.action[locale]}</p>

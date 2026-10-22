@@ -79,9 +79,7 @@ function ProcessSteps({ items }: { items: string[] }) {
           key={index}
           className="relative pl-12 pr-4 py-4 rounded-xl border border-brand-sectiongray bg-brand-offwhite/40"
         >
-          <span className="absolute left-4 top-4 w-7 h-7 rounded-full bg-brand-gold text-white text-xs font-bold flex items-center justify-center">
-            {index + 1}
-          </span>
+          <span className="absolute left-4 top-4 w-7 h-7 rounded-full bg-brand-gold text-white text-xs font-bold flex items-center justify-center step-badge" data-step={index + 1} aria-hidden="true" />
           <p className="text-sm text-brand-text-secondary leading-relaxed">{item}</p>
         </li>
       ))}

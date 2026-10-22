@@ -594,3 +594,8 @@ html[data-mobile-nav-open] .clinic-ai-chat {
     color: #86662a;
   }
 }
+
+/* Step numbers in <ol> lists: drawn by CSS so the number is not read twice (list + badge text). */
+.step-badge::before {
+  content: attr(data-step);
+}

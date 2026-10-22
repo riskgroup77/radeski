@@ -58,6 +58,14 @@ export function mapPartnerFromApi(api: ApiPartnerOut): ClinicPartner {
   };
 }
 
+/**
+ * A word typed twice with no space ("жавобжавоб") is shown once. The CMS cannot edit review
+ * text (only publish/unpublish), and re-creating a review would change its date.
+ */
+function fixDoubledWords<T extends string | null | undefined>(text: T): T {
+  return (text ? text.replace(/(?<!\p{L})(\p{L}{5,})\1(?!\p{L})/gu, '$1') : text) as T;
+}
+
 export function mapReviewFromApi(api: ApiReviewOut): CustomerReview {
   const googleReviewId = extractGoogleReviewId(api.service_en);
   const isGoogle = googleReviewId !== null;
@@ -66,7 +74,7 @@ export function mapReviewFromApi(api: ApiReviewOut): CustomerReview {
     id: api.id,
     authorName: api.author_name,
     rating: api.rating,
-    comment: localized(api.comment_uz, api.comment_ru, api.comment_en),
+    comment: localized(fixDoubledWords(api.comment_uz), fixDoubledWords(api.comment_ru), fixDoubledWords(api.comment_en)),
     service: isGoogle
       ? localized(
           GOOGLE_REVIEWS_CONFIG.serviceLabel.uz,

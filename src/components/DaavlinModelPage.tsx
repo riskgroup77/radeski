@@ -192,9 +192,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
                 key={feature.uz}
                 className="flex gap-3 rounded-2xl border border-brand-sectiongray/80 bg-brand-offwhite/60 p-4"
               >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-dark-navy text-sm font-bold text-brand-gold">
-                  {index + 1}
-                </span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-dark-navy text-sm font-bold text-brand-gold step-badge" data-step={index + 1} aria-hidden="true" />
                 <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{feature[locale]}</p>
               </li>
             ))}
@@ -226,9 +224,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
           <ol className="space-y-3">
             {deep.pathway.map((step, index) => (
               <li key={step.uz} className="flex gap-3 text-sm font-light leading-relaxed text-brand-text-secondary">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white">
-                  {index + 1}
-                </span>
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white step-badge" data-step={index + 1} aria-hidden="true" />
                 <span>{step[locale]}</span>
               </li>
             ))}

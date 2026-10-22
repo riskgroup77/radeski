@@ -126,9 +126,7 @@ export default function EquipmentDetailPanel({
         <ol className="space-y-1.5">
           {entry.process.map((step, i) => (
             <li key={i} className="flex gap-2.5 text-sm font-light text-brand-text-secondary">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold-light/15 text-[10px] font-bold text-brand-gold">
-                {i + 1}
-              </span>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold-light/15 text-[10px] font-bold text-brand-gold step-badge" data-step={i + 1} aria-hidden="true" />
               <span>{getLocalizedEquipmentText(step, locale)}</span>
             </li>
           ))}

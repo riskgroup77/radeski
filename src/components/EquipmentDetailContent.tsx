@@ -91,9 +91,7 @@ function TitledSteps({ items }: { items: { title: string; text: string }[] }) {
           key={item.title}
           className="relative rounded-xl border border-brand-sectiongray bg-brand-offwhite/40 py-4 pl-12 pr-4"
         >
-          <span className="absolute left-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white">
-            {index + 1}
-          </span>
+          <span className="absolute left-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white step-badge" data-step={index + 1} aria-hidden="true" />
           <h4 className="text-sm font-bold text-brand-text-primary">{item.title}</h4>
           <p className="mt-1 text-sm leading-relaxed text-brand-text-secondary">{item.text}</p>
         </li>
@@ -127,9 +125,7 @@ function ProcessSteps({ items }: { items: string[] }) {
           key={index}
           className="relative rounded-xl border border-brand-sectiongray bg-brand-offwhite/40 py-4 pl-12 pr-4"
         >
-          <span className="absolute left-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white">
-            {index + 1}
-          </span>
+          <span className="absolute left-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white step-badge" data-step={index + 1} aria-hidden="true" />
           <p className="text-sm leading-relaxed text-brand-text-secondary">{item}</p>
         </li>
       ))}

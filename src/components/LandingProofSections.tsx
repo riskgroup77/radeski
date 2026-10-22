@@ -35,6 +35,7 @@ export default function LandingProofSections({ locale, doctors, results, reviews
               <Link
                 key={doctor.id}
                 to={doctorPath(locale, doctorRouteKey(doctor))}
+                aria-label={`${doctor.name[locale]} — ${doctor.role[locale]}. ${copy.profile}`}
                 className="flex gap-3 items-center p-3 bg-brand-white rounded-2xl border border-brand-sectiongray hover:border-brand-gold/40 no-underline"
               >
                 <div className="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-brand-offwhite">
@@ -48,9 +49,9 @@ export default function LandingProofSections({ locale, doctors, results, reviews
                   )}
                 </div>
                 <div className="min-w-0">
-                  <p className="font-extrabold text-sm text-brand-text-primary leading-snug">{doctor.name[locale]}</p>
-                  <p className="mt-0.5 text-xs text-brand-text-muted line-clamp-2">{doctor.role[locale]}</p>
-                  <span className="mt-1 inline-flex items-center gap-1 text-xs font-bold text-brand-gold">
+                  <p className="font-extrabold text-sm text-brand-text-primary leading-snug">{doctor.name[locale]}</p>{' '}
+                  <p className="mt-0.5 text-xs text-brand-text-muted line-clamp-2">{doctor.role[locale]}</p>{' '}
+                  <span className="mt-1.5 flex items-center gap-1 text-xs font-bold text-brand-gold" aria-hidden="true">
                     {copy.profile}
                     <ArrowRight className="w-3 h-3" />
                   </span>

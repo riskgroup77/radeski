@@ -71,7 +71,7 @@ function getHeroCopy(locale: Locale) {
       cities: { fargona: "Farg'ona", qoqon: "Qo'qon" },
       statPatients: 'Baxtli bemorlar',
       statDoctors: 'Mutaxassis shifokorlar',
-      statExperience: 'Tajriba',
+      statExperience: 'Klinika faoliyati',
       yearsSuffix: 'yil',
     };
   }
@@ -89,8 +89,8 @@ function getHeroCopy(locale: Locale) {
       cities: { fargona: 'Фергана', qoqon: 'Коканд' },
       statPatients: 'Довольных пациентов',
       statDoctors: 'Специалистов',
-      statExperience: 'Опыт',
-      yearsSuffix: 'лет',
+      statExperience: 'Работы клиники',
+      yearsSuffix: 'года',
     };
   }
   return {
@@ -106,7 +106,7 @@ function getHeroCopy(locale: Locale) {
     cities: { fargona: 'Fergana', qoqon: 'Kokand' },
     statPatients: 'Happy patients',
     statDoctors: 'Specialist doctors',
-    statExperience: 'Experience',
+    statExperience: 'Clinic in operation',
     yearsSuffix: 'years',
   };
 }

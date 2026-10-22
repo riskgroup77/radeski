@@ -826,14 +826,19 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'A cosmetologist works with the quality, tone and texture of facial and body skin and with age-related changes. At Radeski Skin Clinic, cosmetic treatments are done by dermatocosmetologists — doctors trained in dermatology: facial cleansing, peels, pigmentation, acne and post-acne, enlarged pores, biorevitalization and botulinum therapy.',
       ),
       L(
-        'Birinchi qabulda yuz JANUS PRO apparatida skanerlanadi, so‘ng muolajalar teri holatiga qarab tanlanadi. Klinikada IPL (InMode), Hollywood Spectra, Derma V va fraksion CO₂ lazer kabi tibbiy apparatlar bor — muolajalar salon usulida emas, tibbiy protokol asosida o‘tkaziladi.',
-        'На первом приёме лицо сканируется на аппарате JANUS PRO, затем процедуры подбираются по состоянию кожи. В клинике есть медицинские аппараты — IPL (InMode), Hollywood Spectra, Derma V, фракционный CO₂-лазер, — поэтому процедуры проводятся по медицинскому протоколу, а не «салонно».',
-        'At the first visit the face is scanned with the JANUS PRO device, then treatments are chosen for the skin’s condition. The clinic has medical devices — IPL (InMode), Hollywood Spectra, Derma V and a fractional CO₂ laser — so treatments follow a medical protocol rather than a salon routine.',
+        'Birinchi qabulda yuz JANUS PRO apparatida skanerlanadi, so‘ng muolajalar teri holatiga qarab tanlanadi. Klinikada IPL (InMode), Hollywood Spectra, Derma V va fraksion CO₂ lazer kabi tibbiy apparatlar bor. Tibbiy protokol degani: muolajadan oldin ko‘rsatma va qarshi ko‘rsatmalar tekshiriladi, apparat rejimi teri fototipi va muammoga qarab tanlanadi, muolaja va natija bemorning tibbiy kartasiga yoziladi.',
+        'На первом приёме лицо сканируется на аппарате JANUS PRO, затем процедуры подбираются по состоянию кожи. В клинике есть медицинские аппараты — IPL (InMode), Hollywood Spectra, Derma V, фракционный CO₂-лазер, — Медицинский протокол означает: перед процедурой проверяются показания и противопоказания, режим аппарата подбирается по фототипу кожи и проблеме, процедура и результат фиксируются в медицинской карте.',
+        'At the first visit the face is scanned with the JANUS PRO device, then treatments are chosen for the skin’s condition. The clinic has medical devices — IPL (InMode), Hollywood Spectra, Derma V and a fractional CO₂ laser — A medical protocol means that indications and contraindications are checked first, device settings are chosen for the skin phototype and the problem, and the treatment and result are recorded in the patient’s medical file.',
       ),
       L(
         'Dermatokosmetolog kosmetik muammoning sababini ham ko‘radi: akne, rozatsea yoki pigmentatsiya ortida kasallik bo‘lsa, davolash dermatolog bilan birga rejalashtiriladi.',
         'Дерматокосметолог видит и причину косметической проблемы: если за акне, розацеа или пигментацией стоит заболевание, лечение планируется вместе с дерматологом.',
         'A dermatocosmetologist also looks for the cause: if acne, rosacea or pigmentation is driven by a skin disease, treatment is planned together with a dermatologist.',
+      ),
+      L(
+        'Muolajalar har kimga ham birdek mos emas. Odatda kechiktiriladi yoki boshqa usul tanlanadi: homiladorlik va emizish davrida, muolaja sohasida faol yallig‘lanish, infeksiya yoki gerpes bo‘lsa, yangi quyosh kuyishi yoki qorayishdan keyin, izotretinoin bilan davolanish paytida va undan keyingi oylarda, keloid chandiqqa moyillikda. Shubhali xol yoki dog‘ bo‘lsa, avval dermatolog dermatoskopiya qiladi.',
+        'Процедуры подходят не всем. Обычно их откладывают или выбирают другой метод при беременности и грудном вскармливании, активном воспалении, инфекции или герпесе в зоне процедуры, после свежего загара или солнечного ожога, во время лечения изотретиноином и в течение нескольких месяцев после него, при склонности к келоидным рубцам. Если есть подозрительная родинка или пятно, сначала дерматолог проводит дерматоскопию.',
+        'Treatments are not right for everyone. They are usually postponed, or another method is chosen, during pregnancy and breastfeeding, with active inflammation, infection or herpes in the area, after a fresh tan or sunburn, during isotretinoin treatment and for some months after it, and with a tendency to keloid scars. A suspicious mole or spot is first checked by a dermatologist with dermoscopy.',
       ),
     ],
     steps: [
@@ -867,6 +872,14 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
           'It is best to come without make-up and tell the doctor about the creams and products you use and any medication you take.',
         ),
       ),
+      Q(
+        L('Kimga kosmetologik muolajalar mumkin emas?', 'Кому нельзя делать косметологические процедуры?', 'Who should not have cosmetic treatments?'),
+        L(
+          'Homiladorlik va emizish, muolaja sohasidagi yallig‘lanish, infeksiya yoki gerpes, yangi quyosh kuyishi, izotretinoin bilan davolanish va keloid chandiqqa moyillik — eng ko‘p uchraydigan cheklovlar. Ular har bir muolaja uchun alohida baholanadi, shuning uchun dastlab shifokor ko‘rigi o‘tkaziladi.',
+          'Самые частые ограничения — беременность и грудное вскармливание, воспаление, инфекция или герпес в зоне процедуры, свежий солнечный ожог, лечение изотретиноином и склонность к келоидным рубцам. Они оцениваются для каждой процедуры отдельно, поэтому сначала проводится осмотр врача.',
+          'The most common limits are pregnancy and breastfeeding, inflammation, infection or herpes in the area, a fresh sunburn, isotretinoin treatment and a tendency to keloid scars. They are assessed for each treatment separately, which is why a doctor’s examination comes first.',
+        ),
+      ),
     ],
     priceNames: [
       "Dermatokosmetolog shifokorining birinchi ko'rigi",
@@ -891,9 +904,9 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'At Radeski Skin Clinic the podiatrist assesses the stage and chooses the method: careful removal of the part of the nail that has grown into the skin and gradual correction of its growth direction with a titanium wire. The wire lifts the nail edges and relieves pressure on the skin — in many cases the whole nail does not need removing.',
       ),
       L(
-        'Agar tirnoq ilgari olib tashlangan bo‘lsa-yu, muammo qaytgan bo‘lsa, faqat olib tashlash yetarli emas — o‘sish yo‘nalishini to‘g‘rilash kerak. Qo‘qon filialida II darajali onixokriptoz bo‘yicha shunday klinik holat va 6 oylik natija saytdagi maqolada bosqichma-bosqich ko‘rsatilgan.',
-        'Если ноготь уже удаляли, а проблема вернулась, одного удаления мало — нужно исправить направление роста. Такой клинический случай онихокриптоза II степени из филиала в Коканде с результатом через 6 месяцев пошагово разобран в статье на сайте.',
-        'If the nail was removed before and the problem came back, removal alone is not enough — the growth direction has to be corrected. A stage II case from the Kokand branch, with the result after 6 months, is shown step by step in an article on the site.',
+        'Agar tirnoq ilgari olib tashlangan bo‘lsa-yu, muammo qaytgan bo‘lsa, faqat olib tashlash yetarli emas — o‘sish yo‘nalishini to‘g‘rilash kerak. Klinikamizdagi II darajali onixokriptoz bo‘yicha shunday klinik holat va 6 oylik natija saytdagi maqolada bosqichma-bosqich ko‘rsatilgan.',
+        'Если ноготь уже удаляли, а проблема вернулась, одного удаления мало — нужно исправить направление роста. Такой клинический случай онихокриптоза II степени из практики клиники с результатом через 6 месяцев пошагово разобран в статье на сайте.',
+        'If the nail was removed before and the problem came back, removal alone is not enough — the growth direction has to be corrected. A stage II case from the clinic’s practice, with the result after 6 months, is shown step by step in an article on the site.',
       ),
     ],
     steps: [

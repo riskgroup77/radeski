@@ -140,9 +140,7 @@ export default function ConditionDetailBody({
           <ol className="space-y-1.5">
             {meta.process.map((step, i) => (
               <li key={i} className="flex gap-2.5 text-sm text-brand-text-secondary font-light">
-                <span className="w-5 h-5 rounded-full bg-brand-gold-light/15 text-brand-gold text-[10px] font-bold flex items-center justify-center shrink-0">
-                  {i + 1}
-                </span>
+                <span className="w-5 h-5 rounded-full bg-brand-gold-light/15 text-brand-gold text-[10px] font-bold flex items-center justify-center shrink-0 step-badge" data-step={i + 1} aria-hidden="true" />
                 <span>{getLocalizedConditionText(step, locale)}</span>
               </li>
             ))}

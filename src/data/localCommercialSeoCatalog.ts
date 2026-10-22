@@ -128,15 +128,8 @@ function specialistLanding(
       L('Shaxsiy davolash rejasi', 'Индивидуальный план лечения', 'Individual treatment plan'),
       L('Apparat muolajalar (ko‘rsatma bo‘yicha)', 'Аппаратные процедуры по показаниям', 'Device procedures when indicated'),
     ],
+    // Topic questions, price and branch address/phone come from localLandingDetails.
     faqs: [
-      {
-        question: L(`${c('uz')} qabulga qanday yozilaman?`, `Как записаться в ${c('ru')}?`, `How to book in ${c('en')}?`),
-        answer: L(
-          'Saytdagi «Qabulga yozilish» tugmasi yoki filial telefon raqami orqali.',
-          'Через кнопку «Запись на приём» на сайте или по телефону филиала.',
-          'Via the Book appointment button or branch phone.',
-        ),
-      },
       {
         question: L('Radeski oddiy kosmetologiya markazimi?', 'Radeski — обычный косметологический центр?', 'Is Radeski a beauty salon?'),
         answer: POSITIONING_FORMULA,
@@ -197,24 +190,8 @@ function treatmentLanding(
     methodsTitle: L('Davolash yondashuvi', 'Подход к лечению', 'Treatment approach'),
     methods: opts.methods,
     equipmentNote: opts.equipmentNote,
-    faqs: [
-      {
-        question: L('Birinchi qadam nima?', 'С чего начать?', 'What is the first step?'),
-        answer: L(
-          'Mutaxassis konsultatsiyasi va kerak bo‘lsa diagnostika.',
-          'Консультация специалиста и диагностика при необходимости.',
-          'Specialist consultation and diagnostics if needed.',
-        ),
-      },
-      {
-        question: L('Natijalar qayerda?', 'Где результаты?', 'Where are results?'),
-        answer: L(
-          'Saytdagi «Natijalar» bo‘limida klinik holatlar mavjud.',
-          'Клинические случаи в разделе «Результаты» на сайте.',
-          'Clinical cases in the Results section on the site.',
-        ),
-      },
-    ],
+    // Every treatment topic has its own questions (localLandingTopics); no generic filler here.
+    faqs: [],
   };
 }
 

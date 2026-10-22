@@ -49,7 +49,8 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
   'soch-tokilish': ['trixolog'],
   trixoskopiya: ['trixolog'],
   podolog: ['podolog'],
-  'ichga-osgan-tirnoq': ['podolog', 'dermatolog'],
+  // Only podiatrists: a dermatologist in the list would suggest they do nail surgery.
+  'ichga-osgan-tirnoq': ['podolog'],
   'tirnoq-zamburug': ['podolog', 'dermatolog'],
   kosmetolog: ['kosmetolog', 'dermatolog'],
   dermatoskopiya: ['onkolog', 'dermatolog'],

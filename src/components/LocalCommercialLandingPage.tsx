@@ -177,9 +177,7 @@ export default function LocalCommercialLandingPage({
             <ol className="mt-3 space-y-2">
               {details.steps.map((step, index) => (
                 <li key={step} className="flex gap-3 text-sm text-brand-text-secondary">
-                  <span className="w-6 h-6 shrink-0 rounded-full bg-brand-gold text-white text-xs font-bold flex items-center justify-center">
-                    {index + 1}
-                  </span>
+                  <span className="w-6 h-6 shrink-0 rounded-full bg-brand-gold text-white text-xs font-bold flex items-center justify-center step-badge" data-step={index + 1} aria-hidden="true" />
                   <span className="pt-0.5">{step}</span>
                 </li>
               ))}
