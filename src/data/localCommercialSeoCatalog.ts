@@ -270,7 +270,7 @@ function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
 
 function buildKokandLandings(): LocalCommercialLanding[] {
   return [
-    specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-psoriasis-daavlin-kokand']),
+    specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-psoriasis-daavlin-kokand']),
     specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-onixokriptoz-klinik-holat']),
     kosmetologLanding('qoqon', ['art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
@@ -278,7 +278,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
       conditionSlug: 'acne',
-      articleRouteKeys: ['art-akne', 'art-pryshchi-u-vzroslykh'],
+      articleRouteKeys: ['art-akne', 'art-akne-u-vzroslykh', 'art-pryshchi-u-vzroslykh'],
       problem: L('Akne va postakne teri sifatini buzadi.', 'Акне и постакне ухудшают кожу.', 'Acne and post-acne affect skin quality.'),
       whoFor: [L('Yoshlar va kattalar', 'Подростки и взрослые', 'Teens and adults')],
       methods: [L('Dermatolog ko‘rigi', 'Осмотр дерматолога', 'Dermatologist exam'), L('Terapiya va apparatlar', 'Терапия и аппараты', 'Therapy and devices')],
@@ -421,7 +421,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
 
 function buildFerganaLandings(): LocalCommercialLanding[] {
   return [
-    specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-ipl-terapiya']),
+    specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-ipl-terapiya']),
     specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-plazmotorapiya-soch-prp']),
     specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-onixokriptoz-klinik-holat']),
     kosmetologLanding('fargona', ['art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
@@ -429,7 +429,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
       conditionSlug: 'acne',
-      articleRouteKeys: ['art-akne'],
+      articleRouteKeys: ['art-akne', 'art-akne-u-vzroslykh', 'art-pryshchi-u-vzroslykh'],
       problem: L('Akne va postakne.', 'Акне и постакне.', 'Acne and post-acne.'),
       whoFor: [L('Yoshlar va kattalar', 'Подростки и взрослые', 'Teens and adults')],
       methods: [L('Dermatolog', 'Дерматолог', 'Dermatologist'), L('Terapiya', 'Терапия', 'Therapy')],

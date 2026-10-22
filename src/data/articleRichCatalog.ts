@@ -21,6 +21,7 @@ import { IPL_THERAPY_ARTICLE_CATALOG } from './articles/iplTherapyArticle';
 import { IPL_PHOTOTHERAPY_RADESKI_ARTICLE_CATALOG } from './articles/iplPhototherapyRadeskiArticle';
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG } from './articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE_CATALOG } from './articles/adultAcneArticle';
+import { ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG } from './articles/adultAcneDermatologistArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -736,6 +737,7 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'ipl-radeski': IPL_PHOTOTHERAPY_RADESKI_ARTICLE_CATALOG,
   'pediatric-warts-co2-deka': PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG,
   'adult-acne': ADULT_ACNE_ARTICLE_CATALOG,
+  'adult-acne-dermatologist': ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

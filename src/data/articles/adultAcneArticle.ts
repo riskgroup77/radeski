@@ -142,7 +142,9 @@ Biz yevropa klinik protokollariga tayangan holda har bir bemorga individual yond
 
 Kattalarda toshmalar — oddiy “kosmetik nuqson” emas, balki professional yondashuvni talab qiladigan holat. O‘zicha davolash ba’zan vaqtinchalik yengillik bersa-da, asorat xavfini oshirishi mumkin.
 
-Agar toshma, yallig‘lanish yoki postakne izlari bezovta qilsa, Radeski Skin Clinic mutaxassislari Farg‘ona va Qo‘qonda sizga mos individual davo rejasini tuzadi.`;
+Agar toshma, yallig‘lanish yoki postakne izlari bezovta qilsa, Radeski Skin Clinic mutaxassislari Farg‘ona va Qo‘qonda sizga mos individual davo rejasini tuzadi.
+
+Qisqa qo‘llanma: [Kattalarda akne — qachon dermatologga murojaat qilish kerak](/uz/articles/art-akne-u-vzroslykh).`;
 }
 
 function ruBody(): string {
@@ -275,7 +277,9 @@ IPL может уменьшать воспаление и покраснение
 
 Прыщи у взрослых — это заболевание, а не «просто косметический дефект». Самолечение часто даёт лишь краткий эффект и повышает риск осложнений. Современная дерматология позволяет эффективно контролировать акне и заметно улучшить состояние кожи.
 
-Если беспокоят прыщи, воспаления или следы постакне, специалисты Radeski Skin Clinic в Фергане и Коканде составят индивидуальную программу лечения.`;
+Если беспокоят прыщи, воспаления или следы постакне, специалисты Radeski Skin Clinic в Фергане и Коканде составят индивидуальную программу лечения.
+
+Короткая памятка: [Акне у взрослых — когда обращаться к дерматологу](/ru/articles/art-akne-u-vzroslykh).`;
 }
 
 function enBody(): string {
@@ -408,7 +412,9 @@ We follow current European dermatology protocols, personalize therapy, and combi
 
 Adult acne is a medical condition, not a minor cosmetic quirk. Self-treatment often brings temporary relief and can increase complications. Modern dermatology can control breakouts and meaningfully improve skin quality.
 
-If acne, inflammation, or post-acne marks bother you, the Radeski Skin Clinic team in Fergana and Kokand can build a personalized treatment plan.`;
+If acne, inflammation, or post-acne marks bother you, the Radeski Skin Clinic team in Fergana and Kokand can build a personalized treatment plan.
+
+Quick guide: [Adult acne — when to see a dermatologist](/en/articles/art-akne-u-vzroslykh).`;
 }
 
 export const ADULT_ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {

@@ -12,7 +12,8 @@ import { getConditionSlugFromPathname } from '../routing/paths';
 import { isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
 import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
 import { DERMATOLOGY_CONDITION_NAV } from '../data/dermatologyConditionsNav';
-import type { Doctor } from '../types';
+import type { Doctor, ServiceCategory } from '../types';
+import { articleServiceLinks } from '../utils/articleServiceLinks';
 import type { CustomerReview, TreatmentResult } from '../data/sitePagesContent';
 import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
 import { buildServiceH1 } from '../seo/pageMeta';
@@ -154,9 +155,10 @@ function resolveHeading(head: RouteHead, locale: Locale): string {
   return head.title.split(' | ')[0];
 }
 
-function ArticleBody({ article, locale }: { article: Article; locale: Locale }) {
+function ArticleBody({ article, locale, categories }: { article: Article; locale: Locale; categories: ServiceCategory[] }) {
   const body = stripArticleHashtagSection(resolveArticleBody(article, locale));
   const rich = resolveArticleRichContent(article, locale);
+  const services = articleServiceLinks(article, categories, locale);
   return (
     <article>
       <p>{resolveArticleSummary(article, locale)}</p>
@@ -169,6 +171,18 @@ function ArticleBody({ article, locale }: { article: Article; locale: Locale }) 
               <p>{item.answer}</p>
             </div>
           ))}
+        </section>
+      )}
+      {services.length > 0 && (
+        <section>
+          <h2>{locale === 'uz' ? 'Mavzuga oid xizmatlar' : locale === 'ru' ? 'Услуги клиники по теме' : 'Related clinic services'}</h2>
+          <ul>
+            {services.map((link) => (
+              <li key={link.path}>
+                <a href={link.path}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
     </article>
@@ -697,7 +711,7 @@ function PageContent({
 
   if (localLanding) return <LandingBody landing={localLanding} locale={locale} clinic={clinic} results={results} reviews={reviews} />;
 
-  if (article) return <ArticleBody article={article} locale={locale} />;
+  if (article) return <ArticleBody article={article} locale={locale} categories={clinic.serviceCategories} />;
 
   if (video) return <VideoBody video={video} videos={videos} locale={locale} />;
 

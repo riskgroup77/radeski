@@ -51,7 +51,8 @@ const SERVICES: { id: string; icon: typeof Stethoscope; uz: string; ru: string; 
 ];
 
 const ARTICLES = [
-  { id: 'art-pryshchi-u-vzroslykh', uz: 'Kattalarda akne', ru: 'Акне у взрослых', en: 'Adult acne' },
+  { id: 'art-akne-u-vzroslykh', uz: 'Kattalarda akne: qachon dermatologga', ru: 'Акне у взрослых: когда к дерматологу', en: 'Adult acne: when to see a dermatologist' },
+  { id: 'art-pryshchi-u-vzroslykh', uz: 'Kattalarda toshma: davolash', ru: 'Прыщи у взрослых: лечение', en: 'Adult acne treatment' },
   { id: 'art-psoriasis-daavlin-kokand', uz: 'Psoriaz — Daavlin Qo‘qon', ru: 'Псориаз — Daavlin Коканд', en: 'Psoriasis — Daavlin Kokand' },
   { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиго', en: 'Vitiligo treatment' },
   { id: 'art-ipl-terapiya', uz: 'IPL terapiya', ru: 'IPL-терапия', en: 'IPL therapy' },

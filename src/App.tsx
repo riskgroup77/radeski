@@ -1055,6 +1055,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               locale={locale}
               articleId={articleId}
               articles={dynamicArticles}
+              serviceCategories={dynamicServiceCategories}
               dictionary={d}
               onBackToList={() => goToPage('articles')}
               onOpenArticle={goToArticle}

@@ -9,6 +9,11 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },
+  'art-akne-u-vzroslykh': {
+    uz: 'Kattalarda akne: qachon dermatologga borish kerak',
+    ru: 'Акне у взрослых: когда идти к дерматологу',
+    en: 'Adult acne: when to see a dermatologist',
+  },
   'art-alopecia-areata-klinik-holat': {
     uz: "Soch to'kilishi: diagnostika va to'g'ri davolash",
     ru: 'Выпадение волос: диагностика вместо шампуня',

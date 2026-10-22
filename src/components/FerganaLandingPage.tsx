@@ -52,6 +52,7 @@ const SERVICES: { id: string; icon: typeof Stethoscope; uz: string; ru: string; 
 
 const ARTICLES = [
   { id: 'art-akne', uz: 'Akne davolash', ru: 'Лечение акне', en: 'Acne treatment' },
+  { id: 'art-akne-u-vzroslykh', uz: 'Kattalarda akne', ru: 'Акне у взрослых', en: 'Adult acne' },
   { id: 'art-ipl-terapiya', uz: 'IPL terapiya Farg‘ona', ru: 'IPL-терапия Фергана', en: 'IPL therapy Fergana' },
   { id: 'art-deka-moveo-fergana-faq', uz: 'DEKA MOVEO lazer', ru: 'Лазер DEKA MOVEO', en: 'DEKA MOVEO laser' },
   { id: 'art-vitiligo-daavlin', uz: 'Vitiligo davolash', ru: 'Лечение витилиго', en: 'Vitiligo treatment' },

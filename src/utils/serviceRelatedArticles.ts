@@ -6,6 +6,7 @@ import { filterPublicArticles } from './articles';
 export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   dermatologiya: [
     'acne',
+    'adult-acne-dermatologist',
     'adult-acne',
     'acne-dermatologist-vs-cosmetologist',
     'rosacea-radeski',

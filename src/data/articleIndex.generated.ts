@@ -912,8 +912,8 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Fargona",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 4035,
-      "bodyWords": 512
+      "bodyLength": 4151,
+      "bodyWords": 522
     },
     "ru": {
       "summary": "Прыщи у взрослых: причины, диагностика и современное лечение акне в Radeski Skin Clinic (Фергана, Коканд) — медикаменты, лазер, IPL и индивидуальный уход.",
@@ -928,8 +928,8 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Фергана",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 3943,
-      "bodyWords": 517
+      "bodyLength": 4049,
+      "bodyWords": 527
     },
     "en": {
       "summary": "Adult acne: causes, diagnosis, and modern treatment at Radeski Skin Clinic in Fergana and Kokand — medication, laser, IPL, and personalized care.",
@@ -944,8 +944,52 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Fergana",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 3460,
-      "bodyWords": 529
+      "bodyLength": 3553,
+      "bodyWords": 539
+    }
+  },
+  "adult-acne-dermatologist": {
+    "uz": {
+      "summary": "Kattalarda akne nima uchun paydo bo'ladi, qanday davolanadi va qachon dermatologga murojaat qilish kerak. Farg'ona va Qo'qonda Radeski Skin Clinic dermatologi qabuli.",
+      "tags": [
+        "Akne",
+        "Kattalarda akne",
+        "Dermatolog",
+        "Postakne",
+        "Fargona",
+        "Qoqon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3164,
+      "bodyWords": 371
+    },
+    "ru": {
+      "summary": "Почему появляется акне у взрослых, как его лечат и когда пора к дерматологу. Приём дерматолога в Radeski Skin Clinic в Фергане и Коканде.",
+      "tags": [
+        "Акне",
+        "Акне у взрослых",
+        "Дерматолог",
+        "Постакне",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2892,
+      "bodyWords": 373
+    },
+    "en": {
+      "summary": "Why acne appears in adults, how it is treated and when to see a dermatologist. Dermatology visits at Radeski Skin Clinic in Fergana and Kokand.",
+      "tags": [
+        "Acne",
+        "Adult acne",
+        "Dermatologist",
+        "Post-acne",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2696,
+      "bodyWords": 412
     }
   },
   "laser-scar-resurfacing": {
@@ -3430,6 +3474,38 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": null,
       "ru": null,
       "en": null
+    },
+    "views": 0
+  },
+  {
+    "id": "art-akne-u-vzroslykh",
+    "slug": "akne-u-vzroslykh",
+    "title": {
+      "uz": "Kattalarda akne: sabablari, davolash va qachon dermatologga murojaat qilish kerak",
+      "ru": "Акне у взрослых: причины, лечение и когда обращаться к дерматологу",
+      "en": "Adult Acne: Causes, Treatment and When to See a Dermatologist"
+    },
+    "summary": {
+      "uz": "Kattalarda akne nima uchun paydo bo'ladi, qanday davolanadi va qachon dermatologga murojaat qilish kerak. Farg'ona va Qo'qonda Radeski Skin Clinic dermatologi qabuli.",
+      "ru": "Почему появляется акне у взрослых, как его лечат и когда пора к дерматологу. Приём дерматолога в Radeski Skin Clinic в Фергане и Коканде.",
+      "en": "Why acne appears in adults, how it is treated and when to see a dermatologist. Dermatology visits at Radeski Skin Clinic in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Ashurov Dilshod Davlatovich",
+      "ru": "Ашуров Дильшод Давлатович",
+      "en": "Dr. Dilshod Davlatovich Ashurov"
+    },
+    "date": "2026-10-22",
+    "image": "/articles/akne-u-vzroslykh-cover.jpg",
+    "images": {
+      "uz": "/articles/akne-u-vzroslykh-cover.jpg",
+      "ru": "/articles/akne-u-vzroslykh-cover.jpg",
+      "en": "/articles/akne-u-vzroslykh-cover.jpg"
     },
     "views": 0
   },

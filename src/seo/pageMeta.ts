@@ -89,6 +89,26 @@ export function fitDescription(text: string): string {
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  'art-akne-u-vzroslykh': {
+    uz: {
+      title: 'Kattalarda akne: qachon dermatologga borish kerak',
+      desc: "Kattalarda akne nima uchun chiqadi, qanday davolanadi va qachon dermatologga borish kerak. Farg'ona va Qo'qonda Radeski Skin Clinic dermatologi qabuli.",
+      keywords:
+        "kattalarda akne, akne sabablari, akne davolash Farg'ona, akne davolash Qo'qon, dermatolog Farg'ona, dermatolog Qo'qon, husnbuzar davolash, postakne, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Акне у взрослых: когда идти к дерматологу',
+      desc: 'Почему появляется акне у взрослых, как его лечат и когда пора к дерматологу. Приём дерматолога в Radeski Skin Clinic в Фергане и Коканде.',
+      keywords:
+        'акне у взрослых, причины акне, лечение акне Фергана, лечение акне Коканд, дерматолог Фергана, дерматолог Коканд, прыщи у взрослых, постакне, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Adult acne: when to see a dermatologist',
+      desc: 'Why acne appears in adults, how it is treated and when to see a dermatologist. Dermatology visits at Radeski Skin Clinic in Fergana and Kokand.',
+      keywords:
+        'adult acne, acne causes, acne treatment Fergana, acne treatment Kokand, dermatologist Fergana, dermatologist Kokand, post-acne, Radeski Skin Clinic',
+    },
+  },
   'art-lasemd-ultra-kokand': {
     uz: {
       title: "Qo'qonda LaseMD Ultra tuliy lazer — Radeski Skin Clinic",

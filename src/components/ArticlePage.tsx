@@ -10,7 +10,8 @@ import {
   ArrowUpRight,
   Clock,
 } from 'lucide-react';
-import { Locale, Article } from '../types';
+import { Locale, Article, ServiceCategory } from '../types';
+import { articleServiceLinks } from '../utils/articleServiceLinks';
 import { DICTIONARY } from '../data';
 import { getLocalizedImage } from '../utils/localizedImage';
 import { enrichArticle } from '../utils/enrichArticles';
@@ -30,6 +31,7 @@ interface ArticlePageProps {
   locale: Locale;
   articleId: string;
   articles: Article[];
+  serviceCategories?: ServiceCategory[];
   dictionary?: Record<string, string>;
   onBackToList: () => void;
   onOpenArticle: (articleId: string) => void;
@@ -45,6 +47,7 @@ export default function ArticlePage({
   locale,
   articleId,
   articles,
+  serviceCategories = [],
   dictionary,
   onBackToList,
   onOpenArticle: _onOpenArticle,
@@ -128,6 +131,8 @@ export default function ArticlePage({
       navigate(articlePath(locale, canonicalKey), { replace: true });
     }
   }, [activeArticle, articleId, locale, navigate]);
+
+  const serviceLinks = activeArticle ? articleServiceLinks(activeArticle, serviceCategories, locale) : [];
 
   const relatedArticles = filterPublicArticles(articles)
     .filter((art) => art.id !== activeArticle?.id)
@@ -290,6 +295,27 @@ export default function ArticlePage({
                 </button>
               </div>
             </div>
+
+            {serviceLinks.length > 0 && (
+              <section className="mt-10 p-5 sm:p-6 bg-brand-offwhite rounded-2xl border border-brand-sectiongray">
+                <h2 className="text-lg sm:text-xl font-extrabold text-brand-text-primary tracking-tight">
+                  {locale === 'uz' ? 'Mavzuga oid xizmatlar' : locale === 'ru' ? 'Услуги клиники по теме' : 'Related clinic services'}
+                </h2>
+                <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {serviceLinks.map((link) => (
+                    <li key={link.path}>
+                      <Link
+                        to={link.path}
+                        className="flex items-center justify-between gap-3 h-full px-4 py-3 bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/50 text-sm font-semibold text-brand-text-primary no-underline transition-colors"
+                      >
+                        <span>{link.label}</span>
+                        <ArrowUpRight className="w-4 h-4 shrink-0 text-brand-gold" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             {relatedArticles.length > 0 && (
               <div className="mt-14 pt-10 border-t border-brand-offwhite">
