@@ -58,17 +58,40 @@ export default function ServiceCategoryTeaserMedia({
     video.currentTime = 0;
   }, [motionMode]);
 
+  // The page hero's poster is the main image (LCP): the looping video only starts once the
+  // poster has loaded, the page has finished loading and the browser is idle, so the ~400 KB
+  // clip never competes with the page's own scripts and data. Skipped on Data Saver / 2G.
+  const [posterReady, setPosterReady] = useState(false);
   useEffect(() => {
-    if (motionMode !== 'always' || !videoSrc) return;
-    startMotion();
+    if (motionMode !== 'always' || !videoSrc || !posterReady) return;
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    if (connection?.saveData || /2g$/.test(connection?.effectiveType ?? '')) return;
+    let cancelled = false;
+    let idleHandle: number | undefined;
+    const begin = () => {
+      if (!cancelled) startMotion();
+    };
+    const whenIdle = () => {
+      idleHandle = window.requestIdleCallback
+        ? window.requestIdleCallback(begin, { timeout: 3000 })
+        : window.setTimeout(begin, 1500);
+    };
+    if (document.readyState === 'complete') whenIdle();
+    else window.addEventListener('load', whenIdle, { once: true });
     return () => {
+      cancelled = true;
+      window.removeEventListener('load', whenIdle);
+      if (idleHandle !== undefined) {
+        if (window.cancelIdleCallback) window.cancelIdleCallback(idleHandle);
+        else window.clearTimeout(idleHandle);
+      }
       const video = videoRef.current;
       setMotionActive(false);
       if (!video) return;
       video.pause();
       video.currentTime = 0;
     };
-  }, [motionMode, videoSrc, startMotion]);
+  }, [motionMode, videoSrc, startMotion, posterReady]);
 
   if (!posterImage && !fallbackImage) {
     return null;
@@ -90,6 +113,7 @@ export default function ServiceCategoryTeaserMedia({
         // 'always' is the page hero: its poster is the page's main image, so it loads first.
         loading={motionMode === 'always' ? 'eager' : 'lazy'}
         fetchPriority={motionMode === 'always' ? 'high' : 'auto'}
+        onLoad={motionMode === 'always' ? () => setPosterReady(true) : undefined}
         className={`relative z-0 h-full w-full object-cover object-center transition-all duration-500 ${
           motionActive ? 'scale-[1.02] opacity-0' : `opacity-100 ${imageClassName}`
         }`}
@@ -100,8 +124,8 @@ export default function ServiceCategoryTeaserMedia({
           muted
           loop
           playsInline
-          // Hover teasers download only when hovered (the poster image shows until then).
-          preload={motionMode === 'always' ? 'metadata' : 'none'}
+          // Nothing is downloaded until play() (hover, or the idle start above for the hero).
+          preload="none"
           poster={posterImage}
           aria-hidden
           className={`service-teaser-hover-video pointer-events-none absolute inset-0 z-[1] h-full w-full object-cover object-center transition-opacity duration-500 ${
