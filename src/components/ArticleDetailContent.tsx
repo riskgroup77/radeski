@@ -20,7 +20,9 @@ import {
   resolveArticleSummary,
   stripArticleHashtagSection,
 } from '../utils/articleContent';
-import { resolveArticleBody, resolveArticleRichContent } from '../utils/articleContentFull';
+import { resolveArticleBodyFrom, resolveArticleRichContentFrom, type ArticleCatalogEntry } from '../utils/articleContentCore';
+import { ARTICLE_CATALOG_LOADERS } from '../data/articleCatalogLoaders.generated';
+import { findArticleCatalogKey } from '../data/articleCatalogKeys';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import { isEquipmentPromoArticle, isEquipmentPromoImageSrc } from '../utils/articles';
 import { getLocalizedImage } from '../utils/localizedImage';
@@ -49,14 +51,48 @@ function slugifyHeading(text: string): string {
     .replace(/\s+/g, '-');
 }
 
+const EMPTY_RICH = { keyTakeaways: [], faq: [], tags: [], whenToSeeDoctor: [] };
+
+/**
+ * Only this article's catalog entry is downloaded; the general fallback text only when the
+ * article has no text of its own in this language.
+ */
+function useArticleCatalog(
+  article: Article,
+  locale: Locale,
+): { entry: ArticleCatalogEntry; general: ArticleCatalogEntry } | null {
+  const key = findArticleCatalogKey(article);
+  const [loaded, setLoaded] = useState<{ id: string; entry: ArticleCatalogEntry; general: ArticleCatalogEntry } | null>(null);
+  const id = `${key}:${locale}`;
+  useEffect(() => {
+    let cancelled = false;
+    const loadGeneral = ARTICLE_CATALOG_LOADERS['general-dermatology'];
+    const ownLoader = ARTICLE_CATALOG_LOADERS[key];
+    (async () => {
+      const entry = await (ownLoader ?? loadGeneral)();
+      const hasOwnText = Boolean(ownLoader && entry[locale]?.body?.trim());
+      const general = hasOwnText ? entry : await loadGeneral();
+      if (!cancelled) setLoaded({ id, entry, general });
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [id, key, locale]);
+  return loaded && loaded.id === id ? loaded : null;
+}
+
 export default function ArticleDetailContent({ article, locale }: ArticleDetailContentProps) {
   const labels = getArticleSectionLabels(locale);
   const summary = resolveArticleSummary(article, locale);
+  const catalog = useArticleCatalog(article, locale);
   const body = useMemo(
-    () => stripArticleHashtagSection(resolveArticleBody(article, locale)),
-    [article, locale],
+    () => (catalog ? stripArticleHashtagSection(resolveArticleBodyFrom(article, locale, catalog.entry, catalog.general)) : ''),
+    [article, locale, catalog],
   );
-  const rich = useMemo(() => resolveArticleRichContent(article, locale), [article, locale]);
+  const rich = useMemo(
+    () => (catalog ? resolveArticleRichContentFrom(article, locale, catalog.entry) : EMPTY_RICH),
+    [article, locale, catalog],
+  );
   const readingMinutes = resolveArticleReadingMinutes(article, locale);
   const toc = useMemo(() => extractArticleHeadings(body), [body]);
   const hashtags = useMemo(() => formatArticleHashtags(rich.tags), [rich.tags]);
@@ -160,6 +196,15 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
     }),
     [coverKey, promoArticle],
   );
+
+  // Keeps the space while the article text downloads (no jump for the content below).
+  if (!catalog) {
+    return (
+      <div className="min-h-[70vh] space-y-3" aria-busy="true">
+        <p className="text-brand-text-secondary leading-relaxed">{summary}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_240px] gap-10">

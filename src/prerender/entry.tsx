@@ -7,7 +7,10 @@
  * not execute JavaScript (Yandex, link previews) now see each page's own content instead of
  * an empty <div id="root"> with the home-page title. In the browser React replaces it.
  */
+import { assertSubServiceCatalogIdsInSync } from '../data/serviceRichCatalog';
+import { resolveDoctorProfile } from '../data/doctorProfiles';
 import type { ReactNode } from 'react';
+import { getEquipmentDetails } from '../data/equipment/equipmentDetails';
 import { getConditionSlugFromPathname } from '../routing/paths';
 import { isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
 import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
@@ -686,7 +689,7 @@ function DoctorProfileText({ profile }: { profile: NonNullable<Doctor['profile']
 function EquipmentBody({ equipment, locale }: { equipment: ClinicEquipmentEntry; locale: Locale }) {
   const t = (text: ClinicEquipmentEntry['title']) => getLocalizedEquipmentText(text, locale);
   const labels = getEquipmentSectionLabels(locale);
-  const details = equipment.details;
+  const details = getEquipmentDetails(equipment.id);
   return (
     <>
       <p>{t(equipment.fullDescription)}</p>
@@ -805,7 +808,7 @@ function PageContent({
   if (doctor) {
     const practice = resolveDoctorPageDetails(doctor, clinic.prices, locale);
     const doctorReviews = reviewsForDoctor(doctor, reviews.map(mapReviewFromApi));
-    const profile = doctor.profile?.[locale];
+    const profile = resolveDoctorProfile(doctor)?.[locale];
     return (
       <>
         <section>
@@ -1272,6 +1275,8 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
   menu:   ${navMenu}
   lineup: ${lineup}`);
   }
+  // The light sub-service id list (serviceCatalogKeys.ts) must match the catalog.
+  assertSubServiceCatalogIdsInSync();
   const raw = snapshot.data;
   const clinic: PrerenderClinic = {
     ...transformClinicData({

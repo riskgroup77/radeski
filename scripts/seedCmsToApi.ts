@@ -29,12 +29,8 @@ import {
   mapTreatmentResultToCreatePayload,
   mapClinicVideoToCreatePayload,
 } from '../src/api/cmsMappers';
-import {
-  CLINIC_PARTNERS,
-  CLINIC_VIDEOS,
-  CUSTOMER_REVIEWS,
-  TREATMENT_RESULTS,
-} from '../src/data/sitePagesContent';
+import { CLINIC_PARTNERS, CUSTOMER_REVIEWS, TREATMENT_RESULTS } from '../src/data/sitePagesContent';
+import { CLINIC_VIDEOS } from '../src/data/clinicVideosCatalog';
 
 const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 400);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

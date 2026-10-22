@@ -16,13 +16,8 @@ import { CLINIC_EQUIPMENT_CATALOG } from '../src/data/clinicEquipmentCatalog';
 import { ARTICLE_RICH_CATALOG } from '../src/data/articleRichCatalog';
 import { LEGAL_DOCUMENTS } from '../src/data/legalContent';
 import { TECHNOLOGIES_PAGE, EQUIPMENT_PARK_PAGE } from '../src/data/advantagePagesContent';
-import {
-  CUSTOMER_REVIEWS,
-  CLINIC_PARTNERS,
-  CLINIC_VIDEOS,
-  CLINIC_BRANCHES,
-  TREATMENT_RESULTS,
-} from '../src/data/sitePagesContent';
+import { CUSTOMER_REVIEWS, CLINIC_PARTNERS, CLINIC_BRANCHES, TREATMENT_RESULTS } from '../src/data/sitePagesContent';
+import { CLINIC_VIDEOS } from '../src/data/clinicVideosCatalog';
 import { HOME_PROMO_SLIDES } from '../src/data/homePromoCarousel';
 import {
   CATEGORY_CONDITION_DEFAULTS,

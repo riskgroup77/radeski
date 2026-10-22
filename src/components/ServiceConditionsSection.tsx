@@ -8,7 +8,7 @@ import {
   X,
 } from 'lucide-react';
 import type { Locale, ServiceCategory, ServiceDetail, ServiceConditionTopic } from '../types';
-import { findSubServiceCatalogKey } from '../data/serviceRichCatalog';
+import { findSubServiceCatalogKey } from '../data/serviceCatalogKeys';
 import {
   getConditionSectionLabels,
   resolveConditionDisplay,

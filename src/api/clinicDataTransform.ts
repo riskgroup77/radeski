@@ -13,7 +13,7 @@ import {
   mapServiceCategoryFromApi,
 } from './mappers';
 import { ARTICLES, DOCTORS, SERVICE_CATEGORIES } from '../data';
-import { hydrateServiceAboutFromSiteTexts } from '../data/serviceAboutCatalog';
+import { hydrateServiceAboutFromSiteTexts } from '../data/serviceAboutOverrides';
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
 import { mergeArticlesWithStaticCatalog } from '../utils/articles';

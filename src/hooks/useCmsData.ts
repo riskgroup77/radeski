@@ -20,7 +20,6 @@ import type {
 import {
   CLINIC_BRANCHES,
   CLINIC_PARTNERS,
-  CLINIC_VIDEOS,
   CUSTOMER_REVIEWS,
   TREATMENT_RESULTS,
 } from '../data/sitePagesContent';
@@ -145,6 +144,8 @@ export function useCmsData(options: PublicDataOptions = {}): CmsDataState {
         ? resolvePublicTreatmentResults(resultsRes.map(mapTreatmentResultFromApi))
         : TREATMENT_RESULTS,
     );
+    // ~180 KB of built-in video texts: fetched with the CMS data instead of the app shell.
+    const { CLINIC_VIDEOS } = await import('../data/clinicVideosCatalog');
     setVideos(
       videosRes.length > 0
         ? mergeCatalogVideos(videosRes.map(mapClinicVideoFromApi), CLINIC_VIDEOS)

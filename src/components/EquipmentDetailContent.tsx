@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getEquipmentDetails } from '../data/equipment/equipmentDetails';
 import type { ReactNode } from 'react';
 import {
   BookOpenCheck,
@@ -62,7 +63,7 @@ function SectionCard({
         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-gold-light/15">
           <Icon className="h-5 w-5 text-brand-gold" />
         </span>
-        <h3 className="text-lg font-extrabold text-brand-text-primary sm:text-xl">{title}</h3>
+        <h2 className="text-lg font-extrabold text-brand-text-primary sm:text-xl">{title}</h2>
       </div>
       {children}
     </article>
@@ -92,7 +93,7 @@ function TitledSteps({ items }: { items: { title: string; text: string }[] }) {
           className="relative rounded-xl border border-brand-sectiongray bg-brand-offwhite/40 py-4 pl-12 pr-4"
         >
           <span className="absolute left-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white step-badge" data-step={index + 1} aria-hidden="true" />
-          <h4 className="text-sm font-bold text-brand-text-primary">{item.title}</h4>
+          <h3 className="text-sm font-bold text-brand-text-primary">{item.title}</h3>
           <p className="mt-1 text-sm leading-relaxed text-brand-text-secondary">{item.text}</p>
         </li>
       ))}
@@ -113,7 +114,7 @@ function Paragraphs({ items }: { items: string[] }) {
 }
 
 function SubHeading({ children }: { children: ReactNode }) {
-  return <h4 className="mb-3 mt-5 text-sm font-bold text-brand-text-primary">{children}</h4>;
+  return <h3 className="mb-3 mt-5 text-sm font-bold text-brand-text-primary">{children}</h3>;
 }
 
 function ProcessSteps({ items }: { items: string[] }) {
@@ -154,7 +155,7 @@ export default function EquipmentDetailContent({
   const directions = entry.directions.map((item) => getLocalizedEquipmentText(item, locale));
   const indications = entry.indications.map((item) => getLocalizedEquipmentText(item, locale));
   const processSteps = entry.process.map((item) => getLocalizedEquipmentText(item, locale));
-  const details = entry.details;
+  const details = getEquipmentDetails(entry.id);
   const t = (text: Parameters<typeof getLocalizedEquipmentText>[0]) => getLocalizedEquipmentText(text, locale);
 
   return (
@@ -196,9 +197,9 @@ export default function EquipmentDetailContent({
           <div className="grid gap-3 sm:grid-cols-2">
             {details.indications.map((item, index) => (
               <div key={item.title.uz} className="rounded-xl border border-brand-sectiongray bg-brand-offwhite/40 p-4">
-                <h4 className="text-sm font-bold text-brand-text-primary">
+                <h3 className="text-sm font-bold text-brand-text-primary">
                   {index + 1}. {t(item.title)}
-                </h4>
+                </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-brand-text-secondary">{t(item.text)}</p>
               </div>
             ))}
@@ -308,7 +309,7 @@ export default function EquipmentDetailContent({
               {details.faq.map((item) => (
                 <details key={item.question.uz} className="group bg-brand-white">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3.5 text-sm font-semibold text-brand-text-primary hover:bg-brand-offwhite/60">
-                    <h4>{t(item.question)}</h4>
+                    <h3>{t(item.question)}</h3>
                     <span className="text-lg leading-none text-brand-gold transition-transform group-open:rotate-45">+</span>
                   </summary>
                   <p className="px-4 pb-4 text-sm leading-relaxed text-brand-text-secondary">{t(item.answer)}</p>

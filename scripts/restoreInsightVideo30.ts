@@ -9,7 +9,7 @@ import {
   updateVideo,
 } from '../src/api/adminApi';
 import { mapClinicVideoToCreatePayload } from '../src/api/cmsMappers';
-import { CLINIC_VIDEOS } from '../src/data/sitePagesContent';
+import { CLINIC_VIDEOS } from '../src/data/clinicVideosCatalog';
 
 async function main() {
   const token = (

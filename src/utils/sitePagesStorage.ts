@@ -1,5 +1,5 @@
+import { CLINIC_VIDEOS } from '../data/clinicVideosCatalog';
 import {
-  CLINIC_VIDEOS,
   TREATMENT_RESULTS,
   CLINIC_PARTNERS,
   type ClinicVideo,

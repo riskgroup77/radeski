@@ -6,7 +6,7 @@ import { MALAKA_OSHIRISH } from '../data/malakaOshirishContent';
 import EducationMediaFrame from './EducationMediaFrame';
 import EducationOverlayHero from './EducationOverlayHero';
 import { openAppointmentBooking } from '../config/links';
-import { educationProgramPath, type EducationProgramId } from '../utils/educationPrograms';
+import { educationProgramPath, type EducationProgramId } from '../utils/educationProgramRoutes';
 
 interface MalakaOshirishPageProps {
   locale: Locale;

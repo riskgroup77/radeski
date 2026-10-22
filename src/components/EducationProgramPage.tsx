@@ -4,7 +4,7 @@ import { Phone } from 'lucide-react';
 
 import type { Locale } from '../types';
 
-import { OBRAZOVANIYA, type EducationProgram } from '../data/obrazovaniyaContent';
+import { OBRAZOVANIYA, type EducationProgramId } from '../data/obrazovaniyaContent';
 
 import { EDUCATION_PROGRAM_IMAGES } from '../utils/educationPrograms';
 
@@ -20,13 +20,15 @@ interface EducationProgramPageProps {
 
   locale: Locale;
 
-  program: EducationProgram;
+  programId: EducationProgramId;
 
 }
 
 
 
-export default function EducationProgramPage({ locale, program }: EducationProgramPageProps) {
+export default function EducationProgramPage({ locale, programId }: EducationProgramPageProps) {
+  // Resolved here (lazy chunk) so the course text stays out of the main bundle.
+  const program = OBRAZOVANIYA.programs.items.find((item) => item.id === programId)!;
 
   const c = OBRAZOVANIYA;
 

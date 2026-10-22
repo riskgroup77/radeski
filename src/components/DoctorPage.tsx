@@ -1,3 +1,4 @@
+import { resolveDoctorProfile } from '../data/doctorProfiles';
 import { useMemo, useState } from 'react';
 import type { PriceItem } from '../types';
 import type { CustomerReview } from '../data/sitePagesContent';
@@ -435,7 +436,7 @@ export default function DoctorPage({
 }: DoctorPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const doctor = findDoctorByRouteParam(doctorId, doctors) ?? null;
-  const profile = doctor?.profile?.[locale];
+  const profile = doctor ? resolveDoctorProfile(doctor)?.[locale] : undefined;
 
   if (!doctor && loading) {
     return (

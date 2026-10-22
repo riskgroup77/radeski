@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { adminLogin, getAdminVideos, updateVideo } from '../src/api/adminApi';
 import { mapClinicVideoToCreatePayload } from '../src/api/cmsMappers';
-import { CLINIC_VIDEOS } from '../src/data/sitePagesContent';
+import { CLINIC_VIDEOS } from '../src/data/clinicVideosCatalog';
 
 async function main() {
   const video = CLINIC_VIDEOS.find((v) => v.id === 'clinic-video-30');

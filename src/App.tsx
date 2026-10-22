@@ -49,7 +49,6 @@ import Hero from './components/Hero';
 import { findPromoSlideBySlug } from './data/homePromoCarousel';
 import { isDermatologyConditionSlug } from './data/dermatologyConditionsNav';
 import Footer from './components/Footer';
-import NotFoundPage from './components/NotFoundPage';
 import MediaImage from './components/MediaImage';
 import { motion, AnimatePresence } from 'motion/react';
 import { Phone, MapPin, Clock, ArrowRight, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
@@ -83,8 +82,8 @@ import { sortDoctorsFeaturedFirst } from './utils/doctors';
 import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
 import {
   getEducationProgramSlugFromPathname,
-  resolveEducationProgram,
-} from './utils/educationPrograms';
+  resolveEducationProgramId,
+} from './utils/educationProgramRoutes';
 import { resolveClinicEquipment } from './utils/clinicEquipmentRoutes';
 import { doctorRouteKey, findDoctorByRouteParam } from './utils/doctorSlug';
 import { findVideoByRouteParam, getVideoKeyFromPathname } from './utils/videoMeta';
@@ -121,6 +120,7 @@ const AdminPanel = lazyPage(() => import('./components/AdminPanel'));
 const LegalPage = lazyPage(() => import('./components/LegalPage'));
 const QrFeedbackPage = lazyPage(() => import('./components/QrFeedbackPage'));
 const KokandLandingPage = lazyPage(() => import('./components/KokandLandingPage'));
+const NotFoundPage = lazyPage(() => import('./components/NotFoundPage'));
 const FerganaLandingPage = lazyPage(() => import('./components/FerganaLandingPage'));
 const LocalCommercialLandingPage = lazyPage(() => import('./components/LocalCommercialLandingPage'));
 
@@ -171,7 +171,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   const daavlinSection = getDaavlinSectionFromPathname(location.pathname);
   const daavlinModelId = getDaavlinModelIdFromPathname(location.pathname);
   const educationProgramSlug = getEducationProgramSlugFromPathname(location.pathname);
-  const activeEducationProgram = resolveEducationProgram(educationProgramSlug, locale);
+  const activeEducationProgramId = resolveEducationProgramId(educationProgramSlug);
   const localCommercialRoute = getLocalCommercialFromPathname(location.pathname);
   const activeLocalCommercial = localCommercialRoute
     ? getLocalCommercialLanding(localCommercialRoute.city, localCommercialRoute.slug) ?? null
@@ -1158,11 +1158,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             ))}
           {currentPage === 'dermoscan' && <DermoScanPage locale={locale} />}
           {currentPage === 'science' && <SciencePage locale={locale} />}
-          {currentPage === 'obrazovaniya' && educationProgramSlug && !activeEducationProgram && (
+          {currentPage === 'obrazovaniya' && educationProgramSlug && !activeEducationProgramId && (
             <Navigate to={pagePath(locale, 'obrazovaniya')} replace />
           )}
-          {currentPage === 'obrazovaniya' && activeEducationProgram && (
-            <EducationProgramPage locale={locale} program={activeEducationProgram} />
+          {currentPage === 'obrazovaniya' && activeEducationProgramId && (
+            <EducationProgramPage locale={locale} programId={activeEducationProgramId} />
           )}
           {currentPage === 'obrazovaniya' && !educationProgramSlug && (
             <ObrazovaniyaPage locale={locale} />

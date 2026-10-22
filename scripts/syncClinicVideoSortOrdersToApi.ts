@@ -4,7 +4,7 @@
  */
 import 'dotenv/config';
 import { adminLogin, getAdminVideos, updateVideo } from '../src/api/adminApi';
-import { CLINIC_VIDEOS } from '../src/data/sitePagesContent';
+import { CLINIC_VIDEOS } from '../src/data/clinicVideosCatalog';
 import { extractClinicVideoNumber } from '../src/utils/clinicVideos';
 
 const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 500);

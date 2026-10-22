@@ -1,9 +1,7 @@
 import type { Locale, ServiceCategory, ServiceDetail, ServiceRichContent, ServiceConditionTopic } from '../types';
-import {
-  CATEGORY_RICH_CATALOG,
-  SUB_SERVICE_RICH_CATALOG,
-  findSubServiceCatalogKey,
-} from '../data/serviceRichCatalog';
+import { CATEGORY_RICH_CATALOG, SUB_SERVICE_RICH_CATALOG } from '../data/serviceRichCatalog';
+import { findSubServiceCatalogKey } from '../data/serviceCatalogKeys';
+import { isCompleteRichContent, mergeRichContent } from './serviceRichMerge';
 import { getServiceAboutContent } from '../data/serviceAboutCatalog';
 import { getCategoryConditions, getSubConditions } from '../data/serviceConditionsCatalog';
 
@@ -274,8 +272,11 @@ export function resolveServiceRichContent(
 ): ServiceRichContent {
   const fallbackOverview = sub.description[locale] || sub.description.uz || category.description[locale];
   const catalogKey = findSubServiceCatalogKey(sub, category);
+  // Same fill-in the data loader used to do (enrichServices), now done where it is needed.
+  const subCatalog = catalogKey ? SUB_SERVICE_RICH_CATALOG[catalogKey] : undefined;
+  const subRich = isCompleteRichContent(sub.richContent) || !subCatalog ? sub.richContent : mergeRichContent(sub.richContent, subCatalog);
 
-  const fromApi = fromEntityRich(sub.richContent, locale, fallbackOverview);
+  const fromApi = fromEntityRich(subRich, locale, fallbackOverview);
 
   let result: ServiceRichContent;
 
@@ -328,8 +329,13 @@ export function resolveCategoryRichContent(
   locale: Locale,
 ): ServiceRichContent {
   const fallbackOverview = category.description[locale] || category.description.uz;
+  const categoryCatalog = CATEGORY_RICH_CATALOG[category.id];
+  const categoryRich =
+    isCompleteRichContent(category.richContent) || !categoryCatalog
+      ? category.richContent
+      : mergeRichContent(category.richContent, categoryCatalog);
 
-  const fromApi = fromEntityRich(category.richContent, locale, fallbackOverview);
+  const fromApi = fromEntityRich(categoryRich, locale, fallbackOverview);
   const fromCatalog = CATEGORY_RICH_CATALOG[category.id]?.[locale];
 
   if (fromApi && isCompleteRich(fromApi)) {

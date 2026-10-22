@@ -1,11 +1,8 @@
-import type { Locale, ServiceConditionTopic } from '../types';
+import type { Locale } from '../types';
+import { getServiceAboutOverride, type ServiceAboutContent } from './serviceAboutOverrides';
 
-export interface ServiceAboutContent {
-  aboutTitle: string;
-  overview: string;
-  aboutSections: ServiceConditionTopic[];
-  aboutFooter?: string;
-}
+export type { ServiceAboutContent };
+export { hydrateServiceAboutFromSiteTexts } from './serviceAboutOverrides';
 
 type LocalizedServiceAbout = Record<Locale, ServiceAboutContent>;
 
@@ -960,35 +957,11 @@ export function getServiceAboutContent(
   key: string,
   locale: Locale,
 ): ServiceAboutContent | null {
-  const apiEntry = apiAboutOverrides[key];
+  const apiEntry = getServiceAboutOverride(key);
   if (apiEntry) {
     return apiEntry[locale] ?? apiEntry.uz ?? null;
   }
   const entry = SERVICE_ABOUT_CATALOG[key];
   if (!entry) return null;
   return entry[locale] ?? entry.uz ?? null;
-}
-
-const apiAboutOverrides: Record<string, Partial<Record<Locale, ServiceAboutContent>>> = {};
-
-export function hydrateServiceAboutFromSiteTexts(
-  entries: { key: string; value_uz?: string | null; value_ru?: string | null; value_en?: string | null }[],
-): void {
-  for (const entry of entries) {
-    if (!entry.key.startsWith('catalog.service-about.')) continue;
-    const catalogKey = entry.key.slice('catalog.service-about.'.length);
-    const parse = (value: string | null | undefined): ServiceAboutContent | undefined => {
-      if (!value?.trim()) return undefined;
-      try {
-        return JSON.parse(value) as ServiceAboutContent;
-      } catch {
-        return undefined;
-      }
-    };
-    apiAboutOverrides[catalogKey] = {
-      uz: parse(entry.value_uz),
-      ru: parse(entry.value_ru),
-      en: parse(entry.value_en),
-    };
-  }
 }

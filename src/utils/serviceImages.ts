@@ -1,5 +1,5 @@
 import type { Locale, ServiceCategory, ServiceDetail } from '../types';
-import { findSubServiceCatalogKey } from '../data/serviceRichCatalog';
+import { findSubServiceCatalogKey } from '../data/serviceCatalogKeys';
 import { catalogCategoryImage, catalogSubServiceImage } from '../data/serviceImagesCatalog';
 import { getLocalizedImage } from './localizedImage';
 

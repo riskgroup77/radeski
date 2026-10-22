@@ -34,6 +34,11 @@ const PROFILE_MATCHERS: { groups: string[][]; profile: NonNullable<Doctor['profi
   { groups: [['baxriddinov', 'bakhriddinov', 'бахриддинов'], ['zuxriddin', 'zukhriddin', 'зухриддин']], profile: BAXRIDDINOV_ZUXRIDDIN_PROFILE },
 ];
 
+/** Profile shown on the doctor page: the frontend text when one exists, else the CMS profile. */
+export function resolveDoctorProfile(doctor: Doctor): Doctor['profile'] | undefined {
+  return getDoctorProfileOverlay(doctor) ?? doctor.profile;
+}
+
 export function getDoctorProfileOverlay(doctor: Doctor): Doctor['profile'] | undefined {
   const haystack = normalizeDoctorName(
     [doctor.id, doctor.name.uz, doctor.name.ru, doctor.name.en].join(' '),

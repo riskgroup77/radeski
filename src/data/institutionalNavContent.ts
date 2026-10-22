@@ -2,7 +2,7 @@ import type { Locale } from '../types';
 import type { PageId } from '../routing/paths';
 import { pagePath } from '../routing/paths';
 import type { EducationProgramId } from './obrazovaniyaContent';
-import { educationProgramPath } from '../utils/educationPrograms';
+import { educationProgramPath } from '../utils/educationProgramRoutes';
 
 type L = Record<Locale, string>;
 

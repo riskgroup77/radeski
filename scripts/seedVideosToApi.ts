@@ -12,7 +12,7 @@ import {
   updateVideo,
 } from '../src/api/adminApi';
 import { mapClinicVideoToCreatePayload } from '../src/api/cmsMappers';
-import { CLINIC_VIDEOS } from '../src/data/sitePagesContent';
+import { CLINIC_VIDEOS } from '../src/data/clinicVideosCatalog';
 
 const REQUEST_DELAY_MS = Number(process.env.SYNC_DELAY_MS || 800);
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

@@ -20,7 +20,7 @@ import {
 import { localCommercialPath, type LocalSeoCity } from '../data/localCommercialSeoCatalog';
 import { localeToHreflang, LOCALES } from '../routing/locale';
 import { videoPath } from '../utils/videoMeta';
-import { educationProgramPath, getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
+import { educationProgramPath, getEducationProgramSlugFromPathname, resolveEducationProgramId } from '../utils/educationProgramRoutes';
 
 export type RouteSeoContext = {
   pathname: string;
@@ -113,8 +113,8 @@ export function resolveAlternatePath(altLocale: Locale, ctx: RouteSeoContext): s
 
   // Course pages have a different slug in each language (sertifikatsiya-kurslari / certification-courses).
   if (ctx.currentPage === 'obrazovaniya') {
-    const program = resolveEducationProgram(getEducationProgramSlugFromPathname(ctx.pathname), getLocaleFromPathname(ctx.pathname));
-    if (program) return educationProgramPath(altLocale, program.id);
+    const programId = resolveEducationProgramId(getEducationProgramSlugFromPathname(ctx.pathname));
+    if (programId) return educationProgramPath(altLocale, programId);
   }
 
   const categoryId = ctx.resolvedServiceCategoryId ?? ctx.serviceCategoryId;

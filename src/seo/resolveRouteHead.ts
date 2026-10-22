@@ -59,6 +59,7 @@ import {
 } from './pageMeta';
 import { SERVICE_CATEGORY_SEO } from './serviceCategorySeo';
 import { getCategoryFaq } from '../data/serviceCategoryFaq';
+import { getEquipmentDetails } from '../data/equipment/equipmentDetails';
 import { getInstitutionalNavSection } from '../data/institutionalNavContent';
 import { buildHreflangLinks, getCanonicalUrl, type HreflangLink, type RouteSeoContext } from './routeSeo';
 import {
@@ -448,10 +449,11 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     const faq = buildFaqSchema(getCategoryFaq(activeServiceCategory.id, locale));
     if (faq) jsonLd.push(faq);
   }
-  if (activeEquipment?.details) {
+  const equipmentDetails = activeEquipment ? getEquipmentDetails(activeEquipment.id) : undefined;
+  if (equipmentDetails) {
     // The same questions are shown on the device page.
     const faq = buildFaqSchema(
-      activeEquipment.details.faq.map((item) => ({
+      equipmentDetails.faq.map((item) => ({
         question: getLocalizedEquipmentText(item.question, locale),
         answer: getLocalizedEquipmentText(item.answer, locale),
       })),
