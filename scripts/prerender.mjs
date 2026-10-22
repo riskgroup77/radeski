@@ -93,6 +93,9 @@ function contentHash(html) {
   return createHash('sha1').update(material).digest('hex');
 }
 
+/** Menu pages that are noindex until they get content (see isPlaceholderSection). */
+const OUT_OF_SITEMAP_PAGES = ['tele-dermatology', 'skin-pathology-center'];
+
 async function main() {
   const { createPrerenderer } = await import(pathToFileURL(ssrEntry).href);
 
@@ -151,6 +154,23 @@ async function main() {
       if (head.robots.startsWith('noindex')) noindex += 1;
     } catch (error) {
       failed.push(`${pathname}: ${error instanceof Error ? error.message : error}`);
+    }
+  }
+
+  // Pages kept out of the sitemap but still linked from the menu (placeholder sections): their
+  // HTML must carry the noindex itself — the SPA shell says "index" until JavaScript runs.
+  // Not added to the SEO manifest, so they are never listed or pinged to IndexNow.
+  for (const lang of ['uz', 'ru', 'en']) {
+    for (const page of OUT_OF_SITEMAP_PAGES) {
+      const pathname = `/${lang}/${page}`;
+      try {
+        const { html } = prerenderer.render(pathname, template);
+        const file = path.join(dist, lang, page, 'index.html');
+        mkdirSync(path.dirname(file), { recursive: true });
+        writeFileSync(file, html);
+      } catch (error) {
+        failed.push(`${pathname}: ${error instanceof Error ? error.message : error}`);
+      }
     }
   }
 
