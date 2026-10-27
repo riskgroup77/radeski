@@ -1,15 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { publicApi } from '../api';
 import { loadPublicData, type PublicDataOptions } from '../api/publicDataSource';
-import {
-  mapBranchFromApi,
-  mapClinicRatingFromApi,
-  mapClinicVideoFromApi,
-  mapPartnerFromApi,
-  mapReviewFromApi,
-  mapTreatmentResultFromApi,
-  type ClinicRatingDisplay,
-} from '../api/cmsMappers';
+import type { ClinicRatingDisplay } from '../api/cmsMappers';
+import { mapLegacyRatings, transformCmsData } from '../api/cmsDataTransform';
 import type {
   ClinicBranch,
   ClinicPartner,
@@ -23,50 +16,8 @@ import {
   CUSTOMER_REVIEWS,
   TREATMENT_RESULTS,
 } from '../data/sitePagesContent';
-import { CLINIC_RATINGS, CLINIC_RATING_SUMMARIES } from '../data';
 import { getCachedClientCount, resolveClientCount, setCachedClientCount } from '../utils/clientCount';
-import { mapApiClinicVideos } from '../utils/clinicVideos';
-import { resolvePublicTreatmentResults } from '../utils/treatmentResults';
-
-function withFallback<T>(apiItems: T[], fallback: T[]): T[] {
-  return apiItems.length > 0 ? apiItems : fallback;
-}
-
-function mergeBranches(apiItems: ClinicBranch[], fallback: ClinicBranch[]): ClinicBranch[] {
-  if (apiItems.length === 0) return fallback;
-
-  const haystack = apiItems
-    .map((b) => `${b.name.uz} ${b.name.ru} ${b.name.en} ${b.address.uz} ${b.phone}`.toLowerCase())
-    .join(' | ');
-
-  const extras = fallback.filter((branch) => {
-    if (branch.id === 'liege-rade-skin') {
-      return !/liège|liege|belgiya|belgium|rade skin|sauvenière|sauveniere/.test(haystack);
-    }
-    if (branch.id === 'kokand-branch') {
-      return !/qo[‘']?qon|коканд|kokand/.test(haystack);
-    }
-    if (branch.id === 'fergana-main') {
-      return !/farg[‘']?ona|фергана|fergana/.test(haystack);
-    }
-    return false;
-  });
-
-  return [...apiItems, ...extras].sort(
-    (a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999),
-  );
-}
-
-function mapLegacyRatings(): ClinicRatingDisplay[] {
-  return CLINIC_RATINGS.map((item) => ({
-    id: item.platform.toLowerCase().replace(/\s+/g, '-'),
-    platform: item.platform,
-    rating: item.rating,
-    count: item.count,
-    url: item.url,
-    summary: CLINIC_RATING_SUMMARIES[item.platform] ?? { uz: '', ru: '', en: '' },
-  }));
-}
+import { getInitialSiteData } from '../ssr/initialSiteData';
 
 interface CmsDataState {
   partners: ClinicPartner[];
@@ -82,24 +33,19 @@ interface CmsDataState {
   refetch: (options?: PublicDataOptions) => Promise<void>;
 }
 
-
-function mergeCatalogVideos(apiVideos: ClinicVideo[], catalog: ClinicVideo[]): ClinicVideo[] {
-  if (apiVideos.length === 0) return mapApiClinicVideos(catalog);
-  // API mavjud bo'lsa — faqat API; statik katalog qo'shilmasin (kontent takrorlanmasin).
-  return mapApiClinicVideos(apiVideos);
-}
-
 export function useCmsData(options: PublicDataOptions = {}): CmsDataState {
   const live = Boolean(options.live);
-  const [partners, setPartners] = useState<ClinicPartner[]>(CLINIC_PARTNERS);
-  const [reviews, setReviews] = useState<CustomerReview[]>(CUSTOMER_REVIEWS);
-  const [branches, setBranches] = useState<ClinicBranch[]>(CLINIC_BRANCHES);
-  const [treatmentResults, setTreatmentResults] = useState<TreatmentResult[]>(TREATMENT_RESULTS);
-  const [videos, setVideos] = useState<ClinicVideo[]>([]);
-  const [clinicRatings, setClinicRatings] = useState<ClinicRatingDisplay[]>(mapLegacyRatings());
-  const [clientCount, setClientCount] = useState(() => getCachedClientCount());
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Server-rendered page: start from the data its HTML was rendered with (no fetch needed).
+  const [initial] = useState(() => (live ? null : getInitialSiteData()?.cms ?? null));
+  const [partners, setPartners] = useState<ClinicPartner[]>(initial?.partners ?? CLINIC_PARTNERS);
+  const [reviews, setReviews] = useState<CustomerReview[]>(initial?.reviews ?? CUSTOMER_REVIEWS);
+  const [branches, setBranches] = useState<ClinicBranch[]>(initial?.branches ?? CLINIC_BRANCHES);
+  const [treatmentResults, setTreatmentResults] = useState<TreatmentResult[]>(initial?.treatmentResults ?? TREATMENT_RESULTS);
+  const [videos, setVideos] = useState<ClinicVideo[]>(initial?.videos ?? []);
+  const [clinicRatings, setClinicRatings] = useState<ClinicRatingDisplay[]>(() => initial?.clinicRatings ?? mapLegacyRatings());
+  const [clientCount, setClientCount] = useState(() => initial?.clientCount ?? getCachedClientCount());
+  const [loading, setLoading] = useState(!initial);
+  const [error, setError] = useState<string | null>(initial?.error ?? null);
 
   const refetch = useCallback(async (refetchOptions?: PublicDataOptions) => {
     const liveFetch = live || Boolean(refetchOptions?.live);
@@ -114,6 +60,7 @@ export function useCmsData(options: PublicDataOptions = {}): CmsDataState {
       videosRes,
       ratingsRes,
       countRes,
+      { CLINIC_VIDEOS },
     ] = await Promise.all([
       loadPublicData('partners', () => publicApi.getPartners(), [], { live: liveFetch }),
       loadPublicData('reviews', () => publicApi.getReviews(true), [], { live: liveFetch }),
@@ -122,38 +69,31 @@ export function useCmsData(options: PublicDataOptions = {}): CmsDataState {
       loadPublicData('videos', () => publicApi.getVideos(), [], { live: liveFetch }),
       loadPublicData('clinicRatings', () => publicApi.getClinicRatings(), [], { live: liveFetch }),
       loadPublicData('clientCount', () => publicApi.getClientCount(), { client_count: getCachedClientCount() }, { live: liveFetch }),
+      // ~180 KB of built-in video texts: fetched with the CMS data instead of the app shell.
+      import('../data/clinicVideosCatalog'),
     ]);
 
-    const apiFailed =
-      partnersRes.length === 0 &&
-      reviewsRes.length === 0 &&
-      branchesRes.length === 0 &&
-      resultsRes.length === 0 &&
-      videosRes.length === 0 &&
-      ratingsRes.length === 0;
-
-    if (apiFailed) {
-      setError('CMS API vaqtincha ishlamayapti — mahalliy ma\'lumotlar ko\'rsatilmoqda');
+    const data = transformCmsData(
+      {
+        partners: partnersRes,
+        reviews: reviewsRes,
+        branches: branchesRes,
+        treatmentResults: resultsRes,
+        videos: videosRes,
+        clinicRatings: ratingsRes,
+      },
+      CLINIC_VIDEOS,
+    );
+    if (data.apiFailed) {
+      setError("CMS API vaqtincha ishlamayapti — mahalliy ma'lumotlar ko'rsatilmoqda");
     }
 
-    setPartners(withFallback(partnersRes.map(mapPartnerFromApi), CLINIC_PARTNERS));
-    setReviews(withFallback(reviewsRes.map(mapReviewFromApi), CUSTOMER_REVIEWS.filter((r) => r.published)));
-    setBranches(mergeBranches(branchesRes.map(mapBranchFromApi), CLINIC_BRANCHES));
-    setTreatmentResults(
-      resultsRes.length > 0
-        ? resolvePublicTreatmentResults(resultsRes.map(mapTreatmentResultFromApi))
-        : TREATMENT_RESULTS,
-    );
-    // ~180 KB of built-in video texts: fetched with the CMS data instead of the app shell.
-    const { CLINIC_VIDEOS } = await import('../data/clinicVideosCatalog');
-    setVideos(
-      videosRes.length > 0
-        ? mergeCatalogVideos(videosRes.map(mapClinicVideoFromApi), CLINIC_VIDEOS)
-        : mapApiClinicVideos(CLINIC_VIDEOS),
-    );
-    setClinicRatings(
-      ratingsRes.length > 0 ? ratingsRes.map(mapClinicRatingFromApi) : mapLegacyRatings(),
-    );
+    setPartners(data.partners);
+    setReviews(data.reviews);
+    setBranches(data.branches);
+    setTreatmentResults(data.treatmentResults);
+    setVideos(data.videos);
+    setClinicRatings(data.clinicRatings);
     const count = resolveClientCount(countRes.client_count);
     setClientCount(count);
     setCachedClientCount(count);
@@ -161,9 +101,18 @@ export function useCmsData(options: PublicDataOptions = {}): CmsDataState {
     setLoading(false);
   }, [live]);
 
+  const skipInitialFetch = useRef(Boolean(initial));
   useEffect(() => {
+    if (skipInitialFetch.current) {
+      skipInitialFetch.current = false;
+      // The count stored in this browser (local +1s) may be higher than the server's.
+      const count = resolveClientCount(initial?.apiClientCount);
+      setClientCount(count);
+      setCachedClientCount(count);
+      return;
+    }
     void refetch();
-  }, [refetch]);
+  }, [refetch, initial]);
 
   return {
     partners,

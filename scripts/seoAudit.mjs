@@ -51,7 +51,8 @@ function main() {
     const description = decode(pick(html, /<meta name="description" content="([^"]*)"/) || '');
     const robots = pick(html, /<meta name="robots" content="([^"]*)"/) || '';
     const canonical = pick(html, /<link rel="canonical" href="([^"]*)"/);
-    const body = pick(html, /<div id="root">([\s\S]*)<\/div>\s*<script type="module"/) || pick(html, /<div id="root">([\s\S]*)$/) || '';
+    // data-ssr: the root holds the server-rendered app instead of the plain SEO body.
+    const body = pick(html, /<div id="root"[^>]*>([\s\S]*)<\/div>\s*<script type="module"/) || pick(html, /<div id="root"[^>]*>([\s\S]*)$/) || '';
     const h1Count = (body.match(/<h1[\s>]/g) || []).length;
 
     if (!title) add('title missing', url);
@@ -74,11 +75,15 @@ function main() {
       }
     }
     for (const [tag] of body.matchAll(/<img\b[^>]*>/g)) {
+      // Decorative copies (alt="" + aria-hidden, e.g. a blurred backdrop) are correct as they are.
+      if (/aria-hidden="true"/.test(tag)) continue;
       if (!/\balt="[^"]+"/.test(tag)) add('image without alt', url, (tag.match(/src="([^"]+)"/) || [])[1] || '');
     }
     for (const [, href] of body.matchAll(/<a [^>]*href="(\/[^"#?]*)/g)) {
       const clean = decodeURIComponent(href).replace(/\/$/, '') || '/';
       if (clean === '/' || existing.has(clean) || existsSync(path.join(dist, clean))) continue;
+      // /admin: the staff login linked (nofollow) from the footer.
+      if (clean === '/admin') continue;
       if (!SPA_SECTIONS.test(clean)) brokenLinks.set(clean, [...(brokenLinks.get(clean) ?? []), url]);
     }
   }

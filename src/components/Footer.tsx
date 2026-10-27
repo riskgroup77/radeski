@@ -209,7 +209,8 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
 
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
           <div>
-            <p className="font-light">
+            {/* A page server-rendered last year hydrates with this year: not a real mismatch. */}
+            <p className="font-light" suppressHydrationWarning>
               &copy; {new Date().getFullYear()} Radeski Skin & Aesthetic Clinic
             </p>
           </div>
@@ -228,6 +229,8 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
             </Link>
             <Link
               to={isAdmin ? pagePath(locale, 'home') : '/admin'}
+              // Staff entrance: not a page for search engines to follow.
+              rel={isAdmin ? undefined : 'nofollow'}
               onClick={() => onNavigate(isAdmin ? 'home' : 'admin')}
               className="hover:text-brand-gold-light transition-colors cursor-pointer font-light"
               title={isAdmin ? 'Chiqish' : 'Admin Panel Login'}

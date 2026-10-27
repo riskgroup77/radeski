@@ -27,6 +27,8 @@ import { getCategoryEquipmentList, getLocalizedEquipmentText, type ClinicEquipme
 import { getHomeServiceTeaserMedia } from '../data/homeServiceTeaserVideos';
 import { responsiveImage } from '../utils/imageVariants';
 import { getLocalizedImage } from '../utils/localizedImage';
+import { buildInitialSiteData, type RawSiteData } from '../ssr/buildInitialSiteData';
+import { isSsrRoute, renderAppHtml } from '../ssr/renderApp';
 import { BRANCHES_PAGE_GUIDE, DOCTORS_PAGE_GUIDE, type ListPageGuide } from '../data/listPageGuides';
 import { getEquipmentSectionLabels } from '../utils/clinicEquipmentLabels';
 import { subServiceLinkName, subServiceRouteKey } from '../utils/serviceSubSlug';
@@ -1373,9 +1375,19 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
     return [...new Set(paths.filter(Boolean).map((p) => (p!.startsWith('http') ? p! : `${SITE_ORIGIN}${p!.startsWith('/') ? '' : '/'}${p}`)))];
   };
 
+  // The same data the browser builds from the snapshot before hydrating (src/ssr).
+  const ssrData = buildInitialSiteData(raw as RawSiteData);
+
+  /** The real app's HTML for routes that are server-rendered (null for the others). */
+  async function renderApp(pathname: string): Promise<string | null> {
+    return isSsrRoute(pathname) ? renderAppHtml(pathname, ssrData) : null;
+  }
+
   function render(
     pathname: string,
     template: string,
+    /** Server-rendered app HTML (renderApp): replaces the plain SEO body and is hydrated. */
+    appHtml?: string | null,
   ): { html: string; head: RouteHead; images: string[]; published?: string; video?: VideoSitemapEntry } {
     const locale = getLocaleFromPathname(pathname);
     const head = resolveRouteHead({
@@ -1396,7 +1408,14 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
       if (faq) head.jsonLd.push(faq);
     }
 
-    const body = renderToStaticMarkup(<PrerenderBody
+    // React puts image preloads (fetchPriority="high" images) in front of the app markup:
+    // move them into <head>, where they belong and where hydration does not meet them.
+    const reactPreloads: string[] = [];
+    const appBody = appHtml?.replace(/^(?:<link rel="preload"[^>]*\/>)+/, (links) => {
+      reactPreloads.push(...(links.match(/<link[^>]*\/>/g) ?? []));
+      return '';
+    });
+    const body = appBody ?? renderToStaticMarkup(<PrerenderBody
         head={head}
         locale={locale}
         clinic={clinic}
@@ -1434,6 +1453,10 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
             } />`,
           ]
         : []),
+      // Minus the one already preloaded above as the LCP image.
+      ...reactPreloads.filter(
+        (link) => !heroImage || !(link.includes(`"${heroImage.src}"`) || (heroImage.srcSet && link.includes(`"${heroImage.srcSet}"`))),
+      ),
       ...head.hreflang.map(
         (link) =>
           `<link rel="alternate" hreflang="${link.hreflang}" href="${escapeHtml(link.href)}" data-radeski-hreflang="true" />`,
@@ -1448,7 +1471,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
       inlineScript === -1
         ? html.replace('</head>', `    ${headLinks}\n  </head>`)
         : `${html.slice(0, inlineScript)}${headLinks}\n    ${html.slice(inlineScript)}`;
-    html = html.replace('<div id="root"></div>', `<div id="root">${body}</div>`);
+    html = html.replace('<div id="root"></div>', appHtml ? `<div id="root" data-ssr="1">${body}</div>` : `<div id="root">${body}</div>`);
 
     return {
       html,
@@ -1461,6 +1484,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
 
   return {
     render,
+    renderApp,
     /** Service category + sub-service paths (readable keys) for the sitemap. */
     servicePaths: [
       ...DERMATOLOGY_CONDITION_NAV.map((item) => `conditions/${item.slug}`),

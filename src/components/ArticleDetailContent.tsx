@@ -20,8 +20,8 @@ import {
   resolveArticleSummary,
   stripArticleHashtagSection,
 } from '../utils/articleContent';
-import { resolveArticleBodyFrom, resolveArticleRichContentFrom, type ArticleCatalogEntry } from '../utils/articleContentCore';
-import { ARTICLE_CATALOG_LOADERS } from '../data/articleCatalogLoaders.generated';
+import { resolveArticleBodyFrom, resolveArticleRichContentFrom } from '../utils/articleContentCore';
+import { getLoadedArticleCatalog, loadArticleCatalog, type ArticleCatalogTexts } from '../data/articleCatalogCache';
 import { findArticleCatalogKey } from '../data/articleCatalogKeys';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import { isEquipmentPromoArticle, isEquipmentPromoImageSrc } from '../utils/articles';
@@ -60,25 +60,24 @@ const EMPTY_RICH = { keyTakeaways: [], faq: [], tags: [], whenToSeeDoctor: [] };
 function useArticleCatalog(
   article: Article,
   locale: Locale,
-): { entry: ArticleCatalogEntry; general: ArticleCatalogEntry } | null {
+): ArticleCatalogTexts | null {
   const key = findArticleCatalogKey(article);
-  const [loaded, setLoaded] = useState<{ id: string; entry: ArticleCatalogEntry; general: ArticleCatalogEntry } | null>(null);
   const id = `${key}:${locale}`;
+  // Already loaded (server-rendered page, or visited before): render the body at once.
+  const [loaded, setLoaded] = useState<{ id: string; texts: ArticleCatalogTexts } | null>(() => {
+    const texts = getLoadedArticleCatalog(key, locale);
+    return texts ? { id, texts } : null;
+  });
   useEffect(() => {
     let cancelled = false;
-    const loadGeneral = ARTICLE_CATALOG_LOADERS['general-dermatology'];
-    const ownLoader = ARTICLE_CATALOG_LOADERS[key];
-    (async () => {
-      const entry = await (ownLoader ?? loadGeneral)();
-      const hasOwnText = Boolean(ownLoader && entry[locale]?.body?.trim());
-      const general = hasOwnText ? entry : await loadGeneral();
-      if (!cancelled) setLoaded({ id, entry, general });
-    })();
+    void loadArticleCatalog(key, locale).then((texts) => {
+      if (!cancelled) setLoaded((prev) => (prev?.id === id && prev.texts.entry === texts.entry && prev.texts.general === texts.general ? prev : { id, texts }));
+    });
     return () => {
       cancelled = true;
     };
   }, [id, key, locale]);
-  return loaded && loaded.id === id ? loaded : null;
+  return loaded && loaded.id === id ? loaded.texts : null;
 }
 
 export default function ArticleDetailContent({ article, locale }: ArticleDetailContentProps) {

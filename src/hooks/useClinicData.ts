@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { getInitialSiteData } from '../ssr/initialSiteData';
 import { publicApi } from '../api';
 import { loadPublicData, type PublicDataOptions } from '../api/publicDataSource';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
@@ -22,16 +23,18 @@ interface ClinicDataState {
 
 export function useClinicData(options: PublicDataOptions = {}): ClinicDataState {
   const live = Boolean(options.live);
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
-  const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
-  const [prices, setPrices] = useState<PriceItem[]>([]);
-  const [pricesLoading, setPricesLoading] = useState(true);
+  // Server-rendered page: start from the data its HTML was rendered with (no fetch needed).
+  const [initial] = useState(() => (live ? null : getInitialSiteData()?.clinic ?? null));
+  const [doctors, setDoctors] = useState<Doctor[]>(initial?.doctors ?? []);
+  const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>(initial?.serviceCategories ?? []);
+  const [prices, setPrices] = useState<PriceItem[]>(initial?.prices ?? []);
+  const [pricesLoading, setPricesLoading] = useState(!initial);
   // Empty until the data arrives: the article index (~120 KB) is loaded with the transform,
   // not with the app shell. Article pages fall back to it on their own.
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [dictionaryOverrides, setDictionaryOverrides] = useState<DictionaryOverrides>({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [articles, setArticles] = useState<Article[]>(initial?.articles ?? []);
+  const [dictionaryOverrides, setDictionaryOverrides] = useState<DictionaryOverrides>(initial?.dictionaryOverrides ?? {});
+  const [loading, setLoading] = useState(!initial);
+  const [error, setError] = useState<string | null>(initial?.error ?? null);
 
   const refetch = useCallback(async () => {
     setLoading(true);
@@ -102,7 +105,12 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
     });
   }, []);
 
+  const skipInitialFetch = useRef(Boolean(initial));
   useEffect(() => {
+    if (skipInitialFetch.current) {
+      skipInitialFetch.current = false;
+      return;
+    }
     void refetch();
   }, [refetch]);
 

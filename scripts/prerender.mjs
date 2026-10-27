@@ -88,10 +88,16 @@ function contentHash(html) {
     pick(/<title>([\s\S]*?)<\/title>/),
     pick(/<meta name="description" content="([^"]*)"/),
     pick(/<link rel="canonical" href="([^"]*)"/),
-    pick(/<div id="root">([\s\S]*?)<\/div>\s*<script type="module"/) || pick(/<div id="root">([\s\S]*)$/),
+    pick(/<div id="root"[^>]*>([\s\S]*?)<\/div>\s*<script type="module"/) || pick(/<div id="root"[^>]*>([\s\S]*)$/),
   ].join('\n');
   return createHash('sha1').update(material).digest('hex');
 }
+
+/**
+ * Server-render the real app for the routes in src/ssr/ssrRoutes.ts (hydrated in the browser).
+ * RADESKI_SSR=0 falls back to the plain SEO body everywhere — a switch for emergencies.
+ */
+const SSR_ENABLED = process.env.RADESKI_SSR !== '0';
 
 /** Menu pages that are noindex until they get content (see isPlaceholderSection). */
 const OUT_OF_SITEMAP_PAGES = ['tele-dermatology', 'skin-pathology-center'];
@@ -141,11 +147,14 @@ async function main() {
 
   const manifest = {};
   let noindex = 0;
+  let ssrPages = 0;
   const failed = [];
 
   for (const pathname of pathnames) {
     try {
-      const { html, head, images, published, video } = prerenderer.render(pathname, template);
+      const appHtml = SSR_ENABLED ? await prerenderer.renderApp(pathname) : null;
+      if (appHtml) ssrPages += 1;
+      const { html, head, images, published, video } = prerenderer.render(pathname, template, appHtml);
       const relative = decodeURIComponent(pathname).replace(/^\/+/, '').replace(/\/+$/, '');
       if (!relative || relative.includes('..')) continue;
       const file = path.join(dist, relative, 'index.html');
@@ -177,7 +186,7 @@ async function main() {
 
   writeFileSync(path.join(dist, '.seo-manifest.json'), JSON.stringify(manifest));
   if (prerenderer.llmsTxt) writeFileSync(path.join(dist, 'llms.txt'), prerenderer.llmsTxt());
-  console.log(`[prerender] ${Object.keys(manifest).length}/${pathnames.length} pages written to dist/`);
+  console.log(`[prerender] ${Object.keys(manifest).length}/${pathnames.length} pages written to dist/ (${ssrPages} server-rendered app pages)`);
   if (noindex) console.warn(`[prerender] ${noindex} sitemap URLs resolve to noindex pages — check the sitemap`);
   if (failed.length) console.warn(`[prerender] failed:\n  ${failed.slice(0, 20).join('\n  ')}`);
 }

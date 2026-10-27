@@ -452,7 +452,10 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       )}
 
       {/* 2. Main Page Renderings based on current routing Tab */}
-      <AnimatePresence mode="wait">
+      {/* initial={false}: the first page shows at once (on a server-rendered page its HTML is
+          already on screen); later navigations fade in. Also applies to the page's own
+          entrance animations on that first page. */}
+      <AnimatePresence mode="wait" initial={false}>
         <m.main
           // At least one screen tall, so the footer stays below the fold while the page's code and
           // data load (otherwise it renders mid-screen and jumps down: layout shift).

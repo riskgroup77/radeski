@@ -47,6 +47,12 @@ export function getCachedClientCount(): number {
   return cachedClientCount;
 }
 
+/** Count from the API alone (no browser storage) — the same on the server and in the browser. */
+export function baseClientCount(apiCount?: number | null): number {
+  const api = normalizeClientCount(apiCount);
+  return Math.max(api && api > 0 ? api : DEFAULT_CLIENT_COUNT, MIN_CLIENT_COUNT);
+}
+
 /** API, localStorage va xotira qiymatlaridan eng kattasini tanlaydi (mahalliy +1 lar yo'qolmasin). */
 export function resolveClientCount(apiCount?: number | null): number {
   const api = normalizeClientCount(apiCount);

@@ -65,8 +65,9 @@ async function load(url) {
 function analyse(url, { status, location, html }) {
   const head = html.slice(0, html.indexOf('</head>') + 1 || undefined);
   const prerender = html.includes('class="prerender"') ? html.slice(html.indexOf('class="prerender"')) : html;
-  const main = first(/<main>([\s\S]*?)<\/main>/, prerender) ? prerender.match(/<main>([\s\S]*?)<\/main>/)[1] : '';
-  const contentForLinks = prerender.replace(/<header>[\s\S]*?<\/header>/, '').replace(/<footer>[\s\S]*?<\/footer>/, '');
+  // Plain prerender body (<main>) or the server-rendered app (<main class=…>, <a class=… href=…>).
+  const main = prerender.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] ?? '';
+  const contentForLinks = prerender.replace(/<header\b[^>]*>[\s\S]*?<\/header>/, '').replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/, '');
   const jsonLd = [...html.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]);
   const types = [];
   let jsonErrors = 0;
@@ -91,8 +92,8 @@ function analyse(url, { status, location, html }) {
   const hreflang = Object.fromEntries([...head.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((m) => [m[1], m[2]]));
   const canonical = first(/<link rel="canonical" href="([^"]+)"/, head);
   const robots = first(/<meta name="robots" content="([^"]*)"/, head);
-  const links = [...contentForLinks.matchAll(/<a href="(\/[^"#?]*)/g)].map((m) => ORIGIN + m[1].replace(/\/$/, ''));
-  const allLinks = [...prerender.matchAll(/<a href="(\/[^"#?]*)/g)].map((m) => ORIGIN + m[1].replace(/\/$/, ''));
+  const links = [...contentForLinks.matchAll(/<a\b[^>]*?\shref="(\/[^"#?]*)/g)].map((m) => ORIGIN + m[1].replace(/\/$/, ''));
+  const allLinks = [...prerender.matchAll(/<a\b[^>]*?\shref="(\/[^"#?]*)/g)].map((m) => ORIGIN + m[1].replace(/\/$/, ''));
   return {
     url,
     lang: new URL(url).pathname.split('/')[1] || '',
