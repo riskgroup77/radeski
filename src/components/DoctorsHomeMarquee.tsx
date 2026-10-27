@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import type { Doctor, Locale } from '../types';
+import { doctorPath } from '../routing/paths';
 import MediaImage from './MediaImage';
 import { doctorRouteKey } from '../utils/doctorSlug';
 
@@ -49,13 +51,12 @@ function DoctorCard({
         <span className="font-mono text-[10px] font-bold uppercase tracking-wide text-brand-gold">
           {doctor.role[locale]}
         </span>
-        <button
-          type="button"
-          onClick={() => onDoctorClick(doctorRouteKey(doctor))}
-          className="mt-1 w-full cursor-pointer text-left text-md font-extrabold leading-snug tracking-tight text-brand-text-primary transition-colors hover:text-brand-gold sm:text-base"
+        <Link
+          to={doctorPath(locale, doctorRouteKey(doctor))}
+          className="mt-1 block w-full text-left text-md font-extrabold leading-snug tracking-tight text-brand-text-primary no-underline transition-colors hover:text-brand-gold sm:text-base"
         >
           {doctor.name[locale]}
-        </button>
+        </Link>
         {doctor.education[locale] && (
           <div className="mt-2">
             <span className="text-xs font-extrabold uppercase tracking-wide text-brand-text-primary">
@@ -69,13 +70,12 @@ function DoctorCard({
         <p className="mt-2 line-clamp-2 text-xs font-light leading-relaxed text-brand-text-muted">
           {doctor.bio[locale]}
         </p>
-        <button
-          type="button"
-          onClick={() => onDoctorClick(doctorRouteKey(doctor))}
-          className="mt-4 w-full cursor-pointer rounded-lg bg-brand-gold-light/10 py-2.5 text-center text-xs font-bold text-brand-gold-dark transition-colors hover:bg-brand-gold-light/20"
+        <Link
+          to={doctorPath(locale, doctorRouteKey(doctor))}
+          className="mt-4 block w-full rounded-lg bg-brand-gold-light/10 py-2.5 text-center text-xs font-bold text-brand-gold-dark no-underline transition-colors hover:bg-brand-gold-light/20"
         >
           {viewProfileLabel}
-        </button>
+        </Link>
       </div>
     </article>
   );

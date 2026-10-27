@@ -91,7 +91,7 @@ Natija odatda bir necha kun ichida tayyor bo‘ladi — o‘sma shubhasi bo‘ls
 
 Radeski Skin Clinic da patolog va dermatolog birgalikda ishlaydi: klinik ma’lumot + laboratoriya natijasi = **aniq tashxis**. Bu yondashuv melanoma, bazalioma va murakkab dermatozlarda eng muhim.
 
-Bog‘liq xizmatlar: [Dermatopatologiya](/uz/services/dermatopatologiya), [Teri biopsiyasi](/uz/services/dermatopatologiya/gistolog), [Dermatoskopiya](/uz/services/dermatoskopiya), [Dermatoonkologiya](/uz/services/dermatoonkologiya), [Bazalioma haqida maqola](/uz/articles/bazalioma-teri-raki), [Narxlar](/uz/prices).`;
+Bog‘liq xizmatlar: [Dermatopatologiya](/uz/services/dermatopatologiya), [Teri biopsiyasi](/uz/services/dermatopatologiya/gistolog), [Dermatoskopiya](/uz/services/dermatoskopiya), [Dermatoonkologiya](/uz/services/dermatoonkologiya), [Bazalioma haqida maqola](/uz/articles/art-bazalioma-teri-raki), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -169,7 +169,7 @@ function ruBody(): string {
 
 В Radeski Skin Clinic патолог и дерматолог работают вместе: клинические данные + лабораторное заключение = **точный диагноз**. Такой подход критически важен при меланоме, базалиоме и сложных дерматозах.
 
-Связанные услуги: [Дерматопатология](/ru/services/dermatopatologiya), [Биопсия кожи](/ru/services/dermatopatologiya/gistolog), [Дерматоскопия](/ru/services/dermatoskopiya), [Дерматоонкология](/ru/services/dermatoonkologiya), [Статья о базалиоме](/ru/articles/bazalioma-teri-raki), [Цены](/ru/prices).`;
+Связанные услуги: [Дерматопатология](/ru/services/dermatopatologiya), [Биопсия кожи](/ru/services/dermatopatologiya/gistolog), [Дерматоскопия](/ru/services/dermatoskopiya), [Дерматоонкология](/ru/services/dermatoonkologiya), [Статья о базалиоме](/ru/articles/art-bazalioma-teri-raki), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -247,7 +247,7 @@ Results are usually ready within several days; speed is especially important whe
 
 At Radeski Skin Clinic, pathologist and dermatologist work together: clinical findings + laboratory report = **accurate diagnosis**. This approach is critical for melanoma, basal cell carcinoma, and complex dermatoses.
 
-Related services: [Dermatopathology](/en/services/dermatopatologiya), [Skin biopsy](/en/services/dermatopatologiya/gistolog), [Dermoscopy](/en/services/dermatoskopiya), [Dermato-oncology](/en/services/dermatoonkologiya), [Basal cell carcinoma article](/en/articles/bazalioma-teri-raki), [Prices](/en/prices).`;
+Related services: [Dermatopathology](/en/services/dermatopatologiya), [Skin biopsy](/en/services/dermatopatologiya/gistolog), [Dermoscopy](/en/services/dermatoskopiya), [Dermato-oncology](/en/services/dermatoonkologiya), [Basal cell carcinoma article](/en/articles/art-bazalioma-teri-raki), [Prices](/en/prices).`;
 }
 
 export const DERMATOPATOLOGIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

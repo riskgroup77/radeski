@@ -144,6 +144,20 @@ if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
   mkdir -p dist/videos
   cp -a public/videos/. dist/videos/
 fi
+# SEO 301 maps from the repo (nginx/*.map.conf) replace the installed ones when they changed;
+# a map that breaks `nginx -t` is put back.
+for MAP in radeski-article-redirects.map.conf radeski-site-redirects.map.conf; do
+  if [ -f "nginx/$MAP" ] && [ -f "/etc/nginx/conf.d/$MAP" ] && ! cmp -s "nginx/$MAP" "/etc/nginx/conf.d/$MAP"; then
+    cp "/etc/nginx/conf.d/$MAP" "/tmp/$MAP.bak"
+    cp "nginx/$MAP" "/etc/nginx/conf.d/$MAP"
+    if nginx -t 2>/dev/null; then
+      echo "Updated /etc/nginx/conf.d/$MAP"
+    else
+      cp "/tmp/$MAP.bak" "/etc/nginx/conf.d/$MAP"
+      echo "WARNING: nginx/$MAP failed nginx -t — kept the installed map"
+    fi
+  fi
+done
 nginx -t
 systemctl reload nginx
 echo DEPLOY_OK

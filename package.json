@@ -18,6 +18,7 @@
     "generate:nginx-redirects": "tsx scripts/generateArticleNginxRedirects.ts",
     "generate:nginx-site-redirects": "tsx scripts/generateSiteNginxRedirects.ts",
     "validate:sitemap": "tsx scripts/validateSitemapSeo.ts",
+    "check:daily": "node scripts/dailySiteCheck.mjs",
     "patch:sitemap-articles": "tsx scripts/patchSitemapArticles.ts",
     "patch:sitemap-doctors": "tsx scripts/patchSitemapDoctors.ts",
     "patch:sitemap-local": "tsx scripts/patchSitemapLocalCommercial.ts",

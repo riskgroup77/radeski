@@ -269,6 +269,12 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'лечение контагиозного моллюска',
   ],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
+  'seborrheic-dermatitis': [
+    'art-seboreyali-dermatit',
+    'seboreyali dermatit',
+    'себорейный дерматит',
+    'seborrheic dermatitis',
+  ],
   'adult-acne-dermatologist': [
     'art-akne-u-vzroslykh',
     'akne-u-vzroslykh',

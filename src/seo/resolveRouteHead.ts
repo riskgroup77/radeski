@@ -282,11 +282,23 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     ? getDermatologyConditionNavItem(conditionSlug)?.label[locale] ?? getDermatologyConditionNavItem(conditionSlug)?.label.uz ?? null
     : null;
 
+  // Promo (offer) pages: their own title and description from the slide, instead of the home
+  // page defaults (which made 30 pages share one title).
+  const promoSeo = activePromoSlide
+    ? {
+        title: buildServicePageSeoTitle(activePromoSlide.title[locale], locale),
+        desc: activePromoSlide.description[locale],
+        keywords: buildEntityKeywords(activePromoSlide.title[locale], locale, [activePromoSlide.badge[locale]]),
+      }
+    : null;
+
   const title =
     currentPage === 'not-found' || (videoKey && !activeVideo && isErrorPage)
       ? `${getNotFoundTitle(locale)} | Radeski Skin Clinic`
       : educationSeo?.title
         ? educationSeo.title
+        : promoSeo
+          ? promoSeo.title
         : activeLocalCommercial
           ? buildLandingSeoTitle(activeLocalCommercial, landingDetails, locale)
           : articleSeo?.title
@@ -319,6 +331,8 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
 
   const description = educationSeo?.desc
     ? educationSeo.desc
+    : promoSeo
+      ? promoSeo.desc
     : activeLocalCommercial
       ? buildLandingSeoDescription(activeLocalCommercial, landingDetails, locale)
       : articleSeo?.desc
@@ -341,6 +355,8 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
 
   const keywords = educationSeo?.keywords
     ? educationSeo.keywords
+    : promoSeo
+      ? promoSeo.keywords
     : activeLocalCommercial
       ? getLocalizedCopy(activeLocalCommercial.seo.keywords, locale)
       : articleSeo?.keywords

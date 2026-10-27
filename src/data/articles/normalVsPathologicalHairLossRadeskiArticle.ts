@@ -106,7 +106,7 @@ Taroqdagi sochlar follikulada nima bo'layotganini ko'rsatmaydi. Shifokor baholay
 
 **[Trixoskopiya](/uz/services/trixoskopiya)** — bosh terisi va sochni ko'p baravar kattalashtirib ko'rish; turli alopetsiyalarni, jumladan erta androgenezik va telogen to'kilishni farqlashga yordam beradi. Zarurat bo'lsa OAK, temir zaxirasi, qalqonsimon bez va boshqa tahlillar belgilanadi — ro'yxat konsultatsiya va anamnezdan keyin.
 
-Batafsil: [Trixolog va trixoskopiya](/uz/articles/trixolog-va-trixoskopiya), [Soch to'kilishi diagnostikasi](/uz/services/trixoskopiya/trix-alopecia).
+Batafsil: [Trixolog va trixoskopiya](/uz/articles/art-trixolog-trixoskopiya), [Soch to'kilishi diagnostikasi](/uz/services/trixoskopiya/trix-alopecia).
 
 ## O'zingiz kuzatish mumkinmi?
 
@@ -131,11 +131,11 @@ Kuchayishni kutmaslik ma'qul:
 - qichishish, parchalanish, qizarish;
 - kasallik, stress yoki keskin ozishdan keyin boshlangan.
 
-Sababi ertaroq aniqlansa, **[soch to'kilishini davolash](/uz/services/trihologiya-centr-lechenie-volos)** rejasi tezroq tuziladi — turli alopetsiyada terapiya farq qiladi; «universal» vositadan iborat emas. Zarurat bo'lsa **[plazmaterapiya (PRP)](/uz/articles/plazmotorapiya-soch-prp)** va boshqa usullar individual tanlanadi.
+Sababi ertaroq aniqlansa, **[soch to'kilishini davolash](/uz/services/trihologiya-centr-lechenie-volos)** rejasi tezroq tuziladi — turli alopetsiyada terapiya farq qiladi; «universal» vositadan iborat emas. Zarurat bo'lsa **[plazmaterapiya (PRP)](/uz/articles/art-plazmotorapiya-soch-prp)** va boshqa usullar individual tanlanadi.
 
 **[Trixolog konsultatsiyasi + trixoskopiya](/uz/services/trixoskopiya/trix-konsult)** — Radeski Skin & Aesthetic Clinic, Farg'ona va Qo'qon.
 
-Bog'liq xizmatlar: [Trixologiya markazi](/uz/services/trihologiya-centr-lechenie-volos), [Trixoskopiya](/uz/services/trixoskopiya), [Plazmaterapiya soch uchun](/uz/articles/plazmotorapiya-soch-prp), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Trixologiya markazi](/uz/services/trihologiya-centr-lechenie-volos), [Trixoskopiya](/uz/services/trixoskopiya), [Plazmaterapiya soch uchun](/uz/articles/art-plazmotorapiya-soch-prp), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -220,7 +220,7 @@ function ruBody(): string {
 
 **[Трихоскопия](/ru/services/trixoskopiya)** — осмотр с многократным увеличением; помогает различать виды алопеции, в том числе раннее андрогенетическое и телогеновое выпадение. При необходимости назначают анализы крови (ОАК, железо, щитовидная железа и др.) — перечень определяется после консультации.
 
-Подробнее: [Врач-трихолог и трихоскопия](/ru/articles/trixolog-va-trixoskopiya), [Диагностика выпадения волос](/ru/services/trixoskopiya/trix-alopecia).
+Подробнее: [Врач-трихолог и трихоскопия](/ru/articles/art-trixolog-trixoskopiya), [Диагностика выпадения волос](/ru/services/trixoskopiya/trix-alopecia).
 
 ## Можно ли понять самостоятельно?
 
@@ -245,11 +245,11 @@ function ruBody(): string {
 - зуд, шелушение, покраснение или болезненность;
 - выпадение после болезни, стресса или резкого похудения.
 
-Чем раньше установлена причина, тем раньше подберут **[лечение выпадения волос](/ru/services/trihologiya-centr-lechenie-volos)** — для разных типов алопеции тактика различается. При показаниях возможна **[плазмотерапия волос (PRP)](/ru/articles/plazmotorapiya-soch-prp)**.
+Чем раньше установлена причина, тем раньше подберут **[лечение выпадения волос](/ru/services/trihologiya-centr-lechenie-volos)** — для разных типов алопеции тактика различается. При показаниях возможна **[плазмотерапия волос (PRP)](/ru/articles/art-plazmotorapiya-soch-prp)**.
 
 **[Консультация трихолога + трихоскопия](/ru/services/trixoskopiya/trix-konsult)** — Radeski Skin & Aesthetic Clinic, Фергана и Коканд.
 
-Связанные услуги: [Трихология](/ru/services/trihologiya-centr-lechenie-volos), [Трихоскопия](/ru/services/trixoskopiya), [Плазмотерапия волос](/ru/articles/plazmotorapiya-soch-prp), [Цены](/ru/prices).`;
+Связанные услуги: [Трихология](/ru/services/trihologiya-centr-lechenie-volos), [Трихоскопия](/ru/services/trixoskopiya), [Плазмотерапия волос](/ru/articles/art-plazmotorapiya-soch-prp), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -334,7 +334,7 @@ Hairs on a comb do not show follicle activity. Your doctor assesses shedding pat
 
 **[Trichoscopy](/en/services/trixoskopiya)** — magnified scalp and hair exam; helps distinguish alopecia types including early androgenetic and telogen shedding. Blood tests (CBC, iron stores, thyroid, etc.) may be added after consultation.
 
-Read more: [Trichologist and trichoscopy](/en/articles/trixolog-va-trixoskopiya), [Hair loss diagnosis](/en/services/trixoskopiya/trix-alopecia).
+Read more: [Trichologist and trichoscopy](/en/articles/art-trixolog-trixoskopiya), [Hair loss diagnosis](/en/services/trixoskopiya/trix-alopecia).
 
 ## Can you monitor at home?
 
@@ -359,11 +359,11 @@ Do not wait for severe loss. Book if:
 - itch, scale, redness, or pain;
 - shedding followed illness, stress, or major weight loss.
 
-Earlier diagnosis means earlier **[hair loss treatment](/en/services/trihologiya-centr-lechenie-volos)** — plans differ by alopecia type. **[PRP for hair](/en/articles/plazmotorapiya-soch-prp)** may be used when indicated.
+Earlier diagnosis means earlier **[hair loss treatment](/en/services/trihologiya-centr-lechenie-volos)** — plans differ by alopecia type. **[PRP for hair](/en/articles/art-plazmotorapiya-soch-prp)** may be used when indicated.
 
 **[Trichologist consultation + trichoscopy](/en/services/trixoskopiya/trix-konsult)** — Radeski Skin & Aesthetic Clinic, Fergana and Kokand.
 
-Related: [Trichology center](/en/services/trihologiya-centr-lechenie-volos), [Trichoscopy](/en/services/trixoskopiya), [Plasma therapy for hair](/en/articles/plazmotorapiya-soch-prp), [Prices](/en/prices).`;
+Related: [Trichology center](/en/services/trihologiya-centr-lechenie-volos), [Trichoscopy](/en/services/trixoskopiya), [Plasma therapy for hair](/en/articles/art-plazmotorapiya-soch-prp), [Prices](/en/prices).`;
 }
 
 export const NORMAL_VS_PATHOLOGICAL_HAIR_LOSS_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

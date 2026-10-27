@@ -18,6 +18,8 @@ import {
   servicesListPath,
 } from '../routing/paths';
 import ConditionDetailBody from './ConditionDetailBody';
+import { CONDITION_ARTICLES } from '../data/conditionArticles';
+import { articlePath } from '../routing/paths';
 
 function ConditionWhereTreated({ locale, slug }: { locale: Locale; slug: string }) {
   const topic = CONDITION_LANDING_TOPIC[slug] ?? 'dermatolog';
@@ -48,6 +50,22 @@ function ConditionWhereTreated({ locale, slug }: { locale: Locale; slug: string 
           {locale === 'uz' ? 'Qabulga yozilish' : locale === 'ru' ? 'Записаться' : 'Book appointment'}
         </AppointmentBookingLink>
       </div>
+      {(CONDITION_ARTICLES[slug] ?? []).length > 0 && (
+        <div className="mt-5">
+          <h3 className="text-sm font-extrabold text-brand-text-primary">
+            {locale === 'uz' ? 'Batafsil maqolalar' : locale === 'ru' ? 'Подробные статьи' : 'In-depth articles'}
+          </h3>
+          <ul className="mt-2 space-y-1.5">
+            {(CONDITION_ARTICLES[slug] ?? []).map((item) => (
+              <li key={item.routeKey}>
+                <Link to={articlePath(locale, item.routeKey)} className="text-sm font-semibold text-brand-gold hover:text-brand-gold-dark no-underline">
+                  {item.title[locale]} →
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <p className="mt-4 text-xs text-brand-text-muted">
         {locale === 'uz'
           ? 'Material: Radeski Skin Clinic shifokorlari jamoasi · Yangilangan: '

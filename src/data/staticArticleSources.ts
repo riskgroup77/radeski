@@ -22,6 +22,7 @@ import { IPL_PHOTOTHERAPY_RADESKI_ARTICLE } from './articles/iplPhototherapyRade
 import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from './articles/pediatricWartsCo2DekaArticle';
 import { ADULT_ACNE_ARTICLE } from './articles/adultAcneArticle';
 import { ADULT_ACNE_DERMATOLOGIST_ARTICLE } from './articles/adultAcneDermatologistArticle';
+import { SEBORRHEIC_DERMATITIS_ARTICLE } from './articles/seborrheicDermatitisArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -84,6 +85,7 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   ADULT_ACNE_DERMATOLOGIST_ARTICLE,
+  SEBORRHEIC_DERMATITIS_ARTICLE,
   LASER_SCAR_RESURFACING_ARTICLE,
   ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE,
   ROSACEA_RADESKI_ARTICLE,

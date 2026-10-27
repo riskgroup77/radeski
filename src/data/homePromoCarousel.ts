@@ -30,7 +30,7 @@ export const HOME_PROMO_SLIDES: HomePromoSlide[] = [
     slug: 'dermataskopiya',
     badge: { uz: 'Dermatologiya', ru: 'Дерматология', en: 'Dermatology' },
     title: {
-      uz: 'Dermataskopiya va shifokor ko‘rigi',
+      uz: 'Dermatoskopiya va shifokor ko‘rigi',
       ru: 'Дерматоскопия и осмотр врача',
       en: 'Dermoscopy and doctor consultation',
     },
@@ -50,7 +50,7 @@ export const HOME_PROMO_SLIDES: HomePromoSlide[] = [
     slug: 'ipl',
     badge: { uz: 'IPL terapiya', ru: 'IPL-терапия', en: 'IPL therapy' },
     title: {
-      uz: 'IPL fotoomolajeniyatsiya',
+      uz: 'IPL bilan yuzni yoshartirish',
       ru: 'IPL-фотоомоложение',
       en: 'IPL photo-rejuvenation',
     },
@@ -76,7 +76,7 @@ export const HOME_PROMO_SLIDES: HomePromoSlide[] = [
     slug: 'podologiya',
     badge: { uz: 'Podologiya', ru: 'Подология', en: 'Podiatry' },
     title: {
-      uz: 'Aparat yordamida tirnoq tozalash',
+      uz: 'Apparat yordamida tirnoq tozalash',
       ru: 'Аппаратная чистка ногтей',
       en: 'Medical device nail cleansing',
     },
@@ -159,7 +159,7 @@ export const HOME_PROMO_SLIDES: HomePromoSlide[] = [
     slug: 'lazer-epilyatsiya',
     badge: { uz: 'Lazer epilyatsiya', ru: 'Лазерная эпиляция', en: 'Laser hair removal' },
     title: {
-      uz: 'Lazerniy epilyatsiya — oyoqlar',
+      uz: 'Lazer epilyatsiyasi — oyoqlar',
       ru: 'Лазерная эпиляция — ноги',
       en: 'Laser hair removal — legs',
     },

@@ -992,6 +992,50 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 412
     }
   },
+  "seborrheic-dermatitis": {
+    "uz": {
+      "summary": "Seboreyali dermatit: kepak, yuz va qoshdagi qizarish va po'st tashlash. Sabablari, psoriaz va zamburug'dan farqi, davolash va uy parvarishi. Farg'ona va Qo'qonda dermatolog qabuli.",
+      "tags": [
+        "Seboreyali dermatit",
+        "Kepak",
+        "Dermatolog",
+        "Bosh terisi",
+        "Fargona",
+        "Qoqon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 4529,
+      "bodyWords": 566
+    },
+    "ru": {
+      "summary": "Себорейный дерматит: перхоть, покраснение и шелушение на лице и бровях. Причины, отличие от псориаза и грибка, лечение и домашний уход. Приём дерматолога в Фергане и Коканде.",
+      "tags": [
+        "Себорейный дерматит",
+        "Перхоть",
+        "Дерматолог",
+        "Кожа головы",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 4162,
+      "bodyWords": 573
+    },
+    "en": {
+      "summary": "Seborrheic dermatitis: dandruff, redness and flaking on the face and brows. Causes, how it differs from psoriasis and fungus, treatment and home care. Dermatology visits in Fergana and Kokand.",
+      "tags": [
+        "Seborrheic dermatitis",
+        "Dandruff",
+        "Dermatologist",
+        "Scalp",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 4218,
+      "bodyWords": 680
+    }
+  },
   "laser-scar-resurfacing": {
     "uz": {
       "summary": "Chandiqlarni lazer shlifovkasi: operatsiya, jarohat, kuyish va akne izlarini kamroq sezilarli qilish. Radeski Skin Clinic’da shifokor konsultatsiyasi va individual reja.",
@@ -2091,7 +2135,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Farg'ona"
       ],
-      "bodyLength": 4365,
+      "bodyLength": 4369,
       "bodyWords": 512
     },
     "ru": {
@@ -2105,7 +2149,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Фергана"
       ],
-      "bodyLength": 4506,
+      "bodyLength": 4510,
       "bodyWords": 515
     },
     "en": {
@@ -2119,7 +2163,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Fergana"
       ],
-      "bodyLength": 4012,
+      "bodyLength": 4016,
       "bodyWords": 522
     }
   },
@@ -2541,7 +2585,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Trixoskopiya",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 6029,
+      "bodyLength": 6038,
       "bodyWords": 733
     },
     "ru": {
@@ -2555,7 +2599,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Трихоскопия",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 5764,
+      "bodyLength": 5773,
       "bodyWords": 710
     },
     "en": {
@@ -2569,7 +2613,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Trichoscopy",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 4716,
+      "bodyLength": 4725,
       "bodyWords": 690
     }
   },
@@ -3506,6 +3550,38 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": "/articles/akne-u-vzroslykh-cover.jpg",
       "ru": "/articles/akne-u-vzroslykh-cover.jpg",
       "en": "/articles/akne-u-vzroslykh-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-seboreyali-dermatit",
+    "slug": "seboreyali-dermatit",
+    "title": {
+      "uz": "Seboreyali dermatit: sabablari, belgilari va davolash — kepak, yuz va qoshdagi qizarish",
+      "ru": "Себорейный дерматит: причины, симптомы и лечение — перхоть, покраснение на лице и бровях",
+      "en": "Seborrheic Dermatitis: Causes, Symptoms and Treatment — Dandruff and Facial Redness"
+    },
+    "summary": {
+      "uz": "Seboreyali dermatit: kepak, yuz va qoshdagi qizarish va po'st tashlash. Sabablari, psoriaz va zamburug'dan farqi, davolash va uy parvarishi. Farg'ona va Qo'qonda dermatolog qabuli.",
+      "ru": "Себорейный дерматит: перхоть, покраснение и шелушение на лице и бровях. Причины, отличие от псориаза и грибка, лечение и домашний уход. Приём дерматолога в Фергане и Коканде.",
+      "en": "Seborrheic dermatitis: dandruff, redness and flaking on the face and brows. Causes, how it differs from psoriasis and fungus, treatment and home care. Dermatology visits in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Ashurov Dilshod Davlatovich",
+      "ru": "Ашуров Дильшод Давлатович",
+      "en": "Dr. Dilshod Davlatovich Ashurov"
+    },
+    "date": "2026-10-27",
+    "image": "/articles/seboreyali-dermatit-cover.jpg",
+    "images": {
+      "uz": "/articles/seboreyali-dermatit-cover.jpg",
+      "ru": "/articles/seboreyali-dermatit-cover.jpg",
+      "en": "/articles/seboreyali-dermatit-cover.jpg"
     },
     "views": 0
   },

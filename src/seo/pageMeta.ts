@@ -89,6 +89,26 @@ export function fitDescription(text: string): string {
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  'art-seboreyali-dermatit': {
+    uz: {
+      title: 'Seboreyali dermatit: sabablari va davolash',
+      desc: "Seboreyali dermatit: kepak, yuz va qoshdagi qizarish — sabablari, psoriazdan farqi va davolash. Farg'ona va Qo'qonda dermatolog qabuli.",
+      keywords:
+        "seboreyali dermatit, seboreya davolash, kepak davolash, bosh terisi qichishi, yuzda qizarish va po'st, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Себорейный дерматит: причины и лечение',
+      desc: 'Себорейный дерматит: перхоть, покраснение на лице и бровях. Причины, отличие от псориаза, лечение и уход. Дерматолог Radeski Skin Clinic в Фергане и Коканде.',
+      keywords:
+        'себорейный дерматит, лечение себорейного дерматита, себорея, перхоть лечение, себорейный дерматит на лице, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Seborrheic dermatitis: causes and treatment',
+      desc: 'Seborrheic dermatitis: dandruff, redness on the face and brows. Causes, how it differs from psoriasis, treatment and care. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'seborrheic dermatitis, seborrheic dermatitis treatment, dandruff treatment, scalp itching, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
   'art-akne-u-vzroslykh': {
     uz: {
       title: 'Kattalarda akne: qachon dermatologga borish kerak',

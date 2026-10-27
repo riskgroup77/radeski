@@ -7,6 +7,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   dermatologiya: [
     'acne',
     'adult-acne-dermatologist',
+    'seborrheic-dermatitis',
     'adult-acne',
     'acne-dermatologist-vs-cosmetologist',
     'rosacea-radeski',

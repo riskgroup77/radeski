@@ -28,6 +28,7 @@ export const ARTICLE_CATALOG_LOADERS: Record<string, () => Promise<ArticleCatalo
   "pediatric-warts-co2-deka": () => import('./articles/pediatricWartsCo2DekaArticle').then((m) => m.PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG),
   "adult-acne": () => import('./articles/adultAcneArticle').then((m) => m.ADULT_ACNE_ARTICLE_CATALOG),
   "adult-acne-dermatologist": () => import('./articles/adultAcneDermatologistArticle').then((m) => m.ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG),
+  "seborrheic-dermatitis": () => import('./articles/seborrheicDermatitisArticle').then((m) => m.SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG),
   "laser-scar-resurfacing": () => import('./articles/laserScarResurfacingArticle').then((m) => m.LASER_SCAR_RESURFACING_ARTICLE_CATALOG),
   "acne-dermatologist-vs-cosmetologist": () => import('./articles/acneDermatologistVsCosmetologistArticle').then((m) => m.ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG),
   "rosacea-radeski": () => import('./articles/rosaceaRadeskiArticle').then((m) => m.ROSACEA_RADESKI_ARTICLE_CATALOG),

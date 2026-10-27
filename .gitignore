@@ -71,3 +71,6 @@ scripts/live-results.json
 # Search Console service-account key and generated SEO reports
 gsc-service-account.json
 reports/
+
+# Daily site check reports (npm run check:daily)
+/audit/

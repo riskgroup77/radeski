@@ -302,19 +302,13 @@ export const CLINIC_RATINGS = [
     logo: '⭐',
     url: 'https://yandex.uz/profile/138616043960',
   },
+  // Checked on Google Maps 17.10.2026 (CMS clinic ratings, when filled, replace these).
   {
     platform: 'Google Maps',
-    rating: '4.8',
-    count: 85,
+    rating: '4.9',
+    count: 48,
     logo: '📍',
     url: 'https://www.google.com/maps/place/Radeski+Skin+%26+Aesthetic+Clinic/@40.3833622,71.7936632,17z/data=!3m1!4b1!4m6!3m5!1s0x38bb830bba97cb09:0xd99d7f456cd820e8!8m2!3d40.3833622!4d71.7962381!16s%2Fg%2F11y2mv11w6?hl=ru&entry=ttu',
-  },
-  {
-    platform: '2GIS',
-    rating: '4.9',
-    count: 96,
-    logo: '🗺️',
-    url: 'https://2gis.kg/bishkek?m=72.367424%2C41.175575%2F7.43',
   },
 ];
 

@@ -1,4 +1,6 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { doctorPath } from '../routing/paths';
 import { motion } from 'motion/react';
 import { Clock, Calendar, Shield } from 'lucide-react';
 import { Locale, Doctor } from '../types';
@@ -37,7 +39,8 @@ function WorkplaceBlock({
 export default function Doctors({
   locale,
   onOpenAppointment,
-  onOpenDoctor,
+  // Cards are links now (crawlable, open in a new tab); kept for the App props.
+  onOpenDoctor: _onOpenDoctor,
   doctors,
   dictionary,
 }: DoctorsProps) {
@@ -72,11 +75,11 @@ export default function Doctors({
               className="bg-brand-white rounded-2xl border border-brand-sectiongray overflow-hidden shadow-sm hover:shadow-md transition-all group flex flex-col justify-between"
             >
               <div>
-                <button
-                  type="button"
-                  onClick={() => onOpenDoctor(doctorRouteKey(doc))}
+                <Link
+                  to={doctorPath(locale, doctorRouteKey(doc))}
                   className="relative aspect-[3/4] w-full overflow-hidden bg-brand-offwhite block cursor-pointer"
                   aria-label={doc.name[locale]}
+                  tabIndex={-1}
                 >
                   {doc.photo ? (
                     <MediaImage
@@ -99,19 +102,18 @@ export default function Doctors({
                       {locale === 'uz' ? 'tajriba' : locale === 'ru' ? 'лет практики' : 'years'}
                     </span>
                   </div>
-                </button>
+                </Link>
 
                 <div className="p-6">
                   <span className="text-[11px] font-bold text-brand-gold tracking-widest uppercase font-mono block mb-1 leading-none">
                     {doc.role[locale]}
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => onOpenDoctor(doctorRouteKey(doc))}
-                    className="text-left w-full text-lg font-extrabold text-brand-text-primary leading-snug group-hover:text-brand-gold transition-colors cursor-pointer"
+                  <Link
+                    to={doctorPath(locale, doctorRouteKey(doc))}
+                    className="block text-left w-full text-lg font-extrabold text-brand-text-primary leading-snug group-hover:text-brand-gold transition-colors no-underline"
                   >
                     {doc.name[locale]}
-                  </button>
+                  </Link>
                   {doc.education[locale] && (
                     <WorkplaceBlock label={d.education} value={doc.education[locale]} />
                   )}
@@ -122,17 +124,17 @@ export default function Doctors({
               </div>
 
               <div className="p-6 pt-0 border-t border-brand-sectiongray mt-4 flex gap-3">
-                <button
+                <Link
                   id={`view-profile-btn-${doc.id}`}
-                  type="button"
-                  onClick={() => onOpenDoctor(doctorRouteKey(doc))}
-                  className="flex-1 py-2.5 bg-brand-dark-navy hover:bg-brand-deep-blue text-white font-semibold text-xs rounded-xl active:scale-98 transition-all cursor-pointer text-center"
+                  to={doctorPath(locale, doctorRouteKey(doc))}
+                  className="flex-1 py-2.5 bg-brand-dark-navy hover:bg-brand-deep-blue text-white font-semibold text-xs rounded-xl active:scale-98 transition-all text-center no-underline"
                 >
                   {d.viewProfile}
-                </button>
+                </Link>
                 <button
                   type="button"
                   onClick={onOpenAppointment}
+                  aria-label={d.appointmentBtn}
                   className="px-3.5 py-2.5 bg-brand-gold-light/10 hover:bg-brand-gold-light/20 text-brand-gold rounded-xl active:scale-98 transition-all cursor-pointer"
                 >
                   <Calendar className="w-4 h-4" />

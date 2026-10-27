@@ -100,7 +100,7 @@ const PROMO_DERMATASKOPIYA: PromoPageContent = {
       title: L('Xizmat haqida', 'Об услуге', 'About the service'),
       paragraphs: [
         L(
-          'Dermataskopiya — teridagi hol, dog\' va o\'smalarni kattalashtirilgan optik uskunada (dermatoskop) ko\'rib chiqish usuli. Radeski klinikasida professional dermatoskop yordamida teri o\'zgarishlarining tuzilishi, rangi va chegaralari batafsil baholanadi.',
+          'Dermatoskopiya — teridagi hol, dog\' va o\'smalarni kattalashtirilgan optik uskunada (dermatoskop) ko\'rib chiqish usuli. Radeski klinikasida professional dermatoskop yordamida teri o\'zgarishlarining tuzilishi, rangi va chegaralari batafsil baholanadi.',
           'Дерматоскопия — метод осмотра родинок, пятен и новообразований с помощью оптического увеличения (дерматоскопа). В клинике Radeski с профессиональным дерматоскопом детально оцениваются структура, цвет и границы изменений кожи.',
           'Dermoscopy is an examination of moles, spots and skin lesions using optical magnification (dermatoscope). At Radeski Clinic, a professional dermatoscope evaluates structure, color and borders in detail.',
         ),
@@ -154,7 +154,7 @@ const PROMO_DERMATASKOPIYA: PromoPageContent = {
       id: 'protocol',
       title: L('Muolaja bosqichlari', 'Этапы процедуры', 'Procedure steps'),
       intro: L(
-        'Dermataskopiya va shifokor ko\'rigi standart protokol bo\'yicha o\'tkaziladi.',
+        'Dermatoskopiya va shifokor ko\'rigi standart protokol bo\'yicha o\'tkaziladi.',
         'Дерматоскопия и осмотр врача проводятся по стандартному протоколу.',
         'Dermoscopy and physician examination follow a standard protocol.',
       ),
@@ -229,13 +229,13 @@ const PROMO_DERMATASKOPIYA: PromoPageContent = {
       id: 'pricing',
       title: L('Narxlar', 'Цены', 'Pricing'),
       intro: L(
-        'Dermataskopiya va dermatolog ko\'rigi narxi quyidagicha. Aniq narx konsultatsiyada tasdiqlanadi.',
+        'Dermatoskopiya va dermatolog ko\'rigi narxi quyidagicha. Aniq narx konsultatsiyada tasdiqlanadi.',
         'Стоимость дерматоскопии и осмотра дерматолога указана ниже. Точная цена подтверждается на консультации.',
         'Dermoscopy and dermatologist consultation pricing is below. Exact price confirmed at consultation.',
       ),
       tiers: [
         {
-          label: L('Dermataskopiya + shifokor ko\'rigi', 'Дерматоскопия + осмотр врача', 'Dermoscopy + physician examination'),
+          label: L('Dermatoskopiya + shifokor ko\'rigi', 'Дерматоскопия + осмотр врача', 'Dermoscopy + physician examination'),
           value: L('150 000 so\'m', '150 000 сум', '150,000 UZS'),
         },
       ],
@@ -257,7 +257,7 @@ const PROMO_DERMATASKOPIYA: PromoPageContent = {
       title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'),
       faq: [
         {
-          question: L('Dermataskopiya og\'riqlimi?', 'Болезненна ли дерматоскопия?', 'Is dermoscopy painful?'),
+          question: L('Dermatoskopiya og\'riqlimi?', 'Болезненна ли дерматоскопия?', 'Is dermoscopy painful?'),
           answer: L(
             'Yo\'q, bu butunlay og\'riqsiz va invaziv bo\'lmagan tekshiruv. Dermatoskop teriga tegib, kattalashtirilgan ko\'rinish beradi.',
             'Нет, это полностью безболезненное неинвазивное исследование. Дерматоскоп касается кожи и даёт увеличенное изображение.',
@@ -300,7 +300,7 @@ const PROMO_IPL: PromoPageContent = {
       title: L('Xizmat haqida', 'Об услуге', 'About the service'),
       paragraphs: [
         L(
-          'IPL (Intense Pulsed Light) fotoomolajeniyatsiya — yuqori intensivlikdagi yorug\'lik impulslari yordamida teridagi pigmentatsiya, qon tomirlari va yoshga bog\'liq o\'zgarishlarni bartaraf etish usuli. Radeski klinikasida AQShda ishlab chiqarilgan Sciton IPL Lumecca platformasi qo\'llaniladi.',
+          'IPL (Intense Pulsed Light) fotoyoshartirish — yuqori intensivlikdagi yorug\'lik impulslari yordamida teridagi pigmentatsiya, qon tomirlari va yoshga bog\'liq o\'zgarishlarni bartaraf etish usuli. Radeski klinikasida AQShda ishlab chiqarilgan Sciton IPL Lumecca platformasi qo\'llaniladi.',
           'IPL-фотоомоложение — метод устранения пигментации, сосудов и возрастных изменений с помощью импульсов интенсивного света. В клинике Radeski используется платформа Sciton IPL Lumecca из США.',
           'IPL photo-rejuvenation removes pigmentation, vessels and age-related changes using intense pulsed light. Radeski Clinic uses the US-made Sciton IPL Lumecca platform.',
         ),
@@ -427,7 +427,7 @@ const PROMO_PODOLOGIYA: PromoPageContent = {
       id: 'overview',
       title: L('Xizmat haqida', 'Об услуге', 'About the service'),
       paragraphs: [
-        L('Podologiya — oyoq va tirnoqlarning tibbiy parvarishi. Radeski klinikasida aparat yordamida tirnoq tozalash zamburug\'i, qalinlashish va deformatsiyani og\'riqsiz, steril sharoitda bartaraf etish uchun o\'tkaziladi.', 'Подология — медицинский уход за стопами и ногтями. В клинике Radeski аппаратная чистка ногтей устраняет грибок, утолщение и деформацию безболезненно в стерильных условиях.', 'Podiatry is medical foot and nail care. At Radeski Clinic, device-assisted nail cleansing treats fungus, thickening and deformity painlessly in sterile conditions.'),
+        L('Podologiya — oyoq va tirnoqlarning tibbiy parvarishi. Radeski klinikasida apparat yordamida tirnoq tozalash zamburug\'i, qalinlashish va deformatsiyani og\'riqsiz, steril sharoitda bartaraf etish uchun o\'tkaziladi.', 'Подология — медицинский уход за стопами и ногтями. В клинике Radeski аппаратная чистка ногтей устраняет грибок, утолщение и деформацию безболезненно в стерильных условиях.', 'Podiatry is medical foot and nail care. At Radeski Clinic, device-assisted nail cleansing treats fungus, thickening and deformity painlessly in sterile conditions.'),
         L('Zamonaviy podologiya apparatlari tirnoq plastinasini millimetr aniqlikda ishlov beradi, infektsiyani olib tashlaydi va sog\'lom o\'sish uchun sharoit yaratadi.', 'Современные подологические аппараты обрабатывают ногтевую пластину с миллиметровой точностью, удаляют инфекцию и создают условия для здорового роста.', 'Modern podology devices treat the nail plate with millimeter precision, remove infection and create conditions for healthy growth.'),
         L('Muolaja podolog-dermatolog tomonidan bajariladi. Kerak bo\'lsa, laboratoriya tekshiruvi va dori-darmon terapiyasi qo\'shiladi.', 'Процедуру выполняет подолог-дерматолог. При необходимости добавляются лабораторные исследования и медикаментозная терапия.', 'Performed by a podiatrist-dermatologist. Lab tests and medication therapy are added when needed.'),
       ],
@@ -447,7 +447,7 @@ const PROMO_PODOLOGIYA: PromoPageContent = {
       steps: [
         { title: L('1. Ko\'rik va tashxis', '1. Осмотр и диагноз', '1. Examination and diagnosis'), description: L('Podolog tirnoq holatini baholaydi, kerak bo\'lsa skraping olinadi.', 'Подолог оценивает состояние ногтя, при необходимости берёт соскоб.', 'Podiatrist assesses nail condition; scraping taken if needed.'), details: [L('Laboratoriya tekshiruvi tavsiya etilishi mumkin', 'Может быть рекомендовано лабораторное исследование', 'Lab testing may be recommended')] },
         { title: L('2. Dezinfeksiya', '2. Дезинфекция', '2. Disinfection'), description: L('Oyoq va tirnoq steril eritma bilan ishlanadi.', 'Стопа и ноготь обрабатываются стерильным раствором.', 'Foot and nail are treated with sterile solution.'), details: [L('Bir martalik sarf materiallar ishlatiladi', 'Используются одноразовые материалы', 'Single-use supplies are used')] },
-        { title: L('3. Aparat bilan tozalash', '3. Аппаратная чистка', '3. Device cleansing'), description: L('Podologiya apparati tirnoq plastinasini bosqichma-bosqich tozalaydi.', 'Подологический аппарат поэтапно очищает ногтевую пластину.', 'Podology device gradually cleans the nail plate.'), details: [L('Og\'riqsiz freza ishlov berish', 'Безболезненная обработка фрезой', 'Painless burr treatment'), L('Zamburug\'li qatlamlar olib tashlanadi', 'Удаляются поражённые слои', 'Infected layers are removed'), L('Tirnoq qisqartiriladi va shakllantiriladi', 'Ноготь укорачивается и формируется', 'Nail is shortened and shaped')] },
+        { title: L('3. Apparat bilan tozalash', '3. Аппаратная чистка', '3. Device cleansing'), description: L('Podologiya apparati tirnoq plastinasini bosqichma-bosqich tozalaydi.', 'Подологический аппарат поэтапно очищает ногтевую пластину.', 'Podology device gradually cleans the nail plate.'), details: [L('Og\'riqsiz freza ishlov berish', 'Безболезненная обработка фрезой', 'Painless burr treatment'), L('Zamburug\'li qatlamlar olib tashlanadi', 'Удаляются поражённые слои', 'Infected layers are removed'), L('Tirnoq qisqartiriladi va shakllantiriladi', 'Ноготь укорачивается и формируется', 'Nail is shortened and shaped')] },
         { title: L('4. Davolash va tavsiyalar', '4. Лечение и рекомендации', '4. Treatment and recommendations'), description: L('Antimikotik preparat surtiladi, uy parvarishi ko\'rsatiladi.', 'Наносится противогрибковый препарат, даются рекомендации по уходу.', 'Antifungal agent applied; home care instructions given.'), details: [L('Takroriy seanslar rejasi tuziladi', 'Составляется план повторных сеансов', 'Repeat session plan is made'), L('Odatda 4–8 hafta oralig\'ida', 'Обычно с интервалом 4–8 недель', 'Usually every 4–8 weeks')] },
       ],
     },
@@ -456,7 +456,7 @@ const PROMO_PODOLOGIYA: PromoPageContent = {
       [L('Radeski klinikasida zamonaviy podologiya apparatlari va tirnoq patologiyasi bo\'yicha malakali mutaxassislar ishlaydi.', 'В клинике Radeski работают современные подологические аппараты и квалифицированные специалисты по патологии ногтей.', 'Radeski Clinic has modern podology devices and qualified nail pathology specialists.')],
       [L('Professional podologiya apparati', 'Профессиональный подологический аппарат', 'Professional podology device'), L('Podolog-dermatolog mutaxassisi', 'Специалист подолог-дерматолог', 'Podiatrist-dermatologist specialist'), L('Steril kabinet va bir martalik asboblar', 'Стерильный кабинет и одноразовые инструменты', 'Sterile room and single-use instruments')],
     ),
-    { id: 'pricing', title: L('Narxlar', 'Цены', 'Pricing'), tiers: [{ label: L('Aparat yordamida tirnoq tozalash', 'Аппаратная чистка ногтей', 'Medical device nail cleansing'), value: L('230 000 so\'m', '230 000 сум', '230,000 UZS') }] },
+    { id: 'pricing', title: L('Narxlar', 'Цены', 'Pricing'), tiers: [{ label: L('Apparat yordamida tirnoq tozalash', 'Аппаратная чистка ногтей', 'Medical device nail cleansing'), value: L('230 000 so\'m', '230 000 сум', '230,000 UZS') }] },
     recoverySection(
       [L('Tirnoqni quruq saqlang', 'Держите ноготь сухим', 'Keep nail dry'), L('Antimikotik krem/moycha qo\'llang', 'Применяйте противогрибковый крем/лак', 'Apply antifungal cream/lacquer'), L('Qulay va keng poyabzal kiying', 'Носите удобную просторную обувь', 'Wear comfortable roomy shoes'), L('Keyingi seansga vaqtida keling', 'Приходите на следующий сеанс вовремя', 'Attend next session on time')],
       [L('Faol tirnoq atrofi yallig\'lanishi', 'Активное воспаление вокруг ногтя', 'Active periungual inflammation'), L('Qon aylanish buzilishlari (shakar diabeti asoratlari)', 'Нарушения кровообращения (осложнения диабета)', 'Circulation disorders (diabetes complications)'), L('Otkrit yaralar', 'Открытые раны', 'Open wounds')],
@@ -465,10 +465,10 @@ const PROMO_PODOLOGIYA: PromoPageContent = {
       id: 'faq',
       title: L('Tez-tez so\'raladigan savollar', 'Часто задаваемые вопросы', 'Frequently asked questions'),
       faq: [
-        { question: L('Muolaja og\'riqlimi?', 'Болезненна ли процедура?', 'Is the procedure painful?'), answer: L('Yo\'q, aparat bilan ishlov berish og\'riqsiz. Ba\'zan yengil noqulaylik bo\'lishi mumkin.', 'Нет, аппаратная обработка безболезненна. Иногда возможен лёгкий дискомфорт.', 'No, device treatment is painless. Mild discomfort may occur.') },
+        { question: L('Muolaja og\'riqlimi?', 'Болезненна ли процедура?', 'Is the procedure painful?'), answer: L('Yo\'q, apparat bilan ishlov berish og\'riqsiz. Ba\'zan yengil noqulaylik bo\'lishi mumkin.', 'Нет, аппаратная обработка безболезненна. Иногда возможен лёгкий дискомфорт.', 'No, device treatment is painless. Mild discomfort may occur.') },
         { question: L('Bir seans yetadimi?', 'Достаточно ли одного сеанса?', 'Is one session enough?'), answer: L('Zamburug\' uchun bir necha seans kerak. Shifokor individual reja tuzadi.', 'При грибке нужно несколько сеансов. Врач составляет индивидуальный план.', 'Fungus requires multiple sessions. Physician creates individual plan.') },
         { question: L('Qancha vaqtda tuzaladi?', 'Сколько времени до выздоровления?', 'How long until recovery?'), answer: L('Tirnoq to\'liq o\'sishi 6–12 oy davom etishi mumkin. Muntazam seanslar muhim.', 'Полный отрастание ногтя может занять 6–12 месяцев. Регулярные сеансы важны.', 'Full nail regrowth may take 6–12 months. Regular sessions are important.') },
-        { question: L('Uy sharoitida davolanish mumkinmi?', 'Можно ли лечиться дома?', 'Can I treat at home only?'), answer: L('Uy parvarishi qo\'llab-quvvatlaydi, lekin aparat tozalash professional muolaja talab qiladi.', 'Домашний уход дополняет, но аппаратная чистка требует профессиональной процедуры.', 'Home care supports treatment but device cleansing requires professional procedure.') },
+        { question: L('Uy sharoitida davolanish mumkinmi?', 'Можно ли лечиться дома?', 'Can I treat at home only?'), answer: L('Uy parvarishi qo\'llab-quvvatlaydi, lekin apparat tozalash professional muolaja talab qiladi.', 'Домашний уход дополняет, но аппаратная чистка требует профессиональной процедуры.', 'Home care supports treatment but device cleansing requires professional procedure.') },
         { question: L('Profilaktika qanday?', 'Как профилактика?', 'How to prevent recurrence?'), answer: L('Oyoqni quruq saqlang, jamoat hammomlarida shippak kiying, eski poyabzallarni almashtiring.', 'Держите ноги сухими, носите шлёпанцы в общественных душах, меняйте старую обувь.', 'Keep feet dry, wear flip-flops in public showers, replace old shoes.') },
       ],
     },

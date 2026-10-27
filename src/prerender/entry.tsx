@@ -110,6 +110,7 @@ import {
   reviewsForTopic,
 } from '../utils/localProof';
 import { getCategoryFaq } from '../data/serviceCategoryFaq';
+import { CONDITION_ARTICLES } from '../data/conditionArticles';
 import { resolveDoctorPageDetails } from '../utils/doctorPageDetails';
 import { LOCAL_LANDING_CONTENT_UPDATED, landingTopicKey } from '../data/localLandingTopics';
 import type { ServiceRichContent } from '../types';
@@ -812,6 +813,10 @@ function PageContent({
     return (
       <>
         <section>
+          {/* Doctor photo in the crawler HTML too (image search by the doctor's name). */}
+          {doctor.photo && (
+            <img src={doctor.photo} alt={`${doctor.name[locale]} — ${doctor.role[locale]}`} width={360} height={480} loading="lazy" />
+          )}
           <p>{doctor.role[locale]}</p>
           <p>{doctor.bio[locale]}</p>
           {doctor.education?.[locale] && <p>{doctor.education[locale]}</p>}
@@ -1021,6 +1026,18 @@ function PageContent({
     return (
       <>
         {topic && dermatology && <ConditionBody condition={topic} locale={locale} category={dermatology} />}
+        {(CONDITION_ARTICLES[slug ?? ''] ?? []).length > 0 && (
+          <section>
+            <h2>{locale === 'uz' ? 'Batafsil maqolalar' : locale === 'ru' ? 'Подробные статьи' : 'In-depth articles'}</h2>
+            <ul>
+              {(CONDITION_ARTICLES[slug ?? ''] ?? []).map((item) => (
+                <li key={item.routeKey}>
+                  <a href={articlePath(locale, item.routeKey)}>{item.title[locale]}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         <h2>{locale === 'uz' ? 'Qayerda davolanadi' : locale === 'ru' ? 'Где лечат' : 'Where it is treated'}</h2>
         <ul>
           {treated.map((landing) => (

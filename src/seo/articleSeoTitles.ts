@@ -9,6 +9,11 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },
+  'art-seboreyali-dermatit': {
+    uz: "Seboreyali dermatit: sabablari va davolash",
+    ru: 'Себорейный дерматит: причины и лечение',
+    en: 'Seborrheic dermatitis: causes and treatment',
+  },
   'art-akne-u-vzroslykh': {
     uz: 'Kattalarda akne: qachon dermatologga borish kerak',
     ru: 'Акне у взрослых: когда идти к дерматологу',
