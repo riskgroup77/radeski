@@ -11,11 +11,13 @@
  *    as "not verifiable", not as broken).
  * 3. Contacts: every tel: link and JSON-LD telephone must be one of the clinic's numbers;
  *    WhatsApp / Telegram / booking links are listed with their status.
+ * 4. SSL certificates of the site, the API and the booking system (fails under 14 days).
  *
- * Writes <out>/<YYYY-MM-DD>/{summary.md, links.csv, crawl.csv, crawl.json} and exits with
+ * Writes <out>/<YYYY-MM-DD>/{summary.md, status.json, links.csv, crawl.csv, crawl.json} and exits with
  * code 1 when something needs fixing (broken internal link, wrong phone, crawl errors).
  */
 import { execFileSync } from 'node:child_process';
+import { connect as tlsConnect } from 'node:tls';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
@@ -135,6 +137,34 @@ const normalize = (n) => '+' + n.replace(/[^\d]/g, '');
 const wrongPhones = phones.filter((p) => !CLINIC_PHONES.has(normalize(p.number)));
 const contactLinks = rows.filter((r) => /wa\.me|whatsapp|t\.me|hipolink|instagram|facebook/.test(r.url));
 
+// 4. SSL certificates of the site, the API and the online booking system. The booking API's
+// certificate on port 62542 expired on 31.08.2026 unnoticed — booking failed for every visitor.
+const SSL_HOSTS = [
+  ['radeski.uz', 443],
+  ['api.radeski.uz', 443],
+  ['radeski.siroca.com', 443],
+  ['radeski.siroca.com', 62542],
+];
+const ssl = await Promise.all(
+  SSL_HOSTS.map(
+    ([host, port]) =>
+      new Promise((resolve) => {
+        const socket = tlsConnect({ host, port, servername: host, rejectUnauthorized: false, timeout: 15000 }, () => {
+          const cert = socket.getPeerCertificate();
+          const days = cert?.valid_to ? Math.floor((new Date(cert.valid_to) - Date.now()) / 86400000) : null;
+          socket.end();
+          resolve({ host: `${host}:${port}`, validTo: cert?.valid_to ?? '?', days, authorized: socket.authorized, error: socket.authorizationError ?? '' });
+        });
+        socket.on('error', (error) => resolve({ host: `${host}:${port}`, validTo: '?', days: null, authorized: false, error: error.code ?? String(error) }));
+        socket.on('timeout', () => {
+          socket.destroy();
+          resolve({ host: `${host}:${port}`, validTo: '?', days: null, authorized: false, error: 'timeout' });
+        });
+      }),
+  ),
+);
+const sslProblems = ssl.filter((s) => !s.authorized || s.days === null || s.days < 14);
+
 // Summary
 const broken = rows.filter((r) => r.verdict === 'BROKEN');
 // Internal pages that answer 200 but are not in the sitemap (old slugs, aliases): link the
@@ -183,8 +213,17 @@ const md = [
   `- WhatsApp havolalari: ${contactLinks.filter((r) => /wa\.me|whatsapp/.test(r.url)).length}`,
   ...contactLinks.map((r) => `- ${r.url} — ${r.status} (${r.verdict}), ${r.pages} sahifada`),
   '',
+  '## 4. SSL sertifikatlari (sayt, API, onlayn yozilish)',
+  ...ssl.map((s) => `- ${s.host}: ${s.authorized ? 'OK' : `**XATO (${s.error})**`}, ${s.days === null ? 'muddati noma\'lum' : `${s.days} kun qoldi`} (${s.validTo})`),
+  `- muammoli: **${sslProblems.length}**`,
+  '',
 ];
 writeFileSync(path.join(outDir, 'summary.md'), md.join('\n'));
 console.log(md.join('\n'));
-const failing = broken.filter((r) => r.internal).length + wrongPhones.length + crawlIssues['not 200'] + crawlIssues['JSON-LD errors'];
+const failing =
+  broken.filter((r) => r.internal).length + wrongPhones.length + crawlIssues['not 200'] + crawlIssues['JSON-LD errors'] + sslProblems.length;
+writeFileSync(
+  path.join(outDir, 'status.json'),
+  JSON.stringify({ day, failing, brokenInternal: broken.filter((r) => r.internal).length, wrongPhones: wrongPhones.length, crawlIssues, ssl }, null, 2),
+);
 process.exit(failing > 0 ? 1 : 0);
