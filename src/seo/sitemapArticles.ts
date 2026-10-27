@@ -16,19 +16,19 @@ type ArticleSitemapGroup = {
 
 /** Public article URLs for sitemap.xml (excludes redirected/superseded pages). */
 export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
-  { routeKey: 'art-ipl-terapiya', locales: ['uz', 'ru'], priority: { uz: 0.85, ru: 0.8 } },
-  { routeKey: 'art-akne', locales: ['uz', 'ru'], priority: { uz: 0.85, ru: 0.8 } },
-  { routeKey: 'art-pryshchi-u-vzroslykh', locales: ['uz', 'ru'], priority: { uz: 0.85, ru: 0.8 } },
+  { routeKey: 'art-ipl-terapiya', locales: ['uz', 'ru', 'en'], priority: { uz: 0.85, ru: 0.8, en: 0.7 } },
+  { routeKey: 'art-akne', locales: ['uz', 'ru', 'en'], priority: { uz: 0.85, ru: 0.8, en: 0.7 } },
+  { routeKey: 'art-pryshchi-u-vzroslykh', locales: ['uz', 'ru', 'en'], priority: { uz: 0.85, ru: 0.8, en: 0.7 } },
   { routeKey: 'art-akne-u-vzroslykh', locales: ['uz', 'ru', 'en'], priority: { uz: 0.85, ru: 0.85, en: 0.7 } },
   { routeKey: 'art-seboreyali-dermatit', locales: ['uz', 'ru', 'en'], priority: { uz: 0.85, ru: 0.85, en: 0.7 } },
-  { routeKey: 'art-postakne', locales: ['uz', 'ru'], priority: { uz: 0.8, ru: 0.75 } },
-  { routeKey: 'art-vitiligo-daavlin', locales: ['uz', 'ru'], priority: { uz: 0.85, ru: 0.8 } },
-  { routeKey: 'art-psoriasis-daavlin-kokand', locales: ['uz', 'ru'], priority: { uz: 0.85, ru: 0.8 } },
-  { routeKey: 'art-bolalarda-sogal-co2-deka', locales: ['uz', 'ru'], priority: { uz: 0.8, ru: 0.75 } },
+  { routeKey: 'art-postakne', locales: ['uz', 'ru', 'en'], priority: { uz: 0.8, ru: 0.75, en: 0.7 } },
+  { routeKey: 'art-vitiligo-daavlin', locales: ['uz', 'ru', 'en'], priority: { uz: 0.85, ru: 0.8, en: 0.7 } },
+  { routeKey: 'art-psoriasis-daavlin-kokand', locales: ['uz', 'ru', 'en'], priority: { uz: 0.85, ru: 0.8, en: 0.7 } },
+  { routeKey: 'art-bolalarda-sogal-co2-deka', locales: ['uz', 'ru', 'en'], priority: { uz: 0.8, ru: 0.75, en: 0.7 } },
   {
     routeKey: 'art-deka-moveo-epilyatsiya-tayyorgarlik',
-    locales: ['uz', 'ru'],
-    priority: { uz: 0.8, ru: 0.75 },
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.8, ru: 0.75, en: 0.7 },
   },
   {
     routeKey: 'art-deka-moveo-fergana-faq',
@@ -40,14 +40,14 @@ export const SITEMAP_ARTICLE_GROUPS: ArticleSitemapGroup[] = [
     locales: ['uz', 'ru', 'en'],
     priority: { uz: 0.88, ru: 0.83, en: 0.78 },
   },
-  { routeKey: 'art-plazmotorapiya-soch-prp', locales: ['uz', 'ru'], priority: { uz: 0.8, ru: 0.75 } },
-  { routeKey: 'art-plazmaferez-teri-kasalliklari', locales: ['uz', 'ru'], priority: { uz: 0.75, ru: 0.7 } },
+  { routeKey: 'art-plazmotorapiya-soch-prp', locales: ['uz', 'ru', 'en'], priority: { uz: 0.8, ru: 0.75, en: 0.7 } },
+  { routeKey: 'art-plazmaferez-teri-kasalliklari', locales: ['uz', 'ru', 'en'], priority: { uz: 0.75, ru: 0.7, en: 0.7 } },
   {
     routeKey: 'art-hair-transplant-contraindications',
-    locales: ['uz', 'ru'],
-    priority: { uz: 0.75, ru: 0.7 },
+    locales: ['uz', 'ru', 'en'],
+    priority: { uz: 0.75, ru: 0.7, en: 0.7 },
   },
-  { routeKey: 'art-co2-lazer-deka', locales: ['uz', 'ru'], priority: { uz: 0.8, ru: 0.75 } },
+  { routeKey: 'art-co2-lazer-deka', locales: ['uz', 'ru', 'en'], priority: { uz: 0.8, ru: 0.75, en: 0.7 } },
   {
     routeKey: 'art-akne-dermatolog-kosmetolog',
     locales: ['uz', 'ru', 'en'],

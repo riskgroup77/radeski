@@ -38,6 +38,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-bolalarda-sogal-co2-deka': {
     uz: 'Bolalarda so‘gal: CO₂-lazer DEKA bilan olib tashlash',
     ru: 'Бородавки у детей: удаление CO₂-лазером DEKA',
+    en: 'Warts in children: CO₂ laser removal',
   },
   'art-botulinoterapiya-radeski': {
     en: 'Botox & Dysport for Expression Lines: Aftercare',
@@ -45,10 +46,12 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-co2-lazer-deka': {
     uz: 'CO₂-lazer DEKA: jarrohliksiz teri yoshartirish',
     ru: 'CO₂-лазер DEKA: омоложение кожи без операции',
+    en: 'DEKA CO₂ laser: skin rejuvenation',
   },
   'art-deka-moveo-epilyatsiya-tayyorgarlik': {
     uz: 'DEKA Moveo lazer epilyatsiyasiga tayyorgarlik',
     ru: 'Подготовка к лазерной эпиляции DEKA Moveo',
+    en: 'Preparing for alexandrite laser hair removal',
   },
   'art-deka-moveo-fergana-faq': {
     uz: "DEKA Moveo lazer epilyatsiyasi Farg'onada: FAQ",
@@ -68,6 +71,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-hair-transplant-contraindications': {
     uz: "Soch ekishga qarshi ko'rsatmalar",
     ru: 'Противопоказания к пересадке волос',
+    en: 'Hair transplant contraindications',
   },
   'art-ipl-fototerapiya-radeski': {
     uz: 'IPL-fototerapiya: qizarish, pigment va tomirlar',
@@ -77,6 +81,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-ipl-terapiya': {
     uz: 'IPL-terapiya Farg‘onada: nima va kimga mos',
     ru: 'IPL-терапия в Фергане: что это и кому подходит',
+    en: 'IPL therapy in Fergana: what it treats',
   },
   'art-jinsiy-azo-yassi-hujayrali-rak': {
     uz: 'Jinsiy a’zo yassi hujayrali raki: belgilar va davolash',
@@ -96,10 +101,12 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-plazmaferez-teri-kasalliklari': {
     uz: 'Teri kasalliklarida plazmaferez: qachon kerak',
     ru: 'Плазмаферез при кожных заболеваниях: когда нужен',
+    en: 'Plasmapheresis for skin diseases',
   },
   'art-plazmotorapiya-soch-prp': {
     uz: 'Soch uchun plazmotorapiya: kimga mos va natija',
     ru: 'Плазмотерапия волос: кому подходит и результаты',
+    en: 'PRP for hair: who it suits and results',
   },
   'art-postakne': {
     uz: "Postakne: chandiq va dog'larni kamaytirish",
@@ -130,5 +137,6 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-vitiligo-daavlin': {
     uz: 'Vitiligo davolash: Daavlin fototerapiyasi',
     ru: 'Лечение витилиго фототерапией Daavlin',
+    en: 'Vitiligo treatment with Daavlin phototherapy',
   },
 };
