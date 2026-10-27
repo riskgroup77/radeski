@@ -32,6 +32,7 @@ mkdirSync(outDir, { recursive: true });
 const CLINIC_PHONES = new Set(['+998732007373', '+998952107373']);
 const UA = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36';
+const SHARE_INTENT = /^https:\/\/(t\.me\/share\/|www\.facebook\.com\/sharer\/|twitter\.com\/intent\/|x\.com\/intent\/|api\.whatsapp\.com\/send\?text|wa\.me\/\?text)/;
 const BOT_HOSTILE = /(instagram\.com|facebook\.com|t\.me|yandex\.|google\.com\/maps|maps\.google\.com|hipolink\.net)/;
 
 // 1. SEO crawl
@@ -80,6 +81,8 @@ function addTarget(raw, page) {
     return;
   }
   if (!/^https?:$/.test(url.protocol)) return;
+  // "Share this article" buttons: built per page, not a destination that can break.
+  if (SHARE_INTENT.test(url.href)) return;
   url.hash = '';
   const key = url.toString();
   if (!linksBySource.has(key)) linksBySource.set(key, new Set());

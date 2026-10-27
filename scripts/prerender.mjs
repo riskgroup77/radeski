@@ -167,11 +167,12 @@ async function main() {
     }
   }
 
-  // Pages kept out of the sitemap but still linked from the menu (placeholder sections): their
-  // HTML must carry the noindex itself — the SPA shell says "index" until JavaScript runs.
+  // Pages kept out of the sitemap but still linked: placeholder sections (their HTML must carry
+  // the noindex itself — the SPA shell says "index" until JavaScript runs), legal pages and offer
+  // landings (their own title and canonical instead of the shell's home page head).
   // Not added to the SEO manifest, so they are never listed or pinged to IndexNow.
   for (const lang of ['uz', 'ru', 'en']) {
-    for (const page of OUT_OF_SITEMAP_PAGES) {
+    for (const page of [...OUT_OF_SITEMAP_PAGES, ...(prerenderer.unlistedPageKeys ?? [])]) {
       const pathname = `/${lang}/${page}`;
       try {
         const { html } = prerenderer.render(pathname, template);

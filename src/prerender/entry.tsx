@@ -15,6 +15,7 @@ import { getConditionSlugFromPathname } from '../routing/paths';
 import { isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
 import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
 import { DERMATOLOGY_CONDITION_NAV } from '../data/dermatologyConditionsNav';
+import { HOME_PROMO_SLIDES } from '../data/homePromoCarousel';
 import type { Doctor, ServiceCategory, ServiceConditionTopic } from '../types';
 import { getLocalizedConditionText } from '../data/serviceConditionDetailsCatalog';
 import { getConditionSectionLabels, resolveConditionDisplay } from '../utils/serviceConditionDetails';
@@ -1499,5 +1500,10 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
     doctorKeys: clinic.doctors.map((doctor) => doctorRouteKey(doctor)),
     /** /llms.txt — the clinic's key facts and pages for AI assistants (llmstxt.org format). */
     llmsTxt: () => buildLlmsTxt(clinic),
+    /**
+     * Linked pages kept out of the sitemap (legal pages, offer landings). They still need their
+     * own HTML — otherwise nginx serves the SPA shell, whose head is the home page's.
+     */
+    unlistedPageKeys: ['terms', 'privacy', ...HOME_PROMO_SLIDES.map((slide) => `promo/${slide.slug}`)],
   };
 }
