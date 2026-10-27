@@ -26,6 +26,9 @@ export default defineConfig(({ mode, isSsrBuild }) => {
     build: {
       // The SSR bundle (build-time prerender) needs no copy of public/ (hundreds of MB of media).
       copyPublicDir: !isSsrBuild,
+      // Never inline a font into the render-blocking CSS as base64: it is only fetched when a
+      // page uses that script (unicode-range), so a separate file costs nothing.
+      assetsInlineLimit: (file) => (file.endsWith('.woff2') ? false : undefined),
     },
     server: {
       port: 3000,

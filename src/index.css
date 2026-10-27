@@ -1,5 +1,5 @@
-/* Google Fonts are linked from index.html without blocking the first paint (not @import here). */
 @import "tailwindcss";
+@import "./fonts.css";
 
 @theme {
   --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
@@ -478,6 +478,17 @@ h1, h2, h3, h4, h5, h6 {
   #hero-section .site-container {
     min-height: 0;
   }
+}
+
+/*
+ * Home sections below the hero: the browser skips their layout and paint until they come
+ * near the screen. The server-rendered home page is long, and laying it all out (again after
+ * fonts and hydration) kept a phone's main thread busy for over a second.
+ * `auto` keeps each section's real height once it has been rendered, so scrolling back is stable.
+ */
+#home-dashboard > section:not(#hero-section) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 760px;
 }
 .clinic-ai-chat-welcome-preview {
   background-color: #ffffff;

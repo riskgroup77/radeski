@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { AnimatePresence, m } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -43,6 +43,9 @@ export default function HomeCarousel<T>({
 }: HomeCarouselProps<T>) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [onScreen, setOnScreen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const hasItems = items.length > 0;
   const canRotate = items.length > visibleCount;
 
   const goNext = useCallback(() => {
@@ -57,13 +60,28 @@ export default function HomeCarousel<T>({
     setIndex(0);
   }, [items.length]);
 
+  // Rotate only while the carousel is on screen: every turn measures the cards' layout, which
+  // on a phone costs a long main-thread task even for a carousel far down the page.
   useEffect(() => {
-    if (!canRotate || paused || autoPlayMs <= 0) return;
-    const timer = window.setInterval(goNext, autoPlayMs);
-    return () => window.clearInterval(timer);
-  }, [canRotate, paused, autoPlayMs, goNext]);
+    const node = rootRef.current;
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      setOnScreen(true);
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => setOnScreen(entries.some((entry) => entry.isIntersecting)));
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [hasItems]); // the root only exists once there are items
 
-  if (items.length === 0) return null;
+  useEffect(() => {
+    if (!canRotate || paused || !onScreen || autoPlayMs <= 0) return;
+    const timer = window.setInterval(() => {
+      if (!document.hidden) goNext();
+    }, autoPlayMs);
+    return () => window.clearInterval(timer);
+  }, [canRotate, paused, onScreen, autoPlayMs, goNext]);
+
+  if (!hasItems) return null;
 
   const visibleItems = getVisibleItems(items, index, visibleCount);
   const isSlide = variant === 'slide';
@@ -93,6 +111,7 @@ export default function HomeCarousel<T>({
 
   return (
     <div
+      ref={rootRef}
       className={`relative ${className}`}
       aria-label={ariaLabel}
       onMouseEnter={pauseOnHover ? () => setPaused(true) : undefined}
