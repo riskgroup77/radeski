@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { CheckCircle2, ChevronRight, Phone } from 'lucide-react';
 import type { Locale } from '../types';
 import { OBRAZOVANIYA } from '../data/obrazovaniyaContent';
@@ -81,7 +81,7 @@ export default function ObrazovaniyaPage({ locale }: ObrazovaniyaPageProps) {
       </div>
 
       <div className="site-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -105,7 +105,7 @@ export default function ObrazovaniyaPage({ locale }: ObrazovaniyaPageProps) {
               </div>
             </div>
           </EducationMediaFrame>
-        </motion.div>
+        </m.div>
 
         <div className="mb-12 grid gap-6 sm:mb-16 lg:grid-cols-2">
           <OverviewCard eyebrow={c.forWho.title[locale]} title={c.forWho.intro[locale]}>
@@ -134,7 +134,7 @@ export default function ObrazovaniyaPage({ locale }: ObrazovaniyaPageProps) {
         <SectionHeading title={c.programs.title[locale]} />
         <div className="mb-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-3 sm:mb-16">
           {c.programs.items.map((program, index) => (
-            <motion.article
+            <m.article
               key={program.id}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -167,11 +167,11 @@ export default function ObrazovaniyaPage({ locale }: ObrazovaniyaPageProps) {
                   <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -195,7 +195,7 @@ export default function ObrazovaniyaPage({ locale }: ObrazovaniyaPageProps) {
               {c.cta.phone}
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );
@@ -211,7 +211,7 @@ function OverviewCard({
   children: ReactNode;
 }) {
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -219,6 +219,6 @@ function OverviewCard({
     >
       <SectionHeading eyebrow={eyebrow} title={title} />
       {children}
-    </motion.article>
+    </m.article>
   );
 }

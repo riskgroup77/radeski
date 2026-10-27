@@ -50,7 +50,7 @@ import { findPromoSlideBySlug } from './data/homePromoCarousel';
 import { isDermatologyConditionSlug } from './data/dermatologyConditionsNav';
 import Footer from './components/Footer';
 import MediaImage from './components/MediaImage';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { Phone, MapPin, Clock, ArrowRight, RefreshCw, AlertCircle, ExternalLink } from 'lucide-react';
 import { useClinicData } from './hooks/useClinicData';
 import { useCmsData } from './hooks/useCmsData';
@@ -60,11 +60,12 @@ import { submitAndPublishCustomerReview } from './api/submitCustomerReview';
 import { fetchClientCountFromApi } from './utils/clientCount';
 import { getPlatformLogo } from './utils/platformLogo';
 import { ApiError } from './api/client';
-import { findArticleByRouteParam, resolveArticleRouteKey, filterPublicArticles } from './utils/articles';
+import { resolveArticleRouteKey, filterPublicArticles } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
 import { getLocalizedImage } from './utils/localizedImage';
 import ArticleViewsBadge from './components/ArticleViewsBadge';
-import ArticleHashtagList from './components/ArticleHashtagList';
+// Home-teaser hashtags need the article catalog index — loaded with the teaser, not the shell.
+const ArticleHashtagList = React.lazy(() => import('./components/ArticleHashtagList'));
 
 import HomeCarousel from './components/HomeCarousel';
 import DoctorsHomeMarquee from './components/DoctorsHomeMarquee';
@@ -230,10 +231,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
       ? findSubServiceByRouteParam(serviceSubId, activeServiceCategory.subServices) ?? null
       : null;
 
-  const activeArticlePreview = articleId
-    ? findArticleByRouteParam(articleId, dynamicArticles) ?? null
-    : null;
-
   const activeDoctorPreview = doctorId
     ? findDoctorByRouteParam(doctorId, dynamicDoctors) ?? null
     : null;
@@ -282,7 +279,13 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
   // page, so the resolver (and the catalogs it reads) stays out of the startup bundle.
   useEffect(() => {
     let cancelled = false;
-    void import('./seo/resolveRouteHead').then(({ applyRouteHead, resolveRouteHead }) => {
+    // Device pages: their FAQ (JSON-LD) lives in the per-device text chunk — wait for it.
+    const [, section, categoryId, subId] = location.pathname.split('/').filter(Boolean);
+    const deviceDetails =
+      section === 'services' && categoryId === 'apparatnaya-kosmetologiya' && subId
+        ? import('./data/equipment/equipmentDetails').then((mod) => mod.loadEquipmentDetails(subId))
+        : null;
+    void Promise.all([import('./seo/resolveRouteHead'), deviceDetails]).then(([{ applyRouteHead, resolveRouteHead }]) => {
       if (cancelled) return;
       applyRouteHead(
         resolveRouteHead({
@@ -450,7 +453,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
       {/* 2. Main Page Renderings based on current routing Tab */}
       <AnimatePresence mode="wait">
-        <motion.main
+        <m.main
           // At least one screen tall, so the footer stays below the fold while the page's code and
           // data load (otherwise it renders mid-screen and jumps down: layout shift).
           className="min-h-screen"
@@ -814,13 +817,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                               <span>{art.date}</span>
                               <ArticleViewsBadge views={art.views} locale={locale} className="text-[10px]" />
                             </span>
-                            <ArticleHashtagList
-                              article={art}
-                              locale={locale}
-                              limit={5}
-                              className="flex flex-wrap gap-x-2 gap-y-1 mb-2"
-                              itemClassName="text-[10px] font-semibold text-brand-gold/90"
-                            />
+                            <Suspense fallback={null}>
+                              <ArticleHashtagList
+                                article={art}
+                                locale={locale}
+                                limit={5}
+                                className="flex flex-wrap gap-x-2 gap-y-1 mb-2"
+                                itemClassName="text-[10px] font-semibold text-brand-gold/90"
+                              />
+                            </Suspense>
                             <h4 className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-snug group-hover:text-brand-gold transition-colors line-clamp-2">
                               {art.title[locale]}
                             </h4>
@@ -1184,7 +1189,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
           )}
 
           </Suspense>
-        </motion.main>
+        </m.main>
       </AnimatePresence>
 
       {/* 3. Global Footer block */}

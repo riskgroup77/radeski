@@ -10,7 +10,7 @@
 import { assertSubServiceCatalogIdsInSync } from '../data/serviceRichCatalog';
 import { resolveDoctorProfile } from '../data/doctorProfiles';
 import type { ReactNode } from 'react';
-import { getEquipmentDetails } from '../data/equipment/equipmentDetails';
+import { getEquipmentDetails, loadAllEquipmentDetails } from '../data/equipment/equipmentDetails';
 import { getConditionSlugFromPathname } from '../routing/paths';
 import { isDermatologyConditionSlug } from '../data/dermatologyConditionsNav';
 import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
@@ -26,6 +26,8 @@ import { buildServiceH1 } from '../seo/pageMeta';
 import { getCategoryEquipmentList, getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
 import { getHomeServiceTeaserMedia } from '../data/homeServiceTeaserVideos';
 import { responsiveImage } from '../utils/imageVariants';
+import { getLocalizedImage } from '../utils/localizedImage';
+import { BRANCHES_PAGE_GUIDE, DOCTORS_PAGE_GUIDE, type ListPageGuide } from '../data/listPageGuides';
 import { getEquipmentSectionLabels } from '../utils/clinicEquipmentLabels';
 import { subServiceLinkName, subServiceRouteKey } from '../utils/serviceSubSlug';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -74,7 +76,7 @@ import {
   type LocalCommercialLanding,
 } from '../data/localCommercialSeoCatalog';
 import { formatUzs, resolveLocalLandingDetails } from '../utils/localLandingDetails';
-import { findArticleByRouteParam } from '../utils/articles';
+import { findArticleByRouteParam } from '../utils/articleCatalogLookup';
 import { getServiceSectionLabels, resolveCategoryRichContent, resolveServiceRichContent } from '../utils/serviceContent';
 import { ALL_LOCAL_COMMERCIAL_LANDINGS } from '../data/localCommercialSeoCatalog';
 import { CLINIC_HISTORY } from '../data/clinicHistoryContent';
@@ -523,6 +525,21 @@ function LandingBody({
   );
 }
 
+/** Patient guide under the doctors / branches lists (same text as ListPageGuideSection). */
+function GuideText({ guide }: { guide: ListPageGuide }) {
+  return (
+    <section>
+      <h2>{guide.title}</h2>
+      {guide.sections.map((section) => (
+        <div key={section.title}>
+          <h3>{section.title}</h3>
+          <p>{section.text}</p>
+        </div>
+      ))}
+    </section>
+  );
+}
+
 /** The same sections the service pages show: overview, conditions, process… */
 function RichServiceBody({ rich, locale }: { rich: ServiceRichContent; locale: Locale }) {
   const labels = getServiceSectionLabels(locale);
@@ -930,13 +947,16 @@ function PageContent({
 
   if (currentPage === 'doctors') {
     return (
-      <ul>
-        {clinic.doctors.map((doc) => (
-          <li key={doc.id}>
-            <a href={doctorPath(locale, doctorRouteKey(doc))}>{doc.name[locale]}</a> — {doc.role[locale]}
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul>
+          {clinic.doctors.map((doc) => (
+            <li key={doc.id}>
+              <a href={doctorPath(locale, doctorRouteKey(doc))}>{doc.name[locale]}</a> — {doc.role[locale]}
+            </li>
+          ))}
+        </ul>
+        <GuideText guide={DOCTORS_PAGE_GUIDE[locale]} />
+      </>
     );
   }
 
@@ -958,17 +978,20 @@ function PageContent({
 
   if (currentPage === 'branches') {
     return (
-      <ul>
-        {CLINIC_BRANCHES.map((branch) => (
-          <li key={branch.id}>
-            <h2>{branch.name[locale]}</h2>
-            <p>{branch.address[locale]}</p>
-            <p>{branch.hours[locale]}</p>
-            <p>{branch.phone}</p>
-            <p>{branch.services[locale]}</p>
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul>
+          {CLINIC_BRANCHES.map((branch) => (
+            <li key={branch.id}>
+              <h2>{branch.name[locale]}</h2>
+              <p>{branch.address[locale]}</p>
+              <p>{branch.hours[locale]}</p>
+              <p>{branch.phone}</p>
+              <p>{branch.services[locale]}</p>
+            </li>
+          ))}
+        </ul>
+        <GuideText guide={BRANCHES_PAGE_GUIDE[locale]} />
+      </>
     );
   }
 
@@ -1283,6 +1306,33 @@ function resolveHeroPreload(head: RouteHead): { src: string; srcSet?: string; si
   return null;
 }
 
+/**
+ * The mobile LCP element of the page, for the <head> preload only (not drawn in the prerender
+ * body): the hero image of service/device pages, the home hero background and the article
+ * cover. Must be the exact URL/srcset the React component requests.
+ */
+function resolveLcpImagePreload(head: RouteHead): { src: string; srcSet?: string; sizes: string } | null {
+  const hero = resolveHeroPreload(head);
+  if (hero) return hero;
+  if (head.route.currentPage === 'home') {
+    // HomeServicesPromoCarousel hero background
+    return { src: '/hero-dermatology-bg.webp', sizes: '100vw' };
+  }
+  const { article } = head.route;
+  const cover = article ? (getLocalizedImage(article.images, head.lang) ?? article.image) : null;
+  if (cover) {
+    // MediaImage requests CMS uploads from the same origin on radeski.uz.
+    const src = cover.match(/\/uploads\/[^\s?#]+/)?.[0] ?? cover;
+    return { ...responsiveImage(src), sizes: '(max-width: 640px) 100vw, 640px' };
+  }
+  return null;
+}
+
+/** Per-device texts are lazy chunks in the app; the prerender needs all of them loaded first. */
+export async function loadPrerenderContent(): Promise<void> {
+  await loadAllEquipmentDetails();
+}
+
 export function createPrerenderer(snapshot: PrerenderSnapshot) {
   // The header's small Daavlin menu list must match the full lineup (see data/daavlinNav.ts).
   const navMenu = DAAVLIN_NAV_MODELS.map((model) => `${model.id}:${model.name}`).join('|');
@@ -1374,7 +1424,7 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
 
     // The hero image is the page's largest element (LCP): start downloading it with the HTML
     // instead of after the app's JavaScript. Same URL / srcset the React hero requests.
-    const heroImage = resolveHeroPreload(head);
+    const heroImage = resolveLcpImagePreload(head);
     const headLinks = [
       `<link rel="canonical" href="${escapeHtml(head.canonical)}" />`,
       ...(heroImage

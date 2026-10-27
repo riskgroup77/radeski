@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { X } from 'lucide-react';
 import type { Locale } from '../types';
 import type { ClinicVideo } from '../data/sitePagesContent';
@@ -36,7 +36,7 @@ export default function ClinicVideoModal({
   }, [onClose]);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -52,7 +52,7 @@ export default function ClinicVideoModal({
         aria-label={d.closeBtn}
       />
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.96, y: 12 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 12 }}
@@ -92,7 +92,7 @@ export default function ClinicVideoModal({
             {video.description[locale]}
           </p>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }

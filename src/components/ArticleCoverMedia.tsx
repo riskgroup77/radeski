@@ -6,6 +6,8 @@ interface ArticleCoverMediaProps {
   src: string;
   alt: string;
   loading?: 'lazy' | 'eager';
+  /** 'high' for the article page cover — the page's largest element on phones (LCP). */
+  fetchPriority?: 'high' | 'low' | 'auto';
   variant?: ArticleCoverVariant;
   /**
    * Portrait promo posters (6 equipment articles): shown whole (object-contain) over a
@@ -28,6 +30,7 @@ export default function ArticleCoverMedia({
   src,
   alt,
   loading = 'lazy',
+  fetchPriority,
   variant = 'card',
   promoPortrait = false,
   className = '',
@@ -48,6 +51,7 @@ export default function ArticleCoverMedia({
         src={src}
         alt={alt}
         loading={loading}
+        fetchPriority={fetchPriority}
         className={`relative w-full h-full object-center ${promoPortrait ? 'object-contain' : 'object-cover'} ${imageClassName}`}
       />
     </div>

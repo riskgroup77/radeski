@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { HelpCircle, Calendar, BookOpen, ChevronRight, Clock } from 'lucide-react';
 import ArticleViewsBadge from './ArticleViewsBadge';
 import ArticleHashtagList from './ArticleHashtagList';
@@ -8,6 +8,7 @@ import { Locale, Article } from '../types';
 import { DICTIONARY } from '../data';
 import { articlePath } from '../routing/paths';
 import { resolveArticleRouteKey, filterPublicArticles, isEquipmentPromoArticle } from '../utils/articles';
+import { STATIC_ARTICLES } from '../data/articleIndex.generated';
 import ArticleCoverMedia from './ArticleCoverMedia';
 import { getLocalizedImage } from '../utils/localizedImage';
 import {
@@ -25,7 +26,8 @@ interface ArticlesProps {
 
 export default function Articles({ locale, articles, dictionary }: ArticlesProps) {
   const d = dictionary || DICTIONARY[locale];
-  const dynamicArticles = filterPublicArticles(articles || []);
+  // Built-in catalog until the CMS list arrives (it is not part of the app shell any more).
+  const dynamicArticles = filterPublicArticles(articles?.length ? articles : STATIC_ARTICLES);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredArticles = useMemo(() => {
@@ -46,7 +48,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
   return (
     <section id="articles-page" className="py-16 bg-brand-white min-h-screen">
       <div className="site-container">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold text-brand-gold tracking-widest uppercase py-1 px-3 bg-brand-gold-light/10 rounded-full font-sans">
               {locale === 'uz' ? 'Blog & Maqolalar' : locale === 'ru' ? 'Блог и Статьи' : 'Medical Blog & Publications'}
@@ -159,7 +161,7 @@ export default function Articles({ locale, articles, dictionary }: ArticlesProps
               </p>
             </div>
           )}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

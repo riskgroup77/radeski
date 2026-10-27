@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowUpRight, CheckCircle2, CornerUpLeft, Cpu } from 'lucide-react';
 import type { Locale, PriceItem, ServiceCategory } from '../types';
 import { EQUIPMENT_PARK_PAGE } from '../data/advantagePagesContent';
@@ -36,7 +36,7 @@ export default function ClinicEquipmentParkPage({
           {locale === 'uz' ? 'Bosh sahifaga qaytish' : locale === 'ru' ? 'На главную' : 'Back to home'}
         </Link>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-brand-white border border-brand-sectiongray rounded-3xl overflow-hidden shadow-sm mb-10"
@@ -66,11 +66,11 @@ export default function ClinicEquipmentParkPage({
               {content.overview[locale]}
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="space-y-6 mb-10">
           {content.blocks.map((block, index) => (
-            <motion.article
+            <m.article
               key={block.title.uz}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -104,7 +104,7 @@ export default function ClinicEquipmentParkPage({
                   )}
                 </div>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
 

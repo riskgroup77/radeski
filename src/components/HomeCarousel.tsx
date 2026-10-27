@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HomeCarouselProps<T> {
@@ -109,14 +109,14 @@ export default function HomeCarousel<T>({
       >
         <AnimatePresence mode="popLayout" initial={false}>
           {visibleItems.map((item) => (
-            <motion.div
+            <m.div
               key={getKey(item)}
               layout={isSlide}
               className="h-full min-w-0"
               {...itemMotion}
             >
               {renderItem(item)}
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
       </div>

@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import {
   Bot,
   Loader2,
@@ -115,7 +115,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
     <div className="clinic-ai-chat fixed z-[60] flex flex-col items-end gap-3">
       <AnimatePresence>
         {open && (
-          <motion.section
+          <m.section
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
@@ -265,13 +265,13 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
                 </button>
               </form>
             </footer>
-          </motion.section>
+          </m.section>
         )}
       </AnimatePresence>
 
       <AnimatePresence>
         {showWelcomePreview && !open && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 8, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 6, scale: 0.98 }}
@@ -294,11 +294,11 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
             >
               {locale === 'uz' ? 'Javob berish →' : locale === 'ru' ? 'Ответить →' : 'Reply →'}
             </button>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
-      <motion.button
+      <m.button
         type="button"
         onClick={() => setOpen((value) => !value)}
         className="clinic-ai-chat-fab inline-flex items-center justify-center w-14 h-14 sm:w-15 sm:h-15 rounded-full bg-brand-gold hover:bg-brand-gold-dark text-white shadow-lg shadow-brand-gold/30 cursor-pointer transition-colors"
@@ -307,7 +307,7 @@ export default function ClinicAiChat({ locale, context }: ClinicAiChatProps) {
         whileTap={{ scale: 0.96 }}
       >
         {open ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
-      </motion.button>
+      </m.button>
     </div>
   );
 }

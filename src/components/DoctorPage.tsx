@@ -4,7 +4,7 @@ import type { PriceItem } from '../types';
 import type { CustomerReview } from '../data/sitePagesContent';
 import DoctorPracticeInfo from './DoctorPracticeInfo';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import {
   Award,
   Briefcase,
@@ -237,7 +237,7 @@ function DoctorProfileLayout({
   onOpenAppointment: () => void;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       className="bg-brand-white rounded-2xl sm:rounded-3xl border border-brand-sectiongray shadow-sm overflow-hidden"
@@ -311,7 +311,7 @@ function DoctorProfileLayout({
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -329,7 +329,7 @@ function DoctorSimpleLayout({
   onOpenAppointment: () => void;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       className="bg-brand-white rounded-2xl sm:rounded-3xl border border-brand-sectiongray shadow-sm overflow-hidden"
@@ -419,7 +419,7 @@ function DoctorSimpleLayout({
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

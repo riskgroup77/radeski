@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowUpRight, CheckCircle2, ChevronLeft, Play } from 'lucide-react';
 import type { Locale } from '../types';
 import type { DaavlinModelId } from '../routing/paths';
@@ -133,7 +133,7 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
         </nav>
 
         <div className="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -147,9 +147,9 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
             <p className="text-sm font-light leading-relaxed text-brand-text-secondary">
               {deep.clinicBody[locale]}
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -174,10 +174,10 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -210,11 +210,11 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
               </span>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         <DaavlinFinanceCalculator locale={locale} modelId={modelId} />
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -229,16 +229,16 @@ export default function DaavlinModelPage({ locale, modelId }: DaavlinModelPagePr
               </li>
             ))}
           </ol>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mb-10"
         >
           <DaavlinContactsCta locale={locale} variant="card" note={contactNote[locale]} />
-        </motion.div>
+        </m.div>
 
         <div>
           <h2 className="mb-4 text-lg font-extrabold text-brand-text-primary sm:text-xl">

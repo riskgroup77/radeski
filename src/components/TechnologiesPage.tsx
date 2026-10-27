@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowUpRight, CheckCircle2, CornerUpLeft, Sparkles } from 'lucide-react';
 import type { Locale } from '../types';
 import { TECHNOLOGIES_PAGE } from '../data/advantagePagesContent';
@@ -25,7 +25,7 @@ export default function TechnologiesPage({ locale }: TechnologiesPageProps) {
           {locale === 'uz' ? 'Bosh sahifaga qaytish' : locale === 'ru' ? 'На главную' : 'Back to home'}
         </Link>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-brand-white border border-brand-sectiongray rounded-3xl overflow-hidden shadow-sm mb-10"
@@ -55,11 +55,11 @@ export default function TechnologiesPage({ locale }: TechnologiesPageProps) {
               {content.overview[locale]}
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="space-y-8">
           {content.blocks.map((block, index) => (
-            <motion.article
+            <m.article
               key={block.title.uz}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ export default function TechnologiesPage({ locale }: TechnologiesPageProps) {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
 

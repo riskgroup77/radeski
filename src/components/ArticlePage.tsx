@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import {
   Calendar,
   User,
@@ -22,8 +22,10 @@ import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
 import { articlePath, articlesListPath, absoluteUrl } from '../routing/paths';
-import { findArticleByRouteParam, resolveArticleApiSlug, resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles, isEquipmentPromoArticle } from '../utils/articles';
+import { resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles, isEquipmentPromoArticle } from '../utils/articles';
+import { findArticleByRouteParam, resolveArticleApiSlug } from '../utils/articleCatalogLookup';
 import ArticleCoverMedia from './ArticleCoverMedia';
+import { STATIC_ARTICLES } from '../data/articleIndex.generated';
 import ArticleDetailContent from './ArticleDetailContent';
 import ArticleViewsBadge from './ArticleViewsBadge';
 
@@ -46,7 +48,7 @@ function buildPreviewArticle(articleId: string, articles: Article[]): Article | 
 export default function ArticlePage({
   locale,
   articleId,
-  articles,
+  articles: loadedArticles,
   serviceCategories = [],
   dictionary,
   onBackToList,
@@ -55,6 +57,9 @@ export default function ArticlePage({
 }: ArticlePageProps) {
   const navigate = useNavigate();
   const d = dictionary || DICTIONARY[locale];
+  // The built-in catalog (loaded with this page, not the app shell) until the CMS list arrives,
+  // so the article shows at once instead of waiting for the API.
+  const articles = loadedArticles.length > 0 ? loadedArticles : STATIC_ARTICLES;
   const articlesRef = useRef(articles);
   articlesRef.current = articles;
   const onViewsUpdateRef = useRef(onViewsUpdate);
@@ -191,7 +196,7 @@ export default function ArticlePage({
         )}
 
         {activeArticle && (
-          <motion.article
+          <m.article
             id={`article-page-${activeArticle.id}`}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -247,6 +252,8 @@ export default function ArticlePage({
                   src={articleImage}
                   alt={activeArticle.title[locale]}
                   variant="hero"
+                  loading="eager"
+                  fetchPriority="high"
                   promoPortrait={isEquipmentPromoArticle(activeArticle)}
                 />
               ) : (
@@ -370,7 +377,7 @@ export default function ArticlePage({
                 </div>
               </div>
             )}
-          </motion.article>
+          </m.article>
         )}
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { getEquipmentDetails } from '../data/equipment/equipmentDetails';
-import type { ReactNode } from 'react';
+import { getEquipmentDetails, loadEquipmentDetails } from '../data/equipment/equipmentDetails';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
   BookOpenCheck,
   CheckCircle2,
@@ -155,7 +155,18 @@ export default function EquipmentDetailContent({
   const directions = entry.directions.map((item) => getLocalizedEquipmentText(item, locale));
   const indications = entry.indications.map((item) => getLocalizedEquipmentText(item, locale));
   const processSteps = entry.process.map((item) => getLocalizedEquipmentText(item, locale));
-  const details = getEquipmentDetails(entry.id);
+  // Per-device text chunk (usually already fetched by the route prefetch at boot).
+  const [details, setDetails] = useState(() => getEquipmentDetails(entry.id));
+  useEffect(() => {
+    let cancelled = false;
+    setDetails(getEquipmentDetails(entry.id));
+    void loadEquipmentDetails(entry.id).then((loaded) => {
+      if (!cancelled) setDetails(loaded);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [entry.id]);
   const t = (text: Parameters<typeof getLocalizedEquipmentText>[0]) => getLocalizedEquipmentText(text, locale);
 
   return (

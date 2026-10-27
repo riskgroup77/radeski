@@ -1,5 +1,6 @@
 import type { Locale } from '../types';
 import { CONDITION_WHY_RADESKI } from './conditionWhyRadeskiCatalog';
+import { CONDITION_ABOUT } from './conditionAboutContent';
 
 export interface LocalizedConditionText {
   uz: string;
@@ -570,7 +571,9 @@ export function resolveConditionDetailMeta(
 ): ServiceConditionDetailMeta {
   const catalogKey = resolveConditionCatalogKey(conditionId);
   const override = resolveConditionOverride(conditionId);
-  const whyRadeski = CONDITION_WHY_RADESKI[catalogKey] ?? CONDITION_WHY_RADESKI[conditionId];
+  // "About the condition" texts of the condition pages, else the "why Radeski" block.
+  const whyRadeski =
+    CONDITION_ABOUT[catalogKey] ?? CONDITION_ABOUT[conditionId] ?? CONDITION_WHY_RADESKI[catalogKey] ?? CONDITION_WHY_RADESKI[conditionId];
   const subDefault = subCatalogKey ? SUB_CONDITION_DEFAULTS[subCatalogKey] : undefined;
   const catDefault = CATEGORY_CONDITION_DEFAULTS[categoryId] ?? GLOBAL_DEFAULT;
   const base = subDefault ?? catDefault;

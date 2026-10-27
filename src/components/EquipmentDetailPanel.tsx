@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ExternalLink, MapPin, Sparkles, Stethoscope, Tag } from 'lucide-react';
 import type { Locale, PriceItem, ServiceCategory } from '../types';
 import {
@@ -208,7 +208,7 @@ export default function EquipmentDetailPanel({
   if (!animated) return content;
 
   return (
-    <motion.div
+    <m.div
       initial={{ height: 0, opacity: 0 }}
       animate={{ height: 'auto', opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
@@ -216,6 +216,6 @@ export default function EquipmentDetailPanel({
       className="overflow-hidden"
     >
       <div className="mt-3 border-t border-brand-sectiongray/80 pb-1 pt-4">{content}</div>
-    </motion.div>
+    </m.div>
   );
 }

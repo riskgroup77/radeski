@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import MediaImage from './MediaImage';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, Globe2, MapPin, ArrowRight } from 'lucide-react';
 import { Locale } from '../types';
 import { DICTIONARY, CLINIC_RATINGS, GALLERY_IMAGS, CLINIC_EXPERIENCE_YEARS } from '../data';
@@ -65,7 +65,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
       <div className="site-container">
         {/* Core content row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -93,10 +93,10 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                 <span className="text-xs text-brand-text-muted font-medium">{locale === 'uz' ? "Tuzalgan bemorlar" : locale === 'ru' ? "Счастливых пациентов" : "Healed Patient Cases"}</span>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Clinic video */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -109,11 +109,11 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
               allowFullScreen
               className="absolute inset-0 w-full h-full"
             />
-          </motion.div>
+          </m.div>
         </div>
 
         {/* History & strategic evolution */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -169,7 +169,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
             <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-brand-gold/60 via-brand-gold/30 to-transparent hidden sm:block" aria-hidden />
             <div className="space-y-8">
               {CLINIC_HISTORY.stages.map((stage, idx) => (
-                <motion.article
+                <m.article
                   key={stage.id}
                   initial={{ opacity: 0, x: idx % 2 === 0 ? -16 : 16 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -247,11 +247,11 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                       </div>
                     )}
                   </div>
-                </motion.article>
+                </m.article>
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Benefits cards bento grid */}
         <div className="mb-20">
@@ -353,7 +353,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
       {/* Lightbox Modal */}
       <AnimatePresence>
         {activeGalleryIdx !== null && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -381,7 +381,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
               className="relative w-full max-w-5xl max-h-[85vh] flex items-center justify-center"
             >
               <AnimatePresence mode="wait">
-                <motion.img
+                <m.img
                   key={GALLERY_IMAGS[activeGalleryIdx].src}
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -410,7 +410,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                 <ChevronRight className="w-6 h-6" />
               </button>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>

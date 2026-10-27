@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { Locale } from '../types';
@@ -43,7 +43,7 @@ export default function InstitutionalSectionPage({
       className="min-h-[calc(100vh-5rem)] bg-gradient-to-br from-brand-offwhite via-[#f7f9fc] to-brand-gold-light/10 pb-16 pt-10 sm:pt-14"
     >
       <div className="site-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
@@ -93,7 +93,7 @@ export default function InstitutionalSectionPage({
               {d.backToHome}
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

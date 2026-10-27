@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import type { ReactNode } from 'react';
 import { useHashScroll } from '../routing/useHashScroll';
 import {
@@ -111,7 +111,7 @@ function BulletList({ items }: { items: string[] }) {
 
 function MidBand({ src, alt }: { src: string; alt: string }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
@@ -121,7 +121,7 @@ function MidBand({ src, alt }: { src: string; alt: string }) {
         <MediaImage src={src} alt={alt} className="h-full w-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-brand-dark-navy/25 via-transparent to-transparent" />
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -129,7 +129,7 @@ function PhotoGallery({ images, alts }: { images: string[]; alts: string[] }) {
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
       {images.map((src, i) => (
-        <motion.div
+        <m.div
           key={src}
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ function PhotoGallery({ images, alts }: { images: string[]; alts: string[] }) {
           <div className="relative aspect-[4/3]">
             <MediaImage src={src} alt={alts[i] ?? ''} className="h-full w-full object-cover" loading="lazy" />
           </div>
-        </motion.div>
+        </m.div>
       ))}
     </div>
   );
@@ -162,7 +162,7 @@ function SplitSection({
   reverse?: boolean;
 }) {
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -177,7 +177,7 @@ function SplitSection({
           <Paragraphs locale={locale} items={paragraphs} />
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -193,7 +193,7 @@ function AboutBody({ locale }: { locale: Locale }) {
   return (
     <div className="space-y-10 sm:space-y-12">
       {/* Safety ribbon */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-3xl border border-brand-gold/30 bg-brand-dark-navy shadow-sm"
@@ -208,10 +208,10 @@ function AboutBody({ locale }: { locale: Locale }) {
           </div>
           <p className="text-sm font-light leading-relaxed text-white/90 sm:text-base">{c.safeBanner[locale]}</p>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Official representation — editorial split */}
-      <motion.article
+      <m.article
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -244,10 +244,10 @@ function AboutBody({ locale }: { locale: Locale }) {
             </div>
           </div>
         </div>
-      </motion.article>
+      </m.article>
 
       {/* Mission cinematic band */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -270,10 +270,10 @@ function AboutBody({ locale }: { locale: Locale }) {
             </p>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Stats ribbon */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -292,7 +292,7 @@ function AboutBody({ locale }: { locale: Locale }) {
         <p className="mt-5 border-t border-brand-sectiongray pt-4 text-[11px] font-light text-brand-text-muted">
           {c.statsNote[locale]}
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Audiences */}
       <div>
@@ -301,7 +301,7 @@ function AboutBody({ locale }: { locale: Locale }) {
           {c.audiences.map((a, i) => {
             const Icon = audienceIcons[i] ?? Sparkles;
             return (
-              <motion.article
+              <m.article
                 key={a.title.uz}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -314,14 +314,14 @@ function AboutBody({ locale }: { locale: Locale }) {
                 </div>
                 <h3 className="mb-2 text-base font-bold text-brand-text-primary">{a.title[locale]}</h3>
                 <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{a.text[locale]}</p>
-              </motion.article>
+              </m.article>
             );
           })}
         </div>
       </div>
 
       {/* Therapy education */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -352,7 +352,7 @@ function AboutBody({ locale }: { locale: Locale }) {
         <div className="border-t border-brand-sectiongray bg-brand-offwhite/60 px-6 py-5 sm:px-8">
           <Paragraphs locale={locale} items={[c.sections[2].paragraphs[0]]} />
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Benefits with visual accent */}
       <div>
@@ -364,7 +364,7 @@ function AboutBody({ locale }: { locale: Locale }) {
             const Icon = benefitIcons[i] ?? Sparkles;
             const accent = i === 0 ? clinicImg : i === 1 ? resultsImg : null;
             return (
-              <motion.article
+              <m.article
                 key={b.title.uz}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -383,7 +383,7 @@ function AboutBody({ locale }: { locale: Locale }) {
                   <h3 className="mb-2 text-base font-bold text-brand-text-primary">{b.title[locale]}</h3>
                   <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{b.text[locale]}</p>
                 </div>
-              </motion.article>
+              </m.article>
             );
           })}
         </div>
@@ -398,7 +398,7 @@ function AboutBody({ locale }: { locale: Locale }) {
           { src: media.gallery?.[5] ?? resultsImg, className: 'min-h-[140px] md:min-h-0' },
           { src: media.gallery?.[6] ?? missionBand, className: 'min-h-[140px] md:min-h-0' },
         ].map((item, i) => (
-          <motion.div
+          <m.div
             key={`${item.src}-${i}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -407,7 +407,7 @@ function AboutBody({ locale }: { locale: Locale }) {
             className={`overflow-hidden rounded-2xl border border-brand-sectiongray bg-brand-offwhite ${item.className}`}
           >
             <MediaImage src={item.src} alt="" className="h-full w-full object-cover" loading="lazy" />
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </div>
@@ -426,7 +426,7 @@ function ClinicBody({ locale }: { locale: Locale }) {
   return (
     <div className="space-y-10 sm:space-y-12">
       {/* Clinic vs distributor ribbon */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-3xl border border-brand-gold/30 bg-brand-dark-navy shadow-sm"
@@ -444,10 +444,10 @@ function ClinicBody({ locale }: { locale: Locale }) {
             <p className="mt-2 text-sm font-light leading-relaxed text-white/90 sm:text-base">{c.note[locale]}</p>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* What happens — editorial split */}
-      <motion.article
+      <m.article
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -480,10 +480,10 @@ function ClinicBody({ locale }: { locale: Locale }) {
             </div>
           </div>
         </div>
-      </motion.article>
+      </m.article>
 
       {/* Promise cinematic band */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -506,10 +506,10 @@ function ClinicBody({ locale }: { locale: Locale }) {
             </p>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Stats */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -525,7 +525,7 @@ function ClinicBody({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Patient pathway 01–04 */}
       <div>
@@ -535,7 +535,7 @@ function ClinicBody({ locale }: { locale: Locale }) {
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {c.pathway.map((step, i) => (
-            <motion.article
+            <m.article
               key={step.step}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -550,13 +550,13 @@ function ClinicBody({ locale }: { locale: Locale }) {
                 <h3 className="text-base font-bold text-brand-text-primary">{step.title[locale]}</h3>
               </div>
               <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{step.text[locale]}</p>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>
 
       {/* Services + cabin visual */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -582,14 +582,14 @@ function ClinicBody({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Branches */}
       <div>
         <h2 className="mb-5 px-1 text-lg font-extrabold text-brand-text-primary sm:text-xl">{c.branchesTitle[locale]}</h2>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {c.branches.map((branch, i) => (
-            <motion.article
+            <m.article
               key={branch.city.uz}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -615,7 +615,7 @@ function ClinicBody({ locale }: { locale: Locale }) {
                   <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{branch.text[locale]}</p>
                 </div>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>
@@ -623,7 +623,7 @@ function ClinicBody({ locale }: { locale: Locale }) {
       {/* Gallery mosaic */}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {[consultImg, cabinImg, branchImg, pathwayBand].map((src, i) => (
-          <motion.div
+          <m.div
             key={`${src}-${i}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -634,18 +634,18 @@ function ClinicBody({ locale }: { locale: Locale }) {
             }`}
           >
             <MediaImage src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
-          </motion.div>
+          </m.div>
         ))}
       </div>
 
       {/* CTA */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
         <DaavlinContactsCta locale={locale} variant="card" note={c.note[locale]} />
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -662,7 +662,7 @@ function CabinsBody({ locale }: { locale: Locale }) {
   return (
     <div className="space-y-10 sm:space-y-12">
       {/* Distributor ribbon */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="relative overflow-hidden rounded-3xl border border-brand-gold/30 bg-brand-dark-navy shadow-sm"
@@ -682,10 +682,10 @@ function CabinsBody({ locale }: { locale: Locale }) {
             <p className="mt-2 text-sm font-light leading-relaxed text-white/90 sm:text-base">{c.closing[locale]}</p>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Editorial intro split */}
-      <motion.article
+      <m.article
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -717,10 +717,10 @@ function CabinsBody({ locale }: { locale: Locale }) {
             <p className="mt-4 text-sm font-light leading-relaxed text-brand-text-secondary sm:text-[15px]">{c.introExtra[locale]}</p>
           </div>
         </div>
-      </motion.article>
+      </m.article>
 
       {/* Promise band */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -743,10 +743,10 @@ function CabinsBody({ locale }: { locale: Locale }) {
             </p>
           </div>
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Stats */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -762,14 +762,14 @@ function CabinsBody({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Three directions */}
       <div>
         <h2 className="mb-5 px-1 text-lg font-extrabold text-brand-text-primary sm:text-xl">{c.solutionsTitle[locale]}</h2>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {c.blocks.map((block, i) => (
-            <motion.article
+            <m.article
               key={block.title.uz}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -786,13 +786,13 @@ function CabinsBody({ locale }: { locale: Locale }) {
                 <h3 className="mb-3 text-base font-extrabold text-brand-text-primary">{block.title[locale]}</h3>
                 <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{block.text[locale]}</p>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>
 
       {/* How to choose */}
-      <motion.section
+      <m.section
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -817,14 +817,14 @@ function CabinsBody({ locale }: { locale: Locale }) {
             </div>
           ))}
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Process 01-04 */}
       <div>
         <h2 className="mb-5 px-1 text-lg font-extrabold text-brand-text-primary sm:text-xl">{c.processTitle[locale]}</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {c.process.map((step, i) => (
-            <motion.article
+            <m.article
               key={step.step}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -837,7 +837,7 @@ function CabinsBody({ locale }: { locale: Locale }) {
               </span>
               <h3 className="mt-3 text-base font-bold text-brand-text-primary">{step.title[locale]}</h3>
               <p className="mt-2 text-sm font-light leading-relaxed text-brand-text-secondary">{step.text[locale]}</p>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>
@@ -845,7 +845,7 @@ function CabinsBody({ locale }: { locale: Locale }) {
       {/* Gallery mosaic before models */}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {[homeImg, clinicImg, targetImg, promiseBand].map((src, i) => (
-          <motion.div
+          <m.div
             key={`${src}-${i}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -856,7 +856,7 @@ function CabinsBody({ locale }: { locale: Locale }) {
             }`}
           >
             <MediaImage src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
-          </motion.div>
+          </m.div>
         ))}
       </div>
 
@@ -878,7 +878,7 @@ function CabinsBody({ locale }: { locale: Locale }) {
 
         <div className="space-y-6">
           {c.lineup.map((item, index) => (
-            <motion.article
+            <m.article
               key={item.id}
               id={`model-${item.id}`}
               initial={{ opacity: 0, y: 16 }}
@@ -957,7 +957,7 @@ function CabinsBody({ locale }: { locale: Locale }) {
                   </Link>
                 </div>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>
@@ -965,13 +965,13 @@ function CabinsBody({ locale }: { locale: Locale }) {
       <MidBand src={media.hero} alt={c.lineupTitle[locale]} />
 
       {/* CTA */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
       >
         <DaavlinContactsCta locale={locale} variant="card" note={c.closing[locale]} />
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -982,7 +982,7 @@ function ResultsBody({ locale }: { locale: Locale }) {
   const media = DAAVLIN_SECTION_MEDIA['clinical-results'];
   return (
     <div className="space-y-8">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -1009,7 +1009,7 @@ function ResultsBody({ locale }: { locale: Locale }) {
             </p>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       <SplitSection
         locale={locale}

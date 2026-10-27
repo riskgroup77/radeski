@@ -97,7 +97,8 @@ function contentHash(html) {
 const OUT_OF_SITEMAP_PAGES = ['tele-dermatology', 'skin-pathology-center'];
 
 async function main() {
-  const { createPrerenderer } = await import(pathToFileURL(ssrEntry).href);
+  const { createPrerenderer, loadPrerenderContent } = await import(pathToFileURL(ssrEntry).href);
+  await loadPrerenderContent();
 
   const template = readFileSync(path.join(dist, 'index.html'), 'utf8');
   if (!template.includes('<div id="root"></div>')) {

@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import {
   CheckCircle2,
   ChevronRight,
@@ -118,7 +118,7 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
         <DermoScanAppInstallSection locale={locale} />
 
         {/* Four pillars with photos */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -145,10 +145,10 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
               </article>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Principle quote over photo */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -163,10 +163,10 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
               </p>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* What is DermaScan — split */}
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -213,10 +213,10 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
               </p>
             </div>
           </div>
-        </motion.article>
+        </m.article>
 
         {/* Philosophy — split reverse */}
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -265,7 +265,7 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
               {c.philosophy.finalNote[locale]}
             </p>
           </div>
-        </motion.article>
+        </m.article>
 
         {/* Features — photo split cards */}
         <div className="mb-12 sm:mb-16">
@@ -275,7 +275,7 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
               const reverse = index % 2 === 1;
               const image = FEATURE_IMAGES[feature.num];
               return (
-                <motion.article
+                <m.article
                   key={feature.num}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -381,14 +381,14 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
                       )}
                     </div>
                   </div>
-                </motion.article>
+                </m.article>
               );
             })}
           </div>
         </div>
 
         {/* Ecosystem — photo background */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -417,11 +417,11 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Science + Future */}
         <div className="mb-12 grid grid-cols-1 gap-6 lg:grid-cols-2 sm:mb-16">
-          <motion.article
+          <m.article
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -447,9 +447,9 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
                 {c.science.transition[locale]}
               </p>
             </div>
-          </motion.article>
+          </m.article>
 
-          <motion.article
+          <m.article
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -472,11 +472,11 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </m.article>
         </div>
 
         {/* Security */}
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -500,11 +500,11 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
               </div>
             ))}
           </div>
-        </motion.article>
+        </m.article>
 
         {/* For patient + doctor */}
         <div className="mb-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <motion.article
+          <m.article
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -528,9 +528,9 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
                 {c.forPatient.tagline[locale]}
               </p>
             </div>
-          </motion.article>
+          </m.article>
 
-          <motion.article
+          <m.article
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -551,7 +551,7 @@ export default function DermoScanPage({ locale }: DermoScanPageProps) {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </m.article>
         </div>
 
         <DownloadAppButton

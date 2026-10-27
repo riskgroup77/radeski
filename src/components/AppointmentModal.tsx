@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { X, CheckCircle, Phone, ShieldCheck } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY } from '../data';
@@ -102,7 +102,7 @@ export default function AppointmentModal({
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <motion.div
+          <m.div
             id="modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -111,7 +111,7 @@ export default function AppointmentModal({
             className="fixed inset-0 bg-[#0c1424]/70 backdrop-blur-sm"
           />
 
-          <motion.div
+          <m.div
             id="appointment-modal-card"
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -261,14 +261,14 @@ export default function AppointmentModal({
                 </>
               ) : (
                 <div className="flex flex-col items-center text-center py-6">
-                  <motion.div
+                  <m.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 15 }}
                     className="w-16 h-16 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold mb-4 border border-brand-gold/20"
                   >
                     <CheckCircle className="w-10 h-10" />
-                  </motion.div>
+                  </m.div>
                   <h3 className="text-xl font-bold text-slate-800">
                     {locale === 'uz' ? "Arizangiz qabul qilindi!" : locale === 'ru' ? 'Заявка принята!' : 'Request Received!'}
                   </h3>
@@ -288,7 +288,7 @@ export default function AppointmentModal({
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>

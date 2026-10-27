@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Search, Info, CalendarClock, ListFilter, HelpCircle } from 'lucide-react';
 import { Locale, PriceItem } from '../types';
 import { DICTIONARY } from '../data';
@@ -144,7 +144,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary, 
 
         <div className="space-y-8 mb-12">
           {pricesByCategory.map((section, sectionIndex) => (
-            <motion.div
+            <m.div
               key={section.categoryId}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -209,7 +209,7 @@ export default function Prices({ locale, onOpenAppointment, prices, dictionary, 
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           ))}
 
           {pricesByCategory.length === 0 && loading && (

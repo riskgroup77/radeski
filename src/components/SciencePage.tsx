@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { CheckCircle2, ChevronRight } from 'lucide-react';
 import type { Locale } from '../types';
 import { SCIENCE } from '../data/scienceContent';
@@ -75,7 +75,7 @@ export default function SciencePage({ locale }: SciencePageProps) {
 
       <div className="site-container">
         {/* Formula */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -102,10 +102,10 @@ export default function SciencePage({ locale }: SciencePageProps) {
               </div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* For patients */}
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -141,9 +141,9 @@ export default function SciencePage({ locale }: SciencePageProps) {
               </p>
             </div>
           </div>
-        </motion.article>
+        </m.article>
 
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -178,10 +178,10 @@ export default function SciencePage({ locale }: SciencePageProps) {
               />
             </div>
           </div>
-        </motion.article>
+        </m.article>
 
         {/* Ethics */}
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -203,10 +203,10 @@ export default function SciencePage({ locale }: SciencePageProps) {
               {c.ethics.principle[locale]}
             </p>
           </div>
-        </motion.article>
+        </m.article>
 
         {/* For doctors */}
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -237,14 +237,14 @@ export default function SciencePage({ locale }: SciencePageProps) {
               </ul>
             </div>
           </div>
-        </motion.article>
+        </m.article>
 
         {/* Activities */}
         <div className="mb-12 sm:mb-16">
           <SectionHeading title={c.activities.title[locale]} />
           <div className="space-y-8">
             {c.activities.items.map((item, index) => (
-              <motion.article
+              <m.article
                 key={item.num}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -278,7 +278,7 @@ export default function SciencePage({ locale }: SciencePageProps) {
                     </ul>
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             ))}
           </div>
         </div>

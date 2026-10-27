@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Calculator, HandCoins, Landmark, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { Locale } from '../types';
@@ -98,7 +98,7 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
   const effectiveLeaseTerms = config.leaseTermsMonths;
 
   return (
-    <motion.section
+    <m.section
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -280,6 +280,6 @@ export default function DaavlinFinanceCalculator({ locale, modelId }: DaavlinFin
           </div>
         </div>
       </div>
-    </motion.section>
+    </m.section>
   );
 }

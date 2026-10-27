@@ -1,5 +1,5 @@
 import { useState, useEffect, type MouseEvent } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import { ArrowLeftRight, ChevronLeft, ChevronRight, Sparkles, X } from 'lucide-react';
 import type { Locale } from '../types';
 import type { TreatmentResult } from '../data/sitePagesContent';
@@ -166,7 +166,7 @@ export default function ServiceRelatedResultsSection({
 
       <AnimatePresence>
         {expandedGallery && expandedItem ? (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -230,7 +230,7 @@ export default function ServiceRelatedResultsSection({
               <p className="mt-3 text-center text-sm font-semibold text-white">{expandedGallery.title}</p>
               <p className="mt-1 text-center text-xs text-white/75">{expandedItem.label}</p>
             </div>
-          </motion.div>
+          </m.div>
         ) : null}
       </AnimatePresence>
     </>

@@ -1,5 +1,6 @@
 import type { Locale } from '../types';
 import { getServiceAboutOverride, type ServiceAboutContent } from './serviceAboutOverrides';
+import { SERVICE_ABOUT_EXTRA } from './serviceAboutExtraCatalog';
 
 export type { ServiceAboutContent };
 export { hydrateServiceAboutFromSiteTexts } from './serviceAboutOverrides';
@@ -961,7 +962,7 @@ export function getServiceAboutContent(
   if (apiEntry) {
     return apiEntry[locale] ?? apiEntry.uz ?? null;
   }
-  const entry = SERVICE_ABOUT_CATALOG[key];
+  const entry = SERVICE_ABOUT_CATALOG[key] ?? SERVICE_ABOUT_EXTRA[key];
   if (!entry) return null;
   return entry[locale] ?? entry.uz ?? null;
 }

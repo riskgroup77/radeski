@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { ArrowUpRight, CheckCircle2, Play } from 'lucide-react';
 import type { Locale } from '../types';
 import { BRAND, BRAND_ARCHITECTURE } from '../data/brandContent';
@@ -69,7 +69,7 @@ export default function BrandPage({ locale }: BrandPageProps) {
       />
 
       <div className="site-container pt-10 sm:pt-14">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 overflow-hidden rounded-3xl border border-brand-sectiongray bg-brand-white p-6 shadow-sm sm:mb-16 sm:p-8 lg:p-10"
@@ -87,9 +87,9 @@ export default function BrandPage({ locale }: BrandPageProps) {
             <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-gold">{c.ideaTitle[locale]}</p>
             <p className="text-sm font-semibold leading-relaxed text-brand-text-primary sm:text-base">{c.idea[locale]}</p>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -113,7 +113,7 @@ export default function BrandPage({ locale }: BrandPageProps) {
               </p>
             </div>
           </div>
-        </motion.article>
+        </m.article>
 
         <div className="mb-12 sm:mb-16">
           <div className="mb-8">
@@ -124,7 +124,7 @@ export default function BrandPage({ locale }: BrandPageProps) {
           </div>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {c.philosophy.principles.map((p, i) => (
-              <motion.article
+              <m.article
                 key={p.id}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ export default function BrandPage({ locale }: BrandPageProps) {
                   <h3 className="mt-1 mb-2 text-lg font-extrabold text-brand-text-primary">{p.title[locale]}</h3>
                   <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{p.text[locale]}</p>
                 </div>
-              </motion.article>
+              </m.article>
             ))}
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function BrandPage({ locale }: BrandPageProps) {
         </h2>
         <div className="space-y-8">
           {BRAND_ARCHITECTURE.map((item, index) => (
-            <motion.article
+            <m.article
               key={item.id}
               id={item.id}
               initial={{ opacity: 0, y: 16 }}
@@ -174,7 +174,7 @@ export default function BrandPage({ locale }: BrandPageProps) {
                   <p className="text-sm font-light leading-relaxed text-brand-text-secondary">{item.description[locale]}</p>
                 </div>
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
 

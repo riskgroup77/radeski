@@ -14,7 +14,12 @@ export function prefetchRouteChunk(pathname: string): void {
         if (!first) return () => import('../components/Services');
         if (!second) return () => import('../components/ServiceCategoryPage');
         return first === 'apparatnaya-kosmetologiya'
-          ? () => Promise.all([import('../components/ClinicEquipmentPage'), import('../components/ServiceSubPage')])
+          ? () =>
+              Promise.all([
+                import('../components/ClinicEquipmentPage'),
+                import('../components/ServiceSubPage'),
+                import('../data/equipment/equipmentDetails').then((m) => m.loadEquipmentDetails(second)),
+              ])
           : () => import('../components/ServiceSubPage');
       case 'doctors':
         return first ? () => import('../components/DoctorPage') : () => import('../components/Doctors');

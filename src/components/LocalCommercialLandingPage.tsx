@@ -24,7 +24,7 @@ import {
 } from '../routing/paths';
 import AppointmentBookingLink from './AppointmentBookingLink';
 import CityServiceLinks from './CityServiceLinks';
-import { findArticleByRouteParam } from '../utils/articles';
+import { findArticleByRouteParam } from '../utils/articleCatalogLookup';
 import { formatUzs, resolveLocalLandingDetails } from '../utils/localLandingDetails';
 
 interface LocalCommercialLandingPageProps {

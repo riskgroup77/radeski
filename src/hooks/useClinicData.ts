@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { publicApi } from '../api';
 import { loadPublicData, type PublicDataOptions } from '../api/publicDataSource';
-import { transformClinicData } from '../api/clinicDataTransform';
 import { Doctor, ServiceCategory, PriceItem, Article } from '../types';
-import { ARTICLES } from '../data';
 import { normalizeArticleViews } from '../utils/articleViews';
 import { dictionaryOverridesFromSiteTexts, type DictionaryOverrides } from '../data/dictionaryOverrides';
 
@@ -28,7 +26,9 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
   const [serviceCategories, setServiceCategories] = useState<ServiceCategory[]>([]);
   const [prices, setPrices] = useState<PriceItem[]>([]);
   const [pricesLoading, setPricesLoading] = useState(true);
-  const [articles, setArticles] = useState<Article[]>(ARTICLES);
+  // Empty until the data arrives: the article index (~120 KB) is loaded with the transform,
+  // not with the app shell. Article pages fall back to it on their own.
+  const [articles, setArticles] = useState<Article[]>([]);
   const [dictionaryOverrides, setDictionaryOverrides] = useState<DictionaryOverrides>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -49,11 +49,13 @@ export function useClinicData(options: PublicDataOptions = {}): ClinicDataState 
       .finally(() => setPricesLoading(false));
 
     const [
+      { transformClinicData },
       doctorsRes,
       servicesRes,
       articlesRes,
       siteTextsRes,
     ] = await Promise.all([
+      import('../api/clinicDataTransform'),
       loadPublicData('doctors', () => publicApi.getDoctors(), [], { live }),
       loadPublicData('services', () => publicApi.getServices(), [], { live }),
       loadPublicData('articles', () => publicApi.getArticles(), [], { live }),

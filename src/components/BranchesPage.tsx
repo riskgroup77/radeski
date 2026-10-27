@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Building2, MapPin, Phone, Clock, Star, Navigation, Globe, Mail } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
@@ -8,6 +8,8 @@ import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl } from '../config/links';
 import { pagePath } from '../routing/paths';
 import MediaImage from './MediaImage';
 import { Link } from 'react-router-dom';
+import { BRANCHES_PAGE_GUIDE } from '../data/listPageGuides';
+import ListPageGuideSection from './ListPageGuideSection';
 
 function resolveBranchMapEmbed(branch: ClinicBranch): string {
   const embed = branch.mapEmbed?.trim();
@@ -72,7 +74,7 @@ export default function BranchesPage({
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
           {branches.map((branch, index) => (
-            <motion.article
+            <m.article
               key={branch.id}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -201,9 +203,11 @@ export default function BranchesPage({
                   title={branch.name[locale]}
                 />
               </div>
-            </motion.article>
+            </m.article>
           ))}
         </div>
+
+        <ListPageGuideSection guide={BRANCHES_PAGE_GUIDE[locale]} className="mt-10" />
       </div>
     </section>
   );

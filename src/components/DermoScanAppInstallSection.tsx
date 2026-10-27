@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { CheckCircle2, Smartphone, Star, X } from 'lucide-react';
 import type { Locale } from '../types';
 import { DERMO_SCAN } from '../data/dermoScanContent';
@@ -105,7 +105,7 @@ function MobileInstallBanner({
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <m.div
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 80, opacity: 0 }}
@@ -139,7 +139,7 @@ function MobileInstallBanner({
               <X className="h-4 w-4" />
             </button>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );
@@ -163,7 +163,7 @@ export default function DermoScanAppInstallSection({ locale }: DermoScanAppInsta
     <>
       <MobileInstallBanner locale={locale} onLearnMore={scrollToSection} />
 
-      <motion.section
+      <m.section
         id={sectionId}
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -276,7 +276,7 @@ export default function DermoScanAppInstallSection({ locale }: DermoScanAppInsta
 
         <AnimatePresence>
           {toast && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 12 }}
@@ -284,10 +284,10 @@ export default function DermoScanAppInstallSection({ locale }: DermoScanAppInsta
               role="status"
             >
               {c.comingSoonToast[locale]}
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
-      </motion.section>
+      </m.section>
     </>
   );
 }

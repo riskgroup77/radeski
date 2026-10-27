@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { TrendingUp } from 'lucide-react';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import type { Locale } from '../types';
 import { useAnimatedClientCount } from '../hooks/useAnimatedClientCount';
 
@@ -157,7 +157,7 @@ function ReelDigit({
 
   return (
     <span className="inline-block align-middle overflow-visible h-[1em] w-[0.64em] relative">
-      <motion.span
+      <m.span
         className="absolute inset-x-0 top-0 flex flex-col items-center will-change-transform"
         animate={{ y: scrolling ? '-2em' : '-1em' }}
         transition={{ duration: 0.64, ease: [0.42, 0.04, 0.18, 1] }}
@@ -166,7 +166,7 @@ function ReelDigit({
         <ReelSlot digit={center} variant="center" cls={cls} />
         <ReelSlot digit={bottomDigit} variant="bottom" cls={cls} />
         {scrolling && <ReelSlot digit={digitNext(value)} variant="bottom" cls={cls} />}
-      </motion.span>
+      </m.span>
     </span>
   );
 }
@@ -269,7 +269,7 @@ export default function ClientCountCard({
 
   if (isHero) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.55 }}
@@ -303,12 +303,12 @@ export default function ClientCountCard({
             </p>
           )}
         </div>
-      </motion.div>
+      </m.div>
     );
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: 0.55 }}
@@ -331,6 +331,6 @@ export default function ClientCountCard({
           </p>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }

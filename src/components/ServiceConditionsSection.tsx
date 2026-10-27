@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import {
   ChevronRight,
   HeartPulse,
@@ -59,7 +59,7 @@ function ConditionDetailModal({
   }, [onClose]);
 
   return createPortal(
-    <motion.div
+    <m.div
       key="condition-modal-root"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -69,7 +69,7 @@ function ConditionDetailModal({
       aria-modal="true"
       aria-labelledby="condition-modal-title"
     >
-        <motion.button
+        <m.button
           type="button"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -79,7 +79,7 @@ function ConditionDetailModal({
           aria-label={labels.close}
         />
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
@@ -122,8 +122,8 @@ function ConditionDetailModal({
               subCatalogKey={subCatalogKey}
             />
           </div>
-        </motion.div>
-      </motion.div>,
+        </m.div>
+      </m.div>,
     document.body,
   );
 }

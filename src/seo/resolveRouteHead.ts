@@ -44,7 +44,8 @@ import {
 import { getDermatologyConditionTopic } from '../utils/dermatologyConditions';
 import { getEducationProgramSlugFromPathname, resolveEducationProgram } from '../utils/educationPrograms';
 import { resolveClinicEquipment } from '../utils/clinicEquipmentRoutes';
-import { findArticleByRouteParam, resolveArticleRedirectTarget, resolveArticleRouteKey } from '../utils/articles';
+import { resolveArticleRedirectTarget, resolveArticleRouteKey } from '../utils/articles';
+import { findArticleByRouteParam } from '../utils/articleCatalogLookup';
 import { resolveArticleTags } from '../utils/articleContent';
 import { getNotFoundTitle } from '../components/NotFoundPage';
 import {

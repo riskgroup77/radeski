@@ -1,5 +1,5 @@
 import type { Article } from '../types';
-import { ARTICLES } from '../data';
+import { STATIC_ARTICLE_ROUTE_KEYS } from '../data/articleRouteKeys.generated';
 import { isApiArticleId } from './articleViews';
 
 /** Retired article routes permanently redirect to the canonical replacement. */
@@ -21,77 +21,18 @@ export function filterPublicArticles(articles: Article[]): Article[] {
   return articles.filter(isArticlePubliclyListed);
 }
 
-/** API ro‘yxatida yo‘q statik katalog maqolalarini qo‘shadi (masalan yangi art-* yozuvlar). */
-export function mergeArticlesWithStaticCatalog(apiArticles: Article[]): Article[] {
-  if (apiArticles.length === 0) return ARTICLES;
-
-  const apiSlugs = new Set(apiArticles.map((article) => article.slug));
-  const apiStaticIds = new Set(
-    apiArticles.map((article) => {
-      const staticMatch = ARTICLES.find(
-        (item) => item.slug === article.slug || item.id === article.id,
-      );
-      return staticMatch?.id ?? article.slug;
-    }),
-  );
-
-  const missingStatic = ARTICLES.filter(
-    (item) => !apiSlugs.has(item.slug) && !apiStaticIds.has(item.id),
-  );
-
-  if (missingStatic.length === 0) return apiArticles;
-
-  return [...apiArticles, ...missingStatic].sort((a, b) =>
-    (b.date || '').localeCompare(a.date || ''),
-  );
-}
-
-export function findArticleByRouteParam(
-  routeParam: string,
-  articles: Article[],
-): Article | undefined {
-  const direct = articles.find(
-    (article) =>
-      article.id === routeParam ||
-      article.slug === routeParam ||
-      article.apiId === routeParam,
-  );
-  if (direct) return direct;
-
-  const staticMatch = ARTICLES.find(
-    (item) => item.id === routeParam || item.slug === routeParam,
-  );
-  if (!staticMatch) return undefined;
-
-  return (
-    articles.find(
-      (article) =>
-        article.slug === staticMatch.slug ||
-        article.id === staticMatch.id ||
-        article.apiId === routeParam,
-    ) ?? staticMatch
-  );
-}
-
 /** Stable public URL segment: art-* id from static catalog, else slug (never UUID). */
 export function resolveArticleRouteKey(
   article: Pick<Article, 'id' | 'slug'>,
 ): string {
   if (article.id.startsWith('art-')) return article.id;
 
-  const staticMatch = ARTICLES.find(
-    (item) => item.id === article.id || item.slug === article.slug,
-  );
-  if (staticMatch) return staticMatch.id;
+  // A small id/slug table, so the header and home page do not pull in the whole index.
+  const staticKey = STATIC_ARTICLE_ROUTE_KEYS[article.id] ?? (article.slug ? STATIC_ARTICLE_ROUTE_KEYS[article.slug] : undefined);
+  if (staticKey) return staticKey;
 
   if (isApiArticleId(article.id)) return article.slug;
   return article.id;
-}
-
-export function resolveArticleApiSlug(routeParam: string, articles: Article[]): string {
-  const match = findArticleByRouteParam(routeParam, articles);
-  if (match) return match.slug;
-  return routeParam;
 }
 
 /** Aparat promo maqolalari — portret rasmlar to'liq ko'rsatiladi. */

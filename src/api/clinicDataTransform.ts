@@ -12,11 +12,12 @@ import {
   mapDoctorFromApi,
   mapServiceCategoryFromApi,
 } from './mappers';
-import { ARTICLES, DOCTORS, SERVICE_CATEGORIES } from '../data';
+import { DOCTORS, SERVICE_CATEGORIES } from '../data';
+import { STATIC_ARTICLES } from '../data/articleIndex.generated';
 import { hydrateServiceAboutFromSiteTexts } from '../data/serviceAboutOverrides';
 import { enrichServiceCategories } from '../utils/enrichServices';
 import { enrichArticles } from '../utils/enrichArticles';
-import { mergeArticlesWithStaticCatalog } from '../utils/articles';
+import { mergeArticlesWithStaticCatalog } from '../utils/articleCatalogLookup';
 import { enrichDoctors } from '../utils/enrichDoctors';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 
@@ -51,7 +52,7 @@ export function transformClinicData(raw: RawClinicData): ClinicData {
 
   const mappedArticles = raw.articles.map(mapArticleListItemFromApi);
   const articles = enrichArticles(
-    mappedArticles.length > 0 ? mergeArticlesWithStaticCatalog(mappedArticles) : ARTICLES,
+    mappedArticles.length > 0 ? mergeArticlesWithStaticCatalog(mappedArticles) : STATIC_ARTICLES,
   );
 
   return {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo } from '../data/sitePagesContent';
@@ -48,7 +48,7 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
             {videos.map((video, index) => (
-              <motion.article
+              <m.article
                 key={video.id}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ export default function VideosPage({ locale, dictionary, videos, loading = false
                 className="group"
               >
                 <VideoPosterCard video={video} locale={locale} onOpen={(item) => setActiveVideoId(item.id)} />
-              </motion.article>
+              </m.article>
             ))}
           </div>
         )}

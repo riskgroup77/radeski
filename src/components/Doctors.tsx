@@ -1,13 +1,15 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { doctorPath } from '../routing/paths';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Clock, Calendar, Shield } from 'lucide-react';
 import { Locale, Doctor } from '../types';
 import { DICTIONARY, DOCTORS } from '../data';
 import MediaImage from './MediaImage';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 import { doctorRouteKey } from '../utils/doctorSlug';
+import { DOCTORS_PAGE_GUIDE } from '../data/listPageGuides';
+import ListPageGuideSection from './ListPageGuideSection';
 
 interface DoctorsProps {
   locale: Locale;
@@ -67,7 +69,7 @@ export default function Doctors({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {dynamicDoctors.map((doc) => (
-            <motion.div
+            <m.div
               key={doc.id}
               id={`doctor-card-${doc.id}`}
               initial={{ opacity: 0, y: 20 }}
@@ -140,11 +142,13 @@ export default function Doctors({
                   <Calendar className="w-4 h-4" />
                 </button>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
-        <div className="mt-20 bg-gradient-to-r from-brand-dark-navy to-brand-deep-blue rounded-2xl p-8 sm:p-10 border border-brand-dark-navy/20 relative overflow-hidden">
+        <ListPageGuideSection guide={DOCTORS_PAGE_GUIDE[locale]} className="mt-16" />
+
+        <div className="mt-12 bg-gradient-to-r from-brand-dark-navy to-brand-deep-blue rounded-2xl p-8 sm:p-10 border border-brand-dark-navy/20 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-gold/15 rounded-full blur-2xl" />
           <div className="relative z-10 flex flex-col md:flex-row gap-6 items-center justify-between">
             <div className="max-w-xl">

@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 
 import { Phone } from 'lucide-react';
 
@@ -58,15 +58,15 @@ export default function EducationProgramPage({ locale, programId }: EducationPro
 
       <div className="site-container py-8 sm:py-10">
 
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+        <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
 
           <EducationProgramDetail locale={locale} program={program} showHeroImage={false} />
 
-        </motion.div>
+        </m.div>
 
 
 
-        <motion.div
+        <m.div
 
           initial={{ opacity: 0, y: 16 }}
 
@@ -118,7 +118,7 @@ export default function EducationProgramPage({ locale, programId }: EducationPro
 
           </div>
 
-        </motion.div>
+        </m.div>
 
       </div>
 

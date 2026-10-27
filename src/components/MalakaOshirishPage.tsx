@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { CheckCircle2, ChevronRight, Phone } from 'lucide-react';
 import type { Locale } from '../types';
 import { MALAKA_OSHIRISH } from '../data/malakaOshirishContent';
@@ -82,7 +82,7 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
       </div>
 
       <div className="site-container">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -108,9 +108,9 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
               </div>
             </div>
           </EducationMediaFrame>
-        </motion.div>
+        </m.div>
 
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -144,9 +144,9 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
               </p>
             </div>
           </div>
-        </motion.article>
+        </m.article>
 
-        <motion.article
+        <m.article
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -171,13 +171,13 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
               className="order-1 bg-brand-offwhite lg:order-2"
             />
           </div>
-        </motion.article>
+        </m.article>
 
         <div className="mb-12 sm:mb-16">
           <SectionHeading title={c.programs.title[locale]} />
           <div className="space-y-8">
             {c.programs.items.map((item, index) => (
-              <motion.article
+              <m.article
                 key={item.id}
                 id={item.id}
                 initial={{ opacity: 0, y: 16 }}
@@ -226,12 +226,12 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
                     ) : null}
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             ))}
           </div>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -257,7 +257,7 @@ export default function MalakaOshirishPage({ locale }: MalakaOshirishPageProps) 
               {c.cta.phone}
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

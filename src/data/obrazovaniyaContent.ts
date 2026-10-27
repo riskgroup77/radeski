@@ -293,9 +293,9 @@ export const OBRAZOVANIYA = {
           ),
         },
         info: L(
-          'Malaka oshirish dasturlari amaliyotchi shifokorlar va mutaxassislarga bilimlarini yangilash, yangi protokollarni o‘rganish va klinik ko‘nikmalarni mustahkamlash imkonini beradi. Dasturlar teri, soch, tirnoq va estetik korrektsiya yo‘nalishlarini qamrab oladi.',
-          'Программы повышения квалификации позволяют практикующим врачам обновить знания, освоить новые протоколы и укрепить клинические навыки. Охватывают направления кожи, волос, ногтей и эстетической коррекции.',
-          'Continuing education programs help practicing physicians update knowledge, learn new protocols, and strengthen clinical skills across skin, hair, nails, and aesthetic correction.',
+          'Malaka oshirish dasturlari amaliyotchi shifokorlar va mutaxassislarga bilimlarini yangilash, yangi protokollarni o‘rganish va klinik ko‘nikmalarni mustahkamlash imkonini beradi. Dasturlar teri, soch, tirnoq va estetik korrektsiya yo‘nalishlarini qamrab oladi. Mashg‘ulotlar ma’ruzalar, klinik holatlar tahlili va klinika shifokorlari nazoratidagi amaliyotni birlashtiradi; format va davomiyligi ro‘yxatdan o‘tishda kelishiladi.',
+          'Программы повышения квалификации позволяют практикующим врачам обновить знания, освоить новые протоколы и укрепить клинические навыки. Охватывают направления кожи, волос, ногтей и эстетической коррекции. Занятия сочетают лекции, разбор клинических случаев и работу под наблюдением врачей клиники; формат и продолжительность согласуются при записи.',
+          'Continuing education programs help practicing physicians update knowledge, learn new protocols, and strengthen clinical skills across skin, hair, nails, and aesthetic correction. Classes combine lectures, clinical case reviews and supervised work with the clinic’s doctors; the format and length are agreed when you enrol.',
         ),
         highlights: [
           L('Dalillarga asoslangan protokollar', 'Протоколы, основанные на доказательствах', 'Evidence-based protocols'),
@@ -354,9 +354,9 @@ export const OBRAZOVANIYA = {
           ),
         },
         info: L(
-          'Master-klasslar yetakchi mutaxassislar ishtirokida qisqa, chuqur va amaliy formatda o‘tkaziladi: jonli demonstratsiya, klinik holatlar tahlili, savol-javob va protokol muhokamasi. Akne, pigment, rozatsea, lazer epilyatsiya va estetik muolajalar bo‘yicha mavzular mavjud.',
-          'Мастер-классы проводятся в коротком, глубоком и практическом формате с ведущими специалистами: живая демонстрация, разбор случаев, Q&A и обсуждение протоколов. Темы: акне, пигментация, розацеа, лазерная эпиляция и эстетические процедуры.',
-          'Masterclasses run in a focused, practical format with leading specialists: live demonstration, case review, Q&A, and protocol discussion. Topics include acne, pigmentation, rosacea, laser hair removal, and aesthetic procedures.',
+          'Master-klasslar yetakchi mutaxassislar ishtirokida qisqa, chuqur va amaliy formatda o‘tkaziladi: jonli demonstratsiya, klinik holatlar tahlili, savol-javob va protokol muhokamasi. Akne, pigment, rozatsea, lazer epilyatsiya va estetik muolajalar bo‘yicha mavzular mavjud. Guruhlar kichik, shuning uchun har bir ishtirokchi savol berishi va o‘z amaliyotidagi holatlarni muhokama qilishi mumkin.',
+          'Мастер-классы проводятся в коротком, глубоком и практическом формате с ведущими специалистами: живая демонстрация, разбор случаев, Q&A и обсуждение протоколов. Темы: акне, пигментация, розацеа, лазерная эпиляция и эстетические процедуры. Группы небольшие, поэтому каждый участник может задать вопросы и обсудить случаи из своей практики.',
+          'Masterclasses run in a focused, practical format with leading specialists: live demonstration, case review, Q&A, and protocol discussion. Topics include acne, pigmentation, rosacea, laser hair removal, and aesthetic procedures. Groups are small, so every participant can ask questions and discuss cases from their own practice.',
         ),
         highlights: [
           L('Jonli demonstratsiya va amaliyot', 'Живая демонстрация и практика', 'Live demonstration and practice'),
@@ -411,9 +411,9 @@ export const OBRAZOVANIYA = {
           ),
         },
         info: L(
-          'Amaliy treninglar klinika bazasida real bemor oqimi va zamonaviy uskunalar kontekstida o‘tkaziladi. Dermatoskop, trixoskop, lazer platformalari, UVB kabinalari va inyeksion texnikalar bo‘yicha qo‘l ostida superviziya ta’minlanadi.',
-          'Практические тренинги проходят на базе клиники в контексте реального потока пациентов и современного оборудования. Обеспечивается супервизия по дерматоскопу, трихоскопу, лазерным платформам, UVB-кабинам и инъекционным техникам.',
-          'Hands-on training takes place at the clinic with real patient flow and modern equipment. Supervision covers dermatoscope, trichoscope, laser platforms, UVB cabins, and injection techniques.',
+          'Amaliy treninglar klinika bazasida real bemor oqimi va zamonaviy uskunalar kontekstida o‘tkaziladi. Dermatoskop, trixoskop, lazer platformalari, UVB kabinalari va inyeksion texnikalar bo‘yicha qo‘l ostida superviziya ta’minlanadi. Ishtirokchi murabbiy nazorati ostida har bir bosqichni — ko‘rik va usul tanlashdan muolaja va bemorga tavsiyalargacha — mashq qiladi.',
+          'Практические тренинги проходят на базе клиники в контексте реального потока пациентов и современного оборудования. Обеспечивается супервизия по дерматоскопу, трихоскопу, лазерным платформам, UVB-кабинам и инъекционным техникам. Участник работает под контролем наставника и отрабатывает каждый этап — от осмотра и выбора метода до процедуры и рекомендаций пациенту.',
+          'Hands-on training takes place at the clinic with real patient flow and modern equipment. Supervision covers dermatoscope, trichoscope, laser platforms, UVB cabins, and injection techniques. Each participant works under a mentor’s supervision through every step — from examination and choice of method to the procedure and advice to the patient.',
         ),
         highlights: [
           L('Real klinik holatlar', 'Реальные клинические случаи', 'Real clinical cases'),
@@ -528,9 +528,9 @@ export const OBRAZOVANIYA = {
           ),
         },
         info: L(
-          'Soch transplantatsiyasi bo‘yicha o‘qitish dasturi FUE/FUT usullari, donor zonani baholash, implantatsiya texnikasi, postoperatsion parvarish va asoratlar profilaktikasi bo‘yicha chuqur amaliy tayyorgarlikni o‘z ichiga oladi.',
-          'Программа обучения пересадке волос включает углублённую практическую подготовку по методам FUE/FUT, оценке донорской зоны, технике имплантации, послеоперационному уходу и профилактике осложнений.',
-          'Hair transplant training covers in-depth practical preparation in FUE/FUT methods, donor zone assessment, implantation technique, postoperative care, and complication prevention.',
+          'Soch transplantatsiyasi bo‘yicha o‘qitish dasturi FUE/FUT usullari, donor zonani baholash, implantatsiya texnikasi, postoperatsion parvarish va asoratlar profilaktikasi bo‘yicha chuqur amaliy tayyorgarlikni o‘z ichiga oladi. Bemorlarni tanlash, soch o‘sish chizig‘ini rejalashtirish va operatsiyadan real kutishlarga alohida e’tibor beriladi.',
+          'Программа обучения пересадке волос включает углублённую практическую подготовку по методам FUE/FUT, оценке донорской зоны, технике имплантации, послеоперационному уходу и профилактике осложнений. Особое внимание уделяется отбору пациентов, планированию линии роста волос и реалистичным ожиданиям от операции.',
+          'Hair transplant training covers in-depth practical preparation in FUE/FUT methods, donor zone assessment, implantation technique, postoperative care, and complication prevention. Special attention is paid to patient selection, hairline planning and realistic expectations of the procedure.',
         ),
         highlights: [
           L('FUE va FUT metodlari', 'Методы FUE и FUT', 'FUE and FUT methods'),
@@ -588,9 +588,9 @@ export const OBRAZOVANIYA = {
           ),
         },
         info: L(
-          'Lazer texnologiyalari bo‘yicha o‘qitish DEKA CO₂, alexandrite, Derma V tomir lazeri va boshqa platformalar bo‘yicha ko‘rsatmalar, kontraindikatsiyalar, parametrlarni sozlash va post-protsedura parvarishini qamrab oladi.',
-          'Обучение лазерным технологиям охватывает показания, противопоказания, настройку параметров и послепроцедурный уход по платформам DEKA CO₂, александрит, сосудистый лазер Derma V и другим.',
-          'Laser training covers indications, contraindications, parameter settings, and aftercare for DEKA CO₂, alexandrite, Derma V vascular laser, and other platforms.',
+          'Lazer texnologiyalari bo‘yicha o‘qitish DEKA CO₂, alexandrite, Derma V tomir lazeri va boshqa platformalar bo‘yicha ko‘rsatmalar, kontraindikatsiyalar, parametrlarni sozlash va post-protsedura parvarishini qamrab oladi. Bemor va xodimlar xavfsizligi, teri fototipiga mos rejim tanlash va nojo‘ya reaksiyalarda harakatlar alohida o‘rganiladi.',
+          'Обучение лазерным технологиям охватывает показания, противопоказания, настройку параметров и послепроцедурный уход по платформам DEKA CO₂, александрит, сосудистый лазер Derma V и другим. Отдельно разбираются безопасность пациента и персонала, подбор режима под фототип кожи и действия при нежелательных реакциях.',
+          'Laser training covers indications, contraindications, parameter settings, and aftercare for DEKA CO₂, alexandrite, Derma V vascular laser, and other platforms. Patient and staff safety, choosing settings for each skin phototype and managing side effects are covered separately.',
         ),
         highlights: [
           L('CO₂ ablyatsiya va resurfacing', 'CO₂ абляция и resurfacing', 'CO₂ ablation and resurfacing'),

@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, type MouseEvent } from 'react';
 import { subServiceRouteKey } from '../utils/serviceSubSlug';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Maximize2, Search, SearchX, X } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
@@ -191,7 +191,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
           {filteredCategories
             .filter(cat => selectedCategory === null ? true : cat.id === selectedCategory)
             .map((category) => (
-              <motion.div
+              <m.div
                 key={category.id}
                 id={`cat-card-${category.id}`}
                 layout
@@ -299,7 +299,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
         </div>
 
@@ -319,7 +319,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
       {/* Image lightbox */}
       <AnimatePresence>
         {expandedImage && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -349,7 +349,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
               className="relative w-full max-w-5xl max-h-[85vh] flex items-center justify-center"
             >
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={expandedImage.src}
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -362,7 +362,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                     alt={expandedImage.alt}
                     className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-white/10"
                   />
-                </motion.div>
+                </m.div>
               </AnimatePresence>
 
               {categoriesWithImages.length > 1 && lightboxIndex >= 0 && (
@@ -390,7 +390,7 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
             <p className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/90 text-sm font-medium text-center px-4">
               {expandedImage.alt}
             </p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>

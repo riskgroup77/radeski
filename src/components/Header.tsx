@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe, Phone, MapPin, ChevronDown, ChevronRight, Clock } from 'lucide-react';
 import { Locale, ServiceCategory, type Article } from '../types';
-import { DICTIONARY, SERVICE_CATEGORIES, ARTICLES } from '../data';
+import { DICTIONARY, SERVICE_CATEGORIES } from '../data';
 import {
   BRAND_NAV_OVERVIEW,
   BRAND_NAV_TITLE,
@@ -405,14 +405,10 @@ export default function Header({
     [serviceCategories],
   );
 
-  const navArticles = useMemo(
-    () => (articles.length > 0 ? articles : ARTICLES),
-    [articles],
-  );
 
   const articleNavGroups = useMemo(
-    () => buildArticleNavGroups(navArticles, navServiceCategories),
-    [navArticles, navServiceCategories],
+    () => buildArticleNavGroups(articles, navServiceCategories),
+    [articles, navServiceCategories],
   );
 
   const articleCategoryFlyout = useNavSideFlyoutController(

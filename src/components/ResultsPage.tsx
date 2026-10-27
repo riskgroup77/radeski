@@ -3,7 +3,7 @@ import { landingTopicKey } from '../data/localLandingTopics';
 import { ALL_LOCAL_COMMERCIAL_LANDINGS, getLocalizedCopy, localCommercialPath } from '../data/localCommercialSeoCatalog';
 import { topicForText } from '../utils/localProof';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { m, AnimatePresence } from 'motion/react';
 import { Sparkles, ArrowLeftRight, CalendarClock, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Locale } from '../types';
 import { DICTIONARY } from '../data';
@@ -215,7 +215,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
             </div>
           ) : (
           filteredResults.map((result, index) => (
-            <motion.article
+            <m.article
               key={result.id}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -351,7 +351,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                   </div>
                 )}
               </div>
-            </motion.article>
+            </m.article>
           ))
           )}
         </div>
@@ -389,7 +389,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
 
       <AnimatePresence>
         {expandedGallery && expandedItem && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -419,7 +419,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
               className="relative w-full max-w-5xl max-h-[85vh] flex items-center justify-center"
             >
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={expandedItem.src}
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -432,7 +432,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
                     alt={expandedItem.alt}
                     className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-white/10"
                   />
-                </motion.div>
+                </m.div>
               </AnimatePresence>
 
               {expandedGallery.items.length > 1 && (
@@ -461,7 +461,7 @@ export default function ResultsPage({ locale, dictionary, results, loading = fal
               <p className="text-white/90 text-sm font-medium">{expandedGallery.title}</p>
               <p className="text-white/65 text-xs mt-1">{expandedItem.label}</p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>
