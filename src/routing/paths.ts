@@ -1,5 +1,6 @@
 import { Locale } from '../types';
 import { normalizeLocaleParam } from './locale';
+import { canonicalSubServiceLink } from '../utils/serviceSubSlug';
 
 export type PageId =
   | 'home'
@@ -259,8 +260,14 @@ export function getPageFromPathname(pathname: string): PageId {
   return 'not-found';
 }
 
+/** Categories the CMS no longer has → the category that took over their services. */
+const LEGACY_SERVICE_CATEGORY_IDS: Record<string, string> = {
+  dermatoskopiya: 'dermatoonkologiya',
+};
+
 export function serviceCategoryPath(locale: Locale, categoryId: string): string {
-  return `/${locale}/services/${encodeURIComponent(categoryId)}`;
+  const id = LEGACY_SERVICE_CATEGORY_IDS[categoryId] ?? categoryId;
+  return `/${locale}/services/${encodeURIComponent(id)}`;
 }
 
 export function servicesListPath(locale: Locale): string {
@@ -300,7 +307,8 @@ export function getConditionSlugFromPathname(pathname: string): string | null {
 }
 
 export function serviceSubPath(locale: Locale, categoryId: string, subId: string): string {
-  return `/${locale}/services/${encodeURIComponent(categoryId)}/${encodeURIComponent(subId)}`;
+  const link = canonicalSubServiceLink(categoryId, subId);
+  return `/${locale}/services/${encodeURIComponent(link.categoryId)}/${encodeURIComponent(link.subId)}`;
 }
 
 export function serviceEquipmentPath(locale: Locale, equipmentId: string): string {

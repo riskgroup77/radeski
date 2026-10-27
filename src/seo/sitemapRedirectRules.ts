@@ -4,8 +4,10 @@ import {
   type DaavlinModelId,
   pagePath,
   serviceCategoryPath,
+  serviceSubPath,
 } from '../routing/paths';
 import { serviceEquipmentPath } from '../routing/paths';
+import { LEGACY_SUB_SERVICES } from '../utils/serviceSubSlug';
 
 /** Paths (without origin) that must never appear in sitemap.xml — they redirect elsewhere. */
 export const SITEMAP_EXCLUDED_PATH_SUFFIXES: string[] = [
@@ -95,6 +97,21 @@ export function buildSiteRedirectPairs(): SiteRedirectPair[] {
       pairs.set(from, to);
       pairs.set(`${from}/`, to);
     }
+  }
+
+  // Hand-written sub-service ids and the removed dermatoskopiya category (the SPA renders them
+  // client-side only, so crawlers got a 200 shell instead of the real page).
+  for (const locale of locales) {
+    for (const [legacyId, target] of Object.entries(LEGACY_SUB_SERVICES)) {
+      const from = `/${locale}/services/${target.categoryId}/${legacyId}`;
+      const to = serviceSubPath(locale, target.categoryId, legacyId);
+      pairs.set(from, to);
+      pairs.set(`${from}/`, to);
+    }
+    const from = `/${locale}/services/dermatoskopiya`;
+    const to = serviceCategoryPath(locale, 'dermatoskopiya');
+    pairs.set(from, to);
+    pairs.set(`${from}/`, to);
   }
 
   return [...pairs.entries()]

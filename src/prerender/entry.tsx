@@ -27,7 +27,7 @@ import { getCategoryEquipmentList, getLocalizedEquipmentText, type ClinicEquipme
 import { getHomeServiceTeaserMedia } from '../data/homeServiceTeaserVideos';
 import { responsiveImage } from '../utils/imageVariants';
 import { getEquipmentSectionLabels } from '../utils/clinicEquipmentLabels';
-import { subServiceRouteKey } from '../utils/serviceSubSlug';
+import { subServiceLinkName, subServiceRouteKey } from '../utils/serviceSubSlug';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
 import type { Article, Locale, PriceItem } from '../types';
@@ -231,7 +231,7 @@ function ConditionBody({ condition, locale, category }: { condition: ServiceCond
 }
 
 function clinicSubName(category: ServiceCategory, subId: string, locale: Locale): string {
-  return category.subServices.find((sub) => sub.id === subId)?.name[locale] ?? subId;
+  return subServiceLinkName(category.subServices, subId, locale);
 }
 
 function ArticleBody({ article, locale, categories }: { article: Article; locale: Locale; categories: ServiceCategory[] }) {

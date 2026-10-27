@@ -12,6 +12,7 @@ import {
   resolveConditionDisplay,
 } from '../utils/serviceConditionDetails';
 import { serviceSubPath } from '../routing/paths';
+import { subServiceLinkName } from '../utils/serviceSubSlug';
 import MediaImage from './MediaImage';
 import AppointmentBookingLink from './AppointmentBookingLink';
 
@@ -48,11 +49,7 @@ export default function ConditionDetailBody({
     condition.aboutFooter ??
     (meta.aboutFooter ? getLocalizedConditionText(meta.aboutFooter, locale) : null);
 
-  const resolveServiceLabel = (categoryId: string, subId: string) => {
-    const cat = category.id === categoryId ? category : category;
-    const subService = cat.subServices.find((s) => s.id === subId);
-    return subService?.name[locale] ?? subId;
-  };
+  const resolveServiceLabel = (subId: string) => subServiceLinkName(category.subServices, subId, locale);
 
   return (
     <div className="space-y-5">
@@ -158,7 +155,7 @@ export default function ConditionDetailBody({
             >
               <ExternalLink className="w-3.5 h-3.5" />
               <span>
-                {labels.relatedService}: {resolveServiceLabel(link.categoryId, link.subId)}
+                {labels.relatedService}: {resolveServiceLabel(link.subId)}
               </span>
             </Link>
           ))}
