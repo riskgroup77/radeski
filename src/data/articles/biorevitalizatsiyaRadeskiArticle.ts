@@ -103,7 +103,7 @@ Muolaja xavfsiz va to‘g‘ri o‘tishi uchun Radeski Skin Clinic ning malakali
 3. seanslarni professional o‘tkazadi;
 4. keyingi parvarish bo‘yicha tavsiyalar beradi.
 
-Bog‘liq xizmatlar: [Inyeksion kosmetologiya](/uz/services/in-ekcionnaya-kosmetologiya), [Lazer biorevitalizatsiya](/uz/services/apparatnaya-kosmetologiya/lazer-biorev), [Narxlar](/uz/prices).`;
+Bog‘liq xizmatlar: [Inyeksion kosmetologiya](/uz/services/in-ekcionnaya-kosmetologiya), [Lazer biorevitalizatsiya](/uz/services/apparatnaya-kosmetologiya/lazer-biorevitalizatsiya), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -190,7 +190,7 @@ function ruBody(): string {
 
 Чтобы процедура прошла правильно без негативных последствий, обратитесь к квалифицированным врачам-косметологам Radeski Skin Clinic. Они внимательно продиагностируют, сообщат стоимость, профессионально выполнят сеансы и дадут рекомендации по дальнейшему уходу.
 
-Связанные услуги: [Инъекционная косметология](/ru/services/in-ekcionnaya-kosmetologiya), [Лазерная биоревитализация](/ru/services/apparatnaya-kosmetologiya/lazer-biorev), [Цены](/ru/prices).`;
+Связанные услуги: [Инъекционная косметология](/ru/services/in-ekcionnaya-kosmetologiya), [Лазерная биоревитализация](/ru/services/apparatnaya-kosmetologiya/lazer-biorevitalizatsiya), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -277,7 +277,7 @@ Discuss post-procedure skincare with your cosmetologist.
 
 For safe, professional treatment, consult qualified cosmetologists at Radeski Skin Clinic. They will assess your skin, explain cost and product choice, perform sessions professionally, and provide aftercare guidance.
 
-Related services: [Injection cosmetology](/en/services/in-ekcionnaya-kosmetologiya), [Laser biorevitalization](/en/services/apparatnaya-kosmetologiya/lazer-biorev), [Prices](/en/prices).`;
+Related services: [Injection cosmetology](/en/services/in-ekcionnaya-kosmetologiya), [Laser biorevitalization](/en/services/apparatnaya-kosmetologiya/lazer-biorevitalizatsiya), [Prices](/en/prices).`;
 }
 
 export const BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

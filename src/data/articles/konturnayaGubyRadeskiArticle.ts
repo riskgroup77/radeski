@@ -74,7 +74,7 @@ Yozda ham, qishda ham muolaja mumkin. Gialuron kislotasi nafaqat hajm beradi, ba
 
 Filler to'liq erigandan keyin ham lablar oldingidan biroz to'liqroq bo'lishi mumkin — gialuron kislotaning yoshartiruvchi ta'siri saqlanadi. Takroriy muolaja shifokor rejasiga ko'ra o'tkaziladi.
 
-Bog'liq xizmatlar: [Kontur plastika](/uz/services/in-ekcionnaya-kosmetologiya/konturnaya), [Biorevitalizatsiya](/uz/services/in-ekcionnaya-kosmetologiya/biorev), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Kontur plastika](/uz/services/in-ekcionnaya-kosmetologiya/kontur-plastikasi), [Biorevitalizatsiya](/uz/services/in-ekcionnaya-kosmetologiya/biorevitalizatsiya), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -137,7 +137,7 @@ function ruBody(): string {
 
 Даже после полного рассасывания губы могут оставаться чуть более полными, чем до процедуры. Повторное введение — по плану врача.
 
-Связанные услуги: [Контурная пластика](/ru/services/in-ekcionnaya-kosmetologiya/konturnaya), [Биоревитализация](/ru/services/in-ekcionnaya-kosmetologiya/biorev), [Цены](/ru/prices).`;
+Связанные услуги: [Контурная пластика](/ru/services/in-ekcionnaya-kosmetologiya/kontur-plastikasi), [Биоревитализация](/ru/services/in-ekcionnaya-kosmetologiya/biorevitalizatsiya), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -200,7 +200,7 @@ The procedure can be done year-round. Hyaluronic acid adds volume and supports t
 
 Lips may remain slightly fuller than before treatment even after full resorption. Repeat sessions follow your physician's plan.
 
-Related services: [Contour enhancement](/en/services/in-ekcionnaya-kosmetologiya/konturnaya), [Biorevitalization](/en/services/in-ekcionnaya-kosmetologiya/biorev), [Prices](/en/prices).`;
+Related services: [Contour enhancement](/en/services/in-ekcionnaya-kosmetologiya/kontur-plastikasi), [Biorevitalization](/en/services/in-ekcionnaya-kosmetologiya/biorevitalizatsiya), [Prices](/en/prices).`;
 }
 
 export const KONTURnaya_GUBY_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

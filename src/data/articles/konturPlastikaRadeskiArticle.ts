@@ -71,7 +71,7 @@ Gialuron kislotasi suv bilan ishlaydi — **yetarli suv ichish** namlik va tikla
 
 Vaqtincha shish, gematoma, yengil og'riq **2–4 kun** normal. Kulish mumkin; faol o'pishdan **5–7 kun** cheklash tavsiya etiladi.
 
-Bog'liq xizmatlar: [Kontur plastika](/uz/services/in-ekcionnaya-kosmetologiya/konturnaya), [Biorevitalizatsiya](/uz/services/in-ekcionnaya-kosmetologiya/biorev), [Botulinoterapiya](/uz/articles/botulinoterapiya-mimik-ajinlar-radeski), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Kontur plastika](/uz/services/in-ekcionnaya-kosmetologiya/kontur-plastikasi), [Biorevitalizatsiya](/uz/services/in-ekcionnaya-kosmetologiya/biorevitalizatsiya), [Botulinoterapiya](/uz/articles/art-botulinoterapiya-radeski), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -127,7 +127,7 @@ function ruBody(): string {
 
 Отёк, гематома, дискомфорт 2–4 дня — норма. Лёгкие поцелуи допустимы; активные — лучше отложить на 5–7 дней.
 
-Связанные услуги: [Контурная пластика](/ru/services/in-ekcionnaya-kosmetologiya/konturnaya), [Биоревитализация](/ru/services/in-ekcionnaya-kosmetologiya/biorev), [Ботулинотерапия](/ru/articles/botulinoterapiya-mimik-ajinlar-radeski), [Цены](/ru/prices).`;
+Связанные услуги: [Контурная пластика](/ru/services/in-ekcionnaya-kosmetologiya/kontur-plastikasi), [Биоревитализация](/ru/services/in-ekcionnaya-kosmetologiya/biorevitalizatsiya), [Ботулинотерапия](/ru/articles/art-botulinoterapiya-radeski), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -169,7 +169,7 @@ Natural volume without an overfilled look.
 
 Temporary swelling, bruising, and soreness for 2–4 days are common. Active kissing is best avoided for 5–7 days.
 
-Related services: [Contour enhancement](/en/services/in-ekcionnaya-kosmetologiya/konturnaya), [Biorevitalization](/en/services/in-ekcionnaya-kosmetologiya/biorev), [Botulinum therapy](/en/articles/botulinoterapiya-mimik-ajinlar-radeski), [Prices](/en/prices).`;
+Related services: [Contour enhancement](/en/services/in-ekcionnaya-kosmetologiya/kontur-plastikasi), [Biorevitalization](/en/services/in-ekcionnaya-kosmetologiya/biorevitalizatsiya), [Botulinum therapy](/en/articles/art-botulinoterapiya-radeski), [Prices](/en/prices).`;
 }
 
 export const KONTUR_PLASTIKA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

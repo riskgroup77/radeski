@@ -87,7 +87,7 @@ Tanlangan kombinatsiya:
 
 > Psoriaz surunkali kasallik — uni «bir dori» bilan butunlay yo'q qilish mumkin emas. Ammo to'g'ri kombinatsiyalangan terapiya bilan uzoq remissiya erishish mumkin. UVA 308 nm va kalsipotriol kombinatsiyasi bemorni gormonlarga qaramlikdan qutqardi. Eritrodermiya yoki psoriatik artrit bo'lsa, immunobiologik yoki boshqa tizimli preparatlar qo'shilishi kerak bo'ladi.
 
-Bog'liq xizmatlar: [Fototerapiya](/uz/services/dermatologiya/fototerapiya), [Psoriaz maktabi](/uz/services/shkola-psoriaza), [Immunobiologik terapiya](/uz/services/dermatologiya/immunobiologicheskaya), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Fototerapiya](/uz/services/dermatologiya/fototerapiya), [Psoriaz maktabi](/uz/conditions/psoriaz), [Immunobiologik terapiya](/uz/services/dermatologiya/immunobiologik-terapiya), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -146,7 +146,7 @@ function ruBody(): string {
 
 > Стабильная ремиссия достижима при правильной комбинированной терапии. UVA 308 nm + кальципотриол снижает зависимость от гормонов. При эритродермии или псориатическом артрите нужны биологические препараты или иные системные препараты.
 
-Связанные услуги: [Фототерапия](/ru/services/dermatologiya/fototerapiya), [Школа псориаза](/ru/services/shkola-psoriaza), [Иммунобиологическая терапия](/ru/services/dermatologiya/immunobiologicheskaya), [Цены](/ru/prices).`;
+Связанные услуги: [Фототерапия](/ru/services/dermatologiya/fototerapiya), [Школа псориаза](/ru/conditions/psoriaz), [Иммунобиологическая терапия](/ru/services/dermatologiya/immunobiologik-terapiya), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -203,7 +203,7 @@ Week 2 — itch resolved; week 4 — plaques flattened; week 8 — major clearan
 
 > Long remission is achievable with the right combined therapy. UVA 308 nm + calcipotriol reduced steroid dependence. Erythrodermic psoriasis or psoriatic arthritis may require biologics or other systemic agents.
 
-Related services: [Phototherapy](/en/services/dermatologiya/fototerapiya), [Psoriasis school](/en/services/shkola-psoriaza), [Immunobiological therapy](/en/services/dermatologiya/immunobiologicheskaya), [Prices](/en/prices).`;
+Related services: [Phototherapy](/en/services/dermatologiya/fototerapiya), [Psoriasis school](/en/conditions/psoriaz), [Immunobiological therapy](/en/services/dermatologiya/immunobiologik-terapiya), [Prices](/en/prices).`;
 }
 
 export const PSORIAZ_KLINIK_KEYS_BAHRIDINOV_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

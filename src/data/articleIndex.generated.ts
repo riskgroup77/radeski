@@ -2044,7 +2044,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Farg'ona"
       ],
-      "bodyLength": 4913,
+      "bodyLength": 4925,
       "bodyWords": 581
     },
     "ru": {
@@ -2058,7 +2058,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Фергана"
       ],
-      "bodyLength": 4579,
+      "bodyLength": 4591,
       "bodyWords": 559
     },
     "en": {
@@ -2072,7 +2072,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Fergana"
       ],
-      "bodyLength": 4141,
+      "bodyLength": 4153,
       "bodyWords": 573
     }
   },
@@ -2089,7 +2089,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Farg'ona"
       ],
-      "bodyLength": 6442,
+      "bodyLength": 6444,
       "bodyWords": 767
     },
     "ru": {
@@ -2104,7 +2104,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Фергана"
       ],
-      "bodyLength": 6293,
+      "bodyLength": 6295,
       "bodyWords": 800
     },
     "en": {
@@ -2119,7 +2119,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Fergana"
       ],
-      "bodyLength": 5579,
+      "bodyLength": 5581,
       "bodyWords": 803
     }
   },
@@ -2135,7 +2135,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Farg'ona"
       ],
-      "bodyLength": 4369,
+      "bodyLength": 4389,
       "bodyWords": 512
     },
     "ru": {
@@ -2149,7 +2149,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Фергана"
       ],
-      "bodyLength": 4510,
+      "bodyLength": 4530,
       "bodyWords": 515
     },
     "en": {
@@ -2163,7 +2163,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Fergana"
       ],
-      "bodyLength": 4016,
+      "bodyLength": 4036,
       "bodyWords": 522
     }
   },
@@ -2179,7 +2179,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Farg'ona"
       ],
-      "bodyLength": 2156,
+      "bodyLength": 2155,
       "bodyWords": 259
     },
     "ru": {
@@ -2193,7 +2193,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Фергана"
       ],
-      "bodyLength": 2016,
+      "bodyLength": 2015,
       "bodyWords": 232
     },
     "en": {
@@ -2207,7 +2207,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Fergana"
       ],
-      "bodyLength": 1691,
+      "bodyLength": 1690,
       "bodyWords": 217
     }
   },
@@ -2260,7 +2260,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Dermatologiya",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2043,
+      "bodyLength": 2039,
       "bodyWords": 217
     },
     "ru": {
@@ -2273,7 +2273,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Dermatologiya",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1901,
+      "bodyLength": 1897,
       "bodyWords": 194
     },
     "en": {
@@ -2286,7 +2286,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Dermatology",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1624,
+      "bodyLength": 1620,
       "bodyWords": 186
     }
   },
@@ -2301,7 +2301,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Surgiderm",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2799,
+      "bodyLength": 2818,
       "bodyWords": 344
     },
     "ru": {
@@ -2314,7 +2314,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Surgiderm",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2446,
+      "bodyLength": 2465,
       "bodyWords": 331
     },
     "en": {
@@ -2327,7 +2327,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Aesthetic medicine",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2127,
+      "bodyLength": 2146,
       "bodyWords": 306
     }
   },
@@ -2342,7 +2342,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Vitaminlar",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2522,
+      "bodyLength": 2537,
       "bodyWords": 281
     },
     "ru": {
@@ -2355,7 +2355,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Витамины",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2140,
+      "bodyLength": 2155,
       "bodyWords": 263
     },
     "en": {
@@ -2368,7 +2368,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Vitamins",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1928,
+      "bodyLength": 1943,
       "bodyWords": 254
     }
   },
@@ -2384,7 +2384,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Qo'qon"
       ],
-      "bodyLength": 3847,
+      "bodyLength": 3843,
       "bodyWords": 435
     },
     "ru": {
@@ -2398,7 +2398,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Коканд"
       ],
-      "bodyLength": 2648,
+      "bodyLength": 2644,
       "bodyWords": 311
     },
     "en": {
@@ -2412,7 +2412,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Radeski Skin Clinic",
         "Kokand"
       ],
-      "bodyLength": 2382,
+      "bodyLength": 2378,
       "bodyWords": 285
     }
   },
@@ -2427,7 +2427,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Frezera skobasi",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2248,
+      "bodyLength": 2258,
       "bodyWords": 258
     },
     "ru": {
@@ -2440,7 +2440,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Скоба Фрезера",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1900,
+      "bodyLength": 1910,
       "bodyWords": 221
     },
     "en": {
@@ -2453,7 +2453,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Freer brace",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1742,
+      "bodyLength": 1752,
       "bodyWords": 223
     }
   },
@@ -2506,7 +2506,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Inyeksion kosmetologiya",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2261,
+      "bodyLength": 2270,
       "bodyWords": 277
     },
     "ru": {
@@ -2519,7 +2519,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Инъекционная косметология",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1695,
+      "bodyLength": 1704,
       "bodyWords": 201
     },
     "en": {
@@ -2532,7 +2532,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Injection cosmetology",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1571,
+      "bodyLength": 1580,
       "bodyWords": 188
     }
   },
@@ -2546,7 +2546,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Namlantirish",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 2120,
+      "bodyLength": 2119,
       "bodyWords": 252
     },
     "ru": {
@@ -2558,7 +2558,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Увлажнение",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1695,
+      "bodyLength": 1694,
       "bodyWords": 184
     },
     "en": {
@@ -2570,7 +2570,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Hydration",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 1567,
+      "bodyLength": 1566,
       "bodyWords": 175
     }
   },
@@ -2585,7 +2585,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Trixoskopiya",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 6038,
+      "bodyLength": 6058,
       "bodyWords": 733
     },
     "ru": {
@@ -2599,7 +2599,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Трихоскопия",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 5773,
+      "bodyLength": 5793,
       "bodyWords": 710
     },
     "en": {
@@ -2613,7 +2613,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Trichoscopy",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 4725,
+      "bodyLength": 4745,
       "bodyWords": 690
     }
   },

@@ -57,7 +57,7 @@ Hayot davomida deyarli har bir kishi terida turli o'smalar bilan duch keladi: to
 
 Teri o'smalarini dermatoskopiya qilish uchun **qarshi ko'rsatmalar yo'q** — muolaja sog'liq uchun to'liq xavfsiz.
 
-Bog'liq xizmatlar: [Dermatoskopiya](/uz/services/dermatoskopiya), [Dermatoonkologiya](/uz/services/dermatoonkologiya), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Dermatoskopiya](/uz/fargona/dermatoskopiya), [Dermatoonkologiya](/uz/services/dermatoonkologiya), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -103,7 +103,7 @@ function ruBody(): string {
 
 Противопоказаний к дерматоскопии новообразований кожи **нет** — процедура полностью безопасна.
 
-Связанные услуги: [Дерматоскопия](/ru/services/dermatoskopiya), [Дерматоонкология](/ru/services/dermatoonkologiya), [Цены](/ru/prices).`;
+Связанные услуги: [Дерматоскопия](/ru/fargona/dermatoskopiya), [Дерматоонкология](/ru/services/dermatoonkologiya), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -149,7 +149,7 @@ Almost everyone develops skin lesions during life: vascular and epithelial growt
 
 There are **no contraindications** — the procedure is fully safe.
 
-Related services: [Dermoscopy](/en/services/dermatoskopiya), [Dermato-oncology](/en/services/dermatoonkologiya), [Prices](/en/prices).`;
+Related services: [Dermoscopy](/en/fargona/dermatoskopiya), [Dermato-oncology](/en/services/dermatoonkologiya), [Prices](/en/prices).`;
 }
 
 export const PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

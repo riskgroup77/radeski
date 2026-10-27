@@ -112,7 +112,7 @@ Bularning oldini olish uchun doza, nuqta tanlash va shifokor tajribasi muhim. Ra
 
 Ko‘pchilik mutaxassislar birinchi marta **Kseomin** yoki **Dysport** kabi sertifikatlangan preparatlarni tavsiya qiladi. Preparat tanlash — teri holati, zona va xohlagan effektga qarab konsultatsiyada aniqlanadi.
 
-Bog‘liq xizmatlar: [Botulinoterapiya](/uz/services/in-ekcionnaya-kosmetologiya/botulino), [Inyeksion kosmetologiya](/uz/services/in-ekcionnaya-kosmetologiya), [Biorevitalizatsiya](/uz/articles/biorevitalizatsiya-gialuron-kislota-radeski), [Narxlar](/uz/prices).`;
+Bog‘liq xizmatlar: [Botulinoterapiya](/uz/services/in-ekcionnaya-kosmetologiya/botulinoterapiya-botoks), [Inyeksion kosmetologiya](/uz/services/in-ekcionnaya-kosmetologiya), [Biorevitalizatsiya](/uz/articles/art-biorevitalizatsiya-radeski), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -209,7 +209,7 @@ function ruBody(): string {
 
 Большинство косметологов рекомендуют для первого применения препараты группы ботулотоксинов — **Ксеомин** или **Диспорт**. Выбор препарата определяется на консультации с учётом зоны, состояния кожи и желаемого эффекта.
 
-Связанные услуги: [Ботулинотерапия](/ru/services/in-ekcionnaya-kosmetologiya/botulino), [Инъекционная косметология](/ru/services/in-ekcionnaya-kosmetologiya), [Биоревитализация](/ru/articles/biorevitalizatsiya-gialuron-kislota-radeski), [Цены](/ru/prices).`;
+Связанные услуги: [Ботулинотерапия](/ru/services/in-ekcionnaya-kosmetologiya/botulinoterapiya-botoks), [Инъекционная косметология](/ru/services/in-ekcionnaya-kosmetologiya), [Биоревитализация](/ru/articles/art-biorevitalizatsiya-radeski), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -308,7 +308,7 @@ Proper dosing, injection points, and physician experience minimize risks. At Rad
 
 Many specialists recommend certified botulinum products such as **Xeomin** or **Dysport** for first-time treatment. Product choice is made at consultation based on zone, skin condition, and desired effect.
 
-Related services: [Botulinum therapy](/en/services/in-ekcionnaya-kosmetologiya/botulino), [Injection cosmetology](/en/services/in-ekcionnaya-kosmetologiya), [Biorevitalization](/en/articles/biorevitalizatsiya-gialuron-kislota-radeski), [Prices](/en/prices).`;
+Related services: [Botulinum therapy](/en/services/in-ekcionnaya-kosmetologiya/botulinoterapiya-botoks), [Injection cosmetology](/en/services/in-ekcionnaya-kosmetologiya), [Biorevitalization](/en/articles/art-biorevitalizatsiya-radeski), [Prices](/en/prices).`;
 }
 
 export const BOTULINOTERAPIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

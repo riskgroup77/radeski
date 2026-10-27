@@ -67,7 +67,7 @@ Tez va iqtisodiy natija kerak bo'lsa — **inyeksion biorevitalizatsiya** ham qo
 
 **Mezoterapiya** — ko'proq epidermis, tonus va mikrotsirkulyatsiya; **biorevitalizatsiya** — chuqurroq derma, **namlik va tiklanish**.
 
-Bog'liq xizmatlar: [Lazer biorevitalizatsiya](/uz/services/apparatnaya-kosmetologiya/lazer-biorev), [Inyeksion biorevitalizatsiya](/uz/articles/biorevitalizatsiya-gialuron-kislota-radeski), [Apparatli kosmetologiya](/uz/services/apparatnaya-kosmetologiya), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Lazer biorevitalizatsiya](/uz/services/apparatnaya-kosmetologiya/lazer-biorevitalizatsiya), [Inyeksion biorevitalizatsiya](/uz/articles/art-biorevitalizatsiya-radeski), [Apparatli kosmetologiya](/uz/services/apparatnaya-kosmetologiya), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -113,7 +113,7 @@ function ruBody(): string {
 
 **Мезотерапия** — верхние слои, тонус, микроциркуляция; **биоревитализация** — глубокая дерма, **увлажнение и восстановление**.
 
-Связанные услуги: [Лазерная биоревитализация](/ru/services/apparatnaya-kosmetologiya/lazer-biorev), [Инъекционная биоревитализация](/ru/articles/biorevitalizatsiya-gialuron-kislota-radeski), [Аппаратная косметология](/ru/services/apparatnaya-kosmetologiya), [Цены](/ru/prices).`;
+Связанные услуги: [Лазерная биоревитализация](/ru/services/apparatnaya-kosmetologiya/lazer-biorevitalizatsiya), [Инъекционная биоревитализация](/ru/articles/art-biorevitalizatsiya-radeski), [Аппаратная косметология](/ru/services/apparatnaya-kosmetologiya), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -154,7 +154,7 @@ Gentle **peel**, **gel** application, **laser** treatment.
 
 **Mesotherapy** targets upper layers and tone; **biorevitalization** focuses on deep dermal **hydration and repair**.
 
-Related services: [Laser biorevitalization](/en/services/apparatnaya-kosmetologiya/lazer-biorev), [Injection biorevitalization](/en/articles/biorevitalizatsiya-gialuron-kislota-radeski), [Device cosmetology](/en/services/apparatnaya-kosmetologiya), [Prices](/en/prices).`;
+Related services: [Laser biorevitalization](/en/services/apparatnaya-kosmetologiya/lazer-biorevitalizatsiya), [Injection biorevitalization](/en/articles/art-biorevitalizatsiya-radeski), [Device cosmetology](/en/services/apparatnaya-kosmetologiya), [Prices](/en/prices).`;
 }
 
 export const LAZER_BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

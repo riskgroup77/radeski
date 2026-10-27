@@ -50,7 +50,7 @@ Baliq yog'i sochlarning quruqligi va mo'rtligini, bosh terisi qichishini, qattiq
 
 Lomklik va qattiq parchalanish uchun trixologlar **Vichy Dercos** kabi ixtisoslashtirilgan shampunlarni tavsiya qiladi — bu seriya klinik amaliyotda yaxshi natija beradi.
 
-Bog'liq xizmatlar: [Trixologiya markazi](/uz/services/trihologiya-centr-lechenie-volos), [Plazmaterapiya (PRP)](/uz/services/trihologiya-centr-lechenie-volos/trixoskop), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Trixologiya markazi](/uz/services/trihologiya-centr-lechenie-volos), [Plazmaterapiya (PRP)](/uz/services/trihologiya-centr-lechenie-volos/kompyuter-trixoskopiyasi), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -89,7 +89,7 @@ function ruBody(): string {
 
 При ломкости и перхоти трихологи рекомендуют специализированные шампуни, например **Vichy Dercos** — серия хорошо зарекомендовала себя в практике.
 
-Связанные услуги: [Центр трихологии](/ru/services/trihologiya-centr-lechenie-volos), [Плазмотерапия (PRP)](/ru/services/trihologiya-centr-lechenie-volos/trixoskop), [Цены](/ru/prices).`;
+Связанные услуги: [Центр трихологии](/ru/services/trihologiya-centr-lechenie-volos), [Плазмотерапия (PRP)](/ru/services/trihologiya-centr-lechenie-volos/kompyuter-trixoskopiyasi), [Цены](/ru/prices).`;
 }
 
 function enBody(): string {
@@ -128,7 +128,7 @@ Fish oil helps reduce dryness, brittleness, itching, dandruff, and shedding. Ome
 
 For brittleness and dandruff, trichologists often recommend specialized shampoos such as **Vichy Dercos**.
 
-Related services: [Trichology center](/en/services/trihologiya-centr-lechenie-volos), [Plasma therapy (PRP)](/en/services/trihologiya-centr-lechenie-volos/trixoskop), [Prices](/en/prices).`;
+Related services: [Trichology center](/en/services/trihologiya-centr-lechenie-volos), [Plasma therapy (PRP)](/en/services/trihologiya-centr-lechenie-volos/kompyuter-trixoskopiyasi), [Prices](/en/prices).`;
 }
 
 export const SOCH_TOKILISHI_PROFILAKTIKA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

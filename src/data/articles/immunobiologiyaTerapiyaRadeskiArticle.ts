@@ -45,7 +45,7 @@ Haqiqiy klinik amaliyotda terapiya davomiyligi uzoq muddatli samarani aks ettira
 
 Radeski Skin & Aesthetic Clinic yetakchi dermatologlari psoriaz, **atopik dermatit**, **urtiker**, **suppurativ gidradenit** va **Diverje kasalligi** bemorlariga immunobiologik preparatlar tayinlashda ko'p yillik tajribaga ega.
 
-Bog'liq xizmatlar: [Immunobiologik terapiya](/uz/services/dermatologiya/immunobiologicheskaya), [Psoriaz maktabi](/uz/services/shkola-psoriaza), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Immunobiologik terapiya](/uz/services/dermatologiya/immunobiologik-terapiya), [Psoriaz maktabi](/uz/conditions/psoriaz), [Narxlar](/uz/prices).`;
 }
 
 function ruBody(): string {
@@ -79,7 +79,7 @@ Stelara сохраняет максимальную действенность �
 
 Ведущие дерматологи Radeski Skin & Aesthetic Clinic имеют многолетний опыт назначения **иммунобиологической терапии** при псориазе, **атопическом дерматите**, **крапивнице**, **суппуративном гидрадените** и **болезни Диверже**.
 
-Связанные услуги: [Иммунобиологическая терапия](/ru/services/dermatologiya/immunobiologicheskaya), [Школа псориаза](/ru/services/shkola-psoriaza), [Цены](/ru/prices).`;
+Связанные услуги: [Иммунобиологическая терапия](/ru/services/dermatologiya/immunobiologik-terapiya), [Школа псориаза](/ru/conditions/psoriaz), [Цены](/ru/prices).`;
 }
 function enBody(): string {
   return `## What is immunobiological therapy?
@@ -112,7 +112,7 @@ Stelara maintains strong long-term effectiveness in real-world practice.
 
 Leading dermatologists at Radeski Skin & Aesthetic Clinic have extensive experience prescribing immunobiological therapy for psoriasis, **atopic dermatitis**, **urticaria**, **hidradenitis suppurativa**, and **Darier disease**.
 
-Related services: [Immunobiological therapy](/en/services/dermatologiya/immunobiologicheskaya), [Psoriasis school](/en/services/shkola-psoriaza), [Prices](/en/prices).`;
+Related services: [Immunobiological therapy](/en/services/dermatologiya/immunobiologik-terapiya), [Psoriasis school](/en/conditions/psoriaz), [Prices](/en/prices).`;
 }
 
 export const IMMUNOBIOLOGIYA_TERAPIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {
