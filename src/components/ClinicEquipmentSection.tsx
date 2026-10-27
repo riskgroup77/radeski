@@ -60,7 +60,7 @@ export default function ClinicEquipmentSection({
           >
             <div className="flex items-start gap-3 p-4 sm:p-5">
               <div className="hidden h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-brand-sectiongray bg-brand-white sm:block">
-                <MediaImage src={entry.image} alt="" className="h-full w-full object-cover" />
+                <MediaImage src={entry.image} alt={title} className="h-full w-full object-cover" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-2">

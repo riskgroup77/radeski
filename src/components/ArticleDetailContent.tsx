@@ -140,11 +140,16 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
           </h3>
         );
       },
-      p: ({ children }: { children?: ReactNode }) => (
-        <p className="text-sm sm:text-base text-brand-text-secondary font-light leading-relaxed mb-4">
-          {children}
-        </p>
-      ),
+      p: ({ node, children }: { node?: { children?: { type: string; tagName?: string }[] }; children?: ReactNode }) => {
+        // An image renders as <figure>, which may not sit in a <p>: browsers split the paragraph,
+        // and a server-rendered article then no longer matches what React hydrates.
+        const Tag = node?.children?.some((child) => child.type === 'element' && child.tagName === 'img') ? 'div' : 'p';
+        return (
+          <Tag className="text-sm sm:text-base text-brand-text-secondary font-light leading-relaxed mb-4">
+            {children}
+          </Tag>
+        );
+      },
       ul: ({ children }: { children?: ReactNode }) => (
         <ul className="list-disc pl-5 space-y-2 mb-5 text-sm sm:text-base text-brand-text-secondary font-light">
           {children}

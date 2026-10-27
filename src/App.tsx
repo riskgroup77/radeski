@@ -1017,8 +1017,6 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             <Services 
               locale={locale} 
               onOpenAppointment={handleOpenAppointmentWithService} 
-              onOpenCategory={goToServiceCategory}
-              onOpenSubService={goToServiceSub}
               serviceCategories={dynamicServiceCategories}
               dictionary={d}
             />

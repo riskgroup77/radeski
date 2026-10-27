@@ -1,5 +1,6 @@
 import type { DaavlinModelId } from '../routing/paths';
 import type { Locale } from '../types';
+import { groupDigits } from '../utils/formatUzs';
 
 type L = Record<Locale, string>;
 const t = (uz: string, ru: string, en: string): L => ({ uz, ru, en });
@@ -442,10 +443,7 @@ export const DAAVLIN_MODEL_FINANCE: Record<DaavlinModelId, ModelFinanceConfig> =
 };
 
 export function formatUzs(amount: number, locale: Locale): string {
-  const rounded = Math.round(amount);
-  const formatted = new Intl.NumberFormat(locale === 'ru' ? 'ru-RU' : 'uz-UZ', {
-    maximumFractionDigits: 0,
-  }).format(rounded);
+  const formatted = groupDigits(amount);
   if (locale === 'en') return `${formatted} UZS`;
   if (locale === 'ru') return `${formatted} сум`;
   return `${formatted} so'm`;

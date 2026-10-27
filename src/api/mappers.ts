@@ -24,6 +24,7 @@ import {
   mapLocalizedImagesFromApi,
 } from '../utils/localizedImage';
 import { normalizeArticleViews } from '../utils/articleViews';
+import { groupDigits } from '../utils/formatUzs';
 
 export function preserveImagePath(url: string | null | undefined): string | null {
   if (!url) return null;
@@ -134,7 +135,7 @@ export function mapServiceCategoryFromApi(api: ApiServiceCategory): ServiceCateg
 }
 
 export function formatPriceValue(value: number): string {
-  return `${Math.round(value).toLocaleString('uz-UZ')} UZS`;
+  return `${groupDigits(value)} UZS`;
 }
 
 export function parsePriceValue(price: string): number {

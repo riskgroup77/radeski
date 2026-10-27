@@ -1,5 +1,7 @@
 import { useState, useMemo, useEffect, type MouseEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { subServiceRouteKey } from '../utils/serviceSubSlug';
+import { serviceCategoryPath, serviceSubPath } from '../routing/paths';
 import { m, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, Maximize2, Search, SearchX, X } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
@@ -12,13 +14,11 @@ import { getServiceLucideIcon, resolveCategoryIcon, resolveSubServiceIcon } from
 interface ServicesProps {
   locale: Locale;
   onOpenAppointment: (serviceId?: string) => void;
-  onOpenCategory?: (categoryId: string) => void;
-  onOpenSubService?: (categoryId: string, subId: string) => void;
   serviceCategories?: ServiceCategory[];
   dictionary?: any;
 }
 
-export default function Services({ locale, onOpenAppointment, onOpenCategory, onOpenSubService, serviceCategories, dictionary }: ServicesProps) {
+export default function Services({ locale, onOpenAppointment, serviceCategories, dictionary }: ServicesProps) {
   const d = dictionary || DICTIONARY[locale];
   const dynamicCategories = serviceCategories || SERVICE_CATEGORIES;
   const [searchQuery, setSearchQuery] = useState('');
@@ -226,69 +226,72 @@ export default function Services({ locale, onOpenAppointment, onOpenCategory, on
                 )}
 
                 <div className="p-5 flex flex-col flex-1">
-                  <button
-                    type="button"
-                    onClick={() => onOpenCategory?.(category.id)}
+                  <Link
+                    to={serviceCategoryPath(locale, category.id)}
                     className="text-left font-bold text-brand-text-primary text-lg leading-tight hover:text-brand-gold transition-colors cursor-pointer"
                   >
                     {category.title[locale]}
-                  </button>
+                  </Link>
                   <p className="text-brand-text-secondary text-xs sm:text-sm leading-relaxed mb-4 mt-3 font-light">
                     {category.description[locale]}
                   </p>
 
-                  {onOpenCategory && (
-                    <button
-                      type="button"
-                      onClick={() => onOpenCategory(category.id)}
-                      className="mb-4 text-xs text-brand-gold hover:text-brand-gold-dark font-bold inline-flex items-center gap-1 cursor-pointer"
-                    >
-                      <span>{d.viewDetails}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
-                  )}
+                  <Link
+                    to={serviceCategoryPath(locale, category.id)}
+                    className="mb-4 text-xs text-brand-gold hover:text-brand-gold-dark font-bold inline-flex items-center gap-1 cursor-pointer self-start"
+                  >
+                    <span>{d.viewDetails}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
 
                   <div className="space-y-2.5 border-t border-brand-offwhite pt-4 flex-1">
-                    {category.subServices.map((sub) => (
-                      <button
-                        key={sub.id}
-                        type="button"
-                        onClick={() => onOpenSubService?.(category.id, subServiceRouteKey(sub))}
-                        className="w-full p-2.5 sm:p-3 bg-brand-offwhite/60 hover:bg-brand-gold-light/10 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-start gap-3 cursor-pointer group/sub transition-all text-left"
-                      >
-                        {getSubImage(sub, category) ? (
-                          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-white shadow-xs group/thumb mt-0.5">
-                            <MediaImage
-                              src={getSubImage(sub, category)!}
-                              alt={sub.name[locale]}
-                              loading="lazy"
-                              className="w-full h-full object-cover object-center"
-                            />
+                    {category.subServices.map((sub) => {
+                      const subImage = getSubImage(sub, category);
+                      return (
+                        // The zoom button sits beside the link, over its thumbnail: a button
+                        // inside a link (or another button) is invalid HTML that browsers rewrite.
+                        <div key={sub.id} className="relative group/sub">
+                          <Link
+                            to={serviceSubPath(locale, category.id, subServiceRouteKey(sub))}
+                            className="w-full p-2.5 sm:p-3 bg-brand-offwhite/60 hover:bg-brand-gold-light/10 rounded-xl border border-transparent hover:border-brand-gold-light/30 flex items-start gap-3 cursor-pointer transition-all text-left"
+                          >
+                            {subImage ? (
+                              <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden shrink-0 border border-brand-sectiongray bg-brand-white shadow-xs mt-0.5">
+                                <MediaImage
+                                  src={subImage}
+                                  alt={sub.name[locale]}
+                                  loading="lazy"
+                                  className="w-full h-full object-cover object-center"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl shrink-0 bg-brand-gold-light/10 border border-brand-gold-light/25 flex items-center justify-center shadow-xs mt-0.5">
+                                {renderIcon(resolveSubServiceIcon(sub, category), 'w-5 h-5 text-brand-gold')}
+                              </div>
+                            )}
+                            <span className="flex-1 min-w-0">
+                              <span className="text-brand-text-primary text-xs sm:text-sm font-semibold group-hover/sub:text-brand-gold leading-tight block">
+                                {sub.name[locale]}
+                              </span>
+                              <span className="text-brand-text-muted text-[11px] sm:text-xs font-light leading-snug mt-1 line-clamp-2 block">
+                                {sub.description[locale]}
+                              </span>
+                            </span>
+                            <ChevronRight className="w-4 h-4 text-brand-text-muted group-hover/sub:text-brand-gold group-hover/sub:translate-x-0.5 transition-all shrink-0 mt-1" />
+                          </Link>
+                          {subImage && (
                             <button
                               type="button"
-                              onClick={(e) => openImageLightbox(getSubImage(sub, category)!, sub.name[locale], e)}
-                              className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-all cursor-pointer"
+                              onClick={(e) => openImageLightbox(subImage, sub.name[locale], e)}
+                              className="absolute left-[11px] top-[13px] sm:left-[13px] sm:top-[15px] w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center bg-black/0 hover:bg-black/40 opacity-0 hover:opacity-100 focus-visible:opacity-100 transition-all cursor-pointer"
                               aria-label={locale === 'uz' ? 'Rasmni kattalashtirish' : locale === 'ru' ? 'Увеличить' : 'Expand'}
                             >
                               <Maximize2 className="w-4 h-4 text-white drop-shadow-md" />
                             </button>
-                          </div>
-                        ) : (
-                          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl shrink-0 bg-brand-gold-light/10 border border-brand-gold-light/25 flex items-center justify-center shadow-xs mt-0.5">
-                            {renderIcon(resolveSubServiceIcon(sub, category), 'w-5 h-5 text-brand-gold')}
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
-                          <span className="text-brand-text-primary text-xs sm:text-sm font-semibold group-hover/sub:text-brand-gold leading-tight block">
-                            {sub.name[locale]}
-                          </span>
-                          <span className="text-brand-text-muted text-[11px] sm:text-xs font-light leading-snug mt-1 line-clamp-2 block">
-                            {sub.description[locale]}
-                          </span>
+                          )}
                         </div>
-                        <ChevronRight className="w-4 h-4 text-brand-text-muted group-hover/sub:text-brand-gold group-hover/sub:translate-x-0.5 transition-all shrink-0 mt-1" />
-                      </button>
-                    ))}
+                      );
+                    })}
                   </div>
 
                   <button

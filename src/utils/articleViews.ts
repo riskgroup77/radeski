@@ -1,4 +1,5 @@
 import type { Locale } from '../types';
+import { groupDigits } from './formatUzs';
 
 export function normalizeArticleViews(views: unknown): number {
   if (typeof views === 'number' && Number.isFinite(views)) {
@@ -8,14 +9,9 @@ export function normalizeArticleViews(views: unknown): number {
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
 }
 
-function viewsLocale(locale: Locale): string {
-  if (locale === 'uz') return 'uz-UZ';
-  if (locale === 'ru') return 'ru-RU';
-  return 'en-US';
-}
-
+/** "12 345" (uz, ru) / "12,345" (en) — without Intl, so server and browser agree (see groupDigits). */
 export function formatArticleViewsCount(views: unknown, locale: Locale): string {
-  return normalizeArticleViews(views).toLocaleString(viewsLocale(locale));
+  return groupDigits(normalizeArticleViews(views), locale === 'en' ? ',' : ' ');
 }
 
 export function formatArticleViewsLabel(views: unknown, locale: Locale): string {
