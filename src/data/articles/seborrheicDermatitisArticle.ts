@@ -91,7 +91,7 @@ Radeski Skin Clinic'da [dermatolog](/uz/services/dermatologiya) terini va bosh t
 - [Dermatolog Farg'onada](/uz/fargona/dermatolog) — qabul, narxlar va shifokorlar;
 - [Dermatolog Qo'qonda](/uz/qoqon/dermatolog) — Qo'qon filialida qabul;
 - soch to'kilishi ham bo'lsa: [Trixolog va trixoskopiya](/uz/articles/art-trixolog-trixoskopiya);
-- o'xshash kasalliklar: [Psoriaz: tashxis va davolash](/uz/articles/art-psoriaz-tashxis-davolash-radeski), [Atopik dermatit](/uz/articles/art-atopic-dermatitis).
+- o'xshash kasalliklar: [Psoriaz: tashxis va davolash](/uz/articles/art-psoriaz-tashxis-davolash-radeski), [Atopik dermatit](/uz/articles/art-atopic-dermatitis), [Ekzema](/uz/articles/art-ekzema).
 
 Kepak, qichishish yoki yuzdagi qizarish bezovta qilsa, konsultatsiyani kechiktirmang: erta boshlangan parvarish toshmani tezroq nazoratga oladi.`;
 }
@@ -169,7 +169,7 @@ function ruBody(): string {
 - [Дерматолог в Фергане](/ru/fargona/dermatolog) — приём, цены и врачи;
 - [Дерматолог в Коканде](/ru/qoqon/dermatolog) — приём в кокандском филиале;
 - если выпадают волосы: [Трихолог и трихоскопия](/ru/articles/art-trixolog-trixoskopiya);
-- похожие заболевания: [Псориаз: диагностика и лечение](/ru/articles/art-psoriaz-tashxis-davolash-radeski), [Атопический дерматит](/ru/articles/art-atopic-dermatitis).
+- похожие заболевания: [Псориаз: диагностика и лечение](/ru/articles/art-psoriaz-tashxis-davolash-radeski), [Атопический дерматит](/ru/articles/art-atopic-dermatitis), [Экзема](/ru/articles/art-ekzema).
 
 Если беспокоят перхоть, зуд или покраснение на лице, не откладывайте консультацию: чем раньше начат уход, тем быстрее высыпания удаётся взять под контроль.`;
 }
@@ -247,7 +247,7 @@ At Radeski Skin Clinic a [dermatologist](/en/services/dermatologiya) examines th
 - [Dermatologist in Fergana](/en/fargona/dermatolog) — visits, prices and doctors;
 - [Dermatologist in Kokand](/en/qoqon/dermatolog) — visits at the Kokand branch;
 - if you are also losing hair: [Trichologist and trichoscopy](/en/articles/art-trixolog-trixoskopiya);
-- similar conditions: [Psoriasis: diagnosis and treatment](/en/articles/art-psoriaz-tashxis-davolash-radeski), [Atopic dermatitis](/en/articles/art-atopic-dermatitis).
+- similar conditions: [Psoriasis: diagnosis and treatment](/en/articles/art-psoriaz-tashxis-davolash-radeski), [Atopic dermatitis](/en/articles/art-atopic-dermatitis), [Eczema](/en/articles/art-ekzema).
 
 If dandruff, itching or facial redness bother you, do not put off the consultation: the earlier care starts, the faster the rash comes under control.`;
 }

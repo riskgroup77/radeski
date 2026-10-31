@@ -23,6 +23,10 @@ import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE_CATALOG } from './articles/pediatricWa
 import { ADULT_ACNE_ARTICLE_CATALOG } from './articles/adultAcneArticle';
 import { ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG } from './articles/adultAcneDermatologistArticle';
 import { SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG } from './articles/seborrheicDermatitisArticle';
+import { ECZEMA_ARTICLE_CATALOG } from './articles/eczemaArticle';
+import { SKIN_ITCHING_ARTICLE_CATALOG } from './articles/skinItchingArticle';
+import { URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG } from './articles/urticariaSkinAllergyArticle';
+import { NAIL_FUNGUS_ARTICLE_CATALOG } from './articles/nailFungusArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -98,6 +102,10 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'adult-acne': ADULT_ACNE_ARTICLE_CATALOG,
   'adult-acne-dermatologist': ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG,
   'seborrheic-dermatitis': SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG,
+  eczema: ECZEMA_ARTICLE_CATALOG,
+  'skin-itching': SKIN_ITCHING_ARTICLE_CATALOG,
+  'urticaria-skin-allergy': URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG,
+  'nail-fungus': NAIL_FUNGUS_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

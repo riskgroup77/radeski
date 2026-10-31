@@ -89,6 +89,86 @@ export function fitDescription(text: string): string {
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  'art-ekzema': {
+    uz: {
+      title: "Ekzema: sabablari va davolash — Farg'ona, Qo'qon",
+      desc: "Ekzema: qizarish, pufakchalar, namlanish va qichishish. Turlari, sabablari, davolash va qishda qo'l parvarishi. Farg'ona va Qo'qonda dermatolog qabuli.",
+      keywords:
+        "ekzema, ekzema davolash, qo'l ekzemasi, dishidrotik ekzema, mikrobli ekzema, teri qichishi, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Экзема: причины и лечение — Фергана, Коканд',
+      desc: 'Экзема: покраснение, мокнутие, пузырьки и зуд. Виды экземы, причины, лечение и уход за руками зимой. Дерматолог Radeski Skin Clinic в Фергане и Коканде.',
+      keywords:
+        'экзема, лечение экземы, экзема на руках, дисгидротическая экзема, микробная экзема, мокнущая экзема, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Eczema: causes and treatment — Fergana, Kokand',
+      desc: 'Eczema: redness, weeping blisters and itching. Types, causes, treatment and winter hand care. Dermatologists at Radeski Skin Clinic in Fergana and Kokand.',
+      keywords:
+        'eczema, eczema treatment, hand eczema, dyshidrotic eczema, discoid eczema, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-teri-qichishi': {
+    uz: {
+      title: "Teri qichishi: sabablari va davolash — Farg'ona, Qo'qon",
+      desc: "Teri nima uchun qichiydi: quruq teri, ekzema, eshakemi, qo'tir, zamburug' va ichki sabablar. Xavfli belgilar va tekshiruv. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "teri qichishi, tana qichishi sabablari, kechasi qichishish, quruq teri, qo'tir, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Зуд кожи: причины и лечение — Фергана, Коканд',
+      desc: 'Почему чешется кожа: сухость, экзема, крапивница, чесотка, грибок и внутренние причины. Тревожные признаки и обследование у дерматолога в Фергане и Коканде.',
+      keywords:
+        'зуд кожи, чешется кожа, зуд тела причины, зуд без сыпи, зуд ночью, сухая кожа, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Itchy skin: causes and treatment — Fergana, Kokand',
+      desc: 'Why skin itches: dryness, eczema, hives, scabies, fungus and internal causes. Warning signs and a dermatologist check-up in Fergana and Kokand.',
+      keywords:
+        'itchy skin, itching causes, itching without rash, itching at night, dry skin, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-eshakemi-teri-allergiyasi': {
+    uz: {
+      title: 'Eshakemi va teri allergiyasi: belgilari va davolash',
+      desc: "Eshakemi va teri allergiyasi: qichiydigan pufaklar, qizarish va shish. Sabablari, qachon tez yordam kerak va davolash. Farg'ona va Qo'qonda dermatolog qabuli.",
+      keywords:
+        "eshakemi, teri allergiyasi, krapivnitsa davolash, allergik toshma, Kvinke shishi, kontakt dermatit, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Крапивница и аллергия на коже: симптомы и лечение',
+      desc: 'Крапивница и аллергия на коже: волдыри, зуд и отёки. Причины, острая и хроническая крапивница, когда вызывать скорую и лечение. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'крапивница, аллергия на коже, лечение крапивницы, хроническая крапивница, отёк Квинке, аллергическая сыпь, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Hives and skin allergy: symptoms and treatment',
+      desc: 'Hives and skin allergy: itchy welts, redness and swelling. Causes, acute and chronic hives, when to call an ambulance and treatment in Fergana and Kokand.',
+      keywords:
+        'hives, urticaria, skin allergy, chronic hives treatment, angioedema, allergic rash, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-tirnoq-zamburugi': {
+    uz: {
+      title: "Tirnoq zamburug'i: belgilari va davolash — Farg'ona, Qo'qon",
+      desc: "Tirnoq zamburug'i (onixomikoz): sarg'ayish, qalinlashish va uvalanish. Tahlil, podologik ishlov va davolash muddati. Farg'ona va Qo'qonda podolog.",
+      keywords:
+        "tirnoq zamburug'i, tirnoq zamburug'ini davolash, onixomikoz, oyoq tirnog'i zamburug'i, podolog Farg'ona, podolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Грибок ногтей: признаки и лечение — Фергана, Коканд',
+      desc: 'Грибок ногтей (онихомикоз): пожелтение, утолщение и ломкость. Анализ, подологическая обработка и сроки лечения. Подолог в Фергане и Коканде.',
+      keywords:
+        'грибок ногтей, лечение грибка ногтей, онихомикоз, грибок ногтей на ногах, подолог Фергана, подолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Nail fungus: signs and treatment — Fergana, Kokand',
+      desc: 'Nail fungus (onychomycosis): yellow, thick, crumbling nails. Lab test, podiatric nail care and treatment time. Podiatrists in Fergana and Kokand.',
+      keywords:
+        'nail fungus, nail fungus treatment, onychomycosis, toenail fungus, podiatrist Fergana, podiatrist Kokand, Radeski Skin Clinic',
+    },
+  },
   'art-seboreyali-dermatit': {
     uz: {
       title: 'Seboreyali dermatit: sabablari va davolash',

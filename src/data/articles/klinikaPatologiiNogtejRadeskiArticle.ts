@@ -63,7 +63,9 @@ Hozir **operatsiyasiz** usullar mavjud:
 
 Zamonaviy, **og'riqsiz**, operatsiyasiz usul. Moslashuvchan plastinka tirnoqqa biriktiriladi, kundalik hayotda qulay.
 
-Bog'liq xizmatlar: [Tirnoq patologiyalari markazi](/uz/services/clinika-patologii-nogtej), [Podolog-dermatolog](/uz/services/clinika-patologii-nogtej/dermatologik-podolog-xizmati), [Narxlar](/uz/prices).`;
+Bog'liq xizmatlar: [Tirnoq patologiyalari markazi](/uz/services/clinika-patologii-nogtej), [Podolog-dermatolog](/uz/services/clinika-patologii-nogtej/dermatologik-podolog-xizmati), [Narxlar](/uz/prices).
+
+Batafsil: [Tirnoq zamburug'i: belgilari va davolash](/uz/articles/art-tirnoq-zamburugi).`;
 }
 
 function ruBody(): string {
@@ -115,7 +117,9 @@ function ruBody(): string {
 
 Современный **безболезненный** метод. Гибкие пластины фиксируются на ногте без дискомфорта.
 
-Связанные услуги: [Клиника патологии ногтей](/ru/services/clinika-patologii-nogtej), [Подолог-дерматолог](/ru/services/clinika-patologii-nogtej/dermatologik-podolog-xizmati), [Цены](/ru/prices).`;
+Связанные услуги: [Клиника патологии ногтей](/ru/services/clinika-patologii-nogtej), [Подолог-дерматолог](/ru/services/clinika-patologii-nogtej/dermatologik-podolog-xizmati), [Цены](/ru/prices).
+
+Подробнее: [Грибок ногтей: признаки и лечение](/ru/articles/art-tirnoq-zamburugi).`;
 }
 
 function enBody(): string {
@@ -167,7 +171,9 @@ A **custom** corrective brace used for decades — placed at Radeski Clinic.
 
 Modern **painless** correction with flexible plates on the nail.
 
-Related services: [Nail pathology clinic](/en/services/clinika-patologii-nogtej), [Podiatrist](/en/services/clinika-patologii-nogtej/dermatologik-podolog-xizmati), [Prices](/en/prices).`;
+Related services: [Nail pathology clinic](/en/services/clinika-patologii-nogtej), [Podiatrist](/en/services/clinika-patologii-nogtej/dermatologik-podolog-xizmati), [Prices](/en/prices).
+
+In depth: [Nail fungus: signs and treatment](/en/articles/art-tirnoq-zamburugi).`;
 }
 
 export const KLINIKA_PATOLOGII_NOGTEJ_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog = {

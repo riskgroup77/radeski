@@ -9,6 +9,26 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },
+  'art-ekzema': {
+    uz: "Ekzema: sabablari va davolash — Farg'ona, Qo'qon",
+    ru: 'Экзема: причины и лечение — Фергана, Коканд',
+    en: 'Eczema: causes and treatment — Fergana, Kokand',
+  },
+  'art-teri-qichishi': {
+    uz: "Teri qichishi: sabablari va davolash — Farg'ona, Qo'qon",
+    ru: 'Зуд кожи: причины и лечение — Фергана, Коканд',
+    en: 'Itchy skin: causes and treatment — Fergana, Kokand',
+  },
+  'art-eshakemi-teri-allergiyasi': {
+    uz: 'Eshakemi va teri allergiyasi: belgilari va davolash',
+    ru: 'Крапивница и аллергия на коже: симптомы и лечение',
+    en: 'Hives and skin allergy: symptoms and treatment',
+  },
+  'art-tirnoq-zamburugi': {
+    uz: "Tirnoq zamburug'i: belgilari va davolash — Farg'ona, Qo'qon",
+    ru: 'Грибок ногтей: признаки и лечение — Фергана, Коканд',
+    en: 'Nail fungus: signs and treatment — Fergana, Kokand',
+  },
   'art-seboreyali-dermatit': {
     uz: "Seboreyali dermatit: sabablari va davolash",
     ru: 'Себорейный дерматит: причины и лечение',

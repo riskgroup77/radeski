@@ -247,9 +247,9 @@ function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
 
 function buildKokandLandings(): LocalCommercialLanding[] {
   return [
-    specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-psoriasis-daavlin-kokand']),
+    specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-psoriasis-daavlin-kokand']),
     specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
-    specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-onixokriptoz-klinik-holat']),
+    specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-tirnoq-zamburugi', 'art-onixokriptoz-klinik-holat']),
     kosmetologLanding('qoqon', ['art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('qoqon'),
     treatmentLanding('qoqon', 'akne-davolash', 'dermatologiya', {
@@ -270,6 +270,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'tirnoq-zamburug', 'clinika-patologii-nogtej', {
       name: L("Tirnoq zamburug'i davolash", 'Лечение грибка ногтей', 'Nail fungus treatment'),
       promoSlug: 'podologiya',
+      articleRouteKeys: ['art-tirnoq-zamburugi'],
       problem: L('Onikomikoz tirnoq qalinlashishi bilan kechadi.', 'Онихомикоз — утолщение ногтя.', 'Onychomycosis thickens the nail.'),
       whoFor: [L('Uzoq davom etgan zamburug', 'Длительный грибок', 'Long-standing fungus')],
       methods: [L('Podolog ko‘rigi', 'Осмотр подолога', 'Podiatrist exam'), L('Kompleks terapiya', 'Комплексная терапия', 'Combined therapy')],
@@ -398,9 +399,9 @@ function buildKokandLandings(): LocalCommercialLanding[] {
 
 function buildFerganaLandings(): LocalCommercialLanding[] {
   return [
-    specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ipl-terapiya']),
+    specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-ipl-terapiya']),
     specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-plazmotorapiya-soch-prp']),
-    specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-onixokriptoz-klinik-holat']),
+    specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-tirnoq-zamburugi', 'art-onixokriptoz-klinik-holat']),
     kosmetologLanding('fargona', ['art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('fargona'),
     treatmentLanding('fargona', 'akne-davolash', 'dermatologiya', {
@@ -460,6 +461,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'tirnoq-zamburug', 'clinika-patologii-nogtej', {
       name: L("Tirnoq zamburug'i davolash", 'Лечение грибка ногтей', 'Nail fungus treatment'),
       promoSlug: 'podologiya',
+      articleRouteKeys: ['art-tirnoq-zamburugi'],
       problem: L('Onikomikoz.', 'Онихомикоз.', 'Onychomycosis.'),
       whoFor: [L('Tirnoq zamburug‘i', 'Грибок ногтей', 'Nail fungus')],
       methods: [L('Podolog', 'Подолог', 'Podiatrist')],

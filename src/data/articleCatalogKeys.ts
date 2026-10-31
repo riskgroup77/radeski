@@ -268,6 +268,11 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'контагиозный моллюск у детей',
     'лечение контагиозного моллюска',
   ],
+  // Matched by their own ids, longer than the generic 'ekzem' (atopic) / 'zamburug' (fungal) phrases.
+  eczema: ['art-ekzema', 'ekzema: turlari', 'экзема: виды', 'eczema: types'],
+  'skin-itching': ['art-teri-qichishi', 'teri qichishi: sabablari', 'зуд кожи: причины', 'itchy skin: causes'],
+  'urticaria-skin-allergy': ['art-eshakemi-teri-allergiyasi', 'eshakemi-teri-allergiyasi', 'аллергия на коже и крапивница'],
+  'nail-fungus': ['art-tirnoq-zamburugi', 'tirnoq-zamburugi', 'грибок ногтей (онихомикоз)', 'nail fungus (onychomycosis)'],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
   'seborrheic-dermatitis': [
     'art-seboreyali-dermatit',

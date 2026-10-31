@@ -8,6 +8,9 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'acne',
     'adult-acne-dermatologist',
     'seborrheic-dermatitis',
+    'eczema',
+    'skin-itching',
+    'urticaria-skin-allergy',
     'adult-acne',
     'acne-dermatologist-vs-cosmetologist',
     'rosacea-radeski',
@@ -96,7 +99,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriaz-klinik-keys-bahridinov-radeski',
   ],
   'shkola-dermatoskopii': ['basal-cell-carcinoma', 'mole-screening'],
-  'clinika-patologii-nogtej': ['fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
+  'clinika-patologii-nogtej': ['nail-fungus', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
   dermatopatologiya: ['dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
 };
 
@@ -111,12 +114,13 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     ],
     fototerapiya: [
       'fizioterapiya-dermatovenereologiya',
+      'eczema',
       'vitiligo',
       'psoriasis-daavlin-kokand',
       'psoriasis',
       'psoriaz-klinik-keys-bahridinov-radeski',
     ],
-    immunobiologicheskaya: ['immunobiologiya-radeski', 'psoriasis', 'psoriasis-daavlin-kokand', 'plasmapheresis'],
+    immunobiologicheskaya: ['immunobiologiya-radeski', 'psoriasis', 'psoriasis-daavlin-kokand', 'urticaria-skin-allergy', 'eczema', 'plasmapheresis'],
   },
   dermatoskopiya: {
     'derm-konsult': ['basal-cell-carcinoma', 'molluscum-radeski', 'papilloma-warts'],

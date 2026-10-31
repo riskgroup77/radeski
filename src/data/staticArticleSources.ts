@@ -23,6 +23,10 @@ import { PEDIATRIC_WARTS_CO2_DEKA_ARTICLE } from './articles/pediatricWartsCo2De
 import { ADULT_ACNE_ARTICLE } from './articles/adultAcneArticle';
 import { ADULT_ACNE_DERMATOLOGIST_ARTICLE } from './articles/adultAcneDermatologistArticle';
 import { SEBORRHEIC_DERMATITIS_ARTICLE } from './articles/seborrheicDermatitisArticle';
+import { ECZEMA_ARTICLE } from './articles/eczemaArticle';
+import { SKIN_ITCHING_ARTICLE } from './articles/skinItchingArticle';
+import { URTICARIA_SKIN_ALLERGY_ARTICLE } from './articles/urticariaSkinAllergyArticle';
+import { NAIL_FUNGUS_ARTICLE } from './articles/nailFungusArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -85,6 +89,10 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   ADULT_ACNE_DERMATOLOGIST_ARTICLE,
+  NAIL_FUNGUS_ARTICLE,
+  URTICARIA_SKIN_ALLERGY_ARTICLE,
+  SKIN_ITCHING_ARTICLE,
+  ECZEMA_ARTICLE,
   SEBORRHEIC_DERMATITIS_ARTICLE,
   LASER_SCAR_RESURFACING_ARTICLE,
   ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE,
