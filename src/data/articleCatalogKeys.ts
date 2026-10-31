@@ -277,6 +277,13 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   'winter-skin-care': ['art-qishda-teri-parvarishi', 'qishda-teri-parvarishi', 'уход за кожей зимой', 'winter skin care'],
   demodex: ['art-demodekoz', 'demodekoz', 'демодекоз', 'demodicosis'],
   herpes: ['art-gerpes', 'gerpes (lab', 'герпес на губах', 'cold sores (herpes)'],
+  'scabies': ['art-qotir', 'qotir'],
+  'seborrheic-keratosis': ['art-seboreyali-keratoz', 'seboreyali-keratoz'],
+  'child-rash': ['art-bolalarda-teri-toshmalari', 'bolalarda-teri-toshmalari'],
+  'pityriasis-rosea': ['art-pushti-temiratki', 'pushti-temiratki'],
+  'striae': ['art-striya', 'striya'],
+  'female-hair-loss': ['art-ayollarda-soch-tokilishi', 'ayollarda-soch-tokilishi'],
+  'perioral-dermatitis': ['art-perioral-dermatit', 'perioral-dermatit'],
   'nail-fungus': ['art-tirnoq-zamburugi', 'tirnoq-zamburugi', 'грибок ногтей (онихомикоз)', 'nail fungus (onychomycosis)'],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
   'seborrheic-dermatitis': [

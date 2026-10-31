@@ -89,6 +89,146 @@ export function fitDescription(text: string): string {
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  'art-qotir': {
+    uz: {
+      title: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",
+      desc: "Qo'tir: kechasi kuchayadigan qichishish, qanday yuqadi, dermatoskopiya, butun oilani bir kunda davolash va uydagi ishlov. Farg'ona va Qo'qonda dermatovenerolog.",
+      keywords:
+        "qo'tir, skabiyez, qo'tir davolash, kechasi qichishish, qo'tir belgilari, dermatovenerolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Чесотка: признаки и лечение — Фергана, Коканд',
+      desc: 'Чесотка: ночной зуд, как передаётся, дерматоскопия, лечение всей семьи в один день и обработка вещей. Дерматовенеролог в Фергане и Коканде.',
+      keywords:
+        'чесотка, лечение чесотки, чесоточный клещ, зуд ночью, чесотка у детей, дерматовенеролог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Scabies: signs and treatment — Fergana, Kokand',
+      desc: 'Scabies: night-time itching, how it spreads, dermoscopy, treating the whole household on one day and cleaning bedding. Fergana and Kokand.',
+      keywords:
+        'scabies, scabies treatment, scabies mite, itching at night, scabies in children, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-seboreyali-keratoz': {
+    uz: {
+      title: "Seboreyali keratoz: olib tashlash — Farg'ona, Qo'qon",
+      desc: "Seboreyali keratoz (keratoma): xavflimi, melanomadan farqi, dermatoskopiya, CO₂ lazer va radioto'lqin bilan olib tashlash. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "seboreyali keratoz, keratoma, keksalik so'gali, keratoma olib tashlash, CO2 lazer, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Себорейный кератоз: удаление — Фергана, Коканд',
+      desc: 'Себорейный кератоз (кератома): опасна ли, отличие от меланомы, дерматоскопия, удаление CO₂-лазером и радиоволной. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'себорейный кератоз, кератома, удаление кератомы, старческая бородавка, удаление CO2-лазером, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Seborrheic keratosis: removal — Fergana, Kokand',
+      desc: 'Seborrheic keratosis: is it dangerous, how it differs from melanoma, dermoscopy, removal with CO₂ laser and radiowave. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'seborrheic keratosis, keratoma, age spots removal, CO2 laser, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-bolalarda-teri-toshmalari': {
+    uz: {
+      title: 'Bolalarda teri toshmalari: qachon xavotir olish kerak',
+      desc: "Bolalarda toshma: qachon darhol tez yordam (stakan testi), eng ko'p sabablar, ota-onalar xatolari va bolalar dermatologi. Farg'ona va Qo'qonda qabul.",
+      keywords:
+        "bolalarda toshma, bolada teri toshmasi, bolalar dermatologi, taglik dermatiti, terlama, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Сыпь у ребёнка: когда волноваться — Фергана, Коканд',
+      desc: 'Сыпь у ребёнка: когда сразу вызывать скорую (тест со стаканом), частые причины, ошибки родителей и детский дерматолог в Фергане и Коканде.',
+      keywords:
+        'сыпь у ребёнка, сыпь у детей, детский дерматолог, пелёночный дерматит, потница, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Rashes in children: when to worry — Fergana, Kokand',
+      desc: 'Rashes in children: when to call an ambulance (the glass test), common causes, mistakes parents make and a paediatric dermatologist in Fergana and Kokand.',
+      keywords:
+        'rash in children, child skin rash, paediatric dermatologist, nappy rash, heat rash, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-pushti-temiratki': {
+    uz: {
+      title: 'Pushti temiratki (Jiber): belgilari va parvarish',
+      desc: "Pushti temiratki: \"ona dog'\" va tanadagi pushti dog'lar. Qancha davom etadi, zamburug' va psoriazdan farqi, parvarish. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "pushti temiratki, Jiber temiratkisi, tanada pushti dog'lar, temiratki davolash, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Розовый лишай Жибера: признаки и уход',
+      desc: 'Розовый лишай: «материнская бляшка» и розовые пятна на теле. Сколько длится, отличие от грибка и псориаза, уход. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'розовый лишай, лишай Жибера, розовые пятна на теле, лечение розового лишая, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Pityriasis rosea: signs and care — Fergana, Kokand',
+      desc: 'Pityriasis rosea: a herald patch and pink patches on the body. How long it lasts, how it differs from fungus and psoriasis, and care. Fergana and Kokand.',
+      keywords:
+        'pityriasis rosea, herald patch, pink rash on body, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-striya': {
+    uz: {
+      title: "Cho'zilish izlari (striya): davolash — Farg'ona",
+      desc: "Striyalar nima uchun paydo bo'ladi, yangi va eski izlar, fraksion CO₂ lazer va RF-mikroigna bilan davolash, homiladorlikda oldini olish. Farg'ona va Qo'qonda.",
+      keywords:
+        "striya, cho'zilish izlari, striyalarni davolash, homiladorlikdan keyin striya, CO2 lazer, kosmetolog Farg'ona, kosmetolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Растяжки (стрии): лечение — Фергана, Коканд',
+      desc: 'Почему появляются растяжки, свежие и старые стрии, лечение фракционным CO₂-лазером и RF-микроиглами, профилактика при беременности. Фергана и Коканд.',
+      keywords:
+        'растяжки, стрии, удаление растяжек, растяжки после родов, лазер от растяжек, косметолог Фергана, косметолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Stretch marks: treatment — Fergana, Kokand',
+      desc: 'Why stretch marks appear, new versus old marks, fractional CO₂ laser and RF microneedling, and prevention in pregnancy. Cosmetologists in Fergana and Kokand.',
+      keywords:
+        'stretch marks, striae, stretch mark removal, stretch marks after pregnancy, CO2 laser, cosmetologist Fergana, cosmetologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-ayollarda-soch-tokilishi': {
+    uz: {
+      title: "Ayollarda soch to'kilishi: sabablari va davolash",
+      desc: "Ayollarda soch to'kilishi: tug'ruqdan keyin, stress, temir tanqisligi, qalqonsimon bez. Trixoskopiya, tahlillar va davolash. Farg'ona va Qo'qonda trixolog.",
+      keywords:
+        "ayollarda soch to'kilishi, soch to'kilishi sabablari, tug'ruqdan keyin soch to'kilishi, trixolog Farg'ona, trixolog Qo'qon, trixoskopiya, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Выпадение волос у женщин: причины и лечение',
+      desc: 'Выпадение волос у женщин: после родов, стресс, дефицит железа, щитовидная железа. Трихоскопия, анализы и лечение. Трихолог в Фергане и Коканде.',
+      keywords:
+        'выпадение волос у женщин, причины выпадения волос, выпадение волос после родов, трихолог Фергана, трихолог Коканд, трихоскопия, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Hair loss in women: causes and treatment',
+      desc: 'Hair loss in women: after childbirth, stress, iron deficiency, thyroid. Trichoscopy, blood tests and treatment. Trichologists in Fergana and Kokand.',
+      keywords:
+        'hair loss in women, causes of hair loss, postpartum hair loss, trichologist Fergana, trichologist Kokand, trichoscopy, Radeski Skin Clinic',
+    },
+  },
+  'art-perioral-dermatit': {
+    uz: {
+      title: "Perioral dermatit: og'iz atrofidagi toshma — davolash",
+      desc: "Perioral dermatit: og'iz atrofidagi qizil toshma, gormonli kremlar ta'siri, akne va rozatseyadan farqi, \"nol terapiya\". Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "perioral dermatit, og'iz atrofidagi toshma, gormonli krem, yuzdagi toshma, rozatseya, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Периоральный дерматит: сыпь вокруг рта — лечение',
+      desc: 'Периоральный дерматит: красная сыпь вокруг рта, роль гормональных кремов, отличие от акне и розацеа, «нулевая терапия». Дерматолог в Фергане и Коканде.',
+      keywords:
+        'периоральный дерматит, сыпь вокруг рта, лечение периорального дерматита, гормональный крем, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Perioral dermatitis: rash around the mouth',
+      desc: 'Perioral dermatitis: a red rash around the mouth, the role of steroid creams, how it differs from acne and rosacea, "zero therapy". Fergana and Kokand.',
+      keywords:
+        'perioral dermatitis, rash around mouth, perioral dermatitis treatment, steroid cream, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
   'art-xol-tekshiruvi-dermatoskopiya': {
     uz: {
       title: "Xol tekshiruvi va dermatoskopiya — Farg'ona, Qo'qon",

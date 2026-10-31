@@ -34,6 +34,13 @@ import { WINTER_SKIN_CARE_ARTICLE } from './articles/winterSkinCareArticle';
 import { DEMODICOSIS_ARTICLE } from './articles/demodicosisArticle';
 import { HERPES_ARTICLE } from './articles/herpesArticle';
 import { SKIN_FUNGUS_ARTICLE } from './articles/skinFungusArticle';
+import { SCABIES_ARTICLE } from './articles/scabiesArticle';
+import { SEBORRHEIC_KERATOSIS_ARTICLE } from './articles/seborrheicKeratosisArticle';
+import { CHILD_RASH_ARTICLE } from './articles/childRashArticle';
+import { PITYRIASIS_ROSEA_ARTICLE } from './articles/pityriasisRoseaArticle';
+import { STRIAE_ARTICLE } from './articles/striaeArticle';
+import { FEMALE_HAIR_LOSS_ARTICLE } from './articles/femaleHairLossArticle';
+import { PERIORAL_DERMATITIS_ARTICLE } from './articles/perioralDermatitisArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -96,6 +103,13 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   ADULT_ACNE_DERMATOLOGIST_ARTICLE,
+  PERIORAL_DERMATITIS_ARTICLE,
+  FEMALE_HAIR_LOSS_ARTICLE,
+  STRIAE_ARTICLE,
+  PITYRIASIS_ROSEA_ARTICLE,
+  CHILD_RASH_ARTICLE,
+  SEBORRHEIC_KERATOSIS_ARTICLE,
+  SCABIES_ARTICLE,
   SKIN_FUNGUS_ARTICLE,
   HERPES_ARTICLE,
   DEMODICOSIS_ARTICLE,

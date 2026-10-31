@@ -13,6 +13,10 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'urticaria-skin-allergy',
     'herpes',
     'demodex',
+    'scabies',
+    'child-rash',
+    'pityriasis-rosea',
+    'perioral-dermatitis',
     'fungal',
     'winter-skin-care',
     'adult-acne',
@@ -29,6 +33,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriaz-klinik-keys-bahridinov-radeski',
   ],
   dermatoskopiya: [
+    'seborrheic-keratosis',
     'basal-cell-carcinoma',
     'molluscum-radeski',
     'pediatric-warts-laser-radeski',
@@ -37,6 +42,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'photofinder-diagnostika-radeski',
   ],
   trixoskopiya: [
+    'female-hair-loss',
     'trichologist-trichoscopy',
     'soch-tokilishi-normal-patologiya-radeski',
     'alopecia-areata-klinik-holat',
@@ -46,6 +52,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   ],
   'apparatnaya-kosmetologiya': [
     'melasma',
+    'striae',
     'ipl-radeski',
     'ipl-therapy',
     'ipl-lumecca-pigmentation-radeski',
@@ -73,6 +80,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   ],
   'lazernaya-epilyaciya': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
   'trihologiya-centr-lechenie-volos': [
+    'female-hair-loss',
     'trichologist-trichoscopy',
     'soch-tokilishi-normal-patologiya-radeski',
     'prp-hair',
@@ -83,6 +91,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   dermatoonkologiya: [
     'mole-screening',
     'papilloma-removal',
+    'seborrheic-keratosis',
     'dermatopatologiya-radeski',
     'basal-cell-carcinoma',
     'papilloma-warts',
@@ -92,6 +101,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   ],
   'hirurgicheskaya-dermatologiya': [
     'papilloma-removal',
+    'seborrheic-keratosis',
     'deka-co2',
     'deka-co2-scars-radeski',
     'basal-cell-carcinoma',
@@ -115,6 +125,8 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
 export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> = {
   dermatologiya: {
     'det-derm': [
+      'child-rash',
+      'scabies',
       'pediatric-warts-co2-deka',
       'pediatric-warts-laser-radeski',
       'molluscum-radeski',

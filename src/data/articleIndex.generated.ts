@@ -1553,6 +1553,335 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 598
     }
   },
+  "scabies": {
+    "uz": {
+      "summary": "Qo'tir (skabiyez): kechasi kuchayadigan qichishish, qanday yuqadi, belgilari, dermatoskopiya, butun oilani bir kunda davolash va uydagi ishlov. Farg'ona va Qo'qonda dermatovenerolog.",
+      "tags": [
+        "Qo'tir",
+        "Skabiyez",
+        "Kechasi qichishish",
+        "Dermatovenerolog",
+        "Bolalar dermatologi",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3389,
+      "bodyWords": 408
+    },
+    "ru": {
+      "summary": "Чесотка: зуд, усиливающийся ночью, как передаётся, признаки, дерматоскопия, лечение всей семьи в один день и обработка вещей. Дерматовенеролог в Фергане и Коканде.",
+      "tags": [
+        "Чесотка",
+        "Чесоточный клещ",
+        "Зуд ночью",
+        "Дерматовенеролог",
+        "Детский дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3199,
+      "bodyWords": 452
+    },
+    "en": {
+      "summary": "Scabies: itching that is worse at night, how it spreads, signs, dermoscopy, treating the whole household on one day and cleaning bedding. Dermatovenereologists in Fergana and Kokand.",
+      "tags": [
+        "Scabies",
+        "Scabies mite",
+        "Night itching",
+        "Dermatovenereologist",
+        "Paediatric dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3324,
+      "bodyWords": 521
+    }
+  },
+  "seborrheic-keratosis": {
+    "uz": {
+      "summary": "Seboreyali keratoz (keratoma): 40 yoshdan keyingi jigarrang \"so'gallar\". Xavfli emas, lekin melanomaga o'xshashi mumkin — dermatoskopiya, olib tashlash usullari va parvarish. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Seboreyali keratoz",
+        "Keratoma",
+        "Keksalik so'gali",
+        "O'simta olib tashlash",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3449,
+      "bodyWords": 406
+    },
+    "ru": {
+      "summary": "Себорейный кератоз (кератома): коричневые «бородавки» после 40 лет. Не опасен, но может быть похож на меланому — дерматоскопия, методы удаления и уход. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Себорейный кератоз",
+        "Кератома",
+        "Старческая бородавка",
+        "Удаление новообразований",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3260,
+      "bodyWords": 416
+    },
+    "en": {
+      "summary": "Seborrheic keratosis: brown \"age warts\" after 40. Harmless, but it can look like melanoma — dermoscopy, removal methods and aftercare. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Seborrheic keratosis",
+        "Keratoma",
+        "Age warts",
+        "Growth removal",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3185,
+      "bodyWords": 497
+    }
+  },
+  "child-rash": {
+    "uz": {
+      "summary": "Bolalarda teri toshmalari: qachon darhol tez yordam chaqirish kerak (stakan testi), eng ko'p uchraydigan sabablar, ota-onalar xatolari va bolalar dermatologiga qachon borish. Farg'ona va Qo'qonda.",
+      "tags": [
+        "Bolalarda toshma",
+        "Bolalar dermatologi",
+        "Taglik dermatiti",
+        "Atopik dermatit",
+        "Allergiya",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3700,
+      "bodyWords": 440
+    },
+    "ru": {
+      "summary": "Сыпь у детей: когда сразу вызывать скорую (тест со стаканом), самые частые причины, ошибки родителей и когда идти к детскому дерматологу. Фергана и Коканд.",
+      "tags": [
+        "Сыпь у детей",
+        "Детский дерматолог",
+        "Пелёночный дерматит",
+        "Атопический дерматит",
+        "Аллергия",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3446,
+      "bodyWords": 464
+    },
+    "en": {
+      "summary": "Rashes in children: when to call an ambulance at once (the glass test), the most common causes, mistakes parents make and when to see a paediatric dermatologist. Fergana and Kokand.",
+      "tags": [
+        "Rash in children",
+        "Paediatric dermatologist",
+        "Nappy rash",
+        "Atopic dermatitis",
+        "Allergy",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3489,
+      "bodyWords": 554
+    }
+  },
+  "pityriasis-rosea": {
+    "uz": {
+      "summary": "Pushti temiratki (Jiber): \"ona dog'\" va tanadagi pushti oval dog'lar. Sabablari, o'z-o'zidan o'tishi, zamburug' va psoriazdan farqi, parvarish va homiladorlik. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Pushti temiratki",
+        "Jiber temiratkisi",
+        "Teri toshmasi",
+        "Teri dog'lari",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3289,
+      "bodyWords": 405
+    },
+    "ru": {
+      "summary": "Розовый лишай Жибера: «материнская бляшка» и розовые овальные пятна на теле. Причины, самостоятельное прохождение, отличие от грибка и псориаза, уход и беременность. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Розовый лишай",
+        "Лишай Жибера",
+        "Сыпь на теле",
+        "Пятна на коже",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3032,
+      "bodyWords": 420
+    },
+    "en": {
+      "summary": "Pityriasis rosea: a \"herald patch\" and pink oval patches on the body. Causes, how it clears on its own, how it differs from fungus and psoriasis, care and pregnancy. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Pityriasis rosea",
+        "Herald patch",
+        "Body rash",
+        "Skin patches",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3027,
+      "bodyWords": 495
+    }
+  },
+  "striae": {
+    "uz": {
+      "summary": "Cho'zilish izlari (striyalar): nima uchun paydo bo'ladi, yangi va eski izlar, fraksion CO₂ lazer va RF-mikroigna bilan davolash, homiladorlikda oldini olish. Farg'ona va Qo'qonda kosmetolog.",
+      "tags": [
+        "Cho'zilish izlari",
+        "Striya",
+        "Homiladorlikdan keyin",
+        "CO₂ lazer",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3340,
+      "bodyWords": 406
+    },
+    "ru": {
+      "summary": "Растяжки (стрии): почему появляются, свежие и старые растяжки, лечение фракционным CO₂-лазером и RF-микроиглами, профилактика при беременности. Косметолог в Фергане и Коканде.",
+      "tags": [
+        "Растяжки",
+        "Стрии",
+        "После беременности",
+        "CO₂-лазер",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3208,
+      "bodyWords": 415
+    },
+    "en": {
+      "summary": "Stretch marks: why they appear, new versus old marks, treatment with fractional CO₂ laser and RF microneedling, and prevention in pregnancy. Cosmetologists in Fergana and Kokand.",
+      "tags": [
+        "Stretch marks",
+        "Striae",
+        "After pregnancy",
+        "CO₂ laser",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3182,
+      "bodyWords": 486
+    }
+  },
+  "female-hair-loss": {
+    "uz": {
+      "summary": "Ayollarda soch to'kilishi: tug'ruqdan keyingi va telogen to'kilish, temir tanqisligi, qalqonsimon bez, androgenetik siyraklashish. Trixoskopiya, tahlillar va davolash. Farg'ona va Qo'qonda trixolog.",
+      "tags": [
+        "Soch to'kilishi",
+        "Ayollarda soch to'kilishi",
+        "Trixolog",
+        "Trixoskopiya",
+        "Tug'ruqdan keyin soch",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3904,
+      "bodyWords": 442
+    },
+    "ru": {
+      "summary": "Выпадение волос у женщин: после родов и телогеновое, дефицит железа, щитовидная железа, андрогенетическое поредение. Трихоскопия, анализы и лечение. Трихолог в Фергане и Коканде.",
+      "tags": [
+        "Выпадение волос",
+        "Выпадение волос у женщин",
+        "Трихолог",
+        "Трихоскопия",
+        "Волосы после родов",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3743,
+      "bodyWords": 461
+    },
+    "en": {
+      "summary": "Hair loss in women: after childbirth and telogen effluvium, iron deficiency, thyroid, female pattern thinning. Trichoscopy, tests and treatment. Trichologists in Fergana and Kokand.",
+      "tags": [
+        "Hair loss",
+        "Hair loss in women",
+        "Trichologist",
+        "Trichoscopy",
+        "Postpartum hair loss",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3538,
+      "bodyWords": 497
+    }
+  },
+  "perioral-dermatitis": {
+    "uz": {
+      "summary": "Perioral dermatit: og'iz atrofidagi mayda qizil toshma. Belgilari, gormonli kremlar va og'ir kosmetika ta'siri, akne va rozatseyadan farqi, \"nol terapiya\" va davolash. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Perioral dermatit",
+        "Og'iz atrofidagi toshma",
+        "Gormonli krem",
+        "Rozatseya",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3390,
+      "bodyWords": 411
+    },
+    "ru": {
+      "summary": "Периоральный дерматит: мелкая красная сыпь вокруг рта. Признаки, роль гормональных кремов и тяжёлой косметики, отличие от акне и розацеа, «нулевая терапия» и лечение. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Периоральный дерматит",
+        "Сыпь вокруг рта",
+        "Гормональный крем",
+        "Розацеа",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3205,
+      "bodyWords": 430
+    },
+    "en": {
+      "summary": "Perioral dermatitis: a rash of small red bumps around the mouth. Signs, the role of steroid creams and heavy cosmetics, how it differs from acne and rosacea, \"zero therapy\" and treatment. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Perioral dermatitis",
+        "Rash around the mouth",
+        "Steroid cream",
+        "Rosacea",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3312,
+      "bodyWords": 505
+    }
+  },
   "laser-scar-resurfacing": {
     "uz": {
       "summary": "Chandiqlarni lazer shlifovkasi: operatsiya, jarohat, kuyish va akne izlarini kamroq sezilarli qilish. Radeski Skin Clinic’da shifokor konsultatsiyasi va individual reja.",

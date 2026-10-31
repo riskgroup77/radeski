@@ -17,6 +17,7 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
   ],
   'atopik-dermatit': [
     { routeKey: 'art-atopic-dermatitis', title: { uz: 'Atopik dermatit: belgilari va davolash', ru: 'Атопический дерматит: симптомы и лечение', en: 'Atopic dermatitis: symptoms and treatment' } },
+    { routeKey: 'art-bolalarda-teri-toshmalari', title: { uz: 'Bolalarda teri toshmalari', ru: 'Сыпь у ребёнка', en: 'Rashes in children' } },
   ],
   acne: [
     { routeKey: 'art-akne', title: { uz: 'Akne: sabablari va davolash', ru: 'Акне: причины и лечение', en: 'Acne: causes and treatment' } },
@@ -29,9 +30,11 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
   rozasea: [
     { routeKey: 'art-rozatseya-davolash-radeski', title: { uz: 'Rozatseyani davolash', ru: 'Лечение розацеа', en: 'Rosacea treatment' } },
     { routeKey: 'art-demodekoz', title: { uz: 'Demodekoz: belgilari va davolash', ru: 'Демодекоз: признаки и лечение', en: 'Demodicosis: signs and treatment' } },
+    { routeKey: 'art-perioral-dermatit', title: { uz: "Perioral dermatit: og'iz atrofidagi toshma", ru: 'Периоральный дерматит: сыпь вокруг рта', en: 'Perioral dermatitis: rash around the mouth' } },
   ],
   'yuz-qizarishi': [
     { routeKey: 'art-derma-v-qizarish-radeski', title: { uz: 'Yuz qizarishi: Derma V lazeri', ru: 'Покраснение лица: лазер Derma V', en: 'Facial redness: Derma V laser' } },
+    { routeKey: 'art-perioral-dermatit', title: { uz: "Perioral dermatit: og'iz atrofidagi toshma", ru: 'Периоральный дерматит: сыпь вокруг рта', en: 'Perioral dermatitis: rash around the mouth' } },
   ],
   'teri-doglari': [
     { routeKey: 'art-melazma', title: { uz: "Melazma: yuzdagi jigarrang dog'lar", ru: 'Мелазма: коричневые пятна на лице', en: 'Melasma: brown patches on the face' } },
@@ -46,6 +49,7 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
     { routeKey: 'art-teri-qichishi', title: { uz: 'Teri qichishi: sabablari va davolash', ru: 'Зуд кожи: причины и лечение', en: 'Itchy skin: causes and treatment' } },
     { routeKey: 'art-eshakemi-teri-allergiyasi', title: { uz: 'Eshakemi va teri allergiyasi', ru: 'Крапивница и аллергия на коже', en: 'Hives and skin allergy' } },
     { routeKey: 'art-teri-zamburugi', title: { uz: "Teri zamburug'i: belgilari va davolash", ru: 'Грибок кожи: признаки и лечение', en: 'Fungal skin infections: signs and treatment' } },
+    { routeKey: 'art-qotir', title: { uz: "Qo'tir: kechasi qichishish", ru: 'Чесотка: ночной зуд', en: 'Scabies: night-time itching' } },
   ],
   'teri-allergiyasi': [
     { routeKey: 'art-eshakemi-teri-allergiyasi', title: { uz: 'Eshakemi va teri allergiyasi: belgilari va davolash', ru: 'Крапивница и аллергия на коже: симптомы и лечение', en: 'Hives and skin allergy: symptoms and treatment' } },

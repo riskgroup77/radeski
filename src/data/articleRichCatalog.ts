@@ -34,6 +34,13 @@ import { WINTER_SKIN_CARE_ARTICLE_CATALOG } from './articles/winterSkinCareArtic
 import { DEMODICOSIS_ARTICLE_CATALOG } from './articles/demodicosisArticle';
 import { HERPES_ARTICLE_CATALOG } from './articles/herpesArticle';
 import { SKIN_FUNGUS_ARTICLE_CATALOG } from './articles/skinFungusArticle';
+import { SCABIES_ARTICLE_CATALOG } from './articles/scabiesArticle';
+import { SEBORRHEIC_KERATOSIS_ARTICLE_CATALOG } from './articles/seborrheicKeratosisArticle';
+import { CHILD_RASH_ARTICLE_CATALOG } from './articles/childRashArticle';
+import { PITYRIASIS_ROSEA_ARTICLE_CATALOG } from './articles/pityriasisRoseaArticle';
+import { STRIAE_ARTICLE_CATALOG } from './articles/striaeArticle';
+import { FEMALE_HAIR_LOSS_ARTICLE_CATALOG } from './articles/femaleHairLossArticle';
+import { PERIORAL_DERMATITIS_ARTICLE_CATALOG } from './articles/perioralDermatitisArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -120,6 +127,13 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'demodex': DEMODICOSIS_ARTICLE_CATALOG,
   'herpes': HERPES_ARTICLE_CATALOG,
   'fungal': SKIN_FUNGUS_ARTICLE_CATALOG,
+  'scabies': SCABIES_ARTICLE_CATALOG,
+  'seborrheic-keratosis': SEBORRHEIC_KERATOSIS_ARTICLE_CATALOG,
+  'child-rash': CHILD_RASH_ARTICLE_CATALOG,
+  'pityriasis-rosea': PITYRIASIS_ROSEA_ARTICLE_CATALOG,
+  'striae': STRIAE_ARTICLE_CATALOG,
+  'female-hair-loss': FEMALE_HAIR_LOSS_ARTICLE_CATALOG,
+  'perioral-dermatitis': PERIORAL_DERMATITIS_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

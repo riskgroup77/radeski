@@ -9,6 +9,41 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },
+  'art-qotir': {
+    uz: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",
+    ru: 'Чесотка: признаки и лечение — Фергана, Коканд',
+    en: 'Scabies: signs and treatment — Fergana, Kokand',
+  },
+  'art-seboreyali-keratoz': {
+    uz: "Seboreyali keratoz: olib tashlash — Farg'ona, Qo'qon",
+    ru: 'Себорейный кератоз: удаление — Фергана, Коканд',
+    en: 'Seborrheic keratosis: removal — Fergana, Kokand',
+  },
+  'art-bolalarda-teri-toshmalari': {
+    uz: 'Bolalarda teri toshmalari: qachon xavotir olish kerak',
+    ru: 'Сыпь у ребёнка: когда волноваться — Фергана, Коканд',
+    en: 'Rashes in children: when to worry — Fergana, Kokand',
+  },
+  'art-pushti-temiratki': {
+    uz: 'Pushti temiratki (Jiber): belgilari va parvarish',
+    ru: 'Розовый лишай Жибера: признаки и уход',
+    en: 'Pityriasis rosea: signs and care — Fergana, Kokand',
+  },
+  'art-striya': {
+    uz: "Cho'zilish izlari (striya): davolash — Farg'ona",
+    ru: 'Растяжки (стрии): лечение — Фергана, Коканд',
+    en: 'Stretch marks: treatment — Fergana, Kokand',
+  },
+  'art-ayollarda-soch-tokilishi': {
+    uz: "Ayollarda soch to'kilishi: sabablari va davolash",
+    ru: 'Выпадение волос у женщин: причины и лечение',
+    en: 'Hair loss in women: causes and treatment',
+  },
+  'art-perioral-dermatit': {
+    uz: "Perioral dermatit: og'iz atrofidagi toshma — davolash",
+    ru: 'Периоральный дерматит: сыпь вокруг рта — лечение',
+    en: 'Perioral dermatitis: rash around the mouth',
+  },
   'art-xol-tekshiruvi-dermatoskopiya': {
     uz: "Xol tekshiruvi va dermatoskopiya — Farg'ona, Qo'qon",
     ru: 'Проверка родинок и дерматоскопия — Фергана, Коканд',

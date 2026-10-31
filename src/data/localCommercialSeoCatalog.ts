@@ -249,9 +249,9 @@ function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
 function buildKokandLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-psoriasis-daavlin-kokand']),
-    specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
+    specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
-    kosmetologLanding('qoqon', ['art-qishda-teri-parvarishi', 'art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
+    kosmetologLanding('qoqon', ['art-qishda-teri-parvarishi', 'art-striya', 'art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('qoqon'),
     treatmentLanding('qoqon', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
@@ -263,7 +263,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     }),
     treatmentLanding('qoqon', 'soch-tokilish', 'trihologiya-centr-lechenie-volos', {
       name: L("Soch to'kilishi davolash", 'Лечение выпадения волос', 'Hair loss treatment'),
-      articleRouteKeys: ['art-soch-tokilishi-tahlillar-radeski', 'art-thulium-laser-hair-kokand', 'art-plazmotorapiya-soch-prp'],
+      articleRouteKeys: ['art-ayollarda-soch-tokilishi', 'art-soch-tokilishi-tahlillar-radeski', 'art-thulium-laser-hair-kokand', 'art-plazmotorapiya-soch-prp'],
       problem: L("Soch to'kilishi turli sabablarga ko'ra bo'lishi mumkin.", 'Выпадение волос имеет разные причины.', 'Hair loss has various causes.'),
       whoFor: [L('Soch siyraklashgan bemorlar', 'При поредении волос', 'Thinning hair')],
       methods: [L('Trixolog va trixoskopiya', 'Трихолог и трихоскопия', 'Trichologist and trichoscopy'), L('PRP va kurs davolash', 'PRP и курс лечения', 'PRP and treatment course')],
@@ -277,7 +277,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
       methods: [L('Podolog ko‘rigi', 'Осмотр подолога', 'Podiatrist exam'), L('Kompleks terapiya', 'Комплексная терапия', 'Combined therapy')],
     }),
     treatmentLanding('qoqon', 'osma-olib-tashlash', 'dermatoonkologiya', {
-      articleRouteKeys: ['art-papilloma-olib-tashlash'],
+      articleRouteKeys: ['art-seboreyali-keratoz', 'art-papilloma-olib-tashlash'],
       name: L("O'sma olib tashlash", 'Удаление новообразований', 'Lesion removal'),
       promoSlug: 'dermataskopiya',
       problem: L("Teri o'smalarini vaqtida baholash muhim.", 'Своевременная оценка образований важна.', 'Timely lesion assessment matters.'),
@@ -305,7 +305,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'rozasea-davolash', 'dermatologiya', {
       name: L('Rozasea davolash', 'Лечение розацеа', 'Rosacea treatment'),
       conditionSlug: 'rozasea',
-      articleRouteKeys: ['art-demodekoz', 'art-rozatseya-davolash-radeski'],
+      articleRouteKeys: ['art-perioral-dermatit', 'art-demodekoz', 'art-rozatseya-davolash-radeski'],
       problem: L('Yuz qizarishi va tomirlar.', 'Покраснение и сосуды.', 'Redness and vessels.'),
       whoFor: [L('Doimiy qizarish', 'Постоянное покраснение', 'Persistent redness')],
       methods: [L('Terapiya', 'Терапия', 'Therapy'), L('IPL/lazer', 'IPL/лазер', 'IPL/laser')],
@@ -353,7 +353,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     }),
     treatmentLanding('qoqon', 'trixoskopiya', 'trihologiya-centr-lechenie-volos', {
       name: L('Trixoskopiya', 'Трихоскопия', 'Trichoscopy'),
-      articleRouteKeys: ['art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat'],
+      articleRouteKeys: ['art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat'],
       problem: L("Soch va bosh terisi holatini kattalashtirib ko'rish.", 'Увеличенный осмотр волос и кожи головы.', 'Magnified exam of scalp and hair.'),
       whoFor: [L("Soch to'kilishi shubhasi", 'Подозрение на выпадение', 'Suspected hair loss')],
       methods: [L('Raqamli trixoskop', 'Цифровой трихоскоп', 'Digital trichoscope'), L('Trixolog xulosasi', 'Заключение трихолога', 'Trichologist report')],
@@ -361,7 +361,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'xol-tekshiruvi', 'dermatoskopiya', {
       name: L('Xol (dog) tekshiruvi', 'Проверка родинок', 'Mole screening'),
       promoSlug: 'dermataskopiya',
-      articleRouteKeys: ['art-xol-tekshiruvi-dermatoskopiya', 'art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-seboreyali-keratoz', 'art-xol-tekshiruvi-dermatoskopiya', 'art-bazalioma-teri-raki'],
       problem: L("Teri dog'larini vaqtida baholash — profilaktika.", 'Своевременная оценка родинок — профилактика.', 'Timely mole assessment is preventive care.'),
       whoFor: [L("Ko'payib borayotgan dog'", 'Растущее образование', 'Growing lesion')],
       methods: [L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'), L('Skrining rejasi', 'План наблюдения', 'Screening plan')],
@@ -403,9 +403,9 @@ function buildKokandLandings(): LocalCommercialLanding[] {
 function buildFerganaLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-ipl-terapiya']),
-    specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-plazmotorapiya-soch-prp']),
+    specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-ayollarda-soch-tokilishi', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
-    kosmetologLanding('fargona', ['art-qishda-teri-parvarishi', 'art-melazma', 'art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
+    kosmetologLanding('fargona', ['art-qishda-teri-parvarishi', 'art-striya', 'art-melazma', 'art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('fargona'),
     treatmentLanding('fargona', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
@@ -435,14 +435,14 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'rozasea-davolash', 'dermatologiya', {
       name: L('Rozasea davolash', 'Лечение розацеа', 'Rosacea treatment'),
       conditionSlug: 'rozasea',
-      articleRouteKeys: ['art-demodekoz', 'art-rozatseya-davolash-radeski'],
+      articleRouteKeys: ['art-perioral-dermatit', 'art-demodekoz', 'art-rozatseya-davolash-radeski'],
       problem: L('Qizarish.', 'Покраснение.', 'Redness.'),
       whoFor: [L('Rozasea', 'Розацеа', 'Rosacea')],
       methods: [L('Terapiya + IPL', 'Терапия + IPL', 'Therapy + IPL')],
     }),
     treatmentLanding('fargona', 'soch-tokilish', 'trihologiya-centr-lechenie-volos', {
       name: L("Soch to'kilishi davolash", 'Лечение выпадения волос', 'Hair loss treatment'),
-      articleRouteKeys: ['art-soch-tokilishi-tahlillar-radeski', 'art-plazmotorapiya-soch-prp'],
+      articleRouteKeys: ['art-ayollarda-soch-tokilishi', 'art-soch-tokilishi-tahlillar-radeski', 'art-plazmotorapiya-soch-prp'],
       problem: L("Soch to'kilishi.", 'Выпадение волос.', 'Hair loss.'),
       whoFor: [L('Alopecia', 'Алопеция', 'Alopecia')],
       methods: [L('PRP', 'PRP', 'PRP'), L('Trixolog', 'Трихолог', 'Trichologist')],
@@ -456,7 +456,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
       methods: [L('Dermatoskop', 'Дерматоскоп', 'Dermoscope')],
     }),
     treatmentLanding('fargona', 'osma-olib-tashlash', 'dermatoonkologiya', {
-      articleRouteKeys: ['art-papilloma-olib-tashlash'],
+      articleRouteKeys: ['art-seboreyali-keratoz', 'art-papilloma-olib-tashlash'],
       name: L("O'sma olib tashlash", 'Удаление новообразований', 'Lesion removal'),
       promoSlug: 'dermataskopiya',
       problem: L("O'smalar.", 'Новообразования.', 'Lesions.'),
@@ -506,7 +506,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     }),
     treatmentLanding('fargona', 'trixoskopiya', 'trihologiya-centr-lechenie-volos', {
       name: L('Trixoskopiya', 'Трихоскопия', 'Trichoscopy'),
-      articleRouteKeys: ['art-trixolog-trixoskopiya', 'art-plazmotorapiya-soch-prp'],
+      articleRouteKeys: ['art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya', 'art-plazmotorapiya-soch-prp'],
       problem: L("Soch holatini kattalashtirib baholash.", 'Увеличенная оценка состояния волос.', 'Magnified hair assessment.'),
       whoFor: [L("Soch to'kilishi", 'Выпадение волос', 'Hair loss')],
       methods: [L('Raqamli trixoskop', 'Цифровой трихоскоп', 'Digital trichoscope')],
@@ -514,7 +514,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'xol-tekshiruvi', 'dermatoskopiya', {
       name: L('Xol (dog) tekshiruvi', 'Проверка родинок', 'Mole screening'),
       promoSlug: 'dermataskopiya',
-      articleRouteKeys: ['art-xol-tekshiruvi-dermatoskopiya', 'art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-seboreyali-keratoz', 'art-xol-tekshiruvi-dermatoskopiya', 'art-bazalioma-teri-raki'],
       problem: L("Dog'larni vaqtida tekshirish.", 'Своевременная проверка родинок.', 'Timely mole checks.'),
       whoFor: [L('Skrining', 'Скрининг', 'Screening')],
       methods: [L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy')],

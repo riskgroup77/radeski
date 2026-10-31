@@ -130,4 +130,4 @@ export const STATIC_ARTICLE_ROUTE_KEYS: Record<string, string> = {
 };
 
 /** Written but dated after this build: not published yet, so nothing may link to them. */
-export const SCHEDULED_ARTICLE_ROUTE_KEYS: string[] = ["art-teri-zamburugi","art-gerpes","art-demodekoz","art-qishda-teri-parvarishi","art-melazma","art-papilloma-olib-tashlash","art-xol-tekshiruvi-dermatoskopiya"];
+export const SCHEDULED_ARTICLE_ROUTE_KEYS: string[] = ["art-perioral-dermatit","art-ayollarda-soch-tokilishi","art-striya","art-pushti-temiratki","art-bolalarda-teri-toshmalari","art-seboreyali-keratoz","art-qotir","art-teri-zamburugi","art-gerpes","art-demodekoz","art-qishda-teri-parvarishi","art-melazma","art-papilloma-olib-tashlash","art-xol-tekshiruvi-dermatoskopiya"];
