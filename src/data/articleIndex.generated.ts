@@ -1224,6 +1224,335 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 662
     }
   },
+  "mole-screening": {
+    "uz": {
+      "summary": "Xolni qachon tekshirish kerak: ABCDE qoidasi, xavf guruhlari, dermatoskopiya va xollar xaritasi, xolni olib tashlash va gistologiya. Farg'ona va Qo'qonda dermatoonkolog.",
+      "tags": [
+        "Xol",
+        "Dermatoskopiya",
+        "Melanoma",
+        "Xol olib tashlash",
+        "Dermatoonkolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3584,
+      "bodyWords": 451
+    },
+    "ru": {
+      "summary": "Когда проверять родинку: правило ABCDE, группы риска, дерматоскопия и картирование родинок, удаление и гистология. Дерматоонколог в Фергане и Коканде.",
+      "tags": [
+        "Родинки",
+        "Дерматоскопия",
+        "Меланома",
+        "Удаление родинок",
+        "Дерматоонколог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3517,
+      "bodyWords": 458
+    },
+    "en": {
+      "summary": "When to check a mole: the ABCDE rule, risk groups, dermoscopy and mole mapping, removal and histology. Dermato-oncologists in Fergana and Kokand.",
+      "tags": [
+        "Moles",
+        "Dermoscopy",
+        "Melanoma",
+        "Mole removal",
+        "Dermato-oncologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3292,
+      "bodyWords": 525
+    }
+  },
+  "papilloma-removal": {
+    "uz": {
+      "summary": "Papillomalar: turlari, so'galdan farqi, uyda olib tashlash xavfi, CO₂ lazer va radioto'lqin bilan olib tashlash, keyingi parvarish. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Papilloma",
+        "So'gal",
+        "Papilloma olib tashlash",
+        "CO₂ lazer",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3558,
+      "bodyWords": 411
+    },
+    "ru": {
+      "summary": "Папилломы: виды, отличие от бородавок, чем опасно удаление дома, удаление CO₂-лазером и радиоволной, уход после процедуры. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Папилломы",
+        "Бородавки",
+        "Удаление папиллом",
+        "CO₂-лазер",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3330,
+      "bodyWords": 415
+    },
+    "en": {
+      "summary": "Papillomas: types, how they differ from warts, why home removal is risky, removal with CO₂ laser and radiowave, aftercare. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Papillomas",
+        "Skin tags",
+        "Warts",
+        "Papilloma removal",
+        "CO₂ laser",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3362,
+      "bodyWords": 495
+    }
+  },
+  "melasma": {
+    "uz": {
+      "summary": "Melazma — yuzdagi jigarrang dog'lar: sabablari (quyosh, gormonlar), boshqa dog'lardan farqi, quyoshdan himoya, kremlar, piling va lazer toning. Farg'ona va Qo'qonda dermatolog-kosmetolog.",
+      "tags": [
+        "Melazma",
+        "Yuzdagi dog'lar",
+        "Pigmentatsiya",
+        "Lazer toning",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3801,
+      "bodyWords": 443
+    },
+    "ru": {
+      "summary": "Мелазма — коричневые пятна на лице: причины (солнце, гормоны), отличие от других пятен, защита от солнца, кремы, пилинги и лазерный тонинг. Дерматолог-косметолог в Фергане и Коканде.",
+      "tags": [
+        "Мелазма",
+        "Пигментные пятна",
+        "Пигментация на лице",
+        "Лазерный тонинг",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3592,
+      "bodyWords": 464
+    },
+    "en": {
+      "summary": "Melasma — brown patches on the face: causes (sun, hormones), how it differs from other spots, sun protection, creams, peels and laser toning. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Melasma",
+        "Facial pigmentation",
+        "Dark spots",
+        "Laser toning",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3463,
+      "bodyWords": 498
+    }
+  },
+  "winter-skin-care": {
+    "uz": {
+      "summary": "Qishda teri nega quriydi va yoriladi: yuz, qo'l, lab va tana uchun har kungi parvarish, keng tarqalgan xatolar va qachon dermatologga borish kerak. Farg'ona va Qo'qonda maslahat.",
+      "tags": [
+        "Qishda teri parvarishi",
+        "Quruq teri",
+        "Qo'llar yorilishi",
+        "Namlovchi krem",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3560,
+      "bodyWords": 454
+    },
+    "ru": {
+      "summary": "Почему зимой кожа сохнет и трескается: ежедневный уход за лицом, руками, губами и телом, частые ошибки и когда идти к дерматологу. Консультация в Фергане и Коканде.",
+      "tags": [
+        "Уход за кожей зимой",
+        "Сухая кожа",
+        "Трещины на руках",
+        "Увлажняющий крем",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3302,
+      "bodyWords": 458
+    },
+    "en": {
+      "summary": "Why skin dries and cracks in winter: a daily routine for face, hands, lips and body, common mistakes and when to see a dermatologist. Advice in Fergana and Kokand.",
+      "tags": [
+        "Winter skin care",
+        "Dry skin",
+        "Cracked hands",
+        "Moisturiser",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3220,
+      "bodyWords": 508
+    }
+  },
+  "demodex": {
+    "uz": {
+      "summary": "Demodekoz: yuzda qizarish, toshma, qichishish va dag'al teri. Demodeks kanasi nima, akne va rozatseyadan farqi, qirindi tahlili, davolash va parvarish. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Demodekoz",
+        "Demodeks",
+        "Yuzda qizarish",
+        "Rozatseya",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3619,
+      "bodyWords": 425
+    },
+    "ru": {
+      "summary": "Демодекоз: покраснение, высыпания, зуд и грубая кожа лица. Что такое клещ демодекс, отличие от акне и розацеа, соскоб, лечение и уход. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Демодекоз",
+        "Демодекс",
+        "Покраснение лица",
+        "Розацеа",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3338,
+      "bodyWords": 443
+    },
+    "en": {
+      "summary": "Demodicosis: facial redness, spots, itching and rough skin. What the Demodex mite is, how it differs from acne and rosacea, the scraping test, treatment and care. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Demodicosis",
+        "Demodex",
+        "Facial redness",
+        "Rosacea",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3395,
+      "bodyWords": 515
+    }
+  },
+  "herpes": {
+    "uz": {
+      "summary": "Gerpes (lab uchug'i): nima uchun qaytadi, bosqichlari, qanday yuqadi, virusga qarshi davolash va qachon zudlik bilan shifokorga borish kerak. Farg'ona va Qo'qonda dermatovenerolog.",
+      "tags": [
+        "Gerpes",
+        "Lab uchug'i",
+        "Belbog'simon temiratki",
+        "Virusli infeksiya",
+        "Dermatovenerolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3494,
+      "bodyWords": 435
+    },
+    "ru": {
+      "summary": "Герпес на губах: почему возвращается, стадии, как передаётся, противовирусное лечение и когда срочно к врачу. Дерматовенеролог в Фергане и Коканде.",
+      "tags": [
+        "Герпес",
+        "Простуда на губах",
+        "Опоясывающий лишай",
+        "Вирусная инфекция",
+        "Дерматовенеролог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3206,
+      "bodyWords": 455
+    },
+    "en": {
+      "summary": "Cold sores (herpes): why they come back, the stages, how herpes spreads, antiviral treatment and when to see a doctor urgently. Dermatovenereologists in Fergana and Kokand.",
+      "tags": [
+        "Herpes",
+        "Cold sores",
+        "Shingles",
+        "Viral infection",
+        "Dermatovenereologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3164,
+      "bodyWords": 530
+    }
+  },
+  "fungal": {
+    "uz": {
+      "summary": "Teri zamburug'i: oyoq, tana, chov, bosh terisi zamburug'i, rang-barang temiratki va kandidoz. Belgilari, qirindi tahlili, gormonli krem xatosi, davolash va profilaktika. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Teri zamburug'i",
+        "Mikoz",
+        "Oyoq zamburug'i",
+        "Temiratki",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 4208,
+      "bodyWords": 508
+    },
+    "ru": {
+      "summary": "Грибок кожи: стопы, тело, пах, кожа головы, разноцветный лишай и кандидоз. Признаки, соскоб, ошибка с гормональными кремами, лечение и профилактика. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Грибок кожи",
+        "Микоз",
+        "Грибок стопы",
+        "Лишай",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3932,
+      "bodyWords": 536
+    },
+    "en": {
+      "summary": "Fungal skin infections: feet, body, groin, scalp, pityriasis versicolor and candida. Signs, the skin scraping test, the steroid cream mistake, treatment and prevention. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Fungal skin infection",
+        "Tinea",
+        "Athlete's foot",
+        "Ringworm",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3770,
+      "bodyWords": 598
+    }
+  },
   "laser-scar-resurfacing": {
     "uz": {
       "summary": "Chandiqlarni lazer shlifovkasi: operatsiya, jarohat, kuyish va akne izlarini kamroq sezilarli qilish. Radeski Skin Clinic’da shifokor konsultatsiyasi va individual reja.",

@@ -139,6 +139,14 @@ async function main() {
   if (prerenderer.videoKeys?.length) {
     sitemap = sitemap.replace('</urlset>', `${videoSitemapBlock(prerenderer.videoKeys)}\n</urlset>`);
   }
+  // Articles scheduled for a later date: no sitemap entry (and so no page) until their day.
+  const scheduled = new Set(prerenderer.scheduledArticleKeys ?? []);
+  if (scheduled.size) {
+    sitemap = sitemap.replace(/\s*<url>\s*<loc>([^<]+)<\/loc>[\s\S]*?<\/url>/g, (block, loc) => {
+      const match = loc.match(/\/(?:uz|ru|en)\/articles\/([^/]+)$/);
+      return match && scheduled.has(match[1]) ? '' : block;
+    });
+  }
   writeFileSync(sitemapPath, sitemap);
 
   const pathnames = [...new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname))]

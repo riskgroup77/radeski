@@ -70,6 +70,7 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'bolalarda sogal lazer radeski',
     'pediatric warts laser radeski',
   ],
+  'papilloma-removal': ['art-papilloma-olib-tashlash', 'papilloma-olib-tashlash'],
   'papilloma-warts': ['papillom', 'borodav', 'wart', 'hpv', "so'gal", 'бородав', 'папиллом', 'condylom'],
   hemangioma: ['gemangi', 'геманги', 'hemangi', 'vascular', 'qizil xol', 'angioma'],
   'psoriasis-daavlin-kokand': [
@@ -272,6 +273,10 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   eczema: ['art-ekzema', 'ekzema: turlari', 'экзема: виды', 'eczema: types'],
   'skin-itching': ['art-teri-qichishi', 'teri qichishi: sabablari', 'зуд кожи: причины', 'itchy skin: causes'],
   'urticaria-skin-allergy': ['art-eshakemi-teri-allergiyasi', 'eshakemi-teri-allergiyasi', 'аллергия на коже и крапивница'],
+  melasma: ['art-melazma', 'melazma: yuzdagi', 'мелазма: коричневые', 'melasma: brown'],
+  'winter-skin-care': ['art-qishda-teri-parvarishi', 'qishda-teri-parvarishi', 'уход за кожей зимой', 'winter skin care'],
+  demodex: ['art-demodekoz', 'demodekoz', 'демодекоз', 'demodicosis'],
+  herpes: ['art-gerpes', 'gerpes (lab', 'герпес на губах', 'cold sores (herpes)'],
   'nail-fungus': ['art-tirnoq-zamburugi', 'tirnoq-zamburugi', 'грибок ногтей (онихомикоз)', 'nail fungus (onychomycosis)'],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
   'seborrheic-dermatitis': [
@@ -312,8 +317,8 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
     'fototerapiya',
     'repigment',
   ],
-  fungal: ['zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
-  'mole-screening': ['nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
+  fungal: ['art-teri-zamburugi', 'teri-zamburugi', 'zamburug', 'гриб', 'fungal', 'mikoz', 'микоз', 'onychomyc'],
+  'mole-screening': ['art-xol-tekshiruvi-dermatoskopiya', 'xol-tekshiruvi-dermatoskopiya', 'nevys', 'nev', 'mole', 'родинк', 'melanom', 'меланом', 'dermatoscopy'],
   'basal-cell-carcinoma': [
     'bazalioma-teri-raki',
     'базальноклеточный рак кожи',

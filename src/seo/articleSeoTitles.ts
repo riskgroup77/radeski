@@ -9,6 +9,41 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },
+  'art-xol-tekshiruvi-dermatoskopiya': {
+    uz: "Xol tekshiruvi va dermatoskopiya — Farg'ona, Qo'qon",
+    ru: 'Проверка родинок и дерматоскопия — Фергана, Коканд',
+    en: 'Mole check and dermoscopy — Fergana, Kokand',
+  },
+  'art-papilloma-olib-tashlash': {
+    uz: "Papilloma olib tashlash: usullar — Farg'ona, Qo'qon",
+    ru: 'Удаление папиллом: методы — Фергана, Коканд',
+    en: 'Papilloma removal: methods — Fergana, Kokand',
+  },
+  'art-melazma': {
+    uz: "Melazma: sabablari va davolash — Farg'ona, Qo'qon",
+    ru: 'Мелазма: причины и лечение — Фергана, Коканд',
+    en: 'Melasma: causes and treatment — Fergana, Kokand',
+  },
+  'art-qishda-teri-parvarishi': {
+    uz: 'Qishda teri parvarishi: quruqlik va yoriqlar',
+    ru: 'Уход за кожей зимой: сухость и трещины',
+    en: 'Winter skin care: dryness and cracks',
+  },
+  'art-demodekoz': {
+    uz: "Demodekoz: belgilari va davolash — Farg'ona, Qo'qon",
+    ru: 'Демодекоз: признаки и лечение — Фергана, Коканд',
+    en: 'Demodicosis: signs and treatment — Fergana, Kokand',
+  },
+  'art-gerpes': {
+    uz: "Gerpes (lab uchug'i): davolash — Farg'ona, Qo'qon",
+    ru: 'Герпес на губах: лечение — Фергана, Коканд',
+    en: 'Cold sores (herpes): treatment — Fergana, Kokand',
+  },
+  'art-teri-zamburugi': {
+    uz: "Teri zamburug'i: belgilari va davolash — Farg'ona",
+    ru: 'Грибок кожи: признаки и лечение — Фергана, Коканд',
+    en: 'Fungal skin infection: treatment — Fergana, Kokand',
+  },
   'art-ekzema': {
     uz: "Ekzema: sabablari va davolash — Farg'ona, Qo'qon",
     ru: 'Экзема: причины и лечение — Фергана, Коканд',

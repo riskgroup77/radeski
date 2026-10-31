@@ -89,6 +89,146 @@ export function fitDescription(text: string): string {
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  'art-xol-tekshiruvi-dermatoskopiya': {
+    uz: {
+      title: "Xol tekshiruvi va dermatoskopiya — Farg'ona, Qo'qon",
+      desc: "Qaysi xol xavfli: ABCDE qoidasi, dermatoskopiya, xollar xaritasi va gistologiya bilan olib tashlash. Farg'ona va Qo'qonda dermatoonkolog qabuli.",
+      keywords:
+        "xol tekshiruvi, dermatoskopiya, xol olib tashlash, melanoma belgilari, xollar xaritasi, dermatoonkolog Farg'ona, dermatoonkolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Проверка родинок и дерматоскопия — Фергана, Коканд',
+      desc: 'Какая родинка опасна: правило ABCDE, дерматоскопия, картирование родинок и удаление с гистологией. Дерматоонколог в Фергане и Коканде.',
+      keywords:
+        'проверка родинок, дерматоскопия, удаление родинок, признаки меланомы, картирование родинок, дерматоонколог Фергана, дерматоонколог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Mole check and dermoscopy — Fergana, Kokand',
+      desc: 'Which mole is dangerous: the ABCDE rule, dermoscopy, mole mapping and removal with histology. Dermato-oncologists in Fergana and Kokand.',
+      keywords:
+        'mole check, dermoscopy, mole removal, melanoma signs, mole mapping, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-papilloma-olib-tashlash': {
+    uz: {
+      title: "Papilloma olib tashlash: usullar — Farg'ona, Qo'qon",
+      desc: "Papillomalar nimadan paydo bo'ladi, uyda olib tashlash xavfi, CO₂ lazer va radioto'lqin usuli, keyingi parvarish. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "papilloma olib tashlash, papilloma davolash, so'gal olib tashlash, CO2 lazer, akroxordon, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Удаление папиллом: методы — Фергана, Коканд',
+      desc: 'Почему появляются папилломы, чем опасно удаление дома, удаление CO₂-лазером и радиоволной, уход после процедуры. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'удаление папиллом, папилломы на коже, удаление папиллом лазером, акрохордоны, удаление бородавок, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Papilloma removal: methods — Fergana, Kokand',
+      desc: 'Why papillomas appear, why home removal is risky, removal with CO₂ laser and radiowave, and aftercare. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'papilloma removal, skin tag removal, wart removal, CO2 laser, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-melazma': {
+    uz: {
+      title: "Melazma: sabablari va davolash — Farg'ona, Qo'qon",
+      desc: "Melazma — yuzdagi jigarrang dog'lar: quyosh va gormonlar, boshqa dog'lardan farqi, himoya, kremlar va lazer toning. Farg'ona va Qo'qonda kosmetolog.",
+      keywords:
+        "melazma, melazma davolash, yuzdagi dog'lar, pigment dog'lar, homiladorlik niqobi, lazer toning, kosmetolog Farg'ona, kosmetolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Мелазма: причины и лечение — Фергана, Коканд',
+      desc: 'Мелазма — коричневые пятна на лице: солнце и гормоны, отличие от других пятен, защита, кремы и лазерный тонинг. Косметолог в Фергане и Коканде.',
+      keywords:
+        'мелазма, лечение мелазмы, пигментные пятна на лице, хлоазма, маска беременных, лазерный тонинг, косметолог Фергана, косметолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Melasma: causes and treatment — Fergana, Kokand',
+      desc: 'Melasma — brown patches on the face: sun and hormones, other spots, sun protection, creams and laser toning. Cosmetologists in Fergana and Kokand.',
+      keywords:
+        'melasma, melasma treatment, facial pigmentation, dark spots on face, laser toning, cosmetologist Fergana, cosmetologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-qishda-teri-parvarishi': {
+    uz: {
+      title: 'Qishda teri parvarishi: quruqlik va yoriqlar',
+      desc: "Qishda teri nega quriydi: yuz, qo'l, lab va tana uchun har kungi parvarish, xatolar va qachon dermatologga borish kerak. Farg'ona va Qo'qonda maslahat.",
+      keywords:
+        "qishda teri parvarishi, quruq teri, qo'llar yorilishi, lab yorilishi, namlovchi krem, kosmetolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Уход за кожей зимой: сухость и трещины',
+      desc: 'Почему зимой сохнет кожа: ежедневный уход за лицом, руками, губами и телом, частые ошибки и когда к дерматологу. Консультация в Фергане и Коканде.',
+      keywords:
+        'уход за кожей зимой, сухая кожа, трещины на руках, сухие губы, увлажняющий крем, косметолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Winter skin care: dryness and cracks',
+      desc: 'Why skin dries in winter: a daily routine for face, hands, lips and body, common mistakes and when to see a dermatologist. Advice in Fergana and Kokand.',
+      keywords:
+        'winter skin care, dry skin, cracked hands, chapped lips, moisturiser, cosmetologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-demodekoz': {
+    uz: {
+      title: "Demodekoz: belgilari va davolash — Farg'ona, Qo'qon",
+      desc: "Demodekoz: yuzda qizarish, toshma va qichishish. Demodeks kanasi, akne va rozatseyadan farqi, qirindi tahlili va davolash. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "demodekoz, demodeks, demodekoz davolash, yuzda qizarish, rozatseya, demodeks tahlili, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Демодекоз: признаки и лечение — Фергана, Коканд',
+      desc: 'Демодекоз: покраснение, высыпания и зуд на лице. Клещ демодекс, отличие от акне и розацеа, соскоб и лечение. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'демодекоз, демодекс, лечение демодекоза, клещ на лице, анализ на демодекс, розацеа, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Demodicosis: signs and treatment — Fergana, Kokand',
+      desc: 'Demodicosis: facial redness, spots and itching. The Demodex mite, how it differs from acne and rosacea, testing and treatment in Fergana and Kokand.',
+      keywords:
+        'demodicosis, demodex, demodex treatment, facial redness, rosacea, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-gerpes': {
+    uz: {
+      title: "Gerpes (lab uchug'i): davolash — Farg'ona, Qo'qon",
+      desc: "Gerpes nima uchun qaytadi: bosqichlari, qanday yuqadi, virusga qarshi davolash va qachon zudlik bilan shifokorga borish kerak. Farg'ona va Qo'qonda.",
+      keywords:
+        "gerpes, lab uchug'i, gerpes davolash, labda pufakcha, belbog'simon temiratki, dermatovenerolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Герпес на губах: лечение — Фергана, Коканд',
+      desc: 'Почему возвращается герпес: стадии, как передаётся, противовирусное лечение и когда срочно к врачу. Дерматовенеролог в Фергане и Коканде.',
+      keywords:
+        'герпес на губах, лечение герпеса, простуда на губах, опоясывающий лишай, частый герпес, дерматовенеролог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Cold sores (herpes): treatment — Fergana, Kokand',
+      desc: 'Why cold sores come back: stages, how herpes spreads, antiviral treatment and when to see a doctor urgently. Dermatovenereologists in Fergana and Kokand.',
+      keywords:
+        'herpes, cold sores, cold sore treatment, shingles, recurrent herpes, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-teri-zamburugi': {
+    uz: {
+      title: "Teri zamburug'i: belgilari va davolash — Farg'ona",
+      desc: "Teri zamburug'i: oyoq, tana, chov, rang-barang temiratki va kandidoz. Qirindi tahlili, gormonli krem xatosi va davolash. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "teri zamburug'i, mikoz, oyoq zamburug'i, temiratki, rang-barang temiratki, zamburug' davolash, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Грибок кожи: признаки и лечение — Фергана, Коканд',
+      desc: 'Грибок кожи: стопы, тело, пах, разноцветный лишай и кандидоз. Соскоб, ошибка с гормональными кремами и лечение. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'грибок кожи, микоз, грибок стопы, лишай, разноцветный лишай, паховый грибок, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Fungal skin infection: treatment — Fergana, Kokand',
+      desc: 'Fungal skin infections: feet, body, groin, pityriasis versicolor and candida. Skin scraping, the steroid cream mistake and treatment in Fergana and Kokand.',
+      keywords:
+        'fungal skin infection, tinea, athletes foot, ringworm, pityriasis versicolor, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
   'art-ekzema': {
     uz: {
       title: "Ekzema: sabablari va davolash — Farg'ona, Qo'qon",

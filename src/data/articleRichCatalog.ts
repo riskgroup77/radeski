@@ -27,6 +27,13 @@ import { ECZEMA_ARTICLE_CATALOG } from './articles/eczemaArticle';
 import { SKIN_ITCHING_ARTICLE_CATALOG } from './articles/skinItchingArticle';
 import { URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG } from './articles/urticariaSkinAllergyArticle';
 import { NAIL_FUNGUS_ARTICLE_CATALOG } from './articles/nailFungusArticle';
+import { MOLE_CHECK_ARTICLE_CATALOG } from './articles/moleCheckArticle';
+import { PAPILLOMA_REMOVAL_ARTICLE_CATALOG } from './articles/papillomaRemovalArticle';
+import { MELASMA_ARTICLE_CATALOG } from './articles/melasmaArticle';
+import { WINTER_SKIN_CARE_ARTICLE_CATALOG } from './articles/winterSkinCareArticle';
+import { DEMODICOSIS_ARTICLE_CATALOG } from './articles/demodicosisArticle';
+import { HERPES_ARTICLE_CATALOG } from './articles/herpesArticle';
+import { SKIN_FUNGUS_ARTICLE_CATALOG } from './articles/skinFungusArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -106,6 +113,13 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'skin-itching': SKIN_ITCHING_ARTICLE_CATALOG,
   'urticaria-skin-allergy': URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG,
   'nail-fungus': NAIL_FUNGUS_ARTICLE_CATALOG,
+  'mole-screening': MOLE_CHECK_ARTICLE_CATALOG,
+  'papilloma-removal': PAPILLOMA_REMOVAL_ARTICLE_CATALOG,
+  'melasma': MELASMA_ARTICLE_CATALOG,
+  'winter-skin-care': WINTER_SKIN_CARE_ARTICLE_CATALOG,
+  'demodex': DEMODICOSIS_ARTICLE_CATALOG,
+  'herpes': HERPES_ARTICLE_CATALOG,
+  'fungal': SKIN_FUNGUS_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

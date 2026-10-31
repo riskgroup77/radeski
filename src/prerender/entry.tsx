@@ -116,6 +116,7 @@ import {
 } from '../utils/localProof';
 import { getCategoryFaq } from '../data/serviceCategoryFaq';
 import { CONDITION_ARTICLES } from '../data/conditionArticles';
+import { SCHEDULED_ARTICLE_ROUTE_KEYS } from '../data/articleRouteKeys.generated';
 import { resolveDoctorPageDetails } from '../utils/doctorPageDetails';
 import { LOCAL_LANDING_CONTENT_UPDATED, landingTopicKey } from '../data/localLandingTopics';
 import type { ServiceRichContent } from '../types';
@@ -1498,6 +1499,8 @@ export function createPrerenderer(snapshot: PrerenderSnapshot) {
     videoKeys: videos.map((video) => videoRouteKey(video)),
     /** Doctor URL keys for the sitemap (CMS doctors, slug form). */
     doctorKeys: clinic.doctors.map((doctor) => doctorRouteKey(doctor)),
+    /** Articles written ahead and dated later: kept out of the sitemap until their day. */
+    scheduledArticleKeys: SCHEDULED_ARTICLE_ROUTE_KEYS,
     /** /llms.txt — the clinic's key facts and pages for AI assistants (llmstxt.org format). */
     llmsTxt: () => buildLlmsTxt(clinic),
     /**

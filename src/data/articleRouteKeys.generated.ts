@@ -128,3 +128,6 @@ export const STATIC_ARTICLE_ROUTE_KEYS: Record<string, string> = {
   "art-soch-tokilishi-tahlillar-radeski": "art-soch-tokilishi-tahlillar-radeski",
   "soch-tokilishi-qanday-tahlillar-radeski": "art-soch-tokilishi-tahlillar-radeski"
 };
+
+/** Written but dated after this build: not published yet, so nothing may link to them. */
+export const SCHEDULED_ARTICLE_ROUTE_KEYS: string[] = ["art-teri-zamburugi","art-gerpes","art-demodekoz","art-qishda-teri-parvarishi","art-melazma","art-papilloma-olib-tashlash","art-xol-tekshiruvi-dermatoskopiya"];

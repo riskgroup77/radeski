@@ -11,6 +11,10 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'eczema',
     'skin-itching',
     'urticaria-skin-allergy',
+    'herpes',
+    'demodex',
+    'fungal',
+    'winter-skin-care',
     'adult-acne',
     'acne-dermatologist-vs-cosmetologist',
     'rosacea-radeski',
@@ -41,6 +45,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'hair-transplant-contraindications',
   ],
   'apparatnaya-kosmetologiya': [
+    'melasma',
     'ipl-radeski',
     'ipl-therapy',
     'ipl-lumecca-pigmentation-radeski',
@@ -76,6 +81,8 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'soch-profilaktika-inyeksii-radeski',
   ],
   dermatoonkologiya: [
+    'mole-screening',
+    'papilloma-removal',
     'dermatopatologiya-radeski',
     'basal-cell-carcinoma',
     'papilloma-warts',
@@ -84,6 +91,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'penile-scc',
   ],
   'hirurgicheskaya-dermatologiya': [
+    'papilloma-removal',
     'deka-co2',
     'deka-co2-scars-radeski',
     'basal-cell-carcinoma',

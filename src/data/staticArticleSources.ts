@@ -27,6 +27,13 @@ import { ECZEMA_ARTICLE } from './articles/eczemaArticle';
 import { SKIN_ITCHING_ARTICLE } from './articles/skinItchingArticle';
 import { URTICARIA_SKIN_ALLERGY_ARTICLE } from './articles/urticariaSkinAllergyArticle';
 import { NAIL_FUNGUS_ARTICLE } from './articles/nailFungusArticle';
+import { MOLE_CHECK_ARTICLE } from './articles/moleCheckArticle';
+import { PAPILLOMA_REMOVAL_ARTICLE } from './articles/papillomaRemovalArticle';
+import { MELASMA_ARTICLE } from './articles/melasmaArticle';
+import { WINTER_SKIN_CARE_ARTICLE } from './articles/winterSkinCareArticle';
+import { DEMODICOSIS_ARTICLE } from './articles/demodicosisArticle';
+import { HERPES_ARTICLE } from './articles/herpesArticle';
+import { SKIN_FUNGUS_ARTICLE } from './articles/skinFungusArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -89,6 +96,13 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   ADULT_ACNE_DERMATOLOGIST_ARTICLE,
+  SKIN_FUNGUS_ARTICLE,
+  HERPES_ARTICLE,
+  DEMODICOSIS_ARTICLE,
+  WINTER_SKIN_CARE_ARTICLE,
+  MELASMA_ARTICLE,
+  PAPILLOMA_REMOVAL_ARTICLE,
+  MOLE_CHECK_ARTICLE,
   NAIL_FUNGUS_ARTICLE,
   URTICARIA_SKIN_ALLERGY_ARTICLE,
   SKIN_ITCHING_ARTICLE,
