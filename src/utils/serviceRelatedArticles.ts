@@ -43,6 +43,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   ],
   trixoskopiya: [
     'female-hair-loss',
+    'male-hair-loss',
     'trichologist-trichoscopy',
     'soch-tokilishi-normal-patologiya-radeski',
     'alopecia-areata-klinik-holat',
@@ -52,6 +53,8 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
   ],
   'apparatnaya-kosmetologiya': [
     'melasma',
+    'carbon-peel',
+    'milia',
     'striae',
     'ipl-radeski',
     'ipl-therapy',
@@ -78,9 +81,10 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'kontur-plastika-radeski',
     'plasmapheresis',
   ],
-  'lazernaya-epilyaciya': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
+  'lazernaya-epilyaciya': ['laser-hair-removal-season', 'deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
   'trihologiya-centr-lechenie-volos': [
     'female-hair-loss',
+    'male-hair-loss',
     'trichologist-trichoscopy',
     'soch-tokilishi-normal-patologiya-radeski',
     'prp-hair',
@@ -117,7 +121,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriaz-klinik-keys-bahridinov-radeski',
   ],
   'shkola-dermatoskopii': ['basal-cell-carcinoma', 'mole-screening'],
-  'clinika-patologii-nogtej': ['nail-fungus', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
+  'clinika-patologii-nogtej': ['nail-fungus', 'calluses', 'cracked-heels', 'diabetic-foot', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
   dermatopatologiya: ['dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
 };
 

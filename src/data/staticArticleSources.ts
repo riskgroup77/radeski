@@ -41,6 +41,13 @@ import { PITYRIASIS_ROSEA_ARTICLE } from './articles/pityriasisRoseaArticle';
 import { STRIAE_ARTICLE } from './articles/striaeArticle';
 import { FEMALE_HAIR_LOSS_ARTICLE } from './articles/femaleHairLossArticle';
 import { PERIORAL_DERMATITIS_ARTICLE } from './articles/perioralDermatitisArticle';
+import { CALLUSES_ARTICLE } from './articles/callusesArticle';
+import { MALE_HAIR_LOSS_ARTICLE } from './articles/maleHairLossArticle';
+import { CRACKED_HEELS_ARTICLE } from './articles/crackedHeelsArticle';
+import { LASER_HAIR_REMOVAL_SEASON_ARTICLE } from './articles/laserHairRemovalSeasonArticle';
+import { MILIA_ARTICLE } from './articles/miliaArticle';
+import { DIABETIC_FOOT_ARTICLE } from './articles/diabeticFootArticle';
+import { CARBON_PEEL_ARTICLE } from './articles/carbonPeelArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -103,6 +110,13 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   ADULT_ACNE_DERMATOLOGIST_ARTICLE,
+  CARBON_PEEL_ARTICLE,
+  DIABETIC_FOOT_ARTICLE,
+  MILIA_ARTICLE,
+  LASER_HAIR_REMOVAL_SEASON_ARTICLE,
+  CRACKED_HEELS_ARTICLE,
+  MALE_HAIR_LOSS_ARTICLE,
+  CALLUSES_ARTICLE,
   PERIORAL_DERMATITIS_ARTICLE,
   FEMALE_HAIR_LOSS_ARTICLE,
   STRIAE_ARTICLE,

@@ -1882,6 +1882,335 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 505
     }
   },
+  "calluses": {
+    "uz": {
+      "summary": "Qadoq va kesaklar: nima uchun paydo bo'ladi, so'galdan farqi, podologda og'riqsiz olib tashlash, uyda nima qilish mumkin va mumkin emas. Farg'ona va Qo'qonda podolog.",
+      "tags": [
+        "Qadoq",
+        "Kesak",
+        "Oyoq parvarishi",
+        "Podolog",
+        "Tirnoq va oyoq klinikasi",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3366,
+      "bodyWords": 440
+    },
+    "ru": {
+      "summary": "Мозоли и натоптыши: почему появляются, отличие от бородавки, безболезненное удаление у подолога, что можно и нельзя делать дома. Подолог в Фергане и Коканде.",
+      "tags": [
+        "Мозоли",
+        "Натоптыши",
+        "Уход за стопами",
+        "Подолог",
+        "Клиника стопы",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3148,
+      "bodyWords": 440
+    },
+    "en": {
+      "summary": "Calluses and corns: why they form, how they differ from warts, painless removal by a podiatrist, and what to do and avoid at home. Podiatrists in Fergana and Kokand.",
+      "tags": [
+        "Calluses",
+        "Corns",
+        "Foot care",
+        "Podiatrist",
+        "Foot clinic",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3115,
+      "bodyWords": 520
+    }
+  },
+  "male-hair-loss": {
+    "uz": {
+      "summary": "Erkaklarda soch to'kilishi: androgenetik alopetsiya belgilari, boshqa sabablar, trixoskopiya, dori vositalari, PRP, tuliy lazer va soch ko'chirish. Farg'ona va Qo'qonda trixolog.",
+      "tags": [
+        "Soch to'kilishi",
+        "Erkaklarda soch to'kilishi",
+        "Androgenetik alopetsiya",
+        "Trixolog",
+        "Trixoskopiya",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3801,
+      "bodyWords": 405
+    },
+    "ru": {
+      "summary": "Выпадение волос у мужчин: признаки андрогенетической алопеции, другие причины, трихоскопия, лекарства, PRP, тулиевый лазер и пересадка. Трихолог в Фергане и Коканде.",
+      "tags": [
+        "Выпадение волос",
+        "Выпадение волос у мужчин",
+        "Андрогенетическая алопеция",
+        "Трихолог",
+        "Трихоскопия",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3522,
+      "bodyWords": 415
+    },
+    "en": {
+      "summary": "Hair loss in men: signs of male pattern baldness, other causes, trichoscopy, medicines, PRP, thulium laser and transplant. Trichologists in Fergana and Kokand.",
+      "tags": [
+        "Hair loss",
+        "Hair loss in men",
+        "Male pattern baldness",
+        "Trichologist",
+        "Trichoscopy",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3404,
+      "bodyWords": 471
+    }
+  },
+  "cracked-heels": {
+    "uz": {
+      "summary": "Tovon yoriqlari: nima uchun paydo bo'ladi, qachon kasallik belgisi, uyda to'g'ri parvarish (mochevinali krem), podologda ishlov va xavfli belgilar. Farg'ona va Qo'qonda podolog.",
+      "tags": [
+        "Tovon yoriqlari",
+        "Oyoq parvarishi",
+        "Quruq teri",
+        "Podolog",
+        "Tirnoq va oyoq klinikasi",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2814,
+      "bodyWords": 356
+    },
+    "ru": {
+      "summary": "Трещины на пятках: почему появляются, когда это признак болезни, правильный уход дома (крем с мочевиной), обработка у подолога и тревожные признаки. Подолог в Фергане и Коканде.",
+      "tags": [
+        "Трещины на пятках",
+        "Уход за стопами",
+        "Сухая кожа",
+        "Подолог",
+        "Клиника стопы",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2664,
+      "bodyWords": 361
+    },
+    "en": {
+      "summary": "Cracked heels: why they appear, when they signal a disease, good home care (urea cream), podiatric treatment and warning signs. Podiatrists in Fergana and Kokand.",
+      "tags": [
+        "Cracked heels",
+        "Foot care",
+        "Dry skin",
+        "Podiatrist",
+        "Foot clinic",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2549,
+      "bodyWords": 412
+    }
+  },
+  "laser-hair-removal-season": {
+    "uz": {
+      "summary": "Nega lazer epilyatsiyani kuz–qishda boshlash kerak: qoraymagan teri, kam quyosh, kurs yozgacha tugaydi. Qanday ishlaydi, muolajalar orasidagi qoidalar va qarshi ko'rsatmalar. Farg'ona va Qo'qonda.",
+      "tags": [
+        "Lazer epilyatsiya",
+        "Aleksandrit lazer",
+        "DEKA Moveo",
+        "Kuz-qish",
+        "Kosmetologiya",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2821,
+      "bodyWords": 341
+    },
+    "ru": {
+      "summary": "Почему лазерную эпиляцию лучше начинать осенью и зимой: нет загара, мало солнца, курс закончится к лету. Как работает, правила между процедурами и противопоказания. Фергана и Коканд.",
+      "tags": [
+        "Лазерная эпиляция",
+        "Александритовый лазер",
+        "DEKA Moveo",
+        "Осень-зима",
+        "Косметология",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2642,
+      "bodyWords": 352
+    },
+    "en": {
+      "summary": "Why start laser hair removal in autumn and winter: no tan, little sun, the course ends before summer. How it works, rules between sessions and contraindications. Fergana and Kokand.",
+      "tags": [
+        "Laser hair removal",
+        "Alexandrite laser",
+        "DEKA Moveo",
+        "Autumn-winter",
+        "Cosmetology",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2677,
+      "bodyWords": 417
+    }
+  },
+  "milia": {
+    "uz": {
+      "summary": "Milium — ko'z atrofidagi mayda oq donachalar: nima, nega akne emas, nega siqib bo'lmaydi, o'xshash hosilalar va klinikada xavfsiz olib tashlash. Farg'ona va Qo'qonda kosmetolog.",
+      "tags": [
+        "Milium",
+        "Oq donachalar",
+        "Ko'z atrofi",
+        "Kosmetolog",
+        "CO₂ lazer",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3057,
+      "bodyWords": 379
+    },
+    "ru": {
+      "summary": "Милиумы — мелкие белые зёрнышки вокруг глаз: что это, почему не акне, почему их нельзя выдавить, похожие образования и безопасное удаление в клинике. Косметолог в Фергане и Коканде.",
+      "tags": [
+        "Милиумы",
+        "Белые точки на лице",
+        "Просянка",
+        "Косметолог",
+        "CO₂-лазер",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2912,
+      "bodyWords": 386
+    },
+    "en": {
+      "summary": "Milia — tiny white bumps around the eyes: what they are, why they are not acne, why they cannot be squeezed, look-alikes and safe removal at the clinic. Cosmetologists in Fergana and Kokand.",
+      "tags": [
+        "Milia",
+        "White bumps on face",
+        "Around the eyes",
+        "Cosmetologist",
+        "CO₂ laser",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2834,
+      "bodyWords": 452
+    }
+  },
+  "diabetic-foot": {
+    "uz": {
+      "summary": "Qandli diabetda oyoq parvarishi: qachon shu kuniyoq shifokorga borish kerak, nega oyoq xavf ostida, har kungi parvarish, hech qachon qilmaslik kerak bo'lgan narsalar va podolog yordami. Farg'ona va Qo'qonda.",
+      "tags": [
+        "Qandli diabet",
+        "Diabetik oyoq",
+        "Oyoq parvarishi",
+        "Podolog",
+        "Tirnoq va oyoq klinikasi",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3410,
+      "bodyWords": 430
+    },
+    "ru": {
+      "summary": "Уход за стопами при сахарном диабете: когда к врачу в тот же день, почему стопы в зоне риска, ежедневный уход, чего нельзя делать и помощь подолога. Фергана и Коканд.",
+      "tags": [
+        "Сахарный диабет",
+        "Диабетическая стопа",
+        "Уход за стопами",
+        "Подолог",
+        "Клиника стопы",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3271,
+      "bodyWords": 445
+    },
+    "en": {
+      "summary": "Foot care with diabetes: when to see a doctor the same day, why feet are at risk, daily care, what never to do and how a podiatrist helps. Fergana and Kokand.",
+      "tags": [
+        "Diabetes",
+        "Diabetic foot",
+        "Foot care",
+        "Podiatrist",
+        "Foot clinic",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3174,
+      "bodyWords": 517
+    }
+  },
+  "carbon-peel": {
+    "uz": {
+      "summary": "Karbon piling (Hollywood peel): qanday ishlaydi, kimga mos va kimga mos emas, kurs, muolajadan keyingi parvarish va qarshi ko'rsatmalar. Farg'ona va Qo'qonda Hollywood Spectra lazeri.",
+      "tags": [
+        "Karbon piling",
+        "Hollywood peel",
+        "Hollywood Spectra",
+        "Teri teshiklari",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3325,
+      "bodyWords": 417
+    },
+    "ru": {
+      "summary": "Карбоновый пилинг (голливудский пилинг): как работает, кому подходит и не подходит, курс, уход после процедуры и противопоказания. Лазер Hollywood Spectra в Фергане и Коканде.",
+      "tags": [
+        "Карбоновый пилинг",
+        "Голливудский пилинг",
+        "Hollywood Spectra",
+        "Расширенные поры",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3143,
+      "bodyWords": 406
+    },
+    "en": {
+      "summary": "Carbon laser peel (Hollywood peel): how it works, who it suits and who it does not, the course, aftercare and contraindications. Hollywood Spectra laser in Fergana and Kokand.",
+      "tags": [
+        "Carbon peel",
+        "Hollywood peel",
+        "Hollywood Spectra",
+        "Enlarged pores",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2939,
+      "bodyWords": 445
+    }
+  },
   "laser-scar-resurfacing": {
     "uz": {
       "summary": "Chandiqlarni lazer shlifovkasi: operatsiya, jarohat, kuyish va akne izlarini kamroq sezilarli qilish. Radeski Skin Clinic’da shifokor konsultatsiyasi va individual reja.",
@@ -4396,6 +4725,70 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": "/articles/akne-u-vzroslykh-cover.jpg",
       "ru": "/articles/akne-u-vzroslykh-cover.jpg",
       "en": "/articles/akne-u-vzroslykh-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-papilloma-olib-tashlash",
+    "slug": "papilloma-olib-tashlash",
+    "title": {
+      "uz": "Papillomalar: nima uchun paydo bo'ladi va qanday xavfsiz olib tashlanadi",
+      "ru": "Папилломы на коже: почему появляются и как их безопасно удалить",
+      "en": "Skin Papillomas: Why They Appear and How to Remove Them Safely"
+    },
+    "summary": {
+      "uz": "Papillomalar: turlari, so'galdan farqi, uyda olib tashlash xavfi, CO₂ lazer va radioto'lqin bilan olib tashlash, keyingi parvarish. Farg'ona va Qo'qonda dermatolog.",
+      "ru": "Папилломы: виды, отличие от бородавок, чем опасно удаление дома, удаление CO₂-лазером и радиоволной, уход после процедуры. Дерматолог в Фергане и Коканде.",
+      "en": "Papillomas: types, how they differ from warts, why home removal is risky, removal with CO₂ laser and radiowave, aftercare. Dermatologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Ashurov Dilshod Davlatovich",
+      "ru": "Ашуров Дильшод Давлатович",
+      "en": "Dr. Dilshod Davlatovich Ashurov"
+    },
+    "date": "2026-11-02",
+    "image": "/articles/papilloma-olib-tashlash-cover.jpg",
+    "images": {
+      "uz": "/articles/papilloma-olib-tashlash-cover.jpg",
+      "ru": "/articles/papilloma-olib-tashlash-cover.jpg",
+      "en": "/articles/papilloma-olib-tashlash-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-xol-tekshiruvi-dermatoskopiya",
+    "slug": "xol-tekshiruvi-dermatoskopiya",
+    "title": {
+      "uz": "Xollar va dermatoskopiya: qaysi xol xavfli — ABCDE qoidasi va tekshiruv",
+      "ru": "Родинки и дерматоскопия: какая родинка опасна — правило ABCDE и проверка",
+      "en": "Moles and Dermoscopy: Which Mole Is Dangerous — the ABCDE Rule and Check-ups"
+    },
+    "summary": {
+      "uz": "Xolni qachon tekshirish kerak: ABCDE qoidasi, xavf guruhlari, dermatoskopiya va xollar xaritasi, xolni olib tashlash va gistologiya. Farg'ona va Qo'qonda dermatoonkolog.",
+      "ru": "Когда проверять родинку: правило ABCDE, группы риска, дерматоскопия и картирование родинок, удаление и гистология. Дерматоонколог в Фергане и Коканде.",
+      "en": "When to check a mole: the ABCDE rule, risk groups, dermoscopy and mole mapping, removal and histology. Dermato-oncologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Yo'qubov Farrux Farhodjonovich",
+      "ru": "Якубов Фаррух Фарходжонович",
+      "en": "Dr. Farrukh Farhodjonovich Yoqubov"
+    },
+    "date": "2026-11-01",
+    "image": "/articles/xol-tekshiruvi-cover.jpg",
+    "images": {
+      "uz": "/articles/xol-tekshiruvi-cover.jpg",
+      "ru": "/articles/xol-tekshiruvi-cover.jpg",
+      "en": "/articles/xol-tekshiruvi-cover.jpg"
     },
     "views": 0
   },

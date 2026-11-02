@@ -9,6 +9,41 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },
+  'art-qadoq-va-kesak': {
+    uz: "Qadoq va kesaklar: olib tashlash — Farg'ona, Qo'qon",
+    ru: 'Мозоли и натоптыши: удаление — Фергана, Коканд',
+    en: 'Calluses and corns: removal — Fergana, Kokand',
+  },
+  'art-erkaklarda-soch-tokilishi': {
+    uz: "Erkaklarda soch to'kilishi: sabablari va davolash",
+    ru: 'Выпадение волос у мужчин: причины и лечение',
+    en: 'Hair loss in men: causes and treatment',
+  },
+  'art-tovon-yoriqlari': {
+    uz: "Tovon yoriqlari: sabablari va davolash — Farg'ona",
+    ru: 'Трещины на пятках: причины и лечение — Фергана',
+    en: 'Cracked heels: causes and treatment — Fergana',
+  },
+  'art-lazer-epilyatsiya-kuz-qish': {
+    uz: 'Lazer epilyatsiya kuz-qishda: nega aynan hozir',
+    ru: 'Лазерная эпиляция осенью и зимой: почему сейчас',
+    en: 'Laser hair removal in autumn and winter: why now',
+  },
+  'art-milium': {
+    uz: "Milium: oq donachalarni olib tashlash — Farg'ona",
+    ru: 'Милиумы: удаление белых точек — Фергана, Коканд',
+    en: 'Milia removal: white bumps — Fergana, Kokand',
+  },
+  'art-diabetda-oyoq-parvarishi': {
+    uz: 'Qandli diabetda oyoq parvarishi: qoidalar',
+    ru: 'Уход за стопами при диабете: правила и признаки',
+    en: 'Foot care with diabetes: rules and warning signs',
+  },
+  'art-karbon-piling': {
+    uz: "Karbon piling: narx va natija — Farg'ona, Qo'qon",
+    ru: 'Карбоновый пилинг: результат — Фергана, Коканд',
+    en: 'Carbon peel: how it works — Fergana, Kokand',
+  },
   'art-qotir': {
     uz: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",
     ru: 'Чесотка: признаки и лечение — Фергана, Коканд',

@@ -43,6 +43,10 @@ export const STATIC_ARTICLE_ROUTE_KEYS: Record<string, string> = {
   "pryshchi-u-vzroslykh": "art-pryshchi-u-vzroslykh",
   "art-akne-u-vzroslykh": "art-akne-u-vzroslykh",
   "akne-u-vzroslykh": "art-akne-u-vzroslykh",
+  "art-papilloma-olib-tashlash": "art-papilloma-olib-tashlash",
+  "papilloma-olib-tashlash": "art-papilloma-olib-tashlash",
+  "art-xol-tekshiruvi-dermatoskopiya": "art-xol-tekshiruvi-dermatoskopiya",
+  "xol-tekshiruvi-dermatoskopiya": "art-xol-tekshiruvi-dermatoskopiya",
   "art-tirnoq-zamburugi": "art-tirnoq-zamburugi",
   "tirnoq-zamburugi": "art-tirnoq-zamburugi",
   "art-eshakemi-teri-allergiyasi": "art-eshakemi-teri-allergiyasi",
@@ -130,4 +134,4 @@ export const STATIC_ARTICLE_ROUTE_KEYS: Record<string, string> = {
 };
 
 /** Written but dated after this build: not published yet, so nothing may link to them. */
-export const SCHEDULED_ARTICLE_ROUTE_KEYS: string[] = ["art-perioral-dermatit","art-ayollarda-soch-tokilishi","art-striya","art-pushti-temiratki","art-bolalarda-teri-toshmalari","art-seboreyali-keratoz","art-qotir","art-teri-zamburugi","art-gerpes","art-demodekoz","art-qishda-teri-parvarishi","art-melazma","art-papilloma-olib-tashlash","art-xol-tekshiruvi-dermatoskopiya"];
+export const SCHEDULED_ARTICLE_ROUTE_KEYS: string[] = ["art-karbon-piling","art-diabetda-oyoq-parvarishi","art-milium","art-lazer-epilyatsiya-kuz-qish","art-tovon-yoriqlari","art-erkaklarda-soch-tokilishi","art-qadoq-va-kesak","art-perioral-dermatit","art-ayollarda-soch-tokilishi","art-striya","art-pushti-temiratki","art-bolalarda-teri-toshmalari","art-seboreyali-keratoz","art-qotir","art-teri-zamburugi","art-gerpes","art-demodekoz","art-qishda-teri-parvarishi","art-melazma"];

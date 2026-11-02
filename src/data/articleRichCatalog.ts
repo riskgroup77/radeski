@@ -41,6 +41,13 @@ import { PITYRIASIS_ROSEA_ARTICLE_CATALOG } from './articles/pityriasisRoseaArti
 import { STRIAE_ARTICLE_CATALOG } from './articles/striaeArticle';
 import { FEMALE_HAIR_LOSS_ARTICLE_CATALOG } from './articles/femaleHairLossArticle';
 import { PERIORAL_DERMATITIS_ARTICLE_CATALOG } from './articles/perioralDermatitisArticle';
+import { CALLUSES_ARTICLE_CATALOG } from './articles/callusesArticle';
+import { MALE_HAIR_LOSS_ARTICLE_CATALOG } from './articles/maleHairLossArticle';
+import { CRACKED_HEELS_ARTICLE_CATALOG } from './articles/crackedHeelsArticle';
+import { LASER_HAIR_REMOVAL_SEASON_ARTICLE_CATALOG } from './articles/laserHairRemovalSeasonArticle';
+import { MILIA_ARTICLE_CATALOG } from './articles/miliaArticle';
+import { DIABETIC_FOOT_ARTICLE_CATALOG } from './articles/diabeticFootArticle';
+import { CARBON_PEEL_ARTICLE_CATALOG } from './articles/carbonPeelArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -134,6 +141,13 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'striae': STRIAE_ARTICLE_CATALOG,
   'female-hair-loss': FEMALE_HAIR_LOSS_ARTICLE_CATALOG,
   'perioral-dermatitis': PERIORAL_DERMATITIS_ARTICLE_CATALOG,
+  'calluses': CALLUSES_ARTICLE_CATALOG,
+  'male-hair-loss': MALE_HAIR_LOSS_ARTICLE_CATALOG,
+  'cracked-heels': CRACKED_HEELS_ARTICLE_CATALOG,
+  'laser-hair-removal-season': LASER_HAIR_REMOVAL_SEASON_ARTICLE_CATALOG,
+  'milia': MILIA_ARTICLE_CATALOG,
+  'diabetic-foot': DIABETIC_FOOT_ARTICLE_CATALOG,
+  'carbon-peel': CARBON_PEEL_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

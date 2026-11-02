@@ -89,6 +89,146 @@ export function fitDescription(text: string): string {
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  'art-qadoq-va-kesak': {
+    uz: {
+      title: "Qadoq va kesaklar: olib tashlash — Farg'ona, Qo'qon",
+      desc: "Qadoq va kesaklar nima uchun paydo bo'ladi, so'galdan farqi, podologda og'riqsiz olib tashlash va uyda nima qilmaslik kerak. Farg'ona va Qo'qonda podolog.",
+      keywords:
+        "qadoq, kesak, qadoqni olib tashlash, oyoqdagi qadoq, podolog Farg'ona, podolog Qo'qon, oyoq parvarishi, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Мозоли и натоптыши: удаление — Фергана, Коканд',
+      desc: 'Почему появляются мозоли и натоптыши, отличие от бородавки, безболезненное удаление у подолога и чего нельзя делать дома. Подолог в Фергане и Коканде.',
+      keywords:
+        'мозоли, натоптыши, удаление мозолей, стержневая мозоль, подолог Фергана, подолог Коканд, аппаратный педикюр, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Calluses and corns: removal — Fergana, Kokand',
+      desc: 'Why calluses and corns form, how they differ from warts, painless removal by a podiatrist and what not to do at home. Podiatrists in Fergana and Kokand.',
+      keywords:
+        'calluses, corns, callus removal, podiatrist Fergana, podiatrist Kokand, foot care, Radeski Skin Clinic',
+    },
+  },
+  'art-erkaklarda-soch-tokilishi': {
+    uz: {
+      title: "Erkaklarda soch to'kilishi: sabablari va davolash",
+      desc: "Erkaklarda soch to'kilishi: androgenetik alopetsiya, boshqa sabablar, trixoskopiya, PRP, tuliy lazer va soch ko'chirish. Farg'ona va Qo'qonda trixolog.",
+      keywords:
+        "erkaklarda soch to'kilishi, androgenetik alopetsiya, kal bo'lish, trixolog Farg'ona, trixolog Qo'qon, PRP soch, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Выпадение волос у мужчин: причины и лечение',
+      desc: 'Выпадение волос у мужчин: андрогенетическая алопеция, другие причины, трихоскопия, PRP, тулиевый лазер и пересадка. Трихолог в Фергане и Коканде.',
+      keywords:
+        'выпадение волос у мужчин, андрогенетическая алопеция, облысение, трихолог Фергана, трихолог Коканд, PRP для волос, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Hair loss in men: causes and treatment',
+      desc: 'Hair loss in men: male pattern baldness, other causes, trichoscopy, PRP, thulium laser and transplant. Trichologists in Fergana and Kokand.',
+      keywords:
+        'hair loss in men, male pattern baldness, androgenetic alopecia, trichologist Fergana, trichologist Kokand, PRP hair, Radeski Skin Clinic',
+    },
+  },
+  'art-tovon-yoriqlari': {
+    uz: {
+      title: "Tovon yoriqlari: sabablari va davolash — Farg'ona",
+      desc: "Tovon yoriqlari: nima uchun paydo bo'ladi, qachon kasallik belgisi, uyda parvarish va podologda ishlov. Farg'ona va Qo'qonda podolog.",
+      keywords:
+        "tovon yoriqlari, tovon yorilishi, quruq tovon, oyoq parvarishi, podolog Farg'ona, podolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Трещины на пятках: причины и лечение — Фергана',
+      desc: 'Трещины на пятках: почему появляются, когда это признак болезни, уход дома и обработка у подолога. Подолог в Фергане и Коканде.',
+      keywords:
+        'трещины на пятках, сухие пятки, лечение трещин на пятках, уход за стопами, подолог Фергана, подолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Cracked heels: causes and treatment — Fergana',
+      desc: 'Cracked heels: why they appear, when they signal a disease, home care and podiatric treatment. Podiatrists in Fergana and Kokand.',
+      keywords:
+        'cracked heels, dry heels, cracked heel treatment, foot care, podiatrist Fergana, podiatrist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-lazer-epilyatsiya-kuz-qish': {
+    uz: {
+      title: 'Lazer epilyatsiya kuz-qishda: nega aynan hozir',
+      desc: "Nega lazer epilyatsiyani kuz–qishda boshlash kerak: teri qoraymagan, kurs yozgacha tugaydi. Muolajalar soni, qoidalar va cheklovlar. Farg'ona va Qo'qon.",
+      keywords:
+        "lazer epilyatsiya, lazer epilyatsiya Farg'ona, lazer epilyatsiya Qo'qon, aleksandrit lazer, DEKA Moveo, kuz qish, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Лазерная эпиляция осенью и зимой: почему сейчас',
+      desc: 'Почему лазерную эпиляцию лучше начинать осенью и зимой: нет загара, курс закончится к лету. Сколько процедур, правила и противопоказания. Фергана и Коканд.',
+      keywords:
+        'лазерная эпиляция, лазерная эпиляция Фергана, лазерная эпиляция Коканд, александритовый лазер, DEKA Moveo, сезон, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Laser hair removal in autumn and winter: why now',
+      desc: 'Why start laser hair removal in autumn and winter: no tan, the course ends before summer. Number of sessions, rules and contraindications. Fergana and Kokand.',
+      keywords:
+        'laser hair removal, laser hair removal Fergana, laser hair removal Kokand, alexandrite laser, DEKA Moveo, Radeski Skin Clinic',
+    },
+  },
+  'art-milium': {
+    uz: {
+      title: "Milium: oq donachalarni olib tashlash — Farg'ona",
+      desc: "Milium — ko'z atrofidagi oq donachalar: nima, nega siqib bo'lmaydi, o'xshash hosilalar va klinikada xavfsiz olib tashlash. Farg'ona va Qo'qonda kosmetolog.",
+      keywords:
+        "milium, yuzdagi oq donachalar, ko'z atrofidagi oq nuqtalar, milium olib tashlash, kosmetolog Farg'ona, kosmetolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Милиумы: удаление белых точек — Фергана, Коканд',
+      desc: 'Милиумы — белые зёрнышки вокруг глаз: что это, почему их нельзя выдавить, похожие образования и безопасное удаление. Косметолог в Фергане и Коканде.',
+      keywords:
+        'милиумы, просянка, белые точки на лице, удаление милиумов, косметолог Фергана, косметолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Milia removal: white bumps — Fergana, Kokand',
+      desc: 'Milia — tiny white bumps around the eyes: what they are, why they cannot be squeezed, look-alikes and safe removal. Cosmetologists in Fergana and Kokand.',
+      keywords:
+        'milia, white bumps on face, milia removal, cosmetologist Fergana, cosmetologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-diabetda-oyoq-parvarishi': {
+    uz: {
+      title: 'Qandli diabetda oyoq parvarishi: qoidalar',
+      desc: "Qandli diabetda oyoq parvarishi: xavfli belgilar, har kungi qoidalar, nima qilish mumkin emas va podolog yordami. Farg'ona va Qo'qonda podolog.",
+      keywords:
+        "qandli diabetda oyoq parvarishi, diabetik oyoq, diabetda pedikyur, podolog Farg'ona, podolog Qo'qon, oyoq yarasi, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Уход за стопами при диабете: правила и признаки',
+      desc: 'Уход за стопами при сахарном диабете: тревожные признаки, ежедневные правила, чего нельзя делать и помощь подолога. Подолог в Фергане и Коканде.',
+      keywords:
+        'уход за стопами при диабете, диабетическая стопа, педикюр при диабете, подолог Фергана, подолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Foot care with diabetes: rules and warning signs',
+      desc: 'Foot care with diabetes: warning signs, daily rules, what never to do and how a podiatrist helps. Podiatrists in Fergana and Kokand.',
+      keywords:
+        'diabetic foot care, diabetic foot, pedicure with diabetes, podiatrist Fergana, podiatrist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-karbon-piling': {
+    uz: {
+      title: "Karbon piling: narx va natija — Farg'ona, Qo'qon",
+      desc: "Karbon piling (Hollywood peel): qanday ishlaydi, kimga mos va mos emas, kurs, parvarish va qarshi ko'rsatmalar. Farg'ona va Qo'qonda Hollywood Spectra.",
+      keywords:
+        "karbon piling, Hollywood peel, karbon piling Farg'ona, karbon piling Qo'qon, teri teshiklari, qora nuqtalar, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Карбоновый пилинг: результат — Фергана, Коканд',
+      desc: 'Карбоновый пилинг (голливудский пилинг): как работает, кому подходит и не подходит, курс, уход и противопоказания. Hollywood Spectra в Фергане и Коканде.',
+      keywords:
+        'карбоновый пилинг, голливудский пилинг, карбоновый пилинг Фергана, карбоновый пилинг Коканд, расширенные поры, чёрные точки, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Carbon peel: how it works — Fergana, Kokand',
+      desc: 'Carbon laser peel (Hollywood peel): how it works, who it suits, the course, aftercare and contraindications. Hollywood Spectra in Fergana and Kokand.',
+      keywords:
+        'carbon peel, Hollywood peel, carbon laser peel Fergana, enlarged pores, blackheads, Radeski Skin Clinic',
+    },
+  },
   'art-qotir': {
     uz: {
       title: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",
