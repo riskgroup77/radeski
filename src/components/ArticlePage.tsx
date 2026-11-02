@@ -185,7 +185,14 @@ export default function ArticlePage({
 
         {detailError && !activeArticle && (
           <div className="max-w-3xl mx-auto p-6 bg-rose-50 border border-rose-100 rounded-2xl text-center">
-            <p className="text-sm text-rose-700 mb-5">{detailError}</p>
+            {/* The API's own message is technical ("Failed to load article", "Not found"). */}
+            <p className="text-sm text-rose-700 mb-5">
+              {locale === 'uz'
+                ? "Bu maqola topilmadi yoki hali e'lon qilinmagan."
+                : locale === 'ru'
+                  ? 'Статья не найдена или ещё не опубликована.'
+                  : 'This article was not found or has not been published yet.'}
+            </p>
             <button
               onClick={() => onBackToList()}
               className="px-5 py-2.5 bg-brand-gold text-white font-bold text-xs rounded-xl cursor-pointer"

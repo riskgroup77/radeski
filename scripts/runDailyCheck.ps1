@@ -20,9 +20,14 @@ $node = (Get-Command node -ErrorAction SilentlyContinue).Source
 if (-not $node) { $node = 'C:\Program Files\nodejs\node.exe' }
 
 "[$(Get-Date -Format s)] start ($node)" | Out-File -FilePath $log -Encoding utf8
-& $node 'scripts/dailySiteCheck.mjs' '--out' 'audit/daily' *>> $log
+# Through Out-File: `*>>` would append in UTF-16 to a UTF-8 file (unreadable log).
+& $node 'scripts/dailySiteCheck.mjs' '--out' 'audit/daily' 2>&1 | ForEach-Object { "$_" } | Out-File -FilePath $log -Encoding utf8 -Append
 $exitCode = $LASTEXITCODE
 "[$(Get-Date -Format s)] exit $exitCode" | Out-File -FilePath $log -Encoding utf8 -Append
+# Keep each day's log next to its report: last-run.log is overwritten the next morning.
+$dayDir = Join-Path $logDir $day
+New-Item -ItemType Directory -Force -Path $dayDir | Out-Null
+Copy-Item $log (Join-Path $dayDir 'run.log') -Force
 
 # Copy the summary where the clinic team will see it
 $desktopDir = Join-Path ([Environment]::GetFolderPath('Desktop')) 'Radeski_kunlik_tekshiruvlar'

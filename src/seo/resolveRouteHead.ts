@@ -196,6 +196,9 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     Boolean(promoSlug && !activePromoSlide) ||
     Boolean(conditionSlug && !isDermatologyConditionSlug(conditionSlug)) ||
     Boolean(doctorId && !input.dataLoading && !activeDoctor) ||
+    // An article key that is neither an article nor an old alias (e.g. one scheduled for a
+    // later date): noindex, instead of an indexable copy of the articles list.
+    Boolean(articleId && !input.dataLoading && !activeArticle && !resolveArticleRedirectTarget(articleId)) ||
     Boolean(videoKey && input.videos?.length && !activeVideo);
 
   // JSON-LD: MedicalBusiness + service FAQs (+ article / courses where relevant).
@@ -294,7 +297,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     : null;
 
   const title =
-    currentPage === 'not-found' || (videoKey && !activeVideo && isErrorPage)
+    currentPage === 'not-found' || (videoKey && !activeVideo && isErrorPage) || (articleId && !activeArticle && isErrorPage)
       ? `${getNotFoundTitle(locale)} | Radeski Skin Clinic`
       : educationSeo?.title
         ? educationSeo.title
