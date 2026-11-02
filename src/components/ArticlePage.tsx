@@ -10,7 +10,7 @@ import {
   ArrowUpRight,
   Clock,
 } from 'lucide-react';
-import { Locale, Article, ServiceCategory } from '../types';
+import { Locale, Article, Doctor, ServiceCategory } from '../types';
 import { articleServiceLinks } from '../utils/articleServiceLinks';
 import { DICTIONARY } from '../data';
 import { getLocalizedImage } from '../utils/localizedImage';
@@ -21,19 +21,24 @@ import ArticleHashtagList from './ArticleHashtagList';
 import { getArticleBySlug } from '../api/publicApi';
 import { mapArticleFromApi } from '../api/mappers';
 import { ApiError } from '../api/client';
-import { articlePath, articlesListPath, absoluteUrl } from '../routing/paths';
+import { articlePath, articlesListPath, absoluteUrl, doctorPath } from '../routing/paths';
 import { resolveArticleRouteKey, resolveArticleRedirectTarget, filterPublicArticles, isEquipmentPromoArticle } from '../utils/articles';
 import { findArticleByRouteParam, resolveArticleApiSlug } from '../utils/articleCatalogLookup';
 import ArticleCoverMedia from './ArticleCoverMedia';
 import { STATIC_ARTICLES } from '../data/articleIndex.generated';
 import ArticleDetailContent from './ArticleDetailContent';
 import ArticleViewsBadge from './ArticleViewsBadge';
+import { findArticleAuthorDoctor } from '../utils/articleAuthor';
+import { pickRelatedArticles } from '../utils/relatedArticles';
+import { doctorRouteKey } from '../utils/doctorSlug';
 
 interface ArticlePageProps {
   locale: Locale;
   articleId: string;
   articles: Article[];
   serviceCategories?: ServiceCategory[];
+  /** For the author byline: a link to the doctor's profile (E-E-A-T for medical articles). */
+  doctors?: Doctor[];
   dictionary?: Record<string, string>;
   onBackToList: () => void;
   onOpenArticle: (articleId: string) => void;
@@ -50,6 +55,7 @@ export default function ArticlePage({
   articleId,
   articles: loadedArticles,
   serviceCategories = [],
+  doctors = [],
   dictionary,
   onBackToList,
   onOpenArticle: _onOpenArticle,
@@ -139,9 +145,10 @@ export default function ArticlePage({
 
   const serviceLinks = activeArticle ? articleServiceLinks(activeArticle, serviceCategories, locale) : [];
 
-  const relatedArticles = filterPublicArticles(articles)
-    .filter((art) => art.id !== activeArticle?.id)
-    .slice(0, 3);
+  const relatedArticles = activeArticle
+    ? pickRelatedArticles(activeArticle, filterPublicArticles(articles))
+    : filterPublicArticles(articles).slice(0, 3);
+  const authorDoctor = activeArticle ? findArticleAuthorDoctor(activeArticle, doctors) : undefined;
 
   const shareUrl = activeArticle
     ? absoluteUrl(articlePath(locale, resolveArticleRouteKey(activeArticle)))
@@ -233,7 +240,17 @@ export default function ArticlePage({
               <div className="flex flex-wrap gap-4 sm:gap-6 items-center text-xs text-brand-text-secondary border-y border-brand-offwhite py-3 mt-6 font-mono font-light">
                 <span className="flex items-center gap-1.5 shrink-0">
                   <User className="w-4 h-4 text-brand-text-muted" />
-                  {activeArticle.author[locale]}
+                  {authorDoctor ? (
+                    <Link
+                      to={doctorPath(locale, doctorRouteKey(authorDoctor))}
+                      rel="author"
+                      className="text-brand-text-secondary underline decoration-brand-gold/40 underline-offset-2 hover:text-brand-gold"
+                    >
+                      {activeArticle.author[locale]}
+                    </Link>
+                  ) : (
+                    activeArticle.author[locale]
+                  )}
                 </span>
                 <span className="flex items-center gap-1.5 shrink-0">
                   <Calendar className="w-4 h-4 text-brand-text-muted" />

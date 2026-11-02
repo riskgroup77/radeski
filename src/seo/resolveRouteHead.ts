@@ -11,7 +11,7 @@ import { resolveCategoryImage, resolveSubServiceImage } from '../utils/serviceIm
 import { findSubServiceByRouteParam, subServiceRouteKey } from '../utils/serviceSubSlug';
 import type { ClinicVideo } from '../data/sitePagesContent';
 import { DICTIONARY } from '../data';
-import { slugifyDoctorName } from '../utils/doctorSlug';
+import { findArticleAuthorDoctor } from '../utils/articleAuthor';
 import { getLocalizedImage } from '../utils/localizedImage';
 import {
   getArticleIdFromPathname,
@@ -668,15 +668,6 @@ function shortenAtWord(text: string, max: number): string {
   return cut;
 }
 
-/** The doctor an article is attributed to (author name matches a doctor's name). */
-function findArticleAuthorDoctor(article: Article, doctors: Doctor[]): Doctor | undefined {
-  const author = slugifyDoctorName(article.author?.uz || '');
-  if (!author) return undefined;
-  return doctors.find((doctor) => {
-    const name = slugifyDoctorName(doctor.name.uz);
-    return name && (name === author || name.startsWith(`${author}-`) || author.startsWith(`${name}-`));
-  });
-}
 
 const SECTION_PAGE: Partial<Record<PageId, keyof (typeof DICTIONARY)['uz']>> = {
   about: 'navAbout',

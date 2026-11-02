@@ -26,7 +26,10 @@ import {
   DoctorProfileSubsection,
 } from '../types';
 import { DICTIONARY } from '../data';
-import { doctorsListPath } from '../routing/paths';
+import { articlePath, doctorsListPath } from '../routing/paths';
+import type { Article } from '../types';
+import { articlesByDoctor } from '../utils/articleAuthor';
+import { filterPublicArticles, resolveArticleRouteKey } from '../utils/articles';
 import MediaImage from './MediaImage';
 import { findDoctorByRouteParam } from '../utils/doctorSlug';
 
@@ -41,6 +44,8 @@ interface DoctorPageProps {
   loading?: boolean;
   prices?: PriceItem[];
   reviews?: CustomerReview[];
+  /** All articles: the ones this doctor wrote are listed on the profile. */
+  articles?: Article[];
 }
 
 function ItemChips({ items, compact = false }: { items: string[]; compact?: boolean }) {
@@ -433,6 +438,7 @@ export default function DoctorPage({
   loading = false,
   prices = [],
   reviews = [],
+  articles = [],
 }: DoctorPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const doctor = findDoctorByRouteParam(doctorId, doctors) ?? null;
@@ -525,7 +531,37 @@ export default function DoctorPage({
           reviews={reviews}
           appointmentLabel={d.appointmentBtn}
         />
+
+        <DoctorArticles locale={locale} doctor={doctor} articles={articles} />
       </div>
+    </section>
+  );
+}
+
+/** The doctor's own articles: shows the author's expertise and links profile and articles both ways. */
+function DoctorArticles({ locale, doctor, articles }: { locale: Locale; doctor: Doctor; articles: Article[] }) {
+  const own = articlesByDoctor(doctor, filterPublicArticles(articles));
+  if (own.length === 0) return null;
+  return (
+    <section className="mt-10 pt-8 border-t border-brand-offwhite">
+      <h2 className="text-xl font-extrabold text-brand-text-primary tracking-tight mb-4">
+        {locale === 'uz' ? 'Shifokor maqolalari' : locale === 'ru' ? 'Статьи врача' : "Doctor's articles"}
+      </h2>
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {own.map((article) => (
+          <li key={article.id}>
+            <Link
+              to={articlePath(locale, resolveArticleRouteKey(article))}
+              className="block h-full p-4 bg-brand-offwhite hover:bg-brand-white rounded-xl border border-brand-sectiongray hover:border-brand-gold/40 no-underline transition-colors"
+            >
+              <span className="text-[11px] font-mono text-brand-text-muted">{article.date}</span>
+              <span className="mt-1 block text-sm font-bold text-brand-text-primary leading-snug">
+                {article.title[locale] || article.title.uz}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

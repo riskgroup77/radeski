@@ -1033,6 +1033,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               onOpenAppointment={() => handleOpenAppointmentWithService()}
               prices={dynamicPrices}
               reviews={cmsReviews}
+              articles={dynamicArticles}
             />
           )}
 
@@ -1062,6 +1063,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
               articleId={articleId}
               articles={dynamicArticles}
               serviceCategories={dynamicServiceCategories}
+              doctors={dynamicDoctors}
               dictionary={d}
               onBackToList={() => goToPage('articles')}
               onOpenArticle={goToArticle}

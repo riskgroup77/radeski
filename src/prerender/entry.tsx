@@ -117,6 +117,7 @@ import {
 import { getCategoryFaq } from '../data/serviceCategoryFaq';
 import { CONDITION_ARTICLES } from '../data/conditionArticles';
 import { SCHEDULED_ARTICLE_ROUTE_KEYS } from '../data/articleRouteKeys.generated';
+import { articlesByDoctor } from '../utils/articleAuthor';
 import { resolveDoctorPageDetails } from '../utils/doctorPageDetails';
 import { LOCAL_LANDING_CONTENT_UPDATED, landingTopicKey } from '../data/localLandingTopics';
 import type { ServiceRichContent } from '../types';
@@ -870,6 +871,19 @@ function PageContent({
             <p>{faq.answer}</p>
           </div>
         ))}
+        {/* The doctor's own articles (same list as DoctorPage). */}
+        {articlesByDoctor(doctor, filterPublicArticles(clinic.articles)).length > 0 && (
+          <section>
+            <h2>{locale === 'uz' ? 'Shifokor maqolalari' : locale === 'ru' ? 'Статьи врача' : "Doctor's articles"}</h2>
+            <ul>
+              {articlesByDoctor(doctor, filterPublicArticles(clinic.articles)).map((item) => (
+                <li key={item.id}>
+                  <a href={articlePath(locale, resolveArticleRouteKey(item))}>{item.title[locale] || item.title.uz}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </>
     );
   }
