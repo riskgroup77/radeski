@@ -105,8 +105,8 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     manufacturer: L('Professional plasmapheresis system', 'Профессиональная система плазмофореза', 'Professional plasmapheresis system'),
     image: CLINIC_EQUIPMENT_IMAGES.plazmoforez,
     serviceLinks: [
-      { categoryId: 'dermatologiya', subId: 'fototerapiya' },
-      { categoryId: 'in-ekcionnaya-kosmetologiya', subId: 'biorev' },
+      { categoryId: 'dermatologiya', subId: 'fototerapiya', label: L('Fototerapiya', 'Фототерапия', 'Phototherapy') },
+      { categoryId: 'in-ekcionnaya-kosmetologiya', subId: 'biorev', label: L('Biorevitalizatsiya', 'Биоревитализация', 'Biorevitalization') },
     ],
     priceCategoryIds: ['fizioterapiya'],
     priceKeywords: ['плазмафорез', 'plazmaforez', 'plazmoforez'],
@@ -147,7 +147,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     ),
     manufacturer: L('Daavlin (AQSh)', 'Daavlin (США)', 'Daavlin (USA)'),
     image: CLINIC_EQUIPMENT_IMAGES['daavlin-neolux'],
-    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya' }],
+    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya', label: L('Fototerapiya', 'Фототерапия', 'Phototherapy') }],
     priceCategoryIds: ['daavlin-neolux'],
     directions: [
       L('Dermatologiya — fototerapiya', 'Дерматология — фототерапия', 'Dermatology — phototherapy'),
@@ -186,7 +186,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     ),
     manufacturer: L('Daavlin (AQSh)', 'Daavlin (США)', 'Daavlin (USA)'),
     image: CLINIC_EQUIPMENT_IMAGES['daavlin-m-series'],
-    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya' }],
+    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya', label: L('Fototerapiya', 'Фототерапия', 'Phototherapy') }],
     priceCategoryIds: ['m-series'],
     directions: [
       L('Dermatologiya — kursli fototerapiya', 'Дерматология — курсовая фототерапия', 'Dermatology — course phototherapy'),
@@ -225,7 +225,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     ),
     manufacturer: L('Daavlin (AQSh)', 'Daavlin (США)', 'Daavlin (USA)'),
     image: CLINIC_EQUIPMENT_IMAGES['daavlin-aquex'],
-    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya' }],
+    serviceLinks: [{ categoryId: 'dermatologiya', subId: 'fototerapiya', label: L('Fototerapiya', 'Фототерапия', 'Phototherapy') }],
     priceCategoryIds: ['fizioterapiya'],
     priceKeywords: ['ионофорез', 'ionoforez', 'aquex'],
     priceNote: L(
@@ -328,9 +328,9 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     image: CLINIC_EQUIPMENT_IMAGES['deka-alexandrite-laser'],
     serviceLinks: [
       {
-        categoryId: 'apparatnaya-kosmetologiya',
-        subId: 'ipl-inmode',
-        label: L('Lazerniy epilyatsiya', 'Лазерная эпиляция', 'Laser hair removal'),
+        categoryId: 'lazernaya-epilyaciya',
+        subId: 'alex-lazer',
+        label: L('Aleksandrit lazer epilyatsiyasi', 'Александритовая лазерная эпиляция', 'Alexandrite laser hair removal'),
       },
     ],
     priceCategoryIds: ['lazernaya-epilyatsiya'],
@@ -419,7 +419,7 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     ),
     manufacturer: L('InMode', 'InMode', 'InMode'),
     image: CLINIC_EQUIPMENT_IMAGES['ipl-inmode'],
-    serviceLinks: [{ categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' }],
+    serviceLinks: [],
     priceCategoryIds: ['fotoomolozhenie-ipl-lumecca'],
     directions: [
       L('Apparatli kosmetologiya — IPL foto-yangilash', 'Аппаратная косметология — IPL фотоомоложение', 'Device cosmetology — IPL photo-rejuvenation'),
@@ -497,7 +497,13 @@ export const CLINIC_EQUIPMENT_CATALOG: Record<ClinicEquipmentId, ClinicEquipment
     ),
     manufacturer: L('Lutronic', 'Lutronic', 'Lutronic'),
     image: CLINIC_EQUIPMENT_IMAGES['hollywood-spectra-lutronic'],
-    serviceLinks: [{ categoryId: 'apparatnaya-kosmetologiya', subId: 'ipl-inmode' }],
+    serviceLinks: [
+      {
+        categoryId: 'apparatnaya-kosmetologiya',
+        subId: 'ultratovush-yuz',
+        label: L('Ultratovush yuz tozalash', 'Ультразвуковая чистка лица', 'Ultrasonic facial cleansing'),
+      },
+    ],
     priceCategoryIds: ['hooywood-spectra-lechenie-pigmentatsii-post-akne'],
     directions: [
       L('Apparatli kosmetologiya — lazer tozalash', 'Аппаратная косметология — лазерное очищение', 'Device cosmetology — laser cleansing'),

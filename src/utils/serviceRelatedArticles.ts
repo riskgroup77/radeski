@@ -154,6 +154,8 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
   trixoskopiya: {
     'trix-konsult': ['soch-tokilishi-normal-patologiya-radeski', 'trichologist-trichoscopy', 'prp-lab-tests'],
     'trix-alopecia': [
+      'female-hair-loss',
+      'male-hair-loss',
       'soch-tokilishi-normal-patologiya-radeski',
       'trichologist-trichoscopy',
       'prp-hair',
@@ -178,7 +180,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'adult-acne',
       'lasemd-ultra-kokand',
     ],
-    'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist'],
+    'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
   },
   'in-ekcionnaya-kosmetologiya': {
     botulino: ['botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
@@ -191,7 +193,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     ],
   },
   'lazernaya-epilyaciya': {
-    'alex-lazer': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
+    'alex-lazer': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar', 'laser-hair-removal-season'],
   },
   'trihologiya-centr-lechenie-volos': {
     trixoskop: [
@@ -216,7 +218,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'dermatosc-lessons': ['basal-cell-carcinoma', 'mole-screening'],
   },
   'clinika-patologii-nogtej': {
-    'podolog-dermatolog': ['fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
+    'podolog-dermatolog': ['fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski', 'calluses', 'cracked-heels', 'diabetic-foot', 'nail-fungus'],
   },
   dermatopatologiya: {
     gistolog: ['dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],

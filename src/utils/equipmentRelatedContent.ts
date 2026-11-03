@@ -7,24 +7,25 @@ import { filterPublicArticles } from './articles';
 
 export const EQUIPMENT_ARTICLE_KEYS: Record<ClinicEquipmentId, string[]> = {
   plazmoforez: ['plasmapheresis', 'fizioterapiya-dermatovenereologiya'],
-  'daavlin-neolux': ['fizioterapiya-dermatovenereologiya', 'vitiligo', 'psoriasis-daavlin-kokand', 'psoriasis'],
-  'daavlin-m-series': ['fizioterapiya-dermatovenereologiya', 'vitiligo', 'psoriasis-daavlin-kokand', 'psoriasis'],
+  'daavlin-neolux': ['fizioterapiya-dermatovenereologiya', 'vitiligo', 'psoriasis-daavlin-kokand', 'psoriasis', 'eczema'],
+  'daavlin-m-series': ['fizioterapiya-dermatovenereologiya', 'vitiligo', 'psoriasis-daavlin-kokand', 'psoriasis', 'eczema'],
   'daavlin-aquex': ['fizioterapiya-dermatovenereologiya'],
   'deka-co2-laser': ['deka-co2-scars-radeski', 'deka-co2', 'laser-scar-resurfacing', 'post-acne'],
-  'deka-alexandrite-laser': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
+  'deka-alexandrite-laser': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar', 'laser-hair-removal-season'],
   'surgitron-radiofrequency': ['papilloma-warts', 'pediatric-warts-laser-radeski', 'pediatric-warts-co2-deka'],
   'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'ipl-lumecca-pigmentation-radeski', 'rosacea-radeski', 'derma-v-vascular'],
   'derma-v-lutronic': ['derma-v-vascular', 'derma-v-redness-radeski', 'rosacea-radeski'],
   'hollywood-spectra-lutronic': [
     'hollywood-spectra-pigmentation',
     'hollywood-spectra-pores-radeski',
+    'carbon-peel',
     'hollywood-spectra-eyebrow-tattoo',
     'post-acne',
     'laser-scar-resurfacing',
     'adult-acne',
     'acne',
   ],
-  'lasemd-ultra-lutronic': ['lasemd-ultra-kokand', 'thulium-laser-hair-kokand', 'hollywood-spectra-pigmentation'],
+  'lasemd-ultra-lutronic': ['lasemd-ultra-kokand', 'thulium-laser-hair-kokand', 'hollywood-spectra-pigmentation', 'male-hair-loss'],
 };
 
 const EQUIPMENT_RESULT_KEYWORDS: Record<ClinicEquipmentId, string[]> = {

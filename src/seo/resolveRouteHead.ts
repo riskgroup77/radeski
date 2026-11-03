@@ -99,6 +99,40 @@ function isPlaceholderSection(page: PageId): boolean {
   return getInstitutionalNavSection(page).topics.length === 0;
 }
 
+/**
+ * Offer landings that repeat a city service page aimed at the same search ("IPL Farg'ona",
+ * "lazer epilyatsiya Qo'qon"…): noindex, follow, so they pass their links on instead of
+ * competing with the page that has the prices, doctors and FAQ.
+ */
+const PROMO_SLUGS_WITH_CITY_PAGES = new Set(['dermataskopiya', 'ipl', 'podologiya', 'lazer-epilyatsiya']);
+
+/**
+ * Device and video pages had 45–70 character descriptions (a device's one-line summary, a
+ * video's caption): too short for a snippet. Under 100 characters, one sentence about the
+ * clinic is added.
+ */
+const VIDEO_DESCRIPTION_TAIL: Record<Locale, string> = {
+  uz: "Radeski Skin Clinic videosi. Farg'ona va Qo'qonda shifokor konsultatsiyasiga yoziling.",
+  ru: 'Видео Radeski Skin Clinic. Запись на консультацию врача в Фергане и Коканде.',
+  en: "A Radeski Skin Clinic video. Book a doctor's consultation in Fergana or Kokand.",
+};
+const EQUIPMENT_DESCRIPTION_TAIL: Record<Locale, string> = {
+  uz: "Radeski Skin Clinic: shifokor ko'rigi, narxlar va onlayn yozilish.",
+  ru: 'Radeski Skin Clinic: консультация врача, цены и онлайн-запись.',
+  en: "Radeski Skin Clinic: doctor's consultation, prices and online booking.",
+};
+const CLINIC_DESCRIPTION_TAIL: Record<Locale, string> = {
+  uz: "Radeski Skin Clinic — Farg'ona va Qo'qon.",
+  ru: 'Radeski Skin Clinic — Фергана и Коканд.',
+  en: 'Radeski Skin Clinic — Fergana and Kokand.',
+};
+
+function withDescriptionTail(text: string, tail: string): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length >= 100 || clean.includes(tail)) return clean;
+  return `${/[.!?…]$/.test(clean) ? clean : `${clean}.`} ${tail}`;
+}
+
 /** schema.org MedicalSpecialty of the main service categories. */
 const CATEGORY_MEDICAL_SPECIALTY: Record<string, string> = {
   dermatologiya: 'Dermatology',
@@ -333,7 +367,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
                         ? daavlinModelSeo.seoTitle[locale]
                         : tabSeo.title;
 
-  const description = educationSeo?.desc
+  const baseDescription = educationSeo?.desc
     ? educationSeo.desc
     : promoSeo
       ? promoSeo.desc
@@ -356,6 +390,10 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
                   : daavlinModelSeo
                     ? daavlinModelSeo.seoDesc[locale]
                     : tabSeo.desc;
+  const description = withDescriptionTail(
+    baseDescription,
+    activeVideo ? VIDEO_DESCRIPTION_TAIL[locale] : activeEquipment ? EQUIPMENT_DESCRIPTION_TAIL[locale] : CLINIC_DESCRIPTION_TAIL[locale],
+  );
 
   const keywords = educationSeo?.keywords
     ? educationSeo.keywords
@@ -489,7 +527,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
     keywords,
     robots: isErrorPage
       ? 'noindex, nofollow'
-      : isPlaceholderSection(currentPage)
+      : isPlaceholderSection(currentPage) || (promoSlug && PROMO_SLUGS_WITH_CITY_PAGES.has(promoSlug))
         ? 'noindex, follow'
         : 'index, follow, max-image-preview:large, max-snippet:-1',
     ogType: activeArticle ? 'article' : 'website',

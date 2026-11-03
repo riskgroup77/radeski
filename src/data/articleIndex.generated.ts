@@ -4729,6 +4729,38 @@ export const STATIC_ARTICLES: Article[] = [
     "views": 0
   },
   {
+    "id": "art-melazma",
+    "slug": "melazma",
+    "title": {
+      "uz": "Melazma: yuzdagi jigarrang dog'lar — sabablari va zamonaviy davolash",
+      "ru": "Мелазма: коричневые пятна на лице — причины и современное лечение",
+      "en": "Melasma: Brown Patches on the Face — Causes and Modern Treatment"
+    },
+    "summary": {
+      "uz": "Melazma — yuzdagi jigarrang dog'lar: sabablari (quyosh, gormonlar), boshqa dog'lardan farqi, quyoshdan himoya, kremlar, piling va lazer toning. Farg'ona va Qo'qonda dermatolog-kosmetolog.",
+      "ru": "Мелазма — коричневые пятна на лице: причины (солнце, гормоны), отличие от других пятен, защита от солнца, кремы, пилинги и лазерный тонинг. Дерматолог-косметолог в Фергане и Коканде.",
+      "en": "Melasma — brown patches on the face: causes (sun, hormones), how it differs from other spots, sun protection, creams, peels and laser toning. Dermatologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Mangasaryan Lorena Georgievna",
+      "ru": "Мангасарян Лорена Георгиевна",
+      "en": "Dr. Lorena Georgievna Mangasaryan"
+    },
+    "date": "2026-11-03",
+    "image": "/articles/melazma-cover.jpg",
+    "images": {
+      "uz": "/articles/melazma-cover.jpg",
+      "ru": "/articles/melazma-cover.jpg",
+      "en": "/articles/melazma-cover.jpg"
+    },
+    "views": 0
+  },
+  {
     "id": "art-papilloma-olib-tashlash",
     "slug": "papilloma-olib-tashlash",
     "title": {
