@@ -3,7 +3,8 @@ import { findArticleCatalogKey } from '../data/articleCatalogKeys';
 import { CONDITION_ARTICLES } from '../data/conditionArticles';
 import { ALL_LOCAL_COMMERCIAL_LANDINGS } from '../data/localCommercialSeoCatalog';
 import { resolveArticleRouteKey } from './articles';
-import { SERVICE_CATEGORY_ARTICLE_KEYS } from './serviceRelatedArticles';
+import { EQUIPMENT_ARTICLE_KEYS } from './equipmentRelatedContent';
+import { SERVICE_CATEGORY_ARTICLE_KEYS, SERVICE_SUB_ARTICLE_KEYS } from './serviceRelatedArticles';
 
 type ArticleLike = Pick<Article, 'id' | 'slug' | 'title' | 'author' | 'date'>;
 
@@ -11,8 +12,8 @@ type ArticleLike = Pick<Article, 'id' | 'slug' | 'title' | 'author' | 'date'>;
 const BROAD_TOPICS = new Set(['landing:dermatolog', 'landing:kosmetolog', 'landing:podolog', 'landing:trixolog']);
 
 /**
- * The topics an article belongs to: the service categories, city pages (by service, either
- * city) and condition pages that already list it. Two articles sharing a topic are about the
+ * The topics an article belongs to: the service categories, sub-services, device pages, city
+ * pages (by service, either city) and condition pages that already list it. Two articles sharing a topic are about the
  * same problem or treatment — those are the useful "read next" links.
  */
 function articleTopics(article: ArticleLike): Set<string> {
@@ -21,6 +22,12 @@ function articleTopics(article: ArticleLike): Set<string> {
   const topics = new Set<string>();
   for (const [categoryId, keys] of Object.entries(SERVICE_CATEGORY_ARTICLE_KEYS)) {
     if (keys.includes(catalogKey)) topics.add(`service:${categoryId}`);
+  }
+  for (const [categoryId, subs] of Object.entries(SERVICE_SUB_ARTICLE_KEYS)) {
+    for (const [subId, keys] of Object.entries(subs)) if (keys.includes(catalogKey)) topics.add(`sub:${categoryId}/${subId}`);
+  }
+  for (const [deviceId, keys] of Object.entries(EQUIPMENT_ARTICLE_KEYS)) {
+    if (keys.includes(catalogKey)) topics.add(`device:${deviceId}`);
   }
   for (const landing of ALL_LOCAL_COMMERCIAL_LANDINGS) {
     if (landing.articleRouteKeys?.includes(routeKey)) topics.add(`landing:${landing.slug}`);
@@ -44,9 +51,17 @@ export function pickRelatedArticles<T extends ArticleLike>(article: ArticleLike,
     .filter((candidate) => candidate.id !== ownId && resolveArticleRouteKey(candidate) !== resolveArticleRouteKey(article))
     .map((candidate) => {
       let score = 0;
+      // A shared device or sub-service is a tie-breaker, counted once: two Daavlin cabins
+      // must not outweigh a shared condition page.
+      let sharedDevice = false;
+      let sharedSub = false;
       for (const topic of articleTopics(candidate)) {
-        if (own.has(topic)) score += BROAD_TOPICS.has(topic) || topic.startsWith('service:') ? 1 : 3;
+        if (!own.has(topic)) continue;
+        if (topic.startsWith('device:')) sharedDevice = true;
+        else if (topic.startsWith('sub:')) sharedSub = true;
+        else score += BROAD_TOPICS.has(topic) || topic.startsWith('service:') ? 1 : 3;
       }
+      score += Number(sharedDevice) + Number(sharedSub);
       return { candidate, score };
     });
   return scored
