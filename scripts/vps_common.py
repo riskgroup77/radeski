@@ -10,6 +10,7 @@ every later connection, so a spoofed server is detected instead of silently trus
 """
 from __future__ import annotations
 
+import codecs
 import getpass
 import os
 import sys
@@ -67,14 +68,28 @@ def ask_password() -> str:
     return password
 
 
+_session_password: str | None = None
+
+
 def connect() -> paramiko.SSHClient:
+    """Connect by key or password; a password typed once is reused for reconnects in this process."""
+    global _session_password
     path = key_path()
     if path:
         try:
-            return connect_with_key(path)
+            client = connect_with_key(path)
         except paramiko.AuthenticationException:
             print(f"SSH key {path} was rejected — falling back to password.", file=sys.stderr)
-    return connect_with_password(ask_password())
+            path = None
+    if not path:
+        if _session_password is None:
+            _session_password = ask_password()
+        client = connect_with_password(_session_password)
+    # Keepalives stop routers and NAT from dropping a connection that is quiet during a long build.
+    transport = client.get_transport()
+    if transport:
+        transport.set_keepalive(15)
+    return client
 
 
 def run(client: paramiko.SSHClient, cmd: str, timeout: int = 1800, check: bool = True) -> tuple[int, str]:
@@ -101,6 +116,76 @@ def run(client: paramiko.SSHClient, cmd: str, timeout: int = 1800, check: bool =
     if check and code != 0:
         raise RuntimeError(f"Remote command failed with exit {code}")
     return code, "".join(chunks)
+
+
+REMOTE_LOG_DIR = "/var/log/radeski-deploy"
+_CONNECTION_ERRORS = (OSError, EOFError, paramiko.SSHException)
+
+
+def _quiet_exec(client: paramiko.SSHClient, cmd: str) -> bytes:
+    _, stdout, _ = client.exec_command(cmd, timeout=60)
+    return stdout.read()
+
+
+def run_detached(client: paramiko.SSHClient, script: str, timeout: int = 3600) -> paramiko.SSHClient:
+    """Run a long script on the server in the background and follow its log.
+
+    The script does not depend on this SSH connection: when the connection drops (Windows
+    error 10054, a Wi-Fi switch, a sleeping laptop) the build keeps going on the server and
+    this function reconnects and continues showing the log from where it stopped.
+    Returns the client that is connected at the end (it may be a new one).
+    """
+    name = time.strftime("%Y%m%d-%H%M%S")
+    script_path = f"{REMOTE_LOG_DIR}/{name}.sh"
+    log_path = f"{REMOTE_LOG_DIR}/{name}.log"
+    exit_path = f"{REMOTE_LOG_DIR}/{name}.exit"
+
+    _quiet_exec(client, f"mkdir -p {REMOTE_LOG_DIR} && find {REMOTE_LOG_DIR} -type f -mtime +14 -delete")
+    with client.open_sftp() as sftp:
+        with sftp.open(script_path, "w") as fh:
+            fh.write(script)
+    _quiet_exec(
+        client,
+        f"setsid nohup bash -c 'bash {script_path}; echo $? > {exit_path}' > {log_path} 2>&1 < /dev/null &",
+    )
+    print(f"\n>>> started on the server; log: {log_path}")
+
+    decoder = codecs.getincrementaldecoder("utf-8")(errors="replace")
+    offset = 0
+    failures = 0
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            chunk = _quiet_exec(client, f"tail -c +{offset + 1} {log_path}")
+            offset += len(chunk)
+            if chunk:
+                sys.stdout.write(decoder.decode(chunk).encode("ascii", errors="replace").decode("ascii"))
+                sys.stdout.flush()
+            status = _quiet_exec(client, f"cat {exit_path} 2>/dev/null").strip()
+            failures = 0
+        except _CONNECTION_ERRORS as error:
+            failures += 1
+            if failures > 20:
+                raise RuntimeError(
+                    f"Lost the connection to the server ({error}). The deploy is still running there; "
+                    f"its log is {log_path}."
+                ) from error
+            print(f"\n[connection lost: {error} - reconnecting in 10 s, the server keeps building]", flush=True)
+            time.sleep(10)
+            try:
+                client.close()
+                client = connect()
+            except _CONNECTION_ERRORS:
+                pass
+            continue
+        if status and not chunk:
+            code = int(status)
+            if code != 0:
+                raise RuntimeError(f"Remote command failed with exit {code} (log: {log_path})")
+            return client
+        if time.monotonic() > deadline:
+            raise RuntimeError(f"The deploy took longer than {timeout} s; it may still be running (log: {log_path})")
+        time.sleep(2)
 
 
 # Pull, back up server-side edits, install deps when needed, build (snapshot + article index +

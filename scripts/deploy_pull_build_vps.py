@@ -9,13 +9,14 @@ vps_upgrade_radeski.py instead.
 """
 from __future__ import annotations
 
-from vps_common import DEPLOY_SCRIPT, connect, run
+from vps_common import DEPLOY_SCRIPT, connect, run, run_detached
 
 
 def main() -> None:
     client = connect()
     try:
-        run(client, DEPLOY_SCRIPT, timeout=1800)
+        # Runs on the server by itself, so a dropped connection does not stop the build halfway.
+        client = run_detached(client, DEPLOY_SCRIPT)
         # The Express app (AI chat, review publishing) runs from the same checkout.
         run(client, "systemctl restart radeski-chat && sleep 2 && systemctl is-active radeski-chat", check=False)
     finally:
