@@ -4,7 +4,7 @@ import { filterPublicArticles } from './articles';
 
 /** Article catalog keys shown on service category pages (broad match). */
 export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
-  dermatologiya: [
+  dermatologiya: ['cheilitis', 'lichen-planus', 
     'acne',
     'adult-acne-dermatologist',
     'seborrheic-dermatitis',
@@ -51,7 +51,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'prp-lab-tests',
     'hair-transplant-contraindications',
   ],
-  'apparatnaya-kosmetologiya': [
+  'apparatnaya-kosmetologiya': ['pigment-spots-winter', 
     'melasma',
     'carbon-peel',
     'milia',
@@ -74,7 +74,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'adult-acne',
     'acne',
   ],
-  'in-ekcionnaya-kosmetologiya': [
+  'in-ekcionnaya-kosmetologiya': ['hyperhidrosis', 
     'botulinoterapiya-radeski',
     'biorevitalizatsiya-radeski',
     'konturnaya-guby-radeski',
@@ -92,7 +92,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'hair-transplant-contraindications',
     'soch-profilaktika-inyeksii-radeski',
   ],
-  dermatoonkologiya: [
+  dermatoonkologiya: ['skin-biopsy', 
     'mole-screening',
     'papilloma-removal',
     'seborrheic-keratosis',
@@ -121,8 +121,8 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriaz-klinik-keys-bahridinov-radeski',
   ],
   'shkola-dermatoskopii': ['basal-cell-carcinoma', 'mole-screening'],
-  'clinika-patologii-nogtej': ['nail-fungus', 'calluses', 'cracked-heels', 'diabetic-foot', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
-  dermatopatologiya: ['dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
+  'clinika-patologii-nogtej': ['ingrown-nail', 'nail-color-change', 'nail-fungus', 'calluses', 'cracked-heels', 'diabetic-foot', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
+  dermatopatologiya: ['skin-biopsy', 'dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
 };
 
 /** More specific article catalog keys per sub-service (merged with category keys on sub pages). */
@@ -136,7 +136,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'molluscum-radeski',
       'atopic-dermatitis',
     ],
-    fototerapiya: [
+    fototerapiya: ['lichen-planus', 
       'fizioterapiya-dermatovenereologiya',
       'eczema',
       'vitiligo',
@@ -164,8 +164,8 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'trix-monitoring': ['trichologist-trichoscopy', 'prp-hair'],
   },
   'apparatnaya-kosmetologiya': {
-    'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'rosacea-radeski', 'derma-v-vascular'],
-    'hollywood-spectra': [
+    'ipl-inmode': ['pigment-spots-winter', 'ipl-radeski', 'ipl-therapy', 'rosacea-radeski', 'derma-v-vascular'],
+    'hollywood-spectra': ['pigment-spots-winter', 
       'hollywood-spectra-pigmentation',
       'hollywood-spectra-eyebrow-tattoo',
       'post-acne',
@@ -183,7 +183,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
   },
   'in-ekcionnaya-kosmetologiya': {
-    botulino: ['botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
+    botulino: ['hyperhidrosis', 'botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
     biorev: ['biorevitalizatsiya-radeski', 'botulinoterapiya-radeski', 'plasmapheresis'],
     konturnaya: [
       'kontur-plastika-radeski',
@@ -206,7 +206,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     ],
   },
   dermatoonkologiya: {
-    biopsiya: ['basal-cell-carcinoma', 'tongue-scc', 'penile-scc', 'papilloma-warts'],
+    biopsiya: ['skin-biopsy', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc', 'papilloma-warts'],
   },
   'hirurgicheskaya-dermatologiya': {
     'moh-surgery': ['basal-cell-carcinoma', 'deka-co2'],
@@ -218,10 +218,10 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'dermatosc-lessons': ['basal-cell-carcinoma', 'mole-screening'],
   },
   'clinika-patologii-nogtej': {
-    'podolog-dermatolog': ['fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski', 'calluses', 'cracked-heels', 'diabetic-foot', 'nail-fungus'],
+    'podolog-dermatolog': ['ingrown-nail', 'nail-color-change', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski', 'calluses', 'cracked-heels', 'diabetic-foot', 'nail-fungus'],
   },
   dermatopatologiya: {
-    gistolog: ['dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
+    gistolog: ['skin-biopsy', 'dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
   },
 };
 

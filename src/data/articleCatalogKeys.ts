@@ -291,6 +291,13 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   'milia': ['art-milium', 'milium'],
   'diabetic-foot': ['art-diabetda-oyoq-parvarishi', 'diabetda-oyoq-parvarishi'],
   'carbon-peel': ['art-karbon-piling', 'karbon-piling'],
+  'skin-biopsy': ['art-teri-biopsiyasi', 'teri-biopsiyasi'],
+  'ingrown-nail': ['art-ichga-osgan-tirnoq', 'ichga-osgan-tirnoq'],
+  'hyperhidrosis': ['art-giperhidroz', 'giperhidroz'],
+  'nail-color-change': ['art-tirnoq-rangi-ozgarishi', 'tirnoq-rangi-ozgarishi'],
+  'cheilitis': ['art-lablar-yorilishi-xeylit', 'lablar-yorilishi-xeylit'],
+  'pigment-spots-winter': ['art-pigment-doglari-qishda', 'pigment-doglari-qishda'],
+  'lichen-planus': ['art-qizil-yassi-temiratki', 'qizil-yassi-temiratki'],
   'nail-fungus': ['art-tirnoq-zamburugi', 'tirnoq-zamburugi', 'грибок ногтей (онихомикоз)', 'nail fungus (onychomycosis)'],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
   'seborrheic-dermatitis': [

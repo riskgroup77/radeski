@@ -13,9 +13,9 @@ export const EQUIPMENT_ARTICLE_KEYS: Record<ClinicEquipmentId, string[]> = {
   'deka-co2-laser': ['deka-co2-scars-radeski', 'deka-co2', 'laser-scar-resurfacing', 'post-acne'],
   'deka-alexandrite-laser': ['deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar', 'laser-hair-removal-season'],
   'surgitron-radiofrequency': ['papilloma-warts', 'pediatric-warts-laser-radeski', 'pediatric-warts-co2-deka'],
-  'ipl-inmode': ['ipl-radeski', 'ipl-therapy', 'ipl-lumecca-pigmentation-radeski', 'rosacea-radeski', 'derma-v-vascular'],
+  'ipl-inmode': ['pigment-spots-winter', 'ipl-radeski', 'ipl-therapy', 'ipl-lumecca-pigmentation-radeski', 'rosacea-radeski', 'derma-v-vascular'],
   'derma-v-lutronic': ['derma-v-vascular', 'derma-v-redness-radeski', 'rosacea-radeski'],
-  'hollywood-spectra-lutronic': [
+  'hollywood-spectra-lutronic': ['pigment-spots-winter', 
     'hollywood-spectra-pigmentation',
     'hollywood-spectra-pores-radeski',
     'carbon-peel',
@@ -25,7 +25,7 @@ export const EQUIPMENT_ARTICLE_KEYS: Record<ClinicEquipmentId, string[]> = {
     'adult-acne',
     'acne',
   ],
-  'lasemd-ultra-lutronic': ['lasemd-ultra-kokand', 'thulium-laser-hair-kokand', 'hollywood-spectra-pigmentation', 'male-hair-loss'],
+  'lasemd-ultra-lutronic': ['pigment-spots-winter', 'lasemd-ultra-kokand', 'thulium-laser-hair-kokand', 'hollywood-spectra-pigmentation', 'male-hair-loss'],
 };
 
 const EQUIPMENT_RESULT_KEYWORDS: Record<ClinicEquipmentId, string[]> = {

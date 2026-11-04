@@ -1243,6 +1243,195 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://radeski.uz/uz/articles/art-teri-biopsiyasi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-teri-biopsiyasi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-teri-biopsiyasi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-teri-biopsiyasi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-teri-biopsiyasi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-teri-biopsiyasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-teri-biopsiyasi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-ichga-osgan-tirnoq</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-ichga-osgan-tirnoq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-ichga-osgan-tirnoq</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-ichga-osgan-tirnoq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-ichga-osgan-tirnoq</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-ichga-osgan-tirnoq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-ichga-osgan-tirnoq"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-giperhidroz</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-giperhidroz"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-giperhidroz</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-giperhidroz"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-giperhidroz</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-giperhidroz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-giperhidroz"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-tirnoq-rangi-ozgarishi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-tirnoq-rangi-ozgarishi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-tirnoq-rangi-ozgarishi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-tirnoq-rangi-ozgarishi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-tirnoq-rangi-ozgarishi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-tirnoq-rangi-ozgarishi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-tirnoq-rangi-ozgarishi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-lablar-yorilishi-xeylit</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-lablar-yorilishi-xeylit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-lablar-yorilishi-xeylit</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-lablar-yorilishi-xeylit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-lablar-yorilishi-xeylit</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-lablar-yorilishi-xeylit"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-lablar-yorilishi-xeylit"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-pigment-doglari-qishda</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-pigment-doglari-qishda"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-pigment-doglari-qishda</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-pigment-doglari-qishda"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-pigment-doglari-qishda</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-pigment-doglari-qishda"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-pigment-doglari-qishda"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-qizil-yassi-temiratki</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-qizil-yassi-temiratki"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-qizil-yassi-temiratki</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-qizil-yassi-temiratki"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-qizil-yassi-temiratki</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-qizil-yassi-temiratki"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-qizil-yassi-temiratki"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://radeski.uz/uz/articles/art-postakne</loc>
     <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-postakne"/>
     <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-postakne"/>

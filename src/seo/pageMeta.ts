@@ -229,6 +229,146 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         'carbon peel, Hollywood peel, carbon laser peel Fergana, enlarged pores, blackheads, Radeski Skin Clinic',
     },
   },
+  'art-teri-biopsiyasi': {
+    uz: {
+      title: "Teri biopsiyasi: qachon kerak va qanday o'tadi — Farg'ona",
+      desc: "Teri biopsiyasi qachon kerak, og'riqlimi, gistologik natija qachon tayyor va nimani ko'rsatadi. Farg'ona va Qo'qonda onkodermatolog va dermatopatolog.",
+      keywords:
+        "teri biopsiyasi, biopsiya Farg'ona, biopsiya Qo'qon, gistologiya, shubhali xol tekshiruvi, onkodermatolog, dermatopatologiya, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Биопсия кожи: когда нужна и как проходит — Фергана',
+      desc: 'Когда нужна биопсия кожи, больно ли это, когда готов гистологический результат и что он показывает. Онкодерматолог и дерматопатолог в Фергане и Коканде.',
+      keywords:
+        'биопсия кожи, биопсия Фергана, биопсия Коканд, гистология кожи, подозрительная родинка, онкодерматолог, дерматопатология, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Skin Biopsy: When It Is Needed and How It Works — Fergana',
+      desc: 'When a skin biopsy is needed, whether it hurts, when the histology result is ready and what it shows. Onco-dermatologists in Fergana and Kokand.',
+      keywords:
+        'skin biopsy, biopsy Fergana, biopsy Kokand, skin histology, suspicious mole, onco-dermatologist, dermatopathology, Radeski Skin Clinic',
+    },
+  },
+  'art-ichga-osgan-tirnoq': {
+    uz: {
+      title: "Ichiga o'sgan tirnoq: sabablari va davolash — Farg'ona",
+      desc: "Ichiga o'sgan tirnoq: sabablari, bosqichlari, uyda nima qilmaslik kerak va podologda jarrohliksiz tuzatish. Farg'ona va Qo'qonda Radeski Skin Clinic.",
+      keywords:
+        "ichiga o'sgan tirnoq, onixokriptoz, ichga o'sgan tirnoqni davolash, tirnoq skobasi, podolog Farg'ona, podolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Вросший ноготь: причины и лечение — Фергана',
+      desc: 'Вросший ноготь: причины, стадии, чего нельзя делать дома и как подолог исправляет ноготь без операции. Фергана и Коканд, Radeski Skin Clinic.',
+      keywords:
+        'вросший ноготь, онихокриптоз, лечение вросшего ногтя, скоба на ноготь, подолог Фергана, подолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Ingrown Toenail: Causes and Treatment — Fergana',
+      desc: 'Ingrown toenail: causes, stages, what not to do at home and how a podiatrist corrects the nail without surgery. Fergana and Kokand, Radeski Skin Clinic.',
+      keywords:
+        'ingrown toenail, onychocryptosis, ingrown toenail treatment, nail brace, podiatrist Fergana, podiatrist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-giperhidroz': {
+    uz: {
+      title: "Giperhidroz: ortiqcha terlashni davolash — Farg'ona",
+      desc: "Ortiqcha terlash (giperhidroz): qo'ltiq, kaft va oyoq terlashi sabablari, xavfli belgilar va botulinoterapiya. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "giperhidroz, ortiqcha terlash, qo'ltiq terlashi, kaft terlashi, oyoq terlashi, terlashga botulinoterapiya, dermatolog Farg'ona Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Гипергидроз: лечение потливости — Фергана и Коканд',
+      desc: 'Повышенная потливость (гипергидроз): причины потливости подмышек, ладоней и стоп, тревожные признаки и ботулинотерапия. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'гипергидроз, повышенная потливость, потливость подмышек, потливость ладоней, потливость стоп, ботулинотерапия от пота, дерматолог Фергана Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Hyperhidrosis: Excessive Sweating Treatment — Fergana',
+      desc: 'Excessive sweating (hyperhidrosis) of underarms, palms and feet: causes, warning signs and botulinum therapy. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'hyperhidrosis, excessive sweating, underarm sweating, sweaty palms, sweaty feet, botulinum for sweating, dermatologist Fergana Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-tirnoq-rangi-ozgarishi': {
+    uz: {
+      title: "Tirnoq rangi o'zgarishi: sabablari va xavf — Farg'ona",
+      desc: "Tirnoq sarg'aydimi, oqardimi yoki qora chiziq chiqdimi? Ranglar nima dalolat beradi, qachon xavfli va podolog qanday tekshiradi — Farg'ona va Qo'qon.",
+      keywords:
+        "tirnoq rangi o'zgarishi, tirnoqda qora chiziq, tirnoqdagi oq dog'lar, sariq tirnoq, tirnoq melanomasi, podolog Farg'ona, podolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Изменение цвета ногтей: причины и риски — Фергана',
+      desc: 'Ноготь пожелтел, побелел или появилась тёмная полоса? О чём говорит цвет ногтей, когда это опасно и как проверяет подолог — Фергана и Коканд.',
+      keywords:
+        'изменение цвета ногтей, тёмная полоса на ногте, белые пятна на ногтях, жёлтые ногти, меланома ногтя, подолог Фергана, подолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Nail Color Changes: Causes and Risks — Fergana',
+      desc: 'Yellow, white or green nails, or a dark stripe? What nail color changes mean, when they are dangerous and how a podiatrist checks them in Fergana and Kokand.',
+      keywords:
+        'nail color changes, dark stripe on nail, white spots on nails, yellow nails, nail melanoma, podiatrist Fergana, podiatrist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-lablar-yorilishi-xeylit': {
+    uz: {
+      title: "Lablar yorilishi va xeylit: qishda parvarish — Farg'ona",
+      desc: "Qishda lablar nega yoriladi, og'iz burchagidagi yoriqlar, allergik va aktinik xeylit, gerpesdan farqi va xavfli belgilar. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "lablar yorilishi, xeylit, quruq lablar, og'iz burchagi yoriqlari, angulyar xeylit, aktinik xeylit, dermatolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Трещины на губах и хейлит зимой — дерматолог Фергана',
+      desc: 'Почему зимой трескаются губы, заеды в уголках рта, аллергический и актинический хейлит, отличие от герпеса и опасные признаки. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'трещины на губах, хейлит, сухие губы, заеды в уголках рта, ангулярный хейлит, актинический хейлит, дерматолог Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Chapped Lips and Cheilitis in Winter — Fergana',
+      desc: 'Why lips crack in winter, angular, allergic and actinic cheilitis, how it differs from herpes, lip care and warning signs. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'chapped lips, cheilitis, dry lips, cracks in corners of mouth, angular cheilitis, actinic cheilitis, dermatologist Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-pigment-doglari-qishda': {
+    uz: {
+      title: "Pigment dog'larini davolash kuz–qishda — Farg'ona",
+      desc: "Pigment dog'larini davolash uchun kuz va qish eng qulay vaqt: lentigo, sepkil, dermatoskopiya, IPL va lazer, qishda SPF. Farg'ona va Qo'qonda kosmetolog.",
+      keywords:
+        "pigment dog'larini davolash, quyosh dog'lari, sepkil olib tashlash, postakne dog'lari, IPL pigmentatsiya, lazer pigment dog', pigmentatsiya Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Лечение пигментных пятен осенью и зимой — Фергана',
+      desc: 'Почему осень и зима — лучшее время лечить пигментные пятна: лентиго, веснушки, дерматоскопия, IPL и лазер, SPF зимой. Косметолог в Фергане и Коканде.',
+      keywords:
+        'лечение пигментных пятен, удаление пигментных пятен, солнечные пятна лентиго, удаление веснушек, пятна постакне, IPL пигментация, пигментация Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Pigment Spot Treatment in Autumn and Winter — Fergana',
+      desc: 'Why autumn and winter are the best time to treat pigment spots: sun spots, freckles, dermoscopy, IPL and laser, winter SPF. Cosmetologist in Fergana and Kokand.',
+      keywords:
+        'pigment spot treatment, sun spot removal, freckle removal, post-acne marks, IPL pigmentation, laser pigmentation, pigmentation Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-qizil-yassi-temiratki': {
+    uz: {
+      title: "Qizil yassi temiratki: belgilari va davolash — Farg'ona",
+      desc: "Qizil yassi temiratki (lixen planus): binafsha-qizil qichiydigan tugunchalar, og'iz va soch shakli, tashxis va davolash. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "qizil yassi temiratki, lixen planus, qizil yassi temiratki davolash, og'izdagi oq dog'lar, teri qichishi, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Красный плоский лишай: симптомы и лечение — Фергана',
+      desc: 'Красный плоский лишай: зудящие фиолетовые узелки, форма во рту и на голове, заразен ли, диагностика и лечение. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'красный плоский лишай, лихен планус, лечение красного плоского лишая, белые пятна во рту, зуд кожи, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Lichen Planus: Symptoms and Treatment — Fergana',
+      desc: 'Lichen planus: itchy purple-red bumps, mouth and scalp forms, whether it is contagious, diagnosis and treatment. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'lichen planus, lichen planus treatment, oral lichen planus, purple itchy bumps, itchy skin, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
   'art-qotir': {
     uz: {
       title: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",

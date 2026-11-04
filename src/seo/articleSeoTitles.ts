@@ -44,6 +44,41 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     ru: 'Карбоновый пилинг: результат — Фергана, Коканд',
     en: 'Carbon peel: how it works — Fergana, Kokand',
   },
+  'art-teri-biopsiyasi': {
+    uz: "Teri biopsiyasi: qachon kerak va qanday o'tadi — Farg'ona",
+    ru: 'Биопсия кожи: когда нужна и как проходит — Фергана',
+    en: 'Skin Biopsy: When It Is Needed and How It Works — Fergana',
+  },
+  'art-ichga-osgan-tirnoq': {
+    uz: "Ichiga o'sgan tirnoq: sabablari va davolash — Farg'ona",
+    ru: 'Вросший ноготь: причины и лечение — Фергана',
+    en: 'Ingrown Toenail: Causes and Treatment — Fergana',
+  },
+  'art-giperhidroz': {
+    uz: "Giperhidroz: ortiqcha terlashni davolash — Farg'ona",
+    ru: 'Гипергидроз: лечение потливости — Фергана и Коканд',
+    en: 'Hyperhidrosis: Excessive Sweating Treatment — Fergana',
+  },
+  'art-tirnoq-rangi-ozgarishi': {
+    uz: "Tirnoq rangi o'zgarishi: sabablari va xavf — Farg'ona",
+    ru: 'Изменение цвета ногтей: причины и риски — Фергана',
+    en: 'Nail Color Changes: Causes and Risks — Fergana',
+  },
+  'art-lablar-yorilishi-xeylit': {
+    uz: "Lablar yorilishi va xeylit: qishda parvarish — Farg'ona",
+    ru: 'Трещины на губах и хейлит зимой — дерматолог Фергана',
+    en: 'Chapped Lips and Cheilitis in Winter — Fergana',
+  },
+  'art-pigment-doglari-qishda': {
+    uz: "Pigment dog'larini davolash kuz–qishda — Farg'ona",
+    ru: 'Лечение пигментных пятен осенью и зимой — Фергана',
+    en: 'Pigment Spot Treatment in Autumn and Winter — Fergana',
+  },
+  'art-qizil-yassi-temiratki': {
+    uz: "Qizil yassi temiratki: belgilari va davolash — Farg'ona",
+    ru: 'Красный плоский лишай: симптомы и лечение — Фергана',
+    en: 'Lichen Planus: Symptoms and Treatment — Fergana',
+  },
   'art-qotir': {
     uz: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",
     ru: 'Чесотка: признаки и лечение — Фергана, Коканд',

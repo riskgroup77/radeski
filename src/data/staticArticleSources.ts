@@ -48,6 +48,13 @@ import { LASER_HAIR_REMOVAL_SEASON_ARTICLE } from './articles/laserHairRemovalSe
 import { MILIA_ARTICLE } from './articles/miliaArticle';
 import { DIABETIC_FOOT_ARTICLE } from './articles/diabeticFootArticle';
 import { CARBON_PEEL_ARTICLE } from './articles/carbonPeelArticle';
+import { SKIN_BIOPSY_ARTICLE } from './articles/skinBiopsyArticle';
+import { INGROWN_NAIL_ARTICLE } from './articles/ingrownNailArticle';
+import { HYPERHIDROSIS_ARTICLE } from './articles/hyperhidrosisArticle';
+import { NAIL_COLOR_CHANGE_ARTICLE } from './articles/nailColorChangeArticle';
+import { CHEILITIS_ARTICLE } from './articles/cheilitisArticle';
+import { PIGMENT_SPOTS_WINTER_ARTICLE } from './articles/pigmentSpotsWinterArticle';
+import { LICHEN_PLANUS_ARTICLE } from './articles/lichenPlanusArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -110,6 +117,13 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   PEDIATRIC_WARTS_CO2_DEKA_ARTICLE,
   ADULT_ACNE_ARTICLE,
   ADULT_ACNE_DERMATOLOGIST_ARTICLE,
+  LICHEN_PLANUS_ARTICLE,
+  PIGMENT_SPOTS_WINTER_ARTICLE,
+  CHEILITIS_ARTICLE,
+  NAIL_COLOR_CHANGE_ARTICLE,
+  HYPERHIDROSIS_ARTICLE,
+  INGROWN_NAIL_ARTICLE,
+  SKIN_BIOPSY_ARTICLE,
   CARBON_PEEL_ARTICLE,
   DIABETIC_FOOT_ARTICLE,
   MILIA_ARTICLE,

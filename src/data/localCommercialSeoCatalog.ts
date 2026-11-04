@@ -221,7 +221,7 @@ function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
     treatmentLanding(city, 'ichga-osgan-tirnoq', 'clinika-patologii-nogtej', {
       name: L("Ichiga o'sgan tirnoqni davolash", 'Лечение вросшего ногтя', 'Ingrown toenail treatment'),
       promoSlug: 'podologiya',
-      articleRouteKeys: ['art-onixokriptoz-klinik-holat'],
+      articleRouteKeys: ['art-ichga-osgan-tirnoq', 'art-onixokriptoz-klinik-holat'],
       problem: L(
         "Tirnoq cheti teriga botib o'sadi: og'riq, qizarish va shish paydo bo'ladi, muammo qaytalanishi mumkin.",
         'Край ногтя врастает в кожу: появляются боль, покраснение и отёк, проблема может возвращаться.',
@@ -248,10 +248,10 @@ function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
 
 function buildKokandLandings(): LocalCommercialLanding[] {
   return [
-    specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-psoriasis-daavlin-kokand']),
+    specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-qizil-yassi-temiratki', 'art-lablar-yorilishi-xeylit', 'art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-psoriasis-daavlin-kokand']),
     specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
-    specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
-    kosmetologLanding('qoqon', ['art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
+    specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-ichga-osgan-tirnoq', 'art-tirnoq-rangi-ozgarishi', 'art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
+    kosmetologLanding('qoqon', ['art-pigment-doglari-qishda', 'art-giperhidroz', 'art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('qoqon'),
     treatmentLanding('qoqon', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
@@ -271,7 +271,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'tirnoq-zamburug', 'clinika-patologii-nogtej', {
       name: L("Tirnoq zamburug'i davolash", 'Лечение грибка ногтей', 'Nail fungus treatment'),
       promoSlug: 'podologiya',
-      articleRouteKeys: ['art-teri-zamburugi', 'art-tirnoq-zamburugi'],
+      articleRouteKeys: ['art-tirnoq-rangi-ozgarishi', 'art-teri-zamburugi', 'art-tirnoq-zamburugi'],
       problem: L('Onikomikoz tirnoq qalinlashishi bilan kechadi.', 'Онихомикоз — утолщение ногтя.', 'Onychomycosis thickens the nail.'),
       whoFor: [L('Uzoq davom etgan zamburug', 'Длительный грибок', 'Long-standing fungus')],
       methods: [L('Podolog ko‘rigi', 'Осмотр подолога', 'Podiatrist exam'), L('Kompleks terapiya', 'Комплексная терапия', 'Combined therapy')],
@@ -314,7 +314,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
       name: L('Pigmentatsiya davolash', 'Лечение пигментации', 'Pigmentation treatment'),
       conditionSlug: 'teri-doglari',
       promoSlug: 'ipl',
-      articleRouteKeys: ['art-melazma', 'art-lasemd-ultra-kokand', 'art-ipl-lumecca-pigmentatsiya-radeski'],
+      articleRouteKeys: ['art-pigment-doglari-qishda', 'art-melazma', 'art-lasemd-ultra-kokand', 'art-ipl-lumecca-pigmentatsiya-radeski'],
       problem: L('Pigment dog‘lari va melasma.', 'Пигментные пятна и мелазма.', 'Pigment spots and melasma.'),
       whoFor: [L('Dog‘lar va postakne', 'Пятна и постакне', 'Spots and post-acne')],
       methods: [L('IPL/lazer', 'IPL/лазер', 'IPL/laser'), L('SPF parvarish', 'SPF и уход', 'SPF and care')],
@@ -368,7 +368,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     }),
     treatmentLanding('qoqon', 'biopsiya', 'dermatopatologiya', {
       name: L('Teri biopsiyasi', 'Биопсия кожи', 'Skin biopsy'),
-      articleRouteKeys: ['art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-teri-biopsiyasi', 'art-bazalioma-teri-raki'],
       problem: L("Shubhali o'smalar uchun gistologik tasdiq.", 'Гистологическое подтверждение при подозрении.', 'Histology when malignancy is suspected.'),
       whoFor: [L("Shubhali teri o'smasi", 'Подозрительное образование', 'Suspicious skin lesion')],
       methods: [L('Biopsiya olish', 'Забор биопсии', 'Biopsy sampling'), L('Gistologik tahlil', 'Гистологический анализ', 'Histopathology')],
@@ -376,7 +376,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'onko-dermatolog', 'dermatoonkologiya', {
       name: L('Onkodermatolog', 'Онкодерматолог', 'Oncodermatologist'),
       promoSlug: 'dermataskopiya',
-      articleRouteKeys: ['art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-teri-biopsiyasi', 'art-bazalioma-teri-raki'],
       problem: L("Teri saratonini erta aniqlash va davolash.", 'Ранняя диагностика и лечение рака кожи.', 'Early skin cancer detection and care.'),
       whoFor: [L("Shubhali dog' va o'smalar", 'Подозрительные родинки и образования', 'Suspicious moles and lesions')],
       methods: [L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'), L('Biopsiya va kuzatuv', 'Биопсия и наблюдение', 'Biopsy and follow-up')],
@@ -384,7 +384,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'ipl-qoqon', 'apparatnaya-kosmetologiya', {
       name: L('IPL muolajalari', 'IPL-процедуры', 'IPL treatments'),
       promoSlug: 'ipl',
-      articleRouteKeys: ['art-ipl-terapiya', 'art-ipl-lumecca-pigmentatsiya-radeski'],
+      articleRouteKeys: ['art-pigment-doglari-qishda', 'art-ipl-terapiya', 'art-ipl-lumecca-pigmentatsiya-radeski'],
       problem: L('Pigment va qizarish uchun IPL.', 'IPL при пигментации и покраснении.', 'IPL for pigmentation and redness.'),
       whoFor: [L('Pigmentatsiya', 'Пигментация', 'Pigmentation')],
       methods: [L('InMode IPL / Lumecca', 'InMode IPL / Lumecca', 'InMode IPL / Lumecca')],
@@ -402,10 +402,10 @@ function buildKokandLandings(): LocalCommercialLanding[] {
 
 function buildFerganaLandings(): LocalCommercialLanding[] {
   return [
-    specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-ipl-terapiya']),
+    specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-qizil-yassi-temiratki', 'art-lablar-yorilishi-xeylit', 'art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-ipl-terapiya']),
     specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-plazmotorapiya-soch-prp']),
-    specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
-    kosmetologLanding('fargona', ['art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-melazma', 'art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
+    specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-ichga-osgan-tirnoq', 'art-tirnoq-rangi-ozgarishi', 'art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
+    kosmetologLanding('fargona', ['art-pigment-doglari-qishda', 'art-giperhidroz', 'art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-melazma', 'art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('fargona'),
     treatmentLanding('fargona', 'akne-davolash', 'dermatologiya', {
       name: L('Akne davolash', 'Лечение акне', 'Acne treatment'),
@@ -466,7 +466,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'tirnoq-zamburug', 'clinika-patologii-nogtej', {
       name: L("Tirnoq zamburug'i davolash", 'Лечение грибка ногтей', 'Nail fungus treatment'),
       promoSlug: 'podologiya',
-      articleRouteKeys: ['art-teri-zamburugi', 'art-tirnoq-zamburugi'],
+      articleRouteKeys: ['art-tirnoq-rangi-ozgarishi', 'art-teri-zamburugi', 'art-tirnoq-zamburugi'],
       problem: L('Onikomikoz.', 'Онихомикоз.', 'Onychomycosis.'),
       whoFor: [L('Tirnoq zamburug‘i', 'Грибок ногтей', 'Nail fungus')],
       methods: [L('Podolog', 'Подолог', 'Podiatrist')],
@@ -474,13 +474,13 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'ipl-fargona', 'apparatnaya-kosmetologiya', {
       name: L('IPL muolajalari', 'IPL-процедуры', 'IPL treatments'),
       promoSlug: 'ipl',
-      articleRouteKeys: ['art-ipl-terapiya', 'art-ipl-lumecca-pigmentatsiya-radeski'],
+      articleRouteKeys: ['art-pigment-doglari-qishda', 'art-ipl-terapiya', 'art-ipl-lumecca-pigmentatsiya-radeski'],
       problem: L('Pigment va qizarish uchun IPL.', 'IPL при пигментации и покраснении.', 'IPL for pigmentation and redness.'),
       whoFor: [L('Pigmentatsiya', 'Пигментация', 'Pigmentation')],
       methods: [L('InMode IPL / Lumecca', 'InMode IPL / Lumecca', 'InMode IPL / Lumecca')],
     }),
     treatmentLanding('fargona', 'pigmentatsiya', 'apparatnaya-kosmetologiya', {
-      articleRouteKeys: ['art-melazma'],
+      articleRouteKeys: ['art-pigment-doglari-qishda', 'art-melazma'],
       name: L('Pigmentatsiya davolash', 'Лечение пигментации', 'Pigmentation treatment'),
       conditionSlug: 'teri-doglari',
       promoSlug: 'ipl',
@@ -521,7 +521,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     }),
     treatmentLanding('fargona', 'biopsiya', 'dermatopatologiya', {
       name: L('Teri biopsiyasi', 'Биопсия кожи', 'Skin biopsy'),
-      articleRouteKeys: ['art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-teri-biopsiyasi', 'art-bazalioma-teri-raki'],
       problem: L('Gistologik tasdiq.', 'Гистологическое подтверждение.', 'Histologic confirmation.'),
       whoFor: [L("Shubhali o'sma", 'Подозрительное образование', 'Suspicious lesion')],
       methods: [L('Biopsiya', 'Биопсия', 'Biopsy'), L('Gistologiya', 'Гистология', 'Histology')],
@@ -529,7 +529,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'onko-dermatolog', 'dermatoonkologiya', {
       name: L('Onkodermatolog', 'Онкодерматолог', 'Oncodermatologist'),
       promoSlug: 'dermataskopiya',
-      articleRouteKeys: ['art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-teri-biopsiyasi', 'art-bazalioma-teri-raki'],
       problem: L("Teri saratonini erta aniqlash.", 'Ранняя диагностика рака кожи.', 'Early skin cancer detection.'),
       whoFor: [L('Shubhali holatlar', 'Подозрительные случаи', 'Suspicious cases')],
       methods: [L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'), L('Biopsiya', 'Биопсия', 'Biopsy')],

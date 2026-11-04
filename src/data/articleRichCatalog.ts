@@ -48,6 +48,13 @@ import { LASER_HAIR_REMOVAL_SEASON_ARTICLE_CATALOG } from './articles/laserHairR
 import { MILIA_ARTICLE_CATALOG } from './articles/miliaArticle';
 import { DIABETIC_FOOT_ARTICLE_CATALOG } from './articles/diabeticFootArticle';
 import { CARBON_PEEL_ARTICLE_CATALOG } from './articles/carbonPeelArticle';
+import { SKIN_BIOPSY_ARTICLE_CATALOG } from './articles/skinBiopsyArticle';
+import { INGROWN_NAIL_ARTICLE_CATALOG } from './articles/ingrownNailArticle';
+import { HYPERHIDROSIS_ARTICLE_CATALOG } from './articles/hyperhidrosisArticle';
+import { NAIL_COLOR_CHANGE_ARTICLE_CATALOG } from './articles/nailColorChangeArticle';
+import { CHEILITIS_ARTICLE_CATALOG } from './articles/cheilitisArticle';
+import { PIGMENT_SPOTS_WINTER_ARTICLE_CATALOG } from './articles/pigmentSpotsWinterArticle';
+import { LICHEN_PLANUS_ARTICLE_CATALOG } from './articles/lichenPlanusArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -148,6 +155,13 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'milia': MILIA_ARTICLE_CATALOG,
   'diabetic-foot': DIABETIC_FOOT_ARTICLE_CATALOG,
   'carbon-peel': CARBON_PEEL_ARTICLE_CATALOG,
+  'skin-biopsy': SKIN_BIOPSY_ARTICLE_CATALOG,
+  'ingrown-nail': INGROWN_NAIL_ARTICLE_CATALOG,
+  'hyperhidrosis': HYPERHIDROSIS_ARTICLE_CATALOG,
+  'nail-color-change': NAIL_COLOR_CHANGE_ARTICLE_CATALOG,
+  'cheilitis': CHEILITIS_ARTICLE_CATALOG,
+  'pigment-spots-winter': PIGMENT_SPOTS_WINTER_ARTICLE_CATALOG,
+  'lichen-planus': LICHEN_PLANUS_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

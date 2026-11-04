@@ -2211,6 +2211,335 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 445
     }
   },
+  "skin-biopsy": {
+    "uz": {
+      "summary": "Teri biopsiyasi: qachon kerak, qanday o'tkaziladi, og'riqlimi, keyingi parvarish va gistologik natija qachon tayyor bo'ladi. Farg'ona va Qo'qonda onkodermatolog.",
+      "tags": [
+        "Teri biopsiyasi",
+        "Gistologiya",
+        "Dermatopatologiya",
+        "Shubhali xol",
+        "Onkodermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5897,
+      "bodyWords": 701
+    },
+    "ru": {
+      "summary": "Биопсия кожи: когда нужна, как проходит, больно ли это, уход после процедуры и когда готов гистологический результат. Онкодерматолог в Фергане и Коканде.",
+      "tags": [
+        "Биопсия кожи",
+        "Гистология",
+        "Дерматопатология",
+        "Подозрительная родинка",
+        "Онкодерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5642,
+      "bodyWords": 727
+    },
+    "en": {
+      "summary": "Skin biopsy: when it is needed, how it is done, whether it hurts, aftercare and when the histology result is ready. Onco-dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Skin biopsy",
+        "Histology",
+        "Dermatopathology",
+        "Suspicious mole",
+        "Onco-dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5576,
+      "bodyWords": 921
+    }
+  },
+  "ingrown-nail": {
+    "uz": {
+      "summary": "Ichiga o'sgan tirnoq: sabablari, bosqichlari, uyda nima qilmaslik kerak, qachon shoshilinch yordam kerak va tirnoqni jarrohliksiz tuzatish. Farg'ona va Qo'qonda podolog.",
+      "tags": [
+        "Ichiga o'sgan tirnoq",
+        "Onixokriptoz",
+        "Bosh barmoq",
+        "Podolog",
+        "Tirnoq va oyoq klinikasi",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5461,
+      "bodyWords": 679
+    },
+    "ru": {
+      "summary": "Вросший ноготь: причины, стадии, чего нельзя делать дома, когда нужна срочная помощь и как вросший ноготь исправляют без операции. Подолог в Фергане и Коканде.",
+      "tags": [
+        "Вросший ноготь",
+        "Онихокриптоз",
+        "Большой палец стопы",
+        "Подолог",
+        "Клиника стопы",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5051,
+      "bodyWords": 698
+    },
+    "en": {
+      "summary": "Ingrown toenail: causes, stages, what not to do at home, when you need urgent help and how the nail can be corrected without surgery. Podiatrists in Fergana and Kokand.",
+      "tags": [
+        "Ingrown toenail",
+        "Onychocryptosis",
+        "Big toe",
+        "Podiatrist",
+        "Foot clinic",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5208,
+      "bodyWords": 875
+    }
+  },
+  "hyperhidrosis": {
+    "uz": {
+      "summary": "Ortiqcha terlash (giperhidroz): qo'ltiq, kaft va oyoq — normal terlashdan farqi, sabablari, xavfli belgilar, kundalik choralar va botulinoterapiya. Farg'ona va Qo'qonda dermatolog va kosmetolog.",
+      "tags": [
+        "Giperhidroz",
+        "Ortiqcha terlash",
+        "Qo'ltiq terlashi",
+        "Kaft terlashi",
+        "Botulinoterapiya",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6097,
+      "bodyWords": 767
+    },
+    "ru": {
+      "summary": "Повышенная потливость (гипергидроз) подмышек, ладоней и стоп: отличие от нормы, причины, тревожные признаки, повседневные меры и ботулинотерапия. Дерматолог и косметолог в Фергане и Коканде.",
+      "tags": [
+        "Гипергидроз",
+        "Повышенная потливость",
+        "Потливость подмышек",
+        "Потливость ладоней",
+        "Ботулинотерапия",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5809,
+      "bodyWords": 786
+    },
+    "en": {
+      "summary": "Excessive sweating (hyperhidrosis) of the underarms, palms and feet: how it differs from normal, causes, warning signs, everyday measures and botulinum therapy. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Hyperhidrosis",
+        "Excessive sweating",
+        "Underarm sweating",
+        "Sweaty palms",
+        "Botulinum therapy",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5905,
+      "bodyWords": 937
+    }
+  },
+  "nail-color-change": {
+    "uz": {
+      "summary": "Tirnoq rangi o'zgarishi: sariq, oq, yashil, qora dog' va jigarrang chiziq nima dalolat beradi, qachon melanoma xavfi bor va qanday tekshiriladi. Farg'ona va Qo'qonda podolog.",
+      "tags": [
+        "Tirnoq rangi",
+        "Tirnoq zamburug'i",
+        "Melanonixiya",
+        "Tirnoq psoriazi",
+        "Podolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6514,
+      "bodyWords": 798
+    },
+    "ru": {
+      "summary": "Изменение цвета ногтей: о чём говорят жёлтые, белые, зелёные, чёрные пятна и тёмная полоса, когда есть риск меланомы и как проводят обследование. Подолог в Фергане и Коканде.",
+      "tags": [
+        "Цвет ногтей",
+        "Грибок ногтей",
+        "Меланонихия",
+        "Псориаз ногтей",
+        "Подолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6119,
+      "bodyWords": 833
+    },
+    "en": {
+      "summary": "Nail color changes: what yellow, white, green and black nails or a dark stripe mean, when melanoma must be ruled out and how nails are examined. Podiatrists in Fergana and Kokand.",
+      "tags": [
+        "Nail color",
+        "Nail fungus",
+        "Melanonychia",
+        "Nail psoriasis",
+        "Podiatrist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5936,
+      "bodyWords": 985
+    }
+  },
+  "cheilitis": {
+    "uz": {
+      "summary": "Qishda lablar nega yoriladi: sovuq, shamol, quruq havo va yalash odati. Xeylit turlari, gerpesdan farqi, parvarish va xavfli belgilar. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Xeylit",
+        "Lablar yorilishi",
+        "Quruq lablar",
+        "Og'iz burchagi yoriqlari",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6351,
+      "bodyWords": 831
+    },
+    "ru": {
+      "summary": "Почему зимой трескаются губы: холод, ветер, сухой воздух и привычка облизывать. Виды хейлита, отличие от герпеса, уход и опасные признаки. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Хейлит",
+        "Трещины на губах",
+        "Сухие губы",
+        "Заеды",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6076,
+      "bodyWords": 878
+    },
+    "en": {
+      "summary": "Why lips crack in winter: cold, wind, dry air and licking. Types of cheilitis, how it differs from herpes, everyday care and warning signs. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Cheilitis",
+        "Chapped lips",
+        "Dry lips",
+        "Angular cheilitis",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5584,
+      "bodyWords": 949
+    }
+  },
+  "pigment-spots-winter": {
+    "uz": {
+      "summary": "Pigment dog'larini davolash uchun nega kuz va qish eng qulay vaqt: lentigo, sepkil, postakne dog'lari, avval dermatoskopiya, IPL va lazer, qishda SPF. Farg'ona va Qo'qonda kosmetolog.",
+      "tags": [
+        "Pigment dog'lari",
+        "Lentigo",
+        "Sepkil",
+        "IPL",
+        "Hollywood Spectra",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5384,
+      "bodyWords": 671
+    },
+    "ru": {
+      "summary": "Почему осень и зима — лучшее время лечить пигментные пятна: лентиго, веснушки, пятна постакне, сначала дерматоскопия, IPL и лазер, SPF зимой. Косметолог в Фергане и Коканде.",
+      "tags": [
+        "Пигментные пятна",
+        "Лентиго",
+        "Веснушки",
+        "IPL",
+        "Hollywood Spectra",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5203,
+      "bodyWords": 685
+    },
+    "en": {
+      "summary": "Why autumn and winter are the best time to treat pigment spots: sun spots, freckles, post-acne marks, dermoscopy first, IPL and laser, winter SPF. Cosmetologists in Fergana and Kokand.",
+      "tags": [
+        "Pigment spots",
+        "Sun spots",
+        "Freckles",
+        "IPL",
+        "Hollywood Spectra",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5267,
+      "bodyWords": 827
+    }
+  },
+  "lichen-planus": {
+    "uz": {
+      "summary": "Qizil yassi temiratki — qichiydigan binafsha-qizil tugunchalar: yuqumli emas va zamburug' emas. Belgilar, og'iz va soch shakli, tashxis va davolash. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Qizil yassi temiratki",
+        "Lixen planus",
+        "Teri qichishi",
+        "Og'iz shilliq qavati",
+        "Fototerapiya",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6251,
+      "bodyWords": 762
+    },
+    "ru": {
+      "summary": "Красный плоский лишай — зудящие фиолетово-красные узелки: не заразен и не грибок. Симптомы, формы во рту и на голове, диагностика и лечение. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Красный плоский лишай",
+        "Лихен планус",
+        "Зуд кожи",
+        "Слизистая рта",
+        "Фототерапия",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5841,
+      "bodyWords": 798
+    },
+    "en": {
+      "summary": "Lichen planus — itchy purple-red bumps that are neither contagious nor a fungus. Signs, mouth and scalp forms, diagnosis and treatment. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Lichen planus",
+        "Purple bumps on skin",
+        "Itchy skin",
+        "Oral lichen planus",
+        "Phototherapy",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5804,
+      "bodyWords": 937
+    }
+  },
   "laser-scar-resurfacing": {
     "uz": {
       "summary": "Chandiqlarni lazer shlifovkasi: operatsiya, jarohat, kuyish va akne izlarini kamroq sezilarli qilish. Radeski Skin Clinic’da shifokor konsultatsiyasi va individual reja.",
@@ -4725,6 +5054,38 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": "/articles/akne-u-vzroslykh-cover.jpg",
       "ru": "/articles/akne-u-vzroslykh-cover.jpg",
       "en": "/articles/akne-u-vzroslykh-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-qishda-teri-parvarishi",
+    "slug": "qishda-teri-parvarishi",
+    "title": {
+      "uz": "Qishda teri parvarishi: quruqlik, yoriqlar va qichishishdan qanday saqlanish kerak",
+      "ru": "Уход за кожей зимой: как защититься от сухости, трещин и шелушения",
+      "en": "Winter Skin Care: How to Prevent Dryness, Cracks and Flaking"
+    },
+    "summary": {
+      "uz": "Qishda teri nega quriydi va yoriladi: yuz, qo'l, lab va tana uchun har kungi parvarish, keng tarqalgan xatolar va qachon dermatologga borish kerak. Farg'ona va Qo'qonda maslahat.",
+      "ru": "Почему зимой кожа сохнет и трескается: ежедневный уход за лицом, руками, губами и телом, частые ошибки и когда идти к дерматологу. Консультация в Фергане и Коканде.",
+      "en": "Why skin dries and cracks in winter: a daily routine for face, hands, lips and body, common mistakes and when to see a dermatologist. Advice in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Kodirova Dilafruzxon",
+      "ru": "Кодирова Дилафрузхон",
+      "en": "Dr. Dilafruzkhon Kodirova"
+    },
+    "date": "2026-11-04",
+    "image": "/articles/qishda-teri-parvarishi-cover.jpg",
+    "images": {
+      "uz": "/articles/qishda-teri-parvarishi-cover.jpg",
+      "ru": "/articles/qishda-teri-parvarishi-cover.jpg",
+      "en": "/articles/qishda-teri-parvarishi-cover.jpg"
     },
     "views": 0
   },
