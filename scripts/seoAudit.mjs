@@ -3,7 +3,8 @@
  * Technical SEO check of the built site (dist/), run at the end of every build:
  * titles/descriptions (missing, duplicate, too long), exactly one H1, canonical + hreflang,
  * no noindex pages in the sitemap, valid JSON-LD, images with alt text, and internal links
- * that point at pages which do not exist. Prints a summary; never fails the build.
+ * that point at pages which do not exist or that nginx 301-redirects (nginx/*.map.conf).
+ * Prints a summary; never fails the build.
  *
  * Usage: node scripts/seoAudit.mjs [--verbose]
  */
@@ -17,6 +18,17 @@ const TITLE_MAX = 60;
 const DESC_MAX = 160;
 // Paths the app serves without a prerendered file (see nginx $radeski_spa_known).
 const SPA_SECTIONS = /^\/(uz|ru|en)(\/(about|services|conditions|doctors|prices|articles|videos|branches|qoqon|fargona|results|technologies|daavlin-foto-kabinalari|dermoscan|science|obrazovaniya|malaka-oshirish|tele-dermatology|skin-pathology-center|brend|terms|privacy|fikr|promo)(\/.*)?)?\/?$/;
+
+/** Source paths of the nginx 301 maps — an internal link there costs a redirect hop. */
+function redirectedPaths() {
+  const out = new Set();
+  for (const name of ['radeski-article-redirects.map.conf', 'radeski-site-redirects.map.conf']) {
+    const file = path.join(process.cwd(), 'nginx', name);
+    if (!existsSync(file)) continue;
+    for (const [, from] of readFileSync(file, 'utf8').matchAll(/^\s+(\/\S+)\s+\S+;$/gm)) out.add(from.replace(/\/$/, ''));
+  }
+  return out;
+}
 
 function walk(dir, out = []) {
   for (const name of readdirSync(dir)) {
@@ -43,6 +55,8 @@ function main() {
   const titles = new Map();
   const descriptions = new Map();
   const brokenLinks = new Map();
+  const redirectLinks = new Map();
+  const redirected = redirectedPaths();
 
   for (const file of pages) {
     const html = readFileSync(file, 'utf8');
@@ -81,7 +95,16 @@ function main() {
     }
     for (const [, href] of body.matchAll(/<a [^>]*href="(\/[^"#?]*)/g)) {
       const clean = decodeURIComponent(href).replace(/\/$/, '') || '/';
+      if (redirected.has(clean)) {
+        redirectLinks.set(clean, [...(redirectLinks.get(clean) ?? []), url]);
+        continue;
+      }
       if (clean === '/' || existing.has(clean) || existsSync(path.join(dist, clean))) continue;
+      // Every published article is prerendered, so a missing one is a dead or not-yet-published link.
+      if (/^\/(uz|ru|en)\/articles\/[^/]+$/.test(clean)) {
+        brokenLinks.set(clean, [...(brokenLinks.get(clean) ?? []), url]);
+        continue;
+      }
       // /admin: the staff login linked (nofollow) from the footer.
       if (clean === '/admin') continue;
       if (!SPA_SECTIONS.test(clean)) brokenLinks.set(clean, [...(brokenLinks.get(clean) ?? []), url]);
@@ -91,6 +114,7 @@ function main() {
   for (const [title, urls] of titles) if (urls.length > 1) add('duplicate title', title, `${urls.length} pages: ${urls.slice(0, 3).join(', ')}`);
   for (const [, urls] of descriptions) if (urls.length > 1) add('duplicate description', urls[0], `${urls.length} pages`);
   for (const [href, urls] of brokenLinks) add('link to unknown page', href, `from ${urls.length} page(s), e.g. ${urls[0]}`);
+  for (const [href, urls] of redirectLinks) add('link to a redirected URL', href, `from ${urls.length} page(s), e.g. ${urls[0]}`);
   for (const url of sitemapUrls) {
     const local = new URL(url).pathname.replace(/\/$/, '');
     if (local && !existing.has(local)) add('sitemap URL without page', url);

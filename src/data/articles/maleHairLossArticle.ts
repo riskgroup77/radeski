@@ -56,7 +56,7 @@ Har qanday soch to'kilishi androgenetik emas:
 - **Dori vositalari** — tashqi va ichiladigan vositalar soch follikulalariga ta'sirni kamaytiradi va o'sishni qo'llab-quvvatlaydi. Ularni faqat trixolog tayinlaydi, chunki tanlov va nazorat muhim.
 - **[PRP (plazmoterapiya)](/uz/articles/art-plazmotorapiya-soch-prp)** — o'z qon plazmasidan tayyorlangan in'ektsiyalar follikulalarni rag'batlantiradi.
 - **[Tuliy lazer](/uz/articles/art-thulium-laser-hair-kokand)** — soch o'sishini rag'batlantiruvchi apparat muolajasi.
-- **Soch ko'chirib o'tkazish** — follikulalar butunlay yopilgan joylar uchun; uni qilishdan oldin [qarshi ko'rsatmalarni](/uz/articles/art-soch-ekish-mumkin-bolmagan-holatlar) bilish kerak.
+- **Soch ko'chirib o'tkazish** — follikulalar butunlay yopilgan joylar uchun; uni qilishdan oldin [qarshi ko'rsatmalarni](/uz/articles/art-hair-transplant-contraindications) bilish kerak.
 
 Natija sekin keladi: birinchi o'zgarishlar 3–6 oydan keyin baholanadi, davolash esa ko'pincha uzoq muddatli bo'ladi.
 
@@ -113,7 +113,7 @@ function ruBody(): string {
 - **Лекарственные средства** — наружные и системные препараты уменьшают воздействие на фолликулы и поддерживают рост. Их назначает только трихолог: важны выбор и контроль.
 - **[PRP (плазмотерапия)](/ru/articles/art-plazmotorapiya-soch-prp)** — инъекции из собственной плазмы стимулируют фолликулы.
 - **[Тулиевый лазер](/ru/articles/art-thulium-laser-hair-kokand)** — аппаратная процедура для стимуляции роста волос.
-- **Пересадка волос** — для зон, где фолликулы уже закрылись; перед ней важно знать [противопоказания](/ru/articles/art-soch-ekish-mumkin-bolmagan-holatlar).
+- **Пересадка волос** — для зон, где фолликулы уже закрылись; перед ней важно знать [противопоказания](/ru/articles/art-hair-transplant-contraindications).
 
 Результат приходит постепенно: первые изменения оценивают через 3–6 месяцев, а лечение чаще всего длительное.
 
@@ -170,7 +170,7 @@ Not all hair loss is androgenetic:
 - **Medicines** — topical and oral treatments reduce the hormonal effect on follicles and support growth. Only a trichologist should prescribe them: choice and monitoring matter.
 - **[PRP (plasma therapy)](/en/articles/art-plazmotorapiya-soch-prp)** — injections from your own blood plasma stimulate the follicles.
 - **[Thulium laser](/en/articles/art-thulium-laser-hair-kokand)** — a device treatment to stimulate hair growth.
-- **Hair transplant** — for areas where follicles have already closed; know the [contraindications](/en/articles/art-soch-ekish-mumkin-bolmagan-holatlar) first.
+- **Hair transplant** — for areas where follicles have already closed; know the [contraindications](/en/articles/art-hair-transplant-contraindications) first.
 
 Results come gradually: the first changes are assessed after 3–6 months, and treatment is usually long-term.
 

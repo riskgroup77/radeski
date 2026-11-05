@@ -131,6 +131,7 @@ import {
   videoRouteKey,
   videoTitle,
 } from '../utils/videoMeta';
+import { relatedVideos, videoTopicArticles, videoTopicLinks } from '../utils/videoTopics';
 
 /** Clinic data plus the price list (in the browser prices load as a separate chunk). */
 type PrerenderClinic = ClinicData & { prices: PriceItem[] };
@@ -322,7 +323,20 @@ function VideoLink({ video, locale }: { video: ClinicVideo; locale: Locale }) {
   );
 }
 
-function VideoBody({ video, videos, locale }: { video: ClinicVideo; videos: ClinicVideo[]; locale: Locale }) {
+function VideoBody({
+  video,
+  videos,
+  articles,
+  locale,
+}: {
+  video: ClinicVideo;
+  videos: ClinicVideo[];
+  articles: Article[];
+  locale: Locale;
+}) {
+  const label = (uz: string, ru: string, en: string) => (locale === 'uz' ? uz : locale === 'ru' ? ru : en);
+  const topicLinks = videoTopicLinks(video, locale);
+  const topicArticles = videoTopicArticles(video, articles);
   const info = videoFileInfo(video);
   const duration = videoDurationLabel(video);
   const category = video.category[locale] || video.category.uz;
@@ -342,15 +356,37 @@ function VideoBody({ video, videos, locale }: { video: ClinicVideo; videos: Clin
         {[category, duration, video.createdAt?.slice(0, 10)].filter(Boolean).join(' · ')}
       </p>
       <p>{videoDescription(video, locale)}</p>
+      {topicLinks.length > 0 && (
+        <section>
+          <h2>{label('Tegishli xizmatlar', 'Услуги по теме', 'Related services')}</h2>
+          <ul>
+            {topicLinks.map((link) => (
+              <li key={link.path}>
+                <a href={link.path}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {topicArticles.length > 0 && (
+        <section>
+          <h2>{label('Mavzu bo‘yicha maqolalar', 'Статьи по теме', 'Articles on this topic')}</h2>
+          <ul>
+            {topicArticles.map((item) => (
+              <li key={item.id}>
+                <a href={articlePath(locale, resolveArticleRouteKey(item))}>{item.title[locale] || item.title.uz}</a>
+                <p>{item.summary[locale] || item.summary.uz}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <ul>
-        {videos
-          .filter((item) => item.id !== video.id)
-          .slice(0, 6)
-          .map((item) => (
-            <li key={item.id}>
-              <VideoLink video={item} locale={locale} />
-            </li>
-          ))}
+        {relatedVideos(video, videos).map((item) => (
+          <li key={item.id}>
+            <VideoLink video={item} locale={locale} />
+          </li>
+        ))}
       </ul>
     </article>
   );
@@ -814,7 +850,7 @@ function PageContent({
 
   if (article) return <ArticleBody article={article} locale={locale} categories={clinic.serviceCategories} />;
 
-  if (video) return <VideoBody video={video} videos={videos} locale={locale} />;
+  if (video) return <VideoBody video={video} videos={videos} articles={filterPublicArticles(clinic.articles)} locale={locale} />;
 
   if (currentPage === 'videos') {
     return (

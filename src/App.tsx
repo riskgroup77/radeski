@@ -1123,7 +1123,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
 
           {currentPage === 'videos' && videoKey && (
             activeVideo ? (
-              <VideoWatchPage video={activeVideo} videos={cmsVideos} locale={locale} dictionary={d} />
+              <VideoWatchPage video={activeVideo} videos={cmsVideos} articles={dynamicArticles} locale={locale} dictionary={d} />
             ) : cmsLoading || cmsVideos.length === 0 ? (
               <VideosPage locale={locale} dictionary={d} videos={[]} loading />
             ) : (

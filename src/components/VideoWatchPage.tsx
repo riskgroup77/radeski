@@ -1,11 +1,13 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, CalendarDays, Clock, Tag } from 'lucide-react';
-import type { Locale } from '../types';
+import type { Article, Locale } from '../types';
 import { DICTIONARY } from '../data';
 import type { ClinicVideo } from '../data/sitePagesContent';
 import { openAppointmentBooking } from '../config/links';
-import { pagePath } from '../routing/paths';
+import { articlePath, pagePath } from '../routing/paths';
+import { resolveArticleRouteKey } from '../utils/articles';
+import { relatedVideos, videoTopicArticles, videoTopicLinks } from '../utils/videoTopics';
 import ResolvedVideo from './ResolvedVideo';
 import VideoPosterCard from './VideoPosterCard';
 import { videoDescription, videoDurationLabel, videoPoster, videoTitle } from '../utils/videoMeta';
@@ -13,14 +15,34 @@ import { videoDescription, videoDurationLabel, videoPoster, videoTitle } from '.
 interface VideoWatchPageProps {
   video: ClinicVideo;
   videos: ClinicVideo[];
+  /** Published articles; the ones on the video's subject are listed under it. */
+  articles?: Article[];
   locale: Locale;
   dictionary?: Record<string, string>;
 }
 
 const COPY = {
-  uz: { back: 'Barcha videolar', related: 'Boshqa videolar', note: 'Video tanishuv maqsadida. Aniq davolash rejasi shifokor ko‘rigida belgilanadi.' },
-  ru: { back: 'Все видео', related: 'Другие видео', note: 'Видео носит ознакомительный характер. Точный план лечения определяется на приёме.' },
-  en: { back: 'All videos', related: 'More videos', note: 'For reference only. The exact treatment plan is set at consultation.' },
+  uz: {
+    back: 'Barcha videolar',
+    related: 'Boshqa videolar',
+    note: 'Video tanishuv maqsadida. Aniq davolash rejasi shifokor ko‘rigida belgilanadi.',
+    articles: 'Mavzu bo‘yicha maqolalar',
+    services: 'Tegishli xizmatlar',
+  },
+  ru: {
+    back: 'Все видео',
+    related: 'Другие видео',
+    note: 'Видео носит ознакомительный характер. Точный план лечения определяется на приёме.',
+    articles: 'Статьи по теме',
+    services: 'Услуги по теме',
+  },
+  en: {
+    back: 'All videos',
+    related: 'More videos',
+    note: 'For reference only. The exact treatment plan is set at consultation.',
+    articles: 'Articles on this topic',
+    services: 'Related services',
+  },
 } as const;
 
 const UZ_MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr'];
@@ -35,7 +57,7 @@ function formatVideoDate(value: string | undefined, locale: Locale): string {
 }
 
 /** One video as the main content of its own URL — the page Google can show as a video result. */
-export default function VideoWatchPage({ video, videos, locale, dictionary }: VideoWatchPageProps) {
+export default function VideoWatchPage({ video, videos, articles = [], locale, dictionary }: VideoWatchPageProps) {
   const d = dictionary || DICTIONARY[locale];
   const copy = COPY[locale];
   const title = videoTitle(video, locale);
@@ -44,12 +66,9 @@ export default function VideoWatchPage({ video, videos, locale, dictionary }: Vi
   const category = video.category[locale] || video.category.uz;
   const date = formatVideoDate(video.createdAt, locale);
 
-  // Same category first, then the newest of the rest.
-  const related = useMemo(() => {
-    const others = videos.filter((item) => item.id !== video.id);
-    const sameCategory = others.filter((item) => item.category.uz && item.category.uz === video.category.uz);
-    return [...sameCategory, ...others.filter((item) => !sameCategory.includes(item))].slice(0, 6);
-  }, [videos, video]);
+  const related = useMemo(() => relatedVideos(video, videos), [videos, video]);
+  const topicArticles = useMemo(() => videoTopicArticles(video, articles), [video, articles]);
+  const topicLinks = useMemo(() => videoTopicLinks(video, locale), [video, locale]);
 
   return (
     <section id="video-watch-page" className="py-8 sm:py-12 bg-brand-white min-h-screen">
@@ -111,8 +130,49 @@ export default function VideoWatchPage({ video, videos, locale, dictionary }: Vi
               {d.appointmentBtn}
             </button>
             <p className="mt-6 text-xs text-brand-text-muted leading-relaxed">{copy.note}</p>
+
+            {topicLinks.length > 0 ? (
+              <div className="mt-8">
+                <h2 className="text-base font-extrabold text-brand-text-primary mb-3">{copy.services}</h2>
+                <ul className="flex flex-wrap gap-2">
+                  {topicLinks.map((link) => (
+                    <li key={link.path}>
+                      <Link
+                        to={link.path}
+                        className="inline-flex px-3 py-1.5 rounded-full border border-brand-gold/40 text-sm font-semibold text-brand-gold-dark hover:bg-brand-gold-light/15 transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         </div>
+
+        {topicArticles.length > 0 ? (
+          <div className="mt-12">
+            <h2 className="text-xl font-extrabold text-brand-text-primary mb-5">{copy.articles}</h2>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {topicArticles.map((article) => (
+                <li key={article.id}>
+                  <Link
+                    to={articlePath(locale, resolveArticleRouteKey(article))}
+                    className="block h-full rounded-2xl border border-brand-sectiongray bg-white p-5 hover:shadow-lg transition-shadow"
+                  >
+                    <h3 className="text-base font-bold text-brand-text-primary leading-snug">
+                      {article.title[locale] || article.title.uz}
+                    </h3>
+                    <p className="mt-2 text-sm text-brand-text-muted leading-relaxed line-clamp-3">
+                      {article.summary[locale] || article.summary.uz}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
 
         {related.length > 0 ? (
           <div className="mt-12">
