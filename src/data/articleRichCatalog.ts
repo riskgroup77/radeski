@@ -55,6 +55,13 @@ import { NAIL_COLOR_CHANGE_ARTICLE_CATALOG } from './articles/nailColorChangeArt
 import { CHEILITIS_ARTICLE_CATALOG } from './articles/cheilitisArticle';
 import { PIGMENT_SPOTS_WINTER_ARTICLE_CATALOG } from './articles/pigmentSpotsWinterArticle';
 import { LICHEN_PLANUS_ARTICLE_CATALOG } from './articles/lichenPlanusArticle';
+import { MELANOMA_ARTICLE_CATALOG } from './articles/melanomaArticle';
+import { HERPES_ZOSTER_ARTICLE_CATALOG } from './articles/herpesZosterArticle';
+import { COLD_ALLERGY_ARTICLE_CATALOG } from './articles/coldAllergyArticle';
+import { VITILIGO_GUIDE_ARTICLE_CATALOG } from './articles/vitiligoGuideArticle';
+import { LEG_VEINS_ARTICLE_CATALOG } from './articles/legVeinsArticle';
+import { SCALP_PSORIASIS_ARTICLE_CATALOG } from './articles/scalpPsoriasisArticle';
+import { CHEMICAL_PEEL_ARTICLE_CATALOG } from './articles/chemicalPeelArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -162,6 +169,13 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'cheilitis': CHEILITIS_ARTICLE_CATALOG,
   'pigment-spots-winter': PIGMENT_SPOTS_WINTER_ARTICLE_CATALOG,
   'lichen-planus': LICHEN_PLANUS_ARTICLE_CATALOG,
+  'melanoma': MELANOMA_ARTICLE_CATALOG,
+  'herpes-zoster': HERPES_ZOSTER_ARTICLE_CATALOG,
+  'cold-allergy': COLD_ALLERGY_ARTICLE_CATALOG,
+  'vitiligo-guide': VITILIGO_GUIDE_ARTICLE_CATALOG,
+  'leg-veins': LEG_VEINS_ARTICLE_CATALOG,
+  'scalp-psoriasis': SCALP_PSORIASIS_ARTICLE_CATALOG,
+  'chemical-peel': CHEMICAL_PEEL_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

@@ -4,7 +4,7 @@ import { filterPublicArticles } from './articles';
 
 /** Article catalog keys shown on service category pages (broad match). */
 export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
-  dermatologiya: ['cheilitis', 'lichen-planus', 
+  dermatologiya: ['herpes-zoster', 'cold-allergy', 'vitiligo-guide', 'scalp-psoriasis', 'cheilitis', 'lichen-planus', 
     'acne',
     'adult-acne-dermatologist',
     'seborrheic-dermatitis',
@@ -51,7 +51,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'prp-lab-tests',
     'hair-transplant-contraindications',
   ],
-  'apparatnaya-kosmetologiya': ['pigment-spots-winter', 
+  'apparatnaya-kosmetologiya': ['leg-veins', 'chemical-peel', 'pigment-spots-winter', 
     'melasma',
     'carbon-peel',
     'milia',
@@ -82,7 +82,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'plasmapheresis',
   ],
   'lazernaya-epilyaciya': ['laser-hair-removal-season', 'deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
-  'trihologiya-centr-lechenie-volos': [
+  'trihologiya-centr-lechenie-volos': ['scalp-psoriasis', 
     'female-hair-loss',
     'male-hair-loss',
     'trichologist-trichoscopy',
@@ -92,7 +92,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'hair-transplant-contraindications',
     'soch-profilaktika-inyeksii-radeski',
   ],
-  dermatoonkologiya: ['skin-biopsy', 
+  dermatoonkologiya: ['melanoma', 'skin-biopsy', 
     'mole-screening',
     'papilloma-removal',
     'seborrheic-keratosis',
@@ -103,7 +103,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'tongue-scc',
     'penile-scc',
   ],
-  'hirurgicheskaya-dermatologiya': [
+  'hirurgicheskaya-dermatologiya': ['melanoma', 
     'papilloma-removal',
     'seborrheic-keratosis',
     'deka-co2',
@@ -136,7 +136,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'molluscum-radeski',
       'atopic-dermatitis',
     ],
-    fototerapiya: ['lichen-planus', 
+    fototerapiya: ['vitiligo-guide', 'lichen-planus', 
       'fizioterapiya-dermatovenereologiya',
       'eczema',
       'vitiligo',
@@ -144,15 +144,15 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'psoriasis',
       'psoriaz-klinik-keys-bahridinov-radeski',
     ],
-    immunobiologicheskaya: ['immunobiologiya-radeski', 'psoriasis', 'psoriasis-daavlin-kokand', 'urticaria-skin-allergy', 'eczema', 'plasmapheresis'],
+    immunobiologicheskaya: ['scalp-psoriasis', 'immunobiologiya-radeski', 'psoriasis', 'psoriasis-daavlin-kokand', 'urticaria-skin-allergy', 'eczema', 'plasmapheresis'],
   },
   dermatoskopiya: {
     'derm-konsult': ['basal-cell-carcinoma', 'molluscum-radeski', 'papilloma-warts'],
-    'derm-total-body': ['basal-cell-carcinoma', 'mole-screening'],
+    'derm-total-body': ['melanoma', 'basal-cell-carcinoma', 'mole-screening'],
     'derm-skin-passport': ['basal-cell-carcinoma', 'photofinder-diagnostika-radeski'],
   },
   trixoskopiya: {
-    'trix-konsult': ['soch-tokilishi-normal-patologiya-radeski', 'trichologist-trichoscopy', 'prp-lab-tests'],
+    'trix-konsult': ['scalp-psoriasis', 'soch-tokilishi-normal-patologiya-radeski', 'trichologist-trichoscopy', 'prp-lab-tests'],
     'trix-alopecia': [
       'female-hair-loss',
       'male-hair-loss',
@@ -180,7 +180,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'adult-acne',
       'lasemd-ultra-kokand',
     ],
-    'ultratovush-yuz': ['acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
+    'ultratovush-yuz': ['chemical-peel', 'acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
   },
   'in-ekcionnaya-kosmetologiya': {
     botulino: ['hyperhidrosis', 'botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
@@ -206,7 +206,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     ],
   },
   dermatoonkologiya: {
-    biopsiya: ['skin-biopsy', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc', 'papilloma-warts'],
+    biopsiya: ['melanoma', 'skin-biopsy', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc', 'papilloma-warts'],
   },
   'hirurgicheskaya-dermatologiya': {
     'moh-surgery': ['basal-cell-carcinoma', 'deka-co2'],

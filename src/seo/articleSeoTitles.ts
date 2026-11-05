@@ -79,6 +79,41 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     ru: 'Красный плоский лишай: симптомы и лечение — Фергана',
     en: 'Lichen Planus: Symptoms and Treatment — Fergana',
   },
+  'art-melanoma': {
+    uz: "Melanoma: erta belgilar va tekshiruv — Farg'ona, Qo'qon",
+    ru: 'Меланома: ранние признаки и диагностика — Фергана, Коканд',
+    en: 'Melanoma: Early Signs and Skin Checks — Fergana, Kokand',
+  },
+  'art-orab-oluvchi-temiratki': {
+    uz: "O'rab oluvchi temiratki: belgilar va davolash — Farg'ona",
+    ru: 'Опоясывающий лишай: признаки и лечение — Фергана',
+    en: 'Shingles: First Signs and Treatment — Fergana',
+  },
+  'art-sovuq-allergiyasi': {
+    uz: "Sovuq allergiyasi va pernioz: belgilar, xavf — Farg'ona",
+    ru: 'Аллергия на холод и ознобление — дерматолог в Фергане',
+    en: 'Cold Allergy and Chilblains: Signs, Risks — Fergana',
+  },
+  'art-vitiligo-belgilari': {
+    uz: "Vitiligo: oq dog'lar, belgilari va davolash — Farg'ona",
+    ru: 'Витилиго: белые пятна на коже, признаки, лечение — Фергана',
+    en: 'Vitiligo: White Patches, First Signs and Treatment — Fergana',
+  },
+  'art-oyoqdagi-tomir-tori': {
+    uz: "Oyoqdagi tomir to'ri: lazer bilan davolash — Farg'ona",
+    ru: 'Сосудистые звёздочки на ногах: лазер — Фергана',
+    en: 'Spider Veins on Legs: Laser Treatment — Fergana',
+  },
+  'art-bosh-terisi-psoriazi': {
+    uz: "Bosh terisi psoriazi: belgilari va davolash — Farg'ona",
+    ru: 'Псориаз кожи головы: признаки и лечение — Фергана',
+    en: 'Scalp Psoriasis: Signs and Treatment — Fergana',
+  },
+  'art-kimyoviy-piling': {
+    uz: "Kimyoviy piling: teri yangilanishi va parvarish — Farg'ona",
+    ru: 'Химический пилинг лица: показания и уход — Фергана',
+    en: 'Chemical Peel: Benefits and Aftercare — Fergana',
+  },
   'art-qotir': {
     uz: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",
     ru: 'Чесотка: признаки и лечение — Фергана, Коканд',

@@ -9,10 +9,12 @@ type ConditionArticle = { routeKey: string; title: Record<Locale, string> };
  */
 const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
   psoriaz: [
+    { routeKey: 'art-bosh-terisi-psoriazi', title: { uz: 'Bosh terisi psoriazi', ru: 'Псориаз волосистой части головы', en: 'Scalp psoriasis' } },
     { routeKey: 'art-psoriaz-tashxis-davolash-radeski', title: { uz: 'Psoriaz: tashxis va davolash', ru: 'Псориаз: диагностика и лечение', en: 'Psoriasis: diagnosis and treatment' } },
     { routeKey: 'art-psoriasis-daavlin-kokand', title: { uz: 'Psoriazni Daavlin fototerapiyasi bilan davolash', ru: 'Лечение псориаза фототерапией Daavlin', en: 'Psoriasis treatment with Daavlin phototherapy' } },
   ],
   vitiligo: [
+    { routeKey: 'art-vitiligo-belgilari', title: { uz: 'Vitiligo: belgilari, sabablari va davolash', ru: 'Витилиго: признаки, причины и лечение', en: 'Vitiligo: signs, causes and treatment' } },
     { routeKey: 'art-vitiligo-daavlin', title: { uz: 'Vitiligo: Daavlin fototerapiyasi', ru: 'Витилиго: фототерапия Daavlin', en: 'Vitiligo: Daavlin phototherapy' } },
   ],
   'atopik-dermatit': [
@@ -25,20 +27,22 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
     { routeKey: 'art-demodekoz', title: { uz: 'Demodekoz: akne davolashi yordam bermasa', ru: 'Демодекоз: если лечение акне не помогает', en: 'Demodicosis: when acne treatment fails' } },
   ],
   postacne: [
+    { routeKey: 'art-kimyoviy-piling', title: { uz: 'Kimyoviy piling', ru: 'Химический пилинг', en: 'Chemical peels' } },
     { routeKey: 'art-postakne', title: { uz: "Postakne: chandiq va dog'larni kamaytirish", ru: 'Постакне: как убрать рубцы и пятна', en: 'Post-acne: reducing scars and marks' } },
   ],
   rozasea: [
-    { routeKey: 'art-rozacea-ipl', title: { uz: 'Rozasea: IPL va Derma V', ru: 'Розацеа: IPL и Derma V', en: 'Rosacea: IPL and Derma V' } },
     { routeKey: 'art-rozatseya-davolash-radeski', title: { uz: 'Rozatseyani davolash', ru: 'Лечение розацеа', en: 'Rosacea treatment' } },
     { routeKey: 'art-demodekoz', title: { uz: 'Demodekoz: belgilari va davolash', ru: 'Демодекоз: признаки и лечение', en: 'Demodicosis: signs and treatment' } },
     { routeKey: 'art-perioral-dermatit', title: { uz: "Perioral dermatit: og'iz atrofidagi toshma", ru: 'Периоральный дерматит: сыпь вокруг рта', en: 'Perioral dermatitis: rash around the mouth' } },
   ],
   'yuz-qizarishi': [
+    { routeKey: 'art-sovuq-allergiyasi', title: { uz: 'Sovuqdan yuz qizarishi', ru: 'Покраснение лица от холода', en: 'Facial redness from the cold' } },
     { routeKey: 'art-sosudistaya-setochka-derma-v-radeski', title: { uz: "Yuzdagi tomir to'ri: Derma V", ru: 'Сосудистая сеточка на лице: Derma V', en: 'Facial spider veins: Derma V' } },
     { routeKey: 'art-derma-v-qizarish-radeski', title: { uz: 'Yuz qizarishi: Derma V lazeri', ru: 'Покраснение лица: лазер Derma V', en: 'Facial redness: Derma V laser' } },
     { routeKey: 'art-perioral-dermatit', title: { uz: "Perioral dermatit: og'iz atrofidagi toshma", ru: 'Периоральный дерматит: сыпь вокруг рта', en: 'Perioral dermatitis: rash around the mouth' } },
   ],
   'teri-doglari': [
+    { routeKey: 'art-kimyoviy-piling', title: { uz: "Kimyoviy piling: dog'lar va notekis rang", ru: 'Химический пилинг: пятна и неровный тон', en: 'Chemical peels: spots and uneven tone' } },
     { routeKey: 'art-pigment-doglari-qishda', title: { uz: "Pigment dog'larini qishda davolash", ru: 'Пигментные пятна: лечение зимой', en: 'Pigment spots: treating them in winter' } },
     { routeKey: 'art-melazma', title: { uz: "Melazma: yuzdagi jigarrang dog'lar", ru: 'Мелазма: коричневые пятна на лице', en: 'Melasma: brown patches on the face' } },
     { routeKey: 'art-pigmentaciya-hollywood-spectra-radeski', title: { uz: 'Pigmentatsiyani davolash', ru: 'Лечение пигментации', en: 'Pigmentation treatment' } },
@@ -56,6 +60,7 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
     { routeKey: 'art-qotir', title: { uz: "Qo'tir: kechasi qichishish", ru: 'Чесотка: ночной зуд', en: 'Scabies: night-time itching' } },
   ],
   'teri-allergiyasi': [
+    { routeKey: 'art-sovuq-allergiyasi', title: { uz: 'Sovuq allergiyasi va pernioz', ru: 'Аллергия на холод и ознобления', en: 'Cold allergy and chilblains' } },
     { routeKey: 'art-eshakemi-teri-allergiyasi', title: { uz: 'Eshakemi va teri allergiyasi: belgilari va davolash', ru: 'Крапивница и аллергия на коже: симптомы и лечение', en: 'Hives and skin allergy: symptoms and treatment' } },
     { routeKey: 'art-teri-qichishi', title: { uz: 'Teri qichishi: sabablari', ru: 'Зуд кожи: причины', en: 'Itchy skin: causes' } },
   ],

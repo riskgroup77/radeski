@@ -369,6 +369,146 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         'lichen planus, lichen planus treatment, oral lichen planus, purple itchy bumps, itchy skin, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
     },
   },
+  'art-melanoma': {
+    uz: {
+      title: "Melanoma: erta belgilar va tekshiruv — Farg'ona, Qo'qon",
+      desc: "Melanoma belgilari: ABCDE, xunuk o'rdakcha, tirnoq va tovondagi dog'lar. Dermatoskopiya, PhotoFinder va biopsiya — Farg'ona va Qo'qonda dermatoonkolog.",
+      keywords:
+        "melanoma belgilari, teri saratoni, xol o'zgarishi, dermatoonkolog Farg'ona, dermatoskopiya Qo'qon, teri biopsiyasi, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Меланома: ранние признаки и диагностика — Фергана, Коканд',
+      desc: 'Признаки меланомы: ABCDE, «гадкий утёнок», пятна на ногте и стопе. Дерматоскопия, PhotoFinder и биопсия — дерматоонколог в Фергане и Коканде.',
+      keywords:
+        'меланома признаки, рак кожи, изменение родинки, дерматоонколог Фергана, дерматоскопия Коканд, биопсия кожи, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Melanoma: Early Signs and Skin Checks — Fergana, Kokand',
+      desc: 'Melanoma signs: ABCDE, the ugly duckling, nail and sole spots. Dermoscopy, PhotoFinder mapping and biopsy with a dermato-oncologist in Fergana and Kokand.',
+      keywords:
+        'melanoma signs, skin cancer, changing mole, dermato-oncologist Fergana, dermoscopy Kokand, skin biopsy, Radeski Skin Clinic',
+    },
+  },
+  'art-orab-oluvchi-temiratki': {
+    uz: {
+      title: "O'rab oluvchi temiratki: belgilar va davolash — Farg'ona",
+      desc: "O'rab oluvchi temiratki (gerpes zoster): birinchi belgilar, xavfli holatlar, yuqumliligi va davolash. Farg'ona va Qo'qonda dermatolog qabuli.",
+      keywords:
+        "o'rab oluvchi temiratki, gerpes zoster, belbog'simon temiratki, o'rab oluvchi temiratki davolash, postgerpetik og'riq, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Опоясывающий лишай: признаки и лечение — Фергана',
+      desc: 'Опоясывающий лишай (опоясывающий герпес): первые признаки, опасные симптомы, заразность и лечение. Приём дерматолога в Фергане и Коканде.',
+      keywords:
+        'опоясывающий лишай, опоясывающий герпес, лечение опоясывающего лишая, постгерпетическая невралгия, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Shingles: First Signs and Treatment — Fergana',
+      desc: 'Shingles (herpes zoster): first signs, warning symptoms, whether it is contagious and how it is treated. See a dermatologist in Fergana and Kokand.',
+      keywords:
+        'shingles, herpes zoster, shingles treatment, post-herpetic neuralgia, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-sovuq-allergiyasi': {
+    uz: {
+      title: "Sovuq allergiyasi va pernioz: belgilar, xavf — Farg'ona",
+      desc: "Sovuq allergiyasi, pernioz va sovuqdan qizarish: farqi, sovuq suvda xavf, nima qilmaslik va himoya. Farg'ona va Qo'qonda dermatolog maslahati.",
+      keywords:
+        "sovuq allergiyasi, sovuq eshakemisi, pernioz, sovuqdan qizarish, barmoqlar shishishi, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Аллергия на холод и ознобление — дерматолог в Фергане',
+      desc: 'Аллергия на холод, ознобление и покраснение от холода: как отличить, чем опасна холодная вода, чего не делать. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'аллергия на холод, холодовая крапивница, ознобление, покраснение от холода, отёк пальцев, дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Cold Allergy and Chilblains: Signs, Risks — Fergana',
+      desc: 'Cold allergy, chilblains and cold redness: how to tell them apart, cold-water danger, what not to do and protection. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'cold allergy, cold urticaria, chilblains, cold redness, swollen fingers, dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-vitiligo-belgilari': {
+    uz: {
+      title: "Vitiligo: oq dog'lar, belgilari va davolash — Farg'ona",
+      desc: "Vitiligo — sutdek oq dog'lar: yuqumlimi, birinchi belgilar, nimadan farqlash, nima qilmaslik va davolash. Farg'ona va Qo'qonda dermatolog ko'rigi.",
+      keywords:
+        "vitiligo, terida oq dog'lar, vitiligo belgilari, vitiligo yuqumlimi, vitiligo davolash Farg'ona, vitiligo Qo'qon, dermatolog, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Витилиго: белые пятна на коже, признаки, лечение — Фергана',
+      desc: 'Витилиго — молочно-белые пятна: заразно ли, первые признаки, с чем путают, чего не делать и как лечат. Осмотр дерматолога в Фергане и Коканде.',
+      keywords:
+        'витилиго, белые пятна на коже, признаки витилиго, заразно ли витилиго, лечение витилиго Фергана, витилиго Коканд, дерматолог, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Vitiligo: White Patches, First Signs and Treatment — Fergana',
+      desc: 'Vitiligo — milky-white skin patches: is it contagious, first signs, look-alikes, what not to do and treatment. Dermatologist visits in Fergana and Kokand.',
+      keywords:
+        'vitiligo, white patches on skin, vitiligo symptoms, is vitiligo contagious, vitiligo treatment Fergana, vitiligo Kokand, dermatologist, Radeski Skin Clinic',
+    },
+  },
+  'art-oyoqdagi-tomir-tori': {
+    uz: {
+      title: "Oyoqdagi tomir to'ri: lazer bilan davolash — Farg'ona",
+      desc: "Oyoqlardagi tomir to'ri: varikozdan farqi, sabablari, xavfli belgilar va Derma V lazeri bilan davolash. Farg'ona va Qo'qonda Radeski Skin Clinic.",
+      keywords:
+        "oyoqdagi tomir to'ri, teleangiektaziya, oyoqdagi tomirlarni lazer bilan olib tashlash, varikoz, Derma V lazer, tomir to'ri Farg'ona, tomir to'ri Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Сосудистые звёздочки на ногах: лазер — Фергана',
+      desc: 'Сосудистые звёздочки на ногах: отличие от варикоза, причины, опасные признаки и удаление лазером Derma V. Radeski Skin Clinic в Фергане и Коканде.',
+      keywords:
+        'сосудистые звёздочки на ногах, телеангиэктазии, удаление сосудов на ногах лазером, варикоз, лазер Derma V, сосудистые звёздочки Фергана, сосудистые звёздочки Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Spider Veins on Legs: Laser Treatment — Fergana',
+      desc: 'Spider veins on the legs: how they differ from varicose veins, causes, warning signs and Derma V laser removal. Radeski Skin Clinic in Fergana and Kokand.',
+      keywords:
+        'spider veins on legs, telangiectasia, laser leg vein removal, varicose veins, Derma V laser, spider veins Fergana, spider veins Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-bosh-terisi-psoriazi': {
+    uz: {
+      title: "Bosh terisi psoriazi: belgilari va davolash — Farg'ona",
+      desc: "Bosh terisi psoriazi: kepakdan farqi, soch to'kilishi, qishda kuchayishi va davolash. Farg'ona va Qo'qonda dermatolog va trixolog ko'rigi.",
+      keywords:
+        "bosh terisi psoriazi, boshdagi psoriaz, psoriaz kepak farqi, psoriazda soch to'kilishi, psoriaz davolash Farg'ona, trixolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Псориаз кожи головы: признаки и лечение — Фергана',
+      desc: 'Псориаз кожи головы: отличие от перхоти, выпадение волос, обострения зимой и лечение. Осмотр дерматолога и трихолога в Фергане и Коканде.',
+      keywords:
+        'псориаз кожи головы, псориаз волосистой части головы, псориаз или перхоть, выпадение волос при псориазе, лечение псориаза Фергана, трихолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Scalp Psoriasis: Signs and Treatment — Fergana',
+      desc: 'Scalp psoriasis: how it differs from dandruff, hair shedding, winter flares and treatment. Dermatologist and trichologist care in Fergana and Kokand.',
+      keywords:
+        'scalp psoriasis, psoriasis vs dandruff, hair loss in psoriasis, scalp psoriasis treatment, psoriasis treatment Fergana, trichologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-kimyoviy-piling': {
+    uz: {
+      title: "Kimyoviy piling: teri yangilanishi va parvarish — Farg'ona",
+      desc: "Kimyoviy piling: nimaga yordam beradi, nega kuz-qishda, qarshi ko'rsatmalar va parvarish. Farg'ona va Qo'qonda kosmetolog pilingni tanlaydi.",
+      keywords:
+        "kimyoviy piling, yuz pilingi, postakne dog'lari, pigment dog'lari, piling Farg'ona, piling Qo'qon, kosmetolog, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Химический пилинг лица: показания и уход — Фергана',
+      desc: 'Химический пилинг: с чем помогает, почему осенью и зимой, противопоказания и уход после. Косметолог в Фергане и Коканде подберёт пилинг.',
+      keywords:
+        'химический пилинг, пилинг лица, следы постакне, пигментные пятна, пилинг Фергана, пилинг Коканд, косметолог, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Chemical Peel: Benefits and Aftercare — Fergana',
+      desc: 'Chemical peels: what they help with, why autumn and winter, contraindications and aftercare. A cosmetologist in Fergana and Kokand picks the peel.',
+      keywords:
+        'chemical peel, facial peel, post-acne marks, pigment spots, chemical peel Fergana, chemical peel Kokand, cosmetologist, Radeski Skin Clinic',
+    },
+  },
   'art-qotir': {
     uz: {
       title: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",

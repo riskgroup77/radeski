@@ -43,6 +43,8 @@ export const STATIC_ARTICLE_ROUTE_KEYS: Record<string, string> = {
   "pryshchi-u-vzroslykh": "art-pryshchi-u-vzroslykh",
   "art-akne-u-vzroslykh": "art-akne-u-vzroslykh",
   "akne-u-vzroslykh": "art-akne-u-vzroslykh",
+  "art-demodekoz": "art-demodekoz",
+  "demodekoz": "art-demodekoz",
   "art-qishda-teri-parvarishi": "art-qishda-teri-parvarishi",
   "qishda-teri-parvarishi": "art-qishda-teri-parvarishi",
   "art-melazma": "art-melazma",
@@ -138,4 +140,4 @@ export const STATIC_ARTICLE_ROUTE_KEYS: Record<string, string> = {
 };
 
 /** Written but dated after this build: not published yet, so nothing may link to them. */
-export const SCHEDULED_ARTICLE_ROUTE_KEYS: string[] = ["art-qizil-yassi-temiratki","art-pigment-doglari-qishda","art-lablar-yorilishi-xeylit","art-tirnoq-rangi-ozgarishi","art-giperhidroz","art-ichga-osgan-tirnoq","art-teri-biopsiyasi","art-karbon-piling","art-diabetda-oyoq-parvarishi","art-milium","art-lazer-epilyatsiya-kuz-qish","art-tovon-yoriqlari","art-erkaklarda-soch-tokilishi","art-qadoq-va-kesak","art-perioral-dermatit","art-ayollarda-soch-tokilishi","art-striya","art-pushti-temiratki","art-bolalarda-teri-toshmalari","art-seboreyali-keratoz","art-qotir","art-teri-zamburugi","art-gerpes","art-demodekoz"];
+export const SCHEDULED_ARTICLE_ROUTE_KEYS: string[] = ["art-qizil-yassi-temiratki","art-pigment-doglari-qishda","art-lablar-yorilishi-xeylit","art-tirnoq-rangi-ozgarishi","art-giperhidroz","art-ichga-osgan-tirnoq","art-kimyoviy-piling","art-bosh-terisi-psoriazi","art-oyoqdagi-tomir-tori","art-vitiligo-belgilari","art-sovuq-allergiyasi","art-orab-oluvchi-temiratki","art-melanoma","art-teri-biopsiyasi","art-karbon-piling","art-diabetda-oyoq-parvarishi","art-milium","art-lazer-epilyatsiya-kuz-qish","art-tovon-yoriqlari","art-erkaklarda-soch-tokilishi","art-qadoq-va-kesak","art-perioral-dermatit","art-ayollarda-soch-tokilishi","art-striya","art-pushti-temiratki","art-bolalarda-teri-toshmalari","art-seboreyali-keratoz","art-qotir","art-teri-zamburugi","art-gerpes"];

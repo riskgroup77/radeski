@@ -55,6 +55,13 @@ import { NAIL_COLOR_CHANGE_ARTICLE } from './articles/nailColorChangeArticle';
 import { CHEILITIS_ARTICLE } from './articles/cheilitisArticle';
 import { PIGMENT_SPOTS_WINTER_ARTICLE } from './articles/pigmentSpotsWinterArticle';
 import { LICHEN_PLANUS_ARTICLE } from './articles/lichenPlanusArticle';
+import { MELANOMA_ARTICLE } from './articles/melanomaArticle';
+import { HERPES_ZOSTER_ARTICLE } from './articles/herpesZosterArticle';
+import { COLD_ALLERGY_ARTICLE } from './articles/coldAllergyArticle';
+import { VITILIGO_GUIDE_ARTICLE } from './articles/vitiligoGuideArticle';
+import { LEG_VEINS_ARTICLE } from './articles/legVeinsArticle';
+import { SCALP_PSORIASIS_ARTICLE } from './articles/scalpPsoriasisArticle';
+import { CHEMICAL_PEEL_ARTICLE } from './articles/chemicalPeelArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -123,6 +130,13 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   NAIL_COLOR_CHANGE_ARTICLE,
   HYPERHIDROSIS_ARTICLE,
   INGROWN_NAIL_ARTICLE,
+  CHEMICAL_PEEL_ARTICLE,
+  SCALP_PSORIASIS_ARTICLE,
+  LEG_VEINS_ARTICLE,
+  VITILIGO_GUIDE_ARTICLE,
+  COLD_ALLERGY_ARTICLE,
+  HERPES_ZOSTER_ARTICLE,
+  MELANOMA_ARTICLE,
   SKIN_BIOPSY_ARTICLE,
   CARBON_PEEL_ARTICLE,
   DIABETIC_FOOT_ARTICLE,

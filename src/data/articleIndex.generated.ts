@@ -1942,7 +1942,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Qo'qon",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 3801,
+      "bodyLength": 3799,
       "bodyWords": 405
     },
     "ru": {
@@ -1957,7 +1957,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Коканд",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 3522,
+      "bodyLength": 3520,
       "bodyWords": 415
     },
     "en": {
@@ -1972,7 +1972,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Kokand",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 3404,
+      "bodyLength": 3402,
       "bodyWords": 471
     }
   },
@@ -2538,6 +2538,335 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       ],
       "bodyLength": 5804,
       "bodyWords": 937
+    }
+  },
+  "melanoma": {
+    "uz": {
+      "summary": "Melanoma — eng xavfli teri o'smasi: erta belgilar, tirnoq va tovondagi melanoma, xavf omillari, nima qilmaslik kerak va qanday tekshiriladi. Farg'ona va Qo'qonda dermatoonkolog.",
+      "tags": [
+        "Melanoma",
+        "Teri saratoni",
+        "Xunuk o'rdakcha",
+        "Dermatoonkolog",
+        "PhotoFinder",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6738,
+      "bodyWords": 831
+    },
+    "ru": {
+      "summary": "Меланома — самая опасная опухоль кожи: ранние признаки, меланома ногтя и стопы, факторы риска, чего нельзя делать и как проходит диагностика. Дерматоонколог в Фергане и Коканде.",
+      "tags": [
+        "Меланома",
+        "Рак кожи",
+        "Гадкий утёнок",
+        "Дерматоонколог",
+        "PhotoFinder",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6436,
+      "bodyWords": 845
+    },
+    "en": {
+      "summary": "Melanoma — the most dangerous skin tumour: early signs, nail and sole melanoma, risk factors, what not to do and how it is diagnosed. Dermato-oncologists in Fergana and Kokand.",
+      "tags": [
+        "Melanoma",
+        "Skin cancer",
+        "Ugly duckling sign",
+        "Dermato-oncologist",
+        "PhotoFinder",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6041,
+      "bodyWords": 947
+    }
+  },
+  "herpes-zoster": {
+    "uz": {
+      "summary": "O'rab oluvchi temiratki — bir tomonlama og'riq va pufakchalar: kimlarda uchraydi, nega dastlabki kunlar muhim, xavfli belgilar va yuqumliligi. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "O'rab oluvchi temiratki",
+        "Gerpes zoster",
+        "Suvchechak virusi",
+        "Postgerpetik og'riq",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6077,
+      "bodyWords": 761
+    },
+    "ru": {
+      "summary": "Опоясывающий лишай — односторонняя боль и полоса пузырьков: у кого бывает, почему важны первые дни, опасные признаки и заразность. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Опоясывающий лишай",
+        "Опоясывающий герпес",
+        "Вирус ветрянки",
+        "Постгерпетическая боль",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5744,
+      "bodyWords": 803
+    },
+    "en": {
+      "summary": "Shingles — one-sided pain and a band of blisters: who gets it, why the first days matter, warning signs and whether it is contagious. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Shingles",
+        "Herpes zoster",
+        "Chickenpox virus",
+        "Post-herpetic pain",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5632,
+      "bodyWords": 946
+    }
+  },
+  "cold-allergy": {
+    "uz": {
+      "summary": "Sovuq allergiyasi, pernioz va oddiy sovuqdan qizarish: qanday farqlanadi, sovuq suvda cho'milish xavfi, nima qilmaslik va qanday himoyalanish. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Sovuq allergiyasi",
+        "Sovuq eshakemisi",
+        "Pernioz",
+        "Qishki teri",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6312,
+      "bodyWords": 805
+    },
+    "ru": {
+      "summary": "Аллергия на холод, ознобление и обычное покраснение от холода: как отличить, чем опасно купание в холодной воде, чего не делать и как защититься. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Аллергия на холод",
+        "Холодовая крапивница",
+        "Ознобление",
+        "Кожа зимой",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6165,
+      "bodyWords": 869
+    },
+    "en": {
+      "summary": "Cold allergy, chilblains and plain cold redness: how to tell them apart, why cold-water swimming can be dangerous, what not to do and how to protect your skin. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Cold allergy",
+        "Cold urticaria",
+        "Chilblains",
+        "Winter skin",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5780,
+      "bodyWords": 947
+    }
+  },
+  "vitiligo-guide": {
+    "uz": {
+      "summary": "Vitiligo — terida sutdek oq dog'lar: yuqumlimi va irsiymi, birinchi belgilar, o'xshash kasalliklar, nima qilmaslik va davolash imkoniyatlari. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Vitiligo",
+        "Oq dog'lar",
+        "Pigment yo'qolishi",
+        "Dermatolog",
+        "Fototerapiya",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6324,
+      "bodyWords": 780
+    },
+    "ru": {
+      "summary": "Витилиго — молочно-белые пятна на коже: заразно ли и наследуется ли, первые признаки, похожие болезни, чего не делать и варианты лечения. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Витилиго",
+        "Белые пятна на коже",
+        "Потеря пигмента",
+        "Дерматолог",
+        "Фототерапия",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5954,
+      "bodyWords": 806
+    },
+    "en": {
+      "summary": "Vitiligo — milky-white patches on the skin: is it contagious or inherited, first signs, look-alikes, what not to do and treatment options. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Vitiligo",
+        "White patches on skin",
+        "Loss of pigment",
+        "Dermatologist",
+        "Phototherapy",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6014,
+      "bodyWords": 947
+    }
+  },
+  "leg-veins": {
+    "uz": {
+      "summary": "Oyoqlardagi tomir to'ri: varikozdan farqi, sabablari, xavfli belgilar, Lutronic Derma V lazeri bilan davolash va profilaktika. Farg'ona va Qo'qonda kosmetolog.",
+      "tags": [
+        "Tomir to'ri",
+        "Teleangiektaziya",
+        "Oyoqdagi tomirlar",
+        "Derma V",
+        "Lazer",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6173,
+      "bodyWords": 785
+    },
+    "ru": {
+      "summary": "Сосудистые звёздочки на ногах: чем отличаются от варикоза, причины, опасные признаки, лазер Lutronic Derma V и профилактика. Косметолог в Фергане и Коканде.",
+      "tags": [
+        "Сосудистые звёздочки",
+        "Телеангиэктазии",
+        "Сосуды на ногах",
+        "Derma V",
+        "Лазер",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5831,
+      "bodyWords": 803
+    },
+    "en": {
+      "summary": "Spider veins on the legs: how they differ from varicose veins, causes, warning signs, Lutronic Derma V laser treatment and prevention. Cosmetologists in Fergana and Kokand.",
+      "tags": [
+        "Spider veins",
+        "Telangiectasia",
+        "Leg veins",
+        "Derma V",
+        "Laser",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5734,
+      "bodyWords": 937
+    }
+  },
+  "scalp-psoriasis": {
+    "uz": {
+      "summary": "Bosh terisi psoriazi: belgilari, kepak va seboreyali dermatitdan farqi, soch to'kiladimi, nega qishda kuchayadi, uyda nima qilmaslik va davolash. Farg'ona va Qo'qonda dermatolog va trixolog.",
+      "tags": [
+        "Bosh terisi psoriazi",
+        "Psoriaz",
+        "Kepak",
+        "Soch to'kilishi",
+        "Trixolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6120,
+      "bodyWords": 749
+    },
+    "ru": {
+      "summary": "Псориаз кожи головы: признаки, отличие от перхоти и себорейного дерматита, выпадают ли волосы, почему обостряется зимой, чего не делать дома и лечение. Дерматолог и трихолог в Фергане и Коканде.",
+      "tags": [
+        "Псориаз кожи головы",
+        "Псориаз",
+        "Перхоть",
+        "Выпадение волос",
+        "Трихолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5943,
+      "bodyWords": 778
+    },
+    "en": {
+      "summary": "Scalp psoriasis: signs, how it differs from dandruff and seborrheic dermatitis, hair shedding, why winter makes it worse, what not to do at home and treatment. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Scalp psoriasis",
+        "Psoriasis",
+        "Dandruff",
+        "Hair loss",
+        "Trichologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6038,
+      "bodyWords": 934
+    }
+  },
+  "chemical-peel": {
+    "uz": {
+      "summary": "Kimyoviy piling: teri qanday yangilanadi, yuzaki va o'rta piling, nimaga yordam beradi, nega kuz-qishda, qarshi ko'rsatmalar va parvarish. Farg'ona va Qo'qonda kosmetolog.",
+      "tags": [
+        "Kimyoviy piling",
+        "Teri yangilanishi",
+        "Postakne",
+        "Pigmentatsiya",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5383,
+      "bodyWords": 671
+    },
+    "ru": {
+      "summary": "Химический пилинг: как обновляется кожа, поверхностный и срединный пилинг, с чем помогает, почему осенью и зимой, противопоказания и уход. Косметолог в Фергане и Коканде.",
+      "tags": [
+        "Химический пилинг",
+        "Обновление кожи",
+        "Постакне",
+        "Пигментация",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5166,
+      "bodyWords": 705
+    },
+    "en": {
+      "summary": "Chemical peels: how skin renews, superficial vs medium peels, what they help with, why autumn and winter, contraindications and aftercare. Cosmetologists in Fergana and Kokand.",
+      "tags": [
+        "Chemical peel",
+        "Skin renewal",
+        "Post-acne",
+        "Pigmentation",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5152,
+      "bodyWords": 833
     }
   },
   "laser-scar-resurfacing": {
@@ -5054,6 +5383,38 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": "/articles/akne-u-vzroslykh-cover.jpg",
       "ru": "/articles/akne-u-vzroslykh-cover.jpg",
       "en": "/articles/akne-u-vzroslykh-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-demodekoz",
+    "slug": "demodekoz",
+    "title": {
+      "uz": "Demodekoz: yuzdagi qizarish va toshma sababi — belgilari, tahlil va davolash",
+      "ru": "Демодекоз: покраснение и высыпания на лице — признаки, анализ и лечение",
+      "en": "Demodicosis: Facial Redness and Spots — Signs, Testing and Treatment"
+    },
+    "summary": {
+      "uz": "Demodekoz: yuzda qizarish, toshma, qichishish va dag'al teri. Demodeks kanasi nima, akne va rozatseyadan farqi, qirindi tahlili, davolash va parvarish. Farg'ona va Qo'qonda dermatolog.",
+      "ru": "Демодекоз: покраснение, высыпания, зуд и грубая кожа лица. Что такое клещ демодекс, отличие от акне и розацеа, соскоб, лечение и уход. Дерматолог в Фергане и Коканде.",
+      "en": "Demodicosis: facial redness, spots, itching and rough skin. What the Demodex mite is, how it differs from acne and rosacea, the scraping test, treatment and care. Dermatologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Turg'unov Shohruz Ilxomjon o'g'li",
+      "ru": "Тургунов Шохруз Илхомжон угли",
+      "en": "Dr. Shohruz Ilxomjon ugli Turgunov"
+    },
+    "date": "2026-11-05",
+    "image": "/articles/demodekoz-cover.jpg",
+    "images": {
+      "uz": "/articles/demodekoz-cover.jpg",
+      "ru": "/articles/demodekoz-cover.jpg",
+      "en": "/articles/demodekoz-cover.jpg"
     },
     "views": 0
   },
