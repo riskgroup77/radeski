@@ -114,6 +114,41 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     ru: 'Химический пилинг лица: показания и уход — Фергана',
     en: 'Chemical Peel: Benefits and Aftercare — Fergana',
   },
+  'art-plantar-sogal': {
+    uz: "Plantar so'gal: oyoq tagidagi so'galni davolash — Farg'ona",
+    ru: 'Подошвенная бородавка: лечение и удаление — Фергана',
+    en: 'Plantar Warts: Treatment and Removal — Fergana',
+  },
+  'art-chipqon-follikulit': {
+    uz: "Chipqon va follikulit: davolash — Farg'ona, Qo'qon",
+    ru: 'Фурункул и фолликулит: лечение — Фергана, Коканд',
+    en: 'Boils and Folliculitis Treatment — Fergana, Kokand',
+  },
+  'art-aktinik-keratoz': {
+    uz: "Aktinik keratoz: quyoshdan dag'al dog'lar — Farg'ona",
+    ru: 'Актинический кератоз: шершавые пятна от солнца — Фергана',
+    en: 'Actinic Keratosis: Rough Sun Spots — Fergana',
+  },
+  'art-bolalarda-atopik-dermatit': {
+    uz: "Bolalarda atopik dermatit: qishki parvarish — Farg'ona",
+    ru: 'Атопический дерматит у детей зимой — Фергана',
+    en: 'Atopic Dermatitis in Children: Winter Care — Fergana',
+  },
+  'art-mort-tirnoqlar': {
+    uz: "Mo'rt va qatlanadigan tirnoqlar: parvarish — Farg'ona",
+    ru: 'Ломкие и слоящиеся ногти: причины и уход — Фергана',
+    en: 'Brittle and Splitting Nails: Causes and Care — Fergana',
+  },
+  'art-koz-osti-qorayishi': {
+    uz: "Ko'z osti qorayishi va shishi: sabablari — Farg'ona",
+    ru: 'Тёмные круги и отёки под глазами — Фергана',
+    en: 'Dark Circles and Under-Eye Puffiness — Fergana',
+  },
+  'art-yangi-yil-yuz-parvarishi': {
+    uz: "Yangi yil oldidan yuz parvarishi: muolaja rejasi — Farg'ona",
+    ru: 'Уход за лицом перед Новым годом: план процедур — Фергана',
+    en: 'Skin Care Before New Year: Treatment Timing — Fergana',
+  },
   'art-qotir': {
     uz: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",
     ru: 'Чесотка: признаки и лечение — Фергана, Коканд',

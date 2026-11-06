@@ -2869,6 +2869,335 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 833
     }
   },
+  "plantar-warts": {
+    "uz": {
+      "summary": "Oyoq tagidagi so'gal: HPV qanday yuqadi, qadoqdan farqi, xavfli belgilar, uyda nima qilmaslik va klinikada lazer, krio yoki radioto'lqin bilan davolash. Farg'ona va Qo'qonda podolog.",
+      "tags": [
+        "Plantar so'gal",
+        "Oyoq tagidagi so'gal",
+        "HPV",
+        "Podolog",
+        "CO₂ lazer",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5685,
+      "bodyWords": 698
+    },
+    "ru": {
+      "summary": "Подошвенная бородавка: как передаётся ВПЧ, чем отличается от мозоли, опасные признаки, чего не делать дома и лечение лазером, криодеструкцией или радиоволной. Подолог в Фергане и Коканде.",
+      "tags": [
+        "Подошвенная бородавка",
+        "Бородавка на стопе",
+        "ВПЧ",
+        "Подолог",
+        "CO₂-лазер",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5345,
+      "bodyWords": 711
+    },
+    "en": {
+      "summary": "Plantar warts: how HPV spreads, how a wart differs from a callus, warning signs, what not to do at home and treatment with laser, cryo or radio waves. Podiatrists in Fergana and Kokand.",
+      "tags": [
+        "Plantar warts",
+        "Wart on the sole",
+        "HPV",
+        "Podiatrist",
+        "CO₂ laser",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5411,
+      "bodyWords": 902
+    }
+  },
+  "furuncle": {
+    "uz": {
+      "summary": "Chipqon va follikulit: farqi, sabablari, bosqichlari, yuzdagi chipqon nega xavfli, uyda nima qilish mumkin emas va qanday davolanadi. Farg'ona va Qo'qonda dermatolog.",
+      "tags": [
+        "Chipqon",
+        "Furunkul",
+        "Follikulit",
+        "Karbunkul",
+        "Dermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5699,
+      "bodyWords": 723
+    },
+    "ru": {
+      "summary": "Фурункул и фолликулит: в чём разница, причины, стадии, чем опасен фурункул на лице, чего нельзя делать дома и как лечат. Дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Фурункул",
+        "Фолликулит",
+        "Карбункул",
+        "Чирей",
+        "Дерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5337,
+      "bodyWords": 739
+    },
+    "en": {
+      "summary": "Boils and folliculitis: the difference, causes, stages, why a boil on the face is dangerous, what not to do at home and how they are treated. Dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Boils",
+        "Furuncle",
+        "Folliculitis",
+        "Carbuncle",
+        "Dermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5422,
+      "bodyWords": 897
+    }
+  },
+  "actinic-keratosis": {
+    "uz": {
+      "summary": "Aktinik keratoz — quyosh ko'rgan terida dag'al, qipiqli dog'lar: nega saratonoldi, boshqa dog'lardan farqi, xavfli belgilar, tashxis va davolash. Farg'ona va Qo'qonda onkodermatolog.",
+      "tags": [
+        "Aktinik keratoz",
+        "Quyosh keratozi",
+        "Dag'al dog'lar",
+        "Aktinik xeylit",
+        "Onkodermatolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5999,
+      "bodyWords": 731
+    },
+    "ru": {
+      "summary": "Актинический кератоз — шершавые пятна на коже, видевшей много солнца: почему это предрак, отличия от других пятен, опасные признаки, диагностика и лечение. Онкодерматолог в Фергане и Коканде.",
+      "tags": [
+        "Актинический кератоз",
+        "Солнечный кератоз",
+        "Шершавые пятна",
+        "Актинический хейлит",
+        "Онкодерматолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5901,
+      "bodyWords": 781
+    },
+    "en": {
+      "summary": "Actinic keratosis — rough, scaly spots on sun-damaged skin: why it is precancerous, how it differs from other spots, red flags, diagnosis and treatment. Oncodermatologists in Fergana and Kokand.",
+      "tags": [
+        "Actinic keratosis",
+        "Solar keratosis",
+        "Rough skin spots",
+        "Actinic cheilitis",
+        "Oncodermatologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5688,
+      "bodyWords": 915
+    }
+  },
+  "child-atopic-dermatitis": {
+    "uz": {
+      "summary": "Bolalarda atopik dermatit qishda nega kuchayadi: yoshga qarab belgilar, cho'miltirish va namlantirish rejasi, xavfli belgilar va nima qilmaslik kerak. Farg'ona va Qo'qonda bolalar dermatologi.",
+      "tags": [
+        "Atopik dermatit",
+        "Bolalar dermatologi",
+        "Bolalarda ekzema",
+        "Qishki parvarish",
+        "Emolent",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6393,
+      "bodyWords": 795
+    },
+    "ru": {
+      "summary": "Почему атопический дерматит у детей обостряется зимой: признаки по возрасту, план купания и увлажнения, тревожные признаки и чего не делать. Детский дерматолог в Фергане и Коканде.",
+      "tags": [
+        "Атопический дерматит",
+        "Детский дерматолог",
+        "Экзема у детей",
+        "Зимний уход",
+        "Эмолент",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6075,
+      "bodyWords": 834
+    },
+    "en": {
+      "summary": "Why atopic dermatitis in children flares in winter: signs by age, a bathing and moisturising plan, red flags and what not to do. Paediatric dermatologists in Fergana and Kokand.",
+      "tags": [
+        "Atopic dermatitis",
+        "Paediatric dermatologist",
+        "Eczema in children",
+        "Winter care",
+        "Emollient",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5800,
+      "bodyWords": 934
+    }
+  },
+  "brittle-nails": {
+    "uz": {
+      "summary": "Mo'rt va qatlanadigan tirnoqlar: suv, qish havosi va gel-lak, zamburug' va psoriaz, xavfli belgilar, klinikada tekshiruv va uyda parvarish. Farg'ona va Qo'qonda podolog.",
+      "tags": [
+        "Mo'rt tirnoqlar",
+        "Qatlanadigan tirnoqlar",
+        "Tirnoq parvarishi",
+        "Podolog",
+        "Tirnoq zamburug'i",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5969,
+      "bodyWords": 733
+    },
+    "ru": {
+      "summary": "Ломкие и слоящиеся ногти: вода, зимний воздух и гель-лак, грибок и псориаз, тревожные признаки, проверка в клинике и уход дома. Подолог в Фергане и Коканде.",
+      "tags": [
+        "Ломкие ногти",
+        "Слоящиеся ногти",
+        "Уход за ногтями",
+        "Подолог",
+        "Грибок ногтей",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5257,
+      "bodyWords": 722
+    },
+    "en": {
+      "summary": "Brittle and splitting nails: water, winter air and gel polish, fungus and psoriasis, warning signs, clinic checks and care at home. Podologists in Fergana and Kokand.",
+      "tags": [
+        "Brittle nails",
+        "Splitting nails",
+        "Nail care",
+        "Podologist",
+        "Nail fungus",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5234,
+      "bodyWords": 838
+    }
+  },
+  "dark-circles": {
+    "uz": {
+      "summary": "Ko'z osti qorayishi va shishi: pigment, tomir va soya turlari, shish sabablari, qachon shifokor kerak va klinikada nima yordam beradi. Farg'ona va Qo'qonda kosmetolog.",
+      "tags": [
+        "Ko'z osti qorayishi",
+        "Ko'z osti shishi",
+        "Qora doiralar",
+        "Biorevitalizatsiya",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5731,
+      "bodyWords": 721
+    },
+    "ru": {
+      "summary": "Тёмные круги и отёки под глазами: пигментный, сосудистый и теневой типы, причины отёков, когда нужен врач и что помогает в клинике. Косметолог в Фергане и Коканде.",
+      "tags": [
+        "Тёмные круги под глазами",
+        "Отёки под глазами",
+        "Мешки под глазами",
+        "Биоревитализация",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5423,
+      "bodyWords": 743
+    },
+    "en": {
+      "summary": "Dark circles and under-eye puffiness: pigment, vascular and shadow types, causes of swelling, when to see a doctor and what helps at the clinic. Cosmetologists in Fergana and Kokand.",
+      "tags": [
+        "Dark circles",
+        "Under-eye puffiness",
+        "Under-eye bags",
+        "Biorevitalization",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5631,
+      "bodyWords": 886
+    }
+  },
+  "new-year-skin-plan": {
+    "uz": {
+      "summary": "Yangi yil oldidan yuz parvarishi: piling, botulinoterapiya, filler va tozalashni bayramdan qancha oldin qilish, uy parvarishi va nimalardan saqlanish. Farg'ona va Qo'qonda kosmetolog.",
+      "tags": [
+        "Yangi yil",
+        "Yuz parvarishi",
+        "Kimyoviy piling",
+        "Botulinoterapiya",
+        "Kosmetolog",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 6055,
+      "bodyWords": 745
+    },
+    "ru": {
+      "summary": "Уход за лицом перед Новым годом: за сколько до праздника делать пилинг, ботулинотерапию, филлеры и чистку, домашний уход и чего избегать. Косметолог в Фергане и Коканде.",
+      "tags": [
+        "Новый год",
+        "Уход за лицом",
+        "Химический пилинг",
+        "Ботулинотерапия",
+        "Косметолог",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5846,
+      "bodyWords": 760
+    },
+    "en": {
+      "summary": "Skin care before New Year: how far ahead to book peels, botulinum therapy, fillers and cleansing, holiday home care and what to avoid. Cosmetologists in Fergana and Kokand.",
+      "tags": [
+        "New Year",
+        "Facial care",
+        "Chemical peel",
+        "Botulinum therapy",
+        "Cosmetologist",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 5705,
+      "bodyWords": 887
+    }
+  },
   "laser-scar-resurfacing": {
     "uz": {
       "summary": "Chandiqlarni lazer shlifovkasi: operatsiya, jarohat, kuyish va akne izlarini kamroq sezilarli qilish. Radeski Skin Clinic’da shifokor konsultatsiyasi va individual reja.",
@@ -5383,6 +5712,38 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": "/articles/akne-u-vzroslykh-cover.jpg",
       "ru": "/articles/akne-u-vzroslykh-cover.jpg",
       "en": "/articles/akne-u-vzroslykh-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-gerpes",
+    "slug": "gerpes",
+    "title": {
+      "uz": "Gerpes (lab uchug'i): nima uchun qaytadi va qanday tez davolanadi",
+      "ru": "Герпес на губах: почему возвращается и как быстро вылечить",
+      "en": "Cold Sores (Herpes): Why They Come Back and How to Treat Them Fast"
+    },
+    "summary": {
+      "uz": "Gerpes (lab uchug'i): nima uchun qaytadi, bosqichlari, qanday yuqadi, virusga qarshi davolash va qachon zudlik bilan shifokorga borish kerak. Farg'ona va Qo'qonda dermatovenerolog.",
+      "ru": "Герпес на губах: почему возвращается, стадии, как передаётся, противовирусное лечение и когда срочно к врачу. Дерматовенеролог в Фергане и Коканде.",
+      "en": "Cold sores (herpes): why they come back, the stages, how herpes spreads, antiviral treatment and when to see a doctor urgently. Dermatovenereologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Baxriddinov Zuxriddin Muxiddinovich",
+      "ru": "Бахриддинов Зухриддин Мухиддинович",
+      "en": "Dr. Zuxriddin Muxiddinovich Baxriddinov"
+    },
+    "date": "2026-11-06",
+    "image": "/articles/gerpes-cover.webp",
+    "images": {
+      "uz": "/articles/gerpes-cover.webp",
+      "ru": "/articles/gerpes-cover.webp",
+      "en": "/articles/gerpes-cover.webp"
     },
     "views": 0
   },

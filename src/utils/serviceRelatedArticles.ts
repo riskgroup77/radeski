@@ -4,7 +4,7 @@ import { filterPublicArticles } from './articles';
 
 /** Article catalog keys shown on service category pages (broad match). */
 export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
-  dermatologiya: ['herpes-zoster', 'cold-allergy', 'vitiligo-guide', 'scalp-psoriasis', 'cheilitis', 'lichen-planus', 
+  dermatologiya: ['furuncle', 'child-atopic-dermatitis', 'herpes-zoster', 'cold-allergy', 'vitiligo-guide', 'scalp-psoriasis', 'cheilitis', 'lichen-planus', 
     'acne',
     'adult-acne-dermatologist',
     'seborrheic-dermatitis',
@@ -51,7 +51,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'prp-lab-tests',
     'hair-transplant-contraindications',
   ],
-  'apparatnaya-kosmetologiya': ['leg-veins', 'chemical-peel', 'pigment-spots-winter', 
+  'apparatnaya-kosmetologiya': ['new-year-skin-plan', 'plantar-warts', 'leg-veins', 'chemical-peel', 'pigment-spots-winter', 
     'melasma',
     'carbon-peel',
     'milia',
@@ -74,7 +74,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'adult-acne',
     'acne',
   ],
-  'in-ekcionnaya-kosmetologiya': ['hyperhidrosis', 
+  'in-ekcionnaya-kosmetologiya': ['dark-circles', 'new-year-skin-plan', 'hyperhidrosis', 
     'botulinoterapiya-radeski',
     'biorevitalizatsiya-radeski',
     'konturnaya-guby-radeski',
@@ -92,7 +92,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'hair-transplant-contraindications',
     'soch-profilaktika-inyeksii-radeski',
   ],
-  dermatoonkologiya: ['melanoma', 'skin-biopsy', 
+  dermatoonkologiya: ['actinic-keratosis', 'melanoma', 'skin-biopsy', 
     'mole-screening',
     'papilloma-removal',
     'seborrheic-keratosis',
@@ -103,7 +103,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'tongue-scc',
     'penile-scc',
   ],
-  'hirurgicheskaya-dermatologiya': ['melanoma', 
+  'hirurgicheskaya-dermatologiya': ['actinic-keratosis', 'melanoma', 
     'papilloma-removal',
     'seborrheic-keratosis',
     'deka-co2',
@@ -121,14 +121,14 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriaz-klinik-keys-bahridinov-radeski',
   ],
   'shkola-dermatoskopii': ['basal-cell-carcinoma', 'mole-screening'],
-  'clinika-patologii-nogtej': ['ingrown-nail', 'nail-color-change', 'nail-fungus', 'calluses', 'cracked-heels', 'diabetic-foot', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
+  'clinika-patologii-nogtej': ['brittle-nails', 'plantar-warts', 'ingrown-nail', 'nail-color-change', 'nail-fungus', 'calluses', 'cracked-heels', 'diabetic-foot', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
   dermatopatologiya: ['skin-biopsy', 'dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
 };
 
 /** More specific article catalog keys per sub-service (merged with category keys on sub pages). */
 export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> = {
   dermatologiya: {
-    'det-derm': [
+    'det-derm': ['child-atopic-dermatitis', 
       'child-rash',
       'scabies',
       'pediatric-warts-co2-deka',
@@ -136,7 +136,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'molluscum-radeski',
       'atopic-dermatitis',
     ],
-    fototerapiya: ['vitiligo-guide', 'lichen-planus', 
+    fototerapiya: ['child-atopic-dermatitis', 'vitiligo-guide', 'lichen-planus', 
       'fizioterapiya-dermatovenereologiya',
       'eczema',
       'vitiligo',
@@ -148,7 +148,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
   },
   dermatoskopiya: {
     'derm-konsult': ['basal-cell-carcinoma', 'molluscum-radeski', 'papilloma-warts'],
-    'derm-total-body': ['melanoma', 'basal-cell-carcinoma', 'mole-screening'],
+    'derm-total-body': ['actinic-keratosis', 'melanoma', 'basal-cell-carcinoma', 'mole-screening'],
     'derm-skin-passport': ['basal-cell-carcinoma', 'photofinder-diagnostika-radeski'],
   },
   trixoskopiya: {
@@ -173,19 +173,19 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'adult-acne',
       'acne',
     ],
-    'lazer-biorev': [
+    'lazer-biorev': ['dark-circles', 'new-year-skin-plan', 
       'lazer-biorevitalizatsiya-radeski',
       'biorevitalizatsiya-radeski',
       'post-acne',
       'adult-acne',
       'lasemd-ultra-kokand',
     ],
-    'ultratovush-yuz': ['chemical-peel', 'acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
+    'ultratovush-yuz': ['new-year-skin-plan', 'chemical-peel', 'acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
   },
   'in-ekcionnaya-kosmetologiya': {
-    botulino: ['hyperhidrosis', 'botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
-    biorev: ['biorevitalizatsiya-radeski', 'botulinoterapiya-radeski', 'plasmapheresis'],
-    konturnaya: [
+    botulino: ['new-year-skin-plan', 'hyperhidrosis', 'botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
+    biorev: ['dark-circles', 'biorevitalizatsiya-radeski', 'botulinoterapiya-radeski', 'plasmapheresis'],
+    konturnaya: ['dark-circles', 
       'kontur-plastika-radeski',
       'konturnaya-guby-radeski',
       'biorevitalizatsiya-radeski',
@@ -218,7 +218,7 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
     'dermatosc-lessons': ['basal-cell-carcinoma', 'mole-screening'],
   },
   'clinika-patologii-nogtej': {
-    'podolog-dermatolog': ['ingrown-nail', 'nail-color-change', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski', 'calluses', 'cracked-heels', 'diabetic-foot', 'nail-fungus'],
+    'podolog-dermatolog': ['brittle-nails', 'plantar-warts', 'ingrown-nail', 'nail-color-change', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski', 'calluses', 'cracked-heels', 'diabetic-foot', 'nail-fungus'],
   },
   dermatopatologiya: {
     gistolog: ['skin-biopsy', 'dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],

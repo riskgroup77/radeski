@@ -509,6 +509,146 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         'chemical peel, facial peel, post-acne marks, pigment spots, chemical peel Fergana, chemical peel Kokand, cosmetologist, Radeski Skin Clinic',
     },
   },
+  'art-plantar-sogal': {
+    uz: {
+      title: "Plantar so'gal: oyoq tagidagi so'galni davolash — Farg'ona",
+      desc: "Oyoq tagidagi so'gal: qadoqdan farqi, qanday yuqadi, xavfli belgilar va CO₂ lazer, krio yoki radioto'lqin bilan davolash. Farg'ona va Qo'qonda podolog.",
+      keywords:
+        "plantar so'gal, oyoq tagidagi so'gal, so'gal olib tashlash, so'gal va qadoq farqi, so'galni lazer bilan olib tashlash, podolog Farg'ona, so'gal Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Подошвенная бородавка: лечение и удаление — Фергана',
+      desc: 'Подошвенная бородавка: отличие от мозоли, как передаётся, опасные признаки и лечение CO₂-лазером, криодеструкцией или радиоволной. Подолог в Фергане и Коканде.',
+      keywords:
+        'подошвенная бородавка, бородавка на стопе, удаление бородавки, бородавка или мозоль, удаление бородавки лазером, подолог Фергана, бородавка Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Plantar Warts: Treatment and Removal — Fergana',
+      desc: 'Plantar warts: how they differ from calluses, how HPV spreads, red flags and treatment with CO₂ laser, cryo or radio waves. Podiatrists in Fergana and Kokand.',
+      keywords:
+        'plantar wart, wart on the sole, wart removal, wart vs callus, laser wart removal, podiatrist Fergana, wart treatment Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-chipqon-follikulit': {
+    uz: {
+      title: "Chipqon va follikulit: davolash — Farg'ona, Qo'qon",
+      desc: "Chipqon (furunkul) va follikulit: sabablari, xavfli belgilar, yuzdagi chipqonni nega siqib bo'lmaydi va qanday davolanadi. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "chipqon, furunkul, follikulit, karbunkul, chipqon davolash, yuzdagi chipqon, dermatolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Фурункул и фолликулит: лечение — Фергана, Коканд',
+      desc: 'Фурункул и фолликулит: причины, опасные признаки, почему нельзя выдавливать фурункул на лице и как его лечат. Дерматолог в Фергане и Коканде.',
+      keywords:
+        'фурункул, фолликулит, карбункул, чирей, лечение фурункула, фурункул на лице, дерматолог Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Boils and Folliculitis Treatment — Fergana, Kokand',
+      desc: 'Boils (furuncles) and folliculitis: causes, danger signs, why never to squeeze a boil on the face and how it is treated. Dermatologists in Fergana and Kokand.',
+      keywords:
+        'boils, furuncle, folliculitis, carbuncle, boil treatment, boil on face, dermatologist Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-aktinik-keratoz': {
+    uz: {
+      title: "Aktinik keratoz: quyoshdan dag'al dog'lar — Farg'ona",
+      desc: "Aktinik keratoz — quyosh ko'rgan terida dag'al, qipiqli dog'lar. Belgilari, xavfi, dermatoskopiya va davolash Farg'ona va Qo'qonda onkodermatologda.",
+      keywords:
+        "aktinik keratoz, quyosh keratozi, terida dag'al dog'lar, aktinik xeylit, onkodermatolog Farg'ona, dermatoskopiya Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Актинический кератоз: шершавые пятна от солнца — Фергана',
+      desc: 'Актинический кератоз — шершавые шелушащиеся пятна на коже после солнца. Признаки, риск, дерматоскопия и лечение у онкодерматолога в Фергане и Коканде.',
+      keywords:
+        'актинический кератоз, солнечный кератоз, шершавые пятна на коже, актинический хейлит, онкодерматолог Фергана, дерматоскопия Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Actinic Keratosis: Rough Sun Spots — Fergana',
+      desc: 'Actinic keratosis: rough, scaly spots on sun-damaged skin. Signs, risk, dermatoscopy and treatment with an oncodermatologist in Fergana and Kokand.',
+      keywords:
+        'actinic keratosis, solar keratosis, rough skin spots, actinic cheilitis, oncodermatologist Fergana, dermatoscopy Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-bolalarda-atopik-dermatit': {
+    uz: {
+      title: "Bolalarda atopik dermatit: qishki parvarish — Farg'ona",
+      desc: "Bolalarda atopik dermatit qishda: belgilar, cho'miltirish va emolent rejasi, xavfli belgilar. Farg'ona va Qo'qonda bolalar dermatologi.",
+      keywords:
+        "bolalarda atopik dermatit, bolalarda ekzema, atopik dermatit qishda, emolent, bolalar dermatologi Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Атопический дерматит у детей зимой — Фергана',
+      desc: 'Атопический дерматит у детей зимой: признаки, купание и эмоленты, тревожные симптомы. Детский дерматолог в Фергане и Коканде — Radeski.',
+      keywords:
+        'атопический дерматит у детей, детская экзема, атопический дерматит зимой, эмолент, детский дерматолог Фергана, дерматолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Atopic Dermatitis in Children: Winter Care — Fergana',
+      desc: 'Atopic dermatitis in children in winter: signs by age, bathing and emollient plan, red flags. Paediatric dermatologist in Fergana and Kokand.',
+      keywords:
+        'atopic dermatitis in children, childhood eczema, winter eczema care, emollient, paediatric dermatologist Fergana, dermatologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-mort-tirnoqlar': {
+    uz: {
+      title: "Mo'rt va qatlanadigan tirnoqlar: parvarish — Farg'ona",
+      desc: "Mo'rt va qatlanadigan tirnoqlar: sabablari, zamburug' va psoriaz belgilari, tahlil va podolog parvarishi. Farg'ona va Qo'qonda Radeski Skin Clinic.",
+      keywords:
+        "mo'rt tirnoqlar, qatlanadigan tirnoqlar, tirnoq sinishi, tirnoq parvarishi, podolog Farg'ona, podolog Qo'qon, tirnoq zamburug'i tahlili, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Ломкие и слоящиеся ногти: причины и уход — Фергана',
+      desc: 'Ломкие и слоящиеся ногти: причины, признаки грибка и псориаза, анализ и подологический уход. Подолог в Фергане и Коканде — Radeski Skin Clinic.',
+      keywords:
+        'ломкие ногти, слоящиеся ногти, ногти ломаются причины, уход за ногтями, подолог Фергана, подолог Коканд, анализ на грибок ногтей, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Brittle and Splitting Nails: Causes and Care — Fergana',
+      desc: 'Brittle and splitting nails: causes, signs of fungus and psoriasis, nail tests and podology care. Podologists in Fergana and Kokand at Radeski Skin Clinic.',
+      keywords:
+        'brittle nails, splitting nails, peeling nails causes, nail care, podologist Fergana, podologist Kokand, nail fungus test, Radeski Skin Clinic',
+    },
+  },
+  'art-koz-osti-qorayishi': {
+    uz: {
+      title: "Ko'z osti qorayishi va shishi: sabablari — Farg'ona",
+      desc: "Ko'z osti qorayishi va shishi: pigment, tomir va soya turlari, qachon shifokor kerak, uyda parvarish va klinikada davolash. Farg'ona va Qo'qonda kosmetolog.",
+      keywords:
+        "ko'z osti qorayishi, ko'z osti shishi, qora doiralar, ko'z atrofi biorevitalizatsiya, ko'z yoshi tarnovi filler, kosmetolog Farg'ona, kosmetolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Тёмные круги и отёки под глазами — Фергана',
+      desc: 'Тёмные круги и отёки под глазами: пигментный, сосудистый и теневой типы, когда нужен врач, домашний уход и лечение в клинике. Косметолог в Фергане и Коканде.',
+      keywords:
+        'тёмные круги под глазами, отёки под глазами, мешки под глазами, биоревитализация вокруг глаз, филлер носослёзной борозды, косметолог Фергана, косметолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Dark Circles and Under-Eye Puffiness — Fergana',
+      desc: 'Dark circles and under-eye puffiness: pigment, vascular and shadow types, when to see a doctor, home care and treatment. Cosmetologists in Fergana and Kokand.',
+      keywords:
+        'dark circles under eyes, under-eye puffiness, under-eye bags, eye-area biorevitalization, tear trough filler, cosmetologist Fergana, cosmetologist Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-yangi-yil-yuz-parvarishi': {
+    uz: {
+      title: "Yangi yil oldidan yuz parvarishi: muolaja rejasi — Farg'ona",
+      desc: "Bayramdan qancha oldin piling, botoks, filler va yuz tozalash qilish kerak, uy parvarishi va xatolar. Farg'ona va Qo'qonda kosmetolog.",
+      keywords:
+        "yangi yil oldidan yuz parvarishi, bayram oldidan kosmetolog, piling qachon qilish, botoks bayramgacha, filler shishi, kosmetolog Farg'ona, kosmetolog Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Уход за лицом перед Новым годом: план процедур — Фергана',
+      desc: 'За сколько до праздника делать пилинг, ботокс, филлеры и чистку лица, домашний уход и частые ошибки. Опытный косметолог в Фергане и Коканде.',
+      keywords:
+        'уход за лицом перед Новым годом, косметолог перед праздником, когда делать пилинг, ботокс перед праздником, отёк после филлеров, косметолог Фергана, косметолог Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Skin Care Before New Year: Treatment Timing — Fergana',
+      desc: 'How far ahead of the holidays to book peels, Botox, fillers and facial cleansing, plus home care and mistakes. Cosmetologists in Fergana and Kokand.',
+      keywords:
+        'skin care before New Year, pre-holiday cosmetologist, when to get a peel, Botox before holidays, filler swelling, cosmetologist Fergana, cosmetologist Kokand, Radeski Skin Clinic',
+    },
+  },
   'art-qotir': {
     uz: {
       title: "Qo'tir (skabiyez): davolash — Farg'ona, Qo'qon",

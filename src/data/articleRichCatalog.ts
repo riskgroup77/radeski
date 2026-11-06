@@ -62,6 +62,13 @@ import { VITILIGO_GUIDE_ARTICLE_CATALOG } from './articles/vitiligoGuideArticle'
 import { LEG_VEINS_ARTICLE_CATALOG } from './articles/legVeinsArticle';
 import { SCALP_PSORIASIS_ARTICLE_CATALOG } from './articles/scalpPsoriasisArticle';
 import { CHEMICAL_PEEL_ARTICLE_CATALOG } from './articles/chemicalPeelArticle';
+import { PLANTAR_WARTS_ARTICLE_CATALOG } from './articles/plantarWartsArticle';
+import { FURUNCLE_ARTICLE_CATALOG } from './articles/furuncleArticle';
+import { ACTINIC_KERATOSIS_ARTICLE_CATALOG } from './articles/actinicKeratosisArticle';
+import { CHILD_ATOPIC_DERMATITIS_ARTICLE_CATALOG } from './articles/childAtopicDermatitisArticle';
+import { BRITTLE_NAILS_ARTICLE_CATALOG } from './articles/brittleNailsArticle';
+import { DARK_CIRCLES_ARTICLE_CATALOG } from './articles/darkCirclesArticle';
+import { NEW_YEAR_SKIN_PLAN_ARTICLE_CATALOG } from './articles/newYearSkinPlanArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -176,6 +183,13 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'leg-veins': LEG_VEINS_ARTICLE_CATALOG,
   'scalp-psoriasis': SCALP_PSORIASIS_ARTICLE_CATALOG,
   'chemical-peel': CHEMICAL_PEEL_ARTICLE_CATALOG,
+  'plantar-warts': PLANTAR_WARTS_ARTICLE_CATALOG,
+  'furuncle': FURUNCLE_ARTICLE_CATALOG,
+  'actinic-keratosis': ACTINIC_KERATOSIS_ARTICLE_CATALOG,
+  'child-atopic-dermatitis': CHILD_ATOPIC_DERMATITIS_ARTICLE_CATALOG,
+  'brittle-nails': BRITTLE_NAILS_ARTICLE_CATALOG,
+  'dark-circles': DARK_CIRCLES_ARTICLE_CATALOG,
+  'new-year-skin-plan': NEW_YEAR_SKIN_PLAN_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

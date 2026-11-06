@@ -18,10 +18,12 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
     { routeKey: 'art-vitiligo-daavlin', title: { uz: 'Vitiligo: Daavlin fototerapiyasi', ru: 'Витилиго: фототерапия Daavlin', en: 'Vitiligo: Daavlin phototherapy' } },
   ],
   'atopik-dermatit': [
+    { routeKey: 'art-bolalarda-atopik-dermatit', title: { uz: 'Bolalarda atopik dermatit: qishki parvarish', ru: 'Атопический дерматит у детей: уход зимой', en: 'Atopic dermatitis in children: winter care' } },
     { routeKey: 'art-atopic-dermatitis', title: { uz: 'Atopik dermatit: belgilari va davolash', ru: 'Атопический дерматит: симптомы и лечение', en: 'Atopic dermatitis: symptoms and treatment' } },
     { routeKey: 'art-bolalarda-teri-toshmalari', title: { uz: 'Bolalarda teri toshmalari', ru: 'Сыпь у ребёнка', en: 'Rashes in children' } },
   ],
   acne: [
+    { routeKey: 'art-chipqon-follikulit', title: { uz: 'Chipqon va follikulit: akne emas', ru: 'Фурункул и фолликулит: не акне', en: 'Boils and folliculitis: not acne' } },
     { routeKey: 'art-akne', title: { uz: 'Akne: sabablari va davolash', ru: 'Акне: причины и лечение', en: 'Acne: causes and treatment' } },
     { routeKey: 'art-akne-u-vzroslykh', title: { uz: 'Kattalarda akne: qachon dermatologga', ru: 'Акне у взрослых: когда к дерматологу', en: 'Adult acne: when to see a dermatologist' } },
     { routeKey: 'art-demodekoz', title: { uz: 'Demodekoz: akne davolashi yordam bermasa', ru: 'Демодекоз: если лечение акне не помогает', en: 'Demodicosis: when acne treatment fails' } },
@@ -42,6 +44,8 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
     { routeKey: 'art-perioral-dermatit', title: { uz: "Perioral dermatit: og'iz atrofidagi toshma", ru: 'Периоральный дерматит: сыпь вокруг рта', en: 'Perioral dermatitis: rash around the mouth' } },
   ],
   'teri-doglari': [
+    { routeKey: 'art-aktinik-keratoz', title: { uz: "Aktinik keratoz: quyoshdan keyingi dag'al dog'lar", ru: 'Актинический кератоз: шершавые пятна от солнца', en: 'Actinic keratosis: rough sun spots' } },
+    { routeKey: 'art-koz-osti-qorayishi', title: { uz: "Ko'z osti qorayishi", ru: 'Тёмные круги под глазами', en: 'Dark circles under the eyes' } },
     { routeKey: 'art-kimyoviy-piling', title: { uz: "Kimyoviy piling: dog'lar va notekis rang", ru: 'Химический пилинг: пятна и неровный тон', en: 'Chemical peels: spots and uneven tone' } },
     { routeKey: 'art-pigment-doglari-qishda', title: { uz: "Pigment dog'larini qishda davolash", ru: 'Пигментные пятна: лечение зимой', en: 'Pigment spots: treating them in winter' } },
     { routeKey: 'art-melazma', title: { uz: "Melazma: yuzdagi jigarrang dog'lar", ru: 'Мелазма: коричневые пятна на лице', en: 'Melasma: brown patches on the face' } },
