@@ -18,6 +18,8 @@ interface VideoTopic {
   match: RegExp;
   /** Videos that also match this are about something else (laser hair removal is not hair loss). */
   exclude?: RegExp;
+  /** Too general to pick videos for an article (it still links a video to articles). */
+  broad?: boolean;
   /** Article route keys, most relevant first; unpublished or retired ones are skipped. */
   articles: string[];
   links: TopicLink[];
@@ -58,6 +60,7 @@ const VIDEO_TOPICS: VideoTopic[] = [
   },
   {
     match: /bosh terisi|кожи головы|kepak|перхот/,
+    exclude: /mezoterap|мезотерап/,
     articles: ['art-bosh-terisi-psoriazi', 'art-seboreyali-dermatit', 'art-teri-qichishi'],
     links: [condition('seboreyali-dermatit', L('Seboreyali dermatit', 'Себорейный дерматит', 'Seborrheic dermatitis')), TRICHOSCOPY],
   },
@@ -132,11 +135,12 @@ const VIDEO_TOPICS: VideoTopic[] = [
   },
   {
     match: /botoks|ботокс|mezoterap|мезотерап|biorevital|биоревит/,
+    exclude: /soch|волос/,
     articles: ['art-botulinoterapiya-radeski', 'art-biorevitalizatsiya-radeski'],
     links: [INJECTIONS],
   },
   {
-    match: /teri parvarish|уход\S* за кож/,
+    match: /teri parvarish|уход\S* за кож(?!ей головы)/,
     articles: ['art-qishda-teri-parvarishi', 'art-kimyoviy-piling', 'art-hollywood-spectra-poralar-radeski'],
     links: [HARDWARE],
   },
@@ -147,6 +151,7 @@ const VIDEO_TOPICS: VideoTopic[] = [
   },
   {
     match: /dermatolog|дерматолог/,
+    broad: true,
     articles: ['art-akne-dermatolog-kosmetolog', 'art-teri-qichishi', 'art-ekzema'],
     links: [DERMATOLOGY],
   },
@@ -193,4 +198,19 @@ export function relatedVideos(video: ClinicVideo, videos: ClinicVideo[], limit =
     .sort((a, b) => b.score - a.score || a.index - b.index)
     .slice(0, limit)
     .map(({ item }) => item);
+}
+
+/** Videos on an article's subject (the reverse of videoTopicArticles), most relevant first. */
+export function articleTopicVideos(routeKey: string, videos: ClinicVideo[], limit = 3): ClinicVideo[] {
+  return videos
+    .map((video, index) => {
+      const topics = matchedTopics(video).filter((topic) => !topic.broad);
+      const ranks = topics.map((topic) => topic.articles.indexOf(routeKey)).filter((rank) => rank >= 0);
+      // A video about this one subject beats a video that touches several.
+      return { video, index, rank: ranks.length ? Math.min(...ranks) : -1, spread: topics.length };
+    })
+    .filter((entry) => entry.rank >= 0)
+    .sort((a, b) => a.rank - b.rank || a.spread - b.spread || a.index - b.index)
+    .slice(0, limit)
+    .map(({ video }) => video);
 }

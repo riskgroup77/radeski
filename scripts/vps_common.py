@@ -245,6 +245,11 @@ for MAP in radeski-article-redirects.map.conf radeski-site-redirects.map.conf; d
 done
 nginx -t
 systemctl reload nginx
+# Renews only certificates within 30 days of expiry (backs up the certbot timer).
+if command -v certbot >/dev/null; then
+  certbot renew --quiet --no-random-sleep-on-renew || echo "WARNING: certbot renew failed — check: certbot certificates"
+  certbot certificates 2>/dev/null | grep -E "Domains|Expiry" || true
+fi
 echo DEPLOY_OK
 git log -1 --oneline
 """

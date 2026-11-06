@@ -31,6 +31,9 @@ import ArticleViewsBadge from './ArticleViewsBadge';
 import { findArticleAuthorDoctor } from '../utils/articleAuthor';
 import { pickRelatedArticles } from '../utils/relatedArticles';
 import { doctorRouteKey } from '../utils/doctorSlug';
+import type { ClinicVideo } from '../data/sitePagesContent';
+import { articleTopicVideos } from '../utils/videoTopics';
+import VideoPosterCard from './VideoPosterCard';
 
 interface ArticlePageProps {
   locale: Locale;
@@ -39,6 +42,8 @@ interface ArticlePageProps {
   serviceCategories?: ServiceCategory[];
   /** For the author byline: a link to the doctor's profile (E-E-A-T for medical articles). */
   doctors?: Doctor[];
+  /** Clinic videos; the ones on the article's subject are shown under it. */
+  videos?: ClinicVideo[];
   dictionary?: Record<string, string>;
   onBackToList: () => void;
   onOpenArticle: (articleId: string) => void;
@@ -56,6 +61,7 @@ export default function ArticlePage({
   articles: loadedArticles,
   serviceCategories = [],
   doctors = [],
+  videos = [],
   dictionary,
   onBackToList,
   onOpenArticle: _onOpenArticle,
@@ -148,6 +154,7 @@ export default function ArticlePage({
   const relatedArticles = activeArticle
     ? pickRelatedArticles(activeArticle, filterPublicArticles(articles))
     : filterPublicArticles(articles).slice(0, 3);
+  const topicVideos = activeArticle ? articleTopicVideos(resolveArticleRouteKey(activeArticle), videos) : [];
   const authorDoctor = activeArticle ? findArticleAuthorDoctor(activeArticle, doctors) : undefined;
 
   const shareUrl = activeArticle
@@ -345,6 +352,19 @@ export default function ArticlePage({
                     </li>
                   ))}
                 </ul>
+              </section>
+            )}
+
+            {topicVideos.length > 0 && (
+              <section className="mt-10">
+                <h2 className="text-lg sm:text-xl font-extrabold text-brand-text-primary tracking-tight mb-4">
+                  {locale === 'uz' ? 'Mavzu bo‘yicha videolar' : locale === 'ru' ? 'Видео по теме' : 'Videos on this topic'}
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-xl">
+                  {topicVideos.map((video) => (
+                    <VideoPosterCard key={video.id} video={video} locale={locale} headingLevel="h3" />
+                  ))}
+                </div>
               </section>
             )}
 
