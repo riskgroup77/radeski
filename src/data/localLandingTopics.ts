@@ -264,6 +264,109 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
     ],
   },
 
+  // Facts from the clinic's own materials: the surgeon's profile (abduvaliyevBegaliProfile:
+  // FUE, DHI, Long Hair, 4 years, 1000+ operations), the price list (from 7 000 000), the
+  // published FUE cases (follow-up 6–12 months) and the clinic videos (beard, women, aftercare).
+  'soch-ekish': {
+    about: [
+      L(
+        'Soch ekish (transplantatsiya) — sochi siyraklashgan yoki to‘kilib ketgan joyga bemorning o‘z soch follikulalarini ko‘chirib o‘tkazish operatsiyasi. Follikulalar donor zonadan — odatda ensa va chakkadan olinadi: bu sochlar androgenetik alopetsiyada to‘kilmaydi, shuning uchun yangi joyda ham o‘sishda davom etadi.',
+        'Пересадка волос (трансплантация) — операция, при которой собственные волосяные фолликулы пациента переносят в зону поредения или облысения. Фолликулы берут из донорской зоны — обычно с затылка и висков: эти волосы не выпадают при андрогенетической алопеции и продолжают расти на новом месте.',
+        'A hair transplant moves the patient’s own hair follicles into thinning or bald areas. Follicles are taken from the donor area — usually the back and sides of the head: these hairs do not fall out in androgenetic alopecia, so they keep growing in their new place.',
+      ),
+      L(
+        'Radeski’da operatsiyani dermatolog-trixolog Dr. Abduvaliyev Begali Sheraliyevich bajaradi: soch transplantatsiyasida 4 yillik tajriba va 1000 dan ortiq operatsiya. FUE va DHI usullari, Long Hair transplantatsiyasi va soqol ekish qilinadi; ko‘rsatma bo‘lsa, androgenetik alopetsiyasi bor ayollarga ham soch ekiladi. Operatsiya klinikaning operatsion blokida o‘tadi.',
+        'В Radeski операцию проводит дерматолог-трихолог Абдувалиев Бегали Шералиевич: 4 года опыта в трансплантации волос и более 1000 операций. Выполняются методы FUE и DHI, Long Hair трансплантация и пересадка бороды; при показаниях волосы пересаживают и женщинам с андрогенетической алопецией. Операция проходит в операционном блоке клиники.',
+        'At Radeski the operation is performed by dermatologist-trichologist Dr. Begali Abduvaliyev: 4 years in hair transplantation and more than 1,000 operations. FUE and DHI, Long Hair transplants and beard transplants are offered; women with androgenetic alopecia are also treated when indicated. The operation takes place in the clinic’s surgical suite.',
+      ),
+      L(
+        'Soch ekishdan oldin trixolog to‘kilish sababini aniqlaydi (trixoskopiya, kerak bo‘lsa qon tahlillari) va donor zonani baholaydi. To‘kilish faol bo‘lsa yoki sababi boshqa bo‘lsa — diffuz to‘kilish, o‘choqli alopetsiya, temir yoki gormon muammosi — avval davolash buyuriladi: ekilgan sochlar bilan birga o‘zingizning sochlaringizni ham saqlab qolish kerak.',
+        'Перед пересадкой трихолог выясняет причину выпадения (трихоскопия, при необходимости анализы крови) и оценивает донорскую зону. Если выпадение активное или причина другая — диффузное выпадение, очаговая алопеция, дефицит железа, гормоны — сначала назначают лечение: важно сохранить не только пересаженные, но и собственные волосы.',
+        'Before a transplant the trichologist finds the cause of hair loss (trichoscopy, blood tests if needed) and assesses the donor area. If the loss is active or has another cause — diffuse shedding, alopecia areata, iron or hormone problems — treatment comes first: your own hair needs saving as well as the transplanted grafts.',
+      ),
+      L(
+        'Natija bosqichma-bosqich ko‘rinadi: ekilgan sochlar odatda dastlabki haftalarda to‘kiladi (follikula saqlanib qoladi — bu normal), yangi sochlar taxminan 3–4 oydan o‘sa boshlaydi, yakuniy zichlik 9–12 oyda shakllanadi. Radeski’da operatsiyadan keyin 6–12 oy davomida nazorat ko‘riklari o‘tkaziladi.',
+        'Результат проявляется постепенно: пересаженные волосы обычно выпадают в первые недели (фолликул остаётся — это норма), новые волосы начинают расти примерно через 3–4 месяца, итоговая густота формируется к 9–12 месяцам. В Radeski после операции 6–12 месяцев проводятся контрольные осмотры.',
+        'Results come in stages: transplanted hairs usually shed in the first weeks (the follicle stays — this is normal), new hair starts growing after about 3–4 months, and the final density forms by 9–12 months. Radeski follows patients up for 6–12 months after the operation.',
+      ),
+    ],
+    steps: [
+      L(
+        'Trixolog konsultatsiyasi va trixoskopiya: to‘kilish sababi va donor zona baholanadi',
+        'Консультация трихолога и трихоскопия: причина выпадения и оценка донорской зоны',
+        'Trichologist consultation and trichoscopy: cause of hair loss and donor area assessment',
+      ),
+      L(
+        'Reja: soch chizig‘i belgilanadi, usul (FUE yoki DHI), graftlar soni va narx oldindan aytiladi',
+        'План: рисуется линия роста, выбирается метод (FUE или DHI), количество графтов и стоимость озвучиваются заранее',
+        'Plan: the hairline is drawn, the method (FUE or DHI), number of grafts and cost are agreed in advance',
+      ),
+      L(
+        'Operatsiya kuni: operatsion blokda, mahalliy og‘riqsizlantirish ostida',
+        'День операции: в операционном блоке, под местной анестезией',
+        'Operation day: in the surgical suite, under local anaesthesia',
+      ),
+      L(
+        'Tiklanish: parvarish bo‘yicha yozma ko‘rsatmalar va 6–12 oy nazorat ko‘riklari',
+        'Восстановление: письменные рекомендации по уходу и контрольные осмотры 6–12 месяцев',
+        'Recovery: written aftercare instructions and follow-up visits for 6–12 months',
+      ),
+    ],
+    faqs: [
+      Q(
+        L('Soch ekish narxi qancha?', 'Сколько стоит пересадка волос?', 'How much does a hair transplant cost?'),
+        L(
+          'Radeski’da soch ekish 7 000 000 so‘mdan boshlanadi, ko‘pincha 7–12 mln so‘m oralig‘ida. Yakuniy narx graftlar soni va usulga bog‘liq — u konsultatsiyada, soch chizig‘i va donor zona baholangandan keyin aytiladi.',
+          'В Radeski пересадка волос стоит от 7 000 000 сум, чаще всего 7–12 млн сум. Итоговая цена зависит от количества графтов и метода — её называют на консультации после оценки линии роста и донорской зоны.',
+          'At Radeski a hair transplant starts at 7,000,000 UZS, most often 7–12 million UZS. The final price depends on the number of grafts and the method — it is given at the consultation after the hairline and donor area are assessed.',
+        ),
+      ),
+      Q(
+        L('FUE va DHI usullarining farqi nimada?', 'Чем отличаются методы FUE и DHI?', 'What is the difference between FUE and DHI?'),
+        L(
+          'Ikkalasida ham graftlar donor zonadan bittadan, chandiq qoldirmasdan olinadi. FUE’da graftlar oldindan ochilgan mikrokanallarga joylanadi, DHI’da esa maxsus implanter bilan kanal ochish va ekish bir harakatda bajariladi. Qaysi biri mosligini shifokor soch turi, zona va zichlikka qarab tanlaydi.',
+          'В обоих методах графты берут из донорской зоны по одному, без линейного рубца. При FUE их помещают в заранее подготовленные микроканалы, при DHI специальный имплантер формирует канал и вводит графт одним движением. Подходящий метод врач выбирает по типу волос, зоне и нужной густоте.',
+          'In both, grafts are taken from the donor area one by one, without a linear scar. In FUE they are placed into pre-made micro-channels; in DHI a special implanter makes the channel and places the graft in one movement. The doctor picks the method by hair type, area and target density.',
+        ),
+      ),
+      Q(
+        L('Ekilgan sochlar to‘kilib ketadimi?', 'Выпадут ли пересаженные волосы?', 'Will the transplanted hair fall out?'),
+        L(
+          'Dastlabki haftalarda ekilgan soch tolalari odatda to‘kiladi — bu normal: follikula terida qoladi va taxminan 3–4 oydan yangi soch o‘sadi. Donor zonadan olingan follikulalar androgenetik to‘kilishga chidamli, shuning uchun natija uzoq muddatli.',
+          'В первые недели пересаженные стержни волос обычно выпадают — это нормально: фолликул остаётся в коже, и примерно через 3–4 месяца растёт новый волос. Фолликулы из донорской зоны устойчивы к андрогенетическому выпадению, поэтому результат долговременный.',
+          'In the first weeks the transplanted hair shafts usually shed — this is normal: the follicle stays in the skin and new hair grows in about 3–4 months. Donor follicles resist androgenetic hair loss, so the result lasts.',
+        ),
+      ),
+      Q(
+        L('Kimga soch ekish mumkin emas?', 'Кому нельзя пересаживать волосы?', 'Who should not have a hair transplant?'),
+        L(
+          'Qon ivishi buzilganda, qandli diabet nazoratsiz bo‘lsa, o‘tkir infeksiya, bosh terisida faol yallig‘lanish, faol o‘choqli alopetsiya yoki onkologik kasallikning faol davrida operatsiya qilinmaydi yoki keyinga suriladi. Homiladorlik va emizish davrida ham kutish kerak. Qaror konsultatsiyada qabul qilinadi.',
+          'Операцию не проводят или откладывают при нарушениях свёртываемости крови, некомпенсированном диабете, острой инфекции, активном воспалении кожи головы, активной очаговой алопеции и в активной фазе онкологического заболевания. При беременности и грудном вскармливании тоже нужно подождать. Решение принимается на консультации.',
+          'The operation is not done or is postponed with bleeding disorders, uncontrolled diabetes, acute infection, active scalp inflammation, active alopecia areata or active cancer treatment. Pregnancy and breastfeeding are also a reason to wait. The decision is made at the consultation.',
+        ),
+      ),
+      Q(
+        L('Ayollarga va soqolga ham ekish mumkinmi?', 'Можно ли пересадить волосы женщинам и в бороду?', 'Can women and beards be treated too?'),
+        L(
+          'Ha. Androgenetik alopetsiyasi bor ayollarga, donor zona yetarli bo‘lsa, soch ekiladi; erkaklarga soqol va mo‘ylov ekish ham qilinadi. Ayollarda avval gormonal va temir tanqisligi sabablari tekshiriladi.',
+          'Да. Женщинам с андрогенетической алопецией пересадку делают при достаточной донорской зоне; мужчинам выполняют пересадку бороды и усов. У женщин сначала проверяют гормональные причины и дефицит железа.',
+          'Yes. Women with androgenetic alopecia can have a transplant when the donor area allows; men can have beard and moustache transplants. In women hormonal causes and iron deficiency are checked first.',
+        ),
+      ),
+      Q(
+        L('Operatsiyadan keyin nimalarga e’tibor berish kerak?', 'Что важно после операции?', 'What matters after the operation?'),
+        L(
+          'Shifokor yozma parvarish rejasini beradi: bosh terisini qanday yuvish, qaysi kunlardan sport, hammom va quyoshga chiqish mumkinligi. Ekilgan zonani ishqalamaslik va bosh kiyimni ko‘rsatmaga ko‘ra kiyish muhim. Nazorat ko‘riklari natijani kuzatish va kerak bo‘lsa sochni qo‘llab-quvvatlovchi davolash uchun o‘tkaziladi.',
+          'Врач даёт письменный план ухода: как мыть кожу головы, с какого дня можно спорт, баню и солнце. Важно не тереть пересаженную зону и носить головной убор по рекомендации. Контрольные визиты нужны, чтобы следить за результатом и при необходимости поддержать волосы лечением.',
+          'The doctor gives a written aftercare plan: how to wash the scalp and when sport, sauna and sun are allowed again. Do not rub the grafted area and wear headwear as advised. Follow-up visits track the result and add supportive hair treatment if needed.',
+        ),
+      ),
+    ],
+    // The operation only: the page's "from" price is the lowest row, and a consultation row
+    // would make it read "hair transplant from 150 000".
+    priceNames: ['Soch ekish (narxdan boshlab)'],
+  },
+
   'tirnoq-zamburug': {
     about: [
       L(

@@ -106,7 +106,8 @@ function isPlaceholderSection(page: PageId): boolean {
  * competing with the page that has the prices, doctors and FAQ. Same for offers whose full
  * page already exists: phototherapy (/services/dermatologiya/fototerapiya), CO₂ removal of
  * moles and growths (/fargona/osma-olib-tashlash, the DEKA CO₂ page) and carbon peel (the
- * Hollywood Spectra page). An offer page is one slide — a title, a sentence and a price.
+ * Hollywood Spectra page) and hair transplant (/fargona/soch-ekish). An offer page is one
+ * slide — a title, a sentence and a price.
  */
 const PROMO_SLUGS_WITH_CITY_PAGES = new Set([
   'dermataskopiya',
@@ -116,6 +117,7 @@ const PROMO_SLUGS_WITH_CITY_PAGES = new Set([
   'fototerapiya',
   'co2-lazer',
   'karbon-peeling',
+  'soch-ekish',
 ]);
 
 /**

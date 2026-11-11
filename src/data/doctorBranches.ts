@@ -20,4 +20,7 @@ export const DOCTOR_BRANCHES: Record<string, LocalSeoCity[]> = {
   'karimova-iroda': ['qoqon'],
   // Profile: "Farg'ona va Qo'qon filiallari"
   'usmanova-mohinabonu-anvarovna': ['fargona', 'qoqon'],
+  // Published patient reviews: "Fargʻona filialidagi Begali Abduvaliyev" and
+  // "Qoqon filialiga Begali akaga … murojat qildim"
+  'abdvaliyev-begali': ['fargona', 'qoqon'],
 };

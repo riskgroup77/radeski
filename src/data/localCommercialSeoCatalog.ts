@@ -447,6 +447,54 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
       whoFor: [L('Alopecia', 'Алопеция', 'Alopecia')],
       methods: [L('PRP', 'PRP', 'PRP'), L('Trixolog', 'Трихолог', 'Trichologist')],
     }),
+    // Hair transplant: the only page for it (the /promo/soch-ekish slide is noindex). Fergana
+    // only — the surgical suite's branch is not stated for Kokand in the clinic's materials.
+    withKeywords(
+      treatmentLanding('fargona', 'soch-ekish', 'trihologiya-centr-lechenie-volos', {
+        name: L('Soch ekish', 'Пересадка волос', 'Hair transplant'),
+        promoSlug: 'soch-ekish',
+        articleRouteKeys: ['art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya'],
+        problem: L(
+          'Tepa, peshona yoki chakkada soch siyraklashib, oldingi holiga qaytmayapti.',
+          'Волосы поредели на макушке, лбу или висках и не восстанавливаются.',
+          'Hair has thinned on the crown, front or temples and is not growing back.',
+        ),
+        whoFor: [
+          L(
+            'Androgenetik alopetsiya: peshona chizig‘i orqaga ketgan yoki tepada soch siyraklashgan erkaklar',
+            'Андрогенетическая алопеция: у мужчин отступила линия роста или поредела макушка',
+            'Androgenetic alopecia: men with a receding hairline or thinning crown',
+          ),
+          L(
+            'Androgenetik alopetsiyasi bor, donor zonasi yetarli ayollar',
+            'Женщины с андрогенетической алопецией и достаточной донорской зоной',
+            'Women with androgenetic alopecia and enough donor hair',
+          ),
+          L(
+            'Soqol yoki mo‘ylovni qalinlashtirmoqchi bo‘lgan erkaklar',
+            'Мужчинам, которые хотят сделать гуще бороду или усы',
+            'Men wanting a fuller beard or moustache',
+          ),
+          L(
+            'Chandiq yoki avvalgi operatsiyadan keyin sochsiz qolgan joylar (shifokor ko‘rigidan keyin)',
+            'Участки без волос после рубца или прошлой операции (после осмотра врача)',
+            'Hairless patches after a scar or a previous operation (after a doctor’s assessment)',
+          ),
+        ],
+        methods: [
+          L('FUE — graftlarni bittadan olib, mikrokanallarga ekish', 'FUE — забор графтов по одному и пересадка в микроканалы', 'FUE — grafts taken one by one and placed into micro-channels'),
+          L('DHI — implanter bilan kanal ochish va ekish bir harakatda', 'DHI — имплантер формирует канал и вводит графт одним движением', 'DHI — an implanter makes the channel and places the graft in one move'),
+          L('Long Hair transplantatsiyasi — sochni qirqmasdan ekish', 'Long Hair — пересадка без короткой стрижки', 'Long Hair transplant — without shaving the hair short'),
+          L('Soqol va mo‘ylov ekish', 'Пересадка бороды и усов', 'Beard and moustache transplant'),
+          L('Operatsiyadan oldin va keyin trixologik davolash (PRP va boshqalar)', 'Трихологическое лечение до и после операции (PRP и др.)', 'Trichology treatment before and after the operation (PRP and more)'),
+        ],
+      }),
+      L(
+        "soch ekish Farg'ona, soch ko'chirish Farg'ona, soch transplantatsiyasi, FUE soch ekish, DHI, soqol ekish, soch ekish narxi, Radeski Skin Clinic",
+        'пересадка волос Фергана, трансплантация волос, FUE, DHI, пересадка бороды, пересадка волос цена, Radeski Skin Clinic',
+        'hair transplant Fergana, hair transplantation Uzbekistan, FUE hair transplant, DHI, beard transplant, hair transplant cost, Radeski Skin Clinic',
+      ),
+    ),
     treatmentLanding('fargona', 'dermatoskopiya', 'dermatoskopiya', {
       articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-xol-tekshiruvi-dermatoskopiya'],
       name: L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'),

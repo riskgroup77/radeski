@@ -36,6 +36,11 @@ const condition = (slug: string, label: Record<Locale, string>): TopicLink => ({
 
 const TRICHOLOGY = category('trihologiya-centr-lechenie-volos', L('Trixologiya markazi', 'Центр трихологии', 'Trichology centre'));
 const TRICHOSCOPY = category('trixoskopiya', L('Trixoskopiya', 'Трихоскопия', 'Trichoscopy'));
+/** The hair transplant page (a city page: the clinic has no sub-service for it). */
+const HAIR_TRANSPLANT: TopicLink = {
+  label: L("Soch ekish Farg'onada", 'Пересадка волос в Фергане', 'Hair transplant in Fergana'),
+  path: (l) => `/${l}/fargona/soch-ekish`,
+};
 const EPILATION = category('lazernaya-epilyaciya', L('Lazer epilyatsiya', 'Лазерная эпиляция', 'Laser hair removal'));
 const DERMATOLOGY = category('dermatologiya', L('Dermatologiya', 'Дерматология', 'Dermatology'));
 const ONCOLOGY = category('dermatoonkologiya', L('Dermatoonkologiya', 'Дерматоонкология', 'Dermato-oncology'));
@@ -51,7 +56,7 @@ const VIDEO_TOPICS: VideoTopic[] = [
   {
     match: /soch ekish|soqol|transplant|пересадк/,
     articles: ['art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi'],
-    links: [TRICHOLOGY],
+    links: [HAIR_TRANSPLANT, TRICHOLOGY],
   },
   {
     match: /tuliy|тулиев|thulium/,

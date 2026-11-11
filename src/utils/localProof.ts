@@ -46,6 +46,7 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
   ipl: ['kosmetolog', 'dermatolog'],
   'lazer-epilyatsiya': ['kosmetolog', 'dermatolog'],
   trixolog: ['trixolog'],
+  'soch-ekish': ['trixolog'],
   'soch-tokilish': ['trixolog'],
   trixoskopiya: ['trixolog'],
   podolog: ['podolog'],
@@ -61,10 +62,23 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
   'sogal-olib-tashlash': ['xirurg', 'dermatolog'],
 };
 
+/**
+ * Topics only some specialists perform (an operation): the doctors' URL slugs. Without this
+ * every trichologist would be listed as doing hair transplants.
+ */
+const TOPIC_DOCTORS: Record<string, string[]> = {
+  // Profile: hair transplant specialist, 1000+ operations (abduvaliyevBegaliProfile)
+  'soch-ekish': ['abdvaliyev-begali'],
+};
+
 /** Doctors of the landing's branch whose specialty matches the topic (best match first). */
 export function doctorsForLanding(landing: LocalCommercialLanding, doctors: Doctor[]): Doctor[] {
-  const wanted = TOPIC_SPECIALTIES[landingTopicKey(landing.slug)] ?? ['dermatolog'];
-  const inBranch = doctors.filter((doctor) => doctorBranches(doctor).includes(landing.city));
+  const topic = landingTopicKey(landing.slug);
+  const wanted = TOPIC_SPECIALTIES[topic] ?? ['dermatolog'];
+  const only = TOPIC_DOCTORS[topic];
+  const inBranch = doctors.filter(
+    (doctor) => doctorBranches(doctor).includes(landing.city) && (!only || only.includes(doctorRouteKey(doctor))),
+  );
   const rank = (doctor: Doctor) => {
     const specialties = doctorSpecialties(doctor);
     const index = wanted.findIndex((specialty) => specialties.includes(specialty));
@@ -88,6 +102,8 @@ const TOPIC_KEYWORDS: Record<string, RegExp> = {
   'lazer-tomir': /tomir|сосуд|vascul|derma v/i,
   ipl: /\bipl\b/i,
   'lazer-epilyatsiya': /epil|эпил/i,
+  // Before the hair-loss topics; "transplant" alone would also take melanocyte grafting.
+  'soch-ekish': /soch ekish|soqol ekish|soch transplant|hair transplant|пересадк\S* (волос|бород)|трансплантаци\S* волос|\bFUE\b|\bDHI\b/i,
   trixolog: /trix|trich|трих|soch|волос|hair|alopes|алопец/i,
   'soch-tokilish': /soch|волос|hair|alopes|алопец|trix|трих/i,
   trixoskopiya: /trixoskop|трихоскоп|trichoscop|soch|волос/i,

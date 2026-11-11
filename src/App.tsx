@@ -81,7 +81,7 @@ import ClinicAiChat from './components/ClinicAiChat';
 import CityServiceLinks from './components/CityServiceLinks';
 
 /** Main city service pages linked from the home page (each owns "<specialist> <city>"). */
-const HOME_CITY_LANDING_SLUGS = ['dermatolog', 'kosmetolog', 'trixolog', 'podolog', 'lazer-epilyatsiya', 'dermatoskopiya'];
+const HOME_CITY_LANDING_SLUGS = ['dermatolog', 'kosmetolog', 'trixolog', 'podolog', 'lazer-epilyatsiya', 'dermatoskopiya', 'soch-ekish'];
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
 import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
