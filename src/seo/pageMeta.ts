@@ -74,13 +74,19 @@ export function buildArticleSeoTitle(title: string, locale: Locale): string {
   ]);
 }
 
+/**
+ * A sentence end before this would leave a snippet under ~110 characters (Google then writes
+ * its own): cut at a word instead.
+ */
+const DESCRIPTION_MIN_SENTENCE_CUT = 110;
+
 /** Trims a description to what search results show — at a sentence end when possible. */
 export function fitDescription(text: string): string {
   const clean = text.replace(/\s+/g, ' ').trim();
   if (clean.length <= DESCRIPTION_MAX_LENGTH) return clean;
   const cut = clean.slice(0, DESCRIPTION_MAX_LENGTH);
   const sentenceEnd = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '), cut.lastIndexOf('? '));
-  if (sentenceEnd >= 90) return cut.slice(0, sentenceEnd + 1);
+  if (sentenceEnd >= DESCRIPTION_MIN_SENTENCE_CUT) return cut.slice(0, sentenceEnd + 1);
   const wordEnd = cut.lastIndexOf(' ');
   return `${cut.slice(0, wordEnd > 90 ? wordEnd : DESCRIPTION_MAX_LENGTH - 1).replace(/[,;:—–-]+$/, '')}…`;
 }

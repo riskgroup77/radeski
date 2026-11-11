@@ -52,6 +52,23 @@ map $uri $radeski_spa_known {
     "~^/(uz|ru|en)/(about|services|conditions|doctors|prices|articles|videos|branches|qoqon|fargona|results|technologies|daavlin-foto-kabinalari|dermoscan|science|obrazovaniya|malaka-oshirish|tele-dermatology|skin-pathology-center|brend|terms|privacy|fikr|promo|clinic-equipment|admin)(/|$)" 1;
 }
 
+# Detail pages the build did not prerender (an article/doctor/video added in the admin panel
+# since the last nightly build, a scheduled article before its day, an old alias, or a typo)
+# still get the SPA shell so visitors see the page, but crawlers are told not to index that
+# copy — the nightly build prerenders real items. Without this they were soft-404s.
+map $uri $radeski_spa_robots {
+    default "";
+    "~^/(uz|ru|en)/(articles|doctors|videos)/[^/]+/?$" "noindex, follow";
+}
+
+# Bare domain: server-side redirect to a language home page (crawlers send no
+# Accept-Language and get /uz, the x-default). It used to be an empty JS-only shell.
+map $http_accept_language $radeski_root_locale {
+    default uz;
+    "~*^\\s*ru" ru;
+    "~*^\\s*en" en;
+}
+
 # HTML must be revalidated so visitors get a new deploy immediately (assets are hashed).
 map $sent_http_content_type $radeski_html_cache_control {
     "~^text/html" "no-cache";
@@ -98,6 +115,32 @@ REVIEWS_LOCATION = f"""location = /api/reviews/submit {{
 
     """
 
+OLD_SPA_LOCATION = """location @radeski_spa {
+        if ($radeski_spa_known = 0) {
+            return 404;
+        }
+        rewrite ^ /index.html break;
+    }"""
+SPA_LOCATION = f"""location @radeski_spa {{
+        if ($radeski_spa_known = 0) {{
+            return 404;
+        }}
+        {INCLUDE_HEADERS}
+        add_header X-Robots-Tag $radeski_spa_robots always;
+        rewrite ^ /index.html break;
+    }}"""
+
+SEO_MARKER = "# radeski-seo (managed by nginx_upgrade.py)"
+SEO_BLOCK = f"""{SEO_MARKER}
+    location = / {{
+        {INCLUDE_HEADERS}
+        add_header Vary "Accept-Language" always;
+        return 302 /$radeski_root_locale$is_args$args;
+    }}
+    # end radeski-seo
+
+    """
+
 PERF_MARKER = "# radeski-perf (managed by nginx_upgrade.py)"
 PERF_BLOCK = f"""{PERF_MARKER}
     location ^~ /assets/ {{
@@ -140,12 +183,7 @@ PERF_BLOCK = f"""{PERF_MARKER}
         return 301 /uz/fikr;
     }}
 
-    location @radeski_spa {{
-        if ($radeski_spa_known = 0) {{
-            return 404;
-        }}
-        rewrite ^ /index.html break;
-    }}
+    {SPA_LOCATION}
 
     error_page 404 /index.html;
     # end radeski-perf
@@ -239,10 +277,16 @@ def patch_site(text: str) -> str:
                 if new_body != body and not any(e[0] == l_body for e in edits):
                     edits.append((l_body, l_end, new_body))
 
+        root_loc = next((l for l in locations if re.match(r"location\s+/\s*\{", block[l[0]:l[1]])), None)
+        root_anchor = root_loc[0] if root_loc else s_end - s_start - 1
         if PERF_MARKER not in block:
-            root_loc = next((l for l in locations if re.match(r"location\s+/\s*\{", block[l[0]:l[1]])), None)
-            anchor = root_loc[0] if root_loc else s_end - s_start - 1
-            edits.append((anchor, anchor, PERF_BLOCK))
+            edits.append((root_anchor, root_anchor, PERF_BLOCK))
+        if SEO_MARKER not in block and not re.search(r"location\s*=\s*/\s*\{", block):
+            edits.append((root_anchor, root_anchor, SEO_BLOCK))
+        # Servers upgraded before the robots header existed: swap in the new SPA fallback.
+        old_spa = block.find(OLD_SPA_LOCATION)
+        if old_spa != -1:
+            edits.append((old_spa, old_spa + len(OLD_SPA_LOCATION), SPA_LOCATION))
 
         if "location = /api/reviews/submit" not in block:
             api_loc = next(

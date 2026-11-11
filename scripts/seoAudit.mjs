@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * Technical SEO check of the built site (dist/), run at the end of every build:
- * titles/descriptions (missing, duplicate, too long), exactly one H1, canonical + hreflang,
+ * titles/descriptions (missing, duplicate, too long/short), exactly one H1, canonical + hreflang,
+ * no URL listed twice in the sitemap,
  * no noindex pages in the sitemap, valid JSON-LD, images with alt text, and internal links
  * that point at pages which do not exist or that nginx 301-redirects (nginx/*.map.conf).
  * Prints a summary; never fails the build.
@@ -16,6 +17,8 @@ const ORIGIN = 'https://radeski.uz';
 const verbose = process.argv.includes('--verbose');
 const TITLE_MAX = 60;
 const DESC_MAX = 160;
+/** Google rewrites very short descriptions with text of its own choosing. */
+const DESC_MIN = 100;
 // Paths the app serves without a prerendered file (see nginx $radeski_spa_known).
 const SPA_SECTIONS = /^\/(uz|ru|en)(\/(about|services|conditions|doctors|prices|articles|videos|branches|qoqon|fargona|results|technologies|daavlin-foto-kabinalari|dermoscan|science|obrazovaniya|malaka-oshirish|tele-dermatology|skin-pathology-center|brend|terms|privacy|fikr|promo)(\/.*)?)?\/?$/;
 
@@ -46,7 +49,8 @@ const pick = (html, re) => (html.match(re) || [])[1];
 function main() {
   if (!existsSync(dist)) return console.warn('[seo-audit] no dist/ — skipped');
   const sitemap = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');
-  const sitemapUrls = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
+  const sitemapLocs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const sitemapUrls = new Set(sitemapLocs);
   const pages = walk(dist).filter((file) => path.relative(dist, file) !== 'index.html');
   const existing = new Set(pages.map((file) => `/${path.relative(dist, path.dirname(file)).split(path.sep).join('/')}`));
 
@@ -73,6 +77,7 @@ function main() {
     else if (title.length > TITLE_MAX) add('title too long', url, `${title.length}`);
     if (!description) add('description missing', url);
     else if (description.length > DESC_MAX) add('description too long', url, `${description.length}`);
+    else if (description.length < DESC_MIN) add('description too short', url, `${description.length}`);
     if (title) titles.set(title, [...(titles.get(title) ?? []), url]);
     if (description) descriptions.set(description, [...(descriptions.get(description) ?? []), url]);
     if (h1Count !== 1) add('H1 count is not 1', url, `${h1Count}`);
@@ -115,6 +120,11 @@ function main() {
   for (const [, urls] of descriptions) if (urls.length > 1) add('duplicate description', urls[0], `${urls.length} pages`);
   for (const [href, urls] of brokenLinks) add('link to unknown page', href, `from ${urls.length} page(s), e.g. ${urls[0]}`);
   for (const [href, urls] of redirectLinks) add('link to a redirected URL', href, `from ${urls.length} page(s), e.g. ${urls[0]}`);
+  const seenLocs = new Set();
+  for (const loc of sitemapLocs) {
+    if (seenLocs.has(loc)) add('duplicate sitemap URL', loc);
+    seenLocs.add(loc);
+  }
   for (const url of sitemapUrls) {
     const local = new URL(url).pathname.replace(/\/$/, '');
     if (local && !existing.has(local)) add('sitemap URL without page', url);

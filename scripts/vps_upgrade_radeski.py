@@ -62,6 +62,10 @@ check "video sitemap"            "$(curl -s --max-time 20 https://radeski.uz/sit
 check "doctor slug page"         "$(curl -s --max-time 20 https://radeski.uz/uz/doctors/ashurov-dilshod-davlatovich | grep -c 'BreadcrumbList')" 1
 check "unknown page is 404"      "$(code https://radeski.uz/uz/bunday-sahifa-yoq)" 404
 check "new article path is 200"   "$(code https://radeski.uz/uz/articles/yangi-maqola-tekshiruv)" 200
+check "new article path noindex"  "$(curl -sI --max-time 20 https://radeski.uz/uz/articles/yangi-maqola-tekshiruv | grep -ci '^x-robots-tag: noindex')" 1
+check "real article indexable"    "$(curl -sI --max-time 20 https://radeski.uz/uz/articles/art-atopic-dermatitis | grep -ci '^x-robots-tag')" 0
+check "bare domain -> 302"        "$(code https://radeski.uz/)" 302
+check "bare domain, ru browser"   "$(curl -s -o /dev/null -w '%{redirect_url}' --max-time 20 -H 'Accept-Language: ru-RU,ru;q=0.9' https://radeski.uz/)" "https://radeski.uz/ru"
 check "/uz/contacts -> 301"       "$(code https://radeski.uz/uz/contacts)" 301
 check "assets cached 1 year"      "$(curl -sI --max-time 20 https://radeski.uz$(curl -s --max-time 20 https://radeski.uz/uz | grep -oE '/assets/index-[^"]+\.js' | head -1) | grep -ci 'max-age=31536000')" 1
 check "image variant served"      "$(code https://radeski.uz/img-cache/index.json)" 200
