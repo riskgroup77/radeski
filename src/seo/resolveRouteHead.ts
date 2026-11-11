@@ -697,12 +697,13 @@ function buildLandingSeoDescription(
   const base = getLocalizedCopy(landing.seo.desc, locale);
   if (!details) return base;
   const h1 = getLocalizedCopy(landing.h1, locale);
+  const unit = details.topic?.priceUnit ? getLocalizedCopy(details.topic.priceUnit, locale) : '';
   const price = details.minPrice
     ? locale === 'uz'
-      ? ` — ${formatUzs(details.minPrice, locale)}dan`
+      ? ` — ${unit ? `${unit} ` : ''}${formatUzs(details.minPrice, locale)}dan`
       : locale === 'ru'
-        ? ` — от ${formatUzs(details.minPrice, locale)}`
-        : ` — from ${formatUzs(details.minPrice, locale)}`
+        ? ` — от ${formatUzs(details.minPrice, locale)}${unit ? ` за ${unit}` : ''}`
+        : ` — from ${formatUzs(details.minPrice, locale)}${unit ? ` per ${unit}` : ''}`
     : '';
   const first = details.about[0]?.match(/^.+?[.!?](?=\s|$)/)?.[0] ?? '';
   return first ? `${h1}${price}. ${first}` : `${h1}${price}. ${base}`;

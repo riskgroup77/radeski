@@ -114,7 +114,7 @@ export function resolveLocalLandingDetails(
   const maxPrice = values.length ? Math.max(...values) : undefined;
 
   const faqs: LandingFaq[] = [];
-  if (minPrice) {
+  if (minPrice && !topic?.hasPriceFaq) {
     const service = lowerFirst(serviceName, locale);
     faqs.push(
       locale === 'uz'

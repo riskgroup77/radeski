@@ -19,6 +19,10 @@ export interface LocalLandingTopic {
    * exists in several sections.
    */
   priceNames: string[];
+  /** The topic's own FAQ answers the price question: no generated "how much is it?" entry. */
+  hasPriceFaq?: boolean;
+  /** Prices are per unit (botulinum toxin): "from 30 000 per unit", not "from 30 000". */
+  priceUnit?: LocalizedCopy;
 }
 
 function L(uz: string, ru: string, en: string): LocalizedCopy {
@@ -365,6 +369,107 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
     // The operation only: the page's "from" price is the lowest row, and a consultation row
     // would make it read "hair transplant from 150 000".
     priceNames: ['Soch ekish (narxdan boshlab)'],
+    hasPriceFaq: true,
+  },
+
+  // Facts from the clinic's own materials: the botulinum therapy article (products, 15–20 min,
+  // onset ~1 week, result at 2 weeks, lasts 3–8 months, contraindications, aftercare), the
+  // price list (per unit; hyperhidrosis) and Dr. Mangasaryan's profile (Full Face).
+  botoks: {
+    about: [
+      L(
+        'Botoks (botulinoterapiya) — mimik mushaklarga A tipidagi botulotoksin preparatini kiritib, ajinlarni yumshatish usuli. Mushak vaqtincha bo‘shashadi, teri tekislanadi, yuz ifodasi esa tabiiy qoladi. Radeski’da sertifikatlangan preparatlar qo‘llaniladi — Dysport, Relatoks, Kseomin; qaysi biri mosligini shifokor konsultatsiyada tanlaydi.',
+        'Ботокс (ботулинотерапия) — введение препарата ботулотоксина типа А в мимические мышцы, чтобы разгладить морщины. Мышца временно расслабляется, кожа выравнивается, а мимика остаётся естественной. В Radeski используют сертифицированные препараты — Dysport, Релатокс, Ксеомин; подходящий выбирает врач на консультации.',
+        'Botox (botulinum therapy) relaxes the facial expression muscles with a type A botulinum toxin product so wrinkles soften. The muscle relaxes for a while, the skin smooths out, and the face still looks natural. Radeski uses certified products — Dysport, Relatox, Xeomin; the doctor chooses at the consultation.',
+      ),
+      L(
+        'Eng ko‘p qilinadigan zonalar: peshonadagi gorizontal ajinlar, qoshlar orasidagi vertikal chiziqlar, ko‘z atrofidagi «o‘rdak oyoqlari», yuqori lab ustidagi mayda ajinlar, bo‘yin va tushgan lab burchaklari. Botulotoksin ortiqcha terlashni (giperhidroz) davolashda ham qo‘llaniladi — qo‘ltiq osti, kaft va oyoq tagi.',
+        'Самые частые зоны: горизонтальные морщины лба, вертикальные складки между бровями, «гусиные лапки» вокруг глаз, мелкие морщины над верхней губой, шея и опущенные уголки губ. Ботулотоксин также применяют для лечения повышенной потливости (гипергидроза) — подмышки, ладони и стопы.',
+        'The most common areas are horizontal forehead lines, vertical frown lines between the brows, crow’s feet, fine lines above the upper lip, the neck and drooping mouth corners. Botulinum toxin is also used to treat excessive sweating (hyperhidrosis) — underarms, palms and soles.',
+      ),
+      L(
+        'Natija bosqichma-bosqich keladi: preparat taxminan bir haftadan keyin ta’sir qila boshlaydi, yakuniy natija 2 haftada baholanadi va 3–8 oy saqlanadi. Muolaja odatda har 4–12 oyda takrorlanadi. Botoks faqat mimik ajinlarni yumshatadi; teri elastikligi yo‘qolgan statik ajinlar uchun biorevitalizatsiya, kontur plastika yoki lazer kerak bo‘lishi mumkin.',
+        'Результат проявляется постепенно: препарат начинает действовать примерно через неделю, итог оценивают через 2 недели, и он держится 3–8 месяцев. Обычно процедуру повторяют раз в 4–12 месяцев. Ботокс разглаживает только мимические морщины; для статических, связанных с потерей упругости, может понадобиться биоревитализация, контурная пластика или лазер.',
+        'Results build up: the product starts working after about a week, the final result is assessed at 2 weeks and lasts 3–8 months. The treatment is usually repeated every 4–12 months. Botox only softens expression lines; static wrinkles from lost elasticity may need biorevitalization, fillers or laser.',
+      ),
+      L(
+        'Radeski’da inyeksiyalarni shifokor-kosmetolog Mangasaryan Lorena Georgievna bajaradi: mimik ajinlar korreksiyasi va kompleks botulinoterapiya (Full Face). Doza va nuqtalar har bir bemor uchun alohida belgilanadi — tabiiy ifodani saqlash va ptoz yoki asimmetriya kabi nojo‘ya ta’sirlarning oldini olish uchun.',
+        'В Radeski инъекции проводит врач-косметолог Мангасарян Лорена Георгиевна: коррекция мимических морщин и комплексная ботулинотерапия (Full Face). Дозы и точки подбираются индивидуально — чтобы сохранить естественную мимику и избежать нежелательных эффектов, таких как птоз или асимметрия.',
+        'At Radeski the injections are done by cosmetologist Dr. Lorena Mangasaryan: expression-line correction and full-face botulinum therapy. Doses and injection points are chosen for each patient to keep expressions natural and avoid side effects such as eyelid droop or asymmetry.',
+      ),
+    ],
+    steps: [
+      L(
+        'Konsultatsiya: zonalar, mimika va qarshi ko‘rsatmalar baholanadi, preparat tanlanadi',
+        'Консультация: оценка зон, мимики и противопоказаний, выбор препарата',
+        'Consultation: areas, facial movement and contraindications are assessed, the product is chosen',
+      ),
+      L(
+        'Muolaja: 15–20 daqiqa, ingichka igna bilan; odatda og‘riqsizlantirish kerak emas, xohlasangiz krem surtiladi',
+        'Процедура: 15–20 минут, тонкой иглой; обычно без анестезии, по желанию — крем-анестетик',
+        'Treatment: 15–20 minutes with a fine needle; usually no anaesthesia, a numbing cream if you prefer',
+      ),
+      L(
+        'Bir necha kun: yuz massaji, sauna, faol sport va alkogoldan saqlanish',
+        'Несколько дней: без массажа лица, сауны, активного спорта и алкоголя',
+        'For a few days: no facial massage, sauna, intense exercise or alcohol',
+      ),
+      L(
+        '2 haftadan keyin nazorat: natija baholanadi, kerak bo‘lsa korreksiya qilinadi',
+        'Контроль через 2 недели: оценка результата и при необходимости коррекция',
+        'Check-up at 2 weeks: the result is assessed and touched up if needed',
+      ),
+    ],
+    faqs: [
+      Q(
+        L('Botoks narxi qancha?', 'Сколько стоит ботокс?', 'How much does Botox cost?'),
+        L(
+          'Narx birlik bo‘yicha hisoblanadi: botulotoksin 1 birligi 30 000 so‘mdan, Relatoks 1 birligi 55 000 so‘m. Umumiy narx zonalar va kerakli birliklar soniga bog‘liq — u konsultatsiyada aytiladi. Giperhidrozni davolash 1 300 000 so‘mdan.',
+          'Цена считается за единицу: ботулотоксин — от 30 000 сум за единицу, Релатокс — 55 000 сум за единицу. Итоговая стоимость зависит от зон и количества единиц и называется на консультации. Лечение гипергидроза — от 1 300 000 сум.',
+          'The price is per unit: botulinum toxin from 30,000 UZS per unit, Relatox 55,000 UZS per unit. The total depends on the areas and units needed and is given at the consultation. Hyperhidrosis treatment starts at 1,300,000 UZS.',
+        ),
+      ),
+      Q(
+        L('Natija qancha vaqt saqlanadi?', 'Сколько держится эффект?', 'How long does it last?'),
+        L(
+          'Odatda 3–8 oy. Preparat ta’siri asta-sekin kamayadi, mushaklar yana faollashadi — shuning uchun muolaja har 4–12 oyda takrorlanadi. Takroriy muolajalar mushak atrofiyasiga olib kelmaydi.',
+          'Обычно 3–8 месяцев. Действие препарата постепенно ослабевает, мышцы снова включаются — поэтому процедуру повторяют раз в 4–12 месяцев. Повторные процедуры не вызывают атрофии мышц.',
+          'Usually 3–8 months. The effect fades gradually and the muscles become active again, so the treatment is repeated every 4–12 months. Repeat treatments do not cause muscle atrophy.',
+        ),
+      ),
+      Q(
+        L('Yuz «niqob»dek qotib qolmaydimi?', 'Не будет ли лицо «маской»?', 'Will my face look frozen?'),
+        L(
+          'Yo‘q, agar doza va nuqtalar to‘g‘ri tanlansa. Maqsad — ajinni yumshatish, mimikani o‘chirish emas: shifokor har bir zonaga kerakli miqdorni kiritadi va 2 haftadan keyin natijani tekshiradi.',
+          'Нет, если правильно подобраны дозы и точки. Цель — смягчить морщину, а не убрать мимику: врач вводит в каждую зону нужное количество и через 2 недели проверяет результат.',
+          'No, when doses and points are chosen correctly. The aim is to soften the line, not erase expression: the doctor puts the right amount into each area and checks the result at 2 weeks.',
+        ),
+      ),
+      Q(
+        L('Kimga botoks qilish mumkin emas?', 'Кому нельзя делать ботокс?', 'Who should not have Botox?'),
+        L(
+          'Homiladorlik va emizish davrida, og‘ir kasalliklarda (gepatit, onkologiya, gemofiliya), surunkali kasallik kuchayganda, yuzda yallig‘lanish yoki gerpes bo‘lganda, asab tizimiga ta’sir qiluvchi ayrim dorilar qabul qilinayotganda muolaja qilinmaydi yoki keyinga suriladi.',
+          'Процедуру не проводят или откладывают при беременности и грудном вскармливании, тяжёлых заболеваниях (гепатит, онкология, гемофилия), обострении хронических болезней, воспалении или герпесе на лице и при приёме некоторых препаратов, влияющих на нервную систему.',
+          'It is not done or is postponed during pregnancy and breastfeeding, with serious illnesses (hepatitis, cancer, haemophilia), flare-ups of chronic disease, facial inflammation or cold sores, and with some medicines that act on the nervous system.',
+        ),
+      ),
+      Q(
+        L('Botoks yoki filler — qaysi biri kerak?', 'Ботокс или филлер — что выбрать?', 'Botox or filler — which do I need?'),
+        L(
+          'Botoks mimik ajinlarni yumshatadi (peshona, qosh orasi, ko‘z atrofi). Filler — gialuron kislotasi — yo‘qolgan hajmni to‘ldiradi (lab, yonoq, nazolabial chiziqlar). Ko‘pincha ikkalasi birga rejalashtiriladi; nima kerakligini shifokor ko‘rikda aytadi.',
+          'Ботокс разглаживает мимические морщины (лоб, межбровье, вокруг глаз). Филлер на гиалуроновой кислоте восполняет потерянный объём (губы, скулы, носогубные складки). Часто их планируют вместе; что нужно именно вам, врач скажет на осмотре.',
+          'Botox softens expression lines (forehead, frown lines, around the eyes). A hyaluronic acid filler restores lost volume (lips, cheeks, nasolabial folds). They are often planned together; the doctor will say what you need at the visit.',
+        ),
+      ),
+    ],
+    priceNames: [
+      'Botulotoksin inyeksiyasi (1 birlik)',
+      'Relatoks botulotoksin (1 birlik)',
+      'Gipergidroz — botulotoksin bilan davolash',
+      'Gipergidroz — Relatoks preparati bilan davolash',
+    ],
+    hasPriceFaq: true,
+    priceUnit: L('1 birligi', 'единицу', 'unit'),
   },
 
   'tirnoq-zamburug': {

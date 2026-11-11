@@ -495,6 +495,35 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
         'hair transplant Fergana, hair transplantation Uzbekistan, FUE hair transplant, DHI, beard transplant, hair transplant cost, Radeski Skin Clinic',
       ),
     ),
+    // Botox: Fergana only — the injecting cosmetologist (Dr. Mangasaryan) works in Fergana.
+    withKeywords(
+      treatmentLanding('fargona', 'botoks', 'in-ekcionnaya-kosmetologiya', {
+        name: L('Botoks', 'Ботокс', 'Botox'),
+        articleRouteKeys: ['art-botulinoterapiya-radeski', 'art-giperhidroz', 'art-kontur-plastika-radeski', 'art-yangi-yil-yuz-parvarishi'],
+        problem: L(
+          'Peshona, qosh orasi va ko‘z atrofida mimik ajinlar chuqurlashib, yuz charchagan ko‘rinadi.',
+          'Мимические морщины на лбу, между бровями и вокруг глаз углубляются, лицо выглядит уставшим.',
+          'Expression lines on the forehead, between the brows and around the eyes deepen and the face looks tired.',
+        ),
+        whoFor: [
+          L('Peshona, qosh orasi yoki ko‘z atrofida mimik ajinlar', 'Мимические морщины лба, межбровья или вокруг глаз', 'Expression lines on the forehead, between the brows or around the eyes'),
+          L('Tushgan lab burchaklari, bo‘yin ajinlari', 'Опущенные уголки губ, морщины шеи', 'Drooping mouth corners, neck lines'),
+          L('Ajinlar chuqurlashishining oldini olmoqchi bo‘lganlar', 'Профилактика углубления морщин', 'Preventing lines from deepening'),
+          L('Ortiqcha terlash (giperhidroz): qo‘ltiq osti, kaft, oyoq tagi', 'Повышенная потливость (гипергидроз): подмышки, ладони, стопы', 'Excessive sweating (hyperhidrosis): underarms, palms, soles'),
+        ],
+        methods: [
+          L('Mimik ajinlar korreksiyasi (peshona, qosh orasi, ko‘z atrofi)', 'Коррекция мимических морщин (лоб, межбровье, вокруг глаз)', 'Expression-line correction (forehead, frown lines, crow’s feet)'),
+          L('Kompleks botulinoterapiya (Full Face)', 'Комплексная ботулинотерапия (Full Face)', 'Full-face botulinum therapy'),
+          L('Giperhidrozni botulotoksin bilan davolash', 'Лечение гипергидроза ботулотоксином', 'Hyperhidrosis treatment with botulinum toxin'),
+          L('Preparatlar: Dysport, Relatoks, Kseomin', 'Препараты: Dysport, Релатокс, Ксеомин', 'Products: Dysport, Relatox, Xeomin'),
+        ],
+      }),
+      L(
+        "botoks Farg'ona, botulinoterapiya Farg'ona, botoks narxi, mimik ajinlar, peshona ajinlari, giperhidroz davolash, Dysport, Relatoks, Radeski Skin Clinic",
+        'ботокс Фергана, ботулинотерапия Фергана, ботокс цена, мимические морщины, морщины на лбу, лечение гипергидроза, Диспорт, Релатокс, Radeski Skin Clinic',
+        'botox Fergana, botulinum therapy Fergana, botox price, expression lines, forehead wrinkles, hyperhidrosis treatment, Dysport, Relatox, Radeski Skin Clinic',
+      ),
+    ),
     treatmentLanding('fargona', 'dermatoskopiya', 'dermatoskopiya', {
       articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-xol-tekshiruvi-dermatoskopiya'],
       name: L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'),

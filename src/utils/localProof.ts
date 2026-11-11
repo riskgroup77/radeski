@@ -54,6 +54,7 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
   'ichga-osgan-tirnoq': ['podolog'],
   'tirnoq-zamburug': ['podolog', 'dermatolog'],
   kosmetolog: ['kosmetolog', 'dermatolog'],
+  botoks: ['kosmetolog'],
   dermatoskopiya: ['onkolog', 'dermatolog'],
   'xol-tekshiruvi': ['onkolog', 'dermatolog'],
   'onko-dermatolog': ['onkolog'],
@@ -69,6 +70,8 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
 const TOPIC_DOCTORS: Record<string, string[]> = {
   // Profile: hair transplant specialist, 1000+ operations (abduvaliyevBegaliProfile)
   'soch-ekish': ['abdvaliyev-begali'],
+  // Profile: botulinum therapy incl. Full Face (mangasaryanLorenaProfile)
+  botoks: ['mangasaryan-lorena-georgievna'],
 };
 
 /** Doctors of the landing's branch whose specialty matches the topic (best match first). */
@@ -104,6 +107,7 @@ const TOPIC_KEYWORDS: Record<string, RegExp> = {
   'lazer-epilyatsiya': /epil|эпил/i,
   // Before the hair-loss topics; "transplant" alone would also take melanocyte grafting.
   'soch-ekish': /soch ekish|soqol ekish|soch transplant|hair transplant|пересадк\S* (волос|бород)|трансплантаци\S* волос|\bFUE\b|\bDHI\b/i,
+  botoks: /botoks|botox|ботокс|botul|ботул|dysport|диспорт|relatoks|релатокс|mimik ajin|мимическ/i,
   trixolog: /trix|trich|трих|soch|волос|hair|alopes|алопец/i,
   'soch-tokilish': /soch|волос|hair|alopes|алопец|trix|трих/i,
   trixoskopiya: /trixoskop|трихоскоп|trichoscop|soch|волос/i,
