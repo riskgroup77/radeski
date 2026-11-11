@@ -16,6 +16,8 @@ interface CityServiceLinksProps {
   /** … or every other landing of one city (city service pages). */
   city?: LocalSeoCity;
   excludeSlug?: string;
+  /** Only these landings, in this order (the home page's main specialists). */
+  slugs?: string[];
 }
 
 const CITY_TITLE: Record<LocalSeoCity, Record<Locale, string>> = {
@@ -28,13 +30,15 @@ const CITY_TITLE: Record<LocalSeoCity, Record<Locale, string>> = {
  * how search engines find and weigh these pages, so service sections and the city pages
  * themselves point at them.
  */
-export default function CityServiceLinks({ locale, serviceCategoryId, city, excludeSlug }: CityServiceLinksProps) {
+export default function CityServiceLinks({ locale, serviceCategoryId, city, excludeSlug, slugs }: CityServiceLinksProps) {
   const landings = ALL_LOCAL_COMMERCIAL_LANDINGS.filter(
     (item) =>
       (!serviceCategoryId || item.serviceCategoryId === serviceCategoryId) &&
       (!city || item.city === city) &&
+      (!slugs || slugs.includes(item.slug)) &&
       item.slug !== excludeSlug,
   );
+  if (slugs) landings.sort((a, b) => slugs.indexOf(a.slug) - slugs.indexOf(b.slug));
   if (landings.length === 0) return null;
 
   const byCity = (['fargona', 'qoqon'] as const)

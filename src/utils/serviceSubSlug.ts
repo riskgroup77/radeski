@@ -10,6 +10,29 @@ type SubService = ServiceCategory['subServices'][number];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /**
+ * CMS sub-services folded into their category page: their texts were ~75% the same as each
+ * other, so the pages competed for one query. They are hidden from menus, the sitemap and
+ * prerendering, and nginx 301-redirects their URLs to the category (sitemapRedirectRules).
+ * Matched by CMS id or by readable slug.
+ */
+export const MERGED_SUB_SERVICES: { categoryId: string; id: string; slug: string }[] = [
+  { categoryId: 'trixoskopiya', id: '861a5da3-4ad6-4964-a787-2c15b14f4ff5', slug: 'trixoskopik-korik' },
+  { categoryId: 'trixoskopiya', id: '714c2f1b-dc84-444f-b40c-757f8c42100c', slug: 'soch-tokilishi-diagnostikasi' },
+  { categoryId: 'trixoskopiya', id: '009d4598-c39d-41a9-b986-f75de20bb0d2', slug: 'davolash-natijasini-monitoring' },
+];
+
+/** A link target (category + sub-service id or slug) that now lives on the category page. */
+export function isMergedSubServiceLink(categoryId: string, subId: string): boolean {
+  return MERGED_SUB_SERVICES.some((merged) => merged.categoryId === categoryId && (merged.slug === subId || merged.id === subId));
+}
+
+export function isMergedSubService(categoryId: string, sub: Pick<SubService, 'id' | 'name'>): boolean {
+  return MERGED_SUB_SERVICES.some(
+    (merged) => merged.categoryId === categoryId && (merged.id === sub.id || merged.slug === subServiceRouteKey(sub)),
+  );
+}
+
+/**
  * Old hand-written ids that were linked before the CMS took over (catalogs, promo slides,
  * conditions) → the CMS sub-service page that replaced them. Names match the CMS, so a link
  * label never falls back to the bare id.

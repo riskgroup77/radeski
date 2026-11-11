@@ -63,6 +63,22 @@ export function buildServicePageSeoTitle(name: string, locale: Locale): string {
   ]);
 }
 
+/**
+ * Condition pages (/conditions/psoriaz): no city in the title. "Psoriaz Farg'ona va Qo'qonda"
+ * competed with the city landing (/fargona/psoriaz-davolash), which owns the local query;
+ * the condition page is the overview of how the clinic diagnoses and treats it.
+ */
+export function buildConditionPageSeoTitle(name: string, locale: Locale): string {
+  const tail =
+    locale === 'uz' ? 'tashxis va davolash usullari' : locale === 'ru' ? 'диагностика и методы лечения' : 'diagnosis and treatment options';
+  return fitTitle([
+    `${name} — ${tail} | Radeski Skin Clinic`,
+    `${name} — ${tail} | Radeski`,
+    `${name} | Radeski Skin Clinic`,
+    `${name} | Radeski`,
+  ]);
+}
+
 export function buildArticleSeoTitle(title: string, locale: Locale): string {
   const cities = localSeoCities(locale);
   const topic = locale === 'uz' ? 'dermatologiya' : locale === 'ru' ? 'дерматология' : 'dermatology';
@@ -1415,12 +1431,12 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     terms: {
       title: "Пользовательское соглашение | Radeski Skin Clinic",
-      desc: "Правила использования сайта Radeski.uz.",
+      desc: "Правила использования сайта Radeski.uz: онлайн-запись к врачу, отзывы, материалы сайта и ответственность сторон. Radeski Skin Clinic — Фергана и Коканд.",
       keywords: "пользовательское соглашение, Radeski, правила сайта",
     },
     privacy: {
       title: "Политика конфиденциальности | Radeski Skin Clinic",
-      desc: "Как клиника Radeski обрабатывает и защищает персональные данные.",
+      desc: "Как клиника Radeski собирает, хранит и защищает персональные данные пациентов при онлайн-записи, отзывах и обращениях через сайт.",
       keywords: "политика конфиденциальности, персональные данные, Radeski",
     },
   },
@@ -1531,12 +1547,12 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     terms: {
       title: "Terms of Use | Radeski Skin Clinic",
-      desc: "Rules for using the Radeski.uz website.",
+      desc: "Rules for using the Radeski.uz website: online booking, patient reviews, site content and liability. Radeski Skin Clinic — Fergana and Kokand.",
       keywords: "terms of use, Radeski, website rules",
     },
     privacy: {
       title: "Privacy Policy | Radeski Skin Clinic",
-      desc: "How Radeski collects, stores and protects personal data.",
+      desc: "How Radeski Skin Clinic collects, stores and protects patients' personal data from online booking, reviews and enquiries sent through the website.",
       keywords: "privacy policy, personal data, Radeski",
     },
   },

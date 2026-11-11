@@ -50,6 +50,7 @@ import { resolveArticleTags } from '../utils/articleContent';
 import { getNotFoundTitle } from '../components/NotFoundPage';
 import {
   TITLE_MAX_LENGTH,
+  buildConditionPageSeoTitle,
   buildEntityKeywords,
   buildServicePageSeoTitle,
   buildServiceSeoTitle,
@@ -102,9 +103,20 @@ function isPlaceholderSection(page: PageId): boolean {
 /**
  * Offer landings that repeat a city service page aimed at the same search ("IPL Farg'ona",
  * "lazer epilyatsiya Qo'qon"…): noindex, follow, so they pass their links on instead of
- * competing with the page that has the prices, doctors and FAQ.
+ * competing with the page that has the prices, doctors and FAQ. Same for offers whose full
+ * page already exists: phototherapy (/services/dermatologiya/fototerapiya), CO₂ removal of
+ * moles and growths (/fargona/osma-olib-tashlash, the DEKA CO₂ page) and carbon peel (the
+ * Hollywood Spectra page). An offer page is one slide — a title, a sentence and a price.
  */
-const PROMO_SLUGS_WITH_CITY_PAGES = new Set(['dermataskopiya', 'ipl', 'podologiya', 'lazer-epilyatsiya']);
+const PROMO_SLUGS_WITH_CITY_PAGES = new Set([
+  'dermataskopiya',
+  'ipl',
+  'podologiya',
+  'lazer-epilyatsiya',
+  'fototerapiya',
+  'co2-lazer',
+  'karbon-peeling',
+]);
 
 /**
  * Device and video pages had 45–70 character descriptions (a device's one-line summary, a
@@ -347,7 +359,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
                   locale,
                 )
             : activeCondition && conditionSlug
-              ? buildServicePageSeoTitle(
+              ? buildConditionPageSeoTitle(
                   getDermatologyConditionNavItem(conditionSlug)?.label[locale] ??
                     getDermatologyConditionNavItem(conditionSlug)?.label.uz ??
                     conditionSlug,

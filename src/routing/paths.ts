@@ -1,6 +1,6 @@
 import { Locale } from '../types';
 import { normalizeLocaleParam } from './locale';
-import { canonicalSubServiceLink } from '../utils/serviceSubSlug';
+import { canonicalSubServiceLink, isMergedSubServiceLink } from '../utils/serviceSubSlug';
 
 export type PageId =
   | 'home'
@@ -308,6 +308,10 @@ export function getConditionSlugFromPathname(pathname: string): string | null {
 
 export function serviceSubPath(locale: Locale, categoryId: string, subId: string): string {
   const link = canonicalSubServiceLink(categoryId, subId);
+  // Folded into the category page (MERGED_SUB_SERVICES): link there, not through the 301.
+  if (isMergedSubServiceLink(link.categoryId, link.subId)) {
+    return `/${locale}/services/${encodeURIComponent(link.categoryId)}`;
+  }
   return `/${locale}/services/${encodeURIComponent(link.categoryId)}/${encodeURIComponent(link.subId)}`;
 }
 

@@ -7,7 +7,7 @@
 
 import React, { Suspense, useState, useEffect, useMemo } from 'react';
 import { trackPageView } from './utils/analytics';
-import { findSubServiceByRouteParam, subServiceRouteKey } from './utils/serviceSubSlug';
+import { findSubServiceByRouteParam, MERGED_SUB_SERVICES, subServiceRouteKey } from './utils/serviceSubSlug';
 import { lazyPage } from './utils/lazyPage';
 import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
 import { Locale } from './types';
@@ -78,6 +78,10 @@ import {
   isCityCommercialPathAttempt,
 } from './data/localCommercialSeoCatalog';
 import ClinicAiChat from './components/ClinicAiChat';
+import CityServiceLinks from './components/CityServiceLinks';
+
+/** Main city service pages linked from the home page (each owns "<specialist> <city>"). */
+const HOME_CITY_LANDING_SLUGS = ['dermatolog', 'kosmetolog', 'trixolog', 'podolog', 'lazer-epilyatsiya', 'dermatoskopiya'];
 import { buildClinicAiContext } from './utils/clinicAiContext';
 import { sortDoctorsFeaturedFirst } from './utils/doctors';
 import { getHomeServiceTeaserCategories } from './utils/homeServiceTeaser';
@@ -374,6 +378,17 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     return (
       <Navigate to={serviceSubPath(parsedLocale, activeServiceCategory.id, subServiceRouteKey(activeServiceSub))} replace />
     );
+  }
+
+  // Sub-services folded into their category page (nginx sends the same 301 to crawlers).
+  const mergedSub =
+    parsedLocale && serviceCategoryId && serviceSubId
+      ? MERGED_SUB_SERVICES.find(
+          (merged) => merged.categoryId === serviceCategoryId && (merged.slug === serviceSubId || merged.id === serviceSubId),
+        )
+      : undefined;
+  if (parsedLocale && mergedSub) {
+    return <Navigate to={serviceCategoryPath(parsedLocale, mergedSub.categoryId)} replace />;
   }
 
   const legacyContactsRedirect =
@@ -932,6 +947,11 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                       <Clock className="w-4 h-4 text-brand-gold" />
                       {locale === 'uz' ? "Ish vaqti: 08:00 - 18:00" : locale === 'ru' ? "Пн.-Сб.: 08:00 - 18:00" : "Mon.-Sat. 8AM - 6PM"}
                     </span>
+                  </div>
+
+                  {/* The city pages own "dermatolog Farg'ona"-type searches: link them from the home page. */}
+                  <div className="max-w-4xl mx-auto text-left">
+                    <CityServiceLinks locale={locale} slugs={HOME_CITY_LANDING_SLUGS} />
                   </div>
                 </div>
               </section>

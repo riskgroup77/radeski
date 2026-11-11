@@ -1,4 +1,5 @@
 import type { PriceItem, ServiceCategory, ServiceDetail } from '../types';
+import { isMergedSubService } from './serviceSubSlug';
 
 /** Preyskurantdan butunlay olib tashlangan bo'limlar */
 export const EXCLUDED_PRICE_CATEGORY_IDS = new Set([
@@ -207,6 +208,7 @@ function normalizeApparatusSubServices(category: ServiceCategory): ServiceCatego
     if (isExcludedDermatoOncologySubService(sub, category.id)) continue;
     if (category.id === 'apparatnaya-kosmetologiya' && isRemovedApparatusSubService(sub)) continue;
     if (category.id !== 'apparatnaya-kosmetologiya' && EXCLUDED_SUB_SERVICE_IDS.has(sub.id)) continue;
+    if (isMergedSubService(category.id, sub)) continue;
 
     if (category.id === 'apparatnaya-kosmetologiya' && isIplInmodeSubService(sub)) {
       if (!hasIplInmode) {

@@ -7,7 +7,7 @@ import {
   serviceSubPath,
 } from '../routing/paths';
 import { serviceEquipmentPath } from '../routing/paths';
-import { LEGACY_SUB_SERVICES } from '../utils/serviceSubSlug';
+import { LEGACY_SUB_SERVICES, MERGED_SUB_SERVICES } from '../utils/serviceSubSlug';
 
 /** Paths (without origin) that must never appear in sitemap.xml — they redirect elsewhere. */
 export const SITEMAP_EXCLUDED_PATH_SUFFIXES: string[] = [
@@ -112,6 +112,18 @@ export function buildSiteRedirectPairs(): SiteRedirectPair[] {
     const to = serviceCategoryPath(locale, 'dermatoskopiya');
     pairs.set(from, to);
     pairs.set(`${from}/`, to);
+  }
+
+  // Near-duplicate sub-services folded into their category page (MERGED_SUB_SERVICES).
+  for (const locale of locales) {
+    for (const merged of MERGED_SUB_SERVICES) {
+      const to = serviceCategoryPath(locale, merged.categoryId);
+      for (const key of [merged.slug, merged.id]) {
+        const from = `/${locale}/services/${merged.categoryId}/${key}`;
+        pairs.set(from, to);
+        pairs.set(`${from}/`, to);
+      }
+    }
   }
 
   return [...pairs.entries()]

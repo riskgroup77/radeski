@@ -13,7 +13,7 @@ import { buildServiceH1 } from '../seo/pageMeta';
 import { resolveArticleRouteKey } from './articles';
 import { EQUIPMENT_ARTICLE_KEYS } from './equipmentRelatedContent';
 import { SERVICE_CATEGORY_ARTICLE_KEYS, SERVICE_SUB_ARTICLE_KEYS } from './serviceRelatedArticles';
-import { subServiceLinkName } from './serviceSubSlug';
+import { canonicalSubServiceLink, isMergedSubServiceLink, subServiceLinkName } from './serviceSubSlug';
 
 export interface ArticleServiceLink {
   label: string;
@@ -72,6 +72,9 @@ export function articleServiceLinks(
     const label = category ? subServiceLinkName(category.subServices, subId, locale) : subId;
     // Only sub-services the clinic's catalog has (a key it does not know is not a page).
     if (!category || label === subId) return [];
+    // Folded into the category page: the category link below covers it.
+    const canonical = canonicalSubServiceLink(categoryId, subId);
+    if (isMergedSubServiceLink(canonical.categoryId, canonical.subId)) return [];
     return [{ label, path: serviceSubPath(locale, categoryId, subId) }];
   });
 
