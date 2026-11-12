@@ -472,6 +472,116 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
     priceUnit: L('1 birligi', 'единицу', 'unit'),
   },
 
+  // Facts from the clinic's own materials: the biorevitalization article (45–60 min sessions,
+  // course of 4–6 two weeks apart, effect after the 2nd and final after the 4th session, ~6
+  // months, indications/contraindications, papules 1–3 days), the price list (products) and
+  // Dr. Mangasaryan's profile (biorevitalization, PRP).
+  biorevitalizatsiya: {
+    about: [
+      L(
+        'Biorevitalizatsiya — gialuron kislotasini mikroinyeksiyalar bilan terining chuqur qatlamiga yuborish. Yosh bilan teri namlikni ushlab turish qobiliyatini yo‘qotadi: quruqlik, xiralik, mayda ajinlar va sarko‘zlik shundan. Gialuron kislotasi teri ichida suvni ushlab turadi va o‘z kollageni hamda elastini ishlab chiqarilishini rag‘batlantiradi.',
+        'Биоревитализация — введение гиалуроновой кислоты микроинъекциями в глубокие слои кожи. С возрастом кожа теряет способность удерживать влагу — отсюда сухость, тусклость, мелкие морщины и вялость. Гиалуроновая кислота удерживает воду внутри кожи и стимулирует выработку собственного коллагена и эластина.',
+        'Biorevitalization delivers hyaluronic acid into the deeper skin layers with micro-injections. With age skin loses its ability to hold moisture — hence dryness, dullness, fine lines and sagging. Hyaluronic acid holds water inside the skin and stimulates its own collagen and elastin.',
+      ),
+      L(
+        'Radeski’da preparat teri turi va vazifaga qarab tanlanadi: ABG Lab (AQSh), Revi Silk / Strong / Eye (Rossiya), MesoEye C71 va Revi Eye — ko‘z atrofi uchun, TEOSYAL PureSense Redensity — terini namlantirish uchun, Rejuran (PDRN) — terini tiklash va chandiqlar uchun. Plazmoterapiya (PRP) — bemorning o‘z qon plazmasi bilan muqobil variant.',
+        'В Radeski препарат подбирают по типу кожи и задаче: ABG Lab (США), Revi Silk / Strong / Eye (Россия), MesoEye C71 и Revi Eye — для зоны вокруг глаз, TEOSYAL PureSense Redensity — для увлажнения, Rejuran (PDRN) — для восстановления кожи и рубцов. Плазмотерапия (PRP) — вариант с собственной плазмой пациента.',
+        'At Radeski the product is chosen by skin type and goal: ABG Lab (USA), Revi Silk / Strong / Eye (Russia), MesoEye C71 and Revi Eye for the eye area, TEOSYAL PureSense Redensity for hydration, Rejuran (PDRN) for skin repair and scars. Plasma therapy (PRP) uses the patient’s own plasma instead.',
+      ),
+      L(
+        'Muolaja kurs bilan qilinadi: odatda 4–6 seans, oralig‘i 2 hafta; bir seans 45–60 daqiqa. Effekt 1–2 seansdan keyin seziladi, yakuniy natija to‘rtinchi seansdan keyin shakllanadi va taxminan 6 oy saqlanadi — shuning uchun kurs kamida yiliga bir marta takrorlanadi. Yuz, ko‘z atrofi, bo‘yin, dekolte va qo‘llarga qilinadi.',
+        'Процедуру проводят курсом: обычно 4–6 сеансов с интервалом 2 недели, один сеанс — 45–60 минут. Эффект заметен после 1–2 сеансов, итог формируется после четвёртого и держится около 6 месяцев — поэтому курс повторяют минимум раз в год. Зоны: лицо, вокруг глаз, шея, декольте и кисти рук.',
+        'It is done as a course: usually 4–6 sessions two weeks apart, 45–60 minutes each. The effect shows after 1–2 sessions, the final result forms after the fourth and lasts about 6 months, so the course is repeated at least once a year. Areas: face, around the eyes, neck, décolleté and hands.',
+      ),
+      L(
+        'Radeski’da biorevitalizatsiyani shifokor-kosmetolog Mangasaryan Lorena Georgievna o‘tkazadi — anti-age kosmetologiya, biorevitalizatsiya, kollagenostimulyatsiya va PRP-terapiya. Ignasiz variant ham bor: lazer biorevitalizatsiya — gialuron kislotasi sovuq (atermal) lazer yordamida teriga yetkaziladi.',
+        'В Radeski биоревитализацию проводит врач-косметолог Мангасарян Лорена Георгиевна — anti-age косметология, биоревитализация, коллагеностимуляция и PRP-терапия. Есть и вариант без игл — лазерная биоревитализация: гиалуроновую кислоту доставляют в кожу холодным (атермальным) лазером.',
+        'At Radeski biorevitalization is done by cosmetologist Dr. Lorena Mangasaryan — anti-age cosmetology, biorevitalization, collagen stimulation and PRP. There is also a needle-free option: laser biorevitalization, where a cold (athermal) laser delivers hyaluronic acid into the skin.',
+      ),
+    ],
+    steps: [
+      L(
+        'Konsultatsiya: teri holati va qarshi ko‘rsatmalar baholanadi, preparat va seanslar soni tanlanadi',
+        'Консультация: оценка кожи и противопоказаний, выбор препарата и числа сеансов',
+        'Consultation: skin and contraindications are assessed, the product and number of sessions chosen',
+      ),
+      L(
+        'Seans: 45–60 daqiqa, teri tozalanadi, ingichka igna bilan mikroinyeksiyalar',
+        'Сеанс: 45–60 минут, очищение кожи и микроинъекции тонкой иглой',
+        'Session: 45–60 minutes, skin cleansing and micro-injections with a fine needle',
+      ),
+      L(
+        'Keyingi kunlar: 1–3 kun kichik do‘mboqchalar bo‘lishi normal, 1–2 kun makiyajsiz',
+        'Следующие дни: мелкие папулы 1–3 дня — норма, 1–2 дня без макияжа',
+        'The next days: small bumps for 1–3 days are normal, no make-up for 1–2 days',
+      ),
+      L(
+        'Kurs: 4–6 seans 2 hafta oralig‘ida, keyin qo‘llab-quvvatlovchi parvarish',
+        'Курс: 4–6 сеансов через 2 недели, затем поддерживающий уход',
+        'Course: 4–6 sessions two weeks apart, then maintenance care',
+      ),
+    ],
+    faqs: [
+      Q(
+        L('Biorevitalizatsiya narxi qancha?', 'Сколько стоит биоревитализация?', 'How much is biorevitalization?'),
+        L(
+          'Narx preparatga bog‘liq: plazmoterapiya (PRP) — 400 000 so‘m, ABG Lab va Revi preparatlari — 1 800 000 – 2 730 000 so‘m, TEOSYAL Redensity va Rejuran — 1 600 000 – 3 200 000 so‘m (bir muolaja). Kurs uchun umumiy narx konsultatsiyada aytiladi.',
+          'Цена зависит от препарата: плазмотерапия (PRP) — 400 000 сум, препараты ABG Lab и Revi — 1 800 000 – 2 730 000 сум, TEOSYAL Redensity и Rejuran — 1 600 000 – 3 200 000 сум (за процедуру). Стоимость курса называют на консультации.',
+          'The price depends on the product: plasma therapy (PRP) 400,000 UZS, ABG Lab and Revi 1,800,000–2,730,000 UZS, TEOSYAL Redensity and Rejuran 1,600,000–3,200,000 UZS (per treatment). The course total is given at the consultation.',
+        ),
+      ),
+      Q(
+        L('Necha seans kerak va natija qancha saqlanadi?', 'Сколько нужно сеансов и сколько держится эффект?', 'How many sessions, and how long does it last?'),
+        L(
+          'Odatda 4–6 seans, 2 hafta oralig‘ida. Effekt 1–2 seansdan keyin seziladi, yakuniy natija to‘rtinchi seansdan keyin va taxminan 6 oy saqlanadi. Kurs kamida yiliga bir marta takrorlanadi.',
+          'Обычно 4–6 сеансов с интервалом 2 недели. Эффект заметен после 1–2 сеансов, итог — после четвёртого, и держится около 6 месяцев. Курс повторяют минимум раз в год.',
+          'Usually 4–6 sessions two weeks apart. The effect shows after 1–2 sessions, the final result after the fourth, lasting about 6 months. Repeat the course at least once a year.',
+        ),
+      ),
+      Q(
+        L('Biorevitalizatsiya va filler — farqi nima?', 'Чем биоревитализация отличается от филлера?', 'How is it different from a filler?'),
+        L(
+          'Ikkalasida ham gialuron kislotasi bor, lekin vazifasi har xil. Biorevitalizatsiya terini ichidan namlantiradi va sifatini yaxshilaydi — hajm qo‘shmaydi. Filler (kontur plastika) zichroq gel bilan lab, yonoq yoki chuqur chiziqlarga hajm beradi.',
+          'В обоих — гиалуроновая кислота, но задачи разные. Биоревитализация увлажняет кожу изнутри и улучшает её качество — объём не добавляет. Филлер (контурная пластика) более плотным гелем добавляет объём губам, скулам или глубоким складкам.',
+          'Both contain hyaluronic acid but do different jobs. Biorevitalization hydrates the skin from within and improves its quality — it adds no volume. A filler is a denser gel that adds volume to lips, cheeks or deep folds.',
+        ),
+      ),
+      Q(
+        L('Kimga mumkin emas?', 'Кому нельзя?', 'Who should not have it?'),
+        L(
+          'Qon va tomir kasalliklari, qandli diabet, onkologiya, sil, gialuron kislotasiga sezuvchanlik, homiladorlik va emizish, virusli yoki ichak infeksiyasi bo‘lganda qilinmaydi. 25 yoshgacha odatda tavsiya etilmaydi — juda quruq teri bundan mustasno.',
+          'Не проводят при заболеваниях крови и сосудов, диабете, онкологии, туберкулёзе, чувствительности к гиалуроновой кислоте, беременности и грудном вскармливании, вирусной или кишечной инфекции. До 25 лет обычно не рекомендуют — кроме очень сухой кожи.',
+          'It is not done with blood or vascular disorders, diabetes, cancer, tuberculosis, sensitivity to hyaluronic acid, pregnancy and breastfeeding, or a viral or gut infection. It is usually not advised under 25, except for very dry skin.',
+        ),
+      ),
+      Q(
+        L('Ignasiz variant bormi?', 'Есть ли вариант без уколов?', 'Is there a needle-free option?'),
+        L(
+          'Ha — lazer biorevitalizatsiya: past molekulyar gialuron kislotasi sovuq (atermal) lazer yordamida teriga ignasiz yetkaziladi. Qaysi usul mos ekanini shifokor teri holatiga qarab aytadi.',
+          'Да — лазерная биоревитализация: низкомолекулярную гиалуроновую кислоту доставляют в кожу холодным (атермальным) лазером, без уколов. Какой метод подходит, врач скажет по состоянию кожи.',
+          'Yes — laser biorevitalization: low-molecular hyaluronic acid is delivered into the skin by a cold (athermal) laser, without needles. The doctor will say which method suits your skin.',
+        ),
+      ),
+    ],
+    // One row per name (matchPrices takes the first row that starts with it).
+    priceNames: [
+      'Biorevitalizatsiya: plazmoterapiya',
+      'Biorevitalizatsiya: ABG Lab LCC New York',
+      'Biorevitalizatsiya: ABG Lab Meso-Xantin F199',
+      'Biorevitalizatsiya: MesoEye C71',
+      'Biorevitalizatsiya: Revi Eye',
+      'Biorevitalizatsiya: Revi Silk',
+      'Biorevitalizatsiya: Revi Strong',
+      'TEOSYAL PureSense Redensity 1, 1 ml',
+      'TEOSYAL PureSense Redensity 1, 3 ml',
+      'TEOSYAL PureSense Redensity 2',
+      'Rejuran (PDRN',
+      'Rejuran i',
+      'Rejuran S',
+    ],
+    hasPriceFaq: true,
+  },
+
   'tirnoq-zamburug': {
     about: [
       L(

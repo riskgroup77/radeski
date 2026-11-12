@@ -524,6 +524,36 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
         'botox Fergana, botulinum therapy Fergana, botox price, expression lines, forehead wrinkles, hyperhidrosis treatment, Dysport, Relatox, Radeski Skin Clinic',
       ),
     ),
+    // Biorevitalization: Fergana only — the injecting cosmetologist (Dr. Mangasaryan) works there.
+    withKeywords(
+      treatmentLanding('fargona', 'biorevitalizatsiya', 'in-ekcionnaya-kosmetologiya', {
+        name: L('Biorevitalizatsiya', 'Биоревитализация', 'Biorevitalization'),
+        articleRouteKeys: ['art-biorevitalizatsiya-radeski', 'art-lazer-biorevitalizatsiya-radeski', 'art-kontur-plastika-radeski', 'art-yangi-yil-yuz-parvarishi'],
+        problem: L(
+          'Teri quruq, xira va sarko‘z bo‘lib qolgan, mayda ajinlar ko‘paygan.',
+          'Кожа стала сухой, тусклой и вялой, появилось больше мелких морщин.',
+          'The skin has become dry, dull and lax, with more fine lines.',
+        ),
+        whoFor: [
+          L('Quruq, suvsizlangan va xira teri', 'Сухая, обезвоженная и тусклая кожа', 'Dry, dehydrated and dull skin'),
+          L('Mayda ajinlar, elastiklikning pasayishi (odatda 25 yoshdan)', 'Мелкие морщины, снижение упругости (обычно с 25 лет)', 'Fine lines and loss of elasticity (usually from 25)'),
+          L('Ko‘z atrofi, bo‘yin, dekolte va qo‘llar terisi', 'Кожа вокруг глаз, шеи, декольте и рук', 'Skin around the eyes, neck, décolleté and hands'),
+          L('Piling, lazer yoki shlifovkadan keyin tiklanish', 'Восстановление после пилинга, лазера или шлифовки', 'Recovery after a peel, laser or resurfacing'),
+        ],
+        methods: [
+          L('Gialuron kislotali biorevitalizantlar: ABG Lab, Revi, MesoEye', 'Биоревитализанты на гиалуроновой кислоте: ABG Lab, Revi, MesoEye', 'Hyaluronic acid biorevitalizants: ABG Lab, Revi, MesoEye'),
+          L('TEOSYAL PureSense Redensity — chuqur namlantirish', 'TEOSYAL PureSense Redensity — глубокое увлажнение', 'TEOSYAL PureSense Redensity — deep hydration'),
+          L('Rejuran (PDRN) — terini tiklash va chandiqlar', 'Rejuran (PDRN) — восстановление кожи и рубцы', 'Rejuran (PDRN) — skin repair and scars'),
+          L('Plazmoterapiya (PRP)', 'Плазмотерапия (PRP)', 'Plasma therapy (PRP)'),
+          L('Ignasiz variant: lazer biorevitalizatsiya', 'Без игл: лазерная биоревитализация', 'Needle-free: laser biorevitalization'),
+        ],
+      }),
+      L(
+        "biorevitalizatsiya Farg'ona, biorevitalizatsiya narxi, gialuron kislotasi inyeksiyasi, teri namlantirish, Rejuran, Teosyal Redensity, mezoterapiya yuz, Radeski Skin Clinic",
+        'биоревитализация Фергана, биоревитализация цена, уколы гиалуроновой кислоты, увлажнение кожи, Rejuran, Teosyal Redensity, мезотерапия лица, Radeski Skin Clinic',
+        'biorevitalization Fergana, biorevitalization price, hyaluronic acid injections, skin hydration, Rejuran, Teosyal Redensity, facial mesotherapy, Radeski Skin Clinic',
+      ),
+    ),
     treatmentLanding('fargona', 'dermatoskopiya', 'dermatoskopiya', {
       articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-xol-tekshiruvi-dermatoskopiya'],
       name: L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'),
