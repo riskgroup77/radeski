@@ -57,6 +57,7 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
   botoks: ['kosmetolog'],
   biorevitalizatsiya: ['kosmetolog'],
   'kontur-plastika': ['kosmetolog'],
+  'bolalar-dermatologi': ['dermatolog'],
   dermatoskopiya: ['onkolog', 'dermatolog'],
   'xol-tekshiruvi': ['onkolog', 'dermatolog'],
   'onko-dermatolog': ['onkolog'],
@@ -78,6 +79,15 @@ const TOPIC_DOCTORS: Record<string, string[]> = {
   biorevitalizatsiya: ['mangasaryan-lorena-georgievna'],
   // Profile: lip and face contouring, Full Face, hyaluronidase (mangasaryanLorenaProfile)
   'kontur-plastika': ['mangasaryan-lorena-georgievna'],
+  // Doctors the clinic's materials show seeing children: profiles "adults and children"
+  // (Turgunov, Karimova — Kokand), pediatric wart cases (Ashurov) and the pediatric alopecia
+  // areata case (Yoqubov) — Fergana.
+  'bolalar-dermatologi': [
+    'turgunov-shohruz-ilxomjon-ogli',
+    'karimova-iroda',
+    'ashurov-dilshod-davlatovich',
+    'yoqubov-farrux-farhodjonovich',
+  ],
 };
 
 /** Doctors of the landing's branch whose specialty matches the topic (best match first). */
@@ -131,6 +141,8 @@ const TOPIC_KEYWORDS: Record<string, RegExp> = {
   biopsiya: /biops|биопс|gistolog|гистолог/i,
   'sogal-olib-tashlash': /so.?g.?al|бородав|wart|papillom|папиллом/i,
   kosmetolog: /kosmetolog|косметолог|cosmetolog|piling|пилинг|peel|yuz tozalash|чистк/i,
+  // Last: a child's acne or alopecia case belongs to that topic first (topicForText order).
+  'bolalar-dermatologi': /bolalar|bolada|bolam|o.?g.?lim|qizim|chaqaloq|детск|ребён|ребен|у детей|pediatric|child/i,
 };
 
 /** Most specific city-page topic for a text (clinical case, review) — null when none fits. */

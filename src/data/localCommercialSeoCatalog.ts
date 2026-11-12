@@ -214,6 +214,45 @@ function kosmetologLanding(city: LocalSeoCity, articleRouteKeys: string[]): Loca
   );
 }
 
+/**
+ * "Bolalar dermatologi" city page. Both branches see children: Kokand — the Turgunov and
+ * Karimova profiles ("adults and children"); Fergana — Dr. Ashurov's pediatric wart cases
+ * and Dr. Yoqubov's pediatric alopecia areata case.
+ */
+function pediatricDermatologistLanding(city: LocalSeoCity, articleRouteKeys: string[]): LocalCommercialLanding {
+  const [uzCity, ruCity, enCity] = city === 'qoqon' ? ["Qo'qon", 'Коканд', 'Kokand'] : ["Farg'ona", 'Фергана', 'Fergana'];
+  const landing = specialistLanding(
+    city,
+    'bolalar-dermatologi',
+    'dermatologiya',
+    L('Bolalar dermatologi', 'Детский дерматолог', 'Pediatric dermatologist'),
+    articleRouteKeys,
+  );
+  return withKeywords(
+    {
+      ...landing,
+      whoFor: [
+        L('Chaqaloq va go‘daklar: taglik dermatiti, quruq va qizargan teri', 'Младенцы: пелёночный дерматит, сухая и покрасневшая кожа', 'Babies: nappy rash, dry and red skin'),
+        L('Atopik dermatit, ekzema va allergik toshma', 'Атопический дерматит, экзема и аллергическая сыпь', 'Atopic dermatitis, eczema and allergic rash'),
+        L('So‘gal, molluskum, impetigo va boshqa yuqumli teri kasalliklari', 'Бородавки, моллюск, импетиго и другие заразные болезни кожи', 'Warts, molluscum, impetigo and other contagious skin conditions'),
+        L('O‘smirlik aknesi, soch to‘kilishi, xol va tug‘ma dog‘lar', 'Подростковое акне, выпадение волос, родинки и родимые пятна', 'Teenage acne, hair loss, moles and birthmarks'),
+      ],
+      methods: [
+        L('Bola yoshiga mos dermatologik ko‘rik', 'Дерматологический осмотр с учётом возраста', 'Age-appropriate skin examination'),
+        L('Og‘riqsiz dermatoskopiya', 'Безболезненная дерматоскопия', 'Painless dermatoscopy'),
+        L('Allergiya va triggerlarni aniqlash, kerak bo‘lsa tahlillar', 'Поиск аллергенов и триггеров, при необходимости анализы', 'Finding allergens and triggers, tests if needed'),
+        L('So‘gal va o‘smalarni DEKA CO₂ lazer bilan olib tashlash', 'Удаление бородавок и образований лазером DEKA CO₂', 'Wart and growth removal with the DEKA CO₂ laser'),
+        L('Ota-onaga uyda parvarish bo‘yicha yo‘riqnoma va kuzatuv', 'Инструкция для родителей по уходу дома и наблюдение', 'Home-care guidance for parents and follow-up'),
+      ],
+    },
+    L(
+      `bolalar dermatologi ${uzCity}, bolalar teri shifokori ${uzCity}, bolalarda atopik dermatit, bolalarda toshma, bolalarda so'gal, chaqaloq terisi, Radeski Skin Clinic`,
+      `детский дерматолог ${ruCity}, детский кожный врач ${ruCity}, атопический дерматит у детей, сыпь у ребёнка, бородавки у детей, кожа младенца, Radeski Skin Clinic`,
+      `pediatric dermatologist ${enCity}, children's skin doctor ${enCity}, atopic dermatitis in children, child rash, warts in children, baby skin, Radeski Skin Clinic`,
+    ),
+  );
+}
+
 /** "Ichiga o'sgan tirnoq" city page (ingrown toenail: removal and titanium-wire correction). */
 function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
   const [uzCity, ruCity, enCity] = city === 'qoqon' ? ["Qo'qon", 'Коканд', 'Kokand'] : ["Farg'ona", 'Фергана', 'Fergana'];
@@ -249,6 +288,7 @@ function ingrownNailLanding(city: LocalSeoCity): LocalCommercialLanding {
 function buildKokandLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-bolalarda-atopik-dermatit', 'art-chipqon-follikulit', 'art-sovuq-allergiyasi', 'art-orab-oluvchi-temiratki', 'art-qizil-yassi-temiratki', 'art-lablar-yorilishi-xeylit', 'art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-psoriasis-daavlin-kokand']),
+    pediatricDermatologistLanding('qoqon', ['art-bolalarda-atopik-dermatit', 'art-bolalarda-teri-toshmalari', 'art-bolalarda-sogal-lazer-radeski', 'art-bolalarda-sogal-co2-deka', 'art-alopecia-areata-klinik-holat']),
     specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-bosh-terisi-psoriazi', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-mort-tirnoqlar', 'art-plantar-sogal', 'art-ichga-osgan-tirnoq', 'art-tirnoq-rangi-ozgarishi', 'art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
     kosmetologLanding('qoqon', ['art-yangi-yil-yuz-parvarishi', 'art-koz-osti-qorayishi', 'art-kimyoviy-piling', 'art-oyoqdagi-tomir-tori', 'art-pigment-doglari-qishda', 'art-giperhidroz', 'art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
@@ -403,6 +443,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
 function buildFerganaLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-bolalarda-atopik-dermatit', 'art-chipqon-follikulit', 'art-sovuq-allergiyasi', 'art-orab-oluvchi-temiratki', 'art-qizil-yassi-temiratki', 'art-lablar-yorilishi-xeylit', 'art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-ipl-terapiya']),
+    pediatricDermatologistLanding('fargona', ['art-bolalarda-atopik-dermatit', 'art-bolalarda-teri-toshmalari', 'art-bolalarda-sogal-lazer-radeski', 'art-bolalarda-sogal-co2-deka', 'art-alopecia-areata-klinik-holat']),
     specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-bosh-terisi-psoriazi', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-mort-tirnoqlar', 'art-plantar-sogal', 'art-ichga-osgan-tirnoq', 'art-tirnoq-rangi-ozgarishi', 'art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
     kosmetologLanding('fargona', ['art-yangi-yil-yuz-parvarishi', 'art-koz-osti-qorayishi', 'art-kimyoviy-piling', 'art-oyoqdagi-tomir-tori', 'art-pigment-doglari-qishda', 'art-giperhidroz', 'art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-melazma', 'art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),

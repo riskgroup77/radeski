@@ -688,6 +688,91 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
     hasPriceFaq: true,
   },
 
+  // Facts from the clinic's own materials: the pediatric dermatology service (infants and
+  // children, atopic dermatitis, allergic rash, congenital conditions, parent guidance), the
+  // doctors' profiles (Turgunov, Karimova: adults and children), the pediatric wart CO₂-laser
+  // cases (Ashurov: minutes per wart, healing 1–3 weeks) and the pediatric alopecia areata case.
+  'bolalar-dermatologi': {
+    about: [
+      L(
+        'Bolalar dermatologi chaqaloqlik davridan o‘smirlikkacha bo‘lgan bolalarning teri, soch va tirnoq kasalliklarini aniqlaydi va davolaydi. Bola terisi yupqa va sezgir, shuning uchun dori, doza va muolaja yoshga qarab tanlanadi, ota-onaga esa uyda parvarish bo‘yicha aniq yo‘riqnoma beriladi.',
+        'Детский дерматолог диагностирует и лечит болезни кожи, волос и ногтей у детей — от младенчества до подросткового возраста. Детская кожа тонкая и чувствительная, поэтому препараты, дозы и процедуры подбираются по возрасту, а родители получают чёткую инструкцию по домашнему уходу.',
+        'A pediatric dermatologist diagnoses and treats skin, hair and nail conditions in children — from infancy to the teenage years. Children’s skin is thin and sensitive, so medicines, doses and procedures are chosen for the child’s age, and parents get clear instructions for care at home.',
+      ),
+      L(
+        'Ko‘p murojaat qilinadigan holatlar: atopik dermatit va ekzema, allergik toshma va eshakemi, taglik dermatiti, so‘gal va molluskum kontagiozum, impetigo, gerpes, qo‘tir va bitlash, o‘choqli alopetsiya, o‘smirlik aknesi va seboreya, tug‘ma dog‘lar, xol va pigment o‘zgarishlari.',
+        'Частые причины обращения: атопический дерматит и экзема, аллергическая сыпь и крапивница, пелёночный дерматит, бородавки и контагиозный моллюск, импетиго, герпес, чесотка и педикулёз, очаговая алопеция, подростковое акне и себорея, врождённые пятна, родинки и нарушения пигментации.',
+        'Common reasons to visit: atopic dermatitis and eczema, allergic rash and hives, nappy rash, warts and molluscum contagiosum, impetigo, cold sores, scabies and head lice, alopecia areata, teenage acne and seborrhoea, birthmarks, moles and pigment changes.',
+      ),
+      L(
+        'Radeski’da bolani dermatovenerologlar qabul qiladi; xol va tug‘ma dog‘lar og‘riqsiz dermatoskopiya bilan tekshiriladi. So‘gal va o‘smalar kerak bo‘lsa DEKA CO₂ lazer bilan olib tashlanadi — bitta so‘gal odatda bir necha daqiqa oladi, tiklanish 1–3 hafta. O‘choqli alopetsiya va surunkali kasalliklarda bola dinamik kuzatuvda bo‘ladi.',
+        'В Radeski детей принимают дерматовенерологи; родинки и врождённые пятна проверяют безболезненной дерматоскопией. Бородавки и образования при необходимости удаляют лазером DEKA CO₂ — одна бородавка обычно занимает несколько минут, заживление 1–3 недели. При очаговой алопеции и хронических болезнях ребёнок находится под динамическим наблюдением.',
+        'At Radeski children are seen by dermatovenereologists; moles and birthmarks are checked with painless dermatoscopy. Warts and growths are removed with the DEKA CO₂ laser when needed — one wart usually takes a few minutes and heals in 1–3 weeks. Children with alopecia areata or chronic conditions stay under regular follow-up.',
+      ),
+    ],
+    steps: [
+      L(
+        'Ko‘rik ota-ona bilan: shikoyatlar, ovqatlanish, ishlatilayotgan krem va dorilar, allergiya so‘raladi',
+        'Осмотр вместе с родителем: жалобы, питание, используемые кремы и лекарства, аллергии',
+        'Visit with a parent: complaints, diet, creams and medicines used, allergies',
+      ),
+      L(
+        'Kerak bo‘lsa dermatoskopiya yoki tahlillar',
+        'При необходимости дерматоскопия или анализы',
+        'Dermatoscopy or tests if needed',
+      ),
+      L(
+        'Yoshga mos davolash rejasi va uyda parvarish bo‘yicha yozma yo‘riqnoma',
+        'План лечения по возрасту и письменная инструкция по уходу дома',
+        'An age-appropriate treatment plan and written home-care instructions',
+      ),
+      VISIT_STEPS.followUp,
+    ],
+    faqs: [
+      Q(
+        L('Bolalarni necha yoshdan qabul qilasiz?', 'С какого возраста вы принимаете детей?', 'From what age do you see children?'),
+        L(
+          'Chaqaloqlik davridan boshlab: go‘daklar, maktab yoshidagi bolalar va o‘smirlar qabul qilinadi. Bola ota-onasi yoki vasiysi bilan keladi.',
+          'С младенчества: принимаем грудных детей, школьников и подростков. Ребёнок приходит с родителем или опекуном.',
+          'From infancy: babies, school-age children and teenagers are seen. A child comes with a parent or guardian.',
+        ),
+      ),
+      Q(
+        L('Qabulga qanday tayyorlanish kerak?', 'Как подготовиться к приёму?', 'How should we prepare for the visit?'),
+        L(
+          'Ishlatilayotgan krem va dorilarni (yoki ularning nomini) olib keling. Toshma kelib-ketsa, uning rasmini telefonda saqlang. Qabul kuni toshmaga krem surtmaslik tavsiya etiladi — shifokor terini asl holida ko‘rishi kerak.',
+          'Возьмите кремы и лекарства, которыми пользуетесь (или их названия). Если сыпь то появляется, то исчезает, сфотографируйте её. В день приёма лучше не наносить крем на сыпь — врачу нужно увидеть кожу как есть.',
+          'Bring the creams and medicines you use (or their names). If the rash comes and goes, take a photo of it. On the day of the visit avoid putting cream on the rash — the doctor needs to see the skin as it is.',
+        ),
+      ),
+      Q(
+        L('Atopik dermatit butunlay davolanadimi?', 'Можно ли вылечить атопический дерматит?', 'Can atopic dermatitis be cured?'),
+        L(
+          'Atopik dermatit surunkali kasallik, lekin uni nazorat qilish mumkin: muntazam namlantirish, triggerlardan saqlanish va kuchayish davrida shifokor buyurgan davolash. Ko‘p bolalarda yosh o‘tishi bilan kasallik yengillashadi.',
+          'Атопический дерматит — хроническое заболевание, но его можно контролировать: регулярное увлажнение, исключение триггеров и лечение по назначению врача при обострении. У многих детей с возрастом болезнь становится мягче.',
+          'Atopic dermatitis is chronic but can be controlled: regular moisturising, avoiding triggers and treatment prescribed by the doctor during flares. In many children it becomes milder with age.',
+        ),
+      ),
+      Q(
+        L('Bolalardagi so‘gal qanday olib tashlanadi?', 'Как удаляют бородавки у детей?', 'How are warts removed in children?'),
+        L(
+          'Avval shifokor bu haqiqatan so‘gal ekanini tekshiradi. Kerak bo‘lsa, so‘gal DEKA CO₂ lazer bilan olib tashlanadi: bittasiga odatda bir necha daqiqa ketadi, tiklanish 1–3 hafta. Uyda kesish, kuydirish yoki agressiv vositalar tavsiya etilmaydi — chandiq va yallig‘lanish xavfi bor.',
+          'Сначала врач проверяет, действительно ли это бородавка. При необходимости её удаляют лазером DEKA CO₂: на одну обычно уходит несколько минут, заживление 1–3 недели. Срезать, прижигать или использовать агрессивные средства дома не рекомендуется — есть риск рубца и воспаления.',
+          'First the doctor confirms it really is a wart. If needed it is removed with the DEKA CO₂ laser: one usually takes a few minutes and heals in 1–3 weeks. Cutting, burning or harsh products at home are not advised — they risk scarring and inflammation.',
+        ),
+      ),
+      Q(
+        L('Bolaning xol va tug‘ma dog‘larini tekshirish kerakmi?', 'Нужно ли проверять родинки и родимые пятна у ребёнка?', 'Should a child’s moles and birthmarks be checked?'),
+        L(
+          'Ha, ayniqsa xol tez kattalashsa, shakli yoki rangi o‘zgarsa, qonasa yoki qichisa. Dermatoskopiya og‘riqsiz, bolaga hech qanday noqulaylik tug‘dirmaydi.',
+          'Да, особенно если родинка быстро растёт, меняет форму или цвет, кровоточит или чешется. Дерматоскопия безболезненна и не доставляет ребёнку неудобств.',
+          'Yes, especially if a mole grows quickly, changes shape or colour, bleeds or itches. Dermatoscopy is painless and causes the child no discomfort.',
+        ),
+      ),
+    ],
+    priceNames: DERMATOLOGIST_PRICES,
+  },
+
   'tirnoq-zamburug': {
     about: [
       L(

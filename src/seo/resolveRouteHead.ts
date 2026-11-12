@@ -671,7 +671,7 @@ function buildDoctorSeoDescription(doctor: Doctor, details: DoctorPageDetails | 
   return where ? `${lead} ${where}. ${bio}` : `${lead} ${bio}`;
 }
 
-const SPECIALIST_LANDINGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog', 'kosmetolog']);
+const SPECIALIST_LANDINGS = new Set(['dermatolog', 'trixolog', 'podolog', 'onko-dermatolog', 'kosmetolog', 'bolalar-dermatologi']);
 
 /** "Lazer epilyatsiya Farg'onada — narxlar | Radeski Skin Clinic" when prices are known. */
 function buildLandingSeoTitle(
