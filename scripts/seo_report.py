@@ -3,7 +3,8 @@
 
 What it measures (the plan's KPIs): clicks, impressions, CTR, average position and their
 change vs the previous period; how many queries are in TOP-3 / TOP-10 / TOP-20; Fergana and
-Kokand queries separately; pages that earn traffic; sitemap pages with no impressions at all.
+Kokand queries separately; each service (position, its queries, and pages competing for the
+same query); pages that earn traffic; sitemap pages with no impressions at all.
 
 Setup (once):
   1. Google Cloud console -> create a project -> enable "Google Search Console API".
@@ -31,12 +32,103 @@ import sys
 import urllib.request
 from pathlib import Path
 
+# Domain property by default; resolve_site() switches to the property the key can actually see
+# (the site is also verified with an HTML file, i.e. possibly as "https://radeski.uz/").
 SITE = os.environ.get("GSC_SITE", "sc-domain:radeski.uz")
 CREDENTIALS = Path(os.environ.get("GSC_CREDENTIALS", "gsc-service-account.json"))
 SITEMAP_URL = "https://radeski.uz/sitemap.xml"
 FERGANA = re.compile(r"farg|ferg|фергон|фергана|фергане", re.I)
 KOKAND = re.compile(r"qo.?qon|kokand|qoqon|коканд|кукон|куқон", re.I)
 BRAND = re.compile(r"radeski|радески|rade skin", re.I)
+
+# Services the clinic wants found — a query belongs to the first service whose pattern matches
+# (specific ones before "Dermatolog"). Latin Uzbek, Cyrillic Uzbek and Russian spellings.
+SERVICES: list[tuple[str, re.Pattern[str]]] = [
+    (name, re.compile(pattern, re.I))
+    for name, pattern in [
+        ("Soch ekish", r"soch ekish|soch ko.?chir|соч экиш|пересадк\w* волос|трансплантац\w* волос|hair transplant"),
+        ("Botoks", r"botoks|botox|ботокс|botulin|ботулин|диспорт|dysport"),
+        ("Biorevitalizatsiya", r"biorev|биорев"),
+        ("Kontur plastika", r"kontur|контурн|filler|филлер|lab katt|увеличени\w* губ"),
+        ("Lazer epilyatsiya", r"epilya|эпиляц"),
+        ("Bolalar dermatologi", r"bolalar|болалар|детск\w* дерматолог|дерматолог\w* для детей|у детей|у ребен"),
+        ("Psoriaz", r"psoria|псориа"),
+        ("Vitiligo", r"vitiligo|витилиго"),
+        ("Akne", r"akne|акне|husnbuzar|ugri|прыщ|угр"),
+        ("Pigmentatsiya", r"pigment|пигмент|melazm|мелазм"),
+        ("Rozatsea va tomirlar", r"rozas|розац|kuperoz|купероз|tomir|сосуд"),
+        ("IPL", r"\bipl\b|фотоомолож"),
+        ("Dermatoskopiya va xollar", r"dermatoskop|дерматоскоп|\bxol\b|xollar|родинк|nevus|невус"),
+        ("So'gal va o'smalar", r"so.?g.?al|бородав|papillom|папиллом|o.?sma|новообраз"),
+        ("Podolog va tirnoq", r"podolog|подолог|tirnoq|тирноқ|ногот|ногт"),
+        ("Trixolog va soch to'kilishi", r"trixolog|трихолог|soch to.?kil|соч тўкил|выпаден\w* волос|alopes|алопец|trixoskop|трихоскоп"),
+        ("Kosmetolog", r"kosmetolog|косметолог"),
+        ("Dermatolog", r"dermatolog|дерматолог|teri shifokor|кожн\w* врач"),
+    ]
+]
+
+
+def service_for(query_text: str) -> str | None:
+    return next((name for name, pattern in SERVICES if pattern.search(query_text)), None)
+
+
+def service_section(page_queries: list[dict]) -> list[str]:
+    """Per service: how it ranks, which queries, and which pages Google shows for them.
+
+    More than one page shown for the same query means the pages compete (cannibalization).
+    """
+    by_service: dict[str, dict[str, dict]] = {}
+    for row in page_queries:
+        page, text = row["keys"]
+        name = service_for(text)
+        if not name:
+            continue
+        entry = by_service.setdefault(name, {}).setdefault(text, {"clicks": 0, "impressions": 0, "weighted": 0.0, "pages": {}})
+        entry["clicks"] += row["clicks"]
+        entry["impressions"] += row["impressions"]
+        entry["weighted"] += row["position"] * row["impressions"]
+        entry["pages"][page] = entry["pages"].get(page, 0) + row["impressions"]
+
+    lines = [
+        "## Xizmatlar bo'yicha pozitsiyalar",
+        "",
+        "| Xizmat | Ko'rsatish | Klik | O'rtacha pozitsiya | TOP-10 so'rovlar | Asosiy sahifa |",
+        "|---|---:|---:|---:|---:|---|",
+    ]
+    details: list[str] = []
+    for name, _ in SERVICES:
+        queries = by_service.get(name)
+        if not queries:
+            lines.append(f"| {name} | 0 | 0 | — | 0 | — |")
+            continue
+        impressions = sum(q["impressions"] for q in queries.values())
+        clicks = sum(q["clicks"] for q in queries.values())
+        position = sum(q["weighted"] for q in queries.values()) / impressions if impressions else 0
+        top10 = sum(1 for q in queries.values() if q["impressions"] and q["weighted"] / q["impressions"] <= 10)
+        page_totals: dict[str, float] = {}
+        for q in queries.values():
+            for page, shown in q["pages"].items():
+                page_totals[page] = page_totals.get(page, 0) + shown
+        main_page = max(page_totals, key=page_totals.get).replace("https://radeski.uz", "")
+        lines.append(f"| {name} | {impressions:.0f} | {clicks:.0f} | {position:.1f} | {top10} | {main_page} |")
+
+        details += [
+            "",
+            f"### {name}",
+            "| So'rov | Ko'rsatish | Klik | Pozitsiya | Ko'rsatilgan sahifa(lar) |",
+            "|---|---:|---:|---:|---|",
+        ]
+        for text, q in sorted(queries.items(), key=lambda item: -item[1]["impressions"])[:12]:
+            pages = sorted(q["pages"].items(), key=lambda item: -item[1])
+            shown = ", ".join(page.replace("https://radeski.uz", "") for page, _ in pages[:3])
+            flag = " ⚠️ raqobat" if len(pages) > 1 else ""
+            lines_pos = q["weighted"] / q["impressions"] if q["impressions"] else 0
+            details.append(f"| {text} | {q['impressions']:.0f} | {q['clicks']:.0f} | {lines_pos:.1f} | {shown}{flag} |")
+    return lines + [
+        "",
+        "⚠️ raqobat — bitta so'rov uchun Google bir nechta sahifani ko'rsatgan: ular bir-biri bilan raqobatlashadi.",
+        *details,
+    ]
 
 
 def gsc_service():
@@ -51,6 +143,20 @@ def gsc_service():
         str(CREDENTIALS), scopes=["https://www.googleapis.com/auth/webmasters.readonly"]
     )
     return build("searchconsole", "v1", credentials=creds, cache_discovery=False)
+
+
+def resolve_site(service) -> str:
+    """The radeski.uz property this key has access to (GSC_SITE when it is among them)."""
+    sites = [s["siteUrl"] for s in service.sites().list().execute().get("siteEntry", [])]
+    if SITE in sites:
+        return SITE
+    match = next((s for s in sites if "radeski.uz" in s and "api." not in s), None)
+    if not match:
+        sys.exit(
+            "The service account sees no radeski.uz property. Add its e-mail in Search Console ->"
+            f" Settings -> Users and permissions. Properties it can see: {sites or 'none'}"
+        )
+    return match
 
 
 def query(service, start: dt.date, end: dt.date, dimensions: list[str], limit: int = 25000) -> list[dict]:
@@ -142,10 +248,13 @@ def main() -> None:
     prev_end = start - dt.timedelta(days=1)
     prev_start = prev_end - dt.timedelta(days=args.days - 1)
 
+    global SITE
     service = gsc_service()
+    SITE = resolve_site(service)
     queries = query(service, start, end, ["query"])
     prev_queries = query(service, prev_start, prev_end, ["query"])
     pages = query(service, start, end, ["page"])
+    page_queries = query(service, start, end, ["page", "query"])
 
     now, before = totals(queries), totals(prev_queries)
     buckets_now, buckets_before = bucket_counts(queries), bucket_counts(prev_queries)
@@ -190,6 +299,8 @@ def main() -> None:
         "| So'rov | Klik | Ko'rsatish | Pozitsiya |",
         "|---|---:|---:|---:|",
         *[f"| {r['keys'][0]} | {r['clicks']:.0f} | {r['impressions']:.0f} | {r['position']:.1f} |" for r in sorted(fergana, key=lambda r: -r["impressions"])[:20]],
+        "",
+        *service_section(page_queries),
         "",
         "## Trafik olayotgan sahifalar (TOP-20)",
         "| Sahifa | Klik | Ko'rsatish | Pozitsiya |",
