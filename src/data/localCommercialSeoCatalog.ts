@@ -554,6 +554,36 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
         'biorevitalization Fergana, biorevitalization price, hyaluronic acid injections, skin hydration, Rejuran, Teosyal Redensity, facial mesotherapy, Radeski Skin Clinic',
       ),
     ),
+    // Dermal fillers: Fergana only — the injecting cosmetologist (Dr. Mangasaryan) works there.
+    withKeywords(
+      treatmentLanding('fargona', 'kontur-plastika', 'in-ekcionnaya-kosmetologiya', {
+        name: L('Kontur plastika', 'Контурная пластика', 'Dermal fillers'),
+        articleRouteKeys: ['art-kontur-plastika-radeski', 'art-konturnaya-guby-radeski', 'art-botulinoterapiya-radeski', 'art-biorevitalizatsiya-radeski'],
+        problem: L(
+          'Lab yupqalashgan, yonoq va yuz ovali hajmini yo‘qotgan, nazolabial chiziqlar chuqurlashgan.',
+          'Губы стали тоньше, скулы и овал лица потеряли объём, носогубные складки углубились.',
+          'Lips have thinned, cheeks and jawline have lost volume, nasolabial folds have deepened.',
+        ),
+        whoFor: [
+          L('Lab hajmi va konturini tuzatmoqchi bo‘lganlar', 'Коррекция объёма и контура губ', 'Lip volume and outline correction'),
+          L('Nazolabial chiziqlar va tushgan lab burchaklari', 'Носогубные складки и опущенные уголки рта', 'Nasolabial folds and drooping mouth corners'),
+          L('Yonoq, iyak va yuz ovalidagi yoshga bog‘liq hajm yo‘qolishi', 'Возрастная потеря объёма скул, подбородка и овала лица', 'Age-related volume loss in cheeks, chin and jawline'),
+          L('Yuz asimmetriyasi; boshqa joyda kiritilgan fillerni tuzatish', 'Асимметрия лица; коррекция филлера, введённого в другом месте', 'Facial asymmetry; correcting filler placed elsewhere'),
+        ],
+        methods: [
+          L('Lab kontur plastikasi: Juvederm Ultra Smile / Ultra 3, TEOSYAL Kiss', 'Контурная пластика губ: Juvederm Ultra Smile / Ultra 3, TEOSYAL Kiss', 'Lip fillers: Juvederm Ultra Smile / Ultra 3, TEOSYAL Kiss'),
+          L('Chuqur kontur va hajm: TEOSYAL PureSense Ultra Deep, RHA 4', 'Глубокие контуры и объём: TEOSYAL PureSense Ultra Deep, RHA 4', 'Deep contouring and volume: TEOSYAL PureSense Ultra Deep, RHA 4'),
+          L('Mimik zonalar uchun dinamik fillerlar: TEOSYAL RHA 1–3', 'Динамические филлеры для мимических зон: TEOSYAL RHA 1–3', 'Dynamic fillers for expressive areas: TEOSYAL RHA 1–3'),
+          L('Kompleks Full Face rejasi', 'Комплексный план Full Face', 'Full-face plan'),
+          L('Fillerni gialuronidaza bilan eritish', 'Растворение филлера гиалуронидазой', 'Dissolving filler with hyaluronidase'),
+        ],
+      }),
+      L(
+        "kontur plastika Farg'ona, lab kattalashtirish Farg'ona, lab filler, filler narxi, Juvederm, Teosyal, nazolabial chiziqlar, yonoq filler, Radeski Skin Clinic",
+        'контурная пластика Фергана, увеличение губ Фергана, филлер для губ, филлеры цена, Juvederm, Teosyal, носогубные складки, филлер скулы, Radeski Skin Clinic',
+        'dermal fillers Fergana, lip fillers Fergana, lip augmentation, filler price, Juvederm, Teosyal, nasolabial folds, cheek filler, Radeski Skin Clinic',
+      ),
+    ),
     treatmentLanding('fargona', 'dermatoskopiya', 'dermatoskopiya', {
       articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-xol-tekshiruvi-dermatoskopiya'],
       name: L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'),

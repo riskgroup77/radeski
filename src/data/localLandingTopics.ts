@@ -582,6 +582,112 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
     hasPriceFaq: true,
   },
 
+  // Facts from the clinic's own materials: the dermal filler and lip filler articles (zones,
+  // 1–2 ml / ~20 injections, swelling 2–4 days, no active kissing 5–7 days, 6–12 months,
+  // contraindications, before/after care), the price list (products) and Dr. Mangasaryan's
+  // profile (lips, face contour, Full Face, dissolving fillers with hyaluronidase).
+  'kontur-plastika': {
+    about: [
+      L(
+        'Kontur plastika — gialuron kislotasi asosidagi filler bilan yuzga hajm berish va konturni tiklash. Gialuron kislotasi terining tabiiy tarkibiy qismi: u suvni ushlab turadi, shuning uchun filler yo‘qolgan hajmni to‘ldiradi va terini namlantiradi. Natija muolajadan keyin darhol ko‘rinadi.',
+        'Контурная пластика — восполнение объёма и восстановление контуров лица филлером на основе гиалуроновой кислоты. Гиалуроновая кислота — естественный компонент кожи: она удерживает воду, поэтому филлер заполняет утраченный объём и увлажняет кожу. Результат виден сразу после процедуры.',
+        'Dermal fillers restore volume and facial contours with a hyaluronic acid gel. Hyaluronic acid is a natural part of the skin: it holds water, so the filler replaces lost volume and hydrates the skin. The result is visible straight after the treatment.',
+      ),
+      L(
+        'Tuzatiladigan zonalar: lab hajmi va konturi, tushgan lab burchaklari, og‘iz atrofidagi mayda ajinlar, nazolabial chiziqlar, yonoq, iyak va yuz ovali, yoshga bog‘liq hajm yo‘qolishi va asimmetriya. Maqsad — «sun’iy» effekt emas, tabiiy shakl.',
+        'Корректируемые зоны: объём и контур губ, опущенные уголки рта, мелкие морщины вокруг рта, носогубные складки, скулы, подбородок и овал лица, возрастная потеря объёма и асимметрия. Цель — не «искусственный» эффект, а естественная форма.',
+        'Areas treated: lip volume and outline, drooping mouth corners, fine lines around the mouth, nasolabial folds, cheeks, chin and jawline, age-related volume loss and asymmetry. The goal is a natural shape, not an “overdone” look.',
+      ),
+      L(
+        'Radeski’da sertifikatlangan fillerlar qo‘llaniladi: Juvederm (Ultra Smile, Ultra 3) va TEOSYAL — lab uchun Kiss, chuqur kontur uchun PureSense Ultra Deep, yuz ifodasi va hajm uchun dinamik RHA 1–4. Bir seansda odatda 1–2 ml preparat ingichka igna bilan kichik dozalarda kiritiladi; natija preparat va metabolizmga qarab 6–12 oy saqlanadi.',
+        'В Radeski используют сертифицированные филлеры: Juvederm (Ultra Smile, Ultra 3) и TEOSYAL — Kiss для губ, PureSense Ultra Deep для глубоких контуров, динамические RHA 1–4 для мимических зон и объёма. За сеанс обычно вводят 1–2 мл тонкой иглой небольшими порциями; эффект держится 6–12 месяцев в зависимости от препарата и обмена веществ.',
+        'Radeski uses certified fillers: Juvederm (Ultra Smile, Ultra 3) and TEOSYAL — Kiss for lips, PureSense Ultra Deep for deep contouring, dynamic RHA 1–4 for expressive areas and volume. A session usually uses 1–2 ml injected in small amounts with a fine needle; results last 6–12 months depending on the product and metabolism.',
+      ),
+      L(
+        'Kontur plastikani shifokor-kosmetolog Mangasaryan Lorena Georgievna bajaradi: lab kontur plastikasi, yuz konturi va hajmi korreksiyasi, kompleks Full Face. Kerak bo‘lsa, avval boshqa joyda kiritilgan gialuron filler gialuronidaza bilan eritiladi.',
+        'Контурную пластику проводит врач-косметолог Мангасарян Лорена Георгиевна: контурная пластика губ, коррекция контуров и объёма лица, комплексный Full Face. При необходимости ранее введённый гиалуроновый филлер растворяют гиалуронидазой.',
+        'Fillers are done by cosmetologist Dr. Lorena Mangasaryan: lip fillers, facial contour and volume correction, full-face plans. If needed, a hyaluronic filler injected elsewhere can first be dissolved with hyaluronidase.',
+      ),
+    ],
+    steps: [
+      L(
+        'Konsultatsiya: zonalar va proporsiyalar baholanadi, filler va hajm (ml) tanlanadi',
+        'Консультация: оценка зон и пропорций, выбор филлера и объёма (мл)',
+        'Consultation: areas and proportions are assessed, the filler and volume (ml) chosen',
+      ),
+      L(
+        'Tayyorgarlik: 1 hafta solyariy va plyajsiz, 48 soat alkogolsiz; qon suyultiruvchi dorilar shifokor bilan kelishiladi',
+        'Подготовка: неделю без солярия и пляжа, 48 часов без алкоголя; препараты, разжижающие кровь, — по согласованию с врачом',
+        'Preparation: no tanning for a week, no alcohol for 48 hours; blood thinners only as agreed with the doctor',
+      ),
+      L(
+        'Muolaja: ingichka igna, kichik dozalar, natija darhol ko‘rinadi',
+        'Процедура: тонкая игла, небольшие порции, результат виден сразу',
+        'Treatment: fine needle, small amounts, the result shows immediately',
+      ),
+      L(
+        'Keyin: 24–48 soat zonaga tegmaslik va massaj qilmaslik, 2–4 kun shish bo‘lishi normal, nazorat ko‘rigi',
+        'После: 24–48 часов не трогать и не массировать зону, отёк 2–4 дня — норма, контрольный осмотр',
+        'Afterwards: do not touch or massage the area for 24–48 hours, swelling for 2–4 days is normal, follow-up visit',
+      ),
+    ],
+    faqs: [
+      Q(
+        L('Kontur plastika narxi qancha?', 'Сколько стоит контурная пластика?', 'How much do fillers cost?'),
+        L(
+          'Narx preparatga bog‘liq: Juvederm Ultra Smile — 1 600 000 so‘m, Juvederm Ultra 3 — 2 225 000 so‘m, TEOSYAL fillerlari — 2 000 000 – 3 000 000 so‘m (bir shprits). Nechta shprits kerakligi zonalarga qarab konsultatsiyada aytiladi.',
+          'Цена зависит от препарата: Juvederm Ultra Smile — 1 600 000 сум, Juvederm Ultra 3 — 2 225 000 сум, филлеры TEOSYAL — 2 000 000 – 3 000 000 сум (за шприц). Сколько шприцев нужно, скажут на консультации по зонам.',
+          'The price depends on the product: Juvederm Ultra Smile 1,600,000 UZS, Juvederm Ultra 3 2,225,000 UZS, TEOSYAL fillers 2,000,000–3,000,000 UZS (per syringe). How many syringes you need is decided at the consultation.',
+        ),
+      ),
+      Q(
+        L('Natija qancha saqlanadi?', 'Сколько держится результат?', 'How long does it last?'),
+        L(
+          'Odatda 6–12 oy — preparat, zona va metabolizmga bog‘liq. Gialuron kislotasi asta-sekin tabiiy yo‘l bilan so‘riladi; qayta muolaja vaqtini shifokor belgilaydi.',
+          'Обычно 6–12 месяцев — зависит от препарата, зоны и обмена веществ. Гиалуроновая кислота постепенно рассасывается естественным путём; время повторной процедуры определяет врач.',
+          'Usually 6–12 months, depending on the product, area and metabolism. Hyaluronic acid is gradually absorbed naturally; the doctor decides when to repeat.',
+        ),
+      ),
+      Q(
+        L('Og‘riydimi, shish qancha davom etadi?', 'Больно ли и сколько держится отёк?', 'Does it hurt, and how long is the swelling?'),
+        L(
+          'Ingichka igna ishlatiladi, ko‘p fillerlar tarkibida og‘riqsizlantiruvchi bor. Vaqtincha shish, ko‘karish va yengil og‘riq 2–4 kun normal. Labga qilinganda faol o‘pishdan 5–7 kun saqlanish tavsiya etiladi.',
+          'Используется тонкая игла, многие филлеры содержат анестетик. Временный отёк, синяк и лёгкая боль 2–4 дня — норма. После губ рекомендуется 5–7 дней воздержаться от активных поцелуев.',
+          'A fine needle is used and many fillers contain an anaesthetic. Temporary swelling, bruising and mild soreness for 2–4 days are normal. After lip fillers avoid active kissing for 5–7 days.',
+        ),
+      ),
+      Q(
+        L('Natija yoqmasa nima qilinadi?', 'Что делать, если результат не понравился?', 'What if I do not like the result?'),
+        L(
+          'Gialuron filler qaytariladigan muolaja: kerak bo‘lsa, shifokor uni gialuronidaza fermenti bilan eritadi. Shu usul bilan boshqa joyda noto‘g‘ri kiritilgan filler ham tuzatiladi.',
+          'Гиалуроновый филлер обратим: при необходимости врач растворяет его ферментом гиалуронидазой. Так же исправляют неудачно введённый в другом месте филлер.',
+          'A hyaluronic filler is reversible: if needed the doctor dissolves it with the enzyme hyaluronidase. The same method corrects filler placed badly elsewhere.',
+        ),
+      ),
+      Q(
+        L('Kimga mumkin emas?', 'Кому нельзя?', 'Who should not have it?'),
+        L(
+          'Filler tarkibiga allergiya, homiladorlik va emizish, nazoratsiz qandli diabet, o‘tkir infeksiya (gripp, ORVI, gerpes) bo‘lganda qilinmaydi yoki keyinga suriladi.',
+          'Не проводят или откладывают при аллергии на компоненты филлера, беременности и грудном вскармливании, некомпенсированном диабете, острой инфекции (грипп, ОРВИ, герпес).',
+          'It is not done or is postponed with an allergy to filler ingredients, pregnancy and breastfeeding, uncontrolled diabetes, or an acute infection (flu, cold, cold sores).',
+        ),
+      ),
+    ],
+    // Fillers only (skin boosters such as Redensity and Volite are on the biorevitalization page).
+    priceNames: [
+      'Lab kontur plastikasi: Juvederm Ultra Smile',
+      'Lab kontur plastikasi: Juvederm Ultra 3',
+      'TEOSYAL Kiss 0.7 ml',
+      'TEOSYAL PureSense Kiss',
+      'TEOSYAL PureSense Ultra Deep',
+      'TEOSYAL RHA 1',
+      'TEOSYAL RHA 2',
+      'TEOSYAL RHA 3',
+      'TEOSYAL RHA 4',
+    ],
+    hasPriceFaq: true,
+  },
+
   'tirnoq-zamburug': {
     about: [
       L(

@@ -56,6 +56,7 @@ const TOPIC_SPECIALTIES: Record<string, Specialty[]> = {
   kosmetolog: ['kosmetolog', 'dermatolog'],
   botoks: ['kosmetolog'],
   biorevitalizatsiya: ['kosmetolog'],
+  'kontur-plastika': ['kosmetolog'],
   dermatoskopiya: ['onkolog', 'dermatolog'],
   'xol-tekshiruvi': ['onkolog', 'dermatolog'],
   'onko-dermatolog': ['onkolog'],
@@ -75,6 +76,8 @@ const TOPIC_DOCTORS: Record<string, string[]> = {
   botoks: ['mangasaryan-lorena-georgievna'],
   // Profile: biorevitalization and collagen stimulation, PRP (mangasaryanLorenaProfile)
   biorevitalizatsiya: ['mangasaryan-lorena-georgievna'],
+  // Profile: lip and face contouring, Full Face, hyaluronidase (mangasaryanLorenaProfile)
+  'kontur-plastika': ['mangasaryan-lorena-georgievna'],
 };
 
 /** Doctors of the landing's branch whose specialty matches the topic (best match first). */
@@ -111,6 +114,8 @@ const TOPIC_KEYWORDS: Record<string, RegExp> = {
   // Before the hair-loss topics; "transplant" alone would also take melanocyte grafting.
   'soch-ekish': /soch ekish|soqol ekish|soch transplant|hair transplant|пересадк\S* (волос|бород)|трансплантаци\S* волос|\bFUE\b|\bDHI\b/i,
   botoks: /botoks|botox|ботокс|botul|ботул|dysport|диспорт|relatoks|релатокс|mimik ajin|мимическ/i,
+  // Before biorevitalization: fillers are hyaluronic acid too.
+  'kontur-plastika': /kontur plast|контурн|filler|филлер|juvederm|teosyal|lab hajm|увеличени\S* губ/i,
   biorevitalizatsiya: /biorev|биорев|rejuran|режуран|redensity|gialuron kislota|гиалуронов/i,
   trixolog: /trix|trich|трих|soch|волос|hair|alopes|алопец/i,
   'soch-tokilish': /soch|волос|hair|alopes|алопец|trix|трих/i,
