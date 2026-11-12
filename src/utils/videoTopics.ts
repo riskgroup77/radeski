@@ -55,7 +55,7 @@ const BOTULINUM = sub('in-ekcionnaya-kosmetologiya', 'botulino', L('Botulinotera
 const VIDEO_TOPICS: VideoTopic[] = [
   {
     match: /soch ekish|soqol|transplant|пересадк/,
-    articles: ['art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi'],
+    articles: ['art-soch-ekish-fue-dhi', 'art-soqol-ekish', 'art-soch-ekishdan-keyin', 'art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi'],
     links: [HAIR_TRANSPLANT, TRICHOLOGY],
   },
   {

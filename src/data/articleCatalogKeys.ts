@@ -312,6 +312,16 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   'brittle-nails': ['art-mort-tirnoqlar', 'mort-tirnoqlar'],
   'dark-circles': ['art-koz-osti-qorayishi', 'koz-osti-qorayishi'],
   'new-year-skin-plan': ['art-yangi-yil-yuz-parvarishi', 'yangi-yil-yuz-parvarishi'],
+  'hair-transplant-fue-dhi': ['art-soch-ekish-fue-dhi', 'soch-ekish-fue-dhi'],
+  'hair-transplant-aftercare': ['art-soch-ekishdan-keyin', 'soch-ekishdan-keyin'],
+  'beard-transplant': ['art-soqol-ekish', 'soqol-ekish'],
+  'botox-or-filler': ['art-botoks-yoki-filler', 'botoks-yoki-filler'],
+  'mesotherapy': ['art-mezoterapiya', 'mezoterapiya'],
+  'device-cosmetology': ['art-apparatli-kosmetologiya', 'apparatli-kosmetologiya'],
+  'dermatologist-visit': ['art-dermatolog-qabuliga-tayyorgarlik', 'dermatolog-qabuliga-tayyorgarlik'],
+  'podiatrist': ['art-podolog-kim', 'podolog-kim'],
+  'couperose': ['art-kuperoz', 'kuperoz'],
+  'facial-cleansing': ['art-yuz-tozalash-turlari', 'yuz-tozalash-turlari'],
   'nail-fungus': ['art-tirnoq-zamburugi', 'tirnoq-zamburugi', 'грибок ногтей (онихомикоз)', 'nail fungus (onychomycosis)'],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
   'seborrheic-dermatitis': [

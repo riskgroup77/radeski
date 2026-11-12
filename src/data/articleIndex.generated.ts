@@ -3198,6 +3198,473 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
       "bodyWords": 887
     }
   },
+  "hair-transplant-fue-dhi": {
+    "uz": {
+      "summary": "Soch ekish FUE va DHI usullari: graft va donor zona, operatsiya bosqichlari, natija va narxga ta'sir qiluvchi omillar, natija qachon ko'rinadi. Radeski — Farg'ona.",
+      "tags": [
+        "Soch ekish",
+        "FUE",
+        "DHI",
+        "Long Hair",
+        "Soch transplantatsiyasi",
+        "Trixolog",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3690,
+      "bodyWords": 463
+    },
+    "ru": {
+      "summary": "Пересадка волос методами FUE и DHI: графты и донорская зона, этапы операции, что влияет на результат и цену, когда виден результат. Radeski — Фергана.",
+      "tags": [
+        "Пересадка волос",
+        "FUE",
+        "DHI",
+        "Long Hair",
+        "Трансплантация волос",
+        "Трихолог",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3413,
+      "bodyWords": 469
+    },
+    "en": {
+      "summary": "Hair transplant with FUE and DHI: grafts and the donor area, the steps of the operation, what affects the result and price, and when you see results. Radeski — Fergana.",
+      "tags": [
+        "Hair transplant",
+        "FUE",
+        "DHI",
+        "Long Hair",
+        "Hair transplantation",
+        "Trichologist",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3453,
+      "bodyWords": 555
+    }
+  },
+  "hair-transplant-aftercare": {
+    "uz": {
+      "summary": "Soch ekishdan keyingi parvarish: birinchi kunlardan 12 oygacha nima normal, qobiqchalar, shok to'kilish, nimalardan saqlanish va qachon shifokorga murojaat qilish kerak.",
+      "tags": [
+        "Soch ekish",
+        "Soch ekishdan keyin",
+        "Parvarish",
+        "Shok to‘kilish",
+        "Trixolog",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2761,
+      "bodyWords": 357
+    },
+    "ru": {
+      "summary": "Уход после пересадки волос: что нормально с первого дня до 12 месяцев, корочки, шоковое выпадение, чего избегать и когда обратиться к врачу.",
+      "tags": [
+        "Пересадка волос",
+        "После пересадки волос",
+        "Уход",
+        "Шоковое выпадение",
+        "Трихолог",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2481,
+      "bodyWords": 350
+    },
+    "en": {
+      "summary": "Aftercare after a hair transplant: what is normal from day one to month 12, crusts, shock loss, what to avoid and when to call the doctor.",
+      "tags": [
+        "Hair transplant",
+        "After hair transplant",
+        "Aftercare",
+        "Shock loss",
+        "Trichologist",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2549,
+      "bodyWords": 434
+    }
+  },
+  "beard-transplant": {
+    "uz": {
+      "summary": "Soqol va mo'ylov ekish: kimga mos, qachon kutish kerak, operatsiya qanday o'tadi (FUE, DHI), tiklanish va natija qachon ko'rinadi. Radeski — Farg'ona.",
+      "tags": [
+        "Soqol ekish",
+        "Mo‘ylov ekish",
+        "Soch ekish",
+        "FUE",
+        "DHI",
+        "Trixolog",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2578,
+      "bodyWords": 322
+    },
+    "ru": {
+      "summary": "Пересадка бороды и усов: кому подходит, когда лучше подождать, как проходит операция (FUE, DHI), восстановление и когда виден результат. Radeski — Фергана.",
+      "tags": [
+        "Пересадка бороды",
+        "Пересадка усов",
+        "Пересадка волос",
+        "FUE",
+        "DHI",
+        "Трихолог",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2404,
+      "bodyWords": 338
+    },
+    "en": {
+      "summary": "Beard and moustache transplant: who it suits, when to wait, how the operation goes (FUE, DHI), recovery and when results show. Radeski — Fergana.",
+      "tags": [
+        "Beard transplant",
+        "Moustache transplant",
+        "Hair transplant",
+        "FUE",
+        "DHI",
+        "Trichologist",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2487,
+      "bodyWords": 406
+    }
+  },
+  "botox-or-filler": {
+    "uz": {
+      "summary": "Botoks yoki filler: farqi nimada, qaysi ajin va qaysi muammoga qaysi biri kerak, qachon birga qilinadi, natija qancha saqlanadi. Radeski — Farg'ona.",
+      "tags": [
+        "Botoks",
+        "Filler",
+        "Kontur plastika",
+        "Botulinoterapiya",
+        "Mimik ajinlar",
+        "Kosmetolog",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2915,
+      "bodyWords": 358
+    },
+    "ru": {
+      "summary": "Ботокс или филлер: в чём разница, какой морщине и проблеме что нужно, когда их сочетают, сколько держится эффект. Radeski — Фергана.",
+      "tags": [
+        "Ботокс",
+        "Филлер",
+        "Контурная пластика",
+        "Ботулинотерапия",
+        "Мимические морщины",
+        "Косметолог",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2717,
+      "bodyWords": 364
+    },
+    "en": {
+      "summary": "Botox or filler: the difference, which line and problem needs which, when they are combined and how long each lasts. Radeski — Fergana.",
+      "tags": [
+        "Botox",
+        "Filler",
+        "Dermal fillers",
+        "Botulinum therapy",
+        "Expression lines",
+        "Cosmetologist",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2703,
+      "bodyWords": 426
+    }
+  },
+  "mesotherapy": {
+    "uz": {
+      "summary": "Mezoterapiya yuz va soch uchun: biorevitalizatsiyadan farqi, qaysi preparat nima uchun, soch mezoterapiyasidan oldin trixolog, muolaja va kurs. Radeski — Farg'ona.",
+      "tags": [
+        "Mezoterapiya",
+        "Soch mezoterapiyasi",
+        "Biorevitalizatsiya",
+        "Yuz parvarishi",
+        "Kosmetolog",
+        "Trixolog",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2992,
+      "bodyWords": 355
+    },
+    "ru": {
+      "summary": "Мезотерапия для лица и волос: отличие от биоревитализации, какой препарат для чего, трихолог перед мезотерапией волос, процедура и курс. Radeski — Фергана.",
+      "tags": [
+        "Мезотерапия",
+        "Мезотерапия волос",
+        "Биоревитализация",
+        "Уход за лицом",
+        "Косметолог",
+        "Трихолог",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2765,
+      "bodyWords": 357
+    },
+    "en": {
+      "summary": "Mesotherapy for the face and hair: how it differs from biorevitalization, which product is for what, seeing a trichologist first for hair, the procedure and course. Radeski — Fergana.",
+      "tags": [
+        "Mesotherapy",
+        "Hair mesotherapy",
+        "Biorevitalization",
+        "Facial care",
+        "Cosmetologist",
+        "Trichologist",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2748,
+      "bodyWords": 410
+    }
+  },
+  "device-cosmetology": {
+    "uz": {
+      "summary": "Apparatli kosmetologiya: qaysi apparat qaysi muammo uchun — lazer epilyatsiya, pigment, g'ovaklar, qizarish, chandiqlar, papillomalar. Radeski apparatlari, Farg'ona.",
+      "tags": [
+        "Apparatli kosmetologiya",
+        "Lazer",
+        "IPL",
+        "Hollywood Spectra",
+        "Derma V",
+        "DEKA",
+        "Kosmetolog",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 3004,
+      "bodyWords": 388
+    },
+    "ru": {
+      "summary": "Аппаратная косметология: какой аппарат для какой проблемы — эпиляция, пигмент, поры, покраснение, рубцы, папилломы. Аппараты Radeski, Фергана.",
+      "tags": [
+        "Аппаратная косметология",
+        "Лазер",
+        "IPL",
+        "Hollywood Spectra",
+        "Derma V",
+        "DEKA",
+        "Косметолог",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2873,
+      "bodyWords": 381
+    },
+    "en": {
+      "summary": "Device cosmetology: which device for which problem — hair removal, pigment, pores, redness, scars, papillomas. Radeski devices, Fergana.",
+      "tags": [
+        "Device cosmetology",
+        "Laser",
+        "IPL",
+        "Hollywood Spectra",
+        "Derma V",
+        "DEKA",
+        "Cosmetologist",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2854,
+      "bodyWords": 423
+    }
+  },
+  "dermatologist-visit": {
+    "uz": {
+      "summary": "Dermatolog qabuliga qanday tayyorlanish: nima olib kelish, qabuldan oldin nimani qilmaslik, qabulda nima bo'ladi va qanday savollar berish kerak. Farg'ona va Qo'qon.",
+      "tags": [
+        "Dermatolog",
+        "Dermatolog qabuli",
+        "Dermatoskopiya",
+        "Teri kasalliklari",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2657,
+      "bodyWords": 339
+    },
+    "ru": {
+      "summary": "Как подготовиться к приёму дерматолога: что взять с собой, чего не делать перед приёмом, что будет на приёме и какие вопросы задать. Фергана и Коканд.",
+      "tags": [
+        "Дерматолог",
+        "Приём дерматолога",
+        "Дерматоскопия",
+        "Кожные заболевания",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2456,
+      "bodyWords": 350
+    },
+    "en": {
+      "summary": "How to prepare for a dermatologist visit: what to bring, what not to do beforehand, what happens at the visit and which questions to ask. Fergana and Kokand.",
+      "tags": [
+        "Dermatologist",
+        "Dermatologist visit",
+        "Dermatoscopy",
+        "Skin conditions",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2528,
+      "bodyWords": 425
+    }
+  },
+  "podiatrist": {
+    "uz": {
+      "summary": "Podolog kim va qachon kerak: pedikyurdan farqi, ichiga o'sgan tirnoq, tirnoq zamburug'i, qadoq, tovon yorilishi, diabetda oyoq parvarishi. Farg'ona va Qo'qon.",
+      "tags": [
+        "Podolog",
+        "Podologiya",
+        "Ichiga o‘sgan tirnoq",
+        "Tirnoq zamburug‘i",
+        "Qadoq",
+        "Tovon yorilishi",
+        "Farg'ona",
+        "Qo'qon",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2789,
+      "bodyWords": 356
+    },
+    "ru": {
+      "summary": "Кто такой подолог и когда к нему идти: отличие от педикюра, вросший ноготь, грибок ногтей, мозоли, трещины пяток, уход за стопами при диабете. Фергана и Коканд.",
+      "tags": [
+        "Подолог",
+        "Подология",
+        "Вросший ноготь",
+        "Грибок ногтей",
+        "Мозоли",
+        "Трещины пяток",
+        "Фергана",
+        "Коканд",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2481,
+      "bodyWords": 355
+    },
+    "en": {
+      "summary": "Who a podiatrist is and when to see one: the difference from a pedicure, ingrown nails, nail fungus, corns, cracked heels and foot care in diabetes. Fergana and Kokand.",
+      "tags": [
+        "Podiatrist",
+        "Podiatry",
+        "Ingrown toenail",
+        "Nail fungus",
+        "Corns",
+        "Cracked heels",
+        "Fergana",
+        "Kokand",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2548,
+      "bodyWords": 419
+    }
+  },
+  "couperose": {
+    "uz": {
+      "summary": "Kuperoz nima: yuzdagi qizil tomir to'rlari, sabablari, rozatseadan farqi, nega kremlar yordam bermaydi va Derma V lazeri hamda IPL bilan davolash. Radeski — Farg'ona.",
+      "tags": [
+        "Kuperoz",
+        "Tomir to‘ri",
+        "Teleangiektaziya",
+        "Rozatsea",
+        "Derma V",
+        "IPL",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2595,
+      "bodyWords": 329
+    },
+    "ru": {
+      "summary": "Что такое купероз: сосудистые сеточки на лице, причины, отличие от розацеа, почему не помогают кремы и лечение лазером Derma V и IPL. Radeski — Фергана.",
+      "tags": [
+        "Купероз",
+        "Сосудистая сеточка",
+        "Телеангиэктазии",
+        "Розацеа",
+        "Derma V",
+        "IPL",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2381,
+      "bodyWords": 321
+    },
+    "en": {
+      "summary": "What couperose is: thread veins on the face, causes, how it differs from rosacea, why creams do not help and treatment with the Derma V laser and IPL. Radeski — Fergana.",
+      "tags": [
+        "Couperose",
+        "Thread veins",
+        "Telangiectasia",
+        "Rosacea",
+        "Derma V",
+        "IPL",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2404,
+      "bodyWords": 367
+    }
+  },
+  "facial-cleansing": {
+    "uz": {
+      "summary": "Yuz tozalash turlari: mexanik, ultratovush, karbon piling va PRX-T33 — qanday ishlaydi, qaysi teriga mos, qachon tozalash mumkin emas. Radeski — Farg'ona.",
+      "tags": [
+        "Yuz tozalash",
+        "Ultratovush tozalash",
+        "Karbon piling",
+        "PRX-T33",
+        "Kosmetolog",
+        "Farg'ona",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2552,
+      "bodyWords": 304
+    },
+    "ru": {
+      "summary": "Виды чистки лица: механическая, ультразвуковая, карбоновый пилинг и PRX-T33 — как работают, какой коже подходят, когда чистку делать нельзя. Radeski — Фергана.",
+      "tags": [
+        "Чистка лица",
+        "Ультразвуковая чистка",
+        "Карбоновый пилинг",
+        "PRX-T33",
+        "Косметолог",
+        "Фергана",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2461,
+      "bodyWords": 311
+    },
+    "en": {
+      "summary": "Types of facial cleansing: mechanical, ultrasonic, carbon peel and PRX-T33 — how they work, which skin they suit and when cleansing should wait. Radeski — Fergana.",
+      "tags": [
+        "Facial cleansing",
+        "Ultrasonic cleansing",
+        "Carbon peel",
+        "PRX-T33",
+        "Cosmetologist",
+        "Fergana",
+        "Radeski Skin Clinic"
+      ],
+      "bodyLength": 2334,
+      "bodyWords": 340
+    }
+  },
   "laser-scar-resurfacing": {
     "uz": {
       "summary": "Chandiqlarni lazer shlifovkasi: operatsiya, jarohat, kuyish va akne izlarini kamroq sezilarli qilish. Radeski Skin Clinic’da shifokor konsultatsiyasi va individual reja.",
@@ -4747,7 +5214,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Trixoskopiya",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 6058,
+      "bodyLength": 6011,
       "bodyWords": 733
     },
     "ru": {
@@ -4761,7 +5228,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Трихоскопия",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 5793,
+      "bodyLength": 5746,
       "bodyWords": 710
     },
     "en": {
@@ -4775,7 +5242,7 @@ export const ARTICLE_CATALOG_LIGHT: Record<string, Record<Locale, ArticleCatalog
         "Trichoscopy",
         "Radeski Skin Clinic"
       ],
-      "bodyLength": 4745,
+      "bodyLength": 4698,
       "bodyWords": 690
     }
   },
@@ -5712,6 +6179,518 @@ export const STATIC_ARTICLES: Article[] = [
       "uz": "/articles/akne-u-vzroslykh-cover.jpg",
       "ru": "/articles/akne-u-vzroslykh-cover.jpg",
       "en": "/articles/akne-u-vzroslykh-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-soch-ekish-fue-dhi",
+    "slug": "soch-ekish-fue-dhi",
+    "title": {
+      "uz": "Soch ekish FUE va DHI usulida: jarayon, natija va narxga nima ta’sir qiladi",
+      "ru": "Пересадка волос FUE и DHI: как проходит, от чего зависят результат и цена",
+      "en": "Hair Transplant with FUE and DHI: The Process, Results and What Affects the Price"
+    },
+    "summary": {
+      "uz": "Soch ekish FUE va DHI usullari: graft va donor zona, operatsiya bosqichlari, natija va narxga ta'sir qiluvchi omillar, natija qachon ko'rinadi. Radeski — Farg'ona.",
+      "ru": "Пересадка волос методами FUE и DHI: графты и донорская зона, этапы операции, что влияет на результат и цену, когда виден результат. Radeski — Фергана.",
+      "en": "Hair transplant with FUE and DHI: grafts and the donor area, the steps of the operation, what affects the result and price, and when you see results. Radeski — Fergana."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Abdvaliyev Begali Sheraliyevich",
+      "ru": "Абдвалиев Бегали Шералиевич",
+      "en": "Dr. Begali Sheraliyevich Abdvaliyev"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/soch-ekish-fue-dhi-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/soch-ekish-fue-dhi-cover-uz.jpg",
+      "ru": "/articles/soch-ekish-fue-dhi-cover-ru.jpg",
+      "en": "/articles/soch-ekish-fue-dhi-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-soch-ekishdan-keyin",
+    "slug": "soch-ekishdan-keyin",
+    "title": {
+      "uz": "Soch ekishdan keyin: birinchi kundan 12 oygacha parvarish va nima normal",
+      "ru": "После пересадки волос: уход с первого дня до 12 месяцев и что считается нормой",
+      "en": "After a Hair Transplant: Aftercare from Day One to Month 12 and What Is Normal"
+    },
+    "summary": {
+      "uz": "Soch ekishdan keyingi parvarish: birinchi kunlardan 12 oygacha nima normal, qobiqchalar, shok to'kilish, nimalardan saqlanish va qachon shifokorga murojaat qilish kerak.",
+      "ru": "Уход после пересадки волос: что нормально с первого дня до 12 месяцев, корочки, шоковое выпадение, чего избегать и когда обратиться к врачу.",
+      "en": "Aftercare after a hair transplant: what is normal from day one to month 12, crusts, shock loss, what to avoid and when to call the doctor."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Abdvaliyev Begali Sheraliyevich",
+      "ru": "Абдвалиев Бегали Шералиевич",
+      "en": "Dr. Begali Sheraliyevich Abdvaliyev"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/soch-ekishdan-keyin-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/soch-ekishdan-keyin-cover-uz.jpg",
+      "ru": "/articles/soch-ekishdan-keyin-cover-ru.jpg",
+      "en": "/articles/soch-ekishdan-keyin-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-soqol-ekish",
+    "slug": "soqol-ekish",
+    "title": {
+      "uz": "Soqol va mo‘ylov ekish: kimga mos, qanday o‘tadi va natija qachon ko‘rinadi",
+      "ru": "Пересадка бороды и усов: кому подходит, как проходит и когда виден результат",
+      "en": "Beard and Moustache Transplant: Who It Suits, How It Works and When You See Results"
+    },
+    "summary": {
+      "uz": "Soqol va mo'ylov ekish: kimga mos, qachon kutish kerak, operatsiya qanday o'tadi (FUE, DHI), tiklanish va natija qachon ko'rinadi. Radeski — Farg'ona.",
+      "ru": "Пересадка бороды и усов: кому подходит, когда лучше подождать, как проходит операция (FUE, DHI), восстановление и когда виден результат. Radeski — Фергана.",
+      "en": "Beard and moustache transplant: who it suits, when to wait, how the operation goes (FUE, DHI), recovery and when results show. Radeski — Fergana."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Abdvaliyev Begali Sheraliyevich",
+      "ru": "Абдвалиев Бегали Шералиевич",
+      "en": "Dr. Begali Sheraliyevich Abdvaliyev"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/soqol-ekish-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/soqol-ekish-cover-uz.jpg",
+      "ru": "/articles/soqol-ekish-cover-ru.jpg",
+      "en": "/articles/soqol-ekish-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-botoks-yoki-filler",
+    "slug": "botoks-yoki-filler",
+    "title": {
+      "uz": "Botoks yoki filler: farqi nimada va sizga qaysi biri kerak",
+      "ru": "Ботокс или филлер: в чём разница и что нужно именно вам",
+      "en": "Botox or Filler: What Is the Difference and Which One Do You Need"
+    },
+    "summary": {
+      "uz": "Botoks yoki filler: farqi nimada, qaysi ajin va qaysi muammoga qaysi biri kerak, qachon birga qilinadi, natija qancha saqlanadi. Radeski — Farg'ona.",
+      "ru": "Ботокс или филлер: в чём разница, какой морщине и проблеме что нужно, когда их сочетают, сколько держится эффект. Radeski — Фергана.",
+      "en": "Botox or filler: the difference, which line and problem needs which, when they are combined and how long each lasts. Radeski — Fergana."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Mangasaryan Lorena Georgievna",
+      "ru": "Мангасарян Лорена Георгиевна",
+      "en": "Dr. Lorena Georgievna Mangasaryan"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/botoks-yoki-filler-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/botoks-yoki-filler-cover-uz.jpg",
+      "ru": "/articles/botoks-yoki-filler-cover-ru.jpg",
+      "en": "/articles/botoks-yoki-filler-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-mezoterapiya",
+    "slug": "mezoterapiya",
+    "title": {
+      "uz": "Mezoterapiya yuz va soch uchun: nima, kimga va biorevitalizatsiyadan farqi",
+      "ru": "Мезотерапия для лица и волос: что это, кому подходит и чем отличается от биоревитализации",
+      "en": "Mesotherapy for Face and Hair: What It Is, Who It Suits and How It Differs from Biorevitalization"
+    },
+    "summary": {
+      "uz": "Mezoterapiya yuz va soch uchun: biorevitalizatsiyadan farqi, qaysi preparat nima uchun, soch mezoterapiyasidan oldin trixolog, muolaja va kurs. Radeski — Farg'ona.",
+      "ru": "Мезотерапия для лица и волос: отличие от биоревитализации, какой препарат для чего, трихолог перед мезотерапией волос, процедура и курс. Radeski — Фергана.",
+      "en": "Mesotherapy for the face and hair: how it differs from biorevitalization, which product is for what, seeing a trichologist first for hair, the procedure and course. Radeski — Fergana."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Mangasaryan Lorena Georgievna",
+      "ru": "Мангасарян Лорена Георгиевна",
+      "en": "Dr. Lorena Georgievna Mangasaryan"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/mezoterapiya-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/mezoterapiya-cover-uz.jpg",
+      "ru": "/articles/mezoterapiya-cover-ru.jpg",
+      "en": "/articles/mezoterapiya-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-apparatli-kosmetologiya",
+    "slug": "apparatli-kosmetologiya",
+    "title": {
+      "uz": "Apparatli kosmetologiya: qaysi apparat qaysi muammo uchun",
+      "ru": "Аппаратная косметология: какой аппарат для какой проблемы",
+      "en": "Device Cosmetology: Which Device for Which Skin Problem"
+    },
+    "summary": {
+      "uz": "Apparatli kosmetologiya: qaysi apparat qaysi muammo uchun — lazer epilyatsiya, pigment, g'ovaklar, qizarish, chandiqlar, papillomalar. Radeski apparatlari, Farg'ona.",
+      "ru": "Аппаратная косметология: какой аппарат для какой проблемы — эпиляция, пигмент, поры, покраснение, рубцы, папилломы. Аппараты Radeski, Фергана.",
+      "en": "Device cosmetology: which device for which problem — hair removal, pigment, pores, redness, scars, papillomas. Radeski devices, Fergana."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Mangasaryan Lorena Georgievna",
+      "ru": "Мангасарян Лорена Георгиевна",
+      "en": "Dr. Lorena Georgievna Mangasaryan"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/apparatli-kosmetologiya-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/apparatli-kosmetologiya-cover-uz.jpg",
+      "ru": "/articles/apparatli-kosmetologiya-cover-ru.jpg",
+      "en": "/articles/apparatli-kosmetologiya-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-dermatolog-qabuliga-tayyorgarlik",
+    "slug": "dermatolog-qabuliga-tayyorgarlik",
+    "title": {
+      "uz": "Dermatolog qabuliga qanday tayyorlanish: nima olib kelish va qabulda nima bo‘ladi",
+      "ru": "Как подготовиться к приёму дерматолога: что взять с собой и что будет на приёме",
+      "en": "How to Prepare for a Dermatologist Visit: What to Bring and What Happens"
+    },
+    "summary": {
+      "uz": "Dermatolog qabuliga qanday tayyorlanish: nima olib kelish, qabuldan oldin nimani qilmaslik, qabulda nima bo'ladi va qanday savollar berish kerak. Farg'ona va Qo'qon.",
+      "ru": "Как подготовиться к приёму дерматолога: что взять с собой, чего не делать перед приёмом, что будет на приёме и какие вопросы задать. Фергана и Коканд.",
+      "en": "How to prepare for a dermatologist visit: what to bring, what not to do beforehand, what happens at the visit and which questions to ask. Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Ashurov Dilshod Davlatovich",
+      "ru": "Ашуров Дильшод Давлатович",
+      "en": "Dr. Dilshod Davlatovich Ashurov"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/dermatolog-qabuli-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/dermatolog-qabuli-cover-uz.jpg",
+      "ru": "/articles/dermatolog-qabuli-cover-ru.jpg",
+      "en": "/articles/dermatolog-qabuli-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-podolog-kim",
+    "slug": "podolog-kim",
+    "title": {
+      "uz": "Podolog kim va qachon kerak: pedikyurdan farqi va qanday muammolarni davolaydi",
+      "ru": "Кто такой подолог и когда к нему идти: отличие от педикюра и что он лечит",
+      "en": "Who Is a Podiatrist and When to See One: How It Differs from a Pedicure"
+    },
+    "summary": {
+      "uz": "Podolog kim va qachon kerak: pedikyurdan farqi, ichiga o'sgan tirnoq, tirnoq zamburug'i, qadoq, tovon yorilishi, diabetda oyoq parvarishi. Farg'ona va Qo'qon.",
+      "ru": "Кто такой подолог и когда к нему идти: отличие от педикюра, вросший ноготь, грибок ногтей, мозоли, трещины пяток, уход за стопами при диабете. Фергана и Коканд.",
+      "en": "Who a podiatrist is and when to see one: the difference from a pedicure, ingrown nails, nail fungus, corns, cracked heels and foot care in diabetes. Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Usmanova Mohinabonu Anvarovna",
+      "ru": "Усманова Мохинабону Анваровна",
+      "en": "Dr. Mohinabonu Anvarovna Usmanova"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/podolog-kim-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/podolog-kim-cover-uz.jpg",
+      "ru": "/articles/podolog-kim-cover-ru.jpg",
+      "en": "/articles/podolog-kim-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-kuperoz",
+    "slug": "kuperoz",
+    "title": {
+      "uz": "Kuperoz nima: yuzdagi qizil tomirlar sababi va lazer bilan davolash",
+      "ru": "Что такое купероз: причины сосудистых сеточек на лице и лечение лазером",
+      "en": "What Is Couperose: Why Red Veins Appear on the Face and Laser Treatment"
+    },
+    "summary": {
+      "uz": "Kuperoz nima: yuzdagi qizil tomir to'rlari, sabablari, rozatseadan farqi, nega kremlar yordam bermaydi va Derma V lazeri hamda IPL bilan davolash. Radeski — Farg'ona.",
+      "ru": "Что такое купероз: сосудистые сеточки на лице, причины, отличие от розацеа, почему не помогают кремы и лечение лазером Derma V и IPL. Radeski — Фергана.",
+      "en": "What couperose is: thread veins on the face, causes, how it differs from rosacea, why creams do not help and treatment with the Derma V laser and IPL. Radeski — Fergana."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Kodirova Dilafruzxon",
+      "ru": "Кодирова Дилафрузхон",
+      "en": "Dr. Dilafruzkhon Kodirova"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/kuperoz-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/kuperoz-cover-uz.jpg",
+      "ru": "/articles/kuperoz-cover-ru.jpg",
+      "en": "/articles/kuperoz-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-yuz-tozalash-turlari",
+    "slug": "yuz-tozalash-turlari",
+    "title": {
+      "uz": "Yuz tozalash turlari: mexanik, ultratovush va karbon piling — qaysi biri sizga mos",
+      "ru": "Виды чистки лица: механическая, ультразвуковая и карбоновый пилинг — какая подходит вам",
+      "en": "Types of Facial Cleansing: Mechanical, Ultrasonic and Carbon Peel — Which One Suits You"
+    },
+    "summary": {
+      "uz": "Yuz tozalash turlari: mexanik, ultratovush, karbon piling va PRX-T33 — qanday ishlaydi, qaysi teriga mos, qachon tozalash mumkin emas. Radeski — Farg'ona.",
+      "ru": "Виды чистки лица: механическая, ультразвуковая, карбоновый пилинг и PRX-T33 — как работают, какой коже подходят, когда чистку делать нельзя. Radeski — Фергана.",
+      "en": "Types of facial cleansing: mechanical, ultrasonic, carbon peel and PRX-T33 — how they work, which skin they suit and when cleansing should wait. Radeski — Fergana."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Mangasaryan Lorena Georgievna",
+      "ru": "Мангасарян Лорена Георгиевна",
+      "en": "Dr. Lorena Georgievna Mangasaryan"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/yuz-tozalash-turlari-cover-uz.jpg",
+    "images": {
+      "uz": "/articles/yuz-tozalash-turlari-cover-uz.jpg",
+      "ru": "/articles/yuz-tozalash-turlari-cover-ru.jpg",
+      "en": "/articles/yuz-tozalash-turlari-cover-en.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-striya",
+    "slug": "striya",
+    "title": {
+      "uz": "Cho'zilish izlari (striyalar): nima uchun paydo bo'ladi va qanday kamaytiriladi",
+      "ru": "Растяжки на коже (стрии): почему появляются и как их уменьшить",
+      "en": "Stretch Marks: Why They Appear and How to Reduce Them"
+    },
+    "summary": {
+      "uz": "Cho'zilish izlari (striyalar): nima uchun paydo bo'ladi, yangi va eski izlar, fraksion CO₂ lazer va RF-mikroigna bilan davolash, homiladorlikda oldini olish. Farg'ona va Qo'qonda kosmetolog.",
+      "ru": "Растяжки (стрии): почему появляются, свежие и старые растяжки, лечение фракционным CO₂-лазером и RF-микроиглами, профилактика при беременности. Косметолог в Фергане и Коканде.",
+      "en": "Stretch marks: why they appear, new versus old marks, treatment with fractional CO₂ laser and RF microneedling, and prevention in pregnancy. Cosmetologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Mangasaryan Lorena Georgievna",
+      "ru": "Мангасарян Лорена Георгиевна",
+      "en": "Dr. Lorena Georgievna Mangasaryan"
+    },
+    "date": "2026-11-12",
+    "image": "/articles/striya-cover.webp",
+    "images": {
+      "uz": "/articles/striya-cover.webp",
+      "ru": "/articles/striya-cover.webp",
+      "en": "/articles/striya-cover.webp"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-pushti-temiratki",
+    "slug": "pushti-temiratki",
+    "title": {
+      "uz": "Pushti temiratki (Jiber): tanadagi pushti dog'lar — xavflimi va qancha davom etadi",
+      "ru": "Розовый лишай Жибера: розовые пятна на теле — опасно ли и сколько длится",
+      "en": "Pityriasis Rosea: Pink Patches on the Body — Is It Dangerous and How Long Does It Last"
+    },
+    "summary": {
+      "uz": "Pushti temiratki (Jiber): \"ona dog'\" va tanadagi pushti oval dog'lar. Sabablari, o'z-o'zidan o'tishi, zamburug' va psoriazdan farqi, parvarish va homiladorlik. Farg'ona va Qo'qonda dermatolog.",
+      "ru": "Розовый лишай Жибера: «материнская бляшка» и розовые овальные пятна на теле. Причины, самостоятельное прохождение, отличие от грибка и псориаза, уход и беременность. Дерматолог в Фергане и Коканде.",
+      "en": "Pityriasis rosea: a \"herald patch\" and pink oval patches on the body. Causes, how it clears on its own, how it differs from fungus and psoriasis, care and pregnancy. Dermatologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Turg'unov Shohruz Ilxomjon o'g'li",
+      "ru": "Тургунов Шохруз Илхомжон угли",
+      "en": "Dr. Shohruz Ilxomjon ugli Turgunov"
+    },
+    "date": "2026-11-11",
+    "image": "/articles/pushti-temiratki-cover.webp",
+    "images": {
+      "uz": "/articles/pushti-temiratki-cover.webp",
+      "ru": "/articles/pushti-temiratki-cover.webp",
+      "en": "/articles/pushti-temiratki-cover.webp"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-bolalarda-teri-toshmalari",
+    "slug": "bolalarda-teri-toshmalari",
+    "title": {
+      "uz": "Bolalarda teri toshmalari: qachon xavotir olish va qachon dermatologga borish kerak",
+      "ru": "Сыпь у ребёнка: когда волноваться и когда идти к дерматологу",
+      "en": "Rashes in Children: When to Worry and When to See a Dermatologist"
+    },
+    "summary": {
+      "uz": "Bolalarda teri toshmalari: qachon darhol tez yordam chaqirish kerak (stakan testi), eng ko'p uchraydigan sabablar, ota-onalar xatolari va bolalar dermatologiga qachon borish. Farg'ona va Qo'qonda.",
+      "ru": "Сыпь у детей: когда сразу вызывать скорую (тест со стаканом), самые частые причины, ошибки родителей и когда идти к детскому дерматологу. Фергана и Коканд.",
+      "en": "Rashes in children: when to call an ambulance at once (the glass test), the most common causes, mistakes parents make and when to see a paediatric dermatologist. Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Usmanova Mohinabonu Anvarovna",
+      "ru": "Усманова Мохинабону Анваровна",
+      "en": "Dr. Mohinabonu Anvarovna Usmanova"
+    },
+    "date": "2026-11-10",
+    "image": "/articles/bolalarda-teri-toshmalari-cover.jpg",
+    "images": {
+      "uz": "/articles/bolalarda-teri-toshmalari-cover.jpg",
+      "ru": "/articles/bolalarda-teri-toshmalari-cover.jpg",
+      "en": "/articles/bolalarda-teri-toshmalari-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-seboreyali-keratoz",
+    "slug": "seboreyali-keratoz",
+    "title": {
+      "uz": "Seboreyali keratoz (keratoma): 40 yoshdan keyingi dog'lar — xavflimi va qanday olib tashlanadi",
+      "ru": "Себорейный кератоз (кератома): опасна ли и как её удалить",
+      "en": "Seborrheic Keratosis: Is It Dangerous and How Is It Removed?"
+    },
+    "summary": {
+      "uz": "Seboreyali keratoz (keratoma): 40 yoshdan keyingi jigarrang \"so'gallar\". Xavfli emas, lekin melanomaga o'xshashi mumkin — dermatoskopiya, olib tashlash usullari va parvarish. Farg'ona va Qo'qonda dermatolog.",
+      "ru": "Себорейный кератоз (кератома): коричневые «бородавки» после 40 лет. Не опасен, но может быть похож на меланому — дерматоскопия, методы удаления и уход. Дерматолог в Фергане и Коканде.",
+      "en": "Seborrheic keratosis: brown \"age warts\" after 40. Harmless, but it can look like melanoma — dermoscopy, removal methods and aftercare. Dermatologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Yo'qubov Farrux Farhodjonovich",
+      "ru": "Якубов Фаррух Фарходжонович",
+      "en": "Dr. Farrukh Farhodjonovich Yoqubov"
+    },
+    "date": "2026-11-09",
+    "image": "/articles/seboreyali-keratoz-cover.jpg",
+    "images": {
+      "uz": "/articles/seboreyali-keratoz-cover.jpg",
+      "ru": "/articles/seboreyali-keratoz-cover.jpg",
+      "en": "/articles/seboreyali-keratoz-cover.jpg"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-qotir",
+    "slug": "qotir",
+    "title": {
+      "uz": "Qo'tir (skabiyez): kechasi qichishish, qanday yuqadi va butun oilani davolash",
+      "ru": "Чесотка: ночной зуд, как передаётся и как лечить всю семью",
+      "en": "Scabies: Night-Time Itching, How It Spreads and Treating the Whole Family"
+    },
+    "summary": {
+      "uz": "Qo'tir (skabiyez): kechasi kuchayadigan qichishish, qanday yuqadi, belgilari, dermatoskopiya, butun oilani bir kunda davolash va uydagi ishlov. Farg'ona va Qo'qonda dermatovenerolog.",
+      "ru": "Чесотка: зуд, усиливающийся ночью, как передаётся, признаки, дерматоскопия, лечение всей семьи в один день и обработка вещей. Дерматовенеролог в Фергане и Коканде.",
+      "en": "Scabies: itching that is worse at night, how it spreads, signs, dermoscopy, treating the whole household on one day and cleaning bedding. Dermatovenereologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Karimova Iroda",
+      "ru": "Каримова Ирода",
+      "en": "Dr. Iroda Karimova"
+    },
+    "date": "2026-11-08",
+    "image": "/articles/qotir-cover.webp",
+    "images": {
+      "uz": "/articles/qotir-cover.webp",
+      "ru": "/articles/qotir-cover.webp",
+      "en": "/articles/qotir-cover.webp"
+    },
+    "views": 0
+  },
+  {
+    "id": "art-teri-zamburugi",
+    "slug": "teri-zamburugi",
+    "title": {
+      "uz": "Teri zamburug'i (mikoz): oyoq, tana va chov — belgilari, tahlil va davolash",
+      "ru": "Грибок кожи (микоз): стопы, тело и пах — признаки, анализ и лечение",
+      "en": "Fungal Skin Infections: Feet, Body and Groin — Signs, Testing and Treatment"
+    },
+    "summary": {
+      "uz": "Teri zamburug'i: oyoq, tana, chov, bosh terisi zamburug'i, rang-barang temiratki va kandidoz. Belgilari, qirindi tahlili, gormonli krem xatosi, davolash va profilaktika. Farg'ona va Qo'qonda dermatolog.",
+      "ru": "Грибок кожи: стопы, тело, пах, кожа головы, разноцветный лишай и кандидоз. Признаки, соскоб, ошибка с гормональными кремами, лечение и профилактика. Дерматолог в Фергане и Коканде.",
+      "en": "Fungal skin infections: feet, body, groin, scalp, pityriasis versicolor and candida. Signs, the skin scraping test, the steroid cream mistake, treatment and prevention. Dermatologists in Fergana and Kokand."
+    },
+    "content": {
+      "uz": "",
+      "ru": "",
+      "en": ""
+    },
+    "author": {
+      "uz": "Usmanova Mohinabonu Anvarovna",
+      "ru": "Усманова Мохинабону Анваровна",
+      "en": "Dr. Mohinabonu Anvarovna Usmanova"
+    },
+    "date": "2026-11-07",
+    "image": "/articles/teri-zamburugi-cover.webp",
+    "images": {
+      "uz": "/articles/teri-zamburugi-cover.webp",
+      "ru": "/articles/teri-zamburugi-cover.webp",
+      "en": "/articles/teri-zamburugi-cover.webp"
     },
     "views": 0
   },

@@ -33,11 +33,13 @@ const ALL_CONDITION_ARTICLES: Partial<Record<string, ConditionArticle[]>> = {
     { routeKey: 'art-postakne', title: { uz: "Postakne: chandiq va dog'larni kamaytirish", ru: 'Постакне: как убрать рубцы и пятна', en: 'Post-acne: reducing scars and marks' } },
   ],
   rozasea: [
+    { routeKey: 'art-kuperoz', title: { uz: 'Kuperoz: yuzdagi qizil tomirlar', ru: 'Купероз: сосуды на лице', en: 'Couperose: facial thread veins' } },
     { routeKey: 'art-rozatseya-davolash-radeski', title: { uz: 'Rozatseyani davolash', ru: 'Лечение розацеа', en: 'Rosacea treatment' } },
     { routeKey: 'art-demodekoz', title: { uz: 'Demodekoz: belgilari va davolash', ru: 'Демодекоз: признаки и лечение', en: 'Demodicosis: signs and treatment' } },
     { routeKey: 'art-perioral-dermatit', title: { uz: "Perioral dermatit: og'iz atrofidagi toshma", ru: 'Периоральный дерматит: сыпь вокруг рта', en: 'Perioral dermatitis: rash around the mouth' } },
   ],
   'yuz-qizarishi': [
+    { routeKey: 'art-kuperoz', title: { uz: 'Kuperoz: yuzdagi qizil tomirlar', ru: 'Купероз: сосуды на лице', en: 'Couperose: facial thread veins' } },
     { routeKey: 'art-sovuq-allergiyasi', title: { uz: 'Sovuqdan yuz qizarishi', ru: 'Покраснение лица от холода', en: 'Facial redness from the cold' } },
     { routeKey: 'art-sosudistaya-setochka-derma-v-radeski', title: { uz: "Yuzdagi tomir to'ri: Derma V", ru: 'Сосудистая сеточка на лице: Derma V', en: 'Facial spider veins: Derma V' } },
     { routeKey: 'art-derma-v-qizarish-radeski', title: { uz: 'Yuz qizarishi: Derma V lazeri', ru: 'Покраснение лица: лазер Derma V', en: 'Facial redness: Derma V laser' } },

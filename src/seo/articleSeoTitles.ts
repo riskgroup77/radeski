@@ -6,6 +6,56 @@ import type { Locale } from '../types';
  * shortened, keyword first. The brand ("| Radeski…") is appended when it still fits.
  */
 export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, string>>>> = {
+  'art-soch-ekish-fue-dhi': {
+    uz: "Soch ekish FUE va DHI: jarayon va narx — Farg'ona",
+    ru: "Пересадка волос FUE и DHI: этапы и цена — Фергана",
+    en: "Hair Transplant FUE and DHI: Process and Cost — Fergana",
+  },
+  'art-soch-ekishdan-keyin': {
+    uz: "Soch ekishdan keyin: 12 oylik parvarish — Farg'ona",
+    ru: "После пересадки волос: уход на 12 месяцев — Фергана",
+    en: "After a Hair Transplant: 12-Month Aftercare — Fergana",
+  },
+  'art-soqol-ekish': {
+    uz: "Soqol va mo'ylov ekish: kimga mos — Farg'ona",
+    ru: "Пересадка бороды и усов: кому подходит — Фергана",
+    en: "Beard and Moustache Transplant — Fergana",
+  },
+  'art-botoks-yoki-filler': {
+    uz: "Botoks yoki filler: farqi va tanlov — Farg'ona",
+    ru: "Ботокс или филлер: в чём разница — Фергана",
+    en: "Botox or Filler: The Difference — Fergana",
+  },
+  'art-mezoterapiya': {
+    uz: "Mezoterapiya yuz va soch uchun — Farg'ona",
+    ru: "Мезотерапия для лица и волос — Фергана",
+    en: "Mesotherapy for Face and Hair — Fergana",
+  },
+  'art-apparatli-kosmetologiya': {
+    uz: "Apparatli kosmetologiya: qaysi apparat nima uchun",
+    ru: "Аппаратная косметология: какой аппарат для чего",
+    en: "Device Cosmetology: Which Device for What — Fergana",
+  },
+  'art-dermatolog-qabuliga-tayyorgarlik': {
+    uz: "Dermatolog qabuliga tayyorgarlik — Farg'ona, Qo'qon",
+    ru: "Как подготовиться к дерматологу — Фергана, Коканд",
+    en: "Preparing for a Dermatologist Visit — Fergana, Kokand",
+  },
+  'art-podolog-kim': {
+    uz: "Podolog kim va qachon kerak — Farg'ona, Qo'qon",
+    ru: "Кто такой подолог и когда к нему идти — Фергана",
+    en: "Who Is a Podiatrist and When to Go — Fergana",
+  },
+  'art-kuperoz': {
+    uz: "Kuperoz nima: yuzdagi qizil tomirlar — Farg'ona",
+    ru: "Что такое купероз: сосуды на лице — Фергана",
+    en: "What Is Couperose: Facial Thread Veins — Fergana",
+  },
+  'art-yuz-tozalash-turlari': {
+    uz: "Yuz tozalash turlari: qaysi biri mos — Farg'ona",
+    ru: "Виды чистки лица: какая подходит — Фергана",
+    en: "Types of Facial Cleansing: Which Suits You — Fergana",
+  },
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },

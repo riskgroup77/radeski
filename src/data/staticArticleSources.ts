@@ -69,6 +69,16 @@ import { CHILD_ATOPIC_DERMATITIS_ARTICLE } from './articles/childAtopicDermatiti
 import { BRITTLE_NAILS_ARTICLE } from './articles/brittleNailsArticle';
 import { DARK_CIRCLES_ARTICLE } from './articles/darkCirclesArticle';
 import { NEW_YEAR_SKIN_PLAN_ARTICLE } from './articles/newYearSkinPlanArticle';
+import { HAIR_TRANSPLANT_FUE_DHI_ARTICLE } from './articles/hairTransplantFueDhiArticle';
+import { HAIR_TRANSPLANT_AFTERCARE_ARTICLE } from './articles/hairTransplantAftercareArticle';
+import { BEARD_TRANSPLANT_ARTICLE } from './articles/beardTransplantArticle';
+import { BOTOX_OR_FILLER_ARTICLE } from './articles/botoxOrFillerArticle';
+import { MESOTHERAPY_ARTICLE } from './articles/mesotherapyArticle';
+import { DEVICE_COSMETOLOGY_ARTICLE } from './articles/deviceCosmetologyArticle';
+import { DERMATOLOGIST_VISIT_ARTICLE } from './articles/dermatologistVisitArticle';
+import { PODIATRIST_ARTICLE } from './articles/podiatristArticle';
+import { COUPEROSE_ARTICLE } from './articles/couperoseArticle';
+import { FACIAL_CLEANSING_ARTICLE } from './articles/facialCleansingArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -137,6 +147,16 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   NAIL_COLOR_CHANGE_ARTICLE,
   HYPERHIDROSIS_ARTICLE,
   INGROWN_NAIL_ARTICLE,
+  HAIR_TRANSPLANT_FUE_DHI_ARTICLE,
+  HAIR_TRANSPLANT_AFTERCARE_ARTICLE,
+  BEARD_TRANSPLANT_ARTICLE,
+  BOTOX_OR_FILLER_ARTICLE,
+  MESOTHERAPY_ARTICLE,
+  DEVICE_COSMETOLOGY_ARTICLE,
+  DERMATOLOGIST_VISIT_ARTICLE,
+  PODIATRIST_ARTICLE,
+  COUPEROSE_ARTICLE,
+  FACIAL_CLEANSING_ARTICLE,
   NEW_YEAR_SKIN_PLAN_ARTICLE,
   DARK_CIRCLES_ARTICLE,
   BRITTLE_NAILS_ARTICLE,

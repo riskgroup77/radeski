@@ -111,6 +111,206 @@ export function fitDescription(text: string): string {
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  'art-soch-ekish-fue-dhi': {
+    uz: {
+      title: "Soch ekish FUE va DHI: jarayon va narx — Farg'ona",
+      desc: "Soch ekish FUE va DHI usulida: graft va donor zona, operatsiya bosqichlari, natija va narxga nima ta'sir qiladi. Farg'onada Radeski Skin Clinic.",
+      keywords:
+        "soch ekish, soch ekish narxi, FUE soch ekish, DHI, soch ko'chirish Farg'ona, graft, soch transplantatsiyasi, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Пересадка волос FUE и DHI: этапы и цена — Фергана",
+      desc: "Пересадка волос методами FUE и DHI: графты и донорская зона, этапы операции, что влияет на результат и цену. Radeski Skin Clinic в Фергане.",
+      keywords:
+        "пересадка волос, пересадка волос цена, FUE, DHI, трансплантация волос Фергана, графты, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Hair Transplant FUE and DHI: Process and Cost — Fergana",
+      desc: "Hair transplant with FUE and DHI: grafts and the donor area, the steps of surgery, what affects results and price. Radeski Skin Clinic, Fergana.",
+      keywords:
+        "hair transplant, hair transplant cost, FUE, DHI, hair transplant Fergana, grafts, Radeski Skin Clinic",
+    },
+  },
+  'art-soch-ekishdan-keyin': {
+    uz: {
+      title: "Soch ekishdan keyin: 12 oylik parvarish — Farg'ona",
+      desc: "Soch ekishdan keyin nima normal: qobiqchalar, shok to'kilish, yuvish, sport va quyosh, natija qachon ko'rinadi. Radeski trixologi maslahatlari.",
+      keywords:
+        "soch ekishdan keyin, soch ekishdan keyingi parvarish, shok to'kilish, soch ekish natijasi, trixolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "После пересадки волос: уход на 12 месяцев — Фергана",
+      desc: "Что нормально после пересадки волос: корочки, шоковое выпадение, мытьё, спорт и солнце, когда виден результат. Советы трихолога Radeski.",
+      keywords:
+        "после пересадки волос, уход после пересадки волос, шоковое выпадение, результат пересадки волос, трихолог Фергана, Radeski Skin Clinic",
+    },
+    en: {
+      title: "After a Hair Transplant: 12-Month Aftercare — Fergana",
+      desc: "What is normal after a hair transplant: crusts, shock loss, washing, sport and sun, and when results show. Advice from the Radeski trichologist.",
+      keywords:
+        "after hair transplant, hair transplant aftercare, shock loss, hair transplant results, trichologist Fergana, Radeski Skin Clinic",
+    },
+  },
+  'art-soqol-ekish': {
+    uz: {
+      title: "Soqol va mo'ylov ekish: kimga mos — Farg'ona",
+      desc: "Soqol va mo'ylov ekish: siyrak soqol va chandiqlar, qachon kutish kerak, FUE va DHI bilan operatsiya, tiklanish va natija. Radeski — Farg'ona.",
+      keywords:
+        "soqol ekish, mo'ylov ekish, soqol ekish narxi, siyrak soqol, soqol transplantatsiyasi Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Пересадка бороды и усов: кому подходит — Фергана",
+      desc: "Пересадка бороды и усов: редкая борода и рубцы, когда подождать, операция FUE и DHI, восстановление и результат. Radeski — Фергана.",
+      keywords:
+        "пересадка бороды, пересадка усов, пересадка бороды цена, редкая борода, трансплантация бороды Фергана, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Beard and Moustache Transplant — Fergana",
+      desc: "Beard and moustache transplant: patchy beards and scars, when to wait, FUE and DHI surgery, recovery and results. Radeski Skin Clinic, Fergana.",
+      keywords:
+        "beard transplant, moustache transplant, beard transplant cost, patchy beard, beard transplant Fergana, Radeski Skin Clinic",
+    },
+  },
+  'art-botoks-yoki-filler': {
+    uz: {
+      title: "Botoks yoki filler: farqi va tanlov — Farg'ona",
+      desc: "Botoks yoki filler: farqi nimada, qaysi ajin va muammoga qaysi biri kerak, qachon birga qilinadi, natija qancha saqlanadi. Radeski kosmetologi.",
+      keywords:
+        "botoks yoki filler, botoks va filler farqi, mimik ajinlar, kontur plastika, botoks Farg'ona, kosmetolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Ботокс или филлер: в чём разница — Фергана",
+      desc: "Ботокс или филлер: в чём разница, какой морщине и проблеме что нужно, когда их сочетают, сколько держится эффект. Косметолог Radeski.",
+      keywords:
+        "ботокс или филлер, разница ботокса и филлера, мимические морщины, контурная пластика, ботокс Фергана, косметолог Фергана, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Botox or Filler: The Difference — Fergana",
+      desc: "Botox or filler: the difference, which line and problem needs which, when they are combined and how long each lasts. Radeski cosmetologist.",
+      keywords:
+        "botox or filler, botox vs filler, expression lines, dermal fillers, botox Fergana, cosmetologist Fergana, Radeski Skin Clinic",
+    },
+  },
+  'art-mezoterapiya': {
+    uz: {
+      title: "Mezoterapiya yuz va soch uchun — Farg'ona",
+      desc: "Mezoterapiya yuz va soch uchun: biorevitalizatsiyadan farqi, qaysi preparat nima uchun, kurs va qarshi ko'rsatmalar. Radeski — Farg'ona.",
+      keywords:
+        "mezoterapiya, soch mezoterapiyasi, yuz mezoterapiyasi, mezoterapiya narxi, biorevitalizatsiya, kosmetolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Мезотерапия для лица и волос — Фергана",
+      desc: "Мезотерапия для лица и волос: отличие от биоревитализации, какой препарат для чего, курс и противопоказания. Radeski — Фергана.",
+      keywords:
+        "мезотерапия, мезотерапия волос, мезотерапия лица, мезотерапия цена, биоревитализация, косметолог Фергана, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Mesotherapy for Face and Hair — Fergana",
+      desc: "Mesotherapy for the face and hair: how it differs from biorevitalization, which product is for what, the course and contraindications. Radeski.",
+      keywords:
+        "mesotherapy, hair mesotherapy, facial mesotherapy, mesotherapy price, biorevitalization, cosmetologist Fergana, Radeski Skin Clinic",
+    },
+  },
+  'art-apparatli-kosmetologiya': {
+    uz: {
+      title: "Apparatli kosmetologiya: qaysi apparat nima uchun",
+      desc: "Apparatli kosmetologiya: lazer epilyatsiya, pigment, g'ovaklar, qizarish, chandiqlar va papillomalar uchun qaysi apparat. Radeski — Farg'ona.",
+      keywords:
+        "apparatli kosmetologiya, lazer kosmetologiya, IPL, Hollywood Spectra, Derma V, DEKA, kosmetolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Аппаратная косметология: какой аппарат для чего",
+      desc: "Аппаратная косметология: какой аппарат для эпиляции, пигмента, пор, покраснения, рубцов и папиллом. Аппараты Radeski в Фергане.",
+      keywords:
+        "аппаратная косметология, лазерная косметология, IPL, Hollywood Spectra, Derma V, DEKA, косметолог Фергана, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Device Cosmetology: Which Device for What — Fergana",
+      desc: "Device cosmetology: which device treats unwanted hair, pigment, pores, redness, scars and papillomas. Radeski Skin Clinic devices in Fergana.",
+      keywords:
+        "device cosmetology, laser cosmetology, IPL, Hollywood Spectra, Derma V, DEKA, cosmetologist Fergana, Radeski Skin Clinic",
+    },
+  },
+  'art-dermatolog-qabuliga-tayyorgarlik': {
+    uz: {
+      title: "Dermatolog qabuliga tayyorgarlik — Farg'ona, Qo'qon",
+      desc: "Dermatolog qabuliga qanday tayyorlanish: nima olib kelish, qabuldan oldin nimani qilmaslik, qabulda nima bo'ladi. Farg'ona va Qo'qonda dermatolog.",
+      keywords:
+        "dermatolog qabuli, dermatologga tayyorgarlik, dermatolog Farg'ona, dermatolog Qo'qon, teri shifokori, dermatoskopiya, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Как подготовиться к дерматологу — Фергана, Коканд",
+      desc: "Как подготовиться к приёму дерматолога: что взять с собой, чего не делать перед приёмом, что будет на приёме. Дерматолог в Фергане и Коканде.",
+      keywords:
+        "приём дерматолога, подготовка к дерматологу, дерматолог Фергана, дерматолог Коканд, кожный врач, дерматоскопия, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Preparing for a Dermatologist Visit — Fergana, Kokand",
+      desc: "How to prepare for a dermatologist visit: what to bring, what not to do beforehand and what happens at the visit. Dermatologists in Fergana and Kokand.",
+      keywords:
+        "dermatologist visit, preparing for a dermatologist, dermatologist Fergana, dermatologist Kokand, skin doctor, dermatoscopy, Radeski Skin Clinic",
+    },
+  },
+  'art-podolog-kim': {
+    uz: {
+      title: "Podolog kim va qachon kerak — Farg'ona, Qo'qon",
+      desc: "Podolog kim va qachon kerak: pedikyurdan farqi, ichiga o'sgan tirnoq, tirnoq zamburug'i, qadoq va tovon yorilishi. Farg'ona va Qo'qonda podolog.",
+      keywords:
+        "podolog, podolog kim, podolog Farg'ona, podolog Qo'qon, ichiga o'sgan tirnoq, tirnoq zamburug'i, qadoq, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Кто такой подолог и когда к нему идти — Фергана",
+      desc: "Кто такой подолог: отличие от педикюра, вросший ноготь, грибок ногтей, мозоли и трещины пяток, уход при диабете. Подолог в Фергане и Коканде.",
+      keywords:
+        "подолог, кто такой подолог, подолог Фергана, подолог Коканд, вросший ноготь, грибок ногтей, мозоли, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Who Is a Podiatrist and When to Go — Fergana",
+      desc: "Who a podiatrist is: the difference from a pedicure, ingrown nails, nail fungus, corns, cracked heels and diabetic foot care. Fergana and Kokand.",
+      keywords:
+        "podiatrist, what is a podiatrist, podiatrist Fergana, podiatrist Kokand, ingrown toenail, nail fungus, corns, Radeski Skin Clinic",
+    },
+  },
+  'art-kuperoz': {
+    uz: {
+      title: "Kuperoz nima: yuzdagi qizil tomirlar — Farg'ona",
+      desc: "Kuperoz nima: yuzdagi tomir to'rlari sabablari, rozatseadan farqi, nega kremlar yordam bermaydi va Derma V lazeri hamda IPL bilan davolash.",
+      keywords:
+        "kuperoz, kuperoz nima, yuzdagi tomir to'ri, teleangiektaziya, kuperozni davolash Farg'ona, Derma V, IPL, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Что такое купероз: сосуды на лице — Фергана",
+      desc: "Что такое купероз: причины сосудистых сеточек, отличие от розацеа, почему не помогают кремы и лечение лазером Derma V и IPL в Фергане.",
+      keywords:
+        "купероз, что такое купероз, сосудистая сеточка на лице, телеангиэктазии, лечение купероза Фергана, Derma V, IPL, Radeski Skin Clinic",
+    },
+    en: {
+      title: "What Is Couperose: Facial Thread Veins — Fergana",
+      desc: "What couperose is: why thread veins appear, how it differs from rosacea, why creams do not help, and Derma V laser and IPL treatment in Fergana.",
+      keywords:
+        "couperose, what is couperose, facial thread veins, telangiectasia, couperose treatment Fergana, Derma V, IPL, Radeski Skin Clinic",
+    },
+  },
+  'art-yuz-tozalash-turlari': {
+    uz: {
+      title: "Yuz tozalash turlari: qaysi biri mos — Farg'ona",
+      desc: "Yuz tozalash turlari: mexanik, ultratovush, karbon piling va PRX-T33 — qaysi teriga mos va qachon tozalash mumkin emas. Radeski — Farg'ona.",
+      keywords:
+        "yuz tozalash, yuz tozalash turlari, ultratovush yuz tozalash, mexanik tozalash, karbon piling, yuz tozalash narxi Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: "Виды чистки лица: какая подходит — Фергана",
+      desc: "Виды чистки лица: механическая, ультразвуковая, карбоновый пилинг и PRX-T33 — какой коже подходят и когда чистка противопоказана. Radeski.",
+      keywords:
+        "чистка лица, виды чистки лица, ультразвуковая чистка, механическая чистка, карбоновый пилинг, чистка лица цена Фергана, Radeski Skin Clinic",
+    },
+    en: {
+      title: "Types of Facial Cleansing: Which Suits You — Fergana",
+      desc: "Facial cleansing types: mechanical, ultrasonic, carbon peel and PRX-T33 — which skin each suits and when cleansing should wait. Radeski, Fergana.",
+      keywords:
+        "facial cleansing, types of facial cleansing, ultrasonic facial, mechanical cleansing, carbon peel, facial price Fergana, Radeski Skin Clinic",
+    },
+  },
   'art-qadoq-va-kesak': {
     uz: {
       title: "Qadoq va kesaklar: olib tashlash — Farg'ona, Qo'qon",

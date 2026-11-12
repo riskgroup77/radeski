@@ -4,7 +4,7 @@ import { filterPublicArticles } from './articles';
 
 /** Article catalog keys shown on service category pages (broad match). */
 export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
-  dermatologiya: ['furuncle', 'child-atopic-dermatitis', 'herpes-zoster', 'cold-allergy', 'vitiligo-guide', 'scalp-psoriasis', 'cheilitis', 'lichen-planus', 
+  dermatologiya: ['dermatologist-visit', 'furuncle', 'child-atopic-dermatitis', 'herpes-zoster', 'cold-allergy', 'vitiligo-guide', 'scalp-psoriasis', 'cheilitis', 'lichen-planus', 
     'acne',
     'adult-acne-dermatologist',
     'seborrheic-dermatitis',
@@ -51,7 +51,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'prp-lab-tests',
     'hair-transplant-contraindications',
   ],
-  'apparatnaya-kosmetologiya': ['new-year-skin-plan', 'plantar-warts', 'leg-veins', 'chemical-peel', 'pigment-spots-winter', 
+  'apparatnaya-kosmetologiya': ['device-cosmetology', 'facial-cleansing', 'couperose', 'new-year-skin-plan', 'plantar-warts', 'leg-veins', 'chemical-peel', 'pigment-spots-winter', 
     'melasma',
     'carbon-peel',
     'milia',
@@ -74,7 +74,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'adult-acne',
     'acne',
   ],
-  'in-ekcionnaya-kosmetologiya': ['dark-circles', 'new-year-skin-plan', 'hyperhidrosis', 
+  'in-ekcionnaya-kosmetologiya': ['botox-or-filler', 'mesotherapy', 'dark-circles', 'new-year-skin-plan', 'hyperhidrosis', 
     'botulinoterapiya-radeski',
     'biorevitalizatsiya-radeski',
     'konturnaya-guby-radeski',
@@ -82,7 +82,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'plasmapheresis',
   ],
   'lazernaya-epilyaciya': ['laser-hair-removal-season', 'deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
-  'trihologiya-centr-lechenie-volos': ['scalp-psoriasis', 
+  'trihologiya-centr-lechenie-volos': ['hair-transplant-fue-dhi', 'hair-transplant-aftercare', 'beard-transplant', 'mesotherapy', 'scalp-psoriasis', 
     'female-hair-loss',
     'male-hair-loss',
     'trichologist-trichoscopy',
@@ -121,7 +121,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'psoriaz-klinik-keys-bahridinov-radeski',
   ],
   'shkola-dermatoskopii': ['basal-cell-carcinoma', 'mole-screening'],
-  'clinika-patologii-nogtej': ['brittle-nails', 'plantar-warts', 'ingrown-nail', 'nail-color-change', 'nail-fungus', 'calluses', 'cracked-heels', 'diabetic-foot', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
+  'clinika-patologii-nogtej': ['podiatrist', 'brittle-nails', 'plantar-warts', 'ingrown-nail', 'nail-color-change', 'nail-fungus', 'calluses', 'cracked-heels', 'diabetic-foot', 'fungal', 'onychocryptosis-kokand', 'klinika-patologii-nogtej-stopy-radeski'],
   dermatopatologiya: ['skin-biopsy', 'dermatopatologiya-radeski', 'basal-cell-carcinoma', 'tongue-scc', 'penile-scc'],
 };
 
@@ -180,12 +180,12 @@ export const SERVICE_SUB_ARTICLE_KEYS: Record<string, Record<string, string[]>> 
       'adult-acne',
       'lasemd-ultra-kokand',
     ],
-    'ultratovush-yuz': ['new-year-skin-plan', 'chemical-peel', 'acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
+    'ultratovush-yuz': ['facial-cleansing', 'new-year-skin-plan', 'chemical-peel', 'acne', 'adult-acne', 'acne-dermatologist-vs-cosmetologist', 'milia'],
   },
   'in-ekcionnaya-kosmetologiya': {
-    botulino: ['new-year-skin-plan', 'hyperhidrosis', 'botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
-    biorev: ['dark-circles', 'biorevitalizatsiya-radeski', 'botulinoterapiya-radeski', 'plasmapheresis'],
-    konturnaya: ['dark-circles', 
+    botulino: ['botox-or-filler', 'new-year-skin-plan', 'hyperhidrosis', 'botulinoterapiya-radeski', 'biorevitalizatsiya-radeski'],
+    biorev: ['mesotherapy', 'dark-circles', 'biorevitalizatsiya-radeski', 'botulinoterapiya-radeski', 'plasmapheresis'],
+    konturnaya: ['botox-or-filler', 'dark-circles', 
       'kontur-plastika-radeski',
       'konturnaya-guby-radeski',
       'biorevitalizatsiya-radeski',

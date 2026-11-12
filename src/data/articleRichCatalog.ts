@@ -69,6 +69,16 @@ import { CHILD_ATOPIC_DERMATITIS_ARTICLE_CATALOG } from './articles/childAtopicD
 import { BRITTLE_NAILS_ARTICLE_CATALOG } from './articles/brittleNailsArticle';
 import { DARK_CIRCLES_ARTICLE_CATALOG } from './articles/darkCirclesArticle';
 import { NEW_YEAR_SKIN_PLAN_ARTICLE_CATALOG } from './articles/newYearSkinPlanArticle';
+import { HAIR_TRANSPLANT_FUE_DHI_ARTICLE_CATALOG } from './articles/hairTransplantFueDhiArticle';
+import { HAIR_TRANSPLANT_AFTERCARE_ARTICLE_CATALOG } from './articles/hairTransplantAftercareArticle';
+import { BEARD_TRANSPLANT_ARTICLE_CATALOG } from './articles/beardTransplantArticle';
+import { BOTOX_OR_FILLER_ARTICLE_CATALOG } from './articles/botoxOrFillerArticle';
+import { MESOTHERAPY_ARTICLE_CATALOG } from './articles/mesotherapyArticle';
+import { DEVICE_COSMETOLOGY_ARTICLE_CATALOG } from './articles/deviceCosmetologyArticle';
+import { DERMATOLOGIST_VISIT_ARTICLE_CATALOG } from './articles/dermatologistVisitArticle';
+import { PODIATRIST_ARTICLE_CATALOG } from './articles/podiatristArticle';
+import { COUPEROSE_ARTICLE_CATALOG } from './articles/couperoseArticle';
+import { FACIAL_CLEANSING_ARTICLE_CATALOG } from './articles/facialCleansingArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -190,6 +200,16 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'brittle-nails': BRITTLE_NAILS_ARTICLE_CATALOG,
   'dark-circles': DARK_CIRCLES_ARTICLE_CATALOG,
   'new-year-skin-plan': NEW_YEAR_SKIN_PLAN_ARTICLE_CATALOG,
+  'hair-transplant-fue-dhi': HAIR_TRANSPLANT_FUE_DHI_ARTICLE_CATALOG,
+  'hair-transplant-aftercare': HAIR_TRANSPLANT_AFTERCARE_ARTICLE_CATALOG,
+  'beard-transplant': BEARD_TRANSPLANT_ARTICLE_CATALOG,
+  'botox-or-filler': BOTOX_OR_FILLER_ARTICLE_CATALOG,
+  'mesotherapy': MESOTHERAPY_ARTICLE_CATALOG,
+  'device-cosmetology': DEVICE_COSMETOLOGY_ARTICLE_CATALOG,
+  'dermatologist-visit': DERMATOLOGIST_VISIT_ARTICLE_CATALOG,
+  'podiatrist': PODIATRIST_ARTICLE_CATALOG,
+  'couperose': COUPEROSE_ARTICLE_CATALOG,
+  'facial-cleansing': FACIAL_CLEANSING_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,
