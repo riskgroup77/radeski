@@ -1,5 +1,6 @@
 import type { Locale } from '../types';
 import { SCHEDULED_ARTICLE_ROUTE_KEYS } from './articleRouteKeys.generated';
+import { LANDING_LISTS } from './localLandingLists';
 
 export type LocalSeoCity = 'qoqon' | 'fargona';
 
@@ -732,14 +733,17 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
 }
 
 // Articles scheduled for a later date are not linked yet (see scripts/buildArticleIndex.ts).
+// Topics with full lists (localLandingLists) replace the catalog's short placeholders.
 export const ALL_LOCAL_COMMERCIAL_LANDINGS: LocalCommercialLanding[] = [
   ...buildKokandLandings(),
   ...buildFerganaLandings(),
-].map((landing) =>
-  landing.articleRouteKeys
-    ? { ...landing, articleRouteKeys: landing.articleRouteKeys.filter((key) => !SCHEDULED_ARTICLE_ROUTE_KEYS.includes(key)) }
-    : landing,
-);
+].map((landing) => {
+  const lists = LANDING_LISTS[landing.slug === 'ipl-qoqon' || landing.slug === 'ipl-fargona' ? 'ipl' : landing.slug];
+  const withLists = lists ? { ...landing, whoFor: lists.whoFor, methods: lists.methods } : landing;
+  return withLists.articleRouteKeys
+    ? { ...withLists, articleRouteKeys: withLists.articleRouteKeys.filter((key) => !SCHEDULED_ARTICLE_ROUTE_KEYS.includes(key)) }
+    : withLists;
+});
 
 export function getLocalCommercialLanding(city: LocalSeoCity, slug: string): LocalCommercialLanding | undefined {
   return ALL_LOCAL_COMMERCIAL_LANDINGS.find((item) => item.city === city && item.slug === slug);
