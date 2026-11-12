@@ -68,7 +68,7 @@ check "bare domain -> 302"        "$(code https://radeski.uz/)" 302
 check "bare domain, ru browser"   "$(curl -s -o /dev/null -w '%{redirect_url}' --max-time 20 -H 'Accept-Language: ru-RU,ru;q=0.9' https://radeski.uz/)" "https://radeski.uz/ru"
 check "/uz/contacts -> 301"       "$(code https://radeski.uz/uz/contacts)" 301
 check "old site /kontakty -> 301" "$(code https://radeski.uz/kontakty)" 301
-check "assets cached 1 year"      "$(curl -sI --max-time 20 https://radeski.uz$(curl -s --max-time 20 https://radeski.uz/uz | grep -oE '/assets/index-[^"]+\.js' | head -1) | grep -ci 'max-age=31536000')" 1
+check "assets cached 1 year"      "$(curl -sI --max-time 20 https://radeski.uz$(curl -s --max-time 20 https://radeski.uz/uz | grep -oE '/assets/index-[^"]+\.js' | head -1) | grep -ci '^cache-control:.*max-age=31536000')" 1
 check "image variant served"      "$(code https://radeski.uz/img-cache/index.json)" 200
 check "core snapshot"             "$(code https://radeski.uz/data/site-snapshot-core.json)" 200
 check "prices snapshot"           "$(code https://radeski.uz/data/site-snapshot-prices.json)" 200

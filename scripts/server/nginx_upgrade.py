@@ -56,9 +56,11 @@ map $uri $radeski_spa_known {
 # since the last nightly build, a scheduled article before its day, an old alias, or a typo)
 # still get the SPA shell so visitors see the page, but crawlers are told not to index that
 # copy — the nightly build prerenders real items. Without this they were soft-404s.
-map $uri $radeski_spa_robots {
+# Keyed on $request_uri: add_header is evaluated after `rewrite ^ /index.html`, when $uri is
+# already "/index.html".
+map $request_uri $radeski_spa_robots {
     default "";
-    "~^/(uz|ru|en)/(articles|doctors|videos)/[^/]+/?$" "noindex, follow";
+    "~^/(uz|ru|en)/(articles|doctors|videos)/[^/?]+/?(\\?|$)" "noindex, follow";
 }
 
 # Bare domain: server-side redirect to a language home page (crawlers send no
