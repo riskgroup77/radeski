@@ -6,6 +6,24 @@ Google xaritadagi o‘rinni eng ko‘p shular belgilaydi.
 
 ---
 
+## 0. Hozirgi holat (Google Maps tekshiruvi, 2026-11-12)
+
+| Muammo | Nima ko‘rinadi | Nima qilish kerak |
+|---|---|---|
+| Farg‘ona profili tasdiqlanmagan | Kartada “Bu joy menga tegishli” tugmasi bor | business.google.com orqali profilni egallab, tasdiqlash (video yoki qo‘ng‘iroq) |
+| Asosiy kategoriya noto‘g‘ri | “Axborot xizmatlari” | Asosiy kategoriya — *Dermatologist* (pastda) |
+| Nom boshqa yozilgan | “Радески Скин Эстетик Клиник” | Peshtaxtadagi haqiqiy nom: *Radeski Skin Clinic* |
+| Manzil noaniq | “A uy, O'zbekiston ovozi ko'chasi 1” | *O‘zbekiston Ovozi ko‘chasi, 1A-bino* (1-bo‘limdagi kabi) |
+| Qo‘qon filialining kartasi yo‘q | “Radeski Qo‘qon” qidirilsa Farg‘ona kartasi ochiladi | Qo‘qon uchun alohida profil ochish va tasdiqlash |
+| Qo‘qon sharhlari Farg‘ona kartasida | Turg‘unov Shohruz haqidagi sharhlar Farg‘ona kartasida | Qo‘qon kartasi ochilgach, Qo‘qon bemorlaridan sharhni o‘sha kartaga so‘rash |
+
+Kartada hozir 4.9 baho (48 ta sharh) va 20 ta surat bor — yaxshi asos. Tasdiqlash va to‘g‘ri
+kategoriya “dermatolog Farg‘ona” kabi qidiruvlarda xarita blokiga (Map Pack) chiqish uchun eng muhim qadam.
+
+Tayyor matnlar (tavsif, xizmatlar va narxlar, postlar) — `Radeski_Google_Business_paket.docx`.
+
+---
+
 ## 1. NAP — hamma joyda bir xil yozilishi shart
 
 Nom, manzil, telefon (NAP) Google, Yandex, 2GIS, Instagram, kataloglar va saytda **harfma-harf bir xil** bo‘lsin.
@@ -40,6 +58,11 @@ Laser hair removal service, Hair removal service, Trichologist, Podiatrist* (ro�
 | Lazer epilyatsiya | /uz/fargona/lazer-epilyatsiya | /uz/qoqon/lazer-epilyatsiya |
 | Dermatoskopiya / xol tekshiruvi | /uz/fargona/xol-tekshiruvi | /uz/qoqon/xol-tekshiruvi |
 | Podolog / tirnoq zamburug‘i | /uz/fargona/podolog | /uz/qoqon/podolog |
+| Bolalar dermatologi | /uz/fargona/bolalar-dermatologi | /uz/qoqon/bolalar-dermatologi |
+| Soch ekish (FUE, DHI) | /uz/fargona/soch-ekish | — |
+| Botoks | /uz/fargona/botoks | — |
+| Biorevitalizatsiya | /uz/fargona/biorevitalizatsiya | — |
+| Kontur plastika | /uz/fargona/kontur-plastika | — |
 
 Narxlar saytdagi shu sahifalarda turibdi — profilga o‘shalarni yozing.
 
