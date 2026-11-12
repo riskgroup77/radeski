@@ -62,10 +62,56 @@ function addLocalePaths(
   }
 }
 
+/**
+ * URLs of the clinic's previous (Russian) website that Google still shows — Search Console
+ * export of 2026-11-12, e.g. /kontakty with 367 impressions and 14 clicks — and that answered
+ * 404. Each goes to the closest Russian page of the current site.
+ */
+export const LEGACY_SITE_REDIRECTS: Record<string, string> = {
+  '/kontakty': '/ru/branches',
+  '/uslugi': '/ru/services',
+  '/prejskurant': '/ru/prices',
+  '/dermatopatologiya': '/ru/services/dermatopatologiya',
+  '/fototerapiya-1': '/ru/services/dermatologiya/fototerapiya',
+  '/dermatologiya': '/ru/services/dermatologiya',
+  '/hirurgicheskaya-dermatologiya': '/ru/services/hirurgicheskaya-dermatologiya',
+  '/in-ekcionnaya-kosmetologiya': '/ru/services/in-ekcionnaya-kosmetologiya',
+  '/o-klinike': '/ru/about',
+  '/centr-lechenie-limfomy-kozhi': '/ru/services/dermatoonkologiya',
+  '/fizioterapiya': '/ru/articles/art-fizioterapiya-dermatovenereologiya',
+  '/peresadka-volos': '/ru/fargona/soch-ekish',
+  '/botulinoterapiya': '/ru/fargona/botoks',
+  '/kriohirurgiya': '/ru/fargona/osma-olib-tashlash',
+  '/uzi': '/ru/services',
+  '/diagnostika-novoobrazovanijs-pomoshchyu-photofinder': '/ru/articles/art-photofinder-diagnostika-radeski',
+  '/klinika-patologii-nogtej-i-stopy': '/ru/services/clinika-patologii-nogtej',
+  '/plazmoterapiya': '/ru/articles/art-plazmotorapiya-soch-prp',
+  '/mezo-terapiya': '/ru/fargona/biorevitalizatsiya',
+  '/mezoterapiya': '/ru/fargona/biorevitalizatsiya',
+  '/novosti-1/post/gistologicheskoe-issledovanie/next': '/ru/fargona/biopsiya',
+  '/my-lechim': '/ru/services',
+  '/bbl-fotoomolozheniya': '/ru/fargona/ipl-fargona',
+  '/in-ekcii-dlya-uvelicheniya-gub': '/ru/fargona/kontur-plastika',
+  '/operaciya-po-metodu-moosa': '/ru/services/hirurgicheskaya-dermatologiya/mohs-mikrografik-jarrohligi',
+  '/karta-sayta': '/ru',
+  '/lazernaya-epilyaciya': '/ru/fargona/lazer-epilyatsiya',
+  '/immunobiologicheskaya-terapiya-1': '/ru/services/dermatologiya/immunobiologik-terapiya',
+  '/mikrotoki': '/ru/services/apparatnaya-kosmetologiya',
+  '/dlya-pacientov': '/ru',
+  '/shkola-psoriaza': '/ru/fargona/psoriaz-davolash',
+  '/biopsiya-kozhi': '/ru/fargona/biopsiya',
+  '/stacionar': '/ru',
+};
+
 /** Server-side 301 targets for SPA routes that currently redirect in React. */
 export function buildSiteRedirectPairs(): SiteRedirectPair[] {
   const pairs = new Map<string, string>();
   const locales: Locale[] = ['uz', 'ru', 'en'];
+
+  for (const [from, to] of Object.entries(LEGACY_SITE_REDIRECTS)) {
+    pairs.set(from, to);
+    pairs.set(`${from}/`, to);
+  }
 
   addLocalePaths(pairs, locales, (locale) => ({
     from: `/${locale}/contacts`,
