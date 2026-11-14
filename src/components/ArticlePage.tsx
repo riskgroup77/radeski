@@ -9,6 +9,7 @@ import {
   Loader2,
   ArrowUpRight,
   Clock,
+  ShieldCheck,
 } from 'lucide-react';
 import { Locale, Article, Doctor, ServiceCategory } from '../types';
 import { articleServiceLinks } from '../utils/articleServiceLinks';
@@ -156,6 +157,10 @@ export default function ArticlePage({
     : filterPublicArticles(articles).slice(0, 3);
   const topicVideos = activeArticle ? articleTopicVideos(resolveArticleRouteKey(activeArticle), videos) : [];
   const authorDoctor = activeArticle ? findArticleAuthorDoctor(activeArticle, doctors) : undefined;
+  const reviewerDoctor = activeArticle?.review
+    ? findArticleAuthorDoctor({ author: { uz: activeArticle.review.by, ru: '', en: '' } }, doctors)
+    : undefined;
+  const reviewerName = reviewerDoctor ? reviewerDoctor.name[locale] || reviewerDoctor.name.uz : undefined;
 
   const shareUrl = activeArticle
     ? absoluteUrl(articlePath(locale, resolveArticleRouteKey(activeArticle)))
@@ -263,6 +268,18 @@ export default function ArticlePage({
                   <Calendar className="w-4 h-4 text-brand-text-muted" />
                   {activeArticle.date}
                 </span>
+                {activeArticle.updated && activeArticle.updated !== activeArticle.date && (
+                  <span className="shrink-0">
+                    {locale === 'uz' ? 'Yangilangan' : locale === 'ru' ? 'Обновлено' : 'Updated'}: {activeArticle.updated}
+                  </span>
+                )}
+                {activeArticle.review && (
+                  <span className="flex items-center gap-1.5 shrink-0 text-emerald-700">
+                    <ShieldCheck className="w-4 h-4" />
+                    {locale === 'uz' ? 'Shifokor tekshirgan' : locale === 'ru' ? 'Проверено врачом' : 'Medically reviewed by'}:{' '}
+                    {reviewerName ?? activeArticle.review.by}, {activeArticle.review.date}
+                  </span>
+                )}
                 <ArticleViewsBadge
                   views={activeArticle.views}
                   locale={locale}

@@ -4,7 +4,7 @@ import { GA4_MEASUREMENT_ID, YANDEX_METRIKA_ID } from '../config/analytics';
 /**
  * Google Analytics 4 + Yandex Metrika, loaded after the page is idle so they never slow the
  * first render. Page views are sent on every route change (single-page app); clicks on
- * phone numbers, booking links, Telegram and Instagram are sent as conversion events.
+ * phone numbers, booking links, Telegram, WhatsApp, Instagram and maps are sent as conversion events.
  * Does nothing when no ID is configured, on the admin panel, or outside the browser.
  */
 type Gtag = (...args: unknown[]) => void;
@@ -59,6 +59,7 @@ function conversionFor(href: string): string | null {
   if (href.startsWith('tel:')) return 'phone_click';
   if (/hipolink\.net|\/booking|qabulga/i.test(href)) return 'booking_click';
   if (/^https?:\/\/(t\.me|telegram\.me)\//i.test(href)) return 'telegram_click';
+  if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com)\//i.test(href)) return 'whatsapp_click';
   if (/instagram\.com/i.test(href)) return 'instagram_click';
   if (/maps\.google|google\.[a-z.]+\/maps|yandex\.[a-z]+\/(maps|profile)|2gis\./i.test(href)) return 'map_click';
   return null;

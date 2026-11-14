@@ -5,6 +5,7 @@ import { Locale, ServiceCategory } from '../types';
 import { DICTIONARY } from '../data';
 import { createAppointment } from '../api/publicApi';
 import { ApiError } from '../api/client';
+import { trackEvent } from '../utils/analytics';
 
 interface AppointmentModalProps {
   isOpen: boolean;
@@ -78,6 +79,8 @@ export default function AppointmentModal({
         preferred_date: preferredDate || null,
       });
       setIsSubmitted(true);
+      // Conversion: a sent appointment request (no personal data in the event).
+      trackEvent('appointment_submit', { service_id: resolvedServiceId ?? '', page_path: window.location.pathname });
       setPhone('');
       setClientName('');
       setComment('');

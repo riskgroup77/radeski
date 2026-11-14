@@ -318,6 +318,7 @@ export function buildArticleSchema(
   article: Article,
   origin: string,
   authorDoctor?: { doctor: Doctor; url: string } | null,
+  reviewerDoctor?: { doctor: Doctor; url: string } | null,
 ): Record<string, unknown> {
   const routeKey = resolveArticleRouteKey(article);
   const pageUrl = absoluteUrl(articlePath(locale, routeKey));
@@ -338,6 +339,18 @@ export function buildArticleSchema(
     : authorName
       ? { '@type': 'Person', name: authorName, worksFor: { '@id': clinicEntityId(origin) } }
       : { '@type': 'Organization', '@id': clinicEntityId(origin), name: 'Radeski Skin Clinic' };
+  // reviewedBy / lastReviewed only for a recorded medical review (article.review).
+  const reviewer = article.review
+    ? reviewerDoctor
+      ? {
+          '@type': 'Person',
+          '@id': `${reviewerDoctor.url}#doctor`,
+          name: reviewerDoctor.doctor.name[locale] || reviewerDoctor.doctor.name.uz,
+          jobTitle: reviewerDoctor.doctor.role[locale] || reviewerDoctor.doctor.role.uz,
+          url: reviewerDoctor.url,
+        }
+      : { '@type': 'Person', name: article.review.by, worksFor: { '@id': clinicEntityId(origin) } }
+    : undefined;
 
   return {
     '@context': 'https://schema.org',
@@ -346,8 +359,8 @@ export function buildArticleSchema(
     url: pageUrl,
     name: article.title[locale] || article.title.uz,
     inLanguage: inLanguageCode(locale),
-    lastReviewed: article.date || undefined,
-    reviewedBy: author,
+    lastReviewed: article.review?.date || undefined,
+    reviewedBy: reviewer,
     audience: { '@type': 'Patient' },
     mainEntity: {
       '@type': 'Article',
@@ -363,7 +376,7 @@ export function buildArticleSchema(
         logo: { '@type': 'ImageObject', url: `${origin}/gallery/logo.webp` },
       },
       datePublished: article.date || undefined,
-      dateModified: article.date || undefined,
+      dateModified: article.updated || article.review?.date || article.date || undefined,
       inLanguage: inLanguageCode(locale),
       mainEntityOfPage: `${pageUrl}#webpage`,
     },

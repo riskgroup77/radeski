@@ -268,6 +268,9 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
   }
   if (activeArticle) {
     const authorDoctor = findArticleAuthorDoctor(activeArticle, doctors);
+    const reviewerDoctor = activeArticle.review
+      ? findArticleAuthorDoctor({ author: { uz: activeArticle.review.by, ru: '', en: '' } }, doctors)
+      : undefined;
     jsonLd.push(
       buildArticleSchema(
         locale,
@@ -275,6 +278,9 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
         origin,
         authorDoctor
           ? { doctor: authorDoctor, url: absoluteUrl(doctorPath(locale, doctorRouteKey(authorDoctor))) }
+          : null,
+        reviewerDoctor
+          ? { doctor: reviewerDoctor, url: absoluteUrl(doctorPath(locale, doctorRouteKey(reviewerDoctor))) }
           : null,
       ),
     );

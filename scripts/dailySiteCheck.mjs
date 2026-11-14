@@ -168,6 +168,67 @@ const ssl = await Promise.all(
 );
 const sslProblems = ssl.filter((s) => !s.authorized || s.days === null || s.days < 14);
 
+// 5. Nightly build and scheduled articles. The VPS rebuilds every night at 03:30 Tashkent
+// (scripts/server/nightly_build.sh) and writes /build-status.json; an article dated today or
+// earlier on origin/main must then be in the sitemap. Articles that are only local (not pushed)
+// are not expected yet.
+const tashkentDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tashkent' }).format(new Date());
+let buildStatus = null;
+try {
+  const res = await fetch(`${ORIGIN}/build-status.json`, { headers: { 'User-Agent': BROWSER_UA }, cache: 'no-store' });
+  if (res.ok) buildStatus = await res.json();
+} catch {
+  /* reported below as missing */
+}
+const hoursSince = (iso) => (iso ? (Date.now() - new Date(iso).getTime()) / 3600000 : Infinity);
+const buildProblem = !buildStatus
+  ? 'build-status.json not found (written by the first nightly run after the deploy)'
+  : buildStatus.result !== 'ok'
+    ? `last nightly run FAILED (${buildStatus.finishedAt}); last success ${buildStatus.lastSuccess || 'unknown'}`
+    : hoursSince(buildStatus.lastSuccess) > 30
+      ? `last successful nightly build is ${Math.round(hoursSince(buildStatus.lastSuccess))} h old`
+      : '';
+const articleDates = new Map(); // id -> date, from origin/main
+try {
+  const ref = (() => {
+    try {
+      execFileSync('git', ['rev-parse', '--verify', '-q', 'origin/main'], { stdio: 'pipe' });
+      return 'origin/main';
+    } catch {
+      return 'HEAD';
+    }
+  })();
+  const out = execFileSync('git', ['grep', '-h', '-e', "^  id: 'art-", '-e', "^  date: '20", ref, '--', 'src/data/articles'], {
+    encoding: 'utf8',
+  });
+  let id = null;
+  for (const line of out.split('\n')) {
+    const idMatch = line.match(/^ {2}id: '(art-[^']+)'/);
+    const dateMatch = line.match(/^ {2}date: '(\d{4}-\d{2}-\d{2})'/);
+    if (idMatch) id = idMatch[1];
+    else if (dateMatch && id) {
+      articleDates.set(id, dateMatch[1]);
+      id = null;
+    }
+  }
+} catch (error) {
+  console.warn('[daily] article dates not read from git:', error.message);
+}
+const sitemapPaths = new Set(crawl.map((r) => new URL(r.url).pathname.replace(/\/$/, '')));
+const dueArticles = [...articleDates].filter(([, date]) => date <= tashkentDay);
+// Articles merged into another one keep their id but answer 301 (nginx article redirect map).
+const redirectedPaths = new Set(
+  readFileSync('nginx/radeski-article-redirects.map.conf', 'utf8')
+    .split(/\r?\n/)
+    .map((line) => line.trim().split(/\s+/)[0])
+    .filter((source) => source?.startsWith('/')),
+);
+const missingArticles = dueArticles.filter(
+  ([id]) => !sitemapPaths.has(`/uz/articles/${id}`) && !redirectedPaths.has(`/uz/articles/${id}`),
+);
+const upcoming = [...articleDates].filter(([, date]) => date > tashkentDay).sort((a, b) => a[1].localeCompare(b[1]));
+const publishedToday = dueArticles.filter(([, date]) => date === tashkentDay);
+
 // Summary
 const broken = rows.filter((r) => r.verdict === 'BROKEN');
 // Internal pages that answer 200 but are not in the sitemap (old slugs, aliases): link the
@@ -220,13 +281,24 @@ const md = [
   ...ssl.map((s) => `- ${s.host}: ${s.authorized ? 'OK' : `**XATO (${s.error})**`}, ${s.days === null ? 'muddati noma\'lum' : `${s.days} kun qoldi`} (${s.validTo})`),
   `- muammoli: **${sslProblems.length}**`,
   '',
+  "## 5. Tungi build va rejalashtirilgan maqolalar",
+  buildStatus
+    ? `- oxirgi tungi build: ${buildStatus.result === 'ok' ? 'OK' : '**XATO**'} (${buildStatus.finishedAt}), oxirgi muvaffaqiyatli: ${buildStatus.lastSuccess}`
+    : '- build-status.json topilmadi',
+  ...(buildProblem ? [`- **muammo: ${buildProblem}**`] : []),
+  `- bugun (${tashkentDay}) chiqishi kerak: ${publishedToday.map(([id]) => id).join(', ') || "yo'q"}`,
+  `- sanasi kelgan, lekin sitemap'da yo'q maqolalar: **${missingArticles.length}**`,
+  ...missingArticles.map(([id, date]) => `  - ${id} (${date})`),
+  `- navbatda: ${upcoming.length}${upcoming.length ? ` (keyingisi ${upcoming[0][1]}: ${upcoming[0][0]}; oxirgisi ${upcoming.at(-1)[1]})` : ''}`,
+  '',
 ];
 writeFileSync(path.join(outDir, 'summary.md'), md.join('\n'));
 console.log(md.join('\n'));
 const failing =
-  broken.filter((r) => r.internal).length + wrongPhones.length + crawlIssues['not 200'] + crawlIssues['JSON-LD errors'] + sslProblems.length;
+  broken.filter((r) => r.internal).length + wrongPhones.length + crawlIssues['not 200'] + crawlIssues['JSON-LD errors'] + sslProblems.length +
+  missingArticles.length + (buildStatus && buildProblem ? 1 : 0);
 writeFileSync(
   path.join(outDir, 'status.json'),
-  JSON.stringify({ day, failing, brokenInternal: broken.filter((r) => r.internal).length, wrongPhones: wrongPhones.length, crawlIssues, ssl }, null, 2),
+  JSON.stringify({ day, failing, brokenInternal: broken.filter((r) => r.internal).length, wrongPhones: wrongPhones.length, crawlIssues, ssl, nightlyBuild: buildStatus, buildProblem, missingArticles: missingArticles.map(([id, date]) => ({ id, date })) }, null, 2),
 );
 process.exit(failing > 0 ? 1 : 0);

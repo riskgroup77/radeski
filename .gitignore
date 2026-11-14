@@ -74,3 +74,4 @@ reports/
 
 # Daily site check reports (npm run check:daily)
 /audit/
+/Tibbiy_tekshiruv/

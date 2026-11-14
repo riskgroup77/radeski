@@ -193,6 +193,13 @@ export interface Article {
     en: string;
   };
   date: string;
+  /** Last substantive revision of the text (YYYY-MM-DD); dateModified in the schema. */
+  updated?: string;
+  /**
+   * Medical review: the doctor who checked the text (name as in the doctor's profile, uz) and
+   * when. Only set after a real review — the page and the schema claim a review only then.
+   */
+  review?: { by: string; date: string };
   image: string | null;
   images?: LocalizedImages;
   views: number;
