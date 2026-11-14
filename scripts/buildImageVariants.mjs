@@ -80,19 +80,37 @@ async function imageWidth(input) {
   return Number.parseInt(stdout.trim(), 10) || 0;
 }
 
+/** A variant counts only when it has content: a failed ffmpeg run leaves an empty file behind. */
+function ready(file) {
+  try {
+    return statSync(file).size > 0;
+  } catch {
+    return false;
+  }
+}
+
 async function convert(input, width, target, hasAlpha) {
   mkdirSync(path.dirname(target), { recursive: true });
-  await run(
-    'ffmpeg',
-    [
-      '-y', '-v', 'error', '-i', input,
-      '-vf', `scale=${width}:-2:flags=lanczos`,
-      ...(hasAlpha ? ['-pix_fmt', 'yuva420p'] : []),
-      '-frames:v', '1', '-c:v', 'libwebp', '-quality', '78', '-compression_level', '5',
-      target,
-    ],
-    { timeout: 120_000 },
-  );
+  try {
+    await run(
+      'ffmpeg',
+      [
+        '-y', '-v', 'error', '-i', input,
+        '-vf', `scale=${width}:-2:flags=lanczos`,
+        ...(hasAlpha ? ['-pix_fmt', 'yuva420p'] : []),
+        '-frames:v', '1', '-c:v', 'libwebp', '-quality', '78', '-compression_level', '5',
+        target,
+      ],
+      { timeout: 120_000 },
+    );
+  } catch (error) {
+    rmSync(target, { force: true });
+    throw error;
+  }
+  if (!ready(target)) {
+    rmSync(target, { force: true });
+    throw new Error('ffmpeg wrote an empty file');
+  }
 }
 
 async function main() {
@@ -117,7 +135,7 @@ async function main() {
     };
     const targetFor = (w) => path.join(outDir, `${source.key}-${w}.webp`);
     const known = previous[source.src];
-    if (!force && known?.length && known.every((w) => existsSync(targetFor(w)))) {
+    if (!force && known?.length && known.every((w) => ready(targetFor(w)))) {
       index[source.src] = known;
       continue;
     }
@@ -136,7 +154,7 @@ async function main() {
       const widths = wanted(sourceWidth);
       const hasAlpha = /\.png$/i.test(source.src);
       for (const w of widths) {
-        if (force || !existsSync(targetFor(w))) {
+        if (force || !ready(targetFor(w))) {
           await convert(input, w, targetFor(w), hasAlpha);
           converted += 1;
         }
