@@ -51,6 +51,7 @@ import { getNotFoundTitle } from '../components/NotFoundPage';
 import {
   TITLE_MAX_LENGTH,
   buildConditionPageSeoTitle,
+  CONDITION_SEO_OVERRIDES,
   buildEntityKeywords,
   buildServicePageSeoTitle,
   buildServiceSeoTitle,
@@ -367,7 +368,8 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
                   locale,
                 )
             : activeCondition && conditionSlug
-              ? buildConditionPageSeoTitle(
+              ? CONDITION_SEO_OVERRIDES[conditionSlug]?.[locale]?.title ??
+                buildConditionPageSeoTitle(
                   getDermatologyConditionNavItem(conditionSlug)?.label[locale] ??
                     getDermatologyConditionNavItem(conditionSlug)?.label.uz ??
                     conditionSlug,
@@ -398,7 +400,7 @@ export function resolveRouteHead(input: RouteHeadInput): RouteHead {
         : activeVideo
           ? videoDescription(activeVideo, locale)
         : activeCondition
-          ? activeCondition.description
+          ? (conditionSlug && CONDITION_SEO_OVERRIDES[conditionSlug]?.[locale]?.desc) || activeCondition.description
           : activeDoctor
             ? buildDoctorSeoDescription(activeDoctor, doctorDetails, locale)
             : activeEquipment

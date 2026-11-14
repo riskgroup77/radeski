@@ -275,7 +275,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     en: 'Eczema: causes and treatment — Fergana, Kokand',
   },
   'art-teri-qichishi': {
-    uz: "Teri qichishi: sabablari va davolash — Farg'ona, Qo'qon",
+    uz: 'Teri va badan qichishi sabablari: qachon xavfli',
     ru: 'Зуд кожи: причины и лечение — Фергана, Коканд',
     en: 'Itchy skin: causes and treatment — Fergana, Kokand',
   },
@@ -294,6 +294,9 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     ru: 'Себорейный дерматит: причины и лечение',
     en: 'Seborrheic dermatitis: causes and treatment',
   },
+  'art-akne': {
+    uz: 'Akne nima: sabablari, belgilari va davolash',
+  },
   'art-akne-u-vzroslykh': {
     uz: 'Kattalarda akne: qachon dermatologga borish kerak',
     ru: 'Акне у взрослых: когда идти к дерматологу',
@@ -305,6 +308,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     en: "Hair Loss Diagnosis: Why Shampoo Isn't Enough",
   },
   'art-atopic-dermatitis': {
+    uz: 'Atopik dermatit nima: belgilari, bolalarda davolash',
     ru: 'Атопический дерматит: симптомы и лечение',
   },
   'art-bazalioma-teri-raki': {
@@ -379,7 +383,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     en: 'Ingrown Toenail Treatment: Clinical Case, Kokand',
   },
   'art-plazmaferez-teri-kasalliklari': {
-    uz: 'Teri kasalliklarida plazmaferez: qachon kerak',
+    uz: 'Plazmaferez nima: teri kasalliklarida qachon kerak',
     ru: 'Плазмаферез при кожных заболеваниях: когда нужен',
     en: 'Plasmapheresis for skin diseases',
   },
@@ -392,8 +396,9 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     uz: "Postakne: chandiq va dog'larni kamaytirish",
   },
   'art-prp-terapiya-oldidan-tahlillar': {
-    uz: 'PRP-terapiya oldidan qanday tahlillar kerak?',
+    uz: 'PRP oldidan tahlillar: to‘liq ro‘yxat va tayyorgarlik',
     ru: 'Анализы перед PRP-терапией: полный список',
+    en: 'Blood Tests Before PRP: The Full Checklist',
   },
   'art-psoriaz-klinik-keys-bahridinov-radeski': {
     ru: 'Псориаз: клинический случай и лечение',
@@ -405,12 +410,12 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     en: 'Rosacea Treatment: Facial Redness and Vessels',
   },
   'art-til-yassi-hujayrali-rak': {
-    uz: 'Til raki: birinchi belgilar va davolash',
+    uz: 'Til raki: alomatlari, belgilari va qanday ko‘rinadi',
     ru: 'Рак языка: первые симптомы и лечение',
     en: 'Tongue Cancer (SCC): Early Signs and Treatment',
   },
   'art-trixolog-trixoskopiya': {
-    uz: 'Trixoskopiya: soch to‘kilishi sababini aniqlash',
+    uz: 'Trixolog kim, trixoskopiya nima va qachon kerak',
     ru: 'Трихоскопия: диагностика причин выпадения волос',
     en: 'Trichoscopy: Finding the Cause of Hair Loss',
   },

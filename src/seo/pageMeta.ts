@@ -107,10 +107,94 @@ export function fitDescription(text: string): string {
   return `${cut.slice(0, wordEnd > 90 ? wordEnd : DESCRIPTION_MAX_LENGTH - 1).replace(/[,;:—–-]+$/, '')}…`;
 }
 
+/**
+ * Condition pages (/conditions/<slug>) whose generated title and description had many
+ * impressions but almost no clicks in Search Console (12 Nov 2026 export, CTR under 0.5%):
+ * written to the queries people actually type ("… sabablari", "… nima").
+ */
+export const CONDITION_SEO_OVERRIDES: Partial<
+  Record<string, Partial<Record<Locale, { title: string; desc: string }>>>
+> = {
+  'yuz-qizarishi': {
+    uz: {
+      title: 'Yuz qizarishi sabablari: rozasea, kuperoz, sezgir teri',
+      desc: "Yuz nega qizaradi: rozasea, kuperoz (kengaygan tomirlar) yoki sezgir teri. Sababni dermatolog aniqlaydi; tomirlar uchun lazer va IPL muolajalari qo'llanadi.",
+    },
+  },
+  'teri-qichishi': {
+    uz: {
+      title: 'Teri qichishi: dermatolog tashxisi va davolash',
+      desc: "Teri qichishi ekzema, allergiya, quruq teri yoki ichki kasallik belgisi bo'lishi mumkin. Dermatolog sababini aniqlab, davolash rejasini tuzadi.",
+    },
+  },
+  'seboreyali-dermatit': {
+    uz: {
+      title: 'Seboreyali dermatit nima: belgilari va davolash',
+      desc: "Seboreyali dermatit nima: bosh terisi va yuzda yog'li po'st, qizarish va qichish. Nima kuchaytiradi, qanday davolanadi va qachon dermatologga borish kerak.",
+    },
+  },
+};
+
 /** Per-article SEO overrides keyed by public route id (art-*). */
 export const ARTICLE_SEO_OVERRIDES: Partial<
   Record<string, Partial<Record<Locale, { title: string; desc: string; keywords?: string }>>>
 > = {
+  // Low-CTR pages in the 12 Nov 2026 Search Console export: search-result texts rewritten to
+  // the queries behind them ("… nima", "… alomatlari", "trixolog kim"). Page body unchanged.
+  'art-atopic-dermatitis': {
+    uz: {
+      title: 'Atopik dermatit nima: belgilari, bolalarda davolash',
+      desc: 'Atopik dermatit nima va nega teri quruqlashib qichiydi? Bolalar va kattalardagi belgilar, kuchaytiruvchi omillar, zamonaviy davolash va uy parvarishi.',
+      keywords:
+        "atopik dermatit, atopik dermatit nima, atopik dermatit bolalarda davolash, atopik dermatit davosi, ekzema, dermatolog Farg'ona, Radeski Skin Clinic",
+    },
+  },
+  'art-til-yassi-hujayrali-rak': {
+    uz: {
+      title: 'Til raki: alomatlari, belgilari va qanday ko‘rinadi',
+      desc: 'Til raki qanday boshlanadi: birinchi alomatlar, qanday ko‘rinishi, tashxis va davolash. 2 haftadan ortiq bitmaydigan til yarasi — shifokorga borish belgisi.',
+      keywords:
+        'til raki, til raki alomatlari, til raki belgilari, til raki qanday ko‘rinadi, tilning yassi hujayrali raki, biopsiya, Radeski Skin Clinic',
+    },
+  },
+  'art-prp-terapiya-oldidan-tahlillar': {
+    uz: {
+      title: 'PRP oldidan tahlillar: to‘liq ro‘yxat va tayyorgarlik',
+      desc: 'PRP-terapiyadan oldin qaysi tahlillar kerak: OAK, koagulogramma, biokimyo, infeksiyalar, ferritin, D vitamini. Tayyorgarlik va PRP qachon qilinadi.',
+      keywords:
+        'PRP terapiya, PRP oldidan tahlillar, plazmoterapiya tahlillar, ferritin, D vitamini, koagulogramma, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Blood Tests Before PRP: The Full Checklist',
+      desc: 'Which blood tests you need before PRP: CBC, coagulation, biochemistry, infection screening, ferritin and vitamin D, how to prepare and when PRP can start.',
+      keywords:
+        'PRP blood test, tests before PRP, PRP lab tests, CBC, coagulation profile, ferritin, vitamin D, PRP for hair, Radeski Skin Clinic',
+    },
+  },
+  'art-trixolog-trixoskopiya': {
+    uz: {
+      title: 'Trixolog kim, trixoskopiya nima va qachon kerak',
+      desc: 'Trixolog kim va qachon kerak, trixoskopiya qanday o‘tadi va soch to‘kilishining qaysi sabablarini aniqlaydi. Qabul bosqichlari va davolash.',
+      keywords:
+        'trixolog kim, trixolog, trixoskopiya, trixoskopiya nima, soch to‘kilishi, trixolog Farg‘ona, Radeski Skin Clinic',
+    },
+  },
+  'art-akne': {
+    uz: {
+      title: 'Akne nima: sabablari, belgilari va davolash',
+      desc: "Akne nima va nega paydo bo'ladi: teri yog'i, poralar tiqilishi, gormonlar. Belgilar, og'irlik darajalari, zamonaviy davolash va qachon dermatologga borish.",
+      keywords:
+        "akne, akne nima, akne davolash, husnbuzar, ugri, akne sabablari, dermatolog Farg'ona, Radeski Skin Clinic",
+    },
+  },
+  'art-plazmaferez-teri-kasalliklari': {
+    uz: {
+      title: 'Plazmaferez nima: teri kasalliklarida qachon kerak',
+      desc: 'Plazmaferez nima, qaysi teri kasalliklarida qo‘llanadi, muolaja qanday o‘tadi va qanday foyda kutish mumkin. Radeski’da u kompleks davolashning bir qismi.',
+      keywords:
+        'plazmaferez, plazmaferez nima, plazmaferez teri kasalliklari, plazmaferez Farg‘ona, Radeski Skin Clinic',
+    },
+  },
   'art-soch-ekish-fue-dhi': {
     uz: {
       title: "Soch ekish FUE va DHI: jarayon va narx — Farg'ona",
@@ -1173,8 +1257,8 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
   },
   'art-teri-qichishi': {
     uz: {
-      title: "Teri qichishi: sabablari va davolash — Farg'ona, Qo'qon",
-      desc: "Teri nima uchun qichiydi: quruq teri, ekzema, eshakemi, qo'tir, zamburug' va ichki sabablar. Xavfli belgilar va tekshiruv. Farg'ona va Qo'qonda dermatolog.",
+      title: 'Teri va badan qichishi sabablari: qachon xavfli',
+      desc: "Teri va badan nima uchun qichiydi: quruqlik, ekzema, eshakemi, qo'tir, zamburug' va ichki kasalliklar. Xavfli belgilar, tekshiruv va davolash yo'llari.",
       keywords:
         "teri qichishi, tana qichishi sabablari, kechasi qichishish, quruq teri, qo'tir, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
     },
