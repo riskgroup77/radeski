@@ -2,9 +2,12 @@
  * Generate nginx map for site-level 301 redirects (Daavlin sections, clinic laser models, legacy paths).
  * Usage: npx tsx scripts/generateSiteNginxRedirects.ts
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { buildSiteRedirectPairs } from '../src/seo/sitemapRedirectRules';
+import { buildCmsIdRedirectPairs, buildSiteRedirectPairs, type CmsIdSnapshot } from '../src/seo/sitemapRedirectRules';
+
+// Old CMS-id URLs → readable ones, from the site snapshot (npm run build writes it first).
+const SNAPSHOT = path.join(process.cwd(), 'public', 'data', 'site-snapshot-core.json');
 
 const OUT = path.join(process.cwd(), 'nginx', 'radeski-site-redirects.map.conf');
 
@@ -22,7 +25,11 @@ function buildNginxMap(pairs: Array<{ from: string; to: string }>): string {
   return lines.join('\n');
 }
 
-const pairs = buildSiteRedirectPairs();
+const snapshot: CmsIdSnapshot = existsSync(SNAPSHOT) ? JSON.parse(readFileSync(SNAPSHOT, 'utf8')).data : {};
+if (!snapshot.doctors?.length) console.warn(`No CMS data in ${SNAPSHOT}: UUID redirects left out.`);
+const merged = new Map<string, string>();
+for (const { from, to } of [...buildCmsIdRedirectPairs(snapshot), ...buildSiteRedirectPairs()]) merged.set(from, to);
+const pairs = [...merged.entries()].map(([from, to]) => ({ from, to })).sort((a, b) => a.from.localeCompare(b.from));
 mkdirSync(path.dirname(OUT), { recursive: true });
 writeFileSync(OUT, buildNginxMap(pairs), 'utf8');
 console.log(`Wrote ${pairs.length} site redirects -> ${OUT}`);

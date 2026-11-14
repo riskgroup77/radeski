@@ -1136,6 +1136,8 @@ function PageContent({
 /** Daavlin model pages that are published (the others redirect to the device pages). */
 const PRERENDER_DAAVLIN_MODELS: { id: DaavlinModelId; name: string }[] = [
   { id: '7-series', name: 'Daavlin 7 Series' },
+  { id: '1-series', name: 'Daavlin 1 Series' },
+  { id: 'uv-series', name: 'Daavlin UV Series' },
   { id: 'm-series', name: 'Daavlin M Series' },
   { id: 'neolux', name: 'Daavlin NeoLux' },
   { id: 'aquex', name: 'Daavlin Aquex' },

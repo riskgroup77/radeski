@@ -1542,8 +1542,8 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
         "dermatolog Qo'qon, dermatologiya Qo'qon, kosmetologiya Qo'qon, IPL Qo'qon, lazer epilyatsiya Qo'qon, Radeski Qo'qon, akne Qo'qon",
     },
     fargona: {
-      title: "Dermatolog Farg'ona — Radeski Skin Clinic",
-      desc: "Farg'onada Radeski bosh klinikasi: dermatologiya, trixologiya, podologiya, IPL, lazer, dermatoskopiya. Manzil: O'zbekiston Ovozi 1A. Tel: +998 73 200-73-73.",
+      title: "Farg'ona dermatologiya markazi — Radeski Skin Clinic",
+      desc: "Farg'onadagi teri kasalliklari klinikasi Radeski: dermatolog, trixolog, podolog, IPL va lazer. Manzil: O'zbekiston Ovozi 1A. Tel: +998 73 200-73-73.",
       keywords:
         "dermatolog Farg'ona, trixolog Farg'ona, podolog Farg'ona, IPL Farg'ona, lazer epilyatsiya Farg'ona, Radeski Farg'ona, akne Farg'ona",
     },
@@ -1621,7 +1621,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "клиника Radeski, дерматолог Фергана, дерматолог Коканд, лицензия, аккредитация, Ашуров Дильшод",
     },
     services: {
-      title: "Услуги дерматологии и косметологии — Radeski",
+      title: "Услуги дерматолога и косметолога в Фергане — Radeski",
       desc: "12 направлений: дерматология, аппаратная косметология, IPL, лазерная эпиляция, трихология, инъекции, хирургия Mohs — Фергана и Коканд.",
       keywords:
         "услуги дерматолога Фергана, косметология Коканд, IPL Фергана, лазерная эпиляция Коканд, трихология, ботокс, фототерапия",
@@ -1658,7 +1658,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
         'дерматолог Коканд, дерматология Коканд, косметология Коканд, IPL Коканд, лазерная эпиляция Коканд, Radeski Коканд, акне Коканд',
     },
     fargona: {
-      title: 'Дерматолог в Фергане — Radeski Skin Clinic',
+      title: 'Клиника дерматологии в Фергане — Radeski Skin Clinic',
       desc: 'Главная клиника Radeski в Фергане: дерматология, трихология, подология, IPL, лазер, дерматоскопия. Адрес: ул. Узбекистон Овози 1А. Тел: +998 73 200-73-73.',
       keywords:
         'дерматолог Фергана, трихолог Фергана, подолог Фергана, IPL Фергана, лазерная эпиляция Фергана, Radeski Фергана, акне Фергана',
@@ -1726,8 +1726,8 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
   },
   en: {
     home: {
-      title: "Dermatologist in Fergana & Kokand — Radeski Skin Clinic",
-      desc: "Radeski Skin Clinic — medical care for skin, hair and nails with modern aesthetic correction. Dermatology, trichology, podology, IPL, laser and injectables. Tel: +998 73 200-73-73.",
+      title: "Radeski Skin Clinic — Dermatologist in Fergana & Kokand",
+      desc: "Skin clinic in Fergana and Kokand: dermatologists, trichologist, podiatrist, IPL, laser and injectables. Book online or call +998 73 200-73-73.",
       keywords:
         "Radeski Skin Clinic, medical skin clinic, hair and nails, aesthetic correction, dermatology, trichology, podology",
     },
@@ -1763,7 +1763,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
       keywords: "Radeski video, dermatology video, IPL, clinic Fergana, clinic Kokand",
     },
     branches: {
-      title: "Branches — Fergana | Kokand | Belgium | Radeski",
+      title: "Clinic Addresses in Fergana & Kokand — Radeski",
       desc: "Radeski branches in Fergana, Kokand and Rade Skin Clinic in Liège, Belgium. Dermatologist and cosmetology in Kokand.",
       keywords: "Radeski branch, dermatologist Fergana, dermatologist Kokand, clinic address",
     },

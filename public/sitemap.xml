@@ -265,6 +265,18 @@
 
   <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/7-series</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
 
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/1-series</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/1-series</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/1-series</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+
+  <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/uv-series</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+
+  <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/uv-series</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <url><loc>https://radeski.uz/en/daavlin-foto-kabinalari/models/uv-series</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+
   <url><loc>https://radeski.uz/uz/daavlin-foto-kabinalari/models/dermapal</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
 
   <url><loc>https://radeski.uz/ru/daavlin-foto-kabinalari/models/dermapal</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

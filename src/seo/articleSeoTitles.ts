@@ -382,6 +382,9 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     ru: 'Вросший ноготь: клинический случай, Коканд',
     en: 'Ingrown Toenail Treatment: Clinical Case, Kokand',
   },
+  'art-photofinder-diagnostika-radeski': {
+    en: 'PhotoFinder Mole Mapping: Skin Cancer Screening',
+  },
   'art-plazmaferez-teri-kasalliklari': {
     uz: 'Plazmaferez nima: teri kasalliklarida qachon kerak',
     ru: 'Плазмаферез при кожных заболеваниях: когда нужен',
