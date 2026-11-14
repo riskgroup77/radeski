@@ -7,7 +7,7 @@ import type { LocalizedCopy, LocalCommercialFaq } from './localCommercialSeoCata
  * parts (address, hours, phone, prices "from") are added around it.
  */
 /** When the city-page texts below were last revised (shown on the pages and in dateModified). */
-export const LOCAL_LANDING_CONTENT_UPDATED = '2026-10-10';
+export const LOCAL_LANDING_CONTENT_UPDATED = '2026-11-14';
 
 export interface LocalLandingTopic {
   about: LocalizedCopy[];
@@ -92,6 +92,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Лаборатория, дерматоскопия, фототерапия Daavlin и лазеры находятся в одной клинике, поэтому диагностика и лечение проходят по одному плану, без направлений в другие места.',
         'The lab, dermatoscopy, Daavlin phototherapy and lasers are under one roof, so diagnosis and treatment follow a single plan without referrals elsewhere.',
       ),
+      L(
+        'Dermatologga qachon borish kerak: toshma, qichish yoki qizarish 1–2 haftada o‘tmasa; xolning shakli, rangi yoki hajmi o‘zgarsa; yara bitmasa; akne chandiq qoldira boshlasa; tirnoq yoki soch holati o‘zgarsa. Erta murojaat qilinsa, davolash odatda qisqaroq bo‘ladi.',
+        'Когда идти к дерматологу: сыпь, зуд или покраснение не проходят за 1–2 недели; родинка меняет форму, цвет или размер; ранка не заживает; акне начинает оставлять рубцы; изменились ногти или волосы. При раннем обращении лечение обычно короче.',
+        'When to see a dermatologist: a rash, itch or redness that lasts beyond 1–2 weeks; a mole changing shape, colour or size; a sore that does not heal; acne starting to scar; changes in nails or hair. Treatment is usually shorter when started early.',
+      ),
+      L(
+        'Qabuldan oldin toshmaga 2–3 kun shifokor buyurmagan krem surtmang va dog‘larni bo‘yanish bilan yopmang — shifokor terini asl holida ko‘rishi kerak. Ishlatayotgan dori va kremlaringiz ro‘yxatini, oldingi tahlil natijalarini olib keling.',
+        'За 2–3 дня до приёма не наносите на высыпания кремы, которые не назначал врач, и не маскируйте пятна косметикой — врач должен увидеть кожу как есть. Возьмите список лекарств и кремов, которыми пользуетесь, и прежние анализы.',
+        'For 2–3 days before the visit, do not put creams the doctor has not prescribed on the rash and do not cover spots with make-up: the doctor needs to see the skin as it is. Bring a list of your medicines and creams and any earlier test results.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -107,6 +117,30 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Bolalarni ham qabul qilasizmi?', 'Принимаете ли детей?', 'Do you see children?'),
         L('Ha, bolalar dermatologik muammolari bilan ham murojaat qilish mumkin.', 'Да, детей с кожными проблемами тоже принимаем.', 'Yes, children with skin problems are seen too.'),
+      ),
+      Q(
+        L('Tahlillarni klinikaning o‘zida topshirsa bo‘ladimi?', 'Можно ли сдать анализы в самой клинике?', 'Can tests be done at the clinic?'),
+        L(
+          'Ha, klinikada laboratoriya bor: qon tahlillari va zamburug‘ tahlili shu yerda olinadi, kerak bo‘lsa biopsiya ham qilinadi. Natijalar bilan shifokor davolash rejasini tuzadi.',
+          'Да, в клинике есть лаборатория: анализы крови и исследование на грибок берут на месте, при необходимости делают биопсию. По результатам врач составляет план лечения.',
+          'Yes, the clinic has its own lab: blood tests and fungal tests are taken on site, and a biopsy can be done when needed. The doctor builds the treatment plan from the results.',
+        ),
+      ),
+      Q(
+        L('Xolni tekshirtirish kerakmi?', 'Нужно ли проверять родинки?', 'Should I have a mole checked?'),
+        L(
+          'Xol o‘zgarsa, qichisa, qonasa yoki boshqalardan keskin farq qilsa — ha. Dermatoskopiya og‘riqsiz va bir necha daqiqa davom etadi; shubhali xol bo‘lsa, shifokor dermatoonkolog ko‘rigi yoki biopsiyani tavsiya qiladi.',
+          'Да, если родинка меняется, чешется, кровоточит или заметно отличается от остальных. Дерматоскопия безболезненна и занимает несколько минут; при подозрительной родинке врач рекомендует осмотр дерматоонколога или биопсию.',
+          'Yes, if a mole changes, itches, bleeds or looks clearly different from the others. Dermatoscopy is painless and takes a few minutes; for a suspicious mole the doctor recommends a dermato-oncologist review or a biopsy.',
+        ),
+      ),
+      Q(
+        L('Takroriy qabul kerakmi?', 'Нужен ли повторный приём?', 'Is a follow-up visit needed?'),
+        L(
+          'Ko‘p kasalliklarda — ha: shifokor davolash samarasini baholash va rejani to‘g‘rilash uchun nazorat sanasini davolash turiga qarab belgilaydi.',
+          'При большинстве заболеваний — да: врач назначает дату контроля в зависимости от лечения, чтобы оценить эффект и скорректировать план.',
+          'For most conditions, yes: the doctor sets a check-up date that suits the treatment, to see how it works and adjust the plan.',
+        ),
       ),
     ],
     priceNames: [...DERMATOLOGIST_PRICES, "Zamburug' tahlili (silliq teri va sochli bosh qismidan)"],
@@ -124,6 +158,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'На первом приёме проводится цифровая трихоскопия — фолликулы рассматриваются под увеличением. В плане лечения — PRP-терапия, мезотерапия, тулиевый лазер и при показаниях пересадка волос.',
         'The first visit includes digital trichoscopy of the follicles under magnification. Treatment options include PRP, mesotherapy, thulium laser and, when indicated, hair transplant.',
       ),
+      L(
+        'Trixologga qachon borish kerak: soch odatdagidan ko‘p to‘kilsa yoki bir necha hafta to‘kilishda davom etsa, sochlar siyraklashib bosh terisi ko‘rina boshlasa, dumaloq kal joy paydo bo‘lsa, bosh terisi qichisa yoki po‘st tashlasa. Tug‘ruq, kasallik yoki kuchli stressdan keyingi to‘kilish ham ko‘rikni talab qiladi.',
+        'Когда идти к трихологу: волосы выпадают сильнее обычного или выпадение длится несколько недель, волосы редеют и просвечивает кожа головы, появился круглый очаг облысения, кожа головы зудит или шелушится. Выпадение после родов, болезни или сильного стресса тоже стоит показать врачу.',
+        'When to see a trichologist: more hair falls out than usual or the shedding lasts several weeks, hair thins so the scalp shows, a round bald patch appears, or the scalp itches or flakes. Shedding after childbirth, illness or severe stress is also worth a check.',
+      ),
+      L(
+        'Shampun va vitaminlarni o‘zboshimchalik bilan almashtirish ko‘pincha vaqtni yo‘qotadi: to‘kilishning sababi har xil — gormonlar, temir yetishmasligi, qalqonsimon bez, autoimmun jarayon yoki irsiyat. Trixolog avval sababni aniqlaydi, keyin davolashni tanlaydi.',
+        'Самостоятельная смена шампуней и витаминов часто отнимает время: причины выпадения разные — гормоны, дефицит железа, щитовидная железа, аутоиммунный процесс или наследственность. Трихолог сначала находит причину, затем подбирает лечение.',
+        'Switching shampoos and vitamins on your own often wastes time: hair loss has many causes — hormones, iron deficiency, the thyroid, an autoimmune process or heredity. A trichologist finds the cause first, then chooses the treatment.',
+      ),
     ],
     steps: [
       L('Trixolog ko‘rigi va raqamli trixoskopiya', 'Осмотр трихолога и цифровая трихоскопия', 'Trichologist exam and digital trichoscopy'),
@@ -139,6 +183,38 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Erkaklar ham murojaat qiladimi?', 'Обращаются ли мужчины?', 'Do men come too?'),
         L('Ha, androgenetik alopetsiya erkaklarda ko‘p uchraydi va erta boshlangan davolash samaraliroq.', 'Да, андрогенетическая алопеция у мужчин встречается часто, и раннее лечение эффективнее.', 'Yes, androgenetic alopecia is common in men and early treatment works better.'),
+      ),
+      Q(
+        L('Trixoskopiya og‘riqlimi?', 'Больно ли делать трихоскопию?', 'Is trichoscopy painful?'),
+        L(
+          'Yo‘q. Trixoskopiya — bosh terisi va sochni maxsus kamera bilan kattalashtirib ko‘rish; hech narsa kesilmaydi va ukol qilinmaydi.',
+          'Нет. Трихоскопия — осмотр кожи головы и волос специальной камерой с увеличением; ничего не разрезают и не колют.',
+          'No. Trichoscopy means looking at the scalp and hair through a special magnifying camera; nothing is cut or injected.',
+        ),
+      ),
+      Q(
+        L('Kuniga qancha soch to‘kilishi normal?', 'Сколько волос в день выпадает в норме?', 'How much daily hair shedding is normal?'),
+        L(
+          'Odatda kuniga 50–100 tagacha soch to‘kilishi normal hisoblanadi. Undan ko‘p bo‘lsa, to‘kilish bir necha hafta davom etsa yoki sochlar siyraklashsa, sababini tekshirish kerak.',
+          'Обычно нормой считается до 50–100 волос в день. Если выпадает больше, выпадение длится несколько недель или волосы заметно редеют, причину нужно проверить.',
+          'Losing up to about 50–100 hairs a day is usually considered normal. If you lose more, the shedding lasts several weeks or the hair visibly thins, the cause should be checked.',
+        ),
+      ),
+      Q(
+        L('Qabulga qanday tayyorlanish kerak?', 'Как подготовиться к приёму?', 'How should I prepare for the visit?'),
+        L(
+          'Qabul kuni sochga lak, gel va boshqa uslub vositalarini surtmang — bosh terisi trixoskopda aniq ko‘rinishi kerak. Oxirgi qon tahlillari bo‘lsa, olib keling.',
+          'В день приёма не наносите на волосы лак, гель и другие средства для укладки — кожа головы должна хорошо просматриваться при трихоскопии. Возьмите последние анализы крови, если они есть.',
+          'On the day of the visit, do not use hairspray, gel or other styling products, so the scalp is clearly visible in trichoscopy. Bring your latest blood tests if you have them.',
+        ),
+      ),
+      Q(
+        L('Ayollarda soch to‘kilishini davolaysizmi?', 'Лечите ли выпадение волос у женщин?', 'Do you treat hair loss in women?'),
+        L(
+          'Ha. Ayollarda ko‘pincha diffuz to‘kilish, temir yetishmasligi yoki gormonal sabablar uchraydi; trixolog trixoskopiya va tahlillar asosida reja tuzadi.',
+          'Да. У женщин часто встречаются диффузное выпадение, дефицит железа или гормональные причины; трихолог составляет план по данным трихоскопии и анализов.',
+          'Yes. In women, diffuse shedding, iron deficiency or hormonal causes are common; the trichologist builds the plan from trichoscopy and test results.',
+        ),
       ),
     ],
     priceNames: [
@@ -164,6 +240,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Медицинский педикюр выполняется аппаратом и стерильными инструментами. Вросший ноготь во многих случаях исправляется без операции — титановой нитью или коррекцией.',
         'Medical pedicure is done with a device and sterile instruments. An ingrown nail can often be corrected without surgery, using a titanium thread or bracing.',
       ),
+      L(
+        'Podologga qachon borish kerak: tirnoq atrofi qizarib og‘risa, tirnoq qalinlashib, sarg‘ayib yoki uvalanib qolsa, tovonda chuqur yoriqlar paydo bo‘lsa, qadoq yurganda og‘riq bersa. Qandli diabetda oyoqdagi har qanday yara yoki rang o‘zgarishini kechiktirmasdan ko‘rsatish kerak.',
+        'Когда идти к подологу: кожа вокруг ногтя краснеет и болит, ноготь утолщается, желтеет или крошится, на пятках появились глубокие трещины, мозоль болит при ходьбе. При сахарном диабете любую ранку или изменение цвета стопы нужно показать без промедления.',
+        'When to see a podiatrist: the skin around a nail is red and sore, a nail thickens, yellows or crumbles, deep heel cracks appear, or a callus hurts when walking. With diabetes, any sore or colour change on the foot should be shown without delay.',
+      ),
+      L(
+        'Tirnoq zamburug‘i bir muolajada o‘tmaydi: oyoq tirnog‘i to‘liq yangilanishi uchun odatda 6–12 oy kerak. Shuning uchun davolash — apparat bilan tozalash, dori vositalari va uy parvarishi — bosqichma-bosqich olib boriladi, natija esa yangi o‘sayotgan sog‘lom tirnoqda ko‘rinadi.',
+        'Грибок ногтей не проходит за одну процедуру: ноготь на ноге полностью обновляется обычно за 6–12 месяцев. Поэтому лечение — аппаратная обработка, препараты и домашний уход — идёт поэтапно, а результат виден по отрастающему здоровому ногтю.',
+        'Nail fungus does not clear in one session: a toenail usually takes 6–12 months to grow out completely. Treatment — device cleaning, medicines and home care — therefore goes in stages, and the result shows in the healthy nail growing in.',
+      ),
     ],
     steps: [
       L('Podolog konsultatsiyasi va oyoqni ko‘rik', 'Консультация подолога и осмотр стоп', 'Podiatrist consultation and foot exam'),
@@ -179,6 +265,38 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('O‘sib ketgan tirnoqni olib tashlash og‘riqlimi?', 'Больно ли удалять вросший ноготь?', 'Is ingrown nail treatment painful?'),
         L('Muolaja mahalliy og‘riqsizlantirish bilan qilinadi; ko‘p hollarda tirnoqni to‘liq olib tashlash shart emas.', 'Процедура проходит под местной анестезией; во многих случаях удалять ноготь полностью не нужно.', 'It is done under local anaesthesia, and the whole nail often does not need removing.'),
+      ),
+      Q(
+        L('Tirnoq zamburug‘ini davolash qancha davom etadi?', 'Сколько длится лечение грибка ногтей?', 'How long does nail fungus treatment take?'),
+        L(
+          'Odatda bir necha oy: oyoq tirnog‘i 6–12 oyda to‘liq yangilanadi. Podolog zararlangan qismni apparat bilan tozalaydi, shifokor dori vositalarini belgilaydi, nazorat ko‘riklarida natija baholanadi.',
+          'Обычно несколько месяцев: ноготь на ноге полностью обновляется за 6–12 месяцев. Подолог аппаратно обрабатывает поражённую часть, врач назначает препараты, результат оценивают на контрольных осмотрах.',
+          'Usually several months: a toenail grows out fully in 6–12 months. The podiatrist cleans the affected part with a device, the doctor prescribes medicines, and progress is checked at follow-up visits.',
+        ),
+      ),
+      Q(
+        L('Titan ip nima va qanday ishlaydi?', 'Что такое титановая нить и как она работает?', 'What is a titanium thread and how does it work?'),
+        L(
+          'Bu o‘sib ketgan tirnoq chetini asta-sekin ko‘tarib, to‘g‘ri o‘sishga yo‘naltiradigan yupqa ip. U operatsiyasiz qo‘yiladi va tirnoq o‘sishiga qarab almashtiriladi.',
+          'Это тонкая нить, которая постепенно приподнимает край вросшего ногтя и направляет его рост правильно. Её ставят без операции и меняют по мере роста ногтя.',
+          'It is a thin thread that gradually lifts the edge of an ingrown nail and guides it to grow straight. It is fitted without surgery and replaced as the nail grows.',
+        ),
+      ),
+      Q(
+        L('Tibbiy pedikyur oddiy pedikyurdan nimasi bilan farq qiladi?', 'Чем медицинский педикюр отличается от обычного?', 'How is a medical pedicure different from a regular one?'),
+        L(
+          'Tibbiy pedikyurni oyoq muammolarini biladigan mutaxassis steril asboblar va apparat bilan bajaradi. Maqsad — qadoq, qalinlashgan tirnoq va yoriqlarni davolash, faqat chiroyli ko‘rinish emas.',
+          'Медицинский педикюр выполняет специалист по проблемам стоп стерильными инструментами и аппаратом. Цель — лечение мозолей, утолщённых ногтей и трещин, а не только внешний вид.',
+          'A medical pedicure is done by a foot specialist with sterile instruments and a device. Its aim is to treat calluses, thickened nails and cracks, not only to look good.',
+        ),
+      ),
+      Q(
+        L('Qadoqni o‘zim kesib tashlasam bo‘ladimi?', 'Можно ли срезать мозоль самому?', 'Can I cut a callus myself?'),
+        L(
+          'Tavsiya etilmaydi: chuqur kesish infeksiya va yara xavfini oshiradi, ayniqsa qandli diabetda. Podolog qadoqni apparat bilan xavfsiz olib tashlaydi.',
+          'Не рекомендуется: глубокий срез повышает риск инфекции и раны, особенно при диабете. Подолог безопасно удалит мозоль аппаратом.',
+          'It is not recommended: cutting deep raises the risk of infection and wounds, especially with diabetes. A podiatrist removes a callus safely with a device.',
+        ),
       ),
     ],
     priceNames: [
@@ -995,6 +1113,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Moveo работает с охлаждением, поэтому процедура почти безболезненна. Курс обычно 6–8 сеансов, так как волосы находятся в разных фазах роста. Процедуру выполняет специалист с медицинским образованием.',
         'Moveo has built-in cooling, so the procedure is almost painless. A course is usually 6–8 sessions because hairs are in different growth phases. It is performed by a medically trained specialist.',
       ),
+      L(
+        'Lazer tukdagi qora pigmentga ta’sir qiladi, shuning uchun qora va to‘q tuklarda natija eng yaxshi bo‘ladi. Oq, kul rang va juda och sariq tuklarda pigment kam — ularga lazer deyarli ta’sir qilmaydi; buni mutaxassis konsultatsiyada oldindan aytadi.',
+        'Лазер действует на тёмный пигмент волоса, поэтому лучший результат — на тёмных волосах. В седых, белых и очень светлых волосах пигмента мало, на них лазер почти не действует; специалист предупредит об этом на консультации.',
+        'The laser targets dark pigment in the hair, so dark hair responds best. White, grey and very light blond hair has little pigment and barely responds; the specialist will tell you this at the consultation.',
+      ),
+      L(
+        'Muolaja kechiktiriladi yoki qilinmaydi: homiladorlik davrida; muolaja zonasida yallig‘lanish, yara, gerpes yoki infeksiya bo‘lsa; teri yaqinda quyoshda qoraygan bo‘lsa; yorug‘likka sezuvchanlikni oshiradigan dorilar (masalan, izotretinoin) qabul qilinayotganda. Xollar va tatuirovkalar muolaja vaqtida yopib qo‘yiladi.',
+        'Процедуру откладывают или не проводят: при беременности; при воспалении, ранах, герпесе или инфекции в зоне; при свежем загаре; при приёме препаратов, повышающих светочувствительность (например, изотретиноина). Родинки и татуировки во время процедуры закрывают.',
+        'The procedure is postponed or not done: during pregnancy; with inflammation, wounds, herpes or infection in the area; on freshly tanned skin; while taking medicines that increase light sensitivity (for example isotretinoin). Moles and tattoos are covered during the session.',
+      ),
     ],
     steps: [
       L('Konsultatsiya: teri va tuk turini baholash', 'Консультация: оценка типа кожи и волос', 'Consultation: skin and hair type assessment'),
@@ -1010,6 +1138,38 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Yozda lazer epilyatsiya qilish mumkinmi?', 'Можно ли делать лазерную эпиляцию летом?', 'Can it be done in summer?'),
         L('Mumkin, agar teri yangi qoraymagan bo‘lsa; muolajadan keyin 2 hafta quyoshda qoraymaslik kerak.', 'Можно, если кожа не загорела недавно; после процедуры 2 недели нельзя загорать.', 'Yes, if the skin is not freshly tanned; avoid tanning for 2 weeks after.'),
+      ),
+      Q(
+        L('Lazer epilyatsiya og‘riqlimi?', 'Больно ли делать лазерную эпиляцию?', 'Does laser hair removal hurt?'),
+        L(
+          'DEKA Moveo sovutish tizimi bilan ishlaydi: ko‘pchilik buni yengil iliqlik yoki chimchilash kabi his qiladi. Sezgir zonalarda his qilish kuchliroq bo‘lishi mumkin.',
+          'DEKA Moveo работает с охлаждением: большинство ощущает лёгкое тепло или покалывание. На чувствительных зонах ощущения могут быть сильнее.',
+          'DEKA Moveo has built-in cooling: most people feel mild warmth or tingling. Sensitive areas may feel stronger.',
+        ),
+      ),
+      Q(
+        L('Muolajadan keyin nimalarga e’tibor berish kerak?', 'Что делать после процедуры?', 'What should I do after a session?'),
+        L(
+          '1–2 kun issiq vanna, sauna va zonani qattiq ishqalashdan saqlaning, 2 hafta quyoshda qoraymang va SPF ishlating. Yengil qizarish odatda bir necha soatda o‘tadi.',
+          '1–2 дня избегайте горячей ванны, сауны и трения зоны, 2 недели не загорайте и пользуйтесь SPF. Лёгкое покраснение обычно проходит за несколько часов.',
+          'For 1–2 days avoid hot baths, the sauna and rubbing the area; do not tan for 2 weeks and use SPF. Mild redness usually fades within a few hours.',
+        ),
+      ),
+      Q(
+        L('Kimga lazer epilyatsiya mumkin emas?', 'Кому нельзя лазерную эпиляцию?', 'Who should not have laser hair removal?'),
+        L(
+          'Homiladorlik davrida, muolaja zonasida yallig‘lanish, yara, gerpes yoki infeksiya bo‘lsa, yangi qorayishda va yorug‘likka sezuvchanlikni oshiradigan dorilar qabul qilinayotganda. Boshqa kasalliklar bo‘lsa, mutaxassis konsultatsiyada baholaydi.',
+          'При беременности, при воспалении, ранах, герпесе или инфекции в зоне, при свежем загаре и при приёме препаратов, повышающих светочувствительность. При других заболеваниях специалист оценит возможность на консультации.',
+          'During pregnancy, with inflammation, wounds, herpes or infection in the area, on fresh tans and while taking medicines that increase light sensitivity. Other conditions are assessed at the consultation.',
+        ),
+      ),
+      Q(
+        L('Oq yoki och tuklarni olib tashlasa bo‘ladimi?', 'Удаляет ли лазер светлые и седые волосы?', 'Does the laser remove light or grey hair?'),
+        L(
+          'Deyarli yo‘q: aleksandrit lazeri tukdagi pigmentga ta’sir qiladi, oq va juda och tuklarda esa pigment kam. Bunday holatda mutaxassis boshqa yechimni tavsiya qiladi.',
+          'Практически нет: александритовый лазер действует на пигмент волоса, а в седых и очень светлых волосах его мало. В таком случае специалист подскажет другое решение.',
+          'Hardly: the alexandrite laser acts on hair pigment, and white or very light hair has little of it. The specialist will suggest another option in that case.',
+        ),
       ),
     ],
     priceNames: [
