@@ -225,6 +225,8 @@ export VITE_API_URL="${{VITE_API_URL:-https://api.radeski.uz}}"
 # Notify Yandex/Bing (IndexNow) about pages whose content changed in this deploy.
 export INDEXNOW=1
 npm run build
+# Status of the last nightly rebuild (scripts/server/nightly_build.sh) survives the new dist/.
+[ -f build-status.json ] && cp -f build-status.json dist/build-status.json || true
 if [ -d public/videos ] && [ "$(ls -A public/videos 2>/dev/null)" ]; then
   mkdir -p dist/videos
   cp -a public/videos/. dist/videos/

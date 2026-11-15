@@ -15,7 +15,9 @@ LOG=/var/log/radeski-nightly.log
 # Public status of the last nightly run (https://radeski.uz/build-status.json). The daily site
 # check (scripts/dailySiteCheck.mjs) reads it and raises an alarm when the last run failed or
 # the last success is older than ~30 hours.
-STATUS_FILE="$APP_DIR/dist/build-status.json"
+# Kept outside dist/ (a deploy rebuilds dist/ and would delete it) and copied in after each write;
+# the deploy script copies it back after its own build.
+STATUS_FILE="$APP_DIR/build-status.json"
 STARTED_AT="$(date -Is)"
 PUBLISH_DATE="$(TZ=Asia/Tashkent date +%F)"
 
@@ -27,9 +29,9 @@ write_status() { # $1 = ok | failed
   if [ "$1" != ok ]; then
     last_success="$(grep -o '"lastSuccess": *"[^"]*"' "$STATUS_FILE" 2>/dev/null | sed 's/.*"\([^"]*\)"$/\1/' || true)"
   fi
-  mkdir -p "$(dirname "$STATUS_FILE")"
   printf '{\n  "job": "nightly-build",\n  "result": "%s",\n  "startedAt": "%s",\n  "finishedAt": "%s",\n  "publishDate": "%s",\n  "lastSuccess": "%s"\n}\n' \
     "$1" "$STARTED_AT" "$(date -Is)" "$PUBLISH_DATE" "$last_success" > "$STATUS_FILE"
+  mkdir -p "$APP_DIR/dist" && cp -f "$STATUS_FILE" "$APP_DIR/dist/build-status.json"
 }
 
 on_fail() {
