@@ -7,7 +7,7 @@ import type { LocalizedCopy, LocalCommercialFaq } from './localCommercialSeoCata
  * parts (address, hours, phone, prices "from") are added around it.
  */
 /** When the city-page texts below were last revised (shown on the pages and in dateModified). */
-export const LOCAL_LANDING_CONTENT_UPDATED = '2026-11-14';
+export const LOCAL_LANDING_CONTENT_UPDATED = '2026-11-15';
 
 export interface LocalLandingTopic {
   about: LocalizedCopy[];
@@ -941,6 +941,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Метод удаления выбирается по образованию: CO₂-лазер DEKA SmartXide, радиоволна Surgitron, криохирургия или хирургическое иссечение. При необходимости ткань отправляется на гистологию.',
         'The method depends on the growth: DEKA SmartXide CO₂ laser, Surgitron radiowave, cryosurgery or surgical excision. Tissue is sent for histology when needed.',
       ),
+      L(
+        'Qachon ko‘rikka kelish kerak: xol tez kattalashsa, rangi yoki chegarasi o‘zgarsa, qonasa, qichisa yoki atrofida yangi dog‘lar paydo bo‘lsa. Kiyim, soqol olish yoki taqinchoq doim jarohatlaydigan o‘smalar ham olib tashlanadi — bunday joyda ular ko‘proq yallig‘lanadi.',
+        'Когда приходить: родинка быстро растёт, меняет цвет или границы, кровоточит, чешется или вокруг появились новые пятна. Удаляют и образования, которые постоянно травмируются одеждой, бритьём или украшениями, — в таких местах они чаще воспаляются.',
+        'When to come: a mole grows quickly, changes colour or border, bleeds, itches or new spots appear around it. Growths that are constantly rubbed by clothing, shaving or jewellery are also removed, since they get inflamed more often.',
+      ),
+      L(
+        'Uyda o‘smani bog‘lab, kuydirib yoki dorixona vositalari bilan ketkazish xavfli: to‘qima gistologiyaga tushmaydi, xavfli o‘sma o‘tkazib yuboriladi, chandiq va infeksiya ehtimoli oshadi. Olib tashlangandan keyin qobiq o‘zi tushguncha teginmaslik, 1–2 hafta saunadan voz kechish va joyni SPF 50 bilan himoyalash kerak.',
+        'Удалять образование дома — перевязывать, прижигать, сводить аптечными средствами — опасно: ткань не попадает на гистологию, злокачественная опухоль может быть пропущена, растёт риск рубца и инфекции. После удаления корочку не трогают до её отпадения, 1–2 недели избегают бани и защищают место кремом SPF 50.',
+        'Removing a growth at home — tying it off, burning it, using pharmacy products — is dangerous: no tissue reaches histology, a malignant tumour can be missed, and scarring and infection are more likely. After removal, leave the crust alone until it falls off, skip the sauna for 1–2 weeks and protect the area with SPF 50.',
+      ),
     ],
     steps: [
       L('Dermatoonkolog ko‘rigi va dermatoskopiya', 'Осмотр дерматоонколога и дерматоскопия', 'Dermato-oncologist exam and dermatoscopy'),
@@ -956,6 +966,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Har qanday xolni olib tashlash mumkinmi?', 'Можно ли удалить любую родинку?', 'Can any mole be removed?'),
         L('Avval dermatoskopiya qilinadi; shubhali xollar faqat gistologiya bilan olib tashlanadi.', 'Сначала проводится дерматоскопия; подозрительные родинки удаляются только с гистологией.', 'Dermatoscopy comes first; suspicious moles are removed only with histology.'),
+      ),
+      Q(
+        L('Olib tashlash og‘riqlimi?', 'Больно ли удалять?', 'Does removal hurt?'),
+        L('Muolaja mahalliy og‘riqsizlantirish bilan o‘tadi, faqat ukol paytida qisqa sanchiq seziladi. Kichik o‘smani olib tashlash ko‘pincha 10–20 daqiqa davom etadi.', 'Процедура проходит под местной анестезией, ощущается только короткий укол. Удаление небольшого образования обычно занимает 10–20 минут.', 'It is done under local anaesthesia; you only feel the brief injection. Removing a small growth usually takes 10–20 minutes.'),
+      ),
+      Q(
+        L('Yozda olib tashlash mumkinmi?', 'Можно ли удалять летом?', 'Can it be done in summer?'),
+        L('Ha, agar joy kiyim yoki plastir bilan yopiladi va SPF 50 qo‘llanilsa. Shubhali xolni olib tashlashni mavsum tufayli kechiktirmaslik kerak.', 'Да, если место закрыто одеждой или пластырем и используется SPF 50. Удаление подозрительной родинки не стоит откладывать из‑за сезона.', 'Yes, if the area is covered by clothing or a plaster and SPF 50 is used. A suspicious mole should not wait for the season.'),
+      ),
+      Q(
+        L('Olib tashlangan xol yana paydo bo‘ladimi?', 'Может ли родинка появиться снова?', 'Can the mole come back?'),
+        L('To‘liq olib tashlangan o‘sma odatda qaytmaydi. Yuzaki usulda olinganda ba’zan qoldiq pigment ko‘rinadi — bunda nazorat ko‘rigida shifokor qaror qiladi.', 'Полностью удалённое образование обычно не возвращается. После поверхностного удаления иногда виден остаточный пигмент — тогда решение принимает врач на контрольном осмотре.', 'A completely removed growth usually does not return. After superficial removal some residual pigment may show; the doctor decides at the follow-up visit.'),
       ),
     ],
     priceNames: [
@@ -1011,6 +1033,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'В лечении применяются узкополосная UVB-фототерапия Daavlin, эксимерный лазер (308 нм) для точечного воздействия на небольшие пятна, наружные средства и при стабильном витилиго — трансплантация меланоцитов.',
         'Treatment uses Daavlin narrowband UVB, the 308 nm excimer laser for small patches, topical therapy and, in stable vitiligo, melanocyte transplantation.',
       ),
+      L(
+        'Qachon kelish kerak: terida sababsiz oqargan yoki sutdek oq dog‘ paydo bo‘lsa, ayniqsa u kattalashsa yoki yangi dog‘lar qo‘shilsa. Oq dog‘ni faqat vitiligo deb bo‘lmaydi — rang-barang lishay, oq lishay va dog‘dan keyingi gipopigmentatsiya ham shunday ko‘rinadi, shuning uchun tashxisni shifokor qo‘yadi.',
+        'Когда приходить: на коже без причины появилось побелевшее или молочно-белое пятно, особенно если оно растёт или добавляются новые. Белое пятно — не всегда витилиго: так же выглядят отрубевидный и белый лишай, гипопигментация после воспаления, поэтому диагноз ставит врач.',
+        'When to come: a pale or milk-white patch appears for no reason, especially if it grows or new ones follow. Not every white patch is vitiligo — pityriasis versicolor, pityriasis alba and post-inflammatory hypopigmentation look similar, so a doctor should make the diagnosis.',
+      ),
+      L(
+        'Vitiligo ba’zan qalqonsimon bez kasalliklari bilan birga uchraydi, shuning uchun shifokor tahlillarni ham tavsiya qilishi mumkin. Davolash bir necha oy davom etadi: natija bosqichma-bosqich, dog‘ chetidan va soch follikulalari atrofidan nuqtali pigment ko‘rinishida keladi. Kurs davomida dog‘larni quyosh kuyishidan himoya qilish va teri jarohatlarini kamaytirish muhim.',
+        'Витилиго иногда сочетается с болезнями щитовидной железы, поэтому врач может назначить анализы. Лечение длится несколько месяцев: результат приходит постепенно — точечным пигментом по краю пятна и вокруг волосяных фолликулов. Во время курса важно защищать пятна от солнечных ожогов и меньше травмировать кожу.',
+        'Vitiligo sometimes goes together with thyroid disease, so the doctor may order tests. Treatment takes several months: colour returns gradually, as dots of pigment at the edge of a patch and around hair follicles. During the course it is important to prevent sunburn on the patches and avoid skin injury.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -1026,6 +1058,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Bolalarga fototerapiya qilish mumkinmi?', 'Можно ли детям фототерапию?', 'Can children have phototherapy?'),
         L('Ko‘rsatma bo‘lsa — ha, shifokor nazoratida va yoshga mos doza bilan.', 'При показаниях — да, под контролем врача и с дозой по возрасту.', 'If indicated — yes, supervised and with an age-appropriate dose.'),
+      ),
+      Q(
+        L('Vitiligo yuqumlimi yoki irsiymi?', 'Заразно ли витилиго, передаётся ли по наследству?', 'Is vitiligo contagious or hereditary?'),
+        L('Yuqumli emas — u teginish, umumiy idish yoki ovqat orqali yuqmaydi. Oilada vitiligo bo‘lsa, moyillik biroz yuqoriroq, ammo bu kasallik albatta o‘tadi degani emas.', 'Не заразно — не передаётся через прикосновения, общую посуду или еду. Если витилиго есть у родственников, предрасположенность немного выше, но это не значит, что болезнь обязательно появится.', 'It is not contagious — it does not spread through touch, shared dishes or food. A family history slightly raises the risk, but does not mean the disease will appear.'),
+      ),
+      Q(
+        L('Ovqat vitiligoga ta’sir qiladimi?', 'Влияет ли питание на витилиго?', 'Does diet affect vitiligo?'),
+        L('Muayyan ovqatni yeyish yoki tashlash vitiligoni davolamaydi. Muvozanatli ovqatlanish foydali, qattiq parhezlar esa shifokor tavsiyasisiz kerak emas.', 'Отказ от каких-то продуктов или их употребление витилиго не лечит. Сбалансированное питание полезно, а строгие диеты без рекомендации врача не нужны.', 'Eating or avoiding particular foods does not treat vitiligo. A balanced diet helps; strict diets are not needed without a doctor’s advice.'),
+      ),
+      Q(
+        L('Natija qachon ko‘rinadi?', 'Когда будет виден результат?', 'When will results show?'),
+        L('Fototerapiyada birinchi pigment orollari odatda 2–3 oyda paydo bo‘ladi. Kurs dog‘lar faolligi va joyiga qarab rejalashtiriladi va nazorat ko‘riklarida baholanadi.', 'При фототерапии первые островки пигмента обычно появляются через 2–3 месяца. Курс планируется по активности и расположению пятен и оценивается на контрольных осмотрах.', 'With phototherapy, the first islands of pigment usually appear in 2–3 months. The course is planned around how active the patches are and where they are, and reviewed at follow-up visits.'),
       ),
     ],
     priceNames: [DERMATOLOGIST_PRICES[0], ...PHOTOTHERAPY_PRICES.slice(0, 3), 'Melanotsit transplantatsiyasi (1 sm²)'],
@@ -1360,6 +1404,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Панч-биопсия выполняется под местной анестезией за несколько минут. В Radeski есть направление дерматопатологии — результат оценивает патолог, специализирующийся на коже.',
         'A punch biopsy takes a few minutes under local anaesthesia. Radeski has a dermatopathology service, so a skin-specialised pathologist reads the result.',
       ),
+      L(
+        'Biopsiya qachon kerak: o‘sma xavfli bo‘lishi mumkinligiga shubha bo‘lsa, toshma odatdagi davolashga javob bermasa yoki bir necha kasallik bir xil ko‘rinsa. Usul vazifaga qarab tanlanadi: panch-biopsiya (dumaloq kichik namuna), shave-biopsiya (yuzaki qatlam) yoki o‘smani butunlay kesib olish (eksizion biopsiya).',
+        'Когда нужна биопсия: есть подозрение на злокачественность образования, сыпь не отвечает на обычное лечение или несколько болезней выглядят одинаково. Метод выбирают по задаче: панч-биопсия (небольшой круглый образец), шейв-биопсия (поверхностный слой) или полное иссечение образования (эксцизионная биопсия).',
+        'When a biopsy is needed: a growth may be malignant, a rash does not respond to usual treatment, or several diseases look alike. The method depends on the goal: punch biopsy (a small round sample), shave biopsy (the surface layer) or removing the whole growth (excisional biopsy).',
+      ),
+      L(
+        'Tayyorgarlik oddiy: qon suyultiruvchi dorilar, allergiya va qandli diabet haqida shifokorga oldindan ayting — dorini o‘zingiz to‘xtatmang. Biopsiyadan keyin joyni 24 soat ho‘llamaslik, so‘ng kuniga bir marta yuvib, bog‘lam almashtirish tavsiya etiladi; chok qo‘yilgan bo‘lsa, u 7–14 kunda olinadi.',
+        'Подготовка простая: заранее скажите врачу о препаратах, разжижающих кровь, аллергии и диабете — сами лекарство не отменяйте. После биопсии место 24 часа не мочат, затем раз в день промывают и меняют повязку; если наложен шов, его снимают через 7–14 дней.',
+        'Preparation is simple: tell the doctor in advance about blood thinners, allergies and diabetes — do not stop any medicine yourself. Keep the site dry for 24 hours, then wash it once a day and change the dressing; stitches, if any, come out after 7–14 days.',
+      ),
     ],
     steps: [
       L('Shifokor ko‘rigi va biopsiya joyini tanlash', 'Осмотр и выбор места биопсии', 'Exam and choosing the biopsy site'),
@@ -1375,6 +1429,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Biopsiyadan keyin chandiq qoladimi?', 'Остаётся ли рубец после биопсии?', 'Will it leave a scar?'),
         L('Kichik, 2–4 mm li iz qoladi va vaqt o‘tib bilinmay ketadi.', 'Остаётся маленький след 2–4 мм, со временем он малозаметен.', 'A small 2–4 mm mark that fades over time.'),
+      ),
+      Q(
+        L('Biopsiya og‘riqlimi?', 'Больно ли делать биопсию?', 'Does a biopsy hurt?'),
+        L('Mahalliy og‘riqsizlantirishdan keyin namuna olish sezilmaydi; faqat ukol paytida qisqa sanchiq bo‘ladi. Keyingi kunlarda engil sezgirlik bo‘lishi mumkin.', 'После местной анестезии забор образца не ощущается, чувствуется только короткий укол. В следующие дни возможна лёгкая болезненность.', 'After local anaesthesia the sampling is not felt; only the injection stings briefly. The site may be slightly tender for a few days.'),
+      ),
+      Q(
+        L('Biopsiya o‘smaning tarqalishiga sabab bo‘ladimi?', 'Может ли биопсия спровоцировать рост опухоли?', 'Can a biopsy make a tumour spread?'),
+        L('Yo‘q, to‘g‘ri bajarilgan biopsiya o‘smaning tarqalishiga olib kelmaydi. Aksincha, aniq tashxis davolashni kechiktirmaslikka yordam beradi.', 'Нет, правильно выполненная биопсия не вызывает распространения опухоли. Наоборот, точный диагноз помогает не откладывать лечение.', 'No, a properly performed biopsy does not cause a tumour to spread. An accurate diagnosis helps avoid delaying treatment.'),
+      ),
+      Q(
+        L('Natija nima bo‘yicha beriladi?', 'Что содержит заключение?', 'What does the report contain?'),
+        L('Gistologik xulosada to‘qima tuzilishi va tashxis yoziladi, o‘sma olib tashlangan bo‘lsa — chetlari tozaligi ham. Xulosani shifokor tushuntiradi va keyingi qadamni belgilaydi.', 'В гистологическом заключении описывается строение ткани и диагноз, а если образование удалено — и чистота краёв. Заключение объясняет врач и определяет следующий шаг.', 'The histology report describes the tissue and gives the diagnosis, and for a removed growth, whether the margins are clear. The doctor explains it and sets the next step.'),
       ),
     ],
     priceNames: ['Panch-biopsiya', 'dermatoonkologiya-2|Biopsiya'],
@@ -1429,6 +1495,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Процедура длится 20–30 минут, реабилитации почти нет: пятна за несколько дней темнеют и затем отшелушиваются. Обычно достаточно 1–3 сеансов.',
         'A session takes 20–30 minutes with almost no downtime: spots darken for a few days and then flake off. Usually 1–3 sessions are enough.',
       ),
+      L(
+        'IPL kimga mos: yuz va qo‘llardagi quyosh dog‘lari (lentigo), kuperoz va rozatsea qizarishi, mayda tomir to‘rlari va teri rangining notekisligida. Melazma, juda qora (to‘q) teri va yangi qorayish IPL uchun ehtiyotkorlik talab qiladi — bunday hollarda shifokor boshqa usulni tavsiya qilishi mumkin.',
+        'Кому подходит IPL: солнечные пятна (лентиго) на лице и руках, покраснение при куперозе и розацеа, мелкая сосудистая сетка и неровный тон кожи. Мелазма, очень смуглая кожа и свежий загар требуют осторожности — в таких случаях врач может предложить другой метод.',
+        'Who IPL suits: sun spots (lentigines) on the face and hands, redness from couperose and rosacea, fine vessel networks and uneven skin tone. Melasma, very dark skin and a fresh tan need caution — the doctor may suggest another method.',
+      ),
+      L(
+        'Seansdan oldin 2–4 hafta quyoshda qoraymaslik va solyariyga bormaslik kerak. Homiladorlik, faol teri infeksiyasi, yorug‘likka sezgirlikni oshiruvchi dorilar va izotretinoin bilan davolanish IPL ni kechiktirish sababi bo‘ladi. Seansdan keyin bir necha soat qizarish va iliqlik sezilishi normal.',
+        'За 2–4 недели до сеанса нельзя загорать и посещать солярий. Беременность, активная кожная инфекция, препараты, повышающие чувствительность к свету, и лечение изотретиноином — причины отложить IPL. После сеанса несколько часов сохраняются покраснение и ощущение тепла — это нормально.',
+        'Avoid tanning and sunbeds for 2–4 weeks before a session. Pregnancy, an active skin infection, light-sensitising medicines and isotretinoin treatment are reasons to postpone IPL. Redness and warmth for a few hours afterwards are normal.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -1444,6 +1520,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('IPL dan keyin quyoshga chiqish mumkinmi?', 'Можно ли на солнце после IPL?', 'Can I go in the sun after IPL?'),
         L('2 hafta davomida SPF 50 krem bilan himoyalanish kerak.', 'В течение 2 недель нужна защита кремом SPF 50.', 'Use SPF 50 for 2 weeks.'),
+      ),
+      Q(
+        L('IPL og‘riqlimi?', 'Больно ли делать IPL?', 'Does IPL hurt?'),
+        L('Har bir impulsda rezina tasma urilgandek qisqa iliq chaqish seziladi. Sovutuvchi gel va moslangan rejim noqulaylikni kamaytiradi, og‘riqsizlantirish odatda kerak emas.', 'При каждой вспышке ощущается короткий тёплый щелчок, как от резинки. Охлаждающий гель и подобранный режим уменьшают дискомфорт, обезболивание обычно не нужно.', 'Each pulse feels like a brief warm snap of a rubber band. Cooling gel and tailored settings reduce discomfort; anaesthesia is usually not needed.'),
+      ),
+      Q(
+        L('Seansdan keyin ishga chiqish mumkinmi?', 'Можно ли сразу на работу?', 'Can I go back to work right away?'),
+        L('Ha. Qizarish odatda bir necha soatda o‘tadi, ertasi kuni makiyaj qilish mumkin. Dog‘lar to‘qlashib ko‘chguncha ularni ishqalamaslik kerak.', 'Да. Покраснение обычно проходит за несколько часов, на следующий день можно наносить макияж. Пока пятна темнеют и отшелушиваются, их нельзя тереть.', 'Yes. Redness usually fades within hours and make-up can be worn the next day. Do not rub the spots while they darken and flake.'),
+      ),
+      Q(
+        L('IPL natijasi qancha saqlanadi?', 'Сколько держится результат IPL?', 'How long do IPL results last?'),
+        L('Olib tashlangan dog‘lar qaytmaydi, ammo quyosh yangilarini paydo qilishi mumkin. Har kuni SPF qo‘llash va kerak bo‘lsa yiliga bir marta qo‘llab-quvvatlovchi seans natijani uzoq saqlaydi.', 'Удалённые пятна не возвращаются, но солнце может вызвать новые. Ежедневный SPF и при необходимости поддерживающий сеанс раз в год сохраняют результат надолго.', 'Removed spots do not return, but the sun can cause new ones. Daily SPF and, if needed, a yearly maintenance session keep the result.'),
       ),
     ],
     priceNames: [
