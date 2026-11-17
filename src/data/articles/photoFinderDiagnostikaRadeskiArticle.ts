@@ -25,9 +25,9 @@ Hayot davomida deyarli har bir kishi terida turli o'smalar bilan duch keladi: to
 
 ## Ko'rsatmalar
 
-- har qanday shubhali yoki netipik nevüs, jumladan katta o'lchamdagi;
-- tug'ma va gigant nevüsalar;
-- borlar, papillomalar;
+- har qanday shubhali yoki notipik nevus (xol), jumladan katta o'lchamdagi;
+- tug'ma va gigant nevuslar;
+- so'gallar, papillomalar;
 - keratomalar;
 - tomir o'smalari;
 - soch kistalari;
@@ -52,6 +52,24 @@ Hayot davomida deyarli har bir kishi terida turli o'smalar bilan duch keladi: to
 - Yon ta'sirsiz va asoratlarsiz davolash rejasi.
 - O'smalarni vaqtida aniqlash.
 - Yomon sifatli o'smalarning oldini olish.
+
+## PhotoFinder va oddiy dermatoskopiya farqi
+
+Oddiy dermatoskopiyada shifokor xolni kattalashtiruvchi asbob orqali ko'radi va baholaydi. PhotoFinder esa butun tana va har bir muhim xolning yuqori aniqlikdagi suratini saqlaydi. Keyingi tashrifda dastur yangi suratlarni avvalgilari bilan solishtiradi: yangi paydo bo'lgan yoki o'lchami, rangi, shakli o'zgargan xollar ko'rsatiladi. Melanomani erta bosqichda topishda aynan shu o'zgarish asosiy belgi hisoblanadi.
+
+## Kimga har yili kartografiya kerak?
+
+- tanasida 50 tadan ortiq xoli bor odamlar;
+- notipik (displastik) yoki katta tug'ma xollari borlar;
+- oilasida melanoma bo'lganlar;
+- och terili, oson kuyadigan, bolaligida ko'p quyosh kuyishini boshdan kechirganlar;
+- oldin teri saratoni yoki melanoma davolanganlar.
+
+Bunday holatlarda shifokor odatda yiliga bir marta, ba'zan 6 oyda bir marta nazorat kartografiyasini tavsiya qiladi.
+
+## Tekshiruvga tayyorgarlik
+
+Maxsus tayyorgarlik kerak emas. Tekshiruv kuni tanaga krem va o'z-o'zidan qoraytiruvchi vositalar surtmang, tirnoq lakini olib tashlang; tirnoqlarda o'zgarish bo'lsa, ularni ham ko'rsating. Butun tana kartografiyasi odatda 30–60 daqiqa davom etadi.
 
 ## Qarshi ko'rsatmalar
 
@@ -99,6 +117,24 @@ function ruBody(): string {
 - Своевременная диагностика новообразований.
 - Профилактика злокачественных образований.
 
+## Чем PhotoFinder отличается от обычной дерматоскопии
+
+При обычной дерматоскопии врач смотрит родинку через увеличительный прибор и оценивает её. PhotoFinder сохраняет высокоточные снимки всего тела и каждой важной родинки. На следующем визите программа сравнивает новые снимки с прежними и показывает новые родинки и те, что изменили размер, цвет или форму. Именно изменение — главный признак при раннем выявлении меланомы.
+
+## Кому картирование нужно каждый год
+
+- людям с более чем 50 родинками на теле;
+- при атипичных (диспластических) или крупных врождённых невусах;
+- если у родственников была меланома;
+- при светлой коже, которая легко обгорает, и частых солнечных ожогах в детстве;
+- тем, кто уже лечился от рака кожи или меланомы.
+
+В таких случаях врач обычно рекомендует контрольное картирование раз в год, иногда раз в 6 месяцев.
+
+## Подготовка к обследованию
+
+Особой подготовки не нужно. В день обследования не наносите на тело кремы и автозагар, снимите лак с ногтей; если есть изменения ногтей, покажите и их. Картирование всего тела обычно занимает 30–60 минут.
+
 ## Противопоказания
 
 Противопоказаний к дерматоскопии новообразований кожи **нет** — процедура полностью безопасна.
@@ -145,6 +181,24 @@ Almost everyone develops skin lesions during life: vascular and epithelial growt
 - Timely lesion detection.
 - Prevention of malignant transformation.
 
+## PhotoFinder vs standard dermoscopy
+
+In standard dermoscopy the doctor looks at a mole through a magnifying device and assesses it. PhotoFinder stores high-resolution images of the whole body and of each important mole. At the next visit the software compares new images with the previous ones and highlights new moles and those that changed in size, colour or shape. Change is the key sign in detecting melanoma early.
+
+## Who needs mole mapping every year
+
+- people with more than 50 moles;
+- people with atypical (dysplastic) or large congenital moles;
+- a family history of melanoma;
+- fair skin that burns easily and frequent sunburn in childhood;
+- people previously treated for skin cancer or melanoma.
+
+In these cases the doctor usually recommends follow-up mapping once a year, sometimes every 6 months.
+
+## How to prepare
+
+No special preparation is needed. On the day, do not apply body lotion or self-tanner, remove nail polish, and point out any nail changes too. Whole-body mapping usually takes 30–60 minutes.
+
 ## Contraindications
 
 There are **no contraindications** — the procedure is fully safe.
@@ -187,6 +241,16 @@ export const PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCa
         answer:
           'Yo\'q. Bu xavfsiz, invaziv bo\'lmagan diagnostika — faqat ko\'rish va suratga olish.',
       },
+      {
+        question: "PhotoFinder kartografiyasini qanchada bir qilish kerak?",
+        answer:
+          "Xavf omillari bo'lsa odatda yiliga bir marta, ba'zan 6 oyda bir marta. Xavf past bo'lsa, shifokor ko'rik oralig'ini alohida belgilaydi.",
+      },
+      {
+        question: "PhotoFinder melanomani aniqlaydimi?",
+        answer:
+          "U shubhali xollarni va vaqt o'tib o'zgarganlarini aniqlashga yordam beradi. Yakuniy tashxis xolni olib tashlab, gistologik tekshiruv bilan qo'yiladi.",
+      },
     ],
   },
   ru: {
@@ -222,6 +286,16 @@ export const PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCa
         question: 'Процедура болезненна?',
         answer:
           'Нет. Это безопасная неинвазивная диагностика — только осмотр и фотофиксация.',
+      },
+      {
+        question: "Как часто нужно делать картирование PhotoFinder?",
+        answer:
+          "При факторах риска обычно раз в год, иногда раз в 6 месяцев. При низком риске интервал врач определяет индивидуально.",
+      },
+      {
+        question: "Выявляет ли PhotoFinder меланому?",
+        answer:
+          "Он помогает найти подозрительные родинки и те, что меняются со временем. Окончательный диагноз ставится после удаления и гистологического исследования.",
       },
     ],
   },
@@ -259,6 +333,16 @@ export const PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCa
         answer:
           'No. It is safe, non-invasive diagnostics — examination and photography only.',
       },
+      {
+        question: "How often should PhotoFinder mapping be done?",
+        answer:
+          "With risk factors, usually once a year, sometimes every 6 months. With low risk, the doctor sets the interval individually.",
+      },
+      {
+        question: "Does PhotoFinder detect melanoma?",
+        answer:
+          "It helps find suspicious moles and those that change over time. The final diagnosis is made after removal and histology.",
+      },
     ],
   },
 };
@@ -283,6 +367,7 @@ export const PHOTOFINDER_DIAGNOSTIKA_RADESKI_ARTICLE: Article = {
   },
   author: { uz: 'Radeski Skin Clinic', ru: 'Radeski Skin Clinic', en: 'Radeski Skin Clinic' },
   date: '2026-09-22',
+  updated: '2026-11-17',
   image: COVER,
   images: { uz: COVER, ru: COVER, en: COVER },
   views: 0,

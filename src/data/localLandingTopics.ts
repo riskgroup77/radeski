@@ -7,7 +7,7 @@ import type { LocalizedCopy, LocalCommercialFaq } from './localCommercialSeoCata
  * parts (address, hours, phone, prices "from") are added around it.
  */
 /** When the city-page texts below were last revised (shown on the pages and in dateModified). */
-export const LOCAL_LANDING_CONTENT_UPDATED = '2026-11-15';
+export const LOCAL_LANDING_CONTENT_UPDATED = '2026-11-17';
 
 export interface LocalLandingTopic {
   about: LocalizedCopy[];
@@ -321,6 +321,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Лечение подбирается по степени акне: наружные и системные препараты, пилинги, лазер Hollywood Spectra, IPL и протокол Face Art. При постакне применяется шлифовка CO₂-лазером DEKA.',
         'Treatment depends on acne severity: topical and oral medication, peels, Hollywood Spectra laser, IPL and the Face Art protocol. Post-acne scars are treated with DEKA CO₂ laser resurfacing.',
       ),
+      L(
+        'Qachon dermatologga kelish kerak: husnbuzar 2–3 oy davomida dorixona vositalari bilan kamaymasa, chuqur og‘riqli tugunlar paydo bo‘lsa, dog‘ yoki chuqurcha izlar qola boshlasa, akne 25 yoshdan keyin boshlansa yoki hayz sikli buzilishi bilan birga kechsa. Erta davolash chandiqlar paydo bo‘lishining oldini oladi — postakneni tuzatish aknening o‘zini davolashdan ancha uzoq davom etadi.',
+        'Когда идти к дерматологу: высыпания не уменьшаются за 2–3 месяца аптечных средств, появились глубокие болезненные узлы, начинают оставаться пятна или рубчики, акне началось после 25 лет или сочетается с нарушением цикла. Раннее лечение предотвращает рубцы — исправлять постакне гораздо дольше, чем лечить само акне.',
+        'When to see a dermatologist: spots do not improve after 2–3 months of pharmacy products, deep painful nodules appear, marks or pitted scars start to remain, acne begins after 25 or comes with irregular periods. Early treatment prevents scarring — fixing post-acne takes far longer than treating acne itself.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -336,6 +341,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Uyda husnbuzarni siqish mumkinmi?', 'Можно ли выдавливать прыщи дома?', 'Can I squeeze pimples at home?'),
         L('Yo‘q — bu infeksiyani chuqurlashtiradi va chandiq qoldiradi.', 'Нет — это углубляет инфекцию и оставляет рубцы.', 'No — it drives infection deeper and causes scars.'),
+      ),
+      Q(
+        L('Ovqat aknega ta’sir qiladimi?', 'Влияет ли питание на акне?', 'Does diet affect acne?'),
+        L('Ba’zi odamlarda shirinlik, oq un mahsulotlari va ko‘p sut ichish toshmalarni kuchaytirishi mumkin. Parhez yolg‘iz o‘zi aknani davolamaydi, ammo davolashga yordam beradi.', 'У части людей сладкое, белая мука и много молока могут усиливать высыпания. Одна диета акне не лечит, но помогает лечению.', 'In some people sweets, white flour and a lot of milk can make breakouts worse. Diet alone does not cure acne, but it supports treatment.'),
+      ),
+      Q(
+        L('Davolash boshida toshmalar ko‘payishi normalmi?', 'Нормально ли, что в начале лечения высыпаний больше?', 'Is it normal for acne to get worse at first?'),
+        L('Retinoidlar bilan davolash boshida 2–4 hafta ichida vaqtincha kuchayish bo‘lishi mumkin. Bu haqida shifokorga ayting — dozani o‘zgartirish kerak bo‘lishi mumkin, lekin davolashni o‘zingiz to‘xtatmang.', 'В начале лечения ретиноидами в первые 2–4 недели возможно временное обострение. Сообщите врачу — может понадобиться коррекция дозы, но не прекращайте лечение самостоятельно.', 'Retinoids can cause a temporary flare in the first 2–4 weeks. Tell your doctor — the dose may need adjusting — but do not stop treatment on your own.'),
+      ),
+      Q(
+        L('Postakne izlari qanday ketkaziladi?', 'Как убрать следы постакне?', 'How are post-acne marks treated?'),
+        L('Qizil va qora dog‘lar uchun IPL va lazer toning, chuqurcha chandiqlar uchun fraksion CO₂ lazer va boshqa usullar qo‘llaniladi. Davolash faol akne tinchlangandan keyin boshlanadi.', 'Для красных и тёмных пятен применяют IPL и лазерный тонинг, для рубцов-ямок — фракционный CO₂-лазер и другие методы. Лечение начинают после стихания активного акне.', 'Red and dark marks respond to IPL and laser toning; pitted scars to fractional CO₂ laser and other methods. Treatment starts once active acne has calmed down.'),
       ),
     ],
     priceNames: [
@@ -359,6 +376,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'В Radeski трихолог ставит диагноз по трихоскопии и анализам и подбирает лечение: PRP-терапия, протоколы Hair Vital / Hair Loss Control, мезотерапия тулиевым лазером, при показаниях — пересадка волос.',
         'At Radeski the trichologist diagnoses with trichoscopy and lab tests and chooses treatment: PRP, Hair Vital / Hair Loss Control protocols, thulium laser mesotherapy and, if indicated, hair transplant.',
       ),
+      L(
+        'Qachon trixologga kelish kerak: soch 2–3 oydan ortiq ko‘p to‘kilsa, soch ayrilgan chiziq yoki tepa qismi siyraklasa, bosh terisida tuksiz o‘choq paydo bo‘lsa, soch to‘kilishi qichish, qipiq yoki og‘riq bilan kechsa. Tug‘ruq, og‘ir kasallik, qattiq parhez yoki stressdan 2–3 oy keyin boshlangan to‘kilish ko‘pincha vaqtinchalik bo‘ladi, ammo temir tanqisligi va qalqonsimon bez muammolarini tahlil bilan istisno qilish kerak.',
+        'Когда идти к трихологу: волосы выпадают сильнее обычного дольше 2–3 месяцев, редеет пробор или макушка, появился очаг без волос, выпадение сопровождается зудом, перхотью или болезненностью. Выпадение через 2–3 месяца после родов, тяжёлой болезни, жёсткой диеты или стресса часто временное, но дефицит железа и проблемы щитовидной железы нужно исключить анализами.',
+        'When to see a trichologist: shedding lasts more than 2–3 months, the parting or crown thins, a bald patch appears, or hair loss comes with itching, dandruff or tenderness. Shedding 2–3 months after childbirth, a serious illness, a strict diet or stress is often temporary, but iron deficiency and thyroid problems should be ruled out with tests.',
+      ),
     ],
     steps: [
       L('Trixoskopiya — sochning holatini kattalashtirib ko‘rish', 'Трихоскопия — осмотр волос под увеличением', 'Trichoscopy — magnified hair exam'),
@@ -374,6 +396,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('PRP-terapiya nechta seans qilinadi?', 'Сколько сеансов PRP нужно?', 'How many PRP sessions are needed?'),
         L('Odatda 4–6 seanslik kurs, 2–4 hafta oralig‘ida; aniq soni trixolog tomonidan belgilanadi.', 'Обычно курс 4–6 сеансов с интервалом 2–4 недели; точное число определяет трихолог.', 'Usually 4–6 sessions 2–4 weeks apart; the trichologist sets the exact number.'),
+      ),
+      Q(
+        L('Soch to‘kilishi uchun qanday tahlillar topshiriladi?', 'Какие анализы сдают при выпадении волос?', 'Which tests are done for hair loss?'),
+        L('Ko‘pincha umumiy qon tahlili, ferritin, qalqonsimon bez gormonlari, D vitamini, ayollarda esa kerak bo‘lsa jinsiy gormonlar. Aniq ro‘yxatni trixolog ko‘rikdan keyin belgilaydi.', 'Чаще всего общий анализ крови, ферритин, гормоны щитовидной железы, витамин D, у женщин при необходимости — половые гормоны. Точный список врач определяет после осмотра.', 'Usually a full blood count, ferritin, thyroid hormones and vitamin D, plus sex hormones for women when needed. The trichologist sets the exact list after the exam.'),
+      ),
+      Q(
+        L('Soch to‘kilishi o‘z-o‘zidan to‘xtaydimi?', 'Пройдёт ли выпадение само?', 'Will hair loss stop by itself?'),
+        L('Stress yoki kasallikdan keyingi diffuz to‘kilish ko‘pincha 3–6 oyda o‘tadi. Androgenetik alopesiya esa davolashsiz asta-sekin kuchayadi, shuning uchun turini aniqlash muhim.', 'Диффузное выпадение после стресса или болезни часто проходит за 3–6 месяцев. Андрогенетическая алопеция без лечения постепенно прогрессирует, поэтому важно определить тип.', 'Diffuse shedding after stress or illness often settles within 3–6 months. Androgenetic alopecia slowly progresses without treatment, so identifying the type matters.'),
+      ),
+      Q(
+        L('Natija qachon ko‘rinadi?', 'Когда будет виден результат?', 'When will results show?'),
+        L('Soch sekin o‘sadi: to‘kilish kamayishi odatda 6–8 haftada, yangi sochlar o‘sishi 3–6 oyda seziladi. Natija trixoskopiya bilan raqamlarda solishtiriladi.', 'Волосы растут медленно: уменьшение выпадения обычно заметно через 6–8 недель, рост новых волос — через 3–6 месяцев. Результат сравнивают по трихоскопии в цифрах.', 'Hair grows slowly: less shedding is usually noticed in 6–8 weeks and new growth in 3–6 months. Progress is measured with trichoscopy.'),
       ),
     ],
     priceNames: [
@@ -903,6 +937,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Диагноз подтверждается лабораторным анализом. В лечении сочетаются аппаратная обработка ногтя, лазерная терапия и препараты — так быстрее и меньше рецидивов.',
         'The diagnosis is confirmed by a lab test. Treatment combines device cleaning of the nail, laser therapy and medication — faster and with fewer relapses.',
       ),
+      L(
+        'Tirnoqning sarg‘ayishi va qalinlashishi har doim ham zamburug‘ emas: psoriaz, jarohat, tor poyabzal va qarilik o‘zgarishlari ham shunday ko‘rinadi. Shuning uchun davolashdan oldin tirnoqdan namuna olinib, laboratoriyada zamburug‘ tasdiqlanadi. Davolash davomida poyabzal va paypoqlarni ham zararsizlantirish, oyoqni quruq saqlash va umumiy sochiqdan foydalanmaslik kerak — aks holda infeksiya qaytadi.',
+        'Пожелтение и утолщение ногтя — не всегда грибок: так же выглядят псориаз, травма, тесная обувь и возрастные изменения. Поэтому до лечения берут образец ногтя и подтверждают грибок в лаборатории. Во время лечения нужно обрабатывать обувь и носки, держать стопы сухими и не пользоваться общими полотенцами — иначе инфекция вернётся.',
+        'A yellow, thick nail is not always fungus: psoriasis, injury, tight shoes and ageing look similar. So a nail sample is checked in the lab before treatment. During treatment, disinfect shoes and socks, keep feet dry and do not share towels, or the infection will come back.',
+      ),
     ],
     steps: [
       L('Podolog yoki dermatolog ko‘rigi', 'Осмотр подолога или дерматолога', 'Podiatrist or dermatologist exam'),
@@ -918,6 +957,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Lazer og‘riqlimi?', 'Больно ли лазерное лечение?', 'Is the laser painful?'),
         L('Yo‘q, faqat iliqlik seziladi; og‘riqsizlantirish kerak emas.', 'Нет, ощущается только тепло; обезболивание не нужно.', 'No, only warmth is felt; no anaesthesia is needed.'),
+      ),
+      Q(
+        L('Faqat malham yoki lak bilan davolasa bo‘ladimi?', 'Можно ли вылечить только мазью или лаком?', 'Can creams or lacquers alone cure it?'),
+        L('Faqat tirnoq chetida kichik zararlanish bo‘lsa — ba’zan ha. Tirnoqning katta qismi yoki ildizi zararlangan bo‘lsa, tozalash, lazer va kerak bo‘lsa ichiladigan dori birga kerak.', 'Только при небольшом поражении края ногтя — иногда да. Если поражена большая часть ногтя или его основание, нужны чистка, лазер и при необходимости таблетки.', 'Only for a small area at the nail edge — sometimes. If much of the nail or its base is affected, cleaning, laser and, if needed, tablets are combined.'),
+      ),
+      Q(
+        L('Zamburug‘ boshqalarga yuqadimi?', 'Заразен ли грибок для других?', 'Is nail fungus contagious?'),
+        L('Ha, umumiy poyabzal, sochiq, hammom va basseyn orqali yuqishi mumkin. Oila a’zolarida ham belgilar bo‘lsa, ular ham tekshirilgani yaxshi.', 'Да, он передаётся через общую обувь, полотенца, баню и бассейн. Если признаки есть у членов семьи, им тоже лучше обследоваться.', 'Yes, it spreads through shared shoes, towels, saunas and pools. If family members have signs, they should be checked too.'),
+      ),
+      Q(
+        L('Sog‘lom tirnoq qachon o‘sib chiqadi?', 'Когда отрастёт здоровый ноготь?', 'When will a healthy nail grow back?'),
+        L('Oyoq tirnog‘i to‘liq yangilanishi uchun 9–12 oy kerak. Davolash muvaffaqiyatli bo‘lsa, ildiz tomondan toza tirnoq o‘sib kelayotgani bir necha oyda ko‘rinadi.', 'Ноготь на ноге полностью обновляется за 9–12 месяцев. При успешном лечении чистый ноготь у основания становится виден через несколько месяцев.', 'A toenail takes 9–12 months to fully renew. With successful treatment, clear nail growing from the base shows within a few months.'),
       ),
     ],
     priceNames: [
@@ -1001,6 +1052,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'В Radeski псориаз лечат комплексно: наружные средства, узкополосная UVB-фототерапия Daavlin (311 нм) и эксимерный лазер (308 нм), в тяжёлых случаях — иммунобиологическая терапия. Фототерапия снижает зависимость от гормонов.',
         'At Radeski psoriasis is treated comprehensively: topical therapy, Daavlin narrowband UVB (311 nm) phototherapy, the excimer laser (308 nm) and, in severe cases, biologic therapy. Phototherapy reduces reliance on steroids.',
       ),
+      L(
+        'Psoriazni kuchaytiruvchi omillar: stress, infeksiyalar (ayniqsa tomoq), teri jarohatlari, chekish, spirt, ortiqcha vazn va ba’zi dorilar. Bo‘g‘imlarda og‘riq, ertalabki qotish yoki barmoqlar shishishi paydo bo‘lsa, buni albatta shifokorga ayting — bu psoriatik artrit belgisi bo‘lishi mumkin va alohida davolashni talab qiladi.',
+        'Обострения псориаза провоцируют стресс, инфекции (особенно горла), травмы кожи, курение, алкоголь, лишний вес и некоторые лекарства. Если появились боли в суставах, утренняя скованность или отёк пальцев, обязательно скажите врачу — это может быть псориатический артрит, который требует отдельного лечения.',
+        'Psoriasis flares are triggered by stress, infections (especially throat), skin injury, smoking, alcohol, excess weight and some medicines. If you notice joint pain, morning stiffness or swollen fingers, tell your doctor — it may be psoriatic arthritis, which needs separate treatment.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -1016,6 +1072,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Nechta seans kerak?', 'Сколько сеансов нужно?', 'How many sessions are needed?'),
         L('Ko‘pincha 20–30 seans; birinchi yaxshilanish 3–4 haftada ko‘rinadi.', 'Обычно 20–30 сеансов; первое улучшение заметно через 3–4 недели.', 'Usually 20–30 sessions; first improvement shows in 3–4 weeks.'),
+      ),
+      Q(
+        L('Psoriaz yuqumlimi?', 'Заразен ли псориаз?', 'Is psoriasis contagious?'),
+        L('Yo‘q. Psoriaz teginish, umumiy idish yoki basseyn orqali yuqmaydi — bu immun tizimi bilan bog‘liq kasallik.', 'Нет. Псориаз не передаётся через прикосновения, посуду или бассейн — это болезнь, связанная с иммунной системой.', 'No. Psoriasis does not spread through touch, dishes or pools — it is an immune-related disease.'),
+      ),
+      Q(
+        L('Bosh terisidagi psoriaz qanday davolanadi?', 'Как лечат псориаз кожи головы?', 'How is scalp psoriasis treated?'),
+        L('Maxsus shampun, losyon va qatlamni yumshatuvchi vositalar qo‘llaniladi; soch orasidagi o‘choqlar uchun eksimer lazer qulay. Qatlamni qirib olish yoki tirnash ahvolni yomonlashtiradi.', 'Применяют специальные шампуни, лосьоны и средства, размягчающие корки; для очагов среди волос удобен эксимерный лазер. Сдирать корки и расчёсывать нельзя — это ухудшает состояние.', 'Medicated shampoos, lotions and scale-softening products are used; the excimer laser suits patches within the hair. Picking or scratching off scales makes it worse.'),
+      ),
+      Q(
+        L('Remissiya qancha davom etadi?', 'Сколько длится ремиссия?', 'How long does remission last?'),
+        L('Har kimda har xil: oylar yoki yillar. Teri namligini saqlash, kuchaytiruvchi omillardan qochish va qo‘llab-quvvatlovchi davolash remissiyani uzaytiradi.', 'У всех по-разному: месяцы или годы. Увлажнение кожи, отказ от провоцирующих факторов и поддерживающее лечение продлевают ремиссию.', 'It varies: months or years. Moisturising, avoiding triggers and maintenance treatment extend remission.'),
       ),
     ],
     priceNames: [DERMATOLOGIST_PRICES[0], ...PHOTOTHERAPY_PRICES],
@@ -1087,6 +1155,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Лечение включает препараты, а также сосудистый лазер Derma V (Lutronic) и IPL-фототерапию — они уменьшают покраснение и расширенные сосуды. Протокол Face Art успокаивает воспаление.',
         'Treatment combines medication with the Derma V (Lutronic) vascular laser and IPL, which reduce redness and dilated vessels. The Face Art protocol calms inflammation.',
       ),
+      L(
+        'Rozatsea ko‘pincha 30 yoshdan keyin, och terili odamlarda boshlanadi va akne yoki allergiya deb adashtiriladi. Gormonli kremlar vaqtincha yordam bergandek tuyuladi, lekin keyin rozatseani kuchaytiradi — shuning uchun ularni o‘zingiz qo‘llamang. Kundalik yumshoq parvarish, mineral SPF va qizarishni qo‘zg‘atuvchi omillarni (achchiq ovqat, issiq ichimlik, sauna, spirt) aniqlab chetlash davolashning muhim qismi.',
+        'Розацеа чаще начинается после 30 лет у людей со светлой кожей и её путают с акне или аллергией. Гормональные кремы сначала будто помогают, но потом усиливают розацеа — не используйте их самостоятельно. Мягкий ежедневный уход, минеральный SPF и выявление провокаторов покраснения (острая еда, горячие напитки, сауна, алкоголь) — важная часть лечения.',
+        'Rosacea usually starts after 30 in fair-skinned people and is often mistaken for acne or allergy. Steroid creams seem to help at first but then make rosacea worse — do not use them on your own. Gentle daily care, mineral SPF and identifying flushing triggers (spicy food, hot drinks, sauna, alcohol) are an important part of treatment.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -1102,6 +1175,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Yozda davolash mumkinmi?', 'Можно ли лечиться летом?', 'Can it be treated in summer?'),
         L('Ha, Derma V yozda ham qo‘llanadi; quyoshdan himoya kremi majburiy.', 'Да, Derma V применяется и летом; солнцезащитный крем обязателен.', 'Yes, Derma V can be used in summer; sunscreen is a must.'),
+      ),
+      Q(
+        L('Rozatsea butunlay davolanadimi?', 'Можно ли вылечить розацеа навсегда?', 'Can rosacea be cured?'),
+        L('Rozatsea surunkali kasallik, lekin uni yaxshi nazorat qilish mumkin: dorilar toshmalarni, lazer va IPL esa qizarish va tomirlarni kamaytiradi. Vaqti-vaqti bilan qo‘llab-quvvatlovchi davolash kerak bo‘ladi.', 'Розацеа — хроническое заболевание, но его можно хорошо контролировать: лекарства убирают высыпания, лазер и IPL — покраснение и сосуды. Время от времени нужно поддерживающее лечение.', 'Rosacea is chronic but can be well controlled: medicines clear the bumps, laser and IPL reduce redness and vessels. Maintenance treatment is needed from time to time.'),
+      ),
+      Q(
+        L('Rozatseada qanday kosmetika ishlatish mumkin?', 'Какую косметику можно при розацеа?', 'Which skincare is safe with rosacea?'),
+        L('Spirtsiz, atirsiz, yumshoq yuvish vositalari va namlantiruvchilar; quyoshdan mineral (sink, titan dioksid) SPF. Skrab, kislotali pilinglar va mentolli vositalardan saqlaning.', 'Без спирта и отдушек, мягкие очищающие и увлажняющие средства; минеральный SPF (цинк, диоксид титана). Избегайте скрабов, кислотных пилингов и средств с ментолом.', 'Alcohol-free, fragrance-free gentle cleansers and moisturisers, plus mineral SPF (zinc, titanium dioxide). Avoid scrubs, acid peels and menthol products.'),
+      ),
+      Q(
+        L('Rozatsea ko‘zga ta’sir qiladimi?', 'Может ли розацеа поражать глаза?', 'Can rosacea affect the eyes?'),
+        L('Ha, ba’zan ko‘zda qumdek sezish, qizarish va qovoq yallig‘lanishi bo‘ladi. Bunday belgilarda shifokorga ayting, kerak bo‘lsa oftalmolog ham ko‘radi.', 'Да, иногда появляются ощущение песка, покраснение глаз и воспаление век. При таких признаках скажите врачу, при необходимости подключается офтальмолог.', 'Yes, sometimes there is a gritty feeling, red eyes and eyelid inflammation. Mention these signs to your doctor; an ophthalmologist may be involved.'),
       ),
     ],
     priceNames: [DERMATOLOGIST_PRICES[0], ...VASCULAR_PRICES.slice(0, 3), 'Face Art — rozatsea va akneni davolash'],
@@ -1119,6 +1204,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Сначала тип пятна определяется дерматоскопией (чтобы исключить опасное образование). Затем подбираются лазер Hollywood Spectra, IPL Lumecca и пилинги против пигментации.',
         'First the spot type is checked with dermatoscopy to rule out a dangerous lesion. Then Hollywood Spectra laser, IPL Lumecca and anti-pigment peels are chosen.',
       ),
+      L(
+        'Dog‘ turini bilish muhim, chunki usul har xil: quyosh dog‘lari lazer va IPL ga yaxshi javob beradi, melazma esa issiqlik va qattiq ta’sirdan kuchayishi mumkin, shuning uchun unda yumshoq lazer toning va kremlar tanlanadi. Agar dog‘ yangi paydo bo‘lgan, notekis rangli yoki tez o‘zgarayotgan bo‘lsa, kosmetik muolajadan oldin uni dermatoskopiya bilan tekshirish shart.',
+        'Важно знать тип пятна, потому что методы разные: солнечные пятна хорошо отвечают на лазер и IPL, а мелазма может усиливаться от нагрева и агрессивного воздействия, поэтому для неё подбирают мягкий лазерный тонинг и кремы. Если пятно новое, неравномерно окрашено или быстро меняется, перед косметической процедурой его обязательно проверяют дерматоскопом.',
+        'Knowing the type of spot matters because the methods differ: sun spots respond well to laser and IPL, while melasma can worsen with heat and aggressive treatment, so gentle laser toning and creams are chosen. A new, unevenly coloured or quickly changing spot must be checked with dermatoscopy before any cosmetic procedure.',
+      ),
     ],
     steps: [
       L('Dermatoskopiya bilan dog‘ turini aniqlash', 'Определение типа пятна дерматоскопией', 'Identifying the spot type with dermatoscopy'),
@@ -1134,6 +1224,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Necha seans kerak?', 'Сколько сеансов нужно?', 'How many sessions?'),
         L('Odatda 2–5 seans, 3–4 hafta oralig‘ida.', 'Обычно 2–5 сеансов с интервалом 3–4 недели.', 'Usually 2–5 sessions 3–4 weeks apart.'),
+      ),
+      Q(
+        L('Melazma nima?', 'Что такое мелазма?', 'What is melasma?'),
+        L('Melazma — yonoq, peshona va yuqori labda simmetrik jigarrang dog‘lar. Ko‘pincha ayollarda, homiladorlik, gormonal dorilar va quyosh ta’sirida paydo bo‘ladi. U surunkali, qaytishga moyil va uzoq parvarishni talab qiladi.', 'Мелазма — симметричные коричневые пятна на щеках, лбу и над верхней губой. Чаще у женщин, на фоне беременности, гормональных препаратов и солнца. Она хроническая, склонна возвращаться и требует длительного ухода.', 'Melasma is symmetrical brown patches on the cheeks, forehead and upper lip. It is more common in women and linked to pregnancy, hormonal medicines and sun. It is chronic, tends to return and needs long-term care.'),
+      ),
+      Q(
+        L('Oqartiruvchi kremlar yordam beradimi?', 'Помогают ли отбеливающие кремы?', 'Do whitening creams help?'),
+        L('Shifokor tanlagan vositalar (azelain kislota, retinoidlar va boshqalar) yordam beradi. Noma’lum tarkibli “oqartiruvchi” kremlar simob yoki gormon saqlashi mumkin va terini shikastlaydi.', 'Помогают средства, подобранные врачом (азелаиновая кислота, ретиноиды и др.). «Отбеливающие» кремы неизвестного состава могут содержать ртуть или гормоны и повреждают кожу.', 'Products chosen by a doctor (azelaic acid, retinoids and others) help. "Whitening" creams of unknown composition may contain mercury or steroids and damage the skin.'),
+      ),
+      Q(
+        L('Yozda pigmentatsiyani davolash mumkinmi?', 'Можно ли лечить пигментацию летом?', 'Can pigmentation be treated in summer?'),
+        L('Kremlar va yumshoq protokollar bilan — ha, qat’iy SPF 50 sharti bilan. Kuchliroq lazer kurslari odatda kuz va qishda rejalashtiriladi.', 'Кремами и мягкими протоколами — да, при строгом SPF 50. Более интенсивные лазерные курсы обычно планируют на осень и зиму.', 'With creams and gentle protocols — yes, with strict SPF 50. Stronger laser courses are usually planned for autumn and winter.'),
       ),
     ],
     priceNames: [
@@ -1175,6 +1277,10 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       L('Keyingi seans 4–8 haftadan keyin', 'Следующий сеанс через 4–8 недель', 'Next session in 4–8 weeks'),
     ],
     faqs: [
+      Q(
+        L('Epilyatsiya nima va depilyatsiyadan farqi nima?', 'Что такое эпиляция и чем она отличается от депиляции?', 'What is epilation and how is it different from depilation?'),
+        L('Epilyatsiya — tukni ildizi (follikulasi) bilan birga yo‘qotish: lazer follikulani shikastlaydi va tuk asta-sekin o‘smay qo‘yadi. Depilyatsiya (ustara, krem) faqat teri ustidagi qismni olib tashlaydi, tuk 1–3 kunda qayta o‘sadi.', 'Эпиляция — удаление волоса вместе с корнем (фолликулом): лазер повреждает фолликул, и волосы постепенно перестают расти. Депиляция (бритва, крем) убирает только часть над кожей, волос отрастает за 1–3 дня.', 'Epilation removes hair together with its root (follicle): the laser damages the follicle so hair gradually stops growing. Depilation (razor, cream) removes only the part above the skin, and hair grows back in 1–3 days.'),
+      ),
       Q(
         L('Necha seansda tuklar yo‘qoladi?', 'За сколько сеансов уходят волосы?', 'How many sessions are needed?'),
         L('Ko‘pincha 6–8 seans; har seansdan keyin tuklar siyraklashadi va ingichkalashadi.', 'Обычно 6–8 сеансов; после каждого волосы редеют и истончаются.', 'Usually 6–8; hair gets sparser and finer after each.'),
@@ -1239,6 +1345,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'В Radeski дерматоскопия всего тела сохраняется в цифровой базе — при следующих осмотрах изменения каждой родинки сравниваются.',
         'At Radeski whole-body dermatoscopy is stored in a digital database, so each mole can be compared at later visits.',
       ),
+      L(
+        'Yiliga bir marta xollarni tekshirish ayniqsa quyidagilarga tavsiya etiladi: tanasida ko‘p xol borlar, oilasida melanoma bo‘lganlar, och terili va tez kuyadiganlar, quyoshda ko‘p ishlaydiganlar. Uyda oyiga bir marta ko‘zgu oldida terini ko‘zdan kechirish va yangi yoki o‘zgargan xolni suratga olib qo‘yish foydali — keyin uni shifokorga ko‘rsatish oson bo‘ladi.',
+        'Проверять родинки раз в год особенно рекомендуется тем, у кого много родинок, у кого в семье была меланома, людям со светлой, легко обгорающей кожей и тем, кто много работает на солнце. Дома полезно раз в месяц осматривать кожу перед зеркалом и фотографировать новую или изменившуюся родинку — потом её легко показать врачу.',
+        'A yearly mole check is especially advised for people with many moles, a family history of melanoma, fair skin that burns easily, or who work outdoors. At home, check your skin in a mirror once a month and photograph any new or changing mole — it is then easy to show the doctor.',
+      ),
     ],
     steps: [
       L('Shikoyat va xavf omillarini so‘rash', 'Сбор жалоб и факторов риска', 'Complaints and risk factors'),
@@ -1254,6 +1365,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Tayyorgarlik kerakmi?', 'Нужна ли подготовка?', 'Is preparation needed?'),
         L('Yo‘q; faqat tekshiriladigan joyga krem va kosmetika surtmang.', 'Нет; только не наносите крем и косметику на осматриваемые участки.', 'No; just avoid creams and make-up on the areas to be checked.'),
+      ),
+      Q(
+        L('Dermatoskopiya xolni olib tashlash bilan bir xilmi?', 'Дерматоскопия — это удаление родинки?', 'Is dermatoscopy the same as removal?'),
+        L('Yo‘q, dermatoskopiya faqat ko‘rik: hech narsa kesilmaydi. Natijaga qarab shifokor xolni kuzatishni yoki olib tashlashni tavsiya qiladi.', 'Нет, дерматоскопия — только осмотр, ничего не удаляется. По результату врач рекомендует наблюдение или удаление.', 'No, dermatoscopy is only an examination; nothing is cut. Based on the result the doctor advises monitoring or removal.'),
+      ),
+      Q(
+        L('Bolalarga dermatoskopiya qilish mumkinmi?', 'Можно ли делать дерматоскопию детям?', 'Can children have dermatoscopy?'),
+        L('Ha, u og‘riqsiz va xavfsiz. Ayniqsa katta tug‘ma xollari bor bolalarni muntazam kuzatish tavsiya etiladi.', 'Да, это безболезненно и безопасно. Особенно рекомендуется регулярно наблюдать детей с крупными врождёнными родинками.', 'Yes, it is painless and safe. Regular monitoring is especially advised for children with large congenital moles.'),
+      ),
+      Q(
+        L('Tekshiruvdan keyin nima beriladi?', 'Что выдают после обследования?', 'What do I get after the exam?'),
+        L('Shifokor xulosasi: qaysi xollar xavfsiz, qaysilarini kuzatish yoki olib tashlash kerak. Butun tana tekshiruvida suratlar bazaga saqlanadi va keyingi safar solishtiriladi.', 'Заключение врача: какие родинки безопасны, какие наблюдать или удалить. При осмотре всего тела снимки сохраняются в базе и сравниваются в следующий раз.', 'A doctor’s report: which moles are safe and which to monitor or remove. With a whole-body exam the images are stored and compared next time.'),
       ),
     ],
     priceNames: ONCO_PRICES,
@@ -1271,6 +1394,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'В Radeski применяется лазер Derma V (Lutronic, Корея): сосуды на лице и крыльях носа, гемангиомы и мелкие вены на ногах. Процедура быстрая, без разрезов.',
         'Radeski uses the Derma V laser (Lutronic, Korea) for facial and nasal vessels, haemangiomas and small leg veins. It is quick and needs no incisions.',
       ),
+      L(
+        'Yuzdagi tomirlar ko‘pincha och teri, irsiyat, quyosh, harorat o‘zgarishi, rozatsea va spirt bilan bog‘liq. Lazer ko‘rinadigan tomirlarni yo‘qotadi, lekin moyillikni o‘zgartirmaydi — shuning uchun natijani saqlash uchun SPF, issiq sauna va qattiq skrablardan ehtiyot bo‘lish, rozatsea bo‘lsa uni davolash kerak.',
+        'Сосуды на лице чаще связаны со светлой кожей, наследственностью, солнцем, перепадами температуры, розацеа и алкоголем. Лазер убирает видимые сосуды, но не меняет предрасположенность — поэтому для сохранения результата нужны SPF, осторожность с горячей сауной и жёсткими скрабами, а при розацеа — её лечение.',
+        'Facial vessels are linked to fair skin, genetics, sun, temperature changes, rosacea and alcohol. The laser removes visible vessels but not the tendency, so keeping the result needs SPF, care with hot saunas and harsh scrubs, and treating rosacea if present.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -1286,6 +1414,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Necha seans kerak?', 'Сколько нужно сеансов?', 'How many sessions?'),
         L('Mayda tomirlar ko‘pincha 1–2 seansda, kuperoz 2–4 seansda yo‘qoladi.', 'Мелкие сосуды часто уходят за 1–2 сеанса, купероз — за 2–4.', 'Small vessels often clear in 1–2 sessions, couperose in 2–4.'),
+      ),
+      Q(
+        L('Kuperozni kremlar bilan yo‘qotsa bo‘ladimi?', 'Можно ли убрать купероз кремами?', 'Can creams remove couperose?'),
+        L('Kremlar qizarishni biroz kamaytirishi va terini himoya qilishi mumkin, lekin kengaygan tomirni yopmaydi. Ko‘rinadigan tomirlar uchun lazer yoki IPL kerak.', 'Кремы могут немного уменьшить покраснение и защитить кожу, но расширенный сосуд не закрывают. Для видимых сосудов нужен лазер или IPL.', 'Creams can reduce redness a little and protect the skin, but they do not close dilated vessels. Visible vessels need laser or IPL.'),
+      ),
+      Q(
+        L('Muolajadan keyin qanday parvarish kerak?', 'Какой уход после процедуры?', 'What aftercare is needed?'),
+        L('1–2 kun issiq vanna, sauna, sport va spirtdan saqlaning, yuzni ishqalamang, SPF 50 qo‘llang. Engil shish va qizarish 1–3 kunda o‘tadi.', '1–2 дня избегайте горячей ванны, сауны, спорта и алкоголя, не трите лицо, используйте SPF 50. Лёгкий отёк и покраснение проходят за 1–3 дня.', 'For 1–2 days avoid hot baths, saunas, exercise and alcohol, do not rub your face, and use SPF 50. Mild swelling and redness settle in 1–3 days.'),
+      ),
+      Q(
+        L('Bolalardagi gemangiomani davolash mumkinmi?', 'Лечат ли гемангиомы у детей?', 'Are haemangiomas treated in children?'),
+        L('Ha, shifokor ko‘rigidan keyin. Ba’zi gemangiomalar o‘zi kichrayadi, ba’zilari esa — ayniqsa yuzda yoki tez o‘sayotganlari — erta davolashni talab qiladi.', 'Да, после осмотра врача. Некоторые гемангиомы уменьшаются сами, а другие — особенно на лице или быстро растущие — требуют раннего лечения.', 'Yes, after a doctor’s exam. Some haemangiomas shrink on their own, while others — especially on the face or fast-growing — need early treatment.'),
       ),
     ],
     priceNames: VASCULAR_PRICES,
@@ -1303,6 +1443,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'В Radeski бородавки удаляют CO₂-лазером DEKA SmartXide, радиоволной Surgitron или криохирургией. Подходит и детям, под местной анестезией.',
         'At Radeski warts are removed with the DEKA SmartXide CO₂ laser, Surgitron radiowave or cryosurgery, under local anaesthesia — suitable for children too.',
       ),
+      L(
+        'So‘gallar namlik va mayda jarohatlar orqali yuqadi: basseyn, umumiy hammom, tirnoq atrofini tishlash va soqol olish ularni tarqatadi. Uyda kislotali suyuqliklar yoki kuydirish bilan ketkazishga urinish ko‘pincha chandiq qoldiradi va so‘galni chuqurlashtiradi. Tez o‘sayotgan, qonayotgan yoki odatdagidan boshqacha ko‘rinadigan “so‘gal”ni olib tashlashdan oldin shifokor dermatoskopiya bilan tekshiradi.',
+        'Бородавки передаются через влагу и микротравмы: бассейн, общая баня, привычка грызть кожу у ногтей и бритьё их распространяют. Попытки свести их дома кислотами или прижиганием часто оставляют рубец и загоняют бородавку глубже. Быстро растущую, кровоточащую или необычную «бородавку» врач перед удалением проверяет дерматоскопом.',
+        'Warts spread through moisture and tiny injuries: pools, shared bathrooms, biting the skin around nails and shaving all spread them. Removing them at home with acids or burning often leaves a scar and drives the wart deeper. A fast-growing, bleeding or unusual "wart" is checked with dermatoscopy before removal.',
+      ),
     ],
     steps: [
       L('Dermatolog ko‘rigi va dermatoskopiya', 'Осмотр дерматолога и дерматоскопия', 'Dermatologist exam and dermatoscopy'),
@@ -1318,6 +1463,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Bolalarga lazer qilish mumkinmi?', 'Можно ли лазер детям?', 'Is laser OK for children?'),
         L('Ha, mahalliy og‘riqsizlantirish bilan; muolaja qisqa davom etadi.', 'Да, под местной анестезией; процедура короткая.', 'Yes, under local anaesthesia; the procedure is short.'),
+      ),
+      Q(
+        L('Oyoq kaftidagi so‘galni qadoqdan qanday farqlash mumkin?', 'Как отличить подошвенную бородавку от мозоли?', 'How do I tell a plantar wart from a callus?'),
+        L('So‘galda teri chiziqlari uziladi va ichida mayda qora nuqtalar ko‘rinadi, yon tomondan siqilganda og‘riydi. Qadoqda teri chiziqlari saqlanadi. Aniq farqni shifokor yoki podolog aytadi.', 'На бородавке прерывается кожный рисунок и видны мелкие чёрные точки, она болит при сдавливании с боков. На мозоли рисунок кожи сохранён. Точно отличит врач или подолог.', 'A wart interrupts the skin lines and shows tiny black dots, and hurts when squeezed from the sides. A callus keeps the skin lines. A doctor or podiatrist can tell for sure.'),
+      ),
+      Q(
+        L('Olib tashlashdan keyin qanday parvarish kerak?', 'Какой уход после удаления?', 'What aftercare is needed after removal?'),
+        L('Qobiq o‘zi tushguncha teginmang, joyni quruq va toza saqlang, 1–2 hafta basseyn va saunadan voz keching. Bitish odatda 1–2 hafta davom etadi.', 'Не трогайте корочку до её отпадения, держите место сухим и чистым, 1–2 недели избегайте бассейна и сауны. Заживление обычно занимает 1–2 недели.', 'Leave the crust until it falls off, keep the area clean and dry, and skip pools and saunas for 1–2 weeks. Healing usually takes 1–2 weeks.'),
+      ),
+      Q(
+        L('So‘gal o‘z-o‘zidan yo‘qolishi mumkinmi?', 'Может ли бородавка пройти сама?', 'Can a wart go away on its own?'),
+        L('Ha, ayniqsa bolalarda bir necha oy yoki yilda yo‘qolishi mumkin. Lekin og‘riq bersa, ko‘paysa yoki boshqalarga yuqish xavfi bo‘lsa, olib tashlash ma’qul.', 'Да, особенно у детей, за несколько месяцев или лет. Но если она болит, множится или есть риск заразить других, её лучше удалить.', 'Yes, especially in children, within months or years. But if it hurts, multiplies or may spread to others, removal is better.'),
       ),
     ],
     priceNames: [
@@ -1340,6 +1497,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Исследование позволяет различить тип выпадения (андрогенетическое, диффузное, очаговое) и отслеживать эффект лечения в цифрах. Безболезненно, 15–20 минут.',
         'It distinguishes the type of hair loss (androgenetic, diffuse, patchy) and tracks treatment results in numbers. Painless, 15–20 minutes.',
       ),
+      L(
+        'Trixoskopiya tahlillar bilan birga soch to‘kilishining sababini topishga yordam beradi va keyingi ko‘riklarda davolash natijasini xolis baholash imkonini beradi: soch zichligi va qalinligi raqamlarda solishtiriladi. Tekshiruv soch to‘kilishi, siyraklashish, o‘choqli to‘kilish, bosh terisining qichishi va qipiq, shuningdek soch ekish yoki PRP kursidan oldin tavsiya qilinadi.',
+        'Трихоскопия вместе с анализами помогает найти причину выпадения и позволяет объективно оценивать результат лечения на повторных визитах: густота и толщина волос сравниваются в цифрах. Обследование рекомендуют при выпадении, поредении, очаговом выпадении, зуде и перхоти кожи головы, а также перед пересадкой волос или курсом PRP.',
+        'Together with tests, trichoscopy helps find the cause of hair loss and lets the doctor objectively assess treatment at follow-ups: hair density and thickness are compared in numbers. It is recommended for shedding, thinning, patchy hair loss, itchy or flaky scalp, and before a hair transplant or PRP course.',
+      ),
     ],
     steps: [
       L('Trixolog bilan suhbat', 'Беседа с трихологом', 'Talk with the trichologist'),
@@ -1355,6 +1517,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Trixoskopiya og‘riqlimi?', 'Больно ли это?', 'Does it hurt?'),
         L('Yo‘q, kamera faqat bosh terisiga tegadi.', 'Нет, камера лишь касается кожи головы.', 'No, the camera only touches the scalp.'),
+      ),
+      Q(
+        L('Trixoskopiyadan keyin tashxis darhol aytiladimi?', 'Диагноз сообщают сразу после трихоскопии?', 'Is the diagnosis given right after trichoscopy?'),
+        L('Ko‘pincha dastlabki xulosa shu kuni aytiladi. To‘liq tashxis va davolash rejasi tahlil natijalari bilan birga tuziladi.', 'Чаще всего предварительное заключение сообщают в тот же день. Полный диагноз и план лечения составляют вместе с результатами анализов.', 'A preliminary conclusion is usually given the same day. The full diagnosis and plan are made together with the test results.'),
+      ),
+      Q(
+        L('Fototrixogramma nima?', 'Что такое фототрихограмма?', 'What is a phototrichogram?'),
+        L('Bosh terisining kichik qismida sochlar qisqartirilib, bir necha kundan keyin suratga olinadi. Bu o‘sayotgan va to‘kilayotgan sochlar ulushini aniq hisoblash imkonini beradi.', 'На небольшом участке кожи головы волосы подстригают и через несколько дней фотографируют. Это позволяет точно посчитать долю растущих и выпадающих волос.', 'Hair is trimmed on a small scalp area and photographed a few days later. This allows an accurate count of growing versus shedding hairs.'),
+      ),
+      Q(
+        L('Qanchalik tez-tez takrorlash kerak?', 'Как часто повторять?', 'How often should it be repeated?'),
+        L('Davolash davomida odatda har 3–4 oyda — natijani solishtirish uchun.', 'Во время лечения обычно каждые 3–4 месяца — для сравнения результата.', 'During treatment, usually every 3–4 months to compare progress.'),
       ),
     ],
     priceNames: ["Trixolog shifokorining birinchi ko'rigi + trixoskopiya", "Trixolog shifokorining takroriy ko'rigi"],
@@ -1372,6 +1546,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Дерматоонколог даёт заключение по правилу ABCDE и дерматоскопическим признакам: наблюдение, внесение в цифровую базу или удаление с гистологией.',
         'The dermato-oncologist decides by the ABCDE rule and dermatoscopic signs: monitoring, digital mapping or removal with histology.',
       ),
+      L(
+        'ABCDE qoidasi uyda xollarni kuzatishga yordam beradi: A — asimmetriya, B — notekis chegaralar, C — bir nechta rang, D — diametri 6 mm dan katta, E — o‘zgarish (kattalashish, ko‘tarilish, qichish). Bulardan bittasi bo‘lsa ham shifokorga ko‘rsating. Shuningdek, boshqa xollaringizga o‘xshamaydigan “begona” xol ham tekshirilishi kerak.',
+        'Правило ABCDE помогает следить за родинками дома: A — асимметрия, B — неровные границы, C — несколько цветов, D — диаметр больше 6 мм, E — изменения (рост, возвышение, зуд). Даже один признак — повод показать родинку врачу. Также проверяют родинку, непохожую на остальные («гадкий утёнок»).',
+        'The ABCDE rule helps monitor moles at home: A — asymmetry, B — irregular border, C — several colours, D — diameter over 6 mm, E — evolving (growing, raised, itchy). Even one sign is a reason to see a doctor. A mole that looks different from your others (the "ugly duckling") should be checked too.',
+      ),
     ],
     steps: [
       L('Xollarni ko‘rik va dermatoskopiya', 'Осмотр и дерматоскопия родинок', 'Exam and dermatoscopy of moles'),
@@ -1387,6 +1566,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Qanchalik tez-tez tekshirish kerak?', 'Как часто проверяться?', 'How often to check?'),
         L('Xavf guruhida — yiliga bir marta, boshqalarga xol o‘zgarganda.', 'В группе риска — раз в год, остальным — при изменении родинки.', 'Yearly if high-risk, otherwise whenever a mole changes.'),
+      ),
+      Q(
+        L('Xolga shikast yetsa nima qilish kerak?', 'Что делать, если травмировал родинку?', 'What if I injure a mole?'),
+        L('Toza bosim bilan qonni to‘xtating, antiseptik surting va xolni ko‘rsatib qo‘ying. Shikast o‘zi xolni xavfli qilmaydi, lekin bitmasa yoki o‘zgarsa, tekshirish shart.', 'Остановите кровь чистым давлением, обработайте антисептиком и покажите родинку врачу. Травма сама по себе не делает её опасной, но если место не заживает или меняется, проверка обязательна.', 'Stop the bleeding with clean pressure, apply antiseptic and have the mole checked. An injury alone does not make it dangerous, but if it does not heal or changes, examination is a must.'),
+      ),
+      Q(
+        L('Xollar soni ko‘payishi normalmi?', 'Нормально ли, что родинок становится больше?', 'Is it normal to get new moles?'),
+        L('30–35 yoshgacha yangi xollar paydo bo‘lishi normal. Kattalarda to‘satdan paydo bo‘lgan yoki tez o‘sayotgan xolni albatta tekshirish kerak.', 'Появление новых родинок до 30–35 лет — норма. У взрослых внезапно появившуюся или быстро растущую родинку обязательно нужно проверить.', 'New moles up to age 30–35 are normal. In adults, a suddenly appearing or fast-growing mole must be checked.'),
+      ),
+      Q(
+        L('Homiladorlikda xollar o‘zgaradimi?', 'Меняются ли родинки при беременности?', 'Do moles change in pregnancy?'),
+        L('Gormonlar ta’sirida xollar biroz to‘qlashishi mumkin. Lekin notekis o‘sish yoki shakl o‘zgarishi homiladorlikda ham tekshiriladi — dermatoskopiya xavfsiz.', 'Под действием гормонов родинки могут немного потемнеть. Но неравномерный рост или изменение формы проверяют и при беременности — дерматоскопия безопасна.', 'Hormones can darken moles slightly. Uneven growth or a change in shape is still checked in pregnancy — dermatoscopy is safe.'),
       ),
     ],
     priceNames: [...ONCO_PRICES, 'Xol (nevus) — lazer bilan olib tashlash (5 mm gacha)'],
@@ -1458,6 +1649,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'В Radeski дерматоскопия, биопсия, гистология и микрографическая хирургия Мооса — в одном месте. Метод Мооса удаляет опухоль, максимально сохраняя здоровые ткани.',
         'Radeski offers dermatoscopy, biopsy, histology and Mohs micrographic surgery in one place; Mohs removes the tumour while sparing as much healthy tissue as possible.',
       ),
+      L(
+        'Teri saratoni xavfi yuqori bo‘lganlar: och terili va sepkilli odamlar, bolaligida ko‘p quyosh kuyishini boshdan kechirganlar, ochiq havoda ishlaydiganlar, oilasida melanoma bo‘lganlar, 50 tadan ko‘p xoli borlar va immuniteti pasaygan bemorlar. Ular yiliga bir marta dermatoonkologga ko‘rinishi, quyoshdan himoyalanishi va solyariydan voz kechishi tavsiya etiladi.',
+        'В группе повышенного риска рака кожи: люди со светлой кожей и веснушками, перенёсшие частые солнечные ожоги в детстве, работающие на открытом воздухе, имеющие родственников с меланомой, более 50 родинок, а также пациенты со сниженным иммунитетом. Им рекомендуют раз в год показываться дерматоонкологу, защищаться от солнца и отказаться от солярия.',
+        'People at higher risk of skin cancer include those with fair, freckled skin, frequent childhood sunburns, outdoor jobs, a family history of melanoma, more than 50 moles, or a weakened immune system. They should see a dermato-oncologist once a year, protect themselves from the sun and avoid sunbeds.',
+      ),
     ],
     steps: [
       L('Dermatoonkolog ko‘rigi va dermatoskopiya', 'Осмотр дерматоонколога и дерматоскопия', 'Dermato-oncologist exam and dermatoscopy'),
@@ -1473,6 +1669,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Bazalioma xavflimi?', 'Опасна ли базалиома?', 'Is basal cell carcinoma dangerous?'),
         L('U kamdan-kam tarqaladi, ammo atrof to‘qimalarni yemiradi — shuning uchun erta olib tashlash kerak.', 'Она редко метастазирует, но разрушает окружающие ткани — поэтому её нужно удалять рано.', 'It rarely spreads but destroys nearby tissue, so it should be removed early.'),
+      ),
+      Q(
+        L('Melanoma qanday ko‘rinadi?', 'Как выглядит меланома?', 'What does melanoma look like?'),
+        L('Ko‘pincha notekis chegarali, bir necha rangli, kattalashayotgan xol yoki yangi paydo bo‘lgan qoramtir dog‘. Ba’zan pushti, pigmentsiz bo‘ladi — shuning uchun o‘zgarayotgan har qanday o‘smani ko‘rsatish kerak.', 'Чаще это родинка с неровными краями, несколькими цветами, которая растёт, или новое тёмное пятно. Иногда она розовая, без пигмента, поэтому любое меняющееся образование нужно показать врачу.', 'Often a growing mole with an irregular border and several colours, or a new dark spot. Sometimes it is pink without pigment, so any changing growth should be shown to a doctor.'),
+      ),
+      Q(
+        L('Mohs jarrohligi kimga kerak?', 'Кому нужна операция Мооса?', 'Who needs Mohs surgery?'),
+        L('Asosan yuz, quloq, burun va ko‘z atrofidagi bazalioma va yassi hujayrali rakda, shuningdek qaytalangan yoki chegarasi noaniq o‘smalarda — sog‘lom to‘qimani saqlash muhim bo‘lgan joylarda.', 'В основном при базалиоме и плоскоклеточном раке на лице, ушах, носу и вокруг глаз, а также при рецидивных опухолях или с нечёткими границами — там, где важно сохранить здоровые ткани.', 'Mainly for basal and squamous cell carcinoma on the face, ears, nose and around the eyes, and for recurrent or poorly defined tumours — where sparing healthy tissue matters.'),
+      ),
+      Q(
+        L('Teri saratonidan keyin qanday kuzatuv kerak?', 'Какое наблюдение нужно после рака кожи?', 'What follow-up is needed after skin cancer?'),
+        L('Shifokor belgilagan oraliqda — odatda dastlabki yillarda 3–6 oyda bir marta — butun teri ko‘rigi va dermatoskopiya. Yangi o‘sma paydo bo‘lish xavfi yuqoriroq bo‘lgani uchun quyoshdan himoya muhim.', 'С интервалом, который назначит врач, — обычно в первые годы раз в 3–6 месяцев — осмотр всей кожи и дерматоскопия. Риск новой опухоли выше, поэтому важна защита от солнца.', 'Full skin checks and dermatoscopy at intervals set by the doctor — usually every 3–6 months in the first years. The risk of a new tumour is higher, so sun protection matters.'),
       ),
     ],
     priceNames: [
@@ -1555,6 +1763,11 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         'Лазер Derma V (Lutronic) воздействует на гемоглобин и закрывает сосуд, не повреждая окружающую кожу. Мелкие сосуды часто уходят за 1–2 сеанса.',
         'The Derma V (Lutronic) laser targets haemoglobin and seals the vessel without harming the surrounding skin. Small vessels often clear in 1–2 sessions.',
       ),
+      L(
+        'Lazerdan oldin 2–4 hafta quyoshda qoraymaslik, muolaja kuni yuzga krem va makiyaj surtmaslik kerak. Homiladorlik, faol teri infeksiyasi, yangi qorayish va yorug‘likka sezgirlikni oshiruvchi dorilar muolajani kechiktirish sababi bo‘ladi. Oyoqdagi katta varikoz tomirlar lazer bilan emas, flebolog tomonidan davolanadi — buni ko‘rikda shifokor aniqlaydi.',
+        'За 2–4 недели до лазера нельзя загорать, в день процедуры не наносят крем и макияж. Беременность, активная кожная инфекция, свежий загар и препараты, повышающие светочувствительность, — причины отложить процедуру. Крупные варикозные вены на ногах лечит флеболог, а не лазер, — это врач определяет на осмотре.',
+        'Avoid tanning for 2–4 weeks before the laser, and do not wear cream or make-up on the day. Pregnancy, active skin infection, a fresh tan and light-sensitising medicines are reasons to postpone. Large varicose veins on the legs are treated by a phlebologist, not the laser — the doctor decides at the exam.',
+      ),
     ],
     steps: [
       VISIT_STEPS.consult,
@@ -1570,6 +1783,18 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       Q(
         L('Muolaja og‘riqlimi?', 'Больно ли это?', 'Is it painful?'),
         L('Rezinka urilgandek qisqa sezgi bo‘ladi; sovutish tizimi noqulaylikni kamaytiradi.', 'Ощущение как короткий щелчок резинки; охлаждение снижает дискомфорт.', 'It feels like a quick rubber-band snap; cooling reduces discomfort.'),
+      ),
+      Q(
+        L('Tomir qayta paydo bo‘ladimi?', 'Появятся ли сосуды снова?', 'Will the vessels come back?'),
+        L('Yopilgan tomir qaytmaydi, lekin moyillik saqlansa vaqt o‘tib yangi tomirlar paydo bo‘lishi mumkin. Bunda qo‘llab-quvvatlovchi seans o‘tkaziladi.', 'Закрытый сосуд не возвращается, но при сохранении предрасположенности со временем могут появиться новые. Тогда проводят поддерживающий сеанс.', 'A closed vessel does not return, but new ones can appear over time if the tendency remains. A maintenance session then helps.'),
+      ),
+      Q(
+        L('Seansdan keyin ko‘karish bo‘ladimi?', 'Бывают ли синяки после сеанса?', 'Will there be bruising?'),
+        L('Ba’zi rejimlarda kichik ko‘karish yoki qizil nuqtalar paydo bo‘lishi mumkin, ular 5–10 kunda o‘tadi. Ko‘pincha faqat qisqa qizarish va engil shish bo‘ladi.', 'При некоторых режимах возможны небольшие синяки или красные точки, они проходят за 5–10 дней. Чаще бывает только кратковременное покраснение и лёгкий отёк.', 'Some settings may cause small bruises or red dots that fade in 5–10 days. Usually there is only brief redness and mild swelling.'),
+      ),
+      Q(
+        L('Necha seans kerak?', 'Сколько сеансов нужно?', 'How many sessions are needed?'),
+        L('Mayda tomirlar ko‘pincha 1–2 seansda, kuperoz va gemangiomalar 2–4 seansda kamayadi. Seanslar orasidagi oraliq odatda 4–6 hafta.', 'Мелкие сосуды часто уходят за 1–2 сеанса, купероз и гемангиомы — за 2–4. Интервал между сеансами обычно 4–6 недель.', 'Small vessels often clear in 1–2 sessions; couperose and haemangiomas in 2–4. Sessions are usually 4–6 weeks apart.'),
       ),
     ],
     priceNames: VASCULAR_PRICES,

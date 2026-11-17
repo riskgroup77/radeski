@@ -46,10 +46,10 @@ Erta bosqich stomatit yoki oddiy yaraga o‘xshashi mumkin. Quyidagilar ogohlant
 - begona narsa turgan dek his;
 - sababsiz qon ketishi;
 - og‘izdan yoqimsiz hid;
-- tilning uyqusirashi (nuvemiya);
+- tilning uvishib qolishi (sezgi kamayishi);
 - bo‘yindagi limfa tugunlarining kattalashishi.
 
-Har bir yara rak emas. Lekin **uysiz bitmasa** — shifokorga borish majburiy emas, balki zarur.
+Har bir yara rak emas. Lekin **2 hafta ichida bitmasa**, shifokorga borish zarur.
 
 ## Kasallik qanday ko‘rinishi mumkin?
 
@@ -69,7 +69,7 @@ Kuchli og‘riqni kutib o‘tirish kerak emas — og‘riq kechikishi mumkin.
 Shifokor og‘iz bo‘shlig‘ini ko‘radi va zarurat bo‘lsa buyuradi:
 
 - kattalashtirib ko‘rik (shu jumladan dermatoskopiya yoki maxsus ko‘rik);
-- biopsiya (tozaga kichik to‘qima olib tekshirish) — asosiy tasdiqlash usuli;
+- biopsiya (kichik to‘qima bo‘lagini olib mikroskopda tekshirish) — asosiy tasdiqlash usuli;
 - limfa tugunlarini UZI;
 - jarayon tarqalishini baholash uchun KT yoki MRT.
 
@@ -108,6 +108,32 @@ Kechiktirmang, agar:
 - bo‘yin limfa tugunlari kattalashsa.
 
 Erta diagnostika davolash samarasini va to‘liq tuzalish ehtimolini oshiradi.
+
+## Til osti raki (og‘iz tubi raki)
+
+Odamlar “til osti raki” deb ko‘pincha tilning pastki yuzasi va og‘iz tubida — til bilan pastki tishlar orasidagi shilliq qavatda boshlanadigan o‘smani aytadi. Bu joy ko‘zguda yaxshi ko‘rinmaydi, shuning uchun o‘zgarish uzoq vaqt sezilmay qolishi mumkin.
+
+Til ostidagi xavotirli belgilar:
+
+- tilni ko‘targanda ko‘rinadigan, 2 haftadan ortiq bitmaydigan yara yoki yoriq;
+- til ostidagi oq (leykoplakiya) yoki qizil (eritroplakiya) dog‘;
+- barmoq bilan seziladigan qattiq tugun yoki qalinlashish;
+- tilni qimirlatish, gapirish yoki yutishda noqulaylik;
+- protez yaxshi o‘tirmay qolishi;
+- jag‘ osti yoki bo‘yindagi limfa tugunlarining kattalashishi.
+
+Til ostida zararsiz holatlar ham ko‘p uchraydi: stomatit yarasi (aftasi), so‘lak bezi kistasi (ranula), venalar kengayishi, tish yoki protez chetidan jarohat. Ular odatda 1–2 hafta ichida yaxshilanadi yoki sababi bartaraf etilgach o‘tadi. Farqni ko‘z bilan aniqlash qiyin, shuning uchun 14 kundan ortiq qolgan har qanday o‘zgarishni shifokor ko‘rishi va kerak bo‘lsa biopsiya qilishi kerak.
+
+## Uyda o‘zingizni qanday tekshirasiz?
+
+Oyiga bir marta yaxshi yorug‘likda ko‘zgu oldida og‘izni tekshirib turing:
+
+1. Tilni chiqarib, ustki yuzasi va ikki yon tomonini ko‘ring.
+2. Til uchini tanglayga tekkizib, til osti va og‘iz tubini ko‘ring.
+3. Toza barmoq bilan til osti va lunjlarni ohista paypaslab, qattiq joy bor-yo‘qligini tekshiring.
+4. Bo‘yin va jag‘ ostini paypaslab ko‘ring.
+
+Chekadigan, nos chekadigan yoki spirtli ichimlikni tez-tez ichadigan odamlar uchun bunday tekshiruv va stomatolog ko‘rigi ayniqsa muhim.
 
 ## Xulosa
 
@@ -213,6 +239,32 @@ function ruBody(): string {
 
 Ранняя диагностика повышает эффективность лечения и шансы на полное выздоровление.
 
+## Рак под языком (рак дна полости рта)
+
+«Раком под языком» обычно называют опухоль нижней поверхности языка и дна полости рта — слизистой между языком и нижними зубами. Это место плохо видно в зеркало, поэтому изменения долго остаются незамеченными.
+
+Тревожные признаки под языком:
+
+- язва или трещина, которая видна при поднятом языке и не заживает дольше 2 недель;
+- белое (лейкоплакия) или красное (эритроплакия) пятно;
+- плотный узел или утолщение, которое прощупывается пальцем;
+- дискомфорт при движении языка, речи или глотании;
+- зубной протез перестал нормально садиться;
+- увеличение лимфоузлов под челюстью или на шее.
+
+Под языком часто бывают и безобидные состояния: афта (стоматит), киста слюнной железы (ранула), расширенные вены, травма краем зуба или протеза. Обычно они проходят за 1–2 недели или после устранения причины. На глаз их трудно отличить, поэтому любое изменение дольше 14 дней должен осмотреть врач и при необходимости взять биопсию.
+
+## Как проверить себя дома?
+
+Раз в месяц при хорошем освещении осмотрите рот перед зеркалом:
+
+1. Высуньте язык и осмотрите его верхнюю поверхность и боковые края.
+2. Коснитесь кончиком языка нёба и осмотрите область под языком и дно рта.
+3. Чистым пальцем аккуратно прощупайте область под языком и щёки — нет ли уплотнений.
+4. Прощупайте шею и область под челюстью.
+
+Курящим, употребляющим насвай и часто пьющим алкоголь такой самоосмотр и визиты к стоматологу особенно важны.
+
 ## Заключение
 
 Плоскоклеточный рак языка — серьёзное заболевание, которое легче лечить на ранней стадии. Длительно незаживающая язва, уплотнение или необычное пятно — повод не для народного лечения, а для медицинского осмотра.
@@ -317,6 +369,32 @@ Do not delay if:
 
 Earlier diagnosis improves treatment success and the chance of full recovery.
 
+## Cancer under the tongue (floor of mouth cancer)
+
+“Cancer under the tongue” usually means a tumour on the underside of the tongue or the floor of the mouth — the lining between the tongue and the lower teeth. This area is hard to see in a mirror, so changes can go unnoticed for a long time.
+
+Warning signs under the tongue:
+
+- an ulcer or crack, visible when you lift the tongue, that does not heal within 2 weeks;
+- a white (leukoplakia) or red (erythroplakia) patch;
+- a firm lump or thickening you can feel with a finger;
+- discomfort when moving the tongue, speaking or swallowing;
+- a denture that no longer fits;
+- enlarged lymph nodes under the jaw or in the neck.
+
+Harmless conditions are common here too: aphthous ulcers, a salivary gland cyst (ranula), prominent veins, injury from a tooth edge or denture. They usually settle within 1–2 weeks or once the cause is removed. They are hard to tell apart by eye, so any change lasting more than 14 days should be examined by a doctor and biopsied if needed.
+
+## How to check yourself at home
+
+Once a month, in good light, look inside your mouth in a mirror:
+
+1. Stick out your tongue and check its top and both sides.
+2. Touch the roof of your mouth with the tip of your tongue and look underneath and at the floor of the mouth.
+3. With a clean finger, gently feel under the tongue and inside the cheeks for firm spots.
+4. Feel your neck and under your jaw.
+
+People who smoke, use naswar or drink alcohol often should be especially careful with self-checks and dental visits.
+
 ## Bottom line
 
 Squamous cell carcinoma of the tongue is serious — and far more treatable early. A long-lasting ulcer, firm spot, or unusual patch is a reason for a medical exam, not for self-treatment.
@@ -373,6 +451,16 @@ export const TONGUE_SCC_ARTICLE_CATALOG: LocalizedArticleCatalog = {
         answer:
           'Ko‘pincha ha. Erta aniqlanganda o‘smani to‘liq olib tashlash va yaxshi natija imkoniyati yuqoriroq.',
       },
+      {
+        question: "Til osti raki qanday ko‘rinadi?",
+        answer:
+          "Ko‘pincha til ostida yoki og‘iz tubida bitmaydigan yara, oq yoki qizil dog‘, qattiq tugun ko‘rinishida boshlanadi. Bu belgilar 2 haftadan ortiq qolsa, shifokor ko‘rigi kerak.",
+      },
+      {
+        question: "Til ostidagi har bir shish xavflimi?",
+        answer:
+          "Yo‘q. Til ostida aftalar, so‘lak bezi kistasi va tomirlar kengayishi ko‘p uchraydi. Ammo uzoq qoladigan yoki kattalashayotgan shishni shifokor ko‘rishi shart.",
+      },
     ],
   },
   ru: {
@@ -422,6 +510,16 @@ export const TONGUE_SCC_ARTICLE_CATALOG: LocalizedArticleCatalog = {
         question: 'Можно ли вылечить на ранней стадии?',
         answer:
           'Часто да. При раннем выявлении опухоль нередко удаётся полностью убрать с хорошим прогнозом.',
+      },
+      {
+        question: "Как выглядит рак под языком?",
+        answer:
+          "Чаще всего начинается с незаживающей язвы, белого или красного пятна либо плотного узла под языком или на дне рта. Если признак держится дольше 2 недель, нужен осмотр врача.",
+      },
+      {
+        question: "Любая шишка под языком опасна?",
+        answer:
+          "Нет. Под языком часто бывают афты, кисты слюнных желёз и расширенные вены. Но образование, которое держится долго или растёт, обязательно должен осмотреть врач.",
       },
     ],
   },
@@ -473,6 +571,16 @@ export const TONGUE_SCC_ARTICLE_CATALOG: LocalizedArticleCatalog = {
         answer:
           'Often yes. When found early, complete tumor removal and a favorable outlook are more achievable.',
       },
+      {
+        question: "What does cancer under the tongue look like?",
+        answer:
+          "It often starts as a non-healing ulcer, a white or red patch, or a firm lump under the tongue or on the floor of the mouth. If it lasts more than 2 weeks, see a doctor.",
+      },
+      {
+        question: "Is every lump under the tongue dangerous?",
+        answer:
+          "No. Ulcers, salivary gland cysts and prominent veins are common there. But a lump that persists or grows must be examined by a doctor.",
+      },
     ],
   },
 };
@@ -501,6 +609,7 @@ export const TONGUE_SCC_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-08-07',
+  updated: '2026-11-17',
   image: null,
   images: {
     uz: null,

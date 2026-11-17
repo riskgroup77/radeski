@@ -62,6 +62,28 @@ Poralar va tekstura uchun odatda **4–6 seans** oralig'i bilan kurs. Natija sea
 
 Faol akne yallig'lanishi yoki ochiq yaralar bo'lsa, avval davolanish kerak.
 
+## Nima uchun poralar kengayadi?
+
+Poralar — soch follikulasi va yog' bezining teridagi chiqish teshigi. Ular quyidagi sabablarga ko'ra kattaroq ko'rinadi:
+
+- **ko'p yog' ajralishi** — yog'li va aralash terida, ayniqsa burun, peshona va iyakda;
+- **tiqilish** — yog' va o'lik hujayralar porani kengaytiradi, qora nuqtalar paydo bo'ladi;
+- **yosh va quyosh** — kollagen kamayadi, pora atrofidagi teri elastikligini yo'qotadi;
+- **akne va postakne** — yallig'lanishdan keyin pora chetlari cho'zilib qoladi;
+- **irsiyat va gormonlar**.
+
+Poralarni butunlay yo'qotib bo'lmaydi, ammo ularni tozalash, yog' ajralishini kamaytirish va kollagenni rag'batlantirish orqali sezilarli darajada toraytirish mumkin.
+
+## Uyda poralarni toraytirish: nima yordam beradi?
+
+- kuniga 2 marta yumshoq yuvish vositasi bilan yuvish (qattiq skrablar emas);
+- salitsil kislota (BHA) — poralar ichidagi yog'ni eritadi;
+- retinoidlar — teri yangilanishini tezlashtiradi (shifokor tavsiyasi bilan);
+- niatsinamid — yog' ajralishini kamaytiradi;
+- komedogen bo'lmagan namlantiruvchi va har kuni SPF.
+
+Siqib chiqarish, spirtli loson va tez-tez skrablash teskari ta'sir qiladi: teri yallig'lanadi va poralar kengroq ko'rinadi. Uy parvarishi samara bermasa, karbon piling, lazer toning va yuz tozalash kabi klinik usullar yordam beradi.
+
 ## Konsultatsiyaga yoziling
 
 Tiniq va yorqin teri uchun Radeski Skin Clinic shifokori **Hollywood Spectra** protokolini individual tanlaydi.`;
@@ -114,6 +136,28 @@ function ruBody(): string {
 - чёрные точки и жирные поры (по протоколу).
 
 При активном воспалении акне или открытых ранах сначала нужно лечение.
+
+## Почему расширяются поры?
+
+Пора — это выход волосяного фолликула и сальной железы на поверхность кожи. Поры выглядят крупнее из-за:
+
+- **избытка кожного сала** — при жирной и комбинированной коже, особенно на носу, лбу и подбородке;
+- **закупорки** — сало и омертвевшие клетки растягивают пору, появляются чёрные точки;
+- **возраста и солнца** — коллагена становится меньше, кожа вокруг поры теряет упругость;
+- **акне и постакне** — после воспаления края поры остаются растянутыми;
+- **наследственности и гормонов**.
+
+Полностью убрать поры нельзя, но их можно заметно сузить: очищать, уменьшать выработку себума и стимулировать коллаген.
+
+## Как сузить поры дома: что действительно помогает
+
+- умывание мягким средством 2 раза в день (без жёстких скрабов);
+- салициловая кислота (BHA) — растворяет себум в порах;
+- ретиноиды — ускоряют обновление кожи (по рекомендации врача);
+- ниацинамид — уменьшает выработку себума;
+- некомедогенный увлажняющий крем и ежедневный SPF.
+
+Выдавливание, спиртовые лосьоны и частые скрабы дают обратный эффект: кожа воспаляется, и поры выглядят шире. Если домашнего ухода мало, помогают клинические методы — карбоновый пилинг, лазерный тонинг и чистка лица.
 
 ## Запишитесь на консультацию
 
@@ -168,6 +212,28 @@ For pores and texture, a course of **4–6 sessions** with intervals is common. 
 
 Active acne inflammation or open wounds should be treated first.
 
+## Why do pores get larger?
+
+A pore is the opening of a hair follicle and oil gland on the skin. Pores look bigger because of:
+
+- **excess sebum** — in oily and combination skin, especially on the nose, forehead and chin;
+- **clogging** — oil and dead cells stretch the pore and form blackheads;
+- **age and sun** — collagen declines and the skin around the pore loses firmness;
+- **acne and post-acne** — pore edges stay stretched after inflammation;
+- **genetics and hormones**.
+
+Pores cannot be removed, but they can be made noticeably smaller by keeping them clear, reducing oil and stimulating collagen.
+
+## Shrinking pores at home: what actually helps
+
+- a gentle cleanser twice a day (no harsh scrubs);
+- salicylic acid (BHA) to dissolve oil inside pores;
+- retinoids to speed up skin renewal (on a doctor's advice);
+- niacinamide to reduce oil production;
+- a non-comedogenic moisturiser and daily SPF.
+
+Squeezing, alcohol toners and frequent scrubbing backfire: the skin gets inflamed and pores look wider. When home care is not enough, clinic options such as carbon peel, laser toning and facial cleansing help.
+
 ## Book a consultation
 
 For clearer, brighter skin, a Radeski Skin Clinic physician will tailor a **Hollywood Spectra** protocol for you.`;
@@ -196,6 +262,16 @@ export const HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG: LocalizedArticleCatalog = 
       { question: 'Poralar butunlay yo\'qoladimi?', answer: 'Poralar anatomik struktura — maqsad ularni vizual toraytirish va terini silliqroq qilish.' },
       { question: 'Karbon piling nima?', answer: 'Maxsus lotion va lazer kombinatsiyasi — teri tozalash va yoritish uchun.' },
       { question: 'Qancha vaqt natija saqlanadi?', answer: 'Parvarish va SPF bilan natija uzoqroq saqlanadi; qo\'llab-quvvatlovchi seanslar kerak bo\'lishi mumkin.' },
+      {
+        question: "Poralarni toraytirish uchun eng samarali usul qaysi?",
+        answer:
+          "Bitta universal usul yo'q: yog'li terida karbon piling va salitsil kislota, yoshga bog'liq kengayishda kollagenni rag'batlantiruvchi lazer protokollari yaxshiroq ishlaydi. Shifokor teri turiga qarab tanlaydi.",
+      },
+      {
+        question: "Muz yoki sovuq suv poralarni toraytiradimi?",
+        answer:
+          "Sovuq teri qisqa vaqt tarangroq ko'rinadi, lekin poralar hajmi o'zgarmaydi. Uzoq natija uchun tozalash, yog'ni kamaytirish va kollagenni rag'batlantirish kerak.",
+      },
     ],
   },
   ru: {
@@ -220,6 +296,16 @@ export const HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG: LocalizedArticleCatalog = 
       { question: 'Исчезнут ли поры полностью?', answer: 'Поры — анатомическая структура; цель — визуально уменьшить и сгладить кожу.' },
       { question: 'Что такое карбоновый пилинг?', answer: 'Комбинация специального лосьона и лазера для очищения и осветления.' },
       { question: 'Как долго держится эффект?', answer: 'При уходе и SPF эффект дольше; могут понадобиться поддерживающие сеансы.' },
+      {
+        question: "Какой способ лучше всего сужает поры?",
+        answer:
+          "Универсального нет: при жирной коже лучше работают карбоновый пилинг и салициловая кислота, при возрастном расширении — лазерные протоколы, стимулирующие коллаген. Врач подбирает метод по типу кожи.",
+      },
+      {
+        question: "Сужают ли поры лёд или холодная вода?",
+        answer:
+          "Холод ненадолго подтягивает кожу, но размер пор не меняется. Для стойкого результата нужны очищение, снижение себума и стимуляция коллагена.",
+      },
     ],
   },
   en: {
@@ -244,6 +330,16 @@ export const HOLLYWOOD_SPECTRA_PORES_ARTICLE_CATALOG: LocalizedArticleCatalog = 
       { question: 'Will pores disappear completely?', answer: 'Pores are anatomical — the goal is to make them look smaller and skin smoother.' },
       { question: 'What is a carbon peel?', answer: 'A combination of a special lotion and laser for cleansing and brightening.' },
       { question: 'How long do results last?', answer: 'With care and SPF, results last longer; maintenance sessions may help.' },
+      {
+        question: "What is the most effective way to shrink pores?",
+        answer:
+          "There is no single method: carbon peel and salicylic acid suit oily skin, while collagen-stimulating laser protocols suit age-related enlargement. The doctor chooses by skin type.",
+      },
+      {
+        question: "Do ice or cold water shrink pores?",
+        answer:
+          "Cold makes the skin look tighter for a short time, but pore size does not change. Lasting results need cleansing, less oil and collagen stimulation.",
+      },
     ],
   },
 };
@@ -272,6 +368,7 @@ export const HOLLYWOOD_SPECTRA_PORES_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-08-31',
+  updated: '2026-11-17',
   image: IMG,
   images: { uz: IMG, ru: IMG, en: IMG },
   views: 0,
