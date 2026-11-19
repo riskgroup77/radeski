@@ -56,6 +56,21 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     ru: "Виды чистки лица: какая подходит — Фергана",
     en: "Types of Facial Cleansing: Which Suits You — Fergana",
   },
+  'art-bosh-terisi-qichishi': {
+    uz: 'Bosh qichishi sabablari: kepak, psoriaz, allergiya',
+    ru: 'Почему чешется голова: 7 причин и что делать',
+    en: 'Itchy Scalp: 7 Causes and What Helps',
+  },
+  'art-til-yarasi': {
+    uz: 'Til yarasi va yorilishi: sabablari va davosi',
+    ru: 'Язва и трещины на языке: причины и лечение',
+    en: 'Tongue Sores and Cracks: Causes and Treatment',
+  },
+  'art-soch-ekish-asoratlari': {
+    uz: 'Soch ekish zararlari va asoratlari: nima normal',
+    ru: 'Вред и осложнения пересадки волос: что норма',
+    en: 'Hair Transplant Side Effects: What Is Normal',
+  },
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
   },

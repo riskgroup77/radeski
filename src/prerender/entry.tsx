@@ -1128,7 +1128,33 @@ function PageContent({
   }
 
   const content = institutionalContent(currentPage, pathname);
-  if (content) return <StructuredPageText content={content} locale={locale} />;
+  if (content) {
+    // Hub pages link their child pages in the content, as the React page does with its cards
+    // (otherwise the HTML reaches them only through the header menu).
+    const childLinks =
+      currentPage === 'daavlin-foto-kabinalari' && !pathname.includes('/models/')
+        ? PRERENDER_DAAVLIN_MODELS.map((model) => ({ href: daavlinModelPath(locale, model.id), label: model.name }))
+        : currentPage === 'obrazovaniya' && !resolveEducationProgram(getEducationProgramSlugFromPathname(pathname), locale)
+          ? OBRAZOVANIYA.programs.items.map((program) => ({
+              href: educationProgramPath(locale, program.id as EducationProgramId),
+              label: program.title[locale],
+            }))
+          : [];
+    return (
+      <>
+        <StructuredPageText content={content} locale={locale} />
+        {childLinks.length > 0 && (
+          <ul>
+            {childLinks.map((link) => (
+              <li key={link.href}>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </>
+    );
+  }
 
   return null;
 }

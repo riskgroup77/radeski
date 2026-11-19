@@ -290,7 +290,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('qoqon', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-dermatolog-qabuliga-tayyorgarlik', 'art-bolalarda-atopik-dermatit', 'art-chipqon-follikulit', 'art-sovuq-allergiyasi', 'art-orab-oluvchi-temiratki', 'art-qizil-yassi-temiratki', 'art-lablar-yorilishi-xeylit', 'art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-psoriasis-daavlin-kokand']),
     pediatricDermatologistLanding('qoqon', ['art-bolalarda-atopik-dermatit', 'art-bolalarda-teri-toshmalari', 'art-bolalarda-sogal-lazer-radeski', 'art-bolalarda-sogal-co2-deka', 'art-alopecia-areata-klinik-holat']),
-    specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-bosh-terisi-psoriazi', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
+    specialistLanding('qoqon', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-bosh-terisi-qichishi', 'art-bosh-terisi-psoriazi', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya', 'art-alopecia-areata-klinik-holat', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('qoqon', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-podolog-kim', 'art-mort-tirnoqlar', 'art-plantar-sogal', 'art-ichga-osgan-tirnoq', 'art-tirnoq-rangi-ozgarishi', 'art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
     kosmetologLanding('qoqon', ['art-apparatli-kosmetologiya', 'art-yuz-tozalash-turlari', 'art-botoks-yoki-filler', 'art-yangi-yil-yuz-parvarishi', 'art-koz-osti-qorayishi', 'art-kimyoviy-piling', 'art-oyoqdagi-tomir-tori', 'art-pigment-doglari-qishda', 'art-giperhidroz', 'art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-akne-dermatolog-kosmetolog', 'art-lasemd-ultra-kokand', 'art-hollywood-spectra-poralar-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('qoqon'),
@@ -417,7 +417,7 @@ function buildKokandLandings(): LocalCommercialLanding[] {
     treatmentLanding('qoqon', 'onko-dermatolog', 'dermatoonkologiya', {
       name: L('Onkodermatolog', 'Онкодерматолог', 'Oncodermatologist'),
       promoSlug: 'dermataskopiya',
-      articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-teri-biopsiyasi', 'art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-teri-biopsiyasi', 'art-bazalioma-teri-raki', 'art-til-yassi-hujayrali-rak', 'art-til-yarasi'],
       problem: L("Teri saratonini erta aniqlash va davolash.", 'Ранняя диагностика и лечение рака кожи.', 'Early skin cancer detection and care.'),
       whoFor: [L("Shubhali dog' va o'smalar", 'Подозрительные родинки и образования', 'Suspicious moles and lesions')],
       methods: [L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'), L('Biopsiya va kuzatuv', 'Биопсия и наблюдение', 'Biopsy and follow-up')],
@@ -445,7 +445,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
   return [
     specialistLanding('fargona', 'dermatolog', 'dermatologiya', L('Dermatolog', 'Дерматолог', 'Dermatologist'), ['art-dermatolog-qabuliga-tayyorgarlik', 'art-bolalarda-atopik-dermatit', 'art-chipqon-follikulit', 'art-sovuq-allergiyasi', 'art-orab-oluvchi-temiratki', 'art-qizil-yassi-temiratki', 'art-lablar-yorilishi-xeylit', 'art-akne', 'art-akne-u-vzroslykh', 'art-seboreyali-dermatit', 'art-ekzema', 'art-gerpes', 'art-ipl-terapiya']),
     pediatricDermatologistLanding('fargona', ['art-bolalarda-atopik-dermatit', 'art-bolalarda-teri-toshmalari', 'art-bolalarda-sogal-lazer-radeski', 'art-bolalarda-sogal-co2-deka', 'art-alopecia-areata-klinik-holat']),
-    specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-bosh-terisi-psoriazi', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-plazmotorapiya-soch-prp']),
+    specialistLanding('fargona', 'trixolog', 'trihologiya-centr-lechenie-volos', L('Trixolog', 'Трихолог', 'Trichologist'), ['art-bosh-terisi-qichishi', 'art-bosh-terisi-psoriazi', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-plazmotorapiya-soch-prp']),
     specialistLanding('fargona', 'podolog', 'clinika-patologii-nogtej', L('Podolog', 'Подолог', 'Podiatrist'), ['art-podolog-kim', 'art-mort-tirnoqlar', 'art-plantar-sogal', 'art-ichga-osgan-tirnoq', 'art-tirnoq-rangi-ozgarishi', 'art-qadoq-va-kesak', 'art-tovon-yoriqlari', 'art-diabetda-oyoq-parvarishi', 'art-tirnoq-zamburugi', 'art-teri-zamburugi', 'art-onixokriptoz-klinik-holat']),
     kosmetologLanding('fargona', ['art-apparatli-kosmetologiya', 'art-yuz-tozalash-turlari', 'art-botoks-yoki-filler', 'art-yangi-yil-yuz-parvarishi', 'art-koz-osti-qorayishi', 'art-kimyoviy-piling', 'art-oyoqdagi-tomir-tori', 'art-pigment-doglari-qishda', 'art-giperhidroz', 'art-karbon-piling', 'art-milium', 'art-qishda-teri-parvarishi', 'art-striya', 'art-melazma', 'art-akne-dermatolog-kosmetolog', 'art-hollywood-spectra-poralar-radeski', 'art-ipl-lumecca-pigmentatsiya-radeski', 'art-biorevitalizatsiya-radeski']),
     ingrownNailLanding('fargona'),
@@ -495,7 +495,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
       treatmentLanding('fargona', 'soch-ekish', 'trihologiya-centr-lechenie-volos', {
         name: L('Soch ekish', 'Пересадка волос', 'Hair transplant'),
         promoSlug: 'soch-ekish',
-        articleRouteKeys: ['art-soch-ekish-fue-dhi', 'art-soch-ekishdan-keyin', 'art-soqol-ekish', 'art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya'],
+        articleRouteKeys: ['art-soch-ekish-fue-dhi', 'art-soch-ekishdan-keyin', 'art-soch-ekish-asoratlari', 'art-soqol-ekish', 'art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi', 'art-ayollarda-soch-tokilishi', 'art-trixolog-trixoskopiya'],
         problem: L(
           'Tepa, peshona yoki chakkada soch siyraklashib, oldingi holiga qaytmayapti.',
           'Волосы поредели на макушке, лбу или висках и не восстанавливаются.',
@@ -708,7 +708,7 @@ function buildFerganaLandings(): LocalCommercialLanding[] {
     treatmentLanding('fargona', 'onko-dermatolog', 'dermatoonkologiya', {
       name: L('Onkodermatolog', 'Онкодерматолог', 'Oncodermatologist'),
       promoSlug: 'dermataskopiya',
-      articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-teri-biopsiyasi', 'art-bazalioma-teri-raki'],
+      articleRouteKeys: ['art-aktinik-keratoz', 'art-melanoma', 'art-teri-biopsiyasi', 'art-bazalioma-teri-raki', 'art-til-yassi-hujayrali-rak', 'art-til-yarasi'],
       problem: L("Teri saratonini erta aniqlash.", 'Ранняя диагностика рака кожи.', 'Early skin cancer detection.'),
       whoFor: [L('Shubhali holatlar', 'Подозрительные случаи', 'Suspicious cases')],
       methods: [L('Dermatoskopiya', 'Дерматоскопия', 'Dermoscopy'), L('Biopsiya', 'Биопсия', 'Biopsy')],

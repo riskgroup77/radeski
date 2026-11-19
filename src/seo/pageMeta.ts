@@ -395,6 +395,66 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         "facial cleansing, types of facial cleansing, ultrasonic facial, mechanical cleansing, carbon peel, facial price Fergana, Radeski Skin Clinic",
     },
   },
+  'art-bosh-terisi-qichishi': {
+    uz: {
+      title: 'Bosh qichishi sabablari: kepak, psoriaz, allergiya',
+      desc: "Bosh terisi nega qichiydi: seboreyali dermatit va kepak, psoriaz, bo'yoqqa allergiya, zamburug', bit va quruq teri. Qanday farqlash va qachon trixologga borish.",
+      keywords:
+        "bosh qichishi, bosh qichishi sabablari, bosh terisi qichishi, kepak, seboreyali dermatit, bosh terisi psoriazi, trixolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Почему чешется голова: 7 причин и что делать',
+      desc: 'Почему чешется кожа головы: себорейный дерматит и перхоть, псориаз, аллергия на краску, грибок, вши, сухость. Как отличить и когда идти к трихологу.',
+      keywords:
+        'чешется голова, зуд кожи головы, причины зуда головы, перхоть, себорейный дерматит, псориаз кожи головы, трихолог Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Itchy Scalp: 7 Causes and What Helps',
+      desc: 'Why your scalp itches: seborrheic dermatitis and dandruff, psoriasis, hair-dye allergy, fungus, lice and dryness. How to tell them apart and when to see a doctor.',
+      keywords:
+        'itchy scalp, itchy scalp causes, dandruff, seborrheic dermatitis, scalp psoriasis, trichologist Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-til-yarasi': {
+    uz: {
+      title: 'Til yarasi va yorilishi: sabablari va davosi',
+      desc: "Til yarasi, til osti yarasi va til yorilishi: jarohat, afta, gerpes, kandidoz, vitamin tanqisligi. Uyda nima qilish va qachon biopsiya kerak — Radeski.",
+      keywords:
+        'til yarasi, til yarasi davosi, til yorilishi, til yorilishi davolash, til osti yarasi, afta, stomatit, Radeski Skin Clinic',
+    },
+    ru: {
+      title: 'Язва и трещины на языке: причины и лечение',
+      desc: 'Язва на языке и под языком, трещины на языке: травма, афты, герпес, кандидоз, дефицит витаминов. Что делать дома и когда нужна биопсия — Radeski.',
+      keywords:
+        'язва на языке, язва под языком, трещины на языке, афта, стоматит, лечение язвы на языке, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Tongue Sores and Cracks: Causes and Treatment',
+      desc: 'Sores on and under the tongue, tongue cracks: injury, canker sores, herpes, thrush and vitamin deficiency. What helps at home and when a biopsy is needed.',
+      keywords:
+        'tongue sore, sore under tongue, tongue cracks, canker sore, stomatitis, fissured tongue, Radeski Skin Clinic',
+    },
+  },
+  'art-soch-ekish-asoratlari': {
+    uz: {
+      title: 'Soch ekish zararlari va asoratlari: nima normal',
+      desc: "Soch ekishning zararlari: shish, qobiq, uvishish va shok to'kilish qachon normal, infeksiya, follikulit va izlar qachon xavfli. Xavfni kamaytirish — Farg'ona.",
+      keywords:
+        "soch ekish zararlari, soch ekish asoratlari, soch ekishdan keyin, shok to'kilish, soch ekish Farg'ona, FUE, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Вред и осложнения пересадки волос: что норма',
+      desc: 'Вред пересадки волос: когда отёк, корочки, онемение и шоковое выпадение — норма, а когда опасны инфекция, фолликулит и рубцы. Как снизить риск — Фергана.',
+      keywords:
+        'вред пересадки волос, осложнения пересадки волос, шоковое выпадение, после пересадки волос, пересадка волос Фергана, FUE, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Hair Transplant Side Effects: What Is Normal',
+      desc: 'Hair transplant side effects: when swelling, crusts, numbness and shock loss are normal, and when infection, folliculitis and scarring matter. How risk is reduced.',
+      keywords:
+        'hair transplant side effects, hair transplant complications, shock loss, after hair transplant, hair transplant Fergana, FUE, Radeski Skin Clinic',
+    },
+  },
   'art-qadoq-va-kesak': {
     uz: {
       title: "Qadoq va kesaklar: olib tashlash — Farg'ona, Qo'qon",

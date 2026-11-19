@@ -79,6 +79,9 @@ import { DERMATOLOGIST_VISIT_ARTICLE_CATALOG } from './articles/dermatologistVis
 import { PODIATRIST_ARTICLE_CATALOG } from './articles/podiatristArticle';
 import { COUPEROSE_ARTICLE_CATALOG } from './articles/couperoseArticle';
 import { FACIAL_CLEANSING_ARTICLE_CATALOG } from './articles/facialCleansingArticle';
+import { SCALP_ITCH_ARTICLE_CATALOG } from './articles/scalpItchArticle';
+import { TONGUE_SORES_ARTICLE_CATALOG } from './articles/tongueSoresArticle';
+import { HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE_CATALOG } from './articles/hairTransplantComplicationsArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -210,6 +213,9 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'podiatrist': PODIATRIST_ARTICLE_CATALOG,
   'couperose': COUPEROSE_ARTICLE_CATALOG,
   'facial-cleansing': FACIAL_CLEANSING_ARTICLE_CATALOG,
+  'scalp-itch': SCALP_ITCH_ARTICLE_CATALOG,
+  'tongue-sores': TONGUE_SORES_ARTICLE_CATALOG,
+  'hair-transplant-complications': HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

@@ -4,7 +4,7 @@ import { filterPublicArticles } from './articles';
 
 /** Article catalog keys shown on service category pages (broad match). */
 export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
-  dermatologiya: ['dermatologist-visit', 'furuncle', 'child-atopic-dermatitis', 'herpes-zoster', 'cold-allergy', 'vitiligo-guide', 'scalp-psoriasis', 'cheilitis', 'lichen-planus', 
+  dermatologiya: ['dermatologist-visit', 'scalp-itch', 'tongue-sores', 'furuncle', 'child-atopic-dermatitis', 'herpes-zoster', 'cold-allergy', 'vitiligo-guide', 'scalp-psoriasis', 'cheilitis', 'lichen-planus', 
     'acne',
     'adult-acne-dermatologist',
     'seborrheic-dermatitis',
@@ -82,7 +82,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'plasmapheresis',
   ],
   'lazernaya-epilyaciya': ['laser-hair-removal-season', 'deka-moveo', 'deka-moveo-fergana-faq', 'lazer-epilyatsiya-samara-xatolar'],
-  'trihologiya-centr-lechenie-volos': ['hair-transplant-fue-dhi', 'hair-transplant-aftercare', 'beard-transplant', 'mesotherapy', 'scalp-psoriasis', 
+  'trihologiya-centr-lechenie-volos': ['scalp-itch', 'hair-transplant-fue-dhi', 'hair-transplant-aftercare', 'hair-transplant-complications', 'beard-transplant', 'mesotherapy', 'scalp-psoriasis', 
     'female-hair-loss',
     'male-hair-loss',
     'trichologist-trichoscopy',
@@ -92,7 +92,7 @@ export const SERVICE_CATEGORY_ARTICLE_KEYS: Record<string, string[]> = {
     'hair-transplant-contraindications',
     'soch-profilaktika-inyeksii-radeski',
   ],
-  dermatoonkologiya: ['actinic-keratosis', 'melanoma', 'skin-biopsy', 
+  dermatoonkologiya: ['tongue-sores', 'actinic-keratosis', 'melanoma', 'skin-biopsy', 
     'mole-screening',
     'papilloma-removal',
     'seborrheic-keratosis',

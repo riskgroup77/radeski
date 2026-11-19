@@ -2086,6 +2086,87 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://radeski.uz/uz/articles/art-bosh-terisi-qichishi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bosh-terisi-qichishi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-bosh-terisi-qichishi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bosh-terisi-qichishi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-bosh-terisi-qichishi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-bosh-terisi-qichishi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-bosh-terisi-qichishi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-til-yarasi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-til-yarasi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-til-yarasi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-til-yarasi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-til-yarasi</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-til-yarasi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-til-yarasi"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/uz/articles/art-soch-ekish-asoratlari</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-soch-ekish-asoratlari"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/ru/articles/art-soch-ekish-asoratlari</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-soch-ekish-asoratlari"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://radeski.uz/en/articles/art-soch-ekish-asoratlari</loc>
+    <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://radeski.uz/en/articles/art-soch-ekish-asoratlari"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://radeski.uz/uz/articles/art-soch-ekish-asoratlari"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://radeski.uz/uz/articles/art-postakne</loc>
     <xhtml:link rel="alternate" hreflang="uz-UZ" href="https://radeski.uz/uz/articles/art-postakne"/>
     <xhtml:link rel="alternate" hreflang="ru-RU" href="https://radeski.uz/ru/articles/art-postakne"/>

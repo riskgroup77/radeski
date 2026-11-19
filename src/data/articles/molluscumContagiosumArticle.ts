@@ -15,7 +15,7 @@ type LocalizedArticleCatalog = Record<
 function uzBody(): string {
   return `## Kontagioz mollyusk: belgilar, sabablar va davolash
 
-Kontagioz mollyusk — terining keng tarqalgan virus kasalligi, ayniqsa bolalarda tez-tez uchraydi. U kichik, qattiq, dumaloq toshmalardan iborat: teri rangi, pushti yoki marvarid tusida, markazida ko‘pincha chuqurcha bo‘ladi.
+Kontagioz mollyusk (xalq orasida “malyuska” yoki “mollyuska toshma” deb ham ataladi) — terining keng tarqalgan virus kasalligi, ayniqsa bolalarda tez-tez uchraydi. U kichik, qattiq, dumaloq toshmalardan iborat: teri rangi, pushti yoki marvarid tusida, markazida ko‘pincha chuqurcha bo‘ladi.
 
 Tashqi ko‘rinishi “xavfsiz” tuyulsa ham, bu yuqumli holat. Bir teri qismidan boshqasiga tarqalishi yoki boshqa odamlarga o‘tishi mumkin.
 
@@ -608,6 +608,7 @@ export const MOLLUSCUM_CONTAGIOSUM_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-08-15',
+  updated: '2026-11-19',
   image: '/karusel/dermataskopiya.jpeg',
   images: {
     uz: '/karusel/dermataskopiya.jpeg',

@@ -36,6 +36,8 @@ function uzBody(): string {
 
 ## Pedikyurdan farqi
 
+**Pedikyur** — oyoq tirnoqlari va tovon terisini parvarish qilish: tirnoqni kesish va shakl berish, kutikulani tozalash, dag‘al terini olib tashlash. Oddiy pedikyur salonda usta tomonidan qilinadi va sog‘lom oyoq uchun mo‘ljallangan. **Tibbiy (apparat) pedikyur** esa steril asbob va frezalar bilan, terini kesmasdan bajariladi va qalinlashgan tirnoq, qadoq, tovon yorilishi kabi muammolarda podolog tomonidan qilinadi.
+
 | Pedikyur | Podologiya |
 |---|---|
 | Parvarish va chiroy | Tashxis va davolash |
@@ -87,6 +89,8 @@ function ruBody(): string {
 
 ## Отличие от педикюра
 
+**Педикюр** — уход за ногтями и кожей стоп: стрижка и форма ногтей, обработка кутикулы, удаление огрубевшей кожи. Обычный педикюр делает мастер в салоне, и он рассчитан на здоровые стопы. **Медицинский (аппаратный) педикюр** выполняется стерильными инструментами и фрезами без срезания кожи; его делает подолог при утолщённых ногтях, мозолях и трещинах на пятках.
+
 | Педикюр | Подология |
 |---|---|
 | Уход и красота | Диагностика и лечение |
@@ -137,6 +141,8 @@ function enBody(): string {
 A **podiatrist** diagnoses and treats conditions of the skin and nails of the feet. At Radeski the podiatrists are **dermatovenereologists**: they do not just tidy the nails, they find the cause — fungus, infection, footwear or a sign of a general illness.
 
 ## How it differs from a pedicure
+
+A **pedicure** is care of the toenails and the skin of the feet: trimming and shaping nails, tidying cuticles and removing hard skin. A regular pedicure is done by a beautician in a salon and is meant for healthy feet. A **medical (device) pedicure** uses sterile instruments and rotary burrs without cutting the skin, and is done by a podiatrist for thickened nails, calluses and cracked heels.
 
 | Pedicure | Podiatry |
 |---|---|
@@ -330,6 +336,7 @@ export const PODIATRIST_ARTICLE: Article = {
     en: 'Dr. Mohinabonu Anvarovna Usmanova',
   },
   date: '2026-11-12',
+  updated: '2026-11-19',
   image: COVER.uz,
   images: COVER,
   views: 0,

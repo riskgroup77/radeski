@@ -322,6 +322,9 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   'podiatrist': ['art-podolog-kim', 'podolog-kim'],
   'couperose': ['art-kuperoz', 'kuperoz'],
   'facial-cleansing': ['art-yuz-tozalash-turlari', 'yuz-tozalash-turlari'],
+  'scalp-itch': ['art-bosh-terisi-qichishi', 'bosh-terisi-qichishi'],
+  'tongue-sores': ['art-til-yarasi', 'til-yarasi'],
+  'hair-transplant-complications': ['art-soch-ekish-asoratlari', 'soch-ekish-asoratlari'],
   'nail-fungus': ['art-tirnoq-zamburugi', 'tirnoq-zamburugi', 'грибок ногтей (онихомикоз)', 'nail fungus (onychomycosis)'],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
   'seborrheic-dermatitis': [

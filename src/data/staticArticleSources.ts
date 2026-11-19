@@ -79,6 +79,9 @@ import { DERMATOLOGIST_VISIT_ARTICLE } from './articles/dermatologistVisitArticl
 import { PODIATRIST_ARTICLE } from './articles/podiatristArticle';
 import { COUPEROSE_ARTICLE } from './articles/couperoseArticle';
 import { FACIAL_CLEANSING_ARTICLE } from './articles/facialCleansingArticle';
+import { SCALP_ITCH_ARTICLE } from './articles/scalpItchArticle';
+import { TONGUE_SORES_ARTICLE } from './articles/tongueSoresArticle';
+import { HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE } from './articles/hairTransplantComplicationsArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -157,6 +160,9 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   PODIATRIST_ARTICLE,
   COUPEROSE_ARTICLE,
   FACIAL_CLEANSING_ARTICLE,
+  SCALP_ITCH_ARTICLE,
+  TONGUE_SORES_ARTICLE,
+  HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE,
   NEW_YEAR_SKIN_PLAN_ARTICLE,
   DARK_CIRCLES_ARTICLE,
   BRITTLE_NAILS_ARTICLE,
