@@ -274,6 +274,11 @@ export const SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Seboreyali (seboreik) dermatit nima?",
+        answer:
+          "Seboreyali dermatit — yog' bezlari faol joylarda (bosh terisi, qosh, burun yonlari, quloq orqasi) qizarish, sarg'ish kepak va qichish bilan kechadigan surunkali yallig'lanish. Yuqumli emas, tez-tez qaytadi, lekin parvarish va davolash bilan yaxshi nazorat qilinadi.",
+      },
+      {
         question: 'Seboreyali dermatit yuqumlimi?',
         answer:
           "Yo'q. U teri yog'i, Malassezia zamburug'iga terining javobi va boshqa ichki omillar bilan bog'liq. Boshqa odamga yuqmaydi va gigiyena yetishmasligidan paydo bo'lmaydi.",
@@ -321,6 +326,11 @@ export const SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Что такое себорейный дерматит?",
+        answer:
+          "Себорейный дерматит — хроническое воспаление кожи в зонах с активными сальными железами (кожа головы, брови, крылья носа, за ушами): покраснение, желтоватые чешуйки, зуд. Не заразен, склонен возвращаться, но хорошо контролируется уходом и лечением.",
+      },
+      {
         question: 'Себорейный дерматит заразен?',
         answer:
           'Нет. Он связан с кожным салом, реакцией кожи на грибок Malassezia и другими внутренними факторами. Другим людям не передаётся и не возникает из-за недостатка гигиены.',
@@ -367,6 +377,11 @@ export const SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'You are not sure of the diagnosis — it might be psoriasis or fungus',
     ],
     faq: [
+      {
+        question: "What is seborrheic dermatitis?",
+        answer:
+          "Seborrheic dermatitis is a chronic inflammation where oil glands are active (scalp, eyebrows, sides of the nose, behind the ears): redness, yellowish flakes and itching. It is not contagious and tends to recur, but care and treatment keep it well controlled.",
+      },
       {
         question: 'Is seborrheic dermatitis contagious?',
         answer:
@@ -420,6 +435,7 @@ export const SEBORRHEIC_DERMATITIS_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-10-27',
+  updated: '2026-11-20',
   image: '/articles/seboreyali-dermatit-cover.jpg',
   images: {
     uz: '/articles/seboreyali-dermatit-cover.jpg',

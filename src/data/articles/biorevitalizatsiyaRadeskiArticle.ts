@@ -309,6 +309,11 @@ export const BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog
     ],
     faq: [
       {
+        question: "Biorevitalizatsiya nima?",
+        answer:
+          "Biorevitalizatsiya — teriga gialuron kislotasini mikroinyeksiyalar bilan kiritish muolajasi. U terini chuqur namlaydi, elastikligini oshiradi va mayda ajinlarni kamaytiradi; odatda bir necha seansli kurs bilan o'tkaziladi.",
+      },
+      {
         question: 'Biorevitalizatsiya necha seansdan iborat?',
         answer:
           'Ko‘pincha 4–6 muolaja, ular orasida taxminan 2 hafta. Aniq reja shifokor teri holatiga qarab tuziladi.',
@@ -362,6 +367,11 @@ export const BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog
       'Нужно проверить противопоказания к биоревитализации',
     ],
     faq: [
+      {
+        question: "Что такое биоревитализация?",
+        answer:
+          "Биоревитализация — введение гиалуроновой кислоты в кожу микроинъекциями. Процедура глубоко увлажняет кожу, повышает её упругость и уменьшает мелкие морщины; обычно проводится курсом из нескольких сеансов.",
+      },
       {
         question: 'Сколько сеансов в курсе биоревитализации?',
         answer:
@@ -417,6 +427,11 @@ export const BIOREVITALIZATSIYA_RADESKI_ARTICLE_CATALOG: LocalizedArticleCatalog
     ],
     faq: [
       {
+        question: "What is biorevitalization?",
+        answer:
+          "Biorevitalization is the delivery of hyaluronic acid into the skin through micro-injections. It deeply hydrates the skin, improves elasticity and softens fine lines; it is usually done as a course of several sessions.",
+      },
+      {
         question: 'How many sessions are in a biorevitalization course?',
         answer:
           'Usually 4–6 procedures about two weeks apart. Your physician sets the exact plan based on skin condition.',
@@ -469,6 +484,7 @@ export const BIOREVITALIZATSIYA_RADESKI_ARTICLE: Article = {
     en: 'Radeski Skin Clinic',
   },
   date: '2026-09-10',
+  updated: '2026-11-20',
   image: COVER,
   images: {
     uz: COVER,

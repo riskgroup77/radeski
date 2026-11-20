@@ -73,14 +73,14 @@ export const LASEMD_ULTRA_LUTRONIC = {
   ],
   seo: {
     title: L(
-      'Tuliy lazer 1927 nm — yoshartirish, pigmentatsiya | Radeski',
-      'Тулиевый лазер 1927 нм — омоложение и пигментация | Radeski',
-      '1927 nm thulium laser — rejuvenation, pigmentation | Radeski',
+      "LaseMD Ultra tuliy lazer 1927 nm — Qo'qon | Radeski",
+      'LaseMD Ultra — тулиевый лазер 1927 нм в Коканде | Radeski',
+      'LaseMD Ultra 1927 nm Thulium Laser — Kokand | Radeski',
     ),
     description: L(
-      "Tuliy lazer 1927 nm: ko'rsatmalar, qarshi ko'rsatmalar, muolaja natijalari, terining tiklanishi va pigmentatsiyani davolash xususiyatlari. Radeski Skin Clinic klinikasida dermatolog konsultatsiyasi.",
-      'Тулиевый лазер 1927 нм: показания, противопоказания, результаты процедуры, восстановление кожи и особенности лечения пигментации. Консультация дерматолога в Radeski Skin Clinic.',
-      '1927 nm thulium laser: indications, contraindications, treatment results, skin recovery and pigmentation treatment. Dermatologist consultation at Radeski Skin Clinic.',
+      "LaseMD Ultra (Lutronic) — 1927 nm tuliy lazer: pigmentatsiya, yoshartirish va teri teksturasi. Ko'rsatmalar, qarshi ko'rsatmalar, seanslar va narx bo'yicha konsultatsiya — Radeski, Qo'qon.",
+      'LaseMD Ultra (Lutronic) — тулиевый лазер 1927 нм: пигментация, омоложение и текстура кожи. Показания, противопоказания, курс и стоимость на консультации — Radeski, Коканд.',
+      'LaseMD Ultra (Lutronic) 1927 nm thulium laser for pigmentation, rejuvenation and skin texture. Indications, contraindications, sessions and price at consultation — Radeski, Kokand.',
     ),
     keywords: L(
       "tuliy lazer, tuliy lazer 1927 nm, fraksion tuliy lazer, lazer bilan terini yoshartirish, pigmentatsiyani lazer bilan davolash, pigment dog'larga qarshi lazer, fotoqarishni davolash, lazer bilan teri yangilanishi, lazer kosmetologiya, LaseMD Ultra, Radeski Skin Clinic",

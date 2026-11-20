@@ -256,6 +256,11 @@ export const URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Eshakemi nima?",
+        answer:
+          "Eshakemi (krapivnitsa, urtikariya) — terida gazanda chaqqandek qichiydigan qizil-pushti bo'rtiqlar paydo bo'lishi. Har bir bo'rtiq odatda 24 soat ichida izsiz yo'qoladi. Ko'pincha allergiya, infeksiya yoki dori bilan bog'liq; lab, til yoki tomoq shishsa — darhol 103 ga qo'ng'iroq qiling.",
+      },
+      {
         question: 'Eshakemi yuqumlimi?',
         answer:
           "Yo'q. Eshakemi — immun tizimining reaksiyasi, u boshqa odamga yuqmaydi. Agar u infeksiya fonida paydo bo'lgan bo'lsa ham, toshmaning o'zi yuqumli emas.",
@@ -303,6 +308,11 @@ export const URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Что такое крапивница?",
+        answer:
+          "Крапивница (уртикария) — зудящие красно-розовые волдыри на коже, как от ожога крапивой. Каждый волдырь обычно исчезает без следа за 24 часа. Чаще связана с аллергией, инфекцией или лекарствами; при отёке губ, языка или горла — сразу звоните 103.",
+      },
+      {
         question: 'Заразна ли крапивница?',
         answer:
           'Нет. Крапивница — реакция иммунной системы, другим людям она не передаётся. Даже если она появилась на фоне инфекции, сама сыпь не заразна.',
@@ -349,6 +359,11 @@ export const URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Swelling of the face and lips — urgently',
     ],
     faq: [
+      {
+        question: "What is urticaria (hives)?",
+        answer:
+          "Urticaria (hives) is itchy red-pink welts on the skin, like nettle stings. Each welt usually disappears without a trace within 24 hours. It is often linked to allergy, infection or medicines; if the lips, tongue or throat swell, call emergency services immediately.",
+      },
       {
         question: 'Are hives contagious?',
         answer:
@@ -402,6 +417,7 @@ export const URTICARIA_SKIN_ALLERGY_ARTICLE: Article = {
     en: 'Dr. Mohinabonu Anvarovna Usmanova',
   },
   date: '2026-10-30',
+  updated: '2026-11-20',
   image: '/articles/eshakemi-teri-allergiyasi-cover.jpg',
   images: {
     uz: '/articles/eshakemi-teri-allergiyasi-cover.jpg',

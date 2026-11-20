@@ -276,6 +276,11 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Plazmaferez nima?",
+        answer:
+          "Plazmaferez — qonni maxsus apparat orqali o'tkazib, uning suyuq qismi (plazma)ni ajratish va qon hujayralarini organizmga qaytarish muolajasi. Teri kasalliklarida u asosiy davolashga qo'shimcha sifatida, yallig'lanish faolligini kamaytirish uchun shifokor ko'rsatmasi bilan qo'llaniladi.",
+      },
+      {
         question: 'Plazmaferez kasallikni butunlay davolaydimi?',
         answer:
           'Yo‘q. Bu usul sababni yo‘qotmaydi; ayrim holatlarda asosiy davolash bilan birga yallig‘lanishni kamaytirishga yordam beradi.',
@@ -317,6 +322,11 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Что такое плазмаферез?",
+        answer:
+          "Плазмаферез — процедура, при которой кровь проходит через специальный аппарат, из неё отделяется жидкая часть (плазма), а клетки крови возвращаются в организм. При кожных болезнях его применяют по назначению врача как дополнение к основному лечению, чтобы снизить активность воспаления.",
+      },
+      {
         question: 'Плазмаферез полностью лечит заболевание?',
         answer:
           'Нет. Метод не устраняет причину; в отдельных случаях помогает снизить воспаление вместе с основной терапией.',
@@ -357,6 +367,11 @@ export const PLASMAPHERESIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Self-treatment is not helping',
     ],
     faq: [
+      {
+        question: "What is plasmapheresis?",
+        answer:
+          "Plasmapheresis is a procedure in which blood passes through a special device, the liquid part (plasma) is separated and the blood cells are returned to the body. In skin disease it is used on a doctor’s advice as an addition to the main treatment, to reduce inflammatory activity.",
+      },
       {
         question: 'Does plasmapheresis fully cure the disease?',
         answer:
@@ -405,6 +420,7 @@ export const PLASMAPHERESIS_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-07-21',
+  updated: '2026-11-20',
   image: null,
   images: {
     uz: null,

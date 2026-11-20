@@ -456,6 +456,11 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Akne nima?",
+        answer:
+          "Akne (husnbuzar) — yog' bezlari va soch follikulalarining yallig'lanishi: qora va oq nuqtalar, qizil tugunchalar va yiringli toshmalar paydo bo'ladi. O'smirlarda ko'p uchraydi, lekin kattalarda ham bo'ladi; davolanmasa izlar qoldirishi mumkin.",
+      },
+      {
         question: 'Akne faqat o\'smirlarda bo\'ladimi?',
         answer:
           'Yo\'q. Akne kattalar ayol va erkaklarda ham, ayniqsa gormonal o\'zgarishlar fonida tez-tez uchraydi.',
@@ -492,6 +497,11 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Что такое акне?",
+        answer:
+          "Акне (угревая болезнь) — воспаление сальных желёз и волосяных фолликулов: чёрные и белые точки, красные узелки и гнойнички. Часто бывает у подростков, но встречается и у взрослых; без лечения может оставлять следы.",
+      },
+      {
         question: 'Акне бывает только у подростков?',
         answer:
           'Нет. Акне часто встречается и у взрослых мужчин и женщин, особенно на фоне гормональных изменений.',
@@ -527,6 +537,11 @@ export const ACNE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Acne appears in adulthood',
     ],
     faq: [
+      {
+        question: "What is acne?",
+        answer:
+          "Acne is inflammation of the oil glands and hair follicles: blackheads, whiteheads, red bumps and pustules. It is common in teenagers but also affects adults, and without treatment it can leave marks and scars.",
+      },
       {
         question: 'Is acne only a teenage condition?',
         answer:
@@ -570,6 +585,7 @@ export const ACNE_ARTICLE: Article = {
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
   date: '2026-07-11',
+  updated: '2026-11-20',
   image: '/karusel/karbon-peeling.jpeg',
   images: {
     uz: '/karusel/karbon-peeling.jpeg',

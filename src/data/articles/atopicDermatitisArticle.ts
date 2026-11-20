@@ -194,6 +194,11 @@ export const ATOPIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "Atopik dermatit nima?",
+        answer:
+          "Atopik dermatit — terining himoya to'sig'i buzilishi bilan bog'liq surunkali yallig'lanish kasalligi: teri quruq, qichiydigan va qizargan bo'ladi, kuchayish va tinchlanish davrlari almashadi. Yuqumli emas; bolalarda ko'p uchraydi, kattalarda ham bo'ladi.",
+      },
+      {
         question: 'Atopik dermatit yuqadimi?',
         answer:
           'Yo\'q. Bu yuqumli kasallik emas — oilaviy moyillik va teri to\'sig\'i buzilishi bilan bog\'liq surunkali holat.',
@@ -244,6 +249,11 @@ export const ATOPIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'У ребёнка симптомы усиливаются',
     ],
     faq: [
+      {
+        question: "Что такое атопический дерматит?",
+        answer:
+          "Атопический дерматит — хроническое воспалительное заболевание кожи с нарушенным защитным барьером: кожа сухая, зудит и краснеет, обострения сменяются затишьем. Не заразен; чаще у детей, но бывает и у взрослых.",
+      },
       {
         question: 'Заразен ли атопический дерматит?',
         answer:
@@ -296,6 +306,11 @@ export const ATOPIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
     ],
     faq: [
       {
+        question: "What is atopic dermatitis?",
+        answer:
+          "Atopic dermatitis is a chronic inflammatory skin disease with a weakened skin barrier: the skin is dry, itchy and red, with flares and calm periods. It is not contagious; it is common in children but also affects adults.",
+      },
+      {
         question: 'Is atopic dermatitis contagious?',
         answer:
           'No. It is not an infection but a chronic condition linked to genetics and a weakened skin barrier.',
@@ -343,6 +358,7 @@ export const ATOPIC_DERMATITIS_ARTICLE: Article = {
     en: 'Dr. Ashurov',
   },
   date: '2026-08-17',
+  updated: '2026-11-20',
   image: '/articles/atopic-dermatitis-cover.webp',
   images: {
     uz: '/articles/atopic-dermatitis-cover.webp',
