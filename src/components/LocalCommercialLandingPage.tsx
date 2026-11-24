@@ -56,7 +56,7 @@ export default function LocalCommercialLandingPage({
     () => ({
       doctors: doctorsForLanding(landing, doctors),
       results: resultsForLanding(landing, results),
-      reviews: reviewsForTopic(landingTopicKey(landing.slug), reviews),
+      reviews: reviewsForTopic(landingTopicKey(landing.slug), reviews, 3, landing.city),
     }),
     [landing, doctors, results, reviews],
   );

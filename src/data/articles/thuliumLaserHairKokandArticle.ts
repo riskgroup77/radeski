@@ -203,7 +203,7 @@ Mutaxassis bosh teri holati, to'kilish xarakteri, folikul holati, laboratoriya t
 
 **Radeski Skin Clinic — Qo'qon filiali**
 
-Manzil: Qo'qon sh., 47-MFY, Hukandiy massivi, 144A
+Manzil: Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A
 
 Telefon: +998 95 210 73 73
 
@@ -304,7 +304,7 @@ The specialist evaluates scalp condition, shedding pattern, follicle status, nee
 
 **Radeski Skin Clinic — Kokand branch**
 
-Address: Kokand, 47-MFY, Hukandiy district, 144A
+Address: Kokand, 47-MFY, Huqandiy district, 144A
 
 Phone: +998 95 210 73 73
 
@@ -325,7 +325,7 @@ export const THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog 
       'Androgenetik alopeciya va soch inchelashida kompleks terapiya qismi bo\'lishi mumkin',
       'Avval sababni aniqlash — temir, gormonlar, stress va boshqalar',
       'Seanslar soni va parametrlar trixolog/dermatolog tomonidan belgilanadi',
-      'Qo\'qon filiali: Hukandiy 144A, +998 95 210 73 73',
+      'Qo\'qon filiali: Huqandiy 144A, +998 95 210 73 73',
     ],
     tags: [
       'Tuliy lazer',
@@ -435,7 +435,7 @@ export const THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog 
       'May be used for androgenetic alopecia and hair thinning in combined care',
       'Cause must be diagnosed first — iron, hormones, stress, inflammation',
       'Session count is set by a trichologist or dermatologist',
-      'Kokand branch: Hukandiy 144A, +998 95 210 73 73',
+      'Kokand branch: Huqandiy 144A, +998 95 210 73 73',
     ],
     tags: [
       'Thulium laser',

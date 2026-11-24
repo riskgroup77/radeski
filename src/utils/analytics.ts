@@ -4,7 +4,8 @@ import { GA4_MEASUREMENT_ID, YANDEX_METRIKA_ID } from '../config/analytics';
 /**
  * Google Analytics 4 + Yandex Metrika, loaded after the page is idle so they never slow the
  * first render. Page views are sent on every route change (single-page app); clicks on
- * phone numbers, booking links, Telegram, WhatsApp, Instagram and maps are sent as conversion events.
+ * phone numbers, booking links, Telegram, WhatsApp, Instagram and maps are sent as conversion events,
+ * each with the branch (fargona / qoqon) it belongs to.
  * Does nothing when no ID is configured, on the admin panel, or outside the browser.
  */
 type Gtag = (...args: unknown[]) => void;
@@ -65,10 +66,32 @@ function conversionFor(href: string): string | null {
   return null;
 }
 
+/**
+ * Which branch an action belongs to, so Fergana and Kokand are reported apart: the branch phone
+ * number or map link wins, then the city in the page address; '' when it cannot be told.
+ */
+export function branchFor(href: string, path: string): 'fargona' | 'qoqon' | '' {
+  const digits = href.startsWith('tel:') ? href.replace(/\D/g, '') : '';
+  if (digits.endsWith('952107373')) return 'qoqon';
+  if (digits.endsWith('732007373')) return 'fargona';
+  let decoded = href;
+  try {
+    decoded = decodeURIComponent(href);
+  } catch {
+    // keep the raw link
+  }
+  if (/40\.5489|qo.?qon|kokand|коканд/i.test(decoded)) return 'qoqon';
+  if (/\/qoqon(\/|$)/.test(path)) return 'qoqon';
+  if (/\/fargona(\/|$)/.test(path)) return 'fargona';
+  return '';
+}
+
 export function trackEvent(name: string, params: Record<string, unknown> = {}): void {
   if (!enabled()) return;
-  window.gtag?.('event', name, params);
-  if (ymId) window.ym?.(ymId, 'reachGoal', name, params);
+  const path = typeof params.page_path === 'string' ? params.page_path : window.location.pathname;
+  const withBranch = 'branch' in params ? params : { ...params, branch: branchFor(String(params.link_url ?? ''), path) };
+  window.gtag?.('event', name, withBranch);
+  if (ymId) window.ym?.(ymId, 'reachGoal', name, withBranch);
 }
 
 export function trackPageView(path: string): void {

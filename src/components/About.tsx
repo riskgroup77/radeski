@@ -13,6 +13,7 @@ import {
   resolveClinicRatingUrl,
 } from '../config/links';
 import { pagePath } from '../routing/paths';
+import { ratingCountLabel } from '../api/cmsMappers';
 import ClinicAdvantagesCards from './ClinicAdvantagesCards';
 
 interface AboutProps {
@@ -319,11 +320,14 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                 <>
                   <span className="text-xl">{plat.logo}</span>
                   <div className="text-left leading-none">
-                    <span className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-none block">
-                      {plat.rating} / 5.0
-                    </span>
+                    {plat.rating ? (
+                      <span className="font-extrabold text-brand-text-primary text-sm sm:text-base leading-none block">
+                        {plat.rating} / 5.0
+                      </span>
+                    ) : null}
                     <span className="text-[10px] text-brand-text-muted uppercase tracking-wider font-light leading-none">
-                      {plat.platform} ({plat.count}+ {d.reviewsCount})
+                      {plat.platform}
+                      {ratingCountLabel(plat, locale) ? ` (${ratingCountLabel(plat, locale)})` : ''}
                     </span>
                   </div>
                 </>

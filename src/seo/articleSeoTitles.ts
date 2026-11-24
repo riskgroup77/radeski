@@ -72,7 +72,6 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     en: 'Hair Transplant Side Effects: What Is Normal',
   },
   'art-akne-dermatolog-kosmetolog': {
-    uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
     uz: "Akne: dermatologga yoki kosmetologga borish kerak?",
   },
   'art-qadoq-va-kesak': {
@@ -333,7 +332,6 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   },
   'art-biorevitalizatsiya-radeski': {
     uz: 'Biorevitalizatsiya: ko‘rsatmalar va parvarish',
-    en: 'Biorevitalization: Indications and Aftercare',
     en: "What Is Biorevitalization? Results and Course",
   },
   'art-bolalarda-sogal-co2-deka': {

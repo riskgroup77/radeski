@@ -96,7 +96,7 @@ function branchPlace(
           : 'Radeski Skin Clinic — Kokand branch',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: "47-MFI, Huqandiy mavzesi, 144A",
+      streetAddress: "47-MFY, Huqandiy mavzesi, 144A",
       addressLocality: locale === 'ru' ? 'Коканд' : locale === 'en' ? 'Kokand' : "Qo'qon",
       addressRegion: locale === 'ru' ? 'Ферганская область' : "Farg'ona viloyati",
       addressCountry: 'UZ',

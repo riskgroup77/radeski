@@ -59,6 +59,7 @@ import { clearPublicDataCache } from './api/publicDataSource';
 import { submitAndPublishCustomerReview } from './api/submitCustomerReview';
 import { fetchClientCountFromApi } from './utils/clientCount';
 import { getPlatformLogo } from './utils/platformLogo';
+import { ratingCountLabel } from './api/cmsMappers';
 import { ApiError } from './api/client';
 import { resolveArticleRouteKey, filterPublicArticles } from './utils/articles';
 import { openAppointmentBooking, APPOINTMENT_LINK_REL, APPOINTMENT_LINK_TARGET, resolveClinicRatingUrl } from './config/links';
@@ -733,8 +734,12 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                                   <ExternalLink className="w-4 h-4 text-brand-gold shrink-0 opacity-70" aria-hidden="true" />
                                 ) : null}
                               </div>
-                              <span className="text-xl font-black text-brand-gold block mt-2">{plat.rating} / 5.0</span>
-                              <p className="text-xs text-brand-text-muted mt-1">{plat.count}+ {d.reviewsCount}</p>
+                              {plat.rating ? (
+                                <span className="text-xl font-black text-brand-gold block mt-2">{plat.rating} / 5.0</span>
+                              ) : null}
+                              {ratingCountLabel(plat, locale) ? (
+                                <p className="text-xs text-brand-text-muted mt-1">{ratingCountLabel(plat, locale)}</p>
+                              ) : null}
                             </div>
                           </div>
 

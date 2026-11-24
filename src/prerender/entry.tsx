@@ -462,7 +462,7 @@ function LandingBody({
 }) {
   const proofDoctors = doctorsForLanding(landing, clinic.doctors);
   const proofResults = resultsForLanding(landing, results.map(mapTreatmentResultFromApi));
-  const proofReviews = reviewsForTopic(landingTopicKey(landing.slug), reviews.map(mapReviewFromApi));
+  const proofReviews = reviewsForTopic(landingTopicKey(landing.slug), reviews.map(mapReviewFromApi), 3, landing.city);
   const details = resolveLocalLandingDetails(landing, clinic.prices, locale);
   const t = (copy: { uz: string; ru: string; en: string }) => getLocalizedCopy(copy, locale);
   const label = (uz: string, ru: string, en: string) => (locale === 'uz' ? uz : locale === 'ru' ? ru : en);

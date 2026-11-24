@@ -93,6 +93,7 @@ export function mapLegacyRatings(): ClinicRatingDisplay[] {
     rating: item.rating,
     count: item.count,
     url: item.url,
+    checked: item.checked,
     summary: CLINIC_RATING_SUMMARIES[item.platform] ?? { uz: '', ru: '', en: '' },
   }));
 }

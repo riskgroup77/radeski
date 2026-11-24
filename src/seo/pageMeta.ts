@@ -1639,7 +1639,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     qoqon: {
       title: "Dermatolog Qo'qon — Radeski Skin Clinic",
-      desc: "Qo'qonda Radeski Skin Clinic: dermatologiya, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya. Manzil: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.",
+      desc: "Qo'qonda Radeski Skin Clinic: dermatologiya, kosmetologiya, IPL, lazer epilyatsiya, fototerapiya. Manzil: 47-MFY, Huqandiy 144A. Tel: +998 95 210 73 73.",
       keywords:
         "dermatolog Qo'qon, dermatologiya Qo'qon, kosmetologiya Qo'qon, IPL Qo'qon, lazer epilyatsiya Qo'qon, Radeski Qo'qon, akne Qo'qon",
     },
@@ -1871,7 +1871,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     qoqon: {
       title: 'Dermatologist in Kokand — Radeski Skin Clinic',
-      desc: 'Radeski Skin Clinic in Kokand: dermatology, cosmetology, IPL, laser hair removal, phototherapy. Address: 47-MFI, Huqandiy 144A. Tel: +998 95 210 73 73.',
+      desc: 'Radeski Skin Clinic in Kokand: dermatology, cosmetology, IPL, laser hair removal, phototherapy. Address: 47-MFY, Huqandiy 144A. Tel: +998 95 210 73 73.',
       keywords:
         'dermatologist Kokand, dermatology Kokand, cosmetology Kokand, IPL Kokand, laser hair removal Kokand, Radeski Kokand, acne Kokand',
     },

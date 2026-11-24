@@ -224,9 +224,9 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
       en: 'Radeski Skin Clinic — Kokand branch',
     },
     address: {
-      uz: "Qo'qon sh., 47-MFI, Huqandiy mavzesi, 144A",
+      uz: "Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A",
       ru: 'г. Коканд, 47-МФЙ, массив Хукандий, 144А',
-      en: '144A Huqandiy Block, 47-MFI, Kokand City',
+      en: '47-MFY, Huqandiy district, 144A, Kokand',
     },
     phone: '+998 95 210 73 73',
     hours: {

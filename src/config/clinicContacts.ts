@@ -25,7 +25,7 @@ export function getHeaderTopBarContacts(locale: Locale) {
     kokandAddress:
       kokand?.address[locale] ||
       kokand?.address.uz ||
-      "Qo'qon sh., 47-MFI, Huqandiy mavzesi, 144A",
+      "Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A",
     primaryPhone: CLINIC_PHONE_PRIMARY,
     kokandPhone: CLINIC_PHONE_KOKAND,
     ferganaMapUrl: fergana?.mapUrl ?? getClinicMapOpenUrl(),

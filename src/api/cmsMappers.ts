@@ -29,10 +29,30 @@ import type {
 export interface ClinicRatingDisplay {
   id: string;
   platform: string;
+  /** Empty when the figure is not verified: the card then only links to the reviews. */
   rating: string;
   count: number;
   url?: string;
+  /** Date (YYYY-MM-DD) the rating and count were read from the platform. */
+  checked?: string;
   summary: { uz: string; ru: string; en: string };
+}
+
+/** "49 sharh · 23.11.2026 holatiga" — the exact count with the date it was read; '' without a count. */
+export function ratingCountLabel(
+  item: Pick<ClinicRatingDisplay, 'count' | 'checked'>,
+  locale: 'uz' | 'ru' | 'en',
+): string {
+  if (!item.count) return '';
+  const noun = locale === 'uz' ? 'sharh' : locale === 'ru' ? 'отзывов' : 'reviews';
+  if (!item.checked) return `${item.count} ${noun}`;
+  const [y, m, d] = item.checked.split('-');
+  const date = `${d}.${m}.${y}`;
+  return locale === 'uz'
+    ? `${item.count} ${noun} · ${date} holatiga`
+    : locale === 'ru'
+      ? `${item.count} ${noun} · на ${date}`
+      : `${item.count} ${noun} · as of ${date}`;
 }
 
 function localized(

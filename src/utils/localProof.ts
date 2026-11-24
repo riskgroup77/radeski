@@ -162,14 +162,35 @@ export function resultsForLanding(landing: LocalCommercialLanding, results: Trea
     .slice(0, 3);
 }
 
-/** Published reviews about the topic, with real text, newest first. */
-export function reviewsForTopic(topic: string, reviews: CustomerReview[], limit = 3): CustomerReview[] {
+/** How patients name each branch city in reviews (Latin, Cyrillic, with or without apostrophes). */
+const CITY_IN_REVIEW: Record<'fargona' | 'qoqon', RegExp> = {
+  fargona: /farg.?ona|фаргона|фергана|fergana/i,
+  qoqon: /qo.?qon|qoqon|коканд|қўқон|кукон|kokand/i,
+};
+
+/**
+ * Published reviews about the topic, with real text, newest first. On a city page, a review
+ * that names the other branch's city is left out, and reviews naming this city come first.
+ */
+export function reviewsForTopic(
+  topic: string,
+  reviews: CustomerReview[],
+  limit = 3,
+  city?: 'fargona' | 'qoqon',
+): CustomerReview[] {
   const pattern = TOPIC_KEYWORDS[topic];
+  const text = (review: CustomerReview) =>
+    `${review.service?.uz ?? ''} ${review.service?.ru ?? ''} ${review.comment.uz} ${review.comment.ru ?? ''}`;
   const candidates = reviews.filter((review) => review.published && review.rating >= 4 && (review.comment.uz || review.comment.ru || '').trim().length >= 40);
+  const other = city ? CITY_IN_REVIEW[city === 'fargona' ? 'qoqon' : 'fargona'] : null;
+  const own = city ? CITY_IN_REVIEW[city] : null;
   const matching = pattern
-    ? candidates.filter((review) => pattern.test(`${review.service?.uz ?? ''} ${review.service?.ru ?? ''} ${review.comment.uz} ${review.comment.ru ?? ''}`))
+    ? candidates.filter((review) => pattern.test(text(review)) && !(other && other.test(text(review))))
     : [];
-  return [...matching].sort((a, b) => b.date.localeCompare(a.date)).slice(0, limit);
+  const ownFirst = (review: CustomerReview) => (own && own.test(text(review)) ? 0 : 1);
+  return [...matching]
+    .sort((a, b) => ownFirst(a) - ownFirst(b) || b.date.localeCompare(a.date))
+    .slice(0, limit);
 }
 
 /** Specialists shown on a service category page (all branches), best match first. */

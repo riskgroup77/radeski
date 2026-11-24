@@ -125,7 +125,7 @@ Klinikada IPL, Lutronic Derma V, Hollywood Spectra, fraksion CO₂ lazer kabi tu
 
 **Radeski Skin Clinic — Qo'qon filiali**
 
-Manzil: Qo'qon sh., 47-MFY, Hukandiy massivi, 144A
+Manzil: Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A
 
 Telefon: +998 95 210 73 73
 
@@ -337,7 +337,7 @@ We offer IPL, Lutronic Derma V, Hollywood Spectra, fractional CO₂ laser, and m
 
 **Radeski Skin Clinic — Kokand branch**
 
-Address: Kokand, 47-MFY, Hukandiy district, 144A
+Address: Kokand, 47-MFY, Huqandiy district, 144A
 
 Phone: +998 95 210 73 73
 
@@ -356,7 +356,7 @@ export const LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Pigmentatsiya, postakne, porlar va fotoyoshlanish uchun kompleks yondashuv',
       'Neablativ fraksion usul — nisbatan qisqa tiklanish',
       'Melazma va shubhali dog\'larda avvalo dermatolog ko\'rigi shart',
-      'Qo\'qon filiali: Hukandiy 144A, +998 95 210 73 73',
+      'Qo\'qon filiali: Huqandiy 144A, +998 95 210 73 73',
     ],
     tags: [
       'LaseMD Ultra',
@@ -476,7 +476,7 @@ export const LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Used for pigmentation, post-acne, pores, and photoaging in tailored protocols',
       'Non-ablative fractional method with relatively short downtime',
       'Melasma and suspicious spots require diagnosis before laser treatment',
-      'Kokand branch: Hukandiy 144A, +998 95 210 73 73',
+      'Kokand branch: Huqandiy 144A, +998 95 210 73 73',
     ],
     tags: [
       'LaseMD Ultra',

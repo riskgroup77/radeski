@@ -155,10 +155,10 @@ export default function Doctors({
               <span className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-gold-light tracking-wider uppercase mb-2">
                 <Shield className="w-4 h-4" />
                 {locale === 'uz'
-                  ? 'Kafolatangan Davolash Standartlari'
+                  ? 'Tibbiy xavfsizlik standartlari'
                   : locale === 'ru'
-                    ? 'Стандарты Медицинской Безопасности'
-                    : 'Clinical Excellence Assured'}
+                    ? 'Стандарты медицинской безопасности'
+                    : 'Medical safety standards'}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 {locale === 'uz'

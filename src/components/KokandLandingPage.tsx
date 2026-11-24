@@ -103,8 +103,8 @@ function copy(locale: Locale) {
       badge: 'Radeski Skin Clinic — Qo‘qon filiali',
       h1: 'Dermatolog Qo‘qon | Radeski Skin Clinic',
       lead:
-        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, dermatoskopiya, onkodermatologiya, IPL, lazer epilyatsiya va fototerapiya. Qo‘qon filialida alohida SEO-klastrlar: akne, psoriaz, vitiligo, rozasea, trixoskopiya, xol tekshiruvi, biopsiya. Manzil: 47-MFI, Huqandiy mavzesi, 144A.',
-      address: "Qo'qon sh., 47-MFI, Huqandiy mavzesi, 144A",
+        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, dermatoskopiya, onkodermatologiya, IPL, lazer epilyatsiya va fototerapiya. Qo‘qon filialida alohida SEO-klastrlar: akne, psoriaz, vitiligo, rozasea, trixoskopiya, xol tekshiruvi, biopsiya. Manzil: 47-MFY, Huqandiy mavzesi, 144A.',
+      address: "Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A",
       hours: 'Dushanba – Shanba: 08:00 – 18:00',
       servicesTitle: 'Qo‘qonda xizmatlar',
       commercialTitle: 'Qo‘qon bo‘yicha qidiruv sahifalari',
@@ -118,7 +118,7 @@ function copy(locale: Locale) {
       faqs: [
         {
           q: 'Qo‘qonda dermatolog qayerda?',
-          a: 'Radeski Skin Clinic Qo‘qon filiali: 47-MFI, Huqandiy mavzesi, 144A. Telefon: +998 95 210 73 73.',
+          a: 'Radeski Skin Clinic Qo‘qon filiali: 47-MFY, Huqandiy mavzesi, 144A. Telefon: +998 95 210 73 73.',
         },
         {
           q: 'Qo‘qonda akne va kosmetologiya bormi?',
@@ -168,8 +168,8 @@ function copy(locale: Locale) {
     badge: 'Radeski Skin Clinic — Kokand branch',
     h1: 'Dermatologist Kokand | Radeski Skin Clinic',
     lead:
-      'Specialized skin, hair and nail clinic in Kokand: dermatology, trichology, podology, dermoscopy, oncodermatology, IPL, laser hair removal and phototherapy. Dedicated pages for acne, psoriasis, vitiligo, rosacea, trichoscopy, mole screening and biopsy. Address: 47-MFI, Huqandiy Block, 144A.',
-    address: '144A Huqandiy Block, 47-MFI, Kokand City',
+      'Specialized skin, hair and nail clinic in Kokand: dermatology, trichology, podology, dermoscopy, oncodermatology, IPL, laser hair removal and phototherapy. Dedicated pages for acne, psoriasis, vitiligo, rosacea, trichoscopy, mole screening and biopsy. Address: 47-MFY, Huqandiy district, 144A.',
+    address: '47-MFY, Huqandiy district, 144A, Kokand',
     hours: 'Monday – Saturday: 08:00 – 18:00',
     servicesTitle: 'Services in Kokand',
     commercialTitle: 'Kokand search landing pages',
@@ -183,7 +183,7 @@ function copy(locale: Locale) {
     faqs: [
       {
         q: 'Where to find a dermatologist in Kokand?',
-        a: 'Radeski Skin Clinic Kokand branch: 47-MFI, Huqandiy Block, 144A. Phone: +998 95 210 73 73.',
+        a: 'Radeski Skin Clinic Kokand branch: 47-MFY, Huqandiy district, 144A. Phone: +998 95 210 73 73.',
       },
       {
         q: 'Is acne and cosmetology available in Kokand?',

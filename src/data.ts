@@ -79,7 +79,7 @@ export const DICTIONARY = {
     safetyDesc: "Klinikamizda barcha asbob-uskunalar Yevropa standartlariga muvofiq ko'p bosqichli sterilizatsiyadan o'tkaziladi. Sizning xavfsizligingiz - bizning oliy maqsadimizdir.",
     years: "yil",
     yearsActive: "yil — klinika faoliyati",
-    reviewsCount: "ko'rib chiqilgan fikrlar",
+    reviewsCount: "sharh",
     seoTitle: "Radeski Skin Clinic — teri, soch va tirnoqlar uchun zamonaviy estetik korreksiyali tibbiy klinika",
     seoText: "Radeski Skin Clinic — teri, soch va tirnoqlar bo'yicha tibbiy yordam hamda zamonaviy estetik korreksiya. Dermatologiya, trixologiya, podologiya, IPL, lazer va inyeksiyalar. Farg'ona va Qo'qon.",
     aboutHeader: "Radeski Skin Clinic — teri, soch va tirnoqlar uchun zamonaviy estetik korreksiyali tibbiy klinika",
@@ -175,7 +175,7 @@ export const DICTIONARY = {
     safetyDesc: "В нашей клинике все инструменты проходят многоступенчатую стерилизацию в соответствии с европейскими стандартами. Ваша безопасность - наш главный приоритет.",
     years: "лет",
     yearsActive: "года работы клиники",
-    reviewsCount: "проверенных отзывов",
+    reviewsCount: "отзывов",
     seoTitle: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией",
     seoText: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией. Дерматология, трихология, подология, IPL, лазер и инъекции. Фергана и Коканд.",
     aboutHeader: "Radeski Skin Clinic — медицинская клиника кожи, волос и ногтей с современной эстетической коррекцией",
@@ -271,7 +271,7 @@ export const DICTIONARY = {
     safetyDesc: "All instruments in our facility undergo multi-stage disinfection matching rigorous European clinical directives. Your health safety is our absolute focus.",
     years: "years",
     yearsActive: "years in operation",
-    reviewsCount: "verified testimonials",
+    reviewsCount: "reviews",
     seoTitle: "Radeski Skin Clinic — medical clinic for skin, hair and nails with modern aesthetic correction",
     seoText: "Radeski Skin Clinic — medical care for skin, hair and nails with modern aesthetic correction. Dermatology, trichology, podology, IPL, laser and injectables. Fergana and Kokand.",
     aboutHeader: "Radeski Skin Clinic — medical clinic for skin, hair and nails with modern aesthetic correction",
@@ -294,19 +294,25 @@ export const DICTIONARY = {
   }
 };
 
-export const CLINIC_RATINGS = [
+/**
+ * Shown when the CMS has no clinic ratings. Only figures read from the platform, with the date:
+ * Google Maps public card 23.11.2026 — 4.9, 49 reviews. Yandex has several Fergana cards with
+ * different figures (4.8/42 and 4.9/17 on 23.11.2026) until the duplicates are merged, so no
+ * number is shown for it — the card only opens the reviews.
+ */
+export const CLINIC_RATINGS: { platform: string; rating: string; count: number; checked?: string; logo: string; url: string }[] = [
   {
     platform: 'Yandex',
-    rating: '4.9',
-    count: 124,
+    rating: '',
+    count: 0,
     logo: '⭐',
     url: 'https://yandex.uz/profile/138616043960',
   },
-  // Checked on Google Maps 17.10.2026 (CMS clinic ratings, when filled, replace these).
   {
     platform: 'Google Maps',
     rating: '4.9',
-    count: 48,
+    count: 49,
+    checked: '2026-11-23',
     logo: '📍',
     url: 'https://www.google.com/maps/place/Radeski+Skin+%26+Aesthetic+Clinic/@40.3833622,71.7936632,17z/data=!3m1!4b1!4m6!3m5!1s0x38bb830bba97cb09:0xd99d7f456cd820e8!8m2!3d40.3833622!4d71.7962381!16s%2Fg%2F11y2mv11w6?hl=ru&entry=ttu',
   },
@@ -314,19 +320,14 @@ export const CLINIC_RATINGS = [
 
 export const CLINIC_RATING_SUMMARIES: Record<string, { uz: string; ru: string; en: string }> = {
   Yandex: {
-    uz: "Yandex'dagi 4.9 ball va 120 dan ortiq sharh bemorlar qabuldan keyin xizmat sifatini yuqori baholaganini ko'rsatadi. Ko'p fikrlarda shifokorlar bilimi, e'tibor va davolash natijasi alohida qayd etilgan.",
-    ru: "Оценка 4,9 и более 120 отзывов на Yandex показывает, что пациенты высоко ценят качество приёма. В отзывах часто отмечают профессионализм врачей, внимание и результат лечения.",
-    en: "A 4.9 score and 120+ Yandex reviews show patients consistently rate our care highly. Reviews often highlight physician expertise, attentive service, and treatment outcomes.",
+    uz: "Yandex Kartalarda bemorlar qabuldan keyin qoldirgan sharhlarni o'qing va o'z fikringizni yozing.",
+    ru: 'Читайте отзывы, которые пациенты оставили на Яндекс Картах после приёма, и оставьте свой.',
+    en: 'Read the reviews patients left on Yandex Maps after their visit, and leave your own.',
   },
   'Google Maps': {
-    uz: "Google Maps'dagi 4.8 reyting va 85+ sharh klinika manzili, ish vaqti va xizmatlar ro'yxatining aniq ekanini tasdiqlaydi. Xalqaro mehmonlar ham xizmat sifati va shaffoflik haqida ijobiy fikr qoldirgan.",
-    ru: "Рейтинг 4,8 и 85+ отзывов на Google Maps подтверждают точность адреса, графика и перечня услуг. Многие отзывы, в том числе от иностранных пациентов, отмечают качество и прозрачность сервиса.",
-    en: "A 4.8 rating and 85+ Google Maps reviews confirm accurate location, hours, and service listings. Many reviewers, including international visitors, praise our care quality and transparency.",
-  },
-  '2GIS': {
-    uz: "2GIS'dagi 4.9 ball va 96+ sharh mahalliy bemorlar klinikamizni oson topishlari va xizmatlar haqida to'liq ma'lumot olishlarini ko'rsatadi. Sharhlarda tez yozilish va do'stona qabul ko'p tilga olinadi.",
-    ru: "Оценка 4,9 и 96+ отзывов в 2GIS показывают, что местные пациенты легко находят клинику и видят полный список услуг. В отзывах часто хвалят быструю запись и доброжелательный приём.",
-    en: "A 4.9 score and 96+ 2GIS reviews show local patients find us easily and see complete service information. Reviews frequently mention quick booking and a welcoming reception.",
+    uz: "Google Maps kartochkasida klinika manzili, ish vaqti va bemorlarning qabuldan keyingi sharhlari bor.",
+    ru: 'В карточке Google Maps — адрес клиники, часы работы и отзывы пациентов после приёма.',
+    en: 'The Google Maps listing shows the clinic address, opening hours and reviews patients left after their visit.',
   },
 };
 
