@@ -73,6 +73,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   },
   'art-akne-dermatolog-kosmetolog': {
     uz: 'Akne: dermatolog yoki kosmetolog davolashi kerak?',
+    uz: "Akne: dermatologga yoki kosmetologga borish kerak?",
   },
   'art-qadoq-va-kesak': {
     uz: "Qadoq va kesaklar: olib tashlash — Farg'ona, Qo'qon",
@@ -295,7 +296,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     en: 'Itchy skin: causes and treatment — Fergana, Kokand',
   },
   'art-eshakemi-teri-allergiyasi': {
-    uz: 'Eshakemi va teri allergiyasi: belgilari va davolash',
+    uz: "Eshakemi (krapivnitsa): sabablari, belgilari, davosi",
     ru: 'Крапивница и аллергия на коже: симптомы и лечение',
     en: 'Hives and skin allergy: symptoms and treatment',
   },
@@ -333,6 +334,7 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
   'art-biorevitalizatsiya-radeski': {
     uz: 'Biorevitalizatsiya: ko‘rsatmalar va parvarish',
     en: 'Biorevitalization: Indications and Aftercare',
+    en: "What Is Biorevitalization? Results and Course",
   },
   'art-bolalarda-sogal-co2-deka': {
     uz: 'Bolalarda so‘gal: CO₂-lazer DEKA bilan olib tashlash',
@@ -368,17 +370,17 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     en: 'Physiotherapy in Dermatology: Methods & Benefits',
   },
   'art-hair-transplant-contraindications': {
-    uz: "Soch ekishga qarshi ko'rsatmalar",
+    uz: "Soch ekish kimga mumkin emas: qarshi ko'rsatmalar",
     ru: 'Противопоказания к пересадке волос',
     en: 'Hair transplant contraindications',
   },
   'art-ipl-fototerapiya-radeski': {
-    uz: 'IPL-fototerapiya: qizarish, pigment va tomirlar',
+    uz: "IPL fototerapiya: kuperoz, pigment va qizarish",
     ru: 'IPL-фототерапия: покраснения, пигмент и сосуды',
     en: 'IPL Phototherapy: Redness, Pigment & Vessels',
   },
   'art-ipl-terapiya': {
-    uz: 'IPL-terapiya Farg‘onada: nima va kimga mos',
+    uz: "IPL terapiya nima va kimga mos — Farg'ona",
     ru: 'IPL-терапия в Фергане: что это и кому подходит',
     en: 'IPL therapy in Fergana: what it treats',
   },
@@ -441,5 +443,14 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     uz: 'Vitiligo davolash: Daavlin fototerapiyasi',
     ru: 'Лечение витилиго фототерапией Daavlin',
     en: 'Vitiligo treatment with Daavlin phototherapy',
+  },
+  'art-klinika-patologii-nogtej-stopy-radeski': {
+    uz: "Tirnoq va oyoq kasalliklari: podolog qabuli",
+  },
+  'art-soch-tokilishi-normal-patologiya-radeski': {
+    uz: "Kuniga nechta soch to'kilishi normal? Belgilar",
+  },
+  'art-deka-co2-chandiqlar-radeski': {
+    en: "CO₂ Laser Scar Treatment: Acne Scars and Results",
   },
 };

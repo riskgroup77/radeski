@@ -55,7 +55,7 @@ const BOTULINUM = sub('in-ekcionnaya-kosmetologiya', 'botulino', L('Botulinotera
 const VIDEO_TOPICS: VideoTopic[] = [
   {
     match: /soch ekish|soqol|transplant|пересадк/,
-    articles: ['art-soch-ekish-fue-dhi', 'art-soqol-ekish', 'art-soch-ekishdan-keyin', 'art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi'],
+    articles: ['art-soch-ekish-fue-dhi', 'art-soqol-ekish', 'art-soch-ekishdan-keyin', 'art-soch-ekish-asoratlari', 'art-hair-transplant-contraindications', 'art-erkaklarda-soch-tokilishi'],
     links: [HAIR_TRANSPLANT, TRICHOLOGY],
   },
   {
@@ -66,7 +66,7 @@ const VIDEO_TOPICS: VideoTopic[] = [
   {
     match: /bosh terisi|кожи головы|kepak|перхот/,
     exclude: /mezoterap|мезотерап/,
-    articles: ['art-bosh-terisi-psoriazi', 'art-seboreyali-dermatit', 'art-teri-qichishi'],
+    articles: ['art-bosh-terisi-qichishi', 'art-bosh-terisi-psoriazi', 'art-seboreyali-dermatit', 'art-teri-qichishi'],
     links: [condition('seboreyali-dermatit', L('Seboreyali dermatit', 'Себорейный дерматит', 'Seborrheic dermatitis')), TRICHOSCOPY],
   },
   {

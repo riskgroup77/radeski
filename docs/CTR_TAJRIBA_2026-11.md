@@ -36,6 +36,31 @@ Jami: 7 556 ko'rinish, ≈ 55 klik (CTR ≈ 0,7%).
 - Kod: maqolalar `src/seo/articleSeoTitles.ts` va `ARTICLE_SEO_OVERRIDES` (`src/seo/pageMeta.ts`);
   kasallik sahifalari uchun yangi `CONDITION_SEO_OVERRIDES`.
 
+
+## 2-to'plam — 24-noyabr 2026
+
+14-noyabr ro'yxatiga kirmagan, ko'rinishi 70+ va CTR'i past 12 ta sahifa. Baseline o'sha eksportdan
+(11.08–10.11.2026). Taqqoslash: deploy'dan 14 kun keyin (≈ 8–10-dekabr).
+
+| Sahifa | Ko'rinish | CTR | Pozitsiya | Yangi title |
+|---|---|---|---|---|
+| /uz/doctors | 349 | 2,87% | 7,61 | Shifokorlar: dermatolog, trixolog, podolog — Radeski |
+| /en/about | 241 | 1,66% | 6,73 | About Radeski Skin Clinic — Dermatology in Fergana & Kokand |
+| /uz/about | 211 | 1,90% | 8,16 | Radeski Skin Clinic haqida: tarix, litsenziya, apparatlar |
+| /uz/articles/art-hair-transplant-contraindications | 260 | 3,08% | 7,13 | Soch ekish kimga mumkin emas: qarshi ko'rsatmalar |
+| /uz/articles/art-eshakemi-teri-allergiyasi | 105 | 0,95% | 6,07 | Eshakemi (krapivnitsa): sabablari, belgilari, davosi |
+| /uz/articles/art-klinika-patologii-nogtej-stopy-radeski | 97 | 1,03% | 7,03 | Tirnoq va oyoq kasalliklari: podolog qabuli |
+| /uz/articles/art-akne-dermatolog-kosmetolog | 95 | 0,00% | 6,29 | Akne: dermatologga yoki kosmetologga borish kerak? |
+| /uz/articles/art-ipl-fototerapiya-radeski | 88 | 1,14% | 6,66 | IPL fototerapiya: kuperoz, pigment va qizarish |
+| /en/articles/art-deka-co2-chandiqlar-radeski | 81 | 1,23% | 6,59 | CO₂ Laser Scar Treatment: Acne Scars and Results |
+| /uz/articles/art-soch-tokilishi-normal-patologiya-radeski | 78 | 0,00% | 5,23 | Kuniga nechta soch to'kilishi normal? Belgilar |
+| /uz/articles/art-ipl-terapiya | 77 | 3,90% | 9,16 | IPL terapiya nima va kimga mos — Farg'ona |
+| /en/articles/art-biorevitalizatsiya-radeski | 72 | 0,00% | 6,60 | What Is Biorevitalization? Results and Course |
+
+Bundan tashqari 20-noyabrda 6 ta maqolaga birinchi FAQ sifatida "… nima?" ta'rifi qo'shildi
+(akne, atopik dermatit, seboreyali dermatit, biorevitalizatsiya, eshakemi, plazmaferez) — ularni ham
+shu sanada solishtirish kerak.
+
 ## Natija (to'ldiriladi)
 
 | Sahifa | Ko'rinish | CTR | Pozitsiya | Izoh |

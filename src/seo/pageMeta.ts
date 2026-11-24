@@ -1338,7 +1338,7 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
   'art-eshakemi-teri-allergiyasi': {
     uz: {
       title: 'Eshakemi va teri allergiyasi: belgilari va davolash',
-      desc: "Eshakemi va teri allergiyasi: qichiydigan pufaklar, qizarish va shish. Sabablari, qachon tez yordam kerak va davolash. Farg'ona va Qo'qonda dermatolog qabuli.",
+      desc: "Eshakemi nima va nimadan chiqadi: qichiydigan pufaklar va shish. Uyda nima qilish, qachon tez yordam kerak va davolash — dermatolog Farg'ona, Qo'qon.",
       keywords:
         "eshakemi, teri allergiyasi, krapivnitsa davolash, allergik toshma, Kvinke shishi, kontakt dermatit, dermatolog Farg'ona, dermatolog Qo'qon, Radeski Skin Clinic",
     },
@@ -1458,7 +1458,7 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
   'art-soch-tokilishi-normal-patologiya-radeski': {
     uz: {
       title: 'Normal soch to\'kilishi va patologik to\'kilishni farqlash | Radeski Skin Clinic',
-      desc: 'Kuniga 50–100 soch normalmi? Patologik to\'kilish belgilari, telogen alopetsiya sabablari, qachon trixolog va trixoskopiya kerak — Radeski Skin Clinic.',
+      desc: "Kuniga 50–100 soch to'kilishi normalmi? Patologik to'kilish belgilari, telogen alopetsiya sabablari va qachon trixolog hamda trixoskopiya kerak — Radeski.",
       keywords:
         'soch to\'kilishi, kuchli soch to\'kilishi, soch to\'kilishi sabablari, normal soch to\'kilishi, patologik soch to\'kilishi, alopetsiya, telogen to\'kilish, trixolog, trixoskopiya, ayollarda soch to\'kilishi, Radeski Skin Clinic',
     },
@@ -1493,6 +1493,48 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
       desc: 'Real clinical case: ingrown toenail treatment from first visit to 6-month outcome. Titanium wire correction, before and after photos. Iroda Karimova, Radeski Skin Clinic Kokand.',
       keywords:
         'ingrown toenail Kokand, onychocryptosis treatment, podiatrist Kokand, titanium wire brace, nail pathology, Radeski Skin Clinic Kokand, before and after',
+    },
+  },
+  'art-akne-dermatolog-kosmetolog': {
+    uz: {
+      title: "Akne: dermatologga yoki kosmetologga borish kerak?",
+      desc: "Husnbuzar bilan kimga borish kerak: dermatolog tashxis qo'yib davolaydi, kosmetolog parvarish va muolaja qiladi. Qachon qaysi biri — Farg'ona, Qo'qon.",
+    },
+  },
+  'art-ipl-fototerapiya-radeski': {
+    uz: {
+      title: "IPL fototerapiya: kuperoz, pigment va qizarish",
+      desc: "IPL fototerapiya yuzdagi qizarish, kuperoz va pigment dog'larini kamaytiradi. Kimga mos, necha seans va natija qachon ko'rinadi — Radeski, Farg'ona.",
+    },
+  },
+  'art-klinika-patologii-nogtej-stopy-radeski': {
+    uz: {
+      title: "Tirnoq va oyoq kasalliklari: podolog qabuli",
+      desc: "Tirnoq zamburug'i, ichiga o'sgan tirnoq, qadoq va tovon yorilishi: podolog ko'rigi, tibbiy pedikyur va lazer bilan davolash. Radeski — Farg'ona va Qo'qon.",
+    },
+  },
+  'art-biorevitalizatsiya-radeski': {
+    en: {
+      title: "What Is Biorevitalization? Results and Course",
+      desc: "Biorevitalization: hyaluronic acid micro-injections for hydration and fine lines. Who it suits, how many sessions, results and aftercare — Radeski.",
+    },
+  },
+  'art-ipl-terapiya': {
+    uz: {
+      title: "IPL terapiya nima va kimga mos — Farg'ona",
+      desc: "IPL terapiya nima: yorug'lik impulslari bilan qizarish, kuperoz, pigment dog'lari va aknega ta'sir. Kimga mos, necha seans va natija — Radeski.",
+    },
+  },
+  'art-deka-co2-chandiqlar-radeski': {
+    en: {
+      title: "CO₂ Laser Scar Treatment: Acne Scars and Results",
+      desc: "Fractional CO₂ laser (DEKA SmartXide) for acne scars and deep scars: how it works, number of sessions, recovery time and results at Radeski, Fergana.",
+    },
+  },
+  'art-hair-transplant-contraindications': {
+    uz: {
+      title: "Soch ekish kimga mumkin emas: qarshi ko'rsatmalar",
+      desc: "Soch ekishni qachon qilish mumkin emas va qachon keyinga qoldirish kerak: kasalliklar, tahlillar va trixolog ko'rigi. Radeski qo'llanmasi, Farg'ona.",
     },
   },
 };
@@ -1560,8 +1602,8 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
         "Radeski Skin Clinic, teri klinikasi, soch va tirnoq, tibbiy klinika, estetik korreksiya, dermatologiya, trixologiya, podologiya",
     },
     about: {
-      title: "Klinika haqida — Radeski Skin Clinic, Farg'ona",
-      desc: "Radeski Skin Clinic tarixi, litsenziyalar va akkreditatsiya. Farg'ona va Qo'qonda zamonaviy dermatologiya, kosmetologiya va dermato-onkologiya.",
+      title: "Radeski Skin Clinic haqida: tarix, litsenziya, apparatlar",
+      desc: "Radeski Skin Clinic — Farg'ona va Qo'qondagi teri, soch va tirnoq klinikasi: tarix, litsenziya, shifokorlar va DEKA, Lutronic, Daavlin apparatlari.",
       keywords: "Radeski klinika, dermatologiya Farg'ona, dermatologiya Qo'qon, litsenziya, akkreditatsiya, Ashurov Dilshod",
     },
     services: {
@@ -1571,8 +1613,8 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
         "dermatologiya xizmatlari Farg'ona, kosmetologiya Qo'qon, IPL Farg'ona, lazer epilyatsiya Qo'qon, trixologiya, botoks, fototerapiya",
     },
     doctors: {
-      title: "Dermatolog shifokorlar Farg'ona, Qo'qon — Radeski",
-      desc: "Radeski shifokorlari: dermatovenerolog, dermatoonkolog, kosmetolog va lazer mutaxassislari. Ashurov Dilshod Davlatovich jamoasi — Farg'ona va Qo'qon.",
+      title: "Shifokorlar: dermatolog, trixolog, podolog — Radeski",
+      desc: "Radeski shifokorlari Farg'ona va Qo'qonda: dermatovenerolog, trixolog, podolog, dermatoonkolog va kosmetolog. Yo'nalishlar va onlayn yozilish.",
       keywords: "dermatolog Farg'ona, dermatolog Qo'qon, Radeski shifokorlari, Ashurov Dilshod, kosmetolog Farg'ona, trixolog",
     },
     prices: {
@@ -1792,8 +1834,8 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
         "Radeski Skin Clinic, medical skin clinic, hair and nails, aesthetic correction, dermatology, trichology, podology",
     },
     about: {
-      title: "About the clinic — Radeski Skin Clinic, Fergana",
-      desc: "History, licensing and accreditation of Radeski Skin Clinic in Fergana and Kokand.",
+      title: "About Radeski Skin Clinic — Dermatology in Fergana & Kokand",
+      desc: "About Radeski Skin Clinic: history, licence, doctors and equipment (DEKA, Lutronic, Daavlin). Dermatology and cosmetology in Fergana and Kokand.",
       keywords: "Radeski clinic, dermatologist Fergana, dermatologist Kokand, license, accreditation, Dilshod Ashurov",
     },
     services: {
