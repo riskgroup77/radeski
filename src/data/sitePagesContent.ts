@@ -195,11 +195,12 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
       en: 'Radeski — Main Clinic (Fergana)',
     },
     address: {
-      uz: "Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1A-bino",
-      ru: 'г. Фергана, ул. Узбекистон Овози, дом 1А',
-      en: '1A Uzbekiston Ovozi St., Fergana City',
+      uz: "Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1B-bino",
+      ru: 'г. Фергана, ул. Узбекистон Овози, дом 1Б',
+      en: '1B Uzbekiston Ovozi St., Fergana City',
     },
-    phone: '+998 (73) 200-73-73',
+    phone: '+998 (73) 200-73-73, +998 95 210 73 73',
+    phoneTel: '+998732007373',
     hours: {
       uz: 'Dushanba – Shanba: 08:00 – 18:00',
       ru: 'Понедельник – Суббота: 08:00 – 18:00',
@@ -228,7 +229,7 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
       ru: 'г. Коканд, 47-МФЙ, массив Хукандий, 144А',
       en: '47-MFY, Huqandiy district, 144A, Kokand',
     },
-    phone: '+998 95 210 73 73',
+    phone: '+998 95 145 73 73',
     hours: {
       uz: 'Dushanba – Shanba: 08:00 – 18:00',
       ru: 'Понедельник – Суббота: 08:00 – 18:00',

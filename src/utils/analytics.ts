@@ -72,8 +72,8 @@ function conversionFor(href: string): string | null {
  */
 export function branchFor(href: string, path: string): 'fargona' | 'qoqon' | '' {
   const digits = href.startsWith('tel:') ? href.replace(/\D/g, '') : '';
-  if (digits.endsWith('952107373')) return 'qoqon';
-  if (digits.endsWith('732007373')) return 'fargona';
+  if (digits.endsWith('951457373')) return 'qoqon';
+  if (digits.endsWith('732007373') || digits.endsWith('952107373')) return 'fargona';
   let decoded = href;
   try {
     decoded = decodeURIComponent(href);

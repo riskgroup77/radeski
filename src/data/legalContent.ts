@@ -136,9 +136,9 @@ export const LEGAL_DOCUMENTS: Record<LegalPageType, LegalDocument> = {
         },
         paragraphs: [
           {
-            uz: "Shartlar bo'yicha savollar uchun: Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1A; tel: +998 (73) 200-73-73; e-mail: info@radeski.uz.",
-            ru: "По вопросам Соглашения: г. Фергана, ул. Узбекистон Овози, 1А; тел.: +998 (73) 200-73-73; e-mail: info@radeski.uz.",
-            en: "For questions about these Terms: 1A Uzbekiston Ovozi Street, Fergana; phone: +998 (73) 200-73-73; email: info@radeski.uz.",
+            uz: "Shartlar bo'yicha savollar uchun: Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1B; tel: +998 (73) 200-73-73; e-mail: info@radeski.uz.",
+            ru: "По вопросам Соглашения: г. Фергана, ул. Узбекистон Овози, 1Б; тел.: +998 (73) 200-73-73; e-mail: info@radeski.uz.",
+            en: "For questions about these Terms: 1B Uzbekiston Ovozi Street, Fergana; phone: +998 (73) 200-73-73; email: info@radeski.uz.",
           },
         ],
       },

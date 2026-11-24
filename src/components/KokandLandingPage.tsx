@@ -118,7 +118,7 @@ function copy(locale: Locale) {
       faqs: [
         {
           q: 'Qo‘qonda dermatolog qayerda?',
-          a: 'Radeski Skin Clinic Qo‘qon filiali: 47-MFY, Huqandiy mavzesi, 144A. Telefon: +998 95 210 73 73.',
+          a: 'Radeski Skin Clinic Qo‘qon filiali: 47-MFY, Huqandiy mavzesi, 144A. Telefon: +998 95 145 73 73.',
         },
         {
           q: 'Qo‘qonda akne va kosmetologiya bormi?',
@@ -126,7 +126,7 @@ function copy(locale: Locale) {
         },
         {
           q: 'Qabulga qanday yozilaman?',
-          a: 'Saytdagi «Qabulga yozilish» orqali yoki +998 95 210 73 73 raqamiga qo‘ng‘iroq qiling.',
+          a: 'Saytdagi «Qabulga yozilish» orqali yoki +998 95 145 73 73 raqamiga qo‘ng‘iroq qiling.',
         },
       ],
     };
@@ -151,7 +151,7 @@ function copy(locale: Locale) {
       faqs: [
         {
           q: 'Где дерматолог в Коканде?',
-          a: 'Филиал Radeski Skin Clinic: 47-МФЙ, массив Хукандий, 144А. Телефон: +998 95 210 73 73.',
+          a: 'Филиал Radeski Skin Clinic: 47-МФЙ, массив Хукандий, 144А. Телефон: +998 95 145 73 73.',
         },
         {
           q: 'Есть ли лечение акне и косметология в Коканде?',
@@ -159,7 +159,7 @@ function copy(locale: Locale) {
         },
         {
           q: 'Как записаться на приём?',
-          a: 'Через кнопку «Записаться» на сайте или по телефону +998 95 210 73 73.',
+          a: 'Через кнопку «Записаться» на сайте или по телефону +998 95 145 73 73.',
         },
       ],
     };
@@ -183,7 +183,7 @@ function copy(locale: Locale) {
     faqs: [
       {
         q: 'Where to find a dermatologist in Kokand?',
-        a: 'Radeski Skin Clinic Kokand branch: 47-MFY, Huqandiy district, 144A. Phone: +998 95 210 73 73.',
+        a: 'Radeski Skin Clinic Kokand branch: 47-MFY, Huqandiy district, 144A. Phone: +998 95 145 73 73.',
       },
       {
         q: 'Is acne and cosmetology available in Kokand?',
@@ -191,7 +191,7 @@ function copy(locale: Locale) {
       },
       {
         q: 'How do I book an appointment?',
-        a: 'Use Book online on the website or call +998 95 210 73 73.',
+        a: 'Use Book online on the website or call +998 95 145 73 73.',
       },
     ],
   };

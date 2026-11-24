@@ -165,14 +165,19 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4.5 h-4.5 text-brand-gold shrink-0 mt-0.5" />
                 <span className="font-light text-slate-300 leading-relaxed">
-                  Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1A-bino.
+                  Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1B-bino.
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4.5 h-4.5 text-brand-gold shrink-0" />
-                <a href="tel:+998732007373" className="hover:text-brand-gold-light font-mono transition-colors text-slate-300">
-                  +998 (73) 200-73-73
-                </a>
+                <span className="flex flex-col gap-1">
+                  <a href="tel:+998732007373" className="hover:text-brand-gold-light font-mono transition-colors text-slate-300">
+                    +998 (73) 200-73-73
+                  </a>
+                  <a href="tel:+998952107373" className="hover:text-brand-gold-light font-mono transition-colors text-slate-300">
+                    +998 95 210 73 73
+                  </a>
+                </span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="w-4.5 h-4.5 text-brand-gold shrink-0 mt-0.5" />

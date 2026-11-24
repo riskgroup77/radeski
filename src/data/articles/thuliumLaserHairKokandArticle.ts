@@ -104,7 +104,7 @@ function ruBody(): string {
 
 Адрес: г. Коканд, 47-МФЙ, массив Хукандий, 144А
 
-Телефон: +998 95 210 73 73
+Телефон: +998 95 145 73 73
 
 График: понедельник–суббота, 08:00–18:00
 
@@ -205,7 +205,7 @@ Mutaxassis bosh teri holati, to'kilish xarakteri, folikul holati, laboratoriya t
 
 Manzil: Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A
 
-Telefon: +998 95 210 73 73
+Telefon: +998 95 145 73 73
 
 Ish vaqti: dushanba–shanba, 08:00–18:00
 
@@ -306,7 +306,7 @@ The specialist evaluates scalp condition, shedding pattern, follicle status, nee
 
 Address: Kokand, 47-MFY, Huqandiy district, 144A
 
-Phone: +998 95 210 73 73
+Phone: +998 95 145 73 73
 
 Hours: Monday–Saturday, 08:00–18:00
 
@@ -325,7 +325,7 @@ export const THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog 
       'Androgenetik alopeciya va soch inchelashida kompleks terapiya qismi bo\'lishi mumkin',
       'Avval sababni aniqlash — temir, gormonlar, stress va boshqalar',
       'Seanslar soni va parametrlar trixolog/dermatolog tomonidan belgilanadi',
-      'Qo\'qon filiali: Huqandiy 144A, +998 95 210 73 73',
+      'Qo\'qon filiali: Huqandiy 144A, +998 95 145 73 73',
     ],
     tags: [
       'Tuliy lazer',
@@ -380,7 +380,7 @@ export const THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog 
       'Может применяться при андрогенетической алопеции и истончении волос',
       'Сначала диагностика причины — железо, гормоны, стресс и др.',
       'Число сеансов определяет трихолог или дерматолог',
-      'Филиал в Коканде: Хукандий 144А, +998 95 210 73 73',
+      'Филиал в Коканде: Хукандий 144А, +998 95 145 73 73',
     ],
     tags: [
       'Тулиевый лазер',
@@ -435,7 +435,7 @@ export const THULIUM_LASER_HAIR_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog 
       'May be used for androgenetic alopecia and hair thinning in combined care',
       'Cause must be diagnosed first — iron, hormones, stress, inflammation',
       'Session count is set by a trichologist or dermatologist',
-      'Kokand branch: Huqandiy 144A, +998 95 210 73 73',
+      'Kokand branch: Huqandiy 144A, +998 95 145 73 73',
     ],
     tags: [
       'Thulium laser',

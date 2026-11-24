@@ -1,6 +1,6 @@
 import { isApiRecordId } from '../utils/apiRecord';
 import type { Article, Locale, ServiceCategory } from '../types';
-import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
+import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_FERGANA_MOBILE, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
 import { absoluteUrl, articlePath } from '../routing/paths';
 import { resolveArticleRouteKey } from '../utils/articles';
 import { getLocalizedImage } from '../utils/localizedImage';
@@ -68,12 +68,18 @@ function branchPlace(
             : 'Radeski Skin Clinic — Fergana branch',
       address: {
         '@type': 'PostalAddress',
-        streetAddress: "O'zbekiston Ovozi ko'chasi, 1A-bino",
+        streetAddress: "O'zbekiston Ovozi ko'chasi, 1B-bino",
         addressLocality: locale === 'ru' ? 'Фергана' : "Farg'ona",
         addressRegion: locale === 'ru' ? 'Ферганская область' : "Farg'ona viloyati",
         addressCountry: 'UZ',
       },
-      telephone: CLINIC_PHONE_PRIMARY.tel,
+      telephone: [CLINIC_PHONE_PRIMARY.tel, CLINIC_PHONE_FERGANA_MOBILE.tel],
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '08:00',
+        closes: '18:00',
+      },
       geo: {
         '@type': 'GeoCoordinates',
         latitude: CLINIC_GEO.lat,
@@ -152,7 +158,7 @@ export function buildMedicalBusinessSchema(
           : 'Dermatology and cosmetology clinic in Fergana and Kokand: IPL, laser, phototherapy, dermatoscopy.',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: "O'zbekiston Ovozi ko'chasi, 1A-bino",
+      streetAddress: "O'zbekiston Ovozi ko'chasi, 1B-bino",
       addressLocality: locale === 'ru' ? 'Фергана' : "Farg'ona",
       addressRegion: locale === 'ru' ? 'Ферганская область' : "Farg'ona viloyati",
       addressCountry: 'UZ',

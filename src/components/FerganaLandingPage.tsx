@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Clock, ArrowRight, Stethoscope, Sparkles, Zap, Sun } from 'lucide-react';
 import type { Locale } from '../types';
-import { CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
+import { CLINIC_PHONE_FERGANA_MOBILE, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
 import { getClinicMapOpenUrl } from '../config/links';
 import {
   COMPETITIVE_ADVANTAGES,
@@ -64,8 +64,8 @@ function copy(locale: Locale) {
       badge: 'Radeski Skin Clinic — Farg‘ona bosh klinikasi',
       h1: 'Dermatolog Farg‘ona | Radeski Skin Clinic',
       lead:
-        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, IPL, lazer va fototerapiya. Manzil: O‘zbekiston Ovozi ko‘chasi, 1A.',
-      address: "Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1A-bino",
+        'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, IPL, lazer va fototerapiya. Manzil: O‘zbekiston Ovozi ko‘chasi, 1B.',
+      address: "Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1B-bino",
       hours: 'Dushanba – Shanba: 08:00 – 18:00',
       servicesTitle: 'Farg‘onada xizmatlar',
       commercialTitle: 'Farg‘ona bo‘yicha qidiruv sahifalari',
@@ -77,7 +77,7 @@ function copy(locale: Locale) {
       faqs: [
         {
           q: 'Farg‘onada dermatolog qayerda?',
-          a: 'Radeski Skin Clinic bosh klinikasi: O‘zbekiston Ovozi ko‘chasi, 1A. Telefon: +998 (73) 200-73-73.',
+          a: 'Radeski Skin Clinic bosh klinikasi: O‘zbekiston Ovozi ko‘chasi, 1B. Telefon: +998 (73) 200-73-73, +998 95 210 73 73.',
         },
         {
           q: 'Farg‘onada trixolog va podolog bormi?',
@@ -95,8 +95,8 @@ function copy(locale: Locale) {
       badge: 'Radeski Skin Clinic — главная клиника в Фергане',
       h1: 'Дерматолог Фергана | Radeski Skin Clinic',
       lead:
-        'Специализированная клиника кожи, волос и ногтей: дерматология, трихология, подология, IPL, лазер и фототерапия. Адрес: ул. Узбекистон Овози, 1А.',
-      address: 'г. Фергана, ул. Узбекистон Овози, дом 1А',
+        'Специализированная клиника кожи, волос и ногтей: дерматология, трихология, подология, IPL, лазер и фототерапия. Адрес: ул. Узбекистон Овози, 1Б.',
+      address: 'г. Фергана, ул. Узбекистон Овози, дом 1Б',
       hours: 'Понедельник – Суббота: 08:00 – 18:00',
       servicesTitle: 'Услуги в Фергане',
       commercialTitle: 'Коммерческие страницы по Фергане',
@@ -108,7 +108,7 @@ function copy(locale: Locale) {
       faqs: [
         {
           q: 'Где дерматолог в Фергане?',
-          a: 'Главная клиника Radeski Skin Clinic: ул. Узбекистон Овози, 1А. Тел: +998 (73) 200-73-73.',
+          a: 'Главная клиника Radeski Skin Clinic: ул. Узбекистон Овози, 1Б. Тел: +998 (73) 200-73-73, +998 95 210 73 73.',
         },
         {
           q: 'Есть ли трихолог и подолог в Фергане?',
@@ -125,8 +125,8 @@ function copy(locale: Locale) {
     badge: 'Radeski Skin Clinic — Fergana main clinic',
     h1: 'Dermatologist Fergana | Radeski Skin Clinic',
     lead:
-      'Specialized clinic for skin, hair and nails: dermatology, trichology, podology, IPL, laser and phototherapy. Address: 1A Uzbekiston Ovozi St.',
-    address: '1A Uzbekiston Ovozi St., Fergana City',
+      'Specialized clinic for skin, hair and nails: dermatology, trichology, podology, IPL, laser and phototherapy. Address: 1B Uzbekiston Ovozi St.',
+    address: '1B Uzbekiston Ovozi St., Fergana City',
     hours: 'Monday – Saturday: 08:00 – 18:00',
     servicesTitle: 'Services in Fergana',
     commercialTitle: 'Fergana search landing pages',
@@ -138,7 +138,7 @@ function copy(locale: Locale) {
     faqs: [
       {
         q: 'Where to find a dermatologist in Fergana?',
-        a: 'Radeski Skin Clinic main branch: 1A Uzbekiston Ovozi St. Phone: +998 (73) 200-73-73.',
+        a: 'Radeski Skin Clinic main branch: 1B Uzbekiston Ovozi St. Phone: +998 (73) 200-73-73, +998 95 210 73 73.',
       },
       {
         q: 'Are trichologist and podiatrist available?',
@@ -197,12 +197,20 @@ export default function FerganaLandingPage({ locale, appointmentLabel }: Fergana
           </li>
           <li className="flex gap-2 p-4 bg-brand-white rounded-xl border border-brand-sectiongray text-sm">
             <Phone className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />
-            <a
-              href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
-              className="text-brand-text-primary no-underline hover:text-brand-gold"
-            >
-              {CLINIC_PHONE_PRIMARY.display}
-            </a>
+            <span className="flex flex-col gap-1">
+              <a
+                href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}
+                className="text-brand-text-primary no-underline hover:text-brand-gold"
+              >
+                {CLINIC_PHONE_PRIMARY.display}
+              </a>
+              <a
+                href={`tel:${CLINIC_PHONE_FERGANA_MOBILE.tel}`}
+                className="text-brand-text-primary no-underline hover:text-brand-gold"
+              >
+                {CLINIC_PHONE_FERGANA_MOBILE.display}
+              </a>
+            </span>
           </li>
           <li className="flex gap-2 p-4 bg-brand-white rounded-xl border border-brand-sectiongray text-sm">
             <Clock className="w-4 h-4 text-brand-gold shrink-0 mt-0.5" />

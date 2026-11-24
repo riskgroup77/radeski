@@ -48,7 +48,7 @@ export const CLINIC_GEO = {
 } as const;
 
 /**
- * Google Maps embed — Radeski Skin & Aesthetic Clinic (1A, O'zbekiston Ovozi).
+ * Google Maps embed — Radeski Skin & Aesthetic Clinic (1B, O'zbekiston Ovozi).
  * Eski noto'g'ri embed 5-uy manziliga ishora qilardi.
  */
 export const CLINIC_MAP_EMBED_URL =

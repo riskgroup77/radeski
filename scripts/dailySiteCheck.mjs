@@ -29,7 +29,7 @@ const outDir = path.resolve(arg('--out', 'audit/daily'), day);
 mkdirSync(outDir, { recursive: true });
 
 /** The clinic's numbers (src/config/clinicContacts.ts). */
-const CLINIC_PHONES = new Set(['+998732007373', '+998952107373']);
+const CLINIC_PHONES = new Set(['+998732007373', '+998952107373', '+998951457373']);
 const UA = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36';
 const SHARE_INTENT = /^https:\/\/(t\.me\/share\/|www\.facebook\.com\/sharer\/|twitter\.com\/intent\/|x\.com\/intent\/|api\.whatsapp\.com\/send\?text|wa\.me\/\?text)/;

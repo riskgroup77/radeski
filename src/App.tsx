@@ -942,15 +942,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   <div className="mt-8 flex flex-wrap justify-center gap-6 text-xs text-brand-text-secondary font-medium">
                     <span className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg shadow-2xs">
                       <MapPin className="w-4 h-4 text-brand-gold" />
-                      Farg'ona, O'zbekiston Ovozi 1A
+                      Farg'ona, O'zbekiston Ovozi 1B
                     </span>
                     <span className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg shadow-2xs">
                       <Phone className="w-4 h-4 text-brand-gold" />
-                      +998 (73) 200-73-73
+                      +998 (73) 200-73-73 · +998 95 210 73 73
                     </span>
                     <span className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg shadow-2xs">
                       <Clock className="w-4 h-4 text-brand-gold" />
-                      {locale === 'uz' ? "Ish vaqti: 08:00 - 18:00" : locale === 'ru' ? "Пн.-Сб.: 08:00 - 18:00" : "Mon.-Sat. 8AM - 6PM"}
+                      {locale === 'uz' ? "Du.-Sha.: 08:00 - 18:00" : locale === 'ru' ? "Пн.-Сб.: 08:00 - 18:00" : "Mon.-Sat. 8AM - 6PM"}
                     </span>
                   </div>
 

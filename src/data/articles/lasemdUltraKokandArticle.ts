@@ -127,7 +127,7 @@ Klinikada IPL, Lutronic Derma V, Hollywood Spectra, fraksion CO₂ lazer kabi tu
 
 Manzil: Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A
 
-Telefon: +998 95 210 73 73
+Telefon: +998 95 145 73 73
 
 Ish vaqti: dushanba–shanba, 08:00–18:00
 
@@ -234,7 +234,7 @@ LaseMD Ultra может использоваться для коррекции �
 
 Адрес: г. Коканд, 47-МФЙ, массив Хукандий, 144А
 
-Запись: +998 95 210 73 73
+Запись: +998 95 145 73 73
 
 График: понедельник–суббота, 08:00–18:00
 
@@ -339,7 +339,7 @@ We offer IPL, Lutronic Derma V, Hollywood Spectra, fractional CO₂ laser, and m
 
 Address: Kokand, 47-MFY, Huqandiy district, 144A
 
-Phone: +998 95 210 73 73
+Phone: +998 95 145 73 73
 
 Hours: Monday–Saturday, 08:00–18:00
 
@@ -356,7 +356,7 @@ export const LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Pigmentatsiya, postakne, porlar va fotoyoshlanish uchun kompleks yondashuv',
       'Neablativ fraksion usul — nisbatan qisqa tiklanish',
       'Melazma va shubhali dog\'larda avvalo dermatolog ko\'rigi shart',
-      'Qo\'qon filiali: Huqandiy 144A, +998 95 210 73 73',
+      'Qo\'qon filiali: Huqandiy 144A, +998 95 145 73 73',
     ],
     tags: [
       'LaseMD Ultra',
@@ -416,7 +416,7 @@ export const LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Пигментация, постакне, поры и фотостарение — в комплексных протоколах',
       'Неабляционная методика с относительно коротким восстановлением',
       'При мелазме и подозрительных пятнах нужна диагностика до лазера',
-      'Филиал в Коканде: Хукандий 144А, +998 95 210 73 73',
+      'Филиал в Коканде: Хукандий 144А, +998 95 145 73 73',
     ],
     tags: [
       'LaseMD Ultra',
@@ -476,7 +476,7 @@ export const LASEMD_ULTRA_KOKAND_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       'Used for pigmentation, post-acne, pores, and photoaging in tailored protocols',
       'Non-ablative fractional method with relatively short downtime',
       'Melasma and suspicious spots require diagnosis before laser treatment',
-      'Kokand branch: Huqandiy 144A, +998 95 210 73 73',
+      'Kokand branch: Huqandiy 144A, +998 95 145 73 73',
     ],
     tags: [
       'LaseMD Ultra',
