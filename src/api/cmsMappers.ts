@@ -152,7 +152,8 @@ export function mapBranchFromApi(api: ApiBranchOut): ClinicBranch {
     website: isLiege ? RADE_SKIN_CLINIC_WEBSITE : undefined,
     email: isLiege ? RADE_SKIN_CLINIC_EMAIL : undefined,
     isMain: api.is_main,
-    image: resolveMediaUrl(api.image) || api.image || '',
+    // Kokand: the CMS picture is a 3D render; show the real entrance photo.
+    image: isKokand ? '/gallery/clinic/qoqon-kirish.webp' : resolveMediaUrl(api.image) || api.image || '',
     sortOrder: api.sort_order,
     isActive: api.is_active,
   };

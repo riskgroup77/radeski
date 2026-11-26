@@ -1,4 +1,5 @@
 import { ServiceCategory, Doctor, Article } from './types';
+import { CLINIC_PHOTOS } from './data/clinicPhotos';
 
 /** Klinika tajribasi (yil) — bosh sahifa va «Klinika haqida» bo'limlarida ko'rsatiladi */
 export const CLINIC_EXPERIENCE_YEARS = 2;
@@ -365,17 +366,8 @@ export const HERO_SLIDE_IMAGES = [
   { src: '/gallery/top3.webp', objectPosition: 'center center' },
 ] as const;
 
-export const GALLERY_IMAGS = [
-  { name: "gallery-1", src: "/gallery/1.webp" },
-  { name: "gallery-2", src: "/gallery/2.webp" },
-  { name: "gallery-3", src: "/gallery/3.webp" },
-  { name: "gallery-4", src: "/gallery/4.webp" },
-  { name: "gallery-5", src: "/gallery/5.webp" },
-  { name: "gallery-6", src: "/gallery/6.webp" },
-  { name: "gallery-7", src: "/gallery/7.webp" },
-  { name: "gallery-8", src: "/gallery/8.webp" },
-  { name: "gallery-9", src: "/gallery/9.webp" },
-];
+/** About-page photo gallery: real photos of the Fergana and Kokand branches (data/clinicPhotos.ts). */
+export const GALLERY_IMAGS = CLINIC_PHOTOS.map((photo) => ({ name: photo.src, src: photo.src, alt: photo.alt }));
 
 export const DOCTORS: Doctor[] = [
   {

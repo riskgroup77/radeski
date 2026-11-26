@@ -13,6 +13,8 @@ import {
 import { pagePath, serviceCategoryPath, serviceSubPath, articlePath } from '../routing/paths';
 import { resolveArticleRouteKey } from '../utils/articles';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import ClinicPhotoGrid from './ClinicPhotoGrid';
+import { FERGANA_DIRECTION_VIDEOS, photosForBranch } from '../data/clinicPhotos';
 
 interface FerganaLandingPageProps {
   locale: Locale;
@@ -226,6 +228,42 @@ export default function FerganaLandingPage({ locale, appointmentLabel }: Fergana
         >
           {t.mapCta} <ArrowRight className="w-3.5 h-3.5" />
         </a>
+
+        <ClinicPhotoGrid
+          locale={locale}
+          photos={photosForBranch('fargona')}
+          title={locale === 'uz' ? "Farg'ona klinikasi suratlarda" : locale === 'ru' ? 'Клиника в Фергане в фотографиях' : 'The Fergana clinic in photos'}
+          intro={locale === 'uz' ? "Kabinetlar va apparatlarning haqiqiy suratlari (2026-yil noyabr)." : locale === 'ru' ? 'Настоящие фотографии кабинетов и аппаратов (ноябрь 2026).' : 'Real photos of the rooms and equipment (November 2026).'}
+        />
+
+        <section className="mt-12" aria-label="directions">
+          <h2 className="text-xl sm:text-2xl font-extrabold text-brand-text-primary">
+            {locale === 'uz' ? "Klinikaga qanday borish mumkin" : locale === 'ru' ? 'Как пройти к клинике' : 'How to get to the clinic'}
+          </h2>
+          <p className="mt-2 text-sm text-brand-text-muted leading-relaxed max-w-3xl">
+            {locale === 'uz'
+              ? "Ko'chadan klinika eshigigacha bo'lgan yo'l — ikki qisqa video."
+              : locale === 'ru'
+                ? 'Путь от улицы до входа в клинику — два коротких видео.'
+                : 'The way from the street to the clinic entrance in two short videos.'}
+          </p>
+          <div className="mt-5 grid grid-cols-2 gap-4 max-w-xl">
+            {FERGANA_DIRECTION_VIDEOS.map((video) => (
+              <video
+                key={video.src}
+                src={video.src}
+                poster={video.poster}
+                controls
+                muted
+                playsInline
+                preload="none"
+                width={352}
+                height={640}
+                className="w-full rounded-2xl border border-brand-sectiongray bg-black"
+              />
+            ))}
+          </div>
+        </section>
 
         <h2 className="mt-12 text-xl sm:text-2xl font-extrabold text-brand-text-primary">{t.whyTitle}</h2>
         <ul className="mt-4 space-y-2">

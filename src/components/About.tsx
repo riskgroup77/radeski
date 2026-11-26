@@ -287,7 +287,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
               {locale === 'uz' ? "Fotogalereya" : locale === 'ru' ? "Фотогалерея клиники" : "Clinic photo-tour"}
             </h3>
             <p className="text-brand-text-muted text-xs sm:text-sm mt-2">
-              {locale === 'uz' ? "Radeski klinikasining ichki va modern kabinet ko'rinishlari" : locale === 'ru' ? "Посмотрите на условия нашего стационара и передовое аппаратное оснащение" : "Explore our clinical treatment, consulting rooms, and high-tech devices"}
+              {locale === 'uz' ? "Farg'ona va Qo'qon filiallarining haqiqiy suratlari: kabinetlar va apparatlar" : locale === 'ru' ? "Настоящие фотографии филиалов в Фергане и Коканде: кабинеты и аппараты" : "Real photos of the Fergana and Kokand branches: rooms and equipment"}
             </p>
           </div>
 
@@ -301,7 +301,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
               >
                 <MediaImage
                   src={img.src}
-                  alt={`Radeski clinic ${idx + 1}`}
+                  alt={img.alt[locale]}
                   sizes="(max-width: 640px) 50vw, 25vw"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -392,7 +392,7 @@ export default function About({ locale, onOpenAppointment, dictionary }: AboutPr
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.2 }}
                   src={GALLERY_IMAGS[activeGalleryIdx].src}
-                  alt={`Radeski clinic ${activeGalleryIdx + 1}`}
+                  alt={GALLERY_IMAGS[activeGalleryIdx].alt[locale]}
                   className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl border border-white/10"
                 />
               </AnimatePresence>

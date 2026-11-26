@@ -13,6 +13,8 @@ import {
 } from '../data/localCommercialSeoCatalog';
 import { resolveArticleRouteKey } from '../utils/articles';
 import AppointmentBookingLink from './AppointmentBookingLink';
+import ClinicPhotoGrid from './ClinicPhotoGrid';
+import { photosForBranch } from '../data/clinicPhotos';
 
 interface KokandLandingPageProps {
   locale: Locale;
@@ -260,6 +262,13 @@ export default function KokandLandingPage({ locale, appointmentLabel }: KokandLa
         >
           {t.mapCta} <ArrowRight className="w-3.5 h-3.5" />
         </a>
+
+        <ClinicPhotoGrid
+          locale={locale}
+          photos={photosForBranch('qoqon')}
+          title={locale === 'uz' ? "Qo'qon filiali suratlarda" : locale === 'ru' ? 'Филиал в Коканде в фотографиях' : 'The Kokand branch in photos'}
+          intro={locale === 'uz' ? "Bino, kirish, kabinetlar va apparatlarning haqiqiy suratlari (2026-yil noyabr)." : locale === 'ru' ? 'Настоящие фотографии здания, входа, кабинетов и аппаратов (ноябрь 2026).' : 'Real photos of the building, entrance, rooms and equipment (November 2026).'}
+        />
 
         <h2 className="mt-12 text-xl sm:text-2xl font-extrabold text-brand-text-primary">{t.whyTitle}</h2>
         <ul className="mt-4 space-y-2">

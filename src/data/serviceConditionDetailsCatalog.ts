@@ -29,25 +29,14 @@ export interface ServiceConditionDetailMeta {
   serviceLinks?: { categoryId: string; subId: string }[];
 }
 
+import { CLINIC_PHOTOS } from './clinicPhotos';
+
 export function L(uz: string, ru: string, en: string): LocalizedConditionText {
   return { uz, ru, en };
 }
 
 function galleryImage(index: number): string {
-  const pool = [
-    '/gallery/1.webp',
-    '/gallery/2.webp',
-    '/gallery/3.webp',
-    '/gallery/4.webp',
-    '/gallery/5.webp',
-    '/gallery/6.webp',
-    '/gallery/7.webp',
-    '/gallery/8.webp',
-    '/gallery/9.webp',
-    '/gallery/top1.webp',
-    '/gallery/top2.webp',
-    '/gallery/top3.webp',
-  ];
+  const pool = CLINIC_PHOTOS.map((photo) => photo.src);
   return pool[index % pool.length];
 }
 

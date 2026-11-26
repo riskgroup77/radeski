@@ -243,7 +243,7 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
     mapEmbed: KOKAND_BRANCH_MAP_EMBED_URL,
     mapUrl: KOKAND_BRANCH_MAP_OPEN_URL,
     isMain: false,
-    image: '/gallery/rasmfilial2.jpg',
+    image: '/gallery/clinic/qoqon-kirish.webp',
     sortOrder: 2,
   },
   {

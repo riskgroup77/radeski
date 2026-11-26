@@ -6,6 +6,10 @@ import type { Article, Locale, PriceItem, ServiceCategory } from '../types';
 
 import type { ClinicVideo, TreatmentResult } from '../data/sitePagesContent';
 
+import ClinicPhotoGrid from './ClinicPhotoGrid';
+
+import { photosForEquipment } from '../data/clinicPhotos';
+
 import { DICTIONARY } from '../data';
 
 import { getLocalizedEquipmentText, type ClinicEquipmentEntry } from '../data/clinicEquipmentCatalog';
@@ -179,6 +183,12 @@ export default function ClinicEquipmentPage({
         </div>
 
 
+
+        <ClinicPhotoGrid
+          locale={locale}
+          photos={photosForEquipment(equipment.id)}
+          title={locale === 'uz' ? 'Apparat klinikamizda' : locale === 'ru' ? 'Аппарат в нашей клинике' : 'The device at our clinic'}
+        />
 
         <ServiceRelatedResultsSection locale={locale} results={relatedResults} />
 
