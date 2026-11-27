@@ -116,7 +116,7 @@ Lazer epilyatsiya folikul faolligini asta-sekin kamaytiradi — shuning uchun ku
 
 ## Nega Radeski Skin Clinic?
 
-Radeski Skin Clinic — Farg'onadagi dermatologiya va estetik tibbiyot klinikasi (Farg'ona sh., O'zbekiston ovozi ko'chasi, 1A).
+Radeski Skin Clinic — Farg'onadagi dermatologiya va estetik tibbiyot klinikasi (Farg'ona sh., O'zbekiston ovozi ko'chasi, 1B).
 
 Afzalliklar:
 

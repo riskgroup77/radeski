@@ -280,7 +280,7 @@ export const NEW_YEAR_SKIN_PLAN_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda bayram oldidan yuz parvarishini qayerda rejalashtirish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida kosmetolog teringizni ko'rib, bayramgacha qolgan vaqtga mos muolajalarni tanlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida kosmetolog teringizni ko'rib, bayramgacha qolgan vaqtga mos muolajalarni tanlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -327,7 +327,7 @@ export const NEW_YEAR_SKIN_PLAN_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где в Фергане и Коканде спланировать уход за лицом перед праздниками?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде косметолог осмотрит кожу и подберёт процедуры под оставшееся до праздника время. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде косметолог осмотрит кожу и подберёт процедуры под оставшееся до праздника время. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -374,7 +374,7 @@ export const NEW_YEAR_SKIN_PLAN_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where in Fergana and Kokand can I plan pre-holiday skin care?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a cosmetologist examines your skin and chooses treatments that fit the time left before the holidays. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a cosmetologist examines your skin and chooses treatments that fit the time left before the holidays. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

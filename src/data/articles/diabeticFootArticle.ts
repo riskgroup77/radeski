@@ -239,7 +239,7 @@ export const DIABETIC_FOOT_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda diabetda oyoq parvarishini qayerda qilish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog diabeti bor bemorlarning oyog'ini ehtiyotkorlik bilan parvarish qiladi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog diabeti bor bemorlarning oyog'ini ehtiyotkorlik bilan parvarish qiladi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -286,7 +286,7 @@ export const DIABETIC_FOOT_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где ухаживать за стопами при диабете в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог бережно ухаживает за стопами пациентов с диабетом. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог бережно ухаживает за стопами пациентов с диабетом. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -333,7 +333,7 @@ export const DIABETIC_FOOT_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get diabetic foot care in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a podiatrist carefully looks after the feet of patients with diabetes. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a podiatrist carefully looks after the feet of patients with diabetes. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

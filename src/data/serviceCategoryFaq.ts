@@ -42,7 +42,7 @@ export const SERVICE_CATEGORY_FAQ: Record<string, LocalizedFaq> = {
       {
         question: 'Dermatolog qayerda qabul qiladi?',
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida. Qabulga sayt orqali yoki +998 73 200-73-73 raqamiga qo'ng'iroq qilib yozilish mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida. Qabulga sayt orqali yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlariga qo'ng'iroq qilib yozilish mumkin.",
       },
     ],
     ru: [
@@ -73,7 +73,7 @@ export const SERVICE_CATEGORY_FAQ: Record<string, LocalizedFaq> = {
       {
         question: 'Где принимает дерматолог?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
     en: [
@@ -104,7 +104,7 @@ export const SERVICE_CATEGORY_FAQ: Record<string, LocalizedFaq> = {
       {
         question: 'Where does the dermatologist see patients?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand. You can book on the website or by calling +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand. You can book on the website or by calling +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },
@@ -238,7 +238,7 @@ export const SERVICE_CATEGORY_FAQ: Record<string, LocalizedFaq> = {
       {
         question: 'Podolog qayerda qabul qiladi?',
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida kattalar va bolalar qabul qilinadi. Qabulga sayt orqali yoki +998 73 200-73-73 raqami orqali yozilish mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida kattalar va bolalar qabul qilinadi. Qabulga sayt orqali yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilish mumkin.",
       },
     ],
     ru: [
@@ -270,7 +270,7 @@ export const SERVICE_CATEGORY_FAQ: Record<string, LocalizedFaq> = {
       {
         question: 'Где принимает подолог?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде, взрослых и детей. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде, взрослых и детей. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
     en: [
@@ -302,7 +302,7 @@ export const SERVICE_CATEGORY_FAQ: Record<string, LocalizedFaq> = {
       {
         question: 'Where does the podiatrist see patients?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand, for adults and children. You can book on the website or by calling +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand, for adults and children. You can book on the website or by calling +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

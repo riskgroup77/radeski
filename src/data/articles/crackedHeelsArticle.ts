@@ -209,7 +209,7 @@ export const CRACKED_HEELS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda tovon yoriqlarini qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog tovonga og'riqsiz ishlov beradi va parvarish rejasini tuzadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog tovonga og'riqsiz ishlov beradi va parvarish rejasini tuzadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -256,7 +256,7 @@ export const CRACKED_HEELS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить трещины на пятках в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог безболезненно обработает пятки и составит план ухода. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог безболезненно обработает пятки и составит план ухода. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -303,7 +303,7 @@ export const CRACKED_HEELS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get cracked heels treated in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a podiatrist treats the heels painlessly and builds a care plan. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a podiatrist treats the heels painlessly and builds a care plan. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

@@ -129,7 +129,7 @@ Manzil: Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A
 
 Telefon: +998 95 145 73 73
 
-Ish vaqti: dushanba–shanba, 08:00–18:00
+Ish vaqti: har kuni, 08:00–20:00
 
 Agar pigmentatsiya, postakne, keng porlar, notekis relief, xira yuz yoki fotoyoshlanish bezovta qilsa — konsultatsiyaga yoziling. Shifokor LaseMD Ultra 1927 nm sizga mosligini va optimal protokolni belgilaydi.`;
 }
@@ -236,7 +236,7 @@ LaseMD Ultra может использоваться для коррекции �
 
 Запись: +998 95 145 73 73
 
-График: понедельник–суббота, 08:00–18:00
+График: ежедневно, 08:00–20:00
 
 Если беспокоят пигментация, постакне, расширенные поры, неровный рельеф или фотостарение — запишитесь на консультацию. Врач определит, подходит ли вам LaseMD Ultra 1927 нм и какой протокол оптимален.`;
 }
@@ -341,7 +341,7 @@ Address: Kokand, 47-MFY, Huqandiy district, 144A
 
 Phone: +998 95 145 73 73
 
-Hours: Monday–Saturday, 08:00–18:00
+Hours: daily, 08:00–20:00
 
 If pigmentation, post-acne, pores, uneven texture, or photoaging concern you — book a consultation. Your physician will determine whether LaseMD Ultra 1927 nm suits you and which protocol is optimal.`;
 }

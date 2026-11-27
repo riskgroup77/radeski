@@ -234,7 +234,7 @@ export const MALE_HAIR_LOSS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda trixolog qayerda qabul qiladi?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida trixolog trixoskopiya o'tkazadi va davolash rejasini tuzadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida trixolog trixoskopiya o'tkazadi va davolash rejasini tuzadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -281,7 +281,7 @@ export const MALE_HAIR_LOSS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где принимает трихолог в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде трихолог проведёт трихоскопию и составит план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде трихолог проведёт трихоскопию и составит план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -328,7 +328,7 @@ export const MALE_HAIR_LOSS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I see a trichologist in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a trichologist performs trichoscopy and builds a treatment plan. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a trichologist performs trichoscopy and builds a treatment plan. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

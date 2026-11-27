@@ -287,7 +287,7 @@ export const SKIN_ITCHING_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda teri qichishini qayerda tekshirish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog terini ko'zdan kechiradi, kerak bo'lsa dermatoskopiya, qirindi va qon tahlillarini buyuradi va davolash rejasini tuzadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog terini ko'zdan kechiradi, kerak bo'lsa dermatoskopiya, qirindi va qon tahlillarini buyuradi va davolash rejasini tuzadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -334,7 +334,7 @@ export const SKIN_ITCHING_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где обследоваться при зуде кожи в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит кожу, при необходимости назначит дерматоскопию, соскоб и анализы крови и составит план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит кожу, при необходимости назначит дерматоскопию, соскоб и анализы крови и составит план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -381,7 +381,7 @@ export const SKIN_ITCHING_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get itchy skin checked in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist examines the skin, orders dermoscopy, a scraping and blood tests when needed and builds a treatment plan. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist examines the skin, orders dermoscopy, a scraping and blood tests when needed and builds a treatment plan. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

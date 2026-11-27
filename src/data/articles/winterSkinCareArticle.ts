@@ -284,7 +284,7 @@ export const WINTER_SKIN_CARE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda qishki parvarish bo'yicha qayerda maslahat olish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog va kosmetolog teringiz holatini baholaydi va qishki parvarishni tanlab beradi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog va kosmetolog teringiz holatini baholaydi va qishki parvarishni tanlab beradi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -331,7 +331,7 @@ export const WINTER_SKIN_CARE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где получить консультацию по зимнему уходу в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог и косметолог оценят состояние кожи и подберут зимний уход. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог и косметолог оценят состояние кожи и подберут зимний уход. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -378,7 +378,7 @@ export const WINTER_SKIN_CARE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get winter skin care advice in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist and cosmetologist assess your skin and choose a winter routine. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist and cosmetologist assess your skin and choose a winter routine. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

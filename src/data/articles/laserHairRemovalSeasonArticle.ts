@@ -188,7 +188,7 @@ export const LASER_HAIR_REMOVAL_SEASON_ARTICLE_CATALOG: LocalizedArticleCatalog 
       {
         question: "Farg'ona va Qo'qonda lazer epilyatsiyani qayerda qilish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida DEKA aleksandrit lazeri bilan lazer epilyatsiya qilinadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida DEKA aleksandrit lazeri bilan lazer epilyatsiya qilinadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -235,7 +235,7 @@ export const LASER_HAIR_REMOVAL_SEASON_ARTICLE_CATALOG: LocalizedArticleCatalog 
       {
         question: 'Где сделать лазерную эпиляцию в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде лазерную эпиляцию проводят на александритовом лазере DEKA. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде лазерную эпиляцию проводят на александритовом лазере DEKA. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -282,7 +282,7 @@ export const LASER_HAIR_REMOVAL_SEASON_ARTICLE_CATALOG: LocalizedArticleCatalog 
       {
         question: 'Where can I have laser hair removal in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand laser hair removal is done with a DEKA alexandrite laser. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand laser hair removal is done with a DEKA alexandrite laser. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

@@ -326,7 +326,7 @@ export const HYPERHIDROSIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda giperhidrozni qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog va kosmetolog terlash sababini aniqlaydi va mos davolashni, jumladan botulinoterapiyani tanlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog va kosmetolog terlash sababini aniqlaydi va mos davolashni, jumladan botulinoterapiyani tanlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -373,7 +373,7 @@ export const HYPERHIDROSIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить гипергидроз в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог и косметолог выяснят причину потливости и подберут лечение, в том числе ботулинотерапию. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог и косметолог выяснят причину потливости и подберут лечение, в том числе ботулинотерапию. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -420,7 +420,7 @@ export const HYPERHIDROSIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get hyperhidrosis treated in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist and a cosmetologist find the cause of the sweating and choose treatment, including botulinum therapy. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist and a cosmetologist find the cause of the sweating and choose treatment, including botulinum therapy. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

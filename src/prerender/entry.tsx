@@ -39,7 +39,7 @@ import type { Article, Locale, PriceItem } from '../types';
 import { DICTIONARY } from '../data';
 import { dictionaryOverridesFromSiteTexts, type DictionaryOverrides } from '../data/dictionaryOverrides';
 import { CLINIC_BRANCHES } from '../data/sitePagesContent';
-import { CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
+import { CLINIC_PHONE_FERGANA_MOBILE, CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY } from '../config/clinicContacts';
 import { PRICE_CATEGORY_ORDER } from '../data/priceCategoryLabels';
 import { transformClinicData, type ClinicData, type RawClinicData } from '../api/clinicDataTransform';
 import { transformClinicPrices } from '../api/clinicPricesTransform';
@@ -1279,7 +1279,10 @@ function PrerenderBody({
           </p>
         ))}
         <p>
-          <a href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}>{CLINIC_PHONE_PRIMARY.display}</a> ·{' '}
+          {locale === 'ru' ? 'Фергана' : locale === 'en' ? 'Fergana' : "Farg'ona"}:{' '}
+          <a href={`tel:${CLINIC_PHONE_PRIMARY.tel}`}>{CLINIC_PHONE_PRIMARY.display}</a>,{' '}
+          <a href={`tel:${CLINIC_PHONE_FERGANA_MOBILE.tel}`}>{CLINIC_PHONE_FERGANA_MOBILE.display}</a> ·{' '}
+          {locale === 'ru' ? 'Коканд' : locale === 'en' ? 'Kokand' : "Qo'qon"}:{' '}
           <a href={`tel:${CLINIC_PHONE_KOKAND.tel}`}>{CLINIC_PHONE_KOKAND.display}</a> · {d.workingHoursValue}
         </p>
       </footer>

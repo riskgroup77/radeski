@@ -206,7 +206,7 @@ export const ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG: LocalizedArticleCatalog =
       {
         question: "Farg'ona va Qo'qonda aknani qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog teri holatini baholaydi, tashxisni aniqlaydi va individual davolash rejasini tuzadi. Qabulga sayt orqali yoki +998 73 200-73-73 raqami orqali yozilish mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog teri holatini baholaydi, tashxisni aniqlaydi va individual davolash rejasini tuzadi. Qabulga sayt orqali yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilish mumkin.",
       },
     ],
   },
@@ -253,7 +253,7 @@ export const ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG: LocalizedArticleCatalog =
       {
         question: 'Где лечить акне в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог оценит состояние кожи, уточнит диагноз и составит индивидуальный план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог оценит состояние кожи, уточнит диагноз и составит индивидуальный план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -299,7 +299,7 @@ export const ADULT_ACNE_DERMATOLOGIST_ARTICLE_CATALOG: LocalizedArticleCatalog =
       {
         question: 'Where can I get acne treatment in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand, a dermatologist assesses your skin, confirms the diagnosis and builds an individual treatment plan. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand, a dermatologist assesses your skin, confirms the diagnosis and builds an individual treatment plan. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

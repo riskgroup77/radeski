@@ -291,7 +291,7 @@ export const SKIN_BIOPSY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda teri biopsiyasini qayerda qilish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida shifokor ko'rik va dermatoskopiyadan keyin biopsiya kerakligini aniqlaydi va namunani gistologik tekshiruvga yuboradi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida shifokor ko'rik va dermatoskopiyadan keyin biopsiya kerakligini aniqlaydi va namunani gistologik tekshiruvga yuboradi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -338,7 +338,7 @@ export const SKIN_BIOPSY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где сделать биопсию кожи в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде врач после осмотра и дерматоскопии определит, нужна ли биопсия, и отправит материал на гистологию. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде врач после осмотра и дерматоскопии определит, нужна ли биопсия, и отправит материал на гистологию. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -385,7 +385,7 @@ export const SKIN_BIOPSY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I have a skin biopsy in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand the doctor decides after an examination and dermoscopy whether a biopsy is needed and sends the sample for histology. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand the doctor decides after an examination and dermoscopy whether a biopsy is needed and sends the sample for histology. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

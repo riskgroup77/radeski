@@ -258,7 +258,7 @@ export const NAIL_FUNGUS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda tirnoq zamburug'ini qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog va podolog tirnoqlarni ko'zdan kechiradi, tahlil oladi, podologik ishlov beradi va davolash rejasini tuzadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog va podolog tirnoqlarni ko'zdan kechiradi, tahlil oladi, podologik ishlov beradi va davolash rejasini tuzadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -305,7 +305,7 @@ export const NAIL_FUNGUS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить грибок ногтей в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог и подолог осмотрят ногти, возьмут анализ, проведут подологическую обработку и составят план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог и подолог осмотрят ногти, возьмут анализ, проведут подологическую обработку и составят план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -352,7 +352,7 @@ export const NAIL_FUNGUS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get nail fungus treated in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist and podiatrist examine the nails, take a sample, carry out podiatric nail care and build a treatment plan. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist and podiatrist examine the nails, take a sample, carry out podiatric nail care and build a treatment plan. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

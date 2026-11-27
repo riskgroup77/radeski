@@ -277,7 +277,7 @@ export const DARK_CIRCLES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda ko'z osti qorayishini qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida kosmetolog-dermatolog ko'z osti turini aniqlaydi va mos muolajani tanlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida kosmetolog-dermatolog ko'z osti turini aniqlaydi va mos muolajani tanlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -324,7 +324,7 @@ export const DARK_CIRCLES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить тёмные круги под глазами в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде косметолог-дерматолог определит тип кругов и подберёт подходящую процедуру. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде косметолог-дерматолог определит тип кругов и подберёт подходящую процедуру. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -371,7 +371,7 @@ export const DARK_CIRCLES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I treat dark circles in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist-cosmetologist identifies the type of circles and chooses a suitable treatment. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist-cosmetologist identifies the type of circles and chooses a suitable treatment. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

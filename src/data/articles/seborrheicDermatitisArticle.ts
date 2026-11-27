@@ -301,7 +301,7 @@ export const SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog teri va bosh terisini ko'rib, kerak bo'lsa dermatoskopiya va tahlil o'tkazadi va davolash rejasini tuzadi. Qabulga sayt orqali yoki +998 73 200-73-73 raqami orqali yoziling.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog teri va bosh terisini ko'rib, kerak bo'lsa dermatoskopiya va tahlil o'tkazadi va davolash rejasini tuzadi. Qabulga sayt orqali yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yoziling.",
       },
     ],
   },
@@ -353,7 +353,7 @@ export const SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить себорейный дерматит в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит кожу и кожу головы, при необходимости проведёт дерматоскопию и анализ и составит план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит кожу и кожу головы, при необходимости проведёт дерматоскопию и анализ и составит план лечения. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -405,7 +405,7 @@ export const SEBORRHEIC_DERMATITIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get treatment in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand, a dermatologist examines the skin and scalp, performs dermoscopy and a lab test when needed, and builds a treatment plan. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand, a dermatologist examines the skin and scalp, performs dermoscopy and a lab test when needed, and builds a treatment plan. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

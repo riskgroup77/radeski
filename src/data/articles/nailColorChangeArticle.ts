@@ -343,7 +343,7 @@ export const NAIL_COLOR_CHANGE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda tirnoq rangi o'zgarishini qayerda tekshirish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatovenerolog-podolog tirnoqni ko'radi, dermatoskopiya va kerakli tahlillarni o'tkazadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatovenerolog-podolog tirnoqni ko'radi, dermatoskopiya va kerakli tahlillarni o'tkazadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -390,7 +390,7 @@ export const NAIL_COLOR_CHANGE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где проверить изменение цвета ногтей в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматовенеролог-подолог осмотрит ноготь, проведёт дерматоскопию и нужные анализы. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматовенеролог-подолог осмотрит ноготь, проведёт дерматоскопию и нужные анализы. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -437,7 +437,7 @@ export const NAIL_COLOR_CHANGE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where in Fergana and Kokand can I have nail color changes checked?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatovenereologist-podiatrist examines the nail and performs dermoscopy and the necessary tests. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatovenereologist-podiatrist examines the nail and performs dermoscopy and the necessary tests. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

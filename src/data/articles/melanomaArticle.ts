@@ -304,7 +304,7 @@ export const MELANOMA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda melanomaga qayerda tekshirilish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatoonkolog shubhali dog'larni dermatoskop bilan tekshiradi, kerak bo'lsa kartografiya va biopsiyani tashkil qiladi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatoonkolog shubhali dog'larni dermatoskop bilan tekshiradi, kerak bo'lsa kartografiya va biopsiyani tashkil qiladi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -351,7 +351,7 @@ export const MELANOMA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где проверить кожу на меланому в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматоонколог осмотрит подозрительные пятна дерматоскопом и при необходимости организует картирование и биопсию. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматоонколог осмотрит подозрительные пятна дерматоскопом и при необходимости организует картирование и биопсию. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -398,7 +398,7 @@ export const MELANOMA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get checked for melanoma in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermato-oncologist examines suspicious spots with a dermatoscope and arranges mapping and biopsy when needed. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermato-oncologist examines suspicious spots with a dermatoscope and arranges mapping and biopsy when needed. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

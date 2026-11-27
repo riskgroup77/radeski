@@ -224,7 +224,7 @@ export const CHILD_RASH_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda bolalar dermatologi qayerda qabul qiladi?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida bolalar dermatologi toshmani ko'zdan kechiradi va bola yoshiga mos davolash tanlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida bolalar dermatologi toshmani ko'zdan kechiradi va bola yoshiga mos davolash tanlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -271,7 +271,7 @@ export const CHILD_RASH_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где принимает детский дерматолог в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде детский дерматолог осмотрит сыпь и подберёт лечение по возрасту ребёнка. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде детский дерматолог осмотрит сыпь и подберёт лечение по возрасту ребёнка. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -318,7 +318,7 @@ export const CHILD_RASH_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where is there a paediatric dermatologist in Fergana and Kokand?',
         answer:
-          "At the Radeski Skin Clinic branches in Fergana and Kokand a paediatric dermatologist examines the rash and chooses treatment suited to the child's age. Book on the website or call +998 73 200-73-73.",
+          "At the Radeski Skin Clinic branches in Fergana and Kokand a paediatric dermatologist examines the rash and chooses treatment suited to the child's age. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).",
       },
     ],
   },

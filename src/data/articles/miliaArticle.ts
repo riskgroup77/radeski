@@ -239,7 +239,7 @@ export const MILIA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda miliumni qayerda olib tashlash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog-kosmetolog miliumni tekshiradi va xavfsiz olib tashlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog-kosmetolog miliumni tekshiradi va xavfsiz olib tashlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -286,7 +286,7 @@ export const MILIA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где удалить милиумы в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог-косметолог осмотрит милиумы и безопасно их удалит. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог-косметолог осмотрит милиумы и безопасно их удалит. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -333,7 +333,7 @@ export const MILIA_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I have milia removed in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist-cosmetologist examines and safely removes milia. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist-cosmetologist examines and safely removes milia. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

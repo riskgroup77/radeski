@@ -245,7 +245,7 @@ export const HERPES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda gerpesni qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatovenerolog toshmani ko'zdan kechiradi, davolashni tayinlaydi va tez-tez qaytadigan gerpesda profilaktika rejasini tuzadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatovenerolog toshmani ko'zdan kechiradi, davolashni tayinlaydi va tez-tez qaytadigan gerpesda profilaktika rejasini tuzadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -292,7 +292,7 @@ export const HERPES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить герпес в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматовенеролог осмотрит высыпания, назначит лечение и при частом герпесе составит план профилактики. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматовенеролог осмотрит высыпания, назначит лечение и при частом герпесе составит план профилактики. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -339,7 +339,7 @@ export const HERPES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get herpes treated in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatovenereologist examines the sores, prescribes treatment and plans prevention for frequent recurrences. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatovenereologist examines the sores, prescribes treatment and plans prevention for frequent recurrences. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

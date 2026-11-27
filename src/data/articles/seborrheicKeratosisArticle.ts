@@ -251,7 +251,7 @@ export const SEBORRHEIC_KERATOSIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda keratomani qayerda olib tashlash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog o'simtani dermatoskop bilan tekshiradi va CO₂ lazer, radioto'lqin yoki jarrohlik usulida olib tashlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog o'simtani dermatoskop bilan tekshiradi va CO₂ lazer, radioto'lqin yoki jarrohlik usulida olib tashlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -298,7 +298,7 @@ export const SEBORRHEIC_KERATOSIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где удалить кератому в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит образование дерматоскопом и удалит его CO₂-лазером, радиоволной или хирургически. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит образование дерматоскопом и удалит его CO₂-лазером, радиоволной или хирургически. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -345,7 +345,7 @@ export const SEBORRHEIC_KERATOSIS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I have a keratosis removed in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist examines the growth with a dermatoscope and removes it with CO₂ laser, radiowave or surgery. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist examines the growth with a dermatoscope and removes it with CO₂ laser, radiowave or surgery. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

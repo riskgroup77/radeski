@@ -216,7 +216,7 @@ export const STRIAE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda striyalarni qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog-kosmetolog striyalarni baholaydi va fraksion CO₂ lazer yoki RF-mikroigna kursini tanlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog-kosmetolog striyalarni baholaydi va fraksion CO₂ lazer yoki RF-mikroigna kursini tanlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -263,7 +263,7 @@ export const STRIAE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить растяжки в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог-косметолог оценит растяжки и подберёт курс фракционного CO₂-лазера или RF-микроигл. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог-косметолог оценит растяжки и подберёт курс фракционного CO₂-лазера или RF-микроигл. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -310,7 +310,7 @@ export const STRIAE_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get stretch marks treated in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist-cosmetologist assesses the marks and chooses a course of fractional CO₂ laser or RF microneedling. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist-cosmetologist assesses the marks and chooses a course of fractional CO₂ laser or RF microneedling. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

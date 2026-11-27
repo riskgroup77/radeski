@@ -248,7 +248,7 @@ export const MOLE_CHECK_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda xollarni qayerda tekshirish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatoonkolog xollarni dermatoskop bilan tekshiradi, kerak bo'lsa xollar xaritasini tuzadi va shubhali xolni gistologiya bilan olib tashlaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatoonkolog xollarni dermatoskop bilan tekshiradi, kerak bo'lsa xollar xaritasini tuzadi va shubhali xolni gistologiya bilan olib tashlaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -295,7 +295,7 @@ export const MOLE_CHECK_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где проверить родинки в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматоонколог осмотрит родинки дерматоскопом, при необходимости составит карту родинок и удалит подозрительную с гистологией. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматоонколог осмотрит родинки дерматоскопом, при необходимости составит карту родинок и удалит подозрительную с гистологией. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -342,7 +342,7 @@ export const MOLE_CHECK_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I have my moles checked in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermato-oncologist examines moles with a dermatoscope, maps them when needed and removes suspicious ones with histology. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermato-oncologist examines moles with a dermatoscope, maps them when needed and removes suspicious ones with histology. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

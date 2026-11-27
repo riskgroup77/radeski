@@ -303,7 +303,7 @@ export const BRITTLE_NAILS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda mo'rt tirnoqlarni qayerda tekshirish mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog va dermatolog tirnoqni ko'radi, kerak bo'lsa zamburug'ga tahlil o'tkazadi va tirnoqqa apparat bilan ishlov beradi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog va dermatolog tirnoqni ko'radi, kerak bo'lsa zamburug'ga tahlil o'tkazadi va tirnoqqa apparat bilan ishlov beradi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -359,7 +359,7 @@ export const BRITTLE_NAILS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где проверить ломкие ногти в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог и дерматолог осмотрят ногти, при необходимости проведут анализ на грибок и аппаратно обработают ногти. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог и дерматолог осмотрят ногти, при необходимости проведут анализ на грибок и аппаратно обработают ногти. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -415,7 +415,7 @@ export const BRITTLE_NAILS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where in Fergana and Kokand can I have brittle nails checked?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a podologist and dermatologist examine the nails, run a fungus test if needed and treat the nails with an apparatus. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a podologist and dermatologist examine the nails, run a fungus test if needed and treat the nails with an apparatus. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

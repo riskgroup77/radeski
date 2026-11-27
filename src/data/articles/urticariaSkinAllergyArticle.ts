@@ -283,7 +283,7 @@ export const URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda teri allergiyasini qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog toshmani ko'zdan kechiradi, kerak bo'lsa tahlillarni buyuradi va davolash rejasini tuzadi; og'ir surunkali eshakemida immunobiologik terapiya ham o'tkaziladi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida dermatolog toshmani ko'zdan kechiradi, kerak bo'lsa tahlillarni buyuradi va davolash rejasini tuzadi; og'ir surunkali eshakemida immunobiologik terapiya ham o'tkaziladi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -335,7 +335,7 @@ export const URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где лечить аллергию на коже в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит сыпь, при необходимости назначит анализы и составит план лечения; при тяжёлой хронической крапивнице проводится иммунобиологическая терапия. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде дерматолог осмотрит сыпь, при необходимости назначит анализы и составит план лечения; при тяжёлой хронической крапивнице проводится иммунобиологическая терапия. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -387,7 +387,7 @@ export const URTICARIA_SKIN_ALLERGY_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I get skin allergy treatment in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist examines the rash, orders tests when needed and builds a treatment plan; severe chronic hives can be treated with immunobiological therapy. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a dermatologist examines the rash, orders tests when needed and builds a treatment plan; severe chronic hives can be treated with immunobiological therapy. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

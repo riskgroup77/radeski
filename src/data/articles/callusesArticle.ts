@@ -245,7 +245,7 @@ export const CALLUSES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda qadoqni qayerda olib tashlash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog qadoq va kesaklarni og'riqsiz olib tashlaydi va parvarish rejasini tuzadi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida podolog qadoq va kesaklarni og'riqsiz olib tashlaydi va parvarish rejasini tuzadi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -292,7 +292,7 @@ export const CALLUSES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где удалить мозоль в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог безболезненно удалит мозоли и натоптыши и составит план ухода. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде подолог безболезненно удалит мозоли и натоптыши и составит план ухода. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -339,7 +339,7 @@ export const CALLUSES_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I have calluses removed in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a podiatrist removes calluses and corns painlessly and builds a care plan. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a podiatrist removes calluses and corns painlessly and builds a care plan. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },

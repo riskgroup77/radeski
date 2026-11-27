@@ -346,7 +346,7 @@ export const LEG_VEINS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: "Farg'ona va Qo'qonda oyoqdagi tomir to'rini qayerda davolash mumkin?",
         answer:
-          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida shifokor oyoqdagi tomirlarni baholaydi va mayda yuzaki tomirlarni Lutronic Derma V lazeri bilan davolaydi. Saytda yoki +998 73 200-73-73 raqami orqali yozilishingiz mumkin.",
+          "Radeski Skin Clinic'ning Farg'ona va Qo'qon filiallarida shifokor oyoqdagi tomirlarni baholaydi va mayda yuzaki tomirlarni Lutronic Derma V lazeri bilan davolaydi. Saytda yoki +998 73 200-73-73 (Farg'ona) yoki +998 95 145 73 73 (Qo'qon) raqamlari orqali yozilishingiz mumkin.",
       },
     ],
   },
@@ -393,7 +393,7 @@ export const LEG_VEINS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Где удалить сосудистые звёздочки на ногах в Фергане и Коканде?',
         answer:
-          'В филиалах Radeski Skin Clinic в Фергане и Коканде врач оценит сосуды на ногах и удалит мелкие поверхностные сосуды лазером Lutronic Derma V. Записаться можно на сайте или по телефону +998 73 200-73-73.',
+          'В филиалах Radeski Skin Clinic в Фергане и Коканде врач оценит сосуды на ногах и удалит мелкие поверхностные сосуды лазером Lutronic Derma V. Записаться можно на сайте или по телефону +998 73 200-73-73 (Фергана) или +998 95 145 73 73 (Коканд).',
       },
     ],
   },
@@ -440,7 +440,7 @@ export const LEG_VEINS_ARTICLE_CATALOG: LocalizedArticleCatalog = {
       {
         question: 'Where can I have leg spider veins treated in Fergana and Kokand?',
         answer:
-          'At the Radeski Skin Clinic branches in Fergana and Kokand a doctor assesses the veins on your legs and treats small surface vessels with the Lutronic Derma V laser. Book on the website or call +998 73 200-73-73.',
+          'At the Radeski Skin Clinic branches in Fergana and Kokand a doctor assesses the veins on your legs and treats small surface vessels with the Lutronic Derma V laser. Book on the website or call +998 73 200-73-73 (Fergana) or +998 95 145 73 73 (Kokand).',
       },
     ],
   },
