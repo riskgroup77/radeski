@@ -27,7 +27,7 @@ export const CLINIC_PHOTOS: ClinicPhoto[] = [
   P('qoqon-tashqi', 'qoqon', "Radeski Skin Clinic Qo'qon filiali binosi va to'xtash joyi", 'Здание филиала Radeski Skin Clinic в Коканде и парковка', 'Radeski Skin Clinic Kokand branch building and parking'),
   P('qoqon-kirish', 'qoqon', "Qo'qon filialiga kirish: zinapoya va pandus", 'Вход в филиал в Коканде: лестница и пандус', 'Kokand branch entrance with steps and ramp'),
   P('fargona-yolak', 'fargona', "Farg'ona klinikasi: muolaja xonalariga yo'lak", 'Клиника в Фергане: коридор к процедурным кабинетам', 'Fergana clinic: corridor to the treatment rooms'),
-  P('fargona-lazer-xonasi', 'fargona', "Farg'ona klinikasi: lazer muolajalari xonasi", 'Клиника в Фергане: кабинет лазерных процедур', 'Fergana clinic: laser treatment room'),
+  P('fargona-lazer-xonasi', 'fargona', "LaseMD Ultra tuliy lazeri xonasi — Farg'ona klinikasi", 'Кабинет тулиевого лазера LaseMD Ultra — клиника в Фергане', 'LaseMD Ultra thulium laser room at the Fergana clinic', 'lasemd-ultra-lutronic'),
   P('fargona-lutronic-derma-v', 'fargona', "Lutronic Derma V lazeri — Farg'ona klinikasi", 'Лазер Lutronic Derma V — клиника в Фергане', 'Lutronic Derma V laser at the Fergana clinic', 'derma-v-lutronic'),
   P('fargona-shifokor-kabineti', 'fargona', "Farg'ona klinikasi: dermatolog kabineti, sertifikatlar va mikroskop", 'Клиника в Фергане: кабинет дерматолога, сертификаты и микроскоп', "Fergana clinic: dermatologist's office with certificates and microscope"),
   P('qoqon-deka-smartxide-punto', 'qoqon', "DEKA SmartXide Punto CO₂ lazeri — Qo'qon filiali", 'CO₂-лазер DEKA SmartXide Punto — филиал в Коканде', 'DEKA SmartXide Punto CO₂ laser at the Kokand branch', 'deka-co2-laser'),

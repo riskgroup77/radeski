@@ -950,7 +950,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                     </span>
                     <span className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-white border border-brand-sectiongray rounded-lg shadow-2xs">
                       <Clock className="w-4 h-4 text-brand-gold" />
-                      {locale === 'uz' ? "Du.-Sha.: 08:00 - 18:00" : locale === 'ru' ? "Пн.-Сб.: 08:00 - 18:00" : "Mon.-Sat. 8AM - 6PM"}
+                      {locale === 'uz' ? "Farg'ona: Du.-Sha. 08:00 - 18:00 · Qo'qon: har kuni 08:00 - 20:00" : locale === 'ru' ? "Фергана: Пн.-Сб. 08:00 - 18:00 · Коканд: ежедневно 08:00 - 20:00" : "Fergana: Mon.-Sat. 8AM - 6PM · Kokand: daily 8AM - 8PM"}
                     </span>
                   </div>
 

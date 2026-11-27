@@ -5,7 +5,7 @@ function L(uz: string, ru: string, en: string): LocalizedEquipmentText {
 }
 
 /**
- * Tuliy lazer 1927 nm — LaseMD Ultra (Lutronic), Qo'qon filiali.
+ * Tuliy lazer 1927 nm — LaseMD Ultra (Lutronic), Farg'ona va Qo'qon filiallari.
  * Text approved by the clinic (doctors' chat, 15.10.2026); device and branch as in the
  * LaseMD Ultra / thulium hair articles; sessions and recovery as in the LaseMD article FAQ.
  */
@@ -28,9 +28,9 @@ export const LASEMD_ULTRA_LUTRONIC = {
   ),
   manufacturer: L('Lutronic (Janubiy Koreya)', 'Lutronic (Южная Корея)', 'Lutronic (South Korea)'),
   heading: L(
-    "Tuliy lazer 1927 nm — LaseMD Ultra (Lutronic) Qo'qonda",
-    'Тулиевый лазер 1927 нм — LaseMD Ultra (Lutronic) в Коканде',
-    '1927 nm thulium laser — LaseMD Ultra (Lutronic) in Kokand',
+    "Tuliy lazer 1927 nm — LaseMD Ultra (Lutronic) Farg'ona va Qo'qonda",
+    'Тулиевый лазер 1927 нм — LaseMD Ultra (Lutronic) в Фергане и Коканде',
+    '1927 nm thulium laser — LaseMD Ultra (Lutronic) in Fergana and Kokand',
   ),
   image: '/articles/lasemd-ultra-kokand-cover.jpg',
   serviceLinks: [],
@@ -55,9 +55,9 @@ export const LASEMD_ULTRA_LUTRONIC = {
   ],
   clinicUsage: [
     L(
-      "Radeski Skin Clinic Qo'qon filialida Lutronic kompaniyasining LaseMD Ultra 1927 nm fraksion tuliy lazeri qo'llaniladi. Ta'sir parametrlari, seanslar soni va muolajalar orasidagi interval teri holatiga qarab shifokor tomonidan individual belgilanadi.",
-      'В филиале Radeski Skin Clinic в Коканде используется фракционный тулиевый лазер LaseMD Ultra 1927 нм (Lutronic). Параметры воздействия, количество сеансов и интервалы между процедурами врач подбирает индивидуально по состоянию кожи.',
-      "Radeski Skin Clinic's Kokand branch uses the LaseMD Ultra 1927 nm fractional thulium laser by Lutronic. Treatment settings, the number of sessions and the intervals between them are set individually by the doctor based on skin condition.",
+      "Radeski Skin Clinic Farg'ona va Qo'qon filiallarida Lutronic kompaniyasining LaseMD Ultra 1927 nm fraksion tuliy lazeri qo'llaniladi. Ta'sir parametrlari, seanslar soni va muolajalar orasidagi interval teri holatiga qarab shifokor tomonidan individual belgilanadi.",
+      'В филиалах Radeski Skin Clinic в Фергане и Коканде используется фракционный тулиевый лазер LaseMD Ultra 1927 нм (Lutronic). Параметры воздействия, количество сеансов и интервалы между процедурами врач подбирает индивидуально по состоянию кожи.',
+      "Radeski Skin Clinic's Fergana and Kokand branches use the LaseMD Ultra 1927 nm fractional thulium laser by Lutronic. Treatment settings, the number of sessions and the intervals between them are set individually by the doctor based on skin condition.",
     ),
     L(
       "Klinikada 1927 nm tuliy lazer soch to'kilishi va sochlar siyraklashishini kompleks davolashda ham qo'llaniladi.",
@@ -73,14 +73,14 @@ export const LASEMD_ULTRA_LUTRONIC = {
   ],
   seo: {
     title: L(
-      "LaseMD Ultra tuliy lazer 1927 nm — Qo'qon | Radeski",
-      'LaseMD Ultra — тулиевый лазер 1927 нм в Коканде | Radeski',
-      'LaseMD Ultra 1927 nm Thulium Laser — Kokand | Radeski',
+      "LaseMD Ultra tuliy lazer 1927 nm — Farg'ona, Qo'qon | Radeski",
+      'LaseMD Ultra — тулиевый лазер 1927 нм в Фергане и Коканде | Radeski',
+      'LaseMD Ultra 1927 nm Thulium Laser — Fergana, Kokand | Radeski',
     ),
     description: L(
-      "LaseMD Ultra (Lutronic) — 1927 nm tuliy lazer: pigmentatsiya, yoshartirish va teri teksturasi. Ko'rsatmalar, qarshi ko'rsatmalar, seanslar va narx bo'yicha konsultatsiya — Radeski, Qo'qon.",
-      'LaseMD Ultra (Lutronic) — тулиевый лазер 1927 нм: пигментация, омоложение и текстура кожи. Показания, противопоказания, курс и стоимость на консультации — Radeski, Коканд.',
-      'LaseMD Ultra (Lutronic) 1927 nm thulium laser for pigmentation, rejuvenation and skin texture. Indications, contraindications, sessions and price at consultation — Radeski, Kokand.',
+      "LaseMD Ultra (Lutronic) — 1927 nm tuliy lazer: pigmentatsiya, yoshartirish va teri teksturasi. Ko'rsatmalar, qarshi ko'rsatmalar, seanslar va narx bo'yicha konsultatsiya — Radeski, Farg'ona va Qo'qon.",
+      'LaseMD Ultra (Lutronic) — тулиевый лазер 1927 нм: пигментация, омоложение и текстура кожи. Показания, противопоказания, курс и стоимость на консультации — Radeski, Фергана и Коканд.',
+      'LaseMD Ultra (Lutronic) 1927 nm thulium laser for pigmentation, rejuvenation and skin texture. Indications, contraindications, sessions and price at consultation — Radeski, Fergana and Kokand.',
     ),
     keywords: L(
       "tuliy lazer, tuliy lazer 1927 nm, fraksion tuliy lazer, lazer bilan terini yoshartirish, pigmentatsiyani lazer bilan davolash, pigment dog'larga qarshi lazer, fotoqarishni davolash, lazer bilan teri yangilanishi, lazer kosmetologiya, LaseMD Ultra, Radeski Skin Clinic",

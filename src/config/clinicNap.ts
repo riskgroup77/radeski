@@ -32,6 +32,14 @@ export const KOKAND_ADDRESS: Record<Locale, string> = {
   en: '47-MFY, Huqandiy district, 144A, Kokand',
 };
 
+/** Kokand works every day, 08:00-20:00 (door sign, confirmed by management 27.11.2026). */
+export const KOKAND_HOURS: Record<Locale, string> = {
+  uz: 'Har kuni (Dushanba – Yakshanba): 08:00 – 20:00',
+  ru: 'Ежедневно (Понедельник – Воскресенье): 08:00 – 20:00',
+  en: 'Daily (Monday – Sunday): 08:00 – 20:00',
+};
+
+/** Fergana hours. */
 export const CLINIC_HOURS: Record<Locale, string> = {
   uz: 'Dushanba – Shanba: 08:00 – 18:00',
   ru: 'Понедельник – Суббота: 08:00 – 18:00',

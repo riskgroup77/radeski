@@ -231,9 +231,9 @@ export const CLINIC_BRANCHES: ClinicBranch[] = [
     },
     phone: '+998 95 145 73 73',
     hours: {
-      uz: 'Dushanba – Shanba: 08:00 – 18:00',
-      ru: 'Понедельник – Суббота: 08:00 – 18:00',
-      en: 'Monday – Saturday: 08:00 – 18:00',
+      uz: 'Har kuni (Dushanba – Yakshanba): 08:00 – 20:00',
+      ru: 'Ежедневно (Понедельник – Воскресенье): 08:00 – 20:00',
+      en: 'Daily (Monday – Sunday): 08:00 – 20:00',
     },
     services: {
       uz: 'To‘liq spektr: dermatologiya, kosmetologiya, lazer, laboratoriya, dermatoskopiya',

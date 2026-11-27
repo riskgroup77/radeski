@@ -106,7 +106,7 @@ function ruBody(): string {
 
 Телефон: +998 95 145 73 73
 
-График: понедельник–суббота, 08:00–18:00
+График: ежедневно, 08:00–20:00
 
 Если волосы стали тоньше, уменьшилась их плотность или выпадение стало более выраженным — запишитесь на консультацию. Тулиевый лазер может стать частью индивидуальной программы лечения при определённых видах выпадения волос.
 
@@ -207,7 +207,7 @@ Manzil: Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A
 
 Telefon: +998 95 145 73 73
 
-Ish vaqti: dushanba–shanba, 08:00–18:00
+Ish vaqti: har kuni, 08:00–20:00
 
 Sochlaringiz inchelgan, zichligi kamaygan yoki to'kilish kuchaygan bo'lsa — konsultatsiyaga yoziling. Tuliy lazer ma'lum soch to'kilishi turlarida individual davolash dasturining bir qismi bo'lishi mumkin.
 
@@ -308,7 +308,7 @@ Address: Kokand, 47-MFY, Huqandiy district, 144A
 
 Phone: +998 95 145 73 73
 
-Hours: Monday–Saturday, 08:00–18:00
+Hours: daily, 08:00–20:00
 
 If your hair has become thinner, less dense, or shedding has increased — book a consultation. Thulium laser may be part of an individual treatment program for certain types of hair loss.
 

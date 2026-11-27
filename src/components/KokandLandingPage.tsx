@@ -107,7 +107,7 @@ function copy(locale: Locale) {
       lead:
         'Teri, soch va tirnoqlar bo‘yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya, dermatoskopiya, onkodermatologiya, IPL, lazer epilyatsiya va fototerapiya. Qo‘qon filialida alohida SEO-klastrlar: akne, psoriaz, vitiligo, rozasea, trixoskopiya, xol tekshiruvi, biopsiya. Manzil: 47-MFY, Huqandiy mavzesi, 144A.',
       address: "Qo'qon sh., 47-MFY, Huqandiy mavzesi, 144A",
-      hours: 'Dushanba – Shanba: 08:00 – 18:00',
+      hours: 'Har kuni (Dushanba – Yakshanba): 08:00 – 20:00',
       servicesTitle: 'Qo‘qonda xizmatlar',
       commercialTitle: 'Qo‘qon bo‘yicha qidiruv sahifalari',
       clustersTitle: 'Qo‘qon SEO yo‘nalishlari',
@@ -140,7 +140,7 @@ function copy(locale: Locale) {
       lead:
         'Специализированная клиника кожи, волос и ногтей в Коканде: дерматология, трихология, подология, дерматоскопия, онкодерматология, IPL, лазерная эпиляция и фототерапия. Отдельные страницы по акне, псориазу, витилиго, розацеа, трихоскопии, проверке родинок и биопсии. Адрес: 47-МФЙ, массив Хукандий, 144А.',
       address: 'г. Коканд, 47-МФЙ, массив Хукандий, 144А',
-      hours: 'Понедельник – Суббота: 08:00 – 18:00',
+      hours: 'Ежедневно (Понедельник – Воскресенье): 08:00 – 20:00',
       servicesTitle: 'Услуги в Коканде',
       commercialTitle: 'Коммерческие страницы по Коканду',
       clustersTitle: 'SEO-направления Коканда',
@@ -172,7 +172,7 @@ function copy(locale: Locale) {
     lead:
       'Specialized skin, hair and nail clinic in Kokand: dermatology, trichology, podology, dermoscopy, oncodermatology, IPL, laser hair removal and phototherapy. Dedicated pages for acne, psoriasis, vitiligo, rosacea, trichoscopy, mole screening and biopsy. Address: 47-MFY, Huqandiy district, 144A.',
     address: '47-MFY, Huqandiy district, 144A, Kokand',
-    hours: 'Monday – Saturday: 08:00 – 18:00',
+    hours: 'Daily (Monday – Sunday): 08:00 – 20:00',
     servicesTitle: 'Services in Kokand',
     commercialTitle: 'Kokand search landing pages',
     clustersTitle: 'Kokand SEO clusters',

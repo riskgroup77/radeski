@@ -10,7 +10,7 @@ import { GOOGLE_REVIEWS_CONFIG } from '../config/googleReviews';
 import { CLINIC_MAP_EMBED_URL, getClinicMapOpenUrl, KOKAND_BRANCH_MAP_OPEN_URL, LIEGE_BRANCH_MAP_OPEN_URL, RADE_SKIN_CLINIC_EMAIL, RADE_SKIN_CLINIC_PHONE, RADE_SKIN_CLINIC_WEBSITE } from '../config/links';
 import { extractGoogleReviewId } from '../utils/googleReviewMeta';
 import { resolveMediaUrl } from './client';
-import { CLINIC_PHONE_FERGANA_MOBILE, CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY, FERGANA_ADDRESS, KOKAND_ADDRESS } from '../config/clinicNap';
+import { CLINIC_HOURS, CLINIC_PHONE_FERGANA_MOBILE, CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY, FERGANA_ADDRESS, KOKAND_ADDRESS, KOKAND_HOURS } from '../config/clinicNap';
 import type {
   ApiBranchOut,
   ApiClinicRatingOut,
@@ -139,7 +139,11 @@ export function mapBranchFromApi(api: ApiBranchOut): ClinicBranch {
         : isFergana
           ? CLINIC_PHONE_PRIMARY.tel
           : undefined,
-    hours: localized(api.hours_uz || '', api.hours_ru, api.hours_en),
+    hours: isKokand
+      ? { ...KOKAND_HOURS }
+      : isFergana
+        ? { ...CLINIC_HOURS }
+        : localized(api.hours_uz || '', api.hours_ru, api.hours_en),
     services: localized(api.services_uz || '', api.services_ru, api.services_en),
     mapEmbed: api.map_embed?.trim() && !api.map_embed.includes('0x38bb83461413146b')
       ? api.map_embed
