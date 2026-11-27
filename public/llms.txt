@@ -1,0 +1,32 @@
+# Radeski Skin & Aesthetic Clinic
+
+> Dermatology and cosmetology clinic in Uzbekistan with two branches, Fergana and Kokand: dermatology, dermato-oncology (moles, dermatoscopy, biopsy), trichology, podology (nails), phototherapy for psoriasis and vitiligo, IPL and laser treatments. Site languages: Uzbek (/uz), Russian (/ru), English (/en).
+
+Contact details below were confirmed by the clinic's management in November 2026. Medical texts on the site are general information; diagnosis and treatment are decided by a doctor at a consultation.
+
+## Branches
+
+- Fergana (main clinic): O'zbekiston Ovozi street, 1B, Fergana. Phones: +998 73 200 73 73, +998 95 210 73 73. Hours: Monday–Saturday 08:00–18:00, Sunday closed. Page: https://radeski.uz/ru/fargona
+- Kokand: 47-MFY, Huqandiy district, 144A, Kokand. Phone: +998 95 145 73 73. Hours: every day 08:00–20:00. Page: https://radeski.uz/ru/qoqon
+- Both branches: https://radeski.uz/ru/branches
+- Online booking: https://hipolink.net/radeskiskinclinicuz
+
+## Main pages
+
+- [Doctors](https://radeski.uz/ru/doctors): specialists, their branch and profile
+- [Services](https://radeski.uz/ru/services): all service areas
+- [Dermatology](https://radeski.uz/ru/services/dermatologiya)
+- [Dermato-oncology: moles and skin tumours](https://radeski.uz/ru/services/dermatoonkologiya)
+- [Trichology: hair loss](https://radeski.uz/ru/services/trihologiya-centr-lechenie-volos)
+- [Nail pathology and podology](https://radeski.uz/ru/services/clinika-patologii-nogtej)
+- [Device cosmetology: IPL InMode, lasers](https://radeski.uz/ru/services/apparatnaya-kosmetologiya)
+- [Technologies and equipment](https://radeski.uz/ru/technologies)
+- [Prices](https://radeski.uz/ru/prices)
+- [Articles](https://radeski.uz/ru/articles)
+- [About the clinic](https://radeski.uz/ru/about)
+
+## Optional
+
+- Uzbek versions: replace /ru/ with /uz/ (for example https://radeski.uz/uz/fargona, https://radeski.uz/uz/qoqon)
+- English versions: replace /ru/ with /en/
+- Sitemap: https://radeski.uz/sitemap.xml
