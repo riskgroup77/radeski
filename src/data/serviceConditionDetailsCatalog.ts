@@ -208,9 +208,9 @@ export const CATEGORY_CONDITION_DEFAULTS: Record<string, ServiceConditionDetailM
     priceCategoryIds: ['fotoomolozhenie-ipl-lumecca', 'fotoomolozhenie-lechenie-sosudistyh-patologiy-rozatsea'],
     clinicApproach: [
       L(
-        'Forever Young IPL protokollari gen darajasida teri yangilanishi uchun dermatolog nazoratida qo\'llaniladi.',
-        'Протоколы Forever Young IPL применяются под контролем дерматолога для обновления кожи на генном уровне.',
-        'Forever Young IPL protocols are used under dermatologist supervision for gene-level skin renewal.',
+        'IPL protokollari teri yangilanishi uchun dermatolog nazoratida qo\'llaniladi.',
+        'Протоколы IPL применяются под контролем дерматолога для обновления кожи.',
+        'IPL protocols are used under dermatologist supervision for skin renewal.',
       ),
     ],
   },

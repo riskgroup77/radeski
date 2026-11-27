@@ -1,4 +1,5 @@
 import { resolvePriceCategoryForApi } from '../data/priceCategoryLabels';
+import { sanitizeClaims } from '../utils/claimSanitizer';
 import { Locale, Doctor, ServiceCategory, ServiceDetail, PriceItem, Article } from '../types';
 import {
   ApiDoctor,
@@ -64,9 +65,9 @@ export function mapDoctorFromApi(api: ApiDoctor): Doctor {
     name: { uz: api.name_uz, ru: api.name_ru, en: api.name_en },
     role: { uz: api.role_uz, ru: api.role_ru, en: api.role_en },
     bio: {
-      uz: api.bio_uz || '',
-      ru: api.bio_ru || api.bio_uz || '',
-      en: api.bio_en || api.bio_uz || '',
+      uz: sanitizeClaims(api.bio_uz || ''),
+      ru: sanitizeClaims(api.bio_ru || api.bio_uz || ''),
+      en: sanitizeClaims(api.bio_en || api.bio_uz || ''),
     },
     experience: {
       uz: api.experience_uz || '',

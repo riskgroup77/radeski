@@ -7,6 +7,7 @@
  * not execute JavaScript (Yandex, link previews) now see each page's own content instead of
  * an empty <div id="root"> with the home-page title. In the browser React replaces it.
  */
+import { doctorInfoLabel } from '../utils/doctorInfoLabel';
 import { assertSubServiceCatalogIdsInSync } from '../data/serviceRichCatalog';
 import { resolveDoctorProfile } from '../data/doctorProfiles';
 import type { ReactNode } from 'react';
@@ -877,7 +878,7 @@ function PageContent({
           )}
           <p>{doctor.role[locale]}</p>
           <p>{doctor.bio[locale]}</p>
-          {doctor.education?.[locale] && <p>{doctor.education[locale]}</p>}
+          {doctor.education?.[locale] && <p>{doctorInfoLabel(doctor.education[locale], locale)}: {doctor.education[locale]}</p>}
           {profile && <DoctorProfileText profile={profile} />}
         </section>
         {practice.branches.map((branch) => (

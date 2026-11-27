@@ -1,4 +1,5 @@
 import { resolveDoctorProfile } from '../data/doctorProfiles';
+import { doctorBranchLine, doctorInfoLabel } from '../utils/doctorInfoLabel';
 import { useMemo, useState } from 'react';
 import type { PriceItem } from '../types';
 import type { CustomerReview } from '../data/sitePagesContent';
@@ -287,7 +288,7 @@ function DoctorProfileLayout({
               {doctor.education[locale] && (
                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-brand-text-muted">
                   <Briefcase className="h-3.5 w-3.5 text-brand-gold shrink-0" />
-                  {doctor.education[locale]}
+                  {doctorInfoLabel(doctor.education[locale], locale)}: {doctor.education[locale]}
                 </span>
               )}
             </div>
@@ -381,7 +382,7 @@ function DoctorSimpleLayout({
                 <div>
                   <h2 className="text-sm font-extrabold text-brand-text-primary uppercase tracking-wide flex items-center gap-1.5 mb-2">
                     <Briefcase className="w-4 h-4 text-brand-gold" />
-                    {d.education}
+                    {doctorInfoLabel(doctor.education[locale], locale)}
                   </h2>
                   <p className="text-sm sm:text-base font-semibold text-brand-text-primary leading-relaxed">
                     {doctor.education[locale]}

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { doctorBranchLine, doctorInfoLabel } from '../utils/doctorInfoLabel';
 import type { Doctor, Locale } from '../types';
 import { doctorPath } from '../routing/paths';
 import MediaImage from './MediaImage';
@@ -60,7 +61,7 @@ function DoctorCard({
         {doctor.education[locale] && (
           <div className="mt-2">
             <span className="text-xs font-extrabold uppercase tracking-wide text-brand-text-primary">
-              {educationLabel}
+              {educationLabel && doctorInfoLabel(doctor.education[locale], locale)}
             </span>
             <p className="mt-1 line-clamp-2 text-sm font-semibold leading-relaxed text-brand-text-primary">
               {doctor.education[locale]}

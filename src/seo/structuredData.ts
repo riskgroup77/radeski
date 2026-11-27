@@ -314,7 +314,8 @@ export function buildDoctorSchema(
     url: pageUrl,
     worksFor: branches.length ? branches : { '@id': clinicEntityId(origin) },
     ...(practice?.specialties.length ? { knowsAbout: practice.specialties } : {}),
-    alumniOf: education ? { '@type': 'EducationalOrganization', name: education } : undefined,
+    // The CMS field is a workplace for some doctors ("Radeski Skin Clinic, Fergana"): not a school.
+    alumniOf: education && !/radeski/i.test(education) ? { '@type': 'EducationalOrganization', name: education } : undefined,
     knowsLanguage: ['uz', 'ru'],
   };
 }

@@ -1656,7 +1656,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     technologies: {
       title: "IPL, Mohs, Excimer texnologiyalari — Radeski",
-      desc: "Sciton IPL, Mohs mikrografik jarrohligi, Excimer va UVB fototerapiya — Radeski Skin Clinic Farg'ona va Qo'qon.",
+      desc: "IPL InMode, Mohs mikrografik jarrohligi, Excimer va UVB fototerapiya — Radeski Skin Clinic Farg'ona va Qo'qon.",
       keywords: "IPL Farg'ona, IPL Qo'qon, Mohs, Excimer, UVB fototerapiya, zamonaviy dermatologiya",
     },
     'daavlin-foto-kabinalari': {
@@ -1772,7 +1772,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     technologies: {
       title: "Технологии — IPL, Mohs, Excimer | Radeski Фергана | Коканд",
-      desc: "Sciton IPL, хирургия Mohs, эксимерный лазер и UVB-фототерапия в клинике Radeski — Фергана и Коканд.",
+      desc: "IPL InMode, хирургия Mohs, эксимерный лазер и UVB-фототерапия в клинике Radeski — Фергана и Коканд.",
       keywords: "IPL Фергана, IPL Коканд, Mohs, Excimer, UVB фототерапия, современная дерматология",
     },
     'daavlin-foto-kabinalari': {
@@ -1888,7 +1888,7 @@ export const TAB_SEO: Record<Locale, Partial<Record<PageId, PageMeta>>> = {
     },
     technologies: {
       title: "Technologies — IPL, Mohs, Excimer | Radeski Fergana | Kokand",
-      desc: "Sciton IPL, Mohs micrographic surgery, Excimer and UVB phototherapy at Radeski — Fergana and Kokand.",
+      desc: "IPL InMode, Mohs micrographic surgery, Excimer and UVB phototherapy at Radeski — Fergana and Kokand.",
       keywords: "IPL Fergana, IPL Kokand, Mohs, Excimer, UVB phototherapy, modern dermatology",
     },
     'daavlin-foto-kabinalari': {

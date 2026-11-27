@@ -89,7 +89,7 @@ export const DICTIONARY = {
     features01: "Professional shifokorlar",
     features01Desc: "Xalqaro darajadagi dermatologlar va kosmetologlar jamoasi.",
     features02: "Zamonaviy texnologiyalar",
-    features02Desc: "O'zbekistonda Sciton IPL va ilg'or lazer uskunalaridan foydalanish.",
+    features02Desc: "O'zbekistonda IPL InMode va ilg'or lazer uskunalaridan foydalanish.",
     features03: "Yuqori darajadagi sterilizatsiya",
     features03Desc: "Yevropa tibbiyot standartlariga to'la mos keladigan steril xonalar.",
     features04: "Turli xil apparatlar",
@@ -185,7 +185,7 @@ export const DICTIONARY = {
     features01: "Профессиональные врачи",
     features01Desc: "Команда дерматологов и косметологов международного уровня.",
     features02: "Современные технологии",
-    features02Desc: "Применение систем IPL Sciton и передового лазерного оборудования в Узбекистане.",
+    features02Desc: "Применение систем IPL InMode и современного лазерного оборудования в Узбекистане.",
     features03: "Высочайшая стерильность",
     features03Desc: "Стерилизационные боксы, полностью соответствующие европейским медицинским регламентам.",
     features04: "Разнообразные аппараты",
@@ -281,7 +281,7 @@ export const DICTIONARY = {
     features01: "Professional Physicians",
     features01Desc: "International-class dermatologists and aesthetic cosmetologists.",
     features02: "Modern Technologies",
-    features02Desc: "Exclusive clinical application of Sciton IPL and advanced laser systems in Uzbekistan.",
+    features02Desc: "Clinical use of IPL InMode and advanced laser systems in Uzbekistan.",
     features03: "High-grade Disinfection",
     features03Desc: "Clean sterilization facilities matching global healthcare parameters.",
     features04: "Diverse Clinical Devices",
@@ -412,9 +412,9 @@ export const DOCTORS: Doctor[] = [
       en: "Dermatologist, Aesthetic Cosmetologist"
     },
     bio: {
-      uz: "Inyeksion va apparatli kosmetologiya mutaxassisi. IPL foto-yangilashni gen darajasida qo'llash va yoshartirish protokollarini amalga oshiradi.",
-      ru: "Специалист по инъекционной и аппаратной косметологии. Владеет методиками фотоомоложения IPL на генном уровне и лифтинга кожи.",
-      en: "Expert in injection therapy and medical hardware cosmetology. Implements high-end genetic-level IPL photo-rejuvenation systems."
+      uz: "Inyeksion va apparatli kosmetologiya mutaxassisi. IPL foto-yangilashni qo'llash va yoshartirish protokollarini amalga oshiradi.",
+      ru: "Специалист по инъекционной и аппаратной косметологии. Владеет методиками фотоомоложения IPL и лифтинга кожи.",
+      en: "Expert in injection therapy and medical hardware cosmetology. Implements IPL photo-rejuvenation protocols."
     },
     experience: {
       uz: "12",

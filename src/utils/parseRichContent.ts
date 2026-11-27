@@ -1,3 +1,4 @@
+import { sanitizeClaims } from './claimSanitizer';
 import type { Locale, ServiceConditionTopic, ServiceRichContent } from '../types';
 
 function isNonEmptyString(value: unknown): value is string {
@@ -110,7 +111,11 @@ export function mapRichContentFromApi(
     const solutions = parseJsonStringArray(api[`solutions_${locale}` as keyof ApiRichFields]);
     const benefits = parseJsonStringArray(api[`benefits_${locale}` as keyof ApiRichFields]);
     const process = parseJsonStringArray(api[`process_${locale}` as keyof ApiRichFields]);
-    const conditions = parseJsonConditionTopics(api[`conditions_${locale}` as keyof ApiRichFields]);
+    const conditions = parseJsonConditionTopics(api[`conditions_${locale}` as keyof ApiRichFields]).map((topic) => ({
+      ...topic,
+      title: sanitizeClaims(topic.title),
+      description: sanitizeClaims(topic.description),
+    }));
 
     const hasStructured =
       Boolean(overview.trim()) ||

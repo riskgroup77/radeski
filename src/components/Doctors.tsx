@@ -8,6 +8,7 @@ import { DICTIONARY, DOCTORS } from '../data';
 import MediaImage from './MediaImage';
 import { sortDoctorsFeaturedFirst } from '../utils/doctors';
 import { doctorRouteKey } from '../utils/doctorSlug';
+import { doctorBranchLine, doctorInfoLabel } from '../utils/doctorInfoLabel';
 import { DOCTORS_PAGE_GUIDE } from '../data/listPageGuides';
 import ListPageGuideSection from './ListPageGuideSection';
 
@@ -117,7 +118,10 @@ export default function Doctors({
                     {doc.name[locale]}
                   </Link>
                   {doc.education[locale] && (
-                    <WorkplaceBlock label={d.education} value={doc.education[locale]} />
+                    <WorkplaceBlock label={doctorInfoLabel(doc.education[locale], locale)} value={doc.education[locale]} />
+                  )}
+                  {doctorBranchLine(doc, locale) && (
+                    <p className="mt-2 text-xs font-semibold text-brand-text-secondary">{doctorBranchLine(doc, locale)}</p>
                   )}
                   <p className="text-brand-text-muted text-xs sm:text-sm mt-3 line-clamp-3 leading-relaxed font-light">
                     {doc.bio[locale]}

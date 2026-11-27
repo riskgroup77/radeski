@@ -8,7 +8,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Giperpigmentatsiya (teri rangining ortishi)',
         description:
-          'Giperpigmentatsiya — teri ma\'lum qismlarining atrofdagi teriga qaraganda to\'qroq rangga kirishidir. Quyosh nurlari, gormonal o\'zgarishlar (homiladorlik, kontratseptivlar), akne keyingi dog\'lar yoki jarohatlar sabab bo\'lishi mumkin. Melasma ko\'pincha yuzda simmetrik dog\'lar shaklida paydo bo\'ladi. Apparatli kosmetologiyada Sciton IPL va gen darajasida foto-yangilash pigment hujayralarini bosqichma-bosqich yo\'q qiladi, teri rangini tekislaydi va qayta paydo bo\'lishining oldini olish uchun profilaktik reja tuziladi.',
+          'Giperpigmentatsiya — teri ma\'lum qismlarining atrofdagi teriga qaraganda to\'qroq rangga kirishidir. Quyosh nurlari, gormonal o\'zgarishlar (homiladorlik, kontratseptivlar), akne keyingi dog\'lar yoki jarohatlar sabab bo\'lishi mumkin. Melasma ko\'pincha yuzda simmetrik dog\'lar shaklida paydo bo\'ladi. Apparatli kosmetologiyada IPL InMode (Lumecca) muolajasi pigmentni bosqichma-bosqich oqartiradi, teri rangini tekislaydi va qayta paydo bo\'lishining oldini olish uchun profilaktik reja tuziladi.',
       },
       {
         title: 'Rozaseya va qon tomir tarmoqlari',
@@ -18,7 +18,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Yoshga bog\'liq teri eskirishi va ajinlar',
         description:
-          'Yosh o\'tishi bilan terida kollegen va elastin kamayadi, ajinlar, teri silliqligi va turgor pasayadi. Mimik ajinlari peshona, ko\'z atrofi va lab atrofida paydo bo\'ladi. Gen darajasida foto-yangilash qarish genlarining faolligini o\'zgartiradi, yangi kollegen ishlab chiqarilishini rag\'batlantiradi. Natijada teri zichroq, yorqinroq va yoshroq ko\'rinadi — jarrohliksiz va tabiiy usulda.',
+          'Yosh o\'tishi bilan terida kollegen va elastin kamayadi, ajinlar, teri silliqligi va turgor pasayadi. Mimik ajinlari peshona, ko\'z atrofi va lab atrofida paydo bo\'ladi. IPL foto-yangilash yangi kollegen ishlab chiqarilishini rag\'batlantiradi. Natijada teri zichroq, yorqinroq va yoshroq ko\'rinadi — jarrohliksiz va tabiiy usulda.',
       },
       {
         title: 'Akne va post-akne dog\'lari',
@@ -40,7 +40,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Гиперпигментация',
         description:
-          'Гиперпигментация — потемнение участков кожи из-за солнца, гормонов, постакне или травм. Мелазма проявляется симметричными пятнами на лице. Аппаратная косметология с Sciton IPL постепенно устраняет пигмент и выравнивает тон кожи.',
+          'Гиперпигментация — потемнение участков кожи из-за солнца, гормонов, постакне или травм. Мелазма проявляется симметричными пятнами на лице. Аппаратная косметология с IPL InMode постепенно устраняет пигмент и выравнивает тон кожи.',
       },
       {
         title: 'Розацеа и сосудистые звездочки',
@@ -50,7 +50,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Возрастное старение и морщины',
         description:
-          'С возрастом снижается выработка коллагена и эластина, появляются морщины и потеря упругости. Фотоомоложение на генном уровне стимулирует обновление клеток и естественное омоложение без операции.',
+          'С возрастом снижается выработка коллагена и эластина, появляются морщины и потеря упругости. IPL-фотоомоложение стимулирует обновление клеток и естественное омоложение без операции.',
       },
       {
         title: 'Акне и постакне',
@@ -72,7 +72,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Hyperpigmentation',
         description:
-          'Hyperpigmentation is darkening of skin areas caused by sun, hormones, post-acne marks or injury. Melasma often appears as symmetric facial patches. Sciton IPL gradually removes pigment and evens skin tone.',
+          'Hyperpigmentation is darkening of skin areas caused by sun, hormones, post-acne marks or injury. Melasma often appears as symmetric facial patches. IPL InMode gradually removes pigment and evens skin tone.',
       },
       {
         title: 'Rosacea and vascular lesions',
@@ -82,7 +82,7 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
       {
         title: 'Age-related aging and wrinkles',
         description:
-          'Collagen and elastin decline leads to wrinkles and loss of firmness. Gene-level photo-rejuvenation stimulates cell renewal for natural non-surgical rejuvenation.',
+          'Collagen and elastin decline leads to wrinkles and loss of firmness. IPL photo-rejuvenation stimulates cell renewal for natural non-surgical rejuvenation.',
       },
       {
         title: 'Acne and post-acne',
@@ -421,13 +421,13 @@ export const CATEGORY_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = 
   },
   'gen-revo': {
     uz: [
-      { title: 'Gen darajasida yoshartirish', description: 'Forever Young IPL qarish genlarining faolligini o\'zgartiradi, kollegen yangilanishini rag\'batlantiradi.' },
+      { title: 'Yoshartirish', description: 'IPL qarish genlarining faolligini o\'zgartiradi, kollegen yangilanishini rag\'batlantiradi.' },
     ],
     ru: [
-      { title: 'Омоложение на генном уровне', description: 'Forever Young IPL модулирует гены старения и стимулирует обновление коллагена.' },
+      { title: 'Омоложение', description: 'IPL модулирует гены старения и стимулирует обновление коллагена.' },
     ],
     en: [
-      { title: 'Gene-level rejuvenation', description: 'Forever Young IPL modulates aging genes and stimulates collagen renewal.' },
+      { title: 'Rejuvenation', description: 'IPL modulates aging genes and stimulates collagen renewal.' },
     ],
   },
 };
@@ -482,7 +482,7 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       {
         title: 'Fotoeskirish (photoaging)',
         description:
-          'Quyosh UV nurlari terida erta qarishni tezlashtiradi: ajinlar, quruqlik, pigmentatsiya. Gen darajasida foto-yangilash UV zararini kompensatsiya qiladi, kollegen yangilanishini rag\'batlantiradi va terini yoshroq holatga qaytaradi.',
+          'Quyosh UV nurlari terida erta qarishni tezlashtiradi: ajinlar, quruqlik, pigmentatsiya. Foto-yangilash UV zararini kompensatsiya qiladi, kollegen yangilanishini rag\'batlantiradi va terini yoshroq holatga qaytaradi.',
       },
       {
         title: 'Teri rangining notekisligi',
@@ -501,7 +501,7 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
       { title: 'Melasma', description: 'Hormonal facial pigmentation. IPL Forever Young selectively removes pigment and evens tone within several sessions.' },
       { title: 'Lentigo and sun spots', description: 'Sun-induced brown spots. Photo-rejuvenation gradually lightens them with SPF prevention guidance.' },
       { title: 'Couperose', description: 'Facial vascular spider veins. IPL closes vessels and reduces redness painlessly.' },
-      { title: 'Photoaging', description: 'Premature aging from UV damage. Gene-level rejuvenation stimulates collagen renewal.' },
+      { title: 'Photoaging', description: 'Premature aging from UV damage. Rejuvenation stimulates collagen renewal.' },
       { title: 'Uneven skin tone', description: 'Color irregularities on skin. Individual IPL protocol evens tone and improves texture.' },
     ],
   },
@@ -801,15 +801,15 @@ export const SUB_CONDITIONS_CATALOG: Record<string, LocalizedConditions> = {
   },
   'fy-protocols': {
     uz: [
-      { title: 'Fotoeskirish', description: 'UV zarari terini erta qaritadi. Forever Young IPL kollegen yangilanishini rag\'batlantiradi.' },
+      { title: 'Fotoeskirish', description: 'UV zarari terini erta qaritadi. IPL kollegen yangilanishini rag\'batlantiradi.' },
       { title: 'Giperpigmentatsiya', description: 'Dog\'lar va rang notekisligi IPL protokollari bilan bosqichma-bosqich yengillashtiriladi.' },
     ],
     ru: [
-      { title: 'Фотостарение', description: 'UV-повреждение ускоряет старение. Forever Young IPL стимулирует обновление коллагена.' },
+      { title: 'Фотостарение', description: 'UV-повреждение ускоряет старение. IPL стимулирует обновление коллагена.' },
       { title: 'Гиперпигментация', description: 'Пятна и неровный тон постепенно осветляются протоколами IPL.' },
     ],
     en: [
-      { title: 'Photoaging', description: 'UV damage accelerates aging. Forever Young IPL stimulates collagen renewal.' },
+      { title: 'Photoaging', description: 'UV damage accelerates aging. IPL stimulates collagen renewal.' },
       { title: 'Hyperpigmentation', description: 'Spots and uneven tone are gradually lightened with IPL protocols.' },
     ],
   },

@@ -23,33 +23,33 @@ export const TECHNOLOGIES_PAGE: AdvantagePageContent = {
     en: 'Modern technologies',
   },
   subtitle: {
-    uz: "O'zbekistonda Sciton IPL va ilg'or lazer tizimlari",
-    ru: 'Sciton IPL и передовые лазерные системы в Узбекистане',
-    en: 'Sciton IPL and advanced laser systems in Uzbekistan',
+    uz: "IPL InMode va zamonaviy lazer tizimlari",
+    ru: 'IPL InMode и современные лазерные системы',
+    en: 'IPL InMode and modern laser systems',
   },
   heroImage: '/gallery/top1.webp',
   overview: {
-    uz: 'Radeski Skin & Aesthetic Clinic — Farg\'onada xalqaro standartdagi diagnostika va davolash texnologiyalarini jamlagan markaz. Klinikamizda Germaniya va AQShda ishlab chiqarilgan asl uskunalar qo\'llaniladi: dermatoskopiya bilan teri o\'smalarini erta aniqlash, Sciton IPL bilan gen darajasida foto-yangilash, Mohs mikrografik jarrohligi bilan yuzdagi teri saratoni, Excimer va UVB fototerapiyasi bilan psoriaz va vitiligo davolash. Har bir texnologiya malakali dermatolog nazoratida, individual protokol asosida ishlatiladi.',
-    ru: 'Клиника Radeski Skin & Aesthetic Clinic в Фергане объединяет диагностические и лечебные технологии международного уровня. Используется оригинальное оборудование из Германии и США: дерматоскопия для раннего выявления новообразований, Sciton IPL для фотоомоложения на генном уровне, хирургия Mohs при раке кожи лица, эксимерный лазер и UVB-фототерапия при псориазе и витилиго. Каждая технология применяется под контролем дерматолога по индивидуальному протоколу.',
-    en: 'Radeski Skin & Aesthetic Clinic in Fergana brings together international-standard diagnostic and treatment technologies. We use original equipment from Germany and the USA: clinical dermatoscopy for early lesion detection, Sciton IPL for gene-level photo-rejuvenation, Mohs micrographic surgery for facial skin cancer, Excimer laser and UVB phototherapy for psoriasis and vitiligo. Every technology is applied under dermatologist supervision with individualized protocols.',
+    uz: 'Radeski Skin & Aesthetic Clinic — Farg\'onada xalqaro standartdagi diagnostika va davolash texnologiyalarini jamlagan markaz. Klinikamizda asl (original) uskunalar qo\'llaniladi: dermatoskopiya bilan teri o\'smalarini erta aniqlash, IPL InMode (Lumecca) bilan pigment dog\'lar va qon tomir o\'zgarishlarini yaxshilash, Mohs mikrografik jarrohligi bilan yuzdagi teri saratoni, Excimer va UVB fototerapiyasi bilan psoriaz va vitiligo davolash. Har bir texnologiya malakali dermatolog nazoratida, individual protokol asosida ishlatiladi.',
+    ru: 'Клиника Radeski Skin & Aesthetic Clinic в Фергане объединяет диагностические и лечебные технологии международного уровня. Используется оригинальное оборудование: дерматоскопия для раннего выявления новообразований, IPL InMode (Lumecca) для коррекции пигментации и сосудистых изменений, хирургия Mohs при раке кожи лица, эксимерный лазер и UVB-фототерапия при псориазе и витилиго. Каждая технология применяется под контролем дерматолога по индивидуальному протоколу.',
+    en: 'Radeski Skin & Aesthetic Clinic in Fergana brings together international-standard diagnostic and treatment technologies. We use original equipment: clinical dermatoscopy for early lesion detection, IPL InMode (Lumecca) for pigmentation and vascular changes, Mohs micrographic surgery for facial skin cancer, Excimer laser and UVB phototherapy for psoriasis and vitiligo. Every technology is applied under dermatologist supervision with individualized protocols.',
   },
   blocks: [
     {
       title: {
-        uz: 'Sciton IPL — gen darajasida foto-yangilash',
-        ru: 'Sciton IPL — фотоомоложение на генном уровне',
-        en: 'Sciton IPL — gene-level photo-rejuvenation',
+        uz: 'IPL InMode (Lumecca) — foto-yangilash',
+        ru: 'IPL InMode (Lumecca) — фотоомоложение',
+        en: 'IPL InMode (Lumecca) — photo-rejuvenation',
       },
       description: {
-        uz: 'AQShda ishlab chiqarilgan Sciton platformasi (Forever Young, Forever Clear) O\'zbekistonda kamdan-kam uchraydi. Gen darajasida innovatsion foto-yangilash pigmentatsiya, qon tomirlari, akne va yoshga bog\'liq o\'zgarishlarni jarrohliksiz bartaraf etadi.',
-        ru: 'Платформа Sciton из США (Forever Young, Forever Clear) редко представлена в Узбекистане. Инновационное фотоомоложение на генном уровне устраняет пигментацию, сосуды, акне и возрастные изменения без операции.',
-        en: 'The US-made Sciton platform (Forever Young, Forever Clear) is rarely available in Uzbekistan. Gene-level photo-rejuvenation addresses pigmentation, vessels, acne and aging non-surgically.',
+        uz: 'InMode Lumecca IPL — keng spektrli yorug\'lik bilan pigment dog\'lar, mayda qon tomirlar va notekis teri tonini jarrohliksiz yaxshilash. Seanslar soni va parametrlarni dermatolog teri holatiga qarab belgilaydi; natija har bir bemorda individual.',
+        ru: 'InMode Lumecca IPL — широкополосный свет для коррекции пигментных пятен, мелких сосудов и неровного тона кожи без операции. Число сеансов и параметры дерматолог подбирает по состоянию кожи; результат индивидуален.',
+        en: 'InMode Lumecca IPL uses broadband light to improve pigment spots, small vessels and uneven skin tone without surgery. The dermatologist sets the number of sessions and the settings for each skin; results vary between patients.',
       },
       image: '/gallery/top2.webp',
       bullets: {
-        uz: ['Forever Young IPL protokollari', 'Forever Clear akne fotodavolash', 'Lumecca IPL pigmentatsiya', 'Og\'riqsiz, qisqa tiklanish'],
-        ru: ['Протоколы Forever Young IPL', 'Forever Clear при акне', 'IPL Lumecca при пигментации', 'Безболезненно, короткое восстановление'],
-        en: ['Forever Young IPL protocols', 'Forever Clear for acne', 'Lumecca IPL for pigmentation', 'Painless, short recovery'],
+        uz: ['Pigment dog\'lar va sepkillar', 'Kuperoz va mayda qon tomirlar', 'Notekis teri toni', 'Qisqa tiklanish davri'],
+        ru: ['Пигментные пятна и веснушки', 'Купероз и мелкие сосуды', 'Неровный тон кожи', 'Короткий период восстановления'],
+        en: ['Pigment spots and freckles', 'Couperose and small vessels', 'Uneven skin tone', 'Short recovery'],
       },
     },
     {
