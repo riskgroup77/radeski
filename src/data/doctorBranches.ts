@@ -23,4 +23,7 @@ export const DOCTOR_BRANCHES: Record<string, LocalSeoCity[]> = {
   // Published patient reviews: "Fargʻona filialidagi Begali Abduvaliyev" and
   // "Qoqon filialiga Begali akaga … murojat qildim"
   'abdvaliyev-begali': ['fargona', 'qoqon'],
+  // Management, 27.11.2026: both see patients in Fergana and Kokand
+  'kamolova-barno': ['fargona', 'qoqon'],
+  'murodov-muhammadsolih-azamat-ogli': ['fargona', 'qoqon'],
 };
