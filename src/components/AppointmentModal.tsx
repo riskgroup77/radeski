@@ -80,13 +80,14 @@ export default function AppointmentModal({
       });
       setIsSubmitted(true);
       // Conversion: a sent appointment request (no personal data in the event).
-      trackEvent('appointment_submit', { service_id: resolvedServiceId ?? '', page_path: window.location.pathname });
+      trackEvent('appointment_submit', { form: 'appointment_modal', service_id: resolvedServiceId ?? '', page_path: window.location.pathname });
       setPhone('');
       setClientName('');
       setComment('');
       setPreferredDate('');
       setServiceId('');
     } catch (err) {
+      trackEvent('form_error', { form: 'appointment_modal', page_path: window.location.pathname });
       setError(
         err instanceof ApiError
           ? err.message

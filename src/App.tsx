@@ -6,7 +6,7 @@
  */
 
 import React, { Suspense, useState, useEffect, useMemo } from 'react';
-import { trackPageView } from './utils/analytics';
+import { trackEvent, trackPageView } from './utils/analytics';
 import { findSubServiceByRouteParam, MERGED_SUB_SERVICES, subServiceRouteKey } from './utils/serviceSubSlug';
 import { lazyPage } from './utils/lazyPage';
 import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
@@ -326,6 +326,8 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     try {
       await createAppointment({ phone_number: inlinePhone.trim() });
       setInlineSubmitted(true);
+      // Conversion: the home-page "leave your number" form (no personal data in the event).
+      trackEvent('appointment_submit', { form: 'home_inline', page_path: window.location.pathname });
       setInlinePhone('');
       void fetchClientCountFromApi();
     } catch (err) {
@@ -337,6 +339,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
             : locale === 'ru'
               ? 'Ошибка при отправке заявки'
               : 'Failed to submit request';
+      trackEvent('form_error', { form: 'home_inline', page_path: window.location.pathname });
       alert(message);
     } finally {
       setInlineLoading(false);

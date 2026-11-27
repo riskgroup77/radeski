@@ -3,6 +3,7 @@ import { CheckCircle, Loader2 } from 'lucide-react';
 import type { Locale } from '../types';
 import { createAppointment } from '../api/publicApi';
 import { ApiError } from '../api/client';
+import { trackEvent } from '../utils/analytics';
 
 interface EducationApplicationFormProps {
   locale: Locale;
@@ -86,7 +87,9 @@ export default function EducationApplicationForm({
         service_id: null,
       });
       setIsSubmitted(true);
+      trackEvent('education_application_submit', { page_path: window.location.pathname });
     } catch (err) {
+      trackEvent('form_error', { form: 'education', page_path: window.location.pathname });
       setError(
         err instanceof ApiError
           ? err.message
