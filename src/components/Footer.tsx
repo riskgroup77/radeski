@@ -8,6 +8,7 @@ import InstagramBranchPicker from './InstagramBranchPicker';
 import { PageId, pagePath } from '../routing/paths';
 import { CLINIC_MAP_EMBED_URL, CLINIC_SOCIAL_LINKS } from '../config/links';
 import { handleHomeLogoClick } from '../utils/scrollToTop';
+import { CLINIC_PHONE_FERGANA_MOBILE, CLINIC_PHONE_KOKAND, CLINIC_PHONE_PRIMARY, FERGANA_ADDRESS, KOKAND_ADDRESS } from '../config/clinicNap';
 
 interface FooterProps {
   /** DICTIONARY merged with admin-edited clinic texts (working hours…). */
@@ -162,23 +163,37 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
           <div>
             <h4 className="text-white font-bold text-sm tracking-wider uppercase mb-5">{d.addressTitle}</h4>
             <ul className="space-y-4 text-xs sm:text-sm">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="w-4.5 h-4.5 text-brand-gold shrink-0 mt-0.5" />
-                <span className="font-light text-slate-300 leading-relaxed">
-                  Farg'ona sh., O'zbekiston Ovozi ko'chasi, 1B-bino.
-                </span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="w-4.5 h-4.5 text-brand-gold shrink-0" />
-                <span className="flex flex-col gap-1">
-                  <a href="tel:+998732007373" className="hover:text-brand-gold-light font-mono transition-colors text-slate-300">
-                    +998 (73) 200-73-73
-                  </a>
-                  <a href="tel:+998952107373" className="hover:text-brand-gold-light font-mono transition-colors text-slate-300">
-                    +998 95 210 73 73
-                  </a>
-                </span>
-              </li>
+              {/* Both branches, each with its own address and numbers (audit 26.11: Kokand visitors need the Kokand number). */}
+              {[
+                {
+                  city: locale === 'ru' ? 'Фергана' : locale === 'en' ? 'Fergana' : "Farg'ona",
+                  address: FERGANA_ADDRESS[locale],
+                  phones: [CLINIC_PHONE_PRIMARY, CLINIC_PHONE_FERGANA_MOBILE],
+                },
+                {
+                  city: locale === 'ru' ? 'Коканд' : locale === 'en' ? 'Kokand' : "Qo'qon",
+                  address: KOKAND_ADDRESS[locale],
+                  phones: [CLINIC_PHONE_KOKAND],
+                },
+              ].map((branch) => (
+                <li key={branch.city} className="flex items-start gap-2.5">
+                  <MapPin className="w-4.5 h-4.5 text-brand-gold shrink-0 mt-0.5" />
+                  <span className="flex flex-col gap-1">
+                    <span className="font-semibold text-white">{branch.city}</span>
+                    <span className="font-light text-slate-300 leading-relaxed">{branch.address}</span>
+                    {branch.phones.map((phone) => (
+                      <a
+                        key={phone.tel}
+                        href={`tel:${phone.tel}`}
+                        className="inline-flex items-center gap-1.5 hover:text-brand-gold-light font-mono transition-colors text-slate-300"
+                      >
+                        <Phone className="w-3.5 h-3.5 text-brand-gold shrink-0" />
+                        {phone.display}
+                      </a>
+                    ))}
+                  </span>
+                </li>
+              ))}
               <li className="flex items-start gap-2.5">
                 <Clock className="w-4.5 h-4.5 text-brand-gold shrink-0 mt-0.5" />
                 <span className="font-light text-slate-300 leading-normal">{d.workingHoursValue}</span>

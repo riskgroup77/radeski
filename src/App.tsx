@@ -7,6 +7,7 @@
 
 import React, { Suspense, useState, useEffect, useMemo } from 'react';
 import { trackEvent, trackPageView } from './utils/analytics';
+import { invalidPhoneMessage, isPlausiblePhone, phoneUseNote } from './utils/phoneValidation';
 import { findSubServiceByRouteParam, MERGED_SUB_SERVICES, subServiceRouteKey } from './utils/serviceSubSlug';
 import { lazyPage } from './utils/lazyPage';
 import { Routes, Route, Navigate, useParams, useLocation, Link } from 'react-router-dom';
@@ -318,9 +319,15 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
     openAppointmentBooking();
   };
 
+  const [inlineError, setInlineError] = useState('');
   const handleInlineSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inlinePhone.trim()) return;
+    if (!isPlausiblePhone(inlinePhone)) {
+      setInlineError(invalidPhoneMessage(locale));
+      return;
+    }
+    setInlineError('');
 
     setInlineLoading(true);
     try {
@@ -672,6 +679,7 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                   </p>
 
                   {!inlineSubmitted ? (
+                    <>
                     <form onSubmit={handleInlineSubmit} className="mt-8 max-w-md mx-auto w-full px-1 flex flex-col sm:flex-row gap-3">
                       <input
                         id="inline-phone-input"
@@ -690,9 +698,14 @@ function ClinicShell({ forcePage }: ClinicShellProps) {
                         disabled={inlineLoading}
                         className="w-full sm:w-auto px-6 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-white font-extrabold text-sm rounded-xl transition-all cursor-pointer shadow-lg shadow-brand-gold/10 min-h-[48px]"
                       >
-                        {inlineLoading ? (locale === 'uz' ? "Yuborilmoqda..." : "Отправка...") : d.submitBtn}
+                        {inlineLoading ? (locale === 'uz' ? "Yuborilmoqda..." : locale === 'ru' ? "Отправка..." : "Sending...") : d.submitBtn}
                       </button>
                     </form>
+                    {inlineError ? (
+                      <p role="alert" className="mt-3 text-sm font-semibold text-red-300">{inlineError}</p>
+                    ) : null}
+                    <p className="mt-3 text-xs text-slate-400">{phoneUseNote(locale)}</p>
+                    </>
                   ) : (
                     <div className="mt-8 p-6 bg-brand-gold/10 border border-brand-gold-dark/30 rounded-2xl max-w-md mx-auto text-brand-gold-light text-sm font-medium leading-relaxed">
                       {locale === 'uz' ? "Arizangiz qabul qilindi! Operatorlarimiz tez orada sizga qo'ng'iroq qilishadi." : 

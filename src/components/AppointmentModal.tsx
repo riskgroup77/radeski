@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { invalidPhoneMessage, isPlausiblePhone } from '../utils/phoneValidation';
 import { m, AnimatePresence } from 'motion/react';
 import { X, CheckCircle, Phone, ShieldCheck } from 'lucide-react';
 import { Locale, ServiceCategory } from '../types';
@@ -63,6 +64,10 @@ export default function AppointmentModal({
             ? 'Пожалуйста, введите номер телефона'
             : 'Please enter your phone number'
       );
+      return;
+    }
+    if (!isPlausiblePhone(phone)) {
+      setError(invalidPhoneMessage(locale));
       return;
     }
 

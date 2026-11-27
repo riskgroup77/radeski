@@ -4,6 +4,7 @@ import type { Locale } from '../types';
 import { createAppointment } from '../api/publicApi';
 import { ApiError } from '../api/client';
 import { trackEvent } from '../utils/analytics';
+import { invalidPhoneMessage, isPlausiblePhone } from '../utils/phoneValidation';
 
 interface EducationApplicationFormProps {
   locale: Locale;
@@ -62,6 +63,10 @@ export default function EducationApplicationForm({
     event.preventDefault();
     if (!phone.trim()) {
       setError(labels.required);
+      return;
+    }
+    if (!isPlausiblePhone(phone)) {
+      setError(invalidPhoneMessage(locale));
       return;
     }
 
