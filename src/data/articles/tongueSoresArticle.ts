@@ -358,7 +358,7 @@ export const TONGUE_SORES_ARTICLE: Article = {
     ru: 'Ашуров Дильшод Давлатович',
     en: 'Dr. Dilshod Davlatovich Ashurov',
   },
-  date: '2026-12-14',
+  date: '2026-11-28',
   image: COVER.uz,
   images: COVER,
   views: 0,

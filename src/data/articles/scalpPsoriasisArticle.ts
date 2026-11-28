@@ -463,7 +463,7 @@ export const SCALP_PSORIASIS_ARTICLE: Article = {
     ru: 'Бахриддинов Зухриддин Мухиддинович',
     en: 'Dr. Zuxriddin Muxiddinovich Baxriddinov',
   },
-  date: '2026-12-04',
+  date: '2026-11-28',
   image: '/articles/bosh-terisi-psoriazi-cover.jpg',
   images: {
     uz: '/articles/bosh-terisi-psoriazi-cover.jpg',

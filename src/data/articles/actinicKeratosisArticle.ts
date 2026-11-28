@@ -451,7 +451,7 @@ export const ACTINIC_KERATOSIS_ARTICLE: Article = {
     ru: 'Якубов Фаррух Фарходжонович',
     en: 'Dr. Farrukh Farhodjonovich Yoqubov',
   },
-  date: '2026-12-08',
+  date: '2026-11-28',
   image: '/articles/aktinik-keratoz-cover.jpg',
   images: {
     uz: '/articles/aktinik-keratoz-cover.jpg',

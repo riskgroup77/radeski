@@ -409,7 +409,7 @@ export const COLD_ALLERGY_ARTICLE: Article = {
     ru: 'Кодирова Дилафрузхон',
     en: 'Dr. Dilafruzkhon Kodirova',
   },
-  date: '2026-12-01',
+  date: '2026-11-28',
   image: '/articles/sovuq-allergiyasi-cover.jpg',
   images: {
     uz: '/articles/sovuq-allergiyasi-cover.jpg',

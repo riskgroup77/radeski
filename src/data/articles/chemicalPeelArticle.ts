@@ -453,7 +453,7 @@ export const CHEMICAL_PEEL_ARTICLE: Article = {
     ru: 'Усманова Мохинабону Анваровна',
     en: 'Dr. Mohinabonu Anvarovna Usmanova',
   },
-  date: '2026-12-05',
+  date: '2026-11-28',
   image: '/articles/kimyoviy-piling-cover.jpg',
   images: {
     uz: '/articles/kimyoviy-piling-cover.jpg',

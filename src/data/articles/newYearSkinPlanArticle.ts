@@ -403,7 +403,7 @@ export const NEW_YEAR_SKIN_PLAN_ARTICLE: Article = {
     ru: 'Камолова Барно',
     en: 'Dr. Barno Kamolova',
   },
-  date: '2026-12-12',
+  date: '2026-11-28',
   image: '/articles/yangi-yil-parvarish-cover.jpg',
   images: {
     uz: '/articles/yangi-yil-parvarish-cover.jpg',

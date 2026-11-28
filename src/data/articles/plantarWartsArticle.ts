@@ -446,7 +446,7 @@ export const PLANTAR_WARTS_ARTICLE: Article = {
     ru: 'Усманова Мохинабону Анваровна',
     en: 'Dr. Mohinabonu Anvarovna Usmanova',
   },
-  date: '2026-12-06',
+  date: '2026-11-28',
   image: '/articles/plantar-sogal-cover.jpg',
   images: {
     uz: '/articles/plantar-sogal-cover.jpg',

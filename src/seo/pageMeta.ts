@@ -455,6 +455,206 @@ export const ARTICLE_SEO_OVERRIDES: Partial<
         'hair transplant side effects, hair transplant complications, shock loss, after hair transplant, hair transplant Fergana, FUE, Radeski Skin Clinic',
     },
   },
+  'art-qol-terisi-yorilishi': {
+    uz: {
+      title: 'Qo‘l terisi yorilishi qishda: sabablari va davosi',
+      desc: "Qishda qo'l terisi nega yoriladi: sovuq, yuvish vositalari, dermatit va ekzema. Uyda parvarish va qachon dermatologga borish — Farg'ona, Qo'qon.",
+      keywords:
+        "qo'l terisi yorilishi, qo'l dermatiti, qo'l ekzemasi, qishda qo'l terisi, quruq teri, dermatolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Трещины на руках зимой: причины и что делать',
+      desc: 'Почему зимой трескается кожа рук: холод, моющие средства, дерматит и экзема. Уход дома и когда идти к дерматологу — Фергана, Коканд.',
+      keywords:
+        'трещины на руках, дерматит рук, экзема рук, сухая кожа рук зимой, контактный дерматит, дерматолог Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Cracked Hands in Winter: Causes and Care',
+      desc: 'Why hands crack in winter: cold, detergents, dermatitis and eczema. Home care and when to see a dermatologist in Fergana and Kokand.',
+      keywords:
+        'cracked hands, hand dermatitis, hand eczema, dry hands winter, contact dermatitis, dermatologist Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-tatuirovka-olib-tashlash': {
+    uz: {
+      title: 'Tatuirovkani lazer bilan olib tashlash: necha seans',
+      desc: "Tatuirovka va qosh tatuajini lazer bilan olib tashlash: necha seans, qaysi rang tez ketadi, parvarish va qarshi ko'rsatmalar. Hollywood Spectra.",
+      keywords:
+        "tatuirovka olib tashlash, tatuirovkani lazer bilan ketkazish, qosh tatuajini olib tashlash, Hollywood Spectra, Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Удаление татуировки лазером: сколько сеансов',
+      desc: 'Удаление татуировки и татуажа бровей лазером: сколько сеансов, какие цвета уходят быстрее, уход и противопоказания. Hollywood Spectra.',
+      keywords:
+        'удаление татуировки, лазерное удаление тату, удаление татуажа бровей, Hollywood Spectra, Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Laser Tattoo Removal: How Many Sessions',
+      desc: 'Laser removal of tattoos and eyebrow tattooing: how many sessions, which colours clear fastest, aftercare and contraindications.',
+      keywords:
+        'tattoo removal, laser tattoo removal, eyebrow tattoo removal, Hollywood Spectra, Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-keloid-chandiq': {
+    uz: {
+      title: 'Keloid chandiq: nima u va qanday davolanadi',
+      desc: "Keloid va gipertrofik chandiq farqi, nega keloidni kesib bo'lmaydi, in'eksiya, kriodestruksiya va lazer bilan davolash. Farg'ona, Qo'qon.",
+      keywords:
+        "keloid, keloid chandiq, gipertrofik chandiq, chandiq davolash, chandiqni lazer bilan olib tashlash, Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Келоидный рубец: что это и как лечить',
+      desc: 'Келоид и гипертрофический рубец: отличия, почему келоид нельзя просто вырезать, инъекции, криодеструкция и лазер. Фергана, Коканд.',
+      keywords:
+        'келоид, келоидный рубец, гипертрофический рубец, лечение рубцов, лазер рубцы, Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Keloid Scars: What They Are and Treatment',
+      desc: 'Keloid vs hypertrophic scar, why a keloid should not simply be cut out, and treatment with injections, cryotherapy and laser.',
+      keywords:
+        'keloid, keloid scar, hypertrophic scar, scar treatment, laser scar removal, Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-rang-barang-temiratki': {
+    uz: {
+      title: 'Rang-barang temiratki: teridagi oq dog‘lar sababi',
+      desc: "Ko'krak va orqadagi oq, pushti yoki jigarrang dog'lar: rang-barang temiratki sababi, vitiligodan farqi, tahlil va davolash.",
+      keywords:
+        "rang-barang temiratki, kepaksimon temiratki, teridagi oq dog'lar, teri zamburug'i, Malassezia, dermatolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Отрубевидный лишай: белые пятна на коже',
+      desc: 'Белые, розовые или коричневые пятна на груди и спине: отрубевидный лишай, отличие от витилиго, анализ и лечение.',
+      keywords:
+        'отрубевидный лишай, разноцветный лишай, белые пятна на коже, грибок кожи, Malassezia, дерматолог Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Pityriasis Versicolor: White Patches on Skin',
+      desc: 'White, pink or brown patches on the chest and back: pityriasis versicolor, how it differs from vitiligo, testing and treatment.',
+      keywords:
+        'pityriasis versicolor, tinea versicolor, white patches on skin, skin fungus, Malassezia, dermatologist Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-gemangioma-bolalarda': {
+    uz: {
+      title: 'Bolalarda gemangioma: o‘zi ketadimi, qachon davolash',
+      desc: "Chaqaloqda gemangioma: qanday o'sadi va kichrayadi, qachon erta ko'rsatish kerak, vino dog'idan farqi va Derma V lazer.",
+      keywords:
+        "gemangioma, bolalarda gemangioma, chaqaloqda qizil xol, vino dog'i, Derma V lazer, bolalar dermatologi, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Гемангиома у ребёнка: пройдёт ли сама',
+      desc: 'Гемангиома у младенца: как растёт и уменьшается, когда показать врачу рано, отличие от винного пятна и лазер Derma V.',
+      keywords:
+        'гемангиома, гемангиома у ребёнка, красная родинка у младенца, винное пятно, лазер Derma V, детский дерматолог, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Hemangioma in Babies: Will It Go Away?',
+      desc: 'Infantile hemangioma: how it grows and shrinks, when to see a doctor early, how it differs from a port-wine stain and Derma V laser.',
+      keywords:
+        'infantile hemangioma, hemangioma in babies, strawberry mark, port-wine stain, Derma V laser, paediatric dermatologist, Radeski Skin Clinic',
+    },
+  },
+  'art-tirnoq-psoriazi': {
+    uz: {
+      title: 'Tirnoq psoriazi: belgilari va zamburug‘dan farqi',
+      desc: "Tirnoq psoriazi: nuqtali chuqurchalar, moy tomchisi, tirnoq ajralishi. Zamburug'dan farqi, artrit bilan bog'liqligi va davolash.",
+      keywords:
+        "tirnoq psoriazi, psoriaz tirnoq, tirnoq ajralishi, onixoliz, tirnoq kasalliklari, psoriaz davolash Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Псориаз ногтей: признаки и отличие от грибка',
+      desc: 'Псориаз ногтей: точечные вдавления, масляное пятно, отслойка ногтя. Отличие от грибка, связь с артритом и лечение.',
+      keywords:
+        'псориаз ногтей, ногтевой псориаз, онихолизис, болезни ногтей, лечение псориаза Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Nail Psoriasis: Signs and How It Differs From Fungus',
+      desc: 'Nail psoriasis: pitting, oil-drop spots, nail lifting. How it differs from fungus, the link with arthritis and treatment.',
+      keywords:
+        'nail psoriasis, psoriatic nails, onycholysis, nail disease, psoriasis treatment Fergana, Radeski Skin Clinic',
+    },
+  },
+  'art-xol-olib-tashlash': {
+    uz: {
+      title: 'Xol olib tashlash: qachon kerak va qaysi usul',
+      desc: "Xol olib tashlashdan oldin dermatoskopiya, lazer, radioto'lqin va jarrohlik usullari, gistologiya va keyingi parvarish. Farg'ona, Qo'qon.",
+      keywords:
+        "xol olib tashlash, xolni lazer bilan olib tashlash, nevus olib tashlash, dermatoskopiya, Farg'ona, Qo'qon, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Удаление родинок: когда нужно и каким методом',
+      desc: 'Удаление родинок: дерматоскопия перед удалением, лазер, радиоволна и хирургия, гистология и уход после. Фергана, Коканд.',
+      keywords:
+        'удаление родинок, удаление родинки лазером, удаление невуса, дерматоскопия, Фергана, Коканд, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Mole Removal: When and Which Method',
+      desc: 'Mole removal: dermatoscopy first, laser, radiowave and surgical methods, histology and aftercare in Fergana and Kokand.',
+      keywords:
+        'mole removal, laser mole removal, nevus removal, dermatoscopy, Fergana, Kokand, Radeski Skin Clinic',
+    },
+  },
+  'art-bolalarda-bosh-temiratkisi': {
+    uz: {
+      title: 'Bolalarda bosh temiratkisi: belgilari va davosi',
+      desc: "Bolada bosh terisi temiratkisi: po'stli dumaloq o'choq va singan sochlar, qanday yuqadi, zamburug' tahlili va nega krem yetarli emas.",
+      keywords:
+        "bolalarda temiratki, bosh terisi temiratkisi, mikrosporiya, trixofitiya, bolalarda zamburug', bolalar dermatologi, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Стригущий лишай у ребёнка: признаки и лечение',
+      desc: 'Стригущий лишай на голове у ребёнка: шелушащийся очаг и обломанные волосы, как передаётся, анализ на грибок и почему мало крема.',
+      keywords:
+        'стригущий лишай у ребёнка, лишай на голове, микроспория, трихофития, грибок у детей, детский дерматолог, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Scalp Ringworm in Children: Signs and Treatment',
+      desc: 'Scalp ringworm in a child: a scaly round patch with broken hairs, how it spreads, the fungal test and why cream alone is not enough.',
+      keywords:
+        'scalp ringworm, tinea capitis, ringworm in children, microsporia, fungal infection children, paediatric dermatologist, Radeski Skin Clinic',
+    },
+  },
+  'art-tirnoq-osti-sogal': {
+    uz: {
+      title: 'Tirnoq osti so‘gali: sabablari va lazer bilan davolash',
+      desc: "Tirnoq atrofi va tirnoq ostidagi so'gal: belgilari, nega tarqaladi, qachon shifokorga ko'rsatish va lazer bilan olib tashlash.",
+      keywords:
+        "tirnoq osti so'gali, tirnoq atrofi so'gali, barmoqdagi so'gal, so'gal olib tashlash, lazer, podolog, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Бородавка под ногтем: причины и удаление лазером',
+      desc: 'Околоногтевая и подногтевая бородавка: признаки, почему распространяется, когда показаться врачу и удаление лазером.',
+      keywords:
+        'подногтевая бородавка, околоногтевая бородавка, бородавка на пальце, удаление бородавок лазером, подолог, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Wart Under the Nail: Causes and Laser Removal',
+      desc: 'Warts around and under the nail: signs, why they spread, when to see a doctor and laser removal in Fergana and Kokand.',
+      keywords:
+        'subungual wart, periungual wart, wart on finger, wart removal laser, podiatrist, Radeski Skin Clinic',
+    },
+  },
+  'art-sochning-erta-oqarishi': {
+    uz: {
+      title: 'Sochning erta oqarishi: sabablari va tahlillar',
+      desc: 'Soch nega erta oqaradi: irsiyat, B12, temir, qalqonsimon bez, stress. Qaysi tahlillar kerak va nima haqiqatan yordam beradi.',
+      keywords:
+        "soch oqarishi, sochning erta oqarishi, oq soch sabablari, B12 tanqisligi, trixolog Farg'ona, Radeski Skin Clinic",
+    },
+    ru: {
+      title: 'Ранняя седина: причины и какие анализы сдать',
+      desc: 'Почему рано седеют волосы: наследственность, B12, железо, щитовидная железа, стресс. Какие анализы сдать и что реально помогает.',
+      keywords:
+        'ранняя седина, почему седеют волосы, седина причины, дефицит B12, трихолог Фергана, Radeski Skin Clinic',
+    },
+    en: {
+      title: 'Premature Grey Hair: Causes and Tests',
+      desc: 'Why hair goes grey early: genetics, B12, iron, thyroid and stress. Which tests to have and what genuinely helps.',
+      keywords:
+        'premature grey hair, early greying, grey hair causes, B12 deficiency, trichologist Fergana, Radeski Skin Clinic',
+    },
+  },
   'art-qadoq-va-kesak': {
     uz: {
       title: "Qadoq va kesaklar: olib tashlash — Farg'ona, Qo'qon",

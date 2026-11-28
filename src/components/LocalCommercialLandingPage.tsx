@@ -171,6 +171,30 @@ export default function LocalCommercialLandingPage({
           </div>
         )}
 
+        {details.cityAbout.length > 0 && (
+          <div className="mt-6 p-5 sm:p-6 bg-brand-white rounded-2xl border border-brand-gold/30">
+            <h2 className="text-lg font-extrabold text-brand-text-primary">{details.cityTitle}</h2>
+            {details.cityAbout.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)} className="mt-2 text-sm text-brand-text-secondary leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+            {details.twin && (
+              <p className="mt-3 text-sm">
+                <span className="text-brand-text-muted">
+                  {locale === 'uz' ? 'Boshqa filial: ' : locale === 'ru' ? 'Другой филиал: ' : 'Other branch: '}
+                </span>
+                <Link
+                  to={localCommercialPath(locale, details.twin.city, landing.slug)}
+                  className="font-semibold text-brand-gold no-underline hover:underline"
+                >
+                  {details.twin.label}
+                </Link>
+              </p>
+            )}
+          </div>
+        )}
+
         {details.steps.length > 0 && (
           <>
             <h2 className="mt-10 text-xl font-extrabold text-brand-text-primary">{copy.steps}</h2>

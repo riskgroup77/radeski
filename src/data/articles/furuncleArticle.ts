@@ -449,7 +449,7 @@ export const FURUNCLE_ARTICLE: Article = {
     ru: 'Тургунов Шохруз Илхомжон угли',
     en: 'Dr. Shohruz Ilxomjon ugli Turgunov',
   },
-  date: '2026-12-07',
+  date: '2026-11-28',
   image: '/articles/chipqon-follikulit-cover.jpg',
   images: {
     uz: '/articles/chipqon-follikulit-cover.jpg',

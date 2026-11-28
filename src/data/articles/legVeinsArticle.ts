@@ -469,7 +469,7 @@ export const LEG_VEINS_ARTICLE: Article = {
     ru: 'Камолова Барно',
     en: 'Dr. Barno Kamolova',
   },
-  date: '2026-12-03',
+  date: '2026-11-28',
   image: '/articles/oyoq-tomir-tori-cover.jpg',
   images: {
     uz: '/articles/oyoq-tomir-tori-cover.jpg',

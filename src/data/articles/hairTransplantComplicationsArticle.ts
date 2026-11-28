@@ -328,7 +328,7 @@ export const HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE: Article = {
     ru: 'Абдвалиев Бегали Шералиевич',
     en: 'Dr. Begali Sheraliyevich Abdvaliyev',
   },
-  date: '2026-12-15',
+  date: '2026-11-28',
   image: COVER.uz,
   images: COVER,
   views: 0,

@@ -444,7 +444,7 @@ export const BRITTLE_NAILS_ARTICLE: Article = {
     ru: 'Каримова Ирода',
     en: 'Dr. Iroda Karimova',
   },
-  date: '2026-12-10',
+  date: '2026-11-28',
   image: '/articles/mort-tirnoqlar-cover.jpg',
   images: {
     uz: '/articles/mort-tirnoqlar-cover.jpg',

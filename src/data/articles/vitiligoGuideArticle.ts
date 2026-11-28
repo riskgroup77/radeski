@@ -451,7 +451,7 @@ export const VITILIGO_GUIDE_ARTICLE: Article = {
     ru: 'Муродов Мухаммадсолих Азамат угли',
     en: 'Dr. Muhammadsolih Azamat ugli Murodov',
   },
-  date: '2026-12-02',
+  date: '2026-11-28',
   image: '/articles/vitiligo-cover.jpg',
   images: {
     uz: '/articles/vitiligo-cover.jpg',

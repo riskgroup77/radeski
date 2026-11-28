@@ -27,6 +27,7 @@ import AppointmentBookingLink from './AppointmentBookingLink';
 import { isEquipmentPromoArticle, isEquipmentPromoImageSrc } from '../utils/articles';
 import { getLocalizedImage } from '../utils/localizedImage';
 import { buildFaqSchema } from '../seo/structuredData';
+import { splitMarkdownTables } from '../utils/markdownTables';
 
 interface ArticleDetailContentProps {
   article: Article;
@@ -51,7 +52,15 @@ function slugifyHeading(text: string): string {
     .replace(/\s+/g, '-');
 }
 
-const EMPTY_RICH = { keyTakeaways: [], faq: [], tags: [], whenToSeeDoctor: [] };
+/** A table cell: inline markdown (bold, links) without a wrapping paragraph. */
+const inlineMarkdown = {
+  p: ({ children }: { children?: ReactNode }) => <>{children}</>,
+  strong: ({ children }: { children?: ReactNode }) => (
+    <strong className="font-semibold text-brand-text-primary">{children}</strong>
+  ),
+};
+
+const EMPTY_RICH ={ keyTakeaways: [], faq: [], tags: [], whenToSeeDoctor: [] };
 
 /**
  * Only this article's catalog entry is downloaded; the general fallback text only when the
@@ -94,6 +103,7 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
   );
   const readingMinutes = resolveArticleReadingMinutes(article, locale);
   const toc = useMemo(() => extractArticleHeadings(body), [body]);
+  const bodyParts = useMemo(() => splitMarkdownTables(body), [body]);
   const hashtags = useMemo(() => formatArticleHashtags(rich.tags), [rich.tags]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   // The hero above already shows the cover (and, for the equipment articles, the promo poster):
@@ -252,7 +262,38 @@ export default function ArticleDetailContent({ article, locale }: ArticleDetailC
 
         {body ? (
           <div className="pt-4 prose prose-slate max-w-none">
-            <ReactMarkdown components={markdownComponents}>{body}</ReactMarkdown>
+            {bodyParts.map((part, index) =>
+              part.type === 'markdown' ? (
+                <ReactMarkdown key={index} components={markdownComponents}>
+                  {part.text}
+                </ReactMarkdown>
+              ) : (
+                <div key={index} className="overflow-x-auto mb-6 rounded-xl border border-brand-sectiongray">
+                  <table className="min-w-full text-sm">
+                    <thead className="bg-brand-offwhite text-brand-text-primary">
+                      <tr>
+                        {part.header.map((cell, c) => (
+                          <th key={c} className="px-4 py-3 text-left font-bold border-b border-brand-sectiongray">
+                            <ReactMarkdown components={inlineMarkdown}>{cell}</ReactMarkdown>
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {part.rows.map((row, r) => (
+                        <tr key={r}>
+                          {row.map((cell, c) => (
+                            <td key={c} className="px-4 py-3 border-b border-brand-offwhite text-brand-text-secondary font-light align-top">
+                              <ReactMarkdown components={inlineMarkdown}>{cell}</ReactMarkdown>
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ),
+            )}
           </div>
         ) : (
           <p className="text-brand-text-muted italic mt-6">

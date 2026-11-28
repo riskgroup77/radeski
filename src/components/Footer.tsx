@@ -73,10 +73,10 @@ export default function Footer({ locale, onNavigate, onOpenAppointment, currentP
             </Link>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light mb-6">
               {locale === 'uz'
-                ? "Farg'onada xavfsiz dermatologiya va innovatsion estetika bo'yicha yetakchi va ko'p tilliy tibbiy klinika portaliz."
+                ? "Teri, soch va tirnoqlar bo'yicha ixtisoslashgan klinika: dermatologiya, trixologiya, podologiya va apparat kosmetologiyasi. Farg'ona va Qo'qonda filiallarimiz bor."
                 : locale === 'ru'
-                  ? 'Ведет дерматологическую и эстетическую клинику в Фергане с европейскими стандартами.'
-                  : 'Leading clinical dermatology and hardware aesthetic skincare provider in Fergana.'}
+                  ? 'Специализированная клиника кожи, волос и ногтей: дерматология, трихология, подология и аппаратная косметология. Филиалы в Фергане и Коканде.'
+                  : 'Specialized clinic for skin, hair and nails: dermatology, trichology, podology and device-based cosmetology. Branches in Fergana and Kokand.'}
             </p>
 
             <div className="flex gap-3">

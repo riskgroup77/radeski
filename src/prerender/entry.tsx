@@ -36,6 +36,7 @@ import { getEquipmentSectionLabels } from '../utils/clinicEquipmentLabels';
 import { subServiceLinkName, subServiceRouteKey } from '../utils/serviceSubSlug';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactMarkdown from 'react-markdown';
+import { splitMarkdownTables } from '../utils/markdownTables';
 import type { Article, Locale, PriceItem } from '../types';
 import { DICTIONARY } from '../data';
 import { dictionaryOverridesFromSiteTexts, type DictionaryOverrides } from '../data/dictionaryOverrides';
@@ -250,7 +251,30 @@ function ArticleBody({ article, locale, categories }: { article: Article; locale
   return (
     <article>
       <p>{resolveArticleSummary(article, locale)}</p>
-      <ReactMarkdown>{body}</ReactMarkdown>
+      {splitMarkdownTables(body).map((part, index) =>
+        part.type === 'markdown' ? (
+          <ReactMarkdown key={index}>{part.text}</ReactMarkdown>
+        ) : (
+          <table key={index}>
+            <thead>
+              <tr>
+                {part.header.map((cell, c) => (
+                  <th key={c}>{cell.replace(/\*\*/g, '')}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {part.rows.map((row, r) => (
+                <tr key={r}>
+                  {row.map((cell, c) => (
+                    <td key={c}>{cell.replace(/\*\*/g, '')}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ),
+      )}
       {rich.faq.length > 0 && (
         <section>
           {rich.faq.map((item) => (
@@ -477,6 +501,20 @@ function LandingBody({
           <p key={text.slice(0, 40)}>{text}</p>
         ))}
       </section>
+      {details.cityAbout.length > 0 && (
+        <section>
+          <h2>{details.cityTitle}</h2>
+          {details.cityAbout.map((text) => (
+            <p key={text.slice(0, 40)}>{text}</p>
+          ))}
+          {details.twin && (
+            <p>
+              {label('Boshqa filial: ', 'Другой филиал: ', 'Other branch: ')}
+              <a href={localCommercialPath(locale, details.twin.city, landing.slug)}>{details.twin.label}</a>
+            </p>
+          )}
+        </section>
+      )}
       {details.steps.length > 0 && (
         <section>
           <h2>{label('Qabul qanday o‘tadi?', 'Как проходит приём?', 'How does the visit go?')}</h2>
@@ -488,9 +526,17 @@ function LandingBody({
         </section>
       )}
       <section>
+        <h2>{label('Kimlar uchun?', 'Кому подходит?', 'Who is it for?')}</h2>
+        <ul>
+          {landing.whoFor.map((item) => (
+            <li key={item.uz}>{t(item)}</li>
+          ))}
+        </ul>
+      </section>
+      <section>
         <h2>{t(landing.methodsTitle)}</h2>
         <ul>
-          {[...landing.whoFor, ...landing.methods].map((item) => (
+          {landing.methods.map((item) => (
             <li key={item.uz}>{t(item)}</li>
           ))}
         </ul>

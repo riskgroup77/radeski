@@ -427,7 +427,7 @@ export const MELANOMA_ARTICLE: Article = {
     ru: 'Якубов Фаррух Фарходжонович',
     en: 'Dr. Farrukh Farhodjonovich Yoqubov',
   },
-  date: '2026-11-29',
+  date: '2026-11-28',
   image: '/articles/melanoma-cover.jpg',
   images: {
     uz: '/articles/melanoma-cover.jpg',

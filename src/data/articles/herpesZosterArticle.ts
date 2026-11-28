@@ -461,7 +461,7 @@ export const HERPES_ZOSTER_ARTICLE: Article = {
     ru: 'Тургунов Шохруз Илхомжон угли',
     en: 'Dr. Shohruz Ilxomjon ugli Turgunov',
   },
-  date: '2026-11-30',
+  date: '2026-11-28',
   image: '/articles/temiratki-zoster-cover.jpg',
   images: {
     uz: '/articles/temiratki-zoster-cover.jpg',

@@ -400,7 +400,7 @@ export const DARK_CIRCLES_ARTICLE: Article = {
     ru: 'Мангасарян Лорена Георгиевна',
     en: 'Dr. Lorena Georgievna Mangasaryan',
   },
-  date: '2026-12-11',
+  date: '2026-11-28',
   image: '/articles/koz-osti-cover.jpg',
   images: {
     uz: '/articles/koz-osti-cover.jpg',

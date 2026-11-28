@@ -82,6 +82,16 @@ import { FACIAL_CLEANSING_ARTICLE_CATALOG } from './articles/facialCleansingArti
 import { SCALP_ITCH_ARTICLE_CATALOG } from './articles/scalpItchArticle';
 import { TONGUE_SORES_ARTICLE_CATALOG } from './articles/tongueSoresArticle';
 import { HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE_CATALOG } from './articles/hairTransplantComplicationsArticle';
+import { HAND_DERMATITIS_ARTICLE_CATALOG } from './articles/handDermatitisArticle';
+import { TATTOO_REMOVAL_ARTICLE_CATALOG } from './articles/tattooRemovalArticle';
+import { KELOID_SCAR_ARTICLE_CATALOG } from './articles/keloidScarArticle';
+import { PITYRIASIS_VERSICOLOR_ARTICLE_CATALOG } from './articles/pityriasisVersicolorArticle';
+import { INFANT_HEMANGIOMA_ARTICLE_CATALOG } from './articles/infantHemangiomaArticle';
+import { NAIL_PSORIASIS_ARTICLE_CATALOG } from './articles/nailPsoriasisArticle';
+import { MOLE_REMOVAL_ARTICLE_CATALOG } from './articles/moleRemovalArticle';
+import { CHILD_SCALP_RINGWORM_ARTICLE_CATALOG } from './articles/childScalpRingwormArticle';
+import { SUBUNGUAL_WART_ARTICLE_CATALOG } from './articles/subungualWartArticle';
+import { GREY_HAIR_ARTICLE_CATALOG } from './articles/greyHairArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE_CATALOG } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE_CATALOG } from './articles/rosaceaRadeskiArticle';
@@ -216,6 +226,16 @@ export const ARTICLE_RICH_CATALOG: Record<string, LocalizedArticleCatalog> = {
   'scalp-itch': SCALP_ITCH_ARTICLE_CATALOG,
   'tongue-sores': TONGUE_SORES_ARTICLE_CATALOG,
   'hair-transplant-complications': HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE_CATALOG,
+  'hand-dermatitis': HAND_DERMATITIS_ARTICLE_CATALOG,
+  'tattoo-removal': TATTOO_REMOVAL_ARTICLE_CATALOG,
+  'keloid-scar': KELOID_SCAR_ARTICLE_CATALOG,
+  'pityriasis-versicolor': PITYRIASIS_VERSICOLOR_ARTICLE_CATALOG,
+  'infant-hemangioma': INFANT_HEMANGIOMA_ARTICLE_CATALOG,
+  'nail-psoriasis': NAIL_PSORIASIS_ARTICLE_CATALOG,
+  'mole-removal': MOLE_REMOVAL_ARTICLE_CATALOG,
+  'child-scalp-ringworm': CHILD_SCALP_RINGWORM_ARTICLE_CATALOG,
+  'subungual-wart': SUBUNGUAL_WART_ARTICLE_CATALOG,
+  'grey-hair': GREY_HAIR_ARTICLE_CATALOG,
   'laser-scar-resurfacing': LASER_SCAR_RESURFACING_ARTICLE_CATALOG,
   'acne-dermatologist-vs-cosmetologist': ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE_CATALOG,
   'rosacea-radeski': ROSACEA_RADESKI_ARTICLE_CATALOG,

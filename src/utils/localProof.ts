@@ -91,6 +91,8 @@ const TOPIC_DOCTORS: Record<string, string[]> = {
 };
 
 /** Doctors of the landing's branch whose specialty matches the topic (best match first). */
+const SPECIALIST_TOPICS = new Set(['dermatolog', 'trixolog', 'podolog']);
+
 export function doctorsForLanding(landing: LocalCommercialLanding, doctors: Doctor[]): Doctor[] {
   const topic = landingTopicKey(landing.slug);
   const wanted = TOPIC_SPECIALTIES[topic] ?? ['dermatolog'];
@@ -103,10 +105,16 @@ export function doctorsForLanding(landing: LocalCommercialLanding, doctors: Doct
     const index = wanted.findIndex((specialty) => specialties.includes(specialty));
     return index === -1 ? Number.POSITIVE_INFINITY : index;
   };
+  // A cosmetologist who is also "dermato-" goes after the doctors who are only that specialist.
+  const cosmeticOnlySecond = (doctor: Doctor) =>
+    wanted[0] !== 'kosmetolog' && doctorSpecialties(doctor).includes('kosmetolog') ? 1 : 0;
+  // A specialist page ("Trixolog Qo'qonda") lists every such doctor in the branch, not the first
+  // four: the Kokand dermatologist page left out three of its seven doctors.
+  const limit = SPECIALIST_TOPICS.has(topic) ? 8 : 4;
   return inBranch
     .filter((doctor) => Number.isFinite(rank(doctor)))
-    .sort((a, b) => rank(a) - rank(b))
-    .slice(0, 4);
+    .sort((a, b) => rank(a) - rank(b) || cosmeticOnlySecond(a) - cosmeticOnlySecond(b))
+    .slice(0, limit);
 }
 
 /** Words that tie a published clinical case or review to a topic. */

@@ -433,7 +433,7 @@ export const CHILD_ATOPIC_DERMATITIS_ARTICLE: Article = {
     ru: 'Кодирова Дилафрузхон',
     en: 'Dr. Dilafruzkhon Kodirova',
   },
-  date: '2026-12-09',
+  date: '2026-11-28',
   image: '/articles/bolalarda-atopik-dermatit-cover.jpg',
   images: {
     uz: '/articles/bolalarda-atopik-dermatit-cover.jpg',

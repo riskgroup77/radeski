@@ -325,6 +325,16 @@ export const ARTICLE_CATALOG_KEYWORDS: Record<string, string[]> = {
   'scalp-itch': ['art-bosh-terisi-qichishi', 'bosh-terisi-qichishi'],
   'tongue-sores': ['art-til-yarasi', 'til-yarasi'],
   'hair-transplant-complications': ['art-soch-ekish-asoratlari', 'soch-ekish-asoratlari'],
+  'hand-dermatitis': ['art-qol-terisi-yorilishi', 'qol-terisi-yorilishi'],
+  'tattoo-removal': ['art-tatuirovka-olib-tashlash', 'tatuirovka-olib-tashlash'],
+  'keloid-scar': ['art-keloid-chandiq', 'keloid-chandiq'],
+  'pityriasis-versicolor': ['art-rang-barang-temiratki', 'rang-barang-temiratki'],
+  'infant-hemangioma': ['art-gemangioma-bolalarda', 'gemangioma-bolalarda'],
+  'nail-psoriasis': ['art-tirnoq-psoriazi', 'tirnoq-psoriazi'],
+  'mole-removal': ['art-xol-olib-tashlash', 'xol-olib-tashlash'],
+  'child-scalp-ringworm': ['art-bolalarda-bosh-temiratkisi', 'bolalarda-bosh-temiratkisi'],
+  'subungual-wart': ['art-tirnoq-osti-sogal', 'tirnoq-osti-sogal'],
+  'grey-hair': ['art-sochning-erta-oqarishi', 'sochning-erta-oqarishi'],
   'nail-fungus': ['art-tirnoq-zamburugi', 'tirnoq-zamburugi', 'грибок ногтей (онихомикоз)', 'nail fungus (onychomycosis)'],
   // Matched by its own ids, which are longer than the 'adult-acne' phrases in its title.
   'seborrheic-dermatitis': [

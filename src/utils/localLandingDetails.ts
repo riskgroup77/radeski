@@ -1,11 +1,13 @@
 import type { Locale, PriceItem } from '../types';
 import { CLINIC_BRANCHES, type ClinicBranch } from '../data/sitePagesContent';
 import {
+  ALL_LOCAL_COMMERCIAL_LANDINGS,
   getLocalizedCopy,
   type LocalCommercialLanding,
   type LocalSeoCity,
 } from '../data/localCommercialSeoCatalog';
 import { getLocalLandingTopic, type LocalLandingTopic } from '../data/localLandingTopics';
+import { getLocalLandingCityNote } from '../data/localLandingCityNotes';
 import { resolvePriceName } from './priceDisplay';
 import { formatUzs } from './formatUzs';
 
@@ -35,6 +37,11 @@ export interface LocalLandingDetails {
   maxPrice?: number;
   branch: ClinicBranch;
   faqs: LandingFaq[];
+  /** What this branch adds for the topic (data/localLandingCityNotes.ts); empty when none. */
+  cityTitle?: string;
+  cityAbout: string[];
+  /** The same page in the other city, when it exists ("Trixolog Qo'qonda"). */
+  twin?: { city: LocalSeoCity; label: string };
 }
 
 const CITY_NAMES: Record<LocalSeoCity, Record<Locale, string>> = {
@@ -155,9 +162,26 @@ export function resolveLocalLandingDetails(
             answer: `Address: ${branch.address.en}. Opening hours: ${branch.hours.en}. Phone: ${branch.phone}.`,
           },
   );
-  for (const faq of [...(topic?.faqs ?? []), ...landing.faqs]) {
-    faqs.push({ question: getLocalizedCopy(faq.question, locale), answer: getLocalizedCopy(faq.answer, locale) });
+  const otherCity: LocalSeoCity = landing.city === 'qoqon' ? 'fargona' : 'qoqon';
+  const otherBranch = landingBranch(otherCity);
+  const fill = (text: string) =>
+    text
+      .replaceAll('{address}', branch.address[locale])
+      .replaceAll('{hours}', branch.hours[locale])
+      .replaceAll('{phone}', branch.phone)
+      .replaceAll('{otherHours}', otherBranch.hours[locale]);
+  const cityNote = getLocalLandingCityNote(landing.slug, landing.city);
+  // Branch questions first: they are what separates this page from the other city's.
+  for (const faq of [...(cityNote?.faqs ?? []), ...(topic?.faqs ?? []), ...landing.faqs]) {
+    faqs.push({ question: fill(getLocalizedCopy(faq.question, locale)), answer: fill(getLocalizedCopy(faq.answer, locale)) });
   }
+  const twinExists = ALL_LOCAL_COMMERCIAL_LANDINGS.some((item) => item.city === otherCity && item.slug === landing.slug);
+  const twin = twinExists
+    ? {
+        city: otherCity,
+        label: `${serviceName} ${CITY_LOCATIVE[otherCity][locale]}`,
+      }
+    : undefined;
 
   return {
     serviceName,
@@ -170,5 +194,8 @@ export function resolveLocalLandingDetails(
     maxPrice,
     branch,
     faqs,
+    cityTitle: cityNote ? getLocalizedCopy(cityNote.title, locale) : undefined,
+    cityAbout: cityNote?.about.map((copy) => fill(getLocalizedCopy(copy, locale))) ?? [],
+    twin,
   };
 }

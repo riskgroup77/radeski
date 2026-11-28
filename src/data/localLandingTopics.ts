@@ -7,7 +7,7 @@ import type { LocalizedCopy, LocalCommercialFaq } from './localCommercialSeoCata
  * parts (address, hours, phone, prices "from") are added around it.
  */
 /** When the city-page texts below were last revised (shown on the pages and in dateModified). */
-export const LOCAL_LANDING_CONTENT_UPDATED = '2026-11-17';
+export const LOCAL_LANDING_CONTENT_UPDATED = '2026-11-28';
 
 export interface LocalLandingTopic {
   about: LocalizedCopy[];
@@ -143,7 +143,14 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
         ),
       ),
     ],
-    priceNames: [...DERMATOLOGIST_PRICES, "Zamburug' tahlili (silliq teri va sochli bosh qismidan)"],
+    priceNames: [
+      ...DERMATOLOGIST_PRICES,
+      "Zamburug' tahlili (silliq teri va sochli bosh qismidan)",
+      'Mikoz skriningi RT-PTSR',
+      "Dermatoonkolog shifokorining birinchi ko'rigi + dermatoskopiya",
+      'Panch-biopsiya',
+      'Excimer lazer (1–5 nuqta)',
+    ],
   },
 
   trixolog: {
@@ -222,8 +229,12 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
       "Trixolog shifokorining takroriy ko'rigi",
       'PRP terapiya (sochlar uchun)',
       'PRP terapiya (yarim hajm)',
+      'Derma Heal PRP terapiya',
+      'Mezoterapiya: DQ Hair',
       'Hair Vital (Ispaniya) — ayollar uchun',
       'Hair Loss Control — erkaklar uchun',
+      "Zamburug' tahlili (sochli bosh qismi)",
+      'Sochli bosh trixopigmentatsiyasi (50%)',
       'Soch ekish (narxdan boshlab)',
     ],
   },
@@ -301,11 +312,16 @@ export const LOCAL_LANDING_TOPICS: Record<string, LocalLandingTopic> = {
     ],
     priceNames: [
       'Podologning birinchi konsultatsiyasi',
+      "Podologning takroriy ko'rigi",
       "O'sib ketgan tirnoqni olib tashlash",
       "Titan ip (o'sib ketgan tirnoq uchun)",
       'Tirnoqlarni apparat bilan tozalash',
       'Tovonni apparat bilan tozalash',
       'Mozolini davolash (yadrosiz)',
+      "Mozolini davolash (yadrog'i bilan)",
+      'Tirnoq onixomikozini lazer bilan davolash (dan)',
+      'Tirnoq osti qaltishti — lazer bilan olib tashlash (5 mm gacha)',
+      "Qo'l tirnoqlaridan zamburug' tahlili",
     ],
   },
 

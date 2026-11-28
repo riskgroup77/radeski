@@ -71,6 +71,56 @@ export const ARTICLE_SEO_TITLES: Partial<Record<string, Partial<Record<Locale, s
     ru: 'Вред и осложнения пересадки волос: что норма',
     en: 'Hair Transplant Side Effects: What Is Normal',
   },
+  'art-qol-terisi-yorilishi': {
+    uz: 'Qo‘l terisi yorilishi qishda: sabablari va davosi',
+    ru: 'Трещины на руках зимой: причины и что делать',
+    en: 'Cracked Hands in Winter: Causes and Care',
+  },
+  'art-tatuirovka-olib-tashlash': {
+    uz: 'Tatuirovkani lazer bilan olib tashlash: necha seans',
+    ru: 'Удаление татуировки лазером: сколько сеансов',
+    en: 'Laser Tattoo Removal: How Many Sessions',
+  },
+  'art-keloid-chandiq': {
+    uz: 'Keloid chandiq: nima u va qanday davolanadi',
+    ru: 'Келоидный рубец: что это и как лечить',
+    en: 'Keloid Scars: What They Are and Treatment',
+  },
+  'art-rang-barang-temiratki': {
+    uz: 'Rang-barang temiratki: teridagi oq dog‘lar sababi',
+    ru: 'Отрубевидный лишай: белые пятна на коже',
+    en: 'Pityriasis Versicolor: White Patches on Skin',
+  },
+  'art-gemangioma-bolalarda': {
+    uz: 'Bolalarda gemangioma: o‘zi ketadimi, qachon davolash',
+    ru: 'Гемангиома у ребёнка: пройдёт ли сама',
+    en: 'Hemangioma in Babies: Will It Go Away?',
+  },
+  'art-tirnoq-psoriazi': {
+    uz: 'Tirnoq psoriazi: belgilari va zamburug‘dan farqi',
+    ru: 'Псориаз ногтей: признаки и отличие от грибка',
+    en: 'Nail Psoriasis: Signs and How It Differs From Fungus',
+  },
+  'art-xol-olib-tashlash': {
+    uz: 'Xol olib tashlash: qachon kerak va qaysi usul',
+    ru: 'Удаление родинок: когда нужно и каким методом',
+    en: 'Mole Removal: When and Which Method',
+  },
+  'art-bolalarda-bosh-temiratkisi': {
+    uz: 'Bolalarda bosh temiratkisi: belgilari va davosi',
+    ru: 'Стригущий лишай у ребёнка: признаки и лечение',
+    en: 'Scalp Ringworm in Children: Signs and Treatment',
+  },
+  'art-tirnoq-osti-sogal': {
+    uz: 'Tirnoq osti so‘gali: sabablari va lazer bilan davolash',
+    ru: 'Бородавка под ногтем: причины и удаление лазером',
+    en: 'Wart Under the Nail: Causes and Laser Removal',
+  },
+  'art-sochning-erta-oqarishi': {
+    uz: 'Sochning erta oqarishi: sabablari va tahlillar',
+    ru: 'Ранняя седина: причины и какие анализы сдать',
+    en: 'Premature Grey Hair: Causes and Tests',
+  },
   'art-akne-dermatolog-kosmetolog': {
     uz: "Akne: dermatologga yoki kosmetologga borish kerak?",
   },

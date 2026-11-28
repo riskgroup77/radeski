@@ -82,6 +82,16 @@ import { FACIAL_CLEANSING_ARTICLE } from './articles/facialCleansingArticle';
 import { SCALP_ITCH_ARTICLE } from './articles/scalpItchArticle';
 import { TONGUE_SORES_ARTICLE } from './articles/tongueSoresArticle';
 import { HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE } from './articles/hairTransplantComplicationsArticle';
+import { HAND_DERMATITIS_ARTICLE } from './articles/handDermatitisArticle';
+import { TATTOO_REMOVAL_ARTICLE } from './articles/tattooRemovalArticle';
+import { KELOID_SCAR_ARTICLE } from './articles/keloidScarArticle';
+import { PITYRIASIS_VERSICOLOR_ARTICLE } from './articles/pityriasisVersicolorArticle';
+import { INFANT_HEMANGIOMA_ARTICLE } from './articles/infantHemangiomaArticle';
+import { NAIL_PSORIASIS_ARTICLE } from './articles/nailPsoriasisArticle';
+import { MOLE_REMOVAL_ARTICLE } from './articles/moleRemovalArticle';
+import { CHILD_SCALP_RINGWORM_ARTICLE } from './articles/childScalpRingwormArticle';
+import { SUBUNGUAL_WART_ARTICLE } from './articles/subungualWartArticle';
+import { GREY_HAIR_ARTICLE } from './articles/greyHairArticle';
 import { LASER_SCAR_RESURFACING_ARTICLE } from './articles/laserScarResurfacingArticle';
 import { ACNE_DERMATOLOGIST_VS_COSMETOLOGIST_ARTICLE } from './articles/acneDermatologistVsCosmetologistArticle';
 import { ROSACEA_RADESKI_ARTICLE } from './articles/rosaceaRadeskiArticle';
@@ -163,6 +173,16 @@ export const STATIC_ARTICLE_SOURCES: Article[] = [
   SCALP_ITCH_ARTICLE,
   TONGUE_SORES_ARTICLE,
   HAIR_TRANSPLANT_COMPLICATIONS_ARTICLE,
+  HAND_DERMATITIS_ARTICLE,
+  TATTOO_REMOVAL_ARTICLE,
+  KELOID_SCAR_ARTICLE,
+  PITYRIASIS_VERSICOLOR_ARTICLE,
+  INFANT_HEMANGIOMA_ARTICLE,
+  NAIL_PSORIASIS_ARTICLE,
+  MOLE_REMOVAL_ARTICLE,
+  CHILD_SCALP_RINGWORM_ARTICLE,
+  SUBUNGUAL_WART_ARTICLE,
+  GREY_HAIR_ARTICLE,
   NEW_YEAR_SKIN_PLAN_ARTICLE,
   DARK_CIRCLES_ARTICLE,
   BRITTLE_NAILS_ARTICLE,
